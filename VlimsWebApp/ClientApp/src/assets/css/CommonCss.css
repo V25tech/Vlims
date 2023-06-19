@@ -1,0 +1,12 @@
+.randomheightmax {
+      margin-top: 190px;
+
+}
+.randomheightmin {
+      margin-top: 90px;
+}
+.backgroundimage
+{
+
+  background-image: url(/assets/images/down.svg) !important;
+}

@@ -1,0 +1,38 @@
+<div class="vm-content container-fluid mx-0">
+  <div stickyNavigationArea>
+    <div class="row m-0">
+      <div class="col-12 px-0">
+        <div class="row bg-white vm-border-bottom vm-primary-navigation">
+          <div class="col-12">
+            <nav class="navbar navbar-expand-sm p-0">
+              <ul class="nav navbar-nav" *ngIf="ntype.indexOf('top')!=-1">
+                <li *ngFor="let item of ns.navigationitems;trackBy:trackthenavigationitem"
+                    [hidden]='!item.IsVisible || item.Parent' class="nav-item">
+                  <a [routerLink]='item.IsEnable?item.path:return' class="nav-link" queryParamsHandling="merge"
+                     [ngClass]="{'is-current complete':item.isActive,'complete':item.IsEnable,'is-inactive':!item.IsEnable}">{{item.Name}}</a>
+                </li>
+                <div class="mobile-nav" *ngIf="ns.activated">
+                  <a *ngIf="ns.activated[0].prevtab != null && ns.activated[0].prevtab.IsVisible" class="is-active"
+                     [ngClass]="{'is-complete':ns.activated[0].prevtab.IsEnable ,'is-inactive':!ns.activated[0].prevtab.IsEnable}"
+                     [routerLink]='ns.activated[0].prevtab.IsEnable? ns.activated[0].prevtab.path : return' queryParamsHandling="merge">
+                    <span class="arrow">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" width="16" height="12"><path d="M8 4V0L0 6l8 6V8h8V4H8z" fill-rule="evenodd" fill="#fc23a2"></path><path data-name="arrow" d="M0 6h16v2H8v4z" fill="#b11e74" fill-rule="evenodd"></path></svg>
+                    </span>
+                  </a>
+                  <a *ngIf="ns.activated[0].nexttab != null && ns.activated[0].nexttab.IsVisible" class="vm-bg-teritary next-icon"
+                     [ngClass]="{'is-complete':ns.activated[0].nexttab.IsEnable ,'is-inactive':!ns.activated[0].nexttab.IsEnable}"
+                     [routerLink]='ns.activated[0].nexttab.IsEnable? ns.activated[0].nexttab.path : return' queryParamsHandling="merge">
+                    <span class="arrow">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" width="16" height="12"><path d="M8 4V0L0 6l8 6V8h8V4H8z" fill-rule="evenodd" fill="#fc23a2"></path><path data-name="arrow" d="M0 6h16v2H8v4z" fill="#b11e74" fill-rule="evenodd"></path></svg>
+                    </span>
+                  </a>
+                </div>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <app-subtopnavigation *ngIf="isSubTopNavigationAvailable"></app-subtopnavigation>
+      </div>
+    </div>
+  </div>
+</div>

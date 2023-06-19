@@ -1,0 +1,22 @@
+  <ul class="nav nav-pills vm-tab-pill">
+    <li class="nav-item" *ngFor="let item of data;">
+      <ng-container *ngIf="iscomplex; then complex_data; else non_complex_data">
+      </ng-container>
+      <ng-template #non_complex_data>
+        <a [ngClass]="{'active' : item.text == selectedbutton,'isDisabled': disabled}" class="nav-link workspaces-btn" (click)="buttonClick(item)">
+          <span *ngIf="item.value !=''">
+            <img src="{{item.value}}" height="16px" width="16px" />
+          </span>
+          {{ item.text }}
+        </a>
+      </ng-template>
+      <ng-template #complex_data>
+        <a [ngClass]="{'active' : item[textfield] == selectedbutton,'isDisabled': disabled}" class="nav-link workspaces-btn" (click)="buttonClick(item)">
+          <span *ngIf="item[valuefield] !=''">
+            <img src="{{item[valuefield]}}" height="16px" width="16px" />
+          </span>
+          {{item[textfield]}}
+        </a>
+      </ng-template>
+    </li>
+  </ul>

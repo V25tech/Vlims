@@ -1,0 +1,96 @@
+// DEVICE BREAKPOINTS==========*/
+@mixin vm-breakpoint($media) {
+
+  @if $media==sm-max {
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $media==sm-max767 {
+    @media only screen and (max-width: 767px) {
+      @content;
+    }
+  }
+  @else if $media == md-max {
+    @media only screen and (max-width: 991px) {
+      @content;
+    }
+  }
+
+
+
+  @else if $media==md-992-1024 {
+    @media only screen and (max-width:1024px) and (min-width:992px) {
+      @content;
+    }
+  }
+
+
+  @else if $media==lg-1024 {
+    @media only screen and (min-width:1024px) {
+      @content;
+    }
+  }
+
+
+  @else if $media==xl-1366 {
+    @media only screen and (max-width:1366px) {
+      @content;
+    }
+  }
+
+  @else if $media==xl-min-1440 {
+    @media only screen and (min-width:1440px) {
+      @content;
+    }
+  }
+  @else if $media==xl-min-1920 {
+    @media only screen and (min-width:1440px) {
+      @content;
+    }
+  }
+  @else if $media==xl-min-2560 {
+    @media only screen and (min-width:2560px) {
+      @content;
+    }
+  }
+
+
+  @if $media == xs {
+    @media only screen and (max-width: 575.98px) {
+      @content;
+    }
+  }
+  // @include vm-breakpoint(lg) {}
+}
+
+
+@mixin font-face($font-name, $file-name, $weight: normal, $style: normal, $render: optimizeLegibility) {
+  @font-face {
+    font-family: quote($font-name);
+    src: url($file-name + '.eot');
+    src: url($file-name + '.woff') format('woff');
+    font-weight: $weight;
+    font-style: $style;
+    text-rendering: $render;
+  }
+}
+
+
+// VENDOR PREFIXES
+@mixin vendor-prefix($name, $value) {
+  @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
+    #{$vendor}#{$name}: #{$value};
+  }
+  // @include vendor-prefix('property', 'value');
+}
+
+@mixin border-separator($color, $sides, $y-axis, $x-axis) {
+  border-#{$sides}: 1px solid darken($color, 5%);
+  @include vendor-prefix('box-shadow', '#{$y-axis+px} #{$x-axis+px} 0 #{lighten($color, 2%)}');
+}
+
+@mixin border($sides, $height, $style, $color) {
+  border-#{$sides}: #{$height/10}rem $style $color;
+}

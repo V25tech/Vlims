@@ -1,0 +1,29 @@
+// Secondary Nav CSS //
+.vm-secondary-nav{
+   & .navbar-brand{
+        font-family: "SegoeUISemibold";
+        color: $color-primary !important;
+        font-size: 1.5rem;
+    }
+    & .vm-tab-pill{
+        background: transparent;
+        border: 0;
+        padding: 0;
+    }
+    .nav{
+        & li{
+            @include vm-breakpoint(md-max) {
+                width:100%;
+                margin-top:4px;
+            }
+            
+            & a {
+             padding: 1rem 2.5rem;
+             &.active{
+                 border-radius: 5rem;
+                 padding: 1rem 2.5rem;
+             }
+            }
+         }
+    }
+}

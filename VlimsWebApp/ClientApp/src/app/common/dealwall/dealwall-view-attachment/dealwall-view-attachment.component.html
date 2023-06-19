@@ -1,0 +1,42 @@
+<!--<div class="media dealwall-card bg-white p-5 mb-5 position-relative vm-shadow-sm-grey rounded-lg">
+  <div class="status">
+    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="24">
+      <path
+        d="M14 7h2l-3-3v2a.868.868 0 001 1zm-2-1V3H8v5a1.989 1.989 0 01-2 2H4a1.989 1.989 0 01-2-2V6a1 1 0 011-1h2V3H2a2.142 2.142 0 00-2 2v17a2.15 2.15 0 002 2h13a2.462 2.462 0 002-2V8h-3a2.185 2.185 0 01-2-2zm-9 7h12v1H3v-1zm0 2h12v1H3v-1zm0 2h12v1H3v-1zm9 3H3v-1h9v1zm4 0v2a.989.989 0 01-1 1h-2c-.75 0-.87-1 0-1h2v-2a.5.5 0 111 0zm-1-8H6v-1h9v1zM7 1v7a1.017 1.017 0 01-1 1H4a.914.914 0 01-1-1V6h1l.03 1.99L6 8V1H4v1H3V1a.924.924 0 011-1h2a.978.978 0 011 1z"
+        fill="#fff" fill-rule="evenodd"></path>
+    </svg>
+  </div>
+  <img src="assets/img/avtar.jpg" class="p-2 mr-4 bg-white rounded-circle vm-shadow-lg-grey"
+    style="width:80px;" />
+  <div class="media-body">
+    <p class="mb-1 vm-timeline-color pt-2">
+      {{ attachment.CreatedDate | dealwalldatepipe }}
+    </p>
+    <p class="vm-primary-heading mb-0">
+      <span class="font-weight-bold  vm-primary-heading mb-0 vm-color-black">{{ attachment._context.UserName }}</span> has added a new
+      <span class="font-weight-bold vm-color-black">Attachment</span>
+    </p>
+    <ng-container *ngFor="let file of attachment.Attachments">
+      <p class="vm-color-black"> {{ file.Description }} </p>
+      <p class="vm-color-primary">
+        <a (click)="downloadattachment(file)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17">
+            <path
+              d="M4.436 16.999A4.355 4.355 0 010 12.73a4.183 4.183 0 011.3-3.006L10.545.852a3.328 3.328 0 014.568.113 3.01 3.01 0 010 4.271l-8.958 8.6a2.081 2.081 0 01-2.856 0 1.884 1.884 0 010-2.744l8.313-7.98a.832.832 0 011.139-.085.754.754 0 01.088 1.093.784.784 0 01-.088.085l-8.313 7.98a.388.388 0 00-.117.276.4.4 0 00.4.389.41.41 0 00.289-.114l8.962-8.6a1.506 1.506 0 000-2.194 1.666 1.666 0 00-2.286 0l-9.249 8.876a2.637 2.637 0 000 3.837 2.912 2.912 0 004 0l7.876-7.558a.834.834 0 011.143 0 .755.755 0 010 1.1L7.58 15.755a4.539 4.539 0 01-3.143 1.244z"
+              fill="#00a1c8" fill-rule="evenodd"></path>
+          </svg>
+          {{ file.FileName }}.{{file.FileType}}
+        </a>
+      </p>
+    </ng-container>
+    <section>
+      <div class="vm-content">
+        <div class="footer mt-5">
+          <ul class="p-0">
+            <li><a [ngClass]="{'isDisabled':!enable}" (click)="deleteattachment()">Delete</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>-->

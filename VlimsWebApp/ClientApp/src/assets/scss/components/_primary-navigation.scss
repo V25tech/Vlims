@@ -1,0 +1,145 @@
+// Primary Navigation CSS //
+.vm-primary-navigation {
+  position: relative;
+
+  & .nav {
+    margin-left: -5px !important;
+
+    & li {
+      & a {
+        padding: 1.8rem 2rem !important;
+        font-family: $font-primary-semibold;
+        color: $color-primary;
+        position: relative;
+        cursor: not-allowed !important;
+
+        @include vm-breakpoint(md-max) {
+          display: none;
+        }
+        // margin-right: 2rem;
+        &.complete {
+          background: $color-secondary;
+          color: $color-white;
+          margin-right: 1rem;
+          padding-right: 1.4rem !important;
+          margin-left: -10px;
+          padding-left: 2.6rem !important;
+          cursor: pointer !important;
+
+          &.is-current {
+            color: $color-secondary;
+            position: relative;
+            background: $color-teritary;
+            color: $color-white;
+
+            @include vm-breakpoint(md-max) {
+              display: block !important;
+              background: transparent;
+              font-family: $font-secondary-semibold;
+              font-size: 1.8rem;
+              color: $color-primary;
+            }
+
+            &:before {
+              border-left: 15px solid darken($color-teritary, 8);
+
+              @include vm-breakpoint(md-max) {
+                display: none;
+              }
+            }
+
+            &:after {
+              border-left-color: $color-teritary;
+
+              @include vm-breakpoint(md-max) {
+                display: none;
+              }
+            }
+          }
+
+          &:before, &:after {
+            content: "";
+            position: absolute;
+            border-left: 15px solid darken($color-secondary, 8);
+            top: 0;
+            left: 100%;
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 27px solid transparent;
+            border-bottom: 27px solid transparent;
+            z-index: 1;
+          }
+
+          &:after {
+            z-index: 2;
+            border-left-color: $color-secondary;
+            margin-left: -1px;
+          }
+        }
+      }
+    }
+  }
+
+  & .mobile-nav {
+    position: absolute;
+    right: -1rem;
+    display: none;
+
+    @include vm-breakpoint(md-max) {
+      display: block;
+    }
+
+    & a {
+      border: 0.1rem solid $border-color;
+      ;
+      padding: 0.6rem 1.5rem 1rem;
+      display: inline-block;
+      border-radius: 2rem;
+      margin-right: 1rem;
+      top: 1.2rem;
+      position: relative;
+
+      &.is-inactive {
+        transform: rotate(180deg);
+        cursor: not-allowed !important;
+
+        svg {
+          path {
+            fill: $border-color !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.vm-quote-nav-sticky {
+  animation-duration: 0.5s;
+  transition: 0.5s;
+  z-index: 99;
+  position: relative;
+}
+
+.vm-quote-nav-sticky.sticky1 {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  margin: 0;
+  animation-name: stickySlideDown;
+}
+
+.vm-quote-nav-sticky.sticky1 {
+  & .vm-primary-navigation, .vm-secondary-nav {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+@include vm-breakpoint(md-max) {
+  .vm-d-sm-none {
+    display: none;
+  }
+}

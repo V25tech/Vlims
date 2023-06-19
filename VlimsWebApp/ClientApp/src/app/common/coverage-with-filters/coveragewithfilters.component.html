@@ -1,0 +1,93 @@
+<div class="alert alert-warning" role="alert">
+  Coverage V3 component is not supported in Flux layout
+</div>
+<!-- <div class="row vm-main-cnt">
+  <div class="col-md-12 px-0">
+    <section>
+      <div class="vm-content">
+        <div class="mt-2" *ngIf="ISolverMessages!=null">
+          <div class="alert alert-danger" role="alert" *ngIf="dangerMessages.length > 0">
+            <div class="section vam-MB0">
+              <ul class="list-group vm-list-decimal">
+                <ng-container *ngFor="let msg of dangerMessages">
+                  <li class="list-group-item vm-list-decimal-item bg-transparent border-0">
+                    {{msg.DisplayText}}
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+          </div>
+          <div class="alert alert-warning mb-5" *ngIf="warningMessages.length > 0">
+            <ul class="list-group vm-list-decimal">
+              <li *ngFor="let messages of warningMessages"
+                  class="list-group-item vm-list-decimal-item bg-transparent border-0">
+                {{messages.DisplayText}}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row mt-4" *ngIf="coveragesFilter.length > 0">
+          <div class="col-lg-3 col-md-12 d-flex">
+            <section class="vm-bg-primary w-100 rounded-lg vm-shadow-lg-grey">
+              <div class="vm-content">
+                <div class="vm-left-panel navbar-expand-lg">
+                  <a class="navbar-brand navbar-toggler text-white" data-toggle="collapse"
+                     (click)="expandInresponsive=!expandInresponsive" data-target="#vm-left-nav"
+                     [class.collapsed]="!expandInresponsive">
+                    {{activatedFilter}}
+                    <span class="vm-caret" [class.rotate]="expandInresponsive"></span>
+                  </a>
+                  <div class="collapse navbar-collapse" id="vm-left-nav" [class.show]="expandInresponsive">
+                    <ul class="vm-list-group vm-list-group-flush w-100">
+                      <ng-container *ngFor='let filteritem of coveragesFilter;let i = index'>
+                        <risk-hirarchy-filter [data]='filteritem' [riskFilters]='coveragesFilter'
+                                              (activatefilter)='activatefilter($event)' (filterchange)='filterchange($event)'
+                                              [coverageGrid]="coverageGrid">
+                        </risk-hirarchy-filter>
+                      </ng-container>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="col-lg-9 col-sm-12 d-flex mt-md-5 mt-lg-0 mt-5 ">
+            <section class="vm-grid vm-shadow-lg-blue rounded-lg bg-white w-100">
+              <header class="p-5 vm-separator position-relative  vm-border-bottom-for-white-panel">
+                <h4 class="vm-primary-heading vm-color-teritary font-weight-bold">
+                  Filtered By :
+                  {{filterdescriptions}}
+                </h4>
+              </header>
+              <div class="vm-content vm-separator position-relative">
+                <risk-dropdown-filter [coverageURL]="coverageURL" [headers]="headers" [coverageGrid]="coverageGrid">
+                </risk-dropdown-filter>
+
+
+                <coverage-grid #coverageGrid [editMode]="editMode" [headers]="headers"
+                               [interactiveConfigurationURL]="interactiveConfigurationURL" (saveCoverages)='saveCoverages($event)'
+                               (ISolverMessages)='readISolverMessages($event)' (CancelCov)="clearCovMessages()" [Currency]="Currency"
+                               [Decimal]="Decimal">
+                </coverage-grid>
+
+              </div>
+              <div class="footer text-center vm-border-top-for-white-panel p-5" *ngIf="coverageGrid.coverages.length>0 && !coverageGrid.formReseting" [hidden]="coverageGrid.HideCoverageGrid">
+                <a class="mr-3" (click)="coverageGrid.resetCoverageForm()">Cancel</a>
+                <button (click)="coverageGrid.saveCoverages()" class="btn btn-secondary" [hidden]="!coverageGrid.editMode">Save</button>
+              </div>
+            </section>
+          </div>
+
+        </div>
+        <div class="vm-content p-5" *ngIf="coveragesFilter.length == 0">
+          <div class="alert alert-info p-4 vm-segoui-bold mb-0 text-center ">
+            {{renderMessage}}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div> -->

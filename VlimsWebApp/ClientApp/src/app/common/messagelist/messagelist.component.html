@@ -1,0 +1,37 @@
+
+<div class="alert alert-warning" role="alert">
+  Messagelist component is not supported in Mobile layout
+</div>
+<!-- <ul>
+  <ng-container *ngFor='let item of data'>
+    <li (click)="openMsgPopup(item)">
+      <h4>{{item.Header}}</h4>
+      <p [innerHTML]="item.Description"></p>
+    </li>
+  </ng-container>
+</ul>
+
+<kendo-dialog [title]="curntItem.Header" id="vm-messagelist-window" class="vm-popup" width="1000px" (close)='closeMsgPopup()'
+              *ngIf='isMsgPopupVisible'>
+  <div class='vm-content modal-body'>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="vm-message-slider carousel slide">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <a [href]="curntItem.LinkUrl" target="_blank">
+                <img *ngIf="curntItem.Imagesrc" [src]="curntItem.Imagesrc" class="d-block w-100" />
+                <img *ngIf="curntItem.ImageBinaryData"
+                     src="data:image/gif;base64,{{ curntItem.ImageBinaryData }}" class="d-block w-100" />
+              </a>
+              <div class="carousel-caption">
+                <h4 class="vm-page-heading">{{curntItem.Header}}</h4>
+                <p [innerHTML]="curntItem.Message"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</kendo-dialog> -->

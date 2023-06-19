@@ -1,0 +1,8 @@
+<div class="vm-switch-box">
+  <input class="vm-switch-checkbox" (focus)='onTouched()' type="checkbox" name="{{name}}" id="chk_{{name}}" value="value"
+         [disabled]="disabled" (change)='switchchange($event)' [(ngModel)]='value'>
+  <label class="vm-switch-label text-left" for="chk_{{name}}">
+    <span class="vm-switch-on">{{selectedText}}</span>
+    <span class="vm-switch-off">{{deselectedText}}</span>
+  </label>
+</div>

@@ -1,0 +1,790 @@
+<div class="alert alert-warning" role="alert">
+  Coverage V2 component is not supported in Flux layout
+</div>
+
+<!-- <div id="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row vm-main-cnt">
+      <div class="col-lg-12 px-0">
+        <section>
+          <div class="vm-content p-3" *ngIf="coverages.length>0">
+            <div class="mt-2" *ngIf="ISolverMessages!=null">
+              <div class="alert alert-danger mb-5" *ngIf="dangerMessages.length > 0">
+                <ul class="list-group vm-list-decimal">
+                  <li *ngFor="let messages of dangerMessages"
+                      class="list-group-item vm-list-decimal-item bg-transparent border-0">{{messages.DisplayText}}</li>
+                </ul>
+              </div>
+              <div class="alert alert-warning mb-5" *ngIf="warningMessages.length > 0">
+                <ul class="list-group vm-list-decimal">
+                  <li *ngFor="let messages of warningMessages"
+                      class="list-group-item vm-list-decimal-item bg-transparent border-0">{{messages.DisplayText}}</li>
+                </ul>
+              </div>
+            </div>
+            <form name="coverage3Form" #formInCustumControl="ngForm" nonvaldate>
+              <section class='vm-grid vm-shadow-lg-blue rounded-lg bg-white mb-5'>
+                <header class="d-flex p-5 vm-separator position-relative vm-border-bottom-for-white-panel">
+                  <h4 class="vm-primary-heading vm-color-teritary font-weight-bold">{{attributesLabel | uppercase }}</h4>
+                </header>
+                <section class="p-5">
+                  <ng-container class="row" *ngFor="let attr of attributes;let index = $index;trackBy:covIdTracker">
+                    <div class="col-12">
+
+                      <div class="form-group row " *ngIf="attr.IsVisible" [class.vm-is-invalid]="attr.IsDTxInvalid">
+                        <label class="col-sm-4 col-form-label">
+                          {{attr.DisplayName}}
+                          <span class="vm-star-required font-weight-bold" *ngIf="attr.IsRequired"></span>
+                        </label>
+                        <ng-container [ngSwitch]="attr.ControlType">
+                          <ng-container *ngSwitchCase="'DropDown'">
+                            <div class="vm-column-gutter pr-0" [class.vm-is-invalid]="vs.IsCtrlInvalid(dropdown)">
+                              <kendo-dropdownlist #dropdown="ngModel" attr.alt="{{attr.DisplayName}}"
+                                                  id="{{attr.Id}}" [data]="attr.Values" name='{{attr.Id}}_{{attr.Name}}'
+                                                  [(ngModel)]="attr.UserValue" [required]="attr.IsRequired"
+                                                  (valueChange)="attr.IsActionable ? ExecuteISolver(coverage,attr):'' "
+                                                  [disabled]="!attr.IsEnabled || !editMode">
+                                <ng-template kendoDropDownListValueTemplate let-dataItem
+                                             *ngIf="attr.Format=='currency'">
+                                  <span class="template" *ngIf="dataItem ">
+                                    ${{ dataItem }}
+                                  </span>
+
+                                </ng-template>
+
+                                <ng-template kendoDropDownListValueTemplate let-dataItem
+                                             *ngIf="attr.Format!='currency'">
+                                  <span class="template" *ngIf="dataItem ">{{ dataItem }}</span>
+                                </ng-template>
+                                <ng-template kendoDropDownListItemTemplate let-dataItem
+                                             *ngIf="attr.Format=='currency'">
+                                  <span class="template" *ngIf="dataItem ">
+                                    $
+                                  </span> {{ dataItem}}
+                                </ng-template>
+                              </kendo-dropdownlist>
+                              <div class='vm-validation-wrap position-relative' *ngIf="vs.IsCtrlInvalid(dropdown)">
+                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                  {{vs.GetErrorMessage(dropdown, {},attr.DisplayName)}}
+                                </span>
+                              </div>
+                            </div>
+                          </ng-container>
+                          <ng-container *ngSwitchCase="'TextBox'">
+                            <ng-container [ngSwitch]="attr.DataType">
+                              <ng-container *ngSwitchCase="'Decimal'">
+                                <div class="vm-column-gutter pr-0" [class.vm-is-invalid]="vs.IsCtrlInvalid(decimal)">
+                                  <kendo-numerictextbox id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                        name="{{attr.Id}}{{attr.Name}}" #decimal="ngModel" [min]="attr.Min ? attr.Min:0"
+                                                        [max]="attr.Max ? attr.Max : undefined" [spinners]="false"
+                                                        [(ngModel)]="attr.UserValue"
+                                                        (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                        [pattern]='attr.RegexValidation' [required]="attr.IsRequired"
+                                                        [format]="getFormat(attr.Format, attr.DataType)"
+                                                        [decimals]="getDecimalPrecisionLength(attr.Format, attr.DataType)"
+                                                        [disabled]="!attr.IsEnabled || !editMode">
+
+                                  </kendo-numerictextbox>
+                                  <div class='vm-validation-wrap position-relative'
+                                       *ngIf="vs.IsCtrlInvalid(decimal )">
+                                    <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                      {{vs.GetErrorMessage(decimal, {},attr.DisplayName)}}
+                                    </span>
+                                  </div>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngSwitchCase="attr.DataType == 'Integer' || attr.DataType == 'Numeric' ? attr.DataType : '' ">
+                                <div class="vm-column-gutter pr-0" [class.vm-is-invalid]="vs.IsCtrlInvalid(integer)">
+                                  <kendo-numerictextbox id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                        #integer="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                        [min]=" attr.Min ? attr.Min:0" [spinners]="false"
+                                                        [max]=" attr.Max ? attr.Max :undefined" [(ngModel)]="attr.UserValue"
+                                                        [format]="getFormat(attr.Format, attr.DataType)"
+                                                        (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                        [pattern]='attr.RegexValidation' [required]="attr.IsRequired"
+                                                        [decimals]="getDecimalPrecisionLength(attr.Format, attr.DataType)"
+                                                        [disabled]="!attr.IsEnabled || !editMode">
+                                  </kendo-numerictextbox>
+                                  <div class='vm-validation-wrap position-relative'
+                                       *ngIf="vs.IsCtrlInvalid(integer )">
+                                    <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                      {{vs.GetErrorMessage(integer, {},attr.DisplayName)}}
+                                    </span>
+                                  </div>
+                                </div>
+                              </ng-container>
+
+                              <ng-container *ngSwitchDefault>
+                                <div class="vm-column-gutter pr-0" [class.vm-is-invalid]="vs.IsCtrlInvalid(default)">
+                                  <input id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}" #default="ngModel"
+                                         name="{{attr.Id}}{{attr.Name}}" type='text' class='form-control'
+                                         (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                         [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                         pattern='{{attr.RegexValidation}}'
+                                         [maxlength]=' (attr.MaxLength>0) ? attr.MaxLength : " " '
+                                         [disabled]="!attr.IsEnabled || !editMode" />
+                                  <div class='vm-validation-wrap position-relative'
+                                       *ngIf="vs.IsCtrlInvalid(default)">
+                                    <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                      {{vs.GetErrorMessage(default, {},attr.DisplayName)}}
+                                    </span>
+                                  </div>
+                                </div>
+                              </ng-container>
+                            </ng-container>
+                          </ng-container>
+
+                          <ng-container *ngSwitchCase="'TextArea'">
+                            <div class="vm-column-gutter pr-0" [class.vm-is-invalid]="vs.IsCtrlInvalid(textArea)">
+                              <textarea id="{{attr.Id}}" #textArea="ngModel" attr.alt="{{attr.DisplayName}}"
+                                        name="{{attr.Id}}{{attr.Name}}" class='form-control'
+                                        (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                        [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                        pattern="{{attr.RegexValidation}}"
+                                        [maxlength]=' (attr.MaxLength>0) ? attr.MaxLength : " " '
+                                        [disabled]="!attr.IsEnabled || !editMode">
+                                                                  </textarea>
+                              <div class='vm-validation-wrap position-relative' *ngIf="vs.IsCtrlInvalid(textArea)">
+                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                  {{vs.GetErrorMessage(textArea, {},attr.DisplayName)}}
+                                </span>
+                              </div>
+                            </div>
+                          </ng-container>
+                          <ng-container *ngSwitchCase="'DatePicker'">
+                            <div class="vm-column-gutter pr-0" [class.vm-is-invalid]="vs.IsCtrlInvalid(datePicker)">
+                              <kendo-datepicker id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                #datePicker="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                [min]=" attr.Min ? getDateObj(attr.Min) : '' "
+                                                [max]=" attr.Max ? getDateObj(attr.Max) : '' "
+                                                (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                [required]=attr.IsRequired [(ngModel)]="attr.UserValue"
+                                                [disabled]="!attr.IsEnabled || !editMode">
+                              </kendo-datepicker>
+                              <div class='vm-validation-wrap position-relative'
+                                   *ngIf="vs.IsCtrlInvalid(datePicker )">
+                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                  {{vs.GetErrorMessage(datePicker, {},attr.DisplayName)}}
+                                </span>
+                              </div>
+                            </div>
+
+
+                          </ng-container>
+                          <ng-container *ngSwitchCase="'DateTime'">
+                            <div class="vm-column-gutter pr-0" [class.vm-is-invalid]="vs.IsCtrlInvalid(datePicker)">
+                              <kendo-datepicker id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                #datePicker="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                [min]=" attr.Min ? getDateObj(attr.Min) : '' "
+                                                [max]=" attr.Max ? getDateObj(attr.Max) : '' "
+                                                (valueChange)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                [required]=attr.IsRequired [(ngModel)]="attr.UserValue"
+                                                [disabled]="!attr.IsEnabled || !editMode">
+                              </kendo-datepicker>
+                              <div class='vm-validation-wrap position-relative'
+                                   *ngIf="vs.IsCtrlInvalid(datePicker )">
+                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                  {{vs.GetErrorMessage(datePicker, {},attr.DisplayName)}}
+                                </span>
+                              </div>
+                            </div>
+
+                          </ng-container>
+                          <ng-container *ngSwitchCase="'CheckBox'">
+                            <div class="vm-column-gutter pr-0" [class.vm-is-invalid]="vs.IsCtrlInvalid(checkBox)">
+                              <input type="checkbox" id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}" kendoCheckBox
+                                     #checkBox="ngModel" name="{{attr.Id}}{{attr.Name}}" class="css-checkbox"
+                                     (valueChange)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                     [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                     [disabled]="!attr.IsEnabled || !editMode" />
+                              <label for="{{attr.Id}}" class="css-label vam-MR15">
+                              </label>
+                              <div class='vm-validation-wrap position-relative' *ngIf="vs.IsCtrlInvalid(checkBox)">
+                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                  {{vs.GetErrorMessage(checkBox, {},attr.DisplayName)}}
+                                </span>
+                              </div>
+                            </div>
+
+                          </ng-container>
+                          <ng-container *ngSwitchDefault>
+                            <div class="vm-column-gutter pr-0" [class.vm-is-invalid]="vs.IsCtrlInvalid(default)">
+                              <input id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}" #default="ngModel"
+                                     name="{{attr.Id}}{{attr.Name}}" type='text' class='form-control'
+                                     (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                     [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                     pattern='{{attr.RegexValidation}}' [disabled]="!attr.IsEnabled || !editMode" />
+                              <div class='vm-validation-wrap position-relative' *ngIf="vs.IsCtrlInvalid(default)">
+                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                  {{vs.GetErrorMessage(default, {},attr.DisplayName)}}
+                                </span>
+                              </div>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                        <div kendoTooltip position="right" class="vm-help-icon-inline" title="{{attr.HelpText}}"
+                             *ngIf="attr.HelpText !='' && attr.HelpText != null ">
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </ng-container>
+                </section>
+              </section>
+
+              <div class="table-responsive">
+                <table class="table table-striped vm-fold-table">
+                  <tbody>
+                    <section class='vm-grid vm-shadow-lg-blue rounded-lg bg-white'>
+                      <div class='d-flex p-5 vm-separator position-relative vm-border-bottom-for-white-panel'>
+                        <div class="vm-primary-heading vm-color-teritary font-weight-bold">
+                          {{optionalHeading | uppercase }}
+                        </div>
+                      </div>
+                    </section>
+                    <ng-container *ngFor="let coverage of coverages| orderBy:'SequenceNumber' ;let cindex = index; trackBy:covIdTracker">
+
+                      <tr [hidden]='!coverage.Searched' *ngIf="coverage.IsVisible && !coverage.IsMandatory">
+                        <td colspan="2"
+                            [ngClass]="{'vm-open': coverage.IsSelected && coverage.IsExpanded, 'vm-arrow-function': coverage.IsSelected && !coverage.IsExpanded}"
+                            class="bg-white">
+                          <section>
+                            <header class="px-5 py-4">
+                              <div class="row mx-0 vm-view">
+                                <div class="col-sm-10 col-8 pl-4">
+                                  <span class="vm-coverage-table-arrow"
+                                        (click)="coverage.IsSelected==true?coverage.IsExpanded=!coverage.IsExpanded:return"></span>
+                                  <span class="checkbox">
+                                    <input type="checkbox" id="{{coverage.Id}}" class="" checked=""
+                                           [(ngModel)]='coverage.IsSelected' name='{{coverage.Name}}'
+                                           (change)="coverage.IsExpanded = coverage.IsSelected;coverage.IsActionable?ExecuteISolver(coverage,coverage,'coverage'):''"
+                                           [disabled]='coverage.IsMandatory || !editMode'>
+                                    <label for="{{coverage.Id}}" class="checkbox-label">
+                                    </label>
+                                    <span class="flaticon-question-mark v-text-primary vam-Icon18x vam-ML10"
+                                          (click)="coverage.IsSelected==true?coverage.IsExpanded=!coverage.IsExpanded:return">
+                                      {{coverage.DisplayName}}
+                                    </span>
+                                    <div kendoTooltip position="right" class="vm-help-icon-inline"
+                                         title="{{coverage.HelpText}}"
+                                         *ngIf="coverage.HelpText !='' && coverage.HelpText != null ">
+
+                                    </div>
+                                  </span>
+                                </div>
+                                <div class="col-sm-2 col-4">New Busines</div>
+                              </div>
+                            </header>
+                            <div class="vm-content px-5">
+                              <div class="row mx-0 vm-fold" *ngIf="coverage.IsSelected">
+                                <div class="vm-fold-content col-12 p-5" [hidden]='!coverage.IsSelected'>
+                                  <div class="row"
+                                       *ngFor="let attr of coverage.Attributes;let index = $index;trackBy:covIdTracker">
+                                    <div class="col-12">
+                                      <div class="form-group row " *ngIf="attr.IsVisible"
+                                           [class.vm-is-invalid]="attr.IsDTxInvalid">
+                                        <label class="col-sm-4 col-form-label">
+                                          {{attr.DisplayName}}
+                                          <span class="vm-star-required font-weight-bold"
+                                                *ngIf="attr.IsRequired"></span>
+                                        </label>
+                                        <ng-container [ngSwitch]="attr.ControlType">
+                                          <ng-container *ngSwitchCase="'DropDown'">
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(dropdown)">
+                                              <kendo-dropdownlist #dropdown="ngModel" attr.alt="{{attr.DisplayName}}"
+                                                                  id="{{attr.Id}}" [data]="attr.Values" name='{{attr.Id}}_{{attr.Name}}'
+                                                                  [(ngModel)]="attr.UserValue" [required]="attr.IsRequired"
+                                                                  (valueChange)="attr.IsActionable ? ExecuteISolver(coverage,attr):'' "
+                                                                  [disabled]="!attr.IsEnabled || !editMode">
+                                                <ng-template kendoDropDownListValueTemplate let-dataItem
+                                                             *ngIf="attr.Format=='currency'">
+                                                  <span class="template" *ngIf="dataItem ">
+                                                    ${{ dataItem }}
+                                                  </span>
+
+                                                </ng-template>
+
+                                                <ng-template kendoDropDownListValueTemplate let-dataItem
+                                                             *ngIf="attr.Format!='currency'">
+                                                  <span class="template" *ngIf="dataItem ">{{ dataItem }}</span>
+                                                </ng-template>
+                                                <ng-template kendoDropDownListItemTemplate let-dataItem
+                                                             *ngIf="attr.Format=='currency'">
+                                                  <span class="template" *ngIf="dataItem ">
+                                                    $
+                                                  </span> {{ dataItem}}
+                                                </ng-template>
+                                              </kendo-dropdownlist>
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(dropdown)">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(dropdown, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'TextBox'">
+                                            <ng-container [ngSwitch]="attr.DataType">
+                                              <ng-container *ngSwitchCase="'Decimal'">
+                                                <div class="vm-column-gutter pr-0"
+                                                     [class.vm-is-invalid]="vs.IsCtrlInvalid(decimal)">
+                                                  <kendo-numerictextbox id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                                        name="{{attr.Id}}{{attr.Name}}" #decimal="ngModel"
+                                                                        [min]="attr.Min ? attr.Min:0"
+                                                                        [max]="attr.Max ? attr.Max : undefined" [spinners]="false"
+                                                                        [(ngModel)]="attr.UserValue"
+                                                                        (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                                        [pattern]='attr.RegexValidation' [required]="attr.IsRequired"
+                                                                        [format]="getFormat(attr.Format, attr.DataType)"
+                                                                        [decimals]="getDecimalPrecisionLength(attr.Format, attr.DataType)"
+                                                                        [disabled]="!attr.IsEnabled || !editMode">
+
+                                                  </kendo-numerictextbox>
+                                                  <div class='vm-validation-wrap position-relative'
+                                                       *ngIf="vs.IsCtrlInvalid(decimal )">
+                                                    <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                      {{vs.GetErrorMessage(decimal, {},attr.DisplayName)}}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </ng-container>
+                                              <ng-container *ngSwitchCase="attr.DataType == 'Integer' || attr.DataType == 'Numeric' ? attr.DataType : '' ">
+                                                <div class="vm-column-gutter pr-0"
+                                                     [class.vm-is-invalid]="vs.IsCtrlInvalid(integer)">
+                                                  <kendo-numerictextbox id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                                        #integer="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                                        [min]=" attr.Min ? attr.Min:0" [spinners]="false"
+                                                                        [max]=" attr.Max ? attr.Max :undefined" [(ngModel)]="attr.UserValue"
+                                                                        [format]="getFormat(attr.Format, attr.DataType)"
+                                                                        (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                                        [pattern]='attr.RegexValidation' [required]="attr.IsRequired"
+                                                                        [decimals]="getDecimalPrecisionLength(attr.Format, attr.DataType)"
+                                                                        [disabled]="!attr.IsEnabled || !editMode">
+                                                  </kendo-numerictextbox>
+                                                  <div class='vm-validation-wrap position-relative'
+                                                       *ngIf="vs.IsCtrlInvalid(integer )">
+                                                    <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                      {{vs.GetErrorMessage(integer, {},attr.DisplayName)}}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </ng-container>
+
+                                              <ng-container *ngSwitchDefault>
+                                                <div class="vm-column-gutter pr-0"
+                                                     [class.vm-is-invalid]="vs.IsCtrlInvalid(default)">
+                                                  <input id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                         #default="ngModel" name="{{attr.Id}}{{attr.Name}}" type='text'
+                                                         class='form-control'
+                                                         (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                         [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                                         pattern='{{attr.RegexValidation}}'
+                                                         [maxlength]=' (attr.MaxLength>0) ? attr.MaxLength : " " '
+                                                         [disabled]="!attr.IsEnabled || !editMode" />
+                                                  <div class='vm-validation-wrap position-relative'
+                                                       *ngIf="vs.IsCtrlInvalid(default)">
+                                                    <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                      {{vs.GetErrorMessage(default, {},attr.DisplayName)}}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </ng-container>
+                                            </ng-container>
+                                          </ng-container>
+
+                                          <ng-container *ngSwitchCase="'TextArea'">
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(textArea)">
+                                              <textarea id="{{attr.Id}}" #textArea="ngModel"
+                                                        attr.alt="{{attr.DisplayName}}" name="{{attr.Id}}{{attr.Name}}"
+                                                        class='form-control'
+                                                        (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                        [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                                        pattern="{{attr.RegexValidation}}"
+                                                        [maxlength]=' (attr.MaxLength>0) ? attr.MaxLength : " " '
+                                                        [disabled]="!attr.IsEnabled || !editMode">
+                                                                              </textarea>
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(textArea)">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(textArea, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'DatePicker'">
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(datePicker)">
+                                              <kendo-datepicker id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                                #datePicker="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                                [min]=" attr.Min ? getDateObj(attr.Min) : '' "
+                                                                [max]=" attr.Max ? getDateObj(attr.Max) : '' "
+                                                                (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                                [required]=attr.IsRequired [(ngModel)]="attr.UserValue"
+                                                                [disabled]="!attr.IsEnabled || !editMode">
+                                              </kendo-datepicker>
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(datePicker )">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(datePicker, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+
+
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'DateTime'">
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(datePicker)">
+                                              <kendo-datepicker id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                                #datePicker="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                                [min]=" attr.Min ? getDateObj(attr.Min) : '' "
+                                                                [max]=" attr.Max ? getDateObj(attr.Max) : '' "
+                                                                (valueChange)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                                [required]=attr.IsRequired [(ngModel)]="attr.UserValue"
+                                                                [disabled]="!attr.IsEnabled || !editMode">
+                                              </kendo-datepicker>
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(datePicker )">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(datePicker, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'CheckBox'">
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(checkBox)">
+                                              <input type="checkbox" id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                     kendoCheckBox #checkBox="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                     class="css-checkbox"
+                                                     (valueChange)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                     [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                                     [disabled]="!attr.IsEnabled || !editMode" />
+                                              <label for="{{attr.Id}}" class="css-label vam-MR15">
+                                              </label>
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(checkBox)">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(checkBox, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+
+                                          </ng-container>
+                                          <ng-container *ngSwitchDefault>
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(default)">
+                                              <input id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}" #default="ngModel"
+                                                     name="{{attr.Id}}{{attr.Name}}" type='text' class='form-control'
+                                                     (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                     [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                                     pattern='{{attr.RegexValidation}}'
+                                                     [disabled]="!attr.IsEnabled || !editMode" />
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(default)">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(default, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-container>
+                                        </ng-container>
+                                        <div kendoTooltip position="right" class="vm-help-icon-inline"
+                                             title="{{attr.HelpText}}"
+                                             *ngIf="attr.HelpText !='' && attr.HelpText != null ">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        </td>
+                      </tr>
+                    </ng-container>
+                    <section class='vm-grid vm-shadow-lg-blue rounded-lg bg-white mt-5'>
+                      <div class='d-flex p-5 vm-separator position-relative vm-border-bottom-for-white-panel'>
+                        <div class="vm-primary-heading vm-color-teritary font-weight-bold">
+                          {{madatoryHeading | uppercase }}
+                        </div>
+                      </div>
+                    </section>
+                    <ng-container *ngFor="let coverage of coverages| orderBy:'SequenceNumber' ;let cindex = index; trackBy:covIdTracker">
+
+                      <tr [hidden]='!coverage.Searched' *ngIf="coverage.IsVisible && coverage.IsMandatory">
+                        <td colspan="2"
+                            [ngClass]="{'vm-open': coverage.IsSelected && coverage.IsExpanded, 'vm-arrow-function': coverage.IsSelected && !coverage.IsExpanded}"
+                            class="bg-white">
+                          <section>
+                            <header class="px-5 py-4">
+                              <div class="row mx-0 vm-view">
+                                <div class="col-sm-10 col-8 pl-4">
+                                  <span class="vm-coverage-table-arrow"
+                                        (click)="coverage.IsSelected==true?coverage.IsExpanded=!coverage.IsExpanded:return"></span>
+                                  <span class="checkbox">
+                                    <input type="checkbox" id="{{coverage.Id}}" class="" checked=""
+                                           [(ngModel)]='coverage.IsSelected' name='{{coverage.Name}}'
+                                           (change)="coverage.IsExpanded = coverage.IsSelected;coverage.IsActionable?ExecuteISolver(coverage,coverage,'coverage'):''"
+                                           [disabled]='coverage.IsMandatory || !editMode'>
+                                    <label for="{{coverage.Id}}" class="checkbox-label">
+                                    </label>
+                                    <span class="flaticon-question-mark v-text-primary vam-Icon18x vam-ML10"
+                                          (click)="coverage.IsSelected==true?coverage.IsExpanded=!coverage.IsExpanded:return">
+                                      {{coverage.DisplayName}}
+                                    </span>
+                                    <div kendoTooltip position="right" class="vm-help-icon-inline"
+                                         title="{{coverage.HelpText}}"
+                                         *ngIf="coverage.HelpText !='' && coverage.HelpText != null ">
+
+                                    </div>
+                                  </span>
+                                </div>
+                                <div class="col-sm-2 col-4">New Busines</div>
+                              </div>
+                            </header>
+                            <div class="vm-content px-5">
+                              <div class="row mx-0 vm-fold" *ngIf="coverage.IsSelected">
+                                <div class="vm-fold-content col-12 p-5" [hidden]='!coverage.IsSelected'>
+                                  <div class="row"
+                                       *ngFor="let attr of coverage.Attributes;let index = $index;trackBy:covIdTracker">
+                                    <div class="col-12">
+                                      <div class="form-group row " *ngIf="attr.IsVisible"
+                                           [class.vm-is-invalid]="attr.IsDTxInvalid">
+                                        <label class="col-sm-4 col-form-label">
+                                          {{attr.DisplayName}}
+                                          <span class="vm-star-required font-weight-bold"
+                                                *ngIf="attr.IsRequired"></span>
+                                        </label>
+                                        <ng-container [ngSwitch]="attr.ControlType">
+                                          <ng-container *ngSwitchCase="'DropDown'">
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(dropdown)">
+                                              <kendo-dropdownlist #dropdown="ngModel" attr.alt="{{attr.DisplayName}}"
+                                                                  id="{{attr.Id}}" [data]="attr.Values" name='{{attr.Id}}_{{attr.Name}}'
+                                                                  [(ngModel)]="attr.UserValue" [required]="attr.IsRequired"
+                                                                  (valueChange)="attr.IsActionable ? ExecuteISolver(coverage,attr):'' "
+                                                                  [disabled]="!attr.IsEnabled || !editMode">
+                                                <ng-template kendoDropDownListValueTemplate let-dataItem
+                                                             *ngIf="attr.Format=='currency'">
+                                                  <span class="template" *ngIf="dataItem ">
+                                                    ${{ dataItem }}
+                                                  </span>
+
+                                                </ng-template>
+
+                                                <ng-template kendoDropDownListValueTemplate let-dataItem
+                                                             *ngIf="attr.Format!='currency'">
+                                                  <span class="template" *ngIf="dataItem ">{{ dataItem }}</span>
+                                                </ng-template>
+                                                <ng-template kendoDropDownListItemTemplate let-dataItem
+                                                             *ngIf="attr.Format=='currency'">
+                                                  <span class="template" *ngIf="dataItem ">
+                                                    $
+                                                  </span> {{ dataItem}}
+                                                </ng-template>
+                                              </kendo-dropdownlist>
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(dropdown)">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(dropdown, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'TextBox'">
+                                            <ng-container [ngSwitch]="attr.DataType">
+                                              <ng-container *ngSwitchCase="'Decimal'">
+                                                <div class="vm-column-gutter pr-0"
+                                                     [class.vm-is-invalid]="vs.IsCtrlInvalid(decimal)">
+                                                  <kendo-numerictextbox id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                                        name="{{attr.Id}}{{attr.Name}}" #decimal="ngModel"
+                                                                        [min]="attr.Min ? attr.Min:0"
+                                                                        [max]="attr.Max ? attr.Max : undefined" [spinners]="false"
+                                                                        [(ngModel)]="attr.UserValue"
+                                                                        (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                                        [pattern]='attr.RegexValidation' [required]="attr.IsRequired"
+                                                                        [format]="getFormat(attr.Format, attr.DataType)"
+                                                                        [decimals]="getDecimalPrecisionLength(attr.Format, attr.DataType)"
+                                                                        [disabled]="!attr.IsEnabled || !editMode">
+
+                                                  </kendo-numerictextbox>
+                                                  <div class='vm-validation-wrap position-relative'
+                                                       *ngIf="vs.IsCtrlInvalid(decimal )">
+                                                    <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                      {{vs.GetErrorMessage(decimal, {},attr.DisplayName)}}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </ng-container>
+                                              <ng-container *ngSwitchCase="attr.DataType == 'Integer' || attr.DataType == 'Numeric' ? attr.DataType : '' ">
+                                                <div class="vm-column-gutter pr-0"
+                                                     [class.vm-is-invalid]="vs.IsCtrlInvalid(integer)">
+                                                  <kendo-numerictextbox id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                                        #integer="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                                        [min]=" attr.Min ? attr.Min:0" [spinners]="false"
+                                                                        [max]=" attr.Max ? attr.Max :undefined" [(ngModel)]="attr.UserValue"
+                                                                        [format]="getFormat(attr.Format, attr.DataType)"
+                                                                        (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                                        [pattern]='attr.RegexValidation' [required]="attr.IsRequired"
+                                                                        [decimals]="getDecimalPrecisionLength(attr.Format, attr.DataType)"
+                                                                        [disabled]="!attr.IsEnabled || !editMode">
+                                                  </kendo-numerictextbox>
+                                                  <div class='vm-validation-wrap position-relative'
+                                                       *ngIf="vs.IsCtrlInvalid(integer )">
+                                                    <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                      {{vs.GetErrorMessage(integer, {},attr.DisplayName)}}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </ng-container>
+
+                                              <ng-container *ngSwitchDefault>
+                                                <div class="vm-column-gutter pr-0"
+                                                     [class.vm-is-invalid]="vs.IsCtrlInvalid(default)">
+                                                  <input id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                         #default="ngModel" name="{{attr.Id}}{{attr.Name}}" type='text'
+                                                         class='form-control'
+                                                         (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                         [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                                         pattern='{{attr.RegexValidation}}'
+                                                         [maxlength]=' (attr.MaxLength>0) ? attr.MaxLength : " " '
+                                                         [disabled]="!attr.IsEnabled || !editMode" />
+                                                  <div class='vm-validation-wrap position-relative'
+                                                       *ngIf="vs.IsCtrlInvalid(default)">
+                                                    <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                      {{vs.GetErrorMessage(default, {},attr.DisplayName)}}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </ng-container>
+                                            </ng-container>
+                                          </ng-container>
+
+                                          <ng-container *ngSwitchCase="'TextArea'">
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(textArea)">
+                                              <textarea id="{{attr.Id}}" #textArea="ngModel"
+                                                        attr.alt="{{attr.DisplayName}}" name="{{attr.Id}}{{attr.Name}}"
+                                                        class='form-control'
+                                                        (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                        [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                                        pattern="{{attr.RegexValidation}}"
+                                                        [maxlength]=' (attr.MaxLength>0) ? attr.MaxLength : " " '
+                                                        [disabled]="!attr.IsEnabled || !editMode">
+                                                                              </textarea>
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(textArea)">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(textArea, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'DatePicker'">
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(datePicker)">
+                                              <kendo-datepicker id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                                #datePicker="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                                [min]=" attr.Min ? getDateObj(attr.Min) : '' "
+                                                                [max]=" attr.Max ? getDateObj(attr.Max) : '' "
+                                                                (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                                [required]=attr.IsRequired [(ngModel)]="attr.UserValue"
+                                                                [disabled]="!attr.IsEnabled || !editMode">
+                                              </kendo-datepicker>
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(datePicker )">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(datePicker, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+
+
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'DateTime'">
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(datePicker)">
+                                              <kendo-datepicker id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                                #datePicker="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                                [min]=" attr.Min ? getDateObj(attr.Min) : '' "
+                                                                [max]=" attr.Max ? getDateObj(attr.Max) : '' "
+                                                                (valueChange)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                                [required]=attr.IsRequired [(ngModel)]="attr.UserValue"
+                                                                [disabled]="!attr.IsEnabled || !editMode">
+                                              </kendo-datepicker>
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(datePicker )">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(datePicker, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'CheckBox'">
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(checkBox)">
+                                              <input type="checkbox" id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}"
+                                                     kendoCheckBox #checkBox="ngModel" name="{{attr.Id}}{{attr.Name}}"
+                                                     class="css-checkbox"
+                                                     (valueChange)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                     [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                                     [disabled]="!attr.IsEnabled || !editMode" />
+                                              <label for="{{attr.Id}}" class="css-label vam-MR15">
+                                              </label>
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(checkBox)">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(checkBox, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+
+                                          </ng-container>
+                                          <ng-container *ngSwitchDefault>
+                                            <div class="vm-column-gutter pr-0"
+                                                 [class.vm-is-invalid]="vs.IsCtrlInvalid(default)">
+                                              <input id="{{attr.Id}}" attr.alt="{{attr.DisplayName}}" #default="ngModel"
+                                                     name="{{attr.Id}}{{attr.Name}}" type='text' class='form-control'
+                                                     (blur)="attr.IsActionable?ExecuteISolver(coverage,attr):''"
+                                                     [(ngModel)]='attr.UserValue' [required]="attr.IsRequired"
+                                                     pattern='{{attr.RegexValidation}}'
+                                                     [disabled]="!attr.IsEnabled || !editMode" />
+                                              <div class='vm-validation-wrap position-relative'
+                                                   *ngIf="vs.IsCtrlInvalid(default)">
+                                                <span class="vm-validation vm-top-arrow mt-2 p-2">
+                                                  {{vs.GetErrorMessage(default, {},attr.DisplayName)}}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-container>
+                                        </ng-container>
+                                        <div kendoTooltip position="right" class="vm-help-icon-inline"
+                                             title="{{attr.HelpText}}"
+                                             *ngIf="attr.HelpText !='' && attr.HelpText != null ">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div> -->

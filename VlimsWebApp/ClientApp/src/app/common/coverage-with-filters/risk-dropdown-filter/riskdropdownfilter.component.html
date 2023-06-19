@@ -1,0 +1,69 @@
+<!-- <section class="vm-separator vm-border-bottom-for-white-panel position-relative vm-bg-light" [hidden]="hidePolicyFilter">
+  <div class="vm-content p-5 vm-border-white">
+    <div class="owl-carousel owl-theme vm-owl owl-loaded owl-drag">
+      <div class="owl-stage-outer">
+        <div class="owl-stage">
+          <div class="owl-item active">
+            <div class="item">
+              <div class="row">
+                <button class="am-next" (click)="toggleDropdownValue('backward');">
+                  <a class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 11" fill="#fff">
+                      <path id="arrow" d="M1006,832.857h7.41V836l6.59-5.5-6.59-5.5v3.143H1006v4.714Z"
+                            transform="translate(-1006 -825)"></path>
+                    </svg>
+                  </a>
+                </button>
+                <div class="col-md-12 px-5">
+                  <kendo-dropdownlist name='listitem' class="w-100" [data]="riskInstances" [textField]="'DisplayName'"
+                                      [valueField]="'Id'" [(ngModel)]="SelectedRisk"
+                                      [kendoDropDownFilter]="{caseSensitive: false,operator: 'contains'}" [filterable]="true"
+                                      (valueChange)="riskInstanceChange()">
+                    <ng-template kendoDropDownListValueTemplate let-dataItem>
+                      <div class="col-11 pr-0 text-ellipsis">
+                        {{ dataItem?.DisplayName }}
+                      </div>
+                      <div class="col-1 px-0 text-right pr-0">
+                        <img src="assets/img/warning.png" alt="error" class="float-right"
+                             *ngIf='!dataItem?.CoveragesSelected'>
+                        <img src="assets/img/completed.svg" alt="completed" class="float-right"
+                             *ngIf='dataItem?.CoveragesSelected'>
+                      </div>
+                    </ng-template>
+                    <ng-template kendoDropDownListItemTemplate let-dataItem class="row p2">
+                      <div class="col-md-10">
+                        {{ dataItem.DisplayName }}
+                      </div>
+                      <div class="col-md-2 text-right pr-0">
+                        <img src="assets/img/warning.png" alt="error" class="float-right"
+                             *ngIf='!dataItem.CoveragesSelected'>
+                        <img src="assets/img/completed.svg" alt="completed" class="float-right"
+                             *ngIf='dataItem.CoveragesSelected'>
+                      </div>
+
+                    </ng-template>
+                  </kendo-dropdownlist>
+                </div>
+                <button class="am-prev" (click)="toggleDropdownValue('forward');">
+                  <a class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 11" fill="#fff">
+                      <path id="arrow" d="M1006,832.857h7.41V836l6.59-5.5-6.59-5.5v3.143H1006v4.714Z"
+                            transform="translate(-1006 -825)"></path>
+                    </svg>
+                  </a>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vm-content p-5" *ngIf="showNoRImessage">
+    <div class="alert alert-info p-4 vm-segoui-bold mb-0 text-center">
+      No risks to display.
+    </div>
+  </div>
+
+</section> -->

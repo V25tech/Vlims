@@ -1,0 +1,35 @@
+<div [ngClass]='orientation == "horizontal" ? "form-row":"form"'>
+  <ng-container *ngIf="(valuefield != '' && textfield != ''); then complex_data; else non_complex_data">
+  </ng-container>
+  <ng-template #non_complex_data>
+    <div class="form-check vm-radio" *ngFor='let item of data,let i = index,let f = first,let l = last' [ngClass]="{'vm-help-align': (orientation == 'horizontal' && l) || (orientation != 'horizontal' && f)}">
+      <div class="custom-control custom-radio">
+        <input (focus)='touched()' type="radio"
+               name="rbl_{{name}}_{{i}}" id="rbl_{{name}}_{{i}}" value="{{item}}" [disabled]='isDisabled'
+               (change)='change($event)' [(ngModel)]='selectedvalue'>
+        <label for="rbl_{{name}}_{{i}}">
+          <svg class="check" viewBox="0 0 40 40"><defs><linearGradient id="gradient" x1="0" x2="0" y1="0" y2="100%"><stop offset="0%" stop-color="#ff8a00"></stop><stop offset="100%" stop-color="#da1b60"></stop></linearGradient></defs><circle cx="20px" cy="20px" id="border" r="16px"></circle><circle cx="20px" cy="20px" id="dot" r="8px"></circle></svg>
+          {{item}}
+        </label>
+      </div>
+      <div *ngIf='orientation== "horizontal" && l && help!=""' kendoTooltip position="right" class="vm-help-icon ml-3" title="{{help}}"></div>
+      <div *ngIf='orientation != "horizontal" && f && help!=""' kendoTooltip position="right" class="vm-help-icon ml-3" title="{{help}}"></div>
+    </div>
+  </ng-template>
+  <ng-template #complex_data>
+    <div class="form-check vm-radio" *ngFor='let item of data,let i = index,let f = first,let l = last' [ngClass]="{'vm-help-align': (orientation == 'horizontal' && l) || (orientation != 'horizontal' && f)}">
+      <div class="custom-control custom-radio">
+        <input (focus)='touched()' type="radio"
+               name="rbl_{{name}}_{{i}}" id="rbl_{{name}}_{{i}}" value="{{item[valuefield]}}" [disabled]="isDisabled"
+               (change)='change($event)' [(ngModel)]='selectedvalue'>
+        <label for="rbl_{{name}}_{{i}}">
+          <svg class="check" viewBox="0 0 40 40"><defs><linearGradient id="gradient" x1="0" x2="0" y1="0" y2="100%"><stop offset="0%" stop-color="#ff8a00"></stop><stop offset="100%" stop-color="#da1b60"></stop></linearGradient></defs><circle cx="20px" cy="20px" id="border" r="16px"></circle><circle cx="20px" cy="20px" id="dot" r="8px"></circle></svg>
+          {{item[textfield]}}
+        </label>
+      </div>
+      <div *ngIf='orientation== "horizontal" && l && help!=""' kendoTooltip position="right" class="vm-help-icon ml-3" title="{{help}}"></div>
+      <div *ngIf='orientation != "horizontal" && f && help!=""' kendoTooltip position="right" class="vm-help-icon ml-3" title="{{help}}"></div>
+    </div>
+  </ng-template>
+  <small *ngIf='hint!=""' class="vm-hint text-muted">{{hint}}</small>
+</div>

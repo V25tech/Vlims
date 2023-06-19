@@ -1,0 +1,59 @@
+<div kendoDialogContainer></div><exp-container-Header></exp-container-Header>
+<div id='BuildProductModel'  class='container-fluid'>
+    <form name="BuildProductModel" #BuildProductModelForm="ngForm" novalidate>
+        <div class="alert alert-danger" role="alert" *ngIf="validationMessages.length > 0">
+			<div class="section vam-MB0">
+      <h2>Please fix the following errors:</h2>
+				<ul class="list-group vm-list-decimal">					
+					<li class="list-group-item vm-list-decimal-item bg-transparent border-0" *ngFor="let error of validationMessages">{{ error }}</li>
+				</ul>
+			</div>
+		</div>
+        <div class="row">
+            <div class='col-lg-12'>
+                <div class="vm-content">
+                    <div class='row' ><div class='col-sm-12 '><div class='row' ><div class='col-sm-2'><div class="editable-grid" id="botypeslistdiv" ngModelGroup="botypeslistGrid_Group" #botypeslistGrid_Group="ngModelGroup"><ng-template #template_eddg3bcc1459a7dfed476c9c let-anchor>
+      <span>{{ anchor.nativeElement.innerText }}</span>
+ </ng-template>
+ <div kendoTooltip showOn="none" [tooltipTemplate]="template_eddg3bcc1459a7dfed476c9c" (mouseover)="showTooltip_eddg3bcc1459a7dfed476c9c($event)"><kendo-grid #botypeslistgridInstance="kendoGrid" [kendoGridBinding]='botypeslist.Items' [sortable] = 'true' [filterable] = 'false' [resizable] = 'false' [reorderable] = 'false'[sort]="botypeslist.state.sort" 
+        [skip]="botypeslist.state.skip" 
+        [filter]="botypeslist.state.filter" 
+
+        (dataStateChange)="botypeslist._cancelChanges($event)" 
+        (cellClick)="botypeslist._editRowItem($event)" 
+        (pageChange)="botypeslist._pageChange($event)"
+        (clickOutside)="botypeslist._validatedEditExit($event)"><kendo-grid-column field='BOName' width="150" title="Type" [filterable]="false" [sortable]="false"  ><ng-template kendoGridCellTemplate let-dataItem="dataItem" let-rowIndex="rowIndex"><span class='row mx-0'><a  id= "lnk6e072308d8785b4622f3"  alt= "BO"  title= "BO"  target= "_blank" (click)='$event.data=dataItem;botypeclick($event)'[text]='dataItem.BOName' >BO</a>  </span> </ng-template><ng-template kendoGridEditTemplate let-dataItem="dataItem" let-rowIndex="rowIndex"><div class='row mx-0'><a  id= "lnk6e072308d8785b4622f3"  alt= "BO"  title= "BO"  target= "_blank" (click)='$event.data=dataItem;botypeclick($event)'[text]='dataItem.BOName' >BO</a></div></ng-template></kendo-grid-column></kendo-grid></div></div></div><div class='col-sm-2'><div class="editable-grid" id="fglistdiv" ngModelGroup="fglistGrid_Group" #fglistGrid_Group="ngModelGroup"><ng-template #template_eddg1a1445df75ab6f3a40b2 let-anchor>
+      <span>{{ anchor.nativeElement.innerText }}</span>
+ </ng-template>
+ <div kendoTooltip showOn="none" [tooltipTemplate]="template_eddg1a1445df75ab6f3a40b2" (mouseover)="showTooltip_eddg1a1445df75ab6f3a40b2($event)"><kendo-grid #fglistgridInstance="kendoGrid" [kendoGridBinding]='fglist.Items' [sortable] = 'true' [filterable] = 'false' [resizable] = 'false' [reorderable] = 'false'[sort]="fglist.state.sort" 
+        [skip]="fglist.state.skip" 
+        [filter]="fglist.state.filter" 
+
+        (dataStateChange)="fglist._cancelChanges($event)" 
+        (cellClick)="fglist._editRowItem($event)" 
+        (pageChange)="fglist._pageChange($event)"
+        (clickOutside)="fglist._validatedEditExit($event)"><kendo-grid-column field='FactorGroupName' width="150" title="Factor Groups" [filterable]="false" [sortable]="false"  ><ng-template kendoGridCellTemplate let-dataItem="dataItem" let-rowIndex="rowIndex"><span class='row mx-0'><a  id= "lnk55770c8459478cb9bc2c"  alt= "FactorGroup"  title= "FactorGroup"  target= "_blank" [text]='dataItem.FactorGroupName' >FactorGroup</a>  </span> </ng-template><ng-template kendoGridEditTemplate let-dataItem="dataItem" let-rowIndex="rowIndex"><div class='row mx-0'><a  id= "lnk55770c8459478cb9bc2c"  alt= "FactorGroup"  title= "FactorGroup"  target= "_blank" [text]='dataItem.FactorGroupName' >FactorGroup</a></div></ng-template></kendo-grid-column></kendo-grid></div></div></div><div class='col-sm-2'><div class="editable-grid" id="bomfactorlistdiv" ngModelGroup="bomfactorlistGrid_Group" #bomfactorlistGrid_Group="ngModelGroup"><ng-template #template_eddgdcb2453d9b1ab11c1c75 let-anchor>
+      <span>{{ anchor.nativeElement.innerText }}</span>
+ </ng-template>
+ <div kendoTooltip showOn="none" [tooltipTemplate]="template_eddgdcb2453d9b1ab11c1c75" (mouseover)="showTooltip_eddgdcb2453d9b1ab11c1c75($event)"><kendo-grid #bomfactorlistgridInstance="kendoGrid" [kendoGridBinding]='bomfactorlist.Items' [sortable] = 'true' [filterable] = 'false' [resizable] = 'false' [reorderable] = 'false'[sort]="bomfactorlist.state.sort" 
+        [skip]="bomfactorlist.state.skip" 
+        [filter]="bomfactorlist.state.filter" 
+
+        (dataStateChange)="bomfactorlist._cancelChanges($event)" 
+        (cellClick)="bomfactorlist._editRowItem($event)" 
+        (pageChange)="bomfactorlist._pageChange($event)"
+        (clickOutside)="bomfactorlist._validatedEditExit($event)"><kendo-grid-column field='FName' width="150" title="Factors" [filterable]="false" [sortable]="false"  ><ng-template kendoGridCellTemplate let-dataItem="dataItem" let-rowIndex="rowIndex"><span class='row mx-0'><a  id= "lnk8576d8c12306aeedf95f"  alt= "FactorName"  title= "FactorName"  target= "_blank" [text]='dataItem.FName' >FactorName</a>  </span> </ng-template><ng-template kendoGridEditTemplate let-dataItem="dataItem" let-rowIndex="rowIndex"><div class='row mx-0'><a  id= "lnk8576d8c12306aeedf95f"  alt= "FactorName"  title= "FactorName"  target= "_blank" [text]='dataItem.FName' >FactorName</a></div></ng-template></kendo-grid-column></kendo-grid></div></div></div><div class='col-sm-3 '><exp-section id='formsecb34e1ad7a59c25011331' ngModelGroup="formsecb34e1ad7a59c25011331" #formsecb34e1ad7a59c25011331="ngModelGroup" name="FactorGroup Details"  *ngIf='isfgvisible'  [isexpandable]='false'  >
+        <div header></div>
+        <div body ><div class='row' ><div class='col-sm-12'><div class='form-group row' ><label class='col-sm-6 col-form-label'><span>FactorGroup Name</span></label><div class='vm-column-gutter'><input  type= "text" [(ngModel)]='factorgroupobj.FactorGroupName'  id= "txt62fd3c7741225413bfba"  name= "txt62fd3c7741225413bfba" #txt62fd3c7741225413bfba='ngModel'  class= "form-control" ></div></div></div></div><div class='row' ><div class='col-sm-12'><div class='form-group row' ><label class='col-sm-6 col-form-label'><span>Display Name</span></label><div class='vm-column-gutter'><input  type= "text" [(ngModel)]='factorgroupobj.FgDisplayName'  id= "txt96eb95224ef82580cb95"  name= "txt96eb95224ef82580cb95" #txt96eb95224ef82580cb95='ngModel'  class= "form-control" ></div></div></div></div><div class='row' ><div class='col-sm-12'><div class='form-group row' ><label class='col-sm-6 col-form-label'><span>Description</span></label><div class='vm-column-gutter'><input  type= "text" [(ngModel)]='factorgroupobj.FgDescription'  id= "txte427cd7fd941ca55e7d5"  name= "txte427cd7fd941ca55e7d5" #txte427cd7fd941ca55e7d5='ngModel'  class= "form-control" ></div></div></div></div><div class='row' ><div class='col-sm-12 '></div></div><div class='row' ><div class='col-sm-12'><div class='form-group row' ><label class='col-sm-6 col-form-label'><span>Cardinality</span></label><div class='vm-column-gutter'><kendo-dropdownlist  id= "ddl9d78035cabd3101f02bc"  name= "ddl9d78035cabd3101f02bc"  valuePrimitive= "true" [(ngModel)]='factorgroupobj.Cardinality' #ddl9d78035cabd3101f02bc='ngModel' [data]='ddr_source_ddl9d78035cabd3101f02bc'  [defaultItem]= "ddl9d78035cabd3101f02bc_defaultItem"  textField= "text"  valueField= "value" ></kendo-dropdownlist></div></div></div></div><div class='row' ><div class='col-sm-12 '><button  value= "Cancel"  id= "btnd314c5a9445e1c287821"  name= "btnd314c5a9445e1c287821" >Cancel</button><button  value= "Submit"  id= "btnf04858485acaa6bec012"  name= "btnf04858485acaa6bec012" >Submit</button></div></div></div>
+    </exp-section></div><div class='col-sm-3 '><exp-section id='formsec140260b8a2f7179b3b6d' ngModelGroup="formsec140260b8a2f7179b3b6d" #formsec140260b8a2f7179b3b6d="ngModelGroup" name="FactorDetails"  *ngIf='isfactorvisible'  [isexpandable]='false'  >
+        <div header></div>
+        <div body ><div class='row' ><div class='col-sm-12'><div class='form-group row' [ngClass]="{'vm-is-invalid':vs.IsCtrlInvalid(txt6bb7d8d39b71f6431228)}"><label class='col-sm-6 col-form-label'><span class='vm-star-required'>Factor Name</span></label><div class='vm-column-gutter'><input  type= "text" [(ngModel)]='factorobj.FName'  id= "txt6bb7d8d39b71f6431228"  name= "txt6bb7d8d39b71f6431228" #txt6bb7d8d39b71f6431228='ngModel'  required  class= "form-control" ><div class='vm-validation-wrap' *ngIf="vs.IsCtrlInvalid(txt6bb7d8d39b71f6431228)"><span class="vm-validation vm-top-arrow mt-2 p-2">
+			{{ vs.GetErrorMessage( txt6bb7d8d39b71f6431228, {}, "Factor Name" ) }}
+</span></div></div></div></div></div><div class='row' ><div class='col-sm-12'><div class='form-group row' ><label class='col-sm-6 col-form-label'><span>Display Name</span></label><div class='vm-column-gutter'><input  type= "text" [(ngModel)]='factorobj.FDisplayName'  id= "txtb6ccbd7aa9727df2e50c"  name= "txtb6ccbd7aa9727df2e50c" #txtb6ccbd7aa9727df2e50c='ngModel'  class= "form-control" ></div></div></div></div></div>
+    </exp-section><div class='row' ><div class='col-sm-12'><div class='form-group row' ><label class='col-sm-6 col-form-label'><span>Description</span></label><div class='vm-column-gutter'><input  type= "text" [(ngModel)]='factorobj.FDescription'  id= "txt4c5f8f97e733118c260f"  name= "txt4c5f8f97e733118c260f" #txt4c5f8f97e733118c260f='ngModel'  class= "form-control" ></div></div></div></div><div class='row' ><div class='col-sm-12 '></div></div><div class='row' ><div class='col-sm-12 '></div></div><div class='row' ><div class='col-sm-12 '></div></div><div class='row' ><div class='col-sm-12 '></div></div><div class='row' ><div class='col-sm-12 '></div></div><div class='row' ><div class='col-sm-12 '></div></div><div class='row' ><div class='col-sm-12'><div class='form-group row' ><label class='col-sm-6 col-form-label'><span>SequenceNumber</span></label><div class='vm-column-gutter'><input  type= "text" [(ngModel)]='factorobj.SequenceNumber'  id= "txt2a397ffb8a0740f9365b"  name= "txt2a397ffb8a0740f9365b" #txt2a397ffb8a0740f9365b='ngModel'  class= "form-control" ></div></div></div></div><div class='row' ><div class='col-sm-12 text-right'><button  value= "Submit"  id= "btndd826bfaedac67213d94"  name= "btndd826bfaedac67213d94" >Submit</button><button  value= "Cancel"  id= "btn2881f2fd4edc36c2d358"  name= "btn2881f2fd4edc36c2d358" >Cancel</button></div></div></div></div></div></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<exp-container-Footer></exp-container-Footer>

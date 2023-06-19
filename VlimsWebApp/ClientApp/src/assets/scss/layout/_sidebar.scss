@@ -1,0 +1,60 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 0;
+  background-color: $color-1;
+
+
+  &.right {
+    right: 0;
+    @include border(left, .1, solid, $border-color);
+  }
+
+  &.left {
+    left: 0;
+    @include border(right, .1, solid, $border-color);
+  }
+}
+
+.sidebar2 {
+  background-color: $color-1;
+  position: fixed;
+  //   top: 2rem;
+  bottom: 0;
+  z-index: 12;
+  padding: 0;
+
+  &.right {
+    right: 0;
+    @include border(left, .1, solid, $border-color);
+    padding-top: 0 !important;
+    // margin-top: 2.2rem;
+  }
+
+  .dropdown-menu {
+    top: -20px !important;
+
+    &[x-placement="top-end"] {
+      top: -20px !important;
+
+      .dropdown-item:first-of-type {
+        border-radius: 1rem 1rem 0 0 !important;
+      }
+    }
+  }
+}
+
+.dropdown-menu {
+  &[x-placement="top-end"] {
+
+    .dropdown-item:first-of-type {
+      border-radius: 1rem 1rem 0 0 !important;
+    }
+  }
+}
+
+.changeeventBreadbrumb {
+  height: 150px !important;
+}

@@ -1,0 +1,46 @@
+<div class="dropdown d-inline-block vm-table-action">
+  <div class="ddropdownropdown-with-icons dropdown dropdown-with-icons d-inline-block" [ngClass]="{'show' : ispopupopen}" (clickOutside)="closedropdownBlock($event)">
+    <a (click)="toggleDropdown($event)" [ngClass]="{'isDisabled' : disabled}" role="button" #dropdown>
+      <ng-container *ngIf="imageurl !=''; then image; else default">
+      </ng-container>
+      <ng-template #image>
+        <span>
+          <img src="{{imageurl}}" height="20px" width="20px" />
+        </span>
+      </ng-template>
+      <ng-template #default>
+        <svg viewBox="0 0 16 4" width="16" height="4">
+          <path data-name="more copy 2" d="M14 0a2 2 0 11-2 2 2 2 0 012-2zM8 0a2 2 0 11-2 2 2 2 0 012-2zM2 0a2 2 0 11-2 2 2 2 0 012-2z" fill="#4f596f" fill-rule="evenodd"></path>
+        </svg>
+      </ng-template>
+    </a>
+    <kendo-popup [anchor]="dropdown" (anchorViewportLeave)="ispopupopen = false" *ngIf="ispopupopen">
+      <div #getResolution class="dropdown-popup dropdown-menu dropdown-menu-arrow" [ngClass]="{ 'show': ispopupopen,'dropdown-menu-right' : (browserWidth - (screenWidth + getResolution.offsetWidth)) < 0,'vm-dropup-menu vm-dropup-menu-right':(browserHeight - (screenHeight + getResolution.offsetHeight)) < 0}">
+        <div class="dropdown-close" (click)="closedropdownBlock($event)">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mx-2" width="10" height="10" viewBox="0 0 16 16">
+            <path d="M3 0L0 2l6 6-6 6 3 2 5-5V5z" fill-rule="evenodd" fill="#2684fe"></path>
+            <path data-name="close copy" d="M13 0l3 2-6 6 6 6-3 2-5-5V5z" fill="#2684fe" fill-rule="evenodd"></path>
+          </svg>
+        </div>
+        <ng-container *ngIf="iscomplex; then complex_data; else non_complex_data">
+        </ng-container>
+        <ng-template #non_complex_data>
+          <a [ngClass]="{'active' : item.text == selectedbutton}" *ngFor="let item of data" (click)="buttonClick(item)" class="dropdown-item">
+            <span *ngIf="item.value !=''" class="vm-dropDownicons">
+              <img src="{{item.value}}" height="16px" width="16px" />
+            </span>
+            {{ item.text }}
+          </a>
+        </ng-template>
+        <ng-template #complex_data>
+          <a [ngClass]="{'active' : item[textfield] == selectedbutton}" *ngFor="let item of data" (click)="buttonClick(item)" class="dropdown-item">
+            <span *ngIf="item[valuefield] !=''" class="vm-dropDownicons">
+              <img src="{{item[valuefield]}}" height="16px" width="16px" />
+            </span>
+            {{ item[textfield] }}
+          </a>
+        </ng-template>
+      </div>
+    </kendo-popup>
+  </div>
+</div>

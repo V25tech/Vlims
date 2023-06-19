@@ -1,0 +1,129 @@
+<div class="alert alert-warning" role="alert">
+  Dealwall component is not supported in Flux layout
+</div>
+<!-- <section>
+  <header class="vm-border-bottom-for-white-panel w-100 position-relative deal-wall-header">
+    <div class="row m-0">
+      <div class="col-md-12 col-12">
+        <h1
+          class="p-4 font-weight-bold mr-2 h2 vm-color-teritary vm-primary-heading mb-0"
+        >
+          DealWall
+          <span [ngClass]="{'isDisabled':!enable}"
+            class="dropdown ml-3"
+            expandMenu
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+            >
+              <path
+                d="M12 0A12 12 0 110 12 12 12 0 0112 0zm4 13h-3v3h-2v-3H8v-2h3V8h2v3h3v2z"
+                fill="#00a1c8"
+                fill-rule="evenodd"
+              />
+            </svg>
+
+            <div
+              class="dropdown-menu p-0 vm-shadow-sm-grey rounded-lg" style="position: absolute; transform: translate3d(0px, 25px, 0px); top: 0px; left: 0px; will-change: transform;"
+            >
+              <a *ngFor="let item of adddealwalloptions"
+                (click)="itemClick(item)"
+                class="dropdown-item"
+                >{{ item }}</a
+              >
+            </div>
+          </span>
+        </h1>
+        <ul class="mb-0 header-right-list">
+          <li>
+            <exp-filtermenu
+              [source]="filterValues"
+              (itemClick)="filter($event)"
+            ></exp-filtermenu>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="vm-content w-100">
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngIf="errormessage">
+          <div class="alert alert-danger" role="alert">
+            <div class="vam-form-error">{{ errormessage }}</div>
+          </div>
+        </div>
+        <div *ngIf="!items">
+          <div class="col-lg-12 col-md-13 col-sm-12">
+            <div class="alert alert-info">No records found</div>
+          </div>
+        </div>
+        <ng-template [ngIf]="addtype == 'Note'">
+          <exp-dealwall-add-note
+            (save)="save($event, 'note')"
+            (cancel)="cancel()"
+          ></exp-dealwall-add-note>
+        </ng-template>
+        <ng-template [ngIf]="addtype == 'Attachment'">
+          <exp-dealwall-add-attachment
+            (save)="save($event, 'attachment')"
+            (cancel)="cancel()"
+            [isopen]="true"
+          >
+          </exp-dealwall-add-attachment>
+        </ng-template>
+        <section class="w-100 p-5">
+          <ng-container
+            *ngFor="let item of items; trackBy: trackbydealwallitems"
+          >
+            <div [ngSwitch]="item.type">
+              <ng-template [ngSwitchCase]="'note'">
+                <ng-template
+                  [ngIf]="
+                    filteritemtype == 'all' || filteritemtype == item.type
+                  "
+                >
+                  <exp-dealwall-view-note
+                    [data]="item"
+                    (delete)="deleteItem($event, item.type)"
+                    (download)="downloadfile($event)"
+                    [enable]="enable"
+                  ></exp-dealwall-view-note>
+                </ng-template>
+              </ng-template>
+              <ng-template [ngSwitchCase]="'activity'">
+                <ng-template
+                  [ngIf]="
+                    filteritemtype == 'all' || filteritemtype == item.type
+                  "
+                >
+                  <exp-dealwall-view-event
+                    [data]="item"
+                  ></exp-dealwall-view-event>
+                </ng-template>
+              </ng-template>
+              <ng-template [ngSwitchCase]="'attachment'">
+                <ng-template
+                  [ngIf]="
+                    filteritemtype == 'all' || filteritemtype == item.type
+                  "
+                >
+                  <exp-dealwall-view-attachment
+                    [data]="item"
+                    (delete)="deleteItem($event, item.type)"
+                    (download)="downloadfile($event)"
+                    [enable]="enable"
+                  ></exp-dealwall-view-attachment>
+                </ng-template>
+              </ng-template>
+            </div>
+          </ng-container>
+        </section>
+      </div>
+    </div>
+  </div>
+</section> -->

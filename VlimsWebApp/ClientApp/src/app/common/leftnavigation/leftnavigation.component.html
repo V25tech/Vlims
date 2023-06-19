@@ -1,0 +1,45 @@
+<div class="col col-lg-3 col-md-12 d-flex vm-left-panel"
+     *ngIf="isLeftNavVisible || istopleftNavVisible || istopSubTopLeftVisible">
+  <ng-container *ngIf="isLeftNavVisible">
+    <section class="w-100">
+      <a class="navbar-brand navbar-toggler text-white" data-toggle="collapse"
+         (click)="expandInresponsive=!expandInresponsive" data-target="#vm-left-nav"
+         [class.collapsed]="!expandInresponsive">
+        {{ns.activated[0].Name}}
+        <span class="vm-caret" [class.rotate]="expandInresponsive"></span>
+      </a>
+      <div class="collapse navbar-collapse" id="vm-left-nav" [class.show]="expandInresponsive">
+
+        <ul class="list-group vm-list">
+          <li *ngFor="let item of ns.navigationitems;trackBy:trackthenavigationitem"
+              [hidden]='!item.IsVisible || item.Parent' class="vm-list-group-item">
+            <a [routerLink]='item.IsEnable?item.path:return' class="list-group-item list-group-item-action" queryParamsHandling="merge"
+               [ngClass]="{'active':item.isActive}">{{item.Name}}</a>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+  </ng-container>
+  <ng-container *ngIf="istopleftNavVisible || istopSubTopLeftVisible">
+    <section class="w-100">
+      <a class="navbar-brand navbar-toggler text-white" data-toggle="collapse"
+         (click)="expandInresponsive=!expandInresponsive" data-target="#vm-left-nav"
+         [class.collapsed]="!expandInresponsive">
+        {{ns.activated[1].Name}}
+        <span class="vm-caret" [class.rotate]="expandInresponsive"></span>
+      </a>
+      <div class="collapse navbar-collapse" id="vm-left-nav" [class.show]="expandInresponsive">
+
+        <ul class="list-group vm-list">
+          <li *ngFor="let item of ns.leftnavigationitems;trackBy:trackthenavigationitem"
+              [hidden]='!item.IsVisible' class="vm-list-group-item">
+            <a [routerLink]='item.IsEnable?item.path:return' class="list-group-item list-group-item-action" queryParamsHandling="merge"
+               [ngClass]="{'active':item.isActive}">{{item.Name}}</a>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+  </ng-container>
+</div>

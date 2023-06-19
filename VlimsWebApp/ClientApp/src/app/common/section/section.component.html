@@ -1,0 +1,18 @@
+<section class="vm-mb-70 vm-all-collapse">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-end">
+      <button class="btn-header-collapse btn-link text-left" [ngClass]="{collapsed:!isexpanded,arrowNone:!isexpandable}" type="button" *ngIf="isHeader" (click)="expand()">
+        <h2 class="vm-heading-style vm-font-primary-bold">{{name}}</h2>
+        <small *ngIf="hinttext != '' && isbeside" class="vm-hint-inline text-muted">{{hinttext}}</small>
+        <small *ngIf="hinttext != '' && !isbeside" class="vm-hint text-muted">{{hinttext}}</small>
+      </button>
+      <ng-content select="[header]"></ng-content>
+    </div>
+    <div class="collapse show" *ngIf="isexpanded">
+      <div class="vm-content shadow-lg rounded-lg border mt-4 p-5">
+        <ng-content select="[body]"></ng-content>
+      </div>
+    </div>
+    <span class="vm-border-bottom"></span>
+  </div>
+</section>

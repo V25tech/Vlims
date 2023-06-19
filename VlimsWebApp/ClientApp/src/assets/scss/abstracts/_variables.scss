@@ -1,0 +1,150 @@
+//LAYOUT PRIMARY COLORS
+$color-primary: #323a4d;   // it's application branding color, dominating color of the layout.
+$color-secondary: #2684fe; // it's second main color of your application color pallete.
+$color-teritary: #47d185;  // it's third importance color of the application color pallete.
+//  Gradient color
+$color-grdientStart: #45cfdc;  
+$horizontal-gradient: $color-grdientStart, $color-secondary; 
+$link-color: #49a7ec; // by default unvisited hyperlink color of the application.
+$body-background-color:#fff;
+
+//OTHER COLORS
+$color-1: #f2f7fc;  // Left and Right Panel and tab bg Color
+$color-2: #afb8c9;  // light text color for left and right panel
+$color-3: #4f596f;  // default text color and checkbox and radio border color
+$color-4: #445270;  // table header bg color
+$color-5: #646d83;  // form label color
+$color-6: #e2ebfb;  // Form border color 
+$color-7: #00ccab;  
+$color-8: #fc23a2;
+$color-white: #ffffff;  // usually used to fill the surface (backgorund) or text with white color. 
+$color-black: #090909; // usually used to fill the surface (backgorund) or text with black color.
+$border-color: $color-6; // #dae5f7; // usually used to fill the border color of the surface.
+
+//CONTEXTUAL COLORS    
+$color-danger: #f03f3f;  // use this color for when we required to show error messages, alerts and toast messages . 
+$color-success: #242723;  // use this color when we required to show success messages, alerts and toast messages. 
+$color-warning: #ffc973; // use this color when we required to show warning messages, alerts and toast messages. 
+$color-info:  #00a1c9; // use this color when we required to show information messages, alerts and toast messages. 
+ 
+// FONT FAMILY VARIABLES
+$font-primary: 'SegoeUI';    // to change all primary fonts of the application.
+$font-primary-semibold: 'SegoeUISemibold';    //  to apply semi bold primary fonts of the application.
+$font-primary-bold: 'SegoeUIBold'; //  to apply bold primary fonts of the application.
+$font-secondary: 'Lato'; //  to change all secondary fonts of the application. 
+$font-secondary-bold: 'LatoBold'; // to apply bold secondary fonts of the application. 
+$font-secondary-semibold: 'LatoBlack';
+
+//DEFAULT FONT SIZE   (body font size)
+$font-size-base: 1.4rem; // it's default fontsize of the overall application (body font-size). 
+
+// HEADING COLORS
+$primary-heading:        $color-primary; // used for primary heading color of the application. 
+$primary-heading-border: $color-1;
+$secondary-heading:      $color-secondary; // used for secondary heading color of the application. 
+
+//--------FORM CONTROL---------------------------//
+//---Button colors
+$primary-btn-color:          $color-teritary;   //used for primary button background color
+$primary-btn-text-color:     $color-white;      //used for primary button text color
+$secondary-btn-color:        $color-secondary;    //used for secondary button background color
+$secondary-btn-text-color:   $color-white;      //used for secondary button text color
+$default-btn-color:          $color-2;          //used for default button background color
+$default-btn-text-color:     $color-white;      //used for default button text color
+
+//---Form Label and Control Colors
+$form-text-color: $color-primary; // used for input or select text color.
+$form-control-bg-color:$color-white; // used for input or select background color.
+$form-label-color: $color-3; //used to get label color.
+$form-border-color: $color-6; //used to get border color of the input or select boxes.
+
+//---Form Font Size
+$form-base-font: $font-size-base; // it's default fontsize of the overall forms of the application.
+
+//--Radio Button , Checkbox Colors
+$radio-btn-color: $color-3; //to change radio buttons and checkboxes background color.
+//------------------------------------------------//
+
+// HEADER SPECIFIC COLORS
+$header-bg-color:        $color-primary; //used to change the header background color
+$header-color-1:         $color-1; //used to change the header text colors
+
+//----------Primary Nav color
+$primary-nav-bg-color: $color-primary; //used to change the primary nav background color (offcanvas nav background color)
+
+// TABLE HEAD COLORS
+$table-head-bg-color: $color-4;  //used to change table head background color.
+$table-head-text-color: $color-white; //used to change table head text color.
+
+// FOOTER SPECIFIC COLORS
+$footer-bg-color: $color-primary; //used to change footer background color.
+$footer-text-color: $color-white; //used to change footer text color.
+
+//******************** COMPONENT SPECIFIC VARIABLES********************
+//----------Notification Panel Color
+$notification-bg-color: $color-2;
+$notification-border-color: $color-1;
+$notification-bg-hover-color: $color-primary;
+
+$notification-icon-color-notification: darken($color-danger, 2%);
+$notification-icon-color-chat: darken($color-1,15%);
+$notification-icon-color-occassion: lighten($color-3,12%);
+$notification-icon-color-quote: lighten($color-primary,20%);
+
+//----------Quote Nav color
+$quote-nav-default-bg-color:           $color-teritary;
+$quote-nav-complete-bg-color:          $color-4;
+$quote-nav-current-bg-color:           $color-secondary;
+$quote-nav-default-text-color:    $color-teritary;
+$quote-nav-complete-text-color:   $color-4;
+$quote-nav-current-text-color:    $color-white;
+
+//----------Secondary Quote Nav
+$secondary-quote-bg-color:           lighten($color-teritary, 55%);
+$secondary-quote-nav-bg-color:           $color-primary;
+$secondary-quote-nav-text-color:         $color-teritary;
+
+//----------Header Quote summary color
+$quote-summary-bg-color:           $color-teritary;
+$quote-summary-label-text-color:    lighten($color-3, 45%);
+$quote-summary-value-text-color:    $color-white;
+$quote-summary-detail-bg-color:      lighten($color-teritary, 50%);
+$quote-summary-detail-label-color:   darken($color-3, 10%);
+$quote-summary-detail-value-color:   $color-teritary;
+
+//=========Content color
+
+//-----dashboard color
+    $quote-link-bg:  $color-primary;
+    $quick-link-bg:  $color-secondary;
+    $quick-link-title:  $color-1;
+
+//-------Left sidebar nav color
+$left-sidebar-bg-color: lighten($color-teritary,55%);
+$left-sidebar-hover-bg-color: $color-secondary;
+
+//---------Collaboration Window
+$colab-header-bg: $color-secondary;
+$colab-header-title-bg: $color-5;
+$colab-header-title-color: $color-primary;
+
+//---------Appetite Guide
+$appetite-guide-bg: $color-2;
+$appetite-guide-hover-bg: $color-primary;
+
+//-------------- Product color
+$product-bg: $color-secondary;
+$product-text-color: $color-white;
+
+//--------form chooser
+$form-chooser-bg: $color-teritary; 
+
+//--------Tab
+$tab-bg: $color-2; 
+$tab-bg-active: $color-primary;
+
+//--------Coverages with Filter 
+$quote-widget-bg:$color-2;
+$quote-widget-border:$color-5;
+$filter-panel-bg:$color-secondary;
+

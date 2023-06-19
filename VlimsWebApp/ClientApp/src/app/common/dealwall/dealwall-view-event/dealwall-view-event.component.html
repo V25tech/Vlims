@@ -1,0 +1,23 @@
+<div
+class="media dealwall-card bg-white p-5 mb-5 vm-shadow-sm-grey rounded-lg"
+>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="32.594"
+  height="49.75"
+  class="mr-4 mt-"
+>
+  <path
+    d="M2 0c3.054.71 11.705 6.8 30 16a1.131 1.131 0 010 2C25.179 21.029 3 30 3 30v18a1.516 1.516 0 11-3 0V2a2.093 2.093 0 012-2z"
+    fill="#00a1c8"
+    fill-rule="evenodd"
+  ></path>
+</svg>
+<div class="media-body">
+  <p class="mb-1 vm-timeline-color pt-2">
+    {{ data.CreatedDate | dealwalldatepipe: "event" }}
+  </p>
+  <p class="vm-color-black">{{ data.Description }}</p>
+ 
+</div>
+</div>

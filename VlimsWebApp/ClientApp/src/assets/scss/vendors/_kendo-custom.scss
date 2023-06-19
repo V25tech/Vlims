@@ -1,0 +1,1434 @@
+
+* {
+  &::selection {
+    background-color: $color-primary !important;
+  }
+}
+
+$color-success: #47d185;
+$control-height: 4rem;
+
+.k-textbox {
+  height: $control-height;
+}
+
+.k-textbox.form-control {
+  height: $control-height;
+}
+
+.k-numerictextbox .k-numeric-wrap {
+  height: 3.5rem;
+  display: flex;
+
+  input {
+    align-self: center;
+  }
+}
+
+
+
+//TABBAR STYLES
+.k-tabstrip {
+  //  border: $px-1 solid darken($border-color, 5%);
+  & .k-tabstrip-items {
+    background-color: $color-white;
+    background-color: $color-1;
+    border: 1px solid $border-color;
+    border-radius: 5rem;
+    padding: .5rem;
+    align-self: baseline;
+
+
+    & .k-item {
+      color: $color-primary;
+      padding: 1.2rem 2rem;
+      border: none;
+      font-family: $font-secondary-bold;
+
+
+      & .k-link {
+        padding: 0rem;
+      }
+    }
+
+    & .k-item.k-state-active {
+      color: $color-secondary;
+      background-color: $color-secondary;
+      box-shadow: 0px 15px 10px 0px rgba(38, 132, 254, 0.2);
+      border-radius: 2.5rem;
+      color: $color-white;
+      outline: none !important;
+      border: none !important;
+    }
+  }
+
+
+  & > .k-content {
+    padding: 1.5rem;
+    border: none;
+    background-color: transparent;
+  }
+}
+//TABBAR STYLES END
+
+
+//MASKED TEXTBOX
+.k-maskedtextbox {
+  & .k-textbox {
+    height: $control-height;
+    border-color: $form-border-color;
+    border-radius: 0.5rem;
+
+    &:focus {
+      color: $form-text-color;
+      border: 1px solid darken($form-border-color,10%);
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
+//END MASKED TEXTBOX
+
+
+//AUTOCOMPLETE
+.k-autocomplete {
+  height: $control-height;
+
+  &.k-state-focused {
+    color: $form-text-color;
+    border: 1px solid darken($form-border-color,10%);
+    outline: none;
+    box-shadow: none;
+  }
+
+  & .k-searchbar {
+    align-self: center;
+  }
+
+  & .k-clear-value {
+    top: 6px;
+  }
+}
+//END AUTOCOMPLETE
+
+
+
+//ACCORDION STYLES
+.k-panelbar {
+  background-color: transparent;
+  border: none;
+  border-radius: 0.5rem !important;
+
+
+  > .k-item {
+    background-color: $color-white;
+    box-shadow: 0px 15px 30px 0px rgba(113, 116, 129, 0.15);
+    margin-bottom: 0.5rem;
+    border-top: none !important;
+
+    &:first-child {
+      border-radius: 0.5rem 0.5rem 0 0 !important;
+
+      .k-link {
+        border-radius: 0.5rem 0.5rem 0 0 !important;
+      }
+    }
+
+    > .k-link {
+      background-color: $color-white;
+      color: $color-3 !important;
+      padding: 2rem;
+      padding-left: 5rem;
+      cursor: pointer;
+      border-radius: 0.5rem 0.8rem 0 0 !important;
+      font-size: 1.8rem;
+      font-family: $font-primary-semibold;
+      font-weight: 700;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $color-white;
+        color: $color-3 !important;
+      }
+
+
+
+
+      &.k-state-focused {
+        box-shadow: none;
+      }
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: 0.5625rem;
+        height: 0.5625rem;
+        left: 3rem;
+        top: auto;
+        bottom: auto;
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        -webkit-transition: all 0.1s ease-in;
+        -moz-transition: all 0.1s ease-in;
+        -ms-transition: all 0.1s ease-in;
+        -o-transition: all 0.1s ease-in;
+        transition: all 0.1s ease-in;
+        border-left: 0.6rem solid transparent;
+        border-right: 0.6rem solid transparent;
+        border-top: 0.6rem solid $color-primary;
+      }
+
+      & .k-icon {
+        display: none;
+      }
+
+      &.k-state-selected {
+        background-color: $color-white;
+        font-size: 1.5rem;
+        font-weight: 700;
+
+
+        &:hover {
+          background-color: $color-white;
+        }
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 0.5625rem;
+          height: 0.5625rem;
+          left: 0.75rem;
+          top: auto;
+          bottom: auto;
+          // border-top: 0.1875rem solid $color-primary;
+          //border-left: 0.1875rem solid $color-primary;
+          -webkit-transform: rotate(-90deg);
+          -moz-transform: rotate(-90deg);
+          -ms-transform: rotate(-90deg);
+          -o-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+          -webkit-transition: all 0.1s ease-in;
+          -moz-transition: all 0.1s ease-in;
+          -ms-transition: all 0.1s ease-in;
+          -o-transition: all 0.1s ease-in;
+          transition: all 0.1s ease-in;
+          //border-bottom: 0.0625rem solid $form-border-color;
+          left: 3rem;
+          border-left: 0.6rem solid transparent;
+          border-right: 0.6rem solid transparent;
+          border-top: 0.6rem solid $color-primary;
+        }
+      }
+    }
+
+    &.k-state-expanded {
+      & .k-link {
+        font-family: $font-primary;
+        font-weight: 700;
+
+        &:before {
+          transform: rotate(0deg);
+        }
+
+        &.k-state-selected {
+          background-color: $color-white;
+          color: $color-teritary;
+          font-size: 1.5rem;
+          font-weight: 700;
+
+
+          &:hover {
+            background-color: $color-white;
+          }
+
+          &:before {
+            content: "";
+            position: absolute;
+            width: 0.5625rem;
+            height: 0.5625rem;
+            left: 3rem;
+            top: auto;
+            bottom: auto;
+            // border-top: 0.1875rem solid $color-primary;
+            //border-left: 0.1875rem solid $color-primary;
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+            -webkit-transition: all 0.1s ease-in;
+            -moz-transition: all 0.1s ease-in;
+            -ms-transition: all 0.1s ease-in;
+            -o-transition: all 0.1s ease-in;
+            transition: all 0.1s ease-in;
+          }
+        }
+      }
+    }
+
+
+
+
+
+    & .k-content {
+      padding: 3rem;
+    }
+  }
+}
+
+
+
+// // START GRID TABLE
+
+.k-grid table {
+  border-spacing: 0 0.2rem !important;
+}
+
+.k-grid {
+  border-collapse: separate;
+  border-spacing: 0 .4rem;
+  margin-bottom: 0rem !important;
+  color: $color-3 !important;
+  border-color: transparent;
+  box-shadow: 0px 15px 30px 0px rgba(80, 94, 166, 0.15);
+
+  .k-datepicker .k-picker-wrap .k-dateinput-wrap {
+    align-items: center;
+    height: 3.5rem;
+  }
+
+  .k-filtercell {
+    .k-datepicker .k-picker-wrap .k-dateinput-wrap {
+      border: none !important;
+    }
+  }
+
+  .k-grid-content {
+    overflow-y: initial !important;
+  }
+
+  & thead tr {
+    box-shadow: 0px 15px 30px 0px rgba(80, 94, 166, 0.15);
+  }
+
+  & .k-header {
+    border: none;
+    background-color: $table-head-bg-color !important;
+    font-family: $font-primary-semibold;
+    box-shadow: none;
+    vertical-align: text-top;
+    color: $color-white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+
+    &:first-child {
+      border-radius: .5rem 0 0 .5rem;
+    }
+  }
+
+  & .k-grid-header-wrap, & .k-grid-header {
+    border: 0 !important;
+  }
+
+  & .k-grid-edit-row {
+    box-shadow: 0px 15px 30px 0px rgba(113, 116, 129, 0.15);
+
+    & textarea.form-control {
+      height: 40px;
+      width: 100%;
+
+      &::placeholder {
+        color: lighten($form-text-color,55%);
+      }
+
+      &:focus {
+        color: $form-text-color;
+        border: 1px solid darken($form-border-color,10%);
+        outline: none;
+        box-shadow: none;
+
+        &::placeholder {
+          color: transparent !important;
+        }
+      }
+    }
+  }
+
+  .k-dropdown .k-dropdown-wrap:hover {
+    border: 1px solid #e2ebfb;
+  }
+
+  .k-grid-header, .k-grid-toolbar, .k-grouping-header, .k-grid-add-row, .k-grid-footer {
+    background: transparent;
+  }
+
+  .k-grid-header {
+    padding-right: 0px !important;
+
+    .k-i-sort-desc-sm {
+      color: #ffffff !important;
+    }
+
+    .k-i-sort-asc-sm {
+      color: #ffffff !important;
+    }
+
+    .k-sort-order {
+      color: #ffffff !important;
+    }
+  }
+
+  .k-grid-header {
+    .k-grid-filter {
+      &.k-state-active {
+        background-color: $color-secondary;
+      }
+
+      .k-dropdown:hover {
+        border: none;
+      }
+    }
+  }
+}
+
+.k-grid th, .k-grid td {
+  border-style: dashed;
+  border-color: transparent;
+  padding: 2rem;
+
+  & .textarea.k-textarea {
+    height: 40px;
+    width: 100%;
+  }
+
+  & .k-grid-filter {
+    color: $color-white !important;
+    top: 1.6rem;
+
+    &:hover {
+      background: transparent;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.k-filter-row {
+  background: $color-white;
+
+  & td {
+    border-right: .1rem dashed $border-color;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    .k-datepicker {
+      height: $control-height;
+      line-height: 2;
+      color: $form-text-color;
+      background: $form-control-bg-color;
+      border: 1px solid $form-border-color;
+      font-size: $font-size-base;
+      border-radius: 0.5rem;
+      // padding-left: 2.5rem;
+      .k-picker-wrap {
+        border: none;
+        box-shadow: none;
+        border-radius: 0.5rem;
+      }
+
+      &::placeholder {
+        color: lighten($form-text-color,55%);
+      }
+
+      &:focus {
+        color: $form-text-color;
+        border: 1px solid darken($form-border-color,10%);
+        outline: none;
+        box-shadow: none;
+
+        &::placeholder {
+          color: transparent !important;
+        }
+      }
+    }
+  }
+}
+
+.k-filtercell {
+  & .k-header {
+    background: transparent !important;
+
+    &.k-dropdown {
+      align-items: center;
+
+      .k-input {
+        padding: 0rem 1.5rem;
+      }
+    }
+
+    & .k-dropdown-wrap {
+      background: transparent !important;
+      background-image: none !important;
+      border: 0;
+      padding: 0px;
+      height: 3rem;
+      box-shadow: none;
+    }
+  }
+
+  & .k-filtercell-wrapper {
+    & .k-textbox {
+      height: $control-height;
+      line-height: 2;
+      color: $form-text-color;
+      background: $form-control-bg-color;
+      border: 1px solid $form-border-color;
+      font-size: $font-size-base;
+      border-radius: .5rem;
+
+      &::placeholder {
+        color: lighten($form-text-color,55%);
+      }
+
+      &:focus {
+        color: $form-text-color;
+        border: 1px solid darken($form-border-color,10%);
+        outline: none;
+        box-shadow: none;
+
+        &::placeholder {
+          color: transparent !important;
+        }
+      }
+    }
+  }
+}
+
+
+.k-filter-menu {
+
+
+  .k-dropdown .k-dropdown-wrap:hover {
+    border: none;
+  }
+
+  .k-i-filter {
+    // margin-top: -0.8rem;
+    // margin-left: -1.4rem;
+    margin-top: 1.2rem;
+    margin-left: 0rem;
+  }
+
+  .k-action-buttons {
+    .k-button {
+      box-shadow: 0px 20px 15px 0px rgba(71, 209, 133, 0.25) !important;
+      border-radius: 3rem !important;
+    }
+
+    .k-primary {
+      color: $primary-btn-text-color;
+      background-color: $primary-btn-color;
+      border-color: transparent;
+      box-shadow: 0px 20px 15px 0px rgba(71, 209, 133, 0.25);
+      transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      border-radius: 3rem;
+    }
+  }
+}
+
+// start kendo pagination
+.k-pager-wrap {
+  & .k-pager-numbers {
+    & li {
+      margin-right: 0.4rem;
+
+      & .k-state-selected {
+        background-color: $color-secondary !important;
+        color: $color-white !important;
+
+        &:hover {
+          color: $color-white;
+        }
+      }
+    }
+
+    & .k-link {
+      color: $color-primary !important;
+      border-radius: 0rem;
+      background-color: $color-white !important;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  & .k-pager-nav {
+    &:hover {
+      color: $color-primary;
+    }
+
+    & .k-icon {
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+}
+// end kendo pagination
+
+.k-grid {
+  .k-filtercell .k-filtercell-operator {
+    display: flex;
+    align-items: center;
+
+    .k-dropdown {
+      display: flex;
+      align-items: center;
+    }
+  }
+  // start checbox style in the grid styles override
+  .k-checkbox {
+    box-shadow: inset 0 0 0 0.2rem $radio-btn-color;
+    border-color: transparent;
+    width: 1.7rem;
+    height: 1.7rem;
+
+    &:hover {
+      box-shadow: inset 0 0 0 0.2rem lighten($radio-btn-color, 55%);
+    }
+
+    &:checked {
+      box-shadow: inset 0 0 0 0.2rem $color-teritary;
+      border-color: transparent;
+      background-color: $color-white;
+      color: $color-teritary;
+    }
+
+    &:disabled {
+      box-shadow: inset 0 0 0 0.2rem lighten($radio-btn-color, 45%);
+      // & ~ svg {
+      //   stroke: lighten($radio-btn-color, 45%);
+      // }
+    }
+  }
+
+  th {
+    .k-checkbox {
+      background-color: $color-white;
+      box-shadow: inset 0 0 0 0.2rem lighten($radio-btn-color, 55%);
+
+      &:checked {
+        background-color: $color-white;
+        border-color: $table-head-bg-color;
+      }
+    }
+
+
+
+    .k-checkbox:indeterminate, .k-checkbox.k-state-indeterminate {
+      color: $color-white;
+    }
+  }
+  // end checbox style in the grid styles override
+}
+// END GRID TABLE
+
+
+
+//*DROPDOWN GROUP*//
+.k-dropdown {
+  height: $control-height;
+  cursor: pointer;
+
+
+  & .k-dropdown-wrap {
+    background-image: none;
+    padding: 1rem 1rem 1rem 1rem;
+    border-radius: 0.5rem;
+    color: lighten($form-text-color,30%);
+    background: $form-control-bg-color;
+    border: 1px solid $form-border-color;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 11;
+    font-size: $form-base-font;
+    width: 100%;
+
+    .k-select {
+      color: #323a4d;
+    }
+    //@extend %basic-field-style;
+    &:hover {
+      background-image: none;
+      background-color: $color-white;
+      border: 0.1rem solid darken($form-border-color, 10%);
+      color: darken($form-text-color, 5%);
+    }
+
+    .k-input {
+      align-self: center;
+      //height: calc(1.5em + .75rem + 8px);
+    }
+  }
+
+  &.form-control {
+    & .k-dropdown-wrap {
+      border: 0.1rem solid $border-color !important;
+      height: $control-height;
+    }
+
+    & .k-input {
+      align-self: center;
+      //height: calc(1.5em + .75rem + 8px);
+    }
+  }
+}
+
+.k-list {
+  background-color: $color-white;
+  border-radius: 0.5rem;
+
+  & .k-item {
+    padding: 1rem 1rem 1rem 2rem;
+    border-bottom: 1px solid $border-color;
+    word-break: break-word;
+
+
+    &.k-state-focused {
+      box-shadow: none !important;
+      background-color: $color-secondary !important;
+      color: $color-white;
+    }
+
+    &.k-state-selected {
+      box-shadow: none !important;
+      background-color: $color-secondary !important;
+      color: $color-white;
+    }
+
+    &:hover {
+      background-color: $color-secondary !important;
+      color: $color-white !important;
+    }
+  }
+}
+
+.k-list-optionlabel {
+  padding: 1rem 1rem 1rem 2rem;
+
+  &.k-state-focused {
+    color: $color-white;
+    background-color: $color-secondary !important;
+    box-shadow: none;
+  }
+
+  &.k-state-selected {
+    color: $color-white;
+    background-color: $color-secondary !important;
+  }
+}
+
+.k-dropdown {
+  &.k-header {
+    background-color: transparent !important;
+  }
+}
+// DROPDOWN END
+
+
+
+
+
+// START AUTOCOMPLETE
+.k-autocomplete {
+  height: $control-height;
+  border-color: $form-border-color !important;
+  border-radius: 0.5rem;
+
+  &.k-state-focused {
+    border: 0.1rem solid darken($form-border-color, 10%);
+    box-shadow: none !important;
+  }
+
+  & .k-searchbar {
+    align-self: center;
+  }
+
+  & .k-clear-value {
+    top: 6px;
+  }
+}
+// END AUTO COMPLETE
+
+
+// TOAST MESSAGES
+.k-notification-group {
+  z-index: 100002;
+  top: 1rem !important;
+  right: 1rem !important;
+
+  @include vm-breakpoint(xs) {
+    left: 1rem;
+  }
+
+  .k-notification-container {
+    width: 300px;
+    max-width: 300px;
+
+    @include vm-breakpoint(xs) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  & .k-notification {
+    width: 100%;
+    max-width: 100%;
+    padding: 2rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .1);
+    animation: toast-animate 0.5s ease-out;
+    border-radius: 0.5rem;
+    //@include vendor-prefix('border-radius', $px-4);
+    & .k-notification-wrap {
+      align-items: center;
+
+      & .k-icon {
+        font-size: 3.2rem;
+      }
+
+      & .k-notification-content {
+        font-size: 1.4rem !important;
+        line-height: 1.1rem !important;
+        padding-left: 0.8rem;
+        word-break: break-word;
+      }
+    }
+
+    &.k-notification-success {
+      background-color: rgba($color-success, 0.9) !important;
+      border-color: darken($color-success, 5%) !important;
+    }
+
+    &.k-notification-error {
+      background-color: rgba($color-danger, 0.9) !important;
+      border-color: darken($color-danger, 5%) !important;
+    }
+
+    &.k-notification-warning {
+      background-color: rgba(lighten($color-warning, 30%), 0.9);
+      border-color: lighten($color-warning, 35%) !important;
+      color: $color-3 !important;
+    }
+
+    &.k-notification-info {
+      background-color: rgba(lighten($color-info, 35%), 0.9);
+      color: $color-3 !important;
+      border-color: lighten($color-info, 35%) !important;
+    }
+  }
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes toast-animate {
+  from {
+    transform: translateY(-100%)
+  }
+
+  to {
+    top: 0
+  }
+}
+
+/* Safari 4.0 - 8.0 */
+keyframes toast-animate {
+  from {
+    transform: translateY(-100%)
+  }
+
+  to {
+    top: 0
+  }
+}
+
+// END TOAST MESSAGES
+
+
+
+//VALIDATIONS
+
+.vm-is-invalid {
+  .k-numerictextbox {
+    // border-width: 1px;
+    .k-numeric-wrap {
+      border-color: $color-danger !important;
+    }
+  }
+
+  .k-autocomplete {
+    border-color: $color-danger !important;
+  }
+
+  .k-dropdown {
+    .k-dropdown-wrap {
+      border-color: $color-danger !important;
+    }
+  }
+
+  .k-datepicker {
+    .k-picker-wrap {
+      & .k-dateinput-wrap {
+        border-color: $color-danger !important;
+      }
+
+      & .k-select {
+        border-color: $color-danger !important;
+      }
+    }
+  }
+}
+//END VALIDATIONS
+
+
+
+//KENDO  FILE UPLOAD
+.k-upload {
+  border-color: $form-border-color;
+  border-radius: 0.5rem;
+
+  & .k-dropzone {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0;
+    height: $control-height;
+    background-color: $color-white;
+    border-radius: 0.5rem;
+
+    & input[type=file] {
+      display: block;
+    }
+
+    & .k-dropzone-hint {
+      padding: 0 1.4rem;
+    }
+
+    & .k-upload-button {
+      padding: 1rem 2rem;
+      background-color: $secondary-btn-color;
+      background-image: none;
+      color: $secondary-btn-text-color;
+      border-radius: 0 0.5rem 0.5rem 0rem;
+      height: $control-height;
+      border: none;
+    }
+  }
+
+  & .k-upload-selected {
+    color: $secondary-btn-text-color;
+    background-color: $secondary-btn-color;
+    border-color: transparent !important;
+    box-shadow: 0px 15px 10px 0px rgba(38, 132, 254, 0.2);
+    transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-radius: 3rem;
+    background-image: none;
+    padding: 1rem 2rem;
+    height: $control-height;
+
+    &:hover {
+      background-color: $secondary-btn-color;
+      background-image: none;
+      border-color: transparent !important;
+    }
+
+    &:active {
+      border-color: transparent !important;
+      box-shadow: none;
+    }
+
+    &:focus {
+      border-color: transparent !important;
+      box-shadow: none;
+    }
+  }
+
+  & .k-clear-selected {
+    color: $link-color;
+    background-image: none;
+    background-color: transparent !important;
+    border: none;
+  }
+
+  & .k-action-buttons {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .k-upload-files {
+    .k-file-name {
+      color: $link-color;
+    }
+  }
+
+  .k-upload-status {
+    padding: 0rem 4rem;
+  }
+}
+// END KENDO  FILE UPLOAD
+
+//CONFIRMATION DIALOG
+kendo-dialog {
+  .k-window {
+    border-radius: 1rem;
+    min-width: 300px;
+    max-width: 50%;
+
+    .k-dialog-titlebar {
+      border-radius: 1rem 1rem 0 0;
+      background-color: $color-white;
+      padding: 2.5rem 3rem 0rem 3rem;
+      border-bottom: transparent;
+
+      .k-dialog-title {
+        position: relative;
+        display: inline-block;
+        font-family: $font-secondary-semibold;
+        font-size: 1.8rem;
+        color: $color-secondary;
+        height: 28px;
+
+        &::before {
+          content: '';
+          position: absolute;
+          background: $color-teritary;
+          box-shadow: 0px 3px 3px 0px rgba(57, 158, 102, 0.25);
+          border-radius: 2rem;
+          height: 0.4rem;
+          width: 3rem;
+          bottom: -.5rem;
+          left: 0;
+          bottom: 0.4rem;
+        }
+      }
+    }
+
+    .k-content {
+      padding: 3rem;
+    }
+
+    .k-dialog-buttongroup {
+      border-top: 0.1rem solid $form-border-color;
+
+      &.k-dialog-button-layout-stretched {
+        padding: 1.5rem 3rem;
+
+        .k-button {
+          text-decoration: none;
+          cursor: pointer !important;
+          outline: none;
+          transition: all ease 0.3s;
+          color: $link-color !important;
+
+          &:hover {
+            background-color: transparent;
+            background-color: white !important;
+            background-image: none;
+          }
+
+          &.k-primary {
+            color: $primary-btn-text-color !important;
+            background-color: $primary-btn-color !important;
+            border-color: transparent;
+            box-shadow: 0px 20px 15px 0px rgba(71, 209, 133, 0.25) !important;
+            transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            border-radius: 3rem !important;
+          }
+        }
+      }
+    }
+  }
+}
+//confirmation DIALOG
+
+//MODAL POPUP
+.vm-popup {
+  .k-widget.k-window.k-dialog {
+    border-radius: 1rem !important;
+
+    @include vm-breakpoint(sm-max) {
+      width: 95% !important;
+    }
+  }
+
+
+  .k-dialog-titlebar {
+    .k-dialog-title {
+    }
+  }
+
+
+  .k-content {
+    max-height: 40rem;
+    overflow: auto;
+  }
+}
+//END MODAL POPUP
+
+
+
+//*DATE PICKER GROUP*//
+.k-datepicker {
+  border: 0px;
+
+  & .k-picker-wrap {
+    border: 0px;
+
+
+    & .k-dateinput-wrap {
+      height: $control-height;
+      //border-right:1px solid  $form-border-color !important;
+      border: 1px solid $form-border-color !important;
+      border-radius: 0.5rem 0 0 0.5rem;
+      align-items: center;
+      display: flex;
+    }
+
+    & .k-select {
+      padding: 0.6rem;
+      box-sizing: content-box;
+      border: 1px solid $form-border-color !important;
+      border-left: none !important;
+      background-color: #fff;
+      border-radius: 0 0.5rem 0.5rem 0rem;
+    }
+
+    &.k-state-focused {
+      border: 1px solid darken($form-border-color,10%);
+      box-shadow: none !important;
+      border-radius: 5px;
+
+      & .k-dateinput-wrap {
+        border: 1px solid darken($form-border-color,10%);
+      }
+
+      & .k-select {
+        border: 1px solid darken($form-border-color,10%);
+        border-left: none !important;
+      }
+    }
+  }
+}
+
+//*DATE PICKER GROUP END*//
+
+.k-calendar {
+  table td, table th {
+    padding: 0.2rem 0rem !important;
+  }
+
+  .k-calendar-header {
+    background-color: $color-secondary;
+
+    .k-today {
+      color: $color-white;
+      background-color: darken($color-secondary, 5%) !important;
+      padding: 0.3rem 0.6rem;
+
+      &:hover {
+        color: $color-white;
+      }
+    }
+
+    .k-button {
+      color: $color-white;
+      background-color: darken($color-secondary, 5%) !important;
+    }
+  }
+
+  .k-state-selected {
+    .k-link {
+      background-color: $color-teritary;
+      border-color: $color-teritary;
+
+      &:hover {
+        background-color: $color-teritary;
+      }
+    }
+  }
+
+  .k-content {
+    color: $color-teritary;
+
+    .k-today {
+      color: $color-primary;
+
+      &:hover {
+        color: darken($color-primary, 10%);
+      }
+    }
+  }
+
+  .k-calendar-navigation {
+    .k-content {
+      li {
+        // background-color: $color-secondary;
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+}
+//Popup close icon
+.k-widget.k-window.k-dialog .k-dialog-titlebar .k-dialog-close {
+  margin-top: -0.2rem;
+  opacity: 1;
+  color: #c1c7d7 !important;
+  text-shadow: none !important;
+  padding: 0.3rem 0.6rem !important;
+  font-weight: normal;
+  position: relative;
+  top: -2rem;
+  right: -2rem;
+}
+//*Validation Message in Grid *//
+.k-grid th, .k-grid td {
+  overflow: initial;
+}
+//*Validation Message in Grid End*//
+
+//* Tablist tab border issue fix//
+.k-tabstrip .k-tabstrip-items .k-item {
+  outline: none !important;
+  border: none !important;
+}
+//* Tablist tab border issue fix end//
+.k-grid {
+  .vm-column-gutter {
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+
+  .vm-grid-multi-control {
+    .vm-column-gutter {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  tr.k-state-selected td {
+    background-color: #ffffff;
+  }
+
+  .k-numerictextbox .k-numeric-wrap {
+    border-width: 0px;
+  }
+}
+//datagrid on checkbox select changes
+//textarea in dynamic editable grid
+.k-grid .k-textarea.form-control {
+  width: 100%;
+}
+
+.k-grid {
+  .vm-dropdown.vm-multi-select-dropdown {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .row {
+    margin-right: 0px;
+
+    .vm-column-gutter {
+      padding-left: 15px;
+      width: 100%;
+    }
+  }
+}
+
+.k-grid {
+  kendo-grid-boolean-filter-cell {
+    kendo-dropdownlist {
+      border: 1px solid $border-color !important;
+      border-radius: 0.5rem !important;
+    }
+  }
+}
+
+.k-numeric-wrap {
+  border: 1px solid $color-danger;
+  border-width: 1px !important;
+}
+
+
+//kendo treeview scss START
+.k-treeview {
+
+  .k-in {
+    color: $link-color;
+    transition: all 0.2s ease-in;
+  }
+
+  .k-in.k-state-selected, .k-in:hover {
+    background-color: $color-white;
+    box-shadow: 2.457px 1.721px 10px 0px rgba(0, 84, 213, 0.15);
+    padding: 0.5rem 1rem;
+    color: inherit;
+
+
+    &:before {
+      content: "";
+      background-color: $color-secondary;
+      box-shadow: 2px 0px 2px 0px rgba(38, 132, 254, 0.2);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0.3rem;
+      height: 100%;
+    }
+  }
+
+
+  .k-icon + .k-in {
+    font-family: $font-primary-semibold;
+    color: $color-primary !important;
+
+    &:hover {
+      background-color: transparent !important;
+      box-shadow: none;
+      padding: 4px 8px;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    &.k-state-focused {
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
+
+
+exp-dropdowntreeview {
+  .k-popup {
+    border-radius: 0.5rem;
+  }
+
+  .dropdown-popup {
+    border-radius: 0.5rem;
+
+    input {
+      padding-left: 10px !important;
+    }
+  }
+
+
+  .dropdown.vm-multi-select-dropdown.vm-custom-dropdown {
+    button.dropdown-toggle {
+      border-radius: 0.5rem !important;
+      height: $control-height !important;
+
+      span {
+        padding-left: 1rem;
+      }
+
+      &:hover {
+        border: 1px solid darken($form-border-color,10%) !important;
+      }
+    }
+  }
+}
+
+//kendo treeview scss END
+
+.dropdown {
+  .k-popup {
+    border: none;
+    background-color: transparent;
+
+    .dropdown-menu {
+      position: relative;
+
+      .dropdown-close {
+        //left: 1px !important;
+      }
+
+      &.dropdown-menu-right {
+        margin-right: 1.5rem;
+      }
+    }
+  }
+}
+//dropdown inside list
+.k-popup.k-list-container {
+  box-shadow: none;
+  border-radius: 5px;
+  border-color: darken($form-border-color, 10%);
+  overflow: hidden;
+
+  kendo-list {
+    .k-list-scroller {
+
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: #f8f8f8;
+      }
+
+      &::-webkit-scrollbar {
+        width: 4px;
+        margin-left: 3px;
+        margin-right: 3px;
+        background-color: #f8f8f8;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+}
+
+.k-datepicker {
+  .k-picker-wrap {
+    flex-direction: row-reverse;
+
+    .k-dateinput-wrap {
+      border-left: none !important;
+      border-radius: 0 0.5rem 0.5rem 0rem;
+    }
+
+    .k-select {
+      border-right: none !important;
+      border-radius: 0.5rem 0 0 0.5rem;
+      border-left: 0.1rem solid $form-border-color !important;
+    }
+  }
+}
+
+.k-i-filter, .k-i-calendar {
+  background-image: url('/assets/img/filter-icon.svg');
+  width: 1.6rem;
+  height: 1.6rem;
+  background-repeat: no-repeat;
+}
+
+.k-i-calendar {
+  background-image: url('/assets/img/calendar-icon.svg');
+}
+
+.k-i-filter::before, .k-i-calendar::before {
+  display: none;
+}

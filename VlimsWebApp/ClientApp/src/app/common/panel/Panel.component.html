@@ -1,0 +1,31 @@
+<div class="tab-content">
+  <div class="tab-pane fade active show">
+    <div class="table-responsive">
+      <table class="table table-striped vm-fold-table">
+        <tbody>
+          <tr>
+            <td colspan="2" class="bg-white border-top-0" [ngClass]="{ 'vm-open': isExpanded }">
+              <section>
+                <header *ngIf="isHeader">
+                  <div class="row mx-0 vm-view" (click)="isCollapsable && (isExpanded = !isExpanded)">
+                    <div class="mx-5">
+                      <span class="vm-coverage-table-arrow"></span>
+                      <div class="form-check pl-0 vm-checkbox path checkbox ml-2">
+                        <label for="chk_{{ Name }}" class="checkbox-label form-check-label vm-font-primary-semibold vm-font-size-18">
+                          {{ Name }}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </header>
+                <div class="vm-content" *ngIf="isExpanded">
+                  <ng-content></ng-content>
+                </div>
+              </section>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

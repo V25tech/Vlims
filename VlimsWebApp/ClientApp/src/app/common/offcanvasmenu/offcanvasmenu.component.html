@@ -1,0 +1,39 @@
+<div class="vm-collab-panel" [ngClass]="{'ColabOpen':visible}" *ngIf="menutype==modeType.OFFCANVAS">
+  <div class="vm-ColabPanel" [style.width.%]="width">
+    <section class="w-100">
+      <header class="vm-bg-primary colab-tabs" *ngIf="showDefaultButton" [hidden]="!visible">
+        <a class="collaboration-close collaboration-close-right" (click)="opencollapse($event,false)"
+           [style.left.%]="width">
+          <span aria-hidden="true">×</span>
+        </a>
+      </header>
+      <div class="vm-content">
+        <a class="shadow collaboration-close-right vm-collab-icon" *ngIf="showDefaultButton"
+           (click)="opencollapse($event,true)" [hidden]="!showDefaultButton || visible">
+          <img [src]="imgsrc" width="32">
+        </a>
+        <div class="tab-content p-4" style="height: 100vh; overflow-y: scroll;overflow-x: hidden;">
+          <ng-container *ngTemplateOutlet="content"></ng-container>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="vm-primary-nav" *ngIf="menutype==modeType.PUSHMENU">
+  <nav class="vm-nav " role="navigation" [ngStyle]="{'width': visible ? width+unit : '0'+unit}">
+    <div class="vm-hamburger" [ngStyle]="{'left': visible ?  width+unit : '0'+unit,'position':buttonPosition}">
+      <button type="button" *ngIf="showDefaultButton" class="vm-hamburger-btn " data-toggle="offcanvas"
+              [ngClass]="{'is-closed':(!visible),'is-open':(visible)}" (click)="toggleMenu($event);">
+        <span class="hamb-top"></span>
+        <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+      </button>
+    </div>
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+
+  </nav>
+</div>
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>

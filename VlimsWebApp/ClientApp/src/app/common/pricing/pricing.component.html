@@ -1,0 +1,160 @@
+<div class="alert alert-warning" role="alert">
+  Pricing component is not supported in Flux layout
+</div>
+
+<!-- <section>
+  <div class="vm-content p-5">
+    <section class="vm-grid vm-shadow-lg-blue rounded-lg bg-white mb-5" *ngIf="data.StatePricing">
+      <div class="row w-100 d-flex p-5 vm-separator">
+        <div class="col-8 col-md-10 col-lg-10">
+          <h4 class=" vm-primary-heading vm-color-teritary font-weight-bold">
+            {{ data.StatePricing.HeaderName }}
+          </h4>
+        </div>
+        <div class="col-4 col-md-2 col-lg-2 vm-grid-mark">
+          <span class="text-danger pl-5 pl-lg-3">
+            {{data.StatePricing.Premium | currency}}
+          </span>
+        </div>
+      </div>
+
+      <div class="vm-content">
+        <div *ngIf="data.StatePricing && data.StatePricing.AdditionalDetails.length > 0">
+          <ng-container *ngTemplateOutlet="recursiveAddTmpl;context: { $implicit: data.StatePricing.AdditionalDetails }">
+          </ng-container>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="vm-content">
+        <ng-container *ngTemplateOutlet="recursiveriskgroupdetails;context: { $implicit: data.RiskGroups }">
+        </ng-container>
+      </div>
+    </section>
+
+  </div>
+</section>
+<ng-template #recursiveAddTmpl let-alist>
+  <section>
+    <header class="d-flex py-5 px-4 vm-separator position-relative vm-border-bottom-for-white-panel">
+      <div class="col-lg-4" *ngFor="let item of alist">
+        <p>
+          {{ item.Name }}
+          <span class="d-block pt-2 text-dark vm-segoui-bold">{{ item.Value | currency }}</span>
+        </p>
+      </div>
+    </header>
+  </section>
+</ng-template>
+<ng-template #recursivecovdetails let-clist>
+  <div class="table-responsive" *ngIf="clist">
+    <table class="table vm-table-bdr-separator border-top-0">
+      <thead>
+        <tr>
+          <th width="81%" class="text-dark  border-top-0">Coverage Name</th>
+          <th width="19%" class="text-dark  border-top-0">Premium</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of clist">
+          <td>{{ item.HeaderName }}</td>
+          <td>
+            {{ item.Premium | currency }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+<ng-template #recursiveriskgroupdetails let-risklist>
+  <div *ngFor="let riskgroup of risklist">
+    <section>
+      <header class="p-4">
+        <div class="row w-100 mt-5">
+          <div class="col-8 col-md-10 col-lg-10">
+            <h4 class="vm-primary-heading font-weight-bold pl-4 text-dark">{{ riskgroup.Type }}</h4>
+          </div>
+          <div class="col-4 col-md-2 col-lg-2 vm-grid-mark">
+            <span class="text-danger vm-primary-heading">
+              {{ riskgroup.Premium | currency }}
+            </span>
+          </div>
+        </div>
+      </header>
+
+
+      <div *ngFor="let subriskgroup of riskgroup.RiskDetails">
+        <div class="mb-3">
+          <exp-tab [title]="subriskgroup.HeaderName" [price]="subriskgroup.Premium" [child]='false'>
+            <div class="panel-body">
+              <div>
+                <ng-container *ngTemplateOutlet="
+                  recursiveAddTmpl;
+                  context: { $implicit: subriskgroup.AdditionalDetails }
+                ">
+                </ng-container>
+              </div>
+              <div class="vm-content">
+                <ng-container *ngTemplateOutlet="
+                  recursivecovdetails;
+                  context: { $implicit: subriskgroup.CoverageDetails }
+                ">
+                </ng-container>
+              </div>
+              <div class="vm-content">
+                <div *ngFor="let riskgroup of subriskgroup.RiskGroups">
+                  <section>
+                    <header class="p-4">
+                      <div class="row w-100 mt-5">
+                        <div class="col-8 col-md-10 col-lg-10">
+                          <h4 class="vm-primary-heading font-weight-bold pl-4 text-dark">{{ riskgroup.Type }}</h4>
+                        </div>
+                        <div class="col-4 col-md-2 col-lg-2 vm-grid-mark">
+                          <span class="text-danger vm-primary-heading">
+                            {{ riskgroup.Premium | currency }}
+                          </span>
+                        </div>
+                      </div>
+                    </header>
+
+
+                    <div *ngFor="let subriskgroup of riskgroup.RiskDetails">
+                      <div class="mb-3">
+                        <exp-tab [title]="subriskgroup.HeaderName" [price]="subriskgroup.Premium" [child]='true'>
+                          <div class="panel-body">
+                            <div>
+                              <ng-container *ngTemplateOutlet="
+                                recursiveAddTmpl;
+                                context: { $implicit: subriskgroup.AdditionalDetails }
+                              ">
+                              </ng-container>
+                            </div>
+                            <div class="vm-content">
+                              <ng-container *ngTemplateOutlet="
+                                recursivecovdetails;
+                                context: { $implicit: subriskgroup.CoverageDetails }
+                              ">
+                              </ng-container>
+                            </div>
+                            <div class="vm-content">
+                              <ng-container *ngTemplateOutlet="
+                                recursiveriskgroupdetails;
+                                context: { $implicit: subriskgroup.RiskGroups }
+                              ">
+                              </ng-container>
+                            </div>
+                          </div>
+                        </exp-tab>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+
+              </div>
+            </div>
+          </exp-tab>
+        </div>
+      </div>
+    </section>
+  </div>
+</ng-template> -->

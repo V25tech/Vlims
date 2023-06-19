@@ -1,0 +1,56 @@
+// .col-form-label {
+//     line-height: 2.2;
+// }
+
+
+// radio button show hide
+.box{
+    display: none;
+}
+
+// forms
+
+//Browse
+.vm-form-upload {
+    position: relative;
+      & .vm-upload-input {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        display: block;
+        opacity: 0;
+        cursor: pointer;
+      }
+      & .vm-btn-browse {
+        pointer-events: none;
+      }
+   
+      & .vm-btn-upload {
+        display: none;
+      }
+   
+      &.vm-browsed {
+        & .vm-btn-browse {
+          display: none;
+        }
+   
+        & .vm-btn-upload {
+          display: flex;
+        }
+      }
+      .rounded-right{
+        border-top-right-radius: .5rem!important;
+      border-bottom-right-radius: .5rem!important;
+      }
+   }
+  
+.shadow-lg {
+  -webkit-box-shadow: 0 5px 15px 0px rgba(0,0,0,0.09) !important;
+  -moz-box-shadow: 0 5px 15px 0px rgba(0,0,0,0.09) !important;
+  -ms-box-shadow: 0 5px 15px 0px rgba(0,0,0,0.09) !important;
+  -o-box-shadow: 0 5px 15px 0px rgba(0,0,0,0.09) !important;
+  box-shadow: 0 5px 15px 0px rgba(0,0,0,0.09) !important;
+}
+button{
+  background: transparent;
+}

@@ -1,0 +1,16 @@
+<div class="dropdown filter-dropdown bg-white" expandMenu>
+  <a class="dropdown-toggle mb-0 vm-color-black"
+    data-toggle="dropdown"
+    aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16">
+      <path d="M5.83 8.728A.381.381 0 016 9v7l3-3V9a.381.381 0 01.17-.272L15 3H0zM0 0h15v2H0V0z"
+        fill="#00a1c8"
+        fill-rule="evenodd"></path>
+    </svg>
+    {{ value }}
+  </a>
+  <div class="dropdown-menu p-0 vm-shadow-sm-grey rounded-lg" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-10px, 54px, 0px);">
+    <a *ngFor="let item of items"
+      (click)="addvalue(item.Value, item.Text)" class="dropdown-item">{{ item.Text }}</a>
+  </div>
+</div>
