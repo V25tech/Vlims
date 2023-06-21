@@ -15,12 +15,13 @@ namespace PolicySummary.Sheet1.Data
     using System.Data.SqlClient;
     using System.Collections.Generic;
     using Newtonsoft.Json;
-    using PolicySummary.Common.Entities;
-    using PolicySummary.Sheet1.Entities;
+
     using VAMLibrary.Core;
     using VAMLibrary.Core.Common;
-    
-    
+    using Vlims.Entities.Common;
+    using Vlims.Entities;
+
+
     // Comment
     public class AdimManagementData : IAdimManagementData
     {

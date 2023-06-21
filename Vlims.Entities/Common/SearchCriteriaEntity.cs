@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PolicySummary.Common.Entities
+namespace Vlims.Entities.Common
 {
     public class SearchCriteria : RequestContext
     {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PolicySummary.Sheet1.Entities
+namespace Vlims.Entities
 {
     using System;
     using System.Collections.Generic;

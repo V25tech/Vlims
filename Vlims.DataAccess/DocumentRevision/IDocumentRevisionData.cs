@@ -15,10 +15,11 @@ namespace PolicySummary.Sheet1.Data
     using System.Data.SqlClient;
     using System.Collections.Generic;
     using Newtonsoft.Json;
-    using PolicySummary.Common.Entities;
-    using PolicySummary.Sheet1.Entities;
-    
-    
+    using Vlims.Entities.Common;
+    using Vlims.Entities;
+
+
+
     // Comment
     public interface IDocumentRevisionData
     {

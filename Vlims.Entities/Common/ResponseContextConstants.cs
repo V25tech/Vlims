@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Dealfoundry.Common.Entities
+namespace Vlims.Entities.Common
 {
     public static class ResponseContextConstants
     {

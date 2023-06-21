@@ -1,8 +1,8 @@
-using Dealfoundry.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Vlims.Entities.Common;
 
 namespace PolicySummary.Sheet1.Services
 {

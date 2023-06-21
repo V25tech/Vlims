@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PolicySummary.Common.Entities
+namespace Vlims.Entities.Common
 {
 
     public class RequestContext

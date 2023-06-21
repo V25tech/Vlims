@@ -15,8 +15,8 @@ namespace PolicySummary.Sheet1.Services
     using System.Linq;
     using System.Data;
     using System.Collections.Generic;
-    using PolicySummary.Common.Entities;
-    using PolicySummary.Sheet1.Entities;
+    
+    
     using PolicySummary.Sheet1.Data;
     
     

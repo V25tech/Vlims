@@ -14,8 +14,8 @@ namespace PolicySummary.Controllers
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-    using PolicySummary.Common.Entities;
-    using PolicySummary.Sheet1.Entities;
+    
+    
     using PolicySummary.Sheet1.Services;
     //hnjfsdjhf
 
