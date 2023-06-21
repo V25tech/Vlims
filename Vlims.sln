@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VlimsWebApp", "VlimsWebApp\VlimsWebApp.csproj", "{DD09A576-A62D-4CFE-BB15-291637293475}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VlimsWebApp", "VlimsWebApp\VlimsWebApp.csproj", "{DD09A576-A62D-4CFE-BB15-291637293475}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VlimsAPI", "VlimsAPI\VlimsAPI.csproj", "{BFBE199F-E55F-45A2-AC60-937C95A16947}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.DataAccess", "Vlims.DataAccess\Vlims.DataAccess.csproj", "{B19D3BBC-4A36-4008-97D3-7CF88E5B6054}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.Services", "Vlims.Services\Vlims.Services.csproj", "{7A2E4F1B-937F-455F-9398-599FBF6014BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.Tests", "Vlims.Tests\Vlims.Tests.csproj", "{9ED4BBE5-DE3F-4683-99F9-E7E84D7A9C76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.Entities", "Vlims.Entities\Vlims.Entities.csproj", "{997700E1-FF66-4A57-9C8B-679546E7FFBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,26 @@ Global
 		{DD09A576-A62D-4CFE-BB15-291637293475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD09A576-A62D-4CFE-BB15-291637293475}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD09A576-A62D-4CFE-BB15-291637293475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFBE199F-E55F-45A2-AC60-937C95A16947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFBE199F-E55F-45A2-AC60-937C95A16947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFBE199F-E55F-45A2-AC60-937C95A16947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFBE199F-E55F-45A2-AC60-937C95A16947}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B19D3BBC-4A36-4008-97D3-7CF88E5B6054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B19D3BBC-4A36-4008-97D3-7CF88E5B6054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B19D3BBC-4A36-4008-97D3-7CF88E5B6054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B19D3BBC-4A36-4008-97D3-7CF88E5B6054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2E4F1B-937F-455F-9398-599FBF6014BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2E4F1B-937F-455F-9398-599FBF6014BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2E4F1B-937F-455F-9398-599FBF6014BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2E4F1B-937F-455F-9398-599FBF6014BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ED4BBE5-DE3F-4683-99F9-E7E84D7A9C76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED4BBE5-DE3F-4683-99F9-E7E84D7A9C76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED4BBE5-DE3F-4683-99F9-E7E84D7A9C76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED4BBE5-DE3F-4683-99F9-E7E84D7A9C76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{997700E1-FF66-4A57-9C8B-679546E7FFBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{997700E1-FF66-4A57-9C8B-679546E7FFBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{997700E1-FF66-4A57-9C8B-679546E7FFBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{997700E1-FF66-4A57-9C8B-679546E7FFBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
