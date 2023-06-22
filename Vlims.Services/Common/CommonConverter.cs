@@ -4,7 +4,7 @@ using System.Data;
 using System.Text;
 using Vlims.Entities.Common;
 
-namespace PolicySummary.Sheet1.Services
+namespace Vlims.Services
 {
     public static class CommonConverter
     {

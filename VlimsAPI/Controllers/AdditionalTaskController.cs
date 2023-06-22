@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PolicySummary.Controllers
+namespace Vlims.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-    using PolicySummary.Sheet1.Services;
+    using Vlims.Services;
     using Vlims.Entities.Common;
     using Vlims.Entities;
 

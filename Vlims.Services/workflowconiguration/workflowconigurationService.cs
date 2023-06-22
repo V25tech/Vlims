@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PolicySummary.Sheet1.Services
+namespace Vlims.Services
 {
     using System;
     using System.Text;
@@ -18,8 +18,10 @@ namespace PolicySummary.Sheet1.Services
     
     
     using PolicySummary.Sheet1.Data;
-    
-    
+    using Vlims.Entities.Common;
+    using Vlims.Entities;
+
+
     // Comment
     public class workflowconigurationService : IworkflowconigurationService
     {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PolicySummary.Sheet1.Services
+namespace Vlims.Services
 {
     using System;
     using System.Text;
@@ -18,8 +18,9 @@ namespace PolicySummary.Sheet1.Services
     using Newtonsoft.Json;
     
     using VAMLIbrary.Core.Validators;
-    
-    
+    using Vlims.Entities;
+
+
     // Comment
     public static class UserManagementValidator
     {

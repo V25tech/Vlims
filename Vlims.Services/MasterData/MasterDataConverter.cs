@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using VAMLIbrary.Core.Extentions;
 using VAMLIbrary.Core.Common;
 
-namespace PolicySummary.Sheet1.Services
+namespace Vlims.Services
 {
     public static class MasterDataConverter
     {        

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PolicySummary.Sheet1.Services
+namespace Vlims.Services
 {
     public class DatatypeConverter
     {

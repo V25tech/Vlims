@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PolicySummary.Sheet1.Services
+namespace Vlims.Services
 {
     using System;
     using System.Text;
@@ -15,10 +15,12 @@ namespace PolicySummary.Sheet1.Services
     using System.Linq;
     using System.Data;
     using System.Collections.Generic;
-    
-    
-    
-    
+    using Vlims.Entities.Common;
+    using Vlims.Entities;
+
+
+
+
     // Comment
     public interface IUserConfigurationService
     {

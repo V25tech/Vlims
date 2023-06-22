@@ -15,7 +15,7 @@ namespace PolicySummary.Sheet1.API.Extensions
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using Microsoft.Extensions.DependencyInjection;
-    using PolicySummary.Sheet1.Services;
+    using Vlims.Services;
     using PolicySummary.Sheet1.Data;
     using VAMLibrary.Core;
     

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PolicySummary.Controllers
+namespace Vlims.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -16,9 +16,11 @@ namespace PolicySummary.Controllers
     using Microsoft.AspNetCore.Authorization;
     
     
-    using PolicySummary.Sheet1.Services;
-    
-    
+    using Vlims.Services;
+    using Vlims.Entities;
+    using Vlims.Entities.Common;
+
+
     /// <summary>
     /// Comment
     /// </summary>
