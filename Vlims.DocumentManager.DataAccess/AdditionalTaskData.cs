@@ -14,11 +14,7 @@ namespace Vlims.DocumentManager.DataAccess
     using System.Linq;
     using System.Data.SqlClient;
     using System.Collections.Generic;
-    using Newtonsoft.Json;
-    //using PolicySummary.Common.Entities;
-    //using PolicySummary.Sheet1.Entities;
-    //using VAMLibrary.Core;
-    //using VAMLibrary.Core.Common;
+    using Newtonsoft.Json;    
     using Vlims.Common;
     using Vlims.DMS.Entities;
 
@@ -26,9 +22,6 @@ namespace Vlims.DocumentManager.DataAccess
     // Comment
     public static class AdditionalTaskData
     {
-        
-        
-        
         public static DataSet GetAllAdditionalTask(RequestContext requestContext)
         {
             try

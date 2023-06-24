@@ -1,0 +1,111 @@
+<div kendoDialogContainer></div><exp-container-Header></exp-container-Header>
+<div id='tess' class='container-fluid'>
+  <form name="tess" #tessForm="ngForm" novalidate>
+    <div class="alert alert-danger" role="alert" *ngIf="validationMessages.length > 0">
+      <div class="section vam-MB0">
+        <h2>Please fix the following errors:</h2>
+        <ul class="list-group vm-list-decimal">
+          <li class="list-group-item vm-list-decimal-item bg-transparent border-0"
+            *ngFor="let error of validationMessages">{{ error }}</li>
+        </ul>
+      </div>
+    </div>
+    <div style="position: relative; top: 10px">
+    <div class="row">
+      <div class='col-lg-12'>
+        <div class="vm-content">
+          <div class="row vm-empty-section">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 vam-PLR0">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 vam-PLR0">
+          <exp-section id='formsec73082d7cd5c13450eb52' ngModelGroup="formsec73082d7cd5c13450eb52"
+            #formsec73082d7cd5c13450eb52="ngModelGroup" name="Document Type Configuration" [isexpandable]='false'>
+            <div header>
+              <div class="row justify-content-between align-items-end flex-column flex-sm-row">
+                <div class="col-12 d-flex align-items-center flex-wrap vm-section-with-controls">
+                  <label class="col-sm-6 col-form-label"></label>
+                  <button value="+"
+                              id="btnb7d11e4df5036f645749"
+                              name="btnb7d11e4df5036f645749"
+                              class="btn btn-secondary ml-4 shadow"
+                              (click)="AddDocumentConfiguration($event)">
+                              <img src="assets/images/icons/add-plus-sign.svg"/>
+                            </button>
+                </div>
+              </div>
+            </div>
+            <div body>
+              <div class='row'>
+                <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 vam-PLR0'><ng-template #template_dgc814f87b1e1667695454 let-anchor>
+                    <span>{{ anchor.nativeElement.innerText }}</span>
+                  </ng-template>
+                  <div kendoTooltip showOn="none" [tooltipTemplate]="template_dgc814f87b1e1667695454"
+                    (mouseover)="showTooltip_dgc814f87b1e1667695454($event)">
+                    <div
+                            class="editable-grid"
+                            id="lstProductListdiv"
+                            ngModelGroup="lstDocumentConfigGrid_Group"
+                            #lstDocumentConfigGrid_Group="ngModelGroup"
+                          >
+                    <kendo-grid id="lstDocumentConfigGridInstance"
+                                name="lstDocumentConfigGridInstance"
+                                [kendoGridBinding]='lstDocumentTypeConfig.Items'
+                                [sortable]='true'
+                                filterable='menu'
+                                [resizable]="false"
+                                [reorderable]="false"
+                                [pageable]="cfs.GetPagingInfoBasedOnData(lstDocumentTypeConfig.Items )"
+                                [pageSize]="appContext.PageSize"
+                                [sort]="lstDocumentTypeConfig.state.sort"
+                              [skip]="lstDocumentTypeConfig.state.skip"
+                              [filter]="lstDocumentTypeConfig.state.filter"
+                              [pageSize]="appContext.PageSize"
+                              (dataStateChange)=" lstDocumentTypeConfig._cancelChanges($event)"
+                              (cellClick)="lstDocumentTypeConfig._editRowItem($event)"
+                              (pageChange)="lstDocumentTypeConfig._pageChange($event)"
+                              (clickOutside)=" lstDocumentTypeConfig._validatedEditExit($event)">
+                      <!-- <kendo-grid-column title="S.No" width="70" [sortable]="false" -->
+                                  [filterable]="false">
+                        <ng-template kendoGridCellTemplate let-rowIndex='rowIndex'>{{rowIndex + 1}} </ng-template>
+
+                      <kendo-grid-column field="DocumentName" title="Document Type Name"
+                        width="150"><ng-template kendoGridFilterMenuTemplate let-column="column" let-filter="filter">
+                          <kendo-grid-string-filter-cell [column]="column" [filter]="filter" operator="startswith">
+                          </kendo-grid-string-filter-cell>
+                        </ng-template>
+                      </kendo-grid-column><kendo-grid-column field="TypePrefix" title="Document Type Prefix"
+                        width="150"><ng-template kendoGridFilterMenuTemplate let-column="column" let-filter="filter">
+                          <kendo-grid-string-filter-cell [column]="column" [filter]="filter" operator="startswith">
+                          </kendo-grid-string-filter-cell>
+                        </ng-template>
+                      </kendo-grid-column><kendo-grid-column field="Description" title="Description" width="150"
+                        [filterable]='false'>
+                      </kendo-grid-column><kendo-grid-column field="RegisteredBy" title="Registered By" width="150"
+                        [filterable]='false'>
+                      </kendo-grid-column><kendo-grid-column field="RegisteredOn" title="Registered On" width="150"
+                        [filterable]='false'>
+                      </kendo-grid-column><kendo-grid-column field="Status" title="Status" width="150"
+                        [filterable]='false'>
+                      </kendo-grid-column><kendo-grid-column title="Modify" width="150" [sortable]="false"
+                        [filterable]="false">
+                        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                          <img id="ModifyDocument" name="ModifyDocument" src="assets/images/icons/edit.svg"
+                            style="width: 16px; height: 16px;cursor: pointer;" title="Edit"
+                            (click)='$event.data=dataItem;EditDocumentTypeConfig($event)' />
+                        </ng-template>
+                      </kendo-grid-column></kendo-grid>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </exp-section>
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </form>
+</div>
+<exp-container-Footer></exp-container-Footer>
