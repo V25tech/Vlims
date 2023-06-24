@@ -21,12 +21,12 @@ namespace Vlims.DocumentManager.Manager
 
 
     // Comment
-    public static class DocumentrequestService 
+    public  class DocumentrequestService  : IDocumentrequestService
     {
         
       
         
-        public static ResponseContext<Documentrequest> GetAllDocumentrequest(RequestContext requestContext)
+        public  ResponseContext<Documentrequest> GetAllDocumentrequest(RequestContext requestContext)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Vlims.DocumentManager.Manager
             }
         }
         
-        public static Documentrequest GetDocumentrequestByDRID(string dRID)
+        public  Documentrequest GetDocumentrequestByDRID(string dRID)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace Vlims.DocumentManager.Manager
             }
         }
         
-        public static bool SaveDocumentrequest(Documentrequest documentrequest)
+        public  bool SaveDocumentrequest(Documentrequest documentrequest)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace Vlims.DocumentManager.Manager
             }
         }
         
-        public static bool UpdateDocumentrequest(Documentrequest documentrequest)
+        public  bool UpdateDocumentrequest(Documentrequest documentrequest)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace Vlims.DocumentManager.Manager
             }
         }
         
-        public static bool DeleteDocumentrequestByDRID(string dRID)
+        public  bool DeleteDocumentrequestByDRID(string dRID)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace Vlims.DocumentManager.Manager
             }
         }
         
-        public static bool DeleteAllDocumentrequest(List<int> dRIDs)
+        public  bool DeleteAllDocumentrequest(List<int> dRIDs)
         {
             try
             {

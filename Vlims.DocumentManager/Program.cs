@@ -6,9 +6,7 @@ builder.Services.AddScoped<IDocumentManagerService, DocumentManagerService>();
 builder.Services.AddScoped<IAdditionalTaskService, AdditionalTaskService>();
 builder.Services.AddScoped<IDocumentEffectiveService, DocumentEffectiveService>();
 builder.Services.AddScoped<IDocumentPreparationService, DocumentPreparationService>();
-//builder.Services.AddScoped<IDocumentrequestService, DocumentrequestService>();
-
-
+builder.Services.AddScoped<IDocumentrequestService, DocumentrequestService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
