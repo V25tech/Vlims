@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c23e892a-914e-4a06-b5da-053a058e303b</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vlims.Common\Vlims.Common.csproj" />
+    <ProjectReference Include="..\Vlims.DocumentMaster.DataAccess\Vlims.DocumentMaster.DataAccess.csproj" />
+    <ProjectReference Include="..\Vlims.DocumentMaster.Entities\Vlims.DocumentMaster.Entities.csproj" />
+    <ProjectReference Include="..\Vlims.DocumentMaster.Manager\Vlims.DocumentMaster.Manager.csproj" />
+  </ItemGroup>
+
+</Project>

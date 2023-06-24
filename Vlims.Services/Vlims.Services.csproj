@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vlims.DataAccess\Vlims.DataAccess.csproj" />
-    <ProjectReference Include="..\Vlims.Entities\Vlims.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -25,5 +25,5 @@ const routes: Routes = [
   schemas: [],
   providers:[]
 })
-export class DocumentConfigurationModule { }
+export class DashboardConfigurationModule { }
 
