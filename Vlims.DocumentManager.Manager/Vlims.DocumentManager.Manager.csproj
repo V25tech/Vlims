@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vlims.Common\Vlims.Common.csproj" />
+    <ProjectReference Include="..\Vlims.DocumentManager.DataAccess\Vlims.DocumentManager.DataAccess.csproj" />
+    <ProjectReference Include="..\Vlims.DocumentManager.Entities\Vlims.DocumentManager.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

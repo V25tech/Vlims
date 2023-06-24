@@ -9,17 +9,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VlimsAPIs", "VlimsAPIs", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocumentMaster", "DocumentMaster", "{B9002880-EC92-4102-897F-1A81D65E2063}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.DocumentMaster", "Vlims.DocumentMaster\Vlims.DocumentMaster.csproj", "{BE5519AA-FB0C-4A71-8016-D418EAC93814}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vlims.DocumentMaster", "Vlims.DocumentMaster\Vlims.DocumentMaster.csproj", "{BE5519AA-FB0C-4A71-8016-D418EAC93814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.DocumentMaster.Manager", "Vlims.DocumentMaster.Manager\Vlims.DocumentMaster.Manager.csproj", "{79C206B4-C0A2-425C-89A5-B3A51987ADB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vlims.DocumentMaster.Manager", "Vlims.DocumentMaster.Manager\Vlims.DocumentMaster.Manager.csproj", "{79C206B4-C0A2-425C-89A5-B3A51987ADB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.DocumentMaster.Entities", "Vlims.DocumentMaster.Entities\Vlims.DocumentMaster.Entities.csproj", "{4C235386-F22A-48FA-9961-3326D9EDA69F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vlims.DocumentMaster.Entities", "Vlims.DocumentMaster.Entities\Vlims.DocumentMaster.Entities.csproj", "{4C235386-F22A-48FA-9961-3326D9EDA69F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{ED1F7CA0-BCF0-4FF6-B938-A8A60BBEA0E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.Common", "Vlims.Common\Vlims.Common.csproj", "{089D4E85-79E4-4237-92D6-F2AA12C93492}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vlims.Common", "Vlims.Common\Vlims.Common.csproj", "{089D4E85-79E4-4237-92D6-F2AA12C93492}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.DocumentMaster.DataAccess", "Vlims.DocumentMaster.DataAccess\Vlims.DocumentMaster.DataAccess.csproj", "{8FC58053-BF0A-4E9F-B023-4E19DACBB3CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vlims.DocumentMaster.DataAccess", "Vlims.DocumentMaster.DataAccess\Vlims.DocumentMaster.DataAccess.csproj", "{8FC58053-BF0A-4E9F-B023-4E19DACBB3CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocumentManager", "DocumentManager", "{505000F8-7DAD-4C23-9E06-D46CA499AA68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.DocumentManager.Entities", "Vlims.DocumentManager.Entities\Vlims.DocumentManager.Entities.csproj", "{8C6990B7-C6CC-4363-A75F-E49C2D9B6B1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.DocumentManager.Manager", "Vlims.DocumentManager.Manager\Vlims.DocumentManager.Manager.csproj", "{0EF27BE0-DE76-4441-8536-711D96774A69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.DocumentManager.DataAccess", "Vlims.DocumentManager.DataAccess\Vlims.DocumentManager.DataAccess.csproj", "{557A3AF5-8254-45D7-90F3-1789526693D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.DocumentManager", "Vlims.DocumentManager\Vlims.DocumentManager.csproj", "{526FF801-C1FE-49CE-BCC9-16C87964F80D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +61,22 @@ Global
 		{8FC58053-BF0A-4E9F-B023-4E19DACBB3CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FC58053-BF0A-4E9F-B023-4E19DACBB3CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FC58053-BF0A-4E9F-B023-4E19DACBB3CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C6990B7-C6CC-4363-A75F-E49C2D9B6B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C6990B7-C6CC-4363-A75F-E49C2D9B6B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C6990B7-C6CC-4363-A75F-E49C2D9B6B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C6990B7-C6CC-4363-A75F-E49C2D9B6B1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EF27BE0-DE76-4441-8536-711D96774A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EF27BE0-DE76-4441-8536-711D96774A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EF27BE0-DE76-4441-8536-711D96774A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EF27BE0-DE76-4441-8536-711D96774A69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{557A3AF5-8254-45D7-90F3-1789526693D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{557A3AF5-8254-45D7-90F3-1789526693D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{557A3AF5-8254-45D7-90F3-1789526693D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{557A3AF5-8254-45D7-90F3-1789526693D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526FF801-C1FE-49CE-BCC9-16C87964F80D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526FF801-C1FE-49CE-BCC9-16C87964F80D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526FF801-C1FE-49CE-BCC9-16C87964F80D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526FF801-C1FE-49CE-BCC9-16C87964F80D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +89,11 @@ Global
 		{ED1F7CA0-BCF0-4FF6-B938-A8A60BBEA0E7} = {C7580137-F231-47F8-ACC7-39ACD3BEEA1E}
 		{089D4E85-79E4-4237-92D6-F2AA12C93492} = {ED1F7CA0-BCF0-4FF6-B938-A8A60BBEA0E7}
 		{8FC58053-BF0A-4E9F-B023-4E19DACBB3CD} = {B9002880-EC92-4102-897F-1A81D65E2063}
+		{505000F8-7DAD-4C23-9E06-D46CA499AA68} = {C7580137-F231-47F8-ACC7-39ACD3BEEA1E}
+		{8C6990B7-C6CC-4363-A75F-E49C2D9B6B1A} = {505000F8-7DAD-4C23-9E06-D46CA499AA68}
+		{0EF27BE0-DE76-4441-8536-711D96774A69} = {505000F8-7DAD-4C23-9E06-D46CA499AA68}
+		{557A3AF5-8254-45D7-90F3-1789526693D1} = {505000F8-7DAD-4C23-9E06-D46CA499AA68}
+		{526FF801-C1FE-49CE-BCC9-16C87964F80D} = {505000F8-7DAD-4C23-9E06-D46CA499AA68}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {554D06BC-53F6-4406-B872-E50D3B2E5020}
