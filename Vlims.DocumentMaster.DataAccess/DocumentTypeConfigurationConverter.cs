@@ -32,16 +32,16 @@ namespace Vlims.DocumentMaster.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         documentTypeConfigurationData = new DocumentTypeConfiguration();
-                        documentTypeConfigurationData.DTCId = Convert.ToString(row[DocumentTypeConfigurationConstants.DTCId.Trim()]);
-                        documentTypeConfigurationData.DocumentMasterId = Convert.ToString(row[DocumentTypeConfigurationConstants.DocumentMasterId.Trim()]);
-                        documentTypeConfigurationData.Documenttypename = Convert.ToString(row[DocumentTypeConfigurationConstants.Documenttypename.Trim()]);
-                        documentTypeConfigurationData.documenttypeprefix = Convert.ToString(row[DocumentTypeConfigurationConstants.documenttypeprefix.Trim()]);
-                        documentTypeConfigurationData.Description = Convert.ToString(row[DocumentTypeConfigurationConstants.Description.Trim()]);
-                        documentTypeConfigurationData.Assigntodepartment = Convert.ToString(row[DocumentTypeConfigurationConstants.Assigntodepartment.Trim()]);
-                        documentTypeConfigurationData.CreatedBy = Convert.ToString(row[DocumentTypeConfigurationConstants.CreatedBy.Trim()]);
-                        documentTypeConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentTypeConfigurationConstants.CreatedDate.Trim()]);
-                        documentTypeConfigurationData.ModifiedBy = Convert.ToString(row[DocumentTypeConfigurationConstants.ModifiedBy.Trim()]);
-                        documentTypeConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentTypeConfigurationConstants.ModifiedDate.Trim()]);
+                        documentTypeConfigurationData.DTCId = Convert.ToString(row[DocumentTypeConfigurationConstants.DTCId.Trim('@')]);
+                        documentTypeConfigurationData.DocumentMasterId = Convert.ToString(row[DocumentTypeConfigurationConstants.DocumentMasterId.Trim('@')]);
+                        documentTypeConfigurationData.Documenttypename = Convert.ToString(row[DocumentTypeConfigurationConstants.Documenttypename.Trim('@')]);
+                        documentTypeConfigurationData.documenttypeprefix = Convert.ToString(row[DocumentTypeConfigurationConstants.documenttypeprefix.Trim('@')]);
+                        documentTypeConfigurationData.Description = Convert.ToString(row[DocumentTypeConfigurationConstants.Description.Trim('@')]);
+                        documentTypeConfigurationData.Assigntodepartment = Convert.ToString(row[DocumentTypeConfigurationConstants.Assigntodepartment.Trim('@')]);
+                        documentTypeConfigurationData.CreatedBy = Convert.ToString(row[DocumentTypeConfigurationConstants.CreatedBy.Trim('@')]);
+                        documentTypeConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentTypeConfigurationConstants.CreatedDate.Trim('@')]);
+                        documentTypeConfigurationData.ModifiedBy = Convert.ToString(row[DocumentTypeConfigurationConstants.ModifiedBy.Trim('@')]);
+                        documentTypeConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentTypeConfigurationConstants.ModifiedDate.Trim('@')]);
                         result.Add(documentTypeConfigurationData);
                     }
                 }

@@ -3,21 +3,21 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data.Common;
 using System.Data;
 using System.Reflection;
-using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
+//using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data.SqlClient;
 //
 //
 
 namespace Vlims.Common
 {
-    public class dataAccessHelper
+    public static class dataAccessHelper
     {
         
         public static Database _database { get; set; }
 
 
 
-        public dataAccessHelper()
+        static dataAccessHelper()
         {
             CreateConnection();
         }
@@ -26,8 +26,9 @@ namespace Vlims.Common
         {
             DbConnection con = null;
             
-            _database = new Microsoft.Practices.EnterpriseLibrary.Data.Sql.SqlDatabase("");
-            con= _database.CreateConnection();
+            _database = new Microsoft.Practices.EnterpriseLibrary.Data.Sql.SqlDatabase("Data Source=DESKTOP-NOVEC8T\\SQLEXPRESS;Initial Catalog=Vlims;User ID=test;Password=1234;Pooling=true;Min Pool Size=0;Max Pool Size=1024");
+
+            con = _database.CreateConnection();
         }
 
         public static object ExecuteStoredProcedure(string p_procName, List<SqlParameter> p_sqlParams, ExecutionType p_type, int p_timeout = 30)
@@ -38,10 +39,7 @@ namespace Vlims.Common
                 DbCommand storedProcCommand = _database.GetStoredProcCommand(p_procName);
                 if (p_sqlParams != null && p_sqlParams.Count > 0)
                 {
-                    foreach (SqlParameter p_sqlParam in p_sqlParams)
-                    {
-                        _database.AddInParameter(storedProcCommand, p_sqlParam.ParameterName, p_sqlParam.DbType, p_sqlParam.Value);
-                    }
+                    storedProcCommand.Parameters.AddRange(p_sqlParams.ToArray());
                 }
 
                 storedProcCommand.CommandTimeout = p_timeout;
@@ -53,8 +51,8 @@ namespace Vlims.Common
                         return _database.ExecuteNonQuery(storedProcCommand);
                     case ExecutionType.Scalar:
                         return _database.ExecuteScalar(storedProcCommand);
-                    //case ExecutionType.Reader:
-                    //    return ((DataReaderWrapper)(RefCountingDataReader)_database.ExecuteReader(storedProcCommand)).get_InnerReader();
+                    case ExecutionType.Reader:
+                        return ((DataReaderWrapper)(RefCountingDataReader)_database.ExecuteReader(storedProcCommand)).InnerReader;
                 }
             }
             catch (SqlException ex)
@@ -89,7 +87,7 @@ namespace Vlims.Common
                 {
                     foreach (DataTable table in dataSet.Tables)
                     {
-                        ((SqlDatabase)_database).AddInParameter(storedProcCommand, "@" + table.TableName, SqlDbType.Structured, table);
+                        //((SqlDatabase)_database).AddInParameter(storedProcCommand, "@" + table.TableName, SqlDbType.Structured, table);
                     }
                 }
 
