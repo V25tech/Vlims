@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.Administration.DataAc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.Administration", "Vlims.Administration\Vlims.Administration.csproj", "{FF4B3BA7-F759-4F78-A66B-82636C50D07D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlims.Reports", "Vlims.Reports\Vlims.Reports.csproj", "{FEDE39D2-E01B-472F-BF76-0C414B70D147}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,10 @@ Global
 		{FF4B3BA7-F759-4F78-A66B-82636C50D07D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF4B3BA7-F759-4F78-A66B-82636C50D07D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF4B3BA7-F759-4F78-A66B-82636C50D07D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDE39D2-E01B-472F-BF76-0C414B70D147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDE39D2-E01B-472F-BF76-0C414B70D147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDE39D2-E01B-472F-BF76-0C414B70D147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDE39D2-E01B-472F-BF76-0C414B70D147}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,6 +165,7 @@ Global
 		{50E16672-4859-4095-93D6-3B10A075DBE3} = {FB65809A-B460-4262-A330-2E34C9B49994}
 		{4A4B2964-C6E3-4838-A660-046053804AB7} = {FB65809A-B460-4262-A330-2E34C9B49994}
 		{FF4B3BA7-F759-4F78-A66B-82636C50D07D} = {FB65809A-B460-4262-A330-2E34C9B49994}
+		{FEDE39D2-E01B-472F-BF76-0C414B70D147} = {3BA47D20-71DD-4BC2-BBF7-08E5336A468A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {554D06BC-53F6-4406-B872-E50D3B2E5020}
