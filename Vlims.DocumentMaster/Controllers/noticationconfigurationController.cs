@@ -20,7 +20,7 @@ namespace Vlims.Controllers
     /// </summary>
     [ApiController()]
     [Route("api/noticationconfiguration")]
-    public class noticationconfigurationController : ControllerBase
+    public class NoticationconfigurationController : ControllerBase
     {
         
         private readonly InoticationconfigurationService noticationconfigurationService;
@@ -29,7 +29,7 @@ namespace Vlims.Controllers
         /// 
         /// </summary>
         /// <param name="noticationconfigurationService"></param>
-        public noticationconfigurationController(InoticationconfigurationService noticationconfigurationService)
+        public NoticationconfigurationController(InoticationconfigurationService noticationconfigurationService)
         {
             this.noticationconfigurationService = noticationconfigurationService;
         }

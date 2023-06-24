@@ -20,7 +20,7 @@ namespace Vlims.Controllers
     /// </summary>
     [ApiController()]
     [Route("api/dashboardconfiguration")]
-    public class dashboardconfigurationController : ControllerBase
+    public class DashboardconfigurationController : ControllerBase
     {
         
         private readonly IdashboardconfigurationService dashboardconfigurationService;
@@ -29,7 +29,7 @@ namespace Vlims.Controllers
         /// 
         /// </summary>
         /// <param name="dashboardconfigurationService"></param>
-        public dashboardconfigurationController(IdashboardconfigurationService dashboardconfigurationService)
+        public DashboardconfigurationController(IdashboardconfigurationService dashboardconfigurationService)
         {
             this.dashboardconfigurationService = dashboardconfigurationService;
         }
