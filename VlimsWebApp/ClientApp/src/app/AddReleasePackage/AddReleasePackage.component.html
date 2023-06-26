@@ -1,0 +1,1201 @@
+<div kendoDialogContainer></div>
+
+<div
+  id="AddReleasePackage"
+  class="container-fluid"
+  [hidden]="!(accesslevel > 0)"
+>
+  <form name="AddReleasePackage" #AddReleasePackageForm="ngForm" novalidate>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="validationMessages.length > 0"
+    >
+      <div class="section vam-MB0">
+        <h2>Please fix the following errors:</h2>
+        <ul class="list-group vm-list-decimal">
+          <li
+            class="list-group-item vm-list-decimal-item bg-transparent border-0"
+            *ngFor="let error of validationMessages"
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="vm-content">
+          <div class="row" style="padding-bottom: 71px">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 vam-PLR0">
+              <div
+                id="snippetadce7c9b74774c78130e"
+                name="snippetadce7c9b74774c78130e"
+              >
+                <div class="row bg-white vm-border-bottom vm-breadcrumb">
+                  <div class="col">
+                    <div
+                      class="
+                        row
+                        py-3
+                        justify-content-between
+                        align-items-center
+                      "
+                    >
+                      <div class="col">
+                        <div
+                          class="
+                            left
+                            d-flex
+                            justify-content-start
+                            align-items-center
+                          "
+                        >
+                          <a (click)="AddReleasePackage_Cancel_Click($event)">
+                            <span class="arrow">
+                              <img
+                                src="assets/images/icons/back-arrow.svg"
+                                width="16"
+                                height="auto"
+                                alt="back"
+                              />
+                            </span>
+                          </a>
+                          <h1
+                            class="
+                              d-flex
+                              justify-content-start
+                              align-items-start
+                              mt-2
+                            "
+                          >
+                            {{ ReleasePackageMode }}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="padding: 15px">
+            <exp-section
+              id="formsec14b84bee020a8c1eef47"
+              ngModelGroup="formsec14b84bee020a8c1eef47"
+              #formsec14b84bee020a8c1eef47="ngModelGroup"
+              name="Basic Details"
+              [isexpandable]="true"
+              *ngIf="!appContext.isViewMode"
+            >
+              <div header></div>
+              <div body>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div
+                      class="form-group row"
+                      [ngClass]="{
+                        'vm-is-invalid': vs.IsCtrlInvalid(
+                          txtb7d152293311de40c400
+                        )
+                      }"
+                    >
+                      <label class="col-lg-2 col-sm-3 col-form-label"
+                        ><span class="vm-star-required">Name</span></label
+                      >
+                      <div class="vm-column-gutter">
+                        <input
+                          type="text"
+                          [(ngModel)]="objReleasePackage.Name"
+                          id="txtb7d152293311de40c400"
+                          name="txtb7d152293311de40c400"
+                          #txtb7d152293311de40c400="ngModel"
+                          required
+                          class="form-control"
+                        />
+                        <div
+                          class="vm-validation-wrap"
+                          *ngIf="vs.IsCtrlInvalid(txtb7d152293311de40c400)"
+                        >
+                          <span
+                            class="vm-validation vm-top-arrow vm-mt-20 p-2 ml-2"
+                            >{{
+                              vs.GetErrorMessage(
+                                txtb7d152293311de40c400,
+                                { "req-msg": "Please Provide Name" },
+                                "Name"
+                              )
+                            }}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-2 col-sm-3 col-form-label"
+                        ><span>Display Name</span></label
+                      >
+                      <div class="vm-column-gutter">
+                        <input
+                          type="text"
+                          [(ngModel)]="objReleasePackage.DisplayName"
+                          id="txt1c8d52b2037731af63a2"
+                          name="txt1c8d52b2037731af63a2"
+                          #txt1c8d52b2037731af63a2="ngModel"
+                          class="form-control"
+                        />
+                        <!-- <div
+                          class="vm-validation-wrap"
+                          *ngIf="vs.IsCtrlInvalid(txt1c8d52b2037731af63a2)"
+                        >
+                          <span
+                            class="vm-validation vm-top-arrow vm-mt-20 p-2 ml-2"
+                            >{{
+                              vs.GetErrorMessage(
+                                txt1c8d52b2037731af63a2,
+                                { "req-msg": "Please Provide Display Name" },
+                                "Display Name"
+                              )
+                            }}</span
+                          >
+                        </div> -->
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-2 col-sm-3 col-form-label"
+                        ><span>Description</span></label
+                      >
+                      <div class="vm-column-gutter">
+                        <textarea
+                          type="text"
+                          [(ngModel)]="objReleasePackage.Description"
+                          id="txt69e7a92cc695a9adb2d3"
+                          name="txt69e7a92cc695a9adb2d3"
+                          #txt69e7a92cc695a9adb2d3="ngModel"
+                          rows="2"
+                          class="form-control"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <!-- <div class="form-group row">
+                      <label class="col-lg-2 col-sm-3 col-form-label"
+                        ><span>Include Power-Shell Script</span></label
+                      >
+                      <div class="vm-column-gutter">
+                        <div class="form-row">
+                          <div class="form-check vm-radio">
+                            <div class="custom-control custom-radio">
+                              <fieldset>
+                                <input
+                                  type="radio"
+                                  id="rb26340b3f4b22bc5f4939Yes"
+                                  name="rb26340b3f4b22bc5f4939"
+                                  value="Yes"
+                                  alt="Include Power-Shell Script"
+                                  title="Include Power-Shell Script"
+                                  [(ngModel)]="
+                                    objReleasePackage.IsPowerShellInclude
+                                  "
+                                  #rb26340b3f4b22bc5f4939Yes="ngModel"
+                                />
+                                <label for="rb26340b3f4b22bc5f4939Yes">
+                                  <svg class="check" viewBox="0 0 40 40">
+                                    <defs>
+                                      <linearGradient
+                                        id="gradient"
+                                        x1="0"
+                                        y1="0"
+                                        x2="0"
+                                        y2="100%"
+                                      >
+                                        <stop
+                                          offset="0%"
+                                          stop-color="#ff8a00"
+                                        ></stop>
+                                        <stop
+                                          offset="100%"
+                                          stop-color="#da1b60"
+                                        ></stop>
+                                      </linearGradient>
+                                    </defs>
+                                    <circle
+                                      id="border"
+                                      r="16px"
+                                      cx="20px"
+                                      cy="20px"
+                                    ></circle>
+                                    <circle
+                                      id="dot"
+                                      r="8px"
+                                      cx="20px"
+                                      cy="20px"
+                                    ></circle>
+                                  </svg>
+                                  Yes</label
+                                >
+                              </fieldset>
+                            </div>
+                          </div>
+                          <div class="form-check vm-radio vm-help-align">
+                            <div class="custom-control custom-radio">
+                              <fieldset>
+                                <input
+                                  type="radio"
+                                  id="rb26340b3f4b22bc5f4939No"
+                                  name="rb26340b3f4b22bc5f4939"
+                                  value="No"
+                                  alt="Include Power-Shell Script"
+                                  title="Include Power-Shell Script"
+                                  [(ngModel)]="
+                                    objReleasePackage.IsPowerShellInclude
+                                  "
+                                  #rb26340b3f4b22bc5f4939Yes="ngModel"
+                                />
+                                <label for="rb26340b3f4b22bc5f4939No">
+                                  <svg class="check" viewBox="0 0 40 40">
+                                    <defs>
+                                      <linearGradient
+                                        id="gradient"
+                                        x1="0"
+                                        y1="0"
+                                        x2="0"
+                                        y2="100%"
+                                      >
+                                        <stop
+                                          offset="0%"
+                                          stop-color="#ff8a00"
+                                        ></stop>
+                                        <stop
+                                          offset="100%"
+                                          stop-color="#da1b60"
+                                        ></stop>
+                                      </linearGradient>
+                                    </defs>
+                                    <circle
+                                      id="border"
+                                      r="16px"
+                                      cx="20px"
+                                      cy="20px"
+                                    ></circle>
+                                    <circle
+                                      id="dot"
+                                      r="8px"
+                                      cx="20px"
+                                      cy="20px"
+                                    ></circle>
+                                  </svg>
+                                  No</label
+                                >
+                              </fieldset>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+
+
+                      <label class="col-lg-2 col-sm-3 col-form-label"
+                        ><span style="margin-left: -10px">Show consolidated</span></label
+                      >
+
+                        <span class="checkbox">
+                          <input
+                            type="checkbox"
+                            id="chk69e7a92cc695a9adb2d1"
+                            class=""
+                            checked="true"
+                            text="Show consolidated"
+                            (change)="ShowConsolidated($event)"
+                          />
+                        </span>
+
+
+                  </div>
+                </div>
+              </div>
+            </exp-section>
+
+            <exp-section
+              name="Basic Details"
+              [isexpandable]="true"
+              *ngIf="appContext.isViewMode"
+            >
+              <div header></div>
+              <div body>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group row">
+                      <label class="col-lg-2 col-sm-3 col-form-label"
+                        ><span class="vm-star-required">Name</span></label
+                      >
+                      <div class="vm-column-gutter">
+                        <label>{{ objReleasePackage.Name }}</label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-2 col-sm-3 col-form-label"
+                        ><span>Display Name</span></label
+                      >
+                      <div class="vm-column-gutter">
+                        <label>{{ objReleasePackage.DisplayName }}</label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-2 col-sm-3 col-form-label"
+                        ><span>Description</span></label
+                      >
+                      <div class="vm-column-gutter">
+                        <label>{{ objReleasePackage.Description }}</label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-2 col-sm-3 col-form-label"
+                        ><span>Include Power-Shell Script</span></label
+                      >
+                      <div class="vm-column-gutter">
+                        <div class="form-row">
+                          <div class="form-check vm-radio">
+                            <div class="custom-control custom-radio">
+                              <fieldset>
+                                <input
+                                  type="radio"
+                                  id="rb26340b3f4b22bc5f4939Yes"
+                                  name="rb26340b3f4b22bc5f4939"
+                                  value="Yes"
+                                  alt="Include Power-Shell Script"
+                                  title="Include Power-Shell Script"
+                                  [(ngModel)]="
+                                    objReleasePackage.IsPowerShellInclude
+                                  "
+                                  #rb26340b3f4b22bc5f4939Yes="ngModel"
+                                  disabled="true"
+                                />
+                                <label for="rb26340b3f4b22bc5f4939Yes">
+                                  <svg class="check" viewBox="0 0 40 40">
+                                    <defs>
+                                      <linearGradient
+                                        id="gradient"
+                                        x1="0"
+                                        y1="0"
+                                        x2="0"
+                                        y2="100%"
+                                      >
+                                        <stop
+                                          offset="0%"
+                                          stop-color="#ff8a00"
+                                        ></stop>
+                                        <stop
+                                          offset="100%"
+                                          stop-color="#da1b60"
+                                        ></stop>
+                                      </linearGradient>
+                                    </defs>
+                                    <circle
+                                      id="border"
+                                      r="16px"
+                                      cx="20px"
+                                      cy="20px"
+                                    ></circle>
+                                    <circle
+                                      id="dot"
+                                      r="8px"
+                                      cx="20px"
+                                      cy="20px"
+                                    ></circle>
+                                  </svg>
+                                  Yes</label
+                                >
+                              </fieldset>
+                            </div>
+                          </div>
+                          <div class="form-check vm-radio vm-help-align">
+                            <div class="custom-control custom-radio">
+                              <fieldset>
+                                <input
+                                  type="radio"
+                                  id="rb26340b3f4b22bc5f4939No"
+                                  name="rb26340b3f4b22bc5f4939"
+                                  value="No"
+                                  alt="Include Power-Shell Script"
+                                  title="Include Power-Shell Script"
+                                  [(ngModel)]="
+                                    objReleasePackage.IsPowerShellInclude
+                                  "
+                                  #rb26340b3f4b22bc5f4939Yes="ngModel"
+                                  disabled="true"
+                                />
+                                <label for="rb26340b3f4b22bc5f4939No">
+                                  <svg class="check" viewBox="0 0 40 40">
+                                    <defs>
+                                      <linearGradient
+                                        id="gradient"
+                                        x1="0"
+                                        y1="0"
+                                        x2="0"
+                                        y2="100%"
+                                      >
+                                        <stop
+                                          offset="0%"
+                                          stop-color="#ff8a00"
+                                        ></stop>
+                                        <stop
+                                          offset="100%"
+                                          stop-color="#da1b60"
+                                        ></stop>
+                                      </linearGradient>
+                                    </defs>
+                                    <circle
+                                      id="border"
+                                      r="16px"
+                                      cx="20px"
+                                      cy="20px"
+                                    ></circle>
+                                    <circle
+                                      id="dot"
+                                      r="8px"
+                                      cx="20px"
+                                      cy="20px"
+                                    ></circle>
+                                  </svg>
+                                  No</label
+                                >
+                              </fieldset>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </exp-section>
+
+            <div class="row vm-empty-section">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 vam-PLR0">
+                <exp-section
+                  id="formsec702575441c7537f8ae95"
+                  ngModelGroup="formsec702575441c7537f8ae95"
+                  #formsec702575441c7537f8ae95="ngModelGroup"
+                  name="Plan Mappings"
+                  [isexpandable]="true"
+                  [isgridexists]="true"
+                  [isexpanded]="false"
+                >
+                  <div header>
+                    <div
+                      class="
+                        row
+                        justify-content-between
+                        align-items-end
+                        flex-column flex-sm-row
+                      "
+                    >
+                      <div
+                        class="
+                          col-12
+                          d-flex
+                          align-items-center
+                          flex-wrap
+                          vm-section-with-controls
+                        "
+                        *ngIf="!appContext.isViewMode"
+                      >
+                        <kendo-dropdownlist
+                          id="ddl8b25afb0b85726f3eb42"
+                          name="ddl301bf7800ad85efc5e8a"
+                          valuePrimitive="true"
+                          [data]="ddr_source_ddl8b25afb0b85726f3eb42"
+                          [defaultItem]="ddl8b25afb0b85726f3eb42_defaultItem"
+                          textField="text"
+                          valueField="value"
+                          (valueChange)="PlanMappings_OtherAction_Click($event)"
+                        ></kendo-dropdownlist>
+
+                        <button
+                          value="+"
+                          id="btn522956a1f3619609d3cb"
+                          name="btn522956a1f3619609d3cb"
+                          class="btn btn-secondary ml-4"
+                          (click)="PlanMappings_AddNew_Click($event)"
+                          [hidden]="!(accesslevel > 1)"
+                        >
+                          <img src="assets/images/icons/add-plus-sign.svg" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div body>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div
+                          class="editable-grid"
+                          id="lstPlanMappingsdiv"
+                          ngModelGroup="lstPlanMappingsGrid_Group"
+                          #lstPlanMappingsGrid_Group="ngModelGroup"
+                        >
+                          <kendo-grid
+                            #lstPlanMappingsgridInstance="kendoGrid"
+                            [kendoGridBinding]="lstPlanMappings.Items"
+                            [sortable]="true"
+                            filterable="menu"
+                            [resizable]="false"
+                            [reorderable]="false"
+                            [sort]="lstPlanMappings.state.sort"
+                            [skip]="lstPlanMappings.state.skip"
+                            [filter]="lstPlanMappings.state.filter"
+                            [pageSize]="appContext.PageSize"
+                            [pageable]="
+                              cfs.GetPagingInfoBasedOnData(
+                                lstPlanMappings.Items
+                              )
+                            "
+                            (dataStateChange)="
+                              lstPlanMappings._cancelChanges($event)
+                            "
+                            (cellClick)="lstPlanMappings._editRowItem($event)"
+                            (pageChange)="lstPlanMappings._pageChange($event)"
+                            (clickOutside)="
+                              lstPlanMappings._validatedEditExit($event)
+                            "
+                            ><kendo-grid-column
+                              field="selected"
+                              [width]="appContext.GridCheckBoxColumnWidth"
+                              title="checkBoxValue"
+                              [filterable]="false"
+                              [sortable]="false"
+                            >
+                              <ng-template
+                                kendoGridHeaderTemplate
+                                let-column
+                                let-columnIndex="columnIndex"
+                              >
+                                <div
+                                  [ngClass]="
+                                    appContext.GridCheckBoxHeaderColumnClass
+                                  "
+                                >
+                                  <input
+                                    id="lstPlanMappings_All"
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    [checked]="
+                                      lstPlanMappings.headerCheckBoxValue
+                                    "
+                                    (change)="
+                                      lstPlanMappings._headerCheckboxEvent()
+                                    "
+                                  />
+                                  <svg viewBox="0 0 21 21">
+                                    <path
+                                      d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                    ></path>
+                                  </svg>
+                                  <label for="lstPlanMappings_All"></label>
+                                </div>
+                              </ng-template>
+                              <ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                              >
+                                <div
+                                  [ngClass]="appContext.GridCheckBoxColumnClass"
+                                >
+                                  <input
+                                    id="{{ rowIndex }}"
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    [checked]="dataItem.selected"
+                                    (change)="
+                                      lstPlanMappings._rowCheckboxEvent(
+                                        dataItem
+                                      )
+                                    "
+                                  />
+                                  <svg viewBox="0 0 21 21">
+                                    <path
+                                      d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                    ></path>
+                                  </svg>
+                                  <label for="{{ rowIndex }}"></label>
+                                </div>
+                              </ng-template>
+                              <ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                              >
+                                <div
+                                  [ngClass]="appContext.GridCheckBoxColumnClass"
+                                >
+                                  <input
+                                    id="{{ rowIndex }}"
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    [checked]="dataItem.selected"
+                                    (change)="
+                                      lstPlanMappings._rowCheckboxEvent(
+                                        dataItem
+                                      )
+                                    "
+                                  />
+                                  <svg viewBox="0 0 21 21">
+                                    <path
+                                      d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                    ></path>
+                                  </svg>
+                                  <label for="{{ rowIndex }}"></label>
+                                </div>
+                              </ng-template>
+                            </kendo-grid-column>
+                            <kendo-grid-column
+                              field="PlanName"
+                              height="37"
+                              width="180"
+                              title="Plan Name"
+                            >
+                              <ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><span class="row mx-0"
+                                  >{{ dataItem.PlanName }}
+                                </span> </ng-template
+                              ><ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><div class="row mx-0">
+                                  <div
+                                    class="vm-column-gutter"
+                                    [class.vm-is-invalid]="
+                                      vs.IsCtrlInvalid(ddlc913f9fddda76f86e969)
+                                    "
+                                  >
+                                    <kendo-dropdownlist
+                                      id="ddlc913f9fddda76f86e969_{{
+                                        rowIndex
+                                      }}"
+                                      name="ddlc913f9fddda76f86e969_{{
+                                        rowIndex
+                                      }}"
+                                      valuePrimitive="false"
+                                      required
+                                      style="height: 37px; width: 161px"
+                                      [(ngModel)]="dataItem.Selected_Plan"
+                                      #ddlc913f9fddda76f86e969="ngModel"
+                                      (valueChange)="
+                                        Plans_Selection_Changed(dataItem)
+                                      "
+                                      [data]="lstPlans"
+                                      [defaultItem]="
+                                        ddlc913f9fddda76f86e969_defaultItem
+                                      "
+                                      textField="PlanName"
+                                      valueField="PlanId"
+                                      [disabled]="this.appContext.isViewMode"
+                                    ></kendo-dropdownlist>
+                                    <div
+                                      class="vm-validation-wrap"
+                                      *ngIf="
+                                        vs.IsCtrlInvalid(
+                                          ddlc913f9fddda76f86e969
+                                        )
+                                      "
+                                    >
+                                      <span
+                                        class="
+                                          vm-validation vm-top-arrow vm-mt-20
+                                          p-2
+                                          ml-2
+                                        "
+                                        >{{
+                                          vs.GetErrorMessage(
+                                            ddlc913f9fddda76f86e969,
+                                            {
+                                              "req-msg":
+                                                "Please Provide Plan Name"
+                                            },
+                                            ""
+                                          )
+                                        }}</span
+                                      >
+                                    </div>
+                                  </div>
+                                </div></ng-template
+                              ></kendo-grid-column
+                            >
+                            <kendo-grid-column
+                              field="Version"
+                              title="Versions"
+                              width="180"
+                            >
+                              <ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><span class="row mx-0"
+                                  >{{ dataItem.Version }}
+                                </span> </ng-template
+                              ><ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><div class="row mx-0">
+                                  <div
+                                    class="vm-column-gutter"
+                                    [class.vm-is-invalid]="
+                                      vs.IsCtrlInvalid(ddl6bf7ffba79343514ab0b)
+                                    "
+                                  >
+                                    <kendo-dropdownlist
+                                      id="ddl6bf7ffba79343514ab0b_{{
+                                        rowIndex
+                                      }}"
+                                      name="ddl6bf7ffba79343514ab0b_{{
+                                        rowIndex
+                                      }}"
+                                      valuePrimitive="false"
+                                      required
+                                      style="height: 37px; width: 161px"
+                                      [(ngModel)]="dataItem.Selected_Version"
+                                      #ddl6bf7ffba79343514ab0b="ngModel"
+                                      [data]="dataItem.lstfilPlanVersions"
+                                      [defaultItem]="
+                                        ddl6bf7ffba79343514ab0b_defaultItem
+                                      "
+                                      textField="Version"
+                                      valueField="id"
+                                      (valueChange)="setVersions(dataItem)"
+                                      [disabled]="this.appContext.isViewMode"
+                                    ></kendo-dropdownlist>
+                                    <div
+                                      class="vm-validation-wrap"
+                                      *ngIf="
+                                        vs.IsCtrlInvalid(
+                                          ddl6bf7ffba79343514ab0b
+                                        )
+                                      "
+                                    >
+                                      <span
+                                        class="
+                                          vm-validation vm-top-arrow vm-mt-20
+                                          p-2
+                                          ml-2
+                                        "
+                                        >{{
+                                          vs.GetErrorMessage(
+                                            ddl6bf7ffba79343514ab0b,
+                                            {
+                                              "req-msg":
+                                                "Please Provide Version"
+                                            },
+                                            ""
+                                          )
+                                        }}</span
+                                      >
+                                    </div>
+                                  </div>
+                                </div></ng-template
+                              ></kendo-grid-column
+                            ><kendo-grid-column
+                              field="Selected_PlanDeterminationName"
+                              title="Plan Determinations"
+                              width="180"
+                            >
+                              <ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><span class="row mx-0"
+                                  >{{ dataItem.Selected_PlanDeterminationName }}
+                                </span> </ng-template
+                              ><ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><div class="row mx-0">
+                                  <div
+                                    *ngIf="rerenderFlag"
+                                    class="vm-column-gutter"
+                                    [class.vm-is-invalid]="
+                                      vs.IsCtrlInvalid(ddl84a81e5f668b959a098e)
+                                    "
+                                  >
+                                    <kendo-dropdownlist
+                                      id="ddl84a81e5f668b959a098e_{{
+                                        rowIndex
+                                      }}"
+                                      name="ddl84a81e5f668b959a098e_{{
+                                        rowIndex
+                                      }}"
+                                      valuePrimitive="true"
+                                      required
+                                      style="height: 37px; width: 161px"
+                                      [(ngModel)]="
+                                        dataItem.Selected_PlanDeterminations
+                                      "
+                                      #ddl84a81e5f668b959a098e="ngModel"
+                                      [data]="dataItem.lstfilplanfactors"
+                                      [defaultItem]="
+                                        ddl84a81e5f668b959a098e_defaultItem
+                                      "
+                                      (valueChange)="
+                                        PlanDetermination_Selection_Changed(
+                                          $event
+                                        )
+                                      "
+                                      textField="FactorName"
+                                      valueField="FactorId"
+                                      [disabled]="this.appContext.isViewMode"
+                                    ></kendo-dropdownlist>
+                                    <div
+                                      class="vm-validation-wrap"
+                                      *ngIf="
+                                        vs.IsCtrlInvalid(
+                                          ddl84a81e5f668b959a098e
+                                        )
+                                      "
+                                    >
+                                      <span
+                                        class="
+                                          vm-validation vm-top-arrow vm-mt-20
+                                          p-2
+                                          ml-2
+                                        "
+                                        >{{
+                                          vs.GetErrorMessage(
+                                            ddl84a81e5f668b959a098e,
+                                            {
+                                              "req-msg":
+                                                "Please Provide Plan Determinations"
+                                            },
+                                            ""
+                                          )
+                                        }}</span
+                                      >
+                                    </div>
+                                  </div>
+                                </div></ng-template
+                              ></kendo-grid-column
+                            >
+
+                            <kendo-grid-column
+                              field="SelectedInitiativeName"
+                              height="37"
+                              title="Initiatives"
+                              width="180"
+                            >
+                              <ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><span class="row mx-0"
+                                  >{{ dataItem.SelectedInitiativeName }}
+                                </span> </ng-template
+                              ><ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><div class="row mx-0">
+                                  <div
+                                    class="vm-column-gutter"
+                                    [class.vm-is-invalid]="
+                                      vs.IsCtrlInvalid(ddlc913f9fddda76f86e969)
+                                    "
+                                  >
+                                    <kendo-dropdownlist
+                                      id="ddlc913f9fddda76f86e969_{{
+                                        rowIndex
+                                      }}"
+                                      name="ddlc913f9fddda76f86e969_{{
+                                        rowIndex
+                                      }}"
+                                      valuePrimitive="false"
+                                      required
+                                      style="height: 37px; width: 161px"
+                                      [(ngModel)]="dataItem.SelectedInitiative"
+                                      #ddlc913f9fddda76f86e969="ngModel"
+                                      [data]="dataItem.lstfilInitiatives"
+                                      [defaultItem]="
+                                        ddlc953f7db9bbd4a06c9ca_defaultItem
+                                      "
+                                      textField="InitiativeName"
+                                      valueField="id_brq"
+                                      [disabled]="this.appContext.isViewMode"
+                                      (valueChange)="
+                                        Initiatives_Selection_Changed($event)
+                                      "
+                                    ></kendo-dropdownlist>
+                                  </div></div></ng-template
+                            ></kendo-grid-column>
+                            <kendo-grid-column
+                              field="Selected_Type"
+                              title="Type"
+                              width="180"
+                            >
+                              <ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><span class="row mx-0"
+                                  >{{
+                                    lstPlanMappings._getValueByID(
+                                      ddr_source_ddl387225e1ffe409f56b18,
+                                      "text",
+                                      "value",
+                                      dataItem.Selected_Type
+                                    )
+                                  }}
+                                </span> </ng-template
+                              ><ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><div class="row mx-0">
+                                  <div
+                                    class="vm-column-gutter"
+                                    [class.vm-is-invalid]="
+                                      vs.IsCtrlInvalid(ddl387225e1ffe409f56b18)
+                                    "
+                                  >
+                                    <kendo-dropdownlist
+                                      id="ddl387225e1ffe409f56b18_{{
+                                        rowIndex
+                                      }}"
+                                      name="ddl387225e1ffe409f56b18_{{
+                                        rowIndex
+                                      }}"
+                                      valuePrimitive="false"
+                                      required
+                                      style="height: 37px; width: 161px"
+                                      [(ngModel)]="dataItem.Selected_Type"
+                                      #ddl387225e1ffe409f56b18="ngModel"
+                                      [data]="
+                                        ddr_source_ddl387225e1ffe409f56b18
+                                      "
+                                      [defaultItem]="
+                                        ddl387225e1ffe409f56b18_defaultItem
+                                      "
+                                      textField="text"
+                                      valueField="value"
+                                      [disabled]="this.appContext.isViewMode"
+                                    ></kendo-dropdownlist>
+                                    <div
+                                      class="vm-validation-wrap"
+                                      *ngIf="
+                                        vs.IsCtrlInvalid(
+                                          ddl387225e1ffe409f56b18
+                                        )
+                                      "
+                                    >
+                                      <span
+                                        class="
+                                          vm-validation vm-top-arrow vm-mt-20
+                                          p-2
+                                          ml-2
+                                        "
+                                        >{{
+                                          vs.GetErrorMessage(
+                                            ddl387225e1ffe409f56b18,
+                                            {
+                                              "req-msg": "Please provide Type"
+                                            },
+                                            ""
+                                          )
+                                        }}</span
+                                      >
+                                    </div>
+                                  </div>
+                                </div></ng-template
+                              ></kendo-grid-column
+                            ><kendo-grid-column
+                              field="Selected_EffectiveDate"
+                              title="Effective Date"
+                              filter="date"
+                              [format]="cfs.GetDateFormat()"
+                              ><ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><span class="row mx-0"
+                                  >{{
+                                    dataItem.Selected_EffectiveDate
+                                      | date: cfs.GetDateFormat()
+                                  }}
+                                </span> </ng-template
+                              ><ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><div class="row mx-0">
+                                  <div
+                                    class="vm-column-gutter"
+                                    [class.vm-is-invalid]="
+                                      vs.IsCtrlInvalid(date340ea1760882bb22d008)
+                                    "
+                                  >
+                                    <kendo-datepicker
+                                      id="date340ea1760882bb22d008_{{
+                                        rowIndex
+                                      }}"
+                                      name="date340ea1760882bb22d008_{{
+                                        rowIndex
+                                      }}"
+                                      format="MM/dd/yyyy "
+                                      ngClass="k-datepicker form-control"
+                                      [(ngModel)]="
+                                        dataItem.Selected_EffectiveDate
+                                      "
+                                      #date340ea1760882bb22d008="ngModel"
+                                      (blur)="
+                                        EffectiveDate_Selection_Changed(
+                                          dataItem
+                                        )
+                                      "
+                                      [disabled]="this.appContext.isViewMode"
+                                    ></kendo-datepicker>
+                                  </div></div></ng-template></kendo-grid-column
+                            ><kendo-grid-column
+                              field="Selected_ExpiryDate"
+                              title="Expiry Date"
+                              filter="date"
+                              [format]="cfs.GetDateFormat()"
+                              ><ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><span class="row mx-0"
+                                  >{{
+                                    dataItem.Selected_ExpiryDate
+                                      | date: cfs.GetDateFormat()
+                                  }}
+                                </span> </ng-template
+                              ><ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><div class="row mx-0">
+                                  <div
+                                    class="vm-column-gutter"
+                                    [class.vm-is-invalid]="
+                                      vs.IsCtrlInvalid(date44fedab6067eabc33f37)
+                                    "
+                                  >
+                                    <kendo-datepicker
+                                      readonly="true"
+                                      id="date44fedab6067eabc33f37_{{
+                                        rowIndex
+                                      }}"
+                                      name="date44fedab6067eabc33f37_{{
+                                        rowIndex
+                                      }}"
+                                      format="MM/dd/yyyy"
+                                      ngClass="k-datepicker form-control  "
+                                      [(ngModel)]="dataItem.Selected_ExpiryDate"
+                                      #date44fedab6067eabc33f37="ngModel"
+                                      (valueChange)="
+                                        Expiry_Date_SelectionChanged(dataItem)
+                                      "
+                                      [disabled]="this.appContext.isViewMode"
+                                    ></kendo-datepicker>
+                                  </div></div></ng-template></kendo-grid-column
+                            ><kendo-grid-column
+                              title="Dependency Details"
+                              *ngIf="false"
+                            >
+                              <ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><span class="row mx-0"
+                                  ><a
+                                    id="lnk143b0b257057527367c6"
+                                    alt="View"
+                                    title="View"
+                                    target="_blank"
+                                    >View</a
+                                  >
+                                </span> </ng-template
+                              ><ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><div class="row mx-0">
+                                  <a
+                                    id="lnk143b0b257057527367c6"
+                                    alt="View"
+                                    title="View"
+                                    target="_blank"
+                                    >View</a
+                                  >
+                                </div></ng-template
+                              ></kendo-grid-column
+                            >
+                            <ng-template kendoGridNoRecordsTemplate>
+                              {{ appContext.EmptyGridInfoMessage }}
+                            </ng-template>
+                          </kendo-grid>
+                          <ng-template #InformationMessage_ReleasePackage>
+                            <b>This operation cannot be performed</b
+                            ><br /><br />
+                            Intermediate plan mappings cannot be deleted.
+                          </ng-template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </exp-section>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row text-center mb-5 pt-5"
+            style="border-top: 1px solid #e2ebfb"
+          >
+            <div
+              class="
+                col-lg-12 col-md-12 col-sm-12 col-xs-12
+                va
+                text-center text-center
+              "
+            >
+              <a
+                id="lnkfd3bbb38d069ecb91838"
+                alt="Cancel"
+                title="Cancel"
+                class="mr-4"
+                target="_blank"
+                style="
+                  text-decoration: none;
+                  cursor: pointer !important;
+                  outline: none;
+                  transition: all ease 0.3s;
+                  color: #49a7ec;
+                "
+                (click)="AddReleasePackage_Cancel_Click($event)"
+                >Cancel</a
+              >
+              <button
+                value="Save"
+                id="btnc20d9f42c4974d34c71a"
+                name="btnc20d9f42c4974d34c71a"
+                class="btn btn-primary"
+                (click)="ReleasePackage_Save_Click($event)"
+                [hidden]="!(accesslevel > 1)"
+                *ngIf="!appContext.isViewMode"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+          <ng-template #DeleteEntity_Information>
+            <span>
+              <b>This action cannot be Performed</b><br /><br />
+              Select at-least one record to perform this action
+            </span>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

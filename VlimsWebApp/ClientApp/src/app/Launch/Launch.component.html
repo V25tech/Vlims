@@ -1,0 +1,1954 @@
+<div kendoDialogContainer></div>
+
+<div id="Launch" class="container-fluid" [hidden]="!(accesslevel > 0)">
+  <form name="Launch" #LaunchForm="ngForm" novalidate>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="validationMessages.length > 0"
+    >
+      <div class="section vam-MB0">
+        <h2>Please fix the following errors:</h2>
+        <ul class="list-group vm-list-decimal">
+          <li
+            class="list-group-item vm-list-decimal-item bg-transparent border-0"
+            *ngFor="let error of validationMessages"
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="vm-content">
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 vam-PLR0">
+              <div
+                id="snippetc47763e9d9139cdd1a42"
+                name="snippetc47763e9d9139cdd1a42"
+              >
+                <div
+                  class="row bg-white vm-border-bottom vm-breadcrumb"
+                  style="top: 50px"
+                >
+                  <div class="col">
+                    <div
+                      class="
+                        row
+                        py-3
+                        justify-content-between
+                        align-items-center
+                      "
+                    >
+                      <div class="col">
+                        <div
+                          class="
+                            left
+                            d-flex
+                            justify-content-start
+                            align-items-center
+                          "
+                        >
+                          <ol
+                            class="
+                              breadcrumb
+                              vm-productBreadCrumb
+                              mb-0
+                              mt-2
+                              p-0
+                            "
+                          >
+                            <li>
+                              <a href="#!">
+                                <h1
+                                  class="
+                                    d-flex
+                                    justify-content-start
+                                    align-items-start
+                                  "
+                                >
+                                  Launch
+                                </h1>
+                              </a>
+                            </li>
+                            <li
+                              class="breadcrumb-item ml-0 ml-sm-4 pl-0 active"
+                            >
+                              <a href="#!">
+                                {{ this.SelectedProduct }}
+                              </a>
+                            </li>
+                            <li
+                              class="
+                                breadcrumb-item
+                                ml-0 ml-sm-4
+                                pr-3
+                                pl-0
+                                active
+                              "
+                            >
+                              <a href="#!">
+                                {{ this.SelectedTabValue }}
+                              </a>
+                            </li>
+                          </ol>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <section class="w-100">
+                  <div class="slimscroll-changeEvents">
+                    <div
+                      class="
+                        dropdown-container
+                        vm-dropdown-fixed
+                        col-md-3 col-lg-3
+                        sidebar sidebar-breadcrumb
+                        left
+                      "
+                      style="top: 100px; overflow-y: scroll"
+                    >
+                      <ul class="list-group vm-list">
+                        <li
+                          *ngFor="let subItem of lstProducts"
+                          class="vm-list-group-item"
+                        >
+                          <a
+                            (click)="ActiveProduct(subItem)"
+                            class="list-group-item list-group-item-action"
+                            [ngClass]="{ active: subItem.isActive }"
+                            >{{ subItem.Name }}</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div
+              class="col-lg-9 col-md-9 col-sm-9 col-xs-12 vam-PLR0 colfix"
+              style="top: 48px; padding: 30px 30px"
+            >
+              <div class="row" style="top: 33px">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 vam-PLR0">
+                  <div class="row">
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 vam-PLR0">
+                      <div class="d-flex">
+                        <exp-nav-pills
+                          (valueChange)="Launch_Tab_Selection_Changed($event)"
+                          [(selectedbutton)]="SelectedTab"
+                          id="navplsbbc1d709bcee88bc0d1f"
+                          [data]="navpills_options_navplsbbc1d709bcee88bc0d1f"
+                        ></exp-nav-pills>
+                      </div>
+                    </div>
+                    <div
+                      class="
+                        col-sm-5
+                        d-flex
+                        justify-content-end
+                        align-items-center
+                      "
+                    >
+                      <!-- <img
+                        id="imga42cc592f57e3395da7b"
+                        name="imga42cc592f57e3395da7b"
+                        class="pull-right vm-action"
+                        style="
+                                width: 20px;
+                                height: 20px;
+                                box-sizing: content-box !important;
+                              "
+                        src="assets/images/mock-search.svg"
+                      /> -->
+                      <img
+                        id="imgeaaed7d75c4b07e421a4"
+                        name="imgeaaed7d75c4b07e421a4"
+                        class="pull-right vm-action"
+                        *ngIf="SearchVisibility"
+                        style="
+                          width: 20px;
+                          height: 20px;
+                          box-sizing: content-box !important;
+                          margin-right: 0rem !important;
+                        "
+                        (click)="PlanFactor_AddNew_Click($event)"
+                        src="assets/images/icons/settings.svg"
+                      />
+                      <div
+                        class="form-group row vm-label-top"
+                        style="padding: 0; margin: 0"
+                      >
+                        <div
+                          class="vm-column-gutter"
+                          style="padding: 1px; margin: 10px; margin-right: 1rem"
+                        >
+                          <kendo-dropdownlist
+                            id="ddl65b52e8f23177779876c"
+                            name="ddlc2a3642c2b5897ad6241"
+                            valuePrimitive="true"
+                            [(ngModel)]="ActionDropdown"
+                            #ddl65b52e8f23177779876c="ngModel"
+                            (valueChange)="OtherActions_SelectionChange($event)"
+                            [data]="ddr_source_ddl65b52e8f23177779876c"
+                            [defaultItem]="ddl65b52e8f23177779876c_defaultItem"
+                            textField="text"
+                            valueField="value"
+                          ></kendo-dropdownlist>
+                        </div>
+                      </div>
+                      <button
+                        value="+"
+                        id="btn2d454b748f550337c28b"
+                        name="btn2d454b748f550337c28b"
+                        class="btn btn-secondary"
+                        (click)="Launch_AddNew_Click($event)"
+                        [hidden]="!(accesslevel > 1)"
+                      >
+                        <img src="assets/images/icons/add-plus-sign.svg" />
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row" [hidden]="!ReleasePackagesGridVisibility">
+                    <div
+                      class="col-lg-12 col-md-12 col-sm-12 col-xs-12 vam-PLR0"
+                    >
+                      <div
+                        class="editable-grid"
+                        id="lstReleasePackagediv"
+                        ngModelGroup="lstReleasePackageGrid_Group"
+                        #lstReleasePackageGrid_Group="ngModelGroup"
+                      >
+                        <kendo-grid
+                          #lstReleasePackagegridInstance="kendoGrid"
+                          [kendoGridBinding]="lstReleasePackage.Items"
+                          [sortable]="true"
+                          filterable="menu"
+                          [resizable]="false"
+                          [reorderable]="false"
+                          [sort]="lstReleasePackage.state.sort"
+                          [skip]="lstReleasePackage.state.skip"
+                          [filter]="lstReleasePackage.state.filter"
+                          [pageSize]="appContext.PageSize"
+                          [pageable]="
+                            cfs.GetPagingInfoBasedOnData(
+                              lstReleasePackage.Items
+                            )
+                          "
+                          (dataStateChange)="
+                            lstReleasePackage._cancelChanges($event)
+                          "
+                          (cellClick)="lstReleasePackage._editRowItem($event)"
+                          (pageChange)="lstReleasePackage._pageChange($event)"
+                          (clickOutside)="
+                            lstReleasePackage._validatedEditExit($event)
+                          "
+                          ><kendo-grid-column
+                            field="selected"
+                            [width]="appContext.GridCheckBoxColumnWidth"
+                            title="checkBoxValue"
+                            [filterable]="false"
+                            [sortable]="false"
+                          >
+                            <ng-template
+                              kendoGridHeaderTemplate
+                              let-column
+                              let-columnIndex="columnIndex"
+                            >
+                              <div
+                                [ngClass]="
+                                  appContext.GridCheckBoxHeaderColumnClass
+                                "
+                              >
+                                <input
+                                  id="lstReleasePackage_All"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  [checked]="
+                                    lstReleasePackage.headerCheckBoxValue
+                                  "
+                                  (change)="
+                                    lstReleasePackage._headerCheckboxEvent()
+                                  "
+                                />
+                                <svg viewBox="0 0 21 21">
+                                  <path
+                                    d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                  ></path>
+                                </svg>
+                                <label for="lstReleasePackage_All"></label>
+                              </div>
+                            </ng-template>
+                            <ng-template
+                              kendoGridCellTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                            >
+                              <div
+                                [ngClass]="appContext.GridCheckBoxColumnClass"
+                              >
+                                <input
+                                  id="{{ rowIndex }}"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  [checked]="dataItem.selected"
+                                  (change)="
+                                    lstReleasePackage._rowCheckboxEvent(
+                                      dataItem
+                                    )
+                                  "
+                                />
+                                <svg viewBox="0 0 21 21">
+                                  <path
+                                    d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                  ></path>
+                                </svg>
+                                <label for="{{ rowIndex }}"></label>
+                              </div>
+                            </ng-template>
+                            <ng-template
+                              kendoGridEditTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                            >
+                              <div
+                                [ngClass]="appContext.GridCheckBoxColumnClass"
+                              >
+                                <input
+                                  id="{{ rowIndex }}"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  [checked]="dataItem.selected"
+                                  (change)="
+                                    lstReleasePackage._rowCheckboxEvent(
+                                      dataItem
+                                    )
+                                  "
+                                />
+                                <svg viewBox="0 0 21 21">
+                                  <path
+                                    d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                  ></path>
+                                </svg>
+                                <label for="{{ rowIndex }}"></label>
+                              </div>
+                            </ng-template> </kendo-grid-column
+                          ><kendo-grid-column field="Name" title="Name">
+                            <ng-template
+                              kendoGridCellTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                              ><span class="row mx-0"
+                                ><a
+                                  id="lnkc64bf07aadf2463b2c25"
+                                  alt="Name"
+                                  [title]="dataItem.Name"
+                                  target="_blank"
+                                  [text]="dataItem.DisplayName"
+                                  (click)="
+                                  $event.data = dataItem; ReleasePackageViewClick($event)
+                                "
+                                  >Display Name</a
+                                >
+                              </span> </ng-template
+                            ><ng-template
+                              kendoGridEditTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                              ><div class="row mx-0">
+                                <a
+                                  id="lnkc64bf07aadf2463b2c25"
+                                  alt="Name"
+                                  title="Name"
+                                  target="_blank"
+                                  [text]="dataItem.DisplayName"
+                                  >Display Name</a
+                                >
+                              </div></ng-template
+                            ></kendo-grid-column
+                          >
+                          <kendo-grid-column
+                          field="Created_Date"
+                          width="140"
+                          title="Created on"
+                          filter="date"
+                          [format]="cfs.GetDateFormat()"
+                          ><ng-template
+                            kendoGridCellTemplate
+                            let-dataItem="dataItem"
+                            let-rowIndex="rowIndex"
+                            ><span class="row mx-0"
+                              >{{
+                                dataItem.CreatedDate
+                                  | date: cfs.GetDateFormat()
+                              }}
+                            </span> </ng-template
+                          ><ng-template
+                            kendoGridEditTemplate
+                            let-dataItem="dataItem"
+                            let-rowIndex="rowIndex"
+                            ><div class="row mx-0">
+                              <div
+                                class="vm-column-gutter"
+                                [class.vm-is-invalid]="
+                                  vs.IsCtrlInvalid(date9a1378015363af85cc86)
+                                "
+                              >
+                                <kendo-datepicker
+                                  id="date9a1378015363af85cc86_{{ rowIndex }}"
+                                  name="date9a1378015363af85cc86_{{
+                                    rowIndex
+                                  }}"
+                                  [format]="cfs.GetDateFormat()"
+                                  ngClass="k-datepicker form-control  "
+                                  [(ngModel)]="dataItem.CreatedDate"
+                                  #date9a1378015363af85cc86="ngModel"
+                                ></kendo-datepicker>
+                              </div></div></ng-template
+                        ></kendo-grid-column>
+                          <!-- <kendo-grid-column
+                            field="CreatedDate"
+                            width="140"
+                            title="Created Date"
+                            filter="date"
+                            format="cfs.GetDateFormat()"
+                            ><ng-template
+                              kendoGridCellTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                              ><span class="row mx-0"
+                                >{{
+                                  dataItem.CreatedDate
+                                    | date: cfs.GetDateFormat()
+                                }}
+                              </span> </ng-template
+                            ><ng-template
+                              kendoGridEditTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                              ><div class="row mx-0">
+                                <div
+                                class="vm-column-gutter"
+                                [class.vm-is-invalid]="
+                                  vs.IsCtrlInvalid(date9a1378015363af85cc86_)
+                                "
+                              >
+                                <kendo-datepicker
+                                    id="date9a1378015363af85cc86_{{ rowIndex }}"
+                                    name="date9a1378015363af85cc86_{{
+                                      rowIndex
+                                    }}"
+                                    [format]="cfs.GetDateFormat()"
+                                    ngClass="k-datepicker form-control  "
+                                    [(ngModel)]=" dataItem.CreatedDate"
+                                    #date9a1378015363af85cc86="ngModel"
+                                  ></kendo-datepicker>
+                              </div>
+                              </div></ng-template
+                            ></kendo-grid-column
+                          > -->
+                          <kendo-grid-column
+                            field="CreatedBy"
+                            width="190"
+                            title="Created By"
+                          >
+                            <ng-template
+                              kendoGridCellTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                              ><span
+                                class="row mx-0"
+                                style="
+                                  width: 185px;
+                                  word-wrap: break-word;
+                                  word-break: break-all;
+                                "
+                                >{{ dataItem.CreatedBy }}
+                              </span> </ng-template
+                            ><ng-template
+                              kendoGridEditTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                              ><div class="row mx-0">
+                                <label
+                                  class="read-only"
+                                  id="lbl1873e8013f5a5a467e90"
+                                  style="
+                                    width: 185px;
+                                    word-wrap: break-word;
+                                    word-break: break-all;
+                                  "
+                                  >{{ dataItem.CreatedBy }}</label
+                                >
+                              </div></ng-template
+                            ></kendo-grid-column
+                          ><kendo-grid-column
+                            width="110"
+                            title="Actions"
+                            [filterable]="false"
+                            [sortable]="false"
+                            ><ng-template
+                              kendoGridCellTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                              ><span class="row mx-0"
+                                ><img
+                                  id="imga53c9cb641bc7ddafa05"
+                                  name="imga53c9cb641bc7ddafa05"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                    cursor: pointer;
+                                  "
+                                  title="Export Package"
+                                  src="assets/images/download.svg"
+                                  [hidden]="!(accesslevel > 1)"
+                                  (click)="GenerateReleasePackage(dataItem, false,false)"
+                                />
+                                <!-- <img
+                                  id="imgbe28c0dce264774e5df4"
+                                  name="imgbe28c0dce264774e5df4"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                  "
+                                  src="assets/images/icons/edit.svg"
+                                  [hidden]="!(accesslevel > 1)"
+                                  (click)="
+                                    ReleasePackageAction_Edit_Click(dataItem)
+                                  "
+                                /> -->
+                                <img
+                                  id="img8a3dc9bf2cf4d2fce97c"
+                                  name="img8a3dc9bf2cf4d2fce97c"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                    cursor: pointer;
+                                  "
+                                  title="Delete"
+                                  src="assets/images/icons/delete.svg"
+                                  [hidden]="!(accesslevel > 2)"
+                                  (click)="
+                                    ReleasePackageAction_Delete_Click(dataItem)
+                                  "
+                                />
+                                <!-- <img
+                                  id="imga53c9cb641bc7ddafa05"
+                                  name="imga53c9cb641bc7ddafa05"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                  "
+                                  title="Export Json"
+                                  src="assets/images/download.svg"
+                                  [hidden]="!(accesslevel > 1)"
+                                  (click)="GenerateReleasePackage(dataItem,true)"
+                                /> -->
+                              </span> </ng-template
+                            ><ng-template
+                              kendoGridEditTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                              ><div class="row mx-0">
+                                <img
+                                  id="imga53c9cb641bc7ddafa05"
+                                  name="imga53c9cb641bc7ddafa05"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                    cursor: pointer;
+                                  "
+                                  src="assets/images/download.svg"
+                                  [hidden]="!(accesslevel > 1)"
+                                /><img
+                                  id="imgbe28c0dce264774e5df4"
+                                  name="imgbe28c0dce264774e5df4"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                  "
+                                  src="assets/images/icons/edit.svg"
+                                  [hidden]="!(accesslevel > 1)"
+                                  (click)="
+                                    ReleasePackageAction_Edit_Click(dataItem)
+                                  "
+                                /><img
+                                  id="img8a3dc9bf2cf4d2fce97c"
+                                  name="img8a3dc9bf2cf4d2fce97c"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                    cursor: pointer;
+                                  "
+                                  src="assets/images/icons/delete.svg"
+                                  [hidden]="!(accesslevel > 2)"
+                                  (click)="
+                                    ReleasePackageAction_Delete_Click(dataItem)
+                                  "
+                                /></div></ng-template></kendo-grid-column
+                        ></kendo-grid>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" [hidden]="!PlanFactorsGridVisibility">
+                    <div
+                      class="col-lg-12 col-md-12 col-sm-12 col-xs-12 vam-PLR0"
+                    >
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div
+                            ngModelGroup="lstPlanFactors_Group"
+                            #lstPlanFactors_Group="ngModelGroup"
+                          >
+                            <kendo-grid
+                              id="dyneditgridd864b287802b683b0f1a"
+                              #lstPlanFactors_Instance="kendoGrid"
+                              [kendoGridBinding]="lstPlanFactors.data"
+                              [sortable]="true"
+                              filterable="menu"
+                              [pageSize]="appContext.PageSize"
+                              [pageable]="
+                                cfs.GetPagingInfoBasedOnData(
+                                  lstPlanFactors.data
+                                )
+                              "
+                              [sort]="lstPlanFactors.state.sort"
+                              [filter]="lstPlanFactors.state.filter"
+                              [skip]="lstPlanFactors.state.skip"
+                              (cellClick)="lstPlanFactors._editRowItem($event)"
+                              (dataStateChange)="
+                                lstPlanFactors._cancelChanges($event)
+                              "
+                              (pageChange)="lstPlanFactors._pageChange($event)"
+                              (clickOutside)="
+                                lstPlanFactors._validateEditExit($event)
+                              "
+                            >
+                              <kendo-grid-column
+                                field="isSelected"
+                                [width]="appContext.GridCheckBoxColumnWidth"
+                                [filterable]="false"
+                                [sortable]="false"
+                                title="checkBoxValue"
+                              >
+                                <ng-template
+                                  kendoGridHeaderTemplate
+                                  let-column
+                                  let-columnIndex="columnIndex"
+                                >
+                                  <div
+                                    [ngClass]="
+                                      appContext.GridCheckBoxHeaderColumnClass
+                                    "
+                                  >
+                                    <input
+                                      id="lstPlanFactors_dyncbxAll"
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      [checked]="lstPlanFactors.selectAll"
+                                      (change)="
+                                        lstPlanFactors._toggleAllChecks()
+                                      "
+                                    />
+                                    <svg viewBox="0 0 21 21">
+                                      <path
+                                        d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                      ></path>
+                                    </svg>
+                                    <label
+                                      for="lstPlanFactors_dyncbxAll"
+                                    ></label>
+                                  </div>
+                                </ng-template>
+                                <ng-template
+                                  kendoGridCellTemplate
+                                  let-dataItem
+                                  let-rowIndex="rowIndex"
+                                >
+                                  <div
+                                    [ngClass]="
+                                      appContext.GridCheckBoxColumnClass
+                                    "
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      id="{{ rowIndex }}"
+                                      class="form-check-input"
+                                      [checked]="dataItem.isSelected"
+                                      (change)="
+                                        lstPlanFactors._rowCheckboxEvent(
+                                          dataItem
+                                        )
+                                      "
+                                    />
+                                    <svg viewBox="0 0 21 21">
+                                      <path
+                                        d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                      ></path>
+                                    </svg>
+                                    <label for="{{ rowIndex }}"></label>
+                                  </div>
+                                </ng-template>
+                                <ng-template
+                                  kendoGridEditTemplate
+                                  let-dataItem="dataItem"
+                                  let-indx="rowIndex"
+                                >
+                                  <div
+                                    [ngClass]="
+                                      appContext.GridCheckBoxColumnClass
+                                    "
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      id="{{ indx }}"
+                                      class="form-check-input"
+                                      [checked]="dataItem.isSelected"
+                                      (change)="
+                                        lstPlanFactors._rowCheckboxEvent(
+                                          dataItem
+                                        )
+                                      "
+                                    />
+                                    <svg viewBox="0 0 21 21">
+                                      <path
+                                        d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                      ></path>
+                                    </svg>
+                                    <label for="{{ indx }}"></label>
+                                  </div>
+                                </ng-template>
+                              </kendo-grid-column>
+                              <ng-container
+                                *ngFor="let column of lstPlanFactors.columns"
+                              >
+                                <kendo-grid-column
+                                  [field]="
+                                    column.Fields.length > 1
+                                      ? null
+                                      : column.Name
+                                  "
+                                  [title]="column.HeaderText"
+                                  [width]="
+                                    column.Width > 0 ? column.Width : 200
+                                  "
+                                  [sortable]="column.IsSortable"
+                                  [filterable]="column.IsFilterable"
+                                  [filter]="column.FilterType"
+                                  [format]="
+                                    column.FilterType == 'date'
+                                      ? column.Format
+                                      : ''
+                                  "
+                                >
+                                  <ng-template
+                                    kendoGridEditTemplate
+                                    let-dataItem="dataItem"
+                                    let-rowIndex="rowIndex"
+                                  >
+                                    <div class="row mx-0">
+                                      <ng-container
+                                        *ngFor="let fld of column.Fields"
+                                      >
+                                        <ng-container
+                                          [ngSwitch]="fld.ControlType"
+                                        >
+                                          <ng-container
+                                            *ngSwitchCase="'TextArea'"
+                                          >
+                                            <div
+                                              *ngIf="fld.IsVisible"
+                                              [class.vm-is-invalid]="
+                                                vs.IsCtrlInvalid(
+                                                  lstPlanFactors_txtarea
+                                                )
+                                              "
+                                            >
+                                              <textarea
+                                                [(ngModel)]="dataItem[fld.Name]"
+                                                name="{{ fld.Name }}_{{
+                                                  rowIndex
+                                                }}"
+                                                #lstPlanFactors_txtarea="ngModel"
+                                                [required]="fld.IsRequired"
+                                                [maxlength]="
+                                                  fld.MaxLength > 0
+                                                    ? fld.MaxLength
+                                                    : ' '
+                                                "
+                                                [disabled]="dataItem"
+                                                class="k-textarea form-control {{
+                                                  fld.CssClass
+                                                }}"
+                                                [ngStyle]="
+                                                  fld.Width > 0 && {
+                                                    'width.px': fld.Width
+                                                  }
+                                                "
+                                                (blur)="
+                                                  fld.EventName
+                                                    ? lstPlanFactors_eventHandler(
+                                                        fld.EventName,
+                                                        dataItem
+                                                      )
+                                                    : ''
+                                                "
+                                              ></textarea>
+                                              <div
+                                                class="vm-validation-wrap"
+                                                *ngIf="
+                                                  vs.IsCtrlInvalid(
+                                                    lstPlanFactors_txtarea
+                                                  )
+                                                "
+                                              >
+                                                <span
+                                                  [ngClass]="{
+                                                    'validation-position':
+                                                      lstPlanFactors?.data
+                                                        ?.length == 1
+                                                  }"
+                                                  class="
+                                                    vm-validation vm-top-arrow
+                                                    mt-2
+                                                    p-2
+                                                  "
+                                                >
+                                                  {{
+                                                    vs.GetErrorMessage(
+                                                      lstPlanFactors_txtarea,
+                                                      {},
+                                                      fld.DisplayName
+                                                    )
+                                                  }}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-container>
+                                          <ng-container
+                                            *ngSwitchCase="'TextBox'"
+                                          >
+                                            <ng-container
+                                              [ngSwitch]="fld.DataType"
+                                            >
+                                              <ng-container
+                                                *ngSwitchCase="
+                                                  lstPlanFactors.numdatatypes[
+                                                    lstPlanFactors.numdatatypes.indexOf(
+                                                      fld.DataType
+                                                    )
+                                                  ] != null
+                                                    ? fld.DataType
+                                                    : '-1'
+                                                "
+                                              >
+                                                <div
+                                                  *ngIf="fld.IsVisible"
+                                                  [class.vm-is-invalid]="
+                                                    vs.IsCtrlInvalid(
+                                                      lstPlanFactors_numtxtbox
+                                                    )
+                                                  "
+                                                >
+                                                  <kendo-numerictextbox
+                                                    #lstPlanFactors_numtxtbox="ngModel"
+                                                    name="{{ fld.Name }}_{{
+                                                      rowIndex
+                                                    }}"
+                                                    [(ngModel)]="
+                                                      dataItem[fld.Name]
+                                                    "
+                                                    [min]="
+                                                      fld.Min ? fld.Min : 0
+                                                    "
+                                                    [max]="
+                                                      fld.Max
+                                                        ? fld.Max
+                                                        : undefined
+                                                    "
+                                                    [disabled]="
+                                                      dataItem[fld.Name]
+                                                    "
+                                                    [required]="fld.IsRequired"
+                                                    format="#"
+                                                    class="k-numerictextbox form-control {{
+                                                      fld.CssClass
+                                                    }}"
+                                                    [ngStyle]="
+                                                      fld.Width > 0 && {
+                                                        'width.px': fld.Width
+                                                      }
+                                                    "
+                                                    (blur)="
+                                                      fld.EventName
+                                                        ? lstPlanFactors_eventHandler(
+                                                            fld.EventName,
+                                                            dataItem
+                                                          )
+                                                        : ''
+                                                    "
+                                                  >
+                                                  </kendo-numerictextbox>
+                                                  <div
+                                                    class="vm-validation-wrap"
+                                                    *ngIf="
+                                                      vs.IsCtrlInvalid(
+                                                        lstPlanFactors_numtxtbox
+                                                      )
+                                                    "
+                                                  >
+                                                    <span
+                                                      [ngClass]="{
+                                                        'validation-position':
+                                                          lstPlanFactors?.data
+                                                            ?.length == 1
+                                                      }"
+                                                      class="
+                                                        vm-validation
+                                                        vm-top-arrow
+                                                        mt-2
+                                                        p-2
+                                                      "
+                                                    >
+                                                      {{
+                                                        vs.GetErrorMessage(
+                                                          lstPlanFactors_numtxtbox,
+                                                          {},
+                                                          fld.DisplayName
+                                                        )
+                                                      }}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </ng-container>
+                                              <ng-container *ngSwitchDefault>
+                                                <div
+                                                  *ngIf="fld.IsVisible"
+                                                  [class.vm-is-invalid]="
+                                                    vs.IsCtrlInvalid(
+                                                      lstPlanFactors_txtbox
+                                                    )
+                                                  "
+                                                >
+                                                  <input
+                                                    [(ngModel)]="
+                                                      dataItem[fld.Name]
+                                                    "
+                                                    name="{{ fld.Name }}_{{
+                                                      rowIndex
+                                                    }}"
+                                                    [required]="fld.IsRequired"
+                                                    class="k-textbox form-control {{
+                                                      fld.CssClass
+                                                    }}"
+                                                    [maxlength]="
+                                                      fld.MaxLength > 0
+                                                        ? fld.MaxLength
+                                                        : ' '
+                                                    "
+                                                    [disabled]="
+                                                      dataItem[
+                                                        fld.Name + '_IsEnabled'
+                                                      ]
+                                                        ? dataItem[
+                                                            fld.Name +
+                                                              '_IsEnabled'
+                                                          ]
+                                                        : !fld.IsEnabled
+                                                    "
+                                                    #lstPlanFactors_txtbox="ngModel"
+                                                    [ngStyle]="
+                                                      fld.Width > 0 && {
+                                                        'width.px': fld.Width
+                                                      }
+                                                    "
+                                                    (blur)="
+                                                      fld.EventName
+                                                        ? lstPlanFactors_eventHandler(
+                                                            fld.EventName,
+                                                            dataItem
+                                                          )
+                                                        : ''
+                                                    "
+                                                  />
+                                                  <div
+                                                    class="vm-validation-wrap"
+                                                    *ngIf="
+                                                      vs.IsCtrlInvalid(
+                                                        lstPlanFactors_txtbox
+                                                      )
+                                                    "
+                                                  >
+                                                    <span
+                                                      [ngClass]="{
+                                                        'validation-position':
+                                                          lstPlanFactors?.data
+                                                            ?.length == 1
+                                                      }"
+                                                      class="
+                                                        vm-validation
+                                                        vm-top-arrow
+                                                        mt-2
+                                                        p-2
+                                                      "
+                                                    >
+                                                      {{
+                                                        vs.GetErrorMessage(
+                                                          lstPlanFactors_txtbox,
+                                                          {},
+                                                          fld.Name
+                                                        )
+                                                      }}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </ng-container>
+                                            </ng-container>
+                                          </ng-container>
+
+                                          <ng-container
+                                            *ngSwitchCase="'DropDown'"
+                                          >
+                                            <div
+                                              *ngIf="fld.IsVisible"
+                                              [class.vm-is-invalid]="
+                                                vs.IsCtrlInvalid(
+                                                  lstPlanFactors_dropdownlist
+                                                )
+                                              "
+                                            >
+                                              <kendo-dropdownlist
+                                                                  #lstPlanFactors_dropdownlist="ngModel" class="form-control" style="width:15.7rem;"
+                                                                  [data]="
+                                                                  fld.Values &&
+                                                                  fld.Values.length>
+                                                0
+                                                ? fld.Values
+                                                : dataItem[
+                                                fld.DataSourceName
+                                                ]
+                                                "
+                                                name="{{ fld.Name }}_{{
+                                                  rowIndex
+                                                }}"
+                                                [(ngModel)]="dataItem[fld.Name]"
+                                                [disabled]="!fld.IsEnabled"
+                                                [required]="fld.IsRequired"
+                                                [ngStyle]="
+                                                fld.Width > 0 && {
+                                                'width.px': fld.Width
+                                                }
+                                                "
+                                                (valueChange)="
+                                                fld.EventName
+                                                ? lstPlanFactors_eventHandler(
+                                                fld.EventName,
+                                                dataItem
+                                                )
+                                                : ''
+                                                "
+                                                [textField]="
+                                                fld.TextFeild
+                                                ? fld.TextFeild
+                                                : null
+                                                "
+                                                [valueField]="
+                                                fld.ValueFeild
+                                                ? fld.ValueFeild
+                                                : null
+                                                "
+                                                valuePrimitive="true"
+                                                >
+                                                <ng-template style="height:4rem "
+                                                             kendoDropDownListValueTemplate
+                                                             let-dataItem
+                                                             *ngIf="
+                                                    fld.Format == 'currency'
+                                                  "
+                                                             >
+                                                  <span
+                                                        class="template"
+                                                        *ngIf="dataItem">$</span>{{ dataItem }}
+                                                </ng-template>
+                                                <ng-template
+                                                             kendoDropDownListItemTemplate
+                                                             let-dataItem
+                                                             *ngIf="
+                                                    fld.Format == 'currency'
+                                                  "
+                                                             >
+                                                  <span
+                                                        class="template"
+                                                        *ngIf="dataItem">
+                                                    $
+                                                  </span>
+                                                  {{ dataItem }}
+                                                </ng-template>
+                                              </kendo-dropdownlist>
+                                              <div
+                                                class="vm-validation-wrap"
+                                                *ngIf="
+                                                  vs.IsCtrlInvalid(
+                                                    lstPlanFactors_dropdownlist
+                                                  )
+                                                "
+                                              >
+                                                <span
+                                                  [ngClass]="{
+                                                    'validation-position':
+                                                      lstPlanFactors?.data
+                                                        ?.length == 1
+                                                  }"
+                                                  class="
+                                                    vm-validation vm-top-arrow
+                                                    mt-2
+                                                    p-2
+                                                  "
+                                                >
+                                                  {{
+                                                    vs.GetErrorMessage(
+                                                      lstPlanFactors_dropdownlist,
+                                                      {},
+                                                      fld.DisplayName
+                                                    )
+                                                  }}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-container>
+                                          <ng-container
+                                            *ngSwitchCase="'DatePicker'"
+                                          >
+                                            <div
+                                              *ngIf="fld.IsVisible"
+                                              [class.vm-is-invalid]="
+                                                vs.IsCtrlInvalid(
+                                                  lstPlanFactors_datepicker
+                                                )
+                                              "
+                                            >
+                                              <kendo-datepicker
+                                                #lstPlanFactors_datepicker="ngModel"
+                                                name="{{ fld.Name }}_{{
+                                                  rowIndex
+                                                }}"
+                                                [required]="fld.IsRequired"
+                                                [disabled]="!fld.IsEnabled"
+                                                [(ngModel)]="dataItem[fld.Name]"
+                                                class="k-datepicker form-control {{
+                                                  fld.CssClass
+                                                }}"
+                                                [ngStyle]="
+                                                  fld.Width > 0 && {
+                                                    'width.px': fld.Width
+                                                  }
+                                                "
+                                                (valueChange)="
+                                                  fld.EventName
+                                                    ? lstPlanFactors_eventHandler(
+                                                        fld.EventName,
+                                                        dataItem
+                                                      )
+                                                    : ''
+                                                "
+                                              >
+                                              </kendo-datepicker>
+                                              <div
+                                                class="vm-validation-wrap"
+                                                *ngIf="
+                                                  vs.IsCtrlInvalid(
+                                                    lstPlanFactors_datepicker
+                                                  )
+                                                "
+                                              >
+                                                <span
+                                                  [ngClass]="{
+                                                    'validation-position':
+                                                      lstPlanFactors?.data
+                                                        ?.length == 1
+                                                  }"
+                                                  class="
+                                                    vm-validation vm-top-arrow
+                                                    mt-2
+                                                    p-2
+                                                  "
+                                                >
+                                                  {{
+                                                    vs.GetErrorMessage(
+                                                      lstPlanFactors_datepicker,
+                                                      {},
+                                                      fld.DisplayName
+                                                    )
+                                                  }}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-container>
+                                          <ng-container
+                                            *ngSwitchCase="'CheckBox'"
+                                          >
+                                            <div
+                                              class="{{ fld.CssClass }}"
+                                              *ngIf="fld.IsVisible"
+                                              [class.vm-is-invalid]="
+                                                vs.IsCtrlInvalid(
+                                                  lstPlanFactors_checkbox
+                                                )
+                                              "
+                                            >
+                                              <div
+                                                class="
+                                                  form-check
+                                                  vm-checkbox
+                                                  path
+                                                "
+                                              >
+                                                <input
+                                                  type="checkbox"
+                                                  id="{{ fld.Name }}_{{
+                                                    rowIndex
+                                                  }}"
+                                                  #lstPlanFactors_checkbox="ngModel"
+                                                  name="{{ fld.Name }}_{{
+                                                    rowIndex
+                                                  }}"
+                                                  class="form-check-input"
+                                                  [(ngModel)]="
+                                                    dataItem[fld.Name]
+                                                  "
+                                                  [disabled]="!fld.IsEnabled"
+                                                  [required]="fld.IsRequired"
+                                                  (change)="
+                                                    fld.EventName
+                                                      ? lstPlanFactors_eventHandler(
+                                                          fld.EventName,
+                                                          dataItem
+                                                        )
+                                                      : ''
+                                                  "
+                                                />
+                                                <svg viewBox="0 0 21 21">
+                                                  <path
+                                                    d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                                  ></path>
+                                                </svg>
+                                                <label
+                                                  for="{{ fld.Name }}_{{
+                                                    rowIndex
+                                                  }}"
+                                                ></label>
+                                              </div>
+
+                                              <div
+                                                class="vm-validation-wrap"
+                                                *ngIf="
+                                                  vs.IsCtrlInvalid(
+                                                    lstPlanFactors_checkbox
+                                                  )
+                                                "
+                                              >
+                                                <span
+                                                  [ngClass]="{
+                                                    'validation-position':
+                                                      lstPlanFactors?.data
+                                                        ?.length == 1
+                                                  }"
+                                                  class="
+                                                    vm-validation vm-top-arrow
+                                                    mt-2
+                                                    p-2
+                                                  "
+                                                >
+                                                  {{
+                                                    vs.GetErrorMessage(
+                                                      lstPlanFactors_checkbox,
+                                                      {},
+                                                      fld.DisplayName
+                                                    )
+                                                  }}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'Label'">
+                                            <div class="{{ fld.CssClass }}">
+                                              <label
+                                                class="read-only"
+                                                id="{{ fld.Name }}_{{
+                                                  rowIndex
+                                                }}"
+                                                >{{ dataItem[fld.Name] }}</label
+                                              >
+                                            </div>
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'Link'">
+                                            <a
+                                              id="{{ fld.Name }}_id"
+                                              [title]="fld.DisplayName"
+                                              target="{{ fld.Target }}"
+                                              class="{{ fld.CssClass }}"
+                                              [ngStyle]="
+                                                fld.Width > 0 && {
+                                                  'width.px': fld.Width
+                                                }
+                                              "
+                                              [hidden]="!fld.IsVisible"
+                                              (click)="
+                                                fld.EventName
+                                                  ? lstPlanFactors_eventHandler(
+                                                      fld.EventName,
+                                                      dataItem
+                                                    )
+                                                  : ''
+                                              "
+                                              [text]="fld.DisplayName"
+                                              [href]="fld.Href ? fld.Href : ''"
+                                            ></a>
+                                          </ng-container>
+                                          <ng-container
+                                            *ngSwitchCase="'Button'"
+                                          >
+                                            <button
+                                              id="{{ fld.Name }}_id"
+                                              name="{{ fld.Name }}_name"
+                                              [value]="fld.Name"
+                                              class="{{ fld.CssClass }}"
+                                              [disabled]="!fld.IsEnabled"
+                                              [ngStyle]="
+                                                fld.Width > 0 && {
+                                                  'width.px': fld.Width
+                                                }
+                                              "
+                                              (click)="
+                                                fld.EventName
+                                                  ? lstPlanFactors_eventHandler(
+                                                      fld.EventName,
+                                                      dataItem
+                                                    )
+                                                  : ''
+                                              "
+                                              *ngIf="fld.IsVisible"
+                                            >
+                                              {{ fld.DisplayName }}
+                                            </button>
+                                          </ng-container>
+                                          <ng-container *ngSwitchCase="'Image'">
+                                            <img
+                                              id="{{ fld.Name }}_id"
+                                              name="{{ fld.Name }}_name"
+                                              *ngIf="fld.IsVisible"
+                                              class="{{ fld.CssClass }}"
+                                              [ngStyle]="
+                                                fld.Width > 0 && {
+                                                  'width.px': fld.Width
+                                                }
+                                              "
+                                              (click)="
+                                                fld.EventName
+                                                  ? lstPlanFactors_eventHandler(
+                                                      fld.EventName,
+                                                      dataItem
+                                                    )
+                                                  : ''
+                                              "
+                                              [src]="fld.Src"
+                                            />
+                                          </ng-container>
+                                        </ng-container>
+                                      </ng-container>
+                                    </div>
+                                  </ng-template>
+                                  <ng-template
+                                    kendoGridCellTemplate
+                                    let-dataItem="dataItem"
+                                  >
+                                    <ng-container
+                                      *ngFor="let fld of column.Fields"
+                                    >
+                                      <ng-container
+                                        [ngSwitch]="fld.ControlType"
+                                      >
+                                        <ng-container
+                                          *ngSwitchCase="'DatePicker'"
+                                        >
+                                          <span class="{{ fld.CssClass }}">{{
+                                            dataItem[fld.Name]
+                                              | date: column.Format
+                                          }}</span>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="'Link'">
+                                          <a
+                                            id="{{ fld.Name }}_id"
+                                            [title]="fld.DisplayName"
+                                            target="{{ fld.Target }}"
+                                            class="{{ fld.CssClass }}"
+                                            [ngStyle]="
+                                              fld.Width > 0 && {
+                                                'width.px': fld.Width
+                                              }
+                                            "
+                                            [hidden]="!fld.IsVisible"
+                                            (click)="
+                                              fld.EventName
+                                                ? lstPlanFactors_eventHandler(
+                                                    fld.EventName,
+                                                    dataItem
+                                                  )
+                                                : ''
+                                            "
+                                            [text]="fld.DisplayName"
+                                            [href]="fld.Href ? fld.Href : ''"
+                                          ></a>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="'Button'">
+                                          <button
+                                            id="{{ fld.Name }}_id"
+                                            name="{{ fld.Name }}_name"
+                                            [value]="fld.Name"
+                                            class="{{ fld.CssClass }}"
+                                            [disabled]="!fld.IsEnabled"
+                                            [ngStyle]="
+                                              fld.Width > 0 && {
+                                                'width.px': fld.Width
+                                              }
+                                            "
+                                            (click)="
+                                              fld.EventName
+                                                ? lstPlanFactors_eventHandler(
+                                                    fld.EventName,
+                                                    dataItem
+                                                  )
+                                                : ''
+                                            "
+                                            *ngIf="fld.IsVisible"
+                                          >
+                                            {{ fld.DisplayName }}
+                                          </button>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="'Image'">
+                                          <img
+                                            id="{{ fld.Name }}_id"
+                                            name="{{ fld.Name }}_name"
+                                            *ngIf="fld.IsVisible"
+                                            class="{{ fld.CssClass }}"
+                                            [ngStyle]="
+                                              fld.Width > 0 && {
+                                                'width.px': fld.Width
+                                              }
+                                            "
+                                            (click)="
+                                              fld.EventName
+                                                ? lstPlanFactors_eventHandler(
+                                                    fld.EventName,
+                                                    dataItem
+                                                  )
+                                                : ''
+                                            "
+                                            [src]="fld.Src"
+                                          />
+                                        </ng-container>
+                                        <ng-container *ngSwitchDefault>
+                                          <span class="{{ fld.CssClass }}">
+                                            {{ dataItem[fld.Name] }}</span
+                                          >
+                                        </ng-container>
+                                      </ng-container>
+                                    </ng-container>
+                                  </ng-template>
+                                </kendo-grid-column>
+                              </ng-container>
+                              <kendo-grid-column
+                                title="Actions"
+                                width="90"
+                                editable="false"
+                                [filterable]="false"
+                                [sortable]="false"
+                              >
+                                <ng-template
+                                  kendoGridCellTemplate
+                                  let-dataItem="dataItem"
+                                >
+                                  <a
+                                    (click)="
+                                      lstPlanFactors._deleteItem(dataItem)
+                                    "
+                                    [hidden]="!(accesslevel > 2)"
+                                  >
+                                    <img
+                                      src="assets/images/icons/delete.svg"
+                                      width="16"
+                                      height="16"
+                                      alt="delete"
+                                      [hidden]="!(accesslevel > 2)"
+                                  /></a>
+                                </ng-template>
+                              </kendo-grid-column>
+                            </kendo-grid>
+                          </div>
+                          <div
+                            class="row text-center mb-5 pt-5"
+                            style="
+                              border-top: 1px solid #e2ebfb;
+                              margin-top: 16px;
+                            "
+                          >
+                            <div
+                              class="
+                                col-lg-12 col-md-12 col-sm-12 col-xs-12
+                                va
+                                text-center text-center
+                              "
+                            >
+                              <a
+                                id="lnk49a3ca35da0fb5f6ce40"
+                                alt="Cancel"
+                                title="Cancel"
+                                class="mr-4"
+                                target="_blank"
+                                style="
+                                  text-decoration: none;
+                                  cursor: pointer !important;
+                                  outline: none;
+                                  transition: all ease 0.3s;
+                                  color: #49a7ec;
+                                "
+                                (click)="PlanFactor_Cancel_Click($event)"
+                                >Cancel</a
+                              ><button
+                                value="Save"
+                                id="btnc6f2eae5f524a0c441fb"
+                                name="btnc6f2eae5f524a0c441fb"
+                                class="btn btn-primary"
+                                (click)="PlanFactor_Save_Click($event)"
+                                [hidden]="!(accesslevel > 1)"
+                              >
+                                Save
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" [hidden]="!ReleasePlansGridVisibility">
+                    <div class="col-sm-12">
+                      <div
+                        class="editable-grid"
+                        id="lstReleasePlansdiv"
+                        ngModelGroup="lstReleasePlansGrid_Group"
+                        #lstReleasePlansGrid_Group="ngModelGroup"
+                      >
+                        <ng-template
+                          #template_eddg69fd26eb0a9773625356
+                          let-anchor
+                        >
+                          <span>{{ anchor.nativeElement.innerText }}</span>
+                        </ng-template>
+                        <div
+                          kendoTooltip
+                          showOn="none"
+                          [tooltipTemplate]="template_eddg69fd26eb0a9773625356"
+
+                        >
+                          <kendo-grid
+                            #lstReleasePlansgridInstance="kendoGrid"
+                            [kendoGridBinding]="lstReleasePlans.Items"
+                            [sortable]="true"
+                            filterable="menu"
+                            [resizable]="false"
+                            [reorderable]="false"
+                            [sort]="lstReleasePlans.state.sort"
+                            [skip]="lstReleasePlans.state.skip"
+                            [filter]="lstReleasePlans.state.filter"
+                            [pageable]="
+                              lstReleasePlans.Items.length <= 10
+                                ? false
+                                : { buttonCount: 3 }
+                            "
+                            [pageSize]="10"
+                            (dataStateChange)="
+                              lstReleasePlans._cancelChanges($event)
+                            "
+                            (cellClick)="lstReleasePlans._editRowItem($event)"
+                            (pageChange)="lstReleasePlans._pageChange($event)"
+                            (clickOutside)="
+                              lstReleasePlans._validatedEditExit($event)
+                            "
+                            ><kendo-grid-column
+                              field="selected"
+                              width="20"
+                              title="checkBoxValue"
+                              [filterable]="false"
+                              [sortable]="false"
+                            >
+                              <ng-template
+                                kendoGridHeaderTemplate
+                                let-column
+                                let-columnIndex="columnIndex"
+                              >
+                                <div
+                                  class="
+                                    form-check
+                                    vm-checkbox
+                                    light
+                                    path
+                                    vm-width-20
+                                  "
+                                >
+                                  <input
+                                    id="lstReleasePlans_All"
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    [checked]="
+                                      lstReleasePlans.headerCheckBoxValue
+                                    "
+                                    (change)="
+                                      lstReleasePlans._headerCheckboxEvent()
+                                    "
+                                  />
+                                  <svg viewBox="0 0 21 21">
+                                    <path
+                                      d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                    ></path>
+                                  </svg>
+                                  <label for="lstReleasePlans_All"></label>
+                                </div>
+                              </ng-template>
+                              <ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                              >
+                                <div
+                                  class="
+                                    form-check
+                                    vm-checkbox
+                                    path
+                                    vm-width-20
+                                  "
+                                >
+                                  <input
+                                    id="{{ rowIndex }}"
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    [checked]="dataItem.selected"
+                                    (change)="
+                                      lstReleasePlans._rowCheckboxEvent(
+                                        dataItem
+                                      )
+                                    "
+                                  />
+                                  <svg viewBox="0 0 21 21">
+                                    <path
+                                      d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                    ></path>
+                                  </svg>
+                                  <label for="{{ rowIndex }}"></label>
+                                </div>
+                              </ng-template>
+                              <ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                              >
+                                <div
+                                  class="
+                                    form-check
+                                    vm-checkbox
+                                    path
+                                    vm-width-20
+                                  "
+                                >
+                                  <input
+                                    id="{{ rowIndex }}"
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    [checked]="dataItem.selected"
+                                    (change)="
+                                      lstReleasePlans._rowCheckboxEvent(
+                                        dataItem
+                                      )
+                                    "
+                                  />
+                                  <svg viewBox="0 0 21 21">
+                                    <path
+                                      d="M5,10.75 L8.5,14.25 L19.4,2.3 C18.8333333,1.43333333 18.0333333,1 17,1 L4,1 C2.35,1 1,2.35 1,4 L1,17 C1,18.65 2.35,20 4,20 L17,20 C18.65,20 20,18.65 20,17 L20,7.99769186"
+                                    ></path>
+                                  </svg>
+                                  <label for="{{ rowIndex }}"></label>
+                                </div>
+                              </ng-template> </kendo-grid-column
+                            ><kendo-grid-column
+                              field="Name"
+                              width="150"
+                              title="Name"
+                              [filterable]="true"
+                              [sortable]="true"
+                              ><ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><span class="row mx-0"
+                                  ><a
+                                    id="lnkc64bf07aadf2463b2c25"
+                                    alt="Name"
+                                    title="Name"
+                                    target="_blank"
+                                    [text]="dataItem.Name"
+                                    >Name</a
+                                  >
+                                </span> </ng-template
+                              ><ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><div class="row mx-0">
+                                  <a
+                                    id="lnkc64bf07aadf2463b2c25"
+                                    alt="Name"
+                                    title="Name"
+                                    target="_blank"
+                                    [text]="dataItem.Name"
+                                    >Name</a
+                                  >
+                                </div></ng-template
+                              ></kendo-grid-column
+                            ><kendo-grid-column
+                              field="Environment"
+                              width="150"
+                              title="Environment"
+                              [filterable]="true"
+                              [sortable]="false"
+                              ><ng-template
+                                kendoGridCellTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><span class="row mx-0"
+                                  >{{ dataItem.Environment }}
+                                </span> </ng-template
+                              ><ng-template
+                                kendoGridEditTemplate
+                                let-dataItem="dataItem"
+                                let-rowIndex="rowIndex"
+                                ><div class="row mx-0">
+                                  <label
+                                    class="read-only"
+                                    id="lbl9e1139847372d9ee43d2"
+                                    >{{ dataItem.Environment }}</label
+                                  >
+                                </div></ng-template
+                              ></kendo-grid-column
+                            ><kendo-grid-column
+                            width="110"
+                            title="Actions"
+                            [filterable]="false"
+                            [sortable]="false"
+                            ><ng-template
+                              kendoGridCellTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                              ><span class="row mx-0"
+                                >
+                                <!-- <img
+                                  id="imga53c9cb641bc7ddafa05"
+                                  name="imga53c9cb641bc7ddafa05"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                    cursor: pointer;
+                                  "
+                                  title="Export Plan"
+                                  src="assets/images/download.svg"
+                                  [hidden]="!(accesslevel > 1)"
+                                  (click)="GenerateReleasePackage(dataItem, false)"
+                                /> -->
+                                <!-- <img
+                                  id="imgbe28c0dce264774e5df4"
+                                  name="imgbe28c0dce264774e5df4"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                  "
+                                  src="assets/images/icons/edit.svg"
+                                  [hidden]="!(accesslevel > 1)"
+                                  (click)="
+                                    ReleasePackageAction_Edit_Click(dataItem)
+                                  "
+                                /> -->
+                                <img
+                                  id="img8a3dc9bf2cf4d2fce97c"
+                                  name="img8a3dc9bf2cf4d2fce97c"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                    cursor: pointer;
+                                  "
+                                  title="Delete"
+                                  src="assets/images/icons/delete.svg"
+                                  [hidden]="!(accesslevel > 2)"
+                                  (click)="
+                                  ReleasePlanAction_Delete_Click(dataItem)
+                                  "
+                                />
+                                <!-- <img
+                                  id="imga53c9cb641bc7ddafa05"
+                                  name="imga53c9cb641bc7ddafa05"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                  "
+                                  title="Export Json"
+                                  src="assets/images/download.svg"
+                                  [hidden]="!(accesslevel > 1)"
+                                  (click)="GenerateReleasePackage(dataItem,true)"
+                                /> -->
+                              </span> </ng-template
+                            ><ng-template
+                              kendoGridEditTemplate
+                              let-dataItem="dataItem"
+                              let-rowIndex="rowIndex"
+                              ><div class="row mx-0">
+                                <!-- <img
+                                  id="imga53c9cb641bc7ddafa05"
+                                  name="imga53c9cb641bc7ddafa05"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                    cursor: pointer;
+                                  "
+                                  src="assets/images/download.svg"
+                                  [hidden]="!(accesslevel > 1)"
+                                /><img
+                                  id="imgbe28c0dce264774e5df4"
+                                  name="imgbe28c0dce264774e5df4"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                  "
+                                  src="assets/images/icons/edit.svg"
+                                  [hidden]="!(accesslevel > 1)"
+                                  (click)="
+                                    ReleasePackageAction_Edit_Click(dataItem)
+                                  "
+                                />-->
+                                <img
+                                  id="img8a3dc9bf2cf4d2fce97c"
+                                  name="img8a3dc9bf2cf4d2fce97c"
+                                  style="
+                                    width: 16px;
+                                    height: 16px;
+                                    margin-left: 8px;
+                                    cursor: pointer;
+                                  "
+                                  src="assets/images/icons/delete.svg"
+                                  [hidden]="!(accesslevel > 2)"
+                                  (click)="
+                                  ReleasePlanAction_Delete_Click(dataItem)
+                                  "
+                                /></div></ng-template></kendo-grid-column
+                        ></kendo-grid>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <kendo-dialog
+            title="Select factor to delete"
+            class="vm-popup"
+            *ngIf="IsPopupVisible"
+            (close)="PlanFactor_Cancel_Click($event)"
+            ><div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <div class="form-group row">
+                  <label class="col-sm-6 col-form-label"
+                    ><span>Factor Name</span></label
+                  >
+                  <div class="vm-column-gutter">
+                    <kendo-dropdownlist
+                      id="ddl7ce9527cb9fac00c4f69"
+                      name="ddl7ce9527cb9fac00c4f69"
+                      valuePrimitive="true"
+                      [data]="objPlanDeterminationFactor"
+                      [defaultItem]="ddl7ce9527cb9fac00c4f69_defaultItem"
+                      textField="DisplayName"
+                      valueField="Id"
+                      [(ngModel)]="detid"
+                      (valueChange)="DeleteFactorNameSelectionChange($event)"
+                    ></kendo-dropdownlist>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-5">
+                <button
+                  value="Cancel"
+                  id="btn505006f5538ae98e2cd2"
+                  name="btn505006f5538ae98e2cd2"
+                  class="btn btn-secondary"
+                  (click)="PlanFactor_Cancel_Click($event)"
+                >
+                  Cancel
+                </button>
+              </div>
+              <div class="col-sm-5 text-right">
+                <button
+                  value="Delete"
+                  id="btn2ae867ff54adce4c5d22"
+                  name="btn2ae867ff54adce4c5d22"
+                  class="btn btn-primary"
+                  (click)="PlanFactor_DeleteFactor_Click($event)"
+                >
+                  Delete
+                </button>
+              </div>
+              <div class="col-sm-1"></div></div
+          ></kendo-dialog>
+          <ng-template #DeleteMessage_Launch>
+            <span>
+              <b>You are about to delete the selected record(s)</b><br /><br />
+              Once you click on 'Ok', you will not be able to undo this action.
+              Are you sure to proceed?
+            </span>
+          </ng-template>
+          <ng-template #InformationMessage_Launch>
+            <span>
+              <b>This Mapping is used in release Package</b><br />
+
+            </span>
+          </ng-template>
+          <ng-template #DeleteEntity_Information>
+            <span>
+              <b>This action cannot be Performed</b><br /><br />
+            Select at-least one record to perform this action
+            </span>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
