@@ -26,7 +26,7 @@ namespace Vlims.Common
         {
             DbConnection con = null;
             
-            _database = new Microsoft.Practices.EnterpriseLibrary.Data.Sql.SqlDatabase("Data Source=DESKTOP-NOVEC8T\\SQLEXPRESS;Initial Catalog=Vlims;User ID=test;Password=1234;Pooling=true;Min Pool Size=0;Max Pool Size=1024");
+            _database = new Microsoft.Practices.EnterpriseLibrary.Data.Sql.SqlDatabase("Data Source=DESKTOP-RJCK03U\\MSSQLSERVER01;Initial Catalog=Vlims;User ID=sa;Password=Passw0rd;Pooling=true;Min Pool Size=0;Max Pool Size=1024");
 
             con = _database.CreateConnection();
         }

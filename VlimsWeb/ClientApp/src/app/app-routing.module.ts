@@ -24,6 +24,11 @@ import { DashboardConfigComponent } from './dashboard-config/dashboard-config.co
 import { DocumentTemplateConfigComponent } from './document-template-config/document-template-config.component';
 import { DocumentTypeConfigComponent } from './document-type-config/document-type-config.component';
 import { AddDocumentTypeConfigComponent } from './add-document-type-config/add-document-type-config.component';
+import { DocumentmanagerComponent } from './documentmanager/documentmanager.component';
+import { DocumentRequestComponent } from './document-request/document-request.component';
+import { DocumentPreperationComponent } from './document-preperation/document-preperation.component';
+import { DocumentEffectiveComponent } from './document-effective/document-effective.component';
+import { DocumentAdditionaltasksComponent } from './document-additionaltasks/document-additionaltasks.component';
 
 
 const routes: Routes = [
@@ -105,33 +110,33 @@ const routes: Routes = [
             path:'adddoctype',
             component:AddDocumentTypeConfigComponent
           }
+        ]        
+      },
+      {
+        path: 'documentmanager',
+        component: DocumentmanagerComponent,
+        children: [
+          {
+            path: 'documenmgr',
+            component: DocumentmanagerComponent
+          },
+          {
+            path: 'documreq',
+            component: DocumentRequestComponent
+          },
+          {
+            path: 'documprep',
+            component: DocumentPreperationComponent
+          },
+          {
+            path: 'documeffect',
+            component: DocumentEffectiveComponent
+          },
+          {
+            path: 'additasks',
+            component: DocumentAdditionaltasksComponent
+          }
         ]
-        // children: [
-        //   {
-        //     path: '',
-        //     component: DocumentTypeComponent
-        //   }]
-          // {
-          //   path: 'doctemplate',
-          //   component: DocumentTemplateConfigComponent
-          // },
-          // {
-          //   path: 'workflow',
-          //   component: WorkflowConfigComponent
-          // },
-          // {
-          //   path: 'notification',
-          //   component: NotificationConfigComponent
-          // },
-          // {
-          //   path: 'dashboardconfig',
-          //   component: DashboardConfigComponent
-          // },
-          // {
-          //   path: 'doctype',
-          //   component: DocumentTypeComponent
-          // }
-        //]
       }
     ]
   },

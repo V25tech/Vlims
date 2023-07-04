@@ -46,6 +46,15 @@ import { AddDocumentTemplateConfigComponent } from './add-document-template-conf
 import { AddWorkflowConfigComponent } from './add-workflow-config/add-workflow-config.component';
 import { AddNotificationConfigComponent } from './add-notification-config/add-notification-config.component';
 import { AddDashboardConfigComponent } from './add-dashboard-config/add-dashboard-config.component';
+import { DocumentmanagerComponent } from './documentmanager/documentmanager.component';
+import { DocumentRequestComponent } from './document-request/document-request.component';
+import { DocumentPreperationComponent } from './document-preperation/document-preperation.component';
+import { DocumentEffectiveComponent } from './document-effective/document-effective.component';
+import { DocumentAdditionaltasksComponent } from './document-additionaltasks/document-additionaltasks.component';
+import { AddDocumentRequestComponent } from './add-document-request/add-document-request.component';
+import { AddDocumentPreperationComponent } from './add-document-preperation/add-document-preperation.component';
+import { AddDocumentEffectiveComponent } from './add-document-effective/add-document-effective.component';
+import { AddAdditionaltasksComponent } from './add-additionaltasks/add-additionaltasks.component';
 
 
 
@@ -60,7 +69,7 @@ import { AddDashboardConfigComponent } from './add-dashboard-config/add-dashboar
     ProductsView, BrandComponent, TaxComponent, PopupshowDirective,CartsComponent,DocumentMasterComponent,DocumentTypeConfigComponent,
     DocumentTemplateConfigComponent,WorkflowConfigComponent,NotificationConfigComponent,DashboardConfigComponent, 
     BillingsComponent, InvoiceComponent, RegisterComponent, ProfileComponent,FilterPipe, 
-    SidebarDirective, SpinnerComponent, SearchPipe,SearchPipe, TabsDirective, InrPipe, AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, AddNotificationConfigComponent, AddDashboardConfigComponent],
+    SidebarDirective, SpinnerComponent, SearchPipe,SearchPipe, TabsDirective, InrPipe, AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent, DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, AddDocumentRequestComponent, AddDocumentPreperationComponent, AddDocumentEffectiveComponent, AddAdditionaltasksComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })
