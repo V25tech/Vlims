@@ -9,7 +9,7 @@ import { CustomFunctionService } from 'src/app/customfunction.service';
 import { Subscription } from "rxjs";
 import { ApplicationContextService } from 'src/app/application-context.service';import { Title } from '@angular/platform-browser';
 import { TooltipDirective } from '@progress/kendo-angular-tooltip';
-import { DocumentTypeConfiguration } from 'src/app/models/models';
+import { DocumentTypeConfiguration, RequestContext } from 'src/app/models/models';
 import { DataStateChangeEvent, GridComponent, PageChangeEvent } from '@progress/kendo-angular-grid';
 declare var $: any;
 @Component({
@@ -18,6 +18,7 @@ declare var $: any;
 })
 export class DocumentConfiguration implements OnInit, CanComponentDeactivate
 {
+  objrequest=new RequestContext();
   validationMessages : string[] = [];
   subscription: Subscription = new Subscription();
    canDeactivate(): boolean {
@@ -402,20 +403,24 @@ lstDocumentConfigDateProperties = [];
     },
   };
   GetDocumentConfiguration() {
+    debugger
     this.lstDocumentTypeConfig.Items=[]
-    // this.apiServc.GetDocumentConfiguration("Model/GetDocumentConfiguration", {}, "")
-    // .subscribe(
-    //   (r) => {
-    //     this.GetDocumentConfiguration_Completed(r);
-    //   },
-    //   (e) => {
-    //     this.GetDocumentConfiguration_ErrorRaised(e);
-    //   }
-    // );
+   this.objrequest={PageNumber:1,PageSize:1};
+   //obj.PageNumber=1; obj.PageSize=1;
+    this.apiServc.GetDocumentConfiguration("documenttypeconfiguration/getalldoctypeconfig", {},JSON.stringify(this.objrequest))
+    .subscribe(
+      (r) => {
+        this.GetDocumentConfiguration_Completed(r);
+      },
+      (e) => {
+        this.GetDocumentConfiguration_ErrorRaised(e);
+      }
+    );
   }
   GetDocumentConfiguration_Completed(r){
-    this.lstDocumentTypeConfig=r
-
+    debugger
+    this.lstDocumentTypeConfig.Items=r
+debugger
   }
   GetDocumentConfiguration_ErrorRaised(e) {}
   EditDocumentTypeConfig(e){ let variables = { }; }

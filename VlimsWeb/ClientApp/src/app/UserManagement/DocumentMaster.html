@@ -1,0 +1,24 @@
+
+<style>
+    table {
+    width: 100%;
+  }
+  .mat-header-cell {
+    color: black;
+    font-size: 18px;
+}
+  </style>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a [ngClass]="{'active':tabselect==='doctype'}" class="nav-item nav-link"  id="nav-home-tab" data-toggle="tab" (click)="tabselect='doctype'"  [routerLink]="['/mainpage/products']" role="tab" aria-controls="nav-home" aria-selected="true">Document Type</a>
+    <a [ngClass]="{'active':tabselect==='doctemplate'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='brand'" [routerLink]="['/mainpage/products/brand']" role="tab" aria-controls="nav-profile" aria-selected="false">Document Template</a>
+    <a [ngClass]="{'active':tabselect==='workflow'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='productview'" [routerLink]="['/mainpage/products/productview']" role="tab" aria-controls="nav-profile" aria-selected="false">Workflow</a>
+    <a [ngClass]="{'active':tabselect==='notification'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='carts'" [routerLink]="['/mainpage/products/carts']" role="tab" aria-controls="nav-profile" aria-selected="false">Notification</a>
+    <a [ngClass]="{'active':tabselect==='dashboard'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='carts'" [routerLink]="['/mainpage/products/carts']" role="tab" aria-controls="nav-profile" aria-selected="false">Dashboard</a>
+    
+  </div>
+</nav>
+<router-outlet></router-outlet>
+
+      

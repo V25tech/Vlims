@@ -1,0 +1,210 @@
+<style>
+  .form-group>[class*='.form-group .col-md-'] {
+    padding-top: 10px;
+  }
+
+  .table th {
+    width: 30px !important;
+  }
+</style>
+
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <!-- <button type="button" class="btn btn-outline-success btn-sm btn-space" style="float: right;"
+      (click)="makepayment(3,newobj)">Online</button>
+    <button type="button" class="btn btn-outline-success btn-sm btn-space" style="float: right;"
+      (click)="makepayment(2,newobj)">Card</button>
+    <button type="button" class="btn btn-outline-success btn-sm btn-space" style="float: right;"
+      (click)="makepayment(1,newobj)">Cash</button> -->
+    <div *ngIf="carts.length>0">
+      <button type="button" class="btn btn-outline-success btn-sm btn-space" style="float: right;"
+        (click)="updatecarts();">UpdateCart</button>
+    </div>
+    <!-- <form id="fid">
+      <div class="form-group col-xs-12 col-xl-4 col-md-12  pull-right">
+        <input type="number" class="form-control" [(ngModel)]="newobj.BillInfo.CustMobile"
+          [ngModelOptions]="{standalone:true}" name="customername" placeholder="Mobile">
+      </div>
+      <div class="form-group col-xs-12 col-xl-4 col-md-12  pull-right">
+        <input type="text" class="form-control" [(ngModel)]="newobj.BillInfo.CustomerName"
+          [ngModelOptions]="{standalone:true}" name="custmobile" placeholder="Customer Name">
+      </div>
+    </form> -->
+  </div>
+  <div class="card-body">
+    <!-- <div class="table-responsive">
+      <table class="table table-bordered" id="escalation">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">CGST</th>
+            <th scope="col">SGST</th>
+            <th scope="col">TaxAmount</th>
+            <th scope="col">TotalPrice</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cart of carts |filter: filterStr : 'ProductName'| paginate: pageConfig ; let i=index">
+            <th scope="row">{{pageConfig.itemsPerPage * (pageConfig.currentPage-1)+(i+1)}}</th>
+            <td>{{cart.ProductName}}</td>
+            <td>{{cart.Quantity | number : '1.2-2'}}</td>
+            <td>{{cart.Price |  INR}}</td>
+            <td>{{cart.CGST |  INR}}</td>
+            <td>{{cart.SGST |  INR}}</td>
+            <td>{{cart.TaxAmount |  INR}}</td>
+            <td>{{cart.TotalPrice |  INR}}</td>
+            <td>
+              <button class="btn"> <span class="fa fa-cart-plus" (click)="addplus(cart);"></span></button>
+              <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteCart(i,cart);"></span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls style="float: right;" [autoHide]="pageConfig.autoHide"
+        (pageChange)="pageConfig.currentPage = $event"></pagination-controls>
+    </div> -->
+    <!-- <div class="row">
+      <div class="col-xl-3 col-md-6 mb-4" *ngFor="let cart of carts |filter: filterStr">
+        <div class="Products-card">
+          <div class="card-body">
+            <img src="assets/img/oneplus-7t-pro-back.jpg" (click)="edit(prod);" alt="Denim Jeans" style="width:100%">
+
+            <h4>{{cart.ProductName}}</h4>
+            <p>Qty: {{cart.Quantity | number : '1.2-2'}} {{cart.Price |  INR}}</p>
+            <p>CGST: {{cart.CGST |  INR}}</p>
+            <p>SGST: {{cart.SGST |  INR}}</p>
+            <p>Total: {{cart.TotalPrice |  INR}}</p>
+            <p><button class="btn btn-primary"> <span class="fa fa-cart-plus" (click)="addplus(cart);"></span></button>
+              <button class="btn btn-danger"> <span class="fa fa-flag fa-trash"
+                  (click)="deleteCart(i,cart);"></span></button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pagination-controls style="float: right;" [autoHide]="pageConfig.autoHide"
+      (pageChange)="pageConfig.currentPage = $event"></pagination-controls> -->
+    <div *ngIf="carts.length>0">
+      <div class="row">
+
+
+        <!-- Shopping cart table -->
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" class="border-0 bg-light">
+                  <div class="p-2 px-3 text-uppercase">Product</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                  <div class="py-2 text-uppercase">Price</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                  <div class="py-2 text-uppercase">Quantity</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                  <div class="py-2 text-uppercase">CGST</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                  <div class="py-2 text-uppercase">SGST</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                  <div class="py-2 text-uppercase">Total</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                  <div class="py-2 text-uppercase">Actions</div>
+                </th>
+                <!-- <th scope="col" class="border-0 bg-light">
+                <div class="py-2 text-uppercase">Remove</div>
+              </th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cart of carts | paginate: pageConfig ; let i=index">
+                <th scope="row" class="border-0">
+                  <div class="p-2">
+                    <img src="assets/img/oneplus-7t-pro-back.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                    <div class="ml-3 d-inline-block align-middle">
+                      <h5 class="mb-0"> <a href="#"
+                          class="text-dark d-inline-block align-middle">{{cart.ProductName}}</a>
+                      </h5><span class="text-muted font-weight-normal font-italic d-block">Category: {{cart.Type}}</span>
+                    </div>
+                  </div>
+                </th>
+                <td class="border-0 align-middle"><strong>{{cart.Price |  INR}}</strong></td>
+                <td class="border-0 align-middle"><strong>{{cart.Quantity | number : '1.2-2'}}</strong></td>
+                <td class="border-0 align-middle"><strong>{{cart.CGST |  INR}}</strong></td>
+                <td class="border-0 align-middle"><strong>{{cart.SGST |  INR}}</strong></td>
+                <td class="border-0 align-middle"><strong>{{cart.TotalPrice |  INR}}</strong></td>
+                <td class="border-0 align-middle"><button (click)="addplus(cart);"
+                    class="btn btn-success btn-circle btn-sm"><i class="fas fa-cart-plus"></i></button>
+                  <button (click)="deleteCart(i,cart);" class="btn btn-danger btn-circle btn-sm"><i
+                      class="fas fa-trash"></i></button></td>
+                <!-- <td class="border-0 align-middle"><button (click)="deleteCart(i,cart);" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></button></td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- End -->
+      </div>
+
+      <pagination-controls style="float: right;" [autoHide]="pageConfig.autoHide"
+        (pageChange)="pageConfig.currentPage = $event"></pagination-controls>
+
+      <div class="row py-5 p-4 bg-white rounded shadow-sm">
+        <div class="col-lg-6">
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Billing To:</div>
+          <div class="p-4">
+            <form id="fid">
+              <div class="input-group mb-4 border rounded-pill p-2">
+                <input type="text" placeholder="Customer Name" aria-describedby="button-addon3"
+                  class="form-control border-0" [(ngModel)]="newobj.BillInfo.CustomerName"
+                  [ngModelOptions]="{standalone:true}" name="customername">
+              </div>
+              <div class="input-group mb-4 border rounded-pill p-2">
+                <input type="number" placeholder="Mobile" aria-describedby="button-addon3" class="form-control border-0"
+                  [(ngModel)]="newobj.BillInfo.CustMobile" [ngModelOptions]="{standalone:true}" name="custmobile">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+          <div class="p-4">
+            <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.
+            </p>
+            <ul class="list-unstyled mb-4">
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal
+                </strong><strong>{{subtotal |  INR}}</strong></li>
+              <!-- <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and
+                handling</strong><strong>0</strong></li> -->
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                  class="text-muted">Tax</strong><strong>{{totaltax |  INR}}</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                <h5 class="font-weight-bold">{{total |  INR}}</h5>
+              </li>
+            </ul>
+            <!-- <a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a> -->
+            <button class="btn btn-dark rounded-pill py-2 btn-block dropdown-toggle" type="button" id="dropdownMenuButton"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Procceed to checkout
+            </button>
+            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+              <button class="dropdown-item" (click)="makepayment(1,newobj)">Cash</button>
+              <button class="dropdown-item" (click)="makepayment(2,newobj)">Card</button>
+              <button class="dropdown-item" (click)="makepayment(3,newobj)">Online</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="carts.length==0">
+      <p>No items to display</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-2">
+    <!-- <h6 class="m-0 font-weight-bold text-center">List of Brands</h6> -->
+    <!-- <button type="button" class="btn btn-primary btn-sm" style="float: right;" data-toggle="modal"
+        data-target="#exampleModal" data-whatever="@mdo" data-backdrop="static" (click)="createBrand()"
+        data-keyboard="false">Add Brand</button>
+      <button *ngIf="brands && brands.length>0" type="button" (click)="export()" class="btn btn-primary btn-sm"
+        style="float: right;">Export</button>
+      <input type="file" name="myfile" [accept]="actions?.import?.accept"
+        (change)="fileUpload($event.target.files, actions?.import?.accept)" style="display:none;" #file />
+      <button *ngIf="actions?.import" type="button" (click)="file.click()" class="btn btn-primary btn-sm"
+        style="float: right;">{{actions?.import?.btnName}}</button> -->
+    <!-- <div class="dropdown no-arrow">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-header">Dropdown Header:</div>
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div> -->
+
+
+
+    <button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Actions
+    </button>
+    <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+      <button class="dropdown-item" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
+        data-backdrop="static" (click)="createBrand()" data-keyboard="false">Add</button>
+      <button class="dropdown-item"  (click)="export()">Export</button>
+      <input type="file" name="myfile" [accept]="actions?.import?.accept"
+        (change)="fileUpload($event.target.files)" style="display:none;" #file />
+      <button class="dropdown-item" *ngIf="actions?.import" (click)="file.click()">
+        {{actions?.import?.btnName}}</button>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <!-- <div class="table-responsive">
+      <table class="table table-bordered" id="escalation">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let brand of brands|filter: filterStr : 'BrandName' | paginate: pageConfig ; let i=index">
+            <th scope="row">{{pageConfig.itemsPerPage * (pageConfig.currentPage-1)+(i+1)}}</th>
+            <td>{{brand.BrandName}}</td>
+            <td>{{brand.Status}}</td>
+            <td>
+              <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="brand.BrandId"
+                data-backdrop="static" data-keyboard="false" (click)="editBrand(brand);"> <span
+                  class="fa fa-flag fa-wrench"></span> </button>
+              <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,brand);"></span></button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+      <pagination-controls style="float: right;" [autoHide]="pageConfig.autoHide"
+        (pageChange)="pageConfig.currentPage = $event"></pagination-controls>
+    </div> -->
+    <div *ngIf="brands?.length>0">
+      <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4"
+          *ngFor="let brand of brands|filter: filterStr : 'BrandName' | paginate: pageConfig ; let i=index">
+          <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-s font-weight-bold text-success  mb-1">{{brand.BrandName | titlecase}}</div>
+                  <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div> -->
+                </div>
+                <div class="dropdown no-arrow">
+                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw txt-gray-color"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                    aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal" [id]="brand.BrandId"
+                      data-backdrop="static" data-keyboard="false" (click)="editBrand(brand);"><span
+                        class="fa fa-flag fa-wrench"></span> Edit</a>
+                    <a class="dropdown-item" (click)="deleteBrand(i,brand);"><span class="fa fa-flag fa-trash"></span>
+                      Delete</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <pagination-controls style="float: right;" [autoHide]="pageConfig.autoHide"
+        (pageChange)="pageConfig.currentPage = $event"></pagination-controls>
+    </div>
+    <div *ngIf="brands?.length==0">
+      <p>No items to display</p>
+    </div>
+  </div>
+</div>
+
+<!-- /.container-fluid -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h5 class="modal-title card text-white bg-primary" id="exampleModalLabel">{{header}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closepopup();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="fm.form.valid && submit(actiontype,newBrand)" #fm="ngForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="BrandName">Product Brand</label>
+            <input type="text" class="form-control" id="BrandName" [(ngModel)]="newBrand.BrandName"
+              pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter Brand Name"
+              #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

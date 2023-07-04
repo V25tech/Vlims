@@ -12,6 +12,7 @@ const routes : Routes=[
   {path:'NotificationConfig', loadChildren:'../app/NotificationConfiguration/NotificationConfiguration.module#NotificationConfigurationModule'},
   {path:'Workflow', loadChildren:'../app/WorkflowConfiguration/WorkflowConfiguration.module#WorkflowConfigurationModule'},
   {path:'adddocumentconfig', loadChildren:'../app/AddDocumentConfiguration/AddDocumentConfiguration.module#AddDocumentConfigurationModule'},
+  {path:'launch', loadChildren:'../app/Launch/Launch.module#LaunchModule'},
   {path: '**', component: NotfoundComponent}
 ]
 

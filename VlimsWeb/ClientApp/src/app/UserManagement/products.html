@@ -1,0 +1,23 @@
+
+<style>
+    table {
+    width: 100%;
+  }
+  .mat-header-cell {
+    color: black;
+    font-size: 18px;
+}
+  </style>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a [ngClass]="{'active':tabselect==='products'}" class="nav-item nav-link"  id="nav-home-tab" data-toggle="tab" (click)="tabselect='products'"  [routerLink]="['/mainpage/products']" role="tab" aria-controls="nav-home" aria-selected="true">Product Type</a>
+    <a [ngClass]="{'active':tabselect==='brand'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='brand'" [routerLink]="['/mainpage/products/brand']" role="tab" aria-controls="nav-profile" aria-selected="false">Brands</a>
+    <a [ngClass]="{'active':tabselect==='productview'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='productview'" [routerLink]="['/mainpage/products/productview']" role="tab" aria-controls="nav-profile" aria-selected="false">Products</a>
+    <a [ngClass]="{'active':tabselect==='carts'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='carts'" [routerLink]="['/mainpage/products/carts']" role="tab" aria-controls="nav-profile" aria-selected="false">Carts</a>
+    
+  </div>
+</nav>
+<router-outlet></router-outlet>
+
+      

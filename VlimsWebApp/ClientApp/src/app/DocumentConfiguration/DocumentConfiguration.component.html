@@ -68,7 +68,8 @@
                         <ng-template kendoGridCellTemplate let-rowIndex='rowIndex'>{{rowIndex + 1}} </ng-template>
 
                       <kendo-grid-column field="DocumentName" title="Document Type Name"
-                        width="150"><ng-template kendoGridFilterMenuTemplate let-column="column" let-filter="filter">
+                        width="150">
+                        <ng-template kendoGridFilterMenuTemplate let-column="column" let-filter="filter">
                           <kendo-grid-string-filter-cell [column]="column" [filter]="filter" operator="startswith">
                           </kendo-grid-string-filter-cell>
                         </ng-template>

@@ -38,11 +38,11 @@ namespace Vlims.Controllers
         /// This method is used to Get List of DocumentTypeConfiguration
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
-        public ActionResult<ResponseContext<DocumentTypeConfiguration>> GetAllDocumentTypeConfiguration(RequestContext requestContext)
+        [HttpPost("getalldoctypeconfig")]
+        public ActionResult GetAllDocumentTypeConfiguration([FromQuery] RequestContext requestContext)
         {
             var result = documentTypeConfigurationService.GetAllDocumentTypeConfiguration(requestContext);
-            return result;
+            return Ok(result);
         }
         
         /// <summary>

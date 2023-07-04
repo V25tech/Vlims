@@ -52,6 +52,10 @@ namespace Vlims.DocumentMaster.Manager
         {
             try
             {
+                documentTypeConfiguration.CreatedDate = DateTime.Now;
+                documentTypeConfiguration.ModifiedDate = DateTime.Now;
+                documentTypeConfiguration.DTCId = "1";
+                documentTypeConfiguration.DocumentMasterId = "1";
                 String validationMessages = DocumentTypeConfigurationValidator.IsValidDocumentTypeConfiguration(documentTypeConfiguration);
                 if (validationMessages.Length <= 0)
                 {

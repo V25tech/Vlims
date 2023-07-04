@@ -1,0 +1,48 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-center">Billings</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="escalation">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Bill#</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Billed Amt.</th>
+                        <th scope="col">Paid Amt.</th>
+                        <th scope="col">Tax Amt.</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Pay. Mode </th>
+                        <th scope="col">View</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let bill of billings.reverse() |filter: filterStr : 'BillNo':'CustomerName':'PaymentType' | paginate: pageConfig ; let i=index">
+                        <th scope="row">{{pageConfig.itemsPerPage * (pageConfig.currentPage-1)+(i+1)}}</th>
+                        <td>{{bill.BillNo}}</td>
+                        <td *ngIf="bill.CustomerName!=null">{{bill.CustomerName}}</td>
+                        <td *ngIf="bill.CustomerName==null">Unknown</td>
+                        <td>{{bill.BilledAmount|  INR}}</td>
+                        <td>{{bill.PaidAmount|  INR}}</td>
+                        <td>{{bill.TaxAmount|  INR}}</td>
+                        <td>{{bill.CreatedDate | date}}</td>
+                        <td>{{bill.PaymentType}}</td>
+                        <td>
+                            <button class="btn" (click)="viewbll(bill);" [routerLink]="['/billing/invoice']"> <span
+                                    class="fa fa-flag fa-file-image-o fa-lg"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls style="float: right;" [autoHide]="pageConfig.autoHide"
+                (pageChange)="pageConfig.currentPage = $event"></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<!-- /.container-fluid -->

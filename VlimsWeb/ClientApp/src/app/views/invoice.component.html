@@ -1,0 +1,188 @@
+<style>
+    body {
+        background-color: #000
+    }
+
+    .padding {
+        padding: 2rem !important
+    }
+
+    .card {
+        margin-bottom: 30px;
+        border: none;
+        -webkit-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+        -moz-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+        box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22)
+    }
+
+    .card-header {
+        background-color: #fff;
+        border-bottom: 1px solid #e6e6f2
+    }
+
+    h3 {
+        font-size: 20px
+    }
+
+    h5 {
+        font-size: 15px;
+        line-height: 26px;
+        color: #3d405c;
+        margin: 0px 0px 15px 0px;
+        font-family: 'Circular Std Medium'
+    }
+
+    .text-dark {
+        color: #3d405c !important
+    }
+
+    .btn-space {
+        margin-right: 5px;
+    }
+
+    .table .table-cell {
+        display: table-cell;
+        text-align: left;
+        vertical-align: top;
+        border: 1px solid black;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        padding: 0.40rem;
+    }
+
+    @media print {
+    #printPageButton {
+      display: none;
+    }
+    #backPageButton{
+      display: none;
+    }
+  }
+</style>
+<div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
+    <div class="card">
+        <div class="card-header p-2">
+            <div class="float-right">
+                <h2>Invoice Bill</h2>
+                GST NO: {{objretailer?.GstNo}}
+            </div>
+        </div>
+        <div class="card-header p-2">
+            <button class="btn btn-primary btn-sm btn-space" id="backPageButton" [routerLink]="['/mainpage/billing']"
+                data-abc="true">Back</button>
+            <button class="btn btn-success btn-sm btn-space" id="printPageButton" (click)="print();" data-abc="true">Print</button>
+            <div class="float-right">
+                <h3 class="mb-0">Serial No of Invoice: {{objbill?.BillInfo?.BillNo}}</h3>
+                Date of Invoice: {{objbill?.BillInfo?.CreatedDate | date}}
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h5 class="mb-2">From:</h5>
+                    <h3 class="text-dark mb-1">{{objretailer?.RetailName}}</h3>
+                    <div>{{objretailer?.ShopNo}}, {{objretailer?.Building}}</div>
+                    <div>{{objretailer?.Area}}, {{objretailer?.City}}</div>
+                    <div>{{objretailer?.District}}, {{objretailer?.State}}</div>
+                    <div>{{objretailer?.PinCode}}</div>
+                    <div>Phone: +91 {{objretailer?.Mobile}}, {{objretailer?.AlternateMob}}</div>
+                </div>
+                <div class="col-sm-6">
+                    <h5 class="mb-2">To:</h5>
+                    <h3 class="text-dark mb-1" *ngIf="objbill?.BillInfo?.CustomerName">{{objbill?.BillInfo?.CustomerName}}</h3>
+                    <h3 class="text-dark mb-1" *ngIf="objbill?.BillInfo?.CustomerName===null">Unknown</h3>
+                    <div *ngIf="objbill?.BillInfo?.CustMobile!=0">Phone: +91 {{objbill?.BillInfo?.CustMobile}}</div>
+                    <div *ngIf="objbill?.BillInfo?.CustMobile==0">Phone: +91 9999999999</div>
+                </div>
+                <!-- <div class="col-sm-6" *ngIf="objbill?.BillInfo?.CustMobile==0">
+                    <h5 class="mb-2">To:</h5>
+                    <h3 class="text-dark mb-1">Unknown</h3>
+                    <div>Phone: +91 9999999999</div>
+                </div> -->
+            </div>
+            <div class="table-responsive-sm">
+                <table class="table table-borderd">
+                    <thead>
+                        <tr>
+                            <th class="center">#</th>
+                            <th>Item</th>
+                            <th>Description</th>
+                            <th class="center">HSN/SAC</th>
+                            <th class="center">Qty</th>
+                            <th class="right">Price</th>
+                            <th class="right">Dis%</th>
+                            <th class="right">SGST%</th>
+                            <th class="right">CGST%</th>
+                            <th class="right">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let prod of objbill?.BillProducts; let i=index" [attr.data-index]="i">
+                            <th scope=" row">{{i+1}}</th>
+                            <td>{{prod.ProductName}}</td>
+                            <td>{{prod.ProductName}}</td>
+                            <td>{{prod.Code}}</td>
+                            <td>{{prod.Quantity | number : '1.2-2'}}</td>
+                            <td>{{prod.Price |  INR}}</td>
+                            <td></td>
+                            <td>{{prod.SGSTPercentage}}.00</td>
+                            <td>{{prod.CGSTPercentage}}.00</td>
+                            <td>{{((prod.Price*prod.Quantity)+prod.Tax) |  INR}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                </div>
+                <div class="col-lg-4 col-sm-5 ml-auto">
+                    <table class="table table-clear">
+                        <tbody>
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Subtotal</strong>
+                                </td>
+                                <td class="right">{{objbill?.BillInfo?.ActualAmount|  INR}}</td>
+                            </tr>
+                            <!-- <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Discount (20%)</strong>
+                                </td>
+                                <td class="right">$5,761,00</td>
+                            </tr> -->
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">SGST</strong>
+                                </td>
+                                <td class="right">{{(objbill?.BillInfo?.TaxAmount/2)|  INR}}</td>
+                            </tr>
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">CGST</strong>
+                                </td>
+                                <td class="right">{{(objbill?.BillInfo?.TaxAmount/2)|  INR}}</td>
+                            </tr>
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Total</strong> </td>
+                                <td class="right">
+                                    <strong class="text-dark">{{objbill?.BillInfo?.PaidAmount|  INR}}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-white">
+            <p class="mb-0">Terms & Conditions:</p>
+            <p class="mb-0">1. All disputes are subject to ANANTAPURAMU Jurisdiction.</p>
+            <p class="mb-0">2. Goods once sold can not be taken back or exchanged.</p>
+            <p class="mb-0">3. Service & Repair contact respective service centers.</p>
+        </div>
+    </div>
+</div>

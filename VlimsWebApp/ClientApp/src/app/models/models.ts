@@ -2352,11 +2352,63 @@ export class AttributeTypes {
   public DisplayName: string = "";
   public Type: string = "";
 }
-export class DocumentTypeConfiguration {
-    public DocumentName:string="";
-    public TypePrefix: string ="";
-    public Description:string="";
-    public RegisteredBy: string ="";
-    public RegisteredOn:string="";
-    public Status: string ="";
+  export class RequestContext{
+    public PageNumber:number;
+    public PageSize:number;
   }
+  export class dashboardconfiguration {
+  dCId: string;
+  documentMasterId: string;
+  createdBy: string;
+  createdDate: string | null;
+  modifiedBy: string;
+  modifiedDate: string | null;
+}
+export class DocumentTemplateConfiguration {
+  dTID: string;
+  documentMasterId: string;
+  templatename: string;
+  uniquecode: string;
+  documenttype: string;
+  header: string;
+  rows: string;
+  columns: string;
+  footer: string;
+  createdBy: string;
+  createdDate: string | null;
+  modifiedBy: string;
+  modifiedDate: string | null;
+}
+export class DocumentTypeConfiguration {
+  dTCId: string;
+  documentMasterId: string;
+  documenttypename: string;
+  documenttypeprefix: string;
+  description: string;
+  assigntodepartment: string;
+  createdBy: string;
+  createdDate: string | null;
+  modifiedBy: string;
+  modifiedDate: string | null;
+}
+export class noticationconfiguration {
+  nCId: string;
+  documentMasterId: string;
+  createdBy: string;
+  createdDate: string | null;
+  modifiedBy: string;
+  modifiedDate: string | null;
+}
+export class workflowconiguration {
+  wFCId: string;
+  documentMasterId: string;
+  documentstage: string;
+  documenttype: string;
+  department: string;
+  reviewsCount: number | null;
+  approvalsCount: number | null;
+  createdBy: string;
+  createdDate: string | null;
+  modifiedBy: string;
+  modifiedDate: string | null;
+}

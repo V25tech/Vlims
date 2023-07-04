@@ -25,7 +25,7 @@ import {
   PublishContext,
 } from "src/app/models/models";
 import { ignoreElements } from "rxjs/operators";
-import { IFTTUtilityService } from "../shared/utility.service";
+//import { IFTTUtilityService } from "../shared/utility.service";
 @Component({
   selector: "exp-container-Launch",
   templateUrl: "./Launch.component.html",
@@ -117,15 +117,15 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
     private title: Title
   ) {
     title.setTitle(ApplicationConstants.Role_Launch);
-    this.accesslevel = this.us.getAccesslevel("Launch");
-    if (this.accesslevel === 1 || this.accesslevel === 2) {
-      this.ddr_source_ddl65b52e8f23177779876c.splice(0, 2);
-    }
+    // this.accesslevel = this.us.getAccesslevel("Launch");
+    // if (this.accesslevel === 1 || this.accesslevel === 2) {
+    //   this.ddr_source_ddl65b52e8f23177779876c.splice(0, 2);
+    // }
   }
   ngOnInit() {
     this.appContext.toggleOffcanvas = false;
-    this.appContext.IsPackageWebJob =
-      this.appContext.appSettings.IsPackageWebJob;
+    // this.appContext.IsPackageWebJob =
+    //   this.appContext.appSettings.IsPackageWebJob;
     let variables = {};
     this.apiServc
       .GetAllProducts(
@@ -261,7 +261,7 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
       }
     },
     _pushItem: (dataItem: any) => {
-      this.lstPlanFactors.data = [...[dataItem], ...this.lstPlanFactors.data];
+     // this.lstPlanFactors.data = [...[dataItem], ...this.lstPlanFactors.data];
     },
     _isDataValid: () => {
       if (this.lstPlanFactors.isNewRowPristine) {
@@ -390,13 +390,13 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
     },
     getDirtyItems: () => {
       let dirtyItemsList = [
-        ...this.lstPlanFactors.data.filter((item: any) => {
-          return item["isNewRow"] == true;
-        }),
-        ...this.lstPlanFactors.data.filter((item: any) => {
-          return item["isNewRow"] == false && item["isDirtyRow"] == true;
-        }),
-        ...this.lstPlanFactors.removedItems,
+        // ...this.lstPlanFactors.data.filter((item: any) => {
+        //   return item["isNewRow"] == true;
+        // }),
+        // ...this.lstPlanFactors.data.filter((item: any) => {
+        //   return item["isNewRow"] == false && item["isDirtyRow"] == true;
+        // }),
+        // ...this.lstPlanFactors.removedItems,
       ];
       if (!this.lstPlanFactors._isDataValid()) {
         let index = dirtyItemsList.findIndex(
@@ -559,8 +559,8 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
     },
     _pushItem: (dataItem: any) => {
       this.lstReleasePackage.Items = [
-        ...[dataItem],
-        ...this.lstReleasePackage.Items,
+        // ...[dataItem],
+        // ...this.lstReleasePackage.Items,
       ];
     },
     _cancelChanges: (state?: DataStateChangeEvent) => {
@@ -1232,15 +1232,15 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
   }
   private GetFactorMapUsedInfo_ErrorRaised(err, variables) {}
   private GetFactorMapUsedInfo_Completed(response, variables, e) {
-    if (response == false) {
-      this.us.ConfirmationTemplate(this.DeleteMessage).subscribe((x) => {
-        if (x) {
-          this.lstPlanFactors.removeItem(e);
-        }
-      });
-    } else {
-      this.us.InformationTemplate(this.informationMessage);
-    }
+    // if (response == false) {
+    //   this.us.ConfirmationTemplate(this.DeleteMessage).subscribe((x) => {
+    //     if (x) {
+    //       this.lstPlanFactors.removeItem(e);
+    //     }
+    //   });
+    // } else {
+    //   this.us.InformationTemplate(this.informationMessage);
+    // }
   }
   PlanFactor_Save_Click(e) {
     let variables = { lstfactors: [] };
@@ -1536,13 +1536,13 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
     console.log("Test Launch");
     console.log(response);
     if (this.cfs.hasValue(response)) {
-      response.filter((x: any) => {
-        this.appContext.UsersList.forEach((x1: any) => {
-          if (x.CreatedBy == x1.UserName) {
-            x.CreatedBy = x1.DisplayName;
-          }
-        });
-      });
+      // response.filter((x: any) => {
+      //   this.appContext.UsersList.forEach((x1: any) => {
+      //     if (x.CreatedBy == x1.UserName) {
+      //       x.CreatedBy = x1.DisplayName;
+      //     }
+      //   });
+      // });
     }
     this.lstReleasePackage.Items = response;
     this.lstReleasePackage.initializeGridDataSource();
@@ -1587,7 +1587,7 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
   PlanFactor_DeleteFactor_Click(e) {
     let variables = {};
     if (!this.cfs.hasValue(this.detid)) {
-      this.us.Information("Please select a factor to delete");
+      //this.us.Information("Please select a factor to delete");
       return;
     }
 
@@ -1603,11 +1603,11 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
       }
     }
     if (IsFactorDataExist && this.cfs.hasValue(FactorValue)) {
-      this.us.Information(
-        "Unable to delete the selected determination factor. selected determination factor is used in one or more plan mappings.",
-        200,
-        400
-      );
+      // this.us.Information(
+      //   "Unable to delete the selected determination factor. selected determination factor is used in one or more plan mappings.",
+      //   200,
+      //   400
+      // );
       return;
     }
     this.apiServc
@@ -1710,21 +1710,21 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
           this.cfs.hasValue(lstReleasePackageSelectedItems) &&
           this.us.Length(lstReleasePackageSelectedItems) > 0
         ) {
-          this.us.ConfirmationTemplate(this.DeleteMessage).subscribe((x) => {
-            if (x) {
-              lstReleasePackageSelectedItems.forEach((selItem) => {
-                relaseId += "" + selItem.Id + ",";
-              });
-              this.DeleteReleasePackageByReleaseId(
-                this.appContext.ProductId,
-                relaseId
-              );
-            }
-          });
+          // this.us.ConfirmationTemplate(this.DeleteMessage).subscribe((x) => {
+          //   if (x) {
+          //     lstReleasePackageSelectedItems.forEach((selItem) => {
+          //       relaseId += "" + selItem.Id + ",";
+          //     });
+          //     this.DeleteReleasePackageByReleaseId(
+          //       this.appContext.ProductId,
+          //       relaseId
+          //     );
+          //   }
+          // });
           this.GetReleasePackagesByModelId();
           this.lstReleasePackage.initializeGridDataSource();
         } else {
-          this.us.InformationTemplate(this.DeleteEntityInformation);
+          //this.us.InformationTemplate(this.DeleteEntityInformation);
         }
       } else if (this.SelectedTabValue == "Release Plans") {
         let lstReleasePlanSelectedItems = this.lstReleasePlans
@@ -1738,15 +1738,15 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
           this.cfs.hasValue(lstReleasePlanSelectedItems) &&
           this.us.Length(lstReleasePlanSelectedItems) > 0
         ) {
-          this.us.ConfirmationTemplate(this.DeleteMessage).subscribe((x) => {
-            if (x) {
-              this.DeleteReleasePlanByReleaseId(lstReleasePlanSelectedItems);
-            }
-          });
+          // this.us.ConfirmationTemplate(this.DeleteMessage).subscribe((x) => {
+          //   if (x) {
+          //     this.DeleteReleasePlanByReleaseId(lstReleasePlanSelectedItems);
+          //   }
+          // });
           this.GetReleasePlansByModelId();
           this.lstReleasePlans.initializeGridDataSource();
         } else {
-          this.us.InformationTemplate(this.DeleteEntityInformation);
+          //this.us.InformationTemplate(this.DeleteEntityInformation);
         }
       } else {
         this.DeleteSelectedPlanFactorsColumns("");
@@ -1754,12 +1754,12 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
     } else if (this.ActionDropdown == "ExportJson") {
       this.ReleasePackages = this.lstReleasePackage.getCheckedItems();
       this.ReleasePackages.forEach((obj) => {
-        this.GenerateReleasePackage(obj, true, false);
+        //this.GenerateReleasePackage(obj, true, false);
       });
     } else if (this.ActionDropdown == "workspace") {
       this.ReleasePackages = this.lstReleasePackage.getCheckedItems();
       this.ReleasePackages.forEach((obj) => {
-        this.GenerateReleasePackage(obj, false, true);
+        //this.GenerateReleasePackage(obj, false, true);
       });
     } else if (this.ActionDropdown == "exportbom") {
       //this.ReleasePackages = this.lstReleasePackage.getCheckedItems();
@@ -1767,38 +1767,10 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
       //
       //   this.GenerateReleasePackage(obj, false, true);
       // });
-      this.exportbompackage();
+      //this.exportbompackage();
     }
   }
-  exportbompackage() {
-    this.context.ModelID = this.SelectedProdId;
-    this.context.Model = this.SelectedProduct;
-
-    this.apiServc
-      .GenerateBomPackage(
-        "publish/generatebompackage?p_ModelId=" +this.context.ModelID,
-        {},"")
-      .subscribe(
-        (response) => {
-          var binary_string = window.atob(response);
-          var len = binary_string.length;
-          var bytes = new Uint8Array(len);
-          for (var i = 0; i < len; i++) {
-            bytes[i] = binary_string.charCodeAt(i);
-          }
-          var link = document.createElement("a");
-          link.href = window.URL.createObjectURL(
-            new Blob([bytes], { type: "application/octet-stream" })
-          );
-          link.download = this.SelectedProduct + ".zip";
-          link.click();
-          window.URL.revokeObjectURL(link.href);
-        },
-        (e) => {
-          console.log(e);
-        }
-      );
-  }
+ 
   private GetPlanFactorsByPlanModelId_OtherActions_SelectionChangeCompleted(
     response,
     variables
@@ -1807,7 +1779,7 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
     if (this.cfs.hasValue(response) && response.length > 0) {
       this.IsPopupVisible = true;
     } else {
-      this.us.Information("There are no factors to delete");
+      //this.us.Information("There are no factors to delete");
     }
     this.objPlanDeterminationFactor = response;
     this.ActiveProduct(this.SelectedproductInProducts);
@@ -1817,7 +1789,7 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
     err,
     variables
   ) {
-    this.us.Information("There are no factors to delete");
+    //this.us.Information("There are no factors to delete");
   }
 
   private DeleteSelectedPlanFactorsColumns(item) {
@@ -1831,142 +1803,24 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
         });
       } else {
         //this.us.Information("Please Select Record(s) to Delete");
-        this.us.InformationTemplate(this.DeleteEntityInformation);
+        //this.us.InformationTemplate(this.DeleteEntityInformation);
       }
     }
   }
 
   public ReleasePackageAction_Edit_Click(item) {
-    this.appContext.ReleasePackageId = item.Id;
+    //this.appContext.ReleasePackageId = item.Id;
     this.router.navigate(["AddReleasePackage"], {
       queryParamsHandling: "merge",
     });
   }
-  public GenerateReleasePackage(
-    item,
-    isJsonExport: boolean,
-    isworkspacedependency: boolean
-  ) {
-    let variables = { p_id: 0 };
-    variables.p_id = item.Id;
-    if (this.cfs.hasValue(variables.p_id)) {
-      if (
-        !this.appContext.IsPackageWebJob ||
-        isJsonExport ||
-        isworkspacedependency
-      ) {
-        this.apiServc
-          .GenerateReleasePackage(
-            "publish/generatepackage?p_ReleaseId=" +
-              variables.p_id +
-              "&IsJsonExport=" +
-              isJsonExport +
-              "&isWorkSpacedepency=" +
-              isworkspacedependency,
-            {},
-            ""
-          )
-          .subscribe(
-            (r) => {
-              this.GenerateReleasePackage_ChangedCompleted(
-                r,
-                variables,
-                item.Name
-              );
-            },
-            (e) => {
-              this.GenerateReleasePackage_ChangedErrorRaised(e, variables);
-            }
-          );
-      } else {
-        this.webjobcall(variables.p_id);
-      }
-    }
-  }
-  webjobcall(p_id: number) {
-    console.log("calling webjob method");
-    this.apiServc
-      .ImportExportWebJob(
-        "triggeredwebjobs/ImportExportJob/run?arguments=import" +
-          " " +
-          "test" +
-          " " +
-          true +
-          " " +
-          false +
-          " " +
-          p_id +
-          " " +
-          "test",
-        {},
-        ""
-      )
-      .subscribe(
-        (r) => {
-          this.ImportExportWebJob_WebJobCompleted(r);
-        },
-        (e) => {
-          this.ImportExportWebJob_WebJobErrorRaised(e);
-        }
-      );
-  }
+ 
 
-  private ImportExportWebJob_WebJobErrorRaised(err) {}
-  private ImportExportWebJob_WebJobCompleted(response) {
-    this.getwebjobstatus();
-  }
-  private getwebjobstatus() {
-    console.log("calling webjobimportstatus method");
-    this.apiServc
-      .getwebjobstatus("triggeredwebjobs/ImportExportJob/", {}, "")
-      .subscribe(
-        (r) => {
-          this.getwebjobstatus_WebJobCompleted(r);
-        },
-        (e) => {
-          this.getwebjobstatus_WebJobErrorRaised(e);
-        }
-      );
-  }
-  getwebjobstatus_WebJobErrorRaised(e: any) {
-    throw new Error("Method not implemented.");
-  }
-  getwebjobstatus_WebJobCompleted(resp: any) {
-    let timerId;
-    console.log(resp);
-    if (this.urlcount == 0) {
-      this.us.Information(
-        " Log Url - " + resp.body.latest_run.output_url,
-        200,
-        600
-      );
-      this.urlcount++;
-    }
 
-    if (resp.body.latest_run.status == "Running") {
-      timerId = setTimeout(() => {
-        this.getwebjobstatus();
-      }, 20000);
-    } else if (resp.body.latest_run.status == "Initializing") {
-      timerId = setTimeout(() => {
-        this.getwebjobstatus();
-      }, 20000);
-    } else if (resp.body.latest_run.status == "Failed") {
-      this.us.Show("Plan packages generation failed.", "failed");
-    } else if (resp.body.latest_run.status == "Success") {
-      clearTimeout(timerId);
-      this.us.Show("Plan package generated successfully.", "success");
-    }
-  }
-  private GenerateReleasePackage_ChangedCompleted(
-    response,
-    variables,
-    Name: string
-  ) {
-    this.us.Show("Downloaded Successfully", "success");
-    this.cfs.ExportFiles(response, null, Name, "json");
-  }
-  private GenerateReleasePackage_ChangedErrorRaised(err, variables) {}
+
+ 
+ 
+
   public ReleasePackageAction_Delete_Click(item) {
     let relaseId = "" + item.Id + ",";
     this.us.ConfirmationTemplate(this.DeleteMessage).subscribe((x) => {
@@ -2009,44 +1863,44 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
     this.SelectedProdId = !this.cfs.hasValue(this.SelectedProdId)
       ? this.appContext.modelID
       : this.SelectedProdId;
-    this.apiServc
-      .GetReleasePlans(
-        "publish/getreleaseplansbymodel?p_ModelId=" + this.SelectedProdId,
-        {},
-        ""
-      )
-      .subscribe(
-        (r) => {
-          this.GetReleasePlans_Launch_Tab_Selection_ChangedCompleted(
-            r,
-            variables
-          );
-        },
-        (e) => {
-          this.GetReleasePlans_Launch_Tab_Selection_ChangedErrorRaised(
-            e,
-            variables
-          );
-        }
-      );
+    // this.apiServc
+    //   .GetReleasePlans(
+    //     "publish/getreleaseplansbymodel?p_ModelId=" + this.SelectedProdId,
+    //     {},
+    //     ""
+    //   )
+    //   .subscribe(
+    //     (r) => {
+    //       this.GetReleasePlans_Launch_Tab_Selection_ChangedCompleted(
+    //         r,
+    //         variables
+    //       );
+    //     },
+    //     (e) => {
+    //       this.GetReleasePlans_Launch_Tab_Selection_ChangedErrorRaised(
+    //         e,
+    //         variables
+    //       );
+    //     }
+    //   );
   }
   public DeleteReleasePackageByReleaseId(modelId, releaseId) {
     let variables = {};
-    this.apiServc
-      .DeleteReleasePackageByReleaseId(
-        "publishconfig/DeleteReleasePackageByReleaseId?p_ReleaseId=" +
-          releaseId,
-        {},
-        ""
-      )
-      .subscribe(
-        (r) => {
-          this.DeleteReleasePackageByReleaseId_Completed(r, variables);
-        },
-        (e) => {
-          this.DeleteReleasePackageByReleaseId_ErrorRaised(e, variables);
-        }
-      );
+    // this.apiServc
+    //   .DeleteReleasePackageByReleaseId(
+    //     "publishconfig/DeleteReleasePackageByReleaseId?p_ReleaseId=" +
+    //       releaseId,
+    //     {},
+    //     ""
+    //   )
+    //   .subscribe(
+    //     (r) => {
+    //       this.DeleteReleasePackageByReleaseId_Completed(r, variables);
+    //     },
+    //     (e) => {
+    //       this.DeleteReleasePackageByReleaseId_ErrorRaised(e, variables);
+    //     }
+    //   );
   }
   private DeleteReleasePackageByReleaseId_Completed(err, variables) {
     this.us.Show("Deleted Successfully", "success");
@@ -2063,7 +1917,7 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
 
   ReleasePackageViewClick(e) {
     let editItem = e.data;
-    this.appContext.ReleasePackageId = editItem.Id;
+    //this.appContext.ReleasePackageId = editItem.Id;
     this.appContext.isViewMode = true;
     this.router.navigate(["AddReleasePackage"], {
       queryParamsHandling: "merge",
@@ -2071,30 +1925,30 @@ export class LaunchComponent implements OnInit, CanComponentDeactivate {
   }
   public ReleasePlanAction_Delete_Click(item) {
     let releaseId = item.ReleaseId;
-    this.us.ConfirmationTemplate(this.DeleteMessage).subscribe((x) => {
-      if (x) {
-        this.lstReleasePlans.removeItem(item);
-        this.lstReleasePlans.initializeGridDataSource();
-        this.DeleteReleasePlanByReleaseId(releaseId);
-      }
-    });
+    // this.us.ConfirmationTemplate(this.DeleteMessage).subscribe((x) => {
+    //   if (x) {
+    //     this.lstReleasePlans.removeItem(item);
+    //     this.lstReleasePlans.initializeGridDataSource();
+    //     this.DeleteReleasePlanByReleaseId(releaseId);
+    //   }
+    // });
   }
   public DeleteReleasePlanByReleaseId(releaseId) {
     let variables = {};
-    this.apiServc
-      .DeleteReleasePlanByReleaseId(
-        "publish/DeleteReleasePlanByReleaseId?p_ReleaseId=" + releaseId,
-        {},
-        ""
-      )
-      .subscribe(
-        (r) => {
-          this.DeleteReleasePlanByReleaseId_Completed(r, variables);
-        },
-        (e) => {
-          this.DeleteReleasePlanByReleaseId_ErrorRaised(e, variables);
-        }
-      );
+    // this.apiServc
+    //   .DeleteReleasePlanByReleaseId(
+    //     "publish/DeleteReleasePlanByReleaseId?p_ReleaseId=" + releaseId,
+    //     {},
+    //     ""
+    //   )
+    //   .subscribe(
+    //     (r) => {
+    //       this.DeleteReleasePlanByReleaseId_Completed(r, variables);
+    //     },
+    //     (e) => {
+    //       this.DeleteReleasePlanByReleaseId_ErrorRaised(e, variables);
+    //     }
+    //   );
   }
   private DeleteReleasePlanByReleaseId_Completed(err, variables) {
     this.us.Show("Deleted Successfully", "success");

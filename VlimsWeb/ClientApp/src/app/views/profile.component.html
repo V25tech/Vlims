@@ -1,0 +1,78 @@
+<div class="col-lg-12">
+        <div class="p-5">
+          <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Update an Account!</h1>
+          </div>
+          <form class="user" (ngSubmit)="fm.form.valid && update(objnew)" #fm="ngForm" (keydown.enter)="update(objnew)">
+              <div class="form-group row">
+              <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label for="exampleInputEmail1">Name</label>
+                  <input type="email" class="form-control form-control-user" name="name"
+                  [(ngModel)]="objnew.RetailName"  placeholder="Name" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="exampleInputEmail1">GST NO.</label>
+                    <input type="email" class="form-control form-control-user" 
+                    [(ngModel)]="objnew.GstNo" placeholder="GST No." name="gst no" required>
+                  </div>
+              </div>
+            <div class="form-group row">
+               
+              <div class="col-sm-4 mb-3 mb-sm-0">
+                  <label for="exampleInputEmail1">Shop No.</label>
+                <input type="text" class="form-control form-control-user" name="shop no."
+                [(ngModel)]="objnew.ShopNo" placeholder="Shop No." required>
+              </div>
+              <div class="col-sm-4 mb-3 mb-sm-0">
+                  <label for="exampleInputEmail1">Building</label>
+                <input type="text" class="form-control form-control-user" name="building" 
+                [(ngModel)]="objnew.Building"  placeholder="Building" required>
+              </div>
+              <div class="col-sm-4">
+                  <label for="exampleInputEmail1">Area</label>
+                  <input type="text" class="form-control form-control-user" name="area"
+                  [(ngModel)]="objnew.Area"  placeholder="Area" required>
+                </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-4 mb-3 mb-sm-0">
+                  <label for="exampleInputEmail1">Mobile</label>
+                <input type="number" class="form-control form-control-user" name="mobile"
+                [(ngModel)]="objnew.Mobile"  placeholder="Mobile" required>
+              </div>
+              <div class="col-sm-4 mb-sm-0">
+                  <label for="exampleInputEmail1">Alternate Mob.</label>
+                <input type="number" class="form-control form-control-user" name="altermobile"
+                [(ngModel)]="objnew.AlternateMob"  placeholder="Alternate Mob." required>
+              </div>
+              <div class="col-sm-4">
+                  <label for="exampleInputEmail1">City</label>
+                  <input type="text" class="form-control form-control-user" name="city"
+                  [(ngModel)]="objnew.City"  placeholder="City" required>
+                </div>
+            </div>
+            <div class="form-group row">
+               
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                    <label for="exampleInputEmail1">Pincode</label>
+                  <input type="number" class="form-control form-control-user" name="pincode"
+                  [(ngModel)]="objnew.PinCode"  placeholder="Pincode" required>
+                </div>
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                    <label for="exampleInputEmail1">District</label>
+                    <input type="text" class="form-control form-control-user" name="district"
+                    [(ngModel)]="objnew.District"  placeholder="District" required>
+                  </div>
+                  <div class="col-sm-4">
+                      <label for="exampleInputEmail1">State</label>
+                      <input type="text" class="form-control form-control-user" name="state"
+                      [(ngModel)]="objnew.State"  placeholder="State" required>
+                    </div>
+              </div>
+            <button  class="btn btn-primary btn-user btn-block">
+              Update Account
+            </button>
+            <hr>
+          </form>
+        </div>
+      </div>

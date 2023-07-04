@@ -670,6 +670,10 @@ export class ApiService {
     GetChangeEventsInfo = function(url:string, headerdata:any, data:any){
 	   return this.http.get(this.serverconfig.getBaseUrl('baseurl_Workspaces') + url, this.GetOptions(headerdata), data);
 		}
+		GetDocumentConfiguration = function(url:string, headerdata:any, data:any){
+			debugger
+			return this.http.get(this.serverconfig.getBaseUrl('baseurl_doctypeconfig') + url, this.GetOptions(headerdata), data);
+			 }
     private GetOptions(headers: any) {
     const options = {
       responseType: (typeof headers["responsetype"] != "undefined" ? headers['responsetype'] : "json"),
