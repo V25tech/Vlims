@@ -1,0 +1,10 @@
+﻿  CREATE PROCEDURE [dbo].[USP_workflowconiguration_PSY_DELETE] @WFCId_PSY int 
+ AS 
+ BEGIN 
+  BEGIN TRY 
+ DELETE FROM [dbo].[workflowconiguration_PSY]  WHERE [WFCId_PSY] IN (@WFCId_PSY) 
+  END TRY 
+ BEGIN CATCH 
+ SELECT ERROR_MESSAGE(); 
+ END CATCH 
+ END

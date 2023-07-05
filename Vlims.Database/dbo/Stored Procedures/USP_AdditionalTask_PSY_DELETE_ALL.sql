@@ -1,0 +1,10 @@
+﻿  CREATE PROCEDURE [dbo].[USP_AdditionalTask_PSY_DELETE_ALL] @ATID_PSY nvarchar(max)  
+ AS 
+ BEGIN 
+  BEGIN TRY 
+ DELETE FROM [dbo].[AdditionalTask_PSY] WHERE [ATID_PSY] IN (select value from STRING_SPLIT(@ATID_PSY, ',')) 
+  END TRY 
+ BEGIN CATCH 
+ SELECT ERROR_MESSAGE(); 
+ END CATCH 
+ END

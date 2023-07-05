@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Vlims.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{ae1a4c20-28f0-46a4-9fff-b119c6c24bc2}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Vlims.Database</RootNamespace>
+    <AssemblyName>Vlims.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\workflowconiguration_PSY.sql" />
+    <Build Include="dbo\Tables\UserManagement_PSY.sql" />
+    <Build Include="dbo\Tables\UserGroupConfiguration_PSY.sql" />
+    <Build Include="dbo\Tables\UserConfiguration_PSY.sql" />
+    <Build Include="dbo\Tables\SecurityManagement_PSY.sql" />
+    <Build Include="dbo\Tables\RoleConfiguration_PSY.sql" />
+    <Build Include="dbo\Tables\PlantManagement_PSY.sql" />
+    <Build Include="dbo\Tables\noticationconfiguration_PSY.sql" />
+    <Build Include="dbo\Tables\HierarchyManagement_PSY.sql" />
+    <Build Include="dbo\Tables\DocumentTypeConfiguration_PSY.sql" />
+    <Build Include="dbo\Tables\DocumentTemplateConfiguration_PSY.sql" />
+    <Build Include="dbo\Tables\DocumentRevision_PSY.sql" />
+    <Build Include="dbo\Tables\Documentrequest_PSY.sql" />
+    <Build Include="dbo\Tables\DocumentPreparation_PSY.sql" />
+    <Build Include="dbo\Tables\DocumentMaster_PSY.sql" />
+    <Build Include="dbo\Tables\DocumentManager_PSY.sql" />
+    <Build Include="dbo\Tables\DocumentEffective_PSY.sql" />
+    <Build Include="dbo\Tables\DepartmentConfiguration_PSY.sql" />
+    <Build Include="dbo\Tables\dashboardconfiguration_PSY.sql" />
+    <Build Include="dbo\Tables\AdimManagement_PSY.sql" />
+    <Build Include="dbo\Tables\AdditionalTask_PSY.sql" />
+    <Build Include="Security\umrazs.sql" />
+    <Build Include="Security\umraz.sql" />
+    <Build Include="Security\test.sql" />
+    <Build Include="Security\devuser.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="dbo\Stored Procedures\USP_workflowconiguration_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_workflowconiguration_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_workflowconiguration_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_workflowconiguration_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_workflowconiguration_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_workflowconiguration_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_workflowconiguration_PSY_By_DocumentMasterId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_workflowconiguration_PSY_By_DocumentMasterId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserManagement_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserManagement_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserManagement_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserManagement_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserManagement_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserManagement_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserManagement_PSY_By_AdminManagerId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserManagement_PSY_By_AdminManagerId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserGroupConfiguration_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserGroupConfiguration_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserGroupConfiguration_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserGroupConfiguration_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserGroupConfiguration_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserGroupConfiguration_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserGroupConfiguration_PSY_By_Usermanagementid_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserGroupConfiguration_PSY_By_Usermanagementid_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserConfiguration_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserConfiguration_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserConfiguration_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserConfiguration_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserConfiguration_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserConfiguration_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserConfiguration_PSY_By_UserManagementID_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UserConfiguration_PSY_By_UserManagementID_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_SecurityManagement_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_SecurityManagement_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_SecurityManagement_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_SecurityManagement_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_SecurityManagement_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_SecurityManagement_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_SecurityManagement_PSY_By_AdminManagerId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_SecurityManagement_PSY_By_AdminManagerId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_RoleConfiguration_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_RoleConfiguration_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_RoleConfiguration_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_RoleConfiguration_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_RoleConfiguration_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_RoleConfiguration_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_RoleConfiguration_PSY_By_HierarchyManagementId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_RoleConfiguration_PSY_By_HierarchyManagementId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_PlantManagement_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_PlantManagement_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_PlantManagement_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_PlantManagement_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_PlantManagement_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_PlantManagement_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_PlantManagement_PSY_By_AdminManagerId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_PlantManagement_PSY_By_AdminManagerId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_noticationconfiguration_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_noticationconfiguration_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_noticationconfiguration_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_noticationconfiguration_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_noticationconfiguration_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_noticationconfiguration_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_noticationconfiguration_PSY_By_DocumentMasterId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_noticationconfiguration_PSY_By_DocumentMasterId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_HierarchyManagement_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_HierarchyManagement_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_HierarchyManagement_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_HierarchyManagement_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_HierarchyManagement_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_HierarchyManagement_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_HierarchyManagement_PSY_By_AdminManagerId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_HierarchyManagement_PSY_By_AdminManagerId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTypeConfiguration_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTypeConfiguration_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTypeConfiguration_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTypeConfiguration_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTypeConfiguration_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTypeConfiguration_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTypeConfiguration_PSY_By_DocumentMasterId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTypeConfiguration_PSY_By_DocumentMasterId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTemplateConfiguration_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTemplateConfiguration_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTemplateConfiguration_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTemplateConfiguration_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTemplateConfiguration_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTemplateConfiguration_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTemplateConfiguration_PSY_By_DocumentMasterId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentTemplateConfiguration_PSY_By_DocumentMasterId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentRevision_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentRevision_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentRevision_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentRevision_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentRevision_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentRevision_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentRevision_PSY_By_Documentmanagerid_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentRevision_PSY_By_Documentmanagerid_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_Documentrequest_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_Documentrequest_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_Documentrequest_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_Documentrequest_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_Documentrequest_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_Documentrequest_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_Documentrequest_PSY_By_documentmanagerid_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_Documentrequest_PSY_By_documentmanagerid_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentPreparation_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentPreparation_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentPreparation_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentPreparation_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentPreparation_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentPreparation_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentPreparation_PSY_By_Documentmanagerid_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentPreparation_PSY_By_Documentmanagerid_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentMaster_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentMaster_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentMaster_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentMaster_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentMaster_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentMaster_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentMaster_PSY_By_Dmid_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentMaster_PSY_By_Dmid_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentManager_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentManager_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentManager_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentManager_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentManager_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentManager_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentManager_PSY_By_DMGId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentManager_PSY_By_DMGId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentEffective_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentEffective_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentEffective_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentEffective_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentEffective_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentEffective_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentEffective_PSY_By_Documentmanagerid_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentEffective_PSY_By_Documentmanagerid_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DepartmentConfiguration_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DepartmentConfiguration_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DepartmentConfiguration_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DepartmentConfiguration_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DepartmentConfiguration_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DepartmentConfiguration_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DepartmentConfiguration_PSY_By_HierarchyManagementId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DepartmentConfiguration_PSY_By_HierarchyManagementId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_dashboardconfiguration_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_dashboardconfiguration_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_dashboardconfiguration_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_dashboardconfiguration_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_dashboardconfiguration_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_dashboardconfiguration_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_dashboardconfiguration_PSY_By_DocumentMasterId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_dashboardconfiguration_PSY_By_DocumentMasterId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdimManagement_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdimManagement_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdimManagement_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdimManagement_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdimManagement_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdimManagement_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdimManagement_PSY_By_AMId_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdimManagement_PSY_By_AMId_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdditionalTask_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdditionalTask_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdditionalTask_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdditionalTask_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdditionalTask_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdditionalTask_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdditionalTask_PSY_By_Documentmanagerid_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_AdditionalTask_PSY_By_Documentmanagerid_DELETE.sql" />
+  </ItemGroup>
+</Project>

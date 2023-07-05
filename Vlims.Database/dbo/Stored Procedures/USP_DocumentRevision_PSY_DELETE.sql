@@ -1,0 +1,10 @@
+﻿  CREATE PROCEDURE [dbo].[USP_DocumentRevision_PSY_DELETE] @DRId_PSY int 
+ AS 
+ BEGIN 
+  BEGIN TRY 
+ DELETE FROM [dbo].[DocumentRevision_PSY]  WHERE [DRId_PSY] IN (@DRId_PSY) 
+  END TRY 
+ BEGIN CATCH 
+ SELECT ERROR_MESSAGE(); 
+ END CATCH 
+ END
