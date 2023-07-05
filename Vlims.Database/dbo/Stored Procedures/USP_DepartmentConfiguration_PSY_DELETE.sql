@@ -1,0 +1,10 @@
+﻿  CREATE PROCEDURE [dbo].[USP_DepartmentConfiguration_PSY_DELETE] @DPCFId_PSY int 
+ AS 
+ BEGIN 
+  BEGIN TRY 
+ DELETE FROM [dbo].[DepartmentConfiguration_PSY]  WHERE [DPCFId_PSY] IN (@DPCFId_PSY) 
+  END TRY 
+ BEGIN CATCH 
+ SELECT ERROR_MESSAGE(); 
+ END CATCH 
+ END

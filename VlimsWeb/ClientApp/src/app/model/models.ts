@@ -2364,21 +2364,7 @@ export class AttributeTypes {
   modifiedBy: string;
   modifiedDate: string | null;
 }
-export class DocumentTemplateConfiguration {
-  dTID: string;
-  documentMasterId: string;
-  templatename: string;
-  uniquecode: string;
-  documenttype: string;
-  header: string;
-  rows: string;
-  columns: string;
-  footer: string;
-  createdBy: string;
-  createdDate: string | null;
-  modifiedBy: string;
-  modifiedDate: string | null;
-}
+
 export class DocumentTypeConfiguration {
   DTCId: string;
   DocumentMasterId: string;
@@ -2414,15 +2400,32 @@ export class noticationconfiguration {
   modifiedDate: string | null;
 }
 export class workflowconiguration {
-  wFCId: string;
-  documentMasterId: string;
+  WFCId: string;
+  DocumentMasterId: string;
   documentstage: string;
   documenttype: string;
   department: string;
   reviewsCount: number | null;
   approvalsCount: number | null;
-  createdBy: string;
-  createdDate: string | null;
-  modifiedBy: string;
-  modifiedDate: string | null;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+}
+export class DocumentTemplateConfiguration {
+  DTID: string;
+  DocumentMasterId: string;
+  Templatename: string;
+  Uniquecode: string;
+  documenttype: string;
+  header: string;
+  rows: string;
+  columns: string;
+  footer: string;
+  footerrows:string;
+  footercolumns:string;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
 }

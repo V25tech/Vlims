@@ -63,8 +63,8 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.rows, Value = documentTemplateConfiguration.rows });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.columns, Value = documentTemplateConfiguration.columns });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footer, Value = documentTemplateConfiguration.footer });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.rows, Value = documentTemplateConfiguration.rows });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.columns, Value = documentTemplateConfiguration.columns });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footerrows, Value = documentTemplateConfiguration.footerrows });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footercolumns, Value = documentTemplateConfiguration.footercolumns });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.CreatedBy, Value = documentTemplateConfiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.ModifiedBy, Value = documentTemplateConfiguration.ModifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
@@ -90,8 +90,8 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.rows, Value = documentTemplateConfiguration.rows });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.columns, Value = documentTemplateConfiguration.columns });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footer, Value = documentTemplateConfiguration.footer });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.rows, Value = documentTemplateConfiguration.rows });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.columns, Value = documentTemplateConfiguration.columns });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footerrows, Value = documentTemplateConfiguration.footerrows });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footercolumns, Value = documentTemplateConfiguration.footercolumns });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.ModifiedBy, Value = documentTemplateConfiguration.ModifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);

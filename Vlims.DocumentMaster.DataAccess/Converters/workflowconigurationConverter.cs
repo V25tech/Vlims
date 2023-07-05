@@ -33,17 +33,17 @@ namespace Vlims.DocumentMaster.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         workflowconigurationData = new workflowconiguration();
-                        workflowconigurationData.WFCId = Convert.ToString(row[workflowconigurationConstants.WFCId.Trim()]);
-                        workflowconigurationData.DocumentMasterId = Convert.ToString(row[workflowconigurationConstants.DocumentMasterId.Trim()]);
-                        workflowconigurationData.documentstage = Convert.ToString(row[workflowconigurationConstants.documentstage.Trim()]);
-                        workflowconigurationData.documenttype = Convert.ToString(row[workflowconigurationConstants.documenttype.Trim()]);
-                        workflowconigurationData.department = Convert.ToString(row[workflowconigurationConstants.department.Trim()]);
-                        workflowconigurationData.reviewsCount = DatatypeConverter.SetIntValue(row[workflowconigurationConstants.reviewsCount.Trim()]);
-                        workflowconigurationData.approvalsCount = DatatypeConverter.SetIntValue(row[workflowconigurationConstants.approvalsCount.Trim()]);
-                        workflowconigurationData.CreatedBy = Convert.ToString(row[workflowconigurationConstants.CreatedBy.Trim()]);
-                        workflowconigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[workflowconigurationConstants.CreatedDate.Trim()]);
-                        workflowconigurationData.ModifiedBy = Convert.ToString(row[workflowconigurationConstants.ModifiedBy.Trim()]);
-                        workflowconigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[workflowconigurationConstants.ModifiedDate.Trim()]);
+                        workflowconigurationData.WFCId = Convert.ToString(row[workflowconigurationConstants.WFCId.Trim('@')]);
+                        workflowconigurationData.DocumentMasterId = Convert.ToString(row[workflowconigurationConstants.DocumentMasterId.Trim('@')]);
+                        workflowconigurationData.documentstage = Convert.ToString(row[workflowconigurationConstants.documentstage.Trim('@')]);
+                        workflowconigurationData.documenttype = Convert.ToString(row[workflowconigurationConstants.documenttype.Trim('@')]);
+                        workflowconigurationData.department = Convert.ToString(row[workflowconigurationConstants.department.Trim('@')]);
+                        workflowconigurationData.reviewsCount = DatatypeConverter.SetIntValue(row[workflowconigurationConstants.reviewsCount.Trim('@')]);
+                        workflowconigurationData.approvalsCount = DatatypeConverter.SetIntValue(row[workflowconigurationConstants.approvalsCount.Trim('@')]);
+                        workflowconigurationData.CreatedBy = Convert.ToString(row[workflowconigurationConstants.CreatedBy.Trim('@')]);
+                        workflowconigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[workflowconigurationConstants.CreatedDate.Trim('@')]);
+                        workflowconigurationData.ModifiedBy = Convert.ToString(row[workflowconigurationConstants.ModifiedBy.Trim('@')]);
+                        workflowconigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[workflowconigurationConstants.ModifiedDate.Trim('@')]);
                         result.Add(workflowconigurationData);
                     }
                 }

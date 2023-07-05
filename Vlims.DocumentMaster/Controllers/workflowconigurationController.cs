@@ -38,11 +38,11 @@ namespace Vlims.Controllers
         /// This method is used to Get List of workflowconiguration
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
-        public ActionResult<ResponseContext<workflowconiguration>> GetAllworkflowconiguration(RequestContext requestContext)
+        [HttpPost("getallworkflow")]
+        public ActionResult GetAllworkflowconiguration([FromQuery] RequestContext requestContext)
         {
             var result = workflowconigurationService.GetAllworkflowconiguration(requestContext);
-            return result;
+            return Ok(result);
         }
         
         /// <summary>

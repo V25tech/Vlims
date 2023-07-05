@@ -17,6 +17,8 @@ internal class Program
         });
 
         builder.Services.AddScoped<IDocumentTypeConfigurationService, DocumentTypeConfigurationService>();
+        builder.Services.AddScoped<IDocumentTemplateConfigurationService, DocumentTemplateConfigurationService>();
+        builder.Services.AddScoped<IworkflowconigurationService, workflowconigurationService>();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

@@ -29,6 +29,8 @@ import { DocumentRequestComponent } from './document-request/document-request.co
 import { DocumentPreperationComponent } from './document-preperation/document-preperation.component';
 import { DocumentEffectiveComponent } from './document-effective/document-effective.component';
 import { DocumentAdditionaltasksComponent } from './document-additionaltasks/document-additionaltasks.component';
+import { AddDocumentTemplateConfigComponent } from './add-document-template-config/add-document-template-config.component';
+import { AddWorkflowConfigComponent } from './add-workflow-config/add-workflow-config.component';
 
 
 const routes: Routes = [
@@ -109,6 +111,14 @@ const routes: Routes = [
           {
             path:'adddoctype',
             component:AddDocumentTypeConfigComponent
+          },
+          {
+            path:'adddoctemplate',
+            component:AddDocumentTemplateConfigComponent
+          },
+          {
+            path:'addworkflow',
+            component:AddWorkflowConfigComponent
           }
         ]        
       },
