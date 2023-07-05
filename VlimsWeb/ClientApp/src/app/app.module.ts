@@ -52,9 +52,7 @@ import { DocumentPreperationComponent } from './document-preperation/document-pr
 import { DocumentEffectiveComponent } from './document-effective/document-effective.component';
 import { DocumentAdditionaltasksComponent } from './document-additionaltasks/document-additionaltasks.component';
 import { AddDocumentRequestComponent } from './add-document-request/add-document-request.component';
-import { AddDocumentPreperationComponent } from './add-document-preperation/add-document-preperation.component';
-import { AddDocumentEffectiveComponent } from './add-document-effective/add-document-effective.component';
-import { AddAdditionaltasksComponent } from './add-additionaltasks/add-additionaltasks.component';
+
 
 
 
@@ -69,7 +67,7 @@ import { AddAdditionaltasksComponent } from './add-additionaltasks/add-additiona
     ProductsView, BrandComponent, TaxComponent, PopupshowDirective,CartsComponent,DocumentMasterComponent,DocumentTypeConfigComponent,
     DocumentTemplateConfigComponent,WorkflowConfigComponent,NotificationConfigComponent,DashboardConfigComponent, 
     BillingsComponent, InvoiceComponent, RegisterComponent, ProfileComponent,FilterPipe, 
-    SidebarDirective, SpinnerComponent, SearchPipe,SearchPipe, TabsDirective, InrPipe, AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent, DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, AddDocumentRequestComponent, AddDocumentPreperationComponent, AddDocumentEffectiveComponent, AddAdditionaltasksComponent],
+    SidebarDirective, SpinnerComponent, SearchPipe,SearchPipe, TabsDirective, InrPipe, AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent, DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, AddDocumentRequestComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })
