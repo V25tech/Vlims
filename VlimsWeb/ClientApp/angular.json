@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "Vlims"
+  "defaultProject": "Vlims",
+  "cli": {
+    "analytics": "cb4241f7-97db-4cd5-b645-e18d29b09ae9"
+  }
 }

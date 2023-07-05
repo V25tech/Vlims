@@ -1,0 +1,25 @@
+
+<style>
+    table {
+    width: 100%;
+  }
+  .mat-header-cell {
+    color: black;
+    font-size: 18px;
+}
+  </style>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a [ngClass]="{'active':tabselect==='documenmgr'}" class="nav-item nav-link"  id="nav-home-tab" data-toggle="tab" (click)="tabselect='documenmgr'"  [routerLink]="['/mainpage/documentmanager']" role="tab" aria-controls="nav-home" aria-selected="true">Document Manager</a>
+    <a [ngClass]="{'active':tabselect==='documreq'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='documreq'" [routerLink]="['/mainpage/documentmanager/documreq']" role="tab" aria-controls="nav-profile" aria-selected="false">Document Request</a>
+    <a [ngClass]="{'active':tabselect==='documprep'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='documprep'" [routerLink]="['/mainpage/documentmanager/documprep']" role="tab" aria-controls="nav-profile" aria-selected="false">Document Preperation</a>
+    <a [ngClass]="{'active':tabselect==='documeffect'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='documeffect'" [routerLink]="['/mainpage/documentmanager/documeffect']" role="tab" aria-controls="nav-profile" aria-selected="false">Document Effective</a>
+    <a [ngClass]="{'active':tabselect==='additasks'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='additasks'" [routerLink]="['/mainpage/documentmanager/additasks']" role="tab" aria-controls="nav-profile" aria-selected="false">Additional Tasks</a>
+    
+  </div>
+  
+</nav>
+
+<router-outlet></router-outlet>
+
