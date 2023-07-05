@@ -40,14 +40,37 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item" [ngClass]="{'active':tabselect==='mainpage'}">
+      <!-- <li class="nav-item" [ngClass]="{'active':tabselect==='mainpage'}">
         <a class="nav-link" (click)="navLinkClick('mainpage')"  [routerLink]="['/mainpage']">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>DMS</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">DMS:</h6>
+                <a class="collapse-item" [routerLink]="['/mainpage/documentmaster']">Document Master</a>
+                <a class="collapse-item" [routerLink]="['/mainpage/documentmaster']">Document Manager</a>
+            </div>
+        </div>
+    </li>
+      <!-- <li class="nav-item" [ngClass]="{'active':tabselect==='documentmaster'}">
+        <a class="nav-link" (click)="navLinkClick('mainpage')"  [routerLink]="['/mainpage/documentmaster']">
+          <i class="fa fa-file"></i>
+          <span>Document Master</span></a>
       </li>
-
+      <li class="nav-item" [ngClass]="{'active':tabselect==='documentmanager'}">
+        <a class="nav-link" (click)="navLinkClick('mainpage')"  [routerLink]="['/mainpage/documentmanager']">
+          <i class="fa fa-file-text-o"></i>
+          <span>Document Manager</span></a>
+      </li> -->
       
-      <li class="nav-item" [ngClass]="{'active':tabselect==='products'}">
+      <!-- <li class="nav-item" [ngClass]="{'active':tabselect==='products'}">
         <a class="nav-link" (click)="navLinkClick('products')"  [routerLink]="['/mainpage/products']">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Products</span></a>
@@ -57,7 +80,7 @@
         <a class="nav-link" (click)="navLinkClick('billing')"  [routerLink]="['/mainpage/billing']">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Billing</span></a>
-      </li>
+      </li> -->
      
 
       <!-- Divider -->

@@ -33,16 +33,16 @@ namespace Vlims.Controllers
         {
             this.documentTemplateConfigurationService = documentTemplateConfigurationService;
         }
-        
+
         /// <summary>
         /// This method is used to Get List of DocumentTemplateConfiguration
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
-        public ActionResult<ResponseContext<DocumentTemplateConfiguration>> GetAllDocumentTemplateConfiguration(RequestContext requestContext)
+        [HttpPost("getalldoctemplate")]
+        public ActionResult GetAllDocumentTemplateConfiguration([FromQuery] RequestContext requestContext)
         {
             var result = documentTemplateConfigurationService.GetAllDocumentTemplateConfiguration(requestContext);
-            return result;
+            return Ok(result);
         }
         
         /// <summary>

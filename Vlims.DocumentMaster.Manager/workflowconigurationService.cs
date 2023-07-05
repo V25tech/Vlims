@@ -54,6 +54,10 @@ namespace Vlims.DocumentMaster.Manager
         {
             try
             {
+              if(workflowconiguration!=null && workflowconiguration.WFCId==null )
+                {
+                    workflowconiguration.DocumentMasterId = "1";
+                }
                 String validationMessages = workflowconigurationValidator.IsValidworkflowconiguration(workflowconiguration);
                 if (validationMessages.Length <= 0)
                 {

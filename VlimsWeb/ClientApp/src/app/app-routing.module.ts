@@ -24,6 +24,8 @@ import { DashboardConfigComponent } from './dashboard-config/dashboard-config.co
 import { DocumentTemplateConfigComponent } from './document-template-config/document-template-config.component';
 import { DocumentTypeConfigComponent } from './document-type-config/document-type-config.component';
 import { AddDocumentTypeConfigComponent } from './add-document-type-config/add-document-type-config.component';
+import { AddDocumentTemplateConfigComponent } from './add-document-template-config/add-document-template-config.component';
+import { AddWorkflowConfigComponent } from './add-workflow-config/add-workflow-config.component';
 
 
 const routes: Routes = [
@@ -104,6 +106,14 @@ const routes: Routes = [
           {
             path:'adddoctype',
             component:AddDocumentTypeConfigComponent
+          },
+          {
+            path:'adddoctemplate',
+            component:AddDocumentTemplateConfigComponent
+          },
+          {
+            path:'addworkflow',
+            component:AddWorkflowConfigComponent
           }
         ]
         // children: [

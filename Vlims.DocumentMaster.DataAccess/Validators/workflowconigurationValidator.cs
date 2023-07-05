@@ -25,8 +25,8 @@ namespace Vlims.DocumentMaster.DataAccess
             {
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
-                validationMessages.Append(validationHelper.NullCheckValidator(workflowconiguration.WFCId, nameof(workflowconiguration.WFCId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.WFCId,50, nameof(workflowconiguration.WFCId)));
+                //validationMessages.Append(validationHelper.NullCheckValidator(workflowconiguration.WFCId, nameof(workflowconiguration.WFCId)));
+                //validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.WFCId,50, nameof(workflowconiguration.WFCId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(workflowconiguration.DocumentMasterId, nameof(workflowconiguration.DocumentMasterId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.DocumentMasterId,50, nameof(workflowconiguration.DocumentMasterId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.documentstage,50, nameof(workflowconiguration.documentstage)));

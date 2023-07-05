@@ -33,7 +33,10 @@ namespace Vlims.DocumentMaster.Entities
         public const string columns = "@columns_PSY";
         
         public const string footer = "@footer_PSY";
-        
+
+        public const string footerrows = "@footer_rows_PSY";
+        public const string footercolumns = "@footer_columns_PSY";
+
         public const string CreatedBy = "@CreatedBy_PSY";
         
         public const string CreatedDate = "@CreatedDate_PSY";

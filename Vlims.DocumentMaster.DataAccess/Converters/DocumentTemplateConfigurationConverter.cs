@@ -33,21 +33,21 @@ namespace Vlims.DocumentMaster.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         documentTemplateConfigurationData = new DocumentTemplateConfiguration();
-                        documentTemplateConfigurationData.DTID = Convert.ToString(row[DocumentTemplateConfigurationConstants.DTID.Trim()]);
-                        documentTemplateConfigurationData.DocumentMasterId = Convert.ToString(row[DocumentTemplateConfigurationConstants.DocumentMasterId.Trim()]);
-                        documentTemplateConfigurationData.Templatename = Convert.ToString(row[DocumentTemplateConfigurationConstants.Templatename.Trim()]);
-                        documentTemplateConfigurationData.Uniquecode = Convert.ToString(row[DocumentTemplateConfigurationConstants.Uniquecode.Trim()]);
-                        documentTemplateConfigurationData.documenttype = Convert.ToString(row[DocumentTemplateConfigurationConstants.documenttype.Trim()]);
-                        documentTemplateConfigurationData.header = Convert.ToString(row[DocumentTemplateConfigurationConstants.header.Trim()]);
-                        documentTemplateConfigurationData.rows = Convert.ToString(row[DocumentTemplateConfigurationConstants.rows.Trim()]);
-                        documentTemplateConfigurationData.columns = Convert.ToString(row[DocumentTemplateConfigurationConstants.columns.Trim()]);
-                        documentTemplateConfigurationData.footer = Convert.ToString(row[DocumentTemplateConfigurationConstants.footer.Trim()]);
-                        documentTemplateConfigurationData.rows = Convert.ToString(row[DocumentTemplateConfigurationConstants.rows.Trim()]);
-                        documentTemplateConfigurationData.columns = Convert.ToString(row[DocumentTemplateConfigurationConstants.columns.Trim()]);
-                        documentTemplateConfigurationData.CreatedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.CreatedBy.Trim()]);
-                        documentTemplateConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentTemplateConfigurationConstants.CreatedDate.Trim()]);
-                        documentTemplateConfigurationData.ModifiedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.ModifiedBy.Trim()]);
-                        documentTemplateConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentTemplateConfigurationConstants.ModifiedDate.Trim()]);
+                        documentTemplateConfigurationData.DTID = Convert.ToString(row[DocumentTemplateConfigurationConstants.DTID.Trim('@')]);
+                        documentTemplateConfigurationData.DocumentMasterId = Convert.ToString(row[DocumentTemplateConfigurationConstants.DocumentMasterId.Trim('@')]);
+                        documentTemplateConfigurationData.Templatename = Convert.ToString(row[DocumentTemplateConfigurationConstants.Templatename.Trim('@')]);
+                        documentTemplateConfigurationData.Uniquecode = Convert.ToString(row[DocumentTemplateConfigurationConstants.Uniquecode.Trim('@')]);
+                        documentTemplateConfigurationData.documenttype = Convert.ToString(row[DocumentTemplateConfigurationConstants.documenttype.Trim('@')]);
+                        documentTemplateConfigurationData.header = Convert.ToString(row[DocumentTemplateConfigurationConstants.header.Trim('@')]);
+                        documentTemplateConfigurationData.rows = Convert.ToString(row[DocumentTemplateConfigurationConstants.rows.Trim('@')]);
+                        documentTemplateConfigurationData.columns = Convert.ToString(row[DocumentTemplateConfigurationConstants.columns.Trim('@')]);
+                        documentTemplateConfigurationData.footer = Convert.ToString(row[DocumentTemplateConfigurationConstants.footer.Trim('@')]);
+                        documentTemplateConfigurationData.footerrows = Convert.ToString(row[DocumentTemplateConfigurationConstants.footerrows.Trim('@')]);
+                        documentTemplateConfigurationData.footercolumns = Convert.ToString(row[DocumentTemplateConfigurationConstants.footercolumns.Trim('@')]);
+                        documentTemplateConfigurationData.CreatedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.CreatedBy.Trim('@')]);
+                        documentTemplateConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentTemplateConfigurationConstants.CreatedDate.Trim('@')]);
+                        documentTemplateConfigurationData.ModifiedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.ModifiedBy.Trim('@')]);
+                        documentTemplateConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentTemplateConfigurationConstants.ModifiedDate.Trim('@')]);
                         result.Add(documentTemplateConfigurationData);
                     }
                 }
