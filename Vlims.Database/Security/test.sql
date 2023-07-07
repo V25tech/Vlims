@@ -1,2 +1,2 @@
-﻿CREATE USER [test] FOR LOGIN [test];
+﻿--CREATE USER [test] FOR LOGIN [test];
 

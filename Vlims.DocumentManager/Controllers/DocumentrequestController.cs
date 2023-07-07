@@ -43,11 +43,11 @@ namespace Vlims.DocumentManager
         /// This method is used to Get List of Documentrequest
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
-        public ActionResult<ResponseContext<Documentrequest>> GetAllDocumentrequest(RequestContext requestContext)
+        [HttpPost("GetAllDocreq")]
+        public ActionResult GetAllDocumentrequest([FromQuery] RequestContext requestContext)
         {
             var result = documentrequestService.GetAllDocumentrequest(requestContext);
-            return result;
+            return Ok(result);
         }
         
         /// <summary>

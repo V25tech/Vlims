@@ -2377,6 +2377,61 @@ export class DocumentTypeConfiguration {
   ModifiedBy: string;
   ModifiedDate: string | null;
 }
+export class DocumentRequestConfiguration {
+  DTCId: string;
+  DocumentMasterId: string;
+  Documenttype: string;
+  department: string;
+  Description: string;
+  Approvedby: string;
+  ApprovedOn: string;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+  Status: string;
+}
+
+export class DocumentPreperationConfiguration {
+  DTCId: string;
+  DocumentMasterId: string;
+  Documenttype: string;
+  AssignedtoGroup: string;
+  Approvedby: string;
+  ApprovedOn: string;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+  Status: string;
+}
+export class DocumentEffectiveConfiguration {
+  DTCId: string;
+  DocumentTitle: string;
+  DocumentNo: string;
+  DocumentType: string;
+  Department: string;
+  Document: string;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+  Status: string;
+}
+export class DocumentAdditionalTasks {
+  DTCId: string;
+  DocumentTitle: string;
+  DocumentNo: string;
+  DocumentType: string;
+  Department: string;
+  Document: string;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+  Status: string;
+}
+
 export class noticationconfiguration {
   nCId: string;
   documentMasterId: string;

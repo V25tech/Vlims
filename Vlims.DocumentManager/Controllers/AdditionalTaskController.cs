@@ -42,11 +42,11 @@ namespace PolicySummary.Controllers
         /// This method is used to Get List of AdditionalTask
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
-        public ActionResult<ResponseContext<AdditionalTask>> GetAllAdditionalTask(RequestContext requestContext)
+        [HttpPost("GetAddtask")]
+        public ActionResult GetAllAdditionalTask(RequestContext requestContext)
         {
             var result = additionalTaskService.GetAllAdditionalTask(requestContext);
-            return result;
+            return Ok(result);
         }
 
         /// <summary>

@@ -43,11 +43,11 @@ namespace PolicySummary.Controllers
         /// This method is used to Get List of DocumentEffective
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
-        public ActionResult<ResponseContext<DocumentEffective>> GetAllDocumentEffective(RequestContext requestContext)
+        [HttpPost("GetAllDocEff")]
+        public ActionResult GetAllDocumentEffective(RequestContext requestContext)
         {
             var result = documentEffectiveService.GetAllDocumentEffective(requestContext);
-            return result;
+            return Ok(result);
         }
         
         /// <summary>

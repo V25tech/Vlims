@@ -63,6 +63,8 @@ import { UserConfigurationComponent } from './user-configuration/user-configurat
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserGroupConfigurationComponent } from './user-group-configuration/user-group-configuration.component';
 import { AddUserGroupComponent } from './add-user-group/add-user-group.component';
+import { DepartmentConfigurationComponent } from './department-configuration/department-configuration.component';
+
 
 
 
@@ -77,7 +79,7 @@ import { AddUserGroupComponent } from './add-user-group/add-user-group.component
     ProductsView, BrandComponent, TaxComponent, PopupshowDirective,CartsComponent,DocumentMasterComponent,DocumentTypeConfigComponent,
     DocumentTemplateConfigComponent,WorkflowConfigComponent,NotificationConfigComponent,DashboardConfigComponent, 
     BillingsComponent, InvoiceComponent, RegisterComponent, ProfileComponent,FilterPipe, 
-    SidebarDirective, SpinnerComponent, SearchPipe,SearchPipe, TabsDirective, InrPipe, AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent, DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, AddDocumentRequestComponent, AddDocumentPreperationComponent, AddDocumentEffectiveComponent, AddAdditionaltasksComponent, DepartmentComponent, AddDepartmentComponent, RolesComponent, AddRolesComponent, UserConfigurationComponent, AddUserComponent, UserGroupConfigurationComponent, AddUserGroupComponent],
+    SidebarDirective, SpinnerComponent, SearchPipe,SearchPipe, TabsDirective, InrPipe, AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent, DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, AddDocumentRequestComponent, DepartmentConfigurationComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })

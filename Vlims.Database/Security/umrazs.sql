@@ -1,2 +1,2 @@
-﻿CREATE USER [umrazs] FOR LOGIN [umraz];
+﻿--CREATE USER [umrazs] FOR LOGIN [umraz];
 

@@ -42,11 +42,11 @@ namespace PolicySummary.Controllers
         /// This method is used to Get List of DocumentPreparation
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
-        public ActionResult<ResponseContext<DocumentPreparation>> GetAllDocumentPreparation(RequestContext requestContext)
+        [HttpPost("GetAllDocPrep")]
+        public ActionResult GetAllDocumentPreparation([FromQuery] RequestContext requestContext)
         {
             var result = documentPreparationService.GetAllDocumentPreparation(requestContext);
-            return result;
+            return Ok(result);
         }
         
         /// <summary>

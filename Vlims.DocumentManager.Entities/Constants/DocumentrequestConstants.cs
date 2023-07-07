@@ -17,6 +17,8 @@ namespace Vlims.DMS.Entities
     {
         
         public const string DRID = "@DRID_PSY";
+
+        //public const string DRID = "@DRID_PSY";
         
         public const string documentmanagerid = "@documentmanagerid_PSY";
         

@@ -37,17 +37,17 @@ namespace Vlims.DocumentManager.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         documentrequestData = new Documentrequest();
-                        documentrequestData.DRID = Convert.ToString(row[DocumentrequestConstants.DRID.Trim()]);
-                        documentrequestData.documentmanagerid = Convert.ToString(row[DocumentrequestConstants.documentmanagerid.Trim()]);
-                        documentrequestData.documenttype = Convert.ToString(row[DocumentrequestConstants.documenttype.Trim()]);
-                        documentrequestData.department = Convert.ToString(row[DocumentrequestConstants.department.Trim()]);
-                        documentrequestData.Purpose = Convert.ToString(row[DocumentrequestConstants.Purpose.Trim()]);
-                        documentrequestData.ApprovalsCount = DatatypeConverter.SetIntValue(row[DocumentrequestConstants.ApprovalsCount.Trim()]);
-                        documentrequestData.AssigntoGroup = Convert.ToString(row[DocumentrequestConstants.AssigntoGroup.Trim()]);
-                        documentrequestData.CreatedBy = Convert.ToString(row[DocumentrequestConstants.CreatedBy.Trim()]);
-                        documentrequestData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentrequestConstants.CreatedDate.Trim()]);
-                        documentrequestData.ModifiedBy = Convert.ToString(row[DocumentrequestConstants.ModifiedBy.Trim()]);
-                        documentrequestData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentrequestConstants.ModifiedDate.Trim()]);
+                        documentrequestData.DRID = Convert.ToString(row[DocumentrequestConstants.DRID.Trim('@')]);
+                        documentrequestData.documentmanagerid = Convert.ToString(row[DocumentrequestConstants.documentmanagerid.Trim('@')]);
+                        documentrequestData.documenttype = Convert.ToString(row[DocumentrequestConstants.documenttype.Trim('@')]);
+                        documentrequestData.department = Convert.ToString(row[DocumentrequestConstants.department.Trim('@')]);
+                        documentrequestData.Purpose = Convert.ToString(row[DocumentrequestConstants.Purpose.Trim('@')]);
+                        documentrequestData.ApprovalsCount = DatatypeConverter.SetIntValue(row[DocumentrequestConstants.ApprovalsCount.Trim('@')]);
+                        documentrequestData.AssigntoGroup = Convert.ToString(row[DocumentrequestConstants.AssigntoGroup.Trim('@')]);
+                        documentrequestData.CreatedBy = Convert.ToString(row[DocumentrequestConstants.CreatedBy.Trim('@')]);
+                        documentrequestData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentrequestConstants.CreatedDate.Trim('@')]);
+                        documentrequestData.ModifiedBy = Convert.ToString(row[DocumentrequestConstants.ModifiedBy.Trim('@')]);
+                        documentrequestData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentrequestConstants.ModifiedDate.Trim('@')]);
                         result.Add(documentrequestData);
                     }
                 }
