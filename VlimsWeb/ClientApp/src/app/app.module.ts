@@ -79,7 +79,12 @@ import { DepartmentConfigurationComponent } from './department-configuration/dep
     ProductsView, BrandComponent, TaxComponent, PopupshowDirective,CartsComponent,DocumentMasterComponent,DocumentTypeConfigComponent,
     DocumentTemplateConfigComponent,WorkflowConfigComponent,NotificationConfigComponent,DashboardConfigComponent, 
     BillingsComponent, InvoiceComponent, RegisterComponent, ProfileComponent,FilterPipe, 
-    SidebarDirective, SpinnerComponent, SearchPipe,SearchPipe, TabsDirective, InrPipe, AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent, DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, AddDocumentRequestComponent, DepartmentConfigurationComponent],
+    SidebarDirective, SpinnerComponent, SearchPipe,SearchPipe, TabsDirective, InrPipe, 
+    AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, 
+    AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
+     DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, 
+     AddDocumentRequestComponent, DepartmentConfigurationComponent,DepartmentComponent,UserConfigurationComponent,
+    UserGroupConfigurationComponent,RolesComponent,AddRolesComponent,AddDepartmentComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })
