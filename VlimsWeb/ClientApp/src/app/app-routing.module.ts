@@ -31,6 +31,7 @@ import { DocumentEffectiveComponent } from './document-effective/document-effect
 import { DocumentAdditionaltasksComponent } from './document-additionaltasks/document-additionaltasks.component';
 import { AddDocumentTemplateConfigComponent } from './add-document-template-config/add-document-template-config.component';
 import { AddWorkflowConfigComponent } from './add-workflow-config/add-workflow-config.component';
+import { AddDocumentRequestComponent } from './add-document-request/add-document-request.component';
 
 
 const routes: Routes = [
@@ -145,7 +146,11 @@ const routes: Routes = [
           {
             path: 'additasks',
             component: DocumentAdditionaltasksComponent
-          }
+          },
+           {
+             path: 'adddocrequest',
+             component: AddDocumentRequestComponent
+          },
         ]
       }
     ]

@@ -21,12 +21,12 @@ namespace Vlims.DocumentManager.Manager
 
 
     // Comment
-    public  class DocumentrequestService  : IDocumentrequestService
+    public class DocumentrequestService : IDocumentrequestService
     {
-        
-      
-        
-        public  ResponseContext<Documentrequest> GetAllDocumentrequest(RequestContext requestContext)
+
+
+
+        public ResponseContext<Documentrequest> GetAllDocumentrequest(RequestContext requestContext)
         {
             try
             {
@@ -39,8 +39,8 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
-        public  Documentrequest GetDocumentrequestByDRID(string dRID)
+
+        public Documentrequest GetDocumentrequestByDRID(string dRID)
         {
             try
             {
@@ -53,26 +53,28 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
-        public  bool SaveDocumentrequest(Documentrequest documentrequest)
+
+        public bool SaveDocumentrequest(Documentrequest documentrequest)
         {
             try
             {
-                String validationMessages = DocumentrequestValidator.IsValidDocumentrequest(documentrequest);
-                if (validationMessages.Length <= 0)
-                {
-                    var result = DocumentrequestData.SaveDocumentrequest(documentrequest);
-                    return result;
-                }
-                throw new System.Exception(validationMessages);
+                //String validationMessages = DocumentrequestValidator.IsValidDocumentrequest(documentrequest);
+                //if (validationMessages.Length <= 0)
+                //{
+                documentrequest.AssigntoGroup = "A";
+                documentrequest.documentmanagerid = "1";
+                var result = DocumentrequestData.SaveDocumentrequest(documentrequest);
+                return result;
+                //}
+                //throw new System.Exception(validationMessages);
             }
             catch (System.Exception ex)
             {
                 throw;
             }
         }
-        
-        public  bool UpdateDocumentrequest(Documentrequest documentrequest)
+
+        public bool UpdateDocumentrequest(Documentrequest documentrequest)
         {
             try
             {
@@ -89,8 +91,8 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
-        public  bool DeleteDocumentrequestByDRID(string dRID)
+
+        public bool DeleteDocumentrequestByDRID(string dRID)
         {
             try
             {
@@ -101,8 +103,8 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
-        public  bool DeleteAllDocumentrequest(List<int> dRIDs)
+
+        public bool DeleteAllDocumentrequest(List<int> dRIDs)
         {
             try
             {
