@@ -39,12 +39,12 @@ namespace Vlims.DocumentManager.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         additionalTaskData = new AdditionalTask();
-                        additionalTaskData.ATID = Convert.ToString(row[AdditionalTaskConstants.ATID.Trim()]);
-                        additionalTaskData.Documentmanagerid = Convert.ToString(row[AdditionalTaskConstants.Documentmanagerid.Trim()]);
-                        additionalTaskData.CreatedBy = Convert.ToString(row[AdditionalTaskConstants.CreatedBy.Trim()]);
-                        additionalTaskData.CreatedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.CreatedDate.Trim()]);
-                        additionalTaskData.ModifiedBy = Convert.ToString(row[AdditionalTaskConstants.ModifiedBy.Trim()]);
-                        additionalTaskData.ModifiedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.ModifiedDate.Trim()]);
+                        additionalTaskData.ATID = Convert.ToString(row[AdditionalTaskConstants.ATID.Trim('@')]);
+                        additionalTaskData.Documentmanagerid = Convert.ToString(row[AdditionalTaskConstants.Documentmanagerid.Trim('@')]);
+                        additionalTaskData.CreatedBy = Convert.ToString(row[AdditionalTaskConstants.CreatedBy.Trim('@')]);
+                        additionalTaskData.CreatedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.CreatedDate.Trim('@')]);
+                        additionalTaskData.ModifiedBy = Convert.ToString(row[AdditionalTaskConstants.ModifiedBy.Trim('@')]);
+                        additionalTaskData.ModifiedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.ModifiedDate.Trim('@')]);
                         result.Add(additionalTaskData);
                     }
                 }

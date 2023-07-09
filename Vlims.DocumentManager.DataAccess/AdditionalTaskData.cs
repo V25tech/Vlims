@@ -26,6 +26,8 @@ namespace Vlims.DocumentManager.DataAccess
         {
             try
             {
+                requestContext.PageNumber = 1;
+                requestContext.PageSize = 50;
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = RequestContextConstants.PageNumber, Value = requestContext.PageNumber });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = RequestContextConstants.PageSize, Value = requestContext.PageSize });
