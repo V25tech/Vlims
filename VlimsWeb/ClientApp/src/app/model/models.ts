@@ -2380,7 +2380,7 @@ export class DocumentTypeConfiguration {
 export class DocumentRequestConfiguration {
   DTCId: string;
   DocumentMasterId: string;
-  Documenttype: string;
+  documenttype: string;
   department: string;
   Description: string;
   Approvedby: string;
@@ -2390,6 +2390,8 @@ export class DocumentRequestConfiguration {
   ModifiedBy: string;
   ModifiedDate: string | null;
   Status: string;
+  Purpose: string;
+  ApprovalsCount: number;  
 }
 
 export class DocumentPreperationConfiguration {

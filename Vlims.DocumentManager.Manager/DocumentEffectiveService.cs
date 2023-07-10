@@ -29,6 +29,8 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
+                requestContext.PageNumber = 1;
+                requestContext.PageSize = 50;
                 DataSet dataset = DocumentEffectiveData.GetAllDocumentEffective(requestContext);
                 List<DocumentEffective> result = DocumentEffectiveConverter.SetAllDocumentEffective(dataset);
                 return new ResponseContext<DocumentEffective>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };

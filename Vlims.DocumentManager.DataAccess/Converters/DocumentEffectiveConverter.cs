@@ -40,19 +40,19 @@ namespace Vlims.DocumentManager.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         documentEffectiveData = new DocumentEffective();
-                        documentEffectiveData.DEID = Convert.ToString(row[DocumentEffectiveConstants.DEID.Trim()]);
-                        documentEffectiveData.Documentmanagerid = Convert.ToString(row[DocumentEffectiveConstants.Documentmanagerid.Trim()]);
-                        documentEffectiveData.documenttitle = Convert.ToString(row[DocumentEffectiveConstants.documenttitle.Trim()]);
-                        documentEffectiveData.documentno = Convert.ToString(row[DocumentEffectiveConstants.documentno.Trim()]);
-                        documentEffectiveData.documenttype = Convert.ToString(row[DocumentEffectiveConstants.documenttype.Trim()]);
-                        documentEffectiveData.department = Convert.ToString(row[DocumentEffectiveConstants.department.Trim()]);
-                        documentEffectiveData.document = Convert.ToString(row[DocumentEffectiveConstants.document.Trim()]);
-                        documentEffectiveData.EffectiveDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.EffectiveDate.Trim()]);
-                        documentEffectiveData.Reviewdate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.Reviewdate.Trim()]);
-                        documentEffectiveData.CreatedBy = Convert.ToString(row[DocumentEffectiveConstants.CreatedBy.Trim()]);
-                        documentEffectiveData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.CreatedDate.Trim()]);
-                        documentEffectiveData.ModifiedBy = Convert.ToString(row[DocumentEffectiveConstants.ModifiedBy.Trim()]);
-                        documentEffectiveData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.ModifiedDate.Trim()]);
+                        documentEffectiveData.DEID = Convert.ToString(row[DocumentEffectiveConstants.DEID.Trim('@')]);
+                        documentEffectiveData.Documentmanagerid = Convert.ToString(row[DocumentEffectiveConstants.Documentmanagerid.Trim('@')]);
+                        documentEffectiveData.documenttitle = Convert.ToString(row[DocumentEffectiveConstants.documenttitle.Trim('@')]);
+                        documentEffectiveData.documentno = Convert.ToString(row[DocumentEffectiveConstants.documentno.Trim('@')]);
+                        documentEffectiveData.documenttype = Convert.ToString(row[DocumentEffectiveConstants.documenttype.Trim('@')]);
+                        documentEffectiveData.department = Convert.ToString(row[DocumentEffectiveConstants.department.Trim('@')]);
+                        documentEffectiveData.document = Convert.ToString(row[DocumentEffectiveConstants.document.Trim('@')]);
+                        documentEffectiveData.EffectiveDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.EffectiveDate.Trim('@')]);
+                        documentEffectiveData.Reviewdate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.Reviewdate.Trim('@')]);
+                        documentEffectiveData.CreatedBy = Convert.ToString(row[DocumentEffectiveConstants.CreatedBy.Trim('@')]);
+                        documentEffectiveData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.CreatedDate.Trim('@')]);
+                        documentEffectiveData.ModifiedBy = Convert.ToString(row[DocumentEffectiveConstants.ModifiedBy.Trim('@')]);
+                        documentEffectiveData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.ModifiedDate.Trim('@')]);
                         result.Add(documentEffectiveData);
                     }
                 }

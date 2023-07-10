@@ -12,4 +12,8 @@ export class DocumentRequestService {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentrequest/GetAllDocreq");
   }
+  adddocreqconfig(objrequest: DocumentRequestConfiguration) {
+    debugger
+    return this.http.postJsonLogin(objrequest, "api/documentrequest/SaveDocumentrequest");
+  }
 }

@@ -41,6 +41,7 @@ import { AddRolesComponent } from './add-roles/add-roles.component';
 import { UserConfigurationComponent } from './user-configuration/user-configuration.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { AddDocumentRequestComponent } from './add-document-request/add-document-request.component';
 
 
 const routes: Routes = [
@@ -155,7 +156,11 @@ const routes: Routes = [
           {
             path: 'additasks',
             component: DocumentAdditionaltasksComponent
-          }
+          },
+           {
+             path: 'adddocrequest',
+             component: AddDocumentRequestComponent
+          },
         ]
       }
       ,{

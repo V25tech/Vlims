@@ -30,6 +30,8 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
+                requestContext.PageNumber = 1;
+                requestContext.PageSize = 50;
                 DataSet dataset = DocumentPreparationData.GetAllDocumentPreparation(requestContext);
                 List<DocumentPreparation> result = DocumentPreparationConverter.SetAllDocumentPreparation(dataset);
                 return new ResponseContext<DocumentPreparation>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };

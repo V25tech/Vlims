@@ -40,20 +40,20 @@ namespace Vlims.DocumentManager.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         documentPreparationData = new DocumentPreparation();
-                        documentPreparationData.DPNID = Convert.ToString(row[DocumentPreparationConstants.DPNID.Trim()]);
-                        documentPreparationData.Documentmanagerid = Convert.ToString(row[DocumentPreparationConstants.Documentmanagerid.Trim()]);
-                        documentPreparationData.documenttitle = Convert.ToString(row[DocumentPreparationConstants.documenttitle.Trim()]);
-                        documentPreparationData.documentno = Convert.ToString(row[DocumentPreparationConstants.documentno.Trim()]);
-                        documentPreparationData.documenttype = Convert.ToString(row[DocumentPreparationConstants.documenttype.Trim()]);
-                        documentPreparationData.department = Convert.ToString(row[DocumentPreparationConstants.department.Trim()]);
-                        documentPreparationData.document = Convert.ToString(row[DocumentPreparationConstants.document.Trim()]);
-                        documentPreparationData.template = Convert.ToString(row[DocumentPreparationConstants.template.Trim()]);
-                        documentPreparationData.wokflow = Convert.ToString(row[DocumentPreparationConstants.wokflow.Trim()]);
-                        documentPreparationData.details = Convert.ToString(row[DocumentPreparationConstants.details.Trim()]);
-                        documentPreparationData.CreatedBy = Convert.ToString(row[DocumentPreparationConstants.CreatedBy.Trim()]);
-                        documentPreparationData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentPreparationConstants.CreatedDate.Trim()]);
-                        documentPreparationData.ModifiedBy = Convert.ToString(row[DocumentPreparationConstants.ModifiedBy.Trim()]);
-                        documentPreparationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPreparationConstants.ModifiedDate.Trim()]);
+                        documentPreparationData.DPNID = Convert.ToString(row[DocumentPreparationConstants.DPNID.Trim('@')]);
+                        documentPreparationData.Documentmanagerid = Convert.ToString(row[DocumentPreparationConstants.Documentmanagerid.Trim('@')]);
+                        documentPreparationData.documenttitle = Convert.ToString(row[DocumentPreparationConstants.documenttitle.Trim('@')]);
+                        documentPreparationData.documentno = Convert.ToString(row[DocumentPreparationConstants.documentno.Trim('@')]);
+                        documentPreparationData.documenttype = Convert.ToString(row[DocumentPreparationConstants.documenttype.Trim('@')]);
+                        documentPreparationData.department = Convert.ToString(row[DocumentPreparationConstants.department.Trim('@')]);
+                        documentPreparationData.document = Convert.ToString(row[DocumentPreparationConstants.document.Trim('@')]);
+                        documentPreparationData.template = Convert.ToString(row[DocumentPreparationConstants.template.Trim('@')]);
+                        documentPreparationData.wokflow = Convert.ToString(row[DocumentPreparationConstants.wokflow.Trim('@')]);
+                        documentPreparationData.details = Convert.ToString(row[DocumentPreparationConstants.details.Trim('@')]);
+                        documentPreparationData.CreatedBy = Convert.ToString(row[DocumentPreparationConstants.CreatedBy.Trim('@')]);
+                        documentPreparationData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentPreparationConstants.CreatedDate.Trim('@')]);
+                        documentPreparationData.ModifiedBy = Convert.ToString(row[DocumentPreparationConstants.ModifiedBy.Trim('@')]);
+                        documentPreparationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPreparationConstants.ModifiedDate.Trim('@')]);
                         result.Add(documentPreparationData);
                     }
                 }

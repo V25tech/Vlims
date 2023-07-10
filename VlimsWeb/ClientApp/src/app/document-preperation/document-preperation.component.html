@@ -13,27 +13,24 @@
   <div class="card-body">
 
     <div class="table-responsive">
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="types?.length>   0">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="requests?.length>   0">
 
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Document Type Name</th>
-            <th scope="col">Department</th>
+            <th scope="col">Document Type</th>
+            <th scope="col">Department</th>           
             <th scope="col">Assigned to Group</th>
-            <th scope="col">Registered On</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let doc of types; let i=index">
+          <tr *ngFor="let doc of requests; let i=index">
             <th scope="row">{{i+1}}</th>
-            <td>{{doc?.Documenttypename}}</td>
-            <td>{{doc?.department}}</td>
-            <td>{{doc?.Assigned}}</td>            
-            <td>{{doc?.ModifiedBy}}</td>
-            <td>{{doc?.ModifiedDate}}</td>
+            <td>{{doc?.documenttype}}</td>
+            <td>{{doc?.department}}</td>          
+            <td>{{doc?.template}}</td>            
             <td>"Success"</td>
             <td>
               <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTCId"
@@ -49,7 +46,7 @@
 
     </div>
 
-    <div *ngIf="types?.length==0">
+    <div *ngIf="requests?.length==0">
       <p>No items to display</p>
     </div>
   </div>
