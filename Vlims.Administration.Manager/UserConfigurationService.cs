@@ -59,6 +59,8 @@ namespace PolicySummary.Sheet1.Services
         {
             try
             {
+                userConfiguration.UserManagementID = "1";
+                
                 String validationMessages = UserConfigurationValidator.IsValidUserConfiguration(userConfiguration);
                 if (validationMessages.Length <= 0)
                 {

@@ -1,4 +1,7 @@
 {
-  "BaseUrl": "https://localhost:7151/"
+  "BaseUrl": "https://localhost:7151/",
+  "documentmasterUrl":"https://localhost:7151/",
+  "documentmanagerUrl":"https://localhost:7151/",
+  "adminUrl":"https://localhost:7186/"
 }
  

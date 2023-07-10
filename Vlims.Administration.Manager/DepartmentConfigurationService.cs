@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Vlims.Services
+namespace Vlims.Administration.Manager
 {
     using System;
     using System.Data;
@@ -17,6 +17,7 @@ namespace Vlims.Services
     using Vlims.Data;
     using Vlims.Common;
     using Vlims.Administration.Entities;
+    using Vlims.Administration.DataAccess;
 
 
 
@@ -57,6 +58,7 @@ namespace Vlims.Services
         {
             try
             {
+                departmentConfiguration.HierarchyManagementId = "1";
                 String validationMessages = DepartmentConfigurationValidator.IsValidDepartmentConfiguration(departmentConfiguration);
                 if (validationMessages.Length <= 0)
                 {

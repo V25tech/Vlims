@@ -52,9 +52,9 @@ import { DocumentPreperationComponent } from './document-preperation/document-pr
 import { DocumentEffectiveComponent } from './document-effective/document-effective.component';
 import { DocumentAdditionaltasksComponent } from './document-additionaltasks/document-additionaltasks.component';
 import { AddDocumentRequestComponent } from './add-document-request/add-document-request.component';
-import { AddDocumentPreperationComponent } from './add-document-preperation/add-document-preperation.component';
-import { AddDocumentEffectiveComponent } from './add-document-effective/add-document-effective.component';
-import { AddAdditionaltasksComponent } from './add-additionaltasks/add-additionaltasks.component';
+// import { AddDocumentPreperationComponent } from './add-document-preperation/add-document-preperation.component';
+// import { AddDocumentEffectiveComponent } from './add-document-effective/add-document-effective.component';
+// import { AddAdditionaltasksComponent } from './add-additionaltasks/add-additionaltasks.component';
 import { DepartmentComponent } from './department/department.component';
 import { AddDepartmentComponent } from './add-department/add-department.component';
 import { RolesComponent } from './roles/roles.component';
@@ -63,7 +63,10 @@ import { UserConfigurationComponent } from './user-configuration/user-configurat
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserGroupConfigurationComponent } from './user-group-configuration/user-group-configuration.component';
 import { AddUserGroupComponent } from './add-user-group/add-user-group.component';
-import { DepartmentConfigurationComponent } from './department-configuration/department-configuration.component';
+//import { DepartmentConfigurationComponent } from './department-configuration/department-configuration.component';
+import { HierarchymanagementComponent } from './hierarchymanagement/hierarchymanagement.component';
+import { FunctionalProfileComponent } from './functional-profile/functional-profile.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 
 
@@ -83,8 +86,8 @@ import { DepartmentConfigurationComponent } from './department-configuration/dep
     AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, 
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
      DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, 
-     AddDocumentRequestComponent, DepartmentConfigurationComponent,DepartmentComponent,UserConfigurationComponent,
-    UserGroupConfigurationComponent,RolesComponent,AddRolesComponent,AddDepartmentComponent],
+     AddDocumentRequestComponent,DepartmentComponent,UserConfigurationComponent,AddUserComponent,
+    UserGroupConfigurationComponent,RolesComponent,AddRolesComponent,AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })

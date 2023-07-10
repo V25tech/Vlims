@@ -7,12 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PolicySummary.Sheet1.Services
+namespace Vlims.Administration.Manager
 {
     using System;
-    using System.Text;
-    using System.IO;
-    using System.Linq;
     using System.Data;
     using System.Collections.Generic;
     using Vlims.Administration.Entities;
@@ -59,6 +56,7 @@ namespace PolicySummary.Sheet1.Services
         {
             try
             {
+                roleConfiguration.HierarchyManagementId = "1";
                 String validationMessages = RoleConfigurationValidator.IsValidRoleConfiguration(roleConfiguration);
                 if (validationMessages.Length <= 0)
                 {

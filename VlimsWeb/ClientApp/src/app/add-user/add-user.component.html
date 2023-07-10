@@ -1,1 +1,119 @@
-<p>add-user works!</p>
+<div class="card shadow mb-4" style="padding-top: 2px;">
+    <div class="card-header py-3">
+        <div col-12 style="float: left;">
+        <h6 class="m-0 font-weight-bold text-primary">New User</h6>
+    </div>
+
+    </div>
+    <div class="card-body">
+    <form (ngSubmit)="submit(adduser)" #fm="ngForm">
+        <div class="modal-body">
+          <div class="form-group row">
+           
+            <label for="BrandName" class="col-sm-4 col-form-label">First Name</label>
+        
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="BrandName" [(ngModel)]="adduser.FirstName"
+                  pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter First Name"
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+            </div>
+          </div>
+          <div class="form-group row">
+           
+            <label for="BrandName" class="col-sm-4 col-form-label">Last Name</label>
+        
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="BrandName" [(ngModel)]="adduser.LastName"
+                  pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter Last Name"
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+            </div>
+          </div>
+          <div class="form-group row">
+           
+            <label for="BrandName" class="col-sm-4 col-form-label">User ID</label>
+        
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="BrandName" [(ngModel)]="adduser.UserID"
+                  pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter User ID"
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+            </div>
+          </div>
+          <div class="form-group row">
+           
+            <label for="BrandName" class="col-sm-4 col-form-label">Department</label>
+        
+        <div class="col-sm-8">
+            <select class="form-control" [(ngModel)]="adduser.Department" name="typeId" #DTCId="ngModel"
+            [ngClass]="{ 'is-invalid': fm.submitted && DTCId.invalid }" required>
+            <option value="Select">Select</option>
+            <option *ngFor="let type of types" value={{type.DepartmentName}}>{{type?.DepartmentName}}</option>
+          </select>
+            </div>
+          </div>
+          <div class="form-group row">
+           
+            <label for="BrandName" class="col-sm-4 col-form-label">Role</label>
+        
+        <div class="col-sm-8">
+            <select class="form-control" [(ngModel)]="adduser.Role" name="typeId" #DTCId="ngModel"
+            [ngClass]="{ 'is-invalid': fm.submitted && DTCId.invalid }" required>
+            <option value="Select">Select</option>
+            <option *ngFor="let type of roles" value={{type.Role}}>{{type?.Role}}</option>
+          </select>
+            </div>
+          </div>
+          <div class="form-group row">
+           
+            <label for="BrandName" class="col-sm-4 col-form-label">DOJ</label>
+        
+        <div class="col-sm-8">
+            <input type="date" class="form-control" id="BrandName" [(ngModel)]="adduser.Doj"
+                  pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter DOJ"
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+            </div>
+          </div>
+          <div class="form-group row">
+           
+            <label for="BrandName" class="col-sm-4 col-form-label">Emp ID</label>
+        
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="BrandName" [(ngModel)]="adduser.Empid"
+                  pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter Emp ID"
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+            </div>
+          </div>
+          <div class="form-group row">
+           
+            <label for="BrandName" class="col-sm-4 col-form-label">Email ID</label>
+        
+        <div class="col-sm-8">
+            <input type="email" class="form-control" id="BrandName" [(ngModel)]="adduser.EmailId"
+                  pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter Email"
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+            </div>
+          </div>
+          <div class="form-group row">
+           
+            <label for="BrandName" class="col-sm-4 col-form-label">Active Directory</label>
+        
+        <div class="col-sm-2">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="isactivedirectory"
+           [(ngModel)]="isactivedirectory">
+            </div>
+          <!-- </div> -->
+          <!-- <div class="form-group row"> -->
+           
+            <label for="BrandName" class="col-sm-4 col-form-label">Srandard User</label>
+        
+        <div class="col-sm-2">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="isstandarduser" [(ngModel)]="isstandarduser">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+</div>

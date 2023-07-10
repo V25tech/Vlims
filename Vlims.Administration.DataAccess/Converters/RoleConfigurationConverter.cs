@@ -37,15 +37,15 @@ namespace Vlims.Administration.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         roleConfigurationData = new RoleConfiguration();
-                        roleConfigurationData.ROCFId = Convert.ToString(row[RoleConfigurationConstants.ROCFId.Trim()]);
-                        roleConfigurationData.HierarchyManagementId = Convert.ToString(row[RoleConfigurationConstants.HierarchyManagementId.Trim()]);
-                        roleConfigurationData.Role = Convert.ToString(row[RoleConfigurationConstants.Role.Trim()]);
-                        roleConfigurationData.Department = Convert.ToString(row[RoleConfigurationConstants.Department.Trim()]);
-                        roleConfigurationData.Comments = Convert.ToString(row[RoleConfigurationConstants.Comments.Trim()]);
-                        roleConfigurationData.CreatedBy = Convert.ToString(row[RoleConfigurationConstants.CreatedBy.Trim()]);
-                        roleConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[RoleConfigurationConstants.CreatedDate.Trim()]);
-                        roleConfigurationData.ModifiedBy = Convert.ToString(row[RoleConfigurationConstants.ModifiedBy.Trim()]);
-                        roleConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[RoleConfigurationConstants.ModifiedDate.Trim()]);
+                        roleConfigurationData.ROCFId = Convert.ToString(row[RoleConfigurationConstants.ROCFId.Trim('@')]);
+                        roleConfigurationData.HierarchyManagementId = Convert.ToString(row[RoleConfigurationConstants.HierarchyManagementId.Trim('@')]);
+                        roleConfigurationData.Role = Convert.ToString(row[RoleConfigurationConstants.Role.Trim('@')]);
+                        roleConfigurationData.Department = Convert.ToString(row[RoleConfigurationConstants.Department.Trim('@')]);
+                        roleConfigurationData.Comments = Convert.ToString(row[RoleConfigurationConstants.Comments.Trim('@')]);
+                        roleConfigurationData.CreatedBy = Convert.ToString(row[RoleConfigurationConstants.CreatedBy.Trim('@')]);
+                        roleConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[RoleConfigurationConstants.CreatedDate.Trim('@')]);
+                        roleConfigurationData.ModifiedBy = Convert.ToString(row[RoleConfigurationConstants.ModifiedBy.Trim('@')]);
+                        roleConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[RoleConfigurationConstants.ModifiedDate.Trim('@')]);
                         result.Add(roleConfigurationData);
                     }
                 }

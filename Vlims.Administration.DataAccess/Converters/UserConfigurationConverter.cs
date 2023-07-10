@@ -37,22 +37,22 @@ namespace Vlims.Administration.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         userConfigurationData = new UserConfiguration();
-                        userConfigurationData.UCFId = Convert.ToString(row[UserConfigurationConstants.UCFId.Trim()]);
-                        userConfigurationData.UserManagementID = Convert.ToString(row[UserConfigurationConstants.UserManagementID.Trim()]);
-                        userConfigurationData.FirstName = Convert.ToString(row[UserConfigurationConstants.FirstName.Trim()]);
-                        userConfigurationData.LastName = Convert.ToString(row[UserConfigurationConstants.LastName.Trim()]);
-                        userConfigurationData.UserID = Convert.ToString(row[UserConfigurationConstants.UserID.Trim()]);
-                        userConfigurationData.Department = Convert.ToString(row[UserConfigurationConstants.Department.Trim()]);
-                        userConfigurationData.Role = Convert.ToString(row[UserConfigurationConstants.Role.Trim()]);
-                        userConfigurationData.Doj = Convert.ToString(row[UserConfigurationConstants.Doj.Trim()]);
-                        userConfigurationData.Empid = DatatypeConverter.SetIntValue(row[UserConfigurationConstants.Empid.Trim()]);
-                        userConfigurationData.EmailId = Convert.ToString(row[UserConfigurationConstants.EmailId.Trim()]);
-                        userConfigurationData.Activedirectory = Convert.ToString(row[UserConfigurationConstants.Activedirectory.Trim()]);
-                        userConfigurationData.Standarduser = Convert.ToString(row[UserConfigurationConstants.Standarduser.Trim()]);
-                        userConfigurationData.CreatedBy = Convert.ToString(row[UserConfigurationConstants.CreatedBy.Trim()]);
-                        userConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[UserConfigurationConstants.CreatedDate.Trim()]);
-                        userConfigurationData.ModifiedBy = Convert.ToString(row[UserConfigurationConstants.ModifiedBy.Trim()]);
-                        userConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[UserConfigurationConstants.ModifiedDate.Trim()]);
+                        userConfigurationData.UCFId = Convert.ToString(row[UserConfigurationConstants.UCFId.Trim('@')]);
+                        userConfigurationData.UserManagementID = Convert.ToString(row[UserConfigurationConstants.UserManagementID.Trim('@')]);
+                        userConfigurationData.FirstName = Convert.ToString(row[UserConfigurationConstants.FirstName.Trim('@')]);
+                        userConfigurationData.LastName = Convert.ToString(row[UserConfigurationConstants.LastName.Trim('@')]);
+                        userConfigurationData.UserID = Convert.ToString(row[UserConfigurationConstants.UserID.Trim('@')]);
+                        userConfigurationData.Department = Convert.ToString(row[UserConfigurationConstants.Department.Trim('@')]);
+                        userConfigurationData.Role = Convert.ToString(row[UserConfigurationConstants.Role.Trim('@')]);
+                        userConfigurationData.Doj = Convert.ToString(row[UserConfigurationConstants.Doj.Trim('@')]);
+                        userConfigurationData.Empid = DatatypeConverter.SetIntValue(row[UserConfigurationConstants.Empid.Trim('@')]);
+                        userConfigurationData.EmailId = Convert.ToString(row[UserConfigurationConstants.EmailId.Trim('@')]);
+                        userConfigurationData.Activedirectory = Convert.ToString(row[UserConfigurationConstants.Activedirectory.Trim('@')]);
+                        userConfigurationData.Standarduser = Convert.ToString(row[UserConfigurationConstants.Standarduser.Trim('@')]);
+                        userConfigurationData.CreatedBy = Convert.ToString(row[UserConfigurationConstants.CreatedBy.Trim('@')]);
+                        userConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[UserConfigurationConstants.CreatedDate.Trim('@')]);
+                        userConfigurationData.ModifiedBy = Convert.ToString(row[UserConfigurationConstants.ModifiedBy.Trim('@')]);
+                        userConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[UserConfigurationConstants.ModifiedDate.Trim('@')]);
                         result.Add(userConfigurationData);
                     }
                 }

@@ -30,8 +30,8 @@ namespace Vlims.Administration.DataAccess
             {
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
-                validationMessages.Append(validationHelper.NullCheckValidator(userConfiguration.UCFId, nameof(userConfiguration.UCFId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userConfiguration.UCFId,50, nameof(userConfiguration.UCFId)));
+                //validationMessages.Append(validationHelper.NullCheckValidator(userConfiguration.UCFId, nameof(userConfiguration.UCFId)));
+                //validationMessages.Append(validationHelper.LengthCheckValidator(userConfiguration.UCFId,50, nameof(userConfiguration.UCFId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(userConfiguration.UserManagementID, nameof(userConfiguration.UserManagementID)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(userConfiguration.UserManagementID,50, nameof(userConfiguration.UserManagementID)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(userConfiguration.FirstName,50, nameof(userConfiguration.FirstName)));

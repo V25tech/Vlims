@@ -31,7 +31,7 @@ namespace Vlims.Administration.DataAccess
             {
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
-                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.ROCFId,50, nameof(roleConfiguration.ROCFId)));
+                //validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.ROCFId,50, nameof(roleConfiguration.ROCFId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(roleConfiguration.HierarchyManagementId, nameof(roleConfiguration.HierarchyManagementId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.HierarchyManagementId,50, nameof(roleConfiguration.HierarchyManagementId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.Role,50, nameof(roleConfiguration.Role)));

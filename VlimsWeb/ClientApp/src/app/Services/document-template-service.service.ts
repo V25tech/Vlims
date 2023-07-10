@@ -6,15 +6,15 @@ import { DocumentTemplateConfiguration, RequestContext } from '../model/models';
   providedIn: 'root'
 })
 export class DocumentTemplateServiceService {
-
+  type:string="master";
   constructor(private http: HttpbaseService) { }
 
   getdocttemplate(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/documenttemplateconfiguration/getalldoctemplate");
+    return this.http.postJsonLogin(objrequest, "api/documenttemplateconfiguration/getalldoctemplate",this.type);
 }
 adddoctemplate(objrequest: DocumentTemplateConfiguration) {
   debugger
-  return this.http.postJson(objrequest, "api/documenttemplateconfiguration/savedocumenttemplateconfiguration");
+  return this.http.postJson(objrequest, "api/documenttemplateconfiguration/savedocumenttemplateconfiguration",this.type);
 }
 }

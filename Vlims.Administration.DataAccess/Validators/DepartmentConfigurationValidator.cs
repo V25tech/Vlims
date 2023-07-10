@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Vlims.Services
+namespace Vlims.Administration.DataAccess
 {
     using System;
     using System.Text;
@@ -25,8 +25,8 @@ namespace Vlims.Services
             {
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
-                validationMessages.Append(validationHelper.NullCheckValidator(departmentConfiguration.DPCFId, nameof(departmentConfiguration.DPCFId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(departmentConfiguration.DPCFId,50, nameof(departmentConfiguration.DPCFId)));
+                //validationMessages.Append(validationHelper.NullCheckValidator(departmentConfiguration.DPCFId, nameof(departmentConfiguration.DPCFId)));
+                //validationMessages.Append(validationHelper.LengthCheckValidator(departmentConfiguration.DPCFId,50, nameof(departmentConfiguration.DPCFId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(departmentConfiguration.HierarchyManagementId, nameof(departmentConfiguration.HierarchyManagementId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(departmentConfiguration.HierarchyManagementId,50, nameof(departmentConfiguration.HierarchyManagementId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(departmentConfiguration.DepartmentName,50, nameof(departmentConfiguration.DepartmentName)));

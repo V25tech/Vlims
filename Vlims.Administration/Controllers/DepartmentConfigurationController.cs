@@ -12,8 +12,8 @@ namespace Vlims.Controllers
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
     using Vlims.Administration.Entities;
+    using Vlims.Administration.Manager;
     using Vlims.Common;
-    using Vlims.Services;
 
 
     /// <summary>

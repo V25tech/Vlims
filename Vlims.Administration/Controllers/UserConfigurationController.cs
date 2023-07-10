@@ -42,11 +42,11 @@ namespace PolicySummary.Controllers
         /// This method is used to Get List of UserConfiguration
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
-        public ActionResult<ResponseContext<UserConfiguration>> GetAllUserConfiguration(RequestContext requestContext)
+        [HttpPost("getusers")]
+        public ActionResult GetAllUserConfiguration(RequestContext requestContext)
         {
             var result = userConfigurationService.GetAllUserConfiguration(requestContext);
-            return result;
+            return Ok(result);
         }
         
         /// <summary>

@@ -9,11 +9,6 @@
 
 namespace Vlims.Administration.Manager
 {
-    using System;
-    using System.Text;
-    using System.IO;
-    using System.Linq;
-    using System.Data;
     using System.Collections.Generic;
     using Vlims.Common;
     using Vlims.Administration.Entities;
