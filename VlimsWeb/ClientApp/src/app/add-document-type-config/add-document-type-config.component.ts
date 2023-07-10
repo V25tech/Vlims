@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CommonService } from '../shared/common.service';
 import { DocumentTypeServiceService } from '../Services/document-type-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { formatDate } from '@angular/common';
 
 
 //declare var $: any;
@@ -32,8 +33,11 @@ export class AddDocumentTypeConfigComponent implements OnInit {
   adddoctype(doctype: DocumentTypeConfiguration) {
     debugger
     doctype.CreatedBy="admin";
-    doctype.ModifiedBy="admin";
-    //this.router.navigate(['/products']);
+    doctype.ModifiedBy = "admin";
+    const format = 'dd/MM/yyyy';
+    const locale = 'en-US';
+    const formattedDate = formatDate(doctype.CreatedDate, format, locale);
+    doctype.CreatedDate = formattedDate;
     this.doctypeservice.adddoctypeconfig(doctype).subscribe((res:any)=>{
       this.toastr.success('Added');
       this.router.navigate(['/mainpage/documentmaster']);

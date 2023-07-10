@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SpinnerService } from '../spinner/spinner.service';
 import { DocumentRequestService } from '../Services/document-request.service';
 import { Router } from '@angular/router';
+import { formatDate } from "@angular/common";
 
 @Component({
   selector: 'app-document-request',
