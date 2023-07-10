@@ -42,7 +42,7 @@ namespace PolicySummary.Controllers
         /// This method is used to Get List of RoleConfiguration
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
+        [HttpPost("getroles")]
         public ActionResult<ResponseContext<RoleConfiguration>> GetAllRoleConfiguration(RequestContext requestContext)
         {
             var result = roleConfigurationService.GetAllRoleConfiguration(requestContext);

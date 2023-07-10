@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Vlims.Services
+namespace Vlims.Administration.DataAccess
 {
     using System;
     using System.Linq;

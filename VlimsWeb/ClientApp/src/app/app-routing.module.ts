@@ -31,6 +31,16 @@ import { DocumentEffectiveComponent } from './document-effective/document-effect
 import { DocumentAdditionaltasksComponent } from './document-additionaltasks/document-additionaltasks.component';
 import { AddDocumentTemplateConfigComponent } from './add-document-template-config/add-document-template-config.component';
 import { AddWorkflowConfigComponent } from './add-workflow-config/add-workflow-config.component';
+import { HierarchymanagementComponent } from './hierarchymanagement/hierarchymanagement.component';
+import { DepartmentComponent } from './department/department.component';
+//import { DepartmentConfigurationComponent } from './department-configuration/department-configuration.component';
+import { RolesComponent } from './roles/roles.component';
+import { FunctionalProfileComponent } from './functional-profile/functional-profile.component';
+import { AddDepartmentComponent } from './add-department/add-department.component';
+import { AddRolesComponent } from './add-roles/add-roles.component';
+import { UserConfigurationComponent } from './user-configuration/user-configuration.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 
 const routes: Routes = [
@@ -145,6 +155,54 @@ const routes: Routes = [
           {
             path: 'additasks',
             component: DocumentAdditionaltasksComponent
+          }
+        ]
+      }
+      ,{
+        path: 'hierarchy',
+        component: HierarchymanagementComponent,
+        children: [
+          {
+            path: '',
+            component: DepartmentComponent
+          },
+          {
+            path: 'roles',
+            component: RolesComponent
+          },
+          {
+            path: 'functional',
+            component: FunctionalProfileComponent
+          },
+          {
+            path: 'department',
+            component: DepartmentComponent
+          },
+          {
+            path: 'adddept',
+            component: AddDepartmentComponent
+          },
+          {
+            path: 'addrole',
+            component: AddRolesComponent
+          }
+        ]
+      }
+      ,{
+        path: 'users',
+        component: UserManagementComponent,
+        children: [
+          {
+            path: '',
+            component: UserConfigurationComponent
+          },
+          {
+            path: 'users',
+            component: UserConfigurationComponent
+          },
+          {
+            path: 'adduser',
+            component: AddUserComponent
           }
         ]
       }

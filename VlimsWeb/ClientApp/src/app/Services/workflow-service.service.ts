@@ -6,14 +6,14 @@ import { HttpbaseService } from '../shared/httpbase.service';
   providedIn: 'root'
 })
 export class WorkflowServiceService {
-
+  type:string="master";
   constructor(private http: HttpbaseService) { }
   getworkflow(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/workflowconiguration/getallworkflow");
+    return this.http.postJsonLogin(objrequest, "api/workflowconiguration/getallworkflow",this.type);
 }
 addworkflow(objrequest: workflowconiguration) {
   debugger
-  return this.http.postJsonLogin(objrequest, "api/workflowconiguration/saveworkflowconiguration");
+  return this.http.postJsonLogin(objrequest, "api/workflowconiguration/saveworkflowconiguration",this.type);
 }
 }

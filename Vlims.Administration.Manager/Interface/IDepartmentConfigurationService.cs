@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Vlims.Services
+namespace Vlims.Administration.Manager
 {
     using System.Collections.Generic;
     using Vlims.Administration.Entities;

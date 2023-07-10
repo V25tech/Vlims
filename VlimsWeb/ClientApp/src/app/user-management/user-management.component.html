@@ -1,0 +1,27 @@
+
+<style>
+    table {
+    width: 100%;
+  }
+  .mat-header-cell {
+    color: black;
+    font-size: 18px;
+}
+  </style>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a [ngClass]="{'active':tabselect==='users'}" class="nav-item nav-link"  id="nav-home-tab" data-toggle="tab" (click)="tabselect='hierarchy'"  [routerLink]="['/mainpage/hierarchy/users']" role="tab" aria-controls="nav-home" aria-selected="true">User Configuration</a>
+    <a [ngClass]="{'active':tabselect==='activeuser'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='roles'" [routerLink]="['/mainpage/hierarchy/users']" role="tab" aria-controls="nav-profile" aria-selected="false">Activate/De-Activate User</a>
+    <a [ngClass]="{'active':tabselect==='usergroup'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='functional'" [routerLink]="['/mainpage/hierarchy/users']" role="tab" aria-controls="nav-profile" aria-selected="false">User Group Configuration</a>
+    <a [ngClass]="{'active':tabselect==='audit'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='functional'" [routerLink]="['/mainpage/hierarchy/users']" role="tab" aria-controls="nav-profile" aria-selected="false">Audit Logs</a>
+    <!-- <a [ngClass]="{'active':tabselect==='notification'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='notification'" [routerLink]="['/mainpage/documentmaster/notification']" role="tab" aria-controls="nav-profile" aria-selected="false">Notification</a>
+    <a [ngClass]="{'active':tabselect==='dashboard'}" class="nav-item nav-link"  id="nav-profile-tab" data-toggle="tab" (click)="tabselect='dashboard'" [routerLink]="['/mainpage/documentmaster/dashboard']" role="tab" aria-controls="nav-profile" aria-selected="false">Dashboard</a> -->
+    
+  </div>
+  
+</nav>
+
+<router-outlet></router-outlet>
+
+      

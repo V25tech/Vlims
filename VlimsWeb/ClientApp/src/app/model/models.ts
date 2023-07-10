@@ -2470,3 +2470,43 @@ export class DocumentTemplateConfiguration {
   ModifiedBy: string;
   ModifiedDate: string | null;
 }
+export class DepartmentConfiguration {
+  DPCFId: string;
+  HierarchyManagementId: string;
+  DepartmentName: string;
+  DepartmentCode: string;
+  Comments: string;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+}
+export class RoleConfiguration {
+  ROCFId: string;
+  HierarchyManagementId: string;
+  Role: string;
+  Department: string;
+  Comments: string;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+}
+export class UserConfiguration {
+  UCFId: string;
+  UserManagementID: string;
+  FirstName: string;
+  LastName: string;
+  UserID: string;
+  Department: string;
+  Role: string;
+  Doj: string;
+  Empid: number | null;
+  EmailId: string;
+  Activedirectory: string;
+  Standarduser: string;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+}
