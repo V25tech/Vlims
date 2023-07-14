@@ -17,13 +17,13 @@
 
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">S.No</th>
             <th scope="col">Document Title</th>
             <th scope="col">Document No</th>
             <th scope="col">Document Type</th>
             <th scope="col">Department</th>
             <th scope="col">Effective Date</th>
-            <th scope="col">Review Date</th>
+            <!-- <th scope="col">Review Date</th> -->
             
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
@@ -36,15 +36,15 @@
             <td>{{doc?.DocumentNo}}</td>
             <td>{{doc?.Documenttypename}}</td>
             <td>{{doc?.Department}}</td>
-            <td>{{doc?.ModifiedBy}}</td>
+            <!-- <td>{{doc?.ModifiedBy}}</td> -->
             <td>{{doc?.ModifiedDate}}</td>
             <td>"Success"</td>
             <td>
               <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTCId"
                       data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);">
-                <span class="fa fa-flag fa-wrench"></span>
+                <span class="fa fa-edit"></span>
               </button>
-              <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button>
+              <!-- <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button> -->
             </td>
           </tr>
         </tbody>

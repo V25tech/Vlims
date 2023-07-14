@@ -17,8 +17,8 @@
 
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Document Type Name</th>
+            <th scope="col">S.No</th>
+            <th scope="col">Document Type</th>
             <th scope="col">Department</th>
             <th scope="col">Registered By</th>
             <!-- <th scope="col">Registered On</th> -->
@@ -30,9 +30,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let doc of requests; let i=index">
-            <th scope="row">{{i+1}}</th>
+            <th>{{i+1}}</th>
             <td>{{doc?.documenttype}}</td>
-            <td>{{doc?.department}}</td>           
+            <td>{{doc?.department}}</td>
             <td>{{doc?.createdBy}}</td>
             <!-- <td>{{doc?.createdDate}}</td> -->
             <td> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;-  </td>
@@ -41,7 +41,7 @@
             <td>
               <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTCId"
                       data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);">
-                <span class="fa fa-flag fa-wrench"></span>
+                <span class="fa fa-edit"></span>
               </button>
               <!-- <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button> -->
             </td>
