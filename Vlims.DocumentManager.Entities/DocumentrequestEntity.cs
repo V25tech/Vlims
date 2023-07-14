@@ -40,6 +40,12 @@ namespace Vlims.DMS.Entities
 
         private DateTime? modifieddateField;
 
+        private string statusField;
+
+        private string approvedbyField;
+
+        private DateTime? approvedOnField;
+
         public string DRID
         {
             get
@@ -169,6 +175,39 @@ namespace Vlims.DMS.Entities
             set
             {
                 this.modifieddateField = value;
+            }
+        }
+        public string Status
+        {
+            get
+            {
+                return this.statusField;
+            }
+            set
+            {
+                this.statusField = value;
+            }
+        }
+        public string Approvedby
+        {
+            get
+            {
+                return this.approvedbyField;
+            }
+            set
+            {
+                this.approvedbyField = value;
+            }
+        }
+        public DateTime? ApprovedOn
+        {
+            get
+            {
+                return this.approvedOnField;
+            }
+            set
+            {
+                this.approvedOnField = value;
             }
         }
     }

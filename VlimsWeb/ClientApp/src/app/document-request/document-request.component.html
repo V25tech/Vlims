@@ -21,7 +21,9 @@
             <th scope="col">Document Type Name</th>
             <th scope="col">Department</th>
             <th scope="col">Registered By</th>
-            <th scope="col">Registered On</th>
+            <!-- <th scope="col">Registered On</th> -->
+            <th scope="col">Approved By</th>
+            <th scope="col">Approved On</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
@@ -32,14 +34,16 @@
             <td>{{doc?.documenttype}}</td>
             <td>{{doc?.department}}</td>           
             <td>{{doc?.createdBy}}</td>
-            <td>{{doc?.createdDate}}</td>
-            <td>"Success"</td>
+            <!-- <td>{{doc?.createdDate}}</td> -->
+            <td> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;-  </td>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-  </td>
+            <td>{{doc?.status}}</td>
             <td>
               <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTCId"
                       data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);">
                 <span class="fa fa-flag fa-wrench"></span>
               </button>
-              <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button>
+              <!-- <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button> -->
             </td>
           </tr>
         </tbody>

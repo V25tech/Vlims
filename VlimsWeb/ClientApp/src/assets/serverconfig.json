@@ -1,6 +1,6 @@
 {
   "BaseUrl": "https://localhost:7151/",
-  "documentmasterUrl":"https://localhost:7151/",
+  "documentmasterUrl":"https://localhost:7157/",
   "documentmanagerUrl":"https://localhost:7151/",
   "adminUrl":"https://localhost:7186/"
 }

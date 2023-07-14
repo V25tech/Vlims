@@ -6,14 +6,14 @@ import { HttpbaseService } from '../shared/httpbase.service';
   providedIn: 'root'
 })
 export class DocumentRequestService {
-
+  type:string="manager";
   constructor(private http: HttpbaseService) { }
   getdocumentrequest(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/documentrequest/GetAllDocreq");
+    return this.http.postJsonLogin(objrequest, "api/documentrequest/GetAllDocreq",this.type);
   }
   adddocreqconfig(objrequest: DocumentRequestConfiguration) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/documentrequest/SaveDocumentrequest");
+    return this.http.postJsonLogin(objrequest, "api/documentrequest/SaveDocumentrequest",this.type);
   }
 }

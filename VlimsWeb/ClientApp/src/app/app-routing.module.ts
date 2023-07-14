@@ -138,8 +138,8 @@ const routes: Routes = [
         component: DocumentmanagerComponent,
         children: [
           {
-            path: 'documenmgr',
-            component: DocumentmanagerComponent
+            path: '',
+            component: DocumentRequestComponent
           },
           {
             path: 'documreq',

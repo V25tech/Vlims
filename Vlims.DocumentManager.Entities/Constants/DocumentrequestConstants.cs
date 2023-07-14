@@ -39,7 +39,13 @@ namespace Vlims.DMS.Entities
         public const string ModifiedBy = "@ModifiedBy_PSY";
         
         public const string ModifiedDate = "@ModifiedDate_PSY";
-        
+
+        public const string Status = "@Status_PSY";
+
+        public const string ApprovedOn = "@ApprovedOn_PSY";
+
+        public const string Approvedby = "@Approvedby_PSY";
+
         public const string USP_Documentrequest_PSY_GET_ALL = "dbo.USP_Documentrequest_PSY_GET_ALL";
         
         public const string USP_Documentrequest_PSY_GET = "dbo.USP_Documentrequest_PSY_GET";
