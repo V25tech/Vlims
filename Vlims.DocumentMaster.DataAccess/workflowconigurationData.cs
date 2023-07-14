@@ -64,6 +64,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workflowconigurationConstants.approvalsCount, Value = workflowconiguration.approvalsCount });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.CreatedBy, Value = workflowconiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.ModifiedBy, Value = workflowconiguration.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.Status, Value = workflowconiguration.Status });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(workflowconigurationConstants.USP_workflowconiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -86,6 +87,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workflowconigurationConstants.reviewsCount, Value = workflowconiguration.reviewsCount });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workflowconigurationConstants.approvalsCount, Value = workflowconiguration.approvalsCount });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.ModifiedBy, Value = workflowconiguration.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.Status, Value = workflowconiguration.Status });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(workflowconigurationConstants.USP_workflowconiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

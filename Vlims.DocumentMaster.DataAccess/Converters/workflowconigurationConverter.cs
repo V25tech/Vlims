@@ -44,6 +44,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         workflowconigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[workflowconigurationConstants.CreatedDate.Trim('@')]);
                         workflowconigurationData.ModifiedBy = Convert.ToString(row[workflowconigurationConstants.ModifiedBy.Trim('@')]);
                         workflowconigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[workflowconigurationConstants.ModifiedDate.Trim('@')]);
+                        workflowconigurationData.ModifiedBy = Convert.ToString(row[workflowconigurationConstants.ModifiedBy.Trim('@')]);
                         result.Add(workflowconigurationData);
                     }
                 }

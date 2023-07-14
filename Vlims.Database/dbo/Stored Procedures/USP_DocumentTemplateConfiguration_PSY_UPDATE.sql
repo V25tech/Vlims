@@ -8,7 +8,8 @@
 @footer_PSY NVarChar(50),
 @footer_rows_PSY NVarChar(50),
 @footer_columns_PSY NVarChar(50),
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@Status_PSY NVarChar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -23,7 +24,8 @@ columns_PSY=@columns_PSY,
 footer_PSY=@footer_PSY,
 footer_rows_PSY=@footer_rows_PSY,
 footer_columns_PSY=@footer_columns_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [DTID_PSY] = @DTID_PSY ;  select @DTID_PSY; 
+ModifiedBy_PSY=@ModifiedBy_PSY, 
+Status_PSY=@Status_PSY WHERE  [DTID_PSY] = @DTID_PSY ;  select @DTID_PSY; 
   
   END TRY 
  BEGIN CATCH 

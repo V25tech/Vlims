@@ -48,6 +48,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentTemplateConfigurationConstants.CreatedDate.Trim('@')]);
                         documentTemplateConfigurationData.ModifiedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.ModifiedBy.Trim('@')]);
                         documentTemplateConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentTemplateConfigurationConstants.ModifiedDate.Trim('@')]);
+                        documentTemplateConfigurationData.Status = Convert.ToString(row[DocumentTemplateConfigurationConstants.Status.Trim('@')]);
                         result.Add(documentTemplateConfigurationData);
                     }
                 }

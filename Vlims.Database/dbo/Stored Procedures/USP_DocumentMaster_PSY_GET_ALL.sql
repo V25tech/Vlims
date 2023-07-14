@@ -11,8 +11,8 @@ DashboardConfiguration_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY  
- ,count(*) over() as TotalRows 
+ModifiedDate_PSY,  
+ count(*) over() as TotalRows 
  FROM [dbo].[DocumentMaster_PSY] WITH (NOLOCK) 
  Order by [Dmid_PSY]  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 

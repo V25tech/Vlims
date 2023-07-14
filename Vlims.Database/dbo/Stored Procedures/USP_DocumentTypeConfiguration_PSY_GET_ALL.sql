@@ -11,8 +11,9 @@ Assigntodepartment_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY  
- ,count(*) over() as TotalRows 
+ModifiedDate_PSY,
+Status_PSY,
+ count(*) over() as TotalRows 
  FROM [dbo].[DocumentTypeConfiguration_PSY] WITH (NOLOCK) 
  Order by [DTCId_PSY]  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 

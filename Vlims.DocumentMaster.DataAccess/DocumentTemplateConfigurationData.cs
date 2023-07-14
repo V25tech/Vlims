@@ -67,6 +67,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footercolumns, Value = documentTemplateConfiguration.footercolumns });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.CreatedBy, Value = documentTemplateConfiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.ModifiedBy, Value = documentTemplateConfiguration.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Status, Value = documentTemplateConfiguration.Status });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -93,6 +94,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footerrows, Value = documentTemplateConfiguration.footerrows });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footercolumns, Value = documentTemplateConfiguration.footercolumns });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.ModifiedBy, Value = documentTemplateConfiguration.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Status, Value = documentTemplateConfiguration.Status });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

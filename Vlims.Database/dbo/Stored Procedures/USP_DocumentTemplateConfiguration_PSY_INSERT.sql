@@ -9,7 +9,8 @@
 @footer_rows_PSY NVarchar (50),
 @footer_columns_PSY NVarchar (50),
 @CreatedBy_PSY NVarChar(100),
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@Status_PSY NVarChar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -30,7 +31,8 @@ footer_columns_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY)
+ModifiedDate_PSY,
+Status_PSY)
  VALUES 
 (@DocumentMasterId_PSY,
 @Templatename_PSY,
@@ -46,7 +48,8 @@ ModifiedDate_PSY)
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate() );
+ GetDate(),
+ @Status_PSY);
  SELECT @ID = @@IDENTITY; 
  select @ID 
   

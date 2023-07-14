@@ -18,7 +18,8 @@ columns_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY 
+ModifiedDate_PSY ,
+Status_PSY
   FROM [dbo].[DocumentTemplateConfiguration_PSY] WITH (NOLOCK) where [DTID_PSY] = @DTID_PSY   
  END TRY 
  BEGIN CATCH 

@@ -4,7 +4,8 @@
 @Description_PSY NVarChar(50),
 @Assigntodepartment_PSY NVarChar(50),
 @CreatedBy_PSY NVarChar(100),
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@Status_PSY NVarChar(100) 
  AS 
  BEGIN 
   BEGIN TRY 
@@ -19,7 +20,8 @@ Assigntodepartment_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY)
+ModifiedDate_PSY,
+Status_PSY)
  VALUES 
 (@DocumentMasterId_PSY,
 @Documenttypename_PSY,
@@ -29,7 +31,8 @@ ModifiedDate_PSY)
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate() );
+ GetDate(),
+ @Status_PSY);
  SELECT @ID = @@IDENTITY; 
  select @ID 
   

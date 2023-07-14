@@ -4,7 +4,8 @@
 @department_PSY NVarChar(50),
 @reviewsCount_PSY Int,
 @approvalsCount_PSY Int,
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@Status_PSY NVarChar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -15,7 +16,8 @@ documenttype_PSY=@documenttype_PSY,
 department_PSY=@department_PSY,
 reviewsCount_PSY=@reviewsCount_PSY,
 approvalsCount_PSY=@approvalsCount_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [WFCId_PSY] = @WFCId_PSY ;  select @WFCId_PSY; 
+ModifiedBy_PSY=@ModifiedBy_PSY,
+Status_PSY=@Status_PSY WHERE  [WFCId_PSY] = @WFCId_PSY ;  select @WFCId_PSY; 
   
   END TRY 
  BEGIN CATCH 

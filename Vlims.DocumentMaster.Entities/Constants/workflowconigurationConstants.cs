@@ -37,7 +37,9 @@ namespace Vlims.DocumentMaster.Entities
         public const string ModifiedBy = "@ModifiedBy_PSY";
         
         public const string ModifiedDate = "@ModifiedDate_PSY";
-        
+
+        public const string Status = "@Status_PSY";
+
         public const string USP_workflowconiguration_PSY_GET_ALL = "dbo.USP_workflowconiguration_PSY_GET_ALL";
         
         public const string USP_workflowconiguration_PSY_GET = "dbo.USP_workflowconiguration_PSY_GET";

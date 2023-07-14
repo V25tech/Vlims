@@ -3,7 +3,8 @@
 @documenttypeprefix_PSY NVarChar(50),
 @Description_PSY NVarChar(50),
 @Assigntodepartment_PSY NVarChar(50),
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@Status_PSY NVarChar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -13,7 +14,8 @@ Documenttypename_PSY=@Documenttypename_PSY,
 documenttypeprefix_PSY=@documenttypeprefix_PSY,
 Description_PSY=@Description_PSY,
 Assigntodepartment_PSY=@Assigntodepartment_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [DTCId_PSY] = @DTCId_PSY ;  select @DTCId_PSY; 
+ModifiedBy_PSY=@ModifiedBy_PSY,
+Status_PSY=@Status_PSY WHERE  [DTCId_PSY] = @DTCId_PSY ;  select @DTCId_PSY; 
   
   END TRY 
  BEGIN CATCH 

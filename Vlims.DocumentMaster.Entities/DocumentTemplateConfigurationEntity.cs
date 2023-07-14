@@ -46,6 +46,9 @@ namespace Vlims.DocumentMaster.Entities
 
         private string modifiedbyField;
 
+        private string statusField;
+
+
         private DateTime? modifieddateField;
 
         public string DTID
@@ -226,6 +229,17 @@ namespace Vlims.DocumentMaster.Entities
             set
             {
                 this.modifieddateField = value;
+            }
+        }
+        public string Status
+        {
+            get
+            {
+                return this.statusField;
+            }
+            set
+            {
+                this.statusField = value;
             }
         }
     }

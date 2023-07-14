@@ -11,7 +11,8 @@ Assigntodepartment_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY 
+ModifiedDate_PSY,
+Status_PSY
   FROM [dbo].[DocumentTypeConfiguration_PSY] WITH (NOLOCK) where [DTCId_PSY] = @DTCId_PSY   
  END TRY 
  BEGIN CATCH 

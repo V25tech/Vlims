@@ -12,7 +12,8 @@ approvalsCount_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY 
+ModifiedDate_PSY ,
+Status_PSY
   FROM [dbo].[workflowconiguration_PSY] WITH (NOLOCK) where [WFCId_PSY] = @WFCId_PSY   
  END TRY 
  BEGIN CATCH 
