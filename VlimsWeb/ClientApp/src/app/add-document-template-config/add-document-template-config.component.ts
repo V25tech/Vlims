@@ -45,7 +45,8 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
     adddoctype(doctype: DocumentTemplateConfiguration) {
       debugger
       doctype.CreatedBy="admin";
-      doctype.ModifiedBy="admin";
+      doctype.ModifiedBy = "admin";
+      doctype.Status = '';
       
       
       //this.router.navigate(['/products']);

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -69,10 +69,11 @@
         <span>DMS</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" [routerLink]="['/mainpage/documentmaster']">Document Master</a>
-            <a class="collapse-item" [routerLink]="['/mainpage/documentmanager']">Document Manager</a>
-        </div>
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" [routerLink]="['/mainpage/workitems']">Work items assigned to me</a>
+        <a class="collapse-item" [routerLink]="['/mainpage/documentmaster']">Document Master</a>
+        <a class="collapse-item" [routerLink]="['/mainpage/documentmanager']">Document Manager</a>
+      </div>
     </div>
 </li>
       <!-- <li class="nav-item" [ngClass]="{'active':tabselect==='documentmaster'}">

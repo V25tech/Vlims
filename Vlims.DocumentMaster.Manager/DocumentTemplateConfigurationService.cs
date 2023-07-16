@@ -53,7 +53,8 @@ namespace Vlims.DocumentMaster.Manager
         {
             try
             {
-                if(documentTemplateConfiguration!=null && documentTemplateConfiguration.DocumentMasterId==null)
+                documentTemplateConfiguration.Status = "In-Progress";
+                if (documentTemplateConfiguration!=null && documentTemplateConfiguration.DocumentMasterId==null)
                 {
                     documentTemplateConfiguration.DocumentMasterId = "1";
                     documentTemplateConfiguration.header = "header";

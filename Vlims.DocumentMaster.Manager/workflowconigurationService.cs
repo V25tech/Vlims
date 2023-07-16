@@ -61,6 +61,7 @@ namespace Vlims.DocumentMaster.Manager
                 String validationMessages = workflowconigurationValidator.IsValidworkflowconiguration(workflowconiguration);
                 if (validationMessages.Length <= 0)
                 {
+                    workflowconiguration.Status = "Under Review";
                     var result = workflowconigurationData.Saveworkflowconiguration(workflowconiguration);
                     return result;
                 }

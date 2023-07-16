@@ -42,6 +42,7 @@ import { UserConfigurationComponent } from './user-configuration/user-configurat
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { AddDocumentRequestComponent } from './add-document-request/add-document-request.component';
+import { WorkitemsComponent } from './workitems/workitems.component';
 
 
 const routes: Routes = [
@@ -94,44 +95,44 @@ const routes: Routes = [
       {
         path: 'documentmaster',
         component: DocumentMasterComponent,
-        children:[
+        children: [
           {
-            path:'',
-            component:DocumentTypeConfigComponent
+            path: '',
+            component: DocumentTypeConfigComponent
           },
           {
-            path:'doctemplate',
-            component:DocumentTemplateConfigComponent
+            path: 'doctemplate',
+            component: DocumentTemplateConfigComponent
           },
           {
-            path:'workflow',
-            component:WorkflowConfigComponent
+            path: 'workflow',
+            component: WorkflowConfigComponent
           },
           {
-            path:'notification',
-            component:NotificationConfigComponent
+            path: 'notification',
+            component: NotificationConfigComponent
           },
           {
-            path:'dashboard',
-            component:DashboardConfigComponent
+            path: 'dashboard',
+            component: DashboardConfigComponent
           },
           {
-            path:'doctype',
-            component:DocumentTypeConfigComponent
+            path: 'doctype',
+            component: DocumentTypeConfigComponent
           },
           {
-            path:'adddoctype',
-            component:AddDocumentTypeConfigComponent
+            path: 'adddoctype',
+            component: AddDocumentTypeConfigComponent
           },
           {
-            path:'adddoctemplate',
-            component:AddDocumentTemplateConfigComponent
+            path: 'adddoctemplate',
+            component: AddDocumentTemplateConfigComponent
           },
           {
-            path:'addworkflow',
-            component:AddWorkflowConfigComponent
+            path: 'addworkflow',
+            component: AddWorkflowConfigComponent
           }
-        ]        
+        ]
       },
       {
         path: 'documentmanager',
@@ -157,13 +158,23 @@ const routes: Routes = [
             path: 'additasks',
             component: DocumentAdditionaltasksComponent
           },
-           {
-             path: 'adddocrequest',
-             component: AddDocumentRequestComponent
+          {
+            path: 'adddocrequest',
+            component: AddDocumentRequestComponent
           },
         ]
-      }
-      ,{
+      },
+      {
+        path: 'workitems',
+        component: WorkitemsComponent,
+        children: [
+          {
+            path: '',
+            component: WorkitemsComponent
+          }
+        ]
+      },
+      {
         path: 'hierarchy',
         component: HierarchymanagementComponent,
         children: [
@@ -193,7 +204,7 @@ const routes: Routes = [
           }
         ]
       }
-      ,{
+      , {
         path: 'users',
         component: UserManagementComponent,
         children: [

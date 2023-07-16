@@ -2471,6 +2471,7 @@ export class DocumentTemplateConfiguration {
   CreatedDate: string | null;
   ModifiedBy: string;
   ModifiedDate: string | null;
+  Status: string | null
 }
 export class DepartmentConfiguration {
   DPCFId: string;
@@ -2511,4 +2512,13 @@ export class UserConfiguration {
   CreatedDate: string | null;
   ModifiedBy: string;
   ModifiedDate: string | null;
+}
+export class WorkItemsConfiguration {
+  TaskType: string;
+  Stage: string;
+  AssignedtoGroup: string;
+  InitiatedBy: string;
+  InitiatedOn: string; 
+  Status: string;
+  DueDate: string;
 }

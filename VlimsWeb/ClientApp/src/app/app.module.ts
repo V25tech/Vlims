@@ -67,6 +67,7 @@ import { AddUserGroupComponent } from './add-user-group/add-user-group.component
 import { HierarchymanagementComponent } from './hierarchymanagement/hierarchymanagement.component';
 import { FunctionalProfileComponent } from './functional-profile/functional-profile.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { WorkitemsComponent } from './workitems/workitems.component';
 
 
 
@@ -87,7 +88,7 @@ import { UserManagementComponent } from './user-management/user-management.compo
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
      DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, 
      AddDocumentRequestComponent,DepartmentComponent,UserConfigurationComponent,AddUserComponent,
-    UserGroupConfigurationComponent,RolesComponent,AddRolesComponent,AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent],
+    UserGroupConfigurationComponent,RolesComponent,AddRolesComponent,AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })
