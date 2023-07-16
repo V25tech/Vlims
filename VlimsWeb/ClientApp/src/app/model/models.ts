@@ -2363,6 +2363,7 @@ export class AttributeTypes {
   createdDate: string | null;
   modifiedBy: string;
   modifiedDate: string | null;
+  Status: string | null;
 }
 
 export class DocumentTypeConfiguration {
@@ -2376,6 +2377,7 @@ export class DocumentTypeConfiguration {
   CreatedDate: string | null;
   ModifiedBy: string;
   ModifiedDate: string | null;
+  Status: string | null;
 }
 export class DocumentRequestConfiguration {
   DTCId: string;
@@ -2441,6 +2443,7 @@ export class noticationconfiguration {
   createdDate: string | null;
   modifiedBy: string;
   modifiedDate: string | null;
+  Status: string | null;
 }
 export class workflowconiguration {
   WFCId: string;
@@ -2454,6 +2457,7 @@ export class workflowconiguration {
   CreatedDate: string | null;
   ModifiedBy: string;
   ModifiedDate: string | null;
+  Status: string | null;
 }
 export class DocumentTemplateConfiguration {
   DTID: string;
@@ -2471,7 +2475,7 @@ export class DocumentTemplateConfiguration {
   CreatedDate: string | null;
   ModifiedBy: string;
   ModifiedDate: string | null;
-  Status: string | null
+  Status: string | null;
 }
 export class DepartmentConfiguration {
   DPCFId: string;
