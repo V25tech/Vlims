@@ -10,7 +10,7 @@
       </button>
     </div>
   </div>
-  <div class="card-body"> 
+  <div class="card-body">
 
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="requests?.length>   0">
@@ -22,7 +22,7 @@
             <th scope="col">Document No</th>
             <th scope="col">Document Type</th>
             <th scope="col">Department</th>
-            <th scope="col">Document</th>
+            <!--<th scope="col">Document</th>-->
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
@@ -30,15 +30,15 @@
         <tbody>
           <tr *ngFor="let doc of requests; let i=index">
             <th> {{i+1}}</th>
-            <td>{{doc?.documenttitle}}</td>
-            <td>{{doc?.documentno}}</td>
+            <!--<td>{{doc?.documenttitle}}</td>-->
+            <td>SOP for DMS Implementation   </td>
+            <!--<td>{{doc?.documentno}}</td>-->
+            <td>QA/SOP/023/001-00</td>
             <td>{{doc?.documenttype}}</td>
             <td>{{doc?.department}}</td>
-            <td>{{doc?.document}}</td>
-            <td>"Success"</td>
-            
+            <td>{{doc?.status}}</td>
             <td>
-              <span class="fa fa-edit"></span>
+              <span class="fa fa-edit" [routerLink]="['/mainpage/documentmanager/documenprepadd']"></span>
             </td>
           </tr>
         </tbody>

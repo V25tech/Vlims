@@ -23,7 +23,7 @@ namespace Vlims.DocumentManager.Manager
     public interface IDocumentEffectiveService
     {
         
-        ResponseContext<DocumentEffective> GetAllDocumentEffective(RequestContext requestContext);
+        ResponseContext<Documentrequest> GetAllDocumentEffective(RequestContext requestContext);
         
         DocumentEffective GetDocumentEffectiveByDEID(string dEID);
         

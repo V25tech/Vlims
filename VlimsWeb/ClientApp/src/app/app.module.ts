@@ -69,6 +69,7 @@ import { FunctionalProfileComponent } from './functional-profile/functional-prof
 import { UserManagementComponent } from './user-management/user-management.component';
 import { WorkitemsComponent } from './workitems/workitems.component';
 import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.component';
+import { PlantManagementComponent } from './plant-management/plant-management.component';
 
 
 
@@ -89,7 +90,7 @@ import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.co
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
      DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, 
      AddDocumentRequestComponent,DepartmentComponent,UserConfigurationComponent,AddUserComponent,
-    UserGroupConfigurationComponent,RolesComponent,AddRolesComponent,AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent],
+    UserGroupConfigurationComponent,RolesComponent,AddRolesComponent,AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantManagementComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })
