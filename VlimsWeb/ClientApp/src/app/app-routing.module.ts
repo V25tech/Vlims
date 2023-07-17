@@ -43,6 +43,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { AddDocumentRequestComponent } from './add-document-request/add-document-request.component';
 import { WorkitemsComponent } from './workitems/workitems.component';
+import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.component';
 
 
 const routes: Routes = [
@@ -149,6 +150,10 @@ const routes: Routes = [
           {
             path: 'documprep',
             component: DocumentPreperationComponent
+          },
+          {
+            path: 'documenprepadd',
+            component: DocumentprepAddComponent
           },
           {
             path: 'documeffect',

@@ -68,6 +68,8 @@ import { HierarchymanagementComponent } from './hierarchymanagement/hierarchyman
 import { FunctionalProfileComponent } from './functional-profile/functional-profile.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { WorkitemsComponent } from './workitems/workitems.component';
+import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.component';
+import { PlantManagementComponent } from './plant-management/plant-management.component';
 
 
 
@@ -88,7 +90,7 @@ import { WorkitemsComponent } from './workitems/workitems.component';
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
      DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, 
      AddDocumentRequestComponent,DepartmentComponent,UserConfigurationComponent,AddUserComponent,
-    UserGroupConfigurationComponent,RolesComponent,AddRolesComponent,AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent],
+    UserGroupConfigurationComponent,RolesComponent,AddRolesComponent,AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantManagementComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })

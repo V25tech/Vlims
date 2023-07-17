@@ -25,15 +25,16 @@ namespace Vlims.DocumentManager.Manager
     {        
        
         
-        public ResponseContext<DocumentEffective> GetAllDocumentEffective(RequestContext requestContext)
+        public ResponseContext<Documentrequest> GetAllDocumentEffective(RequestContext requestContext)
         {
             try
             {
                 requestContext.PageNumber = 1;
                 requestContext.PageSize = 50;
-                DataSet dataset = DocumentEffectiveData.GetAllDocumentEffective(requestContext);
-                List<DocumentEffective> result = DocumentEffectiveConverter.SetAllDocumentEffective(dataset);
-                return new ResponseContext<DocumentEffective>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
+                DataSet dataset = DocumentrequestData.GetAllDocumentrequest(requestContext);
+                List<Documentrequest> result = DocumentrequestConverter.SetAllDocumentrequest(dataset);
+                result = result.Where(item => item.Status == "Approved").ToList();
+                return new ResponseContext<Documentrequest>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
             }
             catch (System.Exception ex)
             {
