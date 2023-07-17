@@ -20,7 +20,7 @@ export class DepartmentComponent implements OnInit {
   }
 getdepartments() {
     this.loader.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:1};
+   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.doctypeservice.getdepartments(objrequest).subscribe((data: any) => {
         debugger
         this.types = data.Response;

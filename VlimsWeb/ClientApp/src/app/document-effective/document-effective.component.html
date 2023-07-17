@@ -38,7 +38,10 @@
             <td>{{doc?.department}}</td>
             <td>{{doc?.status}}</td>
             <td>
-              <span class="fa fa-edit" [routerLink]="['/mainpage/documentmanager/documenprepadd']"></span>
+              <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTCId"
+                      data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);">
+                <span class="fa fa-edit" [routerLink]="['/mainpage/documentmanager/documenprepadd']"></span>
+              </button>
             </td>
           </tr>
         </tbody>

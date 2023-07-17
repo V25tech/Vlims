@@ -2354,7 +2354,8 @@ export class AttributeTypes {
 }
   export class RequestContext{
     public PageNumber:number;
-    public PageSize:number;
+    public PageSize: number;
+    public Id: number;
   }
   export class dashboardconfiguration {
   dCId: string;

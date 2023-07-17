@@ -13,4 +13,8 @@ export class DocumentEffectiveService {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documenteffective/GetAllDocEff");
   }
+  getdocumentrequestbyId(objrequest: RequestContext) {
+    debugger
+    return this.http.postJsonLogin(objrequest, "api/documentpreparation/getdocId");
+  }
 }

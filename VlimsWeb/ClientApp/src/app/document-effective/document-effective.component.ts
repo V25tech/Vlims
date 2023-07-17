@@ -32,12 +32,26 @@ export class DocumentEffectiveComponent implements OnInit {
   }
   getdocumentrequest() {
     this.loader.show();
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50 };
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.doctypeservice.getdocumentrequest(objrequest).subscribe((data: any) => {
       debugger
       this.requests = data.response;
       this.loader.hide();
       console.log(this.requests);
+    }, er => {
+      this.toastr.error('loading failed');
+      this.loader.hide();
+    });
+  }
+  editBrand(docPrepInfo) {
+    this.loader.show();
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    objrequest.Id = docPrepInfo.Id;
+    return this.doctypeservice.getdocumentrequestbyId(objrequest).subscribe((data: any) => {
+      debugger
+      this.objProductType = data.response;
+      this.loader.hide();
+      console.log(this.objProductType);
     }, er => {
       this.toastr.error('loading failed');
       this.loader.hide();

@@ -15,11 +15,12 @@ import { DocumentPreperationService } from '../Services/document-preperation.ser
 
 
 
-  export class DocumentPreperationComponent implements OnInit {
+export class DocumentPreperationComponent implements OnInit {
   name: string = 'Product Type';
   requests: Array<DocumentPreperationConfiguration> = [];
+  request: DocumentPreperationConfiguration;
   newtype: DocumentPreperationConfiguration;
-  objProductType: DocumentPreperationConfiguration;
+  //objProductType: DocumentPreperationConfiguration;
   retailId: number;
   header: string;
   actiontype: number;
@@ -36,7 +37,7 @@ import { DocumentPreperationService } from '../Services/document-preperation.ser
   }
   getdocumentrequest() {
     this.loader.show();
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50 };
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.doctypeservice.getdocumentrequest(objrequest).subscribe((data: any) => {
       debugger
       this.requests = data.response;
@@ -47,4 +48,19 @@ import { DocumentPreperationService } from '../Services/document-preperation.ser
       this.loader.hide();
     });
   }
+  editBrand(docPrepInfo) {
+    this.loader.show();
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    objrequest.Id = docPrepInfo.Id;
+    return this.doctypeservice.getdocumentrequestbyId(objrequest).subscribe((data: any) => {
+      debugger
+      this.request = data.response;
+      this.loader.hide();
+      console.log(this.requests);
+    }, er => {
+      this.toastr.error('loading failed');
+      this.loader.hide();
+    });
+  }
+ 
 }

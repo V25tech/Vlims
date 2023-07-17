@@ -53,7 +53,7 @@ namespace PolicySummary.Controllers
         /// This method is used to Get DocumentPreparation By Id dPNID
         /// </summary>
         /// <param name="dPNID"></param>
-        [HttpGet("{dPNID}")]
+        [HttpGet("getdocId")]
         public ActionResult<DocumentPreparation> GetDocumentPreparationByDPNID(string dPNID)
         {
             var result = documentPreparationService.GetDocumentPreparationByDPNID(dPNID);
