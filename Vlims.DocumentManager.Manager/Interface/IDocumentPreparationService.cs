@@ -23,7 +23,7 @@ namespace Vlims.DocumentManager.Manager
     public interface IDocumentPreparationService
     {
         
-        ResponseContext<DocumentPreparation> GetAllDocumentPreparation(RequestContext requestContext);
+        ResponseContext<Documentrequest> GetAllDocumentPreparation(RequestContext requestContext);
         
         DocumentPreparation GetDocumentPreparationByDPNID(string dPNID);
         

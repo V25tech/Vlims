@@ -23,25 +23,30 @@ namespace Vlims.DocumentManager.Manager
     // Comment
     public class DocumentPreparationService : IDocumentPreparationService
     {
-        
-      
-        
-        public ResponseContext<DocumentPreparation> GetAllDocumentPreparation(RequestContext requestContext)
+
+
+
+        public ResponseContext<Documentrequest> GetAllDocumentPreparation(RequestContext requestContext)
         {
+            List<Documentrequest> result1 = null;
             try
             {
                 requestContext.PageNumber = 1;
                 requestContext.PageSize = 50;
-                DataSet dataset = DocumentPreparationData.GetAllDocumentPreparation(requestContext);
-                List<DocumentPreparation> result = DocumentPreparationConverter.SetAllDocumentPreparation(dataset);
-                return new ResponseContext<DocumentPreparation>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
+                //DataSet dataset = DocumentPreparationData.GetAllDocumentPreparation(requestContext);
+                DataSet dataset = DocumentrequestData.GetAllDocumentrequest(requestContext);
+                List<Documentrequest> result = DocumentrequestConverter.SetAllDocumentrequest(dataset);
+                result = result.Where(item => item.Status == "Approved").ToList();
+                return new ResponseContext<Documentrequest>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
+                //List<DocumentPreparation> result = DocumentPreparationConverter.SetAllDocumentPreparation(dataset);
+                //return new ResponseContext<DocumentPreparation>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
             }
             catch (System.Exception ex)
             {
                 throw;
             }
         }
-        
+
         public DocumentPreparation GetDocumentPreparationByDPNID(string dPNID)
         {
             try
@@ -55,7 +60,7 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
+
         public bool SaveDocumentPreparation(DocumentPreparation documentPreparation)
         {
             try
@@ -73,7 +78,7 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
+
         public bool UpdateDocumentPreparation(DocumentPreparation documentPreparation)
         {
             try
@@ -91,7 +96,7 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteDocumentPreparationByDPNID(string dPNID)
         {
             try
@@ -103,7 +108,7 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteAllDocumentPreparation(List<int> dPNIDs)
         {
             try

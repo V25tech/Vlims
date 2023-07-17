@@ -2406,6 +2406,13 @@ export class DocumentPreperationConfiguration {
   ModifiedBy: string;
   ModifiedDate: string | null;
   Status: string;
+  DocumentTitle: string;
+  DocumentNo: string;
+  Department: string;
+  Template: string;
+  Workflow: string;
+  Details: string;
+  Document: string;
 }
 export class DocumentEffectiveConfiguration {
   DTCId: string;

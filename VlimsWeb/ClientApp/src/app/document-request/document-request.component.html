@@ -35,8 +35,8 @@
             <td>{{doc?.department}}</td>
             <td>{{doc?.createdBy}}</td>
             <!-- <td>{{doc?.createdDate}}</td> -->
-            <td> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;-  </td>
-            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-  </td>
+          <td> {{doc?.approvedby}} </td>
+          <td> {{doc?.approvedOn | date}}  </td>
             <td>{{doc?.status}}</td>
             <td>
               <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTCId"
