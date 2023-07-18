@@ -48,19 +48,11 @@ export class DocumentPreperationComponent implements OnInit {
       this.loader.hide();
     });
   }
-  editBrand(docPrepInfo) {
+  editBrand(editband: DocumentPreperationConfiguration) {
+    this.commonsvc.docPreperation = editband;
+    debugger;
     this.loader.show();
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
-    objrequest.Id = docPrepInfo.Id;
-    return this.doctypeservice.getdocumentrequestbyId(objrequest).subscribe((data: any) => {
-      debugger
-      this.request = data.response;
-      this.loader.hide();
-      console.log(this.requests);
-    }, er => {
-      this.toastr.error('loading failed');
-      this.loader.hide();
-    });
+    this.router.navigate(['/mainpage/documentmanager/editdocprep']);   
   }
  
 }

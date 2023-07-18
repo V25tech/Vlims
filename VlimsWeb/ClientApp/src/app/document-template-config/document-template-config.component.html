@@ -20,7 +20,6 @@
             <th scope="col">#</th>
             <th scope="col">Template Name</th>
             <th scope="col">Unique Code</th>
-
             <th scope="col">Registered By</th>
             <th scope="col">Registered On</th>
             <th scope="col">Status</th>
@@ -32,16 +31,11 @@
             <th scope="row">{{i+1}}</th>
             <td>{{doc?.Templatename}}</td>
             <td>{{doc?.Uniquecode}}</td>
-
             <td>{{doc?.ModifiedBy}}</td>
             <td>{{doc?.ModifiedDate | date}}</td>
 
             <td>Success</td>
-            <td>
-              <!--<button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTID"
-                      data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);">
-                <span class="fa fa-flag fa-wrench"></span>
-              </button>-->
+            <td>              
               <button class="btn"> <span class="fa fa-edit" (click)="deleteBrand(i,doc);"></span></button>
             </td>
           </tr>

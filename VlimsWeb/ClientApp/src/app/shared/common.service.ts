@@ -5,7 +5,7 @@ import { PageConfig } from '../model/pageConfig';
 import { SpinnerService } from '../spinner/spinner.service';
 import { ToastrService } from 'ngx-toastr';
 import { transformAll } from '@angular/compiler/src/render3/r3_ast';
-import { DocumentTypeConfiguration } from '../model/models';
+import { DocumentPreperationConfiguration, DocumentRequestConfiguration, DocumentTypeConfiguration } from '../model/models';
 
 
 @Injectable({
@@ -21,7 +21,9 @@ export class CommonService {
   userId: number = 0;
   baseurl: string;
   documenttypeId:string;
-  docobject:DocumentTypeConfiguration;
+  docobject: DocumentTypeConfiguration;
+  docPreperation: DocumentPreperationConfiguration;
+  docrequest: DocumentRequestConfiguration;
   private _searchBS = new BehaviorSubject<string>('');
 
   private _sliderToggleBS = new BehaviorSubject<boolean>(false);

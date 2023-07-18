@@ -164,6 +164,14 @@ const routes: Routes = [
             component: DocumentprepAddComponent
           },
           {
+            path: 'editdocprep',
+            component: DocumentprepAddComponent
+          },
+          {
+            path: 'viewdocprep',
+            component: DocumentprepAddComponent
+          },
+          {
             path: 'documeffect',
             component: DocumentEffectiveComponent
           },
@@ -173,6 +181,14 @@ const routes: Routes = [
           },
           {
             path: 'adddocrequest',
+            component: AddDocumentRequestComponent
+          },
+          {
+            path: 'viewdocreq',
+            component: AddDocumentRequestComponent
+          },
+          {
+            path: 'editdocreq',
             component: AddDocumentRequestComponent
           },
         ]

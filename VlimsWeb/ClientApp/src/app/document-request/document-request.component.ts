@@ -44,5 +44,10 @@ export class DocumentRequestComponent implements OnInit {
       this.loader.hide();
     });
   }
+  editdocreq(editband: DocumentRequestConfiguration) {
+    debugger
+    this.commonsvc.docrequest = editband;
+    this.router.navigate(['/mainpage/documentmanager/editdocreq']);
+  }
 
 }
