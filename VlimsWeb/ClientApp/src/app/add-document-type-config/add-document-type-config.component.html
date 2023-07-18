@@ -1,7 +1,7 @@
 <div class="card shadow mb-4" style="padding-top: 2px;">
         <div class="card-header py-3">
             <div col-12 style="float: left;">
-            <h6 class="m-0 font-weight-bold text-primary">Add Document Type Configuration</h6>
+            <h6 class="m-0 font-weight-bold text-primary">{{title}}</h6>
         </div>
 
         </div>
@@ -13,9 +13,9 @@
                 <label for="BrandName" class="col-sm-4 col-form-label">Document Type Name</label>
             
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="BrandName" [(ngModel)]="adddoc.Documenttypename"
-                  pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter Document Type Name"
-                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+                <input type="text" class="form-control" id="DocumentTypeName" [(ngModel)]="adddoc.Documenttypename" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+                  pattern='[A-Za-z\\s]*' name="DocumentTypeName" aria-describedby="productname" placeholder="Enter Document Type Name"
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && DocumentTypeName.invalid }"  required />
                 </div>
               </div>
               <div class="form-group row">
@@ -23,9 +23,9 @@
                 <label for="BrandName" class="col-sm-4 col-form-label">Document Type Prefix</label>
             
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="BrandName" [(ngModel)]="adddoc.documenttypeprefix"
-                  pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter Document Prefix Name"
-                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+                <input type="text" class="form-control" id="DocumentTypePrefix" [(ngModel)]="adddoc.documenttypeprefix" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+                  pattern='[A-Za-z\\s]*' name="DocumentTypePrefix" aria-describedby="productname" placeholder="Enter Document Prefix Name"
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && DocumentTypePrefix.invalid }"  required />
                 </div>
               </div>
               <div class="form-group row">
@@ -33,9 +33,9 @@
                 <label for="BrandName" class="col-sm-4 col-form-label">Description</label>
             
             <div class="col-sm-8">
-                <input type="textbox" class="form-control" id="BrandName" [(ngModel)]="adddoc.Description"
-                  pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter Description"
-                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+                <input type="textbox" class="form-control" id="Description" [(ngModel)]="adddoc.Description" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+                  pattern='[A-Za-z\\s]*' name="Description" aria-describedby="productname" placeholder="Enter Description"
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && Description.invalid }"  required />
                 </div>
               </div>
               <div class="form-group row">
@@ -43,42 +43,22 @@
                 <label for="BrandName" class="col-sm-4 col-form-label">Assign to Department</label>
             
             <div class="col-sm-8">
-                <!-- <select  class="form-control select" multiple data-live-search="true">
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                    <option value="5">Five</option>
-                    <option value="6">Six</option>
-                    <option value="7">Seven</option>
-                    <option value="8">Eight</option>
-                  </select> -->
-                  <select class="form-control" [(ngModel)]="adddoc.Assigntodepartment" name="typeId" #typeId="ngModel"
-                  [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>
-                  <option [ngValue]=null>Select</option>
-                  <option [ngValue]="QA" [(ngModel)]="adddoc.Assigntodepartment" >QA</option>
-                  <option [ngValue]="QA" [(ngModel)]="adddoc.Assigntodepartment">QC</option>
-                  <option [ngValue]="QA" [(ngModel)]="adddoc.Assigntodepartment">PRD</option>
-                  <option [ngValue]="QA" [(ngModel)]="adddoc.Assigntodepartment">ENG</option>
-                </select>
-                <!-- <input type="text" class="form-control" id="BrandName" [(ngModel)]="newBrand.BrandName"
-                  pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter Brand Name"
-                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required /> -->
+                <select class="form-control" [(ngModel)]="adddoc.Assigntodepartment" name="Assigntodepartment"  id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+            [ngClass]="{ 'is-invalid': fm.submitted && Assigntodepartment.invalid }" required>
+            <option value="Select">Select</option>
+            <option *ngFor="let type of types" value={{type.DepartmentName}}>{{type?.DepartmentName}}</option>
+          </select>
+                
                 </div>
-                <!-- <div class="form-group col-xs-12 col-xl-6 col-md-12 pull-right">
-                    <label for="exampleInputEmail1">Select Type</label>
-                    <select class="form-control" [(ngModel)]="newobj.TypeId" name="typeId" #typeId="ngModel"
-                      [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>
-                      <option [ngValue]=null>Select</option>
-                      <option [ngValue]="QA">QA</option>
-                      <option *ngFor="let type of ptypes" value={{type.TypeId}}>{{type.Name}}</option>
-                    </select>
-                  </div> -->
+               
               </div>
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-success" (click)="closepopup();" *ngIf="viewMode">Approve</button>
+              <button type="button" class="btn btn-info" (click)="closepopup();" *ngIf="viewMode">Re-Initiate</button>
+              <button type="button" class="btn btn-danger" (click)="closepopup();" *ngIf="viewMode">Reject</button>
               <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary"  *ngIf="!viewMode">Submit</button>
             </div>
           </form>
         </div>

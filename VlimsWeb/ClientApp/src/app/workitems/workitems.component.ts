@@ -31,7 +31,7 @@ export class WorkitemsComponent implements OnInit {
 
   getworkflowitems() {
     this.loader.show();
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50 };
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50 ,Id:0};
     return this.doctypeservice.getworkitems(objrequest).subscribe((data: any) => {
       debugger
       this.types = data.Response;

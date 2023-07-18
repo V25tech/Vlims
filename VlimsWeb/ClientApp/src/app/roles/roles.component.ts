@@ -21,7 +21,7 @@ export class RolesComponent implements OnInit {
   }
   getroles() {
     this.loader.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:10};
+   let objrequest: RequestContext={PageNumber:1,PageSize:10,Id:0};
       return this.doctypeservice.getroles(objrequest).subscribe((data: any) => {
         debugger
         this.types = data.Response;

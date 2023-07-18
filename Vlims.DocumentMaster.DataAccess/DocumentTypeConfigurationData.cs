@@ -88,6 +88,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTypeConfigurationConstants.Description, Value = documentTypeConfiguration.Description });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTypeConfigurationConstants.Assigntodepartment, Value = documentTypeConfiguration.Assigntodepartment });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTypeConfigurationConstants.ModifiedBy, Value = documentTypeConfiguration.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTypeConfigurationConstants.Status_PSY, Value = documentTypeConfiguration.Status });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentTypeConfigurationConstants.USP_DocumentTypeConfiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

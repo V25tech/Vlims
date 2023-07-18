@@ -126,6 +126,14 @@ const routes: Routes = [
             component: AddDocumentTypeConfigComponent
           },
           {
+            path: 'editdoctype',
+            component: AddDocumentTypeConfigComponent
+          },
+          {
+            path: 'viewdoctype',
+            component: AddDocumentTypeConfigComponent
+          },
+          {
             path: 'adddoctemplate',
             component: AddDocumentTemplateConfigComponent
           },

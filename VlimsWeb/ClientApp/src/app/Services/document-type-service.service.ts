@@ -17,4 +17,8 @@ adddoctypeconfig(objrequest: DocumentTypeConfiguration) {
   debugger
   return this.http.postJsonLogin(objrequest, "api/documenttypeconfiguration/savedocumenttypeconfiguration",this.type);
 }
+updatedoctypeconfig(objrequest: DocumentTypeConfiguration) {
+  debugger
+  return this.http.postJsonLogin(objrequest, "api/documenttypeconfiguration/updatedocumenttypeconfiguration",this.type);
+}
 }

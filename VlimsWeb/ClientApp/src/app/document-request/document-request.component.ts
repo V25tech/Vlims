@@ -33,7 +33,7 @@ export class DocumentRequestComponent implements OnInit {
 
   getdocumentrequest() {
     this.loader.show();
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50 };
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50,Id:0 };
     return this.doctypeservice.getdocumentrequest(objrequest).subscribe((data: any) => {
       debugger
       this.requests = data.response;
