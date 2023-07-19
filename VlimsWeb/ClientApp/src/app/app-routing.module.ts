@@ -141,6 +141,14 @@ const routes: Routes = [
           {
             path: 'addworkflow',
             component: AddWorkflowConfigComponent
+          },
+          {
+            path: 'editdoctemplate',
+            component: AddDocumentTemplateConfigComponent
+          },
+          {
+            path: 'viewdoctemplate',
+            component: AddDocumentTemplateConfigComponent
           }
         ]
       },
