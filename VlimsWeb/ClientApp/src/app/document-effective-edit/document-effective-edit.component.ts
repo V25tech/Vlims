@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SpinnerService } from '../spinner/spinner.service';
 import { DocumentTemplateServiceService } from '../Services/document-template-service.service';
 import { WorkflowServiceService } from '../Services/workflow-service.service';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-document-effective-edit',
@@ -40,7 +41,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
       this.cdr.detectChanges();
     }
     if (lastSegment == "documeffectedit") {
-
+      debugger;
       this.editMode = this.commonsvc.docEffecConfig != null ? true : false;
       if (this.editMode) {
         this.adddocreq = this.commonsvc.docEffecConfig;

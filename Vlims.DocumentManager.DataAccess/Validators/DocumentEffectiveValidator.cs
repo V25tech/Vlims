@@ -37,7 +37,7 @@ namespace Vlims.DocumentManager.DataAccess
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.documenttitle,50, nameof(documentEffective.documenttitle)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.documentno,50, nameof(documentEffective.documentno)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.documenttype,50, nameof(documentEffective.documenttype)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.department,50, nameof(documentEffective.department)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.Department,50, nameof(documentEffective.Department)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.document,50, nameof(documentEffective.document)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.CreatedBy,100, nameof(documentEffective.CreatedBy)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.ModifiedBy,100, nameof(documentEffective.ModifiedBy)));

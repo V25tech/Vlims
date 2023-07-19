@@ -65,10 +65,10 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.documenttitle, Value = documentEffective.documenttitle });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.documentno, Value = documentEffective.documentno });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.documenttype, Value = documentEffective.documenttype });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.department, Value = documentEffective.department });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.department, Value = documentEffective.Department });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.document, Value = documentEffective.document });
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.EffectiveDate, Value = documentEffective.EffectiveDate });
-                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = documentEffective.Reviewdate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = documentEffective.ReviewDate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.CreatedBy, Value = documentEffective.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.ModifiedBy, Value = documentEffective.ModifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentEffectiveConstants.USP_DocumentEffective_PSY_INSERT, sqlparms, ExecutionType.Scalar);
@@ -90,10 +90,10 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.documenttitle, Value = documentEffective.documenttitle });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.documentno, Value = documentEffective.documentno });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.documenttype, Value = documentEffective.documenttype });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.department, Value = documentEffective.department });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.department, Value = documentEffective.Department });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.document, Value = documentEffective.document });
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.EffectiveDate, Value = documentEffective.EffectiveDate });
-                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = documentEffective.Reviewdate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = documentEffective.ReviewDate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.ModifiedBy, Value = documentEffective.ModifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentEffectiveConstants.USP_DocumentEffective_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);

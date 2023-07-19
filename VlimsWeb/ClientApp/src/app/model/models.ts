@@ -2419,11 +2419,13 @@ export class DocumentPreperationConfiguration {
 }
 export class DocumentEffectiveConfiguration {
   DTCId: string;
-  DocumentTitle: string;
-  DocumentNo: string;
-  DocumentType: string;
+  documenttitle: string;
+  documentno: string;
+  documenttype: string;
   Department: string;
-  Document: string;
+  document: string;
+  EffectiveDate: Date;
+  ReviewDate: Date;
   CreatedBy: string;
   CreatedDate: string | null;
   ModifiedBy: string;
