@@ -19,7 +19,7 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
   newdoctemplate=new DocumentTemplateConfiguration();
   editMode: boolean = false;
  viewMode:boolean=false;
- title:string ="Add Document Type Configuration";
+ title:string ="Add Document Template Configuration";
  fm: FormGroup;
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentTypeServiceService  ,
     private doctemplateservice:DocumentTemplateServiceService,private cdr: ChangeDetectorRef,
@@ -78,7 +78,10 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
       doctype.CreatedBy="admin";
       doctype.ModifiedBy = "admin";
       doctype.Status = "Pending";
-      
+      doctype.rows=doctype.rows.toString();
+      doctype.columns=doctype.columns.toString();
+      doctype.footerrows=doctype.footerrows.toString();
+      doctype.footercolumns=doctype.footercolumns.toString();
       
       //this.router.navigate(['/products']);
       this.doctemplateservice.adddoctemplate(doctype).subscribe((res:any)=>{

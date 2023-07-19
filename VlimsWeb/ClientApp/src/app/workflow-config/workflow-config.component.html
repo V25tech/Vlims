@@ -36,10 +36,10 @@
           <td>{{doc?.ModifiedDate  | date}}</td>
           <td>Success</td>
           <td>
-            <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTID"
+            <!-- <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTID"
               data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);"> <span
-                class="fa fa-edit"></span> </button>
-            <!-- <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button> -->
+                class="fa fa-edit"></span> </button> -->
+            <button class="btn"> <span class="fa fa-flag fa-edit" (click)="editdoc(doc);"></span></button>
           </td>
         </tr>
       </tbody>

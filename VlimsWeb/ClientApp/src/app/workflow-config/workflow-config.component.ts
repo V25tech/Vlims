@@ -31,5 +31,9 @@ export class WorkflowConfigComponent implements OnInit {
         this.loader.hide();
       });
   }
-
+  editdoc(editband: workflowconiguration) {
+    debugger
+    this.commonsvc.objworkflow=editband;
+    this.router.navigate(['/mainpage/documentmaster/editworkflow']);
+  }
 }
