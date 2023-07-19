@@ -10,21 +10,21 @@
       <div class="modal-body">
         <div class="form-group row">
 
-          <label for="BrandName" class="col-sm-4 col-form-label">Document Title :</label>
+          <label  class="col-sm-4 col-form-label">Document Title :</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="DocumentName" [(ngModel)]="adddocreq.DocumentTitle"
-                   pattern='[A-Za-z\\s]*' name="DocumentName" aria-describedby="productname" placeholder="DocumentTitle"
+            <input type="text" class="form-control" id="DocumentName" [(ngModel)]="adddocreq.documenttitle"
+                   pattern='[A-Za-z\\s]*' name="DocumentName" aria-describedby="productname" placeholder="documenttitle"
                    #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
           </div>
         </div>
 
         <div class="form-group row">
 
-          <label for="BrandName" class="col-sm-4 col-form-label">Document No :</label>
+          <label  class="col-sm-4 col-form-label">Document No :</label>
 
           <div class="col-sm-8">
 
-            <input type="text" class="form-control" id="DocumentNo" [(ngModel)]="adddocreq.DocumentNo"
+            <input type="text" class="form-control" id="DocumentNo" [(ngModel)]="adddocreq.documentno"
                    pattern='[A-Za-z\\s]*' name="DocumentNo" aria-describedby="productname" placeholder="DocumentNo"
                    #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
 
@@ -34,42 +34,48 @@
 
         <div class="form-group row">
 
-          <label for="BrandName" class="col-sm-4 col-form-label">Document Type :</label>
+          <label class="col-sm-4 col-form-label">Document Type :</label>
 
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="DocType" [(ngModel)]="adddocreq.documenttype"
-                   pattern='[A-Za-z\\s]*' name="DocType" aria-describedby="productname" placeholder="Document Type"
-                   #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+            <select class="form-control"  [(ngModel)]="adddocreq.documenttype" name="typeId"  #typeId="ngModel"
+                    [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>
+
+              <option value="Select">Select</option>
+              <option *ngFor="let doctype of doctypes" value={{doctype.Documenttypename}}>{{doctype?.Documenttypename}}</option>
+            </select>
+         
           </div>
         </div>
         <div class="form-group row">
 
-          <label for="BrandName" class="col-sm-4 col-form-label">Department :</label>
+          <label  class="col-sm-4 col-form-label">Department :</label>
 
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="Department" [(ngModel)]="adddocreq.department"
-                   pattern='[A-Za-z\\s]*' name="Department" aria-describedby="productname" placeholder="Department"
-                   #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+          
+            <select class="form-control"  [(ngModel)]="adddocreq.department" name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+                    [ngClass]="{ 'is-invalid': fm.submitted && Assigntodepartment.invalid }" required>
+              <option value="Select">Select</option>
+              <option *ngFor="let type of departs" value={{type.DepartmentName}}>{{type?.DepartmentName}}</option>
+            </select>
           </div>
         </div>
         <div class="form-group row">
 
-          <label for="BrandName" class="col-sm-4 col-form-label">Document :</label>
+          <label  class="col-sm-4 col-form-label">Document :</label>
 
           <div class="col-sm-8">
-            <input type="file" class="form-control" id="Document" [(ngModel)]="adddocreq.Document"
+            <input type="file" class="form-control" id="Document" [(ngModel)]="adddocreq.document"
                    name="Document" aria-describedby="productname" placeholder="Document"
                    #BrandName="ngModel" />
           </div>
         </div>
         <div class="form-group row">
 
-          <label for="BrandName" class="col-sm-4 col-form-label">Template :</label>
+          <label class="col-sm-4 col-form-label">Template :</label>
 
           <div class="col-sm-8">
-            <select class="form-control" [(ngModel)]="adddocreq.Template" name="typeId" #typeId="ngModel"
-                    [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>
-              <!--templates-->
+            <select class="form-control" [(ngModel)]="adddocreq.template" name="typeId" #typeId="ngModel"
+                    [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>              
               <option value="">Select</option>
               <option *ngFor="let type of templates" value={{type.Templatename}}>{{type.Templatename}}</option>
             </select>
@@ -77,22 +83,22 @@
         </div>
         <div class="form-group row">
 
-          <label for="BrandName" class="col-sm-4 col-form-label">Workflow :</label>
+          <label  class="col-sm-4 col-form-label">Workflow :</label>
           <div class="col-sm-8">
-            <select class="form-control" [(ngModel)]="adddocreq.Workflow" name="typeId" #typeId="ngModel"
+            <select class="form-control" [(ngModel)]="adddocreq.wokflow" name="typeId" #typeId="ngModel"
                     [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>
               <option value="">Select</option>
-              <option *ngFor="let type of workflowTypes" value={{type.documentstage}}>{{type.documentstage}}</option>              
+              <option *ngFor="let type of workflowTypes" value={{type.documentstage}}>{{type.documentstage}}</option>
             </select>
           </div>
         </div>
         <div class="form-group row">
 
-          <label for="BrandName" class="col-sm-4 col-form-label">Details :</label>
+          <label class="col-sm-4 col-form-label">Details :</label>
 
           <div class="col-sm-8">
-            <input type="text"  class="form-control" id="BrandName" [(ngModel)]="adddocreq.ApprovalsCount"
-                   pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Details"
+            <input type="text" class="form-control" id="Details" [(ngModel)]="adddocreq.details"
+                   pattern='[A-Za-z\\s]*' name="Details" aria-describedby="productname" placeholder="Details"
                    #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
           </div>
         </div>

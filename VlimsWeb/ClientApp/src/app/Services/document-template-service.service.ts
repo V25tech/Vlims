@@ -10,7 +10,7 @@ export class DocumentTemplateServiceService {
   constructor(private http: HttpbaseService) { }
 
   getdocttemplate(objrequest: RequestContext) {
-    debugger
+   
     return this.http.postJsonLogin(objrequest, "api/documenttemplateconfiguration/getalldoctemplate",this.type);
 }
 adddoctemplate(objrequest: DocumentTemplateConfiguration) {

@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, workflowconiguration } from '../model/models';
+import { DepartmentConfiguration, DocumentPreperationConfiguration, DocumentTemplateConfiguration, DocumentTypeConfiguration, RequestContext, workflowconiguration } from '../model/models';
 import { Router } from '@angular/router';
 import { CommonService } from '../shared/common.service';
 import { DocumentPreperationService } from '../Services/document-preperation.service';
@@ -8,6 +8,9 @@ import { ToastrService } from 'ngx-toastr';
 import { SpinnerService } from '../spinner/spinner.service';
 import { DocumentTemplateServiceService } from '../Services/document-template-service.service';
 import { WorkflowServiceService } from '../Services/workflow-service.service';
+import { DocumentRequestService } from '../Services/document-request.service';
+import { DepartmentconfigurationService } from '../departmentconfiguration.service';
+import { DocumentTypeServiceService } from '../Services/document-type-service.service';
 
 @Component({
   selector: 'app-documentprep-add',
@@ -22,7 +25,12 @@ export class DocumentprepAddComponent implements OnInit {
   types: Array<DocumentPreperationConfiguration> = [];
   templates: Array<DocumentTemplateConfiguration> = [];
   workflowTypes: Array<workflowconiguration> = [];
-  constructor(private commonsvc: CommonService, private docReqServ: DocumentPreperationService, private workflowserv: WorkflowServiceService, private doctypeservice: DocumentTemplateServiceService, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService, private router: Router,) { }
+  departs: Array<DepartmentConfiguration> = [];
+  //editMode: boolean = false;
+  //viewMode: boolean = false;
+  //title: string = '';
+  doctypes: Array<DocumentTypeConfiguration> = [];;
+  constructor(private commonsvc: CommonService, private docReqServ: DocumentRequestService, private doctypeserv: DocumentTypeServiceService, private docprepServ: DocumentPreperationService, private deptservice: DepartmentconfigurationService, private workflowserv: WorkflowServiceService, private doctypeservice: DocumentTemplateServiceService, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService, private router: Router,) { }
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
@@ -30,6 +38,8 @@ export class DocumentprepAddComponent implements OnInit {
     this.GetDocumentInfo();
     this.getdocumenttemplateconfig();
     this.getworkflowtypeconfig();
+    this.getdepartments();
+    this.getdocumenttypeconfig();
     if (lastSegment == "viewdocprep") {
       this.viewMode = this.commonsvc.docobject != null ? true : false;
       if (this.viewMode) {
@@ -39,7 +49,7 @@ export class DocumentprepAddComponent implements OnInit {
       this.cdr.detectChanges();
     }
     if (lastSegment == "editdocprep") {
-
+      debugger;
       this.editMode = this.commonsvc.docPreperation != null ? true : false;
       if (this.editMode) {
         this.adddocreq = this.commonsvc.docPreperation;
@@ -48,7 +58,7 @@ export class DocumentprepAddComponent implements OnInit {
         this.loader.hide();
       }
 
-      $('select').selectpicker();
+      /* $('select').selectpicker();*/
     }
   }
   GetDocumentInfo() {
@@ -66,14 +76,14 @@ export class DocumentprepAddComponent implements OnInit {
   }
   submit(adddocreq: DocumentPreperationConfiguration) {
     debugger
-    this.adddocrequest(adddocreq);
+    this.addpreprequest(adddocreq);
   }
-  adddocrequest(adddocreq: DocumentPreperationConfiguration) {
+  addpreprequest(adddocreq: DocumentPreperationConfiguration) {
 
     adddocreq.CreatedBy = "admin";
     adddocreq.ModifiedBy = "admin";
     //this.router.navigate(['/products']);
-    this.docReqServ.ManageDocument(adddocreq).subscribe((res: any) => {
+    this.docprepServ.ManageDocument(adddocreq).subscribe((res: any) => {
       this.toastr.success('Added');
       this.router.navigate(['/mainpage/documentpreperation/documprep']);
     });
@@ -93,6 +103,22 @@ export class DocumentprepAddComponent implements OnInit {
     this.workflowserv.getworkflow(objrequest).subscribe((data: any) => {
       debugger
       this.workflowTypes = data.Response;
+    });
+  }
+  getdepartments() {
+
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+      debugger
+      this.departs = data.Response;
+
+    });
+  }
+  getdocumenttypeconfig() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
+      debugger
+      this.doctypes = data.Response;
     });
   }
 }

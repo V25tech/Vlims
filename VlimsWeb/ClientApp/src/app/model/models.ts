@@ -2399,8 +2399,8 @@ export class DocumentRequestConfiguration {
 
 export class DocumentPreperationConfiguration {
   DTCId: string;
-  DocumentMasterId: string;
-  Documenttype: string;
+  Documentmanagerid: string;
+  documenttype: string;
   AssignedtoGroup: string;
   Approvedby: string;
   ApprovedOn: string;
@@ -2409,13 +2409,13 @@ export class DocumentPreperationConfiguration {
   ModifiedBy: string;
   ModifiedDate: string | null;
   Status: string;
-  DocumentTitle: string;
-  DocumentNo: string;
+  documenttitle: string;
+  documentno: string;
   Department: string;
-  Template: string;
-  Workflow: string;
-  Details: string;
-  Document: string;
+  template: string;
+  wokflow: string;
+  details: string;
+  document: string;
 }
 export class DocumentEffectiveConfiguration {
   DTCId: string;
