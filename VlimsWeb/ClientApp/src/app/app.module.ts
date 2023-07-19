@@ -61,7 +61,6 @@ import { RolesComponent } from './roles/roles.component';
 import { AddRolesComponent } from './add-roles/add-roles.component';
 import { UserConfigurationComponent } from './user-configuration/user-configuration.component';
 import { AddUserComponent } from './add-user/add-user.component';
-import { UserGroupConfigurationComponent } from './user-group-configuration/user-group-configuration.component';
 import { AddUserGroupComponent } from './add-user-group/add-user-group.component';
 //import { DepartmentConfigurationComponent } from './department-configuration/department-configuration.component';
 import { HierarchymanagementComponent } from './hierarchymanagement/hierarchymanagement.component';
@@ -72,6 +71,7 @@ import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.co
 import { DocumentEffectiveEditComponent } from './document-effective-edit/document-effective-edit.component';
 import { PlantComponent } from './plantmanagement/plantmanagement.component';
 import { SecurityManagementComponent } from './securitymanagement/securitymanagement.component';
+import { UsergroupconfigurationComponent } from './usergroupconfiguration/usergroupconfiguration.component';
 
 
 
@@ -92,7 +92,7 @@ import { SecurityManagementComponent } from './securitymanagement/securitymanage
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
      DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, 
      AddDocumentRequestComponent,DepartmentComponent,UserConfigurationComponent,AddUserComponent,
-    UserGroupConfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent],
+    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })

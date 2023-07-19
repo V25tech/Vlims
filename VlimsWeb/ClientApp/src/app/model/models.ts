@@ -2556,3 +2556,15 @@ export class SecurityManagement {
   public SessionTimeOut: string;
 
 }
+
+export class Usergroupconfiguration {
+  public SNo: number;
+  public UserGroupName: string;
+  public uniquecode: string;
+  public TotalUsers: number;
+  public Registeredby: string;
+  public Registeredon: string;
+  public Status: string;
+  public Modify: string;
+
+}
