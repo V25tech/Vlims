@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[WORK_ASSAIGNED_TO_ME]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Task_Type] NVARCHAR(500) NULL, 
+    [Stage] NVARCHAR(50) NULL, 
+    [Assigned] NVARCHAR(50) NULL, 
+    [Initiated_By] NVARCHAR(50) NULL, 
+    [Status] NVARCHAR(50) NULL, 
+    [Due_Date] DATETIME NULL
+)

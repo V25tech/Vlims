@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="bbd49444-35e2-4416-8b84-4cf4e7082c08" ChangeDateTime="07/19/2023 13:32:04">
+    <Property Name="ElementName" Value="[dbo].[WORK_ASSAIGNED_TO_ME].[Assa]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WORK_ASSAIGNED_TO_ME]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Assigned" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7837b8b1-2fd1-4a1a-b1a9-5e86ade2fb66" ChangeDateTime="07/19/2023 13:32:26">
+    <Property Name="ElementName" Value="[dbo].[WORK_ASSAIGNED_TO_ME].[Initi]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WORK_ASSAIGNED_TO_ME]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Initiated_By" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="924ceb0b-80f7-4002-8af8-e4c60783f882" ChangeDateTime="07/19/2023 13:33:01">
+    <Property Name="ElementName" Value="[dbo].[WORK_ASSAIGNED_TO_ME].[Due]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WORK_ASSAIGNED_TO_ME]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Due_Date" />
+  </Operation>
+</Operations>
