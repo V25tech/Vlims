@@ -22,26 +22,39 @@ namespace Vlims.DocumentManager.Manager
 
     // Comment
     public class DocumentEffectiveService : IDocumentEffectiveService
-    {        
-       
-        
-        public ResponseContext<Documentrequest> GetAllDocumentEffective(RequestContext requestContext)
+    {
+        public ResponseContext<DocumentEffective> GetAllDocumentEffective(RequestContext requestContext)
         {
             try
             {
-                requestContext.PageNumber = 1;
-                requestContext.PageSize = 50;
-                DataSet dataset = DocumentrequestData.GetAllDocumentrequest(requestContext);
-                List<Documentrequest> result = DocumentrequestConverter.SetAllDocumentrequest(dataset);
-                result = result.Where(item => item.Status == "Approved").ToList();
-                return new ResponseContext<Documentrequest>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
+                DataSet dataset = DocumentEffectiveData.GetAllDocumentEffective(requestContext);
+                List<DocumentEffective> result = DocumentEffectiveConverter.SetAllDocumentEffective(dataset);
+                return new ResponseContext<DocumentEffective>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
             }
             catch (System.Exception ex)
             {
                 throw;
             }
         }
-        
+
+
+        //public ResponseContext<Documentrequest> GetAllDocumentEffective(RequestContext requestContext)
+        //{
+        //    try
+        //    {
+        //        requestContext.PageNumber = 1;
+        //        requestContext.PageSize = 50;
+        //        DataSet dataset = DocumentEffectiveData.GetAllDocumentEffective(requestContext);
+        //        List<Documentrequest> result = DocumentrequestConverter.SetAllDocumentrequest(dataset);
+        //        result = result.Where(item => item.Status == "Approved").ToList();
+        //        return new ResponseContext<Documentrequest>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
+        //    }
+        //    catch (System.Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //}
+
         public DocumentEffective GetDocumentEffectiveByDEID(string dEID)
         {
             try
@@ -55,7 +68,7 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
+
         public bool SaveDocumentEffective(DocumentEffective documentEffective)
         {
             try
@@ -73,7 +86,7 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
+
         public bool UpdateDocumentEffective(DocumentEffective documentEffective)
         {
             try
@@ -91,7 +104,7 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteDocumentEffectiveByDEID(string dEID)
         {
             try
@@ -103,7 +116,7 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteAllDocumentEffective(List<int> dEIDs)
         {
             try

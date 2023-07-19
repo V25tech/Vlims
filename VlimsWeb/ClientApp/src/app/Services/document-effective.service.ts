@@ -7,6 +7,7 @@ import { HttpbaseService } from '../shared/httpbase.service';
   providedIn: 'root'
 })
 export class DocumentEffectiveService {
+  type: string = "manager";
 
   constructor(private http: HttpbaseService) { }
   getdocumentrequest(objrequest: RequestContext) {
@@ -16,5 +17,9 @@ export class DocumentEffectiveService {
   getdocumentrequestbyId(objrequest: RequestContext) {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/getdocId");
+  }
+  ManageDocument(adddocreq: DocumentEffectiveConfiguration) {
+    debugger
+    return this.http.postJsonLogin(adddocreq, "api/documenteffective/savedocumenteffective", this.type);
   }
 }

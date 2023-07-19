@@ -7,8 +7,10 @@ import { HttpbaseService } from '../shared/httpbase.service';
   providedIn: 'root'
 })
 export class DocumentPreperationService {
+  type: string = "manager";
 
-  constructor(private http: HttpbaseService) { }
+  constructor(private http: HttpbaseService) {
+  }
   getdocumentrequest(objrequest: RequestContext) {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/GetAllDocPrep");
@@ -19,6 +21,6 @@ export class DocumentPreperationService {
   }
   ManageDocument(objrequest: DocumentPreperationConfiguration) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/documentpreparation/SaveDocumentPreparation");
+    return this.http.postJsonLogin(objrequest, "api/documentpreparation/savedocumentpreparation",this.type);
   }
 }

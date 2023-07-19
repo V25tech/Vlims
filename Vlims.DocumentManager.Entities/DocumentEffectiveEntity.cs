@@ -104,7 +104,7 @@ namespace Vlims.DMS.Entities
             }
         }
         
-        public string department
+        public string Department
         {
             get
             {
@@ -140,7 +140,7 @@ namespace Vlims.DMS.Entities
             }
         }
         
-        public DateTime? Reviewdate
+        public DateTime? ReviewDate
         {
             get
             {

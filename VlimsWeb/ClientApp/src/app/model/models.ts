@@ -2399,8 +2399,8 @@ export class DocumentRequestConfiguration {
 
 export class DocumentPreperationConfiguration {
   DTCId: string;
-  DocumentMasterId: string;
-  Documenttype: string;
+  Documentmanagerid: string;
+  documenttype: string;
   AssignedtoGroup: string;
   Approvedby: string;
   ApprovedOn: string;
@@ -2409,21 +2409,23 @@ export class DocumentPreperationConfiguration {
   ModifiedBy: string;
   ModifiedDate: string | null;
   Status: string;
-  DocumentTitle: string;
-  DocumentNo: string;
+  documenttitle: string;
+  documentno: string;
   Department: string;
-  Template: string;
-  Workflow: string;
-  Details: string;
-  Document: string;
+  template: string;
+  wokflow: string;
+  details: string;
+  document: string;
 }
 export class DocumentEffectiveConfiguration {
   DTCId: string;
-  DocumentTitle: string;
-  DocumentNo: string;
-  DocumentType: string;
+  documenttitle: string;
+  documentno: string;
+  documenttype: string;
   Department: string;
-  Document: string;
+  document: string;
+  EffectiveDate: Date;
+  ReviewDate: Date;
   CreatedBy: string;
   CreatedDate: string | null;
   ModifiedBy: string;
@@ -2544,4 +2546,25 @@ export class PlantConfiguration {
   CreatedDate: string | null;
   ModifiedBy: string;
   ModifiedDate: string | null;
+}
+export class SecurityManagement {
+
+  public MinimumUserIdLength: string;
+  public MinimumPasswordLength: string;
+  public PasswordComplexity: string;
+  public Invalidattempts: string;
+  public SessionTimeOut: string;
+
+}
+
+export class Usergroupconfiguration {
+  public SNo: number;
+  public UserGroupName: string;
+  public uniquecode: string;
+  public TotalUsers: number;
+  public Registeredby: string;
+  public Registeredon: string;
+  public Status: string;
+  public Modify: string;
+
 }
