@@ -2547,3 +2547,12 @@ export class PlantConfiguration {
   ModifiedBy: string;
   ModifiedDate: string | null;
 }
+export class SecurityManagement {
+
+  public MinimumUserIdLength: string;
+  public MinimumPasswordLength: string;
+  public PasswordComplexity: string;
+  public Invalidattempts: string;
+  public SessionTimeOut: string;
+
+}

@@ -71,6 +71,7 @@ import { WorkitemsComponent } from './workitems/workitems.component';
 import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.component';
 import { DocumentEffectiveEditComponent } from './document-effective-edit/document-effective-edit.component';
 import { PlantComponent } from './plantmanagement/plantmanagement.component';
+import { SecurityManagementComponent } from './securitymanagement/securitymanagement.component';
 
 
 
@@ -91,7 +92,7 @@ import { PlantComponent } from './plantmanagement/plantmanagement.component';
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
      DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, 
      AddDocumentRequestComponent,DepartmentComponent,UserConfigurationComponent,AddUserComponent,
-    UserGroupConfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent],
+    UserGroupConfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })
