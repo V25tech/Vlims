@@ -5,7 +5,7 @@ import { PageConfig } from '../model/pageConfig';
 import { SpinnerService } from '../spinner/spinner.service';
 import { ToastrService } from 'ngx-toastr';
 import { transformAll } from '@angular/compiler/src/render3/r3_ast';
-import { DocumentPreperationConfiguration, DocumentRequestConfiguration, DocumentTypeConfiguration } from '../model/models';
+import { DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentRequestConfiguration, DocumentTypeConfiguration } from '../model/models';
 
 
 @Injectable({
@@ -23,6 +23,7 @@ export class CommonService {
   documenttypeId:string;
   docobject: DocumentTypeConfiguration;
   docPreperation: DocumentPreperationConfiguration;
+  docEffecConfig: DocumentEffectiveConfiguration;
   docrequest: DocumentRequestConfiguration;
   private _searchBS = new BehaviorSubject<string>('');
 

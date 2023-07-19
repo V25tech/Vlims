@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DocumentEffectiveConfiguration, RequestContext } from '../model/models';
+import { DocumentEffectiveConfiguration, DocumentPreperationConfiguration, RequestContext } from '../model/models';
 import { CommonService } from '../shared/common.service';
 import { ToastrService } from 'ngx-toastr';
 import { SpinnerService } from '../spinner/spinner.service';
@@ -43,18 +43,15 @@ export class DocumentEffectiveComponent implements OnInit {
       this.loader.hide();
     });
   }
-  editBrand(docPrepInfo) {
-    this.loader.show();
+  editBrand(editband: DocumentEffectiveConfiguration) {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
-    objrequest.Id = docPrepInfo.Id;
-    return this.doctypeservice.getdocumentrequestbyId(objrequest).subscribe((data: any) => {
-      debugger
-      this.objProductType = data.response;
-      this.loader.hide();
-      console.log(this.objProductType);
-    }, er => {
-      this.toastr.error('loading failed');
-      this.loader.hide();
-    });
+    //objrequest.Id = editband.DTCId;
+    //this.doctypeservice.getdocumentrequestbyId(objrequest).subscribe((data: any) => {
+    //  debugger
+    //  this.objProductType = data.response;
+    this.commonsvc.docEffecConfig = editband;
+    this.router.navigate(['/mainpage/documentmanager/documeffectedit']);
+
+    //});
   }
 }

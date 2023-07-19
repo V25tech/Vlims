@@ -44,6 +44,7 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { AddDocumentRequestComponent } from './add-document-request/add-document-request.component';
 import { WorkitemsComponent } from './workitems/workitems.component';
 import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.component';
+import { DocumentEffectiveEditComponent } from './document-effective-edit/document-effective-edit.component';
 
 
 const routes: Routes = [
@@ -174,6 +175,10 @@ const routes: Routes = [
           {
             path: 'documeffect',
             component: DocumentEffectiveComponent
+          },
+          {
+            path: 'documeffectedit',
+            component: DocumentEffectiveEditComponent
           },
           {
             path: 'additasks',

@@ -16,11 +16,9 @@
 
             <select class="form-control" [(ngModel)]="adddocreq.documenttype" name="documenttype" #typeId="ngModel"
                     [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>
-              <option [ngValue]=null>Select</option>
-              <option [ngValue]="QA">SOP</option>
-              <option [ngValue]="QA">Annexure</option>
-              <option [ngValue]="QA">Format</option>
-              <option [ngValue]="QA">Specification</option>
+              
+              <option value="Select">Select</option>
+              <option *ngFor="let type of doctypes" value={{type.Documenttypename}}>{{type?.Documenttypename}}</option>
             </select>
           </div>
         </div>
@@ -31,13 +29,10 @@
 
           <div class="col-sm-8">
 
-            <select class="form-control" [(ngModel)]="adddocreq.department" name="department" #typeId="ngModel"
-                    [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>
-              <option [ngValue]=null>Select</option>
-              <option [ngValue]="QA">QA</option>
-              <option [ngValue]="QA">QC</option>
-              <option [ngValue]="QA">PRD</option>
-              <option [ngValue]="QA">ENG</option>
+            <select class="form-control" [(ngModel)]="adddocreq.Assigntodepartment" name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+                    [ngClass]="{ 'is-invalid': fm.submitted && Assigntodepartment.invalid }" required>
+              <option value="Select">Select</option>
+              <option *ngFor="let type of departs" value={{type.DepartmentName}}>{{type?.DepartmentName}}</option>
             </select>
 
           </div>

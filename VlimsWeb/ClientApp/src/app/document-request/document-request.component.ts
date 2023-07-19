@@ -6,6 +6,7 @@ import { SpinnerService } from '../spinner/spinner.service';
 import { DocumentRequestService } from '../Services/document-request.service';
 import { Router } from '@angular/router';
 import { formatDate } from "@angular/common";
+import { DocumentTypeServiceService } from '../Services/document-type-service.service';
 
 @Component({
   selector: 'app-document-request',
@@ -22,12 +23,14 @@ export class DocumentRequestComponent implements OnInit {
   actiontype: number;
   pageConfig: any;
   searchstr: string;
-  constructor(private commonsvc: CommonService, private doctypeservice: DocumentRequestService, private toastr: ToastrService, private loader: SpinnerService, private router: Router) { }
+    doctypes: any;
+  constructor(private commonsvc: CommonService, private doctypeservice: DocumentRequestService, private doctypeserv: DocumentTypeServiceService, private toastr: ToastrService, private loader: SpinnerService, private router: Router) { }
 
   ngOnInit() {
     debugger;
     //this.tabselect = this.router.url.split('/').pop();
     this.getdocumentrequest();
+    
   }
 
 

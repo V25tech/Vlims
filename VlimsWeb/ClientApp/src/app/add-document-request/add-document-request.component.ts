@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { DocumentRequestConfiguration, DocumentTypeConfiguration, RequestContext } from '../model/models';
+import { DepartmentConfiguration, DocumentRequestConfiguration, DocumentTypeConfiguration, RequestContext } from '../model/models';
 import { Router } from '@angular/router';
 import { CommonService } from '../shared/common.service';
 import { DocumentRequestService } from '../Services/document-request.service';
 import { ToastrService } from 'ngx-toastr';
 import { SpinnerService } from '../spinner/spinner.service';
+import { DepartmentconfigurationService } from '../departmentconfiguration.service';
+import { DocumentTypeServiceService } from '../Services/document-type-service.service';
 
 @Component({
   selector: 'app-add-document-request',
@@ -15,15 +17,19 @@ import { SpinnerService } from '../spinner/spinner.service';
 export class AddDocumentRequestComponent implements OnInit {
   adddocreq = new DocumentRequestConfiguration();
   requests: Array<DocumentRequestConfiguration> = [];
+  departs: Array<DepartmentConfiguration> =[];
   editMode: boolean = false;
   viewMode: boolean = false;
   title: string = '';
-  constructor(private commonsvc: CommonService, private docReqServ: DocumentRequestService, private router: Router, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService,) { }
+  doctypes: Array<DocumentTypeServiceService> = [];;
+  constructor(private commonsvc: CommonService, private docReqServ: DocumentRequestService, private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService, private router: Router, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService,) { }
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 1];
     this.getdocumentrequest();
+    this.getdepartments();
+    this.getdocumenttypeconfig();
     debugger;
     if (lastSegment == "viewdocreq") {
       this.viewMode = this.commonsvc.docrequest != null ? true : false;
@@ -44,7 +50,7 @@ export class AddDocumentRequestComponent implements OnInit {
       }
     }
 
-    $('select').selectpicker();
+    /*$('select').selectpicker();*/
   }
   getdocumentrequest() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
@@ -72,6 +78,22 @@ export class AddDocumentRequestComponent implements OnInit {
   }
   closepopup() {
     this.router.navigate(['/mainpage/documentmanager']);
+  }
+  getdepartments() {
+   
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+     this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+      debugger
+       this.departs = data.Response;
+   
+    });
+  }
+  getdocumenttypeconfig() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
+      debugger
+      this.doctypes = data.Response;
+    });
   }
 }
 
