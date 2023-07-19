@@ -2534,3 +2534,14 @@ export class WorkItemsConfiguration {
   Status: string;
   DueDate: string;
 }
+export class PlantConfiguration {
+  DPCFId: string;
+  HierarchyManagementId: string;
+  DepartmentName: string;
+  DepartmentCode: string;
+  Comments: string;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+}

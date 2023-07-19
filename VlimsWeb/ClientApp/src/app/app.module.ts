@@ -69,8 +69,8 @@ import { FunctionalProfileComponent } from './functional-profile/functional-prof
 import { UserManagementComponent } from './user-management/user-management.component';
 import { WorkitemsComponent } from './workitems/workitems.component';
 import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.component';
-import { PlantManagementComponent } from './plant-management/plant-management.component';
 import { DocumentEffectiveEditComponent } from './document-effective-edit/document-effective-edit.component';
+import { PlantComponent } from './plantmanagement/plantmanagement.component';
 
 
 
@@ -91,7 +91,7 @@ import { DocumentEffectiveEditComponent } from './document-effective-edit/docume
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
      DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, 
      AddDocumentRequestComponent,DepartmentComponent,UserConfigurationComponent,AddUserComponent,
-    UserGroupConfigurationComponent,RolesComponent,AddRolesComponent,AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantManagementComponent, DocumentEffectiveEditComponent],
+    UserGroupConfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })
