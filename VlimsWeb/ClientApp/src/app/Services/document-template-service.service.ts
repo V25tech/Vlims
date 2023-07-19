@@ -15,6 +15,6 @@ export class DocumentTemplateServiceService {
 }
 adddoctemplate(objrequest: DocumentTemplateConfiguration) {
   debugger
-  return this.http.postJson(objrequest, "api/documenttemplateconfiguration/savedocumenttemplateconfiguration",this.type);
+  return this.http.postJsonLogin(objrequest, "api/documenttemplateconfiguration/savedocumenttemplateconfiguration",this.type);
 }
 }

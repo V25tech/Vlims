@@ -41,4 +41,9 @@ export class DocumentTemplateConfigComponent implements OnInit {
         this.loader.hide();
       });
   }
+  editdoc(editband: DocumentTemplateConfiguration) {
+    debugger
+    this.commonsvc.objdoctemplate=editband;
+    this.router.navigate(['/mainpage/documentmaster/editdoctemplate']);
+  }
 }

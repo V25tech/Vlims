@@ -1,7 +1,7 @@
 <div class="card shadow mb-4" style="padding-top: 2px;">
     <div class="card-header py-3">
         <div col-12 style="float: left;">
-        <h6 class="m-0 font-weight-bold text-primary">Add Workflow Configuration</h6>
+        <h6 class="m-0 font-weight-bold text-primary">{{title}}</h6>
     </div>
 
     </div>
@@ -13,8 +13,8 @@
             <label for="BrandName" class="col-sm-4 col-form-label">Document Stage</label>
         
         <div class="col-sm-8">
-            <select class="form-control" [(ngModel)]="addworkflow.documentstage" name="typeId" #typeId="ngModel"
-            [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>
+            <select class="form-control" [(ngModel)]="addworkflow.documentstage" name="DocumentStage" id="DocumentStage" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+            [ngClass]="{ 'is-invalid': fm.submitted && DocumentStage.invalid }" required>
             <option value="Select"  >Select</option>
                   <option value="Preparation" >Preparation</option>
                   <option value="Validating" >Validating</option>
@@ -28,10 +28,10 @@
             <label for="BrandName" class="col-sm-4 col-form-label">Document Type</label>
         
         <div class="col-sm-8">
-            <select class="form-control" [(ngModel)]="addworkflow.documenttype" name="typeId" #DTCId="ngModel"
-            [ngClass]="{ 'is-invalid': fm.submitted && DTCId.invalid }" required>
+            <select class="form-control" [(ngModel)]="addworkflow.documenttype" name="DocumentType" id="DocumentType" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+            [ngClass]="{ 'is-invalid': fm.submitted && DocumentType.invalid }" required>
             <option [ngValue]=null>Select</option>
-            <option *ngFor="let type of doctypes" value={{type.Documenttypename}}>{{type?.Documenttypename}}</option>
+            <option *ngFor="let type of types" value={{type.Documenttypename}}>{{type?.Documenttypename}}</option>
           </select>
             </div>
           </div>
@@ -40,14 +40,19 @@
             <label for="BrandName" class="col-sm-4 col-form-label">Department</label>
         
         <div class="col-sm-8">
-            <select class="form-control" [(ngModel)]="addworkflow.department" name="typeId" #typeId="ngModel"
+          <select class="form-control" [(ngModel)]="addworkflow.department" name="Department" id="Department" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+                    [ngClass]="{ 'is-invalid': fm.submitted && Department.invalid }" required>
+              <option value="Select">Select</option>
+              <option *ngFor="let type of departs" value={{type.DepartmentName}}>{{type?.DepartmentName}}</option>
+            </select>
+            <!-- <select class="form-control" [(ngModel)]="addworkflow.department" name="typeId" #typeId="ngModel"
             [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>
             <option value="Select"  >Select</option>
                   <option value="QA" >QA</option>
                   <option value="QC" >QC</option>
                   <option value="PRD" >PRD</option>
                   <option value="ENG" >ENG</option>
-          </select>
+          </select> -->
             </div>
           </div>
           <div class="form-group row">
@@ -64,9 +69,12 @@
                   <option value="ENG" >bhuvana</option>
                   <option value="ENG" >rashmitha</option>
           </select> -->
-          <input type="number" class="form-control" id="BrandName" [(ngModel)]="addworkflow.reviewsCount"
+          <!-- <input type="number" class="form-control" id="BrandName" [(ngModel)]="addworkflow.reviewsCount"
                   pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder=""
-                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required /> -->
+                  <input type="number" class="form-control" id="ReviewsCount" [(ngModel)]="addworkflow.reviewsCount" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+              min="1" max="10"  name="ReviewsCount"  
+               [ngClass]="{ 'is-invalid': fm.submitted && ReviewsCount.invalid }" required />
             </div>
           </div>
           <div class="form-group row">
@@ -83,15 +91,21 @@
             <option value="ENG" >bhuvana</option>
             <option value="ENG" >rashmitha</option>
           </select> -->
-          <input type="number" class="form-control" id="BrandName" [(ngModel)]="addworkflow.approvalsCount"
+          <!-- <input type="number" class="form-control" id="BrandName" [(ngModel)]="addworkflow.approvalsCount"
                   pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder=""
-                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+                  #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required /> -->
+                  <input type="number" class="form-control" id="ApprovalsCount" [(ngModel)]="addworkflow.approvalsCount" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+              min="1" max="10"  name="ApprovalsCount"  
+               [ngClass]="{ 'is-invalid': fm.submitted && ApprovalsCount.invalid }" required />
             </div>
           </div>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click)="closepopup();" *ngIf="viewMode">Approve</button>
+          <button type="button" class="btn btn-info" (click)="closepopup();" *ngIf="viewMode">Re-Initiate</button>
+          <button type="button" class="btn btn-danger" (click)="closepopup();" *ngIf="viewMode">Reject</button>
           <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary"  *ngIf="!viewMode">Submit</button>
         </div>
       </form>
     </div>

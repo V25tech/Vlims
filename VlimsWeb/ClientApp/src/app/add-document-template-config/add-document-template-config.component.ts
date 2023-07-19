@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ChangeDetectorRef, OnInit,Directive,Input } from '@angular/core';
+import { FormGroup} from '@angular/forms';
 import { CommonService } from '../shared/common.service';
 import { DocumentTypeServiceService } from '../Services/document-type-service.service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,15 +13,45 @@ import { DocumentTemplateServiceService } from '../Services/document-template-se
   templateUrl: './add-document-template-config.component.html',
   styleUrls: ['./add-document-template-config.component.css']
 })
+
 export class AddDocumentTemplateConfigComponent implements OnInit {
   doctypes: Array<DocumentTypeConfiguration>=[];
   newdoctemplate=new DocumentTemplateConfiguration();
+  editMode: boolean = false;
+ viewMode:boolean=false;
+ title:string ="Add Document Template Configuration";
+ fm: FormGroup;
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentTypeServiceService  ,
-    private doctemplateservice:DocumentTemplateServiceService,
-    private toastr: ToastrService, private loader: SpinnerService,private router: Router) { }
-
+    private doctemplateservice:DocumentTemplateServiceService,private cdr: ChangeDetectorRef,
+    private toastr: ToastrService, private loader: SpinnerService,private router: Router) {
+      
+     }
   ngOnInit() {
+    debugger
+    const urlPath = this.router.url;
+    const segments = urlPath.split('/');
+    const lastSegment = segments[segments.length - 1];
     this.getdocumenttypeconfig();
+    if(lastSegment=="viewdoctemplate")
+    {
+   this.viewMode= this.commonsvc.objdoctemplate!=null ? true : false;
+   if(this.viewMode)
+   {
+   this.newdoctemplate=this.commonsvc.objdoctemplate;
+   this.title="View Document Template Configuration"
+   }
+   this.cdr.detectChanges();
+  }
+  else if(lastSegment=="editdoctemplate")
+  {
+    this.editMode= this.commonsvc.objdoctemplate!=null ? true : false;
+    if(this.editMode)
+    {
+    this.newdoctemplate=this.commonsvc.objdoctemplate;
+    this.title="Edit Document Template Configuration"
+    this.cdr.detectChanges();
+    }
+  }
   }
  getdocumenttypeconfig() {
     this.loader.show();
@@ -46,8 +77,11 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
       debugger
       doctype.CreatedBy="admin";
       doctype.ModifiedBy = "admin";
-      doctype.Status = '';
-      
+      doctype.Status = "Pending";
+      doctype.rows=doctype.rows.toString();
+      doctype.columns=doctype.columns.toString();
+      doctype.footerrows=doctype.footerrows.toString();
+      doctype.footercolumns=doctype.footercolumns.toString();
       
       //this.router.navigate(['/products']);
       this.doctemplateservice.adddoctemplate(doctype).subscribe((res:any)=>{
