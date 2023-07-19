@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { DocumentEffectiveConfiguration, RequestContext, workflowconiguration } from '../model/models';
+import { DepartmentConfiguration, DocumentEffectiveConfiguration, DocumentTypeConfiguration, RequestContext, workflowconiguration } from '../model/models';
 import { Router } from '@angular/router';
 import { CommonService } from '../shared/common.service';
 import { DocumentPreperationService } from '../Services/document-preperation.service';
@@ -10,6 +10,8 @@ import { DocumentTemplateServiceService } from '../Services/document-template-se
 import { WorkflowServiceService } from '../Services/workflow-service.service';
 import { debug } from 'util';
 import { DocumentEffectiveService } from '../Services/document-effective.service';
+import { DepartmentconfigurationService } from '../departmentconfiguration.service';
+import { DocumentTypeServiceService } from '../Services/document-type-service.service';
 
 @Component({
   selector: 'app-document-effective-edit',
@@ -24,7 +26,12 @@ export class DocumentEffectiveEditComponent implements OnInit {
   types: Array<DocumentEffectiveConfiguration> = [];
   templates: Array<DocumentEffectiveConfiguration> = [];
   workflowTypes: Array<workflowconiguration> = [];
-  constructor(private commonsvc: CommonService, private docReqServ: DocumentPreperationService, private docEffServ: DocumentEffectiveService, private workflowserv: WorkflowServiceService, private doctypeservice: DocumentTemplateServiceService, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService, private router: Router,) { }
+  departs: Array<DepartmentConfiguration> = [];
+  //editMode: boolean = false;
+  //viewMode: boolean = false;
+  //title: string = '';
+  doctypes: Array<DocumentTypeConfiguration> = [];;
+  constructor(private commonsvc: CommonService, private docReqServ: DocumentPreperationService, private doctypeserv: DocumentTypeServiceService, private deptservice: DepartmentconfigurationService, private docEffServ: DocumentEffectiveService, private workflowserv: WorkflowServiceService, private doctypeservice: DocumentTemplateServiceService, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService, private router: Router,) { }
   ngOnInit() {
     debugger;
     const urlPath = this.router.url;
@@ -33,6 +40,8 @@ export class DocumentEffectiveEditComponent implements OnInit {
     this.GetDocumentInfo();
     this.getdocumenttemplateconfig();
     this.getworkflowtypeconfig();
+    this.getdepartments();
+    this.getdocumenttypeconfig();
     if (lastSegment == "viewdocprep") {
       this.viewMode = this.commonsvc.docEffecConfig != null ? true : false;
       if (this.viewMode) {
@@ -67,7 +76,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
       this.loader.hide();
     });
   }
- 
+
   closepopup() {
     this.router.navigate(['/mainpage/documentmanager/documeffect']);
   }
@@ -94,10 +103,24 @@ export class DocumentEffectiveEditComponent implements OnInit {
     adddocreq.CreatedBy = "admin";
     adddocreq.ModifiedBy = "admin";
     //this.router.navigate(['/products']);
-    this.docEffServ.ManageDocument(adddocreq).subscribe((res: any) => {
+    this.docEffServ.ManageDocumentEffective(adddocreq).subscribe((res: any) => {
       this.toastr.success('Added');
-      this.router.navigate(['/mainpage/documentpreperation/documprep']);
+      this.router.navigate(['/mainpage/documentpreperation/documeffect']);
     });
   }
+  getdepartments() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+      debugger
+      this.departs = data.Response;
 
+    });
+  }
+  getdocumenttypeconfig() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
+      debugger
+      this.doctypes = data.Response;
+    });
+  }
 }

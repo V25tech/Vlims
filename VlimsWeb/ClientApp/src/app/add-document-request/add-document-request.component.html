@@ -14,8 +14,8 @@
 
           <div class="col-sm-8">
 
-            <select class="form-control" [(ngModel)]="adddocreq.documenttype" name="documenttype" #typeId="ngModel">
-
+            <select class="form-control" [(ngModel)]="adddocreq.documenttype" name="documenttype" id="documenttype" #typeId="ngModel" (ngModelChange)="inputValue = $event" [ngClass]="{ 'is-invalid': fm.submitted && documenttype.invalid }" required>
+              
               <option value="Select">Select</option>
               <option *ngFor="let doctype of doctypes" value={{doctype.Documenttypename}}>{{doctype?.Documenttypename}}</option>
             </select>
@@ -28,10 +28,14 @@
 
           <div class="col-sm-8">
 
-            <select class="form-control" [(ngModel)]="adddocreq.Assigntodepartment" name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event">
+            <select class="form-control" [(ngModel)]="adddocreq.department" name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event">
               <option value="Select">Select</option>
               <option *ngFor="let dept of departs" value={{dept.DepartmentName}}>{{dept?.DepartmentName}}</option>
             </select>
+
+            <!--<input type="text" class="form-control" id="department1" [(ngModel)]="adddocreq.department"
+                   pattern='[A-Za-z\\s]*' name="department1" aria-describedby="department1" placeholder="department1"
+                   #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />-->
 
           </div>
 

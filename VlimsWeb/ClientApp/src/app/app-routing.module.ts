@@ -45,6 +45,7 @@ import { AddDocumentRequestComponent } from './add-document-request/add-document
 import { WorkitemsComponent } from './workitems/workitems.component';
 import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.component';
 import { DocumentEffectiveEditComponent } from './document-effective-edit/document-effective-edit.component';
+import { SecurityManagementComponent } from './securitymanagement/securitymanagement.component';
 
 
 const routes: Routes = [
@@ -269,6 +270,10 @@ const routes: Routes = [
           {
             path: 'adduser',
             component: AddUserComponent
+          },
+          {
+            path: 'security',
+            component: SecurityManagementComponent
           }
         ]
       }

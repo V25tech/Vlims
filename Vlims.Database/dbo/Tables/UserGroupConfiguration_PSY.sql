@@ -3,7 +3,7 @@
     [Usermanagementid_PSY] NVARCHAR (50)  NOT NULL,
     [Usergroupname_PSY]    NVARCHAR (50)  NULL,
     [Code_PSY]             NVARCHAR (50)  NULL,
-    [Users_PSY]            NVARCHAR (50)  NULL,
+    [Users_PSY]            NVARCHAR (MAX)  NULL,
     [Totalusers_PSY]       INT            NULL,
     [CreatedBy_PSY]        NVARCHAR (100) NULL,
     [CreatedDate_PSY]      DATETIME       NULL,
