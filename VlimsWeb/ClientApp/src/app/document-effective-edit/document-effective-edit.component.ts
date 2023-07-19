@@ -9,6 +9,7 @@ import { SpinnerService } from '../spinner/spinner.service';
 import { DocumentTemplateServiceService } from '../Services/document-template-service.service';
 import { WorkflowServiceService } from '../Services/workflow-service.service';
 import { debug } from 'util';
+import { DocumentEffectiveService } from '../Services/document-effective.service';
 
 @Component({
   selector: 'app-document-effective-edit',
@@ -23,7 +24,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
   types: Array<DocumentEffectiveConfiguration> = [];
   templates: Array<DocumentEffectiveConfiguration> = [];
   workflowTypes: Array<workflowconiguration> = [];
-  constructor(private commonsvc: CommonService, private docReqServ: DocumentPreperationService, private workflowserv: WorkflowServiceService, private doctypeservice: DocumentTemplateServiceService, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService, private router: Router,) { }
+  constructor(private commonsvc: CommonService, private docReqServ: DocumentPreperationService, private docEffServ: DocumentEffectiveService, private workflowserv: WorkflowServiceService, private doctypeservice: DocumentTemplateServiceService, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService, private router: Router,) { }
   ngOnInit() {
     debugger;
     const urlPath = this.router.url;
@@ -82,6 +83,20 @@ export class DocumentEffectiveEditComponent implements OnInit {
     this.workflowserv.getworkflow(objrequest).subscribe((data: any) => {
       debugger
       this.workflowTypes = data.Response;
+    });
+  }
+  submit(adddocreq: DocumentEffectiveConfiguration) {
+    debugger
+    this.addDocumentEffective(adddocreq);
+  }
+  addDocumentEffective(adddocreq: DocumentEffectiveConfiguration) {
+
+    adddocreq.CreatedBy = "admin";
+    adddocreq.ModifiedBy = "admin";
+    //this.router.navigate(['/products']);
+    this.docEffServ.ManageDocument(adddocreq).subscribe((res: any) => {
+      this.toastr.success('Added');
+      this.router.navigate(['/mainpage/documentpreperation/documprep']);
     });
   }
 
