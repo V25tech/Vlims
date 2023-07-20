@@ -2568,3 +2568,13 @@ export class Usergroupconfiguration {
   public Modify: string;
 
 }
+export class acticateDeactivateuser {
+  public SNo: number;
+  public UserName: string;
+  public UserId: number;
+  public Department: string;
+  public Registeredon: string;
+  public Status: string;
+
+
+}
