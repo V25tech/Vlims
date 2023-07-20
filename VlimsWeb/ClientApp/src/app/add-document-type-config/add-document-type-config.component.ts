@@ -54,7 +54,7 @@ export class AddDocumentTypeConfigComponent implements OnInit {
     }
   }
 
-    $('select').selectpicker();
+    //$('select').selectpicker();
   }
   getdepartments() {
     this.loader.show();

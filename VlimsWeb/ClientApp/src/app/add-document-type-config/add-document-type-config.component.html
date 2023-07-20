@@ -46,7 +46,7 @@
             <select class="form-control" [(ngModel)]="adddoc.Assigntodepartment" name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
                     [ngClass]="{ 'is-invalid': fm.submitted && Assigntodepartment.invalid }" required>
               <option value="Select">Select</option>
-              <option *ngFor="let type of departs" value={{type.DepartmentName}}>{{type?.DepartmentName}}</option>
+              <option *ngFor="let type of types" value={{type.DepartmentName}}>{{type?.DepartmentName}}</option>
             </select>
 
           </div>
