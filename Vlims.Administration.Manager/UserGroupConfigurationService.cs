@@ -24,9 +24,9 @@ namespace Vlims.Administration.Manager
     // Comment
     public class UserGroupConfigurationService : IUserGroupConfigurationService
     {
-        
-      
-        
+
+
+
         public ResponseContext<UserGroupConfiguration> GetAllUserGroupConfiguration(RequestContext requestContext)
         {
             try
@@ -40,7 +40,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public UserGroupConfiguration GetUserGroupConfigurationByUgcid(string ugcid)
         {
             try
@@ -54,17 +54,19 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool SaveUserGroupConfiguration(UserGroupConfiguration userGroupConfiguration)
         {
             try
             {
+                userGroupConfiguration.CreatedBy = "manoj";
+                userGroupConfiguration.ModifiedBy = "manoj";
                 String validationMessages = UserGroupConfigurationValidator.IsValidUserGroupConfiguration(userGroupConfiguration);
-                if (validationMessages.Length <= 0)
-                {
-                    var result = UserGroupConfigurationData.SaveUserGroupConfiguration(userGroupConfiguration);
-                    return result;
-                }
+                //if (validationMessages.Length <= 0)
+                //{
+                var result = UserGroupConfigurationData.SaveUserGroupConfiguration(userGroupConfiguration);
+                return result;
+                //}
                 throw new System.Exception(validationMessages);
             }
             catch (System.Exception ex)
@@ -72,7 +74,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool UpdateUserGroupConfiguration(UserGroupConfiguration userGroupConfiguration)
         {
             try
@@ -90,7 +92,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteUserGroupConfigurationByUgcid(string ugcid)
         {
             try
@@ -102,7 +104,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteAllUserGroupConfiguration(List<int> ugcids)
         {
             try
@@ -114,7 +116,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public List<UserGroupConfiguration> GetUserGroupConfigurationByUserManagementId(System.Int32? uMId)
         {
             try
@@ -128,7 +130,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteUserGroupConfigurationByUserManagementId(System.Int32? uMId)
         {
             try

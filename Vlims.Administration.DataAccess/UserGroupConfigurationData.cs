@@ -59,7 +59,7 @@ namespace Vlims.Administration.DataAccess
             try
             {
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usermanagementid, Value = userGroupConfiguration.Usermanagementid });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usermanagementid, Value = "1" });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usergroupname, Value = userGroupConfiguration.Usergroupname });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Code, Value = userGroupConfiguration.Code });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Users, Value = userGroupConfiguration.Users });

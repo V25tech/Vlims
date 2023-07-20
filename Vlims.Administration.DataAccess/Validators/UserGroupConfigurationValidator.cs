@@ -31,7 +31,7 @@ namespace PolicySummary.Sheet1.Services
             {
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
-                validationMessages.Append(validationHelper.NullCheckValidator(userGroupConfiguration.Ugcid, nameof(userGroupConfiguration.Ugcid)));
+                //validationMessages.Append(validationHelper.NullCheckValidator(userGroupConfiguration.Ugcid, nameof(userGroupConfiguration.Ugcid)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.Ugcid,50, nameof(userGroupConfiguration.Ugcid)));
                 validationMessages.Append(validationHelper.NullCheckValidator(userGroupConfiguration.Usermanagementid, nameof(userGroupConfiguration.Usermanagementid)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.Usermanagementid,50, nameof(userGroupConfiguration.Usermanagementid)));

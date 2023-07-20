@@ -42,7 +42,7 @@ namespace PolicySummary.Controllers
         /// This method is used to Get List of UserGroupConfiguration
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
+        [HttpPost("GetAllUserGroupConfiguration")]
         public ActionResult<ResponseContext<UserGroupConfiguration>> GetAllUserGroupConfiguration(RequestContext requestContext)
         {
             var result = userGroupConfigurationService.GetAllUserGroupConfiguration(requestContext);

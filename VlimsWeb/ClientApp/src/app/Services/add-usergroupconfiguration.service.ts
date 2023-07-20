@@ -12,7 +12,7 @@ export class usergroupconfigurationService {
 
   getusergroupconfiguration(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/UsergroupConfiguration/GetAllUserGroupConfiguration",this.type);
+    return this.http.postJsonLogin(objrequest, "api/usergroupconfiguration/getusergroupconfiguration",this.type);
 }
 addusergroupconfiguration(objrequest: Usergroupconfiguration) {
   debugger

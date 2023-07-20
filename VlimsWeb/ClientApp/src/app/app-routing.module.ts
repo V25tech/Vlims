@@ -46,6 +46,9 @@ import { WorkitemsComponent } from './workitems/workitems.component';
 import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.component';
 import { DocumentEffectiveEditComponent } from './document-effective-edit/document-effective-edit.component';
 import { SecurityManagementComponent } from './securitymanagement/securitymanagement.component';
+import { UsergroupconfigurationComponent } from './usergroupconfiguration/usergroupconfiguration.component';
+import { AddUserGroupComponent } from './add-user-group/add-user-group.component';
+import { AddusergroupconfigurationComponent } from './Add-usergroupconfiguration/add-usergroupconfiguration.component';
 
 
 const routes: Routes = [
@@ -274,6 +277,15 @@ const routes: Routes = [
           {
             path: 'adduser',
             component: AddUserComponent
+          },
+          {
+            path: 'usergrp',
+            component: UsergroupconfigurationComponent
+          }
+          ,
+          {
+            path: 'addusergroup',
+            component: AddusergroupconfigurationComponent
           }
         ]
       }

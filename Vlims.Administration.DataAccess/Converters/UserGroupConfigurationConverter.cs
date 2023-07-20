@@ -37,16 +37,16 @@ namespace Vlims.Administration.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         userGroupConfigurationData = new UserGroupConfiguration();
-                        userGroupConfigurationData.Ugcid = Convert.ToString(row[UserGroupConfigurationConstants.Ugcid.Trim()]);
-                        userGroupConfigurationData.Usermanagementid = Convert.ToString(row[UserGroupConfigurationConstants.Usermanagementid.Trim()]);
-                        userGroupConfigurationData.Usergroupname = Convert.ToString(row[UserGroupConfigurationConstants.Usergroupname.Trim()]);
-                        userGroupConfigurationData.Code = Convert.ToString(row[UserGroupConfigurationConstants.Code.Trim()]);
-                        userGroupConfigurationData.Users = Convert.ToString(row[UserGroupConfigurationConstants.Users.Trim()]);
-                        userGroupConfigurationData.Totalusers = DatatypeConverter.SetIntValue(row[UserGroupConfigurationConstants.Totalusers.Trim()]);
-                        userGroupConfigurationData.CreatedBy = Convert.ToString(row[UserGroupConfigurationConstants.CreatedBy.Trim()]);
-                        userGroupConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[UserGroupConfigurationConstants.CreatedDate.Trim()]);
-                        userGroupConfigurationData.ModifiedBy = Convert.ToString(row[UserGroupConfigurationConstants.ModifiedBy.Trim()]);
-                        userGroupConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[UserGroupConfigurationConstants.ModifiedDate.Trim()]);
+                        userGroupConfigurationData.Ugcid = Convert.ToString(row[UserGroupConfigurationConstants.Ugcid.Trim('@')]);
+                        userGroupConfigurationData.Usermanagementid = Convert.ToString(row[UserGroupConfigurationConstants.Usermanagementid.Trim('@')]);
+                        userGroupConfigurationData.Usergroupname = Convert.ToString(row[UserGroupConfigurationConstants.Usergroupname.Trim('@')]);
+                        userGroupConfigurationData.Code = Convert.ToString(row[UserGroupConfigurationConstants.Code.Trim('@')]);
+                        userGroupConfigurationData.Users = Convert.ToString(row[UserGroupConfigurationConstants.Users.Trim('@')]);
+                        userGroupConfigurationData.Totalusers = DatatypeConverter.SetIntValue(row[UserGroupConfigurationConstants.Totalusers.Trim('@')]);
+                        userGroupConfigurationData.CreatedBy = Convert.ToString(row[UserGroupConfigurationConstants.CreatedBy.Trim('@')]);
+                        userGroupConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[UserGroupConfigurationConstants.CreatedDate.Trim('@')]);
+                        userGroupConfigurationData.ModifiedBy = Convert.ToString(row[UserGroupConfigurationConstants.ModifiedBy.Trim('@')]);
+                        userGroupConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[UserGroupConfigurationConstants.ModifiedDate.Trim('@')]);
                         result.Add(userGroupConfigurationData);
                     }
                 }

@@ -72,6 +72,7 @@ import { DocumentEffectiveEditComponent } from './document-effective-edit/docume
 import { PlantComponent } from './plantmanagement/plantmanagement.component';
 import { SecurityManagementComponent } from './securitymanagement/securitymanagement.component';
 import { UsergroupconfigurationComponent } from './usergroupconfiguration/usergroupconfiguration.component';
+import { AddusergroupconfigurationComponent } from './Add-usergroupconfiguration/add-usergroupconfiguration.component';
 
 
 
@@ -91,8 +92,8 @@ import { UsergroupconfigurationComponent } from './usergroupconfiguration/usergr
     AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, 
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
      DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, 
-     AddDocumentRequestComponent,DepartmentComponent,UserConfigurationComponent,AddUserComponent,
-    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent],
+    AddDocumentRequestComponent, DepartmentComponent, UserConfigurationComponent, AddUserComponent,
+    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent],
     providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })
