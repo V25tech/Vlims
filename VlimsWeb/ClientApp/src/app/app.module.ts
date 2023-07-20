@@ -26,7 +26,7 @@ import { BillingsComponent } from './views/billings.component';
 import { InvoiceComponent } from './views/invoice.component';
 import { AppintializorService, serverConfigInitializerFactory } from './shared/appintializor.service';
 import { RegisterComponent } from './views/register.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ProfileComponent } from './views/profile.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SidebarDirective } from './directives/sidebar.directive';
@@ -73,28 +73,29 @@ import { PlantComponent } from './plantmanagement/plantmanagement.component';
 import { SecurityManagementComponent } from './securitymanagement/securitymanagement.component';
 import { UsergroupconfigurationComponent } from './usergroupconfiguration/usergroupconfiguration.component';
 import { AddusergroupconfigurationComponent } from './Add-usergroupconfiguration/add-usergroupconfiguration.component';
+import { ApprovalConfigurationsComponent } from './Approval-Configuration/approval-configurations.component';
 
 
 
 
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, AppRoutingModule, MatTableModule, MatPaginatorModule, BrowserAnimationsModule,NgxPaginationModule, HttpClientModule, ToastrModule.forRoot({
+  imports: [BrowserModule, FormsModule, AppRoutingModule, MatTableModule, MatPaginatorModule, BrowserAnimationsModule, NgxPaginationModule, HttpClientModule, ToastrModule.forRoot({
     timeOut: 1500,
     positionClass: 'toast-top-right',
     preventDuplicates: true,
   })],
   declarations: [AppComponent, HelloComponent, DashBoardComponent, LoginComponent, ProductsComponent, MainPageComponent, ProductTypeComponent,
-    ProductsView, BrandComponent, TaxComponent, PopupshowDirective,CartsComponent,DocumentMasterComponent,DocumentTypeConfigComponent,
-    DocumentTemplateConfigComponent,WorkflowConfigComponent,NotificationConfigComponent,DashboardConfigComponent, 
-    BillingsComponent, InvoiceComponent, RegisterComponent, ProfileComponent,FilterPipe, 
-    SidebarDirective, SpinnerComponent, SearchPipe,SearchPipe, TabsDirective, InrPipe, 
-    AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent, 
+    ProductsView, BrandComponent, TaxComponent, PopupshowDirective, CartsComponent, DocumentMasterComponent, DocumentTypeConfigComponent,
+    DocumentTemplateConfigComponent, WorkflowConfigComponent, NotificationConfigComponent, DashboardConfigComponent,
+    BillingsComponent, InvoiceComponent, RegisterComponent, ProfileComponent, FilterPipe,
+    SidebarDirective, SpinnerComponent, SearchPipe, SearchPipe, TabsDirective, InrPipe,
+    AddDocumentTypeConfigComponent, AddDocumentTemplateConfigComponent, AddWorkflowConfigComponent,
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
-     DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent, 
+    DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent,
     AddDocumentRequestComponent, DepartmentComponent, UserConfigurationComponent, AddUserComponent,
-    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent],
-    providers :[AppintializorService,{ provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
+    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent, ApprovalConfigurationsComponent],
+  providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

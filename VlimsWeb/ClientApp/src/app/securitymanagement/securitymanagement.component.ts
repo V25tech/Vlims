@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 
 export class SecurityManagementComponent implements OnInit {
   types: Array<SecurityManagement> = [];
+  securityType: SecurityManagement;
   constructor(private commonsvc: CommonService, private doctypeservice: SecuritymanagementService, private toastr: ToastrService, private loader: SpinnerService, private router: Router) { }
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class SecurityManagementComponent implements OnInit {
     return this.doctypeservice.getsecuritymanagement(objrequest).subscribe((data: any) => {
       debugger
       this.types = data.Response;
+      this.securityType = data.Response[0];
       this.loader.hide();
       console.log(this.types);
     }, er => {
