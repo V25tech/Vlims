@@ -1,8 +1,10 @@
 ﻿CREATE TABLE [dbo].[workitems_PSY] (
     [WITId_PSY]           INT            IDENTITY (1, 1) NOT NULL,
     [TaskType_PSY]        NVARCHAR (50)  NULL,
+    [TaskName_PSY]        NVARCHAR (50)  NULL,  
     [Stage_PSY]           NVARCHAR (50)  NULL,
     [AssignedToGroup_PSY] NVARCHAR (50)  NULL,
+    [InitiatedBy_PSY]     NVARCHAR (50)  NULL,
     [InitiatedOn_PSY]     NVARCHAR (50)  NULL,
     [Status_PSY]          NVARCHAR (50)  NULL,
     [DueDate_PSY]         NVARCHAR (50)  NULL,

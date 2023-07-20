@@ -37,6 +37,10 @@ Status_PSY)
  GetDate() ,
  @Status_PSY);
  SELECT @ID = @@IDENTITY; 
+
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY)
+ SELECT (SELECT (REPLACE(RIGHT(CONVERT(varchar, GETDATE(), 8), 6), ':', '') + 'text')),'Workflow',@Status_PSY,null,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate()
+
  select @ID 
   
   END TRY 
