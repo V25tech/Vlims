@@ -2578,3 +2578,10 @@ export class acticateDeactivateuser {
 
 
 }
+export class LoginConfiguration {
+
+  public UserId: string = "";
+  public password: string = "";
+
+
+}
