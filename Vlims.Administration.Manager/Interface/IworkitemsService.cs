@@ -6,33 +6,30 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System;
+using System.Text;
+using System.IO;
+using System.Linq;
+using System.Data;
+using System.Collections.Generic;
+using Vlims.Common;
+using Vlims.DMS.Entities;
 
-namespace PolicySummary.DMS.Services
+
+// Comment
+public interface IworkitemsService
 {
-    using System;
-    using System.Text;
-    using System.IO;
-    using System.Linq;
-    using System.Data;
-    using System.Collections.Generic;
-    using Vlims.Common;
-    using Vlims.DMS.Entities;
 
+    ResponseContext<workitems> GetAllworkitems(RequestContext requestContext);
 
-    // Comment
-    public interface IworkitemsService
-    {
-        
-        ResponseContext<workitems> GetAllworkitems(RequestContext requestContext);
-        
-        workitems GetworkitemsByWITId(System.Int32? wITId);
-        
-        bool Saveworkitems(workitems workitems);
-        
-        bool Updateworkitems(workitems workitems);
-        
-        bool DeleteworkitemsByWITId(System.Int32? wITId);
-        
-        bool DeleteAllworkitems(List<int> wITIds);
-    }
+    workitems GetworkitemsByWITId(System.Int32? wITId);
+
+    bool Saveworkitems(workitems workitems);
+
+    bool Updateworkitems(workitems workitems);
+
+    bool DeleteworkitemsByWITId(System.Int32? wITId);
+
+    bool DeleteAllworkitems(List<int> wITIds);
 }
+

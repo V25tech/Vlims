@@ -38,17 +38,17 @@ namespace PolicySummary.DMS.Services
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         workitemsData = new workitems();
-                        workitemsData.WITId = DatatypeConverter.SetIntValue(row[workitemsConstants.WITId.Trim()]);
-                        workitemsData.TaskType = Convert.ToString(row[workitemsConstants.TaskType.Trim()]);
-                        workitemsData.Stage = Convert.ToString(row[workitemsConstants.Stage.Trim()]);
-                        workitemsData.AssignedToGroup = Convert.ToString(row[workitemsConstants.AssignedToGroup.Trim()]);
-                        workitemsData.InitiatedOn = Convert.ToString(row[workitemsConstants.InitiatedOn.Trim()]);
-                        workitemsData.Status = Convert.ToString(row[workitemsConstants.Status.Trim()]);
-                        workitemsData.DueDate = Convert.ToString(row[workitemsConstants.DueDate.Trim()]);
-                        workitemsData.CreatedBy = Convert.ToString(row[workitemsConstants.CreatedBy.Trim()]);
-                        workitemsData.CreatedDate = DatatypeConverter.SetDateTime(row[workitemsConstants.CreatedDate.Trim()]);
-                        workitemsData.ModifiedBy = Convert.ToString(row[workitemsConstants.ModifiedBy.Trim()]);
-                        workitemsData.ModifiedDate = DatatypeConverter.SetDateTime(row[workitemsConstants.ModifiedDate.Trim()]);
+                        workitemsData.WITId = DatatypeConverter.SetIntValue(row[workitemsConstants.WITId.Trim('@')]);
+                        workitemsData.TaskType = Convert.ToString(row[workitemsConstants.TaskType.Trim('@')]);
+                        workitemsData.Stage = Convert.ToString(row[workitemsConstants.Stage.Trim('@')]);
+                        workitemsData.AssignedToGroup = Convert.ToString(row[workitemsConstants.AssignedToGroup.Trim('@')]);
+                        workitemsData.InitiatedOn = Convert.ToString(row[workitemsConstants.InitiatedOn.Trim('@')]);
+                        workitemsData.Status = Convert.ToString(row[workitemsConstants.Status.Trim('@')]);
+                        workitemsData.DueDate = Convert.ToString(row[workitemsConstants.DueDate.Trim('@')]);
+                        workitemsData.CreatedBy = Convert.ToString(row[workitemsConstants.CreatedBy.Trim('@')]);
+                        workitemsData.CreatedDate = DatatypeConverter.SetDateTime(row[workitemsConstants.CreatedDate.Trim('@')]);
+                        workitemsData.ModifiedBy = Convert.ToString(row[workitemsConstants.ModifiedBy.Trim('@')]);
+                        workitemsData.ModifiedDate = DatatypeConverter.SetDateTime(row[workitemsConstants.ModifiedDate.Trim('@')]);
                         result.Add(workitemsData);
                     }
                 }

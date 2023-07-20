@@ -7,122 +7,123 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PolicySummary.DMS.Data
+
+using System;
+using System.Data;
+using System.Linq;
+using System.Data.SqlClient;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Vlims.Common;
+using PolicySummary.DMS.Entities;
+using Vlims.DMS.Entities;
+
+
+
+// Comment
+public static class workitemsData
 {
-    using System;
-    using System.Data;
-    using System.Linq;
-    using System.Data.SqlClient;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Vlims.Common;
-    using PolicySummary.DMS.Entities;
-    using Vlims.DMS.Entities;
 
 
-
-    // Comment
-    public class workitemsData 
+    public static DataSet GetAllworkitems(RequestContext requestContext)
     {
-        
-        
-        public DataSet GetAllworkitems(RequestContext requestContext)
+        try
         {
-            try
-            {
-                List<SqlParameter> sqlparms = new List<SqlParameter>();
-                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = RequestContextConstants.PageNumber, Value = requestContext.PageNumber });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = RequestContextConstants.PageSize, Value = requestContext.PageSize });
-                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_GET_ALL, sqlparms, ExecutionType.Dataset);
-                return dataset;
-            }
-            catch (System.Exception ex)
-            {
-                throw;
-            }
+            requestContext.PageNumber = 1;
+            requestContext.PageSize = 50;
+            List<SqlParameter> sqlparms = new List<SqlParameter>();
+            sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = RequestContextConstants.PageNumber, Value = requestContext.PageNumber });
+            sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = RequestContextConstants.PageSize, Value = requestContext.PageSize });
+            DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_GET_ALL, sqlparms, ExecutionType.Dataset);
+            return dataset;
         }
-        
-        public DataSet GetworkitemsByWITId(System.Int32? wITId)
+        catch (System.Exception ex)
         {
-            try
-            {
-                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_GET, workitemsConstants.WITId, DbType.Int32, wITId, ExecutionType.Dataset);
-                return dataset;
-            }
-            catch (System.Exception ex)
-            {
-                throw;
-            }
+            throw;
         }
-        
-        public bool Saveworkitems(workitems workitems)
+    }
+
+    public static DataSet GetworkitemsByWITId(System.Int32? wITId)
+    {
+        try
         {
-            try
-            {
-                List<SqlParameter> sqlparms = new List<SqlParameter>();
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.TaskType, Value = workitems.TaskType });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.Stage, Value = workitems.Stage });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.AssignedToGroup, Value = workitems.AssignedToGroup });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.InitiatedOn, Value = workitems.InitiatedOn });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.Status, Value = workitems.Status });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.DueDate, Value = workitems.DueDate });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.CreatedBy, Value = workitems.CreatedBy });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.ModifiedBy, Value = workitems.ModifiedBy });
-                Object result = dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_INSERT, sqlparms, ExecutionType.Scalar);
-                return (Convert.ToInt32(result) > 0);
-            }
-            catch (System.Exception ex)
-            {
-                throw;
-            }
+            DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_GET, workitemsConstants.WITId, DbType.Int32, wITId, ExecutionType.Dataset);
+            return dataset;
         }
-        
-        public bool Updateworkitems(workitems workitems)
+        catch (System.Exception ex)
         {
-            try
-            {
-                List<SqlParameter> sqlparms = new List<SqlParameter>();
-                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workitemsConstants.WITId, Value = workitems.WITId });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.TaskType, Value = workitems.TaskType });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.Stage, Value = workitems.Stage });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.AssignedToGroup, Value = workitems.AssignedToGroup });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.InitiatedOn, Value = workitems.InitiatedOn });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.Status, Value = workitems.Status });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.DueDate, Value = workitems.DueDate });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.ModifiedBy, Value = workitems.ModifiedBy });
-                Object result = dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
-                return (Convert.ToInt32(result) > 0);
-            }
-            catch (System.Exception ex)
-            {
-                throw;
-            }
+            throw;
         }
-        
-        public bool DeleteworkitemsByWITId(System.Int32? wITId)
+    }
+
+    public static bool Saveworkitems(workitems workitems)
+    {
+        try
         {
-            try
-            {
-                var result = dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_DELETE, workitemsConstants.WITId, DbType.Int32, wITId, ExecutionType.NonQuery);
-                return (Convert.ToInt32(result) >= 0);
-            }
-            catch (System.Exception ex)
-            {
-                throw;
-            }
+            List<SqlParameter> sqlparms = new List<SqlParameter>();
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.TaskType, Value = workitems.TaskType });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.Stage, Value = workitems.Stage });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.AssignedToGroup, Value = workitems.AssignedToGroup });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.InitiatedOn, Value = workitems.InitiatedOn });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.Status, Value = workitems.Status });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.DueDate, Value = workitems.DueDate });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.CreatedBy, Value = workitems.CreatedBy });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.ModifiedBy, Value = workitems.ModifiedBy });
+            Object result = dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_INSERT, sqlparms, ExecutionType.Scalar);
+            return (Convert.ToInt32(result) > 0);
         }
-        
-        public bool DeleteAllworkitems(List<int> wITIds)
+        catch (System.Exception ex)
         {
-            try
-            {
-                var result = dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_DELETE_ALL, workitemsConstants.WITId, DbType.String, string.Join(',',  wITIds), ExecutionType.NonQuery);
-                return (Convert.ToInt32(result) >= 0);
-            }
-            catch (System.Exception ex)
-            {
-                throw;
-            }
+            throw;
+        }
+    }
+
+    public static bool Updateworkitems(workitems workitems)
+    {
+        try
+        {
+            List<SqlParameter> sqlparms = new List<SqlParameter>();
+            sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workitemsConstants.WITId, Value = workitems.WITId });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.TaskType, Value = workitems.TaskType });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.Stage, Value = workitems.Stage });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.AssignedToGroup, Value = workitems.AssignedToGroup });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.InitiatedOn, Value = workitems.InitiatedOn });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.Status, Value = workitems.Status });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.DueDate, Value = workitems.DueDate });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workitemsConstants.ModifiedBy, Value = workitems.ModifiedBy });
+            Object result = dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
+            return (Convert.ToInt32(result) > 0);
+        }
+        catch (System.Exception ex)
+        {
+            throw;
+        }
+    }
+
+    public static bool DeleteworkitemsByWITId(System.Int32? wITId)
+    {
+        try
+        {
+            var result = dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_DELETE, workitemsConstants.WITId, DbType.Int32, wITId, ExecutionType.NonQuery);
+            return (Convert.ToInt32(result) >= 0);
+        }
+        catch (System.Exception ex)
+        {
+            throw;
+        }
+    }
+
+    public static bool DeleteAllworkitems(List<int> wITIds)
+    {
+        try
+        {
+            var result = dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_DELETE_ALL, workitemsConstants.WITId, DbType.String, string.Join(',', wITIds), ExecutionType.NonQuery);
+            return (Convert.ToInt32(result) >= 0);
+        }
+        catch (System.Exception ex)
+        {
+            throw;
         }
     }
 }
+

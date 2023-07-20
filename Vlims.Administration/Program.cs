@@ -20,6 +20,8 @@ internal class Program
         builder.Services.AddScoped<IDepartmentConfigurationService, DepartmentConfigurationService>();
         builder.Services.AddScoped<IRoleConfigurationService, RoleConfigurationService>();
         builder.Services.AddScoped<IUserConfigurationService, UserConfigurationService>();
+        builder.Services.AddScoped<IworkitemsService, workitemsService>();
+
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

@@ -6,7 +6,7 @@ import { HttpbaseService } from '../shared/httpbase.service';
   providedIn: 'root'
 })
 export class WorkflowServiceService {
-  type:string="master";
+  type: string = "admin";
   constructor(private http: HttpbaseService) { }
   getworkflow(objrequest: RequestContext) {
     debugger

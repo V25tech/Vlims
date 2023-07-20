@@ -6,7 +6,7 @@ import { HttpbaseService } from '../shared/httpbase.service';
   providedIn: 'root'
 })
 export class WorkitemsService {
-  type: string = "master";
+  type: string = "admin";
 
   constructor(private http: HttpbaseService) { }
   getworkitems(objrequest: RequestContext) {
