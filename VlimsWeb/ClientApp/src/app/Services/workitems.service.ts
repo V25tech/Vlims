@@ -12,7 +12,7 @@ export class WorkitemsService {
   getworkitems(objrequest: RequestContext) {
     debugger
     //change this method
-    return this.http.postJsonLogin(objrequest, "api/workflowconiguration/getallworkflow", this.type);
+    return this.http.postJsonLogin(objrequest, "api/workitems/GetAllworkitems", this.type);
   }
   
 }
