@@ -31,6 +31,8 @@ namespace Vlims.Administration.Manager
         {
             try
             {
+                requestContext.PageNumber = 1;
+                requestContext.PageSize = 50;
                 DataSet dataset = SecurityManagementData.GetAllSecurityManagement(requestContext);
                 List<SecurityManagement> result = SecurityManagementConverter.SetAllSecurityManagement(dataset);
                 return new ResponseContext<SecurityManagement>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };

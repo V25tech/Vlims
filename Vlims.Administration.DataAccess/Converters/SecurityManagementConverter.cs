@@ -37,17 +37,17 @@ namespace Vlims.Administration.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         securityManagementData = new SecurityManagement();
-                        securityManagementData.SMId = Convert.ToString(row[SecurityManagementConstants.SMId.Trim()]);
-                        securityManagementData.AdminManagerId = Convert.ToString(row[SecurityManagementConstants.AdminManagerId.Trim()]);
-                        securityManagementData.MinimumUserIdLength = Convert.ToString(row[SecurityManagementConstants.MinimumUserIdLength.Trim()]);
-                        securityManagementData.MinimumPasswordLength = Convert.ToString(row[SecurityManagementConstants.MinimumPasswordLength.Trim()]);
-                        securityManagementData.PasswordComplexity = DatatypeConverter.SetIntValue(row[SecurityManagementConstants.PasswordComplexity.Trim()]);
-                        securityManagementData.InvalidAttempts = DatatypeConverter.SetIntValue(row[SecurityManagementConstants.InvalidAttempts.Trim()]);
-                        securityManagementData.SessionTimeOut = DatatypeConverter.SetIntValue(row[SecurityManagementConstants.SessionTimeOut.Trim()]);
-                        securityManagementData.CreatedBy = Convert.ToString(row[SecurityManagementConstants.CreatedBy.Trim()]);
-                        securityManagementData.CreatedDate = DatatypeConverter.SetDateTime(row[SecurityManagementConstants.CreatedDate.Trim()]);
-                        securityManagementData.ModifiedBy = Convert.ToString(row[SecurityManagementConstants.ModifiedBy.Trim()]);
-                        securityManagementData.ModifiedDate = DatatypeConverter.SetDateTime(row[SecurityManagementConstants.ModifiedDate.Trim()]);
+                        securityManagementData.SMId = Convert.ToString(row[SecurityManagementConstants.SMId.Trim('@')]);
+                        securityManagementData.AdminManagerId = Convert.ToString(row[SecurityManagementConstants.AdminManagerId.Trim('@')]);
+                        securityManagementData.MinimumUserIdLength = Convert.ToString(row[SecurityManagementConstants.MinimumUserIdLength.Trim('@')]);
+                        securityManagementData.MinimumPasswordLength = Convert.ToString(row[SecurityManagementConstants.MinimumPasswordLength.Trim('@')]);
+                        securityManagementData.PasswordComplexity = DatatypeConverter.SetIntValue(row[SecurityManagementConstants.PasswordComplexity.Trim('@')]);
+                        securityManagementData.InvalidAttempts = DatatypeConverter.SetIntValue(row[SecurityManagementConstants.InvalidAttempts.Trim('@')]);
+                        securityManagementData.SessionTimeOut = DatatypeConverter.SetIntValue(row[SecurityManagementConstants.SessionTimeOut.Trim('@')]);
+                        securityManagementData.CreatedBy = Convert.ToString(row[SecurityManagementConstants.CreatedBy.Trim('@')]);
+                        securityManagementData.CreatedDate = DatatypeConverter.SetDateTime(row[SecurityManagementConstants.CreatedDate.Trim('@')]);
+                        securityManagementData.ModifiedBy = Convert.ToString(row[SecurityManagementConstants.ModifiedBy.Trim('@')]);
+                        securityManagementData.ModifiedDate = DatatypeConverter.SetDateTime(row[SecurityManagementConstants.ModifiedDate.Trim('@')]);
                         result.Add(securityManagementData);
                     }
                 }

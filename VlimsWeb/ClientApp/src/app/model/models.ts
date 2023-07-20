@@ -74,14 +74,14 @@ export class BasicInfo {
   public BureauReference: string = "";
   public Type: string = "";
   public Code: string = "";
-  public ExternalLookupName:string = "";
-  public IsExternalLookup:boolean = true;
+  public ExternalLookupName: string = "";
+  public IsExternalLookup: boolean = true;
   public DeltaLookup: string = "";
   public DeltaReturn: string = "";
   public Minimum: string = "";
   public Maximum: string = "";
   public UnitValue: string = "";
-  public DefaultValue : string = "";
+  public DefaultValue: string = "";
 }
 export class Book {
   public Id: number = 0;
@@ -549,7 +549,7 @@ export class Field {
   public IsVisible: boolean = false;
   public Format: string = "";
 }
-export class FreeFlowContext {}
+export class FreeFlowContext { }
 export class GeneralInquireGridEntity {
   public Id: string = "";
   public Name: string = "";
@@ -661,8 +661,8 @@ export class LookupTableDefinitionInfo {
   public LookupFactors: rateOrganizationFactor[] = [];
   public Dimensions: BusinessTerm[] = [];
   public LookupTableType: string = "SingleLookup";
-  public ExternalLookupName:string = "";
-  public IsExternalLookup:boolean = false;
+  public ExternalLookupName: string = "";
+  public IsExternalLookup: boolean = false;
 }
 export class LookupTableInfo {
   public LookupFactors: rateOrganizationFactor[] = [];
@@ -685,7 +685,7 @@ export class LookupTableInfo {
   public Minimum: string = "";
   public Maximum: string = "";
   public UnitValue: string = "";
-  public DefaultValue : string = "";
+  public DefaultValue: string = "";
 }
 export class MappingDetails {
   public LKPName: string = "";
@@ -1091,7 +1091,7 @@ export class RolePermission {
   public RolePermissionInfo: RolePermissionInfo[] = [];
 }
 export class RolePermissionInfo {
-  public PriorityID:number = 0;
+  public PriorityID: number = 0;
   public Name: string = "";
   public Permission: string = "";
   public Centername: string = "";
@@ -1389,7 +1389,7 @@ export class LookupTableImportInfo {
   public Minimum: string = "";
   public Maximum: string = "";
   public UnitValue: string = "";
-  public DefaultValue : string = "";
+  public DefaultValue: string = "";
 }
 export class DomainTableImportInfo {
   public LookupFactors: rateOrganizationFactor[] = [];
@@ -2070,7 +2070,7 @@ export class EntityNavDetails {
   public RouteName: string = "";
   public SelectedTab: string = "";
   public WsID: string = "";
-  public isBOM:boolean=false
+  public isBOM: boolean = false
 }
 
 export class AppSettings {
@@ -2268,38 +2268,38 @@ export class ScenarioVersions {
   public ProposedManualImapact: string = "";
   public ProposedManualImapactPerc: string = "";
 }
-export class ExternalTableData{
-  public Id : string = "00000000-0000-0000-0000-000000000000";
-  public SourceLookupName:string = "" ;
+export class ExternalTableData {
+  public Id: string = "00000000-0000-0000-0000-000000000000";
+  public SourceLookupName: string = "";
   public TargetLookupName: string = "";
   public ColumnMappings: ColumnMapping[] = [];
 }
-export class ColumnMapping{
-  public SourceColumn:string ="";
-  public TargetColumn:string = "";
+export class ColumnMapping {
+  public SourceColumn: string = "";
+  public TargetColumn: string = "";
 }
 
 export class BOMDesignModel {
-  public ID:string="00000000-0000-0000-0000-000000000000";
-  public Name:string="";
-  public DisplayName:string="";
-  public Parent:string="";
-  public Updatedby:string="";
-  public UpdatedDate=new Date();
-  public Type:string="";
-  public BureauReference:string="";
-  public Category_ID:string="";
-  public Workspace_ID:string="00000000-0000-0000-0000-000000000000";
-  public SUBTYPE:string="";
+  public ID: string = "00000000-0000-0000-0000-000000000000";
+  public Name: string = "";
+  public DisplayName: string = "";
+  public Parent: string = "";
+  public Updatedby: string = "";
+  public UpdatedDate = new Date();
+  public Type: string = "";
+  public BureauReference: string = "";
+  public Category_ID: string = "";
+  public Workspace_ID: string = "00000000-0000-0000-0000-000000000000";
+  public SUBTYPE: string = "";
 
 }
 
 export class BOMProductEntity {
-  public ProductName: string=""
+  public ProductName: string = ""
   public ProductId: number = 0;
   public fileUploadPath: string = "";
-  public UpdatedBy:string=""
-  public Updatedon: string=""
+  public UpdatedBy: string = ""
+  public Updatedon: string = ""
 }
 
 export class BomFactorGroup {
@@ -2311,7 +2311,7 @@ export class BomFactorGroup {
   public FgDescription: string = "";
   public Type: string = "";
   public Parent: string = "";
-  public OldFGName:string = "";
+  public OldFGName: string = "";
 }
 
 export class BomFactor {
@@ -2352,12 +2352,12 @@ export class AttributeTypes {
   public DisplayName: string = "";
   public Type: string = "";
 }
-  export class RequestContext{
-    public PageNumber:number;
-    public PageSize: number;
-    public Id: number | null;
-  }
-  export class dashboardconfiguration {
+export class RequestContext {
+  public PageNumber: number;
+  public PageSize: number;
+  public Id: number | null;
+}
+export class dashboardconfiguration {
   dCId: string;
   documentMasterId: string;
   createdBy: string;
@@ -2394,7 +2394,7 @@ export class DocumentRequestConfiguration {
   ModifiedDate: string | null;
   Status: string;
   Purpose: string;
-  ApprovalsCount: number;  
+  ApprovalsCount: number;
 }
 
 export class DocumentPreperationConfiguration {
@@ -2479,8 +2479,8 @@ export class DocumentTemplateConfiguration {
   rows: string;
   columns: string;
   footer: string;
-  footerrows:string;
-  footercolumns:string;
+  footerrows: string;
+  footercolumns: string;
   CreatedBy: string;
   CreatedDate: string | null;
   ModifiedBy: string;
@@ -2532,7 +2532,7 @@ export class WorkItemsConfiguration {
   Stage: string;
   AssignedtoGroup: string;
   InitiatedBy: string;
-  InitiatedOn: string; 
+  InitiatedOn: string;
   Status: string;
   DueDate: string;
 }
@@ -2576,5 +2576,19 @@ export class acticateDeactivateuser {
   public Registeredon: string;
   public Status: string;
 
+
+}
+export class LoginConfiguration {
+
+  public UserId: string = "";
+  public password: string = "";
+
+
+}
+export class ApprovalManagament {
+
+  public NoOfApprovals1: number;
+  public NoOfApprovals2: number;
+  public NoOfApprovals3: number;
 
 }

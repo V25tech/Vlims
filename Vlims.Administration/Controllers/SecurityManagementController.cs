@@ -42,7 +42,7 @@ namespace PolicySummary.Controllers
         /// This method is used to Get List of SecurityManagement
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
+        [HttpPost("GetAllSecurityManagement")]
         public ActionResult<ResponseContext<SecurityManagement>> GetAllSecurityManagement(RequestContext requestContext)
         {
             var result = securityManagementService.GetAllSecurityManagement(requestContext);

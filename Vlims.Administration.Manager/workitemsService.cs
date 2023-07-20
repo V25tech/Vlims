@@ -7,25 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PolicySummary.DMS.Services
-{
+
     using System;
     using System.Text;
     using System.IO;
     using System.Linq;
     using System.Data;
     using System.Collections.Generic;
-    using PolicySummary.DMS.Data;
     using Vlims.Common;
     using Vlims.DMS.Entities;
+using PolicySummary.DMS.Services;
 
 
 
-    // Comment
-    public class workitemsService : IworkitemsService
+// Comment
+public class workitemsService : IworkitemsService
     {
         
-        private readonly workitemsData workitemsData;
         
    
         
@@ -117,4 +115,4 @@ namespace PolicySummary.DMS.Services
             }
         }
     }
-}
+

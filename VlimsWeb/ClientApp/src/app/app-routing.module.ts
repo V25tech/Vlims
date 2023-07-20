@@ -96,6 +96,10 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'security',
+        component: SecurityManagementComponent
+      },
+      {
         path: 'documentmaster',
         component: DocumentMasterComponent,
         children: [
@@ -270,10 +274,6 @@ const routes: Routes = [
           {
             path: 'adduser',
             component: AddUserComponent
-          },
-          {
-            path: 'security',
-            component: SecurityManagementComponent
           }
         ]
       }
