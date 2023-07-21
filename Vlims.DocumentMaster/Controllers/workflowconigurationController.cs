@@ -55,7 +55,25 @@ namespace Vlims.Controllers
             var result = workflowconigurationService.GetworkflowconigurationByWFCId(wFCId);
             return result;
         }
-        
+        /// <summary>
+        /// This method is used to Get workflowconiguration By Name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpGet("getbyName")]
+        public ActionResult GetworkflowconigurationByName(string name)
+        {
+            workflowconiguration responseContext = new workflowconiguration();
+            RequestContext requestContext = new RequestContext();
+            requestContext.PageNumber = 1;
+            requestContext.PageSize = 50;
+            var result = workflowconigurationService.GetAllworkflowconiguration(requestContext);
+            if (result != null)
+            {
+                responseContext = result.Response.FirstOrDefault(o => o.workflowName.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            }
+            return Ok(responseContext);
+        }
         /// <summary>
         /// This Method is used to Save workflowconiguration
         /// </summary>

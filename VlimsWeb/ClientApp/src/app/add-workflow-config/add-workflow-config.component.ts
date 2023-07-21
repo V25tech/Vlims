@@ -19,6 +19,7 @@ export class AddWorkflowConfigComponent implements OnInit {
   departs: Array<DepartmentConfiguration>=[];
   editMode: boolean = false;
  viewMode:boolean=false;
+ objname:string;
  title:string ="Add Workflow Configuration";
   constructor(private commonsvc: CommonService, private workflowservice: WorkflowServiceService,
     private deptservice: DepartmentconfigurationService,
@@ -34,10 +35,11 @@ export class AddWorkflowConfigComponent implements OnInit {
       this.getdepartments();
       if(lastSegment=="viewworkflow")
       {
-     this.viewMode= this.commonsvc.objworkflow!=null ? true : false;
+     this.viewMode= true;
      if(this.viewMode)
      {
-     this.addworkflow=this.commonsvc.objworkflow;
+     this.objname=this.commonsvc.objname;
+     this.getByName(this.objname);
      this.title="View Workflow Configuration"
      }
      this.cdr.detectChanges();
@@ -53,6 +55,20 @@ export class AddWorkflowConfigComponent implements OnInit {
     }
   }
     }
+    getByName(objname:string)
+  {
+    this.loader.show();
+    debugger
+      return this.workflowservice.getworkflowbyname(objname).subscribe((data:any)=>{
+        debugger
+        this.addworkflow=data;
+        this.loader.hide();
+        console.log(this.addworkflow);
+      }, er => {
+        this.toastr.error('loading failed');
+        this.loader.hide();
+      });
+  }
     getdepartments() {
       this.loader.show();
      let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
@@ -99,6 +115,13 @@ export class AddWorkflowConfigComponent implements OnInit {
       
     }
     closepopup() {
-      this.router.navigate(['/mainpage/documentmaster/workflow']);
+      if(this.viewMode)
+      {
+        this.router.navigate(['/mainpage/workitems']);
+      }
+      else
+      {
+      this.router.navigate(['/mainpage/workflow']);
+      }
     }
 }

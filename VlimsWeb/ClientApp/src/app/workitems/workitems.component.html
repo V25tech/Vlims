@@ -26,7 +26,7 @@
         <tbody>
           <tr *ngFor="let doc of types; let i=index">
             <th>{{i+1}}</th>
-            <td>{{doc?.TaskType}}</td>
+            <td (click)="getInfo(doc?.TaskType,doc?.TaskName)" ><a> {{doc?.TaskType}} </a></td>
             <td>{{doc?.Stage}}</td>
             <td>{{doc?.AssignedtoGroup}}</td>
             <td>{{doc?.InitiatedBy}}</td>

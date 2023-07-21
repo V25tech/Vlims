@@ -19,7 +19,9 @@ namespace PolicySummary.DMS.Entities
         public const string WITId = "@WITId_PSY";
         
         public const string TaskType = "@TaskType_PSY";
-        
+
+        public const string TaskName = "@TaskName_PSY";
+
         public const string Stage = "@Stage_PSY";
         
         public const string AssignedToGroup = "@AssignedToGroup_PSY";

@@ -63,7 +63,7 @@ namespace Vlims.DocumentMaster.Entities
                 this.documentmasteridField = value;
             }
         }
-        
+        public string workflowName { get; set; }
         public string documentstage
         {
             get

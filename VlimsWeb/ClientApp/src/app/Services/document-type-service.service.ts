@@ -13,6 +13,10 @@ type:string="master";
     debugger
     return this.http.postJsonLogin(objrequest, "api/documenttypeconfiguration/getalldoctypeconfig",this.type);
 }
+getdoctypeconfigbyname(objname: string) {
+  debugger
+  return this.http.getwithheader("api/documenttypeconfiguration/getbyName"+"?name="+objname,this.type);
+}
 adddoctypeconfig(objrequest: DocumentTypeConfiguration) {
   debugger
   return this.http.postJsonLogin(objrequest, "api/documenttypeconfiguration/savedocumenttypeconfiguration",this.type);

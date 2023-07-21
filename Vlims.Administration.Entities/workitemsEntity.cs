@@ -62,7 +62,7 @@ namespace Vlims.DMS.Entities
                 this.tasktypeField = value;
             }
         }
-        
+        public string TaskName { get; set; }
         public string Stage
         {
             get

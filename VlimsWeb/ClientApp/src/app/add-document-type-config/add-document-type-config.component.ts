@@ -21,6 +21,7 @@ export class AddDocumentTypeConfigComponent implements OnInit {
  adddoc = new DocumentTypeConfiguration();
  editMode: boolean = false;
  viewMode:boolean=false;
+ objname:string;
  types: Array<DepartmentConfiguration>=[];
  title:string ="Add Document Type Configuration";
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentTypeServiceService,
@@ -33,12 +34,16 @@ export class AddDocumentTypeConfigComponent implements OnInit {
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 1];
     this.getdepartments();
+    
     if(lastSegment=="viewdoctype")
     {
-   this.viewMode= this.commonsvc.docobject!=null ? true : false;
+   this.viewMode= true;
    if(this.viewMode)
    {
-   this.adddoc=this.commonsvc.docobject;
+    debugger
+    this.objname=this.commonsvc.objname;
+    this.getdocTypeByName(this.objname);
+  //  this.adddoc=this.commonsvc.docobject;
    this.title="View Document Type Configuration"
    }
    this.cdr.detectChanges();
@@ -53,8 +58,20 @@ export class AddDocumentTypeConfigComponent implements OnInit {
     this.cdr.detectChanges();
     }
   }
-
-    //$('select').selectpicker();
+  }
+  getdocTypeByName(objname:string)
+  {
+    this.loader.show();
+    debugger
+      return this.doctypeservice.getdoctypeconfigbyname(objname).subscribe((data:any)=>{
+        debugger
+        this.adddoc=data;
+        this.loader.hide();
+        console.log(this.adddoc);
+      }, er => {
+        this.toastr.error('loading failed');
+        this.loader.hide();
+      });
   }
   getdepartments() {
     this.loader.show();
@@ -100,6 +117,13 @@ export class AddDocumentTypeConfigComponent implements OnInit {
     
   }
   closepopup() {
+    if(this.viewMode)
+    {
+      this.router.navigate(['/mainpage/workitems']);
+    }
+    else
+    {
     this.router.navigate(['/mainpage/documentmaster']);
+    }
   }
 }

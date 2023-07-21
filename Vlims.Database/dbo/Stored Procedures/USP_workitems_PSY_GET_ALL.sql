@@ -4,6 +4,7 @@
  BEGIN TRY 
  SELECT WITId_PSY,
 TaskType_PSY,
+TaskName_PSY,
 Stage_PSY,
 AssignedToGroup_PSY,
 InitiatedOn_PSY,

@@ -2459,6 +2459,7 @@ export class workflowconiguration {
   WFCId: string;
   DocumentMasterId: string;
   documentstage: string;
+  workflowName:string;
   documenttype: string;
   department: string;
   reviewsCount: number | null;
