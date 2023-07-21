@@ -43,5 +43,25 @@ export class WorkitemsComponent implements OnInit {
     });
 
   }
+  getInfo(tasktype:string,taskname:string)
+  {
+    debugger
+    this.commonsvc.objname=taskname;
+    switch(tasktype)
+    {
+      case "Document Type":
+      this.router.navigate(['/mainpage/documentmaster/viewdoctype']);
+        break;
+        case "Document Template":
+      this.router.navigate(['/mainpage/documentmaster/viewdoctemplate']);
+        break;
+        case "Workflow":
+      this.router.navigate(['/mainpage/documentmaster/viewworkflow']);
+        break;
+        default:
+          this.router.navigate(['/mainpage/documentmaster/viewdoctype']);
+        break;
+    }
+  }
 }
 

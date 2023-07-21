@@ -19,6 +19,7 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
   newdoctemplate=new DocumentTemplateConfiguration();
   editMode: boolean = false;
  viewMode:boolean=false;
+ objname:string;
  title:string ="Add Document Template Configuration";
  fm: FormGroup;
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentTypeServiceService  ,
@@ -34,17 +35,18 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
     this.getdocumenttypeconfig();
     if(lastSegment=="viewdoctemplate")
     {
-   this.viewMode= this.commonsvc.objdoctemplate!=null ? true : false;
+   this.viewMode= true;
    if(this.viewMode)
    {
-   this.newdoctemplate=this.commonsvc.objdoctemplate;
+   this.objname=this.commonsvc.objname;;
    this.title="View Document Template Configuration"
+   this.getByName(this.objname);
    }
    this.cdr.detectChanges();
   }
   else if(lastSegment=="editdoctemplate")
   {
-    this.editMode= this.commonsvc.objdoctemplate!=null ? true : false;
+    this.editMode= true;
     if(this.editMode)
     {
     this.newdoctemplate=this.commonsvc.objdoctemplate;
@@ -52,6 +54,20 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
     this.cdr.detectChanges();
     }
   }
+  }
+  getByName(objname:string)
+  {
+    this.loader.show();
+    debugger
+      return this.doctemplateservice.getdoctemplatebyname(objname).subscribe((data:any)=>{
+        debugger
+        this.newdoctemplate=data;
+        this.loader.hide();
+        console.log(this.newdoctemplate);
+      }, er => {
+        this.toastr.error('loading failed');
+        this.loader.hide();
+      });
   }
  getdocumenttypeconfig() {
     this.loader.show();
@@ -92,6 +108,13 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
       
     }
     closepopup() {
-      this.router.navigate(['/mainpage/documentmaster/doctemplate']);
+      if(this.viewMode)
+      {
+        this.router.navigate(['/mainpage/workitems']);
+      }
+      else
+      {
+      this.router.navigate(['/mainpage/doctemplate']);
+      }
     }
 }

@@ -27,6 +27,7 @@ export class CommonService {
   docrequest: DocumentRequestConfiguration;
   objdoctemplate:DocumentTemplateConfiguration;
   objworkflow:workflowconiguration;
+  objname:string;
   private _searchBS = new BehaviorSubject<string>('');
 
   private _sliderToggleBS = new BehaviorSubject<boolean>(false);

@@ -35,6 +35,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         workflowconigurationData = new workflowconiguration();
                         workflowconigurationData.WFCId = Convert.ToString(row[workflowconigurationConstants.WFCId.Trim('@')]);
                         workflowconigurationData.DocumentMasterId = Convert.ToString(row[workflowconigurationConstants.DocumentMasterId.Trim('@')]);
+                        workflowconigurationData.workflowName = Convert.ToString(row[workflowconigurationConstants.workflowName_PSY.Trim('@')]);
                         workflowconigurationData.documentstage = Convert.ToString(row[workflowconigurationConstants.documentstage.Trim('@')]);
                         workflowconigurationData.documenttype = Convert.ToString(row[workflowconigurationConstants.documenttype.Trim('@')]);
                         workflowconigurationData.department = Convert.ToString(row[workflowconigurationConstants.department.Trim('@')]);

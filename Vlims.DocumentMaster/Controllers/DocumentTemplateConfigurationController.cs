@@ -55,7 +55,25 @@ namespace Vlims.Controllers
             var result = documentTemplateConfigurationService.GetDocumentTemplateConfigurationByDTID(dTID);
             return result;
         }
-        
+        /// <summary>
+        /// This method is used to Get DocumentTemplateConfiguration By Name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpGet("getbyName")]
+        public ActionResult GetDocumentTemplateConfigurationByName(string name)
+        {
+            DocumentTemplateConfiguration responseContext = new DocumentTemplateConfiguration();
+            RequestContext requestContext = new RequestContext();
+            requestContext.PageNumber = 1;
+            requestContext.PageSize = 50;
+            var result = documentTemplateConfigurationService.GetAllDocumentTemplateConfiguration(requestContext);
+            if (result != null)
+            {
+                responseContext = result.Response.FirstOrDefault(o => o.Templatename.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            }
+            return Ok(responseContext);
+        }
         /// <summary>
         /// This Method is used to Save DocumentTemplateConfiguration
         /// </summary>

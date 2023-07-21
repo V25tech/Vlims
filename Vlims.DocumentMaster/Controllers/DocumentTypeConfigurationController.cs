@@ -10,6 +10,7 @@
 namespace Vlims.Controllers
 {
     using System.Collections.Generic;
+    using System.Data;
     using Microsoft.AspNetCore.Mvc;
     using Vlims.Common;
     using Vlims.DocumentMaster.Entities;
@@ -55,7 +56,26 @@ namespace Vlims.Controllers
             var result = documentTypeConfigurationService.GetDocumentTypeConfigurationByDTCId(dTCId);
             return result;
         }
-        
+        /// <summary>
+        /// This method is used to Get DocumentTypeConfiguration By Name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpGet("getbyName")]
+        public ActionResult GetDocumentTypeConfigurationByName(string name)
+        {
+            DocumentTypeConfiguration responseContext=new DocumentTypeConfiguration();
+            RequestContext requestContext = new RequestContext();
+            requestContext.PageNumber = 1;
+            requestContext.PageSize = 50;
+            var result = documentTypeConfigurationService.GetAllDocumentTypeConfiguration(requestContext);
+            if (result != null)
+            {
+                responseContext = result.Response.FirstOrDefault(o => o.Documenttypename.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            }
+            return Ok(responseContext);
+        }
+
         /// <summary>
         /// This Method is used to Save DocumentTypeConfiguration
         /// </summary>

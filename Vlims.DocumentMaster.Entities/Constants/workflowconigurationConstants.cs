@@ -21,7 +21,10 @@ namespace Vlims.DocumentMaster.Entities
         public const string DocumentMasterId = "@DocumentMasterId_PSY";
         
         public const string documentstage = "@documentstage_PSY";
-        
+
+        public const string workflowName_PSY = "@workflowName_PSY";
+
+
         public const string documenttype = "@documenttype_PSY";
         
         public const string department = "@department_PSY";

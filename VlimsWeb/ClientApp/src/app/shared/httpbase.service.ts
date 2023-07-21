@@ -136,4 +136,13 @@ export class HttpbaseService {
         this.requestOptions.headers = this.requestOptions.headers.append('token', token);
         return this.httpClient.get(this.baseUrl + url, this.requestOptions);
     }
+    getwithheader(url: string,type:string=null) {
+        debugger
+        if(type!=null)
+        {
+            this.baseUrl=this.geturl(type);
+            
+        }
+        return this.httpClient.get(this.baseUrl + url, this.requestOptions);
+    }
 }

@@ -40,6 +40,7 @@ namespace PolicySummary.DMS.Services
                         workitemsData = new workitems();
                         workitemsData.WITId = DatatypeConverter.SetIntValue(row[workitemsConstants.WITId.Trim('@')]);
                         workitemsData.TaskType = Convert.ToString(row[workitemsConstants.TaskType.Trim('@')]);
+                        workitemsData.TaskName = Convert.ToString(row[workitemsConstants.TaskName.Trim('@')]);
                         workitemsData.Stage = Convert.ToString(row[workitemsConstants.Stage.Trim('@')]);
                         workitemsData.AssignedToGroup = Convert.ToString(row[workitemsConstants.AssignedToGroup.Trim('@')]);
                         workitemsData.InitiatedOn = Convert.ToString(row[workitemsConstants.InitiatedOn.Trim('@')]);
