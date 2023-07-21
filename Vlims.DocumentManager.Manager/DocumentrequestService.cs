@@ -58,15 +58,11 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
-                //String validationMessages = DocumentrequestValidator.IsValidDocumentrequest(documentrequest);
-                //if (validationMessages.Length <= 0)
-                //{
-                documentrequest.AssigntoGroup = "A";
+                //documentrequest.AssigntoGroup = "A";
                 documentrequest.documentmanagerid = "1";
+                //documentrequest.Status = "In-Progress";
                 var result = DocumentrequestData.SaveDocumentrequest(documentrequest);
                 return result;
-                //}
-                //throw new System.Exception(validationMessages);
             }
             catch (System.Exception ex)
             {
