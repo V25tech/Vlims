@@ -42,7 +42,7 @@ namespace PolicySummary.Controllers
         /// This method is used to Get List of PlantManagement
         /// </summary>
         /// <param name="requestContext"></param>
-        [HttpPost()]
+        [HttpPost("GetAllPlantManagement")]
         public ActionResult<ResponseContext<PlantManagement>> GetAllPlantManagement(RequestContext requestContext)
         {
             var result = plantManagementService.GetAllPlantManagement(requestContext);

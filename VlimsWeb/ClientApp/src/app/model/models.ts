@@ -2539,8 +2539,8 @@ export class WorkItemsConfiguration {
 export class PlantConfiguration {
   DPCFId: string;
   HierarchyManagementId: string;
-  DepartmentName: string;
-  DepartmentCode: string;
+  PlantName: string;
+  PlantCode: string;
   Comments: string;
   CreatedBy: string;
   CreatedDate: string | null;

@@ -50,6 +50,7 @@ import { UsergroupconfigurationComponent } from './usergroupconfiguration/usergr
 import { AddUserGroupComponent } from './add-user-group/add-user-group.component';
 import { AddusergroupconfigurationComponent } from './Add-usergroupconfiguration/add-usergroupconfiguration.component';
 import { ApprovalConfigurationsComponent } from './Approval-Configuration/approval-configurations.component';
+import { PlantComponent } from './plantmanagement/plantmanagement.component';
 
 
 const routes: Routes = [
@@ -106,6 +107,10 @@ const routes: Routes = [
       {
         path: 'appconfig',
         component: ApprovalConfigurationsComponent
+      },
+      {
+        path: 'plant',
+        component: PlantComponent
       },
       {
         path: 'documentmaster',

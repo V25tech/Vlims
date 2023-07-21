@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vlims.Administration.Entities\Vlims.Administration.Entities.csproj" />
     <ProjectReference Include="..\Vlims.Administration.Manager\Vlims.Administration.Manager.csproj" />
   </ItemGroup>
 

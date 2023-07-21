@@ -23,6 +23,7 @@ internal class Program
         builder.Services.AddScoped<IworkitemsService, workitemsService>();
         builder.Services.AddScoped<ISecurityManagementService, SecurityManagementService>();
         builder.Services.AddScoped<IUserGroupConfigurationService, UserGroupConfigurationService>();
+        builder.Services.AddScoped<IPlantManagementService, PlantManagementService>();
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

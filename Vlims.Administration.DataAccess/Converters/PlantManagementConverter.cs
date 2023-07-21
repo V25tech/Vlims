@@ -37,16 +37,16 @@ namespace Vlims.Administration.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         plantManagementData = new PlantManagement();
-                        plantManagementData.PMId = Convert.ToString(row[PlantManagementConstants.PMId.Trim()]);
-                        plantManagementData.AdminManagerId = Convert.ToString(row[PlantManagementConstants.AdminManagerId.Trim()]);
-                        plantManagementData.PlantName = Convert.ToString(row[PlantManagementConstants.PlantName.Trim()]);
-                        plantManagementData.PlantCode = Convert.ToString(row[PlantManagementConstants.PlantCode.Trim()]);
-                        plantManagementData.PlantAddress = Convert.ToString(row[PlantManagementConstants.PlantAddress.Trim()]);
-                        plantManagementData.Comments = Convert.ToString(row[PlantManagementConstants.Comments.Trim()]);
-                        plantManagementData.CreatedBy = Convert.ToString(row[PlantManagementConstants.CreatedBy.Trim()]);
-                        plantManagementData.CreatedDate = DatatypeConverter.SetDateTime(row[PlantManagementConstants.CreatedDate.Trim()]);
-                        plantManagementData.ModifiedBy = Convert.ToString(row[PlantManagementConstants.ModifiedBy.Trim()]);
-                        plantManagementData.ModifiedDate = DatatypeConverter.SetDateTime(row[PlantManagementConstants.ModifiedDate.Trim()]);
+                        plantManagementData.PMId = Convert.ToString(row[PlantManagementConstants.PMId.Trim('@')]);
+                        plantManagementData.AdminManagerId = Convert.ToString(row[PlantManagementConstants.AdminManagerId.Trim('@')]);
+                        plantManagementData.PlantName = Convert.ToString(row[PlantManagementConstants.PlantName.Trim('@')]);
+                        plantManagementData.PlantCode = Convert.ToString(row[PlantManagementConstants.PlantCode.Trim('@')]);
+                        plantManagementData.PlantAddress = Convert.ToString(row[PlantManagementConstants.PlantAddress.Trim('@')]);
+                        plantManagementData.Comments = Convert.ToString(row[PlantManagementConstants.Comments.Trim('@')]);
+                        plantManagementData.CreatedBy = Convert.ToString(row[PlantManagementConstants.CreatedBy.Trim('@')]);
+                        plantManagementData.CreatedDate = DatatypeConverter.SetDateTime(row[PlantManagementConstants.CreatedDate.Trim('@')]);
+                        plantManagementData.ModifiedBy = Convert.ToString(row[PlantManagementConstants.ModifiedBy.Trim('@')]);
+                        plantManagementData.ModifiedDate = DatatypeConverter.SetDateTime(row[PlantManagementConstants.ModifiedDate.Trim('@')]);
                         result.Add(plantManagementData);
                     }
                 }
