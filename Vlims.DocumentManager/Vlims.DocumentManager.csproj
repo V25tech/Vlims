@@ -15,4 +15,19 @@
     <ProjectReference Include="..\Vlims.DocumentManager.Manager\Vlims.DocumentManager.Manager.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\..\ConsoleApp1\ConsoleApp1\bin\Debug\net6.0\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\ConsoleApp1\ConsoleApp1\bin\Debug\net6.0\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlToOpenXml">
+      <HintPath>..\..\ConsoleApp1\ConsoleApp1\bin\Debug\net6.0\HtmlToOpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging">
+      <HintPath>..\..\ConsoleApp1\ConsoleApp1\bin\Debug\net6.0\System.IO.Packaging.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
