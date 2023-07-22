@@ -18,7 +18,7 @@ export class NewPlantRegistrationConfigurationService {
 }
 addNewRegistrationconfiguration(objrequest: NewPlantRegistration) {
   debugger
-  return this.http.postJsonLogin(objrequest, "api/NewRegistration/SavePlantManagement",this.type);
+  return this.http.postJsonLogin(objrequest, "api/NewRegistration/saveplantmanagement",this.type);
 }
 }
 

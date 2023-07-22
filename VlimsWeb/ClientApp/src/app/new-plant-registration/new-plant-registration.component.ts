@@ -23,7 +23,8 @@ export class NewPlantRegistrationComponent implements OnInit {
    let objrequest: RequestContext={
        PageNumber: 1, PageSize: 1,
        Id: 0
-   };
+    };
+    debugger
       return this.doctypeservice.getNewRegistrationconfiguration(objrequest).subscribe((data: any) => {
         debugger
         this.types = data.Response;
@@ -33,6 +34,9 @@ export class NewPlantRegistrationComponent implements OnInit {
         this.toastr.error('loading failed');
         this.loader.hide();
       });
+  }
+  submit_new_plant() {
+    debugger;
   }
 }
 

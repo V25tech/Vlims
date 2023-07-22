@@ -41,5 +41,17 @@ export class SecurityManagementComponent implements OnInit {
       this.loader.hide();
     });
   }
+  submit(securityType: SecurityManagement) {
+    debugger
+    /*if (this.editMode) {*/
+    this.doctypeservice.addsecurityconfiguration(securityType).subscribe((res: any) => {
+        this.toastr.success('Updated');
+      });
+    //}
+    //else {
+    //  this.adddoctype(doctype);
+    //}
+
+  }
 }
 
