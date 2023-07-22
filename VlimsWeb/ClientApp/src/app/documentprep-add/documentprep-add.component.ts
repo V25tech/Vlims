@@ -26,6 +26,7 @@ export class DocumentprepAddComponent implements OnInit {
   templates: Array<DocumentTemplateConfiguration> = [];
   workflowTypes: Array<workflowconiguration> = [];
   departs: Array<DepartmentConfiguration> = [];
+  selectedFile: File | null = null;
   //editMode: boolean = false;
   //viewMode: boolean = false;
   //title: string = '';
@@ -120,5 +121,28 @@ export class DocumentprepAddComponent implements OnInit {
       debugger
       this.doctypes = data.Response;
     });
+  }
+  onFileSelected(event: any): void {
+    debugger
+    this.selectedFile = event.target.files[0];
+  }
+  onUpload(): void {
+    debugger
+    if (!this.selectedFile) {
+      console.error('No file selected.');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    this.docprepServ.upload(formData)
+      .subscribe(
+        (response) => {
+          console.log('File uploaded successfully:', response);
+        },
+        (error) => {
+          console.error('Error uploading file:', error);
+        }
+      );
   }
 }

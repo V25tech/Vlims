@@ -17,6 +17,7 @@ namespace PolicySummary.Controllers
     using Vlims.Common;
     using Vlims.DMS.Entities;
     using Vlims.DocumentManager.Manager;
+    using Microsoft.Extensions.Hosting;
 
 
     /// <summary>
@@ -102,6 +103,38 @@ namespace PolicySummary.Controllers
         {
             var result = documentPreparationService.DeleteAllDocumentPreparation(dPNIDs);
             return result;
+        }
+
+        [HttpPost("upload")]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file selected.");
+            }
+
+            try
+            {
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+
+                return Ok(new { message = "File uploaded successfully.", filePath });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while uploading the file: {ex.Message}");
+            }
         }
     }
 }

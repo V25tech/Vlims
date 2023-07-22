@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /VlimsWeb/ClientApp/src/app/Services/login.service.spec.ts
+/Vlims.DocumentManager/Uploads/fd2ba598-95d1-4eb3-b45d-631b132a25f2_headerfooter.docx
+/Vlims.DocumentManager/Uploads/f2a682e0-d5a3-4c70-9729-a3a122e52462_headerfooter.docx

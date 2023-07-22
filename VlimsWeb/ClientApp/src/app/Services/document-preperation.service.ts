@@ -23,4 +23,10 @@ export class DocumentPreperationService {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/savedocumentpreparation",this.type);
   }
+  upload(objrequest: FormData){
+    debugger
+    return this.http.postJsonLogin(objrequest, "api/documentpreparation/upload",this.type);
+  }
+ 
+
 }
