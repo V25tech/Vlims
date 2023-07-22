@@ -2544,6 +2544,7 @@ export class PlantConfiguration {
   HierarchyManagementId: string;
   PlantName: string;
   PlantCode: string;
+  PlantAddress: string;
   Comments: string;
   CreatedBy: string;
   CreatedDate: string | null;
@@ -2597,14 +2598,14 @@ export class ApprovalManagament {
 
 }
 
-export class NewPlantRegistration {
+//export class NewPlantRegistration {
 
-  public planatname: string;
-  public planatcode: number;
-  public planataddress: string;
-  public comments: string;
+//  public PlantName: string;
+//  public PlantCode: number;
+//  public PlantAddress: string;
+//  public Comments: string;
 
-}
+//}
 
 export class FileResponse{
   public filePath:string;
