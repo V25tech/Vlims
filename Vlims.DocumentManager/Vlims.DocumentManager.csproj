@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.20.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.50" />
+    <PackageReference Include="HtmlToOpenXml" Version="1.6.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Vlims.DocumentManager.Entities\Vlims.DocumentManager.Entities.csproj" />
     <ProjectReference Include="..\Vlims.DocumentManager.Manager\Vlims.DocumentManager.Manager.csproj" />
+    <ProjectReference Include="..\Vlims.DocumentMaster.DataAccess\Vlims.DocumentMaster.DataAccess.csproj" />
+    <ProjectReference Include="..\Vlims.DocumentMaster.Entities\Vlims.DocumentMaster.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

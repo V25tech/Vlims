@@ -227,5 +227,6 @@ namespace Vlims.DMS.Entities
                 this.statusField = value;
             }
         }
+        public string path { get; set; }
     }
 }

@@ -13,11 +13,16 @@ namespace PolicySummary.Controllers
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Authorization;   
+    using Microsoft.AspNetCore.Authorization;
     using Vlims.Common;
     using Vlims.DMS.Entities;
     using Vlims.DocumentManager.Manager;
     using Microsoft.Extensions.Hosting;
+
+    using System.Data;
+    using Vlims.DocumentMaster.Entities;
+    using Vlims.DocumentMaster.DataAccess;
+
 
 
     /// <summary>
@@ -27,9 +32,9 @@ namespace PolicySummary.Controllers
     [Route("api/documentpreparation")]
     public class DocumentPreparationController : ControllerBase
     {
-        
+
         private readonly IDocumentPreparationService documentPreparationService;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,7 +43,7 @@ namespace PolicySummary.Controllers
         {
             this.documentPreparationService = documentPreparationService;
         }
-        
+
         /// <summary>
         /// This method is used to Get List of DocumentPreparation
         /// </summary>
@@ -49,7 +54,7 @@ namespace PolicySummary.Controllers
             var result = documentPreparationService.GetAllDocumentPreparation(requestContext);
             return Ok(result);
         }
-        
+
         /// <summary>
         /// This method is used to Get DocumentPreparation By Id dPNID
         /// </summary>
@@ -60,7 +65,7 @@ namespace PolicySummary.Controllers
             var result = documentPreparationService.GetDocumentPreparationByDPNID(dPNID);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Save DocumentPreparation
         /// </summary>
@@ -71,7 +76,41 @@ namespace PolicySummary.Controllers
             var result = documentPreparationService.SaveDocumentPreparation(documentPreparation);
             return result;
         }
-        
+        /// <summary>
+        /// This Method is used to Preview DocumentPreparation
+        /// </summary>
+        /// <param name="documentPreparation"></param>
+        /// <returns></returns>
+        [HttpPost("preview")]
+        public ActionResult PreviewDocumentPreparation(DocumentPreparation documentPreparation)
+        {
+            List<DocumentTemplateConfiguration> result;
+            RequestContext request = new RequestContext() { PageNumber = 1, PageSize = 1 };
+            DataSet dataset = DocumentTemplateConfigurationData.GetAllDocumentTemplateConfiguration(request);
+            if (dataset != null && dataset.Tables[0].Rows.Count > 0)
+            {
+                result = DocumentTemplateConfigurationConverter.SetAllDocumentTemplateConfiguration(dataset);
+                var template = result.FirstOrDefault(o => o.Templatename.Equals(documentPreparation.template, StringComparison.InvariantCultureIgnoreCase));
+                if (template != null)
+                {
+                    HeaderFooter.PrepareHtmlTable(template, documentPreparation);
+                    PrepareHeaderTable(template, documentPreparation);
+                    PrepareFooterTable(template, documentPreparation);
+                }
+            }
+            return Ok(); //result;
+        }
+
+        private void PrepareFooterTable(DocumentTemplateConfiguration template, DocumentPreparation documentPreparation)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void PrepareHeaderTable(DocumentTemplateConfiguration template, DocumentPreparation documentPreparation)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// This Method is used to update DocumentPreparation
         /// </summary>
@@ -82,7 +121,7 @@ namespace PolicySummary.Controllers
             var result = documentPreparationService.UpdateDocumentPreparation(documentPreparation);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Delete DocumentPreparation By Id dPNID
         /// </summary>
@@ -93,7 +132,7 @@ namespace PolicySummary.Controllers
             var result = documentPreparationService.DeleteDocumentPreparationByDPNID(dPNID);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Delete DocumentPreparation By Multiple ids dPNIDs
         /// </summary>
@@ -121,7 +160,7 @@ namespace PolicySummary.Controllers
                     Directory.CreateDirectory(uploadsFolder);
                 }
 
-                string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                string uniqueFileName = file.FileName;
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))

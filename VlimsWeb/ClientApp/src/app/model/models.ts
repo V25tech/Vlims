@@ -2417,6 +2417,7 @@ export class DocumentPreperationConfiguration {
   wokflow: string;
   details: string;
   document: string;
+  path:string;
 }
 export class DocumentEffectiveConfiguration {
   DTCId: string;
@@ -2603,4 +2604,9 @@ export class NewPlantRegistration {
   public planataddress: string;
   public comments: string;
 
+}
+
+export class FileResponse{
+  public filePath:string;
+  public message:string;
 }

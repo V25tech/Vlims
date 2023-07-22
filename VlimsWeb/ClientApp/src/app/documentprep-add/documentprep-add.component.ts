@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { DepartmentConfiguration, DocumentPreperationConfiguration, DocumentTemplateConfiguration, DocumentTypeConfiguration, RequestContext, workflowconiguration } from '../model/models';
+import { DepartmentConfiguration, DocumentPreperationConfiguration, DocumentTemplateConfiguration, DocumentTypeConfiguration, FileResponse, RequestContext, workflowconiguration } from '../model/models';
 import { Router } from '@angular/router';
 import { CommonService } from '../shared/common.service';
 import { DocumentPreperationService } from '../Services/document-preperation.service';
@@ -11,6 +11,8 @@ import { WorkflowServiceService } from '../Services/workflow-service.service';
 import { DocumentRequestService } from '../Services/document-request.service';
 import { DepartmentconfigurationService } from '../departmentconfiguration.service';
 import { DocumentTypeServiceService } from '../Services/document-type-service.service';
+
+type NewType = FileResponse;
 
 @Component({
   selector: 'app-documentprep-add',
@@ -27,6 +29,8 @@ export class DocumentprepAddComponent implements OnInit {
   workflowTypes: Array<workflowconiguration> = [];
   departs: Array<DepartmentConfiguration> = [];
   selectedFile: File | null = null;
+  isUploaded: boolean = false; // Track upload status
+  objfile = new FileResponse();
   //editMode: boolean = false;
   //viewMode: boolean = false;
   //title: string = '';
@@ -125,6 +129,7 @@ export class DocumentprepAddComponent implements OnInit {
   onFileSelected(event: any): void {
     debugger
     this.selectedFile = event.target.files[0];
+    this.isUploaded = false; // Reset upload status when a new file is selected
   }
   onUpload(): void {
     debugger
@@ -137,12 +142,32 @@ export class DocumentprepAddComponent implements OnInit {
 
     this.docprepServ.upload(formData)
       .subscribe(
-        (response) => {
+        (response:any) => {
           console.log('File uploaded successfully:', response);
+          this.objfile=response;
+          this.adddocreq.path=this.objfile.filePath;
+          this.isUploaded = true; // Set upload status to true after successful upload
         },
         (error) => {
           console.error('Error uploading file:', error);
         }
       );
+  }
+  onDeleteFile(): void {
+    debugger
+    this.selectedFile = null;
+    this.isUploaded = false;
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+      this.adddocreq.document=null; // Clear file input value to allow selecting the same file again
+    }
+  }
+  previewtemplate(adddocreq : DocumentPreperationConfiguration){
+    debugger
+    this.docprepServ.preview(adddocreq).subscribe((data: any) => {
+      debugger
+      //this.doctypes = data.Response;
+    });
   }
 }

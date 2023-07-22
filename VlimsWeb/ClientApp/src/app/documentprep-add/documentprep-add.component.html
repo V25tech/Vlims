@@ -67,13 +67,16 @@
 
           <label class="col-sm-4 col-form-label">Document :</label>
 
-          <div class="col-sm-6">
-            <input type="file" class="form-control" id="Document" [(ngModel)]="adddocreq.document"
+          <div class="col-sm-4">
+            <input type="file" class="form-control" id="fileInput" [(ngModel)]="adddocreq.document"
                    name="Document" aria-describedby="productname" placeholder="Document"
-                   #BrandName="ngModel" (change)="onFileSelected($event)" />
+                   #BrandName="ngModel" (change)="onFileSelected($event)" [disabled]="isUploaded"/>
           </div>
           <div class="col-sm-2">
-          <button type="button" class="btn btn-secondary" (click)="onUpload()">Upload</button>
+          <button type="button" class="btn btn-secondary" (click)="onUpload()" [disabled]="isUploaded">Upload</button>
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-danger" *ngIf="selectedFile" (click)="onDeleteFile()">Delete</button>
         </div>
         </div>
         <div class="form-group row">
@@ -114,7 +117,7 @@
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Submit</button>
         <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
-        <button type="button" class="btn btn-secondary" (click)="closepopup();">Preview</button>
+        <button type="button" class="btn btn-secondary" (click)="previewtemplate(adddocreq);">Preview</button>
 
       </div>
     </form>
