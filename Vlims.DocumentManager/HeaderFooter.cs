@@ -1,14 +1,10 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using NotesFor.HtmlToOpenXml;
 using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
 using DocumentFormat.OpenXml;
 using HtmlAgilityPack;
 using System.Text;
-using System.Diagnostics;
-using Vlims.DocumentMaster.Entities;
 using Vlims.DMS.Entities;
-using DocumentFormat.OpenXml.Spreadsheet;
 using Header = DocumentFormat.OpenXml.Wordprocessing.Header;
 using Table = DocumentFormat.OpenXml.Wordprocessing.Table;
 using BottomBorder = DocumentFormat.OpenXml.Wordprocessing.BottomBorder;
@@ -16,10 +12,11 @@ using TopBorder = DocumentFormat.OpenXml.Wordprocessing.TopBorder;
 using LeftBorder = DocumentFormat.OpenXml.Wordprocessing.LeftBorder;
 using RightBorder = DocumentFormat.OpenXml.Wordprocessing.RightBorder;
 using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
+using Aspose.Words;
 
 internal class HeaderFooter
 {
-    private static void getData()
+    public static void getData(string htmlheaderTable, string htmlfooterTable, string outputPath)
     {
         try
         {
@@ -28,9 +25,9 @@ internal class HeaderFooter
 
             //AddHtmlTableToWordDocumentHeader(filePath, htmlTable);
 
-            string htmlheaderTable = "<table><tr><th>Header 1</th></tr><tr><td>Data 1</td></tr></table>";
-            string htmlfooterTable = "<table><tr><th>Header 3</th></tr><tr><td>Data 3</td></tr></table>";
-            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "f3.docx");//testheaderfooter.docx";
+            //string htmlheaderTable = "<table><tr><th>Header 1</th></tr><tr><td>Data 1</td></tr></table>";
+            //string htmlfooterTable = "<table><tr><th>Header 3</th></tr><tr><td>Data 3</td></tr></table>";
+            //string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "f3.docx");//testheaderfooter.docx";
 
             //ConvertHtmlTableToWordTableInHeader(outputPath, htmlheaderTable);
             ConvertHtmlTableToWordTableInHeader1(outputPath, htmlheaderTable, htmlfooterTable);
@@ -94,9 +91,16 @@ internal class HeaderFooter
         using (WordprocessingDocument document = WordprocessingDocument.Open(filePath, true))
         {
             // Get the main document part
-            //MainDocumentPart mainPart = document.MainDocumentPart;
-            MainDocumentPart mainPart = document.AddMainDocumentPart();
-            new Document(new Body()).Save(mainPart);
+            MainDocumentPart mainPart;
+            if (document.MainDocumentPart != null)
+                mainPart = document.MainDocumentPart;
+            else
+            {
+                mainPart = document.AddMainDocumentPart();
+                new DocumentFormat.OpenXml.Wordprocessing.Document(new DocumentFormat.OpenXml.Wordprocessing.Body()).Save(mainPart);
+            }
+            //MainDocumentPart mainPart = document.AddMainDocumentPart();
+            //new Document(new Body()).Save(mainPart);
 
             // Create a new header part and assign an ID
             HeaderPart headerPart = mainPart.AddNewPart<HeaderPart>();
@@ -185,7 +189,7 @@ internal class HeaderFooter
                     foreach (HtmlNode cell in cells)
                     {
                         TableCell wordCell = new TableCell();
-                        wordCell.Append(new Paragraph(new Run(new Text(cell.InnerText))));
+                        wordCell.Append(new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new Run(new Text(cell.InnerText))));
 
                         // Set cell borders
                         TableCellProperties cellProperties = new TableCellProperties(
@@ -214,16 +218,17 @@ internal class HeaderFooter
     /// <returns></returns>
 
 
-    public static void PrepareHtmlTable(DocumentTemplateConfiguration template, DocumentPreparation documentPreparation)
+    public static string PrepareHtmlTable(int p_rows, int p_columns, DocumentPreparation documentPreparation)
     {
+        string table = string.Empty;
         StringBuilder tableHtml = new StringBuilder();
         tableHtml.Append("<table border='1'>");
         // Generate table headers
         tableHtml.Append("<tr>");
         List<string> headers = new List<string>();
         List<string> data = new List<string>();
-        int rows= Convert.ToInt32(template.rows);
-        int columns = Convert.ToInt32(template.columns);
+        int rows = p_rows;
+        int columns = p_columns;
         for (int i = 0; i < columns; i++)
         {
             headers.Add("Column" + i);
@@ -235,14 +240,41 @@ internal class HeaderFooter
         tableHtml.Append("</tr>");
 
         // Generate table rows
-        foreach (string row in data)
+
+
+        for (int i = 0; i < rows; i++)
         {
             tableHtml.Append("<tr>");
-            //foreach (string cell in row)
-            //{
-            //    tableHtml.Append("<td>").Append(cell).Append("</td>");
-            //}
+            for (int j = 0; j < columns; j++)
+            {
+                tableHtml.Append("<td>").Append("Row" + 1 + "-" + "column" + j).Append("</td>");
+            }
             tableHtml.Append("</tr>");
         }
+        //tableHtml.Append("</tr>");
+
+        tableHtml.Append("</table>");
+        table = tableHtml.ToString();
+        return table;
+    }
+
+    public static string GenerateUniqueFileName()
+    {
+        // Generate a unique file name using the current date and time
+        string fileName = "ConvertedFile_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
+        return fileName;
+    }
+    public static string GetTextFromBody(OpenXmlElement element)
+    {
+        return element?.InnerText ?? string.Empty;
+    }
+   
+    public static void generatePDF(string inputFilePath, string outputFilePath)
+    {
+        // Load the input DOCX document using Aspose.Words
+        Aspose.Words.Document doc = new Aspose.Words.Document(inputFilePath);
+
+        // Save the document as PDF using Aspose.Words
+        doc.Save(outputFilePath, SaveFormat.Pdf);
     }
 }

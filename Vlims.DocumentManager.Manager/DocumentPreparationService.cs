@@ -18,6 +18,7 @@ namespace Vlims.DocumentManager.Manager
     using Vlims.DMS.Entities;
     using Vlims.Common;
     using Vlims.DocumentManager.DataAccess;
+    using static System.Net.Mime.MediaTypeNames;
 
 
     // Comment

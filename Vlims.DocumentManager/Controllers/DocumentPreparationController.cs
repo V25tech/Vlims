@@ -13,15 +13,17 @@ namespace PolicySummary.Controllers
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Authorization;
     using Vlims.Common;
     using Vlims.DMS.Entities;
     using Vlims.DocumentManager.Manager;
-    using Microsoft.Extensions.Hosting;
 
     using System.Data;
     using Vlims.DocumentMaster.Entities;
     using Vlims.DocumentMaster.DataAccess;
+    using DocumentFormat.OpenXml.Wordprocessing;
+    //using Microsoft.Office.Interop.Word;
+
+
 
 
 
@@ -93,9 +95,17 @@ namespace PolicySummary.Controllers
                 var template = result.FirstOrDefault(o => o.Templatename.Equals(documentPreparation.template, StringComparison.InvariantCultureIgnoreCase));
                 if (template != null)
                 {
-                    HeaderFooter.PrepareHtmlTable(template, documentPreparation);
-                    PrepareHeaderTable(template, documentPreparation);
-                    PrepareFooterTable(template, documentPreparation);
+                    string headertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), documentPreparation);
+                    string footertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), documentPreparation);
+                    HeaderFooter.getData(headertable, footertable,documentPreparation.path);
+
+                    // Generate the output file path dynamically
+                    string outputFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); // Set the folder where you want to save the converted PDFs
+                    string outputFileName = HeaderFooter.GenerateUniqueFileName(); // Function to generate a unique file name
+                    string outputFilePath = Path.Combine(outputFolderPath, outputFileName);
+
+                    // Convert the content to PDF using iTextSharp
+                    HeaderFooter.generatePDF(documentPreparation.path, outputFilePath);
                 }
             }
             return Ok(); //result;
