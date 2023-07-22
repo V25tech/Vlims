@@ -27,9 +27,9 @@ export class UsergroupconfigurationComponent implements OnInit {
   constructor(private commonsvc: CommonService, private doctypeservice: usergroupconfigurationService, private toastr: ToastrService, private loader: SpinnerService, private router: Router) { }
 
   ngOnInit() {
-    this.getdocumenttypeconfig();
+    this.getusergroupInfo();
   }
-  getdocumenttypeconfig() {
+  getusergroupInfo() {
     this.loader.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     return this.doctypeservice.getusergroupconfiguration(objrequest).subscribe((data: any) => {

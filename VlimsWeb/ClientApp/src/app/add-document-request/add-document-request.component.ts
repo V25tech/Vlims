@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { DepartmentConfiguration, DocumentRequestConfiguration, DocumentTypeConfiguration, RequestContext } from '../model/models';
+import { DepartmentConfiguration, DocumentRequestConfiguration, DocumentTypeConfiguration, RequestContext, Usergroupconfiguration } from '../model/models';
 import { Router } from '@angular/router';
 import { CommonService } from '../shared/common.service';
 import { DocumentRequestService } from '../Services/document-request.service';
@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SpinnerService } from '../spinner/spinner.service';
 import { DepartmentconfigurationService } from '../departmentconfiguration.service';
 import { DocumentTypeServiceService } from '../Services/document-type-service.service';
+import { usergroupconfigurationService } from '../Services/usergroupconfiguration.service';
 
 @Component({
   selector: 'app-add-document-request',
@@ -17,12 +18,13 @@ import { DocumentTypeServiceService } from '../Services/document-type-service.se
 export class AddDocumentRequestComponent implements OnInit {
   adddocreq = new DocumentRequestConfiguration();
   requests: Array<DocumentRequestConfiguration> = [];
-  departs: Array<DepartmentConfiguration> =[];
+  departs: Array<DepartmentConfiguration> = [];
+  usergroups: Array<Usergroupconfiguration> = [];
   editMode: boolean = false;
   viewMode: boolean = false;
   title: string = '';
   doctypes: Array<DocumentTypeServiceService> = [];;
-  constructor(private commonsvc: CommonService, private docReqServ: DocumentRequestService, private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService, private router: Router, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService,) { }
+  constructor(private commonsvc: CommonService, private doctypeservice: usergroupconfigurationService, private docReqServ: DocumentRequestService, private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService, private router: Router, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService,) { }
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
@@ -30,6 +32,7 @@ export class AddDocumentRequestComponent implements OnInit {
     this.getdocumentrequest();
     this.getdepartments();
     this.getdocumenttypeconfig();
+    this.getusergroupInfo();
     debugger;
     if (lastSegment == "viewdocreq") {
       this.viewMode = this.commonsvc.docrequest != null ? true : false;
@@ -59,6 +62,13 @@ export class AddDocumentRequestComponent implements OnInit {
       this.requests = data.response;
     });
   }
+  getusergroupInfo() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    return this.doctypeservice.getusergroupconfiguration(objrequest).subscribe((data: any) => {
+      debugger
+      this.usergroups = data.Response;
+    });
+  }
   submit(adddocreq: DocumentRequestConfiguration) {
     debugger
 
@@ -69,7 +79,7 @@ export class AddDocumentRequestComponent implements OnInit {
     debugger
     adddocreq.CreatedBy = "admin";
     adddocreq.ModifiedBy = "admin";
-    //this.router.navigate(['/products']);
+    adddocreq.Status = "In-Progress";
     this.docReqServ.adddocreqconfig(adddocreq).subscribe((res: any) => {
       this.toastr.success('Added');
       this.router.navigate(['/mainpage/documentmanager']);
@@ -80,12 +90,12 @@ export class AddDocumentRequestComponent implements OnInit {
     this.router.navigate(['/mainpage/documentmanager']);
   }
   getdepartments() {
-   
+
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
-     this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+    this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
       debugger
-       this.departs = data.Response;
-   
+      this.departs = data.Response;
+
     });
   }
   getdocumenttypeconfig() {

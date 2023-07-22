@@ -41,7 +41,7 @@ namespace Vlims.Administration.DataAccess
                         userConfigurationData.UserManagementID = Convert.ToString(row[UserConfigurationConstants.UserManagementID.Trim('@')]);
                         userConfigurationData.FirstName = Convert.ToString(row[UserConfigurationConstants.FirstName.Trim('@')]);
                         userConfigurationData.LastName = Convert.ToString(row[UserConfigurationConstants.LastName.Trim('@')]);
-                        userConfigurationData.UserID = Convert.ToString(row[UserConfigurationConstants.UserID.Trim('@')]);
+                        userConfigurationData.UserID = userConfigurationData.FirstName + userConfigurationData.LastName;//Convert.ToString(row[UserConfigurationConstants.UserID.Trim('@')]);
                         userConfigurationData.Department = Convert.ToString(row[UserConfigurationConstants.Department.Trim('@')]);
                         userConfigurationData.Role = Convert.ToString(row[UserConfigurationConstants.Role.Trim('@')]);
                         userConfigurationData.Doj = Convert.ToString(row[UserConfigurationConstants.Doj.Trim('@')]);

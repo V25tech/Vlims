@@ -1,0 +1,7 @@
+export class setfunctionalprofileconfiguration{
+  public securitymanagement:string;
+  public securityconfiguration:string;
+  public hierarchymanagement:string;
+  public roleconfiguration:string;
+  public departmentconfigurations:string;
+}

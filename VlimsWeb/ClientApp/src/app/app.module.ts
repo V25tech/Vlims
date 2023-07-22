@@ -74,6 +74,8 @@ import { SecurityManagementComponent } from './securitymanagement/securitymanage
 import { UsergroupconfigurationComponent } from './usergroupconfiguration/usergroupconfiguration.component';
 import { AddusergroupconfigurationComponent } from './Add-usergroupconfiguration/add-usergroupconfiguration.component';
 import { ApprovalConfigurationsComponent } from './Approval-Configuration/approval-configurations.component';
+import { NewPlantRegistrationComponent } from './new-plant-registration/new-plant-registration.component';
+
 
 
 
@@ -94,7 +96,7 @@ import { ApprovalConfigurationsComponent } from './Approval-Configuration/approv
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
     DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent,
     AddDocumentRequestComponent, DepartmentComponent, UserConfigurationComponent, AddUserComponent,
-    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent, ApprovalConfigurationsComponent],
+    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent, ApprovalConfigurationsComponent, NewPlantRegistrationComponent],
   providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })

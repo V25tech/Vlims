@@ -23,7 +23,7 @@
             <th scope="col">Registered By</th>
             <!-- <th scope="col">Registered On</th> -->
             <th scope="col">Approved By</th>
-            <th scope="col">Approved On</th>
+            <!--<th scope="col">Approved On</th>-->
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
@@ -36,7 +36,7 @@
             <td>{{doc?.createdBy}}</td>
             <!-- <td>{{doc?.createdDate}}</td> -->
           <td> {{doc?.approvedby}} </td>
-          <td> {{doc?.approvedOn | date}}  </td>
+          <!--<td> {{doc?.approvedOn | date}}  </td>-->
             <td>{{doc?.status}}</td>
             <td>
               <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTCId"

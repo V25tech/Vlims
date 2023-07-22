@@ -2395,6 +2395,7 @@ export class DocumentRequestConfiguration {
   Status: string;
   Purpose: string;
   ApprovalsCount: number;
+  UserGroup: string;
 }
 
 export class DocumentPreperationConfiguration {
@@ -2592,5 +2593,14 @@ export class ApprovalManagament {
   public NoOfApprovals1: number;
   public NoOfApprovals2: number;
   public NoOfApprovals3: number;
+
+}
+
+export class NewPlantRegistration {
+
+  public planatname: string;
+  public planatcode: number;
+  public planataddress: string;
+  public comments: string;
 
 }
