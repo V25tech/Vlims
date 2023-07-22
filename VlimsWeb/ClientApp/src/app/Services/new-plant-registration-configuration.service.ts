@@ -1,7 +1,7 @@
 
 
 import { Injectable } from '@angular/core';
-import { NewPlantRegistration, RequestContext } from '../model/models';
+import { PlantConfiguration, RequestContext } from '../model/models';
 import { HttpbaseService } from '../shared/httpbase.service';
 
 
@@ -12,13 +12,13 @@ export class NewPlantRegistrationConfigurationService {
   type:string="admin";
   constructor(private http: HttpbaseService) { }
 
-  getNewRegistrationconfiguration(objrequest: RequestContext) {
+  GetPlantRegistrationconfiguration(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/NewRegistration/GetAllNewRegistration",this.type);
-}
-addNewRegistrationconfiguration(objrequest: NewPlantRegistration) {
+    return this.http.postJsonLogin(objrequest, "api/plantmanagement/GetAllPlantManagement",this.type);
+  }
+  addNewRegistrationconfiguration(objrequest: PlantConfiguration) {
   debugger
-  return this.http.postJsonLogin(objrequest, "api/NewRegistration/saveplantmanagement",this.type);
+    return this.http.postJsonLogin(objrequest, "api/plantmanagement/saveplantmanagement",this.type);
 }
 }
 

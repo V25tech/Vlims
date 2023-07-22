@@ -26,9 +26,9 @@ namespace Vlims.Administration.Manager
     // Comment
     public class PlantManagementService : IPlantManagementService
     {
-        
-      
-        
+
+
+
         public ResponseContext<PlantManagement> GetAllPlantManagement(RequestContext requestContext)
         {
             try
@@ -42,7 +42,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public PlantManagement GetPlantManagementByPMId(string pMId)
         {
             try
@@ -56,25 +56,28 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool SavePlantManagement(PlantManagement plantManagement)
         {
             try
             {
-                String validationMessages = PlantManagementValidator.IsValidPlantManagement(plantManagement);
-                if (validationMessages.Length <= 0)
-                {
-                    var result = PlantManagementData.SavePlantManagement(plantManagement);
-                    return result;
-                }
-                throw new System.Exception(validationMessages);
+                //String validationMessages = PlantManagementValidator.IsValidPlantManagement(plantManagement);
+                //if (validationMessages.Length <= 0)
+                //{
+                plantManagement.AdminManagerId = "1";
+                plantManagement.CreatedBy = "admin";
+                plantManagement.ModifiedBy = "admin";
+                var result = PlantManagementData.SavePlantManagement(plantManagement);
+                return result;
+                //}
+                //throw new System.Exception(validationMessages);
             }
             catch (System.Exception ex)
             {
                 throw;
             }
         }
-        
+
         public bool UpdatePlantManagement(PlantManagement plantManagement)
         {
             try
@@ -92,7 +95,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeletePlantManagementByPMId(string pMId)
         {
             try
@@ -104,7 +107,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteAllPlantManagement(List<int> pMIds)
         {
             try

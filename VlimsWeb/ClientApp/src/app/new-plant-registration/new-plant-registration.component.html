@@ -1,70 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>New Plant Registration</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
+<div class="card shadow mb-4" style="padding-top: 2px;">
+  <div class="card-header py-3">
+    <div col-12 style="float: left;">
+      <h6 class="m-0 font-weight-bold text-primary">New Plant Registration</h6>
+    </div>
 
-    h2 {
-      text-align: left;
-    }
-
-    table {
-      margin: 0 auto;
-    }
-
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 8px;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    input[type="submit"], input[type="button"] {
-      margin: 10px;
-    }
-  </style>
-</head>
-<body>
-
-  <h2>New Plant Registration</h2>
-
-  <!--<center>-->
-  <div>
-    <form action="/submit_new_plant" method="post">
-      <table align="left">
-        <tr>
-          <th>Plant Name:</th>
-          <td><input type="text" name="plant_name" required></td>
-        </tr>
-        <tr>
-          <th>Plant Code:</th>
-          <td><input type="text" name="plant_code" required></td>
-        </tr>
-        <tr>
-          <th>Plant Address:</th>
-          <td><textarea name="plant_address" rows="5" required></textarea></td>
-        </tr>
-        <tr>
-          <th>comments:</th>
-          <td><input type="text" name="plant_name" required></td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="submit" value="Submit">
-            <input type="button" value="Cancel" onclick="window.location.href='/';">
-          </td>
-      </table>
-    </form>
-
-
-
-    <!--</center>-->
   </div>
-</body>
-</html>
+  <div class="card-body">
+    <form (ngSubmit)="submit(adddoc)" #fm="ngForm">
+      <div class="modal-body">
+        <div class="form-group row">
+
+          <label for="PlantName" class="col-sm-4 col-form-label">Plant Name</label>
+
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="PlantName" [(ngModel)]="adddoc.PlantName" (ngModelChange)="inputValue = $event"
+                   pattern='[A-Za-z\\s]*' name="PlantName" aria-describedby="productname" placeholder="Enter Plant Name"
+                   #BrandName="ngModel"  />
+          </div>
+        </div>
+        <div class="form-group row">
+
+          <label for="PlantCode" class="col-sm-4 col-form-label">Plant Code</label>
+
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="PlantCode" [(ngModel)]="adddoc.PlantCode" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+                   pattern='[A-Za-z\\s]*' name="PlantCode" aria-describedby="productname" placeholder="Enter Plant Code"
+                   #BrandName="ngModel"  />
+          </div>
+        </div>
+        <div class="form-group row">
+
+          <label for="PlantAddress" class="col-sm-4 col-form-label">Plant Address</label>
+
+          <div class="col-sm-8">
+            <input type="text" class="form-control"  id="PlantAddress" [(ngModel)]="adddoc.PlantAddress" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+                   pattern='[A-Za-z\\s]*' name="PlantAddress" aria-describedby="productname" placeholder="Enter Plant Address"
+                   #BrandName="ngModel"  />
+          </div>
+        </div>
+        <div class="form-group row">
+
+          <label for="Comments" class="col-sm-4 col-form-label">Comments</label>
+
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="Comments" [(ngModel)]="adddoc.Comments" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+                   pattern='[A-Za-z\\s]*' name="Comments" aria-describedby="productname" placeholder="Enter Comments"
+                   #BrandName="ngModel"  />
+
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">    
+        <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
