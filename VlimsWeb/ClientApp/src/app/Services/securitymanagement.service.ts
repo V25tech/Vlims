@@ -16,6 +16,6 @@ export class SecuritymanagementService {
 }
 addsecurityconfiguration(objrequest:SecurityManagement ) {
   debugger
-  return this.http.postJsonLogin(objrequest, "api/securitymanagement/SaveSecurityManagement",this.type);
+  return this.http.postJsonLogin(objrequest, "api/securitymanagement/savesecuritymanagement",this.type);
 }
 }
