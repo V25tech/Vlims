@@ -118,12 +118,21 @@ export class AddDocumentRequestComponent implements OnInit {
     debugger
     return this.docReqServ.getdocrequestbyname(objname).subscribe((data: any) => {
       debugger
+      this.commonsvc.docrequest = data;
       this.adddocreq = data;
       this.loader.hide();
       console.log(this.newdocrequest);
     }, er => {
       this.toastr.error('loading failed');
       this.loader.hide();
+    });
+  }
+  ManageApprovalFlow(adddocreq: DocumentRequestConfiguration) {
+    adddocreq.CreatedBy = "admin";   
+    
+    this.docReqServ.ManageApprovalFlow(adddocreq).subscribe((res: any) => {
+      this.toastr.success('Added');
+      this.router.navigate(['/mainpage/documentmanager']);
     });
   }
 }

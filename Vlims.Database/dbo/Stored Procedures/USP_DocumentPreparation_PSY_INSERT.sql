@@ -14,34 +14,12 @@
   BEGIN TRY 
   
  DECLARE @ID INT 
- INSERT INTO [dbo].[DocumentPreparation_PSY] 
- (Documentmanagerid_PSY,
-documenttitle_PSY,
-documentno_PSY,
-documenttype_PSY,
-department_PSY,
-document_PSY,
-template_PSY,
-wokflow_PSY,
-details_PSY,
-CreatedBy_PSY,
-CreatedDate_PSY,
-ModifiedBy_PSY,
-ModifiedDate_PSY)
- VALUES 
-(@Documentmanagerid_PSY,
-@documenttitle_PSY,
-@documentno_PSY,
-@documenttype_PSY,
-@department_PSY,
-@document_PSY,
-@template_PSY,
-@wokflow_PSY,
-@details_PSY,
-@CreatedBy_PSY,
- GetDate() ,
-@ModifiedBy_PSY,
- GetDate() );
+ INSERT INTO [dbo].[DocumentPreparation_PSY]  
+ (Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY)
+ SELECT 1,NULL,NULL,@documenttype_PSY,@department_PSY,NULL,NULL,NULL,NULL,@CreatedBy_PSY,Getdate(),@ModifiedBy_PSY,Getdate()
+ 
+ UPDATE Documentrequest_PSY SET Status_PSY='Approved',Approvedby_PSY=@ModifiedBy_PSY,ApprovedON_PSY=GETDATE() where DRID_PSY=@Documentmanagerid_PSY
+
  SELECT @ID = @@IDENTITY; 
  select @ID 
   

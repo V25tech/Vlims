@@ -2396,6 +2396,7 @@ export class DocumentRequestConfiguration {
   Purpose: string;
   ApprovalsCount: number;
   UserGroup: string;
+  drid: string;
 }
 
 export class DocumentPreperationConfiguration {

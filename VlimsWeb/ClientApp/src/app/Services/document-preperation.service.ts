@@ -13,7 +13,7 @@ export class DocumentPreperationService {
   }
   getdocumentrequest(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/documentpreparation/GetAllDocPrep");
+    return this.http.postJsonLogin(objrequest, "api/documentpreparation/GetAllDocPrep",this.type);
   }
   getdocumentrequestbyId(objrequest: RequestContext) {
     debugger

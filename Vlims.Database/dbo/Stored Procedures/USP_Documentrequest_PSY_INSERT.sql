@@ -1,6 +1,6 @@
 ﻿
 
-  CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_INSERT] @documentmanagerid_PSY NVarChar(50),
+ CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_INSERT] @documentmanagerid_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
 @department_PSY NVarChar(50),
 @Purpose_PSY NVarChar(50),

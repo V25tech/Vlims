@@ -82,7 +82,8 @@ namespace Vlims.DocumentManager.Manager
                 //if (validationMessages.Length <= 0)
                 //{
                 documentPreparation.document = "test";
-                documentPreparation.Documentmanagerid = "1";
+                //documentPreparation.Documentmanagerid = "1";
+                documentPreparation.template = "";
                 var result = DocumentPreparationData.SaveDocumentPreparation(documentPreparation);
                 return result;
                 //}

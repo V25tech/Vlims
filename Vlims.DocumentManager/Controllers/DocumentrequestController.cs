@@ -54,9 +54,9 @@ namespace Vlims.DocumentManager
         /// <summary>
         /// This method is used to Get List of Documentrequest
         /// </summary>
-        /// <param name="requestContext"></param>
+        /// <param name="docreq"></param>
         [HttpGet("GetDocumentRequestbyName")]
-        public ActionResult GetDocumentRequestbyName([FromQuery] string docreq)
+        public ActionResult GetDocumentRequestbyName(string name)
         {
             Documentrequest responseContext = new Documentrequest();
             RequestContext requestContext = new RequestContext();
@@ -65,7 +65,7 @@ namespace Vlims.DocumentManager
             var result = documentrequestService.GetAllDocumentrequest(requestContext);
             if (result != null)
             {
-                responseContext = result.Response.FirstOrDefault(o => o.documenttype.Equals(docreq, StringComparison.InvariantCultureIgnoreCase));
+                responseContext = result.Response.FirstOrDefault(o => o.documenttype.Equals(name, StringComparison.InvariantCultureIgnoreCase));
             }
             return Ok(responseContext);
         }
