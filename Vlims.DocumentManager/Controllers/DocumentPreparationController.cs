@@ -86,7 +86,7 @@ namespace PolicySummary.Controllers
         [HttpPost("preview")]
         public ActionResult PreviewDocumentPreparation(DocumentPreparation documentPreparation)
         {
-            List<DocumentTemplateConfiguration> result;
+            List<DocumentTemplateConfiguration> result; byte[] pdfBytes = null;
             RequestContext request = new RequestContext() { PageNumber = 1, PageSize = 1 };
             DataSet dataset = DocumentTemplateConfigurationData.GetAllDocumentTemplateConfiguration(request);
             if (dataset != null && dataset.Tables[0].Rows.Count > 0)
@@ -106,9 +106,11 @@ namespace PolicySummary.Controllers
 
                     // Convert the content to PDF using iTextSharp
                     HeaderFooter.generatePDF(documentPreparation.path, outputFilePath);
+
+                    pdfBytes = System.IO.File.ReadAllBytes(outputFilePath);
                 }
             }
-            return Ok(); //result;
+            return Ok(pdfBytes); //result;
         }
 
         private void PrepareFooterTable(DocumentTemplateConfiguration template, DocumentPreparation documentPreparation)
@@ -157,10 +159,10 @@ namespace PolicySummary.Controllers
         [HttpPost("upload")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
-            if (file == null || file.Length == 0)
-            {
-                return BadRequest("No file selected.");
-            }
+            //if (file == null || file.Length == 0)
+            //{
+            //    return BadRequest("No file selected.");
+            //}
 
             try
             {

@@ -1,0 +1,19 @@
+<!-- pdf-viewer.component.html -->
+
+    <!-- <iframe [src]="safePdfDataUrl | blobUrl" width="100%" height="600px"></iframe> -->
+    <!-- <iframe [src]="safePdfDataUrl" width="100%" height="600px"></iframe> -->
+    
+    <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+
+
+
+    <!-- <html>
+<head>
+  <title>PDF/Image Viewer</title>
+</head>
+<body>
+  <object [data]="safePdfDataUrl" type="application/pdf" width="100%" height="100%">
+    <p>It appears you don't have a PDF plugin for this browser. You can still <a href="data:application/pdf;base64,<base64-encoded-data>">download the PDF</a>.</p>
+  </object>
+</body>
+</html> -->

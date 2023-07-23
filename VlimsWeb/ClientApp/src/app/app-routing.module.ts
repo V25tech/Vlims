@@ -52,6 +52,7 @@ import { AddusergroupconfigurationComponent } from './Add-usergroupconfiguration
 import { ApprovalConfigurationsComponent } from './Approval-Configuration/approval-configurations.component';
 import { PlantComponent } from './plantmanagement/plantmanagement.component';
 import { NewPlantRegistrationComponent } from './new-plant-registration/new-plant-registration.component';
+import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
 
 
 const routes: Routes = [
@@ -234,6 +235,10 @@ const routes: Routes = [
           {
             path: 'editdocreq',
             component: AddDocumentRequestComponent
+          },
+          {
+            path: 'preview',
+            component: PdfViewerComponent
           },
         ]
       },

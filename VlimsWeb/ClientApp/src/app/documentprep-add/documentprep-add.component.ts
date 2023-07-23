@@ -31,6 +31,7 @@ export class DocumentprepAddComponent implements OnInit {
   selectedFile: File | null = null;
   isUploaded: boolean = false; // Track upload status
   objfile = new FileResponse();
+  fileBytes: Uint8Array = new Uint8Array();
   //editMode: boolean = false;
   //viewMode: boolean = false;
   //title: string = '';
@@ -167,6 +168,9 @@ export class DocumentprepAddComponent implements OnInit {
     debugger
     this.docprepServ.preview(adddocreq).subscribe((data: any) => {
       debugger
+      this.fileBytes=data;
+      this.commonsvc.pdfBytes=this.fileBytes;
+      this.router.navigate(['/mainpage/documentmanager/preview']);
       //this.doctypes = data.Response;
     });
   }

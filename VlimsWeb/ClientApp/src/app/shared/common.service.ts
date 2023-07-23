@@ -28,6 +28,7 @@ export class CommonService {
   objdoctemplate:DocumentTemplateConfiguration;
   objworkflow:workflowconiguration;
   objname:string;
+  pdfBytes: Uint8Array;
   private _searchBS = new BehaviorSubject<string>('');
 
   private _sliderToggleBS = new BehaviorSubject<boolean>(false);

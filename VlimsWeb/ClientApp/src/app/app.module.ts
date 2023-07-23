@@ -75,6 +75,8 @@ import { UsergroupconfigurationComponent } from './usergroupconfiguration/usergr
 import { AddusergroupconfigurationComponent } from './Add-usergroupconfiguration/add-usergroupconfiguration.component';
 import { ApprovalConfigurationsComponent } from './Approval-Configuration/approval-configurations.component';
 import { NewPlantRegistrationComponent } from './new-plant-registration/new-plant-registration.component';
+import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
+import { BlobUrlPipe } from './blob-url.pipe';
 
 
 
@@ -96,7 +98,7 @@ import { NewPlantRegistrationComponent } from './new-plant-registration/new-plan
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
     DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent,
     AddDocumentRequestComponent, DepartmentComponent, UserConfigurationComponent, AddUserComponent,
-    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent, ApprovalConfigurationsComponent, NewPlantRegistrationComponent],
+    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent, ApprovalConfigurationsComponent, NewPlantRegistrationComponent, PdfViewerComponent, BlobUrlPipe],
   providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })
