@@ -77,6 +77,7 @@ import { ApprovalConfigurationsComponent } from './Approval-Configuration/approv
 import { NewPlantRegistrationComponent } from './new-plant-registration/new-plant-registration.component';
 import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
 import { BlobUrlPipe } from './blob-url.pipe';
+import { ActivateDeactivateuserComponent } from './activate-deactivateuser/activate-deactivateuser.component';
 
 
 
@@ -98,7 +99,7 @@ import { BlobUrlPipe } from './blob-url.pipe';
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
     DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent,
     AddDocumentRequestComponent, DepartmentComponent, UserConfigurationComponent, AddUserComponent,
-    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent, ApprovalConfigurationsComponent, NewPlantRegistrationComponent, PdfViewerComponent, BlobUrlPipe],
+    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent, ApprovalConfigurationsComponent, NewPlantRegistrationComponent, PdfViewerComponent, BlobUrlPipe, ActivateDeactivateuserComponent],
   providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })

@@ -53,6 +53,7 @@ import { ApprovalConfigurationsComponent } from './Approval-Configuration/approv
 import { PlantComponent } from './plantmanagement/plantmanagement.component';
 import { NewPlantRegistrationComponent } from './new-plant-registration/new-plant-registration.component';
 import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
+import { ActivateDeactivateuserComponent } from './activate-deactivateuser/activate-deactivateuser.component';
 
 
 const routes: Routes = [
@@ -301,12 +302,16 @@ const routes: Routes = [
           {
             path: 'usergrp',
             component: UsergroupconfigurationComponent
-          }
-          ,
+          },
           {
             path: 'addusergroup',
             component: AddusergroupconfigurationComponent
+          },
+          {
+            path: 'activeuser',
+            component: ActivateDeactivateuserComponent
           }
+          
         ]
       }
     ]

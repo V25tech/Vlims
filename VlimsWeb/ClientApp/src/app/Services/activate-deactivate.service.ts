@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { acticateDeactivateuser, RequestContext } from '../model/models';
+import { activateDeactivateuser, RequestContext } from '../model/models';
 import { HttpbaseService } from '../shared/httpbase.service';
 
 
@@ -13,10 +13,9 @@ export class ActivateDeactivateService {
 
   get_activate_deactivateuser(objrequest: RequestContext) {
     debugger
-    //Need to update correct method
-    return this.http.postJsonLogin(objrequest, "api/userconfiguration/updateusermanagement", this.type);
-}
-add_activate_deactivate(objrequest:acticateDeactivateuser ) {
+    return this.http.postJsonLogin(objrequest, "api/userconfiguration/getusers", this.type);
+  }
+  add_activate_deactivate(objrequest: activateDeactivateuser) {
   debugger
   return this.http.postJsonLogin(objrequest, "api/userconfiguration/updateusermanagement", this.type);
 }

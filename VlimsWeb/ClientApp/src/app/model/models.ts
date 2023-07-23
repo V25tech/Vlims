@@ -2573,7 +2573,7 @@ export class Usergroupconfiguration {
   public Modify: string;
 
 }
-export class acticateDeactivateuser {
+export class activateDeactivateuser {
   public SNo: number;
   public UserName: string;
   public UserId: number;

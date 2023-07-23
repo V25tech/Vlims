@@ -24,6 +24,8 @@ export class NewPlantRegistrationComponent implements OnInit {
   submit(adddoc: PlantConfiguration) {
 
     this.doctypeservice.addNewRegistrationconfiguration(adddoc).subscribe((res: any) => {
+      this.toastr.success('Added');
+      this.router.navigate(['/mainpage/plant']);
     });
   }
 }
