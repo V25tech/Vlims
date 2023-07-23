@@ -17,6 +17,8 @@ namespace Vlims.DocumentManager
     using Vlims.DocumentManager.Manager;
     using Vlims.Common;
     using Vlims.DMS.Entities;
+    using DocumentFormat.OpenXml.Wordprocessing;
+    using Vlims.DocumentMaster.Entities;
 
 
 
@@ -27,9 +29,9 @@ namespace Vlims.DocumentManager
     [Route("api/documentrequest")]
     public class DocumentrequestController : ControllerBase
     {
-        
+
         private readonly IDocumentrequestService documentrequestService;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,7 +40,7 @@ namespace Vlims.DocumentManager
         {
             this.documentrequestService = documentrequestService;
         }
-        
+
         /// <summary>
         /// This method is used to Get List of Documentrequest
         /// </summary>
@@ -49,7 +51,25 @@ namespace Vlims.DocumentManager
             var result = documentrequestService.GetAllDocumentrequest(requestContext);
             return Ok(result);
         }
-        
+        /// <summary>
+        /// This method is used to Get List of Documentrequest
+        /// </summary>
+        /// <param name="requestContext"></param>
+        [HttpGet("GetDocumentRequestbyName")]
+        public ActionResult GetDocumentRequestbyName([FromQuery] string docreq)
+        {
+            Documentrequest responseContext = new Documentrequest();
+            RequestContext requestContext = new RequestContext();
+            requestContext.PageNumber = 1;
+            requestContext.PageSize = 50;
+            var result = documentrequestService.GetAllDocumentrequest(requestContext);
+            if (result != null)
+            {
+                responseContext = result.Response.FirstOrDefault(o => o.documenttype.Equals(docreq, StringComparison.InvariantCultureIgnoreCase));
+            }
+            return Ok(responseContext);
+        }
+
         /// <summary>
         /// This method is used to Get Documentrequest By Id dRID
         /// </summary>
@@ -60,7 +80,7 @@ namespace Vlims.DocumentManager
             var result = documentrequestService.GetDocumentrequestByDRID(dRID);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Save Documentrequest
         /// </summary>
@@ -71,7 +91,7 @@ namespace Vlims.DocumentManager
             var result = documentrequestService.SaveDocumentrequest(documentrequest);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to update Documentrequest
         /// </summary>
@@ -82,7 +102,7 @@ namespace Vlims.DocumentManager
             var result = documentrequestService.UpdateDocumentrequest(documentrequest);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Delete Documentrequest By Id dRID
         /// </summary>
@@ -93,7 +113,7 @@ namespace Vlims.DocumentManager
             var result = documentrequestService.DeleteDocumentrequestByDRID(dRID);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Delete Documentrequest By Multiple ids dRIDs
         /// </summary>

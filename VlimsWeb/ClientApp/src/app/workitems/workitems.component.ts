@@ -58,6 +58,9 @@ export class WorkitemsComponent implements OnInit {
         case "Workflow":
       this.router.navigate(['/mainpage/documentmaster/viewworkflow']);
         break;
+      case "Document Request":
+        this.router.navigate(['/mainpage/documentmanager/viewdocreq']);
+        break;
         default:
           this.router.navigate(['/mainpage/documentmaster/viewdoctype']);
         break;

@@ -16,4 +16,8 @@ export class DocumentRequestService {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentrequest/SaveDocumentrequest",this.type);
   }
+  getdocrequestbyname(docreq: string) {
+    debugger
+    return this.http.postJsonLogin(docreq, "api/documentrequest/GetDocumentRequestbyName", this.type);
+  }
 }

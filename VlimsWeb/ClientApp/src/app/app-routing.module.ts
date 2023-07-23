@@ -228,6 +228,10 @@ const routes: Routes = [
           {
             path: 'adddocrequest',
             component: AddDocumentRequestComponent
+          },          
+          {
+            path: 'viewdocrequest',
+            component: AddDocumentRequestComponent
           },
           {
             path: 'viewdocreq',

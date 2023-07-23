@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { DepartmentConfiguration, DocumentRequestConfiguration, DocumentTypeConfiguration, RequestContext, Usergroupconfiguration } from '../model/models';
+import { DepartmentConfiguration, DocumentRequestConfiguration, DocumentTemplateConfiguration, DocumentTypeConfiguration, RequestContext, Usergroupconfiguration } from '../model/models';
 import { Router } from '@angular/router';
 import { CommonService } from '../shared/common.service';
 import { DocumentRequestService } from '../Services/document-request.service';
@@ -22,8 +22,10 @@ export class AddDocumentRequestComponent implements OnInit {
   usergroups: Array<Usergroupconfiguration> = [];
   editMode: boolean = false;
   viewMode: boolean = false;
-  title: string = '';
-  doctypes: Array<DocumentTypeServiceService> = [];;
+  title: string = 'Add Document Request Configuration';
+  doctypes: Array<DocumentTypeServiceService> = [];
+  newdocrequest = new DocumentTemplateConfiguration();
+  objname: string;
   constructor(private commonsvc: CommonService, private doctypeservice: usergroupconfigurationService, private docReqServ: DocumentRequestService, private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService, private router: Router, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService,) { }
   ngOnInit() {
     const urlPath = this.router.url;
@@ -36,9 +38,15 @@ export class AddDocumentRequestComponent implements OnInit {
     debugger;
     if (lastSegment == "viewdocreq") {
       this.viewMode = this.commonsvc.docrequest != null ? true : false;
+      this.viewMode = true;
       if (this.viewMode) {
         this.adddocreq = this.commonsvc.docrequest;
-        this.title = "View Document Request"
+      }      
+      if (this.viewMode) {
+        debugger
+        this.objname = this.commonsvc.objname;
+        this.getByName(this.objname);
+        this.title = "View Document Type Configuration"
       }
       this.cdr.detectChanges();
     }
@@ -103,6 +111,19 @@ export class AddDocumentRequestComponent implements OnInit {
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
       debugger
       this.doctypes = data.Response;
+    });
+  }
+  getByName(objname: string) {
+    this.loader.show();
+    debugger
+    return this.docReqServ.getdocrequestbyname(objname).subscribe((data: any) => {
+      debugger
+      this.adddocreq = data;
+      this.loader.hide();
+      console.log(this.newdocrequest);
+    }, er => {
+      this.toastr.error('loading failed');
+      this.loader.hide();
     });
   }
 }
