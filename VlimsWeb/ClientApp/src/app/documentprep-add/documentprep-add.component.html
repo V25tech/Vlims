@@ -118,10 +118,12 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="ManageApprovalFlow(adddocreq);" *ngIf="viewMode">Approve</button>
+        <button type="button" class="btn btn-info" (click)="closepopup();" *ngIf="viewMode">Re-Initiate</button>
+        <button type="button" class="btn btn-danger" (click)="closepopup();" *ngIf="viewMode">Reject</button>
         <button type="submit" class="btn btn-primary">Submit</button>
         <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
         <button type="button" class="btn btn-secondary" (click)="previewtemplate(adddocreq);">Preview</button>
-
       </div>
     </form>
   </div>

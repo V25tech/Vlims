@@ -214,10 +214,6 @@ const routes: Routes = [
             component: DocumentprepAddComponent
           },
           {
-            path: 'viewdocprep',
-            component: DocumentprepAddComponent
-          },
-          {
             path: 'documeffect',
             component: DocumentEffectiveComponent
           },

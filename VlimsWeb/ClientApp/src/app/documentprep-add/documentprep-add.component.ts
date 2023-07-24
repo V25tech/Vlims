@@ -31,7 +31,7 @@ export class DocumentprepAddComponent implements OnInit {
   selectedFile: File | null = null;
   isUploaded: boolean = false; // Track upload status
   objfile = new FileResponse();
-  fileBytes: Uint8Array = new Uint8Array();  
+  fileBytes: Uint8Array = new Uint8Array();
   doctypes: Array<DocumentTypeConfiguration> = [];
   objname: string;
   constructor(private commonsvc: CommonService, private docReqServ: DocumentRequestService, private doctypeserv: DocumentTypeServiceService, private docprepServ: DocumentPreperationService, private deptservice: DepartmentconfigurationService, private workflowserv: WorkflowServiceService, private doctypeservice: DocumentTemplateServiceService, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService, private router: Router,) { }
@@ -44,14 +44,16 @@ export class DocumentprepAddComponent implements OnInit {
     this.getworkflowtypeconfig();
     this.getdepartments();
     this.getdocumenttypeconfig();
+    debugger;
     if (lastSegment == "viewdocprep") {
       this.viewMode = this.commonsvc.docPreperation != null ? true : false;
-      if (this.viewMode) {
-        this.adddocreq = this.commonsvc.docPreperation;
-        this.objname = this.commonsvc.objname;
-        this.getByName(this.objname);
-        this.title = "View Document Preperation Configuration"
-      }
+      this.viewMode = true;
+      /* if (this.viewMode) {*/
+      this.adddocreq = this.commonsvc.docPreperation;
+      this.objname = this.commonsvc.objname;
+      this.getByName(this.objname);
+      this.title = "View Document Preperation Configuration"
+      //}
       this.cdr.detectChanges();
     }
     if (lastSegment == "editdocprep") {
@@ -143,10 +145,10 @@ export class DocumentprepAddComponent implements OnInit {
 
     this.docprepServ.upload(formData)
       .subscribe(
-        (response:any) => {
+        (response: any) => {
           console.log('File uploaded successfully:', response);
-          this.objfile=response;
-          this.adddocreq.path=this.objfile.filePath;
+          this.objfile = response;
+          this.adddocreq.path = this.objfile.filePath;
           this.isUploaded = true; // Set upload status to true after successful upload
         },
         (error) => {
@@ -161,15 +163,15 @@ export class DocumentprepAddComponent implements OnInit {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
     if (fileInput) {
       fileInput.value = '';
-      this.adddocreq.document=null; // Clear file input value to allow selecting the same file again
+      this.adddocreq.document = null; // Clear file input value to allow selecting the same file again
     }
   }
-  previewtemplate(adddocreq : DocumentPreperationConfiguration){
+  previewtemplate(adddocreq: DocumentPreperationConfiguration) {
     debugger
     this.docprepServ.preview(adddocreq).subscribe((data: any) => {
       debugger
-      this.fileBytes=data;
-      this.commonsvc.pdfBytes=this.fileBytes;
+      this.fileBytes = data;
+      this.commonsvc.pdfBytes = this.fileBytes;
       this.router.navigate(['/mainpage/documentmanager/preview']);
       //this.doctypes = data.Response;
     });
@@ -188,9 +190,9 @@ export class DocumentprepAddComponent implements OnInit {
       this.loader.hide();
     });
   }
-  ManageApprovalFlow(adddocreq: DocumentRequestConfiguration) {
+  ManageApprovalFlow(adddocreq: DocumentPreperationConfiguration) {
     adddocreq.CreatedBy = "admin";
-    this.docReqServ.ManageApprovalFlow(adddocreq).subscribe((res: any) => {
+    this.docprepServ.ManageApprovalFlow(adddocreq).subscribe((res: any) => {
       this.toastr.success('Added');
       this.router.navigate(['/mainpage/documentmanager']);
     });

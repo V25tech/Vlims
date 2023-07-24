@@ -123,4 +123,13 @@ export class DocumentEffectiveEditComponent implements OnInit {
       this.doctypes = data.Response;
     });
   }
+  UpdateDocumentEffective(adddocreq: DocumentEffectiveConfiguration) {
+    adddocreq.CreatedBy = "admin";
+    adddocreq.ModifiedBy = "admin";
+    adddocreq.Status = 'In Progress';
+    this.docEffServ.UpdateDocumentEffective(adddocreq).subscribe((res: any) => {
+      this.toastr.success('Added');
+      this.router.navigate(['/mainpage/documentpreperation/documeffect']);
+    });
+  }
 }

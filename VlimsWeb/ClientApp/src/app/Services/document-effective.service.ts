@@ -22,4 +22,8 @@ export class DocumentEffectiveService {
     debugger
     return this.http.postJsonLogin(adddocreq, "api/documenteffective/savedocumenteffective", this.type);
   }
+  UpdateDocumentEffective(adddocreq: DocumentEffectiveConfiguration) {
+    debugger
+    return this.http.postJsonLogin(adddocreq, "api/documenteffective/updatedocumenteffective", this.type);
+  }
 }
