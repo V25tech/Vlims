@@ -31,7 +31,7 @@ export class WorkitemsComponent implements OnInit {
 
   getworkflowitems() {
     this.loader.show();
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50 ,Id:0};
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.doctypeservice.getworkitems(objrequest).subscribe((data: any) => {
       debugger
       this.types = data.Response;
@@ -43,26 +43,27 @@ export class WorkitemsComponent implements OnInit {
     });
 
   }
-  getInfo(tasktype:string,taskname:string)
-  {
+  getInfo(tasktype: string, taskname: string) {
     debugger
-    this.commonsvc.objname=taskname;
-    switch(tasktype)
-    {
+    this.commonsvc.objname = taskname;
+    switch (tasktype) {
       case "Document Type":
-      this.router.navigate(['/mainpage/documentmaster/viewdoctype']);
+        this.router.navigate(['/mainpage/documentmaster/viewdoctype']);
         break;
-        case "Document Template":
-      this.router.navigate(['/mainpage/documentmaster/viewdoctemplate']);
+      case "Document Template":
+        this.router.navigate(['/mainpage/documentmaster/viewdoctemplate']);
         break;
-        case "Workflow":
-      this.router.navigate(['/mainpage/documentmaster/viewworkflow']);
+      case "Workflow":
+        this.router.navigate(['/mainpage/documentmaster/viewworkflow']);
         break;
       case "Document Request":
         this.router.navigate(['/mainpage/documentmanager/viewdocreq']);
         break;
-        default:
-          this.router.navigate(['/mainpage/documentmaster/viewdoctype']);
+      case "Document Preperation":
+        this.router.navigate(['/mainpage/documentmanager/viewdocreq']);
+        break;
+      default:
+        this.router.navigate(['/mainpage/documentmaster/viewdoctype']);
         break;
     }
   }

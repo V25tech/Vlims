@@ -73,13 +73,13 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
-                String validationMessages = DocumentEffectiveValidator.IsValidDocumentEffective(documentEffective);
-                if (validationMessages.Length <= 0)
-                {
+                //String validationMessages = DocumentEffectiveValidator.IsValidDocumentEffective(documentEffective);
+                //if (validationMessages.Length <= 0)
+                //{
                     var result = DocumentEffectiveData.SaveDocumentEffective(documentEffective);
                     return result;
-                }
-                throw new System.Exception(validationMessages);
+                //}
+                //throw new System.Exception(validationMessages);
             }
             catch (System.Exception ex)
             {

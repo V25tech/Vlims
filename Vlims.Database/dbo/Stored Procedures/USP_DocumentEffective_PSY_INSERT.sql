@@ -42,6 +42,8 @@ ModifiedDate_PSY)
  SELECT @ID = @@IDENTITY; 
  select @ID 
   
+ UPDATE DocumentPreparation_PSY SET Status_PSY='Approved',ModifiedDate_PSY=GETDATE() where DPNID_PSY=@Documentmanagerid_PSY
+
   END TRY 
  BEGIN CATCH 
  SELECT ERROR_MESSAGE(); 

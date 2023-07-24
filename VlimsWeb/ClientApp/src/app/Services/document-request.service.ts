@@ -35,7 +35,7 @@ export class DocumentRequestService {
     docPrep.details = '';
     docPrep.AssignedtoGroup = objrequest.UserGroup;
     docPrep.document = '';
-    docPrep.Status = 'Approved';
+    docPrep.Status = 'Pending';
     docPrep.documenttitle = '';
     docPrep.documentno = '';
     docPrep.ModifiedBy = 'admin';

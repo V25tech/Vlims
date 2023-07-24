@@ -187,5 +187,23 @@ namespace PolicySummary.Controllers
                 return StatusCode(500, $"An error occurred while uploading the file: {ex.Message}");
             }
         }
+        /// <summary>
+        /// This method is used to Get List of Documentrequest
+        /// </summary>
+        /// <param name="docreq"></param>
+        [HttpGet("GetDocumentRequestbyName")]
+        public ActionResult GetDocumentRequestbyName(string name)
+        {
+            DocumentPreparation responseContext = new DocumentPreparation();
+            RequestContext requestContext = new RequestContext();
+            requestContext.PageNumber = 1;
+            requestContext.PageSize = 50;
+            var result = documentPreparationService.GetAllDocumentPreparation(requestContext);
+            if (result != null)
+            {
+                responseContext = result.Response.FirstOrDefault(o => o.documenttype.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            }
+            return Ok(responseContext);
+        }
     }
 }

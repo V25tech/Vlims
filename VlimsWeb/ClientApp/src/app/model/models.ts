@@ -2422,6 +2422,7 @@ export class DocumentPreperationConfiguration {
 }
 export class DocumentEffectiveConfiguration {
   DTCId: string;
+  documentmanagerid: string;
   documenttitle: string;
   documentno: string;
   documenttype: string;

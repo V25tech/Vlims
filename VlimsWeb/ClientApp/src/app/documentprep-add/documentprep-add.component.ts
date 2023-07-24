@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { DepartmentConfiguration, DocumentPreperationConfiguration, DocumentTemplateConfiguration, DocumentTypeConfiguration, FileResponse, RequestContext, workflowconiguration } from '../model/models';
+import { DepartmentConfiguration, DocumentPreperationConfiguration, DocumentRequestConfiguration, DocumentTemplateConfiguration, DocumentTypeConfiguration, FileResponse, RequestContext, workflowconiguration } from '../model/models';
 import { Router } from '@angular/router';
 import { CommonService } from '../shared/common.service';
 import { DocumentPreperationService } from '../Services/document-preperation.service';
@@ -31,11 +31,9 @@ export class DocumentprepAddComponent implements OnInit {
   selectedFile: File | null = null;
   isUploaded: boolean = false; // Track upload status
   objfile = new FileResponse();
-  fileBytes: Uint8Array = new Uint8Array();
-  //editMode: boolean = false;
-  //viewMode: boolean = false;
-  //title: string = '';
-  doctypes: Array<DocumentTypeConfiguration> = [];;
+  fileBytes: Uint8Array = new Uint8Array();  
+  doctypes: Array<DocumentTypeConfiguration> = [];
+  objname: string;
   constructor(private commonsvc: CommonService, private docReqServ: DocumentRequestService, private doctypeserv: DocumentTypeServiceService, private docprepServ: DocumentPreperationService, private deptservice: DepartmentconfigurationService, private workflowserv: WorkflowServiceService, private doctypeservice: DocumentTemplateServiceService, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService, private router: Router,) { }
   ngOnInit() {
     const urlPath = this.router.url;
@@ -47,10 +45,12 @@ export class DocumentprepAddComponent implements OnInit {
     this.getdepartments();
     this.getdocumenttypeconfig();
     if (lastSegment == "viewdocprep") {
-      this.viewMode = this.commonsvc.docobject != null ? true : false;
+      this.viewMode = this.commonsvc.docPreperation != null ? true : false;
       if (this.viewMode) {
         this.adddocreq = this.commonsvc.docPreperation;
-        this.title = "View Document Type Configuration"
+        this.objname = this.commonsvc.objname;
+        this.getByName(this.objname);
+        this.title = "View Document Preperation Configuration"
       }
       this.cdr.detectChanges();
     }
@@ -59,7 +59,7 @@ export class DocumentprepAddComponent implements OnInit {
       this.editMode = this.commonsvc.docPreperation != null ? true : false;
       if (this.editMode) {
         this.adddocreq = this.commonsvc.docPreperation;
-        this.title = "Edit Document Type Configuration"
+        this.title = "Edit Document Preperation Configuration"
         this.cdr.detectChanges();
         this.loader.hide();
       }
@@ -172,6 +172,27 @@ export class DocumentprepAddComponent implements OnInit {
       this.commonsvc.pdfBytes=this.fileBytes;
       this.router.navigate(['/mainpage/documentmanager/preview']);
       //this.doctypes = data.Response;
+    });
+  }
+  getByName(objname: string) {
+    this.loader.show();
+    debugger
+    return this.docprepServ.getdocrequestbyname(objname).subscribe((data: any) => {
+      debugger
+      this.commonsvc.docPreperation = data;
+      this.adddocreq = data;
+      this.loader.hide();
+      //console.log(this.newdocrequest);
+    }, er => {
+      this.toastr.error('loading failed');
+      this.loader.hide();
+    });
+  }
+  ManageApprovalFlow(adddocreq: DocumentRequestConfiguration) {
+    adddocreq.CreatedBy = "admin";
+    this.docReqServ.ManageApprovalFlow(adddocreq).subscribe((res: any) => {
+      this.toastr.success('Added');
+      this.router.navigate(['/mainpage/documentmanager']);
     });
   }
 }

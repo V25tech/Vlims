@@ -24,11 +24,10 @@ wokflow_PSY=@wokflow_PSY,
 details_PSY=@details_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY='In Progress' WHERE  [DPNID_PSY] = @DPNID_PSY ;  select @DPNID_PSY; 
 
-INSERT INTO [dbo].[DocumentEffective_PSY] 
- (Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,EffectiveDate_PSY,Reviewdate_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY)
+INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY)
+ SELECT @documenttype_PSY,'Document Preperation Request','Pending Approval','','',GetDate(),'Pending Approval',GetDate()
 
- VALUES 
-(@DPNID_PSY,@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,@document_PSY,'','','', GetDate() ,@ModifiedBy_PSY, GetDate() );
+
   
   END TRY 
  BEGIN CATCH 

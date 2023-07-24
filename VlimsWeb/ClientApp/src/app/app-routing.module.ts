@@ -206,6 +206,10 @@ const routes: Routes = [
             component: DocumentprepAddComponent
           },
           {
+            path: 'viewdocprep',
+            component: DocumentprepAddComponent
+          },
+          {
             path: 'editdocprep',
             component: DocumentprepAddComponent
           },

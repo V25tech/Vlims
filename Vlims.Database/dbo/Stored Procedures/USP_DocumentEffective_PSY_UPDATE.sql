@@ -6,7 +6,8 @@
 @document_PSY NVarChar(50),
 @EffectiveDate_PSY DateTime,
 @Reviewdate_PSY DateTime,
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100)
+
  AS 
  BEGIN 
   BEGIN TRY 
@@ -19,7 +20,9 @@ department_PSY=@department_PSY,
 document_PSY=@document_PSY,
 EffectiveDate_PSY=@EffectiveDate_PSY,
 Reviewdate_PSY=@Reviewdate_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [DEID_PSY] = @DEID_PSY ;  select @DEID_PSY; 
+ModifiedBy_PSY=@ModifiedBy_PSY,
+Status_PSY='In Progress'
+WHERE  [DEID_PSY] = @DEID_PSY ;  select @DEID_PSY; 
   
   END TRY 
  BEGIN CATCH 

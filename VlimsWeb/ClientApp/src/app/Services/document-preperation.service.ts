@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DocumentPreperationConfiguration, RequestContext } from '../model/models';
+import { DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentRequestConfiguration, RequestContext } from '../model/models';
 import { HttpbaseService } from '../shared/httpbase.service';
 
 
@@ -7,6 +7,7 @@ import { HttpbaseService } from '../shared/httpbase.service';
   providedIn: 'root'
 })
 export class DocumentPreperationService {
+  
   type: string = "manager";
 
   constructor(private http: HttpbaseService) {
@@ -35,6 +36,28 @@ export class DocumentPreperationService {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/upload",this.type);
   }
- 
+  getdocrequestbyname(docreq: string) {
+    debugger
+    return this.http.getwithheader("api/documentpreparation/GetDocumentRequestbyName" + "?name=" + docreq, this.type);
+  }
+  ManageApprovalFlow(objprep: DocumentPreperationConfiguration) {
+    debugger
+    var docEff = new DocumentEffectiveConfiguration();
+    docEff.documenttype = objprep.documenttype;
+    docEff.Department = objprep.Department;
+    docEff.documentmanagerid = objprep.DTCId;
+    docEff.CreatedDate = objprep.CreatedDate;
+    docEff.CreatedBy = objprep.CreatedBy;
+    //docEff.Approvedby = objprep.Approvedby;
+    //docEff.ApprovedOn = objprep.ApprovedOn;
+    //docEff.AssignedtoGroup = objprep.UserGroup;
+    docEff.document = objprep.document;
+    docEff.Status = 'Pending';
+    docEff.documenttitle = objprep.documenttitle;
+    docEff.documentno = objprep.documentno;
+    docEff.ModifiedBy = 'admin';
+    //docEff.Documentmanagerid = objprep.drid;
+    return this.http.postJsonLogin(docEff, "api/documenteffective/savedocumenteffective", this.type);
+  }
 
 }
