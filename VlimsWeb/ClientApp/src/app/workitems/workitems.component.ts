@@ -62,6 +62,9 @@ export class WorkitemsComponent implements OnInit {
       case "Document Preperation Request":
         this.router.navigate(['/mainpage/documentmanager/viewdocprep']);
         break;
+      case "Document Effective Request":
+        this.router.navigate(['/mainpage/documentmanager/Viewdoceffect']);
+        break;
       default:
         this.router.navigate(['/mainpage/documentmaster/viewdoctype']);
         break;

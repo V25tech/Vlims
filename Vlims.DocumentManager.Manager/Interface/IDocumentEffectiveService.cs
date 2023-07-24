@@ -30,7 +30,10 @@ namespace Vlims.DocumentManager.Manager
         bool SaveDocumentEffective(DocumentEffective documentEffective);
         
         bool UpdateDocumentEffective(DocumentEffective documentEffective);
-        
+
+        bool UpdateDocumentEffectiveApprove(DocumentEffective documentEffective);
+
+
         bool DeleteDocumentEffectiveByDEID(string dEID);
         
         bool DeleteAllDocumentEffective(List<int> dEIDs);

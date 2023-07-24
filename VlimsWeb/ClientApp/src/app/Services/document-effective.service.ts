@@ -26,4 +26,12 @@ export class DocumentEffectiveService {
     debugger
     return this.http.postJsonLogin(adddocreq, "api/documenteffective/updatedocumenteffective", this.type);
   }
+  UpdateDocumentEffectiveApprove(adddocreq: DocumentEffectiveConfiguration) {
+    debugger
+    return this.http.postJsonLogin(adddocreq, "api/documenteffective/UpdateDocumentEffectiveApprove", this.type);
+  }
+  getdocrequestbyname(docreq: string) {
+    debugger
+    return this.http.getwithheader("api/documenteffective/GetDocumentRequestbyName" + "?name=" + docreq, this.type);
+  }
 }

@@ -91,20 +91,36 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
-                String validationMessages = DocumentEffectiveValidator.IsValidDocumentEffective(documentEffective);
-                if (validationMessages.Length <= 0)
-                {
+                //String validationMessages = DocumentEffectiveValidator.IsValidDocumentEffective(documentEffective);
+                //if (validationMessages.Length <= 0)
+                //{
                     bool result = DocumentEffectiveData.UpdateDocumentEffective(documentEffective);
                     return result;
-                }
-                throw new System.Exception(validationMessages);
+                //}
+                //throw new System.Exception(validationMessages);
             }
             catch (System.Exception ex)
             {
                 throw;
             }
         }
-
+        public bool UpdateDocumentEffectiveApprove(DocumentEffective documentEffective)
+        {
+            try
+            {
+                //String validationMessages = DocumentEffectiveValidator.IsValidDocumentEffective(documentEffective);
+                //if (validationMessages.Length <= 0)
+                //{
+                bool result = DocumentEffectiveData.UpdateDocumentEffectiveApproval(documentEffective);
+                return result;
+                //}
+                //throw new System.Exception(validationMessages);
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
         public bool DeleteDocumentEffectiveByDEID(string dEID)
         {
             try

@@ -7,7 +7,8 @@
 @EffectiveDate_PSY DateTime,
 @Reviewdate_PSY DateTime,
 @CreatedBy_PSY NVarChar(100),
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@Status_PSY NVarchar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -25,7 +26,8 @@ Reviewdate_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY)
+ModifiedDate_PSY,
+Status_PSY)
  VALUES 
 (@Documentmanagerid_PSY,
 @documenttitle_PSY,
@@ -38,7 +40,8 @@ ModifiedDate_PSY)
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate() );
+ GetDate(),
+ @Status_PSY);
  SELECT @ID = @@IDENTITY; 
  select @ID 
   

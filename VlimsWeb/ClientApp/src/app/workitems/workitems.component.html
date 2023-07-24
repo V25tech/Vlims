@@ -15,8 +15,7 @@
           <tr>
             <th scope="col">S.No</th>
             <th scope="col">Task Type</th>
-            <th scope="col">Stage</th>
-            <th scope="col">Assigned to Group</th>
+            <th scope="col">Stage</th>           
             <th scope="col">Initiated By</th>
             <th scope="col">Initiated On</th>
             <th scope="col">Status</th>
@@ -27,8 +26,7 @@
           <tr *ngFor="let doc of types; let i=index">
             <th>{{i+1}}</th>
             <td (click)="getInfo(doc?.TaskType,doc?.TaskName)" ><a> {{doc?.TaskType}} </a></td>
-            <td>{{doc?.Stage}}</td>
-            <td>{{doc?.AssignedToGroup}}</td>
+            <td>{{doc?.Stage}}</td>           
             <td>{{doc?.InitiatedBy}}</td>
             <td>{{doc?.InitiatedOn}}</td>
             <td>Success</td>

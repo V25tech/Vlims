@@ -39,7 +39,9 @@ namespace Vlims.DMS.Entities
         public const string CreatedDate = "@CreatedDate_PSY";
         
         public const string ModifiedBy = "@ModifiedBy_PSY";
-        
+
+        public const string Status = "@Status_PSY";
+
         public const string ModifiedDate = "@ModifiedDate_PSY";
         
         public const string USP_DocumentEffective_PSY_GET_ALL = "dbo.USP_DocumentEffective_PSY_GET_ALL";
@@ -49,7 +51,11 @@ namespace Vlims.DMS.Entities
         public const string USP_DocumentEffective_PSY_INSERT = "dbo.USP_DocumentEffective_PSY_INSERT";
         
         public const string USP_DocumentEffective_PSY_UPDATE = "dbo.USP_DocumentEffective_PSY_UPDATE";
+
+        public const string USP_DocumentEffective_PSY_APPROVE = "dbo.USP_DocumentEffective_PSY_APPROVE";
+
         
+
         public const string USP_DocumentEffective_PSY_DELETE = "dbo.USP_DocumentEffective_PSY_DELETE";
         
         public const string USP_DocumentEffective_PSY_DELETE_ALL = "dbo.USP_DocumentEffective_PSY_DELETE_ALL";

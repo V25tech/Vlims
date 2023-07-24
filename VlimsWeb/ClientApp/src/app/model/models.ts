@@ -2431,7 +2431,7 @@ export class DocumentEffectiveConfiguration {
   EffectiveDate: Date;
   ReviewDate: Date;
   CreatedBy: string;
-  CreatedDate: string | null;
+  CreatedDate: string | null; 
   ModifiedBy: string;
   ModifiedDate: string | null;
   Status: string;

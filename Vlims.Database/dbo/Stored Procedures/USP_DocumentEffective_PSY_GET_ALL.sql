@@ -1,4 +1,5 @@
-﻿ CREATE PROCEDURE [dbo].[USP_DocumentEffective_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
+﻿
+ ALTER PROCEDURE [dbo].[USP_DocumentEffective_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
  BEGIN TRY 
@@ -14,7 +15,8 @@ Reviewdate_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY  
+ModifiedDate_PSY,
+STATUS_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[DocumentEffective_PSY] WITH (NOLOCK) 
  Order by [DEID_PSY]  

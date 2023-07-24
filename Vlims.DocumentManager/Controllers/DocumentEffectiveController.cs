@@ -82,7 +82,18 @@ namespace PolicySummary.Controllers
             var result = documentEffectiveService.UpdateDocumentEffective(documentEffective);
             return result;
         }
-        
+
+        /// <summary>
+        /// This Method is used to update DocumentEffective
+        /// </summary>
+        /// <param name="documentEffective"></param>
+        [HttpPost("UpdateDocumentEffectiveApprove")]
+        public ActionResult<System.Boolean> UpdateDocumentEffectiveApprove(DocumentEffective documentEffective)
+        {
+            var result = documentEffectiveService.UpdateDocumentEffectiveApprove(documentEffective);
+            return result;
+        }
+
         /// <summary>
         /// This Method is used to Delete DocumentEffective By Id dEID
         /// </summary>
@@ -103,6 +114,24 @@ namespace PolicySummary.Controllers
         {
             var result = documentEffectiveService.DeleteAllDocumentEffective(dEIDs);
             return result;
+        }
+        /// <summary>
+        /// This method is used to Get List of Documentrequest
+        /// </summary>
+        /// <param name="docreq"></param>
+        [HttpGet("GetDocumentRequestbyName")]
+        public ActionResult GetDocumentRequestbyName(string name)
+        {
+            DocumentEffective responseContext = new DocumentEffective();
+            RequestContext requestContext = new RequestContext();
+            requestContext.PageNumber = 1;
+            requestContext.PageSize = 50;
+            var result = documentEffectiveService.GetAllDocumentEffective(requestContext);
+            if (result != null)
+            {
+                responseContext = result.Response.FirstOrDefault(o => o.documenttype.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            }
+            return Ok(responseContext);
         }
     }
 }

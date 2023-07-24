@@ -27,6 +27,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
   templates: Array<DocumentEffectiveConfiguration> = [];
   workflowTypes: Array<workflowconiguration> = [];
   departs: Array<DepartmentConfiguration> = [];
+  objname: string;
   //editMode: boolean = false;
   //viewMode: boolean = false;
   //title: string = '';
@@ -42,10 +43,13 @@ export class DocumentEffectiveEditComponent implements OnInit {
     this.getworkflowtypeconfig();
     this.getdepartments();
     this.getdocumenttypeconfig();
-    if (lastSegment == "viewdocprep") {
+    if (lastSegment == "Viewdoceffect") {
       this.viewMode = this.commonsvc.docEffecConfig != null ? true : false;
+      this.viewMode = true;
       if (this.viewMode) {
         this.adddocreq = this.commonsvc.docEffecConfig;
+        this.objname = this.commonsvc.objname;
+        this.getByName(this.objname);
         this.title = "View Document Type Configuration"
       }
       this.cdr.detectChanges();
@@ -96,12 +100,14 @@ export class DocumentEffectiveEditComponent implements OnInit {
   }
   submit(adddocreq: DocumentEffectiveConfiguration) {
     debugger
-    this.addDocumentEffective(adddocreq);
+    //this.addDocumentEffective(adddocreq);
+    this.UpdateDocumentEffective(adddocreq);
   }
   addDocumentEffective(adddocreq: DocumentEffectiveConfiguration) {
 
     adddocreq.CreatedBy = "admin";
     adddocreq.ModifiedBy = "admin";
+    adddocreq.Status = 'InProgress';
     //this.router.navigate(['/products']);
     this.docEffServ.ManageDocumentEffective(adddocreq).subscribe((res: any) => {
       this.toastr.success('Added');
@@ -130,6 +136,26 @@ export class DocumentEffectiveEditComponent implements OnInit {
     this.docEffServ.UpdateDocumentEffective(adddocreq).subscribe((res: any) => {
       this.toastr.success('Added');
       this.router.navigate(['/mainpage/documentpreperation/documeffect']);
+    });
+  }
+  ManageApprovalFlow(adddocreq: DocumentEffectiveConfiguration) {
+    adddocreq.CreatedBy = "admin";
+    adddocreq.ModifiedBy = "admin";
+    this.docEffServ.UpdateDocumentEffectiveApprove(adddocreq).subscribe((res: any) => {
+    });
+  }
+  getByName(objname: string) {
+    this.loader.show();
+    debugger
+    return this.docEffServ.getdocrequestbyname(objname).subscribe((data: any) => {
+      debugger
+      this.commonsvc.docPreperation = data;
+      this.adddocreq = data;
+      this.loader.hide();
+      //console.log(this.newdocrequest);
+    }, er => {
+      this.toastr.error('loading failed');
+      this.loader.hide();
     });
   }
 }

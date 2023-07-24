@@ -220,6 +220,10 @@ const routes: Routes = [
           {
             path: 'documeffectedit',
             component: DocumentEffectiveEditComponent
+          },          
+          {
+            path: 'Viewdoceffect',
+            component: DocumentEffectiveEditComponent
           },
           {
             path: 'additasks',

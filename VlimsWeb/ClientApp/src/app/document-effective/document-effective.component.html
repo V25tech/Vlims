@@ -36,7 +36,7 @@
             <td>QA/SOP/023/001-00</td>
             <td>{{doc?.documenttype}}</td>
             <td>{{doc?.department}}</td>
-            <td>In Progress</td>
+            <td>{{doc?.status}}</td>
             <td>
               <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTCId"
                       data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);">

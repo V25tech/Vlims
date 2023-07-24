@@ -78,7 +78,7 @@
 
           <label for="BrandName" class="col-sm-4 col-form-label">Effective Date :</label>
           <div class="col-sm-8">
-            <input type="date" class="form-control" id="Document" [(ngModel)]="adddocreq.EffectiveDate"
+            <input type="date" class="form-control" id="Document" [(ngModel)]="adddocreq.effectiveDate"
                    name="Effective" aria-describedby="Effective" placeholder="Effective"
                    #BrandName="ngModel" />
           </div>
@@ -87,7 +87,7 @@
 
           <label for="BrandName" class="col-sm-4 col-form-label">Review Date :</label>
           <div class="col-sm-8">
-            <input type="date" class="form-control" id="Review" [(ngModel)]="adddocreq.ReviewDate"
+            <input type="date" class="form-control" id="Review" [(ngModel)]="adddocreq.reviewDate"
                    name="Review" aria-describedby="Review" placeholder="Review"
                    #BrandName="ngModel" />
           </div>
@@ -95,9 +95,11 @@
         </div>
 
         <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click)="ManageApprovalFlow(adddocreq);" *ngIf="viewMode">Approve</button>
+          <button type="button" class="btn btn-info" (click)="closepopup();" *ngIf="viewMode">Re-Initiate</button>
+          <button type="button" class="btn btn-danger" (click)="closepopup();" *ngIf="viewMode">Reject</button>
           <button type="submit" class="btn btn-primary">Submit</button>
           <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
-
         </div>
       </div>
     </form>
