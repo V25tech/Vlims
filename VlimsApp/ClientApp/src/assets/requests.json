@@ -1,0 +1,132 @@
+[
+    {
+      "reqCode": "REQ-001",
+      "documentType": "Invoice",
+      "department": "Finance",
+      "registeredBy": "John Doe",
+      "registeredOn": "2023-07-20",
+      "approvedBy": "Jane Smith",
+      "approvedOn": "2023-07-25",
+      "status": "Approved"
+    },
+    {
+      "reqCode": "REQ-002",
+      "documentType": "Receipt",
+      "department": "Accounts",
+      "registeredBy": "Alice Johnson",
+      "registeredOn": "2023-07-21",
+      "approvedBy": "Bob Anderson",
+      "approvedOn": "2023-07-26",
+      "status": "Approved"
+    },
+    {
+      "reqCode": "REQ-003",
+      "documentType": "Proposal",
+      "department": "Marketing",
+      "registeredBy": "David Lee",
+      "registeredOn": "2023-07-22",
+      "approvedBy": "Emily Brown",
+      "approvedOn": "2023-07-27",
+      "status": "In Progress"
+    },
+    {
+        "reqCode": "REQ-016",
+        "documentType": "Invoice",
+        "department": "Finance",
+        "registeredBy": "Sophie Miller",
+        "registeredOn": "2023-08-04",
+        "approvedBy": "Sophie Miller",
+        "approvedOn": "2023-07-27",
+        "status": "Under Review"
+      },
+      {
+        "reqCode": "REQ-017",
+        "documentType": "Receipt",
+        "department": "Accounts",
+        "registeredBy": "Oliver Wilson",
+        "registeredOn": "2023-08-05",
+        "approvedBy": "Sophie Miller",
+        "approvedOn":"2023-07-27",
+        "status": "Under Review"
+      },
+      {
+        "reqCode": "REQ-018",
+        "documentType": "Proposal",
+        "department": "Marketing",
+        "registeredBy": "Noah Johnson",
+        "registeredOn": "2023-08-06",
+        "approvedBy": "James Wilson",
+        "approvedOn": "2023-07-27",
+        "status": "Under Review"
+      },
+      {
+        "reqCode": "REQ-019",
+        "documentType": "Invoice",
+        "department": "Finance",
+        "registeredBy": "Emma Davis",
+        "registeredOn": "2023-08-07",
+        "approvedBy": "James Wilson",
+        "approvedOn": "2023-07-27",
+        "status": "Under Review"
+      },
+      {
+        "reqCode": "REQ-020",
+        "documentType": "Report",
+        "department": "Research",
+        "registeredBy": "William Miller",
+        "registeredOn": "2023-08-08",
+        "approvedBy": "James Wilson",
+        "approvedOn":"2023-07-27",
+        "status": "Approved"
+      },
+      {
+        "reqCode": "REQ-021",
+        "documentType": "Receipt",
+        "department": "Accounts",
+        "registeredBy": "Sophia Davis",
+        "registeredOn": "2023-08-09",
+        "approvedBy": "William Miller",
+        "approvedOn": "2023-07-27",
+        "status": "Under Review"
+      },
+      {
+        "reqCode": "REQ-022",
+        "documentType": "Agreement",
+        "department": "Legal",
+        "registeredBy": "James Wilson",
+        "registeredOn": "2023-08-10",
+        "approvedBy": "James Wilson",
+        "approvedOn": "2023-07-27",
+        "status": "Under Review"
+      },
+      {
+        "reqCode": "REQ-023",
+        "documentType": "Purchase Order",
+        "department": "Procurement",
+        "registeredBy": "Olivia Smith",
+        "registeredOn": "2023-08-11",
+        "approvedBy": "James Wilson",
+        "approvedOn": "2023-07-27",
+        "status": "In Progress"
+      },
+      {
+        "reqCode": "REQ-024",
+        "documentType": "Contract",
+        "department": "Legal",
+        "registeredBy": "William Anderson",
+        "registeredOn": "2023-08-12",
+        "approvedBy": "William Miller",
+        "approvedOn": "2023-07-27",
+        "status": "Approved"
+      },
+      {
+        "reqCode": "REQ-025",
+        "documentType": "Proposal",
+        "department": "Marketing",
+        "registeredBy": "Ava Johnson",
+        "registeredOn": "2023-08-13",
+        "approvedBy": "William Miller",
+        "approvedOn": "2023-07-27",
+        "status": "In Progress"
+      }
+]

@@ -1,0 +1,166 @@
+<div class="container-fluid">
+    <div class="row p-2">
+      <div class="col">
+        <h4 class="page-title">New Document Effective</h4>
+      </div>
+    </div>
+    <div class="row p-2">
+      <div class="col">
+        <form (ngSubmit)="saveEffective()">
+          <div class="p-4 bg-white shadow-dark rounded-2">
+            <!-- <div class="form-group row">
+              <label for="reqCode" class="col-sm-2 col-form-label"
+                >Req Code</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="reqCode"
+                  name="reqCode"
+                  placeholder="System Generated"
+                  [(ngModel)]="preparation.reqCode"
+                  readonly
+                />
+              </div>
+            </div> -->
+  
+            <div class="form-group row">
+              <label for="documentTitle" class="col-sm-2 col-form-label"
+                >Document Title</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="documentTitle"
+                  name="documentTitle"
+                  placeholder="Document Title"
+                  [(ngModel)]="effective.documentTitle"
+                  readonly
+                />
+              </div>
+            </div>
+           
+  
+            <div class="form-group row" >
+              <label for="documentNumber" class="col-sm-2 col-form-label"
+                >Document Number</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="documentNumber"
+                  name="documentNumber"
+                  placeholder="System Generated"
+                  [(ngModel)]="effective.documentNumber"
+                  readonly
+                />
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="docType" class="col-sm-2 col-form-label"
+                >Document Type</label
+              >
+              <div class="col-sm-10">
+                <input
+                type="text"
+                class="form-control"
+                id="docType"
+                name="docType"
+                placeholder="Document Type"
+                [(ngModel)]="effective.documentType"
+                readonly
+              />
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="department" class="col-sm-2 col-form-label"
+                >Department</label
+              >
+              <div class="col-sm-10">
+                <input
+                type="text"
+                class="form-control"
+                id="department"
+                name="department"
+                placeholder="Department"
+                [(ngModel)]="effective.department"
+                readonly
+              />
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="workflow" class="col-sm-2 col-form-label"
+                >Workflow</label
+              >
+              <div class="col-sm-10">
+                <input
+                type="text"
+                class="form-control"
+                id="workflow"
+                name="workflow"
+                placeholder="workflow"
+                [(ngModel)]="effective.workflow"
+                readonly
+              />
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="document" class="col-sm-2 col-form-label">Document</label>
+              <div class="col-sm-10">
+                <a class="link-opacity-100-hover" href="#">View Document</a>
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="effectiveDate" class="col-sm-2 col-form-label">Effective Date</label>
+              <div class="col-sm-10">
+                <input
+                type="date"
+                class="form-control w-150"
+                id="effectiveDate"
+                name="effectiveDate"
+                placeholder="Effective Date"
+                [(ngModel)]="effective.effectiveDate"
+              />
+              </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="reviewDate" class="col-sm-2 col-form-label">Review Date</label>
+                <div class="col-sm-10">
+                    <input
+                    type="date"
+                    class="form-control w-150"
+                    id="reviewDate"
+                    name="reviewDate"
+                    placeholder="Review Date"
+                    [(ngModel)]="effective.reviewDate"
+                  />
+                </div>
+              </div>
+          </div>
+  
+          <div class="form-group row my-4">
+            <div class="col-sm-10 offset-sm-2">
+              <button
+                type="button"
+                class="btn btn-outline-secondary mx-2"
+                (click)="onCancel()"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

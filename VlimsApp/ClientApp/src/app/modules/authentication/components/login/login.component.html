@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center vh-100">
+  <div
+    class="d-flex justify-content-center align-items-center flex-grow-1 left-item"
+  >
+    <div class="d-flex flex-column">
+      <div class="flex-fill text-center">
+        <img src="assets/images/v25.png" width="350px" alt="Logo" class="logo" />
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center flex-column flex-grow-1 bg-login"  >
+    <form class="form-horizontal login-form" (ngSubmit)="login()">
+      <h4>Welcome back!</h4>
+      <p class="mb-4">Sign in to your account to continue</p>
+
+      <div class="floating-label-group">
+        <input
+          type="text"
+          [(ngModel)]="username"
+          id="username"
+          name="username"
+          class="form-control"
+          autocomplete="off"         
+          autofocus
+          required
+        />
+        <label class="floating-label">Username</label>
+      </div>
+
+      <div class="floating-label-group">
+        <input
+          type="password"
+          [(ngModel)]="password"
+          id="password"
+          name="password"
+          class="form-control"
+          autocomplete="off"         
+          required
+        />
+        <label class="floating-label">Password</label>
+      </div>
+
+      <div class="mb-2 f-pwd">
+        <a class="fs-xs">Forgot password?</a>
+      </div>
+
+      <div class="text-center mb-3">
+        <button class="btn btn-primary w-100">Login</button>
+      </div>
+      <div class="text-center mb-3 pt-4">
+        Don't have an account? <a>Sign up</a>
+      </div>
+    </form>
+  </div>
+</div>

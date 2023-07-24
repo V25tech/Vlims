@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Invoice",
+    "docPrefix": "INV",
+    "description": "Invoice document type",
+    "registeredBy": "John Doe",
+    "registeredOn": "2023-05-17",
+    "status": "Completed"
+  },
+  {
+    "name": "Receipt",
+    "docPrefix": "REC",
+    "description": "Receipt document type",
+    "registeredBy": "Jane Smith",
+    "registeredOn": "2023-05-18",
+    "status": "Under Review"
+  },
+  {
+    "name": "Contract",
+    "docPrefix": "CTR",
+    "description": "Contract document type",
+    "registeredBy": "David Johnson",
+    "registeredOn": "2023-05-19",
+    "status": "In Progress"
+  },
+  {
+    "name": "Report",
+    "docPrefix": "RPT",
+    "description": "Report document type",
+    "registeredBy": "Sarah Williams",
+    "registeredOn": "2023-05-20",
+    "status": "In Progress"
+  },
+  {
+    "name": "Proposal",
+    "docPrefix": "PRO",
+    "description": "Proposal document type",
+    "registeredBy": "Michael Brown",
+    "registeredOn": "2023-05-21",
+    "status": "Completed"
+  },
+  {
+    "name": "Agreement",
+    "docPrefix": "AGR",
+    "description": "Agreement document type",
+    "registeredBy": "Emily Davis",
+    "registeredOn": "2023-05-22",
+    "status": "In Progress"
+  },
+  {
+    "name": "Invoice",
+    "docPrefix": "INV",
+    "description": "Invoice document type",
+    "registeredBy": "John Doe",
+    "registeredOn": "2023-05-17",
+    "status": "Completed"
+  },
+  {
+    "name": "Receipt",
+    "docPrefix": "REC",
+    "description": "Receipt document type",
+    "registeredBy": "Jane Smith",
+    "registeredOn": "2023-05-18",
+    "status": "Under Review"
+  },
+  {
+    "name": "Contract",
+    "docPrefix": "CTR",
+    "description": "Contract document type",
+    "registeredBy": "David Johnson",
+    "registeredOn": "2023-05-19",
+    "status": "In Progress"
+  },
+  {
+    "name": "Report",
+    "docPrefix": "RPT",
+    "description": "Report document type",
+    "registeredBy": "Sarah Williams",
+    "registeredOn": "2023-05-20",
+    "status": "In Progress"
+  },
+  {
+    "name": "Proposal",
+    "docPrefix": "PRO",
+    "description": "Proposal document type",
+    "registeredBy": "Michael Brown",
+    "registeredOn": "2023-05-21",
+    "status": "Completed"
+  },
+  {
+    "name": "Agreement",
+    "docPrefix": "AGR",
+    "description": "Agreement document type",
+    "registeredBy": "Emily Davis",
+    "registeredOn": "2023-05-22",
+    "status": "In Progress"
+  }
+]

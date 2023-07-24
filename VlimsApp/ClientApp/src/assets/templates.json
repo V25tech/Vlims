@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "templateName": "Template 1",
+    "uniqueCode": "ABC123",
+    "description": "Sample description 1",
+    "registeredBy": "John Doe",
+    "registeredOn": "2022-10-10",
+    "status": "In Progress"
+  },
+  {
+    "id": 2,
+    "templateName": "Template 2",
+    "uniqueCode": "DEF456",
+    "description": "Sample description 2",
+    "registeredBy": "Jane Smith",
+    "registeredOn": "2022-11-15",
+    "status": "Completed"
+  },
+  {
+    "id": 3,
+    "templateName": "Template 3",
+    "uniqueCode": "GHI789",
+    "description": "Sample description 3",
+    "registeredBy": "Bob Johnson",
+    "registeredOn": "2022-12-20",
+    "status": "Under Review"
+  },
+  {
+    "id": 4,
+    "templateName": "Template 4",
+    "uniqueCode": "JKL012",
+    "description": "Sample description 4",
+    "registeredBy": "Amy Adams",
+    "registeredOn": "2023-01-25",
+    "status": "In Progress"
+  },
+  {
+    "id": 5,
+    "templateName": "Template 5",
+    "uniqueCode": "MNO345",
+    "description": "Sample description 5",
+    "registeredBy": "Tom Wilson",
+    "registeredOn": "2023-02-28",
+    "status": "Completed"
+  },
+
+  {
+    "id": 6,
+    "templateName": "Template 11",
+    "uniqueCode": "ABC123",
+    "description": "Sample description 11",
+    "registeredBy": "John Doe",
+    "registeredOn": "2022-10-10",
+    "status": "In Progress"
+  },
+  {
+    "id": 7,
+    "templateName": "Template 12",
+    "uniqueCode": "DEF456",
+    "description": "Sample description 12",
+    "registeredBy": "Jane Smith",
+    "registeredOn": "2022-11-15",
+    "status": "Completed"
+  },
+  {
+    "id": 8,
+    "templateName": "Template 13",
+    "uniqueCode": "GHI789",
+    "description": "Sample description 13",
+    "registeredBy": "Bob Johnson",
+    "registeredOn": "2022-12-20",
+    "status": "Under Review"
+  },
+  {
+    "id": 9,
+    "templateName": "Template 14",
+    "uniqueCode": "JKL012",
+    "description": "Sample description 14",
+    "registeredBy": "Amy Adams",
+    "registeredOn": "2023-01-25",
+    "status": "In Progress"
+  },
+  {
+    "id": 10,
+    "templateName": "Template 10",
+    "uniqueCode": "MNO345",
+    "description": "Sample description 10",
+    "registeredBy": "Tom Wilson",
+    "registeredOn": "2023-02-28",
+    "status": "Completed"
+  }
+]

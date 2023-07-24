@@ -1,0 +1,83 @@
+[
+    {
+      "reqCode": "REQ-001",
+      "documentTitle": "SOP for DMS Implementation",
+      "documentNumber": "QA/SOP/023/001-00",
+      "documentType": "SOP",
+      "department": "QC",
+      "status": "Under Review"
+    },
+    {
+      "reqCode": "REQ-002",
+      "documentTitle": "Proposal",
+      "documentNumber": "DOC-002",
+      "documentType": "Proposal",
+      "department": "Marketing",
+      "status": "In Progress"
+    },
+    {
+      "reqCode": "REQ-003",
+      "documentTitle": "Purchase Order",
+      "documentNumber": "DOC-003",
+      "documentType": "Order",
+      "department": "Procurement",
+      "status": "Approved"
+    },
+    {
+      "reqCode": "REQ-004",
+      "documentTitle": "Contract",
+      "documentNumber": "DOC-004",
+      "documentType": "Agreement",
+      "department": "Legal",
+      "status": "Approved"
+    },
+    {
+      "reqCode": "REQ-005",
+      "documentTitle": "Research Paper",
+      "documentNumber": "DOC-005",
+      "documentType": "Research",
+      "department": "Research",
+      "status": "In Progress"
+    },
+    {
+        "reqCode": "REQ-006",
+        "documentTitle": "Financial Statement",
+        "documentNumber": "DOC-006",
+        "documentType": "Report",
+        "department": "Finance",
+        "status": "In Progress"
+      },
+      {
+        "reqCode": "REQ-007",
+        "documentTitle": "Marketing Campaign Plan",
+        "documentNumber": "DOC-007",
+        "documentType": "Plan",
+        "department": "Marketing",
+        "status": "Under Review"
+      },
+      {
+        "reqCode": "REQ-008",
+        "documentTitle": "Purchase Order",
+        "documentNumber": "DOC-008",
+        "documentType": "Order",
+        "department": "Procurement",
+        "status": "In Progress"
+      },
+      {
+        "reqCode": "REQ-009",
+        "documentTitle": "Legal Agreement",
+        "documentNumber": "DOC-009",
+        "documentType": "Agreement",
+        "department": "Legal",
+        "status": "Approved"
+      },
+      {
+        "reqCode": "REQ-010",
+        "documentTitle": "Research Report",
+        "documentNumber": "DOC-010",
+        "documentType": "Research",
+        "department": "Research",
+        "status": "Approved"
+      }
+  ]
+  

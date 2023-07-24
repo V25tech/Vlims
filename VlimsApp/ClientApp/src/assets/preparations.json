@@ -1,0 +1,73 @@
+[
+    {
+      "reqCode": "REQ-001",
+      "documentType": "Invoice",
+      "department": "Finance",
+      "assignedToGroup": "Accounts",
+      "status": "Pending"
+    },
+    {
+      "reqCode": "REQ-002",
+      "documentType": "Proposal",
+      "department": "Marketing",
+      "assignedToGroup": "Marketing Team",
+      "status": "In Progress"
+    },
+    {
+      "reqCode": "REQ-003",
+      "documentType": "Report",
+      "department": "Research",
+      "assignedToGroup": "Research Team",
+      "status": "In Progress"
+    },
+    {
+      "reqCode": "REQ-004",
+      "documentType": "Contract",
+      "department": "Legal",
+      "assignedToGroup": "Legal Team",
+      "status": "Pending"
+    },
+    {
+      "reqCode": "REQ-005",
+      "documentType": "Purchase Order",
+      "department": "Procurement",
+      "assignedToGroup": "Procurement Team",
+      "status": "Pending"
+    },
+    {
+        "reqCode": "REQ-006",
+        "documentType": "Receipt",
+        "department": "Accounts",
+        "assignedToGroup": "Accounts Team",
+        "status": "In Progress"
+      },
+      {
+        "reqCode": "REQ-007",
+        "documentType": "Agreement",
+        "department": "Legal",
+        "assignedToGroup": "Legal Team",
+        "status": "Pending"
+      },
+      {
+        "reqCode": "REQ-008",
+        "documentType": "Proposal",
+        "department": "Marketing",
+        "assignedToGroup": "Marketing Team",
+        "status": "In Progress"
+      },
+      {
+        "reqCode": "REQ-009",
+        "documentType": "Report",
+        "department": "Research",
+        "assignedToGroup": "Research Team",
+        "status": "In Progress"
+      },
+      {
+        "reqCode": "REQ-010",
+        "documentType": "Invoice",
+        "department": "Finance",
+        "assignedToGroup": "Accounts",
+        "status": "Pending"
+      }
+  ]
+  

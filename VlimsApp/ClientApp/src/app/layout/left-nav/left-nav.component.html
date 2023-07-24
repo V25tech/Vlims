@@ -1,0 +1,30 @@
+
+<div class="left-nav">
+  
+<nav class="navbar navbar-expand-lg">
+   
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+   
+        <ul class="navbar-nav flex-column">
+            <li *ngFor="let item of navItems" [ngClass]="{ 'active': item.isActive, 'open': item.isOpen }">
+                <a class="nav-link"  (click)="toggleNavItem(item)"> 
+                    <!-- [routerLink]="item.path" -->
+                    <i [class]=item.iconClass></i>
+                    <span>{{ item.label }}</span>
+                    <span *ngIf="item.children" class="toggle-icon">
+                    <i [ngClass]="item.isOpen ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+                    </span>
+                </a>
+            <ul *ngIf="item.children" class="sub-menu">
+                <li *ngFor="let child of item.children" [ngClass]="{ 'active': child.isActive }">
+                    <a class="nav-link"  [routerLink]="child.path">{{ child.label }}</a>
+                </li>
+            </ul>
+            </li>
+        </ul>
+  </nav>
+  
+  </div>

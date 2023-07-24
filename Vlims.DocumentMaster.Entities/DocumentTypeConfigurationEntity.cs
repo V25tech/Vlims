@@ -10,10 +10,9 @@
 namespace Vlims.DocumentMaster.Entities
 {
     using System;
-    using System.Collections.Generic;
 
-    
-    
+
+
     // Comment
     public class DocumentTypeConfiguration
     {
