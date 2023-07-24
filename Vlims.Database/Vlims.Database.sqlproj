@@ -264,6 +264,7 @@
     <Build Include="dbo\Stored Procedures\USP_workitems_PSY_GET.sql" />
     <Build Include="dbo\Stored Procedures\USP_workitems_PSY_DELETE_ALL.sql" />
     <Build Include="dbo\Stored Procedures\USP_workitems_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_DocumentEffective_PSY_APPROVE.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vlims.Database.refactorlog" />
