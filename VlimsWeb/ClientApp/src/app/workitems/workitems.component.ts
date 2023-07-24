@@ -43,9 +43,10 @@ export class WorkitemsComponent implements OnInit {
     });
 
   }
-  getInfo(tasktype: string, taskname: string) {
+  getInfo(tasktype: string, taskname: string, WITId: number) {
     debugger
     this.commonsvc.objname = taskname;
+    this.commonsvc.workId = WITId;
     switch (tasktype) {
       case "Document Type":
         this.router.navigate(['/mainpage/documentmaster/viewdoctype']);

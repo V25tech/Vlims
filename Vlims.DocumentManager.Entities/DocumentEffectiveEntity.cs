@@ -45,6 +45,8 @@ namespace Vlims.DMS.Entities
         private DateTime? modifieddateField;
 
         private string statusField;
+
+        private int workIdField;
         
         public string DEID
         {
@@ -210,6 +212,17 @@ namespace Vlims.DMS.Entities
             set
             {
                 this.statusField = value;
+            }
+        }
+        public int workId
+        {
+            get
+            {
+                return this.workIdField;
+            }
+            set
+            {
+                this.workIdField = value;
             }
         }
     }

@@ -27,7 +27,8 @@ export class CommonService {
   docrequest: DocumentRequestConfiguration;
   objdoctemplate:DocumentTemplateConfiguration;
   objworkflow:workflowconiguration;
-  objname:string;
+  objname: string;
+  workId: number;
   pdfBytes: Uint8Array;
   private _searchBS = new BehaviorSubject<string>('');
 

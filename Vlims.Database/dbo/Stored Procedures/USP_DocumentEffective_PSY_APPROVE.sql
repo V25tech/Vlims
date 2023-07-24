@@ -9,7 +9,8 @@ CREATE PROCEDURE [dbo].[USP_DocumentEffective_PSY_APPROVE] @DEID_PSY int, @Docum
 @document_PSY NVarChar(50),
 @EffectiveDate_PSY DateTime,
 @Reviewdate_PSY DateTime,
-@ModifiedBy_PSY NVarChar(100)
+@ModifiedBy_PSY NVarChar(100),
+@workId int
 
  AS 
  BEGIN 
@@ -26,10 +27,8 @@ Reviewdate_PSY=@Reviewdate_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,
 Status_PSY='Approve'
 WHERE  [DEID_PSY] = @DEID_PSY ;  select @DEID_PSY; 
-
--- need to pass workitems id to update to appove
   
-  UPDATE workitems_PSY SET Stage_PSY='Approve',Status_PSY='Approve' WHERE WITId_PSY=4
+  UPDATE workitems_PSY SET Stage_PSY='Approve',Status_PSY='Approve' WHERE WITId_PSY=@workId
   
   END TRY 
  BEGIN CATCH 

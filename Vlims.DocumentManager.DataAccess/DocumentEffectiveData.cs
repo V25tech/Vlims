@@ -119,6 +119,7 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.EffectiveDate, Value = documentEffective.EffectiveDate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = documentEffective.ReviewDate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.ModifiedBy, Value = documentEffective.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int16, ParameterName = DocumentEffectiveConstants.workId, Value = documentEffective.workId });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentEffectiveConstants.USP_DocumentEffective_PSY_APPROVE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

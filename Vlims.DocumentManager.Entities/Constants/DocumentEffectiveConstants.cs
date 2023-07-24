@@ -39,6 +39,8 @@ namespace Vlims.DMS.Entities
         public const string CreatedDate = "@CreatedDate_PSY";
         
         public const string ModifiedBy = "@ModifiedBy_PSY";
+        
+        public const string workId = "@workId";
 
         public const string Status = "@Status_PSY";
 

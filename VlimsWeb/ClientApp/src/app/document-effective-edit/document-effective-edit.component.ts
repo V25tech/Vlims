@@ -28,9 +28,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
   workflowTypes: Array<workflowconiguration> = [];
   departs: Array<DepartmentConfiguration> = [];
   objname: string;
-  //editMode: boolean = false;
-  //viewMode: boolean = false;
-  //title: string = '';
+  workId: number; 
   doctypes: Array<DocumentTypeConfiguration> = [];;
   constructor(private commonsvc: CommonService, private docReqServ: DocumentPreperationService, private doctypeserv: DocumentTypeServiceService, private deptservice: DepartmentconfigurationService, private docEffServ: DocumentEffectiveService, private workflowserv: WorkflowServiceService, private doctypeservice: DocumentTemplateServiceService, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService, private router: Router,) { }
   ngOnInit() {
@@ -49,6 +47,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
       if (this.viewMode) {
         this.adddocreq = this.commonsvc.docEffecConfig;
         this.objname = this.commonsvc.objname;
+        this.workId = this.commonsvc.workId;
         this.getByName(this.objname);
         this.title = "View Document Type Configuration"
       }
@@ -141,6 +140,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
   ManageApprovalFlow(adddocreq: DocumentEffectiveConfiguration) {
     adddocreq.CreatedBy = "admin";
     adddocreq.ModifiedBy = "admin";
+    adddocreq.workId = adddocreq.workId;
     this.docEffServ.UpdateDocumentEffectiveApprove(adddocreq).subscribe((res: any) => {
     });
   }

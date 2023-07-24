@@ -2435,6 +2435,7 @@ export class DocumentEffectiveConfiguration {
   ModifiedBy: string;
   ModifiedDate: string | null;
   Status: string;
+  workId: number;
 }
 export class DocumentAdditionalTasks {
   DTCId: string;
@@ -2533,6 +2534,7 @@ export class UserConfiguration {
   ModifiedDate: string | null;
 }
 export class WorkItemsConfiguration {
+  WITId: number;
   TaskType: string;
   Stage: string;
   AssignedtoGroup: string;
