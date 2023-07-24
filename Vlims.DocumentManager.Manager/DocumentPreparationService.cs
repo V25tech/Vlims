@@ -99,13 +99,13 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
-                String validationMessages = DocumentPreparationValidator.IsValidDocumentPreparation(documentPreparation);
-                if (validationMessages.Length <= 0)
-                {
+                //String validationMessages = DocumentPreparationValidator.IsValidDocumentPreparation(documentPreparation);
+                //if (validationMessages.Length <= 0)
+                //{
                     bool result = DocumentPreparationData.UpdateDocumentPreparation(documentPreparation);
                     return result;
-                }
-                throw new System.Exception(validationMessages);
+                //}
+                //throw new System.Exception(validationMessages);
             }
             catch (System.Exception ex)
             {

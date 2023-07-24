@@ -74,6 +74,7 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.details, Value = documentPreparation.details });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.CreatedBy, Value = documentPreparation.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.ModifiedBy, Value = documentPreparation.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.Status, Value = documentPreparation.Status });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPreparationConstants.USP_DocumentPreparation_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -99,6 +100,8 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.wokflow, Value = documentPreparation.wokflow });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.details, Value = documentPreparation.details });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.ModifiedBy, Value = documentPreparation.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.Status, Value = documentPreparation.Status });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPreparationConstants.USP_DocumentPreparation_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

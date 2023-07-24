@@ -89,7 +89,7 @@ export class DocumentprepAddComponent implements OnInit {
     adddocreq.CreatedBy = "admin";
     adddocreq.ModifiedBy = "admin";
     //this.router.navigate(['/products']);
-    this.docprepServ.ManageDocument(adddocreq).subscribe((res: any) => {
+    this.docprepServ.UpdateDocument(adddocreq).subscribe((res: any) => {
       this.toastr.success('Added');
       this.router.navigate(['/mainpage/documentpreperation/documprep']);
     });

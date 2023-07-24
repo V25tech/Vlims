@@ -40,7 +40,6 @@ export class DocumentRequestService {
     docPrep.documentno = '';
     docPrep.ModifiedBy = 'admin';
     docPrep.Documentmanagerid = objrequest.drid;
-  
     return this.http.postJsonLogin(docPrep, "api/documentpreparation/savedocumentpreparation", this.type);
   }
 }

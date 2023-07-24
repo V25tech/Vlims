@@ -52,7 +52,16 @@ export class DocumentPreperationComponent implements OnInit {
     this.commonsvc.docPreperation = editband;
     debugger;
     this.loader.show();
-    this.router.navigate(['/mainpage/documentmanager/editdocprep']);   
+    this.router.navigate(['/mainpage/documentmanager/editdocprep']);
   }
- 
+  submit(adddocreq: DocumentPreperationConfiguration) {
+    adddocreq.CreatedBy = "admin";
+    adddocreq.ModifiedBy = "admin";
+    adddocreq.Status = "In-Progress";
+    this.doctypeservice.UpdateDocument(adddocreq).subscribe((res: any) => {
+      this.toastr.success('Added');
+      this.router.navigate(['/mainpage/documentmanager']);
+    });
+
+  }
 }

@@ -15,7 +15,8 @@ details_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY  
+ModifiedDate_PSY,
+Status_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[DocumentPreparation_PSY] WITH (NOLOCK) 
  Order by [DPNID_PSY]  
