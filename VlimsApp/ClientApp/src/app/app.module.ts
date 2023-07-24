@@ -14,6 +14,7 @@ import { LeftNavComponent } from './layout/left-nav/left-nav.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ManagerModule } from './modules/manager/manager.module';
 import { DocumentTypesComponent } from './modules/documents/components/document-types/document-types.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LeftNavComponent],
@@ -28,6 +29,7 @@ import { DocumentTypesComponent } from './modules/documents/components/document-
     DocumentsRoutingModule,
     FontAwesomeModule,
     BsDropdownModule,
+    NgxSpinnerModule
   ],
   exports: [TableModule],
 

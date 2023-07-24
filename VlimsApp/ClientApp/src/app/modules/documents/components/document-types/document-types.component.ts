@@ -8,6 +8,7 @@ import { CommonService } from 'src/app/shared/common.service';
 import { DocumentTypeConfiguration } from '../../models/DocumentTypeConfiguration';
 import { RequestContext } from 'src/app/models/model';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-document-types',
@@ -18,7 +19,9 @@ export class DocumentTypesComponent {
   docTypesDatasource = [];
   //docs:DocumentTypeConfiguration[]=[];
   types:DocumentTypeConfiguration[]=[];
-  constructor(private router:Router, private documenttypeService: DocumentTypeServiceService,private commonsvc: CommonService) {}
+  constructor(private router:Router, private documenttypeService: DocumentTypeServiceService,
+    private spinner: NgxSpinnerService,
+    private commonsvc: CommonService) {}
 
   ngOnInit() {
     debugger
@@ -26,12 +29,12 @@ export class DocumentTypesComponent {
   }
 
   getdocumenttypeconfig() {
-    //this.loader.show();
+    this.spinner.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
       return this.documenttypeService.getdoctypeconfig(objrequest).subscribe((data: any) => {
         debugger
         this.types = data.Response;
-        //this.loader.hide();
+        this.spinner.hide();
         console.log(this.types);
       },
       (error: any) => {

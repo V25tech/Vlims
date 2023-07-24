@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { DepartmentConfiguration, DocumentTypeConfiguration, RequestContext } fr
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { CommonService } from 'src/app/shared/common.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -24,7 +25,9 @@ export class AddDocumentTypeComponent {
     private location: Location,
     private deptservice: DepartmentconfigurationService,
     private doctypeservice: DocumentTypeServiceService,
+    private spinner: NgxSpinnerService,
     private commonsvc:CommonService,
+    private cdr: ChangeDetectorRef,
     //private loader: SpinnerService,
     private router: Router
   ) {
@@ -38,10 +41,15 @@ export class AddDocumentTypeComponent {
     const lastSegment = segments[segments.length - 1];
     if(lastSegment=="edit")
     {
-      this.editMode=true;
+      this.editMode=true;this.viewMode=false;
+      this.documentType=this.commonsvc.documentType;
+    }
+    else if(lastSegment=="view") {
+      this.viewMode=true;this.editMode=false;
       this.documentType=this.commonsvc.documentType;
     }
     this.getdepartments();
+    this.cdr.detectChanges();
   }
   onCancel() {
     this.location.back();
@@ -49,6 +57,7 @@ export class AddDocumentTypeComponent {
 
   getdepartments() {
     //this.loader.show();
+    this.spinner.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
         debugger
@@ -63,7 +72,7 @@ export class AddDocumentTypeComponent {
           });
           this.selectedDepartments
         }
-        // this.loader.hide();
+         this.spinner.hide();
         console.log(this.departments);
       }, (error:any) => {
         // this.toastr.error('loading failed');

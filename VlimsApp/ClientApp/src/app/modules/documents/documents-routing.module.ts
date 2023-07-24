@@ -37,6 +37,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'document-type/view',
+    component: AddDocumentTypeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'templates',
     component: TemplatesComponent,
     canActivate: [AuthGuard],

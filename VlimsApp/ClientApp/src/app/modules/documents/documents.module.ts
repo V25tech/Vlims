@@ -20,6 +20,7 @@ import { WorkflowsComponent } from './components/workflows/workflows.component';
 import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
 import { DocumentMasterHomeComponent } from './components/document-master-home/document-master-home.component';
 import { AppintializorService, serverConfigInitializerFactory } from 'src/app/shared/appintializor.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -45,6 +46,7 @@ import { AppintializorService, serverConfigInitializerFactory } from 'src/app/sh
     MultiSelectModule,
     DropdownModule,
     ToastModule,
+    NgxSpinnerModule
   ],
   providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true },MessageService] 
 })
