@@ -78,6 +78,7 @@ import { NewPlantRegistrationComponent } from './new-plant-registration/new-plan
 import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
 import { BlobUrlPipe } from './blob-url.pipe';
 import { ActivateDeactivateuserComponent } from './activate-deactivateuser/activate-deactivateuser.component';
+import { DocumentRevisonComponent } from './document-revison/document-revison.component';
 
 
 
@@ -99,7 +100,7 @@ import { ActivateDeactivateuserComponent } from './activate-deactivateuser/activ
     AddNotificationConfigComponent, AddDashboardConfigComponent, DocumentmanagerComponent, DocumentRequestComponent,
     DocumentPreperationComponent, DocumentEffectiveComponent, DocumentAdditionaltasksComponent,
     AddDocumentRequestComponent, DepartmentComponent, UserConfigurationComponent, AddUserComponent,
-    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent, ApprovalConfigurationsComponent, NewPlantRegistrationComponent, PdfViewerComponent, BlobUrlPipe, ActivateDeactivateuserComponent],
+    UsergroupconfigurationComponent, RolesComponent, AddRolesComponent, AddDepartmentComponent, HierarchymanagementComponent, FunctionalProfileComponent, UserManagementComponent, WorkitemsComponent, DocumentprepAddComponent, PlantComponent, DocumentEffectiveEditComponent, SecurityManagementComponent, UsergroupconfigurationComponent, AddusergroupconfigurationComponent, ApprovalConfigurationsComponent, NewPlantRegistrationComponent, PdfViewerComponent, BlobUrlPipe, ActivateDeactivateuserComponent, DocumentRevisonComponent],
   providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }],
   bootstrap: [AppComponent]
 })

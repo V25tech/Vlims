@@ -2437,6 +2437,23 @@ export class DocumentEffectiveConfiguration {
   Status: string;
   workId: number;
 }
+export class DocumentRevisonConfiguration {
+  DTCId: string;
+  documentmanagerid: string;
+  documenttitle: string;
+  documentno: string;
+  documenttype: string;
+  Department: string;
+  document: string;
+  EffectiveDate: Date;
+  ReviewDate: Date;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+  Status: string;
+  workId: number;
+}
 export class DocumentAdditionalTasks {
   DTCId: string;
   DocumentTitle: string;

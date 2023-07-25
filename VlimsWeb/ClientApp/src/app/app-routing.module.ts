@@ -54,6 +54,7 @@ import { PlantComponent } from './plantmanagement/plantmanagement.component';
 import { NewPlantRegistrationComponent } from './new-plant-registration/new-plant-registration.component';
 import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
 import { ActivateDeactivateuserComponent } from './activate-deactivateuser/activate-deactivateuser.component';
+import { DocumentRevisonComponent } from './document-revison/document-revison.component';
 
 
 const routes: Routes = [
@@ -218,9 +219,13 @@ const routes: Routes = [
             component: DocumentEffectiveComponent
           },
           {
+            path: 'documrev',
+            component: DocumentRevisonComponent
+          },
+          {
             path: 'documeffectedit',
             component: DocumentEffectiveEditComponent
-          },          
+          },
           {
             path: 'Viewdoceffect',
             component: DocumentEffectiveEditComponent
@@ -232,7 +237,7 @@ const routes: Routes = [
           {
             path: 'adddocrequest',
             component: AddDocumentRequestComponent
-          },          
+          },
           {
             path: 'viewdocrequest',
             component: AddDocumentRequestComponent
@@ -319,7 +324,7 @@ const routes: Routes = [
             path: 'activeuser',
             component: ActivateDeactivateuserComponent
           }
-          
+
         ]
       }
     ]

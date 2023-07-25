@@ -1,0 +1,51 @@
+<div class="card shadow mb-4" style="padding-top: 2px;">
+  <div class="card-header py-3">
+    <div col-6 style="float: left;">
+      <h6 class="m-0 font-weight-bold text-primary">Workflow Configuration</h6>
+    </div>    
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="types?.length> 0">
+
+        <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Document Request Code Document Title</th>
+            <th scope="col">Document No</th>
+            <th scope="col">Document Type</th>
+            <th scope="col">Department</th>
+            <th scope="col">Effective Date</th>
+            <th scope="col">Review Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Version</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let doc of types; let i=index">
+            <th>{{i+1}}</th>
+            <td>{{doc?.documentrequestcode}}</td>
+            <td>{{doc?.documentno}}</td>
+            <td>{{doc?.departmenttype}}</td>
+            <td>{{doc?.department}}</td>
+            <td>{{doc?.EffectiveDate}}</td>
+            <td>{{doc?.ReviewDate}}</td>
+            <td>Success</td>
+            <td>
+              <!-- <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTID"
+      data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);"> <span
+        class="fa fa-edit"></span> </button> -->
+              <button class="btn"> <span class="fa fa-flag fa-edit" (click)="editdoc(doc);"></span></button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div *ngIf="types?.length==0">
+      <p>No items to display</p>
+    </div>
+  </div>
+</div>
