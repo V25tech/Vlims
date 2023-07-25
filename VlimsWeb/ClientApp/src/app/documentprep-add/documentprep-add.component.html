@@ -41,7 +41,7 @@
           <label class="col-sm-4 col-form-label">Document Type :</label>
 
           <div class="col-sm-8">
-            <select class="form-control" [(ngModel)]="adddocreq.documenttype" name="documenttype" #typeId="ngModel"
+            <select class="form-control" [(ngModel)]="adddocreq.documenttype" disabled="true" name="documenttype" #typeId="ngModel"
                     [ngClass]="{ 'is-invalid': fm.submitted && typeId.invalid }" required>
 
               <option [ngValue]=null>Select</option>
@@ -56,7 +56,7 @@
 
           <div class="col-sm-8">
 
-            <select class="form-control" [(ngModel)]="adddocreq.department" name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+            <select class="form-control" [(ngModel)]="adddocreq.department" disabled="true" name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
                     [ngClass]="{ 'is-invalid': fm.submitted && Assigntodepartment.invalid }" required>
               <option value="Select">Select</option>
               <option *ngFor="let type of departs" value={{type.DepartmentName}}>{{type?.DepartmentName}}</option>
@@ -73,14 +73,14 @@
           <div class="col-sm-4">
             <input type="file" class="form-control" id="fileInput" [(ngModel)]="adddocreq.document"
                    name="Document" aria-describedby="productname" placeholder="Document"
-                   #BrandName="ngModel" (change)="onFileSelected($event)" [disabled]="isUploaded"/>
+                   #BrandName="ngModel" (change)="onFileSelected($event)" [disabled]="isUploaded" />
           </div>
           <div class="col-sm-2">
-          <button type="button" class="btn btn-secondary" (click)="onUpload()" [disabled]="isUploaded">Upload</button>
-        </div>
-        <div class="col-sm-2">
-          <button type="button" class="btn btn-danger" *ngIf="selectedFile" (click)="onDeleteFile()">Delete</button>
-        </div>
+            <button type="button" class="btn btn-secondary" (click)="onUpload()" [disabled]="isUploaded">Upload</button>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" class="btn btn-danger" *ngIf="selectedFile" (click)="onDeleteFile()">Delete</button>
+          </div>
         </div>
         <div class="form-group row">
 
@@ -111,9 +111,12 @@
           <label class="col-sm-4 col-form-label">Details :</label>
 
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="Details" [(ngModel)]="adddocreq.details"
+            <textarea name="Details" cols="40" placeholder="Details" rows="5" #BrandName="ngModel" style="width:615px; height:90px;"
+                      aria-describedby="Details" [(ngModel)]="adddocreq.Details"></textarea>
+
+            <!--<input type="text" class="form-control" id="Details" [(ngModel)]="adddocreq.details"
                    pattern='[A-Za-z\\s]*' name="Details" aria-describedby="productname" placeholder="Details"
-                   #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+                   #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />-->
           </div>
         </div>
       </div>

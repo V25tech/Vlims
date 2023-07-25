@@ -76,7 +76,7 @@
 
                 <label for="workflow" class="col-sm-4 col-form-label">Workflow</label>
                 <div class="col-sm-8">
-                    <select class="form-control" [(ngModel)]="adddocreq.Workflow" name="Workflow" id="Workflow" [disabled]="viewMode" (ngModelChange)="inputValue = $event">
+                    <select class="form-control" [(ngModel)]="adddocreq.workflow" name="Workflow" id="Workflow" [disabled]="viewMode" (ngModelChange)="inputValue = $event">
                         <option value="Select">Select</option>
                         <option *ngFor="let UG of wflows" value={{UG.workflowName}}>{{UG?.workflowName}}</option>
                     </select>
