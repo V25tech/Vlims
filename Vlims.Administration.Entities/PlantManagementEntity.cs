@@ -36,6 +36,8 @@ namespace Vlims.Administration.Entities
         private string modifiedbyField;
         
         private DateTime? modifieddateField;
+
+        private string statusField;
         
         public string PMId
         {
@@ -144,7 +146,18 @@ namespace Vlims.Administration.Entities
                 this.modifiedbyField = value;
             }
         }
-        
+        public string Status
+        {
+            get
+            {
+                return this.statusField;
+            }
+            set
+            {
+                this.statusField = value;
+            }
+        }
+
         public DateTime? ModifiedDate
         {
             get

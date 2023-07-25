@@ -45,7 +45,9 @@ namespace Vlims.Administration.Entities
         public const string CreatedDate = "@CreatedDate_PSY";
         
         public const string ModifiedBy = "@ModifiedBy_PSY";
-        
+
+        public const string Status = "@Status_PSY";
+
         public const string ModifiedDate = "@ModifiedDate_PSY";
         
         public const string USP_UserConfiguration_PSY_GET_ALL = "dbo.USP_UserConfiguration_PSY_GET_ALL";

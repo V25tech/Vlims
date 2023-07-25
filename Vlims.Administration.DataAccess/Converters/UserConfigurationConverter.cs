@@ -53,6 +53,7 @@ namespace Vlims.Administration.DataAccess
                         userConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[UserConfigurationConstants.CreatedDate.Trim('@')]);
                         userConfigurationData.ModifiedBy = Convert.ToString(row[UserConfigurationConstants.ModifiedBy.Trim('@')]);
                         userConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[UserConfigurationConstants.ModifiedDate.Trim('@')]);
+                        userConfigurationData.Status = Convert.ToString(row[UserConfigurationConstants.Status.Trim('@')]);
                         result.Add(userConfigurationData);
                     }
                 }
@@ -101,6 +102,7 @@ namespace Vlims.Administration.DataAccess
                         row[UserConfigurationConstants.CreatedBy.Trim()] = userConfigurations[i].CreatedBy;
                         row[UserConfigurationConstants.CreatedDate.Trim()] = userConfigurations[i].CreatedDate;
                         row[UserConfigurationConstants.ModifiedBy.Trim()] = userConfigurations[i].ModifiedBy;
+                        row[UserConfigurationConstants.Status.Trim()] = userConfigurations[i].Status;
                         row[UserConfigurationConstants.ModifiedDate.Trim()] = userConfigurations[i].ModifiedDate;
                         dataTable.Rows.Add(row);
                     }
@@ -131,6 +133,7 @@ namespace Vlims.Administration.DataAccess
             dataTable.Columns.Add(UserConfigurationConstants.CreatedBy.Trim());
             dataTable.Columns.Add(UserConfigurationConstants.CreatedDate.Trim());
             dataTable.Columns.Add(UserConfigurationConstants.ModifiedBy.Trim());
+            dataTable.Columns.Add(UserConfigurationConstants.Status.Trim());
             dataTable.Columns.Add(UserConfigurationConstants.ModifiedDate.Trim());
         }
     }

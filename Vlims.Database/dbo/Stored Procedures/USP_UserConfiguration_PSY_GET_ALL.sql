@@ -17,7 +17,8 @@ Standarduser_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY  
+ModifiedDate_PSY,
+Status_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[UserConfiguration_PSY] WITH (NOLOCK) 
  Order by [UCFId_PSY]  
@@ -28,3 +29,6 @@ ModifiedDate_PSY
   SELECT ERROR_MESSAGE(); 
  END CATCH 
  END
+GO
+
+

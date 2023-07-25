@@ -28,5 +28,8 @@ export class NewPlantRegistrationComponent implements OnInit {
       this.router.navigate(['/mainpage/plant']);
     });
   }
+  closepopup() {
+    this.router.navigate(['/mainpage/plant']);
+  }
 }
 

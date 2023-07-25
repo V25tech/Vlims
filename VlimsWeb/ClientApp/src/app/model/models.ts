@@ -2550,6 +2550,7 @@ export class UserConfiguration {
   CreatedDate: string | null;
   ModifiedBy: string;
   ModifiedDate: string | null;
+  Status: string | null;
 }
 export class WorkItemsConfiguration {
   WITId: number;

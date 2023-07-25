@@ -47,6 +47,7 @@ namespace Vlims.Administration.DataAccess
                         plantManagementData.CreatedDate = DatatypeConverter.SetDateTime(row[PlantManagementConstants.CreatedDate.Trim('@')]);
                         plantManagementData.ModifiedBy = Convert.ToString(row[PlantManagementConstants.ModifiedBy.Trim('@')]);
                         plantManagementData.ModifiedDate = DatatypeConverter.SetDateTime(row[PlantManagementConstants.ModifiedDate.Trim('@')]);
+                        plantManagementData.Status = Convert.ToString(row[PlantManagementConstants.Status.Trim('@')]);
                         result.Add(plantManagementData);
                     }
                 }

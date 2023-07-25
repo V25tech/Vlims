@@ -47,6 +47,8 @@ namespace Vlims.Administration.Entities
         private DateTime? createddateField;
         
         private string modifiedbyField;
+
+        private string statusField;
         
         private DateTime? modifieddateField;
         
@@ -229,7 +231,19 @@ namespace Vlims.Administration.Entities
                 this.modifiedbyField = value;
             }
         }
-        
+
+        public string Status
+        {
+            get
+            {
+                return this.statusField;
+            }
+            set
+            {
+                this.statusField = value;
+            }
+        }
+
         public DateTime? ModifiedDate
         {
             get
