@@ -42,6 +42,8 @@ namespace Vlims.DMS.Entities
 
         public const string Status = "@Status_PSY";
 
+        public const string Workflow = "@Workflow_PSY";
+
         public const string ApprovedOn = "@ApprovedOn_PSY";
 
         public const string Approvedby = "@Approvedby_PSY";

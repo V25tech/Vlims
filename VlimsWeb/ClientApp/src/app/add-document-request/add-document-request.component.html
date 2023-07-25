@@ -7,71 +7,82 @@
   </div>
   <div class="card-body">
     <form (ngSubmit)="submit(adddocreq)" #fm="ngForm">
-      <div class="modal-body">
-        <div class="form-group row">
+        <div class="modal-body">
+            <div class="form-group row">
 
-          <label for="documenttype" class="col-sm-4 col-form-label">Document Type</label>
+                <label for="documenttype" class="col-sm-4 col-form-label">Document Type :</label>
 
-          <div class="col-sm-8">
+                <div class="col-sm-8">
 
-            <select class="form-control" [(ngModel)]="adddocreq.documenttype" name="documenttype" id="documenttype" #typeId="ngModel" (ngModelChange)="inputValue = $event" [ngClass]="{ 'is-invalid': fm.submitted && documenttype.invalid }" required>
+                    <select class="form-control" [(ngModel)]="adddocreq.documenttype" name="documenttype" id="documenttype" #typeId="ngModel" (ngModelChange)="inputValue = $event" [ngClass]="{ 'is-invalid': fm.submitted && documenttype.invalid }" required>
 
-              <option value="Select">Select</option>
-              <option *ngFor="let doctype of doctypes" value={{doctype.Documenttypename}}>{{doctype?.Documenttypename}}</option>
-            </select>
-          </div>
-        </div>
+                        <option value="Select">Select</option>
+                        <option *ngFor="let doctype of doctypes" value={{doctype.Documenttypename}}>{{doctype?.Documenttypename}}</option>
+                    </select>
+                </div>
+            </div>
 
-        <div class="form-group row">
+            <div class="form-group row">
 
-          <label for="department" class="col-sm-4 col-form-label">Assign to Department</label>
+                <label for="department" class="col-sm-4 col-form-label">Department :</label>
 
-          <div class="col-sm-8">
+                <div class="col-sm-8">
 
-            <select class="form-control" [(ngModel)]="adddocreq.department" name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event">
-              <option value="Select">Select</option>
-              <option *ngFor="let dept of departs" value={{dept.DepartmentName}}>{{dept?.DepartmentName}}</option>
-            </select>
+                    <select class="form-control" [(ngModel)]="adddocreq.department" name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event">
+                        <option value="Select">Select</option>
+                        <option *ngFor="let dept of departs" value={{dept.DepartmentName}}>{{dept?.DepartmentName}}</option>
+                    </select>
 
 
 
-          </div>
+                </div>
 
-        </div>
+            </div>
 
-        <div class="form-group row">
+            <div class="form-group row">
 
-          <label for="purpose" class="col-sm-4 col-form-label">Purpose</label>
+                <label for="purpose" class="col-sm-4 col-form-label">Purpose :</label>
 
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="purpose" [(ngModel)]="adddocreq.purpose"
+                <div class="col-sm-8">
+                    <textarea name="productname" cols="40" placeholder="purpose" rows="5" #BrandName="ngModel" style="width:615px; height:90px;" aria-describedby="productname" [(ngModel)]="adddocreq.purpose"></textarea>
+                    <!--<input type="text" class="form-control" style="width:200px; height:50px;" id="purpose" [(ngModel)]="adddocreq.purpose"
                    pattern='[A-Za-z\\s]*' name="purpose" aria-describedby="productname" placeholder="purpose"
-                   #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
-          </div>
+                   #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />-->
+                </div>
+            </div>
+            <div class="form-group row" hidden="hidden">
+
+                <label for="approvalsCount" class="col-sm-4 col-form-label">No.Of Approvals</label>
+
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="approvalsCount" [(ngModel)]="adddocreq.approvalsCount"
+                           pattern='[A-Za-z\\s]*' name="approvalsCount" aria-describedby="productname" placeholder="Approvals Count"
+                           #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+                </div>
+            </div>
+
+            <div class="form-group row" hidden="hidden">
+
+                <label for="AssigntoGroup" class="col-sm-4 col-form-label">Assign to Group</label>
+
+                <div class="col-sm-8">
+                    <select class="form-control" [(ngModel)]="adddocreq.assigntoGroup" name="assigntoGroup" id="assigntoGroup" [disabled]="viewMode" (ngModelChange)="inputValue = $event">
+                        <option value="Select">Select</option>
+                        <option *ngFor="let UG of usergroups" value={{UG.Usergroupname}}>{{UG?.Usergroupname}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row" >
+
+                <label for="workflow" class="col-sm-4 col-form-label">Workflow</label>
+                <div class="col-sm-8">
+                    <select class="form-control" [(ngModel)]="adddocreq.Workflow" name="Workflow" id="Workflow" [disabled]="viewMode" (ngModelChange)="inputValue = $event">
+                        <option value="Select">Select</option>
+                        <option *ngFor="let UG of wflows" value={{UG.workflowName}}>{{UG?.workflowName}}</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="form-group row">
-
-          <label for="approvalsCount" class="col-sm-4 col-form-label">No.Of Approvals</label>
-
-          <div class="col-sm-8">
-            <input type="number" class="form-control" id="approvalsCount" [(ngModel)]="adddocreq.approvalsCount"
-                   pattern='[A-Za-z\\s]*' name="approvalsCount" aria-describedby="productname" placeholder="Approvals Count"
-                   #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
-          </div>
-        </div>
-
-        <div class="form-group row">
-
-          <label for="AssigntoGroup" class="col-sm-4 col-form-label">Assign to Group</label>
-
-          <div class="col-sm-8">
-            <select class="form-control" [(ngModel)]="adddocreq.assigntoGroup" name="assigntoGroup" id="assigntoGroup" [disabled]="viewMode" (ngModelChange)="inputValue = $event">
-              <option value="Select">Select</option>
-              <option *ngFor="let UG of usergroups" value={{UG.Usergroupname}}>{{UG?.Usergroupname}}</option>
-            </select>
-          </div>
-        </div>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" (click)="ManageApprovalFlow(adddocreq);" *ngIf="viewMode">Approve</button>
         <button type="button" class="btn btn-info" (click)="closepopup();" *ngIf="viewMode">Re-Initiate</button>

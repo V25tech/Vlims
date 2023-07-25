@@ -2491,6 +2491,7 @@ export class workflowconiguration {
   ModifiedBy: string;
   ModifiedDate: string | null;
   Status: string | null;
+  Workflow: string;
 }
 export class DocumentTemplateConfiguration {
   DTID: string;

@@ -29,4 +29,8 @@ updatedoctypeconfig(objrequest: DocumentTypeConfiguration) {
     debugger
     return this.http.getwithheader("api/documentpreparation/GetDocumentRequestbyName" + "?name=" + docreq, this.type);
   }
+  getworkflowInfo(objrequest: RequestContext) {
+    debugger
+    return this.http.postJsonLogin(objrequest, "api/documenttypeconfiguration/getalldoctypeconfig", this.type);
+  }
 }

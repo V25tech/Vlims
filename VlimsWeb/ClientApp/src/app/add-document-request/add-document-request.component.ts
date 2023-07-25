@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { DepartmentConfiguration, DocumentRequestConfiguration, DocumentTemplateConfiguration, DocumentTypeConfiguration, RequestContext, Usergroupconfiguration } from '../model/models';
+import { DepartmentConfiguration, DocumentRequestConfiguration, DocumentTemplateConfiguration, DocumentTypeConfiguration, RequestContext, Usergroupconfiguration, workflowconiguration } from '../model/models';
 import { Router } from '@angular/router';
 import { CommonService } from '../shared/common.service';
 import { DocumentRequestService } from '../Services/document-request.service';
@@ -9,6 +9,7 @@ import { SpinnerService } from '../spinner/spinner.service';
 import { DepartmentconfigurationService } from '../departmentconfiguration.service';
 import { DocumentTypeServiceService } from '../Services/document-type-service.service';
 import { usergroupconfigurationService } from '../Services/usergroupconfiguration.service';
+import { WorkflowServiceService } from '../Services/workflow-service.service';
 
 @Component({
   selector: 'app-add-document-request',
@@ -20,13 +21,14 @@ export class AddDocumentRequestComponent implements OnInit {
   requests: Array<DocumentRequestConfiguration> = [];
   departs: Array<DepartmentConfiguration> = [];
   usergroups: Array<Usergroupconfiguration> = [];
+  wflows: Array<workflowconiguration> = [];
   editMode: boolean = false;
   viewMode: boolean = false;
   title: string = 'Add Document Request Configuration';
   doctypes: Array<DocumentTypeServiceService> = [];
   newdocrequest = new DocumentTemplateConfiguration();
   objname: string;
-  constructor(private commonsvc: CommonService, private doctypeservice: usergroupconfigurationService, private docReqServ: DocumentRequestService, private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService, private router: Router, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService,) { }
+  constructor(private commonsvc: CommonService, private doctypeservice: usergroupconfigurationService, private docReqServ: DocumentRequestService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private router: Router, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService,) { }
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
@@ -35,13 +37,14 @@ export class AddDocumentRequestComponent implements OnInit {
     this.getdepartments();
     this.getdocumenttypeconfig();
     this.getusergroupInfo();
+    this.getworkflowinfo()
     debugger;
     if (lastSegment == "viewdocreq") {
       this.viewMode = this.commonsvc.docrequest != null ? true : false;
       this.viewMode = true;
       if (this.viewMode) {
         this.adddocreq = this.commonsvc.docrequest;
-      }      
+      }
       if (this.viewMode) {
         debugger
         this.objname = this.commonsvc.objname;
@@ -79,7 +82,6 @@ export class AddDocumentRequestComponent implements OnInit {
   }
   submit(adddocreq: DocumentRequestConfiguration) {
     debugger
-
     this.adddocrequest(adddocreq);
 
   }
@@ -98,7 +100,6 @@ export class AddDocumentRequestComponent implements OnInit {
     this.router.navigate(['/mainpage/documentmanager']);
   }
   getdepartments() {
-
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
       debugger
@@ -111,6 +112,13 @@ export class AddDocumentRequestComponent implements OnInit {
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
       debugger
       this.doctypes = data.Response;
+    });
+  }
+  getworkflowinfo() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
+      debugger
+      this.wflows = data.Response;
     });
   }
   getByName(objname: string) {
@@ -128,8 +136,7 @@ export class AddDocumentRequestComponent implements OnInit {
     });
   }
   ManageApprovalFlow(adddocreq: DocumentRequestConfiguration) {
-    adddocreq.CreatedBy = "admin";   
-    
+    adddocreq.CreatedBy = "admin";
     this.docReqServ.ManageApprovalFlow(adddocreq).subscribe((res: any) => {
       this.toastr.success('Added');
       this.router.navigate(['/mainpage/documentmanager']);

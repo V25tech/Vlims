@@ -74,6 +74,7 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentrequestConstants.CreatedBy, Value = documentrequest.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentrequestConstants.ModifiedBy, Value = documentrequest.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentrequestConstants.Status, Value = documentrequest.Status });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentrequestConstants.Workflow, Value = documentrequest.Workflow });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentrequestConstants.USP_Documentrequest_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

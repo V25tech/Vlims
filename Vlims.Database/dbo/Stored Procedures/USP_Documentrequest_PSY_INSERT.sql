@@ -1,6 +1,7 @@
 ﻿
 
- CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_INSERT] @documentmanagerid_PSY NVarChar(50),
+
+CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_INSERT] @documentmanagerid_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
 @department_PSY NVarChar(50),
 @Purpose_PSY NVarChar(50),
@@ -8,7 +9,8 @@
 @AssigntoGroup_PSY NVarChar(50),
 @CreatedBy_PSY NVarChar(100),
 @ModifiedBy_PSY NVarChar(100),
-@Status_PSY NVarChar(100)
+@Status_PSY NVarChar(100),
+@Workflow NVarChar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -25,7 +27,8 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-Status_PSY)
+Status_PSY,
+Workflow_PSY)
  VALUES 
 (@documentmanagerid_PSY,
 @documenttype_PSY,
@@ -37,7 +40,8 @@ Status_PSY)
  GetDate() ,
 @ModifiedBy_PSY,
  GetDate(),
- @Status_PSY);
+ @Status_PSY,
+ @Workflow);
  SELECT @ID = @@IDENTITY; 
 
  INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY)

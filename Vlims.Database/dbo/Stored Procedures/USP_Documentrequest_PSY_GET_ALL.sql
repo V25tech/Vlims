@@ -1,5 +1,4 @@
 ﻿
-
  CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
@@ -17,7 +16,8 @@ ModifiedBy_PSY,
 ModifiedDate_PSY,
 Status_PSY,
 ApprovedOn_PSY,
-Approvedby_PSY
+Approvedby_PSY,
+Workflow_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[Documentrequest_PSY] WITH (NOLOCK) 
  Order by [DRID_PSY]  
@@ -27,9 +27,7 @@ Approvedby_PSY
  BEGIN CATCH 
   SELECT ERROR_MESSAGE(); 
  END CATCH 
- END 
-
-
+ END
 GO
 
 

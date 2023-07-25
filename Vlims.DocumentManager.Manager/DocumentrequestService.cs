@@ -58,7 +58,8 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
-                //documentrequest.AssigntoGroup = "A";
+                documentrequest.AssigntoGroup = "A";
+                documentrequest.ApprovalsCount = 9;
                 documentrequest.documentmanagerid = "1";
                 //documentrequest.Status = "In-Progress";
                 var result = DocumentrequestData.SaveDocumentrequest(documentrequest);
