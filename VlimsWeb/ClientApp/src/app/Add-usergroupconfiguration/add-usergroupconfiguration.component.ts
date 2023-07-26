@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RequestContext, UserConfiguration, Usergroupconfiguration } from '../model/models';
 import { CommonService } from '../shared/common.service';
 import { Router } from '@angular/router';
 import { usergroupconfigurationService } from '../Services/usergroupconfiguration.service';
 import { UsersconfigurationService } from '../usersconfiguration.service';
-//import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-usergroupconfiguration',
@@ -13,12 +12,42 @@ import { UsersconfigurationService } from '../usersconfiguration.service';
 })
 export class AddusergroupconfigurationComponent implements OnInit {
   types: Array<UserConfiguration> = [];
-  newdept = new Usergroupconfiguration();
-  constructor(private commonsvc: CommonService, private ugService: usergroupconfigurationService, private userService: UsersconfigurationService,
+  adduser = new Usergroupconfiguration();
+  newdept= new Usergroupconfiguration();
+  editMode: boolean = false;
+  viewMode: boolean = false;
+  objname: string;
+  title: string = "Add User Group Configuration";
+  constructor(private commonsvc: CommonService, private cdr: ChangeDetectorRef, private ugService: usergroupconfigurationService, private userService: UsersconfigurationService,
     private router: Router) { }
 
   ngOnInit() {
     this.getusers();
+    const urlPath = this.router.url;
+    const segments = urlPath.split('/');
+    const lastSegment = segments[segments.length - 1];
+    //this.getdepartments();
+    //this.getroles();
+    debugger
+    if (lastSegment == "viewdoctype") {
+      this.viewMode = true;
+      if (this.viewMode) {
+        debugger
+        this.objname = this.commonsvc.objname;
+        //this.getdocTypeByName(this.objname);
+        this.adduser = this.commonsvc.userGroupConfig;
+        this.title = "View Document Type Configuration"
+      }
+      this.cdr.detectChanges();
+    }
+    else if (lastSegment == "addusergroup") {
+      this.editMode = this.commonsvc.userGroupConfig != null ? true : false;
+      if (this.editMode) {
+        this.newdept = this.commonsvc.userGroupConfig;
+        this.title = "Edit User Group Configuration"
+        this.cdr.detectChanges();
+      }
+    }
   }
   submit(newdept: Usergroupconfiguration) {
     debugger
@@ -28,13 +57,9 @@ export class AddusergroupconfigurationComponent implements OnInit {
       debugger
       newdept.Registeredby="admin";
       newdept.Modify="admin";
-      //this.router.navigate(['/products']);
       this.ugService.addusergroupconfiguration(newdept).subscribe((res:any)=>{
-      //  this.toastr.success('Added');
         this.router.navigate(['/mainpage/users/usergrp']);
       });
-      
-      
     }
     closepopup() {
       this.router.navigate(['/mainpage/users/usergrp']);
@@ -46,4 +71,5 @@ export class AddusergroupconfigurationComponent implements OnInit {
       this.types = data.Response;      
     });
   }
+ 
 }

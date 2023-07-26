@@ -5,7 +5,7 @@ import { PageConfig } from '../model/pageConfig';
 import { SpinnerService } from '../spinner/spinner.service';
 import { ToastrService } from 'ngx-toastr';
 import { transformAll } from '@angular/compiler/src/render3/r3_ast';
-import { DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentRequestConfiguration, DocumentTemplateConfiguration, DocumentTypeConfiguration, workflowconiguration } from '../model/models';
+import { DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentRequestConfiguration, DocumentTemplateConfiguration, DocumentTypeConfiguration, UserConfiguration, Usergroupconfiguration, workflowconiguration } from '../model/models';
 
 
 @Injectable({
@@ -22,6 +22,8 @@ export class CommonService {
   baseurl: string;
   documenttypeId:string;
   docobject: DocumentTypeConfiguration;
+  userConfig: UserConfiguration;
+  userGroupConfig: Usergroupconfiguration;
   docPreperation: DocumentPreperationConfiguration;
   docEffecConfig: DocumentEffectiveConfiguration;
   docrequest: DocumentRequestConfiguration;

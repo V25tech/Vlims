@@ -14,7 +14,17 @@ type NewType = SpinnerService;
   styleUrls: ['./user-configuration.component.css']
 })
 export class UserConfigurationComponent implements OnInit {
-  types: Array<UserConfiguration>=[];
+  types: Array<UserConfiguration> = [];
+
+  name: string = 'Product Type';
+  newtype: UserConfiguration;
+  objProductType: UserConfiguration;
+  retailId: number;
+  header: string;
+  actiontype: number;
+  pageConfig: any;
+  searchstr: string;
+
   constructor(private commonsvc: CommonService, private doctypeservice: UsersconfigurationService ,private toastr: ToastrService, private loader: SpinnerService,private router: Router) { }
 
   ngOnInit() {
@@ -32,6 +42,11 @@ export class UserConfigurationComponent implements OnInit {
         this.toastr.error('loading failed');
         this.loader.hide();
       });
+  }
+  editdoc(doc: UserConfiguration) {
+    debugger
+    this.commonsvc.userConfig = doc;
+    this.router.navigate(['/mainpage/users/adduser']);
   }
 
 }

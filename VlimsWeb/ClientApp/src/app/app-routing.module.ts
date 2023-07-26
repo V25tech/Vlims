@@ -47,7 +47,7 @@ import { DocumentprepAddComponent } from './documentprep-add/documentprep-add.co
 import { DocumentEffectiveEditComponent } from './document-effective-edit/document-effective-edit.component';
 import { SecurityManagementComponent } from './securitymanagement/securitymanagement.component';
 import { UsergroupconfigurationComponent } from './usergroupconfiguration/usergroupconfiguration.component';
-import { AddUserGroupComponent } from './add-user-group/add-user-group.component';
+//import { AddUserGroupComponent } from './add-user-group/add-user-group.component';
 import { AddusergroupconfigurationComponent } from './Add-usergroupconfiguration/add-usergroupconfiguration.component';
 import { ApprovalConfigurationsComponent } from './Approval-Configuration/approval-configurations.component';
 import { PlantComponent } from './plantmanagement/plantmanagement.component';

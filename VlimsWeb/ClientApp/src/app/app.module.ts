@@ -61,7 +61,7 @@ import { RolesComponent } from './roles/roles.component';
 import { AddRolesComponent } from './add-roles/add-roles.component';
 import { UserConfigurationComponent } from './user-configuration/user-configuration.component';
 import { AddUserComponent } from './add-user/add-user.component';
-import { AddUserGroupComponent } from './add-user-group/add-user-group.component';
+//import { AddUserGroupComponent } from './add-user-group/add-user-group.component';
 //import { DepartmentConfigurationComponent } from './department-configuration/department-configuration.component';
 import { HierarchymanagementComponent } from './hierarchymanagement/hierarchymanagement.component';
 import { FunctionalProfileComponent } from './functional-profile/functional-profile.component';

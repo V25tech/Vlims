@@ -2588,7 +2588,7 @@ export class Usergroupconfiguration {
   public SNo: number;
   public usergroupname: string;
   public code: string;
-  public totalusers: number;
+  public totalusers: string;
   public users: string;
   public Registeredby: string;
   public Registeredon: string;

@@ -53,7 +53,7 @@ namespace PolicySummary.Controllers
         /// This method is used to Get UserGroupConfiguration By Id ugcid
         /// </summary>
         /// <param name="ugcid"></param>
-        [HttpGet("{ugcid}")]
+        [HttpGet("GetUserGroupConfigurationByUgcid")]
         public ActionResult<UserGroupConfiguration> GetUserGroupConfigurationByUgcid(string ugcid)
         {
             var result = userGroupConfigurationService.GetUserGroupConfigurationByUgcid(ugcid);

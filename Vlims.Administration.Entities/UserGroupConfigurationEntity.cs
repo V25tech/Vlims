@@ -28,7 +28,7 @@ namespace Vlims.Administration.Entities
         
         private string usersField;
         
-        private System.Int32? totalusersField;
+        private string totalusersField;
         
         private string createdbyField;
         
@@ -98,7 +98,7 @@ namespace Vlims.Administration.Entities
             }
         }
         
-        public System.Int32? Totalusers
+        public string Totalusers
         {
             get
             {

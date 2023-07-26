@@ -42,4 +42,9 @@ export class UsergroupconfigurationComponent implements OnInit {
       this.loader.hide();
     });
   }
+  editdoc(doc: Usergroupconfiguration) {
+    debugger
+    this.commonsvc.userGroupConfig = doc;
+    this.router.navigate(['/mainpage/users/addusergroup']);
+  }
 }

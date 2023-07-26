@@ -42,7 +42,7 @@ namespace Vlims.Administration.DataAccess
                         userGroupConfigurationData.Usergroupname = Convert.ToString(row[UserGroupConfigurationConstants.Usergroupname.Trim('@')]);
                         userGroupConfigurationData.Code = Convert.ToString(row[UserGroupConfigurationConstants.Code.Trim('@')]);
                         userGroupConfigurationData.Users = Convert.ToString(row[UserGroupConfigurationConstants.Users.Trim('@')]);
-                        userGroupConfigurationData.Totalusers = DatatypeConverter.SetIntValue(row[UserGroupConfigurationConstants.Totalusers.Trim('@')]);
+                        userGroupConfigurationData.Totalusers = Convert.ToString(row[UserGroupConfigurationConstants.Totalusers.Trim('@')]);
                         userGroupConfigurationData.CreatedBy = Convert.ToString(row[UserGroupConfigurationConstants.CreatedBy.Trim('@')]);
                         userGroupConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[UserGroupConfigurationConstants.CreatedDate.Trim('@')]);
                         userGroupConfigurationData.ModifiedBy = Convert.ToString(row[UserGroupConfigurationConstants.ModifiedBy.Trim('@')]);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DepartmentConfiguration, RequestContext, RoleConfiguration, UserConfiguration } from '../model/models';
 import { CommonService } from '../shared/common.service';
 import { RolesconfigurationService } from '../rolesconfiguration.service';
@@ -15,18 +15,46 @@ import { UsersconfigurationService } from '../usersconfiguration.service';
 })
 export class AddUserComponent implements OnInit {
   adduser = new UserConfiguration();
+  editMode: boolean = false;
+  viewMode: boolean = false;
+  objname: string;
   types: Array<DepartmentConfiguration>=[];
   roles: Array<RoleConfiguration>=[];
   isactivedirectory : boolean=false;
-  isstandarduser : boolean=false;
+  isstandarduser: boolean = false;
+  title: string = "Add User Configuration";
   constructor(private commonsvc: CommonService, private rolesservice: RolesconfigurationService,
     private deptservice: DepartmentconfigurationService,
     private userservice: UsersconfigurationService,
-    private router: Router,private toastr: ToastrService,private loader: SpinnerService) { }
+    private router: Router, private toastr: ToastrService, private loader: SpinnerService, private cdr: ChangeDetectorRef) { }
 
-    ngOnInit() {
+  ngOnInit() {
+    const urlPath = this.router.url;
+    const segments = urlPath.split('/');
+    const lastSegment = segments[segments.length - 1];
       this.getdepartments();
-      this.getroles();
+    this.getroles();
+    debugger
+      if (lastSegment == "viewdoctype") {
+        this.viewMode = true;
+        if (this.viewMode) {
+          debugger
+          this.objname = this.commonsvc.objname;
+          //this.getdocTypeByName(this.objname);
+          this.adduser = this.commonsvc.userConfig;
+          this.title = "View Document Type Configuration"
+        }
+        this.cdr.detectChanges();
+      }
+      else if (lastSegment == "adduser") {
+        this.editMode = this.commonsvc.userConfig != null ? true : false;
+        if (this.editMode) {
+          this.adduser = this.commonsvc.userConfig;
+          this.title = "Edit User Type Configuration"
+          this.cdr.detectChanges();
+        }
+      }
+
     }
     submit(adduser: UserConfiguration) {
       debugger

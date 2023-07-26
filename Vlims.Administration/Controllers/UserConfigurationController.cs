@@ -53,7 +53,7 @@ namespace PolicySummary.Controllers
         /// This method is used to Get UserConfiguration By Id uCFId
         /// </summary>
         /// <param name="uCFId"></param>
-        [HttpGet("{uCFId}")]
+        [HttpGet("GetUserConfigurationByUCFId")]
         public ActionResult<UserConfiguration> GetUserConfigurationByUCFId(string uCFId)
         {
             var result = userConfigurationService.GetUserConfigurationByUCFId(uCFId);
