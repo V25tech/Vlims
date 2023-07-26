@@ -24,7 +24,7 @@ namespace Vlims.Administration.DataAccess
     // Comment
     public static class UserGroupConfigurationConverter
     {
-        
+
         public static List<UserGroupConfiguration> SetAllUserGroupConfiguration(DataSet dataset)
         {
             try
@@ -46,6 +46,7 @@ namespace Vlims.Administration.DataAccess
                         userGroupConfigurationData.CreatedBy = Convert.ToString(row[UserGroupConfigurationConstants.CreatedBy.Trim('@')]);
                         userGroupConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[UserGroupConfigurationConstants.CreatedDate.Trim('@')]);
                         userGroupConfigurationData.ModifiedBy = Convert.ToString(row[UserGroupConfigurationConstants.ModifiedBy.Trim('@')]);
+                        //userGroupConfigurationData.Status = Convert.ToString(row[UserGroupConfigurationConstants.Status.Trim('@')]);
                         userGroupConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[UserGroupConfigurationConstants.ModifiedDate.Trim('@')]);
                         result.Add(userGroupConfigurationData);
                     }
@@ -57,7 +58,7 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         public static UserGroupConfiguration SetUserGroupConfiguration(DataSet dataset)
         {
             var result = SetAllUserGroupConfiguration(dataset);
@@ -67,7 +68,7 @@ namespace Vlims.Administration.DataAccess
             }
             return null;
         }
-        
+
         public static DataTable SetDataSet(List<UserGroupConfiguration> userGroupConfigurations)
         {
             DataTable dataTable = new DataTable();
@@ -100,7 +101,7 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         private static void SetDataTableColumns(DataTable dataTable)
         {
             dataTable.TableName = "UT_UserGroupConfiguration_PSY";

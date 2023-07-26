@@ -45,6 +45,7 @@ export class AddusergroupconfigurationComponent implements OnInit {
       if (this.editMode) {
         this.newdept = this.commonsvc.userGroupConfig;
         this.title = "Edit User Group Configuration"
+        console.log(this.newdept);
         this.cdr.detectChanges();
       }
     }
