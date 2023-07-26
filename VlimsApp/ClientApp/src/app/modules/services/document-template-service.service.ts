@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpbaseService } from 'src/app/shared/httpbase.service';
 
-import { DocumentTemplateConfiguration } from '../models/DocumentTemplateConfiguration';
-import { RequestContext } from 'src/app/models/model';
+
+import { DocumentTemplateConfiguration, RequestContext } from 'src/app/models/model';
 
 
 @Injectable({
@@ -23,5 +23,9 @@ getdoctemplatebyname(objname: string) {
 adddoctemplate(objrequest: DocumentTemplateConfiguration) {
   debugger
   return this.http.postJsonLogin(objrequest, "api/documenttemplateconfiguration/savedocumenttemplateconfiguration",this.type);
+}
+getbyId(id: number) {
+  debugger
+  return this.http.getwithheader("api/documenttemplateconfiguration/getbyId"+"?dTID="+id,this.type);
 }
 }

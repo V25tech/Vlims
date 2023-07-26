@@ -47,7 +47,17 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'templates/add',
+    path: 'templates/add/:count',
+    component: AddTemplateComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'templates/edit/:templateId',
+    component: AddTemplateComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'templates/view/:templateName',
     component: AddTemplateComponent,
     canActivate: [AuthGuard],
   },

@@ -9,7 +9,9 @@
 
 namespace Vlims.Controllers
 {
+    using System;
     using System.Collections.Generic;
+    using System.Xml.Serialization;
     using Microsoft.AspNetCore.Mvc;
     using Vlims.Common;
     using Vlims.DocumentMaster.Entities;
@@ -49,7 +51,7 @@ namespace Vlims.Controllers
         /// This method is used to Get DocumentTemplateConfiguration By Id dTID
         /// </summary>
         /// <param name="dTID"></param>
-        [HttpGet("{dTID}")]
+        [HttpGet("getbyId")]
         public ActionResult<DocumentTemplateConfiguration> GetDocumentTemplateConfigurationByDTID(int dTID)
         {
             var result = documentTemplateConfigurationService.GetDocumentTemplateConfigurationByDTID(dTID);
@@ -81,7 +83,24 @@ namespace Vlims.Controllers
         [HttpPost("savedocumenttemplateconfiguration")]
         public ActionResult<System.Boolean> SaveDocumentTemplateConfiguration(DocumentTemplateConfiguration documentTemplateConfiguration)
         {
+            var serializer = new XmlSerializer(typeof(DocumentTemplateConfiguration));
+            // Create a StringWriter to hold the XML data
+            var writer = new StringWriter();
+
+            // Serialize the Person object to XML and write it to the StringWriter
+            serializer.Serialize(writer, documentTemplateConfiguration);
+
+            // Get the XML string from the StringWriter
+            string xmlString = writer.ToString();
             var result = documentTemplateConfigurationService.SaveDocumentTemplateConfiguration(documentTemplateConfiguration);
+            // Create an XmlSerializer for the Person type
+            var serializer1 = new XmlSerializer(typeof(DocumentTemplateConfiguration));
+
+            // Create a StringReader to read the XML data
+            var reader = new StringReader(xmlString);
+
+            // Deserialize the XML data back to a Person object
+            var person = (DocumentTemplateConfiguration)serializer.Deserialize(reader);
             return result;
         }
         

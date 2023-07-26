@@ -125,6 +125,7 @@ export class DocumentTemplateConfiguration {
   Templatename: string=''
   Uniquecode: string=''
   documenttype: string=''
+  description:string=''
   header: string=''
   rows: string=''
   columns: string=''
@@ -132,10 +133,12 @@ export class DocumentTemplateConfiguration {
   footerrows: string=''
   footercolumns: string=''
   CreatedBy: string=''
-  CreatedDate: string | null='';
+  CreatedDate: string | null=null;
   ModifiedBy: string=''
-  ModifiedDate: string | null='';
+  ModifiedDate: string | null=null;
   Status: string | null='';
+  headerTable:HeaderTable[] | null=[];
+  footerTable:FooterTable[] | null=[];
 }
 export class DepartmentConfiguration {
   DPCFId: string=''
@@ -257,4 +260,12 @@ export class ApprovalManagament {
 export class FileResponse{
   public filePath:string=''
   public message:string=''
+}
+export class HeaderTable{
+  public selectedOption:number=0;
+  public inputValue:string='';
+}
+export class FooterTable{
+  public selectedOption:number=0;
+  public inputValue:string='';
 }

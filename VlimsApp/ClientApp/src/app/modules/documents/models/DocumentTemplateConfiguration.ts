@@ -1,3 +1,5 @@
+
+
 export class DocumentTemplateConfiguration {
     DTID: string='';
     DocumentMasterId: string='';
@@ -15,4 +17,5 @@ export class DocumentTemplateConfiguration {
     ModifiedBy: string='';
     ModifiedDate: string | null='';
     Status: string | null='';
+    //headerTable:HeaderTable | null=[];
   }

@@ -242,5 +242,18 @@ namespace Vlims.DocumentMaster.Entities
                 this.statusField = value;
             }
         }
+        public string description { get; set; }
+        public List<List<HeaderTable>> headerTable { get; set; }
+        public List<List<FooterTable>> footerTable { get; set; }
+    }
+    public class HeaderTable
+    {
+        public int selectedOption { get; set; }
+        public string inputValue { get; set; }
+    }
+    public class FooterTable
+    {
+        public int selectedOption { get; set; }
+        public string inputValue { get; set; }
     }
 }

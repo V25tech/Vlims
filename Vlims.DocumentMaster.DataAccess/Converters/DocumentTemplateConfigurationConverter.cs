@@ -15,12 +15,14 @@ namespace Vlims.DocumentMaster.DataAccess
     using System.Collections.Generic;
     using Vlims.Common;
     using Vlims.DocumentMaster.Entities;
+    using System.Data.SqlTypes;
+    using System.Xml.Serialization;
 
 
     // Comment
     public static class DocumentTemplateConfigurationConverter
     {
-        
+
         public static List<DocumentTemplateConfiguration> SetAllDocumentTemplateConfiguration(DataSet dataset)
         {
             try
@@ -38,12 +40,25 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.Templatename = Convert.ToString(row[DocumentTemplateConfigurationConstants.Templatename.Trim('@')]);
                         documentTemplateConfigurationData.Uniquecode = Convert.ToString(row[DocumentTemplateConfigurationConstants.Uniquecode.Trim('@')]);
                         documentTemplateConfigurationData.documenttype = Convert.ToString(row[DocumentTemplateConfigurationConstants.documenttype.Trim('@')]);
+                        documentTemplateConfigurationData.description = Convert.ToString(row[DocumentTemplateConfigurationConstants.description.Trim('@')]);
                         documentTemplateConfigurationData.header = Convert.ToString(row[DocumentTemplateConfigurationConstants.header.Trim('@')]);
                         documentTemplateConfigurationData.rows = Convert.ToString(row[DocumentTemplateConfigurationConstants.rows.Trim('@')]);
                         documentTemplateConfigurationData.columns = Convert.ToString(row[DocumentTemplateConfigurationConstants.columns.Trim('@')]);
                         documentTemplateConfigurationData.footer = Convert.ToString(row[DocumentTemplateConfigurationConstants.footer.Trim('@')]);
                         documentTemplateConfigurationData.footerrows = Convert.ToString(row[DocumentTemplateConfigurationConstants.footerrows.Trim('@')]);
                         documentTemplateConfigurationData.footercolumns = Convert.ToString(row[DocumentTemplateConfigurationConstants.footercolumns.Trim('@')]);
+                        string docvalue = Convert.ToString(row[DocumentTemplateConfigurationConstants.document.Trim('@')]);
+                        if (!string.IsNullOrEmpty(docvalue))
+                        {
+                            // Create an XmlSerializer for the Person type
+                            var serializer1 = new XmlSerializer(typeof(DocumentTemplateConfiguration));
+                            // Create a StringReader to read the XML data
+                            var reader = new StringReader(Convert.ToString(row[DocumentTemplateConfigurationConstants.document.Trim('@')]));
+                            // Deserialize the XML data back to a Person object
+                            var person = (DocumentTemplateConfiguration)serializer1.Deserialize(reader);
+                            documentTemplateConfigurationData.headerTable = person.headerTable;
+                            documentTemplateConfigurationData.footerTable = person.footerTable;
+                        }
                         documentTemplateConfigurationData.CreatedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.CreatedBy.Trim('@')]);
                         documentTemplateConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentTemplateConfigurationConstants.CreatedDate.Trim('@')]);
                         documentTemplateConfigurationData.ModifiedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.ModifiedBy.Trim('@')]);
@@ -59,7 +74,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
-        
+
         public static DocumentTemplateConfiguration SetDocumentTemplateConfiguration(DataSet dataset)
         {
             var result = SetAllDocumentTemplateConfiguration(dataset);

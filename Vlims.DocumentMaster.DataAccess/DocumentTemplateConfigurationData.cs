@@ -15,6 +15,9 @@ namespace Vlims.DocumentMaster.DataAccess
     using System.Collections.Generic;
     using Vlims.Common;
     using Vlims.DocumentMaster.Entities;
+    using System.Xml.Serialization;
+    using System.Runtime.Serialization;
+
     // Comment
     public  class DocumentTemplateConfigurationData 
     {
@@ -54,17 +57,28 @@ namespace Vlims.DocumentMaster.DataAccess
         {
             try
             {
+                var serializer = new XmlSerializer(typeof(DocumentTemplateConfiguration));
+                // Create a StringWriter to hold the XML data
+                var writer = new StringWriter();
+
+                // Serialize the Person object to XML and write it to the StringWriter
+                serializer.Serialize(writer, documentTemplateConfiguration);
+
+                // Get the XML string from the StringWriter
+                string xmlString = writer.ToString();
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.DocumentMasterId, Value = documentTemplateConfiguration.DocumentMasterId });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Templatename, Value = documentTemplateConfiguration.Templatename });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Uniquecode, Value = documentTemplateConfiguration.Uniquecode });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.documenttype, Value = documentTemplateConfiguration.documenttype });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.description, Value = documentTemplateConfiguration.description });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.header, Value = documentTemplateConfiguration.header });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.rows, Value = documentTemplateConfiguration.rows });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.columns, Value = documentTemplateConfiguration.columns });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footer, Value = documentTemplateConfiguration.footer });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footerrows, Value = documentTemplateConfiguration.footerrows });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footercolumns, Value = documentTemplateConfiguration.footercolumns });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = DocumentTemplateConfigurationConstants.document, Value =xmlString  });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.CreatedBy, Value = documentTemplateConfiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.ModifiedBy, Value = documentTemplateConfiguration.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Status, Value = documentTemplateConfiguration.Status });
@@ -81,18 +95,29 @@ namespace Vlims.DocumentMaster.DataAccess
         {
             try
             {
+                var serializer = new XmlSerializer(typeof(DocumentTemplateConfiguration));
+                // Create a StringWriter to hold the XML data
+                var writer = new StringWriter();
+
+                // Serialize the Person object to XML and write it to the StringWriter
+                serializer.Serialize(writer, documentTemplateConfiguration);
+
+                // Get the XML string from the StringWriter
+                string xmlString = writer.ToString();
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.DTID, Value = documentTemplateConfiguration.DTID });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.DocumentMasterId, Value = documentTemplateConfiguration.DocumentMasterId });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Templatename, Value = documentTemplateConfiguration.Templatename });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Uniquecode, Value = documentTemplateConfiguration.Uniquecode });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.documenttype, Value = documentTemplateConfiguration.documenttype });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.description, Value = documentTemplateConfiguration.description });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.header, Value = documentTemplateConfiguration.header });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.rows, Value = documentTemplateConfiguration.rows });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.columns, Value = documentTemplateConfiguration.columns });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footer, Value = documentTemplateConfiguration.footer });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footerrows, Value = documentTemplateConfiguration.footerrows });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.footercolumns, Value = documentTemplateConfiguration.footercolumns });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = DocumentTemplateConfigurationConstants.document, Value = xmlString });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.ModifiedBy, Value = documentTemplateConfiguration.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Status, Value = documentTemplateConfiguration.Status });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);

@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TemplateForm} from '../../models/templates';
+import { DocumentTemplateConfiguration } from '../../models/DocumentTemplateConfiguration';
+import { RequestContext } from 'src/app/models/model';
+import { CommonService } from 'src/app/shared/common.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 
 @Component({
   selector: 'app-templates',
@@ -10,14 +15,36 @@ import { TemplateForm} from '../../models/templates';
 })
 export class TemplatesComponent {
   templatesDatasource: TemplateForm[] = [];
-  constructor(private router:Router) {}
+  types:DocumentTemplateConfiguration[]=[];
+  constructor(private router:Router,private templatesvc: DocumentTemplateServiceService,
+    private spinner: NgxSpinnerService,
+    private commonsvc: CommonService) {}
 
   ngOnInit() {
-    
+    this.getdocumenttypeconfig();
   }
-
+  getdocumenttypeconfig() {
+    this.spinner.show();
+   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+      return this.templatesvc.getdocttemplate(objrequest).subscribe((data: any) => {
+        debugger
+        this.types = data.Response;
+        this.commonsvc.templateCount=this.types.length;
+        this.spinner.hide();
+        console.log(this.types);
+      }, (error:any) => {
+       
+      });
+  }
+  editdoc(editband: DocumentTemplateConfiguration) {
+    debugger
+    this.commonsvc.template=editband;
+    //this.router.navigate(['/templates/view',editband.Templatename]);
+    this.router.navigate(['/templates/edit',editband.DTID]);
+  }
   navigateToAddTemplate(): void {
-    this.router.navigate(['/templates/add']);
+    const count = this.types.length;
+    this.router.navigate(['/templates/add', count]);
   }
 
   filterTable(event:any) {
@@ -35,6 +62,8 @@ export class TemplatesComponent {
       return 'status-completed';
     } else if (status === 'Under Review') {
       return 'status-under-review';
+    }else if (status === 'Pending') {
+      return 'status-in-progress'; 
     } else {
       return '';
     }

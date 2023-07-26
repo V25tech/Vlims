@@ -16,19 +16,19 @@
     <div class="row p-2">
         <div class="col">
             <div class="p-4 bg-white shadow-dark rounded-2">
-            <p-table #templatesTable [value]="templatesDatasource"
+            <p-table #templatesTable [value]="types"
             [globalFilterFields]="['templateName', 'uniqueCode', 'description','registeredBy', 'status']"
              tableStyleClass="table table-striped">
              
                 <ng-template pTemplate="header">
                     <tr>
                         <th>#</th>
-                        <th pSortableColumn="templateName" style="width:20%">Template Name<p-sortIcon field="templateName"></p-sortIcon></th>
-                        <th pSortableColumn="uniqueCode" style="width:10%">Unique Code <p-sortIcon field="uniqueCode"></p-sortIcon></th>
+                        <th pSortableColumn="Templatename" style="width:20%">Template Name<p-sortIcon field="Templatename"></p-sortIcon></th>
+                        <th pSortableColumn="Uniquecode" style="width:10%">Unique Code <p-sortIcon field="Uniquecode"></p-sortIcon></th>
                         <th pSortableColumn="description" style="width:15%">Description<p-sortIcon field="description"></p-sortIcon></th>
-                        <th pSortableColumn="registeredBy" style="width:20%">Registered by<p-sortIcon field="registeredBy"></p-sortIcon></th>
-                        <th pSortableColumn="registeredOn" style="width:200px">Registered On <p-sortIcon field="registeredOn"></p-sortIcon></th>
-                        <th pSortableColumn="status" style="width:200px">Status <p-sortIcon field="status"></p-sortIcon></th>
+                        <th pSortableColumn="CreatedBy" style="width:20%">Registered by<p-sortIcon field="CreatedBy"></p-sortIcon></th>
+                        <th pSortableColumn="CreatedBy" style="width:200px">Registered On <p-sortIcon field="CreatedBy"></p-sortIcon></th>
+                        <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
                         <th style="width:80px">Actions</th>
 
                     </tr>
@@ -36,13 +36,13 @@
                 <ng-template pTemplate="body" let-template let-i="rowIndex">
                     <tr>  
                         <td>{{ i + 1 }}</td>  
-                        <td>{{template.templateName}}</td>
-                        <td>{{template.uniqueCode}}</td>
-                        <td>{{template.description}}</td>
-                        <td>{{template.registeredBy}}</td>
-                        <td>{{template.registeredOn}}</td>
-                        <td><span class="status" [ngClass]="getStatusClass(template['status'])">{{template.status}} </span></td>
-                        <td class="text-center"><i class="bi bi-pencil"></i></td>
+                        <td>{{template?.Templatename}}</td>
+                        <td>{{template?.Uniquecode}}</td>
+                        <td>{{template?.Templatename}}</td>
+                        <td>{{template?.CreatedBy}}</td>
+                        <td>{{template?.CreatedBy}}</td>
+                        <td><span class="status" [ngClass]="getStatusClass(template['Status'])">{{template?.Status}} </span></td>
+                        <td class="text-center" (click)="editdoc(template)"><i class="bi bi-pencil"></i></td>
                     </tr>
                 </ng-template>
             </p-table>

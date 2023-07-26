@@ -54,7 +54,7 @@ namespace Vlims.DocumentMaster.Manager
             try
             {
                 documentTemplateConfiguration.Status = "In-Progress";
-                if (documentTemplateConfiguration!=null && documentTemplateConfiguration.DocumentMasterId==null)
+                if (documentTemplateConfiguration!=null && string.IsNullOrEmpty(documentTemplateConfiguration.DocumentMasterId))
                 {
                     documentTemplateConfiguration.DocumentMasterId = "1";
                     documentTemplateConfiguration.header = "header";

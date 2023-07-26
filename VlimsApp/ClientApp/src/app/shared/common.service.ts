@@ -10,6 +10,8 @@ import { DocumentTemplateConfiguration } from '../modules/documents/models/Docum
 })
 export class CommonService {
   documentType=new DocumentTypeConfiguration();
+  template=new DocumentTemplateConfiguration();
+  templateCount:number=0;
   //private retailer = new BehaviorSubject<Retailer>(null);
   //retaileR = this.retailer.asObservable();
   createdBy = 'admin';

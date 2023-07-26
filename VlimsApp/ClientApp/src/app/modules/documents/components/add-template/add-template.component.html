@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-      <h4 class="page-title">New Document Template</h4>
+      <h4 class="page-title">{{title}}</h4>
     </div>
   </div>
   <div class="row p-2">
@@ -16,10 +16,10 @@
             <input
               type="text"
               class="form-control mw-350"
-              id="templateName"
-              name="templateName"
+              id="Templatename"
+              name="Templatename"
               placeholder="Template Name"
-              [(ngModel)]="templateForm.templateName"
+              [(ngModel)]="templateForm.Templatename"
             />
           </div>
         </div>
@@ -34,7 +34,7 @@
               id="prefix"
               name="prefix"
               placeholder="Prefix"
-              [(ngModel)]="templateForm.uniqueCode"
+              [(ngModel)]="templateForm.Uniquecode"
               readonly
             />
           </div>
@@ -44,14 +44,16 @@
             >Document Type</label
           >
           <div class="col-sm-10">
-            <input
+            <p-dropdown [options]="typesDatasource" [(ngModel)]="selectedtype" placeholder="Select a Department" 
+            optionLabel="Documenttypename" ></p-dropdown>
+            <!-- <input
               type="text"
               class="form-control mw-350"
               id="docType"
               name="docType"
               placeholder="Document Type"
-              [(ngModel)]="templateForm.docType"
-            />
+              [(ngModel)]="templateForm.documenttype"
+            /> -->
           </div>
         </div>
         <div class="form-group row">
@@ -202,7 +204,7 @@
           >
             Cancel
           </button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="addTemplate()">Submit</button>
         </div>
       </div>
 

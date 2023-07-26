@@ -25,6 +25,7 @@ namespace Vlims.DocumentMaster.Entities
         public const string Uniquecode = "@Uniquecode_PSY";
         
         public const string documenttype = "@documenttype_PSY";
+        public const string description = "@description_PSY";
         
         public const string header = "@header_PSY";
         
@@ -36,6 +37,7 @@ namespace Vlims.DocumentMaster.Entities
 
         public const string footerrows = "@footer_rows_PSY";
         public const string footercolumns = "@footer_columns_PSY";
+        public const string document = "@document_PSY";
 
         public const string CreatedBy = "@CreatedBy_PSY";
         
