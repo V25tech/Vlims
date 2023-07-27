@@ -21,6 +21,7 @@ export class AddDocumentTypeComponent {
   departments:DepartmentConfiguration[]=[];
   selectedDepartments:DepartmentConfiguration[] = [];
   viewMode:boolean=false;editMode:boolean=false;
+  typeId:number=0;
   constructor(
     private location: Location,
     private deptservice: DepartmentconfigurationService,
@@ -38,11 +39,14 @@ export class AddDocumentTypeComponent {
   {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    const lastSegment = segments[segments.length - 1];
+    const lastSegment = segments[segments.length - 2];
     if(lastSegment=="edit")
     {
+      let id=parseInt(segments[segments.length-1],10);
+      this.typeId=id;
       this.editMode=true;this.viewMode=false;
-      this.documentType=this.commonsvc.documentType;
+      this.getbyId();
+      //this.documentType=this.commonsvc.documentType;
     }
     else if(lastSegment=="view") {
       this.viewMode=true;this.editMode=false;
@@ -54,7 +58,15 @@ export class AddDocumentTypeComponent {
   onCancel() {
     this.location.back();
   }
+  getbyId()
+  {
+    debugger
+    this.doctypeservice.getbyId(this.typeId).subscribe((data:any)=>{
+      this.documentType=data;
+    },((error:any)=>{
 
+    }));
+  }
   getdepartments() {
     //this.loader.show();
     this.spinner.show();
@@ -81,6 +93,13 @@ export class AddDocumentTypeComponent {
   }
   adddoctype(documentType: DocumentTypeConfiguration) {
     debugger
+    if(this.editMode)
+    {
+      this.updatetype(documentType);
+    }
+    else{
+      this.inserttype(documentType);
+    }
     documentType.CreatedBy="admin";
     documentType.ModifiedBy = "admin";
     documentType.DTCId="1";
@@ -97,10 +116,12 @@ export class AddDocumentTypeComponent {
       this.location.back();
     });
   }
-  else
-  {
+  }
+  inserttype(documentType: DocumentTypeConfiguration){
 
   }
+  updatetype(documentType: DocumentTypeConfiguration){
+
   }
 
 }
