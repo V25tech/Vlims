@@ -2572,6 +2572,7 @@ export class PlantConfiguration {
   CreatedBy: string;
   CreatedDate: string | null;
   ModifiedBy: string;
+  Status: string;
   ModifiedDate: string | null;
 }
 export class SecurityManagement {
@@ -2633,4 +2634,28 @@ export class ApprovalManagament {
 export class FileResponse{
   public filePath:string;
   public message:string;
+}
+export class DocumentPrint {
+  DTCId: string;
+  DocumentMasterId: string;
+  documenttype: string;
+  department: string;
+  Description: string;
+  Approvedby: string;
+  ApprovedOn: string;
+  CreatedBy: string;
+  CreatedDate: string | null;
+  ModifiedBy: string;
+  ModifiedDate: string | null;
+  Status: string;
+  Purpose: string;
+  ApprovalsCount: number;
+}
+export class PrintRequest {
+
+  public DocumentType: string;
+  public DocumentName: string;
+  public DocumentNumber: string;
+  public comments: string;
+  public NoOfPrints: string;
 }

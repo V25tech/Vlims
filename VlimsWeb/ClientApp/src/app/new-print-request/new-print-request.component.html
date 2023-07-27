@@ -1,0 +1,69 @@
+<body>
+
+    <div class="card shadow mb-4" style="padding-top: 2px;">
+   <div class="card-header py-3">
+       <div col-12 style="float: left;">
+           <h6 class="m-0 font-weight-bold text-primary">New Print Request</h6>
+       </div>
+
+   </div>
+   <div class="card-body">
+       <form (ngSubmit)="submit(adddoc)" #fm="ngForm">
+           <div class="modal-body">
+               
+               <div class="form-group row">
+
+                   <label for="BrandName" class="col-sm-4 col-form-label">Document Type</label>
+                   <div class="col-sm-8">
+                        <select>
+                             <option >1</option>
+                             <option >2</option>
+                             <option >3</option>
+                             <option >4</option>
+                             <option >5</option>
+                         </select>
+                   </div>
+               </div>
+           
+               <div class="form-group row">
+
+                   <label for="BrandName" class="col-sm-4 col-form-label">Document Name</label>
+                   <div class="col-sm-8">
+                       <input type="text" class="form-control" id="BrandName" [(ngModel)]="adddoc.plantname" pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter Document Name" #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+                   </div>
+               </div>
+
+           </div>
+           <div class="form-group row">
+
+               <label for="BrandName" class="col-sm-4 col-form-label">Document No</label>
+
+               <div class="col-sm-8">
+                   <input type="text" class="form-control" id="BrandName" [(ngModel)]="adddoc.plantcode" pattern='[A-Za-z\\s]*' name="BrandName" aria-describedby="productname" placeholder="Enter Documnet No" #BrandName="ngModel" [ngClass]="{ 'is-invalid': fm.submitted && BrandName.invalid }" required />
+               </div>
+           </div>
+           
+          <div class="form-group row">
+
+                   <label for="BrandName" class="col-sm-4 col-form-label">No Of Prints</label>
+                   <div class="col-sm-8">
+                        <select>
+                             <option >1</option>
+                             <option >2</option>
+                             <option >3</option>
+                             <option >4</option>
+                             <option >5</option>
+                         </select>
+                   </div>
+               </div>
+           
+           <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" (click)="closepopup();">Submit</button>
+               <button type="submit" class="btn btn-primary">Cancel</button>
+           </div>
+       </form>
+   </div>
+</div>  
+ 
+
+</body>

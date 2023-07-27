@@ -1,0 +1,60 @@
+
+<div class="card shadow mb-4" style="padding-top: 2px;">
+    <div class="card-header py-3">
+      <div col-6 style="float: left;">
+        <h6 class="m-0 font-weight-bold text-primary">Document Print Request</h6>
+      </div>
+      <div col-6 style="float: right;">
+        <button class="btn btn-primary" type="button" [routerLink]="['/mainpage/documentprint/adddocrequest']">
+          Add
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+  
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="requests?.length>   0">
+  
+          <thead>
+            <tr>
+              <th scope="col">Request Code</th>
+              <th scope="col">Document Type</th>
+              <th scope="col">Document Name</th>
+              <th scope="col">Document Number</th>
+              
+              <th scope="col">Printed On</th>
+              <th scope="col">Printed By</th>
+              <th scope="col">Print Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doc of requests; let i=index">
+              <th>{{i+1}}</th>
+              <td>{{doc?.requestcode}}</td>
+              <td>{{doc?.documenttype}}</td>
+              <td>{{doc?.documentname}}</td>
+        
+            <td> {{doc?.documnetnumber}} </td>
+            <td> {{doc?.printedon}} </td>
+            <td> {{doc?.printedby}} </td>
+            <td> {{doc?.printcount}} </td>
+              <td>
+                <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTCId"
+                        data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);">
+                  <span class="fa fa-edit"></span>
+                </button>
+                <!-- <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button> -->
+              </td>
+            </tr>
+          </tbody>
+  
+        </table>
+  
+      </div>
+  
+      <div *ngIf="requests?.length==0">
+        <p>No items to display</p>
+      </div>
+    </div>
+  </div>
+  

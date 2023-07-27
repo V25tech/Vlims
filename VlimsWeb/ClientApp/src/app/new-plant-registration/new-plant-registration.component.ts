@@ -22,7 +22,7 @@ export class NewPlantRegistrationComponent implements OnInit {
   }
 
   submit(adddoc: PlantConfiguration) {
-
+    adddoc.Status = 'In Progress';
     this.doctypeservice.addNewRegistrationconfiguration(adddoc).subscribe((res: any) => {
       this.toastr.success('Added');
       this.router.navigate(['/mainpage/plant']);
