@@ -48,7 +48,7 @@ export class DocumentTypesComponent {
   editdoc(editband: DocumentTypeConfiguration) {
     debugger
     this.commonsvc.documentType=editband;
-    this.router.navigate(['/document-type/edit']);
+    this.router.navigate(['/document-type/edit',editband.DTCId]);
   }
   getStatusClass(status: string): string {
     debugger

@@ -50,7 +50,7 @@ namespace Vlims.Controllers
         /// This method is used to Get DocumentTypeConfiguration By Id dTCId
         /// </summary>
         /// <param name="dTCId"></param>
-        [HttpGet("{dTCId}")]
+        [HttpGet("getbyId")]
         public ActionResult<DocumentTypeConfiguration> GetDocumentTypeConfigurationByDTCId(int dTCId)
         {
             var result = documentTypeConfigurationService.GetDocumentTypeConfigurationByDTCId(dTCId);

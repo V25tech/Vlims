@@ -13,6 +13,7 @@ using LeftBorder = DocumentFormat.OpenXml.Wordprocessing.LeftBorder;
 using RightBorder = DocumentFormat.OpenXml.Wordprocessing.RightBorder;
 using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
 using Aspose.Words;
+using System.Data;
 
 internal class HeaderFooter
 {
@@ -218,7 +219,7 @@ internal class HeaderFooter
     /// <returns></returns>
 
 
-    public static string PrepareHtmlTable(int p_rows, int p_columns, DocumentPreparation documentPreparation)
+    public static string PrepareHtmlTable(int p_rows, int p_columns, DataTable dt_table = null)
     {
         string table = string.Empty;
         StringBuilder tableHtml = new StringBuilder();
@@ -229,9 +230,21 @@ internal class HeaderFooter
         List<string> data = new List<string>();
         int rows = p_rows;
         int columns = p_columns;
-        for (int i = 0; i < columns; i++)
+
+        if (dt_table != null)
         {
-            headers.Add("Column" + i);
+            foreach (DataColumn column in dt_table.Columns)
+            {
+                headers.Add(column.ColumnName);
+                //Console.WriteLine(column.ColumnName);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < columns; i++)
+            {
+                headers.Add("Column" + i);
+            }
         }
         foreach (string header in headers)
         {
@@ -240,16 +253,29 @@ internal class HeaderFooter
         tableHtml.Append("</tr>");
 
         // Generate table rows
-
-
-        for (int i = 0; i < rows; i++)
+        if (dt_table != null)
         {
-            tableHtml.Append("<tr>");
-            for (int j = 0; j < columns; j++)
+            foreach (DataRow item in dt_table.Rows)
             {
-                tableHtml.Append("<td>").Append("Row" + 1 + "-" + "column" + j).Append("</td>");
+                tableHtml.Append("<tr>");
+                foreach (string head in headers)
+                {
+                    tableHtml.Append("<td>").Append(item[head].ToString()).Append("</td>");
+                }
+                tableHtml.Append("</tr>");
             }
-            tableHtml.Append("</tr>");
+        }
+        else
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                tableHtml.Append("<tr>");
+                for (int j = 0; j < columns; j++)
+                {
+                    tableHtml.Append("<td>").Append("Row" + 1 + "-" + "column" + j).Append("</td>");
+                }
+                tableHtml.Append("</tr>");
+            }
         }
         //tableHtml.Append("</tr>");
 
@@ -268,7 +294,7 @@ internal class HeaderFooter
     {
         return element?.InnerText ?? string.Empty;
     }
-   
+
     public static void generatePDF(string inputFilePath, string outputFilePath)
     {
         // Load the input DOCX document using Aspose.Words

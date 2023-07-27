@@ -21,6 +21,8 @@ namespace PolicySummary.Controllers
     using Vlims.DocumentMaster.Entities;
     using Vlims.DocumentMaster.DataAccess;
     using DocumentFormat.OpenXml.Wordprocessing;
+    using System.Collections;
+
     //using Microsoft.Office.Interop.Word;
 
 
@@ -95,9 +97,16 @@ namespace PolicySummary.Controllers
                 var template = result.FirstOrDefault(o => o.Templatename.Equals(documentPreparation.template, StringComparison.InvariantCultureIgnoreCase));
                 if (template != null)
                 {
-                    string headertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), documentPreparation);
-                    string footertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), documentPreparation);
-                    HeaderFooter.getData(headertable, footertable,documentPreparation.path);
+                    DataTable hTable = null;
+                    DataTable fTable = null;
+                    if (template.headerTable != null && template.footerTable != null)
+                    {
+                        hTable = PrepareDataTable(template);
+                        fTable = PrepareDataTable1(template);
+                    }
+                    string headertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), hTable);
+                    string footertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), fTable);
+                    HeaderFooter.getData(headertable, footertable, documentPreparation.path);
 
                     // Generate the output file path dynamically
                     string outputFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); // Set the folder where you want to save the converted PDFs
@@ -112,6 +121,77 @@ namespace PolicySummary.Controllers
             }
             return Ok(pdfBytes); //result;
         }
+
+        private DataTable PrepareDataTable1(DocumentTemplateConfiguration template)
+        {
+            DataTable table = new DataTable();
+            template.footerTable[0].ForEach(o =>
+            {
+                table.Columns.Add(new DataColumn(o.inputValue));
+            });
+            List<string> col = new List<string>();
+            foreach (DataColumn column in table.Columns)
+            {
+                col.Add(column.ColumnName);
+            }
+            for (int i = 1; i < template.footerTable.Count; i++)
+            {
+                var obj = template.footerTable[i];
+
+                // Create a new row for each item in the headerTable
+                foreach (var item in obj)
+                {
+                    DataRow newRow = table.NewRow();
+
+                    // Populate the columns in the new row
+                    foreach (string columnName in col)
+                    {
+                        newRow[columnName] = item.inputValue;
+                    }
+
+                    // Add the new row to the DataTable
+                    table.Rows.Add(newRow);
+                }
+            }
+            return table;
+        }
+
+        private DataTable PrepareDataTable(DocumentTemplateConfiguration template)
+        {
+
+            DataTable table = new DataTable();
+            template.headerTable[0].ForEach(o =>
+            {
+                table.Columns.Add(new DataColumn(o.inputValue));
+            });
+            List<string> col = new List<string>();
+            foreach (DataColumn column in table.Columns)
+            {
+                col.Add(column.ColumnName);
+            }
+            for (int i = 1; i < template.headerTable.Count; i++)
+            {
+                var obj = template.headerTable[i];
+
+                // Create a new row for each item in the headerTable
+                foreach (var item in obj)
+                {
+                    DataRow newRow = table.NewRow();
+
+                    // Populate the columns in the new row
+                    foreach (string columnName in col)
+                    {
+                        newRow[columnName] = item.inputValue;
+                    }
+
+                    // Add the new row to the DataTable
+                    table.Rows.Add(newRow);
+                }
+            }
+            return table;
+        }
+
+
 
         private void PrepareFooterTable(DocumentTemplateConfiguration template, DocumentPreparation documentPreparation)
         {

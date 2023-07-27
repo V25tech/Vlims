@@ -32,12 +32,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'document-type/edit',
+    path: 'document-type/edit/:typeId',
     component: AddDocumentTypeComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'document-type/view',
+    path: 'document-type/view/:typeName',
     component: AddDocumentTypeComponent,
     canActivate: [AuthGuard],
   },

@@ -23,6 +23,10 @@ getdoctypeconfigbyname(objname: string) {
   debugger
   return this.http.getwithheader("api/documenttypeconfiguration/getbyName"+"?name="+objname,this.type);
 }
+getbyId(objname: number) {
+  debugger
+  return this.http.getwithheader("api/documenttypeconfiguration/getbyId"+"?dTCId="+objname,this.type);
+}
 adddoctypeconfig(objrequest: DocumentTypeConfiguration) {
   debugger
   return this.http.postJsonLogin(objrequest, "api/documenttypeconfiguration/savedocumenttypeconfiguration",this.type);
