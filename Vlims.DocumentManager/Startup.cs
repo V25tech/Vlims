@@ -8,9 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using PolicySummary.Sheet1.Services;
-//using Serilog;
-using Vlims.Administration.Manager;
+using Vlims.DocumentManager.Manager;
 
 public class Startup
 {
@@ -32,11 +30,12 @@ public class Startup
             SWGenOptions.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "v1",
-                Title = "Admin API",
-                Description = "API Used to Get or Set Information related to Admin Module In Dlims",
+                Title = "Document Manager API",
+                Description = "API Used to Get or Set Information related to Document Manager Module In Dlims",
+
             });
         });
-        AddAdminDependencies(services);
+        AddManagerDependencies(services);
         //services.AddApplicationInsights(Configuration);
         //services.AddApplicationInsightsTelemetry();
     }
@@ -50,24 +49,19 @@ public class Startup
     /// MODIFY COMMENTS
     /// </summary>
     /// <param name="services"></param>
-    private void AddAdminDependencies(IServiceCollection services)
+    private void AddManagerDependencies(IServiceCollection Services)
     {
-        //confiuguration settings
-        //services.AddConfiguration(Configuration);
-        //METHOD TO READ AND BUILD APPLICATION CONFIGURATION
-        //appmgr.BuildIFSettings(services);
-        //services.AddScoped<IRolesDao,RolesDao>();
-        services.AddScoped<IDepartmentConfigurationService, DepartmentConfigurationService>();
-        services.AddScoped<IRoleConfigurationService, RoleConfigurationService>();
-        services.AddScoped<IUserConfigurationService, UserConfigurationService>();
-        services.AddScoped<IworkitemsService, workitemsService>();
-        services.AddScoped<ISecurityManagementService, SecurityManagementService>();
-        services.AddScoped<IUserGroupConfigurationService, UserGroupConfigurationService>();
-        services.AddScoped<IPlantManagementService, PlantManagementService>();
-
+        //Services.AddControllers();
+        Services.AddScoped<IDocumentManagerService, DocumentManagerService>();
+        Services.AddScoped<IAdditionalTaskService, AdditionalTaskService>();
+        Services.AddScoped<IDocumentEffectiveService, DocumentEffectiveService>();
+        Services.AddScoped<IDocumentPreparationService, DocumentPreparationService>();
+        Services.AddScoped<IDocumentrequestService, DocumentrequestService>();
+        //Services.AddEndpointsApiExplorer();
+        //Services.AddSwaggerGen();
     }
 
-    
+
     public void configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory)
     {
         if (env.IsDevelopment())
@@ -77,7 +71,7 @@ public class Startup
         app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
-            c.SwaggerEndpoint("../swagger/v1/swagger.json", "Admin API V1");
+            c.SwaggerEndpoint("../swagger/v1/swagger.json", "Document Manager API V1");
         });
         app.UseCors(x =>
         {
