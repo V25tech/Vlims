@@ -1,0 +1,56 @@
+
+<div class="card shadow mb-4" style="padding-top: 2px;">
+    <div class="card-header py-3">
+        <div col-6 style="float: left;">
+        <h6 class="m-0 font-weight-bold text-primary">Role Configuration</h6>
+    </div>
+    <div col-6 style="float: right;">
+        <button class="btn btn-primary"  type="button" [routerLink]="['/mainpage/hierarchy/addrole']"
+      >Add</button>
+    </div>
+    </div>
+<div class="card-body">
+   
+  <div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="types.length>0" >
+       
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">Role Name</th>
+          <th scope="col">Department</th>
+          <th scope="col">Comments</th>
+          <th scope="col">Registered By</th>
+          <th scope="col">Registered On</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of types; let i=index">
+          <th>{{i+1}}</th>
+          <td>{{doc?.Role}}</td>
+          <td>{{doc?.Department}}</td>
+          <td>{{doc?.Comments}}</td>
+          <td>{{doc?.ModifiedBy}}</td>
+          <td>{{doc?.ModifiedDate  | date}}</td>
+          <td>Success</td>
+          <td>
+            <button class="btn" data-toggle="modal" data-target="#exampleModal" 
+            
+              data-backdrop="static" data-keyboard="false" > <span
+                class="fa fa-edit"></span> </button>
+            <!--(click)="editBrand(doc);" <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button> -->
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  
+  </div>
+ 
+  <div *ngIf="types?.length==0">
+    <p>No items to display</p>
+  </div>
+</div>
+</div>

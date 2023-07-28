@@ -8,13 +8,13 @@ const routes: Routes = [
   { path: '', component: AuthenticationModule },
   { path: 'documents', component: DocumentsRoutingModule },
   { path: 'manager', component: ManagerRoutingModule },
-  { path: 'admin', component: AuthenticationModule },
+  { path: 'admin-home', component: AuthenticationModule },
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    //AuthenticationModule,
+    AuthenticationModule,
     DocumentsRoutingModule,
     ManagerRoutingModule
   ],

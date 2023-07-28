@@ -1,0 +1,63 @@
+
+<div class="card shadow mb-4" style="padding-top: 2px;">
+    <div class="card-header py-3">
+        <div col-6 style="float: left;">
+        <h6 class="m-0 font-weight-bold text-primary">Department Configuration</h6>
+    </div>
+    <div col-6 style="float: right;">
+        <button class="btn btn-primary"  type="button" [routerLink]="['/mainpage/hierarchy/adddept']"
+      >Add</button>
+    </div>
+    </div>
+<div class="card-body">
+   
+  <div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="types?.length>   0" >
+       
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">SecurityManagement</th>
+          <th scope="col">SecurityConfiguration</th>
+          <th scope="col">E sign and Approval Configuration</th>
+          <th scope="col">HirearchyManagement</th>
+          <th scope="col">Role Configuration</th>
+          <th scope="col">DepartmentConfiguration</th>
+          <th scope="col">SetFunctionalProfile</th>
+          <th scope="col">PlantManagement</th>
+          <th scope="col">UserManagement</th>
+          <th scope="col">UserConfiguration</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of types; let i=index">
+          <th>{{i+1}}</th>
+          <td>{{doc?.sno}}</td>
+          <td>{{doc?.SecurityManagement }}</td>
+          <td>{{doc?.SecurityConfiguration}}</td>
+          <td>{{doc?.E sign and Approval Configuration}}</td>
+          <td>{{doc?.HirearchyManagement}}</td>
+          <td>{{doc?.Role Configuration }}</td>
+          <td>{{doc?.DepartmentConfiguration}}</td>
+          <td>{{doc?.UserConfiguration}}</td>
+          <td>Success</td>
+          <td>
+            <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTID"
+                    data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);">
+              <span class="fa fa-edit"></span>
+            </button>
+            <!-- <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button> -->
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  
+  </div>
+ 
+  <div *ngIf="types?.length==0">
+    <p>No items to display</p>
+  </div>
+</div>
+</div>

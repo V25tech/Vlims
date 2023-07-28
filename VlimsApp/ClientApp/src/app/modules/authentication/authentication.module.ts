@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AuthenticationRoutingModule } from './authentication-routing.module';
@@ -13,19 +13,23 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { NgxSpinnerModule } from 'ngx-spinner';
-//import { AddDepartmentComponent } from './components/Department/add-department.component';
+import { RolesComponent } from './components/Roles/roles.component';
+import { AdminHomeComponent } from './components/Admin-Home/Admin-home.component';
+import { AppintializorService, serverConfigInitializerFactory } from 'src/app/shared/appintializor.service';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
+    AdminHomeComponent,
     //AddDepartmentComponent,
     //ApprovalConfigurationsComponent,
     // AddRolesComponent,
     // NewPlantRegistrationComponent,
     //PlantComponent,
-    // RolesComponent,
+    RolesComponent
 
 
   ],
@@ -43,6 +47,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ToastModule,
     NgxSpinnerModule
 
-  ]
+  ],
+  providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true },MessageService]
 })
-export class AuthenticationModule { }
+export class AuthenticationModule { 
+ 
+
+}

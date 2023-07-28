@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-document-master-home',
-  templateUrl: './document-master-home.component.html',
-  styleUrls: ['./document-master-home.component.scss'],
+  selector: 'app-admin-home',
+  templateUrl: './admin-home.component.html',
+  styleUrls: ['./admin-home.component.scss'],
 })
-export class DocumentMasterHomeComponent {
+export class AdminHomeComponent {
   constructor(private router: Router) {}
 
   navigateTo(navTo: any) {
-    if (navTo === 'document-Security') {
-      this.router.navigate(['/securitymanagement']);
+    if (navTo === 'securitymgmt') {
+      this.router.navigate(['/securitymgmt']);
     } else if (navTo === 'Hierarchy') {
       this.router.navigate(['/templates']);
     } else if (navTo === 'Plant') {

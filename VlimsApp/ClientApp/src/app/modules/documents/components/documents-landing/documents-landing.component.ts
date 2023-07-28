@@ -23,7 +23,7 @@ export class DocumentsLandingComponent {
     } else if (navTo === 'document-manager') {
       this.router.navigate(['/document-manager']);
     } else if (navTo === 'admin') {
-      this.router.navigate(['/document-manager']);
+      this.router.navigate(['/admin-home']);
     }
 
   }
