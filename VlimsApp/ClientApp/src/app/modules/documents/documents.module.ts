@@ -48,6 +48,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ToastModule,
     NgxSpinnerModule
   ],
-  providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true },MessageService] 
+  providers: [] 
 })
 export class DocumentsModule { }

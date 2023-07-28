@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { Workflow } from '../../models/workflows';
 import { Router } from '@angular/router';
-import { DepartmentConfiguration, DocumentTypeConfiguration, RequestContext, UserConfiguration, workflowconiguration } from 'src/app/models/model';
+import { DepartmentConfiguration, DocumentTypeConfiguration, RequestContext, UserConfiguration, Usergroupconfiguration, workflowconiguration } from 'src/app/models/model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { UsersconfigurationService } from 'src/app/modules/services/usersconfiguration.service';
 import { usergroupconfigurationService } from 'src/app/modules/services/add-usergroupconfiguration.service';
+import { CommonService } from 'src/app/shared/common.service';
 
 @Component({
   selector: 'app-add-workflow',
@@ -21,6 +22,8 @@ export class AddWorkflowComponent {
   usergroups: Array<usergroupconfigurationService> = [];
   users: Array<UserConfiguration> = [];
   selectedreviwers:UserConfiguration[] = [];
+  selectedgroupreviwers:Usergroupconfiguration[] = [];
+  selectedgroupapprovers:Usergroupconfiguration[] = [];
   selectedapprovers:UserConfiguration[] = [];
   reviewers: { value: string }[] = [{ value: '' }];
   approvers: { value: string }[] = [{ value: '' }];
@@ -62,17 +65,19 @@ export class AddWorkflowComponent {
     private deptsvc:DepartmentconfigurationService,
     private doctypesvc:DocumentTypeServiceService,
     private userssvc:UsersconfigurationService,
-    private usergroupsvc:usergroupconfigurationService
+    private usergroupsvc:usergroupconfigurationService,
+    private commonsvc:CommonService
   ) {}
 ngOnInit(){
+  this.commonsvc.templateCount++;
+  this.workflow.code="Flow-"+this.commonsvc.templateCount;
   this.getdepartments();
 this.getdocumenttypeconfig();
 this.getusergroupInfo();
 this.getusers();
 }
   addWorkflow(workflow:workflowconiguration) {
-    workflow.reviewers=this.reviewers;
-    workflow.approvals=this.approvers;
+    debugger
     this.reviewers.map(reviewer => reviewer.value)
     console.log(this.reviewers);
   }

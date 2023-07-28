@@ -10,6 +10,7 @@ import { AddTemplateComponent } from './components/add-template/add-template.com
 import { AddWorkflowComponent } from './components/add-workflow/add-workflow.component';
 import { WorkflowsComponent } from './components/workflows/workflows.component';
 import { DocumentMasterHomeComponent } from './components/document-master-home/document-master-home.component';
+import { AdminHomeComponent } from '../authentication/components/Admin-Home/Admin-home.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -71,6 +72,11 @@ const routes: Routes = [
     component: AddWorkflowComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'admin',
+    component: AdminHomeComponent,
+    canActivate: [AuthGuard],
+  }
 ];
 
 @NgModule({

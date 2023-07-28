@@ -64,6 +64,7 @@ namespace Vlims.DocumentMaster.Entities
             }
         }
         public string workflowName { get; set; }
+        public string code { get; set; }
         public string documentstage
         {
             get
@@ -123,7 +124,11 @@ namespace Vlims.DocumentMaster.Entities
                 this.approvalscountField = value;
             }
         }
-        
+        public string reviewsType { get; set; }
+        public string approvalsType { get; set; }
+        public List<reviewers> reviewers { get; set; }
+        public List<approvals> approvals { get; set; }
+
         public string CreatedBy
         {
             get
@@ -181,5 +186,13 @@ namespace Vlims.DocumentMaster.Entities
                 this.modifieddateField = value;
             }
         }
+    }
+    public class reviewers
+    {
+        public string value { get; set; }
+    }
+    public class approvals
+    {
+        public string value { get; set; }
     }
 }

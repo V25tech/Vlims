@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,6 +15,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ManagerModule } from './modules/manager/manager.module';
 import { DocumentTypesComponent } from './modules/documents/components/document-types/document-types.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AppintializorService, serverConfigInitializerFactory } from './shared/appintializor.service';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LeftNavComponent],
@@ -24,7 +26,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     DocumentsModule,
     TableModule,
-    //AppRoutingModule,
+    AppRoutingModule,
     AuthenticationRoutingModule,
     DocumentsRoutingModule,
     FontAwesomeModule,
@@ -33,7 +35,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   ],
   exports: [TableModule],
 
-  providers: [],
+  providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true },MessageService], 
   bootstrap: [AppComponent],
 })
 export class AppModule {}

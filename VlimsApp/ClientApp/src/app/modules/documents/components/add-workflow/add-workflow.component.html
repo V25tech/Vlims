@@ -18,8 +18,8 @@
                 class="form-control"
                 id="workflowName"
                 name="workflowName"
-                placeholder="Workflow Name"
-                [(ngModel)]="workflow.name"
+                placeholder="Workflow workflowName"
+                [(ngModel)]="workflow.workflowName"
               />
             </div>
           </div>
@@ -34,7 +34,7 @@
                 id="workflowCode"
                 name="workflowCode"
                 placeholder="System Generated"
-                [(ngModel)]="workflow.code"
+                [(ngModel)]="workflow.code" readonly
               />
             </div>
           </div>
@@ -62,6 +62,7 @@
                 [options]="types"
                 [(ngModel)]="workflow.documenttype"
                 optionLabel="Documenttypename"
+                placeholder="Select a Document Type"
               >
                 
               </p-dropdown>
@@ -144,7 +145,7 @@
             <div class="col-sm-10">
               <p-multiSelect
                 [options]="users"
-                [(ngModel)]="selectedreviwers"
+                [(ngModel)]="workflow.reviewers"
                 defaultLabel="Select a User"
                 name="UserID"
                 optionLabel="UserID"
@@ -176,8 +177,8 @@
               <p-dropdown
                 name="usergroupname"
                 [options]="usergroups"
-                [(ngModel)]="workflow.reviewers"
-                optionLabel="Usergroupname"
+                [(ngModel)]="workflow.reviewersGroup"
+                optionLabel="Usergroupname" placeholder="Select a User Group"
               >
               </p-dropdown>
             </div>
@@ -243,7 +244,7 @@
             <div class="col-sm-10">
               <p-multiSelect
                 [options]="users"
-                [(ngModel)]="selectedapprovers"
+                [(ngModel)]="workflow.approvals"
                 defaultLabel="Select a User"
                 name="UserID"
                 optionLabel="UserID"
@@ -261,8 +262,8 @@
               <p-dropdown
                 name="usergroupname"
                 [options]="usergroups"
-                [(ngModel)]="workflow.approvals"
-                optionLabel="Usergroupname"
+                [(ngModel)]="workflow.approvalsGroup"
+                optionLabel="Usergroupname" placeholder="Select a User Group"
               >
               </p-dropdown>
             </div>
