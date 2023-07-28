@@ -9,8 +9,7 @@ import { CommonService } from '../../../../shared/common.service';
 
 @Component({
   selector: 'app-department',
-  templateUrl: './department.component.html',
-  styleUrls: ['./department.component.css']
+  templateUrl: './department.component.html'
 })
 export class DepartmentComponent implements OnInit {
   types: Array<DepartmentConfiguration> = [];
@@ -32,5 +31,22 @@ getdepartments() {
         //this.toastr.error('loading failed');
         //this.loader.hide();
       });
+}
+  getStatusClass(status: string): string {
+    debugger
+    if (status === 'In Progress') {
+      return 'status-in-progress';
+    } else if (status === 'Completed') {
+      return 'status-completed';
+    } else if (status === 'Under Review') {
+      return 'status-under-review';
+    } else if (status === 'Pending') {
+      return 'status-in-progress';
+    } else {
+      return '';
+    }
+  }
+  navigateToAddDepartment(): void {
+    this.router.navigate(['/document-type/add']);
   }
 }
