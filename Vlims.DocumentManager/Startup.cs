@@ -22,8 +22,8 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        //services.AddControllers();
-        services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.PropertyNamingPolicy = null);
+        services.AddControllers();
+        //services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.PropertyNamingPolicy = null);
         // Register the Swagger generator, defining 1 or more Swagger documents
         services.AddSwaggerGen(SWGenOptions =>
         {
@@ -51,14 +51,14 @@ public class Startup
     /// <param name="services"></param>
     private void AddManagerDependencies(IServiceCollection Services)
     {
-        //Services.AddControllers();
+        Services.AddControllers();
         Services.AddScoped<IDocumentManagerService, DocumentManagerService>();
         Services.AddScoped<IAdditionalTaskService, AdditionalTaskService>();
         Services.AddScoped<IDocumentEffectiveService, DocumentEffectiveService>();
         Services.AddScoped<IDocumentPreparationService, DocumentPreparationService>();
         Services.AddScoped<IDocumentrequestService, DocumentrequestService>();
-        //Services.AddEndpointsApiExplorer();
-        //Services.AddSwaggerGen();
+        Services.AddEndpointsApiExplorer();
+        Services.AddSwaggerGen();
     }
 
 

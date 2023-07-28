@@ -13,6 +13,7 @@
     [Status_PSY] NVARCHAR(100) NULL, 
     [Approvedby_PSY] NVARCHAR(100) NULL, 
     [ApprovedON_PSY] DATETIME NULL, 
+    [Workflow_PSY] NVARCHAR(100) NULL, 
     CONSTRAINT [PK_Documentrequest_PSY] PRIMARY KEY CLUSTERED ([DRID_PSY] ASC)
 );
 
