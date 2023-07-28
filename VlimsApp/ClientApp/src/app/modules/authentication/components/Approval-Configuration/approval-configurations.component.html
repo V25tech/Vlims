@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Approval Configurations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: left;
+    }
+
+    .container {
+      display: flex;
+      justify-content: left;
+      text-align: left;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    select {
+      width: 100%;
+      padding: 5px;
+    }
+
+    .button-radius {
+      padding: 5px;
+    }
+
+    .buttons-container {
+      margin-top: 20px;
+    }
+
+      .buttons-container button {
+        margin: 0 25px;
+      }
+  </style>
+</head>
+<body>
+  <h1>Approval Configurations</h1>
+  <form (ngSubmit)="addapprovalconfig(newdept)" #fm="ngForm">
+    <div class="container">
+      <table align="left">
+        <tr>
+          <th>Configuration Name</th>
+          <th>No of Approvals</th>
+        </tr>
+        <tr>
+          <td>Document Type Configuration</td>
+          <td>
+            <select>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Document Template Configuration</td>
+          <td>
+            <select>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>WorkFlow Configuration</td>
+          <td>
+            <select>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Document Request</td>
+          <td>
+            <select>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="buttons-container">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" (click)="closepopup();" class="btn btn-secondary">Close</button>
+    </div>
+  </form>
+</body>
+</html>

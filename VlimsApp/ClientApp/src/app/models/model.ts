@@ -210,14 +210,16 @@ export class PlantConfiguration {
   CreatedBy: string=''
   CreatedDate: string | null='';
   ModifiedBy: string=''
-  ModifiedDate: string | null='';
+  ModifiedDate: string | null = '';
+  Status: string = '';
+
 }
 export class SecurityManagement {
 
   public MinimumUserIdLength: string=''
   public MinimumPasswordLength: string=''
   public PasswordComplexity: string=''
-  public Invalidattempts: string=''
+  public InvalidAttempts: string=''
   public SessionTimeOut: string=''
 
 }

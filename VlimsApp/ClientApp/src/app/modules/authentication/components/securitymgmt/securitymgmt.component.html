@@ -1,0 +1,48 @@
+
+<div class="card shadow mb-4" style="padding-top: 2px;">
+  <div class="card-header py-3">
+    <div col-6 style="float: left;">
+      <h6 class="m-0 font-weight-bold text-primary">Security Configuration</h6>
+    </div>
+
+  </div>
+  <div class="card-body">
+
+    <div class="table-responsive">
+
+      <form (ngSubmit)="submit(securityType)" #fm="ngForm">
+        <div class="modal-body">
+          <tr>
+            <td><label for="username" class="col-sm-12 col-form-label">Minimum User ID Length</label></td>
+            <td><input type="text" class="form-control" id="username" name="username" [(ngModel)]="securityType.MinimumUserIdLength"></td>
+          </tr>
+          <tr>
+            <td><label class="col-sm-12 col-form-label" for="password">Minimum Password Length	</label></td>
+            <td><input class="form-control" type="password" id="password" name="password" [(ngModel)]="securityType.MinimumPasswordLength"></td>
+          </tr>
+          <tr>
+            <td><label class="col-sm-12 col-form-label" for="email">Password Complexity	</label></td>
+            <td><input class="form-control" type="email" id="email" name="email" [(ngModel)]="securityType.PasswordComplexity"></td>
+          </tr>
+          <!--<tr>
+            <td><label class="col-sm-12 col-form-label" for="fullname">Invalid attempts	</label></td>
+            <td><input class="form-control" type="text" id="fullname" name="fullname" [(ngModel)]="securityType.InvalidAttempts"></td>
+          </tr>-->
+          <tr>
+            <td><label class="col-sm-12 col-form-label" for="fullname">Session Time Out </label></td>
+            <td><input class="form-control" type="text" id="fullname" name="fullname" [(ngModel)]="securityType.SessionTimeOut"></td>
+          </tr>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+
+
+  </div>
+</div>
+

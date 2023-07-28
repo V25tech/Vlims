@@ -12,7 +12,8 @@ export class DocumentsLandingComponent {
 
   constructor(private router: Router){}
 
-  navigateTo(navTo:any){
+  navigateTo(navTo: any) {
+    debugger;
     if(navTo === 'assigned'){
       this.router.navigate(['/assigned']); 
     } else if (navTo === 'dashboard') {
@@ -21,8 +22,8 @@ export class DocumentsLandingComponent {
       this.router.navigate(['/document-master']);
     } else if (navTo === 'document-manager') {
       this.router.navigate(['/document-manager']);
-    } else if (navTo === 'document-manager') {
-      this.router.navigate(['/document-manager']);
+    } else if (navTo === 'admin') {
+      this.router.navigate(['/admin-home']);
     }
 
   }

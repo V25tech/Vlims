@@ -1,7 +1,8 @@
 
 import { Injectable } from '@angular/core';
-import { activateDeactivateuser, RequestContext } from '../model/models';
-import { HttpbaseService } from '../shared/httpbase.service';
+import { activateDeactivateuser, RequestContext } from '../../models/model';
+import { HttpbaseService } from '../../shared/httpbase.service';
+
 
 
 @Injectable({

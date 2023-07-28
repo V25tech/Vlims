@@ -1,7 +1,8 @@
 import { getLocaleDateFormat } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { DocumentPreperationConfiguration, DocumentRequestConfiguration, RequestContext } from '../model/models';
-import { HttpbaseService } from '../shared/httpbase.service';
+import { DocumentPreperationConfiguration, DocumentRequestConfiguration, RequestContext } from '../../models/model';
+import { HttpbaseService } from '../../shared/httpbase.service';
+
 
 @Injectable({
   providedIn: 'root'

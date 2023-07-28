@@ -24,7 +24,7 @@ namespace Vlims.Administration.DataAccess
     // Comment
     public static class UserConfigurationConverter
     {
-        
+
         public static List<UserConfiguration> SetAllUserConfiguration(DataSet dataset)
         {
             try
@@ -33,7 +33,7 @@ namespace Vlims.Administration.DataAccess
                 UserConfiguration userConfigurationData;
                 if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
                 {
-                    for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
+                    for (int i = 0; (i < dataset.Tables[0].Rows.Count); i++)
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         userConfigurationData = new UserConfiguration();
@@ -64,7 +64,7 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         public static UserConfiguration SetUserConfiguration(DataSet dataset)
         {
             var result = SetAllUserConfiguration(dataset);
@@ -74,7 +74,7 @@ namespace Vlims.Administration.DataAccess
             }
             return null;
         }
-        
+
         public static DataTable SetDataSet(List<UserConfiguration> userConfigurations)
         {
             DataTable dataTable = new DataTable();
@@ -114,7 +114,7 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         private static void SetDataTableColumns(DataTable dataTable)
         {
             dataTable.TableName = "UT_UserConfiguration_PSY";
