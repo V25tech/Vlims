@@ -2,6 +2,12 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { Workflow } from '../../models/workflows';
 import { Router } from '@angular/router';
+import { DepartmentConfiguration, DocumentTypeConfiguration, RequestContext, UserConfiguration, workflowconiguration } from 'src/app/models/model';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
+import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
+import { UsersconfigurationService } from 'src/app/modules/services/usersconfiguration.service';
+import { usergroupconfigurationService } from 'src/app/modules/services/add-usergroupconfiguration.service';
 
 @Component({
   selector: 'app-add-workflow',
@@ -9,44 +15,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-workflow.component.scss'],
 })
 export class AddWorkflowComponent {
-  workflow: Workflow = {
-    id: 0,
-    name:'',
-    code:'',
-    stage: '',
-    type: '',
-    department:'',
-    reviewsCount:1,
-    approvalsCount:1,
-    reviewsType: 'user',
-    approvalsType:'user',
-    reviewers: [],
-    approvals: [],
-    status: '',
-  };
-
-  reviewersDatasource = [
-    {
-      label: 'User',
-      value: 'user',
-      items: [
-        { label: 'Select User', value: '' },
-        { label: 'User 1', value: 'user1' },
-        { label: 'User 2', value: 'user2' },
-        { label: 'User 3', value: 'user3' },
-      ]
-  },
-  {
-      label: 'Groups',
-      value: 'group',
-      items: [
-        { label: 'User Group 1', value: 'usergroup1' },
-        { label: 'User Group 2', value: 'usergroup2' },
-        { label: 'User Group 3', value: 'usergroup3' },
-      ]
-  },
-  ]
-
+  workflow = new workflowconiguration();
+  types: Array<DocumentTypeConfiguration>=[];
+  departs: Array<DepartmentConfiguration>=[];
+  usergroups: Array<usergroupconfigurationService> = [];
+  users: Array<UserConfiguration> = [];
+  selectedreviwers:UserConfiguration[] = [];
+  selectedapprovers:UserConfiguration[] = [];
   reviewers: { value: string }[] = [{ value: '' }];
   approvers: { value: string }[] = [{ value: '' }];
 
@@ -66,48 +41,96 @@ export class AddWorkflowComponent {
     this.approvers.splice(index, 1);
   }
 
-  departments = [
-    { label: 'Option 1', value: 'option1' },
-    { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' },
-  ];
+
 
   stageSource = [
     { label: 'Select Stage', value: '' },
-    { label: 'Stage 1', value: 'option2' },
-    { label: 'Stage 2', value: 'option3' },
+    { label: 'Preparation', value: 'Preparation' },
+    { label: 'Validating', value: 'Validating' },
+    { label: 'Excuting', value: 'Excuting' },
+    { label: 'Approval', value: 'Approval' },
   ];
 
-  typeSource = [
-    { label: 'Select Type', value: '' },
-    { label: 'Type 1', value: 'option2' },
-    { label: 'Type 2', value: 'option3' },
-  ];
+  
 
-  reviewersSource = [
-    { label: 'User 1', value: 'user1' },
-    { label: 'User 2', value: 'user2' },
-    { label: 'User 3', value: 'user3' },
-  ]
-
-  groupSource = [
-    { label: 'Select Group', value: '' },
-    { label: 'Group 1', value: 'user1' },
-    { label: 'Group 2', value: 'user2' },
-    { label: 'Group 3', value: 'user3' },
-  ]
+  
 
   constructor(
     private location: Location,
-    private router: Router
+    private router: Router,
+    private loader:NgxSpinnerService,
+    private deptsvc:DepartmentconfigurationService,
+    private doctypesvc:DocumentTypeServiceService,
+    private userssvc:UsersconfigurationService,
+    private usergroupsvc:usergroupconfigurationService
   ) {}
-
-  addWorkflow() {
+ngOnInit(){
+  this.getdepartments();
+this.getdocumenttypeconfig();
+this.getusergroupInfo();
+this.getusers();
+}
+  addWorkflow(workflow:workflowconiguration) {
+    workflow.reviewers=this.reviewers;
+    workflow.approvals=this.approvers;
     this.reviewers.map(reviewer => reviewer.value)
     console.log(this.reviewers);
   }
 
   onCancel() {
     this.location.back();
+  }
+  getdepartments() {
+    this.loader.show();
+   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+      return this.deptsvc.getdepartments(objrequest).subscribe((data: any) => {
+        
+        this.departs = data.Response;
+        this.loader.hide();
+        console.log(this.departs);
+      },((error:any)=>{
+
+      }
+      ));
+  }
+ getdocumenttypeconfig() {
+    this.loader.show();
+   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+      return this.doctypesvc.getdoctypeconfig(objrequest).subscribe((data: any) => {
+        
+        this.types = data.Response;
+        
+        this.loader.hide();
+        console.log(this.types);
+      },((error:any)=>{
+
+      }
+      ));
+  }
+  getusers() {
+    this.loader.show();
+   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+      return this.userssvc.getusers(objrequest).subscribe((data: any) => {
+        
+        this.users = data.Response;
+        this.loader.hide();
+        console.log(this.users);
+      },((error:any)=>{
+
+      }
+      ));
+  }
+  getusergroupInfo() {
+    this.loader.show();
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    return this.usergroupsvc.getusergroupconfiguration(objrequest).subscribe((data: any) => {
+      debugger
+      this.usergroups = data.Response;
+      this.loader.hide();
+      console.log(this.usergroups);
+    },((error:any)=>{
+
+    }
+    ));
   }
 }

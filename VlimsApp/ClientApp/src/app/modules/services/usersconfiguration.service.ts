@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpbaseService } from './shared/httpbase.service';
-import { RequestContext, UserConfiguration } from './model/models';
+import { RequestContext, UserConfiguration } from 'src/app/models/model';
+import { HttpbaseService } from 'src/app/shared/httpbase.service';
+
+
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { RequestContext, workflowconiguration } from '../model/models';
-import { HttpbaseService } from '../shared/httpbase.service';
+import { RequestContext, workflowconiguration } from 'src/app/models/model';
+import { HttpbaseService } from 'src/app/shared/httpbase.service';
+
 
 @Injectable({
   providedIn: 'root'

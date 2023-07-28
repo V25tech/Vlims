@@ -6,7 +6,7 @@
   </div>
   <div class="row p-2">
     <div class="col">
-      <form (ngSubmit)="addWorkflow()">
+      <form (ngSubmit)="addWorkflow(workflow)">
         <div class="p-4 bg-white shadow-dark rounded-2">
           <div class="form-group row">
             <label for="workflowName" class="col-sm-2 col-form-label"
@@ -46,7 +46,7 @@
               <p-dropdown
                 name="workflowStage"
                 [options]="stageSource"
-                [(ngModel)]="workflow.stage"
+                [(ngModel)]="workflow.documentstage"
                 optionLabel="label"
               >
               </p-dropdown>
@@ -59,9 +59,9 @@
             <div class="col-sm-10">
               <p-dropdown
                 name="type"
-                [options]="typeSource"
-                [(ngModel)]="workflow.type"
-                optionLabel="label"
+                [options]="types"
+                [(ngModel)]="workflow.documenttype"
+                optionLabel="Documenttypename"
               >
                 
               </p-dropdown>
@@ -74,11 +74,11 @@
             >
             <div class="col-sm-10">
               <p-multiSelect
-                [options]="departments"
+                [options]="departs"
                 [(ngModel)]="workflow.department"
                 defaultLabel="Select a Department"
                 name="department"
-                optionLabel="label"
+                optionLabel="DepartmentName"
                 display="chip"
               ></p-multiSelect>
             </div>
@@ -143,11 +143,11 @@
             >
             <div class="col-sm-10">
               <p-multiSelect
-                [options]="reviewersSource"
-                [(ngModel)]="workflow.reviewers"
+                [options]="users"
+                [(ngModel)]="selectedreviwers"
                 defaultLabel="Select a User"
-                name="department"
-                optionLabel="label"
+                name="UserID"
+                optionLabel="UserID"
                 display="chip"
               ></p-multiSelect>
             </div>
@@ -174,10 +174,10 @@
             >
             <div class="col-sm-10">
               <p-dropdown
-                name="type"
-                [options]="groupSource"
+                name="usergroupname"
+                [options]="usergroups"
                 [(ngModel)]="workflow.reviewers"
-                optionLabel="label"
+                optionLabel="Usergroupname"
               >
               </p-dropdown>
             </div>
@@ -242,11 +242,11 @@
             >
             <div class="col-sm-10">
               <p-multiSelect
-                [options]="reviewersSource"
-                [(ngModel)]="workflow.approvals"
+                [options]="users"
+                [(ngModel)]="selectedapprovers"
                 defaultLabel="Select a User"
-                name="department"
-                optionLabel="label"
+                name="UserID"
+                optionLabel="UserID"
                 display="chip"
               ></p-multiSelect>
             </div>
@@ -259,10 +259,10 @@
             >
             <div class="col-sm-10">
               <p-dropdown
-                name="type"
-                [options]="groupSource"
+                name="usergroupname"
+                [options]="usergroups"
                 [(ngModel)]="workflow.approvals"
-                optionLabel="label"
+                optionLabel="Usergroupname"
               >
               </p-dropdown>
             </div>

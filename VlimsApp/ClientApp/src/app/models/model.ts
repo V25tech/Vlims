@@ -108,11 +108,16 @@ export class workflowconiguration {
   WFCId: string=''
   DocumentMasterId: string=''
   documentstage: string=''
-  workflowName:string=''
+  name:string=''
+  code:string=''
   documenttype: string=''
   department: string=''
   reviewsCount: number=0;
   approvalsCount: number=0;
+  reviewsType:string=''
+  reviewers:reviewers[]=[]
+  approvalsType:string=''
+  approvals:approvers[]=[]
   CreatedBy: string=''
   CreatedDate: string | null='';
   ModifiedBy: string=''
@@ -139,6 +144,12 @@ export class DocumentTemplateConfiguration {
   Status: string | null='';
   headerTable:HeaderTable[] | null=[];
   footerTable:FooterTable[] | null=[];
+}
+export class reviewers{
+  value:string=''
+}
+export class approvers{
+  value:string=''
 }
 export class DepartmentConfiguration {
   DPCFId: string=''
