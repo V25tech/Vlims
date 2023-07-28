@@ -14,6 +14,7 @@ import { CommonService } from '../../../../shared/common.service';
 })
 export class DepartmentComponent implements OnInit {
   types: Array<DepartmentConfiguration> = [];
+  viewMode:boolean=false;
   constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService, private spinner: NgxSpinnerService, private router: Router) { }
 
   ngOnInit() {

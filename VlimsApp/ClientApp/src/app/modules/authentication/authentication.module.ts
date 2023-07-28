@@ -13,18 +13,19 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { NgxSpinnerModule } from 'ngx-spinner';
+//import { AddDepartmentComponent } from './components/Department/add-department.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent,    
+    RegisterComponent,
     //AddDepartmentComponent,
     //ApprovalConfigurationsComponent,
-   // AddRolesComponent,
-   // NewPlantRegistrationComponent,
+    // AddRolesComponent,
+    // NewPlantRegistrationComponent,
     //PlantComponent,
-   // RolesComponent,
+    // RolesComponent,
 
 
   ],
@@ -41,7 +42,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     DropdownModule,
     ToastModule,
     NgxSpinnerModule
-    
+
   ]
 })
 export class AuthenticationModule { }

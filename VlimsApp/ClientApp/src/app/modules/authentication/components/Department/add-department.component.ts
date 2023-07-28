@@ -12,6 +12,7 @@ import { DepartmentconfigurationService } from '../../../services/departmentconf
 })
 export class AddDepartmentComponent implements OnInit {
   newdept = new DepartmentConfiguration();
+  viewMode:boolean=false;
   constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService,
     private router: Router) { }
 
