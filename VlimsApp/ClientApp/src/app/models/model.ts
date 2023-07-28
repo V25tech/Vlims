@@ -208,7 +208,7 @@ export class SecurityManagement {
   public MinimumUserIdLength: string=''
   public MinimumPasswordLength: string=''
   public PasswordComplexity: string=''
-  public Invalidattempts: string=''
+  public InvalidAttempts: string=''
   public SessionTimeOut: string=''
 
 }

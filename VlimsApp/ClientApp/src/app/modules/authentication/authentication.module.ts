@@ -18,7 +18,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent,
+    RegisterComponent,    
     //AddDepartmentComponent,
     //ApprovalConfigurationsComponent,
    // AddRolesComponent,
