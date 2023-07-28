@@ -24,7 +24,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     DocumentsModule,
     TableModule,
-    AppRoutingModule,
+    //AppRoutingModule,
     AuthenticationRoutingModule,
     DocumentsRoutingModule,
     FontAwesomeModule,

@@ -14,7 +14,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    AuthenticationModule,
+    //AuthenticationModule,
     DocumentsRoutingModule,
     ManagerRoutingModule
   ],
