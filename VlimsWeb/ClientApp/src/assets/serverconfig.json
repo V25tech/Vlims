@@ -1,7 +1,8 @@
 {
   "BaseUrl": "https://localhost:7151/",
-  "documentmasterUrl":"https://localhost:7157/",
-  "documentmanagerUrl":"https://localhost:7152/",
-  "adminUrl":"https://localhost:7186/"
+  "documentmasterUrl": "https://vlimsdocmaster.azurewebsites.net/",
+  "documentmanagerUrl": "https://vlimsdocmanager.azurewebsites.net/",
+  "adminUrl": "https://dmsadmin1.azurewebsites.net/"
 }
+
  

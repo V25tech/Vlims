@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DepartmentConfiguration } from '../model/models';
-import { CommonService } from '../shared/common.service';
-import { DepartmentconfigurationService } from '../departmentconfiguration.service';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+//import { ToastrService } from 'ngx-toastr';
+import { DepartmentConfiguration } from '../../../../models/model';
+import { CommonService } from '../../../../shared/common.service';
+import { DepartmentconfigurationService } from '../../../services/departmentconfiguration.service';
 
 @Component({
   selector: 'app-add-department',
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AddDepartmentComponent implements OnInit {
   newdept = new DepartmentConfiguration();
   constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService,
-    private router: Router,private toastr: ToastrService) { }
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,7 +27,7 @@ export class AddDepartmentComponent implements OnInit {
       newdept.ModifiedBy="admin";
       //this.router.navigate(['/products']);
       this.doctypeservice.adddepartment(newdept).subscribe((res:any)=>{
-        this.toastr.success('Added');
+        //this.toastr.success('Added');
         this.router.navigate(['/mainpage/hierarchy']);
       });
       

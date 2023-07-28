@@ -199,7 +199,9 @@ export class PlantConfiguration {
   CreatedBy: string=''
   CreatedDate: string | null='';
   ModifiedBy: string=''
-  ModifiedDate: string | null='';
+  ModifiedDate: string | null = '';
+  Status: string = '';
+
 }
 export class SecurityManagement {
 

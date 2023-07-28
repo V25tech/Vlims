@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { DocumentPreperationConfiguration, RequestContext } from '../model/models';
-import { HttpbaseService } from '../shared/httpbase.service';
+import { DocumentPreperationConfiguration, RequestContext } from '../../models/model';
+import { HttpbaseService } from '../../shared/httpbase.service';
+
 
 
 @Injectable({

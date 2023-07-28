@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { RequestContext, Usergroupconfiguration } from '../model/models';
-import { HttpbaseService } from '../shared/httpbase.service';
+import { RequestContext, Usergroupconfiguration } from '../../models/model';
+import { HttpbaseService } from '../../shared/httpbase.service';
+
 
 
 @Injectable({

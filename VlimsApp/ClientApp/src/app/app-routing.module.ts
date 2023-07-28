@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: AuthenticationModule },
   { path: 'documents', component: DocumentsRoutingModule },
   { path: 'manager', component: ManagerRoutingModule },
+  { path: 'admin', component: AuthenticationModule },
 ];
 
 @NgModule({

@@ -1,7 +1,8 @@
 
 import { Injectable } from '@angular/core';
-import { ApprovalManagament, RequestContext } from '../model/models';
-import { HttpbaseService } from '../shared/httpbase.service';
+import { ApprovalManagament, RequestContext } from '../../models/model';
+import { HttpbaseService } from '../../shared/httpbase.service';
+
 
 
 @Injectable({

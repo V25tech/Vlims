@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: 'assigned', component: AssignedComponent, canActivate: [AuthGuard] },
   { path: 'document-master', component: DocumentMasterHomeComponent, canActivate: [AuthGuard] },
   {
-    path: 'document-types',
-    component: DocumentTypesComponent,
+    path: 'document-types',    component: DocumentTypesComponent,
+
     canActivate: [AuthGuard],
   },
   {
