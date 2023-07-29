@@ -10,8 +10,8 @@ import { SecuritymanagementService } from '../../../services/securitymanagement.
   styleUrls: ['./securitymgmt.component.scss']
 })
 
-export class SecuritymgmtComponent  {
-  types: Array<SecurityManagement> = [];
+export class SecuritymgmtComponent {
+  types: SecurityManagement[] = [];
   securityType: SecurityManagement = new SecurityManagement;
   constructor(private doctypeservice: SecuritymanagementService, private spinner: NgxSpinnerService, private router: Router) { }
 
@@ -19,6 +19,7 @@ export class SecuritymgmtComponent  {
     this.getsecuritymanagement();
   }
   getsecuritymanagement() {
+    debugger;
     let objrequest: RequestContext = {
       PageNumber: 1, PageSize: 1,
       Id: 0

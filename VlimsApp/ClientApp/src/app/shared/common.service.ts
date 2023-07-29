@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DocumentTypeConfiguration } from '../modules/documents/models/DocumentTypeConfiguration';
 import { DocumentTemplateConfiguration } from '../modules/documents/models/DocumentTemplateConfiguration';
+import { Usergroupconfiguration } from '../models/model';
 
 
 
@@ -11,7 +12,8 @@ import { DocumentTemplateConfiguration } from '../modules/documents/models/Docum
 export class CommonService {
   documentType=new DocumentTypeConfiguration();
   template=new DocumentTemplateConfiguration();
-  templateCount:number=0;
+  templateCount: number = 0;
+  userGroupConfig =new Usergroupconfiguration();
   //private retailer = new BehaviorSubject<Retailer>(null);
   //retaileR = this.retailer.asObservable();
   createdBy = 'admin';

@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxSpinnerService, Spinner } from 'ngx-spinner';
+
+
 import { Router } from '@angular/router';
-import { PlantConfiguration, RequestContext } from '../../../../models/model';
-import { PlantmanagementService } from '../../../services/plantmanagement.service';
+import { DocumentTypeConfiguration, PlantConfiguration, RequestContext } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
+import { PlantmanagementService } from '../../../services/plantmanagement.service';
 
 @Component({
   selector: 'app-plantmanagement',
- templateUrl: './plantmanagement.component.html',
-  styleUrls: ['./plantmanagement.component.css']
+  templateUrl: './plantmanagement.component.html'  
 })
 export class PlantComponent implements OnInit {
-  types: Array<PlantConfiguration> = [];
-  constructor(private commonsvc: CommonService, private doctypeservice: PlantmanagementService, private spinner: NgxSpinnerService, private router: Router) { }
+  types: PlantConfiguration[] = [];
+  constructor(private commonsvc: CommonService, private doctypeservice: PlantmanagementService,  private router: Router) { }
 
   ngOnInit() {
     this.getplantconfiguration();
@@ -24,7 +24,32 @@ export class PlantComponent implements OnInit {
     };
     return this.doctypeservice.getplantconfiguration(objrequest).subscribe((data: any) => {
       debugger
-      this.types = data.Response;     
+      this.types = data.Response;
+      console.log(this.types);
+    }, er => {
+     
     });
+  }
+  navigateToAddPlant(): void {
+    this.router.navigate(['/plant/add']);
+  }
+  editdoc(editband: DocumentTypeConfiguration) {
+    debugger
+    this.commonsvc.documentType = editband;
+    this.router.navigate(['/document-type/edit', editband.DTCId]);
+  }
+  getStatusClass(status: string): string {
+    debugger
+    if (status === 'In Progress') {
+      return 'status-in-progress';
+    } else if (status === 'Completed') {
+      return 'status-completed';
+    } else if (status === 'Under Review') {
+      return 'status-under-review';
+    } else if (status === 'Pending') {
+      return 'status-in-progress';
+    } else {
+      return '';
+    }
   }
 }

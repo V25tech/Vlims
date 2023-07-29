@@ -11,6 +11,11 @@ import { AddWorkflowComponent } from './components/add-workflow/add-workflow.com
 import { WorkflowsComponent } from './components/workflows/workflows.component';
 import { DocumentMasterHomeComponent } from './components/document-master-home/document-master-home.component';
 import { AdminHomeComponent } from '../authentication/components/Admin-Home/Admin-home.component';
+import { SecuritymgmtComponent } from '../authentication/components/Securitymgmt/securitymgmt.component';
+import { PlantComponent } from '../authentication/components/Plantmanagement/plantmanagement.component';
+import { RolesComponent } from '../authentication/components/Roles/roles.component';
+import { Usergroupconfiguration } from '../../models/model';
+import { DepartmentComponent } from '../authentication/components/Department/department.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -75,8 +80,54 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminHomeComponent,
+    children :[
+      {
+          path:'',
+          component:AdminHomeComponent,
+      },
+      {
+        path:'security',
+        component:SecuritymgmtComponent,
+      }
+    ]
+  },
+  // {
+  //   path: 'admin',
+  //   component: AdminHomeComponent,
+  //   canActivate: [AuthGuard],
+  // },
+
+
+  {
+    path: 'admin/security',
+    component: AdminHomeComponent,
+    children :[
+      {
+          path:'',
+          component:SecuritymgmtComponent,
+      }
+    ]
+  },
+  {
+    path: 'admin/plant',
+    component: PlantComponent,
     canActivate: [AuthGuard],
-  }
+  },
+  {
+    path: 'roles',
+    component: RolesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'UserGroup',
+    component: Usergroupconfiguration,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'department',
+    component: DepartmentComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

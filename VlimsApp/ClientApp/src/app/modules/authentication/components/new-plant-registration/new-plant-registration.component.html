@@ -1,60 +1,76 @@
-<div class="card shadow mb-4" style="padding-top: 2px;">
-  <div class="card-header py-3">
-    <div col-12 style="float: left;">
-      <h6 class="m-0 font-weight-bold text-primary">New Plant Registration</h6>
+
+  <div class="container-fluid">
+    <div class="row p-2">
+      <div class="col">
+        <h4 class="page-title">New Plant Registration</h4>
+      </div>
     </div>
+    <div class="row p-2">
+      <div class="col">
+        
+          <div class="p-4 bg-white shadow-dark rounded-2">
 
-  </div>
-  <div class="card-body">
-    <form (ngSubmit)="submit(adddoc)" #fm="ngForm">
-      <div class="modal-body">
-        <div class="form-group row">
+            <div class="form-group row">
+              <label for="plantname" class="col-sm-2 col-form-label">Plant Name</label>
+              <div class="col-sm-10">
+                <input type="text"
+                       class="form-control"
+                       id="plantname"
+                       name="plantname"
+                       placeholder="Enter Plant Name" 
+                       [(ngModel)]="adddoc.PlantName"  />
+              </div>
+            </div>
 
-          <label for="PlantName" class="col-sm-4 col-form-label">Plant Name</label>
+            <div class="form-group row">
+              <label for="prefix" class="col-sm-2 col-form-label">Plant Code</label>
+              <div class="col-sm-10">
+                <input type="text"
+                       class="form-control"
+                       id="plantcode"
+                       name="plantcode"
+                       placeholder="Enter Plant Code"
+                       [(ngModel)]="adddoc.PlantCode" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="description" class="col-sm-2 col-form-label">Plant Address</label>
+              <div class="col-sm-10">
+                <textarea class="form-control"
+                          id="description"
+                          name="description"
+                          rows="3"
+                          placeholder="Enter Plant Address"
+                          [(ngModel)]="adddoc.PlantAddress" ></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="Comments" class="col-sm-2 col-form-label">Comments</label>
+              <div class="col-sm-10">
+                <input type="text"
+                       class="form-control"
+                       id="plantname"
+                       name="plantname"
+                       placeholder=""
+                       [(ngModel)]="adddoc.Comments"  />
+              </div>
+            </div>
 
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="PlantName" [(ngModel)]="adddoc.PlantName" (ngModelChange)="inputValue = $event"
-                   pattern='[A-Za-z\\s]*' name="PlantName" aria-describedby="productname" placeholder="Enter Plant Name"
-                   #BrandName="ngModel"  />
+
           </div>
-        </div>
-        <div class="form-group row">
 
-          <label for="PlantCode" class="col-sm-4 col-form-label">Plant Code</label>
-
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="PlantCode" [(ngModel)]="adddoc.PlantCode" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
-                   pattern='[A-Za-z\\s]*' name="PlantCode" aria-describedby="productname" placeholder="Enter Plant Code"
-                   #BrandName="ngModel"  />
-          </div>
-        </div>
-        <div class="form-group row">
-
-          <label for="PlantAddress" class="col-sm-4 col-form-label">Plant Address</label>
-
-          <div class="col-sm-8">
-            <input type="text" class="form-control"  id="PlantAddress" [(ngModel)]="adddoc.PlantAddress" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
-                   pattern='[A-Za-z\\s]*' name="PlantAddress" aria-describedby="productname" placeholder="Enter Plant Address"
-                   #BrandName="ngModel"  />
-          </div>
-        </div>
-        <div class="form-group row">
-
-          <label for="Comments" class="col-sm-4 col-form-label">Comments</label>
-
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="Comments" [(ngModel)]="adddoc.Comments" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
-                   pattern='[A-Za-z\\s]*' name="Comments" aria-describedby="productname" placeholder="Enter Comments"
-                   #BrandName="ngModel"  />
-
+          <div class="form-group row my-4">
+            <div class="col-sm-10 offset-sm-2">
+              <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
+              <button type="submit" class="btn btn-primary" *ngIf="!editMode" ngSubmit="submit(adddoc)">Submit</button>
+              <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
+            </div>
           </div>
 
-        </div>
+       
       </div>
-      <div class="modal-footer">    
-        <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </form>
+    </div>
   </div>
-</div>
+
+
+

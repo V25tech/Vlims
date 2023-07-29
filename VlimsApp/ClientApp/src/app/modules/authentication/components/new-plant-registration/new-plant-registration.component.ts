@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Router } from '@angular/router';
 import { PlantConfiguration } from '../../../../models/model';
 import { NewPlantRegistrationConfigurationService } from '../../../services/new-plant-registration-configuration.service';
@@ -7,13 +6,12 @@ import { CommonService } from '../../../../shared/common.service';
 
 @Component({
   selector: 'app-new-plant-registration',
-  templateUrl: './new-plant-registration.component.html',
-  styleUrls: ['./new-plant-registration.component.css']
+  templateUrl: './new-plant-registration.component.html'
 })
 export class NewPlantRegistrationComponent implements OnInit {
   types: Array<PlantConfiguration> = [];
   adddoc = new PlantConfiguration();
-
+  viewMode: boolean = false;
   constructor(private commonsvc: CommonService, private doctypeservice: NewPlantRegistrationConfigurationService, private router: Router) { }
 
   ngOnInit() {
@@ -29,6 +27,9 @@ export class NewPlantRegistrationComponent implements OnInit {
   }
   closepopup() {
     this.router.navigate(['/mainpage/plant']);
+  }
+  onCancel() {
+
   }
 }
 

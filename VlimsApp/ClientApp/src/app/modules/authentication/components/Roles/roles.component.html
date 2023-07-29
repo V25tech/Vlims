@@ -5,7 +5,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Role Configuration</h6>
     </div>
     <div col-6 style="float: right;">
-        <button class="btn btn-primary"  type="button" [routerLink]="['/mainpage/hierarchy/addrole']"
+        <button class="btn btn-primary"  type="button" 
       >Add</button>
     </div>
     </div>
@@ -33,7 +33,7 @@
           <td>{{doc?.Department}}</td>
           <td>{{doc?.Comments}}</td>
           <td>{{doc?.ModifiedBy}}</td>
-          <td>{{doc?.ModifiedDate  | date}}</td>
+          <td>{{doc?.ModifiedDate}}</td>
           <td>Success</td>
           <td>
             <button class="btn" data-toggle="modal" data-target="#exampleModal" 

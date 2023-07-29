@@ -23,13 +23,13 @@ import { MessageService } from 'primeng/api';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    AdminHomeComponent,
+    //AdminHomeComponent,
     //AddDepartmentComponent,
     //ApprovalConfigurationsComponent,
     // AddRolesComponent,
     // NewPlantRegistrationComponent,
     //PlantComponent,
-    RolesComponent
+   // RolesComponent
 
 
   ],

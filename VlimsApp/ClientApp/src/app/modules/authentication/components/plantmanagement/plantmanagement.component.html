@@ -1,55 +1,53 @@
 
-<div class="card shadow mb-4" style="padding-top: 2px;">
-  <div class="card-header py-3">
-      <div col-6 style="float: left;">
-      <h6 class="m-0 font-weight-bold text-primary">Plant Configuration</h6>
-  </div>
-  <div col-6 style="float: right;">
-      <button class="btn btn-primary"  type="button"    
-    >Add</button>
-  </div>
-  </div>
-<div class="card-body">
- 
-<div class="table-responsive">
-  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="types?.length>   0" >
-     
-    <thead>
-      <tr>
-        <th scope="col">S.No</th>
-        <th scope="col">Plant Name</th>
-        <th scope="col">Plant Code</th>
-        <th scope="col">Comments</th>
-        <th scope="col">Registered By</th>
-        <th scope="col">Registered On</th>
-        <th scope="col">Status</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let doc of types; let i=index">
-        <th >{{i+1}}</th>
-        <td>{{doc?.PlantName}}</td>
-        <td>{{doc?.PlantCode }}</td>
-        <td>{{doc?.Comments}}</td>
-        <td>{{doc?.ModifiedBy}}</td>
-        <td>{{doc?.ModifiedDate }}</td>
-        <td>{{doc?.Status}}</td>
-        <td>
-          <button class="btn" data-toggle="modal" data-target="#exampleModal" 
-            data-backdrop="static" data-keyboard="false" > <span
-              class="fa fa-edit"></span> </button>
-          <!-- <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button> -->
-        </td>
-      </tr>
-    </tbody>
+<div class="container-fluid">
+  <div class="row p-2">
+    <div class="col">
 
-  </table>
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="page-title flex-grow-1">Plant Management</h4>
+        <div class="d-flex page-title-actions">
+          <input type="text" class="form-control" placeholder="Search">
+          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPlant()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <div class="p-4 bg-white shadow-dark rounded-2">
+        <!--<p-table tableStyleClass="table table-striped">-->
+          <!--[value]="types"-->
+          <ng-template pTemplate="header">
+            <tr>
+              <th>#</th>
 
-</div>
+              <th pSortableColumn="S.No" style="width:20%">S.No</th>
+              <th pSortableColumn="Plant Name" style="width:10%">Plant Name</th>
+              <th pSortableColumn="Plant Code" style="width:15%">Plant Code</th>
+              <th pSortableColumn="Comments" style="width:20%">Comments</th>
+              <th pSortableColumn="Registered By" style="width:200px">Registered By</th>
+              <th pSortableColumn="Registered On" style="width:200px">Registered On </th>
+              <th style="width:80px">Status</th>
+              <th style="width:80px">Actions</th>
 
-<div *ngIf="types?.length==0">
-  <p>No items to display</p>
-</div>
-</div>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-doc let-i="rowIndex">
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{doc?.PlantName}}</td>
+              <td>{{doc?.PlantCode}}</td>
+              <td>{{doc?.Comments}}</td>
+              <td>{{doc?.ModifiedBy}}</td>
+              <td>{{doc?.ModifiedDate }}</td>
+              <td>{{doc?.Status }}</td>
+              <!--<td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>-->
+              <td class="text-center"><i class="bi bi-pencil"></i></td>
+              <!--(click)="editdoc(doc)"-->
+            </tr>
+          </ng-template>
+        <!--</p-table>-->
+      </div>
+    </div>
+  </div>
 </div>

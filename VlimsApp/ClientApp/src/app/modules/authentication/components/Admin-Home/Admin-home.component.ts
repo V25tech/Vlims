@@ -10,16 +10,21 @@ export class AdminHomeComponent {
   constructor(private router: Router) {}
 
   navigateTo(navTo: any) {
-    if (navTo === 'securitymgmt') {
-      this.router.navigate(['/securitymgmt']);
-    } else if (navTo === 'Hierarchy') {
-      this.router.navigate(['/templates']);
-    } else if (navTo === 'Plant') {
-      this.router.navigate(['/workflow']);
+    debugger;
+    if (navTo === 'security') {
+      this.router.navigate(['/admin/security']);
+    } else if (navTo === 'hierrachy') {
+      this.router.navigate(['/department']);
+    } else if (navTo === 'plant') {
+      this.router.navigate(['/plant']);
     } else if (navTo === 'User') {
       this.router.navigate(['/document-master']);
     } else if (navTo === 'Approval') {
       this.router.navigate(['/document-manager']);
+    } else if (navTo === 'UserGroup') {
+      this.router.navigate(['/usergroupconfiguration']);
+    } else if (navTo === 'Roles') {
+      this.router.navigate(['/Roles']);
     } else if (navTo === 'home') {
       this.router.navigate(['/home']);
     }

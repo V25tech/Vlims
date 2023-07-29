@@ -12,7 +12,7 @@ import { CommonService } from '../../../../shared/common.service';
   templateUrl: './department.component.html'
 })
 export class DepartmentComponent implements OnInit {
-  types: Array<DepartmentConfiguration> = [];
+  types: DepartmentConfiguration[] = [];
   viewMode:boolean=false;
   constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService, private spinner: NgxSpinnerService, private router: Router) { }
 
@@ -49,4 +49,9 @@ getdepartments() {
   navigateToAddDepartment(): void {
     this.router.navigate(['/document-type/add']);
   }
+  editBrand(doc : DepartmentConfiguration)
+  {
+    
+  }
+  
 }
