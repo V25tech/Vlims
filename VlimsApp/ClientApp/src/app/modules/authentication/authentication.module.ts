@@ -13,8 +13,6 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { RolesComponent } from './components/Roles/roles.component';
-import { AdminHomeComponent } from './components/Admin-Home/Admin-home.component';
 import { AppintializorService, serverConfigInitializerFactory } from 'src/app/shared/appintializor.service';
 import { MessageService } from 'primeng/api';
 

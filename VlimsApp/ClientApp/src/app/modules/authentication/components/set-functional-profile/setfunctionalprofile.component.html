@@ -1,63 +1,521 @@
+ <body>
 
-<div class="card shadow mb-4" style="padding-top: 2px;">
-    <div class="card-header py-3">
-        <div col-6 style="float: left;">
-        <h6 class="m-0 font-weight-bold text-primary">Department Configuration</h6>
+      <div class="container-fluid">
+  <div class="row p-2">
+    <div class="col">
+      <h4 class="page-title">Set Functional Profile</h4>
     </div>
-    <div col-6 style="float: right;">
-        <button class="btn btn-primary"  type="button" [routerLink]="['/mainpage/hierarchy/adddept']"
-      >Add</button>
-    </div>
-    </div>
-<div class="card-body">
-   
-  <div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="types?.length>   0" >
-       
-      <thead>
-        <tr>
-          <th scope="col">S.No</th>
-          <th scope="col">SecurityManagement</th>
-          <th scope="col">SecurityConfiguration</th>
-          <th scope="col">E sign and Approval Configuration</th>
-          <th scope="col">HirearchyManagement</th>
-          <th scope="col">Role Configuration</th>
-          <th scope="col">DepartmentConfiguration</th>
-          <th scope="col">SetFunctionalProfile</th>
-          <th scope="col">PlantManagement</th>
-          <th scope="col">UserManagement</th>
-          <th scope="col">UserConfiguration</th>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <form (ngSubmit)="adddoctype(documentType)"  #fm="ngForm">
+      <div class="p-4 bg-white shadow-dark rounded-2">
+        
+        
+        
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Admin Management</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="am"
+                name="am"
+                placeholder=""
+                [(ngModel)]="documentType.Am" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Security Management</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="sm"
+                name="sm"
+                placeholder=""
+                [(ngModel)]="documentType.sm" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+                    <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">Security Configurations</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="Security"
+                name="Security"
+                placeholder=""
+                [(ngModel)]="documentType.Security" [disabled]="viewMode"
+                
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >E sign and Aprroval Configurations</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="esign"
+                name="esign"
+                placeholder=""
+                [(ngModel)]="documentType.esign" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Hirearchy Management</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="Hirearchy"
+                name="Hirearchy"
+                placeholder=""
+                [(ngModel)]="documentType.Hirearchy" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+              <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Role Configuration</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="role"
+                name="role"
+                placeholder=""
+                [(ngModel)]="documentType.role" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">Department Configuratio</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="Department"
+                name="Department"
+                placeholder=""
+                [(ngModel)]="documentType.Department" [disabled]="viewMode"
+                
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Set Functional Profile</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="Set"
+                name="Set"
+                placeholder=""
+                [(ngModel)]="documentType.Set" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Plant Managementt</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="PlantM"
+                name="PlantM"
+                placeholder=""
+                [(ngModel)]="documentType.PlantM" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >User Managementt</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="UserM"
+                name="UserM"
+                placeholder=""
+                [(ngModel)]="documentType.UserM" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
           
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let doc of types; let i=index">
-          <th>{{i+1}}</th>
-          <td>{{doc?.sno}}</td>
-          <td>{{doc?.SecurityManagement }}</td>
-          <td>{{doc?.SecurityConfiguration}}</td>
-          <td>{{doc?.E sign and Approval Configuration}}</td>
-          <td>{{doc?.HirearchyManagement}}</td>
-          <td>{{doc?.Role Configuration }}</td>
-          <td>{{doc?.DepartmentConfiguration}}</td>
-          <td>{{doc?.UserConfiguration}}</td>
-          <td>Success</td>
-          <td>
-            <button class="btn" data-toggle="modal" data-target="#exampleModal" [id]="doc.DTID"
-                    data-backdrop="static" data-keyboard="false" (click)="editBrand(doc);">
-              <span class="fa fa-edit"></span>
-            </button>
-            <!-- <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button> -->
-          </td>
-        </tr>
-      </tbody>
+              <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >User Configuration</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="userconfig"
+                name="userconfig"
+                placeholder=""
+                [(ngModel)]="documentType.userconfig" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">Activate/De-Activate</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="Activate"
+                name="Activate"
+                placeholder=""
+                [(ngModel)]="documentType.Activate" [disabled]="viewMode"
+                
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >User Group Configuration</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="usergroup"
+                name="usergroup"
+                placeholder=""
+                [(ngModel)]="documentType.usergroup" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Audit Log</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="Audit"
+                name="Audit"
+                placeholder=""
+                [(ngModel)]="documentType.Audit" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Document Master</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="dc"
+                name="dc"
+                placeholder=""
+                [(ngModel)]="documentType.dc" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          
+              <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Document Type Configuration</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="dtc"
+                name="dtc"
+                placeholder=""
+                [(ngModel)]="documentType.dtc" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">Document Template Configuration</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="documenttemplate"
+                name="documenttemplate"
+                placeholder=""
+                [(ngModel)]="documentType.documenttemplate" [disabled]="viewMode"
+                
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >WorkFlow Configuration</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="workflow"
+                name="workflow"
+                placeholder=""
+                [(ngModel)]="documentType.workflow" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Dash Board Configuration</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="dashboard"
+                name="dashboard"
+                placeholder=""
+                [(ngModel)]="documentType.dashboard" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Notification Configuration</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="Notification"
+                name="Notification"
+                placeholder=""
+                [(ngModel)]="documentType.Notification" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+              <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Document Master</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="documentmaster"
+                name="documentmaster"
+                placeholder=""
+                [(ngModel)]="documentType.documentmaster" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">Document Request</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="documentrequest"
+                name="documentrequest"
+                placeholder=""
+                [(ngModel)]="documentType.documentrequest" [disabled]="viewMode"
+                
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Document Preparation</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="documentpreparation"
+                name="documentpreparation"
+                placeholder=""
+                [(ngModel)]="documentType.documentpreparation" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Document EffectiveOut</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="documenteffective"
+                name="documenteffective"
+                placeholder=""
+                [(ngModel)]="documentType.documenteffective" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Additional Tasks</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="Additional"
+                name="Additional"
+                placeholder=""
+                [(ngModel)]="documentType.Additional" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+                    <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Additional Tasks</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="Additional"
+                name="Additional"
+                placeholder=""
+                [(ngModel)]="documentType.Additional" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+                    <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Document Revision</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="documentrevision"
+                name="documentrevision"
+                placeholder=""
+                [(ngModel)]="documentType.documentrevision" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+                    <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Document Repository</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="docrepository"
+                name="docrepository"
+                placeholder=""
+                [(ngModel)]="documentType.docrepository" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+                    <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Work Assigned To ME</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="WATM"
+                name="WATM"
+                placeholder=""
+                [(ngModel)]="documentType.WATM" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label"
+              >Reports</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="reports"
+                name="reports"
+                placeholder=""
+                [(ngModel)]="documentType.WATM" [disabled]="viewMode"
+               
+              />
+            </div>
+          </div>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        
+        
+        
+        
+        
+        
+      </div>
 
-    </table>
-  
-  </div>
- 
-  <div *ngIf="types?.length==0">
-    <p>No items to display</p>
+      <div class="form-group row my-4">
+        <div class="col-sm-10 offset-sm-2">
+          <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
+          <button type="submit" class="btn btn-primary" *ngIf="!editMode">Submit</button>
+          <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
+        </div>
+      </div>
+
+    </form>
+    </div>
   </div>
 </div>
-</div>
+
+
+  </body>

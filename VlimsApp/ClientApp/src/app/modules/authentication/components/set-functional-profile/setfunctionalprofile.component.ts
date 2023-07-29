@@ -1,8 +1,11 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestContext } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { setfunctionalprofileconfigurationservice } from '../../../services/setfunctionalprofile.service';
+
 
 @Component({
   selector: 'app-functionalprofile',
@@ -20,7 +23,10 @@ getsetfunctionalprofile() {
    let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.doctypeservice.getsetfunctionalprofileconfiguration(objrequest).subscribe((data: any) => {
         debugger
-        this.types = data.Response;       
+        this.types = data.Response;
+        console.log(this.types);
+      }, er => {
+     
       });
   }
 }

@@ -1,56 +1,52 @@
+<div class="container-fluid">
+  <div class="row p-2">
+    <div class="col">
 
-<div class="card shadow mb-4" style="padding-top: 2px;">
-    <div class="card-header py-3">
-        <div col-6 style="float: left;">
-        <h6 class="m-0 font-weight-bold text-primary">Role Configuration</h6>
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="page-title flex-grow-1">Document Types</h4>
+        <div class="d-flex page-title-actions">
+          <input type="text" class="form-control" placeholder="Search">
+          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddRoles()"  >Add</button>
+        </div>
+      </div>
     </div>
-    <div col-6 style="float: right;">
-        <button class="btn btn-primary"  type="button" 
-      >Add</button>
-    </div>
-    </div>
-<div class="card-body">
-   
-  <div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="types.length>0" >
-       
-      <thead>
-        <tr>
-          <th scope="col">S.No</th>
-          <th scope="col">Role Name</th>
-          <th scope="col">Department</th>
-          <th scope="col">Comments</th>
-          <th scope="col">Registered By</th>
-          <th scope="col">Registered On</th>
-          <th scope="col">Status</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let doc of types; let i=index">
-          <th>{{i+1}}</th>
-          <td>{{doc?.Role}}</td>
-          <td>{{doc?.Department}}</td>
-          <td>{{doc?.Comments}}</td>
-          <td>{{doc?.ModifiedBy}}</td>
-          <td>{{doc?.ModifiedDate}}</td>
-          <td>Success</td>
-          <td>
-            <button class="btn" data-toggle="modal" data-target="#exampleModal" 
-            
-              data-backdrop="static" data-keyboard="false" > <span
-                class="fa fa-edit"></span> </button>
-            <!--(click)="editBrand(doc);" <button class="btn"> <span class="fa fa-flag fa-trash" (click)="deleteBrand(i,doc);"></span></button> -->
-          </td>
-        </tr>
-      </tbody>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <div class="p-4 bg-white shadow-dark rounded-2">
+        <p-table [value]="types" tableStyleClass="table table-striped">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>#</th>
+              <th pSortableColumn="S.No" style="width:20%">S.No<p-sortIcon field="S.no"></p-sortIcon></th>
+              <th pSortableColumn="Role Name" style="width:10%">Role Name <p-sortIcon field="Role Name"></p-sortIcon></th>
+              <th pSortableColumn="Department" style="width:15%">Department<p-sortIcon field="Department"></p-sortIcon></th>
+              <th pSortableColumn="Comments" style="width:20%">Comments<p-sortIcon field="Comments"></p-sortIcon></th>
+              <th pSortableColumn="Registered By" style="width:200px">Registered By<p-sortIcon field="Registered By"></p-sortIcon></th>
+              <th pSortableColumn="Registered On" style="width:200px">Registered On <p-sortIcon field="Registered On"></p-sortIcon></th>
+              <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
+              <th pSortableColumn="Modify" style="width:200px">Modify<p-sortIcon field="Modify"></p-sortIcon></th>
 
-    </table>
-  
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-doc let-i="rowIndex">
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{doc?.s.no}}</td>
+              <td>{{doc?.rolename}}</td>
+              <td>{{doc?.department}}</td>
+              <td>{{doc?.comments}}</td>
+              <td>{{doc?.registeredby}}</td>
+              <td>{{doc?.registeredon}}</td>
+              <td>{{doc?.status}}</td>
+              <td>{{doc?.modify}}</td>
+
+              <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
+              <td class="text-center" (click)="editdoc(doc)"><i class="bi bi-pencil"></i></td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
   </div>
- 
-  <div *ngIf="types?.length==0">
-    <p>No items to display</p>
-  </div>
-</div>
-</div>
+</div>  

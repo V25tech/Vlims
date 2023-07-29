@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-//import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService, Spinner } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { DepartmentconfigurationService } from '../../../services/departmentconfiguration.service';

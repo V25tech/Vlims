@@ -123,11 +123,11 @@ const routes: Routes = [
     component: Usergroupconfiguration,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'department',
-    component: DepartmentComponent,
-    canActivate: [AuthGuard],
-  },
+  //{
+  //  path: 'department',
+  //  component: DepartmentComponent,
+  //  canActivate: [AuthGuard],
+  //},
 ];
 
 @NgModule({
