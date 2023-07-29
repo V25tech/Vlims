@@ -116,10 +116,10 @@ export class workflowconiguration {
   reviewsCount: number=0;
   approvalsCount: number=0;
   reviewsType:string | null='';
-  reviewersGroup:Usergroupconfiguration | null=null
+  reviewersGroup:string | null=null
   reviewers:UserConfiguration[] | null=[]
   approvalsType:string=''
-  approvalsGroup:Usergroupconfiguration | null=null
+  approvalsGroup:string | null=null
   approvals:UserConfiguration[] | null=[]
   CreatedBy: string='';
   CreatedDate:string | null=null;

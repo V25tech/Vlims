@@ -2,7 +2,7 @@
     [WFCId_PSY]            INT            IDENTITY (1, 1) NOT NULL,
     [DocumentMasterId_PSY] NVARCHAR (50)  NOT NULL,
     [workflowName_PSY]     NVARCHAR (50)  NULL,
-    [code]                 NVARCHAR (50)  NULL,   
+    [code_PSY]                 NVARCHAR (50)  NULL,   
     [documentstage_PSY]    NVARCHAR (50)  NULL,
     [documenttype_PSY]     NVARCHAR (50)  NULL,
     [department_PSY]       NVARCHAR (50)  NULL,

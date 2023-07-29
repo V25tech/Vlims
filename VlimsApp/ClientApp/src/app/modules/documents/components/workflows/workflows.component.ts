@@ -26,7 +26,7 @@ export class WorkflowsComponent {
   }
 
   navigateToAddWorkflow(): void {
-    this.router.navigate(['/workflows/add']);
+    this.router.navigate(['/workflows/add',this.types.length]);
   }
   getdocumenttypeconfig() {
     this.loader.show();
