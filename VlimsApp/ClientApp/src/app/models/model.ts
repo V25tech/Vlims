@@ -162,7 +162,8 @@ export class DepartmentConfiguration {
   CreatedBy: string=''
   CreatedDate: string | null='';
   ModifiedBy: string=''
-  ModifiedDate: string | null='';
+  ModifiedDate: string | null = '';
+  Role: string = '';
 }
 export class RoleConfiguration {
   ROCFId: string=''

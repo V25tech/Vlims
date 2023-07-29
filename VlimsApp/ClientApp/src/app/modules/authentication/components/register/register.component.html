@@ -1,1 +1,108 @@
-<p>register works!</p>
+
+<div class="container-fluid">
+  <div class="row p-2">
+    <div class="col">
+      <h4 class="page-title">New User</h4>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <form (ngSubmit)="adddoctype(newuser)" #fm="ngForm">
+        <div class="p-4 bg-white shadow-dark rounded-2">
+
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-10">
+              <input type="text"
+                     class="form-control"
+                     id="firstname"
+                     name="firstname"
+                     placeholder="Enter First Nmae"
+                     [(ngModel)]="newuser.FirstName" [disabled]="viewMode" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-10">
+              <input type="text"
+                     class="form-control"
+                     id="lastname"
+                     name="lastname"
+                     placeholder="Enter Last Name"
+                     [(ngModel)]="newuser.LastName" [disabled]="viewMode" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">User Id</label>
+            <div class="col-sm-10">
+              <input type="text"
+                     class="form-control"
+                     id="userid"
+                     name="userid"
+                     placeholder="Enter Userid"
+                     [(ngModel)]="newuser.UserID" [disabled]="viewMode" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">Department</label>
+            <div class="col-sm-10">
+
+
+
+              <select class="form-control" [(ngModel)]="adduser.Department" name="department" [disabled]="viewMode">
+                <option value="Select">Select</option>
+                <option *ngFor="let type of types" value={{type.DepartmentName}}>{{type?.DepartmentName}}</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">Role</label>
+            <div class="col-sm-10">
+
+
+
+              <select class="form-control" [(ngModel)]="adduser.Role" name="role" [disabled]="viewMode">
+                <option value="Select">Select</option>
+                <option *ngFor="let type of types" value={{type.Role}}>{{type?.Role}}</option>
+              </select>
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label">DOJ</label>
+            <div class="col-sm-10">
+              <input type="date"
+                     class="form-control"
+                     id="doj"
+                     name="doj"
+                     placeholder="Enter First Nmae"
+                     [(ngModel)]="newuser.Doj" [disabled]="viewMode" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label">Email Id</label>
+            <div class="col-sm-10">
+              <input type="text"
+                     class="form-control"
+                     id="emailid"
+                     name="emailid"
+                     placeholder="Enter First Nmae"
+                     [(ngModel)]="newuser.EmailId" [disabled]="viewMode" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row my-4">
+          <div class="col-sm-10 offset-sm-2">
+            <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
+            <button type="submit" class="btn btn-primary" *ngIf="!editMode">Submit</button>
+            <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
