@@ -35,11 +35,11 @@ namespace PolicySummary.Sheet1.Services
                 validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.Ugcid,50, nameof(userGroupConfiguration.Ugcid)));
                 validationMessages.Append(validationHelper.NullCheckValidator(userGroupConfiguration.Usermanagementid, nameof(userGroupConfiguration.Usermanagementid)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.Usermanagementid,50, nameof(userGroupConfiguration.Usermanagementid)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.Usergroupname,50, nameof(userGroupConfiguration.Usergroupname)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.Code,50, nameof(userGroupConfiguration.Code)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.Users,50, nameof(userGroupConfiguration.Users)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.CreatedBy,100, nameof(userGroupConfiguration.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.ModifiedBy,100, nameof(userGroupConfiguration.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.usergroupname,50, nameof(userGroupConfiguration.usergroupname)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.code,50, nameof(userGroupConfiguration.code)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.users,50, nameof(userGroupConfiguration.users)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.createdBy,100, nameof(userGroupConfiguration.createdBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.modifiedBy,100, nameof(userGroupConfiguration.modifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
                     return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));

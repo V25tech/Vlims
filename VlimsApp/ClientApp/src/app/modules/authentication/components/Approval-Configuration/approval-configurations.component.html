@@ -6,16 +6,16 @@
   </div>
   <div class="row p-2">
     <div class="col">
-      <form (ngSubmit)="adddoctype(documentType)" #fm="ngForm">
+      <form (ngSubmit)="addapprovalconfig(approvalconfig)" #fm="ngForm">
         <div class="p-4 bg-white shadow-dark rounded-2">
 
 
-          <h5 class="page-title">Document Type Configuration</h5>
+          
           <div class="form-group row">
             <label for="documentType" class="col-sm-2 col-form-label">No Of Approvals</label>
             <div class="col-sm-10">
 
-              <select class="form-control" id="noofapprovals" name="noofapprovals" [(ngModel)]="approvals.noofapprovals" [disabled]="viewMode">
+              <select class="form-control" id="noofapprovals" name="noofapprovals" [(ngModel)]="approvalconfig.NoOfApprovals1" [disabled]="viewMode">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -26,11 +26,11 @@
 
             </div>
           </div>
-          <h5 class="page-title">Document Template Configuration</h5>
+          
           <div class="form-group row">
             <label for="prefix" class="col-sm-2 col-form-label">No Of Approvals</label>
             <div class="col-sm-10">
-              <select class="form-control" id="approval2" name="approval2" [(ngModel)]="approvalconfig.approval2" [disabled]="viewMode">
+              <select class="form-control" id="approval2" name="approval2" [(ngModel)]="approvalconfig.NoOfApprovals2" [disabled]="viewMode">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -40,11 +40,11 @@
               </select>
             </div>
           </div>
-          <h5 class="page-title">Workflow Configuration</h5>
+          
           <div class="form-group row">
             <label for="prefix" class="col-sm-2 col-form-label">No Of Approvals</label>
             <div class="col-sm-10">
-              <select class="form-control" id="approval3" name="approval3" [(ngModel)]="approvalconfigs.approval3" [disabled]="viewMode">
+              <select class="form-control" id="approval3" name="approval3" [(ngModel)]="approvalconfig.NoOfApprovals3" [disabled]="viewMode">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>

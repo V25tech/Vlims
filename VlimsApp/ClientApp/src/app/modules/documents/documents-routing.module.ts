@@ -11,9 +11,14 @@ import { AddWorkflowComponent } from './components/add-workflow/add-workflow.com
 import { WorkflowsComponent } from './components/workflows/workflows.component';
 import { DocumentMasterHomeComponent } from './components/document-master-home/document-master-home.component';
 import { AdminHomeComponent } from '../authentication/components/Admin-Home/Admin-home.component';
-
-
-
+import { SecuritymgmtComponent } from '../authentication/components/Securitymgmt/securitymgmt.component';
+import { PlantComponent } from '../authentication/components/Plantmanagement/plantmanagement.component';
+import { RolesComponent } from '../authentication/components/Roles/roles.component';
+import { Usergroupconfiguration } from '../../models/model';
+import { DepartmentComponent } from '../authentication/components/Department/department.component';
+import { UserConfigurationComponent } from '../authentication/components/User-configuration/user-configuration.component';
+import { ApprovalConfigurationsComponent } from '../authentication/components/Approval-Configuration/approval-configurations.component';
+import { UsergroupconfigurationComponent } from '../authentication/components/User-Group/usergroupconfiguration.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -26,7 +31,7 @@ const routes: Routes = [
   { path: 'assigned', component: AssignedComponent, canActivate: [AuthGuard] },
   { path: 'document-master', component: DocumentMasterHomeComponent, canActivate: [AuthGuard] },
   {
-    path: 'document-types',    component: DocumentTypesComponent,
+    path: 'document-types', component: DocumentTypesComponent,
 
     canActivate: [AuthGuard],
   },
@@ -71,61 +76,112 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'workflows/add/:count',
-    component: AddWorkflowComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'workflows/edit/:workflowId',
+    path: 'workflows/add',
     component: AddWorkflowComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'admin',
     component: AdminHomeComponent,
-    children :[
+    children: [
       {
-          path:'',
-          component:AdminHomeComponent,
+        path: '',
+        component: AdminHomeComponent,
       },
-      // {
-      //   path:'security',
-      //   component:SecuritymgmtComponent,
-      // }
+      //{
+      //  path: 'security',
+      //  component: SecuritymgmtComponent,
+      //}
+    ]
+  },
+  // {
+  //   path: 'admin',
+  //   component: AdminHomeComponent,
+  //   canActivate: [AuthGuard],
+  // },
+
+
+  {
+    path: 'admin/security',
+    component: SecuritymgmtComponent,
+    children: [
+      {
+        path: '',
+        component: SecuritymgmtComponent,
+      }
     ]
   },
   {
-    path: 'admin',
-    component: AdminHomeComponent,
+    path: 'admin/plant',
+    component: PlantComponent,
+    children: [
+      {
+        path: '',
+        component: PlantComponent,
+      }
+    ]
+  },
+  {
+    path: 'admin/department',
+    component: DepartmentComponent,
+    children: [
+      {
+        path: '',
+        component: DepartmentComponent,
+      }
+    ]
+  },
+  {
+    path: 'admin/user',
+    component: UserConfigurationComponent,
+    children: [
+      {
+        path: '',
+        component: UserConfigurationComponent,
+      }
+    ]
+  },
+  {
+    path: 'admin/approvalconfig',
+    component: ApprovalConfigurationsComponent,
+    children: [
+      {
+        path: '',
+        component: ApprovalConfigurationsComponent,
+      }
+    ]
+  },
+  {
+    path: 'admin/roles',
+    component: RolesComponent,
+    children: [
+      {
+        path: '',
+        component: RolesComponent,
+      }
+    ]
+  },
+  {
+    path: 'admin/usergroup',
+    component: UsergroupconfigurationComponent,
+    children: [
+      {
+        path: '',
+        component: UsergroupconfigurationComponent,
+      }
+    ]
+  },
+  //admin / usergroup
+  {
+    path: 'roles',
+    component: RolesComponent,
     canActivate: [AuthGuard],
   },
-
-
-  // {
-  //   path: 'admin/security',
-  //   component: SecuritymgmtComponent,
-  //   children :[
-  //     {
-  //         path:'',
-  //         //component:null,
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: 'admin/plant',
-  //   //component: PlantComponent,
-  //   canActivate: [AuthGuard],
-  // },
-  // {
-  //   path: 'roles',
-  //   component: RolesComponent,
-  //   canActivate: [AuthGuard],
-  // },
-  // {
-  //   path: 'UserGroup',
-  //   component: Usergroupconfiguration,
-  //   canActivate: [AuthGuard],
-  // },
+  {
+    path: 'UserGroup',
+    component: Usergroupconfiguration,
+    canActivate: [AuthGuard],
+  },
   //{
   //  path: 'department',
   //  component: DepartmentComponent,
@@ -137,4 +193,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DocumentsRoutingModule {}
+export class DocumentsRoutingModule { }

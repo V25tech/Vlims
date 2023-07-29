@@ -15,8 +15,8 @@
   <div class="row p-2">
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
-        <!--<p-table tableStyleClass="table table-striped">-->
-          <!--[value]="types"-->
+        <p-table tableStyleClass="table table-striped" [value]="types">
+         
           <ng-template pTemplate="header">
             <tr>
               <th>#</th>
@@ -41,12 +41,12 @@
               <td>{{doc?.ModifiedBy}}</td>
               <td>{{doc?.ModifiedDate }}</td>
               <td>{{doc?.Status }}</td>
-              <!--<td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>-->
+              <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
               <td class="text-center"><i class="bi bi-pencil"></i></td>
               <!--(click)="editdoc(doc)"-->
             </tr>
           </ng-template>
-        <!--</p-table>-->
+        </p-table>
       </div>
     </div>
   </div>

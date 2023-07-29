@@ -61,8 +61,8 @@ namespace Vlims.Administration.Manager
         {
             try
             {
-                userGroupConfiguration.CreatedBy = "manoj";
-                userGroupConfiguration.ModifiedBy = "manoj";
+                userGroupConfiguration.createdBy = "manoj";
+                userGroupConfiguration.modifiedBy = "manoj";
                 String validationMessages = UserGroupConfigurationValidator.IsValidUserGroupConfiguration(userGroupConfiguration);
                 //if (validationMessages.Length <= 0)
                 //{

@@ -42,7 +42,7 @@ getdepartments() {
     } else if (status === 'Pending') {
       return 'status-in-progress';
     } else {
-      return '';
+      return 'Success';
     }
   }
   navigateToAddDepartment(): void {

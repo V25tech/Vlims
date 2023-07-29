@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { RequestContext, UserConfiguration, Usergroupconfiguration } from '../model/models';
-import { CommonService } from '../shared/common.service';
+
 import { Router } from '@angular/router';
-import { usergroupconfigurationService } from '../Services/usergroupconfiguration.service';
-import { UsersconfigurationService } from '../usersconfiguration.service';
+import { RequestContext, UserConfiguration, Usergroupconfiguration } from '../../../../models/model';
+import { CommonService } from '../../../../shared/common.service';
+import { UsersconfigurationService } from '../../../services/usersconfiguration.service';
+import { usergroupconfigurationService } from './add-usergroupconfiguration.service';
+
 
 @Component({
   selector: 'app-add-usergroupconfiguration',
@@ -11,12 +13,12 @@ import { UsersconfigurationService } from '../usersconfiguration.service';
   styleUrls: ['./add-usergroupconfiguration.component.css']
 })
 export class AddusergroupconfigurationComponent implements OnInit {
-  types: Array<UserConfiguration> = [];
+  types: UserConfiguration[] = [];
   adduser = new Usergroupconfiguration();
   newdept= new Usergroupconfiguration();
   editMode: boolean = false;
   viewMode: boolean = false;
-  objname: string;
+  objname: string | undefined;
   title: string = "Add User Group Configuration";
   constructor(private commonsvc: CommonService, private cdr: ChangeDetectorRef, private ugService: usergroupconfigurationService, private userService: UsersconfigurationService,
     private router: Router) { }

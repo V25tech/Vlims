@@ -42,4 +42,22 @@ export class UsergroupconfigurationComponent implements OnInit {
     this.commonsvc.userGroupConfig = doc;
     this.router.navigate(['/mainpage/users/addusergroup']);
   }
+  addusergroup(): void {
+    this.router.navigate(['/document-type/add']);
+  }
+  getStatusClass(status: string): string {
+    debugger
+    if (status === 'In Progress') {
+      return 'status-in-progress';
+    } else if (status === 'Completed') {
+      return 'status-completed';
+    } else if (status === 'Under Review') {
+      return 'status-under-review';
+    } else if (status === 'Pending') {
+      return 'status-in-progress';
+    } else {
+      return '';
+    }
+  }
+ 
 }

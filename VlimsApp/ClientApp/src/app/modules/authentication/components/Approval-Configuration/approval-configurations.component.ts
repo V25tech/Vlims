@@ -10,6 +10,9 @@ import { ApprovalConfigurationService } from '../../../services/approval-configu
 })
 export class ApprovalConfigurationsComponent implements OnInit {
   tabselect: string = 'type';
+  editMode:boolean=false;
+  viewMode:boolean=false;
+  approvalconfig=new ApprovalManagament();
   constructor(private router: Router, private appconfigserv: ApprovalConfigurationService) { }
 
   ngOnInit() {
@@ -25,6 +28,10 @@ export class ApprovalConfigurationsComponent implements OnInit {
       this.router.navigate(['/mainpage/hierarchy']);
     });
 
+
+  }
+  onCancel()
+  {
 
   }
 }

@@ -17,8 +17,7 @@
         <p-table [value]="types" tableStyleClass="table table-striped">
           <ng-template pTemplate="header">
             <tr>
-              <th>#</th>
-              <th pSortableColumn="S.no" style="width:20%">S.no<p-sortIcon field="S.no"></p-sortIcon></th>
+              <th>S.No</th>              
               <th pSortableColumn="FirstName" style="width:10%">First Name <p-sortIcon field="FirstName"></p-sortIcon></th>
               <th pSortableColumn="LastName" style="width:15%">Last Name<p-sortIcon field="LastName"></p-sortIcon></th>
               <th pSortableColumn="UserId" style="width:20%">UserId<p-sortIcon field="UserId"></p-sortIcon></th>
@@ -26,23 +25,20 @@
               <th pSortableColumn="EmployeeId" style="width:200px">Employee Id<p-sortIcon field="EmployeeId"></p-sortIcon></th>
               <th pSortableColumn="E-mail-Id" style="width:200px">E-mail Id<p-sortIcon field="E-mail-Id"></p-sortIcon></th>
               <th pSortableColumn="Modify" style="width:200px">Modify <p-sortIcon field="Modify"></p-sortIcon></th>
-              
-
+              <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
+              <th pSortableColumn="Action" style="width:200px">Action <p-sortIcon field="Action"></p-sortIcon></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-doc let-i="rowIndex">
             <tr>
-              <td>{{ i + 1 }}</td>
-              <td>{{doc?.s.no}}</td>
-              <td>{{doc?.firstname}}</td>
-              <td>{{doc?.lastname}}</td>
-              <td>{{doc?.userid}}</td>
-              <td>{{doc?.department}}</td>
-              <td>{{doc?.employeeid}}</td>
-              <td>{{doc?.emailid}}</td>
-              <td>{{doc?.Modify}}</td>
-           
-            
+              <td>{{ i + 1 }}</td>              
+              <td>{{doc?.FirstName}}</td>
+              <td>{{doc?.LastName}}</td>
+              <td>{{doc?.UserID}}</td>
+              <td>{{doc?.Department}}</td>
+              <td>{{doc?.Empid}}</td>
+              <td>{{doc?.EmailId}}</td>
+              <td>{{doc?.ModifiedBy}}</td>
               <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
               <td class="text-center" (click)="editdoc(doc)"><i class="bi bi-pencil"></i></td>
             </tr>

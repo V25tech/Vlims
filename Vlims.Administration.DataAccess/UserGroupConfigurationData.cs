@@ -60,12 +60,12 @@ namespace Vlims.Administration.DataAccess
             {
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usermanagementid, Value = "1" });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usergroupname, Value = userGroupConfiguration.Usergroupname });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Code, Value = userGroupConfiguration.Code });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Users, Value = userGroupConfiguration.Users });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = UserGroupConfigurationConstants.Totalusers, Value = userGroupConfiguration.Totalusers });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.CreatedBy, Value = userGroupConfiguration.CreatedBy });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.ModifiedBy, Value = userGroupConfiguration.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usergroupname, Value = userGroupConfiguration.usergroupname });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Code, Value = userGroupConfiguration.code });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Users, Value = userGroupConfiguration.users });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = UserGroupConfigurationConstants.Totalusers, Value = userGroupConfiguration.totalusers });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.CreatedBy, Value = userGroupConfiguration.createdBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.ModifiedBy, Value = userGroupConfiguration.modifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(UserGroupConfigurationConstants.USP_UserGroupConfiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -82,11 +82,11 @@ namespace Vlims.Administration.DataAccess
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Ugcid, Value = userGroupConfiguration.Ugcid });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usermanagementid, Value = userGroupConfiguration.Usermanagementid });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usergroupname, Value = userGroupConfiguration.Usergroupname });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Code, Value = userGroupConfiguration.Code });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Users, Value = userGroupConfiguration.Users });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = UserGroupConfigurationConstants.Totalusers, Value = userGroupConfiguration.Totalusers });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.ModifiedBy, Value = userGroupConfiguration.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usergroupname, Value = userGroupConfiguration.usergroupname });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Code, Value = userGroupConfiguration.code });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Users, Value = userGroupConfiguration.users });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = UserGroupConfigurationConstants.Totalusers, Value = userGroupConfiguration.totalusers });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.ModifiedBy, Value = userGroupConfiguration.modifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(UserGroupConfigurationConstants.USP_UserGroupConfiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

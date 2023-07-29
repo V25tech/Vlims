@@ -63,7 +63,7 @@ namespace Vlims.Administration.Entities
             }
         }
         
-        public string Usergroupname
+        public string usergroupname
         {
             get
             {
@@ -75,7 +75,7 @@ namespace Vlims.Administration.Entities
             }
         }
         
-        public string Code
+        public string code
         {
             get
             {
@@ -87,7 +87,7 @@ namespace Vlims.Administration.Entities
             }
         }
         
-        public string Users
+        public string users
         {
             get
             {
@@ -99,7 +99,7 @@ namespace Vlims.Administration.Entities
             }
         }
         
-        public string Totalusers
+        public string totalusers
         {
             get
             {
@@ -111,7 +111,7 @@ namespace Vlims.Administration.Entities
             }
         }
         
-        public string CreatedBy
+        public string createdBy
         {
             get
             {
@@ -123,7 +123,7 @@ namespace Vlims.Administration.Entities
             }
         }
         
-        public DateTime? CreatedDate
+        public DateTime? createdDate
         {
             get
             {
@@ -135,7 +135,7 @@ namespace Vlims.Administration.Entities
             }
         }
         
-        public string ModifiedBy
+        public string modifiedBy
         {
             get
             {
@@ -147,7 +147,7 @@ namespace Vlims.Administration.Entities
             }
         }
 
-        public string Status
+        public string status
         {
             get
             {
@@ -159,7 +159,7 @@ namespace Vlims.Administration.Entities
             }
         }
 
-        public DateTime? ModifiedDate
+        public DateTime? modifiedDate
         {
             get
             {

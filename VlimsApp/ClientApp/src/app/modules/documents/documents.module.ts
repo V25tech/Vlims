@@ -24,6 +24,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { RolesComponent } from '../authentication/components/Roles/roles.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { SecuritymgmtComponent } from '../authentication/components/Securitymgmt/securitymgmt.component';
+import { PlantComponent } from '../authentication/components/Plantmanagement/plantmanagement.component';
+import { DepartmentComponent } from '../authentication/components/Department/department.component';
+import { UserConfigurationComponent } from '../authentication/components/User-configuration/user-configuration.component';
+import { ApprovalConfigurationsComponent } from '../authentication/components/Approval-Configuration/approval-configurations.component';
+import { UsergroupconfigurationComponent } from '../authentication/components/User-Group/usergroupconfiguration.component';
 
 
 
@@ -38,8 +44,15 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     WorkflowsComponent,
     AddWorkflowComponent,
     DocumentMasterHomeComponent,
-   
-    RolesComponent
+    SecuritymgmtComponent,
+    PlantComponent,
+    RolesComponent,
+    DepartmentComponent,
+    UserConfigurationComponent,
+    ApprovalConfigurationsComponent,
+    RolesComponent,
+    UserConfigurationComponent,
+    UsergroupconfigurationComponent,
   ],
   imports: [
     CommonModule,

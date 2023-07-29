@@ -9,8 +9,8 @@ import { UsersconfigurationService } from '../../../services/usersconfiguration.
 
 @Component({
   selector: 'app-user-configuration',
-  templateUrl: './user-configuration.component.html',
-  styleUrls: ['./user-configuration.component.css']
+  templateUrl: './user-configuration.component.html'
+  
 })
 export class UserConfigurationComponent implements OnInit {
   types: UserConfiguration[] = [];
@@ -63,6 +63,10 @@ export class UserConfigurationComponent implements OnInit {
     } else {
       return '';
     }
+  }
+  addusergroup()
+  {
+    
   }
 
 }
