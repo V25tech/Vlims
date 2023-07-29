@@ -6,7 +6,9 @@
 @approvalsCount_PSY Int,
 @CreatedBy_PSY NVarChar(100),
 @ModifiedBy_PSY NVarChar(100),
-@Status_PSY NVarChar(100)
+@Status_PSY NVarChar(100),
+@document_PSY xml,
+@workflowname_PSY NVarchar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -23,7 +25,9 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-Status_PSY)
+Status_PSY,
+Document_PSY,
+workflowName_PSY)
  VALUES 
 (@DocumentMasterId_PSY,
 @documentstage_PSY,
@@ -35,7 +39,7 @@ Status_PSY)
  GetDate() ,
 @ModifiedBy_PSY,
  GetDate() ,
- @Status_PSY);
+ @Status_PSY,@document_PSY,@workflowname_PSY);
  SELECT @ID = @@IDENTITY; 
 
  INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY)

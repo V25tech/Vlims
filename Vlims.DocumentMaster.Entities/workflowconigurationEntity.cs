@@ -10,35 +10,36 @@
 namespace Vlims.DocumentMaster.Entities
 {
     using System;
+    using Vlims.Administration.Entities;
 
-    
-    
+
+
     // Comment
     public class workflowconiguration
     {
-        
+
         private string wfcidField;
-        
+
         private string documentmasteridField;
-        
+
         private string documentstageField;
-        
+
         private string documenttypeField;
-        
+
         private string departmentField;
-        
+
         private System.Int32? reviewscountField;
-        
+
         private System.Int32? approvalscountField;
-        
+
         private string createdbyField;
-        
+
         private DateTime? createddateField;
-        
+
         private string modifiedbyField;
-        
+
         private DateTime? modifieddateField;
-        
+
         private string statusField;
         public string WFCId
         {
@@ -51,7 +52,7 @@ namespace Vlims.DocumentMaster.Entities
                 this.wfcidField = value;
             }
         }
-        
+
         public string DocumentMasterId
         {
             get
@@ -64,6 +65,7 @@ namespace Vlims.DocumentMaster.Entities
             }
         }
         public string workflowName { get; set; }
+        //public string departments { get; set; }
         public string code { get; set; }
         public string documentstage
         {
@@ -76,7 +78,7 @@ namespace Vlims.DocumentMaster.Entities
                 this.documentstageField = value;
             }
         }
-        
+
         public string documenttype
         {
             get
@@ -88,19 +90,10 @@ namespace Vlims.DocumentMaster.Entities
                 this.documenttypeField = value;
             }
         }
-        
-        public string department
-        {
-            get
-            {
-                return this.departmentField;
-            }
-            set
-            {
-                this.departmentField = value;
-            }
-        }
-        
+
+
+
+
         public System.Int32? reviewsCount
         {
             get
@@ -112,7 +105,7 @@ namespace Vlims.DocumentMaster.Entities
                 this.reviewscountField = value;
             }
         }
-        
+
         public System.Int32? approvalsCount
         {
             get
@@ -126,9 +119,12 @@ namespace Vlims.DocumentMaster.Entities
         }
         public string reviewsType { get; set; }
         public string approvalsType { get; set; }
-        public List<reviewers> reviewers { get; set; }
-        public List<approvals> approvals { get; set; }
-
+        public List<UserConfiguration> approvals { get; set; }
+        public List<UserConfiguration> reviewers { get; set; }
+        public UserGroupConfiguration  reviewersGroup { get; set; }
+        public UserGroupConfiguration  approvalsGroup { get; set; }
+        public List<DepartmentConfiguration> department { get; set; }
+        public string departments { get; set; }
         public string CreatedBy
         {
             get
@@ -140,7 +136,7 @@ namespace Vlims.DocumentMaster.Entities
                 this.createdbyField = value;
             }
         }
-        
+
         public DateTime? CreatedDate
         {
             get
@@ -152,7 +148,7 @@ namespace Vlims.DocumentMaster.Entities
                 this.createddateField = value;
             }
         }
-        
+
         public string ModifiedBy
         {
             get
@@ -186,13 +182,5 @@ namespace Vlims.DocumentMaster.Entities
                 this.modifieddateField = value;
             }
         }
-    }
-    public class reviewers
-    {
-        public string value { get; set; }
-    }
-    public class approvals
-    {
-        public string value { get; set; }
     }
 }

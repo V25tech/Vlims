@@ -9,13 +9,16 @@ import { DocumentTypeServiceService } from 'src/app/modules/services/document-ty
 import { UsersconfigurationService } from 'src/app/modules/services/usersconfiguration.service';
 import { usergroupconfigurationService } from 'src/app/modules/services/add-usergroupconfiguration.service';
 import { CommonService } from 'src/app/shared/common.service';
+import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 
 @Component({
   selector: 'app-add-workflow',
   templateUrl: './add-workflow.component.html',
   styleUrls: ['./add-workflow.component.scss'],
 })
+
 export class AddWorkflowComponent {
+  title:string='New Workflow Configuration';
   workflow = new workflowconiguration();
   types: Array<DocumentTypeConfiguration>=[];
   departs: Array<DepartmentConfiguration>=[];
@@ -27,7 +30,11 @@ export class AddWorkflowComponent {
   selectedapprovers:UserConfiguration[] = [];
   reviewers: { value: string }[] = [{ value: '' }];
   approvers: { value: string }[] = [{ value: '' }];
-
+  departments:string[] | null=[];
+  reviwers:string[] | null=null;
+  approvals:string[] | null=null;
+  reviwersgroup:string| null=null;
+  approvalsgroup:string | null=null;
   addReviewer() {
     this.reviewers.push({ value: '' });
   }
@@ -66,19 +73,70 @@ export class AddWorkflowComponent {
     private doctypesvc:DocumentTypeServiceService,
     private userssvc:UsersconfigurationService,
     private usergroupsvc:usergroupconfigurationService,
+    private workflowsvc:WorkflowServiceService,
     private commonsvc:CommonService
   ) {}
 ngOnInit(){
-  this.commonsvc.templateCount++;
-  this.workflow.code="Flow-"+this.commonsvc.templateCount;
+  const urlPath = this.router.url;
+    const segments = urlPath.split('/');
+    const lastSegment = segments[segments.length - 2];
+  // this.commonsvc.templateCount++;
+  // this.workflow.code="Flow-"+this.commonsvc.templateCount;
   this.getdepartments();
 this.getdocumenttypeconfig();
 this.getusergroupInfo();
 this.getusers();
+
+if(lastSegment=="add")
+{
+ let addcount=parseInt(segments[segments.length - 1],10);
+ addcount++;
+this.workflow.code="Flow-"+addcount;  
+this.getdocumenttypeconfig();
 }
+else if(lastSegment=="edit")
+{
+  this.title='Edit Document Template';
+    let id=parseInt(segments[segments.length-1],10);
+    this.getdocumenttypeconfig();
+    this.getbyId(id);
+}
+else if(lastSegment=="view")
+{
+  this.title='View Document Template';
+    let id=segments[segments.length-1];
+    this.getdocumenttypeconfig();
+    this.getbyName(id);
+}
+}
+  getbyName(id: string) {
+    return this.workflowsvc.getbyName(id).subscribe((data:any)=>{
+      this.workflow=data;
+    },(error:any)=>{
+    })
+  }
+  getbyId(id: number) {
+    return this.workflowsvc.getbyId(id).subscribe((data:any)=>{
+      this.workflow=data;
+    },(error:any)=>{
+
+    })
+  }
   addWorkflow(workflow:workflowconiguration) {
-    debugger
-    this.reviewers.map(reviewer => reviewer.value)
+    //this.loader.show();
+    workflow.CreatedBy=this.commonsvc.createdBy;
+    workflow.ModifiedBy=this.commonsvc.createdBy;
+    workflow.Status="In-Progress";
+    if(workflow.department!=null)
+    {
+     workflow.departments= workflow.department.map(o=>o.DepartmentName).join(",");
+    }
+        return this.workflowsvc.addworkflow(workflow).subscribe((data:any)=>{
+        //this.loader.hide();
+        this.router.navigate(['/workflow']);
+    },(error:any)=>{
+
+    })
     console.log(this.reviewers);
   }
 

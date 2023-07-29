@@ -49,7 +49,7 @@ namespace Vlims.Controllers
         /// This method is used to Get workflowconiguration By Id wFCId
         /// </summary>
         /// <param name="wFCId"></param>
-        [HttpGet("{wFCId}")]
+        [HttpGet("getbyId")]
         public ActionResult<workflowconiguration> GetworkflowconigurationByWFCId(int wFCId)
         {
             var result = workflowconigurationService.GetworkflowconigurationByWFCId(wFCId);

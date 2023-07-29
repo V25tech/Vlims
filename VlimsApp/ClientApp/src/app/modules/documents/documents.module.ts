@@ -21,9 +21,9 @@ import { AddWorkflowComponent } from './components/add-workflow/add-workflow.com
 import { DocumentMasterHomeComponent } from './components/document-master-home/document-master-home.component';
 import { AppintializorService, serverConfigInitializerFactory } from 'src/app/shared/appintializor.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { PlantComponent } from '../authentication/components/Plantmanagement/plantmanagement.component';
-import { SecuritymgmtComponent } from '../authentication/components/Securitymgmt/securitymgmt.component';
+
 import { RolesComponent } from '../authentication/components/Roles/roles.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 
@@ -38,8 +38,7 @@ import { RolesComponent } from '../authentication/components/Roles/roles.compone
     WorkflowsComponent,
     AddWorkflowComponent,
     DocumentMasterHomeComponent,
-    PlantComponent,
-    SecuritymgmtComponent,
+   
     RolesComponent
   ],
   imports: [
@@ -53,6 +52,7 @@ import { RolesComponent } from '../authentication/components/Roles/roles.compone
     DropdownModule,
     ToastModule,
     NgxSpinnerModule
+    
   ],
   providers: [] 
 })

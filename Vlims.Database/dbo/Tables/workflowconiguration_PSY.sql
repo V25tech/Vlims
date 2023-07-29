@@ -13,6 +13,7 @@
     [ModifiedBy_PSY]       NVARCHAR (100) NULL,
     [ModifiedDate_PSY]     DATETIME       NULL,
     [Status_PSY] NVARCHAR(50) NULL, 
+    [Document_PSY] XML NULL, 
     CONSTRAINT [PK_workflowconiguration_PSY] PRIMARY KEY CLUSTERED ([WFCId_PSY] ASC)
 );
 

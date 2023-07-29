@@ -28,9 +28,10 @@ namespace Vlims.DocumentMaster.DataAccess
             try
             {
                 List<DocumentTemplateConfiguration> result = new List<DocumentTemplateConfiguration>();
-                DocumentTemplateConfiguration documentTemplateConfigurationData;
+                DocumentTemplateConfiguration documentTemplateConfigurationData; bool islist;
                 if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
                 {
+                    islist = dataset.Tables[0].Rows.Count > 1;
                     for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
@@ -47,17 +48,21 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.footer = Convert.ToString(row[DocumentTemplateConfigurationConstants.footer.Trim('@')]);
                         documentTemplateConfigurationData.footerrows = Convert.ToString(row[DocumentTemplateConfigurationConstants.footerrows.Trim('@')]);
                         documentTemplateConfigurationData.footercolumns = Convert.ToString(row[DocumentTemplateConfigurationConstants.footercolumns.Trim('@')]);
-                        string docvalue = Convert.ToString(row[DocumentTemplateConfigurationConstants.document.Trim('@')]);
-                        if (!string.IsNullOrEmpty(docvalue))
+                       
+                        if (!islist)
                         {
-                            // Create an XmlSerializer for the Person type
-                            var serializer1 = new XmlSerializer(typeof(DocumentTemplateConfiguration));
-                            // Create a StringReader to read the XML data
-                            var reader = new StringReader(Convert.ToString(row[DocumentTemplateConfigurationConstants.document.Trim('@')]));
-                            // Deserialize the XML data back to a Person object
-                            var person = (DocumentTemplateConfiguration)serializer1.Deserialize(reader);
-                            documentTemplateConfigurationData.headerTable = person.headerTable;
-                            documentTemplateConfigurationData.footerTable = person.footerTable;
+                            string docvalue = Convert.ToString(row[DocumentTemplateConfigurationConstants.document.Trim('@')]);
+                            if (!string.IsNullOrEmpty(docvalue))
+                            {
+                                // Create an XmlSerializer for the Person type
+                                var serializer1 = new XmlSerializer(typeof(DocumentTemplateConfiguration));
+                                // Create a StringReader to read the XML data
+                                var reader = new StringReader(Convert.ToString(row[DocumentTemplateConfigurationConstants.document.Trim('@')]));
+                                // Deserialize the XML data back to a Person object
+                                var person = (DocumentTemplateConfiguration)serializer1.Deserialize(reader);
+                                documentTemplateConfigurationData.headerTable = person.headerTable;
+                                documentTemplateConfigurationData.footerTable = person.footerTable;
+                            }
                         }
                         documentTemplateConfigurationData.CreatedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.CreatedBy.Trim('@')]);
                         documentTemplateConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentTemplateConfigurationConstants.CreatedDate.Trim('@')]);

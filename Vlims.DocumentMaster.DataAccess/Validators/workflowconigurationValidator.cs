@@ -31,7 +31,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.DocumentMasterId,50, nameof(workflowconiguration.DocumentMasterId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.documentstage,50, nameof(workflowconiguration.documentstage)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.documenttype,50, nameof(workflowconiguration.documenttype)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.department,50, nameof(workflowconiguration.department)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.departments,50, nameof(workflowconiguration.departments)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.CreatedBy,100, nameof(workflowconiguration.CreatedBy)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.ModifiedBy,100, nameof(workflowconiguration.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))

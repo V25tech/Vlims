@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-      <h4 class="page-title">Workflow Configuration</h4>
+      <h4 class="page-title">{{title}}</h4>
     </div>
   </div>
   <div class="row p-2">
@@ -48,6 +48,7 @@
                 [options]="stageSource"
                 [(ngModel)]="workflow.documentstage"
                 optionLabel="label"
+                optionValue="label"
               >
               </p-dropdown>
             </div>
@@ -63,6 +64,7 @@
                 [(ngModel)]="workflow.documenttype"
                 optionLabel="Documenttypename"
                 placeholder="Select a Document Type"
+                optionValue="Documenttypename"
               >
                 
               </p-dropdown>
@@ -149,6 +151,7 @@
                 defaultLabel="Select a User"
                 name="UserID"
                 optionLabel="UserID"
+                
                 display="chip"
               ></p-multiSelect>
             </div>
@@ -179,6 +182,7 @@
                 [options]="usergroups"
                 [(ngModel)]="workflow.reviewersGroup"
                 optionLabel="Usergroupname" placeholder="Select a User Group"
+                
               >
               </p-dropdown>
             </div>
@@ -248,6 +252,7 @@
                 defaultLabel="Select a User"
                 name="UserID"
                 optionLabel="UserID"
+              
                 display="chip"
               ></p-multiSelect>
             </div>
@@ -264,6 +269,7 @@
                 [options]="usergroups"
                 [(ngModel)]="workflow.approvalsGroup"
                 optionLabel="Usergroupname" placeholder="Select a User Group"
+                
               >
               </p-dropdown>
             </div>

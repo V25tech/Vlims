@@ -13,9 +13,13 @@ export class WorkflowServiceService {
     debugger
     return this.http.postJsonLogin(objrequest, "api/workflowconiguration/getallworkflow",this.type);
 }
-getworkflowbyname(objname: string) {
+getbyName(objname: string) {
   debugger
   return this.http.getwithheader("api/workflowconiguration/getbyName"+"?name="+objname,this.type);
+}
+getbyId(objname: number) {
+  debugger
+  return this.http.getwithheader("api/workflowconiguration/getbyId"+"?wFCId="+objname,this.type);
 }
 addworkflow(objrequest: workflowconiguration) {
   debugger

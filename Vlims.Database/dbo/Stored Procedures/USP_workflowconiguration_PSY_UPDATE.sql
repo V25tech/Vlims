@@ -5,7 +5,8 @@
 @reviewsCount_PSY Int,
 @approvalsCount_PSY Int,
 @ModifiedBy_PSY NVarChar(100),
-@Status_PSY NVarChar(100)
+@Status_PSY NVarChar(100),
+@document_PSY xml
  AS 
  BEGIN 
   BEGIN TRY 
@@ -17,7 +18,7 @@ department_PSY=@department_PSY,
 reviewsCount_PSY=@reviewsCount_PSY,
 approvalsCount_PSY=@approvalsCount_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,
-Status_PSY=@Status_PSY WHERE  [WFCId_PSY] = @WFCId_PSY ;  select @WFCId_PSY; 
+Status_PSY=@Status_PSY,Document_PSY=@document_PSY WHERE  [WFCId_PSY] = @WFCId_PSY ;  select @WFCId_PSY; 
   
   END TRY 
  BEGIN CATCH 

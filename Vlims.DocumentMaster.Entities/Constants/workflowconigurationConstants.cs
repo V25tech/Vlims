@@ -22,7 +22,7 @@ namespace Vlims.DocumentMaster.Entities
         
         public const string documentstage = "@documentstage_PSY";
 
-        public const string workflowName_PSY = "@workflowName_PSY";
+        public const string workflowName_PSY = "@workflowname_PSY";
 
 
         public const string documenttype = "@documenttype_PSY";
@@ -42,6 +42,7 @@ namespace Vlims.DocumentMaster.Entities
         public const string ModifiedDate = "@ModifiedDate_PSY";
 
         public const string Status = "@Status_PSY";
+        public const string document = "@document_PSY";
 
         public const string USP_workflowconiguration_PSY_GET_ALL = "dbo.USP_workflowconiguration_PSY_GET_ALL";
         

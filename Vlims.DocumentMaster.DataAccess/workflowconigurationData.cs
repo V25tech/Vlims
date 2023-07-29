@@ -15,6 +15,7 @@ namespace Vlims.DocumentMaster.DataAccess
     using System.Collections.Generic;
     using Vlims.Common;
     using Vlims.DocumentMaster.Entities;
+    using System.Xml.Serialization;
 
     // Comment
     public class workflowconigurationData 
@@ -55,16 +56,27 @@ namespace Vlims.DocumentMaster.DataAccess
         {
             try
             {
+                var serializer = new XmlSerializer(typeof(workflowconiguration));
+                // Create a StringWriter to hold the XML data
+                var writer = new StringWriter();
+
+                // Serialize the Person object to XML and write it to the StringWriter
+                serializer.Serialize(writer, workflowconiguration);
+
+                // Get the XML string from the StringWriter
+                string xmlString = writer.ToString();
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.DocumentMasterId, Value = workflowconiguration.DocumentMasterId });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.workflowName_PSY, Value = workflowconiguration.workflowName });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.documentstage, Value = workflowconiguration.documentstage });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.documenttype, Value = workflowconiguration.documenttype });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.department, Value = workflowconiguration.department });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.department, Value = workflowconiguration.departments });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workflowconigurationConstants.reviewsCount, Value = workflowconiguration.reviewsCount });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workflowconigurationConstants.approvalsCount, Value = workflowconiguration.approvalsCount });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.CreatedBy, Value = workflowconiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.ModifiedBy, Value = workflowconiguration.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.Status, Value = workflowconiguration.Status });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = workflowconigurationConstants.document, Value = xmlString });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(workflowconigurationConstants.USP_workflowconiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -78,6 +90,15 @@ namespace Vlims.DocumentMaster.DataAccess
         {
             try
             {
+                var serializer = new XmlSerializer(typeof(workflowconiguration));
+                // Create a StringWriter to hold the XML data
+                var writer = new StringWriter();
+
+                // Serialize the Person object to XML and write it to the StringWriter
+                serializer.Serialize(writer, workflowconiguration);
+
+                // Get the XML string from the StringWriter
+                string xmlString = writer.ToString();
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.WFCId, Value = workflowconiguration.WFCId });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.DocumentMasterId, Value = workflowconiguration.DocumentMasterId });
@@ -88,6 +109,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workflowconigurationConstants.approvalsCount, Value = workflowconiguration.approvalsCount });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.ModifiedBy, Value = workflowconiguration.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.Status, Value = workflowconiguration.Status });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = workflowconigurationConstants.document, Value = xmlString });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(workflowconigurationConstants.USP_workflowconiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

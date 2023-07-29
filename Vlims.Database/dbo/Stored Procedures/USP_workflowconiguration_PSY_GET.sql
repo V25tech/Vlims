@@ -13,7 +13,9 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY ,
-Status_PSY
+Status_PSY,
+Document_PSY,
+workflowName_PSY
   FROM [dbo].[workflowconiguration_PSY] WITH (NOLOCK) where [WFCId_PSY] = @WFCId_PSY   
  END TRY 
  BEGIN CATCH 

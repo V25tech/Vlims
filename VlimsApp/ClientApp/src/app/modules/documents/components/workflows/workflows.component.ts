@@ -44,7 +44,8 @@ export class WorkflowsComponent {
   }
   editdoc(editband: workflowconiguration) {
     debugger
-    this.router.navigate(['/mainpage/documentmaster/editworkflow']);
+    //this.router.navigate(['/templates/view',editband.Templatename]);
+    this.router.navigate(['/workflows/edit',editband.WFCId]);
   }
   getStatusClass(status: string): string {
     if (status === 'In Progress') {

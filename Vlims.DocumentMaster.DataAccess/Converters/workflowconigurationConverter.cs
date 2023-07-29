@@ -15,20 +15,22 @@ namespace Vlims.DocumentMaster.DataAccess
     using System.Collections.Generic;
     using Vlims.Common;
     using Vlims.DocumentMaster.Entities;
+    using System.Xml.Serialization;
 
 
     // Comment
     public static class workflowconigurationConverter
     {
-        
+
         public static List<workflowconiguration> SetAllworkflowconiguration(DataSet dataset)
         {
             try
             {
                 List<workflowconiguration> result = new List<workflowconiguration>();
-                workflowconiguration workflowconigurationData;
+                workflowconiguration workflowconigurationData; bool islist;
                 if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
                 {
+                    islist = dataset.Tables[0].Rows.Count > 1;
                     for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
@@ -38,7 +40,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         workflowconigurationData.workflowName = Convert.ToString(row[workflowconigurationConstants.workflowName_PSY.Trim('@')]);
                         workflowconigurationData.documentstage = Convert.ToString(row[workflowconigurationConstants.documentstage.Trim('@')]);
                         workflowconigurationData.documenttype = Convert.ToString(row[workflowconigurationConstants.documenttype.Trim('@')]);
-                        workflowconigurationData.department = Convert.ToString(row[workflowconigurationConstants.department.Trim('@')]);
+                        workflowconigurationData.departments = Convert.ToString(row[workflowconigurationConstants.department.Trim('@')]);
                         workflowconigurationData.reviewsCount = DatatypeConverter.SetIntValue(row[workflowconigurationConstants.reviewsCount.Trim('@')]);
                         workflowconigurationData.approvalsCount = DatatypeConverter.SetIntValue(row[workflowconigurationConstants.approvalsCount.Trim('@')]);
                         workflowconigurationData.CreatedBy = Convert.ToString(row[workflowconigurationConstants.CreatedBy.Trim('@')]);
@@ -47,6 +49,26 @@ namespace Vlims.DocumentMaster.DataAccess
                         workflowconigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[workflowconigurationConstants.ModifiedDate.Trim('@')]);
                         workflowconigurationData.ModifiedBy = Convert.ToString(row[workflowconigurationConstants.ModifiedBy.Trim('@')]);
                         workflowconigurationData.Status = Convert.ToString(row[workflowconigurationConstants.Status.Trim('@')]);
+                        if (!islist)
+                        {
+                            string docvalue = Convert.ToString(row["Document_PSY"]);
+                            if (!string.IsNullOrEmpty(docvalue))
+                            {
+                                // Create an XmlSerializer for the Person type
+                                var serializer1 = new XmlSerializer(typeof(workflowconiguration));
+                                // Create a StringReader to read the XML data
+                                var reader = new StringReader(Convert.ToString(row["Document_PSY"]));
+                                // Deserialize the XML data back to a Person object
+                                var person = (workflowconiguration)serializer1.Deserialize(reader);
+                                workflowconigurationData.reviewsType = person.reviewsType;
+                                workflowconigurationData.approvalsType = person.approvalsType;
+                                workflowconigurationData.reviewers = person.reviewers;
+                                workflowconigurationData.approvals = person.approvals;
+                                workflowconigurationData.reviewersGroup = person.reviewersGroup;
+                                workflowconigurationData.approvalsGroup = person.approvalsGroup;
+                                workflowconigurationData.department=person.department;
+                            }
+                        }
                         result.Add(workflowconigurationData);
                     }
                 }
@@ -57,7 +79,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
-        
+
         public static workflowconiguration Setworkflowconiguration(DataSet dataset)
         {
             var result = SetAllworkflowconiguration(dataset);

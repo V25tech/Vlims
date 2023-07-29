@@ -105,25 +105,26 @@ export class noticationconfiguration {
   Status: string | null='';
 }
 export class workflowconiguration {
-  WFCId: string=''
-  DocumentMasterId: string=''
-  documentstage: string=''
-  workflowName:string=''
-  code:string=''
-  documenttype: string=''
-  department: string=''
+  WFCId: string | null=null;
+  DocumentMasterId: string | null='';
+  documentstage: string | null='';
+  workflowName:string | null='';
+  code:string | null='';
+  documenttype: string | null='';
+  department: DepartmentConfiguration[] | null=[]
+ departments:string | null=null;
   reviewsCount: number=0;
   approvalsCount: number=0;
-  reviewsType:string=''
-  reviewersGroup:Usergroupconfiguration[]=[]
-  reviewers:UserConfiguration[]=[]
+  reviewsType:string | null='';
+  reviewersGroup:Usergroupconfiguration | null=null
+  reviewers:UserConfiguration[] | null=[]
   approvalsType:string=''
-  approvalsGroup:Usergroupconfiguration[]=[]
-  approvals:UserConfiguration[]=[]
-  CreatedBy: string=''
-  CreatedDate: string | null='';
-  ModifiedBy: string=''
-  ModifiedDate: string | null='';
+  approvalsGroup:Usergroupconfiguration | null=null
+  approvals:UserConfiguration[] | null=[]
+  CreatedBy: string='';
+  CreatedDate:string | null=null;
+  ModifiedBy: string='';
+  ModifiedDate: string | null=null;
   Status: string | null='';
 }
 export class DocumentTemplateConfiguration {

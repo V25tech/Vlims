@@ -151,6 +151,7 @@ export class AddTemplateComponent implements OnInit {
   }
   addTemplate() {
     debugger
+    this.loader.show();
     this.templateForm.documenttype=this.selectedtype.Documenttypename;
     this.templateForm.headerTable=this.gridData;
     this.templateForm.footerTable=this.gridFooterData;
@@ -159,6 +160,7 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.footerrows=this.rowsFooterArray.length.toString();
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
     this.templatesvc.adddoctemplate(this.templateForm).subscribe((data:any)=>{
+      this.loader.hide();
     }, (error:any) => {
       this.loader.hide();
     });
