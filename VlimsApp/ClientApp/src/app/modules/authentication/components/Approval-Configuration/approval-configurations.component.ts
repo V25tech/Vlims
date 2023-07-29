@@ -5,8 +5,8 @@ import { ApprovalConfigurationService } from '../../../services/approval-configu
 
 @Component({
   selector: 'app-approval-configurations',
-  templateUrl: './approval-configurations.component.html',
-  styleUrls: ['./approval-configurations.component.css']
+  templateUrl: './approval-configurations.component.html'
+  
 })
 export class ApprovalConfigurationsComponent implements OnInit {
   tabselect: string = 'type';

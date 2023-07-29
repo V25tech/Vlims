@@ -1,123 +1,77 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Approval Configurations</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: left;
-    }
-
-    .container {
-      display: flex;
-      justify-content: left;
-      text-align: left;
-    }
-
-    table {
-      width: 80%;
-      margin: 20px auto;
-      border-collapse: collapse;
-      text-align: left;
-    }
-
-    th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    select {
-      width: 100%;
-      padding: 5px;
-    }
-
-    .button-radius {
-      padding: 5px;
-    }
-
-    .buttons-container {
-      margin-top: 20px;
-    }
-
-      .buttons-container button {
-        margin: 0 25px;
-      }
-  </style>
-</head>
-<body>
-  <h1>Approval Configurations</h1>
-  <form (ngSubmit)="addapprovalconfig(newdept)" #fm="ngForm">
-    <div class="container">
-      <table align="left">
-        <tr>
-          <th>Configuration Name</th>
-          <th>No of Approvals</th>
-        </tr>
-        <tr>
-          <td>Document Type Configuration</td>
-          <td>
-            <select>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Document Template Configuration</td>
-          <td>
-            <select>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>WorkFlow Configuration</td>
-          <td>
-            <select>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Document Request</td>
-          <td>
-            <select>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-            </select>
-          </td>
-        </tr>
-      </table>
+<div class="container-fluid">
+  <div class="row p-2">
+    <div class="col">
+      <h4 class="page-title">Approval Configurations</h4>
     </div>
-    <div class="buttons-container">
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <button type="button" (click)="closepopup();" class="btn btn-secondary">Close</button>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <form (ngSubmit)="adddoctype(documentType)" #fm="ngForm">
+        <div class="p-4 bg-white shadow-dark rounded-2">
+
+
+          <h5 class="page-title">Document Type Configuration</h5>
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label">No Of Approvals</label>
+            <div class="col-sm-10">
+
+              <select class="form-control" id="noofapprovals" name="noofapprovals" [(ngModel)]="approvals.noofapprovals" [disabled]="viewMode">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+
+            </div>
+          </div>
+          <h5 class="page-title">Document Template Configuration</h5>
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">No Of Approvals</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="approval2" name="approval2" [(ngModel)]="approvalconfig.approval2" [disabled]="viewMode">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+            </div>
+          </div>
+          <h5 class="page-title">Workflow Configuration</h5>
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label">No Of Approvals</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="approval3" name="approval3" [(ngModel)]="approvalconfigs.approval3" [disabled]="viewMode">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+
+        <div class="form-group row my-4">
+          <div class="col-sm-10 offset-sm-2">
+            <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
+            <button type="submit" class="btn btn-primary" *ngIf="!editMode">Submit</button>
+            <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
+          </div>
+        </div>
+
+      </form>
     </div>
-  </form>
-</body>
-</html>
+  </div>
+</div>
+
+
