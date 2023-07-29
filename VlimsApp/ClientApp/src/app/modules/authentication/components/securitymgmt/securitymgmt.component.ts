@@ -12,6 +12,8 @@ import { SecuritymanagementService } from '../../../services/securitymanagement.
 
 export class SecuritymgmtComponent {
   types: SecurityManagement[] = [];
+  editMode:boolean=false;
+  viewMode:boolean=false;
   securityType: SecurityManagement = new SecurityManagement;
   constructor(private doctypeservice: SecuritymanagementService, private spinner: NgxSpinnerService, private router: Router) { }
 
@@ -41,7 +43,8 @@ export class SecuritymgmtComponent {
     //}
 
   }
-  closepopup() {
+  onCancel() {
 
   }
+  
 }
