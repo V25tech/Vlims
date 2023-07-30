@@ -119,7 +119,7 @@ namespace Vlims.DMS.Entities
                 this.departmentField = value;
             }
         }
-        
+        public string template { get; set; }
         public string document
         {
             get

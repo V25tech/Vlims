@@ -45,8 +45,9 @@ namespace Vlims.DocumentManager.DataAccess
                         documentEffectiveData.documenttitle = Convert.ToString(row[DocumentEffectiveConstants.documenttitle.Trim('@')]);
                         documentEffectiveData.documentno = Convert.ToString(row[DocumentEffectiveConstants.documentno.Trim('@')]);
                         documentEffectiveData.documenttype = Convert.ToString(row[DocumentEffectiveConstants.documenttype.Trim('@')]);
+                        documentEffectiveData.document = Convert.ToString(row["document"]);
                         documentEffectiveData.Department = Convert.ToString(row[DocumentEffectiveConstants.department.Trim('@')]);
-                        documentEffectiveData.document = Convert.ToString(row[DocumentEffectiveConstants.document.Trim('@')]);
+                        //documentEffectiveData.document = Convert.ToString(row[DocumentEffectiveConstants.document.Trim('@')]);
                         documentEffectiveData.EffectiveDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.EffectiveDate.Trim('@')]);
                         documentEffectiveData.ReviewDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.Reviewdate.Trim('@')]);
                         documentEffectiveData.CreatedBy = Convert.ToString(row[DocumentEffectiveConstants.CreatedBy.Trim('@')]);
@@ -54,6 +55,7 @@ namespace Vlims.DocumentManager.DataAccess
                         documentEffectiveData.ModifiedBy = Convert.ToString(row[DocumentEffectiveConstants.ModifiedBy.Trim('@')]);
                         documentEffectiveData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.ModifiedDate.Trim('@')]);
                         documentEffectiveData.Status = Convert.ToString(row[DocumentEffectiveConstants.Status.Trim('@')]);
+                        documentEffectiveData.template = Convert.ToString(row[DocumentEffectiveConstants.template.Trim('@')]);
                         result.Add(documentEffectiveData);
                     }
                 }
