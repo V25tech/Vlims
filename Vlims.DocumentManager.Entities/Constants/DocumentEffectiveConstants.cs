@@ -43,6 +43,7 @@ namespace Vlims.DMS.Entities
         public const string workId = "@workId";
 
         public const string Status = "@Status_PSY";
+        public const string template = "@template_PSY";
 
         public const string ModifiedDate = "@ModifiedDate_PSY";
         

@@ -3,22 +3,10 @@
  AS 
  BEGIN 
  BEGIN TRY 
- SELECT DEID_PSY,
-Documentmanagerid_PSY,
-documenttitle_PSY,
-documentno_PSY,
-documenttype_PSY,
-department_PSY,
-document_PSY,
-EffectiveDate_PSY,
-Reviewdate_PSY,
-CreatedBy_PSY,
-CreatedDate_PSY,
-ModifiedBy_PSY,
-ModifiedDate_PSY,
-STATUS_PSY
+ SELECT DE.*,DP.template_PSY,DP.document_PSY as document
  ,count(*) over() as TotalRows 
- FROM [dbo].[DocumentEffective_PSY] WITH (NOLOCK) 
+ FROM [dbo].[DocumentEffective_PSY] DE WITH (NOLOCK)
+ JOIN dbo.DocumentPreparation_PSY DP ON DE.Documentmanagerid_PSY=DP.DPNID_PSY
  Order by [DEID_PSY]  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
