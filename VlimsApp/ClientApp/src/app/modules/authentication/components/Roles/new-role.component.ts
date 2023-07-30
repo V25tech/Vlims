@@ -11,90 +11,93 @@ import { CommonService } from 'src/app/shared/common.service';
 @Component({
   selector: 'app-new-role',
   templateUrl: './new-role.component.html'
-  
+
 })
 export class AddRoleComponent implements OnInit {
-  adduser = new UserConfiguration();
+  addrole = new RoleConfiguration();
   editMode: boolean = false;
   viewMode: boolean = false;
   objname: string | undefined;
-  types: DepartmentConfiguration[]=[];
-  roles: RoleConfiguration[]=[];
-  isactivedirectory : boolean=false;
+  types: DepartmentConfiguration[] = [];
+  roles: RoleConfiguration[] = [];
+  isactivedirectory: boolean = false;
   isstandarduser: boolean = false;
-  title: string = "Add User Configuration";
+  title: string = "Add Role Configuration";
   constructor(private commonsvc: CommonService, private rolesservice: RolesconfigurationService,
     private deptservice: DepartmentconfigurationService,
     private userservice: UsersconfigurationService,
-    private router: Router,  private cdr: ChangeDetectorRef) { }
+    private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    const lastSegment = segments[segments.length - 1];
-      this.getdepartments();
+    const lastSegment = segments[segments.length - 2];
+    this.getdepartments();
     this.getroles();
     debugger
-      if (lastSegment == "viewdoctype") {
-        this.viewMode = true;
-        if (this.viewMode) {
-          debugger
-          this.objname = this.commonsvc.objname;
-          //this.getdocTypeByName(this.objname);
-          this.adduser = this.commonsvc.userConfig;
-          this.title = "View Document Type Configuration"
-        }
+    if (lastSegment == "view") {
+      this.viewMode = true;
+      if (this.viewMode) {
+        debugger
+        this.objname = this.commonsvc.objname;
+        //this.getdocTypeByName(this.objname);
+        this.addrole = this.commonsvc.roleConfig;
+        this.title = "View Document Type Configuration"
+      }
+      this.cdr.detectChanges();
+    }
+    else if (lastSegment == "edit") {
+      this.editMode = this.commonsvc.roleConfig != null ? true : false;
+      if (this.editMode) {
+        this.addrole = this.commonsvc.roleConfig;
+        this.title = "Edit User Type Configuration"
         this.cdr.detectChanges();
       }
-      else if (lastSegment == "adduser") {
-        this.editMode = this.commonsvc.userConfig != null ? true : false;
-        if (this.editMode) {
-          this.adduser = this.commonsvc.userConfig;
-          this.title = "Edit User Type Configuration"
-          this.cdr.detectChanges();
-        }
-      }
+    }
 
-    }
-    submit(adduser: UserConfiguration) {
-      debugger
-          this.adddoctype(adduser);
-      }
-      adddoctype(adduser: UserConfiguration) {
-        debugger
-        adduser.Activedirectory=this.isactivedirectory ? "true" : "false" ;
-        adduser.Standarduser=this.isstandarduser ? "true" : "false" ;
-        adduser.CreatedBy="admin";
-        adduser.ModifiedBy="admin";
-        //this.router.navigate(['/products']);
-        this.userservice.adduser(adduser).subscribe((res:any)=>{
-          this.router.navigate(['/mainpage/users']);
-        });
-        
-        
-      }
-      closepopup() {
-        this.router.navigate(['/mainpage/users']);
-      }
+  }
+  submit(addrole: RoleConfiguration) {
+    debugger
+    this.adddoctype(addrole);
+  }
+  adddoctype(adaddrole: RoleConfiguration) {
+    debugger;
+    adaddrole.CreatedBy = "admin";
+    adaddrole.ModifiedBy = "admin";
+    adaddrole.CreatedDate = new Date();
+    adaddrole.ModifiedDate = new Date();
+    //this.router.navigate(['/products']);
+    this.rolesservice.addrole(adaddrole).subscribe((res: any) => {
+      this.router.navigate(['/mainpage/users']);
+    });
+
+
+  }
+  closepopup() {
+    this.router.navigate(['/mainpage/users']);
+  }
   getdepartments() {
-     let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
-        return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-          debugger
-          this.types = data.Response;
-          
-          console.log(this.types);
-        }, er => {
-         
-        });
-    }
-    getroles() {
-   
-     let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
-        return this.rolesservice.getroles(objrequest).subscribe((data: any) => {
-          debugger
-          this.roles = data.Response;         
-          console.log(this.roles);
-        }, er => {        
-        });
-    }
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+      debugger
+      this.types = data.Response;
+
+      console.log(this.types);
+    }, er => {
+
+    });
+  }
+  getroles() {
+
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    return this.rolesservice.getroles(objrequest).subscribe((data: any) => {
+      debugger
+      this.roles = data.Response;
+      console.log(this.roles);
+    }, er => {
+    });
+  }
+  onCancel() {
+
+  }
 }

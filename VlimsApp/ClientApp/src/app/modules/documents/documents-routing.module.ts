@@ -22,6 +22,8 @@ import { UsergroupconfigurationComponent } from '../authentication/components/Us
 import { AddDepartmentComponent } from '../authentication/components/Department/add-department.component';
 import { NewPlantRegistrationComponent } from '../authentication/components/New-plant-registration/new-plant-registration.component';
 import { RegisterComponent } from '../authentication/components/register/register.component';
+import { AddusergroupconfigurationComponent } from '../authentication/components/Add-user-group-configuration/add-usergroupconfiguration.component';
+import { AddRoleComponent } from '../authentication/components/Roles/new-role.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -175,6 +177,26 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'admin/usergroupadd',
+    component: AddusergroupconfigurationComponent,
+    children: [
+      {
+        path: '',
+        component: AddusergroupconfigurationComponent,
+      }
+    ]
+  },
+  {
+    path: 'admin/usergroupadd/edit',
+    component: AddusergroupconfigurationComponent,
+    children: [
+      {
+        path: '',
+        component: AddusergroupconfigurationComponent,
+      }
+    ]
+  },
+  {
     path: 'admin/approvalconfig',
     component: ApprovalConfigurationsComponent,
     children: [
@@ -224,7 +246,17 @@ const routes: Routes = [
       }
     ]
   },
-
+  {
+    path: 'admin/addrole',
+    component: AddRoleComponent,
+    children: [
+      {
+        path: '',
+        component: AddRoleComponent,
+      }
+    ]
+  },
+  //addrole
   {
     path: 'roles',
     component: RolesComponent,

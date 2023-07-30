@@ -13,7 +13,7 @@
           <label for="UserGroupName" class="col-sm-4 col-form-label">User Group Name</label>
 
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="UserGroupName" [(ngModel)]="newdept.Usergroupname"
+            <input type="text" class="form-control" id="UserGroupName" [(ngModel)]="newdept.usergroupname"
                    pattern='[A-Za-z\\s]*' name="UserGroupName" aria-describedby="productname" placeholder="Enter User Group Name"
                    #BrandName="ngModel"  />
           </div>
@@ -23,7 +23,7 @@
           <label for="BrandName" class="col-sm-4 col-form-label">User Group Code</label>
 
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="UserGroupCode" [(ngModel)]="newdept.Code"
+            <input type="text" class="form-control" id="UserGroupCode" [(ngModel)]="newdept.code"
                    pattern='[A-Za-z\\s]*' name="UserGroupCode" aria-describedby="productname" placeholder="Enter UserGroupCode Code"
                    #BrandName="ngModel"  />
           </div>
@@ -34,7 +34,7 @@
 
           <div class="col-sm-8">
             <!--[(ngModel)]="adddocreq.department"-->
-            <select class="form-control" [(ngModel)]="newdept.Users"  name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" (ngModelChange)="inputValue = $event"
+            <select class="form-control" [(ngModel)]="newdept.users"  name="Assigntodepartment" id="Assigntodepartment" [disabled]="viewMode" 
                     >
               <option value="Select">Select</option>
               <option *ngFor="let user of types" value={{user.UserID}}>{{user?.UserID}}</option>
@@ -50,7 +50,7 @@
         <label for="TotalUsers" class="col-sm-4 col-form-label"> &nbsp;&nbsp;&nbsp;&nbsp;Total Users</label>
 
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="TotalUsers" [(ngModel)]="newdept.Totalusers"
+          <input type="text" class="form-control" id="TotalUsers" [(ngModel)]="newdept.totalusers"
                  pattern='[A-Za-z\\s]*' name="TotalUsers" aria-describedby="productname" placeholder="Enter TotalUsers"
                  #BrandName="ngModel"  />
         </div>

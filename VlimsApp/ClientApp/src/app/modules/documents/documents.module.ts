@@ -33,6 +33,8 @@ import { UsergroupconfigurationComponent } from '../authentication/components/Us
 import { AddDepartmentComponent } from '../authentication/components/Department/add-department.component';
 import { NewPlantRegistrationComponent } from '../authentication/components/New-plant-registration/new-plant-registration.component';
 import { RegisterComponent } from '../authentication/components/register/register.component';
+import { AddusergroupconfigurationComponent } from '../authentication/components/Add-user-group-configuration/add-usergroupconfiguration.component';
+import { AddRoleComponent } from '../authentication/components/Roles/new-role.component';
 
 
 
@@ -54,10 +56,11 @@ import { RegisterComponent } from '../authentication/components/register/registe
     UserConfigurationComponent,
     ApprovalConfigurationsComponent,
     RolesComponent,
-    /*RegisterComponent,*/
+    AddusergroupconfigurationComponent,
     UsergroupconfigurationComponent,
     AddDepartmentComponent,
     NewPlantRegistrationComponent,
+    AddRoleComponent,
     
    
 

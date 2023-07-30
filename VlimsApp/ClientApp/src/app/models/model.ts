@@ -172,9 +172,9 @@ export class RoleConfiguration {
   Department: string = ''
   Comments: string = ''
   CreatedBy: string = ''
-  CreatedDate: string | null = '';
+  CreatedDate: Date | undefined;
   ModifiedBy: string = ''
-  ModifiedDate: string | null = '';
+  ModifiedDate: Date | undefined;
 }
 export class UserConfiguration {
   UCFId: string = ''
@@ -228,6 +228,7 @@ export class SecurityManagement {
 }
 
 export class Usergroupconfiguration {
+  public Ugcid: number = 0;
   public SNo: number = 0;
   public usergroupname: string = ''
   public code: string = ''

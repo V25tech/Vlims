@@ -14,12 +14,12 @@ import { usergroupconfigurationService } from './add-usergroupconfiguration.serv
 })
 export class AddusergroupconfigurationComponent implements OnInit {
   types: UserConfiguration[] = [];
-  adduser = new Usergroupconfiguration();
   newdept= new Usergroupconfiguration();
   editMode: boolean = false;
   viewMode: boolean = false;
   objname: string | undefined;
   title: string = "Add User Group Configuration";
+    //usergrp= Usergroupconfiguration;
   constructor(private commonsvc: CommonService, private cdr: ChangeDetectorRef, private ugService: usergroupconfigurationService, private userService: UsersconfigurationService,
     private router: Router) { }
 
@@ -27,22 +27,22 @@ export class AddusergroupconfigurationComponent implements OnInit {
     this.getusers();
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    const lastSegment = segments[segments.length - 1];
+    const lastSegment = segments[segments.length - 2];
     //this.getdepartments();
     //this.getroles();
     debugger
-    if (lastSegment == "viewdoctype") {
+    if (lastSegment == "view") {
       this.viewMode = true;
       if (this.viewMode) {
         debugger
         this.objname = this.commonsvc.objname;
         //this.getdocTypeByName(this.objname);
-        this.adduser = this.commonsvc.userGroupConfig;
+        this.newdept = this.commonsvc.userGroupConfig;
         this.title = "View Document Type Configuration"
       }
       this.cdr.detectChanges();
     }
-    else if (lastSegment == "addusergroup") {
+    else if (lastSegment == "edit") {
       this.editMode = this.commonsvc.userGroupConfig != null ? true : false;
       if (this.editMode) {
         this.newdept = this.commonsvc.userGroupConfig;
@@ -61,11 +61,11 @@ export class AddusergroupconfigurationComponent implements OnInit {
       newdept.Registeredby="admin";
       newdept.Modify="admin";
       this.ugService.addusergroupconfiguration(newdept).subscribe((res:any)=>{
-        this.router.navigate(['/mainpage/users/usergrp']);
+        this.router.navigate(['/admin/usergroup']);
       });
     }
     closepopup() {
-      this.router.navigate(['/mainpage/users/usergrp']);
+      this.router.navigate(['/admin/usergroup']);
     }
   getusers() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };

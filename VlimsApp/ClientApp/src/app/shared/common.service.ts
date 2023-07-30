@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DocumentTypeConfiguration } from '../modules/documents/models/DocumentTypeConfiguration';
 import { DocumentTemplateConfiguration } from '../modules/documents/models/DocumentTemplateConfiguration';
-import { DepartmentConfiguration, PlantConfiguration, UserConfiguration, Usergroupconfiguration } from '../models/model';
+import { DepartmentConfiguration, PlantConfiguration, RoleConfiguration, UserConfiguration, Usergroupconfiguration } from '../models/model';
 import { DepartmentComponent } from '../modules/authentication/components/Department/department.component';
 
 
@@ -18,6 +18,7 @@ export class CommonService {
   userConfig = new UserConfiguration();
   departConfig = new DepartmentConfiguration();
   plantConfig = new PlantConfiguration();
+  roleConfig = new RoleConfiguration();
   //private retailer = new BehaviorSubject<Retailer>(null);
   //retaileR = this.retailer.asObservable();
   createdBy = 'admin';
