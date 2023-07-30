@@ -10,7 +10,7 @@ import { usergroupconfigurationService } from './add-usergroupconfiguration.serv
 @Component({
   selector: 'app-add-usergroupconfiguration',
   templateUrl: './add-usergroupconfiguration.component.html',
-  styleUrls: ['./add-usergroupconfiguration.component.css']
+  styles: ['']
 })
 export class AddusergroupconfigurationComponent implements OnInit {
   types: UserConfiguration[] = [];
