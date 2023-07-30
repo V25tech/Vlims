@@ -105,27 +105,27 @@ export class noticationconfiguration {
   Status: string | null = '';
 }
 export class workflowconiguration {
-  WFCId: string | null = null;
-  DocumentMasterId: string | null = '';
-  documentstage: string | null = '';
-  workflowName: string | null = '';
-  code: string | null = '';
-  documenttype: string | null = '';
-  department: DepartmentConfiguration[] | null = []
-  departments: string | null = null;
-  reviewsCount: number = 0;
-  approvalsCount: number = 0;
-  reviewsType: string | null = '';
-  reviewersGroup: Usergroupconfiguration | null = null
-  reviewers: UserConfiguration[] | null = []
-  approvalsType: string = ''
-  approvalsGroup: Usergroupconfiguration | null = null
-  approvals: UserConfiguration[] | null = []
-  CreatedBy: string = '';
-  CreatedDate: string | null = null;
-  ModifiedBy: string = '';
-  ModifiedDate: string | null = null;
-  Status: string | null = '';
+  WFCId: string | null=null;
+  DocumentMasterId: string | null='';
+  documentstage: string | null='';
+  workflowName:string | null='';
+  code:string | null='';
+  documenttype: string | null='';
+  department: DepartmentConfiguration[] | null=[]
+ departments:string | null=null;
+  reviewsCount: number=0;
+  approvalsCount: number=0;
+  reviewsType:string | null='';
+  reviewersGroup:string | null=null
+  reviewers:UserConfiguration[] | null=[]
+  approvalsType:string=''
+  approvalsGroup:string | null=null
+  approvals:UserConfiguration[] | null=[]
+  CreatedBy: string='';
+  CreatedDate:string | null=null;
+  ModifiedBy: string='';
+  ModifiedDate: string | null=null;
+  Status: string | null='';
 }
 export class DocumentTemplateConfiguration {
   DTID: string = ''

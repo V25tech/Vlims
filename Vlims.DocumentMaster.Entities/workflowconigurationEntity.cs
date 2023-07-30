@@ -121,8 +121,8 @@ namespace Vlims.DocumentMaster.Entities
         public string approvalsType { get; set; }
         public List<UserConfiguration> approvals { get; set; }
         public List<UserConfiguration> reviewers { get; set; }
-        public UserGroupConfiguration  reviewersGroup { get; set; }
-        public UserGroupConfiguration  approvalsGroup { get; set; }
+        public string  reviewersGroup { get; set; }
+        public string  approvalsGroup { get; set; }
         public List<DepartmentConfiguration> department { get; set; }
         public string departments { get; set; }
         public string CreatedBy

@@ -24,7 +24,7 @@ namespace Vlims.DocumentMaster.Entities
 
         public const string workflowName_PSY = "@workflowname_PSY";
 
-
+        public const string code = "@code_PSY";
         public const string documenttype = "@documenttype_PSY";
         
         public const string department = "@department_PSY";

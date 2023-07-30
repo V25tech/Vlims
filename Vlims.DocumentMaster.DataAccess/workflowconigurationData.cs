@@ -68,6 +68,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.DocumentMasterId, Value = workflowconiguration.DocumentMasterId });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.workflowName_PSY, Value = workflowconiguration.workflowName });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.code, Value = workflowconiguration.code });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.documentstage, Value = workflowconiguration.documentstage });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.documenttype, Value = workflowconiguration.documenttype });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.department, Value = workflowconiguration.departments });

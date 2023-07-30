@@ -22,7 +22,7 @@ export class AddWorkflowComponent {
   workflow = new workflowconiguration();
   types: Array<DocumentTypeConfiguration>=[];
   departs: Array<DepartmentConfiguration>=[];
-  usergroups: Array<usergroupconfigurationService> = [];
+  usergroups: Array<Usergroupconfiguration> = [];
   users: Array<UserConfiguration> = [];
   selectedreviwers:UserConfiguration[] = [];
   selectedgroupreviwers:Usergroupconfiguration[] = [];
@@ -35,6 +35,7 @@ export class AddWorkflowComponent {
   approvals:string[] | null=null;
   reviwersgroup:string| null=null;
   approvalsgroup:string | null=null;
+  id:number=0;
   addReviewer() {
     this.reviewers.push({ value: '' });
   }
@@ -82,24 +83,30 @@ ngOnInit(){
     const lastSegment = segments[segments.length - 2];
   // this.commonsvc.templateCount++;
   // this.workflow.code="Flow-"+this.commonsvc.templateCount;
-  this.getdepartments();
-this.getdocumenttypeconfig();
-this.getusergroupInfo();
-this.getusers();
+  
 
 if(lastSegment=="add")
 {
  let addcount=parseInt(segments[segments.length - 1],10);
  addcount++;
 this.workflow.code="Flow-"+addcount;  
+this.getdepartments();
 this.getdocumenttypeconfig();
+this.getusergroupInfo();
+this.getusers();
 }
 else if(lastSegment=="edit")
 {
   this.title='Edit Document Template';
-    let id=parseInt(segments[segments.length-1],10);
-    this.getdocumenttypeconfig();
-    this.getbyId(id);
+    this.id=parseInt(segments[segments.length-1],10);
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.usergroupsvc.getusergroupconfiguration(objrequest).subscribe((data:any) => {
+      this.usergroups = data.Response;
+      this.getdepartments();
+      this.getdocumenttypeconfig();
+      this.getusers();
+      this.getbyId(this.id);
+    });
 }
 else if(lastSegment=="view")
 {
@@ -118,6 +125,7 @@ else if(lastSegment=="view")
   getbyId(id: number) {
     return this.workflowsvc.getbyId(id).subscribe((data:any)=>{
       this.workflow=data;
+      console.log(this.workflow);
     },(error:any)=>{
 
     })
@@ -141,7 +149,8 @@ else if(lastSegment=="view")
   }
 
   onCancel() {
-    this.location.back();
+    //this.workflow.approvalsGroup=this.usergroups[0];
+    //this.location.back();
   }
   getdepartments() {
     this.loader.show();
@@ -189,6 +198,7 @@ else if(lastSegment=="view")
     return this.usergroupsvc.getusergroupconfiguration(objrequest).subscribe((data: any) => {
       debugger
       this.usergroups = data.Response;
+      //this.workflow.approvalsGroup=this.usergroups[0];
       this.loader.hide();
       console.log(this.usergroups);
     },((error:any)=>{

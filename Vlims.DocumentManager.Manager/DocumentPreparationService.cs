@@ -81,9 +81,9 @@ namespace Vlims.DocumentManager.Manager
                 String validationMessages = DocumentPreparationValidator.IsValidDocumentPreparation(documentPreparation);
                 //if (validationMessages.Length <= 0)
                 //{
-                documentPreparation.document = "test";
+                //documentPreparation.document = "test";
                 //documentPreparation.Documentmanagerid = "1";
-                documentPreparation.template = "";
+                //documentPreparation.template = "";
                 var result = DocumentPreparationData.SaveDocumentPreparation(documentPreparation);
                 return result;
                 //}
