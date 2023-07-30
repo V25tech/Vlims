@@ -74,7 +74,7 @@ namespace Vlims.Controllers
         [HttpGet("getbyId")]
         public ActionResult<DepartmentConfiguration> GetDocumentTypeConfigurationByDTCId(int dTCId)
         {
-            var result = departmentConfigurationService.GetDepartmentConfigurationByDPCFId(dTCId);
+            var result = departmentConfigurationService.GetDepartmentConfigurationByDPCFId(dTCId.ToString());
             return result;
         }
         /// <summary>
