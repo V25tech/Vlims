@@ -40,6 +40,7 @@ namespace Vlims.DocumentManager.DataAccess
                         DataRow row = dataset.Tables[0].Rows[i];
                         additionalTaskData = new AdditionalTask();
                         additionalTaskData.ATID = Convert.ToString(row[AdditionalTaskConstants.ATID.Trim('@')]);
+                        additionalTaskData.Status = Convert.ToString(row[AdditionalTaskConstants.Status_PSY.Trim('@')]);
                         additionalTaskData.Documentmanagerid = Convert.ToString(row[AdditionalTaskConstants.Documentmanagerid.Trim('@')]);
                         additionalTaskData.CreatedBy = Convert.ToString(row[AdditionalTaskConstants.CreatedBy.Trim('@')]);
                         additionalTaskData.CreatedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.CreatedDate.Trim('@')]);

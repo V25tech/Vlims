@@ -29,7 +29,10 @@ namespace Vlims.DMS.Entities
         private string modifiedbyField;
         
         private DateTime? modifieddateField;
-        
+
+        public string Status { get; set; }
+
+        public int Version { get; set; }
         public string ATID
         {
             get
