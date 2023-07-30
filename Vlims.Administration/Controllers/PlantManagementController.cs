@@ -59,7 +59,16 @@ namespace PolicySummary.Controllers
             var result = plantManagementService.GetPlantManagementByPMId(pMId);
             return result;
         }
-        
+        /// <summary>
+        /// This method is used to Get DocumentTypeConfiguration By Id dTCId
+        /// </summary>
+        /// <param name="dTCId"></param>
+        [HttpGet("getbyId")]
+        public ActionResult<PlantManagement> GetPlantConfigurationByDTCId(int dTCId)
+        {
+            var result = plantManagementService.GetPlantManagementByPMId(dTCId.ToString());
+            return result;
+        }
         /// <summary>
         /// This Method is used to Save PlantManagement
         /// </summary>

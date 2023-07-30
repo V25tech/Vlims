@@ -20,6 +20,7 @@ import { UserConfigurationComponent } from '../authentication/components/User-co
 import { ApprovalConfigurationsComponent } from '../authentication/components/Approval-Configuration/approval-configurations.component';
 import { UsergroupconfigurationComponent } from '../authentication/components/User-Group/usergroupconfiguration.component';
 import { AddDepartmentComponent } from '../authentication/components/Department/add-department.component';
+import { NewPlantRegistrationComponent } from '../authentication/components/New-plant-registration/new-plant-registration.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -192,7 +193,17 @@ const routes: Routes = [
       }
     ]
   },
-  
+  {
+    path: 'admin/addplant',
+    component: NewPlantRegistrationComponent,
+    children: [
+      {
+        path: '',
+        component: NewPlantRegistrationComponent,
+      }
+    ]
+  },
+
   {
     path: 'roles',
     component: RolesComponent,

@@ -211,9 +211,9 @@ export class PlantConfiguration {
   PlantAddress: string = ''
   Comments: string = ''
   CreatedBy: string = ''
-  CreatedDate: string | null = '';
+  CreatedDate: Date | undefined;
   ModifiedBy: string = ''
-  ModifiedDate: string | null = '';
+  ModifiedDate: Date | undefined;
   Status: string = '';
 
 }

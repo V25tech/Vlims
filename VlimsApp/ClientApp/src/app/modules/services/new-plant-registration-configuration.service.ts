@@ -19,7 +19,11 @@ export class NewPlantRegistrationConfigurationService {
   addNewRegistrationconfiguration(objrequest: PlantConfiguration) {
   debugger
     return this.http.postJsonLogin(objrequest, "api/plantmanagement/saveplantmanagement",this.type);
-}
+  }
+  getbyId(objname: number) {
+    debugger
+    return this.http.getwithheader("api/plantmanagement/getbyId" + "?DPCFId=" + objname, this.type);
+  }
 }
 
 

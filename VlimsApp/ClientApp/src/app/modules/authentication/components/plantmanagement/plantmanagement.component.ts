@@ -31,7 +31,8 @@ export class PlantComponent implements OnInit {
     });
   }
   navigateToAddPlant(): void {
-    this.router.navigate(['/plant/add']);
+    debugger;
+    this.router.navigate(['/admin/addplant']);
   }
   editdoc(editband: DocumentTypeConfiguration) {
     debugger
