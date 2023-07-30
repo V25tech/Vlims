@@ -17,7 +17,11 @@ namespace Vlims.DMS.Entities
     {
         
         public const string ATID = "@ATID_PSY";
-        
+
+        public const string Status_PSY = "@Status_PSY";
+
+        public const string Version = "@Version";
+
         public const string Documentmanagerid = "@Documentmanagerid_PSY";
         
         public const string CreatedBy = "@CreatedBy_PSY";

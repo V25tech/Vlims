@@ -1,6 +1,4 @@
 ﻿
-
-
 CREATE PROCEDURE [dbo].[USP_DocumentEffective_PSY_APPROVE] @DEID_PSY int, @Documentmanagerid_PSY NVarChar(50),
 @documenttitle_PSY NVarChar(50),
 @documentno_PSY NVarChar(50),
@@ -28,7 +26,10 @@ ModifiedBy_PSY=@ModifiedBy_PSY,
 Status_PSY='Approve'
 WHERE  [DEID_PSY] = @DEID_PSY ;  select @DEID_PSY; 
   
-  UPDATE workitems_PSY SET Stage_PSY='Approve',Status_PSY='Approve' WHERE WITId_PSY=@workId
+  UPDATE workitems_PSY SET Stage_PSY='Approve',Status_PSY='Approve' WHERE WITId_PSY=@workId;
+
+  INSERT INTO AdditionalTask_PSY(DocumentEffective_ID,CreatedDate_PSY,CreatedBy_PSY,Status_pSY,Version)
+  values(@DEID_PSY,GETDATE(),@ModifiedBy_PSY,'In Progress',00)
   
   END TRY 
  BEGIN CATCH 
