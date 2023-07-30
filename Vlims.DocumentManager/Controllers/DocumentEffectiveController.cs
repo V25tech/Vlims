@@ -44,7 +44,7 @@ namespace PolicySummary.Controllers
         /// </summary>
         /// <param name="requestContext"></param>
         [HttpPost("GetAllDocEff")]
-        public ActionResult GetAllDocumentEffective(RequestContext requestContext)
+        public ActionResult GetAllDocumentEffective([FromQuery] RequestContext requestContext)
         {
             var result = documentEffectiveService.GetAllDocumentEffective(requestContext);
             return Ok(result);

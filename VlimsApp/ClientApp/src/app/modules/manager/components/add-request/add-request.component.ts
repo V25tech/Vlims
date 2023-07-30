@@ -1,35 +1,24 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
+import { DocumentRequestConfiguration, RequestContext } from 'src/app/models/model';
+import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
+import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
+import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
+import { DocumentRequestService } from 'src/app/modules/services/document-request.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
-import { Requests } from '../../models/requests';
+import { CommonService } from 'src/app/shared/common.service';
 @Component({
   selector: 'app-add-request',
   templateUrl: './add-request.component.html',
   styleUrls: ['./add-request.component.scss'],
 })
 export class AddRequestComponent {
-  constructor(private location: Location, private router: Router) {}
-
-  request: Requests = {
-    id: 0,
-    reqCode: '',
-    documentType: '',
-    department: '',
-    workflow:'',
-    purpose:'',
-    registeredBy: '',
-    registeredOn: '',
-    approvedBy: '',
-    approvedOn: '',
-    status: '',
-  };
-
-  departmentsSource = [
-    { label: 'Select Department', value: '' },
-    { label: 'department 1', value: 'option1' },
-    { label: 'department 2', value: 'option2' },
-    { label: 'department 3', value: 'option3' },
-  ];
+  departmentsSource = [];
+  typeSource = [];
+  workflowsSource = [];
+  request = new DocumentRequestConfiguration();
+  editMode: boolean = false;
 
   stageSource = [
     { label: 'Select Stage', value: '' },
@@ -37,21 +26,82 @@ export class AddRequestComponent {
     { label: 'Stage 2', value: 'option3' },
   ];
 
-  typeSource = [
-    { label: 'Select Type', value: '' },
-    { label: 'Type 1', value: 'option2' },
-    { label: 'Type 2', value: 'option3' },
-  ];
 
-  workflowsSource = [
-    { label: 'Select Workflow', value: '' },
-    { label: 'Workflow 1', value: 'option2' },
-    { label: 'Workflow 2', value: 'option3' },
-  ];
+  constructor(private router: Router, private location: Location, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private documentRequestService: DocumentRequestService) { }
 
-  addRequest() {}
+  ngOnInit() {
+    const urlPath = this.router.url;
+    const segments = urlPath.split('/');
+    if (segments.slice(-1).toString() == 'edit' && this.commonsvc.request) {
+      this.editMode = true;
+      this.request = this.commonsvc.request;
+    }
+    this.getdepartments();
+    this.getdocumenttypeconfig();
+    this.getworkflowinfo();
+  }
+
+
+  saveRequest() {
+    if (this.editMode) {
+      this.updateRequest();
+    }
+    else {
+      this.addRequest();
+    }
+  }
+
+  addRequest() {
+    this.request.createdBy = 'admin';
+    this.request.modifiedBy = 'admin';
+    this.request.status = 'In-Progress';
+    this.request.createdDate = new Date().toISOString();
+    this.request.modifiedDate = new Date().toISOString();
+    this.spinner.show();
+
+    this.documentRequestService.adddocreqconfig(this.request).subscribe(res => {
+      this.commonsvc.request = new DocumentRequestConfiguration();
+      this.location.back();
+      this.spinner.hide();
+    }, er => {
+      console.log(er);
+      this.spinner.hide();
+    });
+  }
+
+  updateRequest() {
+    this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
+      this.commonsvc.request = new DocumentRequestConfiguration();
+      this.location.back();
+      this.spinner.hide();
+    }, er => {
+      console.log(er);
+      this.spinner.hide();
+    });
+  }
 
   onCancel() {
     this.location.back();
   }
+
+  getdepartments() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+      this.departmentsSource = data.Response;
+    });
+  }
+  getdocumenttypeconfig() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
+      this.typeSource = data.Response;
+    });
+  }
+  getworkflowinfo() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
+      this.workflowsSource = data.Response;
+      console.log(this.workflowsSource);
+    });
+  }
+
 }

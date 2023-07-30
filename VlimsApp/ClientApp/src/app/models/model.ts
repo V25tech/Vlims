@@ -27,59 +27,64 @@ export class DocumentTypeConfiguration {
   Status: string | null = null;
 }
 export class DocumentRequestConfiguration {
-  DTCId: string = ''
-  DocumentMasterId: string = ''
-  documenttype: string = ''
-  department: string = ''
-  Description: string = ''
-  Approvedby: string = ''
-  ApprovedOn: string = ''
-  CreatedBy: string = ''
-  CreatedDate: string | null = '';
-  ModifiedBy: string = ''
-  ModifiedDate: string | null = '';
-  Status: string = ''
-  Purpose: string = ''
-  ApprovalsCount: number = 0;
-  UserGroup: string = ''
-  drid: string = ''
+  drid: string = '';
+  documentmanagerid: string = '';
+  documenttype: string = '';
+  department: string = '';
+  purpose: string = '';
+  approvalsCount = 0;
+  assigntoGroup: string = '';
+  createdBy: string = '';
+  createdDate: string | null = '';
+  modifiedBy: string = '';
+  modifiedDate: string | null = '';
+  status: string = '';
+  workflow: string = '';
+  approvedby: string = '';
+  approvedOn?: string;
+  UserGroup: string= '';
 }
 
 export class DocumentPreperationConfiguration {
-  DTCId: string = ''
-  Documentmanagerid: string = ''
-  documenttype: string = ''
-  AssignedtoGroup: string = ''
-  Approvedby: string = ''
-  ApprovedOn: string = ''
-  CreatedBy: string = ''
-  CreatedDate: string | null = '';
-  ModifiedBy: string = ''
-  ModifiedDate: string | null = '';
-  Status: string = ''
-  documenttitle: string = ''
-  documentno: string = ''
-  Department: string = ''
-  template: string = ''
-  wokflow: string = ''
-  details: string = ''
-  document: string = ''
-  path: string = ''
+  DTCId: string='';
+  Documentmanagerid: string='';
+  documenttype: string='';
+  AssignedtoGroup: string='';
+  Approvedby: string='';
+  ApprovedOn: string | null = '';
+  CreatedBy: string='';
+  CreatedDate: string | null='';
+  ModifiedBy: string='';
+  ModifiedDate: string | null='';
+  Status: string='';
+  documenttitle: string='';
+  documentno: string='';
+  department: string='';
+  template: string='';
+  wokflow: string='';
+  details: string='';
+  document: string='';
+  path:string='';
+  dpnid: string='';
 }
+
 export class DocumentEffectiveConfiguration {
-  DTCId: string = ''
-  documenttitle: string = ''
-  documentno: string = ''
-  documenttype: string = ''
-  Department: string = ''
-  document: string = ''
-  EffectiveDate: Date = new Date();
-  ReviewDate: Date = new Date();
-  CreatedBy: string = ''
-  CreatedDate: string | null = '';
-  ModifiedBy: string = ''
-  ModifiedDate: string | null = '';
-  Status: string = ''
+  DTCId: string='';
+  deid: string='';
+  documenttitle: string='';
+  documentno: string='';
+  documenttype: string='';
+  department: string='';
+  document: string='';
+  effectiveDate: string='';
+  reviewDate: Date=new Date();
+  CreatedBy: string='';
+  CreatedDate: string | null=null;
+  ModifiedBy: string='';
+  ModifiedDate: string | null='';
+  Status: string='';
+  workflow: string='';
+  template: string='';
 }
 export class DocumentAdditionalTasks {
   DTCId: string = ''

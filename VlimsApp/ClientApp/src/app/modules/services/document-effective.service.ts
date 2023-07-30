@@ -11,10 +11,10 @@ export class DocumentEffectiveService {
   type: string = "manager";
 
   constructor(private http: HttpbaseService) { }
-  getdocumentrequest(objrequest: RequestContext) {
-    debugger
-    return this.http.postJsonLogin(objrequest, "api/documenteffective/GetAllDocEff");
+  getdocumenteffective(objrequest: RequestContext) {
+    return this.http.postJsonLogin(objrequest, "api/documenteffective/GetAllDocEff",this.type);
   }
+  
   getdocumentrequestbyId(objrequest: RequestContext) {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/getdocId");

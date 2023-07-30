@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ManagerService } from '../../services/manager.service';
+import { DocumentEffectiveService } from 'src/app/modules/services/document-effective.service';
+import { DocumentEffectiveConfiguration, RequestContext } from 'src/app/models/model';
+import { CommonService } from 'src/app/shared/common.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-effectives',
@@ -8,19 +11,29 @@ import { ManagerService } from '../../services/manager.service';
   styleUrls: ['./effectives.component.scss'],
 })
 export class EffectivesComponent {
-  constructor(private router: Router, private managerService: ManagerService) {}
+  effectivesDatasource: DocumentEffectiveConfiguration[]  = [];
 
-  navigateToReviewEffective(): void {
+  constructor(private router: Router, private documentEffectiveService: DocumentEffectiveService,private spinner: NgxSpinnerService, private commonsvc: CommonService) {}
+
+  
+  ngOnInit() {
+    this.spinner.show();
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    this.documentEffectiveService.getdocumenteffective(objrequest).subscribe((data: any) => {
+      this.effectivesDatasource = data.response;
+      console.log('eff',data);
+      this.spinner.hide();
+    }, er =>{
+      console.log(er);
+      this.spinner.hide();
+    });
+  }
+
+  navigateToReviewEffective(effective: DocumentEffectiveConfiguration): void {
+    this.commonsvc.efffective = effective;
     this.router.navigate(['/effectives/review']);
   }
 
-  effectivesDatasource = [];
-
-  ngOnInit() {
-    this.managerService.getEffectivesData().subscribe((data: any) => {
-      this.effectivesDatasource = data;
-    });
-  }
 
   getStatusClass(status: string): string {
     if (status === 'In Progress') {
@@ -37,4 +50,5 @@ export class EffectivesComponent {
       return '';
     }
   }
+
 }

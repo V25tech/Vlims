@@ -41,23 +41,23 @@
               <th class="text-center" style="width: 80px">Actions</th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-docType let-i="rowIndex">
+          <ng-template pTemplate="body" let-effective let-i="rowIndex">
             <tr>
               <td>{{ i + 1 }}</td>
-              <td>{{ docType.reqCode }}</td>
-              <td>{{ docType.documentTitle }}</td>
-              <td>{{ docType.documentNumber }}</td>
-              <td>{{ docType.documentType }}</td>
-              <td>{{ docType.department }}</td>
+              <td>{{ effective.deid }}</td>
+              <td>{{ effective.documenttitle }}</td>
+              <td>{{ effective.documentno }}</td>
+              <td>{{ effective.documenttype }}</td>
+              <td>{{ effective.department }}</td>
               <td>
                 <span
                   class="status"
-                  [ngClass]="getStatusClass(docType['status'])"
-                  >{{ docType.status }}
+                  [ngClass]="getStatusClass(effective['status'])"
+                  >{{ effective.status }}
                 </span>
               </td>
               <td class="text-center">
-                <a (click)="navigateToReviewEffective()"
+                <a (click)="navigateToReviewEffective(effective)"
                   ><i class="bi bi-arrow-right"></i
                 ></a>
               </td>
