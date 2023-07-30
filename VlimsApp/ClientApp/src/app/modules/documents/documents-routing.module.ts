@@ -19,6 +19,7 @@ import { DepartmentComponent } from '../authentication/components/Department/dep
 import { UserConfigurationComponent } from '../authentication/components/User-configuration/user-configuration.component';
 import { ApprovalConfigurationsComponent } from '../authentication/components/Approval-Configuration/approval-configurations.component';
 import { UsergroupconfigurationComponent } from '../authentication/components/User-Group/usergroupconfiguration.component';
+import { AddDepartmentComponent } from '../authentication/components/Department/add-department.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -132,6 +133,16 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'admin/adddepartment/edit/:departId',
+    component: AddDepartmentComponent,
+    children: [
+      {
+        path: '',
+        component: AddDepartmentComponent,
+      }
+    ]
+  },
+  {
     path: 'admin/user',
     component: UserConfigurationComponent,
     children: [
@@ -171,7 +182,17 @@ const routes: Routes = [
       }
     ]
   },
-  //admin / usergroup
+  {
+    path: 'admin/adddepartment',
+    component: AddDepartmentComponent,
+    children: [
+      {
+        path: '',
+        component: AddDepartmentComponent,
+      }
+    ]
+  },
+  
   {
     path: 'roles',
     component: RolesComponent,

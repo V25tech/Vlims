@@ -16,5 +16,9 @@ export class DepartmentconfigurationService {
 adddepartment(objrequest: DepartmentConfiguration) {
   debugger
   return this.http.postJsonLogin(objrequest, "api/departmentconfiguration/savedepartmentconfiguration",this.type);
-}
+  }
+  getbyId(objname: number) {
+    debugger
+    return this.http.getwithheader("api/departmentconfiguration/getbyId" + "?dTCId=" + objname, this.type);
+  }
 }

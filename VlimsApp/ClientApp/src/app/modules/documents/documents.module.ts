@@ -30,6 +30,7 @@ import { DepartmentComponent } from '../authentication/components/Department/dep
 import { UserConfigurationComponent } from '../authentication/components/User-configuration/user-configuration.component';
 import { ApprovalConfigurationsComponent } from '../authentication/components/Approval-Configuration/approval-configurations.component';
 import { UsergroupconfigurationComponent } from '../authentication/components/User-Group/usergroupconfiguration.component';
+import { AddDepartmentComponent } from '../authentication/components/Department/add-department.component';
 
 
 
@@ -53,6 +54,7 @@ import { UsergroupconfigurationComponent } from '../authentication/components/Us
     RolesComponent,
     UserConfigurationComponent,
     UsergroupconfigurationComponent,
+    AddDepartmentComponent,
   ],
   imports: [
     CommonModule,

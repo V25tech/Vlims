@@ -67,7 +67,16 @@ namespace Vlims.Controllers
             var result = departmentConfigurationService.SaveDepartmentConfiguration(departmentConfiguration);
             return result;
         }
-        
+        /// <summary>
+        /// This method is used to Get DocumentTypeConfiguration By Id dTCId
+        /// </summary>
+        /// <param name="dTCId"></param>
+        [HttpGet("getbyId")]
+        public ActionResult<DepartmentConfiguration> GetDocumentTypeConfigurationByDTCId(int dTCId)
+        {
+            var result = departmentConfigurationService.GetDepartmentConfigurationByDPCFId(dTCId);
+            return result;
+        }
         /// <summary>
         /// This Method is used to update DepartmentConfiguration
         /// </summary>

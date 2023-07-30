@@ -46,11 +46,30 @@ getdepartments() {
     }
   }
   navigateToAddDepartment(): void {
-    this.router.navigate(['/document-type/add']);
+    this.router.navigate(['/admin/adddepartment']);
   }
   editBrand(doc : DepartmentConfiguration)
   {
+    debugger
+    this.commonsvc.departConfig = doc;
+    this.router.navigate(['/admin/adddepartment/edit', doc.DPCFId]);
     
+  }
+  submit(newdept: DepartmentConfiguration) {
+    debugger
+    this.adddoctype(newdept);
+  }
+  adddoctype(newdept: DepartmentConfiguration) {
+    debugger
+    newdept.CreatedBy = "admin"; this.navigateToAddDepartment
+    newdept.ModifiedBy = "admin";
+    //this.router.navigate(['/products']);
+    this.doctypeservice.adddepartment(newdept).subscribe((res: any) => {
+      //this.toastr.success('Added');
+      this.router.navigate(['/admin/department']);
+    });
+
+
   }
   
 }

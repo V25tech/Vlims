@@ -64,7 +64,7 @@
 
               <select class="form-control" [(ngModel)]="adduser.Role" name="role" [disabled]="viewMode">
                 <option value="Select">Select</option>
-                <option *ngFor="let type of types" value={{type.Role}}>{{type?.Role}}</option>
+                <option *ngFor="let role of roles" value={{role.Role}}>{{role?.Role}}</option>
               </select>
 
             </div>
