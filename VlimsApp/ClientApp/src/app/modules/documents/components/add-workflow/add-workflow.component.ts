@@ -102,6 +102,7 @@ else if(lastSegment=="edit")
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.usergroupsvc.getusergroupconfiguration(objrequest).subscribe((data:any) => {
       this.usergroups = data.Response;
+      console.log('usergroups',this.usergroups)
       this.getdepartments();
       this.getdocumenttypeconfig();
       this.getusers();
@@ -125,7 +126,7 @@ else if(lastSegment=="view")
   getbyId(id: number) {
     return this.workflowsvc.getbyId(id).subscribe((data:any)=>{
       this.workflow=data;
-      console.log(this.workflow);
+      console.log('u',this.workflow);
     },(error:any)=>{
 
     })
@@ -159,7 +160,6 @@ else if(lastSegment=="view")
         
         this.departs = data.Response;
         this.loader.hide();
-        console.log(this.departs);
       },((error:any)=>{
 
       }
@@ -173,7 +173,6 @@ else if(lastSegment=="view")
         this.types = data.Response;
         
         this.loader.hide();
-        console.log(this.types);
       },((error:any)=>{
 
       }
@@ -186,7 +185,6 @@ else if(lastSegment=="view")
         
         this.users = data.Response;
         this.loader.hide();
-        console.log(this.users);
       },((error:any)=>{
 
       }
@@ -196,11 +194,11 @@ else if(lastSegment=="view")
     this.loader.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     return this.usergroupsvc.getusergroupconfiguration(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.usergroups = data.Response;
       //this.workflow.approvalsGroup=this.usergroups[0];
       this.loader.hide();
-      console.log(this.usergroups);
+      //console.log('usergroup',this.usergroups);
     },((error:any)=>{
 
     }

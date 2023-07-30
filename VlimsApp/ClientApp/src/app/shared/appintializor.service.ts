@@ -17,12 +17,12 @@ export class AppintializorService {
     }
 
     // loadServerConfig(): Promise<string[]> {
-    //     debugger
+    //     
     //    var jobs=  this.http.get(this.configUrl)
     //         .toPromise()
     //         .then((data: any) => 
     //         {
-    //             debugger
+    //             
     //         this.baseUrl = data.BaseUrl;
     //         this.documentmasterUrl= data.documentmasterUrl;
     //         this.documentmanagerUrl= data.documentmanagerUrl;
@@ -44,10 +44,10 @@ export class AppintializorService {
         return this.http.get(this.configUrl);
       }
     showConfig() {
-        debugger
+        
         this.getConfig()
           .subscribe((data: any) => {
-            debugger
+            
             this.jsonUrls=data;
             this.documentmasterUrl=data.documentmasterUrl;
             this.documentmanagerUrl=data.documentmanagerUrl;
@@ -58,7 +58,7 @@ export class AppintializorService {
 }
 
 export function serverConfigInitializerFactory(startupService: AppintializorService): Function {
-    debugger
+    
     return () => startupService.loadServerConfig();
     
 }

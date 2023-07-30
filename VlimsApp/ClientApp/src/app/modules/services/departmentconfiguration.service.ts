@@ -10,15 +10,15 @@ export class DepartmentconfigurationService {
   constructor(private http: HttpbaseService) { }
 
   getdepartments(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/departmentconfiguration/getdepartments",this.type);
 }
 adddepartment(objrequest: DepartmentConfiguration) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/departmentconfiguration/savedepartmentconfiguration",this.type);
   }
   getbyId(objname: number) {
-    debugger
+    
     return this.http.getwithheader("api/departmentconfiguration/getbyId" + "?dTCId=" + objname, this.type);
   }
 }

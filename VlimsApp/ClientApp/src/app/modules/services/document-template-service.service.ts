@@ -17,15 +17,15 @@ export class DocumentTemplateServiceService {
     return this.http.postJsonLogin(objrequest, "api/documenttemplateconfiguration/getalldoctemplate",this.type);
 }
 getdoctemplatebyname(objname: string) {
-  debugger
+  
   return this.http.getwithheader("api/documenttemplateconfiguration/getbyName"+"?name="+objname,this.type);
 }
 adddoctemplate(objrequest: DocumentTemplateConfiguration) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/documenttemplateconfiguration/savedocumenttemplateconfiguration",this.type);
 }
 getbyId(id: number) {
-  debugger
+  
   return this.http.getwithheader("api/documenttemplateconfiguration/getbyId"+"?dTID="+id,this.type);
 }
 }
