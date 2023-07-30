@@ -21,6 +21,7 @@ import { ApprovalConfigurationsComponent } from '../authentication/components/Ap
 import { UsergroupconfigurationComponent } from '../authentication/components/User-Group/usergroupconfiguration.component';
 import { AddDepartmentComponent } from '../authentication/components/Department/add-department.component';
 import { NewPlantRegistrationComponent } from '../authentication/components/New-plant-registration/new-plant-registration.component';
+import { RegisterComponent } from '../authentication/components/register/register.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -144,12 +145,32 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'admin/adduser/edit/:userid',
+    component: RegisterComponent,
+    children: [
+      {
+        path: '',
+        component: RegisterComponent,
+      }
+    ]
+  },  
+  {
     path: 'admin/user',
     component: UserConfigurationComponent,
     children: [
       {
         path: '',
         component: UserConfigurationComponent,
+      }
+    ]
+  },
+  {
+    path: 'admin/adduser',
+    component: RegisterComponent,
+    children: [
+      {
+        path: '',
+        component: RegisterComponent,
       }
     ]
   },

@@ -32,6 +32,7 @@ import { ApprovalConfigurationsComponent } from '../authentication/components/Ap
 import { UsergroupconfigurationComponent } from '../authentication/components/User-Group/usergroupconfiguration.component';
 import { AddDepartmentComponent } from '../authentication/components/Department/add-department.component';
 import { NewPlantRegistrationComponent } from '../authentication/components/New-plant-registration/new-plant-registration.component';
+import { RegisterComponent } from '../authentication/components/register/register.component';
 
 
 
@@ -53,10 +54,13 @@ import { NewPlantRegistrationComponent } from '../authentication/components/New-
     UserConfigurationComponent,
     ApprovalConfigurationsComponent,
     RolesComponent,
-    UserConfigurationComponent,
+    /*RegisterComponent,*/
     UsergroupconfigurationComponent,
     AddDepartmentComponent,
     NewPlantRegistrationComponent,
+    
+   
+
   ],
   imports: [
     CommonModule,

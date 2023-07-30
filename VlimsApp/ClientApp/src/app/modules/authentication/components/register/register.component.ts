@@ -14,7 +14,7 @@ import { UsersconfigurationService } from '../../../services/usersconfiguration.
 })
 export class RegisterComponent implements OnInit {
   adduser = new UserConfiguration();
-  newuser = new UserConfiguration();
+  //newuser = new UserConfiguration();
   editMode: boolean = false;
   viewMode: boolean = false;
   //objname: string;
@@ -32,11 +32,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    const lastSegment = segments[segments.length - 1];
+    const lastSegment = segments[segments.length - 2];
     this.getdepartments();
     this.getroles();
     debugger
-    if (lastSegment == "viewdoctype") {
+    if (lastSegment == "view") {
       this.viewMode = true;
       if (this.viewMode) {
         debugger
@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
       }
       this.cdr.detectChanges();
     }
-    else if (lastSegment == "adduser") {
+    else if (lastSegment == "edit") {
       this.editMode = this.commonsvc.userConfig != null ? true : false;
       if (this.editMode) {
         this.adduser = this.commonsvc.userConfig;
@@ -98,7 +98,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   onCancel() {
-
+    this.router.navigate(['/admin/user']);
   }
 }
 

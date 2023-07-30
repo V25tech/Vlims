@@ -43,11 +43,11 @@ export class UserConfigurationComponent implements OnInit {
   editdoc(doc: UserConfiguration) {
     debugger
     this.commonsvc.userConfig = doc;
-    this.router.navigate(['/mainpage/users/adduser']);
+    this.router.navigate(['/admin/adduser/edit', doc.UCFId]);
   }
 
   navigateToAddUser(): void {
-    this.router.navigate(['/document-type/add']);
+    this.router.navigate(['/admin/adduser']);
   }
   
   getStatusClass(status: string): string {

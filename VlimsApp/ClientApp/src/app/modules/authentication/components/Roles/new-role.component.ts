@@ -13,7 +13,7 @@ import { CommonService } from 'src/app/shared/common.service';
   templateUrl: './new-role.component.html'
   
 })
-export class AddUserComponent implements OnInit {
+export class AddRoleComponent implements OnInit {
   adduser = new UserConfiguration();
   editMode: boolean = false;
   viewMode: boolean = false;
