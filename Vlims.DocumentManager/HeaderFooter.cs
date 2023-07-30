@@ -165,6 +165,7 @@ internal class HeaderFooter
 
         Table wordTable = new Table();
         TableProperties tableProperties = new TableProperties(
+            new TableJustification() { Val = TableRowAlignmentValues.Center },
                 new TableBorders(
                     new TopBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 6 },
                     new BottomBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 6 },

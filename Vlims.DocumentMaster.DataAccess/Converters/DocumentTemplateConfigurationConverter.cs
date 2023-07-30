@@ -23,7 +23,7 @@ namespace Vlims.DocumentMaster.DataAccess
     public static class DocumentTemplateConfigurationConverter
     {
 
-        public static List<DocumentTemplateConfiguration> SetAllDocumentTemplateConfiguration(DataSet dataset)
+        public static List<DocumentTemplateConfiguration> SetAllDocumentTemplateConfiguration(DataSet dataset,bool fromprep=false)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.footerrows = Convert.ToString(row[DocumentTemplateConfigurationConstants.footerrows.Trim('@')]);
                         documentTemplateConfigurationData.footercolumns = Convert.ToString(row[DocumentTemplateConfigurationConstants.footercolumns.Trim('@')]);
                        
-                        if (!islist)
+                        if (!islist || fromprep)
                         {
                             string docvalue = Convert.ToString(row[DocumentTemplateConfigurationConstants.document.Trim('@')]);
                             if (!string.IsNullOrEmpty(docvalue))

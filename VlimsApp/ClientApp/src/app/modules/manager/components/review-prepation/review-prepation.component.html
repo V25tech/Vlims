@@ -105,10 +105,10 @@
               <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput [disabled]="isUploaded"
                 (change)="onFileSelected($event)">
             </div>
-            <div *ngIf="preparation.document" class="col-sm-1">
+            <div *ngIf="preparation.document" class="col-sm-2">
               <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
             </div>
-            <div *ngIf="preparation.document" class="col-sm-9">
+            <div *ngIf="preparation.document" class="col-sm-8">
               <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()">Delete</button>
             </div>
           </div>

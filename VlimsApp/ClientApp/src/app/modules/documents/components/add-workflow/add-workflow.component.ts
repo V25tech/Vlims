@@ -151,7 +151,7 @@ else if(lastSegment=="view")
 
   onCancel() {
     //this.workflow.approvalsGroup=this.usergroups[0];
-    //this.location.back();
+    this.location.back();
   }
   getdepartments() {
     this.loader.show();
