@@ -55,6 +55,7 @@ namespace Vlims.DocumentManager.DataAccess
                         documentPreparationData.ModifiedBy = Convert.ToString(row[DocumentPreparationConstants.ModifiedBy.Trim('@')]);
                         documentPreparationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPreparationConstants.ModifiedDate.Trim('@')]);
                         documentPreparationData.Status= Convert.ToString(row[DocumentPreparationConstants.Status.Trim('@')]);
+                        documentPreparationData.path = documentPreparationData.document;
                         result.Add(documentPreparationData);
                     }
                 }

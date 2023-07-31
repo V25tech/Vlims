@@ -17,6 +17,7 @@ import { DocumentTypesComponent } from './modules/documents/components/document-
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppintializorService, serverConfigInitializerFactory } from './shared/appintializor.service';
 import { MessageService } from 'primeng/api';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LeftNavComponent],
@@ -31,11 +32,12 @@ import { MessageService } from 'primeng/api';
     DocumentsRoutingModule,
     FontAwesomeModule,
     BsDropdownModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ModalModule
   ],
   exports: [TableModule],
 
-  providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true },MessageService], 
+  providers: [BsModalService,AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true },MessageService], 
   bootstrap: [AppComponent],
 })
 export class AppModule {}

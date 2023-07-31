@@ -24,6 +24,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'requests/edit',
+    component: AddRequestComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'preparations',
     component: PreparationComponent,
     canActivate: [AuthGuard],
@@ -32,7 +37,7 @@ const routes: Routes = [
     path: 'preparation/review',
     component: ReviewPrepationComponent,
     canActivate: [AuthGuard],
-  },
+  },  
   {
     path: 'effectives',
     component: EffectivesComponent,

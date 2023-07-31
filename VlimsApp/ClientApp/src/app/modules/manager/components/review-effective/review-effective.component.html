@@ -8,23 +8,7 @@
       <div class="col">
         <form (ngSubmit)="saveEffective()">
           <div class="p-4 bg-white shadow-dark rounded-2">
-            <!-- <div class="form-group row">
-              <label for="reqCode" class="col-sm-2 col-form-label"
-                >Req Code</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="reqCode"
-                  name="reqCode"
-                  placeholder="System Generated"
-                  [(ngModel)]="preparation.reqCode"
-                  readonly
-                />
-              </div>
-            </div> -->
-  
+            
             <div class="form-group row">
               <label for="documentTitle" class="col-sm-2 col-form-label"
                 >Document Title</label
@@ -36,7 +20,7 @@
                   id="documentTitle"
                   name="documentTitle"
                   placeholder="Document Title"
-                  [(ngModel)]="effective.documentTitle"
+                  [(ngModel)]="effective.documenttitle"
                   readonly
                 />
               </div>
@@ -54,7 +38,7 @@
                   id="documentNumber"
                   name="documentNumber"
                   placeholder="System Generated"
-                  [(ngModel)]="effective.documentNumber"
+                  [(ngModel)]="effective.documentno"
                   readonly
                 />
               </div>
@@ -71,7 +55,7 @@
                 id="docType"
                 name="docType"
                 placeholder="Document Type"
-                [(ngModel)]="effective.documentType"
+                [(ngModel)]="effective.documenttype"
                 readonly
               />
               </div>
@@ -114,7 +98,7 @@
             <div class="form-group row">
               <label for="document" class="col-sm-2 col-form-label">Document</label>
               <div class="col-sm-10">
-                <a class="link-opacity-100-hover" href="#">View Document</a>
+                <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
               </div>
             </div>
   
@@ -164,3 +148,17 @@
     </div>
   </div>
   
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Preview</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+    </div>
+  </ng-template>

@@ -81,7 +81,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'workflows/add',
+    path: 'workflows/add/:count',
+    component: AddWorkflowComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'workflows/edit/:workflowId',
     component: AddWorkflowComponent,
     canActivate: [AuthGuard],
   },

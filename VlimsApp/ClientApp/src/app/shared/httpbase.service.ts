@@ -59,7 +59,7 @@ export class HttpbaseService {
         }
     }
     postJsonLogin(postObject: any, url: string,type:string | null =null) {
-        debugger
+        
         if(type!=null)
         {
             this.baseUrl=this.geturl(type);
@@ -69,7 +69,7 @@ export class HttpbaseService {
     }
 
     postJson(postObject: any, url: string,type:string | null=null) {
-        debugger
+        
         if(type!=null)
         {
             this.baseUrl=this.geturl(type);
@@ -137,7 +137,7 @@ export class HttpbaseService {
         return this.httpClient.get(this.baseUrl + url, this.requestOptions);
     }
     getwithheader(url: string,type:string | null=null) {
-        debugger
+        
         if(type!=null)
         {
             this.baseUrl=this.geturl(type);

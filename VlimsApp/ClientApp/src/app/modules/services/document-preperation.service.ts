@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DocumentPreperationConfiguration, RequestContext } from '../../models/model';
 import { HttpbaseService } from '../../shared/httpbase.service';
+import { Observable } from 'rxjs';
 
 
 
@@ -12,8 +13,7 @@ export class DocumentPreperationService {
 
   constructor(private http: HttpbaseService) {
   }
-  getdocumentrequest(objrequest: RequestContext) {
-    debugger
+  getdocumentpreparations(objrequest: RequestContext): Observable<ArrayBuffer> {    
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/GetAllDocPrep",this.type);
   }
   getdocumentrequestbyId(objrequest: RequestContext) {
@@ -22,7 +22,7 @@ export class DocumentPreperationService {
   }
   ManageDocument(objrequest: DocumentPreperationConfiguration) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/documentpreparation/savedocumentpreparation",this.type);
+    return this.http.postJsonLogin(objrequest, "api/documentpreparation/updatedocumentpreparation",this.type);
   }
   preview(objrequest: DocumentPreperationConfiguration) {
     debugger

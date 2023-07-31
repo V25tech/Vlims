@@ -8,16 +8,15 @@ import { HttpbaseService } from 'src/app/shared/httpbase.service';
   providedIn: 'root'
 })
 export class UsersconfigurationService {
-  type: string = "admin";
+  type:string="admin";
   constructor(private http: HttpbaseService) { }
 
   getusers(objrequest: RequestContext) {
-    debugger
-    return this.http.postJsonLogin(objrequest, "api/userconfiguration/getusers", this.type);
-  }
-  adduser(objrequest: UserConfiguration) {
-    debugger
-    return this.http.postJsonLogin(objrequest, "api/userconfiguration/saveuserconfiguration", this.type);
-  }
- 
+    
+    return this.http.postJsonLogin(objrequest, "api/userconfiguration/getusers",this.type);
+}
+adduser(objrequest: UserConfiguration) {
+  
+  return this.http.postJsonLogin(objrequest, "api/userconfiguration/saveuserconfiguration",this.type);
+}
 }

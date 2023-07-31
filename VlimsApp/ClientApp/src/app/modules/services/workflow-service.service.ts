@@ -10,19 +10,19 @@ export class WorkflowServiceService {
   type: string = "master";
   constructor(private http: HttpbaseService) { }
   getworkflow(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/workflowconiguration/getallworkflow",this.type);
 }
 getbyName(objname: string) {
-  debugger
+  
   return this.http.getwithheader("api/workflowconiguration/getbyName"+"?name="+objname,this.type);
 }
 getbyId(objname: number) {
-  debugger
+  
   return this.http.getwithheader("api/workflowconiguration/getbyId"+"?wFCId="+objname,this.type);
 }
 addworkflow(objrequest: workflowconiguration) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/workflowconiguration/saveworkflowconiguration",this.type);
 }
 }

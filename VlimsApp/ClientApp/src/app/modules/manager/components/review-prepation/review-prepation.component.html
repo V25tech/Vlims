@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-      <h4 class="page-title">Document Preparation ({{preparation.reqCode}})</h4>
+      <h4 class="page-title">Document Preparation ({{preparation.dpnid}})</h4>
     </div>
   </div>
   <div class="row p-2">
@@ -26,173 +26,111 @@
           </div> -->
 
           <div class="form-group row">
-            <label for="documentTitle" class="col-sm-2 col-form-label"
-              >Document Title</label
-            >
+            <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
             <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="documentTitle"
-                name="documentTitle"
-                placeholder="Document Title"
-                [(ngModel)]="preparation.documentTitle"
-              />
+              <input type="text" class="form-control" id="documentTitle" name="documentTitle"
+                placeholder="Document Title" [(ngModel)]="preparation.documenttitle" />
             </div>
           </div>
 
           <div class="form-group row">
             <label for="docNoType" class="col-sm-2 col-form-label">
-                Document Number </label>
+              Document Number </label>
             <div class="col-sm-10">
               <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  name="docNoType"
-                  type="radio"
-                  id="docNoType2"
-                  [(ngModel)]="preparation.docNoType"
-                  value="System Generated"
-                />
-                <label class="form-check-label" for="docNoType2"
-                  >System Generated</label
-                >
+                <input class="form-check-input" name="docNoType" type="radio" id="docNoType2" [(ngModel)]="docNoType"
+                  value="System Generated" />
+                <label class="form-check-label" for="docNoType2">System Generated</label>
               </div>
               <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  name="docNoType"
-                  type="radio"
-                  id="docNoType1"
-                  [(ngModel)]="preparation.docNoType"
-                  value="User Defined"
-                />
+                <input class="form-check-input" name="docNoType" type="radio" id="docNoType1" [(ngModel)]="docNoType"
+                  value="User Defined" />
                 <label class="form-check-label" for="docNoType1">User Defined</label>
               </div>
             </div>
           </div>
 
-          <div class="form-group row" *ngIf="preparation.docNoType === 'User Defined'">
-            <label for="documentNumber" class="col-sm-2 col-form-label"
-              >Document Number</label
-            >
+          <div class="form-group row" *ngIf="docNoType === 'User Defined'">
+            <label for="documentNumber" class="col-sm-2 col-form-label">Document Number</label>
             <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="documentNumber"
-                name="documentNumber"
-                placeholder="Document Number"
-                [(ngModel)]="preparation.documentNumber"
-              />
+              <input type="text" class="form-control" id="documentNumber" name="documentNumber"
+                placeholder="Document Number" [(ngModel)]="preparation.documentno" />
             </div>
           </div>
 
-          <div class="form-group row" *ngIf="preparation.docNoType !== 'User Defined'">
-            <label for="documentNumber" class="col-sm-2 col-form-label"
-              >Document Number</label
-            >
+          <div class="form-group row" *ngIf="docNoType !== 'User Defined'">
+            <label for="documentNumber" class="col-sm-2 col-form-label">Document Number</label>
             <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="documentNumber"
-                name="documentNumber"
-                placeholder="System Generated"
-                readonly
-              />
+              <input type="text" class="form-control" id="documentNumber" name="documentNumber"
+                placeholder="System Generated" [(ngModel)]="preparation.documentno" readonly />
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="docType" class="col-sm-2 col-form-label"
-              >Document Type</label
-            >
+            <label for="docType" class="col-sm-2 col-form-label">Document Type</label>
             <div class="col-sm-10">
-              <p-dropdown
-                name="docType"
-                [options]="typeSource"
-                [(ngModel)]="preparation.documentType"
-                optionLabel="label"
-              >
-              </p-dropdown>
+              <input type="text" class="form-control" id="documenttype" name="documenttype"
+                [(ngModel)]="preparation.documenttype" readonly />
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="department" class="col-sm-2 col-form-label"
-              >Department</label
-            >
+            <label for="department" class="col-sm-2 col-form-label">Department</label>
             <div class="col-sm-10">
-              <p-dropdown
-                name="department"
-                [options]="departmentsSource"
-                [(ngModel)]="preparation.department"
-                optionLabel="label"
-              >
-              </p-dropdown>
+              <input type="text" class="form-control" id="Department" name="Department"
+                [(ngModel)]="preparation.department" readonly />
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="workflow" class="col-sm-2 col-form-label"
-              >Workflow</label
-            >
+            <label for="workflow" class="col-sm-2 col-form-label">Workflow</label>
             <div class="col-sm-10">
-              <p-dropdown
-                name="workflow"
-                [options]="workflowsSource"
-                [(ngModel)]="preparation.workflow"
-                optionLabel="label"
-              >
-              </p-dropdown>
+              <input type="text" class="form-control" id="Workflow" name="Workflow" [(ngModel)]="preparation.wokflow"
+                readonly />
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="template" class="col-sm-2 col-form-label"
-              >Template</label
-            >
+            <label for="template" class="col-sm-2 col-form-label">Template</label>
             <div class="col-sm-10">
-              <p-dropdown
-                name="template"
-                [options]="templatesSource"
-                [(ngModel)]="preparation.template"
-                optionLabel="label"
-              >
+              <p-dropdown name="template" [options]="templatesSource" [(ngModel)]="preparation.template"
+                optionLabel="Templatename" optionValue="Templatename">
               </p-dropdown>
             </div>
           </div>
 
           <div class="form-group row">
             <label for="document" class="col-sm-2 col-form-label">Document</label>
-            <div class="col-sm-10">
-                <input class="form-control" type="file" id="document">
+            <div *ngIf="!preparation.document" class="col-sm-10">
+              <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput [disabled]="isUploaded"
+                (change)="onFileSelected($event)">
+            </div>
+            <div *ngIf="preparation.document" class="col-sm-2">
+              <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
+            </div>
+            <div *ngIf="preparation.document" class="col-sm-8">
+              <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()">Delete</button>
             </div>
           </div>
+          <div *ngIf="selectedFile && !isUploaded" class="form-group row">
+            <label for="document" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+              <button type="button" class="btn btn-outline-secondary mx-2" (click)="onUpload()">Upload</button>
+            </div>
+          </div>         
 
           <div class="form-group row">
             <label for="Details" class="col-sm-2 col-form-label">Details</label>
             <div class="col-sm-10">
-              <textarea
-                class="form-control mw-350"
-                id="Details"
-                name="Details"
-                rows="3"
-                placeholder="Details"
-                [(ngModel)]="preparation.details"
-              ></textarea>
+              <textarea class="form-control mw-350" id="Details" name="Details" rows="3" placeholder="Details"
+                [(ngModel)]="preparation.details"></textarea>
             </div>
           </div>
         </div>
 
         <div class="form-group row my-4">
           <div class="col-sm-10 offset-sm-2">
-            <button
-              type="button"
-              class="btn btn-outline-secondary mx-2"
-              (click)="onCancel()"
-            >
+            <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">
               Cancel
             </button>
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -202,3 +140,18 @@
     </div>
   </div>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Preview</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+  </div>
+</ng-template>

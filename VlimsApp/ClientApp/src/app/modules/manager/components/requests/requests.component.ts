@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ManagerService } from '../../services/manager.service';
+import { DocumentRequestService } from 'src/app/modules/services/document-request.service';
+import { DocumentRequestConfiguration, RequestContext } from 'src/app/models/model';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { CommonService } from 'src/app/shared/common.service';
 
 @Component({
   selector: 'app-requests',
@@ -8,7 +11,7 @@ import { ManagerService } from '../../services/manager.service';
   styleUrls: ['./requests.component.scss'],
 })
 export class RequestsComponent implements OnInit{
-  constructor(private router: Router, private managerService: ManagerService) {}
+  constructor(private router: Router,private spinner: NgxSpinnerService, private commonsvc: CommonService, private documentRequestService: DocumentRequestService) {}
 
   navigateToAddRequest(): void {
     this.router.navigate(['/requests/add']);
@@ -16,10 +19,8 @@ export class RequestsComponent implements OnInit{
 
   requestsDatasource = [];
 
-  ngOnInit() {
-    this.managerService.getRequestsData().subscribe((data: any) => {
-      this.requestsDatasource = data;
-    });
+  ngOnInit() {   
+    this.getdocumentrequest();
   }
 
   getStatusClass(status: string): string {
@@ -35,5 +36,41 @@ export class RequestsComponent implements OnInit{
       return '';
     }
   }
+
+  
+  getdocumentrequest() {
+    this.spinner.show();
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    return this.documentRequestService.getdocumentrequest(objrequest).subscribe((data: any) => {     
+      this.requestsDatasource = data.response;
+      console.log(data);
+      this.spinner.hide();
+    }, er => {
+      console.error('An error occurred:', er);
+      this.spinner.hide();
+    });
+  }
+
+  editdocreq(request: DocumentRequestConfiguration) {
+    debugger
+    this.commonsvc.request = request;
+    this.router.navigate(['/requests/edit']);
+  }
+  // getdepartments() {
+
+  //   let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+  //   this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+  //     debugger
+  //     this.departs = data.Response;
+
+  //   });
+  // }
+  // getdocumenttypeconfig() {
+  //   let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+  //   this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
+  //     debugger
+  //     this.doctypes = data.Response;
+  //   });
+  // }
   
 }

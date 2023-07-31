@@ -10,29 +10,28 @@ import { HttpbaseService } from '../../shared/httpbase.service';
 export class DocumentRequestService {
   type: string = "manager";
   constructor(private http: HttpbaseService) { }
-  getdocumentrequest(objrequest: RequestContext) {
-    debugger
+  getdocumentrequest(objrequest: RequestContext) {    
     return this.http.postJsonLogin(objrequest, "api/documentrequest/GetAllDocreq", this.type);
   }
-  adddocreqconfig(objrequest: DocumentRequestConfiguration) {
-    debugger
+  adddocreqconfig(objrequest: DocumentRequestConfiguration) {    
     return this.http.postJsonLogin(objrequest, "api/documentrequest/SaveDocumentrequest", this.type);
   }
-  getdocrequestbyname(docreq: string) {
-    debugger
-    debugger
+  updatedocreqconfig(objrequest: DocumentRequestConfiguration) {    
+    return this.http.postJsonLogin(objrequest, "api/documentrequest/updatedocumentrequest", this.type);
+  }
+  getdocrequestbyname(docreq: string) {        
     return this.http.getwithheader("api/documentrequest/GetDocumentRequestbyName" + "?name=" + docreq, this.type);
   }
-  ManageApprovalFlow(objrequest: DocumentRequestConfiguration) {
-    debugger
+
+  ManageApprovalFlow(objrequest: DocumentRequestConfiguration) {   
     var docPrep = new DocumentPreperationConfiguration();
     docPrep.documenttype = objrequest.documenttype;
-    docPrep.Department = objrequest.department;
+    docPrep.department = objrequest.department;
     docPrep.wokflow = '';
-    docPrep.CreatedDate = objrequest.CreatedDate;
-    docPrep.CreatedBy = objrequest.CreatedBy;
-    docPrep.Approvedby = objrequest.Approvedby;
-    docPrep.ApprovedOn = objrequest.ApprovedOn;
+    docPrep.CreatedDate = objrequest.createdDate;
+    docPrep.CreatedBy = objrequest.createdBy
+    docPrep.Approvedby = objrequest.approvedby;
+    docPrep.ApprovedOn = objrequest.approvedOn??'';
     docPrep.details = '';
     docPrep.AssignedtoGroup = objrequest.UserGroup;
     docPrep.document = '';
