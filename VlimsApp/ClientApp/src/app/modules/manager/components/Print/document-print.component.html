@@ -7,7 +7,7 @@
         <h4 class="page-title flex-grow-1">Document Print Request</h4>
         <div class="d-flex page-title-actions">
           <input type="text" class="form-control" placeholder="Search">
-          <button class="btn btn-primary mx-2" type="button" [routerLink]="['/mainpage/documentprint/adddocrequest']">Add</button>
+          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPrint()">Add</button>
         </div>
       </div>
     </div>
@@ -15,7 +15,7 @@
   <div class="row p-2">
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table [value]="types" tableStyleClass="table table-striped">
+        <p-table [value]="requests" tableStyleClass="table table-striped">
           <ng-template pTemplate="header">
             <tr>
               <th>#</th>

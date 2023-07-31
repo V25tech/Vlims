@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { DepartmentConfiguration, RequestContext } from '../model/models';
-import { HttpbaseService } from '../shared/httpbase.service';
+import { DepartmentConfiguration, DocumentPrintConfiguration, RequestContext } from 'src/app/models/model';
+import { HttpbaseService } from 'src/app/shared/httpbase.service';
+
 
 
 @Injectable({
@@ -10,16 +11,16 @@ export class DocumentPrintService {
   getdepartments(objrequest: RequestContext) {
     throw new Error('Method not implemented.');
   }
-  type:string="admin";
+  type:string="manager";
   constructor(private http: HttpbaseService) { }
 
   GetDocumentPrint(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/documentprint/GetDocumentPrint",this.type);
+    return this.http.postJsonLogin(objrequest, "api/documentprint/GetAllDocPrint",this.type);
 }
 adddDocumentPrint(objrequest: DepartmentConfiguration) {
   debugger
   return this.http.postJsonLogin(objrequest, "api/documentprint/adddDocumentPrint",this.type);
 }
-}
 
+}

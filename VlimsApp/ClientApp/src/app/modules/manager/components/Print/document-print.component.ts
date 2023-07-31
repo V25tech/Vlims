@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { DocumentPrintService } from '../document-print.service';
 import { Router } from '@angular/router';
 import { formatDate } from "@angular/common";
 import { DocumentPrintConfiguration, RequestContext } from '../../../../models/model';
@@ -7,9 +6,8 @@ import { DocumentPrintService } from '../../../services/document-print.service';
 import { CommonService } from 'src/app/shared/common.service';
 
 @Component({
-  selector: 'app-document-request',
+  selector: 'app-document-print',
   templateUrl: './document-print.component.html'
-  //styleUrls: ['./document-print.component.css']
 })
 export class DocumentPrintComponent implements OnInit {
   name: string = 'Product Type';
@@ -23,6 +21,10 @@ export class DocumentPrintComponent implements OnInit {
   searchstr: string='';
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService,  private router: Router) { }
 
+  navigateToAddPrint(): void {
+    debugger;
+    this.router.navigate(['/print/add']);
+  }
   ngOnInit() {
     debugger;
     //this.tabselect = this.router.url.split('/').pop();
@@ -41,6 +43,24 @@ export class DocumentPrintComponent implements OnInit {
       console.log(this.requests);    
     });
   }
-
+  getStatusClass(status: string): string {
+    if (status === 'In Progress') {
+      return 'status-in-progress';
+    } else if (status === 'Completed') {
+      return 'status-completed';
+    } else if (status === 'Under Review') {
+      return 'status-under-review';
+    }else if (status === 'Approved') {
+      return 'status-approved';
+    } else {
+      return '';
+    }
+  }
+  editdoc(request: DocumentPrintConfiguration) {
+    debugger
+    this.commonsvc.printConfig = request;
+    this.router.navigate(['/print/edit']);
+  }
+  
 }
 

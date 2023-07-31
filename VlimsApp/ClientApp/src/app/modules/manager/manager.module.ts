@@ -17,9 +17,11 @@ import { ReviewPrepationComponent } from './components/review-prepation/review-p
 import { EffectivesComponent } from './components/effectives/effectives.component';
 import { ReviewEffectiveComponent } from './components/review-effective/review-effective.component';
 import { DocumentManagerHomeComponent } from './components/document-manager-home/document-manager-home.component';
+import { DocumentPrintComponent } from './components/Print/document-print.component';
+import { NewPrintRequestComponent } from './components/Print/new-print-request.component';
 
 @NgModule({
-  declarations: [RequestsComponent, AddRequestComponent, PreparationComponent, ReviewPrepationComponent, EffectivesComponent, ReviewEffectiveComponent, DocumentManagerHomeComponent],
+  declarations: [RequestsComponent, AddRequestComponent, PreparationComponent, ReviewPrepationComponent, EffectivesComponent, ReviewEffectiveComponent, DocumentManagerHomeComponent, DocumentPrintComponent, NewPrintRequestComponent],
   imports: [
     CommonModule,
     ManagerRoutingModule,
