@@ -195,9 +195,9 @@ export class UserConfiguration {
   Activedirectory: string = ''
   Standarduser: string = ''
   CreatedBy: string = ''
-  CreatedDate: string | null = '';
+  CreatedDate: string | null = null;
   ModifiedBy: string = ''
-  ModifiedDate: string | null = '';
+  ModifiedDate: string | null = null;
 }
 export class WorkItemsConfiguration {
   TaskType: string = ''

@@ -30,7 +30,7 @@ export class UserConfigurationComponent implements OnInit {
     this.getusers();
   }
   getusers() {
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+   let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
       return this.doctypeservice.getusers(objrequest).subscribe((data: any) => {
         debugger
         this.types = data.Response;
@@ -43,11 +43,11 @@ export class UserConfigurationComponent implements OnInit {
   editdoc(doc: UserConfiguration) {
     debugger
     this.commonsvc.userConfig = doc;
-    this.router.navigate(['/admin/adduser/edit', doc.UCFId]);
+    this.router.navigate(['/admin/users/edit', doc.UCFId]);
   }
 
   navigateToAddUser(): void {
-    this.router.navigate(['/admin/adduser']);
+    this.router.navigate(['/admin/users/add']);
   }
   
   getStatusClass(status: string): string {

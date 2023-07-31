@@ -53,7 +53,7 @@ namespace Vlims.Administration.DataAccess
                         userConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[UserConfigurationConstants.CreatedDate.Trim('@')]);
                         userConfigurationData.ModifiedBy = Convert.ToString(row[UserConfigurationConstants.ModifiedBy.Trim('@')]);
                         userConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[UserConfigurationConstants.ModifiedDate.Trim('@')]);
-                        userConfigurationData.Status = Convert.ToString(row[UserConfigurationConstants.Status.Trim('@')]);
+                        //userConfigurationData.Status = Convert.ToString(row[UserConfigurationConstants.Status.Trim('@')]);
                         result.Add(userConfigurationData);
                     }
                 }
