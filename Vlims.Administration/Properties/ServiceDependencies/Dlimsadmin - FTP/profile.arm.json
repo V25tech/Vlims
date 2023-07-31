@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "DMSAdmin1",
+      "defaultValue": "Dlimsadmin",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }

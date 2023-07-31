@@ -7,7 +7,7 @@
   
  DECLARE @ID INT 
  INSERT INTO [dbo].[AdditionalTask_PSY] 
- (Documentmanagerid_PSY,
+ (DocumentEffective_ID,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,

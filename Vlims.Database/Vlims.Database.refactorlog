@@ -35,4 +35,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="code_PSY" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0b151791-0eac-4f65-9f8a-83afb4938c90" ChangeDateTime="07/31/2023 06:44:12">
+    <Property Name="ElementName" Value="[dbo].[AdditionalTask_PSY].[Documentmanagerid_PSY]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AdditionalTask_PSY]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DocumentEffective_ID" />
+  </Operation>
 </Operations>
