@@ -291,3 +291,20 @@ export class FooterTable {
   public selectedOption: number = 0;
   public inputValue: string = '';
 }
+export class DocumentPrintConfiguration  
+{
+  public DTCId: string='';
+  public DocumentMasterId: string='';
+  public documenttype: string='';
+  public department: string='';
+  public Description: string='';
+  public Approvedby: string='';
+  public ApprovedOn: string='';
+  public CreatedBy: string='';
+  public CreatedDate: Date | undefined;
+  public ModifiedBy: string='';
+  public ModifiedDate: Date | undefined;
+  public Status: string='';
+  public Purpose: string='';
+  public ApprovalsCount: number=0;
+}

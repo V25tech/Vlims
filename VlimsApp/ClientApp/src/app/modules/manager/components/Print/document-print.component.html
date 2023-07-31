@@ -1,0 +1,53 @@
+
+<div class="container-fluid">
+  <div class="row p-2">
+    <div class="col">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="page-title flex-grow-1">Document Print Request</h4>
+        <div class="d-flex page-title-actions">
+          <input type="text" class="form-control" placeholder="Search">
+          <button class="btn btn-primary mx-2" type="button" [routerLink]="['/mainpage/documentprint/adddocrequest']">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <div class="p-4 bg-white shadow-dark rounded-2">
+        <p-table [value]="types" tableStyleClass="table table-striped">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>#</th>
+              <th pSortableColumn="RequestCode" style="width:20%">Request Code<p-sortIcon field="RequestCode"></p-sortIcon></th>
+              <th pSortableColumn="documenttype" style="width:10%">Document Type <p-sortIcon field="documenttype"></p-sortIcon></th>
+              <th pSortableColumn="documnetname" style="width:15%">Document Name<p-sortIcon field="documentname"></p-sortIcon></th>
+              <th pSortableColumn="documentnumber" style="width:20%">Document Number by<p-sortIcon field="documentnumber"></p-sortIcon></th>
+              <th pSortableColumn="printedon" style="width:200px">Printed On <p-sortIcon field="printedon"></p-sortIcon></th>
+              <th pSortableColumn="printedby" style="width:200px">Printed By <p-sortIcon field="printedby"></p-sortIcon></th>
+              <th pSortableColumn="printcount" style="width:200px">Printed Count <p-sortIcon field="printcount"></p-sortIcon></th>
+
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-doc let-i="rowIndex">
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{doc?.RequestCode}}</td>
+              <td>{{doc?.documenttype}}</td>
+              <td>{{doc?.documentname}}</td>
+              <td>{{doc?.documentnumber}}</td>
+              <td>{{doc?.printedon}}</td>
+              <td>{{doc?.printedby}}</td>
+              <td>{{doc?.printedby}}</td>
+              <td>{{doc?.printcount}}</td>
+
+              <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
+              <td class="text-center" (click)="editdoc(doc)"><i class="bi bi-pencil"></i></td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

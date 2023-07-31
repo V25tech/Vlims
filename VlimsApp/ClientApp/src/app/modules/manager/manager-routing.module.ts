@@ -8,6 +8,7 @@ import { ReviewPrepationComponent } from './components/review-prepation/review-p
 import { EffectivesComponent } from './components/effectives/effectives.component';
 import { ReviewEffectiveComponent } from './components/review-effective/review-effective.component';
 import { DocumentManagerHomeComponent } from './components/document-manager-home/document-manager-home.component';
+import { DocumentPrintComponent } from './components/Print/document-print.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
@@ -46,6 +47,11 @@ const routes: Routes = [
   {
     path: 'effectives/review',
     component: ReviewEffectiveComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'print',
+    component: DocumentPrintComponent,
     canActivate: [AuthGuard],
   },
   
