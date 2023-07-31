@@ -46,14 +46,11 @@ getdepartments() {
     }
   }
   navigateToAddDepartment(): void {
-    this.router.navigate(['/admin/adddepartment']);
+    this.router.navigate(['/admin/departments/add']);
   }
   editBrand(doc : DepartmentConfiguration)
   {
-    debugger
-    this.commonsvc.departConfig = doc;
-    this.router.navigate(['/admin/adddepartment/edit', doc.DPCFId]);
-    
+    this.router.navigate(['/admin/departments/edit', doc.DPCFId]);
   }
   submit(newdept: DepartmentConfiguration) {
     debugger

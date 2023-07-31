@@ -4,7 +4,8 @@
 @Users_PSY NVarChar(50),
 @Totalusers_PSY Int,
 @CreatedBy_PSY NVarChar(100),
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@document_PSY xml
  AS 
  BEGIN 
   BEGIN TRY 
@@ -19,7 +20,7 @@ Totalusers_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY)
+ModifiedDate_PSY,document_PSY)
  VALUES 
 (@Usermanagementid_PSY,
 @Usergroupname_PSY,
@@ -29,7 +30,7 @@ ModifiedDate_PSY)
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate() );
+ GetDate(),@document_PSY );
  SELECT @ID = @@IDENTITY; 
  select @ID 
   

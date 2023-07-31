@@ -233,12 +233,12 @@ export class SecurityManagement {
 }
 
 export class Usergroupconfiguration {
-  public Ugcid: number = 0;
-  public SNo: number = 0;
+  public Ugcid: string | null = '';
+  //public SNo: number = 0;
   public usergroupname: string = ''
   public code: string = ''
-  public totalusers: number = 0;
-  public users: string = ''
+  public totalusers: string | null = '';
+  public users: UserConfiguration[] | null = []
   public Registeredby: string = ''
   public Registeredon: string = ''
   public Status: string = ''

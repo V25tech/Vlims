@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { RequestContext, UserConfiguration, Usergroupconfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
@@ -20,41 +20,41 @@ export class AddusergroupconfigurationComponent implements OnInit {
   objname: string | undefined;
   title: string = "Add User Group Configuration";
     //usergrp= Usergroupconfiguration;
-  constructor(private commonsvc: CommonService, private cdr: ChangeDetectorRef, private ugService: usergroupconfigurationService, private userService: UsersconfigurationService,
-    private router: Router) { }
+  constructor(private commonsvc: CommonService, private cdr: ChangeDetectorRef, 
+    private ugService: usergroupconfigurationService, private userService: UsersconfigurationService,
+    private router: Router,private location: Location  ) { }
 
   ngOnInit() {
     this.getusers();
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
-    //this.getdepartments();
-    //this.getroles();
-    debugger
-    if (lastSegment == "view") {
+    if(lastSegment=="add")
+    {
+      let addcount=parseInt(segments[segments.length - 1],10);
+     addcount++;
+      this.newdept.code="UG-"+addcount;
+    }
+   else if (lastSegment == "view") {
       this.viewMode = true;
       if (this.viewMode) {
         debugger
         this.objname = this.commonsvc.objname;
         //this.getdocTypeByName(this.objname);
         this.newdept = this.commonsvc.userGroupConfig;
-        this.title = "View Document Type Configuration"
+        this.title = "View User Group Configuration"
       }
       this.cdr.detectChanges();
     }
     else if (lastSegment == "edit") {
-      this.editMode = this.commonsvc.userGroupConfig != null ? true : false;
-      if (this.editMode) {
-        let id = parseInt(segments[segments.length - 1], 10);
-        this.ugcId = id;
-        this.editMode = true; this.viewMode = false;
-        this.newdept = this.commonsvc.userGroupConfig;
-        this.title = "Edit User Group Configuration"
-        this.getbyId();
-        console.log(this.newdept);
-        this.cdr.detectChanges();
-      }
+      this.title = "Edit User Group Configuration"
+      this.editMode = true;
+      let id=parseInt(segments[segments.length - 1],10);
+      this.getbyId(id);
     }
+  }
+  onCancel() {
+    this.location.back();
   }
   submit(newdept: Usergroupconfiguration) {
     debugger
@@ -78,12 +78,18 @@ export class AddusergroupconfigurationComponent implements OnInit {
       this.types = data.Response;      
     });
   }
-  getbyId() {
+  getbyId(id:number) {
     debugger
-    this.ugService.getbyId(this.ugcId).subscribe((data: any) => {
+    this.ugService.getbyId(id).subscribe((data: any) => {
       this.newdept = data;
     }, ((error: any) => {
 
     }));
+  }
+  calculateTotalUsers(): void {
+    if(this.newdept.users!=null || this.newdept.users!=undefined)
+    {
+    this.newdept.totalusers = this.newdept.users?.length.toString();
+    }
   }
 }

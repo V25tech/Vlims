@@ -28,7 +28,7 @@ export class UsergroupconfigurationComponent implements OnInit {
     this.getusergroupInfo();
   }
   getusergroupInfo() {
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.doctypeservice.getusergroupconfiguration(objrequest).subscribe((data: any) => {
       debugger
       this.types = data.Response;
@@ -40,10 +40,11 @@ export class UsergroupconfigurationComponent implements OnInit {
   editdoc(doc: Usergroupconfiguration) {
     debugger
     this.commonsvc.userGroupConfig = doc;
-    this.router.navigate(['/admin/usergroupadd/edit', doc.Ugcid]);
+    this.router.navigate(['/admin/groups/edit', doc.Ugcid]);
   }
   addusergroup(): void {
-    this.router.navigate(['/admin/usergroupadd']);
+    debugger
+    this.router.navigate(['admin/groups/add',this.types.length]);
   }
   getStatusClass(status: string): string {
     debugger

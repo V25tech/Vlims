@@ -21,12 +21,14 @@ export class AdminHomeComponent {
       this.router.navigate(['/admin/user']);
     } else if (navTo === 'Approval') {
       this.router.navigate(['/admin/approvalconfig']);
-    } else if (navTo === 'UserGroup') {
-      this.router.navigate(['/admin/usergroup']);
+    } else if (navTo === 'groups') {
+      this.router.navigate(['admin/groups']);
     } else if (navTo === 'Roles') {
       this.router.navigate(['/admin/roles']);    }
     else if (navTo === 'Approvalconfig') {
       this.router.navigate(['/admin/approvalconfig']);
+    }  else if (navTo === 'departments') {
+      this.router.navigate(['/admin/departments']);
     } else if (navTo === 'home') {
       this.router.navigate(['/home']);
     }

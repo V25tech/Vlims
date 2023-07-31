@@ -9,6 +9,7 @@
     [CreatedDate_PSY]      DATETIME       NULL,
     [ModifiedBy_PSY]       NVARCHAR (100) NULL,
     [ModifiedDate_PSY]     DATETIME       NULL,
+    [document_PSY] XML NULL, 
     CONSTRAINT [PK_UserGroupConfiguration_PSY] PRIMARY KEY CLUSTERED ([Ugcid_PSY] ASC)
 );
 
