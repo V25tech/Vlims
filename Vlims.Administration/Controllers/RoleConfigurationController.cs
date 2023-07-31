@@ -125,5 +125,15 @@ namespace PolicySummary.Controllers
             var result = roleConfigurationService.DeleteRoleConfigurationByHierarchyManagementId(hMId);
             return result;
         }
+        /// <summary>
+        /// This method is used to Get DocumentTypeConfiguration By Id dTCId
+        /// </summary>
+        /// <param name="dTCId"></param>
+        [HttpGet("getbyId")]
+        public ActionResult<RoleConfiguration> GetRoleConfigurationbyId(int roleId)
+        {
+            var result = roleConfigurationService.GetRoleConfigurationByROCFId(roleId.ToString());
+            return result;
+        }
     }
 }

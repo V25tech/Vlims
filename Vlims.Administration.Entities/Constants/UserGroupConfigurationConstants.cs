@@ -34,6 +34,8 @@ namespace Vlims.Administration.Entities
         
         public const string ModifiedBy = "@ModifiedBy_PSY";
 
+        public const string document = "@document_PSY";
+
         public const string Status = "@Status_PSY";
 
         public const string ModifiedDate = "@ModifiedDate_PSY";

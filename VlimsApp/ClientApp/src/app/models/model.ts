@@ -195,9 +195,9 @@ export class UserConfiguration {
   Activedirectory: string = ''
   Standarduser: string = ''
   CreatedBy: string = ''
-  CreatedDate: string | null = '';
+  CreatedDate: string | null = null;
   ModifiedBy: string = ''
-  ModifiedDate: string | null = '';
+  ModifiedDate: string | null = null;
 }
 export class WorkItemsConfiguration {
   TaskType: string = ''
@@ -233,12 +233,12 @@ export class SecurityManagement {
 }
 
 export class Usergroupconfiguration {
-  public Ugcid: number = 0;
-  public SNo: number = 0;
+  public Ugcid: string | null = '';
+  //public SNo: number = 0;
   public usergroupname: string = ''
   public code: string = ''
-  public totalusers: number = 0;
-  public users: string = ''
+  public totalusers: string | null = '';
+  public users: UserConfiguration[] | null = []
   public Registeredby: string = ''
   public Registeredon: string = ''
   public Status: string = ''
@@ -290,4 +290,21 @@ export class HeaderTable {
 export class FooterTable {
   public selectedOption: number = 0;
   public inputValue: string = '';
+}
+export class DocumentPrintConfiguration  
+{
+  public DTCId: string='';
+  public DocumentMasterId: string='';
+  public documenttype: string='';
+  public department: string='';
+  public Description: string='';
+  public Approvedby: string='';
+  public ApprovedOn: string='';
+  public CreatedBy: string='';
+  public CreatedDate: Date | undefined;
+  public ModifiedBy: string='';
+  public ModifiedDate: Date | undefined;
+  public Status: string='';
+  public Purpose: string='';
+  public ApprovalsCount: number=0;
 }

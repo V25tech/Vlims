@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 //import { ToastrService } from 'ngx-toastr';
 import { DepartmentConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
@@ -16,38 +17,46 @@ export class AddDepartmentComponent implements OnInit {
   viewMode: boolean = false;
   departId: number = 0;
    editMode: boolean = false;
+   title:string='Add Department Configuration'
   constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService,
-    private router: Router, private cdr: ChangeDetectorRef) { }
+    private router: Router, private cdr: ChangeDetectorRef,private location: Location) { }
 
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
-    if (lastSegment == "edit") {
-      let id = parseInt(segments[segments.length - 1], 10);
-      this.departId = id;
-      this.editMode = true; this.viewMode = false;
-      this.getbyId();
-      //this.documentType=this.commonsvc.documentType;
+     if (lastSegment == "edit") {
+      this.title = "Edit Department Configuration"
+      this.editMode = true;
+      let id=parseInt(segments[segments.length - 1],10);
+      this.getbyId(id);
     }
     else if (lastSegment == "view") {
       this.viewMode = true; this.editMode = false;
       this.newdept = this.commonsvc.departConfig;
     }
+    else if(lastSegment == "add")
+    {
+
+    }
     //this.get();
     this.cdr.detectChanges();
   }
-  getbyId() {
-    debugger
-    this.doctypeservice.getbyId(this.departId).subscribe((data: any) => {
-      this.newdept = data;
-    }, ((error: any) => {
+    getbyId(id:number) {
+      debugger
+      this.doctypeservice.getbyId(id).subscribe((data: any) => {
+        this.newdept = data;
+      }, ((error: any) => {
 
-    }));
-  }
+      }));
+    }
   submit(newdept: DepartmentConfiguration) {
     debugger
     this.adddoctype(newdept);
+    this.location.back();
+  }
+  onCancel() {
+    this.location.back();
   }
   adddoctype(newdept: DepartmentConfiguration) {
     debugger

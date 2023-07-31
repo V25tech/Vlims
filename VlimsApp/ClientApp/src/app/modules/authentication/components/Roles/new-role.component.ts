@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { DepartmentConfiguration, RequestContext, RoleConfiguration, UserConfiguration } from 'src/app/models/model';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
@@ -18,6 +18,7 @@ export class AddRoleComponent implements OnInit {
   editMode: boolean = false;
   viewMode: boolean = false;
   objname: string | undefined;
+  roleid: number = 0;
   types: DepartmentConfiguration[] = [];
   roles: RoleConfiguration[] = [];
   isactivedirectory: boolean = false;
@@ -26,78 +27,85 @@ export class AddRoleComponent implements OnInit {
   constructor(private commonsvc: CommonService, private rolesservice: RolesconfigurationService,
     private deptservice: DepartmentconfigurationService,
     private userservice: UsersconfigurationService,
-    private router: Router, private cdr: ChangeDetectorRef) { }
+    private router: Router, private cdr: ChangeDetectorRef,private location: Location) { }
 
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
-    this.getdepartments();
-    this.getroles();
-    debugger
+    
+    //this.getroles();
+    
     if (lastSegment == "view") {
       this.viewMode = true;
       if (this.viewMode) {
-        debugger
+        
         this.objname = this.commonsvc.objname;
         //this.getdocTypeByName(this.objname);
         this.addrole = this.commonsvc.roleConfig;
-        this.title = "View Document Type Configuration"
+        this.title = "View Role Configuration"
       }
       this.cdr.detectChanges();
     }
     else if (lastSegment == "edit") {
-      this.editMode = this.commonsvc.roleConfig != null ? true : false;
-      if (this.editMode) {
-        this.addrole = this.commonsvc.roleConfig;
-        this.title = "Edit User Type Configuration"
-        this.cdr.detectChanges();
-      }
+      this.editMode = true;
+      this.title = "Edit Role Configuration"
+      this.roleid=parseInt(segments[segments.length-1],10);
+      
     }
-
+    this.getdepartments();
   }
+  
   submit(addrole: RoleConfiguration) {
-    debugger
+    
     this.adddoctype(addrole);
   }
   adddoctype(adaddrole: RoleConfiguration) {
-    debugger;
+    ;
     adaddrole.CreatedBy = "admin";
     adaddrole.ModifiedBy = "admin";
     adaddrole.CreatedDate = new Date();
     adaddrole.ModifiedDate = new Date();
     //this.router.navigate(['/products']);
     this.rolesservice.addrole(adaddrole).subscribe((res: any) => {
-      this.router.navigate(['/mainpage/users']);
+      this.location.back();
     });
-
-
   }
   closepopup() {
-    this.router.navigate(['/mainpage/users']);
+    this.router.navigate(['/mainpage/roles']);
   }
   getdepartments() {
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-      debugger
       this.types = data.Response;
-
-      console.log(this.types);
+console.log('dept',this.types);
+     if(this.editMode)
+     {
+      this.getbyId(this.roleid);
+     }
     }, er => {
-
     });
   }
   getroles() {
-
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     return this.rolesservice.getroles(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.roles = data.Response;
       console.log(this.roles);
     }, er => {
     });
   }
   onCancel() {
+    this.location.back();
+  }
+  getbyId(id:number) {
+    
+    this.rolesservice.getbyId(id).subscribe((data: any) => {
+      this.addrole = data;
+      this.cdr.detectChanges();
+      console.log('role',this.addrole);
+    }, ((error: any) => {
 
+    }));
   }
 }

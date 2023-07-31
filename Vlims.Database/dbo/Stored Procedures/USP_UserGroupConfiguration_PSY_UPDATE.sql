@@ -3,7 +3,8 @@
 @Code_PSY NVarChar(50),
 @Users_PSY NVarChar(50),
 @Totalusers_PSY Int,
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@document_PSY xml
  AS 
  BEGIN 
   BEGIN TRY 
@@ -13,7 +14,7 @@ Usergroupname_PSY=@Usergroupname_PSY,
 Code_PSY=@Code_PSY,
 Users_PSY=@Users_PSY,
 Totalusers_PSY=@Totalusers_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [Ugcid_PSY] = @Ugcid_PSY ;  select @Ugcid_PSY; 
+ModifiedBy_PSY=@ModifiedBy_PSY,document_PSY=@document_PSY WHERE  [Ugcid_PSY] = @Ugcid_PSY ;  select @Ugcid_PSY; 
   
   END TRY 
  BEGIN CATCH 

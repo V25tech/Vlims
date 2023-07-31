@@ -89,11 +89,11 @@ namespace PolicySummary.Controllers
         public ActionResult PreviewDocumentPreparation(DocumentPreparation documentPreparation)
         {
             List<DocumentTemplateConfiguration> result; byte[] pdfBytes = null;
-            RequestContext request = new RequestContext() { PageNumber = 1, PageSize = 1 };
+            RequestContext request = new RequestContext() { PageNumber = 1, PageSize = 50 };
             DataSet dataset = DocumentTemplateConfigurationData.GetAllDocumentTemplateConfiguration(request);
             if (dataset != null && dataset.Tables[0].Rows.Count > 0)
             {
-                result = DocumentTemplateConfigurationConverter.SetAllDocumentTemplateConfiguration(dataset);
+                result = DocumentTemplateConfigurationConverter.SetAllDocumentTemplateConfiguration(dataset,true);
                 var template = result.FirstOrDefault(o => o.Templatename.Equals(documentPreparation.template, StringComparison.InvariantCultureIgnoreCase));
                 if (template != null)
                 {

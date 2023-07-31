@@ -53,7 +53,7 @@ namespace PolicySummary.Controllers
         /// This method is used to Get UserGroupConfiguration By Id ugcid
         /// </summary>
         /// <param name="ugcid"></param>
-        [HttpGet("GetUserGroupConfigurationByUgcid")]
+        [HttpGet("getbyId")]
         public ActionResult<UserGroupConfiguration> GetUserGroupConfigurationByUgcid(string ugcid)
         {
             var result = userGroupConfigurationService.GetUserGroupConfigurationByUgcid(ugcid);
@@ -123,6 +123,16 @@ namespace PolicySummary.Controllers
         public ActionResult<bool> DeleteUserGroupConfigurationByUserManagementId(System.Int32? uMId)
         {
             var result = userGroupConfigurationService.DeleteUserGroupConfigurationByUserManagementId(uMId);
+            return result;
+        }
+        /// <summary>
+        /// This method is used to Get DepartmentConfiguration By Id dPCFId
+        /// </summary>
+        /// <param name="dPCFId"></param>
+        [HttpGet("{ugcId}")]
+        public ActionResult<UserGroupConfiguration> GetDepartmentConfigurationByDPCFId(string ugcId)
+        {
+            var result = userGroupConfigurationService.GetUserGroupConfigurationByUgcid(ugcId);
             return result;
         }
     }

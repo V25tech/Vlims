@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import {loginAuthGuard} from '../authentication/guards/login-auth.guard';
-import { AdminHomeComponent } from './components/Admin-Home/Admin-home.component';
-import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+
 
 
 //import { SecuritymgmtComponent } from './components/securitymgmt/securitymgmt.component';
