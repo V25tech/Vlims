@@ -18,9 +18,9 @@ export class AdminHomeComponent {
     } else if (navTo === 'plant') {
       this.router.navigate(['/admin/plant']);
     } else if (navTo === 'User') {
-      this.router.navigate(['/admin/user']);
+      this.router.navigate(['/admin/users']);
     } else if (navTo === 'Approval') {
-      this.router.navigate(['/admin/approvalconfig']);
+      this.router.navigate(['/admin/approval']);
     } else if (navTo === 'groups') {
       this.router.navigate(['admin/groups']);
     } else if (navTo === 'Roles') {
