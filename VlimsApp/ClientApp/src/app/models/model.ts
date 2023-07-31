@@ -77,7 +77,7 @@ export class DocumentEffectiveConfiguration {
   department: string = '';
   document: string = '';
   effectiveDate: string = '';
-  reviewDate: Date = new Date();
+  reviewDate: string = '';
   CreatedBy: string = '';
   CreatedDate: string | null = null;
   ModifiedBy: string = '';

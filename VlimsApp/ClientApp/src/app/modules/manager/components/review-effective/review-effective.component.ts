@@ -44,17 +44,11 @@ export class ReviewEffectiveComponent {
   ngOnInit() {
     if (this.commonsvc.efffective) {      
       this.effective = this.commonsvc.efffective;
-      this.effective.effectiveDate =new Date(this.effective.effectiveDate).toISOString().slice(0, 10);
     }
     else this.location.back();
-
     console.log(this.effective);
-
   }
 
-  todate(){
-
-  }
 
   saveEffective() {
     console.log(this.effective);
