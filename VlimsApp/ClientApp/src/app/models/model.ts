@@ -292,9 +292,9 @@ export class FooterTable {
   public inputValue: string = '';
 }
 export class DocumentPrintConfiguration {
-  public DTCId: string = '';
+  public DRId: number = 0;
   public DocumentMasterId: string = '';
-  public documenttype: string = '';
+ // public documenttype: string = '';
   public department: string = '';
   public Description: string = '';
   public Approvedby: string = '';
@@ -311,5 +311,5 @@ export class DocumentPrintConfiguration {
   public documenttitle: string = '';
   public DocumentNumber: string = '';
   public printtype: string = '';
-  public noofcopies:string='';
+  public noofcopies: string = '';
 }

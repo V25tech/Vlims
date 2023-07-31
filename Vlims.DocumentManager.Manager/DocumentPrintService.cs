@@ -44,6 +44,7 @@ public class DocumentPrintService : IDocumentPrintService
             String validationMessages = DocumentPrintValidator.IsValidDocumentPrint(documentPrint);
             if (validationMessages.Length <= 0)
             {
+                documentPrint.Status = "Active";
                 var result = DocumentPrintData.SaveDocumentPrint(documentPrint);
                 return result;
             }

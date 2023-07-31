@@ -31,14 +31,16 @@ export class NewPrintRequestComponent implements OnInit {
     return this.docprintservice.GetNewPrintRequest(objrequest).subscribe((data: any) => {
       debugger
       this.types = data.Response;
+      this.types = data.Response;
       console.log(this.types);
 
     });
   }
   getworkflowinfo() {
+    debugger;
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
-      this.wfservice = data.Response;
+      this.workflowsSource = data.Response;
       console.log(this.workflowsSource);
     });
   }
@@ -52,20 +54,17 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   addRequest() {
+    debugger;
     this.print.CreatedBy = 'admin';
     this.print.ModifiedBy = 'admin';
     this.print.Status = 'In-Progress';
     this.print.CreatedDate = new Date();
     this.print.ModifiedDate = new Date();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
-    this.docprintservice.AddNewPrintRequest(objrequest).subscribe(res => {
-      this.commonsvc.printConfig = new DocumentPrintConfiguration();
-      //this.location.back();
-      //this.spinner.hide();
-    //}, er => {
-    //  console.log(er);
-    //  this.spinner.hide();
+    this.docprintservice.AddNewPrintRequest(this.print).subscribe(res => {
+      this.commonsvc.printConfig = new DocumentPrintConfiguration();     
     });
+    this.router.navigate(['/print']);
   }
 
   updateRequest() {
@@ -82,9 +81,7 @@ export class NewPrintRequestComponent implements OnInit {
   onCancel() {
     //this.location.back();
   }
-  navigateToAddPrint(): void {
-    this.router.navigate(['/print/add']);
-  }
+ 
 }
 
 

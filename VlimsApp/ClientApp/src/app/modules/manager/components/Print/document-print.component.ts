@@ -44,6 +44,7 @@ export class DocumentPrintComponent implements OnInit {
     });
   }
   getStatusClass(status: string): string {
+    debugger;
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Completed') {
@@ -52,7 +53,10 @@ export class DocumentPrintComponent implements OnInit {
       return 'status-under-review';
     }else if (status === 'Approved') {
       return 'status-approved';
-    } else {
+    } else if (status === 'Active') {
+      return 'status-Active';
+    }
+    else {
       return '';
     }
   }

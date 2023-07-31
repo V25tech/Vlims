@@ -29,8 +29,8 @@ public static class DocumentPrintValidator
             {
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
-                validationMessages.Append(validationHelper.NullCheckValidator(documentPrint.DRId, nameof(documentPrint.DRId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPrint.DRId,50, nameof(documentPrint.DRId)));
+               // validationMessages.Append(validationHelper.NullCheckValidator(documentPrint.DRId, nameof(documentPrint.DRId)));
+                //validationMessages.Append(validationHelper.LengthCheckValidator(documentPrint.DRId,50, nameof(documentPrint.DRId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentPrint.CreatedBy,100, nameof(documentPrint.CreatedBy)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentPrint.ModifiedBy,100, nameof(documentPrint.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))

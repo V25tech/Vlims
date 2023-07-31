@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { RequestContext } from '../../models/model';
+import { DocumentPrintConfiguration, RequestContext } from '../../models/model';
 import { HttpbaseService } from '../../shared/httpbase.service';
 
 
@@ -9,14 +9,14 @@ import { HttpbaseService } from '../../shared/httpbase.service';
   providedIn: 'root'
 })
 export class NewPrintRequestService {
-  type:string="admin";
+  type:string="manager";
   constructor(private http: HttpbaseService) { }
 
   GetNewPrintRequest(objrequest: RequestContext) {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentprint/GetAllDocPrint",this.type);
-}
-  AddNewPrintRequest(objrequest: RequestContext) {
+  }
+  AddNewPrintRequest(objrequest: DocumentPrintConfiguration) {
   debugger
     return this.http.postJsonLogin(objrequest, "api/documentprint/savedocumentprint",this.type);
 }

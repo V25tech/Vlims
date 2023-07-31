@@ -60,8 +60,8 @@ public static class DocumentPrintData
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.documenttitle, Value = documentPrint.documenttitle });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.printtype, Value = documentPrint.printtype });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.documentno, Value = documentPrint.documentno });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.noofcopies, Value = documentPrint.noofcopies });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.documentno, Value = documentPrint.DocumentNumber });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int16, ParameterName = DocumentPrintConstants.noofcopies, Value = documentPrint.noofcopies });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.workflow, Value = documentPrint.workflow });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.reason, Value = documentPrint.reason });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.CreatedBy, Value = documentPrint.CreatedBy });
@@ -83,7 +83,7 @@ public static class DocumentPrintData
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.DRId, Value = documentPrint.DRId });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.documenttitle, Value = documentPrint.documenttitle });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.printtype, Value = documentPrint.printtype });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.documentno, Value = documentPrint.documentno });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.documentno, Value = documentPrint.DocumentNumber });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.noofcopies, Value = documentPrint.noofcopies });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.workflow, Value = documentPrint.workflow });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.reason, Value = documentPrint.reason });

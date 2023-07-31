@@ -8,63 +8,64 @@
 //------------------------------------------------------------------------------
 
 
-    using System;
-    using System.Text;
-    using System.IO;
-    using System.Linq;
-    using System.Data;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
+using System;
+using System.Text;
+using System.IO;
+using System.Linq;
+using System.Data;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Vlims.Common;
 
 
 
 // Comment
 public static class DocumentPrintConverter
+{
+
+    public static List<DocumentPrint> SetAllDocumentPrint(DataSet dataset)
     {
-        
-        public static List<DocumentPrint> SetAllDocumentPrint(DataSet dataset)
+        try
         {
-            try
+            List<DocumentPrint> result = new List<DocumentPrint>();
+            DocumentPrint documentPrintData;
+            if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
             {
-                List<DocumentPrint> result = new List<DocumentPrint>();
-                DocumentPrint documentPrintData;
-                if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
+                for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
                 {
-                    for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
-                    {
-                        DataRow row = dataset.Tables[0].Rows[i];
-                        documentPrintData = new DocumentPrint();
-                        documentPrintData.DRId = Convert.ToString(row[DocumentPrintConstants.DRId.Trim('@')]);
-                        documentPrintData.documenttitle = Convert.ToString(row[DocumentPrintConstants.documenttitle.Trim('@')]);
-                        documentPrintData.printtype = Convert.ToString(row[DocumentPrintConstants.printtype.Trim('@')]);
-                        documentPrintData.documentno = Convert.ToString(row[DocumentPrintConstants.documentno.Trim('@')]);
-                        documentPrintData.noofcopies = Convert.ToString(row[DocumentPrintConstants.noofcopies.Trim('@')]);
-                        documentPrintData.workflow = Convert.ToString(row[DocumentPrintConstants.workflow.Trim('@')]);
-                        documentPrintData.reason = Convert.ToString(row[DocumentPrintConstants.reason.Trim('@')]);
-                        documentPrintData.CreatedBy = Convert.ToString(row[DocumentPrintConstants.CreatedBy.Trim('@')]);
-                        documentPrintData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentPrintConstants.CreatedDate.Trim('@')]);
-                        documentPrintData.ModifiedBy = Convert.ToString(row[DocumentPrintConstants.ModifiedBy.Trim('@')]);
-                        documentPrintData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPrintConstants.ModifiedDate.Trim('@')]);
-                        result.Add(documentPrintData);
-                    }
+                    DataRow row = dataset.Tables[0].Rows[i];
+                    documentPrintData = new DocumentPrint();
+                    documentPrintData.DRId = Convert.ToInt16(row[DocumentPrintConstants.DRId.Trim('@')]);
+                    documentPrintData.documenttitle = Convert.ToString(row[DocumentPrintConstants.documenttitle.Trim('@')]);
+                    documentPrintData.printtype = Convert.ToString(row[DocumentPrintConstants.printtype.Trim('@')]);
+                    documentPrintData.DocumentNumber = Convert.ToString(row[DocumentPrintConstants.documentno.Trim('@')]);
+                    documentPrintData.noofcopies = Convert.ToInt16(row[DocumentPrintConstants.noofcopies.Trim('@')]);
+                    documentPrintData.workflow = Convert.ToString(row[DocumentPrintConstants.workflow.Trim('@')]);
+                    documentPrintData.reason = Convert.ToString(row[DocumentPrintConstants.reason.Trim('@')]);
+                    documentPrintData.CreatedBy = Convert.ToString(row[DocumentPrintConstants.CreatedBy.Trim('@')]);
+                    documentPrintData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentPrintConstants.CreatedDate.Trim('@')]);
+                    documentPrintData.ModifiedBy = Convert.ToString(row[DocumentPrintConstants.ModifiedBy.Trim('@')]);
+                    documentPrintData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPrintConstants.ModifiedDate.Trim('@')]);
+                    documentPrintData.Status = Convert.ToString(row[DocumentPrintConstants.Status.Trim('@')]);
+                    result.Add(documentPrintData);
                 }
-                return result;
             }
-            catch (System.Exception ex)
-            {
-                throw;
-            }
+            return result;
         }
-        
-        public static DocumentPrint SetDocumentPrint(DataSet dataset)
+        catch (System.Exception ex)
         {
-            var result = SetAllDocumentPrint(dataset);
-            if (result.Count > 0)
-            {
-                return result.FirstOrDefault();
-            }
-            return null;
+            throw;
         }
     }
+
+    public static DocumentPrint SetDocumentPrint(DataSet dataset)
+    {
+        var result = SetAllDocumentPrint(dataset);
+        if (result.Count > 0)
+        {
+            return result.FirstOrDefault();
+        }
+        return null;
+    }
+}
 
