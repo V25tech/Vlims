@@ -9,14 +9,14 @@ import { usergroupconfigurationService } from './add-usergroupconfiguration.serv
 
 @Component({
   selector: 'app-add-usergroupconfiguration',
-  templateUrl: './add-usergroupconfiguration.component.html',
-  styles: ['']
+  templateUrl: './add-usergroupconfiguration.component.html'
 })
 export class AddusergroupconfigurationComponent implements OnInit {
   types: UserConfiguration[] = [];
   newdept= new Usergroupconfiguration();
   editMode: boolean = false;
   viewMode: boolean = false;
+  ugcId: number = 0;
   objname: string | undefined;
   title: string = "Add User Group Configuration";
     //usergrp= Usergroupconfiguration;
@@ -45,8 +45,12 @@ export class AddusergroupconfigurationComponent implements OnInit {
     else if (lastSegment == "edit") {
       this.editMode = this.commonsvc.userGroupConfig != null ? true : false;
       if (this.editMode) {
+        let id = parseInt(segments[segments.length - 1], 10);
+        this.ugcId = id;
+        this.editMode = true; this.viewMode = false;
         this.newdept = this.commonsvc.userGroupConfig;
         this.title = "Edit User Group Configuration"
+        this.getbyId();
         console.log(this.newdept);
         this.cdr.detectChanges();
       }
@@ -74,5 +78,12 @@ export class AddusergroupconfigurationComponent implements OnInit {
       this.types = data.Response;      
     });
   }
- 
+  getbyId() {
+    debugger
+    this.ugService.getbyId(this.ugcId).subscribe((data: any) => {
+      this.newdept = data;
+    }, ((error: any) => {
+
+    }));
+  }
 }

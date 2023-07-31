@@ -31,8 +31,8 @@ namespace Vlims.Administration.Manager
         {
             try
             {
-                requestContext.PageNumber = 1;
-                requestContext.PageSize= 1;
+                //requestContext.PageNumber = 1;
+                //requestContext.PageSize= 1;
                 DataSet dataset = UserGroupConfigurationData.GetAllUserGroupConfiguration(requestContext);
                 List<UserGroupConfiguration> result = UserGroupConfigurationConverter.SetAllUserGroupConfiguration(dataset);
                 return new ResponseContext<UserGroupConfiguration>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };

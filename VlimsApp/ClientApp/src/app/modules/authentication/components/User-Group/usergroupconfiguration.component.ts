@@ -40,7 +40,7 @@ export class UsergroupconfigurationComponent implements OnInit {
   editdoc(doc: Usergroupconfiguration) {
     debugger
     this.commonsvc.userGroupConfig = doc;
-    this.router.navigate(['/admin/addusergroup/edit']);
+    this.router.navigate(['/admin/usergroupadd/edit', doc.Ugcid]);
   }
   addusergroup(): void {
     this.router.navigate(['/admin/usergroupadd']);
