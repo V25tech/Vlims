@@ -21,6 +21,6 @@ addusergroupconfiguration(objrequest: Usergroupconfiguration) {
   }
   getbyId(objname: number) {
     debugger
-    return this.http.getwithheader("api/userconfiguration/getbyId" + "?ugcId=" + objname, this.type);
+    return this.http.getwithheader("api/usergroupconfiguration/getbyId" + "?ugcId=" + objname, this.type);
   }
 }

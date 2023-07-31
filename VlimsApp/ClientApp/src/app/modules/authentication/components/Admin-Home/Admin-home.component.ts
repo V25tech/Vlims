@@ -18,15 +18,17 @@ export class AdminHomeComponent {
     } else if (navTo === 'plant') {
       this.router.navigate(['/admin/plant']);
     } else if (navTo === 'User') {
-      this.router.navigate(['/admin/user']);
+      this.router.navigate(['/admin/users']);
     } else if (navTo === 'Approval') {
-      this.router.navigate(['/admin/approvalconfig']);
-    } else if (navTo === 'UserGroup') {
-      this.router.navigate(['/admin/usergroup']);
+      this.router.navigate(['/admin/approval']);
+    } else if (navTo === 'groups') {
+      this.router.navigate(['admin/groups']);
     } else if (navTo === 'Roles') {
       this.router.navigate(['/admin/roles']);    }
     else if (navTo === 'Approvalconfig') {
       this.router.navigate(['/admin/approvalconfig']);
+    }  else if (navTo === 'departments') {
+      this.router.navigate(['/admin/departments']);
     } else if (navTo === 'home') {
       this.router.navigate(['/home']);
     }

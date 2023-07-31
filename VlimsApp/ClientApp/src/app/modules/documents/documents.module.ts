@@ -75,7 +75,7 @@ import { AddRoleComponent } from '../authentication/components/Roles/new-role.co
     MultiSelectModule,
     DropdownModule,
     ToastModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
     
   ],
   providers: [] 

@@ -86,19 +86,21 @@ namespace Vlims.Administration.Entities
                 this.codeField = value;
             }
         }
-        
-        public string users
-        {
-            get
-            {
-                return this.usersField;
-            }
-            set
-            {
-                this.usersField = value;
-            }
-        }
-        
+
+        public List<UserConfiguration> users { get; set; }
+        public string userstring { get; set; }
+        //public string users
+        //{
+        //    get
+        //    {
+        //        return this.usersField;
+        //    }
+        //    set
+        //    {
+        //        this.usersField = value;
+        //    }
+        //}
+
         public string totalusers
         {
             get
