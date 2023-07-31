@@ -14,13 +14,13 @@ export class DocumentEffectiveService {
   getdocumenteffective(objrequest: RequestContext) {
     return this.http.postJsonLogin(objrequest, "api/documenteffective/GetAllDocEff",this.type);
   }
-  
+
   getdocumentrequestbyId(objrequest: RequestContext) {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/getdocId");
   }
   ManageDocumentEffective(adddocreq: DocumentEffectiveConfiguration) {
     debugger
-    return this.http.postJsonLogin(adddocreq, "api/documenteffective/savedocumenteffective", this.type);
+    return this.http.postJsonLogin(adddocreq, "api/documenteffective/updatedocumenteffective", this.type);
   }
 }

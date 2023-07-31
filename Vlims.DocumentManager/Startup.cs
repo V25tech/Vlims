@@ -1,12 +1,3 @@
-
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Vlims.DocumentManager.Manager;
 
@@ -57,6 +48,7 @@ public class Startup
         Services.AddScoped<IDocumentEffectiveService, DocumentEffectiveService>();
         Services.AddScoped<IDocumentPreparationService, DocumentPreparationService>();
         Services.AddScoped<IDocumentrequestService, DocumentrequestService>();
+        Services.AddScoped<IDocumentPrintService, DocumentPrintService>();
         Services.AddEndpointsApiExplorer();
         Services.AddSwaggerGen();
     }

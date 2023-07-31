@@ -14,11 +14,11 @@ export class NewPrintRequestService {
 
   GetNewPrintRequest(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/NewPrint/GetNewPrintRequest",this.type);
+    return this.http.postJsonLogin(objrequest, "api/documentprint/GetAllDocPrint",this.type);
 }
   AddNewPrintRequest(objrequest: RequestContext) {
   debugger
-  return this.http.postJsonLogin(objrequest, "api/NewPrint/AddNewPrintRequest",this.type);
+    return this.http.postJsonLogin(objrequest, "api/documentprint/savedocumentprint",this.type);
 }
 }
 

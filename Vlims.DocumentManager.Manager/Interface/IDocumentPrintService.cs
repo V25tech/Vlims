@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-    using System;
-    using System.Text;
-    using System.IO;
-    using System.Linq;
-    using System.Data;
-    using System.Collections.Generic;
+using System;
+using System.Text;
+using System.IO;
+using System.Linq;
+using System.Data;
+using System.Collections.Generic;
 using Vlims.Common;
 
 
@@ -20,18 +20,18 @@ using Vlims.Common;
 
 // Comment
 public interface IDocumentPrintService
-    {
-        
-        ResponseContext<DocumentPrint> GetAllDocumentPrint(RequestContext requestContext);
-        
-        DocumentPrint GetDocumentPrintByDRId(string dRId);
-        
-        bool SaveDocumentPrint(DocumentPrint documentPrint);
-        
-        bool UpdateDocumentPrint(DocumentPrint documentPrint);
-        
-        bool DeleteDocumentPrintByDRId(string dRId);
-        
-        bool DeleteAllDocumentPrint(List<int> dRIds);
-    }
+{
+
+    ResponseContext<DocumentPrint> GetAllDocumentPrint(RequestContext requestContext);
+
+    DocumentPrint GetDocumentPrintByDRId(string dRId);
+
+    bool SaveDocumentPrint(DocumentPrint documentPrint);
+
+    bool UpdateDocumentPrint(DocumentPrint documentPrint);
+
+    bool DeleteDocumentPrintByDRId(string dRId);
+
+    bool DeleteAllDocumentPrint(List<int> dRIds);
+}
 

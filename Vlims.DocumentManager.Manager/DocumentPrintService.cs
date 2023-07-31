@@ -6,13 +6,9 @@ using System.Data;
 using System.Collections.Generic;
 using Vlims.Common;
 
-
 // Comment
-public class DocumentPrintService
+public class DocumentPrintService : IDocumentPrintService
 {
-
-
-
     public ResponseContext<DocumentPrint> GetAllDocumentPrint(RequestContext requestContext)
     {
         try
