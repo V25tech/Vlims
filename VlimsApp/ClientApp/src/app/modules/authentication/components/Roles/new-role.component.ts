@@ -18,6 +18,7 @@ export class AddRoleComponent implements OnInit {
   editMode: boolean = false;
   viewMode: boolean = false;
   objname: string | undefined;
+  roleid: number = 0;
   types: DepartmentConfiguration[] = [];
   roles: RoleConfiguration[] = [];
   isactivedirectory: boolean = false;
@@ -42,7 +43,7 @@ export class AddRoleComponent implements OnInit {
         this.objname = this.commonsvc.objname;
         //this.getdocTypeByName(this.objname);
         this.addrole = this.commonsvc.roleConfig;
-        this.title = "View Document Type Configuration"
+        this.title = "View Role Configuration"
       }
       this.cdr.detectChanges();
     }
@@ -50,7 +51,8 @@ export class AddRoleComponent implements OnInit {
       this.editMode = this.commonsvc.roleConfig != null ? true : false;
       if (this.editMode) {
         this.addrole = this.commonsvc.roleConfig;
-        this.title = "Edit User Type Configuration"
+        this.getbyId();
+        this.title = "Edit Role Configuration"
         this.cdr.detectChanges();
       }
     }
@@ -68,13 +70,11 @@ export class AddRoleComponent implements OnInit {
     adaddrole.ModifiedDate = new Date();
     //this.router.navigate(['/products']);
     this.rolesservice.addrole(adaddrole).subscribe((res: any) => {
-      this.router.navigate(['/mainpage/users']);
+      this.router.navigate(['/mainpage/roles']);
     });
-
-
   }
   closepopup() {
-    this.router.navigate(['/mainpage/users']);
+    this.router.navigate(['/mainpage/roles']);
   }
   getdepartments() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
@@ -84,11 +84,9 @@ export class AddRoleComponent implements OnInit {
 
       console.log(this.types);
     }, er => {
-
     });
   }
   getroles() {
-
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     return this.rolesservice.getroles(objrequest).subscribe((data: any) => {
       debugger
@@ -99,5 +97,13 @@ export class AddRoleComponent implements OnInit {
   }
   onCancel() {
 
+  }
+  getbyId() {
+    debugger
+    this.rolesservice.getbyId(this.roleid).subscribe((data: any) => {
+      this.addrole = data;
+    }, ((error: any) => {
+
+    }));
   }
 }

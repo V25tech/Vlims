@@ -261,6 +261,16 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'admin/addrole/edit/:roleId',
+    component: AddRoleComponent,
+    children: [
+      {
+        path: '',
+        component: AddRoleComponent,
+      }
+    ]
+  },
   //addrole
   {
     path: 'roles',
