@@ -136,11 +136,11 @@ const routes: Routes = [
   },
   {
     path: 'admin/users/add',
-    component: AddusergroupconfigurationComponent,
+    component: RegisterComponent,
   },
   {
     path: 'admin/users/edit/:userId',
-    component: AddusergroupconfigurationComponent,
+    component: RegisterComponent,
   },
   {
     path: 'admin/security',

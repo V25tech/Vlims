@@ -18,7 +18,7 @@
                      id="firstname"
                      name="firstname"
                      placeholder="Enter First Nmae"
-                     [(ngModel)]="adduser.FirstName" [disabled]="viewMode" />
+                     [(ngModel)]="adduser.FirstName" (ngModelChange)="calculateTotalUsers()" [disabled]="viewMode" />
             </div>
           </div>
           <div class="form-group row">
@@ -29,7 +29,7 @@
                      id="lastname"
                      name="lastname"
                      placeholder="Enter Last Name"
-                     [(ngModel)]="adduser.LastName" [disabled]="viewMode" />
+                     [(ngModel)]="adduser.LastName" (ngModelChange)="calculateTotalUsers()" [disabled]="viewMode" />
             </div>
           </div>
           <div class="form-group row">
@@ -40,19 +40,24 @@
                      id="userid"
                      name="userid"
                      placeholder="Enter Userid"
-                     [(ngModel)]="adduser.UserID" [disabled]="viewMode" />
+                     [(ngModel)]="adduser.UserID" readonly [disabled]="viewMode" />
             </div>
           </div>
           <div class="form-group row">
             <label for="prefix" class="col-sm-2 col-form-label">Department</label>
             <div class="col-sm-10">
 
+              <p-dropdown
+              name="DepartmentName"
+              [options]="types"
+              [(ngModel)]="adduser.Department"
+              optionLabel="DepartmentName" placeholder="Select a Department"
+              optionValue="DepartmentName"></p-dropdown>
 
-
-              <select class="form-control" [(ngModel)]="adduser.Department" name="department" [disabled]="viewMode">
+              <!-- <select class="form-control" [(ngModel)]="adduser.Department" name="department" [disabled]="viewMode">
                 <option value="Select">Select</option>
                 <option *ngFor="let type of types" value={{type.DepartmentName}}>{{type?.DepartmentName}}</option>
-              </select>
+              </select> -->
 
             </div>
           </div>
@@ -60,12 +65,17 @@
             <label for="prefix" class="col-sm-2 col-form-label">Role</label>
             <div class="col-sm-10">
 
+              <p-dropdown
+              name="Role"
+              [options]="roles"
+              [(ngModel)]="adduser.Role"
+              optionLabel="Role" placeholder="Select a Role"
+              optionValue="Role"></p-dropdown>
 
-
-              <select class="form-control" [(ngModel)]="adduser.Role" name="role" [disabled]="viewMode">
+              <!-- <select class="form-control" [(ngModel)]="adduser.Role" name="role" [disabled]="viewMode">
                 <option value="Select">Select</option>
                 <option *ngFor="let role of roles" value={{role.Role}}>{{role?.Role}}</option>
-              </select>
+              </select> -->
 
             </div>
           </div>
@@ -81,7 +91,17 @@
                      [(ngModel)]="adduser.Doj" [disabled]="viewMode" />
             </div>
           </div>
-
+          <div class="form-group row">
+            <label for="Empid" class="col-sm-2 col-form-label">Emp Id</label>
+            <div class="col-sm-10">
+              <input type="text"
+                     class="form-control"
+                     id="Empid"
+                     name="Empid"
+                     placeholder="Enter Emp Id"
+                     [(ngModel)]="adduser.Empid" [disabled]="viewMode" />
+            </div>
+          </div>
           <div class="form-group row">
             <label for="documentType" class="col-sm-2 col-form-label">Email Id</label>
             <div class="col-sm-10">

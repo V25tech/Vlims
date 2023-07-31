@@ -27,12 +27,12 @@ export class RolesComponent implements OnInit {
       });
   }
   navigateToAddRoles(): void {
-    this.router.navigate(['/admin/addrole']);
+    this.router.navigate(['/admin/roles/add']);
   }
   editdoc(doc: RoleConfiguration) {
     debugger
     this.commonsvc.roleConfig = doc;
-    this.router.navigate(['/admin/addrole/edit', doc.ROCFId]);
+    this.router.navigate(['/admin/roles/edit', doc.ROCFId]);
   }
   getStatusClass(status: string): string {
     debugger
