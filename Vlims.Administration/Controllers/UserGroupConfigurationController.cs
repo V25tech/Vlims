@@ -125,5 +125,15 @@ namespace PolicySummary.Controllers
             var result = userGroupConfigurationService.DeleteUserGroupConfigurationByUserManagementId(uMId);
             return result;
         }
+        /// <summary>
+        /// This method is used to Get DepartmentConfiguration By Id dPCFId
+        /// </summary>
+        /// <param name="dPCFId"></param>
+        [HttpGet("{ugcId}")]
+        public ActionResult<UserGroupConfiguration> GetDepartmentConfigurationByDPCFId(string ugcId)
+        {
+            var result = userGroupConfigurationService.GetUserGroupConfigurationByUgcid(ugcId);
+            return result;
+        }
     }
 }

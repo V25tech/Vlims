@@ -187,7 +187,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'admin/usergroupadd/edit',
+    path: 'admin/usergroupadd/edit/:ugcId',
     component: AddusergroupconfigurationComponent,
     children: [
       {

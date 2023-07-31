@@ -37,14 +37,14 @@ export class AddDepartmentComponent implements OnInit {
     //this.get();
     this.cdr.detectChanges();
   }
-  getbyId() {
-    debugger
-    this.doctypeservice.getbyId(this.departId).subscribe((data: any) => {
-      this.newdept = data;
-    }, ((error: any) => {
+    getbyId() {
+      debugger
+      this.doctypeservice.getbyId(this.departId).subscribe((data: any) => {
+        this.newdept = data;
+      }, ((error: any) => {
 
-    }));
-  }
+      }));
+    }
   submit(newdept: DepartmentConfiguration) {
     debugger
     this.adddoctype(newdept);
