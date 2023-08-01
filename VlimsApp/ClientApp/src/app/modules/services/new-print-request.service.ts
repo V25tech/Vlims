@@ -20,6 +20,10 @@ export class NewPrintRequestService {
   debugger
     return this.http.postJsonLogin(objrequest, "api/documentprint/savedocumentprint",this.type);
 }
+UpdatePrintRequest(objrequest: DocumentPrintConfiguration) {
+  debugger
+    return this.http.postJsonLogin(objrequest, "api/documentprint/updatedocumentprint",this.type);
+}
 }
 
 

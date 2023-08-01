@@ -18,14 +18,14 @@
         <p-table [value]="requests" tableStyleClass="table table-striped">
           <ng-template pTemplate="header">
             <tr>
-              <th>#</th>              
+              <th>S.No</th>              
               <th pSortableColumn="documenttype" style="width:10%">Document Type <p-sortIcon field="documenttype"></p-sortIcon></th>
               <th pSortableColumn="documnetname" style="width:15%">Document Name<p-sortIcon field="documentname"></p-sortIcon></th>
               <th pSortableColumn="documentnumber" style="width:20%">Document Number<p-sortIcon field="documentnumber"></p-sortIcon></th>
-              <th pSortableColumn="reason" style="width:200px">Reason <p-sortIcon field="reason"></p-sortIcon></th>
-              <th pSortableColumn="workflow" style="width:200px">workflow <p-sortIcon field="workflow"></p-sortIcon></th>
-              <th pSortableColumn="noofcopies" style="width:200px">Printed Count <p-sortIcon field="noofcopies"></p-sortIcon></th>
-              <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
+              <th pSortableColumn="reason" style="width:100px">Reason <p-sortIcon field="reason"></p-sortIcon></th>
+              <th pSortableColumn="workflow" style="width:100px">workflow <p-sortIcon field="workflow"></p-sortIcon></th>
+              <th pSortableColumn="noofcopies" style="width:100px">Printed Count <p-sortIcon field="noofcopies"></p-sortIcon></th>
+              <th pSortableColumn="Status" style="width:100px">Status <p-sortIcon field="Status"></p-sortIcon></th>
               <th style="width:80px">Actions</th>
 
             </tr>
@@ -35,7 +35,7 @@
               <td>{{ i + 1 }}</td>              
               <td>{{doc?.printtype}}</td>
               <td>{{doc?.documenttitle}}</td>
-              <td>{{doc?.documentno}}</td>
+              <td>{{doc?.documentNumber}}</td>
               <td>{{doc?.reason}}</td>
               <td>{{doc?.workflow}}</td>
               <td>{{doc?.noofcopies}}</td>

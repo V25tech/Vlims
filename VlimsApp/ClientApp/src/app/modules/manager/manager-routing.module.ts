@@ -60,6 +60,11 @@ const routes: Routes = [
     component: NewPrintRequestComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'print/edit',
+    component: NewPrintRequestComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

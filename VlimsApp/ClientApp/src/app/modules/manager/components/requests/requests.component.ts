@@ -21,6 +21,7 @@ export class RequestsComponent implements OnInit{
 
   ngOnInit() {   
     this.getdocumentrequest();
+
   }
 
   getStatusClass(status: string): string {
