@@ -9,7 +9,10 @@
     [CreatedDate_PSY]    DATETIME       NULL,
     [ModifiedBy_PSY]     NVARCHAR (100) NULL,
     [ModifiedDate_PSY]   DATETIME       NULL,
-    [Status_PSY] NVARCHAR(50) NULL, 
-    CONSTRAINT [PK_PlantManagement_PSY] PRIMARY KEY CLUSTERED ([PMId_PSY] ASC)
+    [Status_PSY]         NVARCHAR (50)  NULL,
+    CONSTRAINT [PK_PlantManagement_PSY] PRIMARY KEY CLUSTERED ([PMId_PSY] ASC),
+    CONSTRAINT [UC_Plant] UNIQUE NONCLUSTERED ([PlantName_PSY] ASC, [PlantCode_PSY] ASC)
 );
+
+
 
