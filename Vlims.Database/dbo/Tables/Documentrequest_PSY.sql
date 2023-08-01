@@ -10,10 +10,13 @@
     [CreatedDate_PSY]       DATETIME       NULL,
     [ModifiedBy_PSY]        NVARCHAR (100) NULL,
     [ModifiedDate_PSY]      DATETIME       NULL,
-    [Status_PSY] NVARCHAR(100) NULL, 
-    [Approvedby_PSY] NVARCHAR(100) NULL, 
-    [ApprovedON_PSY] DATETIME NULL, 
-    [Workflow_PSY] NVARCHAR(100) NULL, 
+    [Status_PSY]            NVARCHAR (100) NULL,
+    [Approvedby_PSY]        NVARCHAR (100) NULL,
+    [ApprovedON_PSY]        DATETIME       NULL,
+    [DOCStatus_PSY]         NVARCHAR (50)  NULL,
+    [Workflow_PSY]          NVARCHAR (100) NULL,
     CONSTRAINT [PK_Documentrequest_PSY] PRIMARY KEY CLUSTERED ([DRID_PSY] ASC)
 );
+
+
 
