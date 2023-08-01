@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RequestContext, WorkItemsConfiguration } from 'src/app/models/model';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
-
+import { Table } from 'primeng/table';
+import { Paginator } from 'primeng/paginator';
 
 @Component({
   selector: 'app-assigned',
@@ -10,8 +11,13 @@ import { WorkitemsService } from 'src/app/modules/services/workitems.service';
   styleUrls: ['./assigned.component.scss'],
 })
 export class AssignedComponent implements OnInit {
+  @ViewChild('dt') dataTable!: Table;
+  @ViewChild('paginator') dataPaginator!: Paginator;
   types: Array<WorkItemsConfiguration> = [];
   assignedDatasource = [];
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   constructor(private workitemssvc:WorkitemsService,
     private loader:NgxSpinnerService) {}
 
@@ -20,7 +26,7 @@ export class AssignedComponent implements OnInit {
     }
   getworkflowitems() {
     this.loader.show();
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 500, Id: 0 };
     return this.workitemssvc.getworkitems(objrequest).subscribe((data: any) => {
       this.types = data.Response;
       this.loader.hide();
