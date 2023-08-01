@@ -16,6 +16,10 @@ INSERT INTO DocumentPrint_PSY(documenttitle_PSY,printtype_PSY,documentno_PSY,noo
 ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY)
 select e.documenttitle_PSY,documenttype_PSY,documentno_PSY,0,e.wokflow_PSY,null,@ModifiedBy_PSY,GETDATE(),@ModifiedBy_PSY,GETDATE(),'In-Progress',@referenceId from CTE e
 --VALUES(select document from cte)
+
+INSERT INTO workitems_PSY(Status_PSY,RefrenceId_PSY)
+VALUES('APPROVED',@referenceId)
+
 END
 
 select @ATID_PSY; 

@@ -29,6 +29,10 @@ INSERT INTO DocumentPreparation_PSY(Documentmanagerid_PSY,documenttitle_PSY,docu
 department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,DOCStatus_PSY,Refrence_PSY)
 VALUES('1',NULL,NULL,@documenttype_PSY,@department_PSY,null,null,@WORKFLOW,NULL,
 @ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',NULL,@DRID_PSY)
+
+INSERT INTO workitems_PSY(Status_PSY,RefrenceId_PSY)
+VALUES('APPROVED',@DRID_PSY)
+
 END
 
 select @DRID_PSY; 

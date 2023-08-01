@@ -25,7 +25,7 @@ namespace Vlims.DocumentManager.Manager
         
         ResponseContext<Documentrequest> GetAllDocumentrequest(RequestContext requestContext);
         
-        Documentrequest GetDocumentrequestByDRID(string dRID);
+        Documentrequest GetDocumentrequestByDRID(int dRID);
         
         bool SaveDocumentrequest(Documentrequest documentrequest);
         

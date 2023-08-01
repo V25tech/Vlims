@@ -207,6 +207,7 @@ export class WorkItemsConfiguration {
   InitiatedOn: string = ''
   Status: string = ''
   DueDate: string = ''
+  ReferenceId:number=0
 }
 export class PlantConfiguration {
   DPCFId: string = ''

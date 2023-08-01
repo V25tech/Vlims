@@ -33,6 +33,10 @@ INSERT INTO DocumentRevision_PSY(Documentmanagerid_PSY,documenttitle_PSY,documen
 CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY)
 VALUES('1',@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,@document_PSY,null,null,
 @ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId)
+
+INSERT INTO workitems_PSY(Status_PSY,RefrenceId_PSY)
+VALUES('APPROVED',@referenceId)
+
 END
 
 select @DEID_PSY; 
