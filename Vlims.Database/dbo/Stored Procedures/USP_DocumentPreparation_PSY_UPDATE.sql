@@ -22,11 +22,22 @@ document_PSY=@document_PSY,
 template_PSY=@template_PSY,
 wokflow_PSY=@wokflow_PSY,
 details_PSY=@details_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY='In Progress' WHERE  [DPNID_PSY] = @DPNID_PSY ;  select @DPNID_PSY; 
+ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY='In Progress' WHERE  [DPNID_PSY] = @DPNID_PSY ;  
 
-INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY)
- SELECT @documenttype_PSY,'Document Preperation Request','Pending Approval','','',GetDate(),'Pending Approval',GetDate()
 
+
+IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
+BEGIN
+DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentPreparation_PSY where DPNID_PSY=@DPNID_PSY)
+
+INSERT INTO DocumentEffective_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,EffectiveDate_PSY,Reviewdate_PSY,
+CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY)
+VALUES('1',@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,@document_PSY,null,null,
+@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId)
+END
+
+
+select @DPNID_PSY; 
 
   
   END TRY 

@@ -3,7 +3,7 @@
  BEGIN 
  BEGIN TRY 
   SELECT ATID_PSY,
-Documentmanagerid_PSY,
+DocumentEffective_Id,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,

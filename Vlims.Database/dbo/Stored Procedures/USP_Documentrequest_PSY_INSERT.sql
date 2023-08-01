@@ -44,8 +44,8 @@ Workflow_PSY)
  @Workflow_PSY);
  SELECT @ID = @@IDENTITY; 
 
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY)
- SELECT @documenttype_PSY,'Document Request',@Status_PSY,@AssigntoGroup_PSY,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate()
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
+ SELECT @documenttype_PSY,'Request',@Status_PSY,@AssigntoGroup_PSY,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate(),@ID
 
  select @ID 
   

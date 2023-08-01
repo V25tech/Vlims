@@ -47,6 +47,9 @@ Status_PSY)
   
  UPDATE DocumentPreparation_PSY SET Status_PSY='Approved',ModifiedDate_PSY=GETDATE() where DPNID_PSY=@Documentmanagerid_PSY
 
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
+ SELECT @documenttitle_PSY,'Effective',@Status_PSY,null,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate(),@ID
+
   END TRY 
  BEGIN CATCH 
  SELECT ERROR_MESSAGE(); 

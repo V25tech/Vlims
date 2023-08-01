@@ -15,6 +15,7 @@
     [ModifiedDate_PSY]      DATETIME       NULL,
     [Status_PSY]            NVARCHAR (100) NULL,
     [DOCStatus_PSY]         NVARCHAR (50)  NULL,
+    [Refrence_PSY] INT NULL, 
     CONSTRAINT [PK_DocumentPreparation_PSY] PRIMARY KEY CLUSTERED ([DPNID_PSY] ASC)
 );
 

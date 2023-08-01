@@ -35,8 +35,8 @@ Status_PSY)
  @Status_PSY);
  SELECT @ID = @@IDENTITY;
  
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY)
- SELECT @Documenttypename_PSY,'Document Type',@Status_PSY,null,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate()
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
+ SELECT @Documenttypename_PSY,'Type',@Status_PSY,null,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate(),@ID
 
  select @ID 
   
