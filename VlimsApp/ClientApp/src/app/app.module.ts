@@ -18,6 +18,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppintializorService, serverConfigInitializerFactory } from './shared/appintializor.service';
 import { MessageService } from 'primeng/api';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LeftNavComponent],
@@ -33,7 +34,8 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     FontAwesomeModule,
     BsDropdownModule,
     NgxSpinnerModule,
-    ModalModule
+    ModalModule,
+    PaginatorModule
   ],
   exports: [TableModule],
 
