@@ -59,11 +59,11 @@ export class AddRequestComponent {
     this.updateRequest();
   }
   reinitiative(){
-    this.request.status='In-Progress'
+    this.request.status='Re-Initiated'
     this.updateRequest();
   }
   reject(){
-    this.request.status='Reject'
+    this.request.status='Rejected'
     this.updateRequest();
   }
 
