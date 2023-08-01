@@ -90,7 +90,7 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   onCancel() {
-    //this.location.back();
+    this.router.navigate(['/print']);
   }
 
 }
