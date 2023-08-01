@@ -7,8 +7,11 @@
     [ModifiedDate_PSY]     DATETIME       NULL,
     [Status_PSY]           NVARCHAR (50)  NULL,
     [Version]              NVARCHAR (50)  NULL,
+    [Refrence_PSY]         INT            NULL,
     CONSTRAINT [PK_AdditionalTask_PSY] PRIMARY KEY CLUSTERED ([ATID_PSY] ASC)
 );
+
+
 
 
 

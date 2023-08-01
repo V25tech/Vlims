@@ -22,6 +22,10 @@
  UPDATE Documentrequest_PSY SET Status_PSY='Approved',Approvedby_PSY=@ModifiedBy_PSY,ApprovedON_PSY=GETDATE() where DRID_PSY=@Documentmanagerid_PSY
 
  SELECT @ID = @@IDENTITY; 
+
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
+ SELECT @documenttitle_PSY,'Preparation',@Status_PSY,null,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate(),@ID
+
  select @ID 
   
   END TRY 

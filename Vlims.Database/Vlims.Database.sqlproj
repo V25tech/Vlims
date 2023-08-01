@@ -272,6 +272,15 @@
     <Build Include="dbo\Stored Procedures\USP_DocumentPrint_PSY_GET.sql" />
     <Build Include="dbo\Stored Procedures\USP_DocumentPrint_PSY_DELETE_ALL.sql" />
     <Build Include="dbo\Stored Procedures\USP_DocumentPrint_PSY_DELETE.sql" />
+    <Build Include="dbo\Tables\ExistingDocumentRequest_PSY.sql" />
+    <Build Include="dbo\Stored Procedures\USP_ExistingDocumentRequest_PSY_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_ExistingDocumentRequest_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_ExistingDocumentRequest_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_ExistingDocumentRequest_PSY_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_ExistingDocumentRequest_PSY_DELETE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_ExistingDocumentRequest_PSY_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\USP_ExistingDocumentRequest_PSY_By_Documentmanagerid_GET.sql" />
+    <Build Include="dbo\Stored Procedures\USP_ExistingDocumentRequest_PSY_By_Documentmanagerid_DELETE.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vlims.Database.refactorlog" />
