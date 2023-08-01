@@ -129,7 +129,7 @@ namespace PolicySummary.Controllers
             var result = existingDocumentRequestService.GetAllExistingDocumentRequest(requestContext);
             if (result != null)
             {
-                responseContext = result.Response.FirstOrDefault(o => o.documenttype.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+                //responseContext = result.Response.FirstOrDefault(o => o.documenttype.Equals(name, StringComparison.InvariantCultureIgnoreCase));
             }
             return Ok(responseContext);
         }
