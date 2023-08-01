@@ -107,7 +107,7 @@ const routes: Routes = [
     component: AddusergroupconfigurationComponent,
   },
   {
-    path: 'admin/departments',
+    path: 'admin/department',
     component: DepartmentComponent,
   },
   {
