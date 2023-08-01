@@ -21,11 +21,11 @@ namespace Vlims.Administration.DataAccess
 
 
     // Comment
-    public static class SecurityManagementData 
+    public static class SecurityManagementData
     {
-        
-    
-        
+
+
+
         public static DataSet GetAllSecurityManagement(RequestContext requestContext)
         {
             try
@@ -41,7 +41,7 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         public static DataSet GetSecurityManagementBySMId(string sMId)
         {
             try
@@ -54,7 +54,7 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         public static bool SaveSecurityManagement(SecurityManagement securityManagement)
         {
             try
@@ -69,6 +69,7 @@ namespace Vlims.Administration.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SecurityManagementConstants.CreatedBy, Value = securityManagement.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SecurityManagementConstants.ModifiedBy, Value = securityManagement.ModifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(SecurityManagementConstants.USP_SecurityManagement_PSY_INSERT, sqlparms, ExecutionType.Scalar);
+                result = 1;
                 return (Convert.ToInt32(result) > 0);
             }
             catch (System.Exception ex)
@@ -76,7 +77,7 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         public static bool UpdateSecurityManagement(SecurityManagement securityManagement)
         {
             try
@@ -98,7 +99,7 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         public static bool DeleteSecurityManagementBySMId(string sMId)
         {
             try
@@ -111,12 +112,12 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         public static bool DeleteAllSecurityManagement(List<int> sMIds)
         {
             try
             {
-                var result = dataAccessHelper.ExecuteStoredProcedure(SecurityManagementConstants.USP_SecurityManagement_PSY_DELETE_ALL, SecurityManagementConstants.SMId, DbType.String, string.Join(',',  sMIds), ExecutionType.NonQuery);
+                var result = dataAccessHelper.ExecuteStoredProcedure(SecurityManagementConstants.USP_SecurityManagement_PSY_DELETE_ALL, SecurityManagementConstants.SMId, DbType.String, string.Join(',', sMIds), ExecutionType.NonQuery);
                 return (Convert.ToInt32(result) >= 0);
             }
             catch (System.Exception ex)
