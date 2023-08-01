@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using PolicySummary.DMS.Services;
 using Vlims.DocumentManager.Manager;
 
 public class Startup
@@ -49,6 +50,7 @@ public class Startup
         Services.AddScoped<IDocumentPreparationService, DocumentPreparationService>();
         Services.AddScoped<IDocumentrequestService, DocumentrequestService>();
         Services.AddScoped<IDocumentPrintService, DocumentPrintService>();
+        Services.AddScoped<IExistingDocumentRequestService, ExistingDocumentRequestService>();
         Services.AddEndpointsApiExplorer();
         Services.AddSwaggerGen();
     }
