@@ -21,7 +21,7 @@ export class UserConfigurationComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
-
+  types: UserConfiguration[] = [];
   name: string = 'Product Type';
   newtype: UserConfiguration | undefined;
   objProductType: UserConfiguration | undefined;
