@@ -12,7 +12,10 @@
     [CreatedDate_PSY]       DATETIME       NULL,
     [ModifiedBy_PSY]        NVARCHAR (100) NULL,
     [ModifiedDate_PSY]      DATETIME       NULL,
-    [Status_PSY] NVARCHAR(50) NULL, 
+    [Status_PSY]            NVARCHAR (50)  NULL,
+    [Refrence_PSY]          INT            NULL,
     CONSTRAINT [PK_DocumentEffective_PSY] PRIMARY KEY CLUSTERED ([DEID_PSY] ASC)
 );
+
+
 

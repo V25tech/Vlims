@@ -40,7 +40,7 @@ namespace Vlims.DocumentManager.Manager
             }
         }
 
-        public Documentrequest GetDocumentrequestByDRID(string dRID)
+        public Documentrequest GetDocumentrequestByDRID(int dRID)
         {
             try
             {

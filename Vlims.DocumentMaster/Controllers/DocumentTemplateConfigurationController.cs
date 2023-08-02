@@ -111,8 +111,21 @@ namespace Vlims.Controllers
         [HttpPost("updatedocumenttemplateconfiguration")]
         public ActionResult<System.Boolean> UpdateDocumentTemplateConfiguration(DocumentTemplateConfiguration documentTemplateConfiguration)
         {
+            var serializer = new XmlSerializer(typeof(DocumentTemplateConfiguration));
+            // Create a StringWriter to hold the XML data
+            var writer = new StringWriter();
+            // Serialize the Person object to XML and write it to the StringWriter
+            serializer.Serialize(writer, documentTemplateConfiguration);
+            // Get the XML string from the StringWriter
+            string xmlString = writer.ToString();
             var result = documentTemplateConfigurationService.UpdateDocumentTemplateConfiguration(documentTemplateConfiguration);
-            return result;
+            // Create an XmlSerializer for the Person type
+            var serializer1 = new XmlSerializer(typeof(DocumentTemplateConfiguration));
+            // Create a StringReader to read the XML data
+            var reader = new StringReader(xmlString);
+            // Deserialize the XML data back to a Person object
+            var person = (DocumentTemplateConfiguration)serializer.Deserialize(reader);
+            return result;            
         }
         
         /// <summary>

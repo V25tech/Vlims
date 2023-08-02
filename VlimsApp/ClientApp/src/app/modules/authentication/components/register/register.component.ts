@@ -5,7 +5,7 @@ import { CommonService } from '../../../../shared/common.service';
 import { DepartmentconfigurationService } from '../../../services/departmentconfiguration.service';
 import { RolesconfigurationService } from '../../../services/rolesconfiguration.service';
 import { UsersconfigurationService } from '../../../services/usersconfiguration.service';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -24,9 +24,11 @@ export class RegisterComponent implements OnInit {
   isstandarduser: boolean = false;
   title: string = "Add User Configuration";
   objname: string = '';
+  userid:string='';
   constructor(private commonsvc: CommonService, private rolesservice: RolesconfigurationService,
     private deptservice: DepartmentconfigurationService,
     private userservice: UsersconfigurationService,
+    private location: Location,
     private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -48,12 +50,9 @@ export class RegisterComponent implements OnInit {
       this.cdr.detectChanges();
     }
     else if (lastSegment == "edit") {
-      this.editMode = this.commonsvc.userConfig != null ? true : false;
-      if (this.editMode) {
-        this.adduser = this.commonsvc.userConfig;
-        this.title = "Edit User Type Configuration"
-        this.cdr.detectChanges();
-      }
+      this.editMode = true;
+      this.userid=segments[segments.length - 1];
+      this.getbyId();
     }
 
   }
@@ -63,22 +62,38 @@ export class RegisterComponent implements OnInit {
   }
   adddoctype(adduser: UserConfiguration) {
     debugger
+    if(!this.editMode)
+    {
     adduser.Activedirectory = this.isactivedirectory ? "true" : "false";
     adduser.Standarduser = this.isstandarduser ? "true" : "false";
     adduser.CreatedBy = "admin";
     adduser.ModifiedBy = "admin";
+    adduser.CreatedDate=new Date();
+    adduser.ModifiedDate=new Date();
     //this.router.navigate(['/products']);
     this.userservice.adduser(adduser).subscribe((res: any) => {
-      this.router.navigate(['/mainpage/users']);
+      this.location.back();
+    });
+  }
+  else
+  { 
+    this.userservice.update(adduser).subscribe((data:any)=>{
+      this.location.back();
     });
 
-
+  }
+  }
+  getbyId()
+  {
+    return this.userservice.getbyId(this.userid).subscribe((data:any)=>{
+      this.adduser=data;
+    });
   }
   closepopup() {
     this.router.navigate(['/mainpage/users']);
   }
   getdepartments() {
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
       debugger
       this.types = data.Response;
@@ -88,7 +103,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   getroles() {
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.rolesservice.getroles(objrequest).subscribe((data: any) => {
       debugger
       this.roles = data.Response;
@@ -98,7 +113,13 @@ export class RegisterComponent implements OnInit {
     });
   }
   onCancel() {
-    this.router.navigate(['/admin/user']);
+    this.router.navigate(['/admin/users']);
+  }
+  calculateTotalUsers(): void {
+    if(this.adduser.FirstName!=null || this.adduser.LastName!=null)
+    {
+    this.adduser.UserID = this.adduser.FirstName+this.adduser.LastName;
+    }
   }
 }
 

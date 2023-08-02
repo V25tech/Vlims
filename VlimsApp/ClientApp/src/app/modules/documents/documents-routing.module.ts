@@ -92,201 +92,77 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminHomeComponent,
-    children: [
-      {
-        path: '',
-        component: AdminHomeComponent,
-      },
-      //{
-      //  path: 'security',
-      //  component: SecuritymgmtComponent,
-      //}
-    ]
-  },
-  // {
-  //   path: 'admin',
-  //   component: AdminHomeComponent,
-  //   canActivate: [AuthGuard],
-  // },
-
-
-  {
-    path: 'admin/security',
-    component: SecuritymgmtComponent,
-    children: [
-      {
-        path: '',
-        component: SecuritymgmtComponent,
-      }
-    ]
+    component: AdminHomeComponent
   },
   {
-    path: 'admin/plant',
-    component: PlantComponent,
-    children: [
-      {
-        path: '',
-        component: PlantComponent,
-      }
-    ]
+    path: 'admin/groups',
+    component: UsergroupconfigurationComponent,
   },
   {
-    path: 'admin/department',
+    path: 'admin/groups/add/:count',
+    component: AddusergroupconfigurationComponent,
+  },
+  {
+    path: 'admin/groups/edit/:groupId',
+    component: AddusergroupconfigurationComponent,
+  },
+  {
+    path: 'admin/departments',
     component: DepartmentComponent,
-    children: [
-      {
-        path: '',
-        component: DepartmentComponent,
-      }
-    ]
   },
   {
-    path: 'admin/adddepartment/edit/:departId',
+    path: 'admin/departments/add',
     component: AddDepartmentComponent,
-    children: [
-      {
-        path: '',
-        component: AddDepartmentComponent,
-      }
-    ]
   },
   {
-    path: 'admin/adduser/edit/:userid',
-    component: RegisterComponent,
-    children: [
-      {
-        path: '',
-        component: RegisterComponent,
-      }
-    ]
-  },  
-  {
-    path: 'admin/user',
-    component: UserConfigurationComponent,
-    children: [
-      {
-        path: '',
-        component: UserConfigurationComponent,
-      }
-    ]
-  },
-  {
-    path: 'admin/adduser',
-    component: RegisterComponent,
-    children: [
-      {
-        path: '',
-        component: RegisterComponent,
-      }
-    ]
-  },
-  {
-    path: 'admin/usergroupadd',
-    component: AddusergroupconfigurationComponent,
-    children: [
-      {
-        path: '',
-        component: AddusergroupconfigurationComponent,
-      }
-    ]
-  },
-  {
-    path: 'admin/usergroupadd/edit/:ugcId',
-    component: AddusergroupconfigurationComponent,
-    children: [
-      {
-        path: '',
-        component: AddusergroupconfigurationComponent,
-      }
-    ]
-  },
-  {
-    path: 'admin/approvalconfig',
-    component: ApprovalConfigurationsComponent,
-    children: [
-      {
-        path: '',
-        component: ApprovalConfigurationsComponent,
-      }
-    ]
+    path: 'admin/departments/edit/:deptId',
+    component: AddDepartmentComponent,
   },
   {
     path: 'admin/roles',
     component: RolesComponent,
-    children: [
-      {
-        path: '',
-        component: RolesComponent,
-      }
-    ]
   },
   {
-    path: 'admin/usergroup',
-    component: UsergroupconfigurationComponent,
-    children: [
-      {
-        path: '',
-        component: UsergroupconfigurationComponent,
-      }
-    ]
+    path: 'admin/roles/add',
+    component: AddRoleComponent,
   },
   {
-    path: 'admin/adddepartment',
-    component: AddDepartmentComponent,
-    children: [
-      {
-        path: '',
-        component: AddDepartmentComponent,
-      }
-    ]
+    path: 'admin/roles/edit/:deptId',
+    component: AddRoleComponent,
+  },
+  {
+    path: 'admin/users',
+    component: UserConfigurationComponent,
+  },
+  {
+    path: 'admin/users/add',
+    component: RegisterComponent,
+  },
+  {
+    path: 'admin/users/edit/:userId',
+    component: RegisterComponent,
+  },
+  {
+    path: 'admin/security',
+    component: SecuritymgmtComponent,
+  },
+  {
+    path: 'admin/plant',
+    component: PlantComponent,
+  },
+  {
+    path: 'admin/plant/edit/:plantId',
+    component: PlantComponent,
   },
   {
     path: 'admin/addplant',
     component: NewPlantRegistrationComponent,
-    children: [
-      {
-        path: '',
-        component: NewPlantRegistrationComponent,
-      }
-    ]
   },
   {
-    path: 'admin/addrole',
-    component: AddRoleComponent,
-    children: [
-      {
-        path: '',
-        component: AddRoleComponent,
-      }
-    ]
+    path: 'admin/approval',
+    component: ApprovalConfigurationsComponent,
   },
-  {
-    path: 'admin/addrole/edit/:roleId',
-    component: AddRoleComponent,
-    children: [
-      {
-        path: '',
-        component: AddRoleComponent,
-      }
-    ]
-  },
-  //addrole
-  {
-    path: 'roles',
-    component: RolesComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'UserGroup',
-    component: Usergroupconfiguration,
-    canActivate: [AuthGuard],
-  },
-  //{
-  //  path: 'department',
-  //  component: DepartmentComponent,
-  //  canActivate: [AuthGuard],
-  //},
+  
 ];
 
 @NgModule({

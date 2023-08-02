@@ -159,11 +159,22 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.columns=this.colsArray.length.toString();
     this.templateForm.footerrows=this.rowsFooterArray.length.toString();
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
+    if(this.editMode)
+    {
     this.templatesvc.adddoctemplate(this.templateForm).subscribe((data:any)=>{
       this.loader.hide();
     }, (error:any) => {
       this.loader.hide();
     });
+    }
+    else
+    {
+      this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
+        this.loader.hide();
+      }, (error:any) => {
+        this.loader.hide();
+      });
+    }
     //let type=this.templateForm.documenttype.Documenttypename
     //this.documentService.addTemplate(this.templateForm).subscribe(() => {
     this.router.navigate(['/templates']);

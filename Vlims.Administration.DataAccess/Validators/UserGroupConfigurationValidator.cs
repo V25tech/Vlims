@@ -37,7 +37,7 @@ namespace PolicySummary.Sheet1.Services
                 validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.Usermanagementid,50, nameof(userGroupConfiguration.Usermanagementid)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.usergroupname,50, nameof(userGroupConfiguration.usergroupname)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.code,50, nameof(userGroupConfiguration.code)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.users,50, nameof(userGroupConfiguration.users)));
+                //validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.users,50, nameof(userGroupConfiguration.users)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.createdBy,100, nameof(userGroupConfiguration.createdBy)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(userGroupConfiguration.modifiedBy,100, nameof(userGroupConfiguration.modifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))

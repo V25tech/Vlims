@@ -7,7 +7,9 @@
     <div class="row p-2">
         <div class="col">
             <div class="p-4 bg-white shadow-dark rounded-2">
-            <p-table [value]="types" tableStyleClass="table table-striped">
+            <p-table [value]="types" tableStyleClass="table table-striped" [rows]="itemsPerPage"
+            [paginator]="true" [totalRecords]="types.length"
+            [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>#</th>
@@ -25,7 +27,9 @@
                 <ng-template pTemplate="body" let-assigned let-i="rowIndex">
                     <tr>  
                         <td>{{ i + 1 }}</td>  
-                        <td>{{assigned.TaskType}}</td>
+                        <td>
+                            <a href="javascript:void(0);" (click)="viewtask(assigned.TaskType,assigned.ReferenceId)">{{ assigned.TaskType }}</a>
+                        </td>
                         <td>{{assigned.TaskName}}</td>
                         <td>{{assigned.Stage}}</td>
                         <td>{{assigned.assignedGroup}}</td>

@@ -18,6 +18,8 @@ namespace Vlims.Administration.DataAccess
     using Newtonsoft.Json;
     using Vlims.Administration.Entities;
     using Vlims.Common;
+    using System.Collections;
+    using System.Xml.Serialization;
 
 
 
@@ -25,14 +27,15 @@ namespace Vlims.Administration.DataAccess
     public static class UserGroupConfigurationConverter
     {
 
-        public static List<UserGroupConfiguration> SetAllUserGroupConfiguration(DataSet dataset)
+        public static List<UserGroupConfiguration> SetAllUserGroupConfiguration(DataSet dataset, bool fromprep = false)
         {
             try
             {
                 List<UserGroupConfiguration> result = new List<UserGroupConfiguration>();
-                UserGroupConfiguration userGroupConfigurationData;
+                UserGroupConfiguration userGroupConfigurationData; bool islist;
                 if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
                 {
+                    islist = dataset.Tables[0].Rows.Count > 1;
                     for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
@@ -40,14 +43,29 @@ namespace Vlims.Administration.DataAccess
                         userGroupConfigurationData.Ugcid = Convert.ToString(row[UserGroupConfigurationConstants.Ugcid.Trim('@')]);
                         userGroupConfigurationData.Usermanagementid = Convert.ToString(row[UserGroupConfigurationConstants.Usermanagementid.Trim('@')]);
                         userGroupConfigurationData.usergroupname = Convert.ToString(row[UserGroupConfigurationConstants.Usergroupname.Trim('@')]);
+                        userGroupConfigurationData.userstring = Convert.ToString(row[UserGroupConfigurationConstants.Users.Trim('@')]);
                         userGroupConfigurationData.code = Convert.ToString(row[UserGroupConfigurationConstants.Code.Trim('@')]);
-                        userGroupConfigurationData.users = Convert.ToString(row[UserGroupConfigurationConstants.Users.Trim('@')]);
                         userGroupConfigurationData.totalusers = Convert.ToString(row[UserGroupConfigurationConstants.Totalusers.Trim('@')]);
                         userGroupConfigurationData.createdBy = Convert.ToString(row[UserGroupConfigurationConstants.CreatedBy.Trim('@')]);
                         userGroupConfigurationData.createdDate = DatatypeConverter.SetDateTime(row[UserGroupConfigurationConstants.CreatedDate.Trim('@')]);
                         userGroupConfigurationData.modifiedBy = Convert.ToString(row[UserGroupConfigurationConstants.ModifiedBy.Trim('@')]);
                         //userGroupConfigurationData.Status = Convert.ToString(row[UserGroupConfigurationConstants.Status.Trim('@')]);
                         userGroupConfigurationData.modifiedDate = DatatypeConverter.SetDateTime(row[UserGroupConfigurationConstants.ModifiedDate.Trim('@')]);
+                        if (!islist || fromprep)
+                        {
+                            //string docvalue = Convert.ToString(row[UserGroupConfigurationConstants.document.Trim('@')]);
+                            //if (!string.IsNullOrEmpty(docvalue))
+                            //{
+                            //    // Create an XmlSerializer for the Person type
+                            //    var serializer1 = new XmlSerializer(typeof(UserGroupConfiguration));
+                            //    // Create a StringReader to read the XML data
+                            //    var reader = new StringReader(Convert.ToString(row[UserGroupConfigurationConstants.document.Trim('@')]));
+                            //    // Deserialize the XML data back to a Person object
+                            //    var person = (UserGroupConfiguration)serializer1.Deserialize(reader);
+                            //    userGroupConfigurationData.users = person.users;
+                            //    userGroupConfigurationData.userstring = string.Join(",", person.users.Select(o => o.UserID));
+                            //}
+                        }
                         result.Add(userGroupConfigurationData);
                     }
                 }

@@ -19,7 +19,7 @@
                 id="reqCode"
                 name="reqCode"
                 placeholder="System Generated"
-                [(ngModel)]="request.drid"
+                [(ngModel)]="request.drid"  [disabled]="viewMode"
                 readonly
               />
             </div>
@@ -35,7 +35,7 @@
                 [options]="typeSource"
                 [(ngModel)]="request.documenttype"
                 optionLabel="Documenttypename"
-                optionValue="Documenttypename"                
+                optionValue="Documenttypename" [disabled]="viewMode"                
               >
               </p-dropdown>
             </div>
@@ -51,7 +51,7 @@
                 [options]="departmentsSource"
                 [(ngModel)]="request.department"
                 optionLabel="DepartmentName"
-                optionValue="DepartmentName"
+                optionValue="DepartmentName"  [disabled]="viewMode"
               >
               </p-dropdown>
             </div>
@@ -67,7 +67,7 @@
                 [options]="workflowsSource"
                 [(ngModel)]="request.workflow"
                 optionLabel="workflowName"                
-                optionValue="workflowName"  
+                optionValue="workflowName"   [disabled]="viewMode"
               >
               </p-dropdown>
             </div>
@@ -84,7 +84,7 @@
                 name="purpose"
                 rows="3"
                 placeholder="Purpose"
-                [(ngModel)]="request.purpose"
+                [(ngModel)]="request.purpose"  [disabled]="viewMode"
               ></textarea>
             </div>
           </div>
@@ -100,7 +100,10 @@
             >
               Cancel
             </button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" *ngIf="!viewMode">Submit</button>
+            <button type="submit" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && request.status!='Approved'" (click)="approve()">Approve</button>
+            <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && request.status!='Approved'" (click)="reinitiative()">Re-Initiative</button>
+            <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && request.status!='Approved'" (click)="reject()">Reject</button>
           </div>
         </div>
       </form>

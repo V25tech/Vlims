@@ -27,7 +27,7 @@ namespace Vlims.DocumentManager.DataAccess
     // Comment
     public static class DocumentEffectiveConverter
     {
-        
+
         public static List<DocumentEffective> SetAllDocumentEffective(DataSet dataset)
         {
             try
@@ -48,8 +48,14 @@ namespace Vlims.DocumentManager.DataAccess
                         documentEffectiveData.document = Convert.ToString(row["document"]);
                         documentEffectiveData.Department = Convert.ToString(row[DocumentEffectiveConstants.department.Trim('@')]);
                         //documentEffectiveData.document = Convert.ToString(row[DocumentEffectiveConstants.document.Trim('@')]);
-                        documentEffectiveData.EffectiveDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.EffectiveDate.Trim('@')]);
-                        documentEffectiveData.ReviewDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.Reviewdate.Trim('@')]);
+                        //documentEffectiveData.EffectiveDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.EffectiveDate.Trim('@')]);
+                        //documentEffectiveData.ReviewDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.Reviewdate.Trim('@')]);
+
+                        DateTime? effective = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.EffectiveDate.Trim('@')]);
+                        DateTime? reviwed = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.Reviewdate.Trim('@')]);
+                        documentEffectiveData.EffectiveDate = GetUIDate(effective);
+                        documentEffectiveData.ReviewDate = GetUIDate(reviwed);
+
                         documentEffectiveData.CreatedBy = Convert.ToString(row[DocumentEffectiveConstants.CreatedBy.Trim('@')]);
                         documentEffectiveData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.CreatedDate.Trim('@')]);
                         documentEffectiveData.ModifiedBy = Convert.ToString(row[DocumentEffectiveConstants.ModifiedBy.Trim('@')]);
@@ -66,7 +72,20 @@ namespace Vlims.DocumentManager.DataAccess
                 throw;
             }
         }
-        
+
+        private static string GetUIDate(DateTime? documentEffectiveData)
+        {
+            string dateString = string.Empty; if (documentEffectiveData != null)
+            {
+                int year = (int)(documentEffectiveData?.Year);
+                int month = (int)(documentEffectiveData?.Month);
+                int day = (int)(documentEffectiveData?.Day);
+                DateTime date = new DateTime(year, month, day);
+                dateString = date.ToString("yyyy-MM-dd");
+            }
+            return dateString;
+        }
+
         public static DocumentEffective SetDocumentEffective(DataSet dataset)
         {
             var result = SetAllDocumentEffective(dataset);

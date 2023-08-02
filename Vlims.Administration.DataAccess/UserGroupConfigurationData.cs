@@ -17,6 +17,8 @@ namespace Vlims.Administration.DataAccess
     using Newtonsoft.Json;
     using Vlims.Common;
     using Vlims.Administration.Entities;
+    using System.Xml.Serialization;
+    using System.Data.SqlTypes;
 
 
 
@@ -58,14 +60,25 @@ namespace Vlims.Administration.DataAccess
         {
             try
             {
+                var serializer = new XmlSerializer(typeof(UserGroupConfiguration));
+                // Create a StringWriter to hold the XML data
+                var writer = new StringWriter();
+
+                // Serialize the Person object to XML and write it to the StringWriter
+                serializer.Serialize(writer, userGroupConfiguration);
+
+                // Get the XML string from the StringWriter
+                string xmlString = writer.ToString();
+                string userstring = string.Join(",", userGroupConfiguration.users.Select(o => o.UserID));
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usermanagementid, Value = "1" });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usergroupname, Value = userGroupConfiguration.usergroupname });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Code, Value = userGroupConfiguration.code });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Users, Value = userGroupConfiguration.users });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Users, Value = userstring });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = UserGroupConfigurationConstants.Totalusers, Value = userGroupConfiguration.totalusers });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.CreatedBy, Value = userGroupConfiguration.createdBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.ModifiedBy, Value = userGroupConfiguration.modifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = UserGroupConfigurationConstants.document, Value = xmlString });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(UserGroupConfigurationConstants.USP_UserGroupConfiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -79,14 +92,25 @@ namespace Vlims.Administration.DataAccess
         {
             try
             {
+                var serializer = new XmlSerializer(typeof(UserGroupConfiguration));
+                // Create a StringWriter to hold the XML data
+                var writer = new StringWriter();
+
+                // Serialize the Person object to XML and write it to the StringWriter
+                serializer.Serialize(writer, userGroupConfiguration);
+
+                // Get the XML string from the StringWriter
+                string xmlString = writer.ToString();
+                string userstring = string.Join(",", userGroupConfiguration.users.Select(o => o.UserID));
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Ugcid, Value = userGroupConfiguration.Ugcid });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usermanagementid, Value = userGroupConfiguration.Usermanagementid });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Usergroupname, Value = userGroupConfiguration.usergroupname });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Code, Value = userGroupConfiguration.code });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Users, Value = userGroupConfiguration.users });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.Users, Value = userstring });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = UserGroupConfigurationConstants.Totalusers, Value = userGroupConfiguration.totalusers });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserGroupConfigurationConstants.ModifiedBy, Value = userGroupConfiguration.modifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = UserGroupConfigurationConstants.document, Value = xmlString });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(UserGroupConfigurationConstants.USP_UserGroupConfiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

@@ -18,6 +18,10 @@ export class RolesconfigurationService {
     debugger
     return this.http.postJsonLogin(objrequest, "api/roleconfiguration/saveroleconfiguration", this.type);
   }
+  Updaterole(objrequest: RoleConfiguration) {
+    debugger
+    return this.http.postJsonLogin(objrequest, "api/roleconfiguration/updateroleconfiguration", this.type);
+  }
   getbyId(objname: number) {
     return this.http.getwithheader("api/roleconfiguration/getbyId" + "?roleId=" + objname, this.type);
   }

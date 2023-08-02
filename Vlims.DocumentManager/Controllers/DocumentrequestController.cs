@@ -74,8 +74,8 @@ namespace Vlims.DocumentManager
         /// This method is used to Get Documentrequest By Id dRID
         /// </summary>
         /// <param name="dRID"></param>
-        [HttpGet("{dRID}")]
-        public ActionResult<Documentrequest> GetDocumentrequestByDRID(string dRID)
+        [HttpGet("getbyId")]
+        public ActionResult<Documentrequest> GetDocumentrequestByDRID(int dRID)
         {
             var result = documentrequestService.GetDocumentrequestByDRID(dRID);
             return result;

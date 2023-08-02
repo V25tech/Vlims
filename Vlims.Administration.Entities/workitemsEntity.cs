@@ -170,5 +170,6 @@ namespace Vlims.DMS.Entities
                 this.modifieddateField = value;
             }
         }
+        public int? ReferenceId { get; set; }
     }
 }

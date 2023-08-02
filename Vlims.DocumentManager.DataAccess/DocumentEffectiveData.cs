@@ -14,7 +14,7 @@ namespace Vlims.DocumentManager.DataAccess
     using System.Linq;
     using System.Data.SqlClient;
     using System.Collections.Generic;
-    using Newtonsoft.Json; 
+    using Newtonsoft.Json;
     //using VAMLibrary.Core;
     //using VAMLibrary.Core.Common;
     using Vlims.Common;
@@ -22,11 +22,11 @@ namespace Vlims.DocumentManager.DataAccess
 
 
     // Comment
-    public static class DocumentEffectiveData 
+    public static class DocumentEffectiveData
     {
-        
-       
-        
+
+
+
         public static DataSet GetAllDocumentEffective(RequestContext requestContext)
         {
             try
@@ -42,7 +42,7 @@ namespace Vlims.DocumentManager.DataAccess
                 throw;
             }
         }
-        
+
         public static DataSet GetDocumentEffectiveByDEID(string dEID)
         {
             try
@@ -55,11 +55,16 @@ namespace Vlims.DocumentManager.DataAccess
                 throw;
             }
         }
-        
+
         public static bool SaveDocumentEffective(DocumentEffective documentEffective)
         {
             try
             {
+                string effective = documentEffective.EffectiveDate;
+                string reviwed = documentEffective.ReviewDate;
+                DateTime effectivedate = DateTime.ParseExact(effective, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime reviweddate = DateTime.ParseExact(reviwed, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.Documentmanagerid, Value = documentEffective.Documentmanagerid });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.documenttitle, Value = documentEffective.documenttitle });
@@ -67,8 +72,8 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.documenttype, Value = documentEffective.documenttype });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.department, Value = documentEffective.Department });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.document, Value = documentEffective.document });
-                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.EffectiveDate, Value = documentEffective.EffectiveDate });
-                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = documentEffective.ReviewDate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.EffectiveDate, Value = effectivedate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = reviweddate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.CreatedBy, Value = documentEffective.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.ModifiedBy, Value = documentEffective.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.Status, Value = documentEffective.Status });
@@ -80,11 +85,16 @@ namespace Vlims.DocumentManager.DataAccess
                 throw;
             }
         }
-        
+
         public static bool UpdateDocumentEffective(DocumentEffective documentEffective)
         {
             try
             {
+                string effective = documentEffective.EffectiveDate;
+                string reviwed = documentEffective.ReviewDate;
+                DateTime effectivedate = DateTime.ParseExact(effective, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime reviweddate = DateTime.ParseExact(reviwed, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.DEID, Value = documentEffective.DEID });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.Documentmanagerid, Value = documentEffective.Documentmanagerid });
@@ -93,8 +103,8 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.documenttype, Value = documentEffective.documenttype });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.department, Value = documentEffective.Department });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.document, Value = documentEffective.document });
-                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.EffectiveDate, Value = documentEffective.EffectiveDate });
-                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = documentEffective.ReviewDate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.EffectiveDate, Value = effectivedate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = reviweddate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.ModifiedBy, Value = documentEffective.ModifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentEffectiveConstants.USP_DocumentEffective_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
@@ -141,12 +151,12 @@ namespace Vlims.DocumentManager.DataAccess
                 throw;
             }
         }
-        
+
         public static bool DeleteAllDocumentEffective(List<int> dEIDs)
         {
             try
             {
-                var result = dataAccessHelper.ExecuteStoredProcedure(DocumentEffectiveConstants.USP_DocumentEffective_PSY_DELETE_ALL, DocumentEffectiveConstants.DEID, DbType.String, string.Join(',',  dEIDs), ExecutionType.NonQuery);
+                var result = dataAccessHelper.ExecuteStoredProcedure(DocumentEffectiveConstants.USP_DocumentEffective_PSY_DELETE_ALL, DocumentEffectiveConstants.DEID, DbType.String, string.Join(',', dEIDs), ExecutionType.NonQuery);
                 return (Convert.ToInt32(result) >= 0);
             }
             catch (System.Exception ex)

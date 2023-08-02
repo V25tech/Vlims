@@ -19,4 +19,12 @@ adduser(objrequest: UserConfiguration) {
   
   return this.http.postJsonLogin(objrequest, "api/userconfiguration/saveuserconfiguration",this.type);
 }
+update(objrequest: UserConfiguration) {
+  
+  return this.http.postJsonLogin(objrequest, "api/userconfiguration/updateuserconfiguration",this.type);
+}
+getbyId(objrequest: string) {
+  
+  return this.http.getwithheader("api/userconfiguration/getbyId" + "?uCFId=" + objrequest ,this.type);
+}
 }

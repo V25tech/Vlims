@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RequestContext, WorkItemsConfiguration } from 'src/app/models/model';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
-
+import { Table } from 'primeng/table';
+import { Paginator } from 'primeng/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assigned',
@@ -10,9 +12,15 @@ import { WorkitemsService } from 'src/app/modules/services/workitems.service';
   styleUrls: ['./assigned.component.scss'],
 })
 export class AssignedComponent implements OnInit {
+  @ViewChild('dt') dataTable!: Table;
+  @ViewChild('paginator') dataPaginator!: Paginator;
   types: Array<WorkItemsConfiguration> = [];
   assignedDatasource = [];
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   constructor(private workitemssvc:WorkitemsService,
+    private router:Router,
     private loader:NgxSpinnerService) {}
 
     ngOnInit() {
@@ -20,7 +28,7 @@ export class AssignedComponent implements OnInit {
     }
   getworkflowitems() {
     this.loader.show();
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 500, Id: 0 };
     return this.workitemssvc.getworkitems(objrequest).subscribe((data: any) => {
       this.types = data.Response;
       this.loader.hide();
@@ -30,6 +38,35 @@ export class AssignedComponent implements OnInit {
       this.loader.hide();
     });
 
+  }
+  viewtask(tasktype:string,referId:null)
+  {
+    debugger
+    switch (tasktype) {
+      case "Type":
+        this.router.navigate(['/requests/view',referId]);
+        break;
+      case "Template":
+        this.router.navigate(['/mainpage/documentmaster/viewdoctemplate']);
+        break;
+      case "Workflow":
+        this.router.navigate(['/mainpage/documentmaster/viewworkflow']);
+        break;
+      case "Request":
+        this.router.navigate(['/requests/view',referId]);
+        break;
+      case "Preperation":
+        this.router.navigate(['/mainpage/documentmanager/viewdocprep']);
+        break;
+      case "Effective":
+        this.router.navigate(['/mainpage/documentmanager/Viewdoceffect']);
+        break;
+      default:
+        this.router.navigate(['/mainpage/documentmaster/viewdoctype']);
+        break;
+    }
+    
+    console.log('view',referId);
   }
   getStatusClass(status: string): string {
     //const status_ = status.toLowerCase();

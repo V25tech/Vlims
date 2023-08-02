@@ -18,7 +18,7 @@ ModifiedBy_PSY,
 ModifiedDate_PSY,
 Status_PSY
  ,count(*) over() as TotalRows 
- FROM [dbo].[DocumentPreparation_PSY] WITH (NOLOCK) 
+ FROM [dbo].[DocumentPreparation_PSY] DE WITH (NOLOCK) 
  Order by [DPNID_PSY]  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 

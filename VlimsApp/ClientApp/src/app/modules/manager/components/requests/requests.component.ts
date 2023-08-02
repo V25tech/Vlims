@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentRequestService } from 'src/app/modules/services/document-request.service';
 import { DocumentRequestConfiguration, RequestContext } from 'src/app/models/model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/shared/common.service';
+import { Table } from 'primeng/table';
+import { Paginator } from 'primeng/paginator';
 
 @Component({
   selector: 'app-requests',
@@ -11,6 +13,12 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./requests.component.scss'],
 })
 export class RequestsComponent implements OnInit{
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   constructor(private router: Router,private spinner: NgxSpinnerService, private commonsvc: CommonService, private documentRequestService: DocumentRequestService) {}
 
   navigateToAddRequest(): void {
@@ -20,15 +28,19 @@ export class RequestsComponent implements OnInit{
   requestsDatasource = [];
 
   ngOnInit() {   
+    //this.dataPaginator.rows = 10;
     this.getdocumentrequest();
+
   }
 
   getStatusClass(status: string): string {
     if (status === 'In Progress') {
       return 'status-in-progress';
-    } else if (status === 'Completed') {
-      return 'status-completed';
-    } else if (status === 'Under Review') {
+    } else if (status === 'REJECTED') {
+      return 'status-reject';
+    }else if (status === 'In-Progress') {
+      return 'status-in-progress';
+    } else if (status === 'Re-Initiated') {
       return 'status-under-review';
     }else if (status === 'Approved') {
       return 'status-approved';

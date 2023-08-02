@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DocumentPreperationService } from 'src/app/modules/services/document-preperation.service';
+import { DocumentEffectiveService } from 'src/app/modules/services/document-effective.service';
 
 @Component({
   selector: 'app-review-effective',
@@ -38,19 +39,28 @@ export class ReviewEffectiveComponent {
     { label: 'Stage 2', value: 'option3' },
   ];
 
-  constructor(private location: Location, private router: Router, private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private docPreperationService: DocumentPreperationService,) { }
+  constructor(private location: Location, private router: Router, private modalService: BsModalService, private documentEffectiveService: DocumentEffectiveService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private docPreperationService: DocumentPreperationService,) { }
 
   ngOnInit() {
-    if (this.commonsvc.efffective)
+    if (this.commonsvc.efffective) {      
       this.effective = this.commonsvc.efffective;
+    }
     else this.location.back();
-
     console.log(this.effective);
-
   }
+
 
   saveEffective() {
     console.log(this.effective);
+    this.spinner.show();
+    this.documentEffectiveService.ManageDocumentEffective(this.effective).subscribe(res => {
+      console.log(res);
+      this.spinner.hide();
+      this.location.back();
+    }, er => {
+      console.log(er);
+      this.spinner.hide();
+    });
   }
 
   onCancel() {

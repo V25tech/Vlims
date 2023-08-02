@@ -49,7 +49,7 @@ export class NewPlantRegistrationComponent implements OnInit {
     this.router.navigate(['/admin/plant']);
   }
   onCancel() {
-
+    this.router.navigate(['/admin/plant']);
   }
   getbyId() {
     debugger

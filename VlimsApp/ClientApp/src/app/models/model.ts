@@ -42,49 +42,49 @@ export class DocumentRequestConfiguration {
   workflow: string = '';
   approvedby: string = '';
   approvedOn?: string;
-  UserGroup: string= '';
+  UserGroup: string = '';
 }
 
 export class DocumentPreperationConfiguration {
-  DTCId: string='';
-  Documentmanagerid: string='';
-  documenttype: string='';
-  AssignedtoGroup: string='';
-  Approvedby: string='';
+  DTCId: string = '';
+  Documentmanagerid: string = '';
+  documenttype: string = '';
+  AssignedtoGroup: string = '';
+  Approvedby: string = '';
   ApprovedOn: string | null = '';
-  CreatedBy: string='';
-  CreatedDate: string | null='';
-  ModifiedBy: string='';
-  ModifiedDate: string | null='';
-  Status: string='';
-  documenttitle: string='';
-  documentno: string='';
-  department: string='';
-  template: string='';
-  wokflow: string='';
-  details: string='';
-  document: string='';
-  path:string='';
-  dpnid: string='';
+  CreatedBy: string = '';
+  CreatedDate: string | null = '';
+  ModifiedBy: string = '';
+  ModifiedDate: string | null = '';
+  Status: string = '';
+  documenttitle: string = '';
+  documentno: string = '';
+  department: string = '';
+  template: string = '';
+  wokflow: string = '';
+  details: string = '';
+  document: string = '';
+  path: string = '';
+  dpnid: string = '';
 }
 
 export class DocumentEffectiveConfiguration {
-  DTCId: string='';
-  deid: string='';
-  documenttitle: string='';
-  documentno: string='';
-  documenttype: string='';
-  department: string='';
-  document: string='';
-  effectiveDate: string='';
-  reviewDate: Date=new Date();
-  CreatedBy: string='';
-  CreatedDate: string | null=null;
-  ModifiedBy: string='';
-  ModifiedDate: string | null='';
-  Status: string='';
-  workflow: string='';
-  template: string='';
+  DTCId: string = '';
+  deid: string = '';
+  documenttitle: string = '';
+  documentno: string = '';
+  documenttype: string = '';
+  department: string = '';
+  document: string = '';
+  effectiveDate: string = '';
+  reviewDate: string = '';
+  CreatedBy: string = '';
+  CreatedDate: string | null = null;
+  ModifiedBy: string = '';
+  ModifiedDate: string | null = '';
+  Status: string = '';
+  workflow: string = '';
+  template: string = '';
 }
 export class DocumentAdditionalTasks {
   DTCId: string = ''
@@ -110,27 +110,27 @@ export class noticationconfiguration {
   Status: string | null = '';
 }
 export class workflowconiguration {
-  WFCId: string | null=null;
-  DocumentMasterId: string | null='';
-  documentstage: string | null='';
-  workflowName:string | null='';
-  code:string | null='';
-  documenttype: string | null='';
-  department: DepartmentConfiguration[] | null=[]
- departments:string | null=null;
-  reviewsCount: number=0;
-  approvalsCount: number=0;
-  reviewsType:string | null='';
-  reviewersGroup:string | null=null
-  reviewers:UserConfiguration[] | null=[]
-  approvalsType:string=''
-  approvalsGroup:string | null=null
-  approvals:UserConfiguration[] | null=[]
-  CreatedBy: string='';
-  CreatedDate:string | null=null;
-  ModifiedBy: string='';
-  ModifiedDate: string | null=null;
-  Status: string | null='';
+  WFCId: string | null = null;
+  DocumentMasterId: string | null = '';
+  documentstage: string | null = '';
+  workflowName: string | null = '';
+  code: string | null = '';
+  documenttype: string | null = '';
+  department: DepartmentConfiguration[] | null = []
+  departments: string | null = null;
+  reviewsCount: number = 0;
+  approvalsCount: number = 0;
+  reviewsType: string | null = '';
+  reviewersGroup: string | null = null
+  reviewers: UserConfiguration[] | null = []
+  approvalsType: string = ''
+  approvalsGroup: string | null = null
+  approvals: UserConfiguration[] | null = []
+  CreatedBy: string = '';
+  CreatedDate: string | null = null;
+  ModifiedBy: string = '';
+  ModifiedDate: string | null = null;
+  Status: string | null = '';
 }
 export class DocumentTemplateConfiguration {
   DTID: string = ''
@@ -195,9 +195,9 @@ export class UserConfiguration {
   Activedirectory: string = ''
   Standarduser: string = ''
   CreatedBy: string = ''
-  CreatedDate: string | null = '';
+  CreatedDate:  Date | undefined;
   ModifiedBy: string = ''
-  ModifiedDate: string | null = '';
+  ModifiedDate: Date | undefined;
 }
 export class WorkItemsConfiguration {
   TaskType: string = ''
@@ -207,6 +207,7 @@ export class WorkItemsConfiguration {
   InitiatedOn: string = ''
   Status: string = ''
   DueDate: string = ''
+  ReferenceId:number=0
 }
 export class PlantConfiguration {
   DPCFId: string = ''
@@ -233,12 +234,12 @@ export class SecurityManagement {
 }
 
 export class Usergroupconfiguration {
-  public Ugcid: number = 0;
-  public SNo: number = 0;
+  public Ugcid: string | null = '';
+  //public SNo: number = 0;
   public usergroupname: string = ''
   public code: string = ''
-  public totalusers: number = 0;
-  public users: string = ''
+  public totalusers: string | null = '';
+  public users: UserConfiguration[] | null = []
   public Registeredby: string = ''
   public Registeredon: string = ''
   public Status: string = ''
@@ -290,4 +291,26 @@ export class HeaderTable {
 export class FooterTable {
   public selectedOption: number = 0;
   public inputValue: string = '';
+}
+export class DocumentPrintConfiguration {
+  public DRId: number = 0;
+  public DocumentMasterId: string = '';
+ // public documenttype: string = '';
+  public department: string = '';
+  public Description: string = '';
+  public Approvedby: string = '';
+  public ApprovedOn: string = '';
+  public CreatedBy: string = '';
+  public CreatedDate: Date | undefined;
+  public ModifiedBy: string = '';
+  public ModifiedDate: Date | undefined;
+  public Status: string = '';
+  public Purpose: string = '';
+  public ApprovalsCount: number = 0;
+  public workflow: string = '';
+  public reason: string = '';
+  public documenttitle: string = '';
+  public DocumentNumber: string = '';
+  public printtype: string = '';
+  public noofcopies: string = '';
 }

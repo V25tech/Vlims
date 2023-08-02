@@ -8,6 +8,8 @@ import { ReviewPrepationComponent } from './components/review-prepation/review-p
 import { EffectivesComponent } from './components/effectives/effectives.component';
 import { ReviewEffectiveComponent } from './components/review-effective/review-effective.component';
 import { DocumentManagerHomeComponent } from './components/document-manager-home/document-manager-home.component';
+import { DocumentPrintComponent } from './components/Print/document-print.component';
+import { NewPrintRequestComponent } from './components/Print/new-print-request.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
@@ -25,6 +27,11 @@ const routes: Routes = [
   },
   {
     path: 'requests/edit',
+    component: AddRequestComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'requests/view/:requestId',
     component: AddRequestComponent,
     canActivate: [AuthGuard],
   },
@@ -48,7 +55,21 @@ const routes: Routes = [
     component: ReviewEffectiveComponent,
     canActivate: [AuthGuard],
   },
-  
+  {
+    path: 'print',
+    component: DocumentPrintComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'print/add',
+    component: NewPrintRequestComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'print/edit',
+    component: NewPrintRequestComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

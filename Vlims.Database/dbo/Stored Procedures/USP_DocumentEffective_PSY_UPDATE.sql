@@ -7,8 +7,8 @@
 @document_PSY NVarChar(50),
 @EffectiveDate_PSY DateTime,
 @Reviewdate_PSY DateTime,
-@ModifiedBy_PSY NVarChar(100)
-
+@ModifiedBy_PSY NVarChar(100),
+@Status_PSY NVarChar(50)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -22,11 +22,24 @@ document_PSY=@document_PSY,
 EffectiveDate_PSY=@EffectiveDate_PSY,
 Reviewdate_PSY=@Reviewdate_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,
-Status_PSY='In Progress'
-WHERE  [DEID_PSY] = @DEID_PSY ;  select @DEID_PSY; 
-  
-  INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY)
- SELECT @documenttype_PSY,'Document Effective Request','Pending Approval','','admin',@EffectiveDate_PSY,'Pending Approval',@Reviewdate_PSY
+Status_PSY=@Status_PSY
+WHERE  [DEID_PSY] = @DEID_PSY ;  
+
+
+IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
+BEGIN
+DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentEffective_PSY where DEID_PSY=@DEID_PSY)
+INSERT INTO DocumentRevision_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,EffectiveDate_PSY,Reviewdate_PSY,
+CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY)
+VALUES('1',@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,@document_PSY,null,null,
+@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId)
+
+INSERT INTO workitems_PSY(Status_PSY,RefrenceId_PSY)
+VALUES('APPROVED',@referenceId)
+
+END
+
+select @DEID_PSY; 
 
   END TRY 
  BEGIN CATCH 

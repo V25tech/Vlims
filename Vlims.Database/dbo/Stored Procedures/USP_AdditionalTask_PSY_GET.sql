@@ -3,7 +3,7 @@
  BEGIN 
  BEGIN TRY 
   SELECT ATID_PSY,
-DocumentEffective_ID,
+DocumentEffective_Id,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,

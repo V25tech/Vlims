@@ -131,30 +131,32 @@ namespace Vlims.DMS.Entities
                 this.documentField = value;
             }
         }
-        
-        public DateTime? EffectiveDate
-        {
-            get
-            {
-                return this.effectivedateField;
-            }
-            set
-            {
-                this.effectivedateField = value;
-            }
-        }
-        
-        public DateTime? ReviewDate
-        {
-            get
-            {
-                return this.reviewdateField;
-            }
-            set
-            {
-                this.reviewdateField = value;
-            }
-        }
+
+        //public DateTime? EffectiveDate
+        //{
+        //    get
+        //    {
+        //        return this.effectivedateField;
+        //    }
+        //    set
+        //    {
+        //        this.effectivedateField = value;
+        //    }
+        //}
+        public string EffectiveDate { get; set; }
+        public string ReviewDate { get; set; }
+
+        //public DateTime? ReviewDate
+        //{
+        //    get
+        //    {
+        //        return this.reviewdateField;
+        //    }
+        //    set
+        //    {
+        //        this.reviewdateField = value;
+        //    }
+        //}
         
         public string CreatedBy
         {

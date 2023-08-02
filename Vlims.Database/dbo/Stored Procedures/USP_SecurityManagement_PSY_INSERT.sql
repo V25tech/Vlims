@@ -1,4 +1,8 @@
-﻿  CREATE PROCEDURE [dbo].[USP_SecurityManagement_PSY_INSERT] @AdminManagerId_PSY NVarChar(50),
+﻿
+
+
+
+  CREATE PROCEDURE [dbo].[USP_SecurityManagement_PSY_INSERT] @AdminManagerId_PSY NVarChar(50),
 @MinimumUserIdLength_PSY NVarChar(50),
 @MinimumPasswordLength_PSY NVarChar(50),
 @PasswordComplexity_PSY Int,
@@ -11,6 +15,25 @@
   BEGIN TRY 
   
  DECLARE @ID INT 
+  
+
+  IF EXISTS (SELECT * FROM [SecurityManagement_PSY] )
+BEGIN
+
+Select @ID=SMId_PSY from [SecurityManagement_PSY]
+
+UPDATE [SecurityManagement_PSY] SET MinimumUserIdLength_PSY=@MinimumUserIdLength_PSY,
+MinimumPasswordLength_PSY=@MinimumPasswordLength_PSY,PasswordComplexity_PSY=@MinimumPasswordLength_PSY,
+InvalidAttempts_PSY=@InvalidAttempts_PSY,SessionTimeOut_PSY=@SessionTimeOut_PSY
+WHERE SMId_PSY=@ID
+
+
+
+
+
+END
+ELSE
+BEGIN
  INSERT INTO [dbo].[SecurityManagement_PSY] 
  (AdminManagerId_PSY,
 MinimumUserIdLength_PSY,
@@ -32,7 +55,10 @@ ModifiedDate_PSY)
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate() );
+ GetDate() );END
+
+  
+
  SELECT @ID = @@IDENTITY; 
  select @ID 
   

@@ -3,12 +3,12 @@
  BEGIN 
  BEGIN TRY 
   SELECT ATID_PSY,
-DocumentEffective_ID,
+DocumentEffective_Id,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY 
-  FROM [dbo].[AdditionalTask_PSY] WITH (NOLOCK) where DocumentEffective_ID = @Documentmanagerid   
+  FROM [dbo].[AdditionalTask_PSY] WITH (NOLOCK) where DocumentEffective_Id = @Documentmanagerid   
  END TRY 
  BEGIN CATCH 
   SELECT ERROR_MESSAGE(); 
