@@ -18,7 +18,9 @@
             <div class="p-4 bg-white shadow-dark rounded-2">
             <p-table #templatesTable [value]="types"
             [globalFilterFields]="['templateName', 'uniqueCode', 'description','registeredBy', 'status']"
-             tableStyleClass="table table-striped">
+             tableStyleClass="table table-striped" [rows]="itemsPerPage"
+            [paginator]="true" [totalRecords]="types.length"
+            [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
              
                 <ng-template pTemplate="header">
                     <tr>

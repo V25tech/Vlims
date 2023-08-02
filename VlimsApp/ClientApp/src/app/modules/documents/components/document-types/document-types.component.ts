@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -9,6 +9,8 @@ import { DocumentTypeConfiguration } from '../../models/DocumentTypeConfiguratio
 import { RequestContext } from 'src/app/models/model';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Table } from 'primeng/table';
+import { Paginator } from 'primeng/paginator';
 
 @Component({
   selector: 'app-document-types',
@@ -16,6 +18,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./document-types.component.scss'],
 })
 export class DocumentTypesComponent {
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   docTypesDatasource = [];
   //docs:DocumentTypeConfiguration[]=[];
   types:DocumentTypeConfiguration[]=[];

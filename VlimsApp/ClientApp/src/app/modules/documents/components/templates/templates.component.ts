@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TemplateForm} from '../../models/templates';
@@ -7,6 +7,8 @@ import { RequestContext } from 'src/app/models/model';
 import { CommonService } from 'src/app/shared/common.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
+import { Table } from 'primeng/table';
+import { Paginator } from 'primeng/paginator';
 
 @Component({
   selector: 'app-templates',
@@ -14,6 +16,14 @@ import { DocumentTemplateServiceService } from 'src/app/modules/services/documen
   styleUrls: ['./templates.component.scss']
 })
 export class TemplatesComponent {
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
+  docTypesDatasource = [];
+
   templatesDatasource: TemplateForm[] = [];
   types:DocumentTemplateConfiguration[]=[];
   constructor(private router:Router,private templatesvc: DocumentTemplateServiceService,

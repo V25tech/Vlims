@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { Paginator } from 'primeng/paginator';
+import { Table } from 'primeng/table';
 import { RequestContext, workflowconiguration } from 'src/app/models/model';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { CommonService } from 'src/app/shared/common.service';
@@ -12,6 +14,13 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./workflows.component.scss'],
 })
 export class WorkflowsComponent {
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
+  docTypesDatasource = [];
   workflowsDatasource = [];
   types:workflowconiguration[]=[];
   constructor(
