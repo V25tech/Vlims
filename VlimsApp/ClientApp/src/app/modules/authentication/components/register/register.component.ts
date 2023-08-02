@@ -68,6 +68,8 @@ export class RegisterComponent implements OnInit {
     adduser.Standarduser = this.isstandarduser ? "true" : "false";
     adduser.CreatedBy = "admin";
     adduser.ModifiedBy = "admin";
+    adduser.CreatedDate=new Date();
+    adduser.ModifiedDate=new Date();
     //this.router.navigate(['/products']);
     this.userservice.adduser(adduser).subscribe((res: any) => {
       this.location.back();
