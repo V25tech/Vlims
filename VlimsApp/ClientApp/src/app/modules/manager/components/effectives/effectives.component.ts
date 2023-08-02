@@ -29,6 +29,10 @@ export class EffectivesComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.documentEffectiveService.getdocumenteffective(objrequest).subscribe((data: any) => {
       this.effectivesDatasource = data.response;
+      if(this.effectivesDatasource.length<10)
+      {
+      this.currentPage=10;
+      }
       console.log('eff',data);
       this.spinner.hide();
     }, er =>{

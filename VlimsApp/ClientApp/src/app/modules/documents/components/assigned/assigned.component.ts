@@ -31,6 +31,8 @@ export class AssignedComponent implements OnInit {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 500, Id: 0 };
     return this.workitemssvc.getworkitems(objrequest).subscribe((data: any) => {
       this.types = data.Response;
+        if(this.types.length<10)
+        this.currentPage=10;
       this.loader.hide();
       console.log('workitems',this.types);
     }, er => {
@@ -59,7 +61,7 @@ export class AssignedComponent implements OnInit {
         this.router.navigate(['/preparation/view',referId]);
         break;
       case "Effective":
-        this.router.navigate(['/mainpage/documentmanager/Viewdoceffect']);
+        this.router.navigate(['/effectives/view',referId]);
         break;
       default:
         this.router.navigate(['/mainpage/documentmaster/viewdoctype']);
@@ -79,6 +81,12 @@ export class AssignedComponent implements OnInit {
     }
     else if (status === 'pending') {
       return 'status-pending';
+    }
+    else if (status === 'APPROVED') {
+      return 'status-approved';
+    }
+    else if (status === 'Approved') {
+      return 'status-approved';
     }
      else {
       return '';

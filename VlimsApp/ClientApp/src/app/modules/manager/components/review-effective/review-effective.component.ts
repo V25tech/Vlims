@@ -32,7 +32,8 @@ export class ReviewEffectiveComponent {
   safePdfDataUrl: SafeResourceUrl | undefined;
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
-
+  editMode: boolean = false;
+  viewMode: boolean = false;
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -42,13 +43,40 @@ export class ReviewEffectiveComponent {
   constructor(private location: Location, private router: Router, private modalService: BsModalService, private documentEffectiveService: DocumentEffectiveService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private docPreperationService: DocumentPreperationService,) { }
 
   ngOnInit() {
-    if (this.commonsvc.efffective) {      
+    debugger
+    const urlPath = this.router.url;
+    const segments = urlPath.split('/');
+    if(segments[segments.length-2].toString()=='view')
+    {
+      this.viewMode=true;
+      this.getbyId(parseInt(segments[segments.length-1],10))
+    }
+    else if (this.commonsvc.efffective) {      
       this.effective = this.commonsvc.efffective;
     }
     else this.location.back();
     console.log(this.effective);
   }
-
+  getbyId(arg0: number) {
+    this.spinner.show();
+    return this.documentEffectiveService.getbyId(arg0).subscribe((data:any)=>{
+      this.effective=data;
+      this.spinner.hide();
+      console.log('request',data);
+    });
+  }
+  approve(){
+    this.effective.Status='Approved'
+    this.saveEffective();
+  }
+  reinitiative(){
+    this.effective.Status='Re-Initiated'
+    this.saveEffective();
+  }
+  reject(){
+    this.effective.Status='Rejected'
+    this.saveEffective();
+  }
 
   saveEffective() {
     console.log(this.effective);

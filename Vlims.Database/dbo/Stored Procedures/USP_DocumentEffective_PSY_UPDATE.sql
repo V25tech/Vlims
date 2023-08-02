@@ -29,16 +29,15 @@ DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentE
 if((SELECT COUNT(*) FROM workitems_PSY WHERE RefrenceId_PSY=@DEID_PSY)=0)
 begin
 INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
-SELECT @documenttitle_PSY,'Preparation','In Progress', null ,@ModifiedBy_PSY, GetDate(),'In Progress',GetDate(),@DEID_PSY
+SELECT @documenttitle_PSY,'Effective','In Progress', null ,@ModifiedBy_PSY, GetDate(),'In Progress',GetDate(),@DEID_PSY
 end
 
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
 
-INSERT INTO DocumentRevision_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,EffectiveDate_PSY,Reviewdate_PSY,
-CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY)
-VALUES('1',@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,@document_PSY,null,null,
-@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId)
+INSERT INTO AdditionalTask_PSY(DocumentEffective_ID,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Version,Refrence_PSY)
+VALUES('1',
+@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS','0',@referenceId)
 
 UPDATE workitems_PSY SET Status_PSY='APPROVED' WHERE RefrenceId_PSY=@DEID_PSY
 

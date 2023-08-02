@@ -43,7 +43,7 @@ namespace Vlims.DocumentManager.DataAccess
             }
         }
 
-        public static DataSet GetDocumentEffectiveByDEID(string dEID)
+        public static DataSet GetDocumentEffectiveByDEID(int dEID)
         {
             try
             {
@@ -106,6 +106,7 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.EffectiveDate, Value = effectivedate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = reviweddate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.ModifiedBy, Value = documentEffective.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.Status, Value = documentEffective.Status });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentEffectiveConstants.USP_DocumentEffective_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -130,6 +131,7 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = DocumentEffectiveConstants.Reviewdate, Value = documentEffective.ReviewDate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.ModifiedBy, Value = documentEffective.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int16, ParameterName = DocumentEffectiveConstants.workId, Value = documentEffective.workId });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.Status, Value = documentEffective.Status });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentEffectiveConstants.USP_DocumentEffective_PSY_APPROVE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
