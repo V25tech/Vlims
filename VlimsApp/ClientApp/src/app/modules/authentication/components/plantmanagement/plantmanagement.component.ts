@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 
 import { Router } from '@angular/router';
+import { Paginator } from 'primeng/paginator';
+import { Table } from 'primeng/table';
 import { DocumentTypeConfiguration, PlantConfiguration, RequestContext } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { PlantmanagementService } from '../../../services/plantmanagement.service';
@@ -13,7 +15,12 @@ import { PlantmanagementService } from '../../../services/plantmanagement.servic
 export class PlantComponent implements OnInit {
   types: PlantConfiguration[] = [];
   constructor(private commonsvc: CommonService, private doctypeservice: PlantmanagementService,  private router: Router) { }
-
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   ngOnInit() {
     this.getplantconfiguration();
   }

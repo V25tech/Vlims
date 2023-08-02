@@ -1,16 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { NgxSpinnerService, Spinner } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { DepartmentconfigurationService } from '../../../services/departmentconfiguration.service';
 import { DepartmentConfiguration, RequestContext } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
+import { Table } from 'primeng/table';
+import { Paginator } from 'primeng/paginator';
 
 @Component({
   selector: 'app-department',
   templateUrl: './department.component.html'
 })
 export class DepartmentComponent implements OnInit {
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   types: DepartmentConfiguration[] = [];
   viewMode:boolean=false;
   constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService, private spinner: NgxSpinnerService, private router: Router) { }
