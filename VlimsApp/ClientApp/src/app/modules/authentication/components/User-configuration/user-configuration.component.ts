@@ -30,7 +30,7 @@ export class UserConfigurationComponent implements OnInit {
     this.getusers();
   }
   getusers() {
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+   let objrequest: RequestContext={PageNumber:1,PageSize:10,Id:0};
       return this.doctypeservice.getusers(objrequest).subscribe((data: any) => {
         debugger
         this.types = data.Response;
