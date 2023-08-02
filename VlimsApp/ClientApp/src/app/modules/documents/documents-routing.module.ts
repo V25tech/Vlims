@@ -151,6 +151,14 @@ const routes: Routes = [
     component: PlantComponent,
   },
   {
+    path: 'admin/plant/edit/:plantId',
+    component: PlantComponent,
+  },
+  {
+    path: 'admin/addplant',
+    component: NewPlantRegistrationComponent,
+  },
+  {
     path: 'admin/approval',
     component: ApprovalConfigurationsComponent,
   },
