@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentEffectiveService } from 'src/app/modules/services/document-effective.service';
 import { DocumentEffectiveConfiguration, RequestContext } from 'src/app/models/model';
 import { CommonService } from 'src/app/shared/common.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Table } from 'primeng/table';
+import { Paginator } from 'primeng/paginator';
 
 @Component({
   selector: 'app-effectives',
@@ -11,6 +13,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./effectives.component.scss'],
 })
 export class EffectivesComponent {
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   effectivesDatasource: DocumentEffectiveConfiguration[]  = [];
 
   constructor(private router: Router, private documentEffectiveService: DocumentEffectiveService,private spinner: NgxSpinnerService, private commonsvc: CommonService) {}
