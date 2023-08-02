@@ -67,9 +67,14 @@ export class AddRoleComponent implements OnInit {
     adaddrole.CreatedDate = new Date();
     adaddrole.ModifiedDate = new Date();
     //this.router.navigate(['/products']);
-    this.rolesservice.addrole(adaddrole).subscribe((res: any) => {
+    if (this.editMode) 
+{
+    this.rolesservice.Updaterole(adaddrole).subscribe((res: any) => {
       this.location.back();
+    
     });
+  }
+  
   }
   closepopup() {
     this.router.navigate(['/mainpage/roles']);

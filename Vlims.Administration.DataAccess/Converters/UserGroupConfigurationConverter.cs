@@ -53,18 +53,18 @@ namespace Vlims.Administration.DataAccess
                         userGroupConfigurationData.modifiedDate = DatatypeConverter.SetDateTime(row[UserGroupConfigurationConstants.ModifiedDate.Trim('@')]);
                         if (!islist || fromprep)
                         {
-                            string docvalue = Convert.ToString(row[UserGroupConfigurationConstants.document.Trim('@')]);
-                            if (!string.IsNullOrEmpty(docvalue))
-                            {
-                                // Create an XmlSerializer for the Person type
-                                var serializer1 = new XmlSerializer(typeof(UserGroupConfiguration));
-                                // Create a StringReader to read the XML data
-                                var reader = new StringReader(Convert.ToString(row[UserGroupConfigurationConstants.document.Trim('@')]));
-                                // Deserialize the XML data back to a Person object
-                                var person = (UserGroupConfiguration)serializer1.Deserialize(reader);
-                                userGroupConfigurationData.users = person.users;
-                                userGroupConfigurationData.userstring = string.Join(",", person.users.Select(o => o.UserID));
-                            }
+                            //string docvalue = Convert.ToString(row[UserGroupConfigurationConstants.document.Trim('@')]);
+                            //if (!string.IsNullOrEmpty(docvalue))
+                            //{
+                            //    // Create an XmlSerializer for the Person type
+                            //    var serializer1 = new XmlSerializer(typeof(UserGroupConfiguration));
+                            //    // Create a StringReader to read the XML data
+                            //    var reader = new StringReader(Convert.ToString(row[UserGroupConfigurationConstants.document.Trim('@')]));
+                            //    // Deserialize the XML data back to a Person object
+                            //    var person = (UserGroupConfiguration)serializer1.Deserialize(reader);
+                            //    userGroupConfigurationData.users = person.users;
+                            //    userGroupConfigurationData.userstring = string.Join(",", person.users.Select(o => o.UserID));
+                            //}
                         }
                         result.Add(userGroupConfigurationData);
                     }
