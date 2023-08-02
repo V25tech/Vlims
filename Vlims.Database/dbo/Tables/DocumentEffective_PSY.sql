@@ -5,7 +5,7 @@
     [documentno_PSY]        NVARCHAR (50)  NULL,
     [documenttype_PSY]      NVARCHAR (50)  NULL,
     [department_PSY]        NVARCHAR (50)  NULL,
-    [document_PSY]          NVARCHAR (50)  NULL,
+    [document_PSY]          NVARCHAR (500)  NULL,
     [EffectiveDate_PSY]     DATETIME       NULL,
     [Reviewdate_PSY]        DATETIME       NULL,
     [CreatedBy_PSY]         NVARCHAR (100) NULL,

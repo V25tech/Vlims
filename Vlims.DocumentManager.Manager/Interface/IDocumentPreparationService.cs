@@ -25,7 +25,7 @@ namespace Vlims.DocumentManager.Manager
         
         ResponseContext<DocumentPreparation> GetAllDocumentPreparation(RequestContext requestContext);
         
-        DocumentPreparation GetDocumentPreparationByDPNID(string dPNID);
+        DocumentPreparation GetDocumentPreparationByDPNID(int dPNID);
         
         bool SaveDocumentPreparation(DocumentPreparation documentPreparation);
         

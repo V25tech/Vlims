@@ -58,7 +58,7 @@
                   >{{ docPreperation.status }}
                 </span>
               </td>
-              <td class="text-center"><a (click)="navigateToAddPreparation(docPreperation)"><i class="bi bi-arrow-right"></i></a></td>
+              <td class="text-center"><a (click)="navigateToAddPreparation(docPreperation)"><i *ngIf="docPreperation?.status=='In Progress' || docPreperation?.status=='IN-PROGRESS'" class="bi bi-arrow-right"></i></a></td>
             </tr>
           </ng-template>
         </p-table>

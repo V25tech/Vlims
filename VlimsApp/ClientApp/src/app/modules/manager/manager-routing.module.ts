@@ -44,6 +44,11 @@ const routes: Routes = [
     path: 'preparation/review',
     component: ReviewPrepationComponent,
     canActivate: [AuthGuard],
+  }, 
+  {
+    path: 'preparation/view/:id',
+    component: ReviewPrepationComponent,
+    canActivate: [AuthGuard],
   },  
   {
     path: 'effectives',

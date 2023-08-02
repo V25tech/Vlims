@@ -29,7 +29,7 @@
             <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentTitle" name="documentTitle"
-                placeholder="Document Title" [(ngModel)]="preparation.documenttitle" />
+                placeholder="Document Title" [(ngModel)]="preparation.documenttitle" [disabled]="viewMode" />
             </div>
           </div>
 
@@ -39,12 +39,12 @@
             <div class="col-sm-10">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" name="docNoType" type="radio" id="docNoType2" [(ngModel)]="docNoType"
-                  value="System Generated" />
+                  value="System Generated" [disabled]="viewMode" />
                 <label class="form-check-label" for="docNoType2">System Generated</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" name="docNoType" type="radio" id="docNoType1" [(ngModel)]="docNoType"
-                  value="User Defined" />
+                  value="User Defined" [disabled]="viewMode"/>
                 <label class="form-check-label" for="docNoType1">User Defined</label>
               </div>
             </div>
@@ -54,7 +54,7 @@
             <label for="documentNumber" class="col-sm-2 col-form-label">Document Number</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentNumber" name="documentNumber"
-                placeholder="Document Number" [(ngModel)]="preparation.documentno" />
+                placeholder="Document Number" [(ngModel)]="preparation.documentno" [disabled]="viewMode"/>
             </div>
           </div>
 
@@ -62,7 +62,7 @@
             <label for="documentNumber" class="col-sm-2 col-form-label">Document Number</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentNumber" name="documentNumber"
-                placeholder="System Generated" [(ngModel)]="preparation.documentno" readonly />
+                placeholder="System Generated" [(ngModel)]="preparation.documentno" readonly [disabled]="viewMode" />
             </div>
           </div>
 
@@ -70,7 +70,7 @@
             <label for="docType" class="col-sm-2 col-form-label">Document Type</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documenttype" name="documenttype"
-                [(ngModel)]="preparation.documenttype" readonly />
+                [(ngModel)]="preparation.documenttype" readonly [disabled]="viewMode" />
             </div>
           </div>
 
@@ -78,7 +78,7 @@
             <label for="department" class="col-sm-2 col-form-label">Department</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="Department" name="Department"
-                [(ngModel)]="preparation.department" readonly />
+                [(ngModel)]="preparation.department" readonly [disabled]="viewMode"/>
             </div>
           </div>
 
@@ -86,7 +86,7 @@
             <label for="workflow" class="col-sm-2 col-form-label">Workflow</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="Workflow" name="Workflow" [(ngModel)]="preparation.wokflow"
-                readonly />
+                readonly [disabled]="viewMode"/>
             </div>
           </div>
 
@@ -94,7 +94,7 @@
             <label for="template" class="col-sm-2 col-form-label">Template</label>
             <div class="col-sm-10">
               <p-dropdown name="template" [options]="templatesSource" [(ngModel)]="preparation.template"
-                optionLabel="Templatename" optionValue="Templatename">
+                optionLabel="Templatename" optionValue="Templatename" [disabled]="viewMode">
               </p-dropdown>
             </div>
           </div>
@@ -103,13 +103,13 @@
             <label for="document" class="col-sm-2 col-form-label">Document</label>
             <div *ngIf="!preparation.document" class="col-sm-10">
               <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput [disabled]="isUploaded"
-                (change)="onFileSelected($event)">
+                (change)="onFileSelected($event)" [disabled]="viewMode">
             </div>
             <div *ngIf="preparation.document" class="col-sm-2">
               <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
             </div>
             <div *ngIf="preparation.document" class="col-sm-8">
-              <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()">Delete</button>
+              <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>
             </div>
           </div>
           <div *ngIf="selectedFile && !isUploaded" class="form-group row">
@@ -123,7 +123,7 @@
             <label for="Details" class="col-sm-2 col-form-label">Details</label>
             <div class="col-sm-10">
               <textarea class="form-control mw-350" id="Details" name="Details" rows="3" placeholder="Details"
-                [(ngModel)]="preparation.details"></textarea>
+                [(ngModel)]="preparation.details" [disabled]="viewMode"></textarea>
             </div>
           </div>
         </div>
@@ -133,7 +133,10 @@
             <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">
               Cancel
             </button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" *ngIf="!viewMode">Submit</button>
+            <button type="submit" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && preparation.status!='Approved'" (click)="approve()">Approve</button>
+            <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && preparation.status!='Approved'" (click)="reinitiative()">Re-Initiative</button>
+            <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && preparation.status!='Approved'" (click)="reject()">Reject</button>
           </div>
         </div>
       </form>

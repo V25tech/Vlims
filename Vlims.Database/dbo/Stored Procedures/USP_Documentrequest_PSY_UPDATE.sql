@@ -30,8 +30,7 @@ department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,C
 VALUES('1',NULL,NULL,@documenttype_PSY,@department_PSY,null,null,@WORKFLOW,NULL,
 @ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',NULL,@DRID_PSY)
 
-INSERT INTO workitems_PSY(Status_PSY,RefrenceId_PSY)
-VALUES('APPROVED',@DRID_PSY)
+UPDATE workitems_PSY SET Status_PSY='APPROVED' WHERE RefrenceId_PSY=@DRID_PSY
 
 END
 

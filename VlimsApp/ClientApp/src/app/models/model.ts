@@ -56,7 +56,7 @@ export class DocumentPreperationConfiguration {
   CreatedDate: string | null = '';
   ModifiedBy: string = '';
   ModifiedDate: string | null = '';
-  Status: string = '';
+  status: string = '';
   documenttitle: string = '';
   documentno: string = '';
   department: string = '';

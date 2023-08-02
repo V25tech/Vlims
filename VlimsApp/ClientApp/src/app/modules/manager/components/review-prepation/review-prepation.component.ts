@@ -34,7 +34,8 @@ export class ReviewPrepationComponent {
   safePdfDataUrl: SafeResourceUrl | undefined;
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
-
+  viewMode:boolean=false;
+  editMode:boolean=false;
 
   stageSource = [
     { label: 'Select Stage', value: '' },
@@ -47,7 +48,15 @@ export class ReviewPrepationComponent {
   constructor(private location: Location, private router: Router, private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
   ngOnInit() {
-    if (this.commonsvc.preperation.dpnid) {
+    debugger
+    const urlPath = this.router.url;
+    const segments = urlPath.split('/');
+    if(segments[segments.length-2].toString()=='view')
+    {
+      this.viewMode=true;
+      this.getbyId(parseInt(segments[segments.length-1],10))
+    }
+    else if (this.commonsvc.preperation.dpnid) {
       this.preparation = this.commonsvc.preperation;
       debugger;
       console.log('rr',this.preparation);
@@ -60,7 +69,26 @@ export class ReviewPrepationComponent {
     }
     this.getdocttemplate();
   }
-
+  getbyId(arg0: number) {
+    this.spinner.show();
+    return this.docPreperationService.getbyId(arg0).subscribe((data:any)=>{
+      this.preparation=data;
+      this.spinner.hide();
+      console.log('request',this.preparation);
+    });
+  }
+  approve(){
+    this.preparation.status='Approved'
+    this.savePreparation();
+  }
+  reinitiative(){
+    this.preparation.status='Re-Initiated'
+    this.savePreparation();
+  }
+  reject(){
+    this.preparation.status='Rejected'
+    this.savePreparation();
+  }
   savePreparation() {
     this.spinner.show();
     this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {

@@ -55,8 +55,8 @@ export class AssignedComponent implements OnInit {
       case "Request":
         this.router.navigate(['/requests/view',referId]);
         break;
-      case "Preperation":
-        this.router.navigate(['/mainpage/documentmanager/viewdocprep']);
+      case "Preparation":
+        this.router.navigate(['/preparation/view',referId]);
         break;
       case "Effective":
         this.router.navigate(['/mainpage/documentmanager/Viewdoceffect']);
