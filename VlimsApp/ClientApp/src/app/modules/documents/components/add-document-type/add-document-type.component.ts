@@ -111,10 +111,18 @@ export class AddDocumentTypeComponent {
     //documentType.SelectedDepartments=this.selectedDepartments;
     if(this.selectedDepartments!=null && this.selectedDepartments.length>0)
     {
-    this.doctypeservice.adddoctypeconfig(documentType).subscribe((res:any)=>{
-     
+      if(this.editMode)
+    {
+      this.doctypeservice.updatedoctypeconfig(documentType).subscribe((res:any)=>{     
+        this.location.back();
+      });
+    }
+    else
+    {
+    this.doctypeservice.adddoctypeconfig(documentType).subscribe((res:any)=>{     
       this.location.back();
     });
+  }
   }
   }
   inserttype(documentType: DocumentTypeConfiguration){

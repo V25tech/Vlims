@@ -24,6 +24,11 @@ adddoctemplate(objrequest: DocumentTemplateConfiguration) {
   
   return this.http.postJsonLogin(objrequest, "api/documenttemplateconfiguration/savedocumenttemplateconfiguration",this.type);
 }
+updatedoctemplate(objrequest: DocumentTemplateConfiguration) {
+  
+  return this.http.postJsonLogin(objrequest, "api/documenttemplateconfiguration/updatedocumenttemplateconfiguration",this.type);
+}
+
 getbyId(id: number) {
   
   return this.http.getwithheader("api/documenttemplateconfiguration/getbyId"+"?dTID="+id,this.type);

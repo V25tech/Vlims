@@ -97,7 +97,7 @@ this.getusers();
 }
 else if(lastSegment=="edit")
 {
-  this.title='Edit Document Template';
+  this.title='Edit Workflow Configuration';
     this.id=parseInt(segments[segments.length-1],10);
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.usergroupsvc.getusergroupconfiguration(objrequest).subscribe((data:any) => {
