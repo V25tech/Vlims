@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Paginator } from 'primeng/paginator';
+import { Table } from 'primeng/table';
 import { DocumentPreperationConfiguration, RequestContext } from 'src/app/models/model';
 import { DocumentPreperationService } from 'src/app/modules/services/document-preperation.service';
 import { CommonService } from 'src/app/shared/common.service';
@@ -11,7 +13,12 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./preparation.component.scss'],
 })
 export class PreparationComponent {
-
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   preparationsDatasource: DocumentPreperationConfiguration[] = [];
   totalCount = 0;
 
