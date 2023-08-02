@@ -22,6 +22,9 @@ export class DocumentRequestService {
   getdocrequestbyname(docreq: string) {        
     return this.http.getwithheader("api/documentrequest/GetDocumentRequestbyName" + "?name=" + docreq, this.type);
   }
+  getbyId(docreq: number) {        
+    return this.http.getwithheader("api/documentrequest/getbyId" + "?dRID=" + docreq, this.type);
+  }
 
   ManageApprovalFlow(objrequest: DocumentRequestConfiguration) {   
     var docPrep = new DocumentPreperationConfiguration();

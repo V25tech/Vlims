@@ -39,7 +39,9 @@ namespace PolicySummary.DMS.Entities
         public const string ModifiedBy = "@ModifiedBy_PSY";
         
         public const string ModifiedDate = "@ModifiedDate_PSY";
-        
+        public const string ReferenceId = "@RefrenceId_PSY";
+
+
         public const string USP_workitems_PSY_GET_ALL = "dbo.USP_workitems_PSY_GET_ALL";
         
         public const string USP_workitems_PSY_GET = "dbo.USP_workitems_PSY_GET";

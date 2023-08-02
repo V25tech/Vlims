@@ -36,9 +36,11 @@ export class RequestsComponent implements OnInit{
   getStatusClass(status: string): string {
     if (status === 'In Progress') {
       return 'status-in-progress';
-    } else if (status === 'Completed') {
-      return 'status-completed';
-    } else if (status === 'Under Review') {
+    } else if (status === 'REJECTED') {
+      return 'status-reject';
+    }else if (status === 'In-Progress') {
+      return 'status-in-progress';
+    } else if (status === 'Re-Initiated') {
       return 'status-under-review';
     }else if (status === 'Approved') {
       return 'status-approved';

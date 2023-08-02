@@ -19,7 +19,7 @@ export class AddRequestComponent {
   workflowsSource = [];
   request = new DocumentRequestConfiguration();
   editMode: boolean = false;
-
+  viewMode: boolean = false;
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -30,9 +30,15 @@ export class AddRequestComponent {
   constructor(private router: Router, private location: Location, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private documentRequestService: DocumentRequestService) { }
 
   ngOnInit() {
+    debugger
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    if (segments.slice(-1).toString() == 'edit' && this.commonsvc.request) {
+    if(segments[segments.length-2].toString()=='view')
+    {
+      this.viewMode=true;
+      this.getbyId(parseInt(segments[segments.length-1],10))
+    }
+    else if (segments.slice(-1).toString() == 'edit' && this.commonsvc.request) {
       this.editMode = true;
       this.request = this.commonsvc.request;
     }
@@ -40,7 +46,26 @@ export class AddRequestComponent {
     this.getdocumenttypeconfig();
     this.getworkflowinfo();
   }
-
+  getbyId(arg0: number) {
+    this.spinner.show();
+    return this.documentRequestService.getbyId(arg0).subscribe((data:any)=>{
+      this.request=data;
+      this.spinner.hide();
+      console.log('request',data);
+    });
+  }
+  approve(){
+    this.request.status='Approved'
+    this.updateRequest();
+  }
+  reinitiative(){
+    this.request.status='Re-Initiated'
+    this.updateRequest();
+  }
+  reject(){
+    this.request.status='Rejected'
+    this.updateRequest();
+  }
 
   saveRequest() {
     if (this.editMode) {
@@ -52,6 +77,8 @@ export class AddRequestComponent {
   }
 
   addRequest() {
+    if(!this.viewMode)
+    {
     this.request.createdBy = 'admin';
     this.request.modifiedBy = 'admin';
     this.request.status = 'In-Progress';
@@ -67,6 +94,7 @@ export class AddRequestComponent {
       console.log(er);
       this.spinner.hide();
     });
+  }
   }
 
   updateRequest() {

@@ -50,6 +50,7 @@ namespace PolicySummary.DMS.Services
                         workitemsData.CreatedDate = DatatypeConverter.SetDateTime(row[workitemsConstants.CreatedDate.Trim('@')]);
                         workitemsData.ModifiedBy = Convert.ToString(row[workitemsConstants.ModifiedBy.Trim('@')]);
                         workitemsData.ModifiedDate = DatatypeConverter.SetDateTime(row[workitemsConstants.ModifiedDate.Trim('@')]);
+                        workitemsData.ReferenceId = DatatypeConverter.SetIntValue(row[workitemsConstants.ReferenceId.Trim('@')]);
                         result.Add(workitemsData);
                     }
                 }
