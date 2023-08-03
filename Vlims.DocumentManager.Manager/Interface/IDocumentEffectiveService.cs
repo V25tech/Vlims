@@ -25,7 +25,7 @@ namespace Vlims.DocumentManager.Manager
         
         ResponseContext<DocumentEffective> GetAllDocumentEffective(RequestContext requestContext);
         
-        DocumentEffective GetDocumentEffectiveByDEID(string dEID);
+        DocumentEffective GetDocumentEffectiveByDEID(int dEID);
         
         bool SaveDocumentEffective(DocumentEffective documentEffective);
         

@@ -23,4 +23,7 @@ export class DocumentEffectiveService {
     debugger
     return this.http.postJsonLogin(adddocreq, "api/documenteffective/updatedocumenteffective", this.type);
   }
+  getbyId(docreq: number) {        
+    return this.http.getwithheader("api/documenteffective/getbyId" + "?dEID=" + docreq, this.type);
+  }
 }

@@ -15,7 +15,7 @@ DECLARE @documenttitle_PSY NVarchar(500)
  SET @documenttitle_PSY=(SELECT documenttitle_PSY FROM DocumentPreparation_PSY WHERE Refrence_PSY=@referenceId)
 
 INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
-SELECT @documenttitle_PSY,'Preparation','In Progress', null ,@ModifiedBy_PSY, GetDate(),'In Progress',GetDate(),@ATID_PSY
+SELECT @documenttitle_PSY,'Revision','In Progress', null ,@ModifiedBy_PSY, GetDate(),'In Progress',GetDate(),@ATID_PSY
 end
 
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')

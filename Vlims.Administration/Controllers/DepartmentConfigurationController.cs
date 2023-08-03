@@ -64,6 +64,14 @@ namespace Vlims.Controllers
         [HttpPost("savedepartmentconfiguration")]
         public ActionResult<System.Boolean> SaveDepartmentConfiguration(DepartmentConfiguration departmentConfiguration)
         {
+            //RequestContext reqCxt = new RequestContext();
+            //reqCxt.PageNumber = 1;reqCxt.PageSize = 50;
+            //var resultDeparts = departmentConfigurationService.GetAllDepartmentConfiguration(reqCxt);
+            //if(resultDeparts.Response.Count(item=>item.DepartmentName.Equals(departmentConfiguration.DepartmentName))==1)
+            //{
+            //    //Raise duplicate validation
+            //   return Ok(false);
+            //}
             var result = departmentConfigurationService.SaveDepartmentConfiguration(departmentConfiguration);
             return result;
         }

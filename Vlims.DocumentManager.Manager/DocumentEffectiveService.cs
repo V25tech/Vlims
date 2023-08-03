@@ -55,7 +55,7 @@ namespace Vlims.DocumentManager.Manager
         //    }
         //}
 
-        public DocumentEffective GetDocumentEffectiveByDEID(string dEID)
+        public DocumentEffective GetDocumentEffectiveByDEID(int dEID)
         {
             try
             {

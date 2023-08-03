@@ -62,6 +62,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'effectives/view/:id',
+    component: ReviewEffectiveComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'print',
     component: DocumentPrintComponent,
     canActivate: [AuthGuard],

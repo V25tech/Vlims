@@ -8,209 +8,181 @@
 //------------------------------------------------------------------------------
 
 
-    using System;
-    using System.Collections.Generic;
-   
-    
-    
-    // Comment
-    public class ExistingDocumentRequest
+using System;
+using System.Collections.Generic;
+
+
+
+
+public class ExistingDocumentRequest
+{
+
+    private int edridField;
+
+    private string documentmanageridField;
+
+    private string documentnoField;
+
+    private string documenttitleField;
+
+    private string documenttypeField;
+
+    private string noofcopiesField;
+
+    private string workflowField;
+
+    private string departmentField;
+
+    private string documentField;
+
+    private string sampletemplateField;
+
+    private string createdbyField;
+
+    private DateTime? createddateField;
+
+    private string modifiedbyField;
+
+    private DateTime? modifieddateField;
+
+    public DateTime effectiveDate { get; set; }
+    public DateTime reviewDate { get; set; }
+
+    public int EDRId
     {
-        
-        private string edridField;
-        
-        private string documentmanageridField;
-        
-        private string documentnoField;
-        
-        private string documenttitleField;
-        
-        private string printtypeField;
-        
-        private string noofcopiesField;
-        
-        private string workflowField;
-        
-        private string reasonField;
-        
-        private string browseField;
-        
-        private string sampletemplateField;
-        
-        private string createdbyField;
-        
-        private DateTime? createddateField;
-        
-        private string modifiedbyField;
-        
-        private DateTime? modifieddateField;
-        
-        public string EDRId
+        get
         {
-            get
-            {
-                return this.edridField;
-            }
-            set
-            {
-                this.edridField = value;
-            }
+            return this.edridField;
         }
-        
-        public string Documentmanagerid
+        set
         {
-            get
-            {
-                return this.documentmanageridField;
-            }
-            set
-            {
-                this.documentmanageridField = value;
-            }
-        }
-        
-        public string documentno
-        {
-            get
-            {
-                return this.documentnoField;
-            }
-            set
-            {
-                this.documentnoField = value;
-            }
-        }
-        
-        public string documenttitle
-        {
-            get
-            {
-                return this.documenttitleField;
-            }
-            set
-            {
-                this.documenttitleField = value;
-            }
-        }
-        
-        public string printtype
-        {
-            get
-            {
-                return this.printtypeField;
-            }
-            set
-            {
-                this.printtypeField = value;
-            }
-        }
-        
-        public string noofcopies
-        {
-            get
-            {
-                return this.noofcopiesField;
-            }
-            set
-            {
-                this.noofcopiesField = value;
-            }
-        }
-        
-        public string workflow
-        {
-            get
-            {
-                return this.workflowField;
-            }
-            set
-            {
-                this.workflowField = value;
-            }
-        }
-        
-        public string reason
-        {
-            get
-            {
-                return this.reasonField;
-            }
-            set
-            {
-                this.reasonField = value;
-            }
-        }
-        
-        public string browse
-        {
-            get
-            {
-                return this.browseField;
-            }
-            set
-            {
-                this.browseField = value;
-            }
-        }
-        
-        public string sampletemplate
-        {
-            get
-            {
-                return this.sampletemplateField;
-            }
-            set
-            {
-                this.sampletemplateField = value;
-            }
-        }
-        
-        public string CreatedBy
-        {
-            get
-            {
-                return this.createdbyField;
-            }
-            set
-            {
-                this.createdbyField = value;
-            }
-        }
-        
-        public DateTime? CreatedDate
-        {
-            get
-            {
-                return this.createddateField;
-            }
-            set
-            {
-                this.createddateField = value;
-            }
-        }
-        
-        public string ModifiedBy
-        {
-            get
-            {
-                return this.modifiedbyField;
-            }
-            set
-            {
-                this.modifiedbyField = value;
-            }
-        }
-        
-        public DateTime? ModifiedDate
-        {
-            get
-            {
-                return this.modifieddateField;
-            }
-            set
-            {
-                this.modifieddateField = value;
-            }
+            this.edridField = value;
         }
     }
+
+
+
+    public string documentno
+    {
+        get
+        {
+            return this.documentnoField;
+        }
+        set
+        {
+            this.documentnoField = value;
+        }
+    }
+
+    public string documenttitle
+    {
+        get
+        {
+            return this.documenttitleField;
+        }
+        set
+        {
+            this.documenttitleField = value;
+        }
+    }
+
+    public string documenttype
+    {
+        get
+        {
+            return this.documenttypeField;
+        }
+        set
+        {
+            this.documenttypeField = value;
+        }
+    }
+
+
+
+
+    public string department
+    {
+        get
+        {
+            return this.departmentField;
+        }
+        set
+        {
+            this.departmentField = value;
+        }
+    }
+
+    public string document
+    {
+        get
+        {
+            return this.documentField;
+        }
+        set
+        {
+            this.documentField = value;
+        }
+    }
+
+    public string sampletemplate
+    {
+        get
+        {
+            return this.sampletemplateField;
+        }
+        set
+        {
+            this.sampletemplateField = value;
+        }
+    }
+
+    public string CreatedBy
+    {
+        get
+        {
+            return this.createdbyField;
+        }
+        set
+        {
+            this.createdbyField = value;
+        }
+    }
+
+    public DateTime? CreatedDate
+    {
+        get
+        {
+            return this.createddateField;
+        }
+        set
+        {
+            this.createddateField = value;
+        }
+    }
+
+    public string ModifiedBy
+    {
+        get
+        {
+            return this.modifiedbyField;
+        }
+        set
+        {
+            this.modifiedbyField = value;
+        }
+    }
+
+    public DateTime? ModifiedDate
+    {
+        get
+        {
+            return this.modifieddateField;
+        }
+        set
+        {
+            this.modifieddateField = value;
+        }
+    }
+}
 

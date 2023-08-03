@@ -4,7 +4,7 @@
  BEGIN TRY 
   SELECT DE.*,DP.template_PSY,DP.document_PSY as document
   FROM [dbo].[DocumentEffective_PSY] DE WITH (NOLOCK) 
-  JOIN dbo.DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY
+  JOIN dbo.DocumentPreparation_PSY DP ON DP.Refrence_PSY=DE.Refrence_PSY
   where [DEID_PSY] = @DEID_PSY   
  END TRY 
  BEGIN CATCH 

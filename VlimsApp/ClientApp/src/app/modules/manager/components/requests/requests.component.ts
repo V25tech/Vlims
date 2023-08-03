@@ -18,7 +18,7 @@ export class RequestsComponent implements OnInit{
   // Pagination properties
   currentPage = 1;
   itemsPerPage = 10;
-  rowsPerPageOptions = [10, 20, 50];
+  rowsPerPageOptions = [1,10, 20, 50];
   constructor(private router: Router,private spinner: NgxSpinnerService, private commonsvc: CommonService, private documentRequestService: DocumentRequestService) {}
 
   navigateToAddRequest(): void {
@@ -55,6 +55,8 @@ export class RequestsComponent implements OnInit{
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.documentRequestService.getdocumentrequest(objrequest).subscribe((data: any) => {     
       this.requestsDatasource = data.response;
+      if(this.requestsDatasource.length<10)
+      this.currentPage=10;
       console.log(data);
       this.spinner.hide();
     }, er => {
