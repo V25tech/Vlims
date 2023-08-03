@@ -295,7 +295,7 @@ export class FooterTable {
 export class DocumentPrintConfiguration {
   public DRId: number = 0;
   public DocumentMasterId: string = '';
- // public documenttype: string = '';
+  // public documenttype: string = '';
   public department: string = '';
   public Description: string = '';
   public Approvedby: string = '';
@@ -313,4 +313,26 @@ export class DocumentPrintConfiguration {
   public DocumentNumber: string = '';
   public printtype: string = '';
   public noofcopies: string = '';
+}
+
+export class ExistingDocumentRequest {
+  edrId: string = '';
+  documentmanagerid: string = '';
+  documentno: string = '';
+  documenttitle: string = '';
+  printtype: string = '';
+  noofcopies: string = '';
+  workflow: string = '';
+  reason: string = '';
+  browse: string = '';
+  sampletemplate: string = '';
+  createdBy: string = '';
+  createdDate: Date | undefined;
+  modifiedBy: string = '';
+  modifiedDate: Date | undefined;
+  effectiveDate: string = '';
+  reviewDate: string = '';
+
+  department: string = '';
+  documentType: string = '';
 }

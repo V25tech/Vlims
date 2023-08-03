@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DocumentTypeConfiguration } from '../modules/documents/models/DocumentTypeConfiguration';
 import { DocumentTemplateConfiguration } from '../modules/documents/models/DocumentTemplateConfiguration';
-import { DepartmentConfiguration, DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentPrintConfiguration, DocumentRequestConfiguration, PlantConfiguration, RoleConfiguration, UserConfiguration, Usergroupconfiguration } from '../models/model';
+import { DepartmentConfiguration, DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentPrintConfiguration, DocumentRequestConfiguration, ExistingDocumentRequest, PlantConfiguration, RoleConfiguration, UserConfiguration, Usergroupconfiguration } from '../models/model';
 import { DepartmentComponent } from '../modules/authentication/components/Department/department.component';
 
 
@@ -23,8 +23,8 @@ export class CommonService {
   preperation = new DocumentPreperationConfiguration();
   efffective = new DocumentEffectiveConfiguration();  
   printConfig = new DocumentPrintConfiguration();  
-  //private retailer = new BehaviorSubject<Retailer>(null);
-  //retaileR = this.retailer.asObservable();
+  existingDocReq = new ExistingDocumentRequest();
+  
   createdBy = 'admin';
   
   retailerId: number = 0;
