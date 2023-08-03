@@ -53,6 +53,7 @@ export class AddDepartmentComponent implements OnInit {
   submit(newdept: DepartmentConfiguration) {
     debugger
     this.adddoctype(newdept);
+    
     this.location.back();
   }
   onCancel() {

@@ -47,16 +47,15 @@ public static class ExistingDocumentRequestData
         try
         {
             List<SqlParameter> sqlparms = new List<SqlParameter>();
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.Documentmanagerid, Value = existingDocumentRequest.Documentmanagerid });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.documentno, Value = existingDocumentRequest.documentno });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.documenttitle, Value = existingDocumentRequest.documenttitle });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.printtype, Value = existingDocumentRequest.printtype });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.noofcopies, Value = existingDocumentRequest.noofcopies });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.workflow, Value = existingDocumentRequest.workflow });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.reason, Value = existingDocumentRequest.reason });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.browse, Value = existingDocumentRequest.browse });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.printtype, Value = existingDocumentRequest.documenttype });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.department, Value = existingDocumentRequest.department });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.browse, Value = existingDocumentRequest.document });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.sampletemplate, Value = existingDocumentRequest.sampletemplate });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.CreatedBy, Value = existingDocumentRequest.CreatedBy });
+            sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = ExistingDocumentRequestConstants.EffectiveDate, Value = existingDocumentRequest.effectiveDate });
+            sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = ExistingDocumentRequestConstants.ReviewDate, Value = existingDocumentRequest.reviewDate });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.ModifiedBy, Value = existingDocumentRequest.ModifiedBy });
             Object result = dataAccessHelper.ExecuteStoredProcedure(ExistingDocumentRequestConstants.USP_ExistingDocumentRequest_PSY_INSERT, sqlparms, ExecutionType.Scalar);
             return (Convert.ToInt32(result) > 0);
@@ -73,16 +72,14 @@ public static class ExistingDocumentRequestData
         {
             List<SqlParameter> sqlparms = new List<SqlParameter>();
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.EDRId, Value = existingDocumentRequest.EDRId });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.Documentmanagerid, Value = existingDocumentRequest.Documentmanagerid });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.documentno, Value = existingDocumentRequest.documentno });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.documenttitle, Value = existingDocumentRequest.documenttitle });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.printtype, Value = existingDocumentRequest.printtype });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.noofcopies, Value = existingDocumentRequest.noofcopies });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.workflow, Value = existingDocumentRequest.workflow });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.reason, Value = existingDocumentRequest.reason });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.browse, Value = existingDocumentRequest.browse });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.printtype, Value = existingDocumentRequest.documenttype });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.department, Value = existingDocumentRequest.department });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.sampletemplate, Value = existingDocumentRequest.sampletemplate });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.ModifiedBy, Value = existingDocumentRequest.ModifiedBy });
+            sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = ExistingDocumentRequestConstants.EffectiveDate, Value = existingDocumentRequest.effectiveDate });
+            sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = ExistingDocumentRequestConstants.ReviewDate, Value = existingDocumentRequest.reviewDate });
             Object result = dataAccessHelper.ExecuteStoredProcedure(ExistingDocumentRequestConstants.USP_ExistingDocumentRequest_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
             return (Convert.ToInt32(result) > 0);
         }
