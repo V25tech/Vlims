@@ -13,7 +13,7 @@
             <label for="documentType" class="col-sm-2 col-form-label">Document Type</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentType" name="DocumentType" placeholder=""
-                [(ngModel)]="existingDocReq.documenttype" [disabled]="viewMode" />
+                [(ngModel)]="existingDocReq.documenttype" />
             </div>
           </div>
 
@@ -21,7 +21,7 @@
             <label for="documentType" class="col-sm-2 col-form-label">Department</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="department" name="Department" placeholder=""
-                [(ngModel)]="existingDocReq.department" [disabled]="viewMode" />
+                [(ngModel)]="existingDocReq.department"/>
             </div>
           </div>
 
@@ -37,7 +37,7 @@
             <label for="documentType" class="col-sm-2 col-form-label">Document Number</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="dnumber" name="Dnumber" placeholder=""
-                [(ngModel)]="existingDocReq.documentno" [disabled]="viewMode" />
+                [(ngModel)]="existingDocReq.documentno"/>
             </div>
           </div>
 
@@ -45,7 +45,7 @@
             <label for="documentType" class="col-sm-2 col-form-label">Effective Date</label>
             <div class="col-sm-10">
               <input type="date" class="form-control" id="edate" name="Edate" placeholder="Enter First Nmae"
-                [(ngModel)]="effectiveDate" (change)="changeDate($event)" [disabled]="viewMode" />
+                [(ngModel)]="effectiveDate" (change)="existingDocReq.effectiveDate = getAsDate($event)" />
             </div>
           </div>
 
@@ -53,7 +53,7 @@
             <label for="documentType" class="col-sm-2 col-form-label">Review Date</label>
             <div class="col-sm-10">
               <input type="date" class="form-control" id="rdate" name="Rdate" placeholder="Enter First Nmae"
-                [(ngModel)]="existingDocReq.reviewDate" [disabled]="viewMode" />
+                [(ngModel)]="reviewDate" (change)="existingDocReq.reviewDate = getAsDate($event)" />
             </div>
           </div>
 
@@ -61,13 +61,13 @@
             <label for="document" class="col-sm-2 col-form-label">Browse Document</label>
             <div *ngIf="!existingDocReq.document" class="col-sm-10">
               <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput [disabled]="isUploaded"
-                (change)="onFileSelected($event)" [disabled]="viewMode">
+                (change)="onFileSelected($event)">
             </div>
             <div *ngIf="existingDocReq.document" class="col-sm-2">
               <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
             </div>
             <div *ngIf="existingDocReq.document" class="col-sm-8">
-              <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>
+              <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()">Delete</button>
             </div>
           </div>
           <div *ngIf="selectedFile && !isUploaded" class="form-group row">

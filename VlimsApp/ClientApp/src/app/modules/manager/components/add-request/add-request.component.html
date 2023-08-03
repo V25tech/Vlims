@@ -27,7 +27,7 @@
 
           <div class="form-group row">
             <label for="docType" class="col-sm-2 col-form-label"
-              >Document Type</label
+              >Document Type<span style="color: red; font-weight: bolder;">*</span></label
             >
             <div class="col-sm-10">
               <p-dropdown
@@ -35,7 +35,8 @@
                 [options]="typeSource"
                 [(ngModel)]="request.documenttype"
                 optionLabel="Documenttypename"
-                optionValue="Documenttypename" [disabled]="viewMode"                
+                optionValue="Documenttypename" [disabled]="viewMode"
+                [autoDisplayFirst]="false" 
               >
               </p-dropdown>
             </div>
@@ -43,7 +44,7 @@
 
           <div class="form-group row">
             <label for="department" class="col-sm-2 col-form-label"
-              >Department</label
+              >Department<span style="color: red; font-weight: bolder;">*</span></label
             >
             <div class="col-sm-10">
               <p-dropdown
@@ -51,7 +52,7 @@
                 [options]="departmentsSource"
                 [(ngModel)]="request.department"
                 optionLabel="DepartmentName"
-                optionValue="DepartmentName"  [disabled]="viewMode"
+                optionValue="DepartmentName"  [disabled]="viewMode"                
               >
               </p-dropdown>
             </div>
@@ -59,7 +60,7 @@
 
           <div class="form-group row">
             <label for="workflow" class="col-sm-2 col-form-label"
-              >Workflow</label
+              >Workflow<span style="color: red; font-weight: bolder;">*</span></label
             >
             <div class="col-sm-10">
               <p-dropdown

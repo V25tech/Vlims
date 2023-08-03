@@ -30,6 +30,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
   effectiveDate: string | undefined;
+  reviewDate: string | undefined;
 
 
   constructor(private commonsvc: CommonService, private location: Location, private spinner: NgxSpinnerService, private modalService: BsModalService, private sanitizer: DomSanitizer, private existingDocReqservice: ExistingDocumentRequestService, private route: ActivatedRoute) { }
@@ -39,8 +40,9 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
     if (this.id) { //edit mode
       this.editMode = true;
       if (this.commonsvc.existingDocReq) {
-        this.existingDocReq = this.commonsvc.existingDocReq;
+        this.existingDocReq = this.commonsvc.existingDocReq;        
         this.effectiveDate = this.toDate(this.existingDocReq.effectiveDate);
+        this.reviewDate = this.toDate(this.existingDocReq.reviewDate);
       }
       else
         this.getExistingDocument(this.id);
@@ -71,9 +73,11 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
 
   Save() {
     if (this.editMode) {
-      this.Update();
+      console.log(this.existingDocReq);
+      //this.Update();
     }
     else {
+      console.log(this.existingDocReq);
       this.Add();
     }
   }
@@ -96,17 +100,6 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
     }
   }
 
-  toDate(pdate: Date | undefined) {
-    if (pdate == undefined) return undefined;
-    const yyyy = pdate.getFullYear();
-    let mm = pdate.getMonth() + 1;
-    let dd = pdate.getDate();
-    return yyyy + '-' + (mm < 10 ? '0' : '') + mm + '-' + (dd < 10 ? '0' : '') + dd;
-  }
-  changeDate(event: any) {
-    console.log(event.target.value);
-  }
-
   Update() {
     this.existingDocReqservice.UpdateExistingDocument(this.existingDocReq).subscribe(res => {
       this.commonsvc.existingDocReq = new ExistingDocumentRequest();
@@ -118,6 +111,16 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
     });
   }
 
+  toDate(pdate: Date | undefined) {
+    if (pdate == undefined) return undefined;
+    const yyyy = pdate.getFullYear();
+    let mm = pdate.getMonth() + 1;
+    let dd = pdate.getDate();
+    return yyyy + '-' + (mm < 10 ? '0' : '') + mm + '-' + (dd < 10 ? '0' : '') + dd;
+  }
+  getAsDate(event: any) {
+    return event.target.valueAsDate;
+  }
 
   onCancel() {
     this.location.back();

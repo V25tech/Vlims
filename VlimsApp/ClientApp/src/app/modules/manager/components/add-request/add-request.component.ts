@@ -8,6 +8,7 @@ import { DocumentRequestService } from 'src/app/modules/services/document-reques
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/common.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-add-request',
   templateUrl: './add-request.component.html',
@@ -27,16 +28,15 @@ export class AddRequestComponent {
   ];
 
 
-  constructor(private router: Router, private location: Location, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private documentRequestService: DocumentRequestService) { }
+  constructor(private router: Router, private location: Location, private toastr: ToastrService, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private documentRequestService: DocumentRequestService) { }
 
   ngOnInit() {
     debugger
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    if(segments[segments.length-2].toString()=='view')
-    {
-      this.viewMode=true;
-      this.getbyId(parseInt(segments[segments.length-1],10))
+    if (segments[segments.length - 2].toString() == 'view') {
+      this.viewMode = true;
+      this.getbyId(parseInt(segments[segments.length - 1], 10))
     }
     else if (segments.slice(-1).toString() == 'edit' && this.commonsvc.request) {
       this.editMode = true;
@@ -48,53 +48,67 @@ export class AddRequestComponent {
   }
   getbyId(arg0: number) {
     this.spinner.show();
-    return this.documentRequestService.getbyId(arg0).subscribe((data:any)=>{
-      this.request=data;
+    return this.documentRequestService.getbyId(arg0).subscribe((data: any) => {
+      this.request = data;
       this.spinner.hide();
-      console.log('request',data);
+      console.log('request', data);
     });
   }
-  approve(){
-    this.request.status='Approved'
+  approve() {
+    this.request.status = 'Approved'
     this.updateRequest();
   }
-  reinitiative(){
-    this.request.status='Re-Initiated'
+  reinitiative() {
+    this.request.status = 'Re-Initiated'
     this.updateRequest();
   }
-  reject(){
-    this.request.status='Rejected'
+  reject() {
+    this.request.status = 'Rejected'
     this.updateRequest();
   }
 
   saveRequest() {
     if (this.editMode) {
+      if (!this.request.documenttype)
+        this.toastr.error('Documenttype must required', 'Erorr..!', { timeOut: 3000 });
+      else if (!this.request.department)
+        this.toastr.error('Department must required', 'Erorr..!', { timeOut: 3000 });
+      else if (!this.request.workflow)
+        this.toastr.error('Workflow must required', 'Erorr..!', { timeOut: 3000 });
+      else
       this.updateRequest();
     }
     else {
-      this.addRequest();
+      if (!this.request.documenttype)
+        this.toastr.error('Documenttype must required', 'Erorr..!', { timeOut: 3000 });
+      else if (!this.request.department)
+        this.toastr.error('Department must required', 'Erorr..!', { timeOut: 3000 });
+      else if (!this.request.workflow)
+        this.toastr.error('Workflow must required', 'Erorr..!', { timeOut: 3000 });
+      else
+        this.addRequest();
     }
   }
 
   addRequest() {
-    if(!this.viewMode)
-    {
-    this.request.createdBy = 'admin';
-    this.request.modifiedBy = 'admin';
-    this.request.status = 'In-Progress';
-    this.request.createdDate = new Date().toISOString();
-    this.request.modifiedDate = new Date().toISOString();
-    this.spinner.show();
+    if (!this.viewMode) {
+      this.request.createdBy = 'admin';
+      this.request.modifiedBy = 'admin';
+      this.request.status = 'In-Progress';
+      this.request.createdDate = new Date().toISOString();
+      this.request.modifiedDate = new Date().toISOString();
+      this.spinner.show();
 
-    this.documentRequestService.adddocreqconfig(this.request).subscribe(res => {
-      this.commonsvc.request = new DocumentRequestConfiguration();
-      this.location.back();
-      this.spinner.hide();
-    }, er => {
-      console.log(er);
-      this.spinner.hide();
-    });
-  }
+      this.documentRequestService.adddocreqconfig(this.request).subscribe(res => {
+        this.commonsvc.request = new DocumentRequestConfiguration();
+        this.location.back();
+        this.spinner.hide();
+        this.toastr.success('Document Request Saved Succesfull!', 'Saved.!');
+      }, er => {
+        console.log(er);
+        this.spinner.hide();
+      });
+    }
   }
 
   updateRequest() {
