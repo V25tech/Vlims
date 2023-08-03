@@ -35,7 +35,7 @@ export class TemplatesComponent {
   }
   getdocumenttypeconfig() {
     this.spinner.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+   let objrequest: RequestContext={PageNumber:1,PageSize:100,Id:0};
       return this.templatesvc.getdocttemplate(objrequest).subscribe((data: any) => {
         debugger
         this.types = data.Response;

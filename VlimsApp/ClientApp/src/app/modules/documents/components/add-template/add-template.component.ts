@@ -235,4 +235,26 @@ export class AddTemplateComponent implements OnInit {
         this.loader.hide();
       });
   }
+  approve() {
+    this.templateForm.Status = 'Approved'
+    this.updateTemplate();
+  }
+  reinitiative() {
+    this.templateForm.Status = 'Re-Initiated'
+    this.updateTemplate();
+  }
+  reject() {
+    this.templateForm.Status = 'Rejected'
+    this.updateTemplate();
+  }
+  updateTemplate() {
+    this.doctypeservice.updatedoctypeconfig(this.selectedtype).subscribe(res => {
+      this.commonsvc.template = new DocumentTemplateConfiguration();
+      this.location.back();
+      //this.spinner.hide();
+    //}, er => {
+    //  console.log(er);
+    //  this.spinner.hide();
+    });
+  }
 }

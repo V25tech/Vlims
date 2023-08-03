@@ -46,7 +46,7 @@ export class AssignedComponent implements OnInit {
     debugger
     switch (tasktype) {
       case "Type":
-        this.router.navigate(['/requests/view',referId]);
+        this.router.navigate(['/document-type/view',referId]);
         break;
       case "Template":
         this.router.navigate(['/mainpage/documentmaster/viewdoctemplate']);

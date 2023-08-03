@@ -19,7 +19,7 @@
             [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>#</th>
+                        <th>S.No</th>
                         <th pSortableColumn="Documenttypename" style="width:20%">Document type<p-sortIcon field="Documenttypename"></p-sortIcon></th>
                         <th pSortableColumn="documenttypeprefix" style="width:10%">Prefix <p-sortIcon field="documenttypeprefix"></p-sortIcon></th>
                         <th pSortableColumn="Description" style="width:15%">Description<p-sortIcon field="Description"></p-sortIcon></th>
@@ -39,7 +39,7 @@
             <td>{{doc?.ModifiedBy}}</td>
             <td>{{doc?.ModifiedDate | date}}</td>
                         <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
-                        <td class="text-center" (click)="editdoc(doc)"><i class="bi bi-pencil"></i></td>
+                        <td class="text-center"><i *ngIf="doc?.status=='In-Progress'" (click)="editdoc(doc)" class="bi bi-pencil"></i></td>
                     </tr>
                 </ng-template>
             </p-table>
