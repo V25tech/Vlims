@@ -41,7 +41,7 @@ namespace PolicySummary.Sheet1.Services
             }
         }
         
-        public UserConfiguration GetUserConfigurationByUCFId(string uCFId)
+        public UserConfiguration GetUserConfigurationByUCFId(int uCFId)
         {
             try
             {

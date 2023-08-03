@@ -41,7 +41,7 @@ namespace Vlims.Administration.DataAccess
             }
         }
 
-        public static DataSet GetUserConfigurationByUCFId(string uCFId)
+        public static DataSet GetUserConfigurationByUCFId(int uCFId)
         {
             try
             {

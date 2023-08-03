@@ -17,7 +17,7 @@ Standarduser_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY 
+ModifiedDate_PSY ,Password_PSY
   FROM [dbo].[UserConfiguration_PSY] WITH (NOLOCK) where [UCFId_PSY] = @UCFId_PSY   
  END TRY 
  BEGIN CATCH 
