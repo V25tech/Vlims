@@ -10,6 +10,7 @@ import { ReviewEffectiveComponent } from './components/review-effective/review-e
 import { DocumentManagerHomeComponent } from './components/document-manager-home/document-manager-home.component';
 import { DocumentPrintComponent } from './components/Print/document-print.component';
 import { NewPrintRequestComponent } from './components/Print/new-print-request.component';
+import { ExistingDocumentRequestComponent } from './components/existing-document-request/existing-document-request.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
@@ -80,6 +81,14 @@ const routes: Routes = [
     component: NewPrintRequestComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'existingdoc/add',
+    component: ExistingDocumentRequestComponent
+  },
+  {
+    path: 'existingdoc/edit/:id',
+    component: ExistingDocumentRequestComponent
+  }
 ];
 
 @NgModule({
