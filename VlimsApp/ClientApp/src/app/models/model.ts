@@ -198,6 +198,7 @@ export class UserConfiguration {
   CreatedDate:  Date | undefined;
   ModifiedBy: string = ''
   ModifiedDate: Date | undefined;
+  Password:string | null=''
 }
 export class WorkItemsConfiguration {
   TaskType: string = ''

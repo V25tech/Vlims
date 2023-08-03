@@ -71,16 +71,28 @@ export class RegisterComponent implements OnInit {
     adduser.CreatedDate=new Date();
     adduser.ModifiedDate=new Date();
     //this.router.navigate(['/products']);
-    this.userservice.adduser(adduser).subscribe((res: any) => {
+    if(adduser.UserID==='admin')
+    {
+      alert("User Id 'Admin' is invalid")
+    }
+    else
+    {
+      this.userservice.adduser(adduser).subscribe((res: any) => {
       this.location.back();
     });
   }
+  }
   else
   { 
+    if(adduser.UserID==='admin')
+    {
+      alert("User Id 'Admin' is invalid")
+    }
+   else {
     this.userservice.update(adduser).subscribe((data:any)=>{
       this.location.back();
     });
-
+   }
   }
   }
   getbyId()
