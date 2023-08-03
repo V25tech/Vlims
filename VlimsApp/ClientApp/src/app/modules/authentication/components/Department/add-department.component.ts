@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { NgForm } from '@angular/forms';
 //import { ToastrService } from 'ngx-toastr';
 import { DepartmentConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
@@ -50,6 +51,12 @@ export class AddDepartmentComponent implements OnInit {
 
       }));
     }
+    // submit(form: NgForm) {
+    //   debugger
+    //   if (form.valid) {
+    //     debugger
+    //   }
+    // }
   submit(newdept: DepartmentConfiguration) {
     debugger
     this.adddoctype(newdept);
