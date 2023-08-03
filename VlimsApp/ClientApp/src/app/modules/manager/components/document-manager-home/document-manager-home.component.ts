@@ -27,7 +27,7 @@ export class DocumentManagerHomeComponent {
       this.router.navigate(['/home']);
     }
     else if(navTo === 'existing-document-requests'){    
-      this.router.navigate(['/existingdoc/add']);
+      this.router.navigate(['/existingdoc']);
     }
   }
 }

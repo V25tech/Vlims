@@ -10,7 +10,7 @@ export class ExistingDocumentRequestService {
   
   constructor(private http: HttpbaseService) { }
 
-  GetExistingDocument(objrequest: RequestContext) {   
+  GetExistingDocumentAll(objrequest: RequestContext) {   
     return this.http.postJsonLogin(objrequest, "api​/existingdocumentreq​/GetAllDocEff", this.type);
   }
   GetExistingDocumentById(Id: string) {   
@@ -19,9 +19,15 @@ export class ExistingDocumentRequestService {
   adddExistingDocument(objrequest: ExistingDocumentRequest) {
     return this.http.postJsonLogin(objrequest, "​api​/existingdocumentreq​/savedocumenteffective", this.type);
   }
-  UpdateExistingDocument(objrequest: RequestContext) {   
+  UpdateExistingDocument(objrequest: ExistingDocumentRequest) {   
     return this.http.postJsonLogin(objrequest, "​api​/existingdocumentreq​/updatedocumenteffective", this.type);
   }
   
+  preview(objrequest: ExistingDocumentRequest) {
+    return this.http.postJsonLogin(objrequest, "api/existingdocumentreq​/preview",this.type);
+  }
+  upload(objrequest: FormData){
+    return this.http.postJsonLogin(objrequest, "api/existingdocumentreq​/upload",this.type);
+  }
 }
 

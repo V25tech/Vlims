@@ -317,22 +317,18 @@ export class DocumentPrintConfiguration {
 
 export class ExistingDocumentRequest {
   edrId: string = '';
-  documentmanagerid: string = '';
   documentno: string = '';
   documenttitle: string = '';
-  printtype: string = '';
-  noofcopies: string = '';
-  workflow: string = '';
-  reason: string = '';
-  browse: string = '';
+  department: string = '';
+  documenttype: string = '';
+  document: string = '';  
   sampletemplate: string = '';
   createdBy: string = '';
   createdDate: Date | undefined;
   modifiedBy: string = '';
   modifiedDate: Date | undefined;
-  effectiveDate: string = '';
-  reviewDate: string = '';
+  effectiveDate: Date | undefined;
+  reviewDate: Date | undefined;
 
-  department: string = '';
-  documentType: string = '';
+ 
 }

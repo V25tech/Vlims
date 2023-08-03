@@ -20,9 +20,22 @@ import { DocumentManagerHomeComponent } from './components/document-manager-home
 import { DocumentPrintComponent } from './components/Print/document-print.component';
 import { NewPrintRequestComponent } from './components/Print/new-print-request.component';
 import { ExistingDocumentRequestComponent } from './components/existing-document-request/existing-document-request.component';
+import { ReviewExistingDocumentRequestComponent } from './components/review-existing-document-request/review-existing-document-request.component';
 
 @NgModule({
-  declarations: [RequestsComponent, AddRequestComponent, PreparationComponent, ReviewPrepationComponent, EffectivesComponent, ReviewEffectiveComponent, DocumentManagerHomeComponent, DocumentPrintComponent, NewPrintRequestComponent, ExistingDocumentRequestComponent],
+  declarations: [
+    RequestsComponent,
+    AddRequestComponent,
+    PreparationComponent,
+    ReviewPrepationComponent,
+    EffectivesComponent,
+    ReviewEffectiveComponent,
+    DocumentManagerHomeComponent,
+    DocumentPrintComponent,
+    NewPrintRequestComponent,
+    ExistingDocumentRequestComponent,
+    ReviewExistingDocumentRequestComponent
+  ],
   imports: [
     CommonModule,
     ManagerRoutingModule,
@@ -35,4 +48,4 @@ import { ExistingDocumentRequestComponent } from './components/existing-document
     ToastModule,
   ],
 })
-export class ManagerModule {}
+export class ManagerModule { }

@@ -57,7 +57,6 @@ export class RequestsComponent implements OnInit{
       this.requestsDatasource = data.response;
       if(this.requestsDatasource.length<10)
       this.currentPage=10;
-      console.log(data);
       this.spinner.hide();
     }, er => {
       console.error('An error occurred:', er);

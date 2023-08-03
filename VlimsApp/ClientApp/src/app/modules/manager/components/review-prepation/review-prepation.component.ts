@@ -57,12 +57,7 @@ export class ReviewPrepationComponent {
       this.getbyId(parseInt(segments[segments.length-1],10))
     }
     else if (this.commonsvc.preperation.dpnid) {
-      this.preparation = this.commonsvc.preperation;
-      debugger;
-      console.log('rr',this.preparation);
-      if (this.InputVar)
-        this.InputVar.nativeElement.value = 'rst.docx';
-      console.log(this.preparation);
+      this.preparation = this.commonsvc.preperation;            
     }
     else {
       this.location.back();

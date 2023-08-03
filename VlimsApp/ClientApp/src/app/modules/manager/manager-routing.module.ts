@@ -11,10 +11,11 @@ import { DocumentManagerHomeComponent } from './components/document-manager-home
 import { DocumentPrintComponent } from './components/Print/document-print.component';
 import { NewPrintRequestComponent } from './components/Print/new-print-request.component';
 import { ExistingDocumentRequestComponent } from './components/existing-document-request/existing-document-request.component';
+import { ReviewExistingDocumentRequestComponent } from './components/review-existing-document-request/review-existing-document-request.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
-  
+
   { path: 'document-manager', component: DocumentManagerHomeComponent, canActivate: [AuthGuard] },
   {
     path: 'requests',
@@ -45,12 +46,12 @@ const routes: Routes = [
     path: 'preparation/review',
     component: ReviewPrepationComponent,
     canActivate: [AuthGuard],
-  }, 
+  },
   {
     path: 'preparation/view/:id',
     component: ReviewPrepationComponent,
     canActivate: [AuthGuard],
-  },  
+  },
   {
     path: 'effectives',
     component: EffectivesComponent,
@@ -80,14 +81,17 @@ const routes: Routes = [
     path: 'print/edit',
     component: NewPrintRequestComponent,
     canActivate: [AuthGuard],
+  }, {
+    path: 'existingdoc',
+    component: ExistingDocumentRequestComponent,
   },
   {
     path: 'existingdoc/add',
-    component: ExistingDocumentRequestComponent
+    component: ReviewExistingDocumentRequestComponent
   },
   {
     path: 'existingdoc/edit/:id',
-    component: ExistingDocumentRequestComponent
+    component: ReviewExistingDocumentRequestComponent
   }
 ];
 
