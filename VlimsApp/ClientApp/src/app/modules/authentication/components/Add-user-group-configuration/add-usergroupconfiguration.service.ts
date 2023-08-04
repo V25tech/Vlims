@@ -19,6 +19,10 @@ addusergroupconfiguration(objrequest: Usergroupconfiguration) {
   debugger
   return this.http.postJsonLogin(objrequest, "api/usergroupconfiguration/saveusergroupconfiguration",this.type);
   }
+  Updateusergroupconfiguration(objrequest: Usergroupconfiguration) {
+    debugger
+    return this.http.postJsonLogin(objrequest, "api/usergroupconfiguration/updateusergroupconfiguration",this.type);
+    }
   getbyId(objname: number) {
     debugger
     return this.http.getwithheader("api/usergroupconfiguration/getbyId" + "?ugcId=" + objname, this.type);

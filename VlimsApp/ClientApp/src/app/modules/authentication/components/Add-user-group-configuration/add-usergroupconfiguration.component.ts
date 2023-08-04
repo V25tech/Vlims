@@ -64,9 +64,19 @@ export class AddusergroupconfigurationComponent implements OnInit {
       debugger
       newdept.Registeredby="admin";
       newdept.Modify="admin";
-      this.ugService.addusergroupconfiguration(newdept).subscribe((res:any)=>{
-        this.router.navigate(['/admin/usergroup']);
-      });
+      if(this.editMode)
+      {
+        this.ugService.Updateusergroupconfiguration(newdept).subscribe((res:any)=>{
+          this.router.navigate(['/admin/groups/edit/' +newdept.Ugcid]);
+        });        
+      }
+      else
+      {
+        this.ugService.addusergroupconfiguration(newdept).subscribe((res:any)=>{
+          this.router.navigate(['/admin/groups/edit' +newdept.Ugcid]);
+        });
+      }
+   
     }
     closepopup() {
       this.router.navigate(['/admin/usergroup']);
