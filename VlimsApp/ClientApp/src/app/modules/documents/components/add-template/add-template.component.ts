@@ -87,6 +87,7 @@ export class AddTemplateComponent implements OnInit {
     }
     else if(lastSegment=="edit")
     {
+      debugger;
       this.title='Edit Document Template';
         let id=parseInt(segments[segments.length-1],10);
         this.getdocumenttypeconfig();
@@ -94,10 +95,12 @@ export class AddTemplateComponent implements OnInit {
     }
     else if(lastSegment=="view")
     {
+      debugger;
       this.title='View Document Template';
-        let id=segments[segments.length-1];
+      this.viewMode=true;
+        let ide=segments[segments.length-1];
         this.getdocumenttypeconfig();
-        this.getbyName(id);
+        this.getbyId(parseInt(segments[segments.length - 1]));
     }
     
   }
@@ -161,7 +164,7 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
     if(this.editMode)
     {
-    this.templatesvc.adddoctemplate(this.templateForm).subscribe((data:any)=>{
+      this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
       this.loader.hide();
     }, (error:any) => {
       this.loader.hide();
@@ -169,7 +172,7 @@ export class AddTemplateComponent implements OnInit {
     }
     else
     {
-      this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
+      this.templatesvc.adddoctemplate(this.templateForm).subscribe((data:any)=>{ 
         this.loader.hide();
       }, (error:any) => {
         this.loader.hide();
@@ -236,18 +239,32 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   approve() {
-    this.templateForm.Status = 'Approved'
-    this.updateTemplate();
+    debugger;
+    this.templateForm.Status = 'Approved'   
+    this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
+      this.loader.hide();
+    }, (error:any) => {
+      this.loader.hide();
+    });
   }
   reinitiative() {
-    this.templateForm.Status = 'Re-Initiated'
-    this.updateTemplate();
+    this.templateForm.Status = 'Re-Initiated'    
+    this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
+      this.loader.hide();
+    }, (error:any) => {
+      this.loader.hide();
+    });
   }
   reject() {
-    this.templateForm.Status = 'Rejected'
-    this.updateTemplate();
+    this.templateForm.Status = 'Rejected'    
+    this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
+      this.loader.hide();
+    }, (error:any) => {
+      this.loader.hide();
+    });
   }
   updateTemplate() {
+    debugger;
     this.doctypeservice.updatedoctypeconfig(this.selectedtype).subscribe(res => {
       this.commonsvc.template = new DocumentTemplateConfiguration();
       this.location.back();

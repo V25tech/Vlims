@@ -9,7 +9,7 @@
 @footer_PSY NVarChar(50),
 @footer_rows_PSY NVarChar(50),
 @footer_columns_PSY NVarChar(50),
-@document_PSY NVarchar(200),
+@document_PSY xml,
 @ModifiedBy_PSY NVarChar(100),
 @Status_PSY NVarChar(100)
  AS 

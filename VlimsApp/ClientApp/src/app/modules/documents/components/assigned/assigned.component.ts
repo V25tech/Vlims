@@ -49,7 +49,7 @@ export class AssignedComponent implements OnInit {
         this.router.navigate(['/document-type/view',referId]);
         break;
       case "Template":
-        this.router.navigate(['/mainpage/documentmaster/viewdoctemplate']);
+        this.router.navigate(['/templates/view',referId]);
         break;
       case "Workflow":
         this.router.navigate(['/mainpage/documentmaster/viewworkflow']);
