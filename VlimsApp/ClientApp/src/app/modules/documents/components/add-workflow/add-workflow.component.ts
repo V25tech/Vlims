@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { Workflow } from '../../models/workflows';
 import { Router } from '@angular/router';
@@ -75,7 +75,8 @@ export class AddWorkflowComponent {
     private userssvc:UsersconfigurationService,
     private usergroupsvc:usergroupconfigurationService,
     private workflowsvc:WorkflowServiceService,
-    private commonsvc:CommonService
+    private commonsvc:CommonService,
+    private cdr: ChangeDetectorRef
   ) {}
 ngOnInit(){
   const urlPath = this.router.url;
@@ -90,6 +91,10 @@ if(lastSegment=="add")
  let addcount=parseInt(segments[segments.length - 1],10);
  addcount++;
 this.workflow.code="Flow-"+addcount;  
+this.workflow.reviewsType='user';
+this.workflow.approvalsType='user';
+this.workflow.reviewsCount=1;
+this.workflow.approvalsCount=1;
 this.getdepartments();
 this.getdocumenttypeconfig();
 this.getusergroupInfo();
@@ -126,6 +131,14 @@ else if(lastSegment=="view")
   getbyId(id: number) {
     return this.workflowsvc.getbyId(id).subscribe((data:any)=>{
       this.workflow=data;
+      if(this.workflow.reviewers!=null && this.workflow.reviewers!=undefined)
+      {
+      this.workflow.review=this.workflow.reviewers[0]; 
+      }
+      if(this.workflow.approvals!=null && this.workflow.approvals!=undefined)
+      {
+      this.workflow.approve=this.workflow.approvals[0]; 
+      }
       console.log('u',this.workflow);
     },(error:any)=>{
 
@@ -136,6 +149,14 @@ else if(lastSegment=="view")
     workflow.CreatedBy=this.commonsvc.createdBy;
     workflow.ModifiedBy=this.commonsvc.createdBy;
     workflow.Status="In-Progress";
+    workflow.reviewers=[];
+    if(workflow.review!=null && workflow.review!=undefined){
+    workflow.reviewers.push(workflow.review);
+    }
+    workflow.approvals=[];
+    if(workflow.approve!=null && workflow.approve!=undefined){
+    workflow.approvals.push(workflow.approve);
+    }
     if(workflow.department!=null)
     {
      workflow.departments= workflow.department.map(o=>o.DepartmentName).join(",");
@@ -180,7 +201,7 @@ else if(lastSegment=="view")
   }
   getusers() {
     this.loader.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+   let objrequest: RequestContext={PageNumber:1,PageSize:100,Id:0};
       return this.userssvc.getusers(objrequest).subscribe((data: any) => {
         
         this.users = data.Response;
@@ -204,4 +225,31 @@ else if(lastSegment=="view")
     }
     ));
   }
+  // calculateapprovalscount(){
+  //   debugger
+  //   if(this.workflow.approvals!=null || this.workflow.approvals!=undefined)
+  //   {
+  //   this.workflow.approvalsCount = this.workflow.approvals?.length;
+  //   }
+  //   // if(this.workflow.approvalsCount>1 && this.workflow.approvals!=null)
+  //   // {
+  //   //   this.workflow.approvalsCount=1;
+  //   //   let usr=this.workflow.approvals[0];
+  //   //   this.workflow.approvals.push(usr);
+  //   //   this.cdr.detectChanges();
+  //   // }
+  // }
+  // calculatereviewscount(){
+  //   debugger
+  //   alert(this.workflow.reviewers?.length);
+  //   debugger
+  //   if(this.workflow.reviewers!=null || this.workflow.reviewers!=undefined)
+  //   {
+  //   this.workflow.reviewsCount = this.workflow.reviewers?.length;
+  //   }
+  //   if(this.workflow.reviewsCount>1 && this.workflow.reviewers!=null)
+  //   {
+     
+  //    }
+  // }
 }
