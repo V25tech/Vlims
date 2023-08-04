@@ -51,6 +51,7 @@ export class RegisterComponent implements OnInit {
     }
     else if (lastSegment == "edit") {
       this.editMode = true;
+      this.title="Edit User Configuration";
       this.userid=segments[segments.length - 1];
       this.getbyId();
     }

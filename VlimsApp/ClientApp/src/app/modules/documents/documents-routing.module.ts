@@ -152,7 +152,7 @@ const routes: Routes = [
   },
   {
     path: 'admin/plant/edit/:plantId',
-    component: PlantComponent,
+    component: NewPlantRegistrationComponent,
   },
   {
     path: 'admin/addplant',

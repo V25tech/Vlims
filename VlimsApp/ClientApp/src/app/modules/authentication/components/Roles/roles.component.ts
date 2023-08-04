@@ -29,6 +29,10 @@ export class RolesComponent implements OnInit {
       return this.doctypeservice.getroles(objrequest).subscribe((data: any) => {
         debugger
         this.types = data.Response;
+        if(this.types!=null && this.types.length<10)
+        {
+          this.currentPage=10;
+        }
         console.log(this.types);
       }, er => {
       

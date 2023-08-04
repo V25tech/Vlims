@@ -224,6 +224,7 @@ export class PlantConfiguration {
   ModifiedBy: string = ''
   ModifiedDate: Date | undefined;
   Status: string = '';
+  PMId:number=0;
 
 }
 export class SecurityManagement {
