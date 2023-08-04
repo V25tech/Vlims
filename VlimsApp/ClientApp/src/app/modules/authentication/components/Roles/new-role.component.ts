@@ -71,6 +71,7 @@ export class AddRoleComponent implements OnInit {
 {
     this.rolesservice.Updaterole(adaddrole).subscribe((res: any) => {
       this.location.back();
+      this.title="Edit Role Registration";
     
     });
   }

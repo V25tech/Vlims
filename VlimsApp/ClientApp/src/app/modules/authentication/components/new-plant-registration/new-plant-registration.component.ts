@@ -14,22 +14,26 @@ export class NewPlantRegistrationComponent implements OnInit {
   editMode:boolean=false;
   viewMode: boolean = false;
   plantid: number = 0;
+  title:string='Add Plant Configuration';
   constructor(private commonsvc: CommonService, private doctypeservice: NewPlantRegistrationConfigurationService, private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
+    debugger;
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
-    if (lastSegment == "edit") {
+    if (lastSegment == "edit") 
+    {
       let id = parseInt(segments[segments.length - 1], 10);
       this.plantid = id;
       this.editMode = true; this.viewMode = false;
       this.getbyId();
-      //this.documentType=this.commonsvc.documentType;
+      this.title="Edit Plan Configuration";
     }
     else if (lastSegment == "view") {
       this.viewMode = true; this.editMode = false;
       this.adddoc = this.commonsvc.plantConfig;
+      this.title="View Plan Configuration";
     }
     //this.get();
     this.cdr.detectChanges();

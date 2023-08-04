@@ -64,9 +64,9 @@ namespace PolicySummary.Controllers
         /// </summary>
         /// <param name="dTCId"></param>
         [HttpGet("getbyId")]
-        public ActionResult<PlantManagement> GetPlantConfigurationByDTCId(int dTCId)
+        public ActionResult<PlantManagement> GetPlantConfigurationByDTCId(int DPCFId)
         {
-            var result = plantManagementService.GetPlantManagementByPMId(dTCId.ToString());
+            var result = plantManagementService.GetPlantManagementByPMId(DPCFId.ToString());
             return result;
         }
         /// <summary>
