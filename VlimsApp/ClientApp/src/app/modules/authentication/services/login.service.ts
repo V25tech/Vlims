@@ -43,7 +43,7 @@ export class LoginService {
     }
     else if(lstusers!=null && lstusers!=undefined)
     {
-      let user=lstusers.find(o=>o.UserID===username && o.Password===password);
+      let user=lstusers.find(o=>o.UserID==username && o.Password==password);
       if(user!=null && user!=undefined)
       {
         localStorage.setItem(AUTH_STORAGE_KEY, 'true');

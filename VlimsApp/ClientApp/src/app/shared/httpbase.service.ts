@@ -59,7 +59,6 @@ export class HttpbaseService {
         }
     }
     postJsonLogin(postObject: any, url: string,type:string | null =null) {
-        
         if(type!=null)
         {
             this.baseUrl=this.geturl(type);

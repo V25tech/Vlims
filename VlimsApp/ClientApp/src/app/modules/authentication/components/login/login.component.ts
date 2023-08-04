@@ -34,10 +34,10 @@ export class LoginComponent {
     }
   }
   getusers(){
+    debugger
     this.loader.show();
-    let p_context=new RequestContext();
-     p_context.PageNumber=1;p_context.PageSize=100;p_context.PageSize=0;
-      return this.userssvc.getusers(p_context).subscribe((data:any)=>{
+    let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
+      return this.userssvc.getusers(objrequest).subscribe((data:any)=>{
         this.lstusers=data.Response;
         this.loader.hide();
       });

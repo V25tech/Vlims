@@ -12,7 +12,6 @@ export class UsersconfigurationService {
   constructor(private http: HttpbaseService) { }
 
   getusers(objrequest: RequestContext) {
-    
     return this.http.postJsonLogin(objrequest, "api/userconfiguration/getusers",this.type);
 }
 adduser(objrequest: UserConfiguration) {
