@@ -126,13 +126,29 @@ export class LeftNavComponent {
           iconClass: '',
         },
         {
-          label: 'Additional Tasks',
-          path: '',
+          label: 'Document Print',
+          path: 'print',
           isOpen: false,
           children: null,
           isActive: false,
           iconClass: '',
-        }
+        },
+        {
+          label: 'Existing Document Request',
+          path: 'existingdoc',
+          isOpen: false,
+          children: null,
+          isActive: false,
+          iconClass: '',
+        },
+        // {
+        //   label: 'Additional Tasks',
+        //   path: '',
+        //   isOpen: false,
+        //   children: null,
+        //   isActive: false,
+        //   iconClass: '',
+        // }
       ],
     },
     {

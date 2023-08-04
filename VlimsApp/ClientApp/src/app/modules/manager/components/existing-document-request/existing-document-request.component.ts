@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExistingDocumentRequest, RequestContext } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { ExistingDocumentRequestService } from '../../../services/existing-document-request.service';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Table } from 'primeng/table';
 import { Paginator } from 'primeng/paginator';
@@ -32,7 +32,7 @@ export class ExistingDocumentRequestComponent implements OnInit {
   ngOnInit() {
     //this.getdocumentrequest();    
     this.existingDocDatasource = this.getDummyData();
-    this.currentPage=10;
+    this.currentPage = 10;
     console.log(this.existingDocDatasource);
   }
 
@@ -53,19 +53,19 @@ export class ExistingDocumentRequestComponent implements OnInit {
 
   editExistingDoc(existingDocReq: ExistingDocumentRequest) {
     this.commonsvc.existingDocReq = existingDocReq;
-    this.router.navigate(['/existingdoc/edit/'+existingDocReq.edrId]);
+    this.router.navigate(['/existingdoc/edit/' + existingDocReq.edrId]);
   }
 
-  getDummyData(){
+  getDummyData() {
     let estdoc = new ExistingDocumentRequest();
-    estdoc.edrId ='1';
+    estdoc.edrId = 0;
     estdoc.documenttitle = 'SOP for DMS';
     estdoc.documentno = 'QA/SAP/023';
     estdoc.documenttype = "SOP";
-    estdoc.department ="QA"
+    estdoc.department = "QA"
     estdoc.effectiveDate = new Date()
     estdoc.reviewDate = new Date()
-   return [estdoc];
+    return [estdoc];
   }
 
 }

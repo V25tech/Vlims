@@ -320,7 +320,7 @@ export class DocumentPrintConfiguration {
 }
 
 export class ExistingDocumentRequest {
-  edrId: string = '';
+  edrId: number = 0;
   documentno: string = '';
   documenttitle: string = '';
   department: string = '';
