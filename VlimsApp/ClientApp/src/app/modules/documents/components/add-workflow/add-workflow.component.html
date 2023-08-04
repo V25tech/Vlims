@@ -105,8 +105,14 @@
                 max="10"
                 min="1"
                 placeholder="Select No. of Reviews"
-                [(ngModel)]="workflow.reviewsCount"
+                [(ngModel)]="workflow.reviewsCount" readonly
+                required
+                #reviewsCountInput="ngModel"
               />
+               <!-- Show validation error message -->
+    <div *ngIf="workflow.reviewsCount > 1" class="text-danger">
+      Select Only One Reviwer.
+            </div>
             </div>
           </div>
 
@@ -120,7 +126,7 @@
                   type="radio"
                   id="reviewsType2"
                   [(ngModel)]="workflow.reviewsType"
-                  value="user"
+                  value="user" 
                 />
                 <label class="form-check-label" for="reviewsType2"
                   >User(s)</label
@@ -129,11 +135,11 @@
               <div class="form-check form-check-inline">
                 <input
                   class="form-check-input"
-                  name="reviewsType"
+                  name="reviewsType1"
                   type="radio"
                   id="reviewsType1"
                   [(ngModel)]="workflow.reviewsType"
-                  value="group"
+                  value="group" [disabled]="true"
                 />
                 <label class="form-check-label" for="reviewsType1">User Group</label>
               </div>
@@ -145,15 +151,22 @@
               >Reviewer(s)</label
             >
             <div class="col-sm-10">
-              <p-multiSelect
+              <!-- <p-multiSelect
                 [options]="users"
                 [(ngModel)]="workflow.reviewers"
                 defaultLabel="Select a User"
                 name="UserID"
                 optionLabel="UserID"
                 
-                display="chip"
-              ></p-multiSelect>
+                display="chip"  (ngModelChange)="calculatereviewscount()"
+              ></p-multiSelect> -->
+              <p-dropdown
+                name="UserID"
+                [options]="users"
+                [(ngModel)]="workflow.review" 
+                optionLabel="UserID" placeholder="Select a User"
+              >
+              </p-dropdown>
             </div>
             <!-- <div class="col-sm-10">
               <div class="d-flex align-items-center mb-2" *ngFor="let reviewer of reviewers; let i = index">
@@ -201,12 +214,12 @@
               <input
                 type="number"
                 class="form-control"
-                id="reviewsCount"
-                name="reviewsCount"
+                id="approvalsCount"
+                name="approvalsCount"
                 max="10"
                 min="1"
                 placeholder="Select No. of Reviews"
-                [(ngModel)]="workflow.approvalsCount"
+                [(ngModel)]="workflow.approvalsCount" readonly
               />
             </div>
           </div>
@@ -230,11 +243,11 @@
               <div class="form-check form-check-inline">
                 <input
                   class="form-check-input"
-                  name="approvalType"
+                  name="approvalType1"
                   type="radio"
                   id="approvalType1"
                   [(ngModel)]="workflow.approvalsType"
-                  value="group"
+                  value="group" [disabled]="true"
                 />
                 <label class="form-check-label" for="approvalType1">User Group</label>
               </div>
@@ -246,15 +259,22 @@
               >Approver(s)</label
             >
             <div class="col-sm-10">
-              <p-multiSelect
+              <!-- <p-multiSelect
                 [options]="users"
                 [(ngModel)]="workflow.approvals"
                 defaultLabel="Select a User"
                 name="UserID"
                 optionLabel="UserID"
               
-                display="chip"
-              ></p-multiSelect>
+                display="chip" (ngModelChange)="calculateapprovalscount()"
+              ></p-multiSelect> -->
+              <p-dropdown
+              name="UserID"
+              [options]="users"
+              [(ngModel)]="workflow.approve" 
+              optionLabel="UserID" placeholder="Select a User"
+            >
+            </p-dropdown>
             </div>
            
           </div>

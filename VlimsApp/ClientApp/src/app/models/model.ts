@@ -126,6 +126,8 @@ export class workflowconiguration {
   approvalsType: string = ''
   approvalsGroup: string | null = null
   approvals: UserConfiguration[] | null = []
+  review:UserConfiguration | null =null;
+  approve:UserConfiguration | null=null;
   CreatedBy: string = '';
   CreatedDate: string | null = null;
   ModifiedBy: string = '';
