@@ -34,8 +34,8 @@ export class ReviewPrepationComponent {
   safePdfDataUrl: SafeResourceUrl | undefined;
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
-  viewMode:boolean=false;
-  editMode:boolean=false;
+  viewMode: boolean = false;
+  editMode: boolean = false;
 
   stageSource = [
     { label: 'Select Stage', value: '' },
@@ -51,13 +51,12 @@ export class ReviewPrepationComponent {
     debugger
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    if(segments[segments.length-2].toString()=='view')
-    {
-      this.viewMode=true;
-      this.getbyId(parseInt(segments[segments.length-1],10))
+    if (segments[segments.length - 2].toString() == 'view') {
+      this.viewMode = true;
+      this.getbyId(parseInt(segments[segments.length - 1], 10))
     }
     else if (this.commonsvc.preperation.dpnid) {
-      this.preparation = this.commonsvc.preperation;            
+      this.preparation = this.commonsvc.preperation;
     }
     else {
       this.location.back();
@@ -66,25 +65,25 @@ export class ReviewPrepationComponent {
   }
   getbyId(arg0: number) {
     this.spinner.show();
-    return this.docPreperationService.getbyId(arg0).subscribe((data:any)=>{
-      this.preparation=data;
+    return this.docPreperationService.getbyId(arg0).subscribe((data: any) => {
+      this.preparation = data;
       this.spinner.hide();
-      console.log('request',this.preparation);
+      console.log('request', this.preparation);
     });
   }
-  approve(){
-    this.preparation.status='Approved'
+  approve() {
+    this.preparation.status = 'Approved'
     this.savePreparation();
   }
-  reinitiative(){
-    this.preparation.status='Re-Initiated'
+  reinitiative() {
+    this.preparation.status = 'Re-Initiated'
     this.savePreparation();
   }
-  reject(){
-    this.preparation.status='Rejected'
+  reject() {
+    this.preparation.status = 'Rejected'
     this.savePreparation();
   }
-  savePreparation() {
+  savePreparation() {    
     this.spinner.show();
     this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
       this.commonsvc.preperation = new DocumentPreperationConfiguration();
@@ -149,7 +148,7 @@ export class ReviewPrepationComponent {
       const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
       this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
       console.log("safePdfDataUrl" + "-" + this.safePdfDataUrl);
-      this.modalRef = this.modalService.show(template,{ class: 'modal-lg' });
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     }
   }
 
@@ -176,7 +175,7 @@ export class ReviewPrepationComponent {
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();
       this.openViewer(template);
-    },er => {
+    }, er => {
       this.spinner.hide();
     });
   }

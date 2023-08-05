@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
+import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 @Component({
   selector: 'existing-document-request',
   templateUrl: './review-existing-document-request.component.html',
@@ -31,12 +33,17 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   pdfUrl: string | null = null;
   effectiveDate: string | undefined;
   reviewDate: string | undefined;
+  departmentsSource= [];
+  typeSource = [];
 
 
-  constructor(private commonsvc: CommonService, private location: Location, private spinner: NgxSpinnerService, private modalService: BsModalService, private sanitizer: DomSanitizer, private existingDocReqservice: ExistingDocumentRequestService, private route: ActivatedRoute) { }
+  constructor(private commonsvc: CommonService, private location: Location, private spinner: NgxSpinnerService, private modalService: BsModalService, private sanitizer: DomSanitizer, private existingDocReqservice: ExistingDocumentRequestService, private route: ActivatedRoute,
+    private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id') ?? '';
+    this.getdepartments();
+    this.getdocumenttypeconfig();
     if (this.id) { //edit mode
       this.editMode = true;
       if (this.commonsvc.existingDocReq) {
@@ -68,6 +75,19 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
     }, er => {
       this.spinner.hide();
       console.log(er);
+    });
+  }
+
+  getdepartments() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+      this.departmentsSource = data.Response;
+    });
+  }
+  getdocumenttypeconfig() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
+      this.typeSource = data.Response;
     });
   }
 

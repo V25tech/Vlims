@@ -69,24 +69,10 @@ export class AddRequestComponent {
 
   saveRequest() {
     if (this.editMode) {
-      if (!this.request.documenttype)
-        this.toastr.error('Documenttype must required', 'Erorr..!', { timeOut: 3000 });
-      else if (!this.request.department)
-        this.toastr.error('Department must required', 'Erorr..!', { timeOut: 3000 });
-      else if (!this.request.workflow)
-        this.toastr.error('Workflow must required', 'Erorr..!', { timeOut: 3000 });
-      else
       this.updateRequest();
     }
     else {
-      if (!this.request.documenttype)
-        this.toastr.error('Documenttype must required', 'Erorr..!', { timeOut: 3000 });
-      else if (!this.request.department)
-        this.toastr.error('Department must required', 'Erorr..!', { timeOut: 3000 });
-      else if (!this.request.workflow)
-        this.toastr.error('Workflow must required', 'Erorr..!', { timeOut: 3000 });
-      else
-        this.addRequest();
+      this.addRequest();
     }
   }
 
