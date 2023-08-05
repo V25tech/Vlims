@@ -126,6 +126,14 @@ export class LeftNavComponent {
           iconClass: '',
         },
         {
+          label: 'Document Revision',
+          path: 'revision',
+          isOpen: false,
+          children: null,
+          isActive: false,
+          iconClass: '',
+        },
+        {
           label: 'Document Print',
           path: 'print',
           isOpen: false,
@@ -140,15 +148,7 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: '',
-        },
-        // {
-        //   label: 'Additional Tasks',
-        //   path: '',
-        //   isOpen: false,
-        //   children: null,
-        //   isActive: false,
-        //   iconClass: '',
-        // }
+        }
       ],
     },
     {
