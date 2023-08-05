@@ -68,7 +68,7 @@
                      placeholder="Department Name"
                      [(ngModel)]="newdept.DepartmentName" [disabled]="viewMode"
                      required
-           #departmentNameInput="ngModel" />
+                     #departmentNameInput="ngModel" />
            <!-- Show validation error message -->
     <div *ngIf="departmentNameInput.invalid && (departmentNameInput.dirty || departmentNameInput.touched)" class="text-danger">
       Department Name is required.

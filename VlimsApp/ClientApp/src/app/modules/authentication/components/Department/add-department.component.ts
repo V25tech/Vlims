@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { DepartmentConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { DepartmentconfigurationService } from '../../../services/departmentconfiguration.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-department',
@@ -19,7 +20,7 @@ export class AddDepartmentComponent implements OnInit {
   departId: number = 0;
    editMode: boolean = false;
    title:string='Add Department Configuration'
-  constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService,
+  constructor(private commonsvc: CommonService,private toastr: ToastrService, private doctypeservice: DepartmentconfigurationService,
     private router: Router, private cdr: ChangeDetectorRef,private location: Location) { }
 
   ngOnInit() {
@@ -76,6 +77,7 @@ export class AddDepartmentComponent implements OnInit {
     this.doctypeservice.adddepartment(newdept).subscribe((res: any) => {
       //this.toastr.success('Added');
       this.router.navigate(['/admin/department']);
+      this.toastr.success('Department added Succesfull!', 'Saved.!');
     });
 
 
