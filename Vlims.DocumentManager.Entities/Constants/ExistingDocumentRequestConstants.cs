@@ -16,6 +16,8 @@ public class ExistingDocumentRequestConstants
 
     public const string printtype = "@printtype_PSY";
 
+    public const string documenttype = "@documenttype_PSY";
+
     public const string noofcopies = "@no.ofcopies_PSY";
 
     public const string workflow = "@workflow_PSY";
@@ -23,6 +25,8 @@ public class ExistingDocumentRequestConstants
     public const string department = "@department_PSY";
 
     public const string browse = "@browse_PSY";
+
+    public const string document = "@document_PSY";
 
     public const string sampletemplate = "@sampletemplate_PSY";
 

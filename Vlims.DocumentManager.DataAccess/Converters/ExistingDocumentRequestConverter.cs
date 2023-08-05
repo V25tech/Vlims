@@ -29,9 +29,9 @@ public static class ExistingDocumentRequestConverter
                     existingDocumentRequestData.EDRId = Convert.ToInt16(row[ExistingDocumentRequestConstants.EDRId.Trim('@')]);
                     existingDocumentRequestData.documentno = Convert.ToString(row[ExistingDocumentRequestConstants.documentno.Trim('@')]);
                     existingDocumentRequestData.documenttitle = Convert.ToString(row[ExistingDocumentRequestConstants.documenttitle.Trim('@')]);
-                    existingDocumentRequestData.documenttype = Convert.ToString(row[ExistingDocumentRequestConstants.printtype.Trim('@')]);
+                    existingDocumentRequestData.documenttype = Convert.ToString(row[ExistingDocumentRequestConstants.documenttype.Trim('@')]);
                     existingDocumentRequestData.department = Convert.ToString(row[ExistingDocumentRequestConstants.department.Trim('@')]);
-                    existingDocumentRequestData.document = Convert.ToString(row[ExistingDocumentRequestConstants.browse.Trim('@')]);
+                    existingDocumentRequestData.document = Convert.ToString(row[ExistingDocumentRequestConstants.document.Trim('@')]);
                     existingDocumentRequestData.sampletemplate = Convert.ToString(row[ExistingDocumentRequestConstants.sampletemplate.Trim('@')]);
                     existingDocumentRequestData.CreatedBy = Convert.ToString(row[ExistingDocumentRequestConstants.CreatedBy.Trim('@')]);
                     existingDocumentRequestData.CreatedDate = DatatypeConverter.SetDateTime(row[ExistingDocumentRequestConstants.CreatedDate.Trim('@')]);

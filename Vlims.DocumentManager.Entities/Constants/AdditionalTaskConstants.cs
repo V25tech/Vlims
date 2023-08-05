@@ -23,7 +23,10 @@ namespace Vlims.DMS.Entities
         public const string Version = "@Version";
 
         public const string Documentmanagerid = "@Documentmanagerid_PSY";
-        
+
+        public const string DocumentEffective_ID = "@DocumentEffective_ID";
+
+
         public const string CreatedBy = "@CreatedBy_PSY";
         
         public const string CreatedDate = "@CreatedDate_PSY";
@@ -31,7 +34,12 @@ namespace Vlims.DMS.Entities
         public const string ModifiedBy = "@ModifiedBy_PSY";
         
         public const string ModifiedDate = "@ModifiedDate_PSY";
-        
+
+        public const string EffectiveDate = "@EffectiveDate_PSY";
+
+        public const string reviewDate = "@reviewDate_PSY";
+
+
         public const string USP_AdditionalTask_PSY_GET_ALL = "dbo.USP_AdditionalTask_PSY_GET_ALL";
         
         public const string USP_AdditionalTask_PSY_GET = "dbo.USP_AdditionalTask_PSY_GET";
