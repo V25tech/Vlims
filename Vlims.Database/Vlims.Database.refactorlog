@@ -63,4 +63,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="User_PSY" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="4c46425d-8c4c-4bdc-a699-026668f2d34e" ChangeDateTime="08/04/2023 17:14:07">
+    <Property Name="ElementName" Value="[dbo].[WorkflowReviewMapping].[WorkflowId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkflowReviewMapping]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WorkFlowId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="72aece2f-7f43-4dfd-9a84-e95cccf07092" ChangeDateTime="08/04/2023 17:41:29">
+    <Property Name="ElementName" Value="[dbo].[workitems_PSY].[Action_PSY]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[workitems_PSY]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ActionType_PSY" />
+  </Operation>
 </Operations>

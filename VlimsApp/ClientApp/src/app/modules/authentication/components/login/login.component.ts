@@ -17,7 +17,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   constructor(private router: Router,private loginService: LoginService,private userssvc:UsersconfigurationService,
-   private loader:NgxSpinnerService ) {}
+   private loader:NgxSpinnerService,private commonsvc:CommonService ) {}
 
    ngOnInit(){
     this.getusers();
@@ -29,6 +29,8 @@ export class LoginComponent {
     //   this.router.navigate(['/documents']);
     // }
     if(this.loginService.login(this.username, this.password,this.lstusers)){
+      localStorage.setItem("username", this.username);
+      this.commonsvc.createdBy=this.username;
       this.loginSuccess.emit();
       this.router.navigate(['/documents']);
     }
@@ -36,7 +38,8 @@ export class LoginComponent {
   getusers(){
     debugger
     this.loader.show();
-    let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
+    let objrequest=new RequestContext();
+    objrequest.PageNumber=1;objrequest.PageSize=50;
       return this.userssvc.getusers(objrequest).subscribe((data:any)=>{
         this.lstusers=data.Response;
         this.loader.hide();

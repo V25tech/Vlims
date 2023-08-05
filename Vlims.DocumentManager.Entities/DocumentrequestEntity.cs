@@ -222,5 +222,7 @@ namespace Vlims.DMS.Entities
                 this.approvedOnField = value;
             }
         }
+        public string Reviwers { get; set; }
+        public string Approvals { get; set; }
     }
 }

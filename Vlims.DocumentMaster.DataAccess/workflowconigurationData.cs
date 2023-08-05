@@ -16,13 +16,15 @@ namespace Vlims.DocumentMaster.DataAccess
     using Vlims.Common;
     using Vlims.DocumentMaster.Entities;
     using System.Xml.Serialization;
+    using Microsoft.Practices.EnterpriseLibrary.Common.Utility;
+    using Microsoft.VisualBasic;
 
     // Comment
-    public class workflowconigurationData 
+    public class workflowconigurationData
     {
-        
-        
-        
+
+
+
         public static DataSet GetAllworkflowconiguration(RequestContext requestContext)
         {
             try
@@ -38,7 +40,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
-        
+
         public static DataSet GetworkflowconigurationByWFCId(int wFCId)
         {
             try
@@ -51,7 +53,64 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
-        
+
+        public static bool WorkspaceUserMapping(workflowconiguration p_workflowconiguration)
+        {
+            bool insert = false; List<WorkFlowMapping> lstReviwers = new List<WorkFlowMapping>();
+            List<WorkFlowMapping> lstApprovers = new List<WorkFlowMapping>();
+            p_workflowconiguration.reviewers.ForEach(p =>
+            {
+                WorkFlowMapping mapping= new WorkFlowMapping();
+                mapping.UserId = Convert.ToInt32(p.UCFId);
+                mapping.UserName = p.UserID;
+                mapping.WorkFlowId =Convert.ToInt32(p_workflowconiguration.WFCId);
+                mapping.WorkFlowName = p_workflowconiguration.workflowName;
+                mapping.Type = "Review";
+                lstReviwers.Add(mapping);
+            });
+            p_workflowconiguration.approvals.ForEach(p =>
+            {
+                WorkFlowMapping mapping = new WorkFlowMapping();
+                mapping.UserId = Convert.ToInt32(p.UCFId);
+                mapping.UserName = p.UserID;
+                mapping.WorkFlowId = Convert.ToInt32(p_workflowconiguration.WFCId);
+                mapping.WorkFlowName = p_workflowconiguration.workflowName;
+                mapping.Type = "Approve";
+                lstApprovers.Add(mapping);
+            });
+            DataTable workflowusersmappings = GetWorkflowUserMapping();
+            if (lstReviwers.Count > 0)
+            {
+                lstReviwers.ForEach(p =>
+                {
+                    workflowusersmappings.Rows.Add(p.UserId, p.UserName, p.WorkFlowId, p.WorkFlowName, p.Type);
+                });
+            }
+            if (lstApprovers.Count > 0)
+            {
+                lstApprovers.ForEach(p =>
+                {
+                    workflowusersmappings.Rows.Add(p.UserId, p.UserName, p.WorkFlowId, p.WorkFlowName, p.Type);
+                });
+            }
+
+            List<SqlParameter> sqlparms = new List<SqlParameter>();
+            sqlparms.Add(new SqlParameter { SqlDbType =SqlDbType.Structured, ParameterName = "@mappings", Value = workflowusersmappings });
+            Object result = dataAccessHelper.ExecuteStoredProcedure("[dbo].[USP_WorkFlowUsersMappings_PSY_INSERT]", sqlparms, ExecutionType.NonQuery);
+            return insert;
+        }
+
+        public static DataTable GetWorkflowUserMapping()
+        {
+
+            DataTable TableInfo = new DataTable("Workflowusrmappings");
+            TableInfo.Columns.Add("UserId", typeof(int));
+            TableInfo.Columns.Add("UserName", typeof(string));
+            TableInfo.Columns.Add("WorkFlowId", typeof(int));
+            TableInfo.Columns.Add("WorkFlowName", typeof(string)).DefaultValue = "";
+            TableInfo.Columns.Add("Type", typeof(string)).DefaultValue = null;
+            return TableInfo;
+        }
         public static bool Saveworkflowconiguration(workflowconiguration workflowconiguration)
         {
             try
@@ -79,6 +138,8 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.Status, Value = workflowconiguration.Status });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = workflowconigurationConstants.document, Value = xmlString });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(workflowconigurationConstants.USP_workflowconiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
+                if (Convert.ToInt32(result) > 0)
+                    workflowconiguration.WFCId = result.ToString();
                 return (Convert.ToInt32(result) > 0);
             }
             catch (System.Exception ex)
@@ -86,7 +147,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
-        
+
         public static bool Updateworkflowconiguration(workflowconiguration workflowconiguration)
         {
             try
@@ -119,7 +180,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
-        
+
         public static bool DeleteworkflowconigurationByWFCId(int wFCId)
         {
             try
@@ -132,12 +193,12 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
-        
+
         public static bool DeleteAllworkflowconiguration(List<int> wFCIds)
         {
             try
             {
-                var result = dataAccessHelper.ExecuteStoredProcedure(workflowconigurationConstants.USP_workflowconiguration_PSY_DELETE_ALL, workflowconigurationConstants.WFCId, DbType.String, string.Join(',',  wFCIds), ExecutionType.NonQuery);
+                var result = dataAccessHelper.ExecuteStoredProcedure(workflowconigurationConstants.USP_workflowconiguration_PSY_DELETE_ALL, workflowconigurationConstants.WFCId, DbType.String, string.Join(',', wFCIds), ExecutionType.NonQuery);
                 return (Convert.ToInt32(result) >= 0);
             }
             catch (System.Exception ex)

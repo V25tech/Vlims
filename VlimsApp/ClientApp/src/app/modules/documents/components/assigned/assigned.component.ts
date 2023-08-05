@@ -1,10 +1,11 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { RequestContext, WorkItemsConfiguration } from 'src/app/models/model';
+import { RequestContext, RequestContext1, WorkItemsConfiguration } from 'src/app/models/model';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 import { Table } from 'primeng/table';
 import { Paginator } from 'primeng/paginator';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/shared/common.service';
 
 @Component({
   selector: 'app-assigned',
@@ -21,16 +22,28 @@ export class AssignedComponent implements OnInit {
   rowsPerPageOptions = [10, 20, 50];
   constructor(private workitemssvc:WorkitemsService,
     private router:Router,
-    private loader:NgxSpinnerService) {}
+    private loader:NgxSpinnerService,
+    private commonsvc:CommonService) {}
 
     ngOnInit() {
       this.getworkflowitems();
     }
   getworkflowitems() {
     this.loader.show();
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 500, Id: 0 };
-    return this.workitemssvc.getworkitems(objrequest).subscribe((data: any) => {
+    debugger
+    
+    const user=localStorage.getItem("username");
+    if(user!=null && user!=undefined)
+    {
+      this.commonsvc.createdBy=user;
+    }
+    return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
       this.types = data.Response;
+      if(this.types.length>0)
+      {
+        debugger
+        this.types=this.types.filter(p=>p.InitiatedBy==user);
+      }
         if(this.types.length<10)
         this.currentPage=10;
       this.loader.hide();
@@ -41,8 +54,13 @@ export class AssignedComponent implements OnInit {
     });
 
   }
-  viewtask(tasktype:string,referId:null)
+  viewtask(obj:WorkItemsConfiguration)
   {
+    debugger
+   const tasktype=obj.TaskType;
+   const referId=obj.ReferenceId;
+   const total=this.types.filter(o=>o.ReferenceId==obj.ReferenceId && o.ActionType==obj.ActionType);
+
     debugger
     switch (tasktype) {
       case "Type":
@@ -55,7 +73,8 @@ export class AssignedComponent implements OnInit {
         this.router.navigate(['/mainpage/documentmaster/viewworkflow']);
         break;
       case "Request":
-        this.router.navigate(['/requests/view',referId]);
+        this.router.navigate(['/requests/view/workId',referId,obj.WITId]);
+        //this.router.navigate(['/requests/view',referId]);
         break;
       case "Preparation":
         this.router.navigate(['/preparation/view',referId]);

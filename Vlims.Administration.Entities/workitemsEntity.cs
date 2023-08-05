@@ -171,5 +171,8 @@ namespace Vlims.DMS.Entities
             }
         }
         public int? ReferenceId { get; set; }
+        public string InitiatedBy { get; set; }
+        public string ActionType { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }

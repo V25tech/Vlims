@@ -110,9 +110,9 @@
                 #reviewsCountInput="ngModel"
               />
                <!-- Show validation error message -->
-    <div *ngIf="workflow.reviewsCount > 1" class="text-danger">
+    <!-- <div *ngIf="workflow.reviewsCount > 1" class="text-danger">
       Select Only One Reviwer.
-            </div>
+            </div> -->
             </div>
           </div>
 
@@ -151,7 +151,7 @@
               >Reviewer(s)</label
             >
             <div class="col-sm-10">
-              <!-- <p-multiSelect
+              <p-multiSelect
                 [options]="users"
                 [(ngModel)]="workflow.reviewers"
                 defaultLabel="Select a User"
@@ -159,14 +159,14 @@
                 optionLabel="UserID"
                 
                 display="chip"  (ngModelChange)="calculatereviewscount()"
-              ></p-multiSelect> -->
-              <p-dropdown
+              ></p-multiSelect>
+              <!-- <p-dropdown
                 name="UserID"
                 [options]="users"
                 [(ngModel)]="workflow.review" 
                 optionLabel="UserID" placeholder="Select a User"
               >
-              </p-dropdown>
+              </p-dropdown> -->
             </div>
             <!-- <div class="col-sm-10">
               <div class="d-flex align-items-center mb-2" *ngFor="let reviewer of reviewers; let i = index">
@@ -259,7 +259,7 @@
               >Approver(s)</label
             >
             <div class="col-sm-10">
-              <!-- <p-multiSelect
+              <p-multiSelect
                 [options]="users"
                 [(ngModel)]="workflow.approvals"
                 defaultLabel="Select a User"
@@ -267,14 +267,14 @@
                 optionLabel="UserID"
               
                 display="chip" (ngModelChange)="calculateapprovalscount()"
-              ></p-multiSelect> -->
-              <p-dropdown
+              ></p-multiSelect>
+              <!-- <p-dropdown
               name="UserID"
               [options]="users"
               [(ngModel)]="workflow.approve" 
               optionLabel="UserID" placeholder="Select a User"
             >
-            </p-dropdown>
+            </p-dropdown> -->
             </div>
            
           </div>

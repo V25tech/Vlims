@@ -93,8 +93,8 @@ if(lastSegment=="add")
 this.workflow.code="Flow-"+addcount;  
 this.workflow.reviewsType='user';
 this.workflow.approvalsType='user';
-this.workflow.reviewsCount=1;
-this.workflow.approvalsCount=1;
+this.workflow.reviewsCount=0;
+this.workflow.approvalsCount=0;
 this.getdepartments();
 this.getdocumenttypeconfig();
 this.getusergroupInfo();
@@ -149,14 +149,14 @@ else if(lastSegment=="view")
     workflow.CreatedBy=this.commonsvc.createdBy;
     workflow.ModifiedBy=this.commonsvc.createdBy;
     workflow.Status="In-Progress";
-    workflow.reviewers=[];
-    if(workflow.review!=null && workflow.review!=undefined){
-    workflow.reviewers.push(workflow.review);
-    }
-    workflow.approvals=[];
-    if(workflow.approve!=null && workflow.approve!=undefined){
-    workflow.approvals.push(workflow.approve);
-    }
+    // workflow.reviewers=[];
+    // if(workflow.review!=null && workflow.review!=undefined){
+    // workflow.reviewers.push(workflow.review);
+    // }
+    // workflow.approvals=[];
+    // if(workflow.approve!=null && workflow.approve!=undefined){
+    // workflow.approvals.push(workflow.approve);
+    // }
     if(workflow.department!=null)
     {
      workflow.departments= workflow.department.map(o=>o.DepartmentName).join(",");
@@ -225,31 +225,19 @@ else if(lastSegment=="view")
     }
     ));
   }
-  // calculateapprovalscount(){
-  //   debugger
-  //   if(this.workflow.approvals!=null || this.workflow.approvals!=undefined)
-  //   {
-  //   this.workflow.approvalsCount = this.workflow.approvals?.length;
-  //   }
-  //   // if(this.workflow.approvalsCount>1 && this.workflow.approvals!=null)
-  //   // {
-  //   //   this.workflow.approvalsCount=1;
-  //   //   let usr=this.workflow.approvals[0];
-  //   //   this.workflow.approvals.push(usr);
-  //   //   this.cdr.detectChanges();
-  //   // }
-  // }
-  // calculatereviewscount(){
-  //   debugger
-  //   alert(this.workflow.reviewers?.length);
-  //   debugger
-  //   if(this.workflow.reviewers!=null || this.workflow.reviewers!=undefined)
-  //   {
-  //   this.workflow.reviewsCount = this.workflow.reviewers?.length;
-  //   }
-  //   if(this.workflow.reviewsCount>1 && this.workflow.reviewers!=null)
-  //   {
-     
-  //    }
-  // }
+  calculateapprovalscount(){
+    
+    if(this.workflow.approvals!=null || this.workflow.approvals!=undefined)
+    {
+    this.workflow.approvalsCount = this.workflow.approvals?.length;
+    }
+  }
+  calculatereviewscount(){
+    
+   
+    if(this.workflow.reviewers!=null || this.workflow.reviewers!=undefined)
+    {
+    this.workflow.reviewsCount = this.workflow.reviewers?.length;
+    }
+  }
 }

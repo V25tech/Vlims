@@ -24,11 +24,35 @@ wokflow_PSY=@wokflow_PSY,
 details_PSY=@details_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DPNID_PSY] = @DPNID_PSY ;  
 
+if(@Status_PSY!='APPROVED' or @Status_PSY!='APPROVE')
+begin
+DECLARE @TYPE NVARCHAR(100); SET @TYPE=(SELECT ActionType_PSY FROM workitems_PSY WHERE InitiatedBy_PSY=@ModifiedBy_PSY AND RefrenceId_PSY=@DPNID_PSY)
+IF(@TYPE='REVIEW')
+BEGIN
+UPDATE workitems_PSY SET Status_PSY='Reviewed', Stage_PSY=@Status_PSY,IsCompleted_PSY=1 WHERE RefrenceId_PSY=@DPNID_PSY AND InitiatedBy_PSY=@ModifiedBy_PSY
+END
+ELSE 
+BEGIN
+UPDATE workitems_PSY SET Status_PSY='Approved', Stage_PSY=@Status_PSY,IsCompleted_PSY=1 WHERE RefrenceId_PSY=@DPNID_PSY AND InitiatedBy_PSY=@ModifiedBy_PSY
+END
+end
+else
+begin
+UPDATE workitems_PSY SET Status_PSY='Approved',Stage_PSY=@Status_PSY,IsCompleted_PSY=1 WHERE RefrenceId_PSY=@DPNID_PSY AND InitiatedBy_PSY=@ModifiedBy_PSY
+end
+
 DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentPreparation_PSY where DPNID_PSY=@DPNID_PSY)
 if((SELECT COUNT(*) FROM workitems_PSY WHERE RefrenceId_PSY=@DPNID_PSY)=0)
 begin
-INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
-SELECT @documenttitle_PSY,'Preparation','In Progress', null ,@ModifiedBy_PSY, GetDate(),'In Progress',GetDate(),@DPNID_PSY
+--INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
+--SELECT @documenttitle_PSY,'Preparation','In Progress', null ,@ModifiedBy_PSY, GetDate(),'In Progress',GetDate(),@DPNID_PSY
+
+INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
+ SELECT @documenttype_PSY,'Preparation','Pending',NULL,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@DPNID_PSY,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
+
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
+ SELECT @documenttype_PSY,'Preparation','Pending',NULL,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@DPNID_PSY,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
+
 end
 
 

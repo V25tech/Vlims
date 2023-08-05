@@ -183,4 +183,12 @@ namespace Vlims.DocumentMaster.Entities
             }
         }
     }
+    public class WorkFlowMapping
+    {
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public int WorkFlowId { get; set; }
+        public string WorkFlowName { get; set; }
+        public string Type { get; set; }
+    }
 }

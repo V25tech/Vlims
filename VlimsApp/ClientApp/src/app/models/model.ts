@@ -3,6 +3,12 @@ export class RequestContext {
   public PageSize: number = 0;
   public Id: number = 0;
 }
+export class RequestContext1 {
+  public PageNumber: number = 0;
+  public PageSize: number = 0;
+  public Id: number = 0;
+  public UserName:string | null=null;
+}
 export class dashboardconfiguration {
   dCId: string = ''
   documentMasterId: string = ''
@@ -203,6 +209,7 @@ export class UserConfiguration {
   Password:string | null=''
 }
 export class WorkItemsConfiguration {
+  WITId:number=0
   TaskType: string = ''
   Stage: string = ''
   AssignedtoGroup: string = ''
@@ -211,6 +218,8 @@ export class WorkItemsConfiguration {
   Status: string = ''
   DueDate: string = ''
   ReferenceId:number=0
+  ActionType:string=''
+  IsCompleted:boolean=false
 }
 export class PlantConfiguration {
   DPCFId: string = ''

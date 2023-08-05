@@ -28,7 +28,7 @@
                     <tr>  
                         <td>{{ i + 1 }}</td>  
                          <td>
-                            <p (click)="viewtask(assigned.TaskType,assigned.ReferenceId)">{{ assigned.TaskType }}</p>
+                            <a href="javascript:void(0)" (click)="viewtask(assigned)">{{ assigned.TaskType }}</a>
                         </td> 
                        
                         <td>{{assigned.TaskName}}</td>
