@@ -6,6 +6,7 @@ import { DepartmentconfigurationService } from '../../../services/departmentconf
 import { RolesconfigurationService } from '../../../services/rolesconfiguration.service';
 import { UsersconfigurationService } from '../../../services/usersconfiguration.service';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
     private deptservice: DepartmentconfigurationService,
     private userservice: UsersconfigurationService,
     private location: Location,
+    private toastr: ToastrService,
     private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -51,7 +53,6 @@ export class RegisterComponent implements OnInit {
     }
     else if (lastSegment == "edit") {
       this.editMode = true;
-      this.title="Edit User Configuration";
       this.userid=segments[segments.length - 1];
       this.getbyId();
     }
@@ -71,6 +72,7 @@ export class RegisterComponent implements OnInit {
     adduser.ModifiedBy = "admin";
     adduser.CreatedDate=new Date();
     adduser.ModifiedDate=new Date();
+    this.toastr.success('New User  Saved Succesfull!', 'Saved.!');
     //this.router.navigate(['/products']);
     if(adduser.UserID==='admin')
     {

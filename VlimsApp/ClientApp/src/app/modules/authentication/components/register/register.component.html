@@ -11,48 +11,72 @@
         <div class="p-4 bg-white shadow-dark rounded-2">
 
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label">First Name</label>
+            <label for="documentType" class="col-sm-2 col-form-label">First Name<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="firstname"
                      name="firstname"
                      placeholder="Enter First Nmae"
-                     [(ngModel)]="adduser.FirstName" (ngModelChange)="calculateTotalUsers()" [disabled]="viewMode" />
+                     [(ngModel)]="adduser.FirstName" (ngModelChange)="calculateTotalUsers()" [disabled]="viewMode"
+                     required
+                     #firstnameInput="ngModel" />
+                     <div *ngIf="firstnameInput.invalid && (firstnameInput.dirty || firstnameInput.touched)" class="text-danger">
+                      Enter First Name.
+                    </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="prefix" class="col-sm-2 col-form-label">Last Name</label>
+            <label for="lastname" class="col-sm-2 col-form-label">Last Name<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="lastname"
                      name="lastname"
                      placeholder="Enter Last Name"
-                     [(ngModel)]="adduser.LastName" (ngModelChange)="calculateTotalUsers()" [disabled]="viewMode" />
+                     [(ngModel)]="adduser.LastName" (ngModelChange)="calculateTotalUsers()" [disabled]="viewMode" 
+                     required
+                     #lastnameInput="ngModel"/>
+                     <div *ngIf="lastnameInput.invalid && (lastnameInput.dirty || lastnameInput.touched)" class="text-danger">
+                      Enter LastName.
+                    </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="prefix" class="col-sm-2 col-form-label">User Id</label>
+            <label for="userid" class="col-sm-2 col-form-label">User Id<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="userid"
                      name="userid"
                      placeholder="Enter Userid"
-                     [(ngModel)]="adduser.UserID" readonly [disabled]="viewMode" />
+                     [(ngModel)]="adduser.UserID" readonly [disabled]="viewMode" 
+                     required
+                     #useridInput="ngModel"/>
+                     <div *ngIf="useridInput.invalid && (useridInput.dirty || useridInput.touched)" class="text-danger">
+                      Enter UserId.
+                    </div>
+
             </div>
           </div>
           <div class="form-group row">
-            <label for="prefix" class="col-sm-2 col-form-label">Department</label>
+            <label for="prefix" class="col-sm-2 col-form-label">Department<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
 
               <p-dropdown
-              name="DepartmentName"
+              name="dj"
               [options]="types"
               [(ngModel)]="adduser.Department"
-              optionLabel="DepartmentName" placeholder="Select a Department"
-              optionValue="DepartmentName"></p-dropdown>
+              optionLabel="dj" placeholder="Select a Department"
+              optionValue="dj" 
+              [required]="true" 
+              #djInput="ngModel"
+              
+              >            
+            </p-dropdown>
+            <div *ngIf="djInput.invalid && (djInput.dirty || djInput.touched)" class="text-danger">
+              Select Your Role.
+            </div>
 
               <!-- <select class="form-control" [(ngModel)]="adduser.Department" name="department" [disabled]="viewMode">
                 <option value="Select">Select</option>
@@ -62,7 +86,7 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="prefix" class="col-sm-2 col-form-label">Role</label>
+            <label for="prefix" class="col-sm-2 col-form-label">Role<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
 
               <p-dropdown
@@ -81,43 +105,62 @@
           </div>
 
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label">DOJ</label>
+            <label for="doj" class="col-sm-2 col-form-label">DOJ<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="date"
                      class="form-control"
                      id="doj"
                      name="doj"
                      placeholder="Enter First Nmae"
-                     [(ngModel)]="adduser.Doj" [disabled]="viewMode" />
+                     [(ngModel)]="adduser.Doj" [disabled]="viewMode"
+                     required
+                     #dojInput="ngModel"
+                     />
+                     <div *ngIf="dojInput.invalid && (dojInput.dirty || dojInput.touched)" class="text-danger">
+                      Enter DOJ.
+                    </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="Empid" class="col-sm-2 col-form-label">Emp Id</label>
+            <label for="Empid" class="col-sm-2 col-form-label">Emp Id<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="Empid"
                      name="Empid"
                      placeholder="Enter Emp Id"
-                     [(ngModel)]="adduser.Empid" [disabled]="viewMode" />
+                     [(ngModel)]="adduser.Empid" [disabled]="viewMode" 
+                     required
+                     #EmpidInput="ngModel"/>
+                     <div *ngIf="EmpidInput.invalid && (EmpidInput.dirty || EmpidInput.touched)" class="text-danger">
+                      Enter Employee Id.
+                    </div>
+
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label">Email Id</label>
+            <label for="emailid" class="col-sm-2 col-form-label">Email Id<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="emailid"
                      name="emailid"
-                     placeholder="Enter First Nmae"
-                     [(ngModel)]="adduser.EmailId" [disabled]="viewMode" />
+                     placeholder="Enter Email Id"
+                     [(ngModel)]="adduser.EmailId" [disabled]="viewMode" 
+                     required
+                     #emailidInput="ngModel"/>
+                     <div *ngIf="emailidInput.invalid && (emailidInput.dirty || emailidInput.touched)" class="text-danger">
+                      Enter Email Id.
+                    </div>
+
+
             </div>
           </div>
         </div>
         <div class="form-group row my-4">
           <div class="col-sm-10 offset-sm-2">
             <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
-            <button type="submit" class="btn btn-primary" *ngIf="!editMode">Submit</button>
+            <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid">Submit</button>
             <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
           </div>
         </div>
