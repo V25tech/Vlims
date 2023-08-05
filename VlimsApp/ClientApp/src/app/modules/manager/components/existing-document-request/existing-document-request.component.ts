@@ -30,8 +30,8 @@ export class ExistingDocumentRequestComponent implements OnInit {
   existingDocDatasource: ExistingDocumentRequest[] = [];
 
   ngOnInit() {
-    //this.getdocumentrequest();    
-    this.existingDocDatasource = this.getDummyData();
+    this.getdocumentrequest();    
+   // this.existingDocDatasource = this.getDummyData();
     this.currentPage = 10;
     console.log(this.existingDocDatasource);
   }

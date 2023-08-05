@@ -21,6 +21,7 @@ import { DocumentPrintComponent } from './components/Print/document-print.compon
 import { NewPrintRequestComponent } from './components/Print/new-print-request.component';
 import { ExistingDocumentRequestComponent } from './components/existing-document-request/existing-document-request.component';
 import { ReviewExistingDocumentRequestComponent } from './components/review-existing-document-request/review-existing-document-request.component';
+import { DocumentRevisonRequestsComponent } from './components/document-revision/document-revision.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ReviewExistingDocumentRequestComponent } from './components/review-exis
     DocumentPrintComponent,
     NewPrintRequestComponent,
     ExistingDocumentRequestComponent,
-    ReviewExistingDocumentRequestComponent
+    ReviewExistingDocumentRequestComponent,
   ],
   imports: [
     CommonModule,

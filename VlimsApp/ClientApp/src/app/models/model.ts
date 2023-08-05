@@ -333,6 +333,17 @@ export class ExistingDocumentRequest {
   modifiedDate: Date | undefined;
   effectiveDate: Date | undefined;
   reviewDate: Date | undefined;
+}
 
- 
+export class DocumentRevisionRequest{
+  status: string = '';
+  version: Number = 0;
+  documentEffectiveID: Number = 0;
+  atid: string = '';
+  createdBy: string = '';
+  createdDate: Date | undefined;
+  modifiedBy: string = '';
+  effectiveDate: Date | undefined;
+  reviewDate: Date | undefined;
+  modifiedDate: Date | undefined;
 }

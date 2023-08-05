@@ -43,7 +43,7 @@ namespace PolicySummary.Controllers
         /// </summary>
         /// <param name="requestContext"></param>
         [HttpPost("GetAddtask")]
-        public ActionResult GetAllAdditionalTask(RequestContext requestContext)
+        public ActionResult GetAllAdditionalTask([FromQuery] RequestContext requestContext)
         {
             var result = additionalTaskService.GetAllAdditionalTask(requestContext);
             return Ok(result);
