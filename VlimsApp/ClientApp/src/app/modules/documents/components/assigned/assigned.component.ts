@@ -77,10 +77,16 @@ export class AssignedComponent implements OnInit {
         //this.router.navigate(['/requests/view',referId]);
         break;
       case "Preparation":
-        this.router.navigate(['/preparation/view',referId]);
+        this.router.navigate(['/preparation/view/workId',referId,obj.WITId]);
+        break;
+        case "Revision":
+        this.router.navigate(['/revision/view/workId',referId,obj.WITId]);
+        break;
+        case "Print":
+        this.router.navigate(['/print/view/workId',referId,obj.WITId]);
         break;
       case "Effective":
-        this.router.navigate(['/effectives/view',referId]);
+        this.router.navigate(['/effectives/view/workId',referId,obj.WITId]);
         break;
       default:
         this.router.navigate(['/mainpage/documentmaster/viewdoctype']);

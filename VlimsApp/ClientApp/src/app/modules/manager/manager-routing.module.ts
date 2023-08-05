@@ -60,6 +60,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'preparation/view/workId/:requestId/:workId',
+    component: ReviewPrepationComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'effectives',
     component: EffectivesComponent,
     canActivate: [AuthGuard],
@@ -71,6 +76,11 @@ const routes: Routes = [
   },
   {
     path: 'effectives/view/:id',
+    component: ReviewEffectiveComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'effectives/view/workId/:requestId/:workId',
     component: ReviewEffectiveComponent,
     canActivate: [AuthGuard],
   },

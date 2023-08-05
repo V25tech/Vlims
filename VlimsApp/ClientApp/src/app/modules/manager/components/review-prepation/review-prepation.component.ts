@@ -1,7 +1,7 @@
 import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
-import { DocumentPreperationConfiguration, RequestContext } from 'src/app/models/model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DocumentPreperationConfiguration, RequestContext, WorkItemsConfiguration } from 'src/app/models/model';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
@@ -11,6 +11,7 @@ import { DocumentTemplateServiceService } from 'src/app/modules/services/documen
 import { DocumentPreperationService } from 'src/app/modules/services/document-preperation.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 
 @Component({
   selector: 'app-review-prepation',
@@ -36,7 +37,9 @@ export class ReviewPrepationComponent {
   pdfUrl: string | null = null;
   viewMode: boolean = false;
   editMode: boolean = false;
-
+  requestId:number=0;workId:number=0;statuss:string=''
+  workitems: Array<WorkItemsConfiguration> = [];
+  finalStatus:string=''
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -45,15 +48,27 @@ export class ReviewPrepationComponent {
 
   templatesSource = [];
 
-  constructor(private location: Location, private router: Router, private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
+  constructor(private location: Location, private router: Router, 
+    private workitemssvc:WorkitemsService,
+    private route: ActivatedRoute,
+    private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
   ngOnInit() {
     debugger
+    const user=localStorage.getItem("username");
+    if(user!=null && user!=undefined)
+    {
+      this.commonsvc.createdBy=user;
+    }
+    this.route.params.subscribe(params => {
+      this.requestId = params['requestId'];
+      this.workId = params['workId'];
+    });
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    if (segments[segments.length - 2].toString() == 'view') {
+    if (segments[segments.length - 4].toString() == 'view') {
       this.viewMode = true;
-      this.getbyId(parseInt(segments[segments.length - 1], 10))
+      this.getbyId(this.requestId);
     }
     else if (this.commonsvc.preperation.dpnid) {
       this.preparation = this.commonsvc.preperation;
@@ -62,6 +77,7 @@ export class ReviewPrepationComponent {
       this.location.back();
     }
     this.getdocttemplate();
+    this.getworkflowitems();
   }
   getbyId(arg0: number) {
     this.spinner.show();
@@ -72,19 +88,22 @@ export class ReviewPrepationComponent {
     });
   }
   approve() {
-    this.preparation.status = 'Approved'
+    //this.preparation.status = 'Approved'
     this.savePreparation();
   }
   reinitiative() {
-    this.preparation.status = 'Re-Initiated'
-    this.savePreparation();
+    this.location.back();
   }
   reject() {
-    this.preparation.status = 'Rejected'
-    this.savePreparation();
+    this.location.back();
   }
   savePreparation() {    
     this.spinner.show();
+    if(this.viewMode)
+    {
+      this.preparation.ModifiedBy=this.commonsvc.createdBy;
+      this.preparation.status=this.finalStatus;
+    }
     this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
       this.commonsvc.preperation = new DocumentPreperationConfiguration();
       console.log(res);
@@ -186,4 +205,46 @@ export class ReviewPrepationComponent {
       this.templatesSource = data.Response;
     });
   }
+  getworkflowitems() {
+    this.spinner.show();
+    const user=localStorage.getItem("username");
+    if(user!=null && user!=undefined){
+      this.commonsvc.createdBy=user;
+    }
+    return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
+      debugger
+      this.workitems = data.Response;
+      if(this.workitems.length>0){
+        this.workitems=this.workitems.filter(p=>p.ReferenceId==this.requestId);
+        if(this.workitems)
+        {
+          this.workitems.sort((a, b) => a.WITId - b.WITId);
+          const work=this.workitems.filter(o=>o.WITId==this.workId);
+                  this.statuss = work[0].ActionType;
+                  const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+                  const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
+                  const countt = totalreviewcount - reviewedcount;
+                  if (this.statuss === 'Review') {
+                    if (countt === 1) {
+                      this.finalStatus = 'Reviewed';
+                    } else if (countt > 1) {
+                      this.finalStatus = 'Pending Review';
+                    } else if (countt === totalreviewcount) {
+                      this.finalStatus = 'Pending Review';
+                    }
+                  } else {
+                    if (countt === 1) {
+                      this.finalStatus = 'Approved';
+                    } else if (countt > 1) {
+                      this.finalStatus = 'Pending Approve';
+                    } else if (countt === totalreviewcount) {
+                      this.finalStatus = 'Pending Approve';
+                    }
+                  }
+                  console.log('status', this.finalStatus);
+                }
+              }
+              this.spinner.hide();
+            });
+          }
 }

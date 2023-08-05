@@ -3,11 +3,12 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/common.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { DocumentAdditionalTasks, RequestContext } from 'src/app/models/model';
+import { DocumentAdditionalTasks, RequestContext, WorkItemsConfiguration } from 'src/app/models/model';
 import { ToastrService } from 'ngx-toastr';
 import { DocumentRevisionService } from 'src/app/modules/services/document-revision.service';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
+import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 
 @Component({
   selector: 'app-review-revision',
@@ -24,10 +25,15 @@ export class ReviewRevisionComponent {
   reviewDate: string | undefined;
   departmentsSource = [];
   typeSource = [];
-
+  requestId:number=0;workId:number=0;statuss:string=''
+  workitems: Array<WorkItemsConfiguration> = [];
+  finalStatus:string=''
 
   constructor(private router: Router, private location: Location, private toastr: ToastrService, private route: ActivatedRoute,
-    private spinner: NgxSpinnerService, private commonsvc: CommonService, private documentRevisionService: DocumentRevisionService,
+    private spinner: NgxSpinnerService, private commonsvc: CommonService, 
+    private workitemssvc:WorkitemsService,
+    private route1: ActivatedRoute,
+    private documentRevisionService: DocumentRevisionService,
     private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService) { }
 
   ngOnInit() {
