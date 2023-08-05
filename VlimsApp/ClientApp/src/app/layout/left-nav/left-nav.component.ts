@@ -96,7 +96,7 @@ export class LeftNavComponent {
     },
     {
       label: 'Document Manager',
-      path: '',
+      path: '/document-manager',
       isOpen: false,
       isActive: false,
       iconClass: 'bi bi-ui-checks-grid',

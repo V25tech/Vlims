@@ -12,6 +12,7 @@ import { DocumentPrintComponent } from './components/Print/document-print.compon
 import { NewPrintRequestComponent } from './components/Print/new-print-request.component';
 import { ExistingDocumentRequestComponent } from './components/existing-document-request/existing-document-request.component';
 import { ReviewExistingDocumentRequestComponent } from './components/review-existing-document-request/review-existing-document-request.component';
+import { DocumentRevisonRequestsComponent } from './components/document-revision/document-revision.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
@@ -92,7 +93,11 @@ const routes: Routes = [
   {
     path: 'existingdoc/edit/:id',
     component: ReviewExistingDocumentRequestComponent
-  }
+  },
+  // {
+  //   path: 'revison',
+  //   component: DocumentRevisonRequestsComponent
+  // }
 ];
 
 @NgModule({

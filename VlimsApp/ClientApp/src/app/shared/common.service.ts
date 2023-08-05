@@ -20,6 +20,7 @@ export class CommonService {
   plantConfig = new PlantConfiguration();
   roleConfig = new RoleConfiguration();
   request = new DocumentRequestConfiguration();
+  //revision = new ();
   preperation = new DocumentPreperationConfiguration();
   efffective = new DocumentEffectiveConfiguration();  
   printConfig = new DocumentPrintConfiguration();  

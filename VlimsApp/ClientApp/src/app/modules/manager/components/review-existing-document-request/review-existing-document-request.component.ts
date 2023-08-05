@@ -92,12 +92,10 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   }
 
   Save() {
-    if (this.editMode) {
-      console.log(this.existingDocReq);
-      //this.Update();
+    if (this.editMode) {      
+      this.Update();
     }
     else {
-      console.log(this.existingDocReq);
       this.Add();
     }
   }

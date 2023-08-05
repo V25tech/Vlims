@@ -58,7 +58,10 @@
             <label for="documentType" class="col-sm-2 col-form-label">Effective Date</label>
             <div class="col-sm-10">
               <input type="date" class="form-control" id="edate" name="Edate" placeholder="Effective Date"
-                [(ngModel)]="effectiveDate" (change)="existingDocReq.effectiveDate = getAsDate($event)" />
+                [(ngModel)]="effectiveDate" (change)="existingDocReq.effectiveDate = getAsDate($event)"  #effectiveDateInput="ngModel" required/>
+                <div *ngIf="effectiveDateInput.invalid && (effectiveDateInput.dirty || effectiveDateInput.touched)" class="text-danger">
+                  Effective Date is required.
+                </div>
             </div>
           </div>
 
@@ -66,7 +69,10 @@
             <label for="documentType" class="col-sm-2 col-form-label">Review Date</label>
             <div class="col-sm-10">
               <input type="date" class="form-control" id="rdate" name="Rdate" placeholder="Review Date"
-                [(ngModel)]="reviewDate" (change)="existingDocReq.reviewDate = getAsDate($event)" />
+                [(ngModel)]="reviewDate" (change)="existingDocReq.reviewDate = getAsDate($event)" #reviewDateInput="ngModel" required/>
+                <div *ngIf="reviewDateInput.invalid && (reviewDateInput.dirty || reviewDateInput.touched)" class="text-danger">
+                  Review Date is required.
+                </div>
             </div>
           </div>
 
