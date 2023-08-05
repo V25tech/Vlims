@@ -5,7 +5,8 @@ import { RequestContext, UserConfiguration, Usergroupconfiguration } from '../..
 import { CommonService } from '../../../../shared/common.service';
 import { UsersconfigurationService } from '../../../services/usersconfiguration.service';
 import { usergroupconfigurationService } from './add-usergroupconfiguration.service';
-
+import { ToastrService } from 'ngx-toastr';
+ 
 
 @Component({
   selector: 'app-add-usergroupconfiguration',
@@ -21,7 +22,7 @@ export class AddusergroupconfigurationComponent implements OnInit {
   title: string = "Add User Group Configuration";
     //usergrp= Usergroupconfiguration;
   constructor(private commonsvc: CommonService, private cdr: ChangeDetectorRef, 
-    private ugService: usergroupconfigurationService, private userService: UsersconfigurationService,
+    private ugService: usergroupconfigurationService,private toastr: ToastrService, private userService: UsersconfigurationService,
     private router: Router,private location: Location  ) { }
 
   ngOnInit() {
@@ -63,20 +64,18 @@ export class AddusergroupconfigurationComponent implements OnInit {
     adddoctype(newdept: Usergroupconfiguration) {
       debugger
       newdept.Registeredby="admin";
-      newdept.Modify="admin";
-      if(this.editMode)
-      {
-        this.ugService.Updateusergroupconfiguration(newdept).subscribe((res:any)=>{
-          this.router.navigate(['/admin/groups/edit/' +newdept.Ugcid]);
-        });        
-      }
-      else
-      {
-        this.ugService.addusergroupconfiguration(newdept).subscribe((res:any)=>{
-          this.router.navigate(['/admin/groups/edit' +newdept.Ugcid]);
+      newdept.Modify = "admin";
+      if (this.editMode) {
+        this.ugService.Updateusergroupconfiguration(newdept).subscribe((res: any) => {
+          this.router.navigate(['/admin/groups/edit/' + newdept.Ugcid]);
         });
       }
-   
+      else {
+        this.ugService.addusergroupconfiguration(newdept).subscribe((res: any) => {
+          this.router.navigate(['/admin/groups/edit' + newdept.Ugcid]);
+        });
+        this.toastr.success('User Group  Saved Succesfull!', 'Saved.!');
+      }
     }
     closepopup() {
       this.router.navigate(['/admin/usergroup']);
