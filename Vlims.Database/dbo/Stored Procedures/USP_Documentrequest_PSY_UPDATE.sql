@@ -18,19 +18,40 @@ ApprovalsCount_PSY=@ApprovalsCount_PSY,
 AssigntoGroup_PSY=@AssigntoGroup_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRID_PSY] = @DRID_PSY ;  
 
-
+if(@Status_PSY!='APPROVED' or @Status_PSY!='APPROVE')
+begin
+DECLARE @TYPE NVARCHAR(100); SET @TYPE=(SELECT ActionType_PSY FROM workitems_PSY WHERE InitiatedBy_PSY=@ModifiedBy_PSY AND RefrenceId_PSY=@DRID_PSY)
+IF(@TYPE='REVIEW')
+BEGIN
+UPDATE workitems_PSY SET Status_PSY='Reviewed', Stage_PSY=@Status_PSY,IsCompleted_PSY=1 WHERE RefrenceId_PSY=@DRID_PSY AND InitiatedBy_PSY=@ModifiedBy_PSY
+END
+ELSE 
+BEGIN
+UPDATE workitems_PSY SET Status_PSY='Approved', Stage_PSY=@Status_PSY,IsCompleted_PSY=1 WHERE RefrenceId_PSY=@DRID_PSY AND InitiatedBy_PSY=@ModifiedBy_PSY
+END
+end
+else
+begin
+UPDATE workitems_PSY SET Status_PSY='Approved',Stage_PSY=@Status_PSY,IsCompleted_PSY=1 WHERE RefrenceId_PSY=@DRID_PSY AND InitiatedBy_PSY=@ModifiedBy_PSY
+end
 
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
 DECLARE @nvarcharValue NVARCHAR(50);DECLARE @WORKFLOW NVARCHAR(50);
 --SET @nvarcharValue = CAST(@DRID_PSY AS NVARCHAR(50));
 SET @WORKFLOW=(SELECT Workflow_PSY FROM Documentrequest_PSY WHERE DRID_PSY=@DRID_PSY)
+DECLARE @ID INT
 INSERT INTO DocumentPreparation_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,
 department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,DOCStatus_PSY,Refrence_PSY)
 VALUES('1',NULL,NULL,@documenttype_PSY,@department_PSY,null,null,@WORKFLOW,NULL,
-@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',NULL,@DRID_PSY)
+@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',NULL,@DRID_PSY);
+SELECT @ID = @@IDENTITY;
 
-UPDATE workitems_PSY SET Status_PSY='APPROVED' WHERE RefrenceId_PSY=@DRID_PSY
+INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
+ SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@WORKFLOW AND WSR.Type='Review'
+
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
+ SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@WORKFLOW AND WSR.Type='Approve'
 
 END
 

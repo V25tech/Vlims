@@ -18,6 +18,7 @@ namespace Vlims.DocumentManager.Manager
     using Vlims.Common;
     using Vlims.DMS.Entities;
     using Vlims.DocumentManager.DataAccess;
+    using Vlims.DocumentMaster.Manager;
 
 
     // Comment
@@ -58,6 +59,18 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
+                //if (documentrequest != null && !string.IsNullOrEmpty(documentrequest.Workflow))
+                //{
+                //    workflowconigurationService workflowsvc = new workflowconigurationService();
+                //    RequestContext request = new RequestContext { PageNumber = 1, PageSize = 100 };
+                //    var work = workflowsvc.GetAllworkflowconiguration(request).Response.FirstOrDefault(o => o.workflowName == documentrequest.Workflow);
+                //    if (work != null)
+                //    {
+                //        var mainwork = workflowsvc.GetworkflowconigurationByWFCId(Convert.ToInt32(work.WFCId));
+                //        documentrequest.Reviwers = mainwork.reviewers.Select(o => string.Join(o.UserID, ",")).ToString();
+                //        documentrequest.Approvals = mainwork.approvals.Select(o => string.Join(o.UserID, ",")).ToString();
+                //    }
+                //}
                 documentrequest.AssigntoGroup = "A";
                 documentrequest.ApprovalsCount = 9;
                 documentrequest.documentmanagerid = "1";

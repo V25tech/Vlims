@@ -27,7 +27,8 @@ namespace PolicySummary.DMS.Entities
         public const string AssignedToGroup = "@AssignedToGroup_PSY";
         
         public const string InitiatedOn = "@InitiatedOn_PSY";
-        
+        public const string InitiatedBy = "@InitiatedBy_PSY";
+
         public const string Status = "@Status_PSY";
         
         public const string DueDate = "@DueDate_PSY";
@@ -40,7 +41,8 @@ namespace PolicySummary.DMS.Entities
         
         public const string ModifiedDate = "@ModifiedDate_PSY";
         public const string ReferenceId = "@RefrenceId_PSY";
-
+        public const string ActionType = "@ActionType_PSY";
+        public const string IsCompleted = "@IsCompleted_PSY";
 
         public const string USP_workitems_PSY_GET_ALL = "dbo.USP_workitems_PSY_GET_ALL";
         

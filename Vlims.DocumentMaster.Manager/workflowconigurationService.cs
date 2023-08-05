@@ -63,6 +63,8 @@ namespace Vlims.DocumentMaster.Manager
                 {
                     workflowconiguration.Status = "Under Review";
                     var result = workflowconigurationData.Saveworkflowconiguration(workflowconiguration);
+                    if (result)
+                        workflowconigurationData.WorkspaceUserMapping(workflowconiguration);
                     return result;
                 }
                 throw new System.Exception(validationMessages);

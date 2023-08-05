@@ -25,7 +25,7 @@ namespace PolicySummary.DMS.Services
     // Comment
     public static class workitemsConverter
     {
-        
+
         public static List<workitems> SetAllworkitems(DataSet dataset)
         {
             try
@@ -44,6 +44,7 @@ namespace PolicySummary.DMS.Services
                         workitemsData.Stage = Convert.ToString(row[workitemsConstants.Stage.Trim('@')]);
                         workitemsData.AssignedToGroup = Convert.ToString(row[workitemsConstants.AssignedToGroup.Trim('@')]);
                         workitemsData.InitiatedOn = Convert.ToString(row[workitemsConstants.InitiatedOn.Trim('@')]);
+                        workitemsData.InitiatedBy = Convert.ToString(row[workitemsConstants.InitiatedBy.Trim('@')]);
                         workitemsData.Status = Convert.ToString(row[workitemsConstants.Status.Trim('@')]);
                         workitemsData.DueDate = Convert.ToString(row[workitemsConstants.DueDate.Trim('@')]);
                         workitemsData.CreatedBy = Convert.ToString(row[workitemsConstants.CreatedBy.Trim('@')]);
@@ -51,6 +52,9 @@ namespace PolicySummary.DMS.Services
                         workitemsData.ModifiedBy = Convert.ToString(row[workitemsConstants.ModifiedBy.Trim('@')]);
                         workitemsData.ModifiedDate = DatatypeConverter.SetDateTime(row[workitemsConstants.ModifiedDate.Trim('@')]);
                         workitemsData.ReferenceId = DatatypeConverter.SetIntValue(row[workitemsConstants.ReferenceId.Trim('@')]);
+                        workitemsData.ActionType = Convert.ToString(row[workitemsConstants.ActionType.Trim('@')]);
+                        if (row[workitemsConstants.IsCompleted.Trim('@')] != DBNull.Value)
+                            workitemsData.IsCompleted = Convert.ToBoolean(row[workitemsConstants.IsCompleted.Trim('@')]);
                         result.Add(workitemsData);
                     }
                 }
@@ -61,7 +65,7 @@ namespace PolicySummary.DMS.Services
                 throw;
             }
         }
-        
+
         public static workitems Setworkitems(DataSet dataset)
         {
             var result = SetAllworkitems(dataset);

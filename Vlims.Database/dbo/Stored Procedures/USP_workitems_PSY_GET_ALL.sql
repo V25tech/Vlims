@@ -14,7 +14,7 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-RefrenceId_PSY
+RefrenceId_PSY,InitiatedBy_PSY,ActionType_PSY,IsCompleted_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[workitems_PSY] WITH (NOLOCK) 
  Order by [WITId_PSY]  
