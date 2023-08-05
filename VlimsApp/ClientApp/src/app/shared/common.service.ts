@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DocumentTypeConfiguration } from '../modules/documents/models/DocumentTypeConfiguration';
 import { DocumentTemplateConfiguration } from '../modules/documents/models/DocumentTemplateConfiguration';
-import { DepartmentConfiguration, DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentPrintConfiguration, DocumentRequestConfiguration, ExistingDocumentRequest, PlantConfiguration, RoleConfiguration, UserConfiguration, Usergroupconfiguration } from '../models/model';
+import { DepartmentConfiguration, DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentPrintConfiguration, DocumentRequestConfiguration, ExistingDocumentRequest, PlantConfiguration, RequestContext1, RoleConfiguration, UserConfiguration, Usergroupconfiguration } from '../models/model';
 import { DepartmentComponent } from '../modules/authentication/components/Department/department.component';
 
 
@@ -43,7 +43,7 @@ export class CommonService {
   private _cartsCountBS = new BehaviorSubject<number>(0);
   public _cartsCount: number = 0;
   public cartsCount = this._cartsCountBS.asObservable();
-
+  req=new RequestContext1();
   
 
   //gloabl file upload config
@@ -55,7 +55,10 @@ export class CommonService {
   };
 
   constructor() {
-
+    this.req.PageNumber=1;
+    this.req.PageSize=200;
+    this.req.Id=0;
+    this.req.UserName='admin';
     //this.retaileR = new Retailer();
     //this.retaileR.RetailId = 1;
 

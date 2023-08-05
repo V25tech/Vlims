@@ -39,6 +39,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'requests/view/workId/:requestId/:workId',
+    component: AddRequestComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'preparations',
     component: PreparationComponent,
     canActivate: [AuthGuard],
