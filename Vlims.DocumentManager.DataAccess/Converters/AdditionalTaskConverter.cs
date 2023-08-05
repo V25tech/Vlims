@@ -45,6 +45,10 @@ namespace Vlims.DocumentManager.DataAccess
                         additionalTaskData.CreatedBy = Convert.ToString(row[AdditionalTaskConstants.CreatedBy.Trim('@')]);
                         additionalTaskData.CreatedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.CreatedDate.Trim('@')]);
                         additionalTaskData.ModifiedBy = Convert.ToString(row[AdditionalTaskConstants.ModifiedBy.Trim('@')]);
+                        additionalTaskData.Department= Convert.ToString(row[AdditionalTaskConstants.Department.Trim('@')]);
+                        additionalTaskData.Document = Convert.ToString(row[AdditionalTaskConstants.Document.Trim('@')]);
+                        additionalTaskData.DocumentTitle = Convert.ToString(row[AdditionalTaskConstants.DocumentTitle.Trim('@')]);
+                        additionalTaskData.DocumentType = Convert.ToString(row[AdditionalTaskConstants.DocumentType.Trim('@')]);
                         additionalTaskData.ModifiedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.ModifiedDate.Trim('@')]);
                         result.Add(additionalTaskData);
                     }

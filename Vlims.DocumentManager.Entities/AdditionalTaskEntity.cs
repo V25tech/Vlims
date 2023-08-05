@@ -32,14 +32,16 @@ namespace Vlims.DMS.Entities
 
         private DateTime? updateddateField;
         public string Status { get; set; }
-
         public int Version { get; set; }
 
         private DateTime? effectiveDateField;
 
-
         private DateTime? reviewDateField;
-
+        public string Department { get; set; }
+        public string DocumentTitle { get; set; }
+        public string Documentno { get; set; }
+        public string DocumentType { get; set; }
+        public string Document { get; set; }
         public int DocumentEffectiveID
         {
             get

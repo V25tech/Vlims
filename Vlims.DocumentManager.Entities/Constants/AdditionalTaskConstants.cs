@@ -32,7 +32,17 @@ namespace Vlims.DMS.Entities
         public const string CreatedDate = "@CreatedDate_PSY";
         
         public const string ModifiedBy = "@ModifiedBy_PSY";
-        
+
+        public const string Department = "@Department_PSY";
+
+        public const string Document = "@Document_PSY";
+
+        public const string DocumentTitle = "@DocumentTitle_PSY";
+
+        public const string DocumentType = "@DocumentType_PSY";
+
+
+
         public const string ModifiedDate = "@ModifiedDate_PSY";
 
         public const string EffectiveDate = "@EffectiveDate_PSY";
