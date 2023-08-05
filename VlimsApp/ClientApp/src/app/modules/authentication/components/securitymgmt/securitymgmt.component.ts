@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Location } from '@angular/common';
 import { RequestContext, SecurityManagement } from '../../../../models/model';
 import { SecuritymanagementService } from '../../../services/securitymanagement.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-securitymgmt',
@@ -15,10 +18,14 @@ export class SecuritymgmtComponent {
   editMode:boolean=false;
   viewMode:boolean=false;
   securityType: SecurityManagement = new SecurityManagement;
-  constructor(private doctypeservice: SecuritymanagementService, private spinner: NgxSpinnerService, private router: Router) { }
+  constructor(private doctypeservice: SecuritymanagementService,private toastr: ToastrService, private spinner: NgxSpinnerService, 
+    private router: Router,private location: Location) { }
 
   ngOnInit() {
     this.getsecuritymanagement();
+  }
+  onCancel() {
+    this.location.back();
   }
   getsecuritymanagement() {
     debugger;
@@ -35,6 +42,7 @@ export class SecuritymgmtComponent {
   submit(securityType: SecurityManagement) {
     debugger
     /*if (this.editMode) {*/
+    this.toastr.success('Security Changes Saved Succesfull!', 'Saved.!');
     this.doctypeservice.addsecurityconfiguration(securityType).subscribe((res: any) => {
     });
     //}
@@ -43,8 +51,6 @@ export class SecuritymgmtComponent {
     //}
 
   }
-  onCancel() {
-
-  }
+  
   
 }

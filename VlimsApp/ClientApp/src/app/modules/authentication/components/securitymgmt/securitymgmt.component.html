@@ -1,98 +1,101 @@
 <body>
 
   <div class="container-fluid">
-<div class="row p-2">
-<div class="col">
-  <h4 class="page-title">Security Configuratuin</h4>
-</div>
-</div>
-<div class="row p-2">
-<div class="col">
-  <form (ngSubmit)="submit(securityType)"  #fm="ngForm">
-  <div class="p-4 bg-white shadow-dark rounded-2">
-    
-      <div class="form-group row">
-        <label for="MinLength" class="col-sm-2 col-form-label"
-          >Minimum User Id Length</label
-        >
-        <div class="col-sm-10">
-          <input
-            type="text"
-            class="form-control"
-            id="minimumuseridlength"
-            name="minimumuseridlength"
-            placeholder=""
-            [(ngModel)]="securityType.MinimumUserIdLength" [disabled]="viewMode"
-           
-          />
-        </div>
+    <div class="row p-2">
+      <div class="col">
+        <h4 class="page-title">Security Configuratuin</h4>
       </div>
-      
-      <div class="form-group row">
-        <label for="prefix" class="col-sm-2 col-form-label">Minimum Password Length</label>
-        <div class="col-sm-10">
-          <input
-            type="text"
-            class="form-control"
-            id="minimumpasswordlength"
-            name="minimumpasswordlength"
-            placeholder=""
-            [(ngModel)]="securityType.MinimumPasswordLength" [disabled]="viewMode"
-            
-          />
-        </div>
-      </div>
-       
-                 <div class="form-group row">
-        <label for="passcomplexity" class="col-sm-2 col-form-label"
-          >Password Complexity</label
-        >
-        <div class="col-sm-10">
-          <input
-            type="text"
-            class="form-control"
-            id="passwordcomplexity"
-            name="passwordcomplexity"
-            placeholder=""
-            [(ngModel)]="securityType.PasswordComplexity" [disabled]="viewMode"
-           
-          />
-        </div>
-      </div>
-       
-       
-      <div class="form-group row">
-        <label for="session" class="col-sm-2 col-form-label"
-          >Session Time Out</label
-        >
-        <div class="col-sm-10">
-          <input
-            type="text"
-            class="form-control"
-            id="sessiontimeout"
-            name="sessiontimeout"
-            placeholder=""
-            [(ngModel)]="securityType.SessionTimeOut" [disabled]="viewMode"
-           
-          />
-        </div>
-      </div>
-      
-    
-  </div>
+    </div>
+    <div class="row p-2">
+      <div class="col">
+        <form (ngSubmit)="submit(securityType)" #fm="ngForm">
+          <div class="p-4 bg-white shadow-dark rounded-2">
 
-  <div class="form-group row my-4">
-    <div class="col-sm-10 offset-sm-2">
-      <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
-      <button type="submit" class="btn btn-primary" *ngIf="!editMode">Submit</button>
-      <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
+            <div class="form-group row">
+              <label for="minimumuseridlength" class="col-sm-2 col-form-label">Minimum User Id Length<span style="color: red; font-weight: bolder;">*</span></label>
+              <div class="col-sm-10">
+                <input type="text"
+                       class="form-control"
+                       id="minlength"
+                       name="minlength"
+                       placeholder=""
+                       [(ngModel)]="securityType.MinimumUserIdLength" [disabled]="viewMode"
+                       required
+                       #minlengthInput="ngModel" />
+                <div *ngIf="minlengthInput.invalid && (minlengthInput.dirty || minlengthInput.touched)" class="text-danger">
+                  Minimum UserId is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="minpass" class="col-sm-2 col-form-label">Minimum Password Length<span style="color: red; font-weight: bolder;">*</span></label>
+              <div class="col-sm-10">
+                <input type="text"
+                       class="form-control"
+                       id="minpass"
+                       name="minpass"
+                       placeholder=""
+                       [(ngModel)]="securityType.MinimumPasswordLength" [disabled]="viewMode"
+                       required
+                       #minpassInput="ngModel" />
+                <div *ngIf="minpassInput.invalid && (minpassInput.dirty || minpassInput.touched)" class="text-danger">
+                  Minimum password is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="passcomplexity" class="col-sm-2 col-form-label">Password Complexity<span style="color: red; font-weight: bolder;">*</span></label>
+              <div class="col-sm-10">
+                <input type="text"
+                       class="form-control"
+                       id="passwordcomplexity"
+                       name="passwordcomplexity"
+                       placeholder=""
+                       [(ngModel)]="securityType.PasswordComplexity" [disabled]="viewMode"
+                       required
+                       #departmentNameInput="ngModel" />
+                <div *ngIf="departmentNameInput.invalid && (departmentNameInput.dirty || departmentNameInput.touched)" class="text-danger">
+                  PassWord Complexity is Required.
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="form-group row">
+              <label for="sessiontimeout" class="col-sm-2 col-form-label">Session Time Out<span style="color: red; font-weight: bolder;">*</span></label>
+              <div class="col-sm-10">
+                <input type="text"
+                       class="form-control"
+                       id="sessiontimeout"
+                       name="sessiontimeout"
+                       placeholder=""
+                       [(ngModel)]="securityType.SessionTimeOut" [disabled]="viewMode"
+                       required
+                       #sessiontimeoutInput="ngModel" />
+                <div *ngIf="sessiontimeoutInput.invalid && (sessiontimeoutInput.dirty || sessiontimeoutInput.touched)" class="text-danger">
+                  Enter Session TimeOut.
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="form-group row my-4">
+            <div class="col-sm-10 offset-sm-2">
+              <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
+              <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid">Submit</button>
+              <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
     </div>
   </div>
-
-</form>
-</div>
-</div>
-</div>
 
 
 </body>
