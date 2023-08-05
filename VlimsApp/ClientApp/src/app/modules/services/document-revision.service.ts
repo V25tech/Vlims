@@ -11,7 +11,7 @@ export class DocumentRevisionService {
   type: string = "manager";
   constructor(private http: HttpbaseService) { }
   getdocumentRevisions(objrequest: RequestContext) {    
-    return this.http.postJsonLogin(objrequest, "api/documentrequest/GetAllDocreq", this.type);
+    return this.http.postJsonLogin(objrequest, "api/additionaltask/GetAddtask", this.type);
   }
   adddocrevconfig(objrequest: DocumentRequestConfiguration) {    
     return this.http.postJsonLogin(objrequest, "api/documentrequest/SaveDocumentrequest", this.type);
