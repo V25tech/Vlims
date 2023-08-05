@@ -8,7 +8,7 @@ import { DocumentTypeServiceService } from 'src/app/modules/services/document-ty
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/shared/common.service';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
-
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -57,7 +57,7 @@ export class AddTemplateComponent implements OnInit {
   //   status: '',
   // };
 
-  constructor(
+  constructor(private toastr: ToastrService,
     private location: Location,
     private doctypeservice:DocumentTypeServiceService,
     private loader:NgxSpinnerService,
@@ -162,6 +162,7 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.columns=this.colsArray.length.toString();
     this.templateForm.footerrows=this.rowsFooterArray.length.toString();
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
+    this.toastr.success('Document Request Saved Succesfull!', 'Saved.!');
     if(this.editMode)
     {
       this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
