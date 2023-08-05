@@ -25,21 +25,28 @@ ModifiedBy_PSY=@ModifiedBy_PSY,
 Status_PSY=@Status_PSY
 WHERE  [DEID_PSY] = @DEID_PSY ;  
 
+IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
+BEGIN
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DEID_PSY,@ModifiedBy_PSY
+END
+
 DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentEffective_PSY where DEID_PSY=@DEID_PSY)
-if((SELECT COUNT(*) FROM workitems_PSY WHERE RefrenceId_PSY=@DEID_PSY)=0)
-begin
-INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
-SELECT @documenttitle_PSY,'Effective','In Progress', null ,@ModifiedBy_PSY, GetDate(),'In Progress',GetDate(),@DEID_PSY
-end
+
 
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
-
+DECLARE @ID INT,@wokflow_PSY nvarchar(200)
+set @wokflow_PSY=(select Workflow_PSY from Documentrequest_PSY where DRID_PSY=@referenceId)
 INSERT INTO AdditionalTask_PSY(DocumentEffective_ID,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Version,Refrence_PSY)
 VALUES('1',
 @ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS','0',@referenceId)
+SELECT @ID = @@IDENTITY;
 
-UPDATE workitems_PSY SET Status_PSY='APPROVED' WHERE RefrenceId_PSY=@DEID_PSY
+INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
+ SELECT @documenttype_PSY,'Revision','Pending',NULL,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
+
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
+ SELECT @documenttype_PSY,'Revision','Pending',NULL,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
 
 END
 

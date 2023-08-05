@@ -288,6 +288,7 @@
     <Build Include="dbo\Tables\WorkflowUserApproveMapping.sql" />
     <Build Include="dbo\User Defined Types\Workflowusrmappings.sql" />
     <Build Include="dbo\Stored Procedures\USP_WorkFlowUsersMappings_PSY_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\USP_UpdateWorkItemsByReferenceId_PSY.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vlims.Database.refactorlog" />
