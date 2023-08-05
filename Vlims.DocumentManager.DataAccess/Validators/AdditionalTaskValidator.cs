@@ -33,8 +33,8 @@ namespace Vlims.DocumentManager.DataAccess
                 ValidationHelper validationHelper = new ValidationHelper();
                 validationMessages.Append(validationHelper.NullCheckValidator(additionalTask.ATID, nameof(additionalTask.ATID)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(additionalTask.ATID,50, nameof(additionalTask.ATID)));
-                validationMessages.Append(validationHelper.NullCheckValidator(additionalTask.Documentmanagerid, nameof(additionalTask.Documentmanagerid)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(additionalTask.Documentmanagerid,50, nameof(additionalTask.Documentmanagerid)));
+                //validationMessages.Append(validationHelper.NullCheckValidator(additionalTask.DocumentEffectiveID, nameof(additionalTask.DocumentEffectiveID)));
+                //validationMessages.Append(validationHelper.LengthCheckValidator(additionalTask.DocumentEffectiveID,50, nameof(additionalTask.DocumentEffectiveID)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(additionalTask.CreatedBy,100, nameof(additionalTask.CreatedBy)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(additionalTask.ModifiedBy,100, nameof(additionalTask.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))

@@ -58,9 +58,13 @@ namespace Vlims.DocumentManager.DataAccess
             try
             {
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Documentmanagerid, Value = additionalTask.Documentmanagerid });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int16, ParameterName = AdditionalTaskConstants.DocumentEffective_ID, Value = additionalTask.DocumentEffectiveID });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.CreatedBy, Value = additionalTask.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.ModifiedBy, Value = additionalTask.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Status_PSY, Value = additionalTask.Status });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Version, Value = additionalTask.Version });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.EffectiveDate, Value = additionalTask.EffectiveDate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.reviewDate, Value = additionalTask.ReviewDate });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(AdditionalTaskConstants.USP_AdditionalTask_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -77,9 +81,12 @@ namespace Vlims.DocumentManager.DataAccess
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.ATID, Value = additionalTask.ATID });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Status_PSY, Value = additionalTask.Status });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Documentmanagerid, Value = additionalTask.Documentmanagerid });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Version, Value = additionalTask.Documentmanagerid });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int16, ParameterName = AdditionalTaskConstants.DocumentEffective_ID, Value = additionalTask.DocumentEffectiveID });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Version, Value = additionalTask.Version });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.ModifiedBy, Value = additionalTask.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.ModifiedDate, Value = additionalTask.ModifiedDate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.EffectiveDate, Value = additionalTask.EffectiveDate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.reviewDate, Value = additionalTask.ReviewDate });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(AdditionalTaskConstants.USP_AdditionalTask_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

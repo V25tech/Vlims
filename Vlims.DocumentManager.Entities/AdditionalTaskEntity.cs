@@ -12,27 +12,46 @@ namespace Vlims.DMS.Entities
     using System;
     using System.Collections.Generic;
     //using PolicySummary.Common.Entities;
-    
-    
+
+
     // Comment
     public class AdditionalTask
     {
-        
+
         private string atidField;
-        
-        private string documentmanageridField;
-        
+
+        private int documentEffectiveID;
+
         private string createdbyField;
-        
+
         private DateTime? createddateField;
-        
+
         private string modifiedbyField;
-        
+
         private DateTime? modifieddateField;
 
+        private DateTime? updateddateField;
         public string Status { get; set; }
 
         public int Version { get; set; }
+
+        private DateTime? effectiveDateField;
+
+
+        private DateTime? reviewDateField;
+
+        public int DocumentEffectiveID
+        {
+            get
+            {
+                return this.documentEffectiveID;
+            }
+            set
+            {
+                this.documentEffectiveID = value;
+            }
+        }
+
         public string ATID
         {
             get
@@ -44,19 +63,9 @@ namespace Vlims.DMS.Entities
                 this.atidField = value;
             }
         }
-        
-        public string Documentmanagerid
-        {
-            get
-            {
-                return this.documentmanageridField;
-            }
-            set
-            {
-                this.documentmanageridField = value;
-            }
-        }
-        
+
+
+
         public string CreatedBy
         {
             get
@@ -68,7 +77,7 @@ namespace Vlims.DMS.Entities
                 this.createdbyField = value;
             }
         }
-        
+
         public DateTime? CreatedDate
         {
             get
@@ -80,7 +89,7 @@ namespace Vlims.DMS.Entities
                 this.createddateField = value;
             }
         }
-        
+
         public string ModifiedBy
         {
             get
@@ -92,7 +101,31 @@ namespace Vlims.DMS.Entities
                 this.modifiedbyField = value;
             }
         }
-        
+
+        public DateTime? EffectiveDate
+        {
+            get
+            {
+                return this.effectiveDateField;
+            }
+            set
+            {
+                this.effectiveDateField = value;
+            }
+        }
+
+        public DateTime? ReviewDate
+        {
+            get
+            {
+                return this.reviewDateField;
+            }
+            set
+            {
+                this.reviewDateField = value;
+            }
+        }
+
         public DateTime? ModifiedDate
         {
             get
