@@ -7,7 +7,7 @@ export class RequestContext1 {
   public PageNumber: number = 0;
   public PageSize: number = 0;
   public Id: number = 0;
-  public UserName:string | null=null;
+  public UserName: string | null = null;
 }
 export class dashboardconfiguration {
   dCId: string = ''
@@ -93,17 +93,21 @@ export class DocumentEffectiveConfiguration {
   template: string = '';
 }
 export class DocumentAdditionalTasks {
-  DTCId: string = ''
-  DocumentTitle: string = ''
-  DocumentNo: string = ''
-  DocumentType: string = ''
-  Department: string = ''
-  Document: string = ''
-  CreatedBy: string = ''
-  CreatedDate: string | null = '';
-  ModifiedBy: string = ''
-  ModifiedDate: string | null = '';
-  Status: string = ''
+  documentTitle: string = ''
+  documentno: string = ''
+  documentType: string = ''
+  department: string = ''
+  document: string = ''
+  status: string = '';
+  version: number = 0;
+  documentEffectiveID: number = 0;
+  atid: number = 0;
+  createdBy: string = '';
+  createdDate: Date | undefined;
+  modifiedBy: string = '';
+  effectiveDate: Date | undefined;
+  reviewDate: Date | undefined;
+  modifiedDate: Date | undefined;
 }
 
 export class noticationconfiguration {
@@ -132,8 +136,8 @@ export class workflowconiguration {
   approvalsType: string = ''
   approvalsGroup: string | null = null
   approvals: UserConfiguration[] | null = []
-  review:UserConfiguration | null =null;
-  approve:UserConfiguration | null=null;
+  review: UserConfiguration | null = null;
+  approve: UserConfiguration | null = null;
   CreatedBy: string = '';
   CreatedDate: string | null = null;
   ModifiedBy: string = '';
@@ -203,13 +207,13 @@ export class UserConfiguration {
   Activedirectory: string = ''
   Standarduser: string = ''
   CreatedBy: string = ''
-  CreatedDate:  Date | undefined;
+  CreatedDate: Date | undefined;
   ModifiedBy: string = ''
   ModifiedDate: Date | undefined;
-  Password:string | null=''
+  Password: string | null = ''
 }
 export class WorkItemsConfiguration {
-  WITId:number=0
+  WITId: number = 0
   TaskType: string = ''
   Stage: string = ''
   AssignedtoGroup: string = ''
@@ -217,9 +221,9 @@ export class WorkItemsConfiguration {
   InitiatedOn: string = ''
   Status: string = ''
   DueDate: string = ''
-  ReferenceId:number=0
-  ActionType:string=''
-  IsCompleted:boolean=false
+  ReferenceId: number = 0
+  ActionType: string = ''
+  IsCompleted: boolean = false
 }
 export class PlantConfiguration {
   DPCFId: string = ''
@@ -233,7 +237,7 @@ export class PlantConfiguration {
   ModifiedBy: string = ''
   ModifiedDate: Date | undefined;
   Status: string = '';
-  PMId:number=0;
+  PMId: number = 0;
 
 }
 export class SecurityManagement {
@@ -334,7 +338,7 @@ export class ExistingDocumentRequest {
   documenttitle: string = '';
   department: string = '';
   documenttype: string = '';
-  document: string = '';  
+  document: string = '';
   sampletemplate: string = '';
   createdBy: string = '';
   createdDate: Date | undefined;
@@ -344,7 +348,7 @@ export class ExistingDocumentRequest {
   reviewDate: Date | undefined;
 }
 
-export class DocumentRevisionRequest{
+export class DocumentRevisionRequest {
   status: string = '';
   version: Number = 0;
   documentEffectiveID: Number = 0;

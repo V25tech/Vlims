@@ -13,6 +13,7 @@ import { ExistingDocumentRequestComponent } from './components/existing-document
 import { ReviewExistingDocumentRequestComponent } from './components/review-existing-document-request/review-existing-document-request.component';
 import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
 import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
+import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
@@ -102,6 +103,10 @@ const routes: Routes = [
   {
     path: 'revision',
     component: DocumentRevisionRequestsComponent
+  },
+  {
+    path: 'revision/edit/:id',
+    component: ReviewRevisionComponent
   }
 ];
 

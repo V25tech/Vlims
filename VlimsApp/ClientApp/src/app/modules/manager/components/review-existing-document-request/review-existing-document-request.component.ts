@@ -70,7 +70,9 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   getExistingDocument(id: string) {
     this.spinner.show();
     this.existingDocReqservice.GetExistingDocumentById(id).subscribe((res: any) => {
-      this.existingDocReq = res;
+      this.existingDocReq = res;      
+      this.effectiveDate = this.toDate(this.existingDocReq.effectiveDate);
+      this.reviewDate = this.toDate(this.existingDocReq.reviewDate);
       this.spinner.hide();
     }, er => {
       this.spinner.hide();

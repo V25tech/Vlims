@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DocumentTypeConfiguration } from '../modules/documents/models/DocumentTypeConfiguration';
 import { DocumentTemplateConfiguration } from '../modules/documents/models/DocumentTemplateConfiguration';
-import { DepartmentConfiguration, DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentPrintConfiguration, DocumentRequestConfiguration, ExistingDocumentRequest, PlantConfiguration, RequestContext1, RoleConfiguration, UserConfiguration, Usergroupconfiguration } from '../models/model';
+import { DepartmentConfiguration, DocumentAdditionalTasks, DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentPrintConfiguration, DocumentRequestConfiguration, ExistingDocumentRequest, PlantConfiguration, RequestContext1, RoleConfiguration, UserConfiguration, Usergroupconfiguration } from '../models/model';
 import { DepartmentComponent } from '../modules/authentication/components/Department/department.component';
 
 
@@ -20,7 +20,7 @@ export class CommonService {
   plantConfig = new PlantConfiguration();
   roleConfig = new RoleConfiguration();
   request = new DocumentRequestConfiguration();
-  //revision = new ();
+  revision = new DocumentAdditionalTasks();
   preperation = new DocumentPreperationConfiguration();
   efffective = new DocumentEffectiveConfiguration();  
   printConfig = new DocumentPrintConfiguration();  
