@@ -29,5 +29,9 @@ export class DocumentManagerHomeComponent {
     else if(navTo === 'existing-document-requests'){    
       this.router.navigate(['/existingdoc']);
     }
+    else if(navTo === 'document-revision'){    
+      this.router.navigate(['/revision']);
+    }
+
   }
 }

@@ -8,11 +8,11 @@ import { ReviewPrepationComponent } from './components/review-prepation/review-p
 import { EffectivesComponent } from './components/effectives/effectives.component';
 import { ReviewEffectiveComponent } from './components/review-effective/review-effective.component';
 import { DocumentManagerHomeComponent } from './components/document-manager-home/document-manager-home.component';
-import { DocumentPrintComponent } from './components/Print/document-print.component';
-import { NewPrintRequestComponent } from './components/Print/new-print-request.component';
+import { DocumentPrintComponent } from './components/print/document-print.component';
 import { ExistingDocumentRequestComponent } from './components/existing-document-request/existing-document-request.component';
 import { ReviewExistingDocumentRequestComponent } from './components/review-existing-document-request/review-existing-document-request.component';
-import { DocumentRevisonRequestsComponent } from './components/document-revision/document-revision.component';
+import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
+import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
@@ -94,10 +94,10 @@ const routes: Routes = [
     path: 'existingdoc/edit/:id',
     component: ReviewExistingDocumentRequestComponent
   },
-  // {
-  //   path: 'revison',
-  //   component: DocumentRevisonRequestsComponent
-  // }
+  {
+    path: 'revision',
+    component: DocumentRevisionRequestsComponent
+  }
 ];
 
 @NgModule({

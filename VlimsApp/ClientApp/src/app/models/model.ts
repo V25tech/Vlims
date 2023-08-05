@@ -314,7 +314,7 @@ export class DocumentPrintConfiguration {
   public workflow: string = '';
   public reason: string = '';
   public documenttitle: string = '';
-  public DocumentNumber: string = '';
+  public documentNumber: string = '';
   public printtype: string = '';
   public noofcopies: string = '';
 }

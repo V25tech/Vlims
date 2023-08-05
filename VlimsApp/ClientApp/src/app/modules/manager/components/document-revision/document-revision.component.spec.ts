@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DocumentRevisonRequestsComponent } from './document-revision.component';
+import { DocumentRevisionRequestsComponent } from './document-revision.component';
 
 describe('RequestsComponent', () => {
-  let component: DocumentRevisonRequestsComponent;
-  let fixture: ComponentFixture<DocumentRevisonRequestsComponent>;
+  let component: DocumentRevisionRequestsComponent;
+  let fixture: ComponentFixture<DocumentRevisionRequestsComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DocumentRevisonRequestsComponent]
+      declarations: [DocumentRevisionRequestsComponent]
     });
-    fixture = TestBed.createComponent(DocumentRevisonRequestsComponent);
+    fixture = TestBed.createComponent(DocumentRevisionRequestsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -12,7 +12,7 @@ import { DocumentRevisionService } from 'src/app/modules/services/document-revis
   templateUrl: './document-revision.component.html',
   styleUrls: ['./document-revision.component.scss'],
 })
-export class DocumentRevisonRequestsComponent implements OnInit{
+export class DocumentRevisionRequestsComponent implements OnInit{
   @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
   @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
   // Pagination properties
@@ -28,8 +28,7 @@ export class DocumentRevisonRequestsComponent implements OnInit{
   revisionDatasource = [];
 
   ngOnInit() {   
-    //this.dataPaginator.rows = 10;
-    this.getdocumentrequest();
+    this.getdocumentRevisions();
 
   }
 
@@ -50,7 +49,7 @@ export class DocumentRevisonRequestsComponent implements OnInit{
   }
 
   
-  getdocumentrequest() {
+  getdocumentRevisions() {
     this.spinner.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.documentRevisionService.getdocumentRevisions(objrequest).subscribe((data: any) => {     
