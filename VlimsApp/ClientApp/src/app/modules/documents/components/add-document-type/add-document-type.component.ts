@@ -9,6 +9,7 @@ import { DepartmentconfigurationService } from 'src/app/modules/services/departm
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class AddDocumentTypeComponent {
   selectedDepartments: DepartmentConfiguration[] = [];
   viewMode: boolean = false; editMode: boolean = false;
   typeId: number = 0;
-  constructor(
+  constructor(private toastr: ToastrService,
     private location: Location,
     private deptservice: DepartmentconfigurationService,
     private doctypeservice: DocumentTypeServiceService,
@@ -71,6 +72,7 @@ export class AddDocumentTypeComponent {
     //this.loader.show();
     this.spinner.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.toastr.success('Document type Saved Succesfull!', 'Saved.!');
     return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
       debugger
       this.departments = data.Response;
@@ -108,10 +110,11 @@ export class AddDocumentTypeComponent {
     documentType.Status = "pending"
     documentType.Assigntodepartment = this.selectedDepartments.map((obj) => obj.DepartmentName).join(",");
     //documentType.SelectedDepartments=this.selectedDepartments;
-    if (this.selectedDepartments != null && this.selectedDepartments.length > 0) {
+    if (this.selectedDepartments != null && this.selectedDepartments.length > 0) this.toastr.success('Document Request Saved Succesfull!', 'Saved.!');{
       if (this.editMode) {
         this.doctypeservice.updatedoctypeconfig(documentType).subscribe((res: any) => {
           this.location.back();
+          
         });
       }
       else {
