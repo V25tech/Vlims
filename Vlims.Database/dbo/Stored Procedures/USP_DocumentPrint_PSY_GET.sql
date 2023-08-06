@@ -12,7 +12,7 @@ reason_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY 
+ModifiedDate_PSY,Status_PSY 
   FROM [dbo].[DocumentPrint_PSY] WITH (NOLOCK) where [DRId_PSY] = @DRId_PSY   
  END TRY 
  BEGIN CATCH 

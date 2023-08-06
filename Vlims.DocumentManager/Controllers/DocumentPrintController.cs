@@ -43,8 +43,8 @@ public class DocumentPrintController : ControllerBase
     /// This method is used to Get DocumentEffective By Id dEID
     /// </summary>
     /// <param name="dEID"></param>
-    [HttpGet("{dEID}")]
-    public ActionResult<DocumentPrint> GetDocumentPrintByDRId(string dEID)
+   [HttpGet("getbyId")]
+    public ActionResult<DocumentPrint> GetDocumentPrintByDRId(int dEID)
     {
         var result = documentPrintService.GetDocumentPrintByDRId(dEID);
         return result;

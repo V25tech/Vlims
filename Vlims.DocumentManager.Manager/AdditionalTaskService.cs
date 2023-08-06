@@ -41,7 +41,7 @@ namespace Vlims.DocumentManager.Manager
             }
         }
         
-        public AdditionalTask GetAdditionalTaskByATID(string aTID)
+        public AdditionalTask GetAdditionalTaskByATID(int aTID)
         {
             try
             {

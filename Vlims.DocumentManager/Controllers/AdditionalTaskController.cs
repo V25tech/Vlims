@@ -54,7 +54,7 @@ namespace PolicySummary.Controllers
         /// </summary>
         /// <param name="aTID"></param>
         [HttpGet("getbyId")]
-        public ActionResult<AdditionalTask> GetAdditionalTaskByATID(string aTID)
+        public ActionResult<AdditionalTask> GetAdditionalTaskByATID(int aTID)
         {
             var result = additionalTaskService.GetAdditionalTaskByATID(aTID);
             return result;

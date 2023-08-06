@@ -26,6 +26,7 @@ export class ReviewRevisionComponent {
   departmentsSource = [];
   typeSource = [];
   requestId:number=0;workId:number=0;statuss:string='';iscompleted:boolean=false;type:string=''
+  username:string=''
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus:string=''
 
@@ -42,6 +43,7 @@ export class ReviewRevisionComponent {
     if(user!=null && user!=undefined)
     {
       this.commonsvc.createdBy=user;
+      this.username=user;
     }
     this.route.params.subscribe(params => {
       this.requestId = params['requestId'];
@@ -54,14 +56,17 @@ export class ReviewRevisionComponent {
     if (this.type == 'view') {
       this.viewMode = true;
       this.getbyId(this.requestId);
-      this.getworkflowitems();
+      
     }
     else if (this.id) { //edit mode
       this.editMode = true;
-      if (this.commonsvc.revision) {
+      if (this.commonsvc.revision.atid) {
+        console.log('revision',this.commonsvc.revision);
         this.revision = this.commonsvc.revision;
-        this.effectiveDate = this.toDate(this.revision.effectiveDate);
-        this.reviewDate = this.toDate(this.revision.reviewDate);
+        // this.effectiveDate = this.toDate(this.revision.effectiveDate);
+        // this.reviewDate = this.toDate(this.revision.reviewDate);
+        //   this.effectiveDate = this.toDate(this.revision.effectiveDate);
+        //  this.reviewDate = this.toDate(this.revision.reviewDate);
       }
       else
         this.getDocumentRevision(this.id);
@@ -71,12 +76,16 @@ export class ReviewRevisionComponent {
     this.spinner.show();
     return this.documentRevisionService.getbyId1(arg0).subscribe((data: any) => {
       this.revision = data;
+      this.getworkflowitems();
       this.spinner.hide();
       console.log('request', this.revision);
     });
   }
   approve() {
-    //this.preparation.status = 'Approved'
+    debugger
+    this.revision.modifiedBy=this.username;
+    this.revision.status=this.finalStatus;
+    alert(this.revision.status);
     this.saveRequest();
   }
   reinitiative() {

@@ -24,6 +24,9 @@ UpdatePrintRequest(objrequest: DocumentPrintConfiguration) {
   debugger
     return this.http.postJsonLogin(objrequest, "api/documentprint/updatedocumentprint",this.type);
 }
+getbyId(docreq: number) {        
+  return this.http.getwithheader("api/documentprint/getbyId" + "?dEID=" + docreq, this.type);
+}
 }
 
 

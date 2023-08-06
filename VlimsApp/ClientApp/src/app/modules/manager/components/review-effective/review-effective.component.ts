@@ -36,6 +36,7 @@ export class ReviewEffectiveComponent {
   editMode: boolean = false;
   viewMode: boolean = false;
   requestId:number=0;workId:number=0;statuss:string='';type:string='';iscompleted:boolean=false;
+  username:string=''
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus:string=''
   stageSource = [
@@ -55,6 +56,7 @@ export class ReviewEffectiveComponent {
     if(user!=null && user!=undefined)
     {
       this.commonsvc.createdBy=user;
+      this.username=user;
     }
     this.route.params.subscribe(params => {
       this.requestId = params['requestId'];
@@ -84,6 +86,8 @@ export class ReviewEffectiveComponent {
   }
   approve(){
     //this.effective.Status='Approved'
+    this.effective.ModifiedBy=this.username;
+    this.effective.Status=this.finalStatus;
     this.saveEffective();
   }
   reinitiative(){

@@ -80,7 +80,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'effectives/view/workId/:requestId/:workId',
+    path: 'effectives/view/:requestId/:workId/:type',
     component: ReviewEffectiveComponent,
     canActivate: [AuthGuard],
   },
@@ -98,7 +98,13 @@ const routes: Routes = [
     path: 'print/edit',
     component: NewPrintRequestComponent,
     canActivate: [AuthGuard],
-  }, {
+  }, 
+  {
+    path: 'print/view/:requestId/:workId/:type',
+    component: NewPrintRequestComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'existingdoc',
     component: ExistingDocumentRequestComponent,
   },
@@ -117,7 +123,12 @@ const routes: Routes = [
   {
     path: 'revision/edit/:id',
     component: ReviewRevisionComponent
-  }
+  },
+  {
+    path: 'revision/view/:requestId/:workId/:type',
+    component: ReviewRevisionComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

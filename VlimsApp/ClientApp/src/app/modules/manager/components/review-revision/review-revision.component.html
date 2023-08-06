@@ -20,7 +20,7 @@
             <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentTitle" name="documentTitle"
-                placeholder="Document Title" [(ngModel)]="revision.documentTitle" />
+                placeholder="Document Title" [(ngModel)]="revision.documentTitle" disabled="viewMode"/>
             </div>
           </div>
 
@@ -28,7 +28,7 @@
             <label for="documentType" class="col-sm-2 col-form-label">Document Number</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="dnumber" name="Dnumber" placeholder="Document Number"
-                [(ngModel)]="revision.documentno" />
+                [(ngModel)]="revision.documentno" disabled="viewMode"/>
             </div>
           </div>
 
@@ -38,7 +38,7 @@
             <div class="col-sm-10">
               <p-dropdown name="docType" [options]="typeSource" [(ngModel)]="revision.documentType"
                 optionLabel="Documenttypename" optionValue="Documenttypename" [disabled]="viewMode"
-                [autoDisplayFirst]="false" [required]="true" #DocumenttypeInput="ngModel">
+                [autoDisplayFirst]="false" [required]="true" #DocumenttypeInput="ngModel" [disabled]="true">
               </p-dropdown>
               <div *ngIf="DocumenttypeInput.invalid && (DocumenttypeInput.dirty || DocumenttypeInput.touched)"
                 class="text-danger">
@@ -53,7 +53,7 @@
             <div class="col-sm-10">
               <p-dropdown name="department" [options]="departmentsSource" [(ngModel)]="revision.department"
                 optionLabel="DepartmentName" optionValue="DepartmentName" [disabled]="viewMode" [required]="true"
-                [autoDisplayFirst]="false" #DepartmentInput="ngModel">
+                [autoDisplayFirst]="false" #DepartmentInput="ngModel" [disabled]="true">
               </p-dropdown>
               <div *ngIf="DepartmentInput.invalid && (DepartmentInput.dirty || DepartmentInput.touched)"
                 class="text-danger">
@@ -76,7 +76,7 @@
             <div class="col-sm-10">
               <input type="date" class="form-control" id="edate" name="Edate" placeholder="Effective Date"
                 [(ngModel)]="effectiveDate" (change)="revision.effectiveDate = getAsDate($event)"
-                #effectiveDateInput="ngModel" required />
+                #effectiveDateInput="ngModel" required disabled="viewMode"/>
               <div *ngIf="effectiveDateInput.invalid && (effectiveDateInput.dirty || effectiveDateInput.touched)"
                 class="text-danger">
                 Effective Date is required.
@@ -89,7 +89,7 @@
             <div class="col-sm-10">
               <input type="date" class="form-control" id="rdate" name="Rdate" placeholder="Review Date"
                 [(ngModel)]="reviewDate" (change)="revision.reviewDate = getAsDate($event)" #reviewDateInput="ngModel"
-                required />
+                required disabled="viewMode"/>
               <div *ngIf="reviewDateInput.invalid && (reviewDateInput.dirty || reviewDateInput.touched)"
                 class="text-danger">
                 Review Date is required.

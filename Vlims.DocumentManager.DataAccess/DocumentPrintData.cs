@@ -40,7 +40,7 @@ public static class DocumentPrintData
             }
         }
         
-        public static DataSet GetDocumentPrintByDRId(string dRId)
+        public static DataSet GetDocumentPrintByDRId(int dRId)
         {
             try
             {
@@ -88,7 +88,8 @@ public static class DocumentPrintData
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.workflow, Value = documentPrint.workflow });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.reason, Value = documentPrint.reason });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.ModifiedBy, Value = documentPrint.ModifiedBy });
-                Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPrintConstants.USP_DocumentPrint_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
+               sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.Status, Value = documentPrint.Status });
+            Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPrintConstants.USP_DocumentPrint_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
             catch (System.Exception ex)

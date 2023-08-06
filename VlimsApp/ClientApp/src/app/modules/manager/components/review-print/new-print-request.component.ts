@@ -1,14 +1,15 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { DocumentPreperationConfiguration, DocumentPrintConfiguration, RequestContext } from '../../../../models/model';
+import { DocumentPreperationConfiguration, DocumentPrintConfiguration, RequestContext, WorkItemsConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { NewPrintRequestService } from '../../../services/new-print-request.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DocumentPreperationService } from '../../../services/document-preperation.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 
 
 @Component({
@@ -30,18 +31,64 @@ export class NewPrintRequestComponent implements OnInit {
   editMode: boolean = false;
   viewMode: boolean = false;
   preparations: DocumentPreperationConfiguration[] = [];
-  constructor(private commonsvc: CommonService,private location: Location,private toastr: ToastrService, private spinner: NgxSpinnerService, private docprintservice: NewPrintRequestService, private docPreperationService: DocumentPreperationService, private router: Router, private wfservice: WorkflowServiceService, private docservice: DocumentPreperationService) { }
+  username:string=''
+  requestId:number=0;workId:number=0;statuss:string='';iscompleted:boolean=false;type:string='';finalStatus:string='';
+  workitems: Array<WorkItemsConfiguration> = [];
+  constructor(private commonsvc: CommonService,private location: Location,
+    private route: ActivatedRoute,
+    private workitemssvc:WorkitemsService,
+    private toastr: ToastrService, private spinner: NgxSpinnerService, private docprintservice: NewPrintRequestService, private docPreperationService: DocumentPreperationService, private router: Router, private wfservice: WorkflowServiceService, private docservice: DocumentPreperationService) { }
 
   ngOnInit() {
+    const user=localStorage.getItem("username");
+    if(user!=null && user!=undefined)
+    {
+      this.commonsvc.createdBy=user;
+      this.username=user;
+    }
+    this.route.params.subscribe(params => {
+      debugger
+      this.requestId = params['requestId'];
+      this.workId = params['workId'];
+      this.type=params['type'];
+    });
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    if (segments.slice(-1).toString() == 'edit' && this.commonsvc.printConfig) {
+    if (this.type == 'view') {
+      this.viewMode = true;
+      this.getbyId(this.requestId);
+      this.getworkflowitems();
+    }
+    else if (segments.slice(-1).toString() == 'edit' && this.commonsvc.printConfig) {
       this.editMode = true;
       this.print = this.commonsvc.printConfig;
     }
     this.GetNewPrintRequest();
     this.getworkflowinfo();
     this.getdocumentpreparations();
+  }
+  getbyId(arg0: number) {
+    this.spinner.show();
+    return this.docprintservice.getbyId(arg0).subscribe((data: any) => {
+      this.print = data;
+      this.spinner.hide();
+      console.log('request', data);
+    });
+  }
+  approve(){
+    this.print.Status=this.finalStatus;
+    this.print.ModifiedBy=this.username;
+    this.savePrintRequest();
+  }
+  reinitiative(){
+    //this.effective.Status='Re-Initiated'
+    //this.saveEffective();
+    this.location.back();
+  }
+  reject(){
+    //this.effective.Status='Rejected'
+    //this.saveEffective();
+    this.location.back();
   }
   getdocumentpreparations() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
@@ -77,7 +124,7 @@ export class NewPrintRequestComponent implements OnInit {
     });
   }
   savePrintRequest() {
-    if (this.editMode) {
+    if (this.editMode || this.viewMode) {
       this.updateRequest();
     }
     else {
@@ -117,7 +164,49 @@ export class NewPrintRequestComponent implements OnInit {
   onCancel() {
     this.router.navigate(['/print']);
   }
-
+  getworkflowitems() {
+    this.spinner.show();
+    const user=localStorage.getItem("username");
+    if(user!=null && user!=undefined){
+      this.commonsvc.createdBy=user;
+    }
+    return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
+      debugger
+      this.workitems = data.Response;
+      if(this.workitems.length>0){
+        this.workitems=this.workitems.filter(p=>p.ReferenceId==this.requestId);
+        if(this.workitems)
+        {
+          this.workitems.sort((a, b) => a.WITId - b.WITId);
+          const work=this.workitems.filter(o=>o.WITId==this.workId);
+                  this.statuss = work[0].ActionType;
+                  this.iscompleted=work[0].IsCompleted;
+                  const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+                  const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
+                  const countt = totalreviewcount - reviewedcount;
+                  if (this.statuss === 'Review') {
+                    if (countt === 1) {
+                      this.finalStatus = 'Reviewed';
+                    } else if (countt > 1) {
+                      this.finalStatus = 'Pending Review';
+                    } else if (countt === totalreviewcount) {
+                      this.finalStatus = 'Pending Review';
+                    }
+                  } else {
+                    if (countt === 1) {
+                      this.finalStatus = 'Approved';
+                    } else if (countt > 1) {
+                      this.finalStatus = 'Pending Approve';
+                    } else if (countt === totalreviewcount) {
+                      this.finalStatus = 'Pending Approve';
+                    }
+                  }
+                  console.log('status', this.finalStatus);
+                }
+              }
+              this.spinner.hide();
+            });
+          }
 }
 
 

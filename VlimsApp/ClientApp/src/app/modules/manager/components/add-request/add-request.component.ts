@@ -18,6 +18,7 @@ import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 export class AddRequestComponent {
   departmentsSource = []; type:string=''
   requestId:number=0;workId:number=0;statuss:string='';iscompleted:boolean=false;
+  username:string=''
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus:string=''
   typeSource = [];
@@ -43,6 +44,7 @@ export class AddRequestComponent {
     if(user!=null && user!=undefined)
     {
       this.commonsvc.createdBy=user;
+      this.username=user;
     }
     this.route.params.subscribe(params => {
       debugger
@@ -79,6 +81,8 @@ export class AddRequestComponent {
   }
   approve() {
     //this.request.status = this.statuss;
+    this.request.modifiedBy=this.username;
+    this.request.status=this.finalStatus;
     this.updateRequest();
   }
   reinitiative() {

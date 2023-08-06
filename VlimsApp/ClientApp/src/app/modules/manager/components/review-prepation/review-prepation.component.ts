@@ -38,6 +38,7 @@ export class ReviewPrepationComponent {
   viewMode: boolean = false;
   editMode: boolean = false;
   requestId:number=0;workId:number=0;statuss:string='';type:string='';iscompleted:boolean=false;
+  username:string=''
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus:string=''
   stageSource = [
@@ -59,6 +60,7 @@ export class ReviewPrepationComponent {
     if(user!=null && user!=undefined)
     {
       this.commonsvc.createdBy=user;
+      this.username=user;
     }
     this.route.params.subscribe(params => {
       this.requestId = params['requestId'];
@@ -91,6 +93,8 @@ export class ReviewPrepationComponent {
   }
   approve() {
     //this.preparation.status = 'Approved'
+    this.preparation.ModifiedBy=this.username;
+    this.preparation.status=this.finalStatus;
     this.savePreparation();
   }
   reinitiative() {

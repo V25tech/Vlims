@@ -41,6 +41,8 @@ namespace Vlims.DMS.Entities
 
         public const string DocumentTitle = "@DocumentTitle_PSY";
 
+        public const string documentno = "@documentno_PSY";
+
         public const string DocumentType = "@DocumentType_PSY";
 
 
