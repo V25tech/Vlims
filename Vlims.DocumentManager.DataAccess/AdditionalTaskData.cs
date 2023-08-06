@@ -65,6 +65,7 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Version, Value = additionalTask.Version });
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.EffectiveDate, Value = additionalTask.EffectiveDate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.reviewDate, Value = additionalTask.ReviewDate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Workflow, Value = additionalTask.Workflow });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(AdditionalTaskConstants.USP_AdditionalTask_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -84,6 +85,7 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int16, ParameterName = AdditionalTaskConstants.DocumentEffective_ID, Value = additionalTask.DocumentEffectiveID });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Version, Value = additionalTask.Version });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.ModifiedBy, Value = additionalTask.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Workflow, Value = additionalTask.Workflow });
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.ModifiedDate, Value = additionalTask.ModifiedDate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.EffectiveDate, Value = additionalTask.EffectiveDate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.reviewDate, Value = additionalTask.ReviewDate });

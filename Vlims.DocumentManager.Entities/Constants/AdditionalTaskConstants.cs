@@ -33,6 +33,8 @@ namespace Vlims.DMS.Entities
         
         public const string ModifiedBy = "@ModifiedBy_PSY";
 
+        public const string Workflow = "@Workflow_PSY";
+
         public const string Department = "@Department_PSY";
 
         public const string Document = "@Document_PSY";

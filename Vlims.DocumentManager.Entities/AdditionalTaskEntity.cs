@@ -42,6 +42,8 @@ namespace Vlims.DMS.Entities
         public string Documentno { get; set; }
         public string DocumentType { get; set; }
         public string Document { get; set; }
+
+        private string workflowField;
         public int DocumentEffectiveID
         {
             get
@@ -137,6 +139,17 @@ namespace Vlims.DMS.Entities
             set
             {
                 this.modifieddateField = value;
+            }
+        }
+        public string Workflow
+        {
+            get
+            {
+                return this.workflowField;
+            }
+            set
+            {
+                this.workflowField = value;
             }
         }
     }
