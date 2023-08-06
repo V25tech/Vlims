@@ -37,7 +37,7 @@ namespace Vlims.Administration.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         plantManagementData = new PlantManagement();
-                        plantManagementData.PMId = Convert.ToString(row[PlantManagementConstants.PMId.Trim('@')]);
+                        plantManagementData.PMId = Convert.ToInt16(row[PlantManagementConstants.PMId.Trim('@')]);
                         plantManagementData.AdminManagerId = Convert.ToString(row[PlantManagementConstants.AdminManagerId.Trim('@')]);
                         plantManagementData.PlantName = Convert.ToString(row[PlantManagementConstants.PlantName.Trim('@')]);
                         plantManagementData.PlantCode = Convert.ToString(row[PlantManagementConstants.PlantCode.Trim('@')]);

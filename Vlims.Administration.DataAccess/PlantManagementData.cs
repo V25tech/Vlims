@@ -80,7 +80,7 @@ namespace PolicySummary.Sheet1.Data
             try
             {
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.PMId, Value = plantManagement.PMId });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int16, ParameterName = PlantManagementConstants.PMId, Value = plantManagement.PMId });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.AdminManagerId, Value = plantManagement.AdminManagerId });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.PlantName, Value = plantManagement.PlantName });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.PlantCode, Value = plantManagement.PlantCode });

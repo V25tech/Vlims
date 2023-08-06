@@ -226,7 +226,7 @@ export class WorkItemsConfiguration {
   IsCompleted: boolean = false
 }
 export class PlantConfiguration {
-  DPCFId: string = ''
+ // DPCFId: string = ''
   HierarchyManagementId: string = ''
   PlantName: string = ''
   PlantCode: string = ''

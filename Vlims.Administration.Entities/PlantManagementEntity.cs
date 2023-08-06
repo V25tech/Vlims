@@ -17,7 +17,7 @@ namespace Vlims.Administration.Entities
     public class PlantManagement
     {
         
-        private string pmidField;
+        private int pmidField;
         
         private string adminmanageridField;
         
@@ -39,7 +39,7 @@ namespace Vlims.Administration.Entities
 
         private string statusField;
         
-        public string PMId
+        public int PMId
         {
             get
             {
