@@ -72,7 +72,7 @@ export class AddDocumentTypeComponent {
     //this.loader.show();
     this.spinner.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
-    this.toastr.success('Document type Saved Succesfull!', 'Saved.!');
+   // this.toastr.success('Document type Saved Succesfull!', 'Saved.!');
     return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
       debugger
       this.departments = data.Response;

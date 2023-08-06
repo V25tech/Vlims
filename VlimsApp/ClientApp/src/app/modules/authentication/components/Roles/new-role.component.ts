@@ -69,7 +69,7 @@ export class AddRoleComponent implements OnInit {
     adaddrole.CreatedDate = new Date();
     adaddrole.ModifiedDate = new Date();
     this.toastr.success('New Role Saved Succesfull!', 'Saved.!');
-    //this.router.navigate(['/products']);
+    this.router.navigate(['/admin/roles']);
     if (this.editMode) 
 {
     this.rolesservice.Updaterole(adaddrole).subscribe((res: any) => {
