@@ -162,7 +162,7 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.columns=this.colsArray.length.toString();
     this.templateForm.footerrows=this.rowsFooterArray.length.toString();
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
-    this.toastr.success('Document Request Saved Succesfull!', 'Saved.!');
+    this.toastr.success('Document Template Saved Succesfull!', 'Saved.!');
     if(this.editMode)
     {
       this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
