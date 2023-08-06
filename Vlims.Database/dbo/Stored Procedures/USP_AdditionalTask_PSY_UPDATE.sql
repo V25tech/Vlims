@@ -25,12 +25,12 @@ select e.documenttitle_PSY,documenttype_PSY,documentno_PSY,0,e.wokflow_PSY,null,
 SELECT @ID = @@IDENTITY;
 
 INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT DP.printtype_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR 
+ SELECT DP.printtype_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),'In-Progress',GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR 
  JOIN DocumentPrint_PSY DP ON DP.DRId_PSY=@ID
  WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
 
  INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT DP.printtype_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR
+ SELECT DP.printtype_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),'In-Progress',GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR
  JOIN DocumentPrint_PSY DP ON DP.DRId_PSY=@ID
  WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
 

@@ -53,7 +53,7 @@ namespace PolicySummary.Controllers
         /// This method is used to Get AdditionalTask By Id aTID
         /// </summary>
         /// <param name="aTID"></param>
-        [HttpGet("{aTID}")]
+        [HttpGet("getbyId")]
         public ActionResult<AdditionalTask> GetAdditionalTaskByATID(string aTID)
         {
             var result = additionalTaskService.GetAdditionalTaskByATID(aTID);

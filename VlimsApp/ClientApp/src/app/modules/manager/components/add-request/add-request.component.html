@@ -75,12 +75,14 @@
               Cancel
             </button>
             <button type="submit" class="btn btn-primary" *ngIf="!viewMode" [disabled]="!fm.form.valid">Submit</button>
-            <button type="submit" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && request.status!='Approved'"
+            <div *ngIf="iscompleted">
+            <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && request.status!='Approved'"
               (click)="approve()">Approve</button>
-            <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary"
+            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary"
               *ngIf="viewMode && request.status!='Approved'" (click)="reinitiative()">Re-Initiative</button>
-            <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger"
+            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger"
               *ngIf="viewMode && request.status!='Approved'" (click)="reject()">Reject</button>
+            </div>
           </div>
         </div>
       </form>

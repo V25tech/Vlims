@@ -31,18 +31,6 @@ END
 
 
 DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentPreparation_PSY where DPNID_PSY=@DPNID_PSY)
-if((SELECT COUNT(*) FROM workitems_PSY WHERE RefrenceId_PSY=@DPNID_PSY)=0)
-begin
-
-INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT @documenttype_PSY,'Preparation','Pending',NULL,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@DPNID_PSY,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
-
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT @documenttype_PSY,'Preparation','Pending',NULL,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@DPNID_PSY,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
-
-end
-
-
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
 DECLARE @ID INT
@@ -54,10 +42,10 @@ VALUES('1',@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,
 SELECT @ID = @@IDENTITY;
 
 INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT @documenttype_PSY,'Effective','Pending',NULL,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
+ SELECT @documenttype_PSY,'Effective','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
 
  INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT @documenttype_PSY,'Effective','Pending',NULL,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
+ SELECT @documenttype_PSY,'Effective','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
 
 END
 

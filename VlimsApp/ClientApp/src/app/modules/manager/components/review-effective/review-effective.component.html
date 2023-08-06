@@ -141,9 +141,11 @@
                 Cancel
               </button>
               <button type="submit" class="btn btn-primary" *ngIf="!viewMode">Submit</button>
-              <button type="submit" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && effective.Status!='Approved'" (click)="approve()">Approve</button>
-            <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && effective.Status!='Approved'" (click)="reinitiative()">Re-Initiative</button>
-            <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && effective.Status!='Approved'" (click)="reject()">Reject</button>
+             
+              <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
+            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button>
+            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
+            
             </div>
           </div>
         </form>

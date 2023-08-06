@@ -4,8 +4,6 @@
 @UserName NVarchar(100)
 as
 begin
-if(@Status_PSY!='APPROVED' or @Status_PSY!='APPROVE')
-begin
 DECLARE @TYPE NVARCHAR(100); SET @TYPE=(SELECT ActionType_PSY FROM workitems_PSY WHERE InitiatedBy_PSY=@UserName AND RefrenceId_PSY=@RefrenceId_PSY)
 IF(@TYPE='REVIEW')
 BEGIN
@@ -15,9 +13,4 @@ ELSE
 BEGIN
 UPDATE workitems_PSY SET Status_PSY='Approved', Stage_PSY=@Status_PSY,IsCompleted_PSY=1 WHERE RefrenceId_PSY=@RefrenceId_PSY AND InitiatedBy_PSY=@UserName
 END
-end
-else
-begin
-UPDATE workitems_PSY SET Status_PSY='Approved',Stage_PSY=@Status_PSY,IsCompleted_PSY=1 WHERE RefrenceId_PSY=@RefrenceId_PSY AND InitiatedBy_PSY=@UserName
-end
 end

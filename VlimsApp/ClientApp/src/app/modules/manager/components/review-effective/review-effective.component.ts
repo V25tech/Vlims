@@ -35,7 +35,7 @@ export class ReviewEffectiveComponent {
   pdfUrl: string | null = null;
   editMode: boolean = false;
   viewMode: boolean = false;
-  requestId:number=0;workId:number=0;statuss:string=''
+  requestId:number=0;workId:number=0;statuss:string='';type:string='';iscompleted:boolean=false;
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus:string=''
   stageSource = [
@@ -59,19 +59,20 @@ export class ReviewEffectiveComponent {
     this.route.params.subscribe(params => {
       this.requestId = params['requestId'];
       this.workId = params['workId'];
+      this.type=params['type'];
     });
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    if (segments[segments.length - 4].toString() == 'view') {
+    if (this.type == 'view') {
       this.viewMode = true;
       this.getbyId(this.requestId);
+      this.getworkflowitems();
     }
-    else if (this.commonsvc.efffective) {      
+    else if (this.commonsvc.efffective.deid) {      
       this.effective = this.commonsvc.efffective;
     }
     else this.location.back();
     console.log(this.effective);
-    this.getworkflowitems();
   }
   getbyId(arg0: number) {
     this.spinner.show();
@@ -184,6 +185,7 @@ export class ReviewEffectiveComponent {
           this.workitems.sort((a, b) => a.WITId - b.WITId);
           const work=this.workitems.filter(o=>o.WITId==this.workId);
                   this.statuss = work[0].ActionType;
+                  this.iscompleted=work[0].IsCompleted;
                   const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
                   const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
                   const countt = totalreviewcount - reviewedcount;

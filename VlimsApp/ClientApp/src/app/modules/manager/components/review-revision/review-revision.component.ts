@@ -25,7 +25,7 @@ export class ReviewRevisionComponent {
   reviewDate: string | undefined;
   departmentsSource = [];
   typeSource = [];
-  requestId:number=0;workId:number=0;statuss:string=''
+  requestId:number=0;workId:number=0;statuss:string='';iscompleted:boolean=false;type:string=''
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus:string=''
 
@@ -37,10 +37,26 @@ export class ReviewRevisionComponent {
     private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService) { }
 
   ngOnInit() {
+    debugger
+    const user=localStorage.getItem("username");
+    if(user!=null && user!=undefined)
+    {
+      this.commonsvc.createdBy=user;
+    }
+    this.route.params.subscribe(params => {
+      this.requestId = params['requestId'];
+      this.workId = params['workId'];
+      this.type=params['type'];
+    });
     this.id = this.route.snapshot.paramMap.get('id') ?? '';
     this.getdepartments();
     this.getdocumenttypeconfig();
-    if (this.id) { //edit mode
+    if (this.type == 'view') {
+      this.viewMode = true;
+      this.getbyId(this.requestId);
+      this.getworkflowitems();
+    }
+    else if (this.id) { //edit mode
       this.editMode = true;
       if (this.commonsvc.revision) {
         this.revision = this.commonsvc.revision;
@@ -51,7 +67,24 @@ export class ReviewRevisionComponent {
         this.getDocumentRevision(this.id);
     }
   }
-
+  getbyId(arg0: number) {
+    this.spinner.show();
+    return this.documentRevisionService.getbyId1(arg0).subscribe((data: any) => {
+      this.revision = data;
+      this.spinner.hide();
+      console.log('request', this.revision);
+    });
+  }
+  approve() {
+    //this.preparation.status = 'Approved'
+    this.saveRequest();
+  }
+  reinitiative() {
+    this.location.back();
+  }
+  reject() {
+    this.location.back();
+  }
   toDate(pdate: Date | undefined) {
     if (pdate == undefined) return undefined;
     const yyyy = pdate.getFullYear();
@@ -86,7 +119,7 @@ export class ReviewRevisionComponent {
   }
 
   saveRequest() {
-    if (this.editMode) {
+    if (this.editMode || this.viewMode) {
       this.updateRequest();
     }
     else {
@@ -134,5 +167,47 @@ export class ReviewRevisionComponent {
   onCancel() {
     this.location.back();
   }
-
+  getworkflowitems() {
+    this.spinner.show();
+    const user=localStorage.getItem("username");
+    if(user!=null && user!=undefined){
+      this.commonsvc.createdBy=user;
+    }
+    return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
+      debugger
+      this.workitems = data.Response;
+      if(this.workitems.length>0){
+        this.workitems=this.workitems.filter(p=>p.ReferenceId==this.requestId);
+        if(this.workitems)
+        {
+          this.workitems.sort((a, b) => a.WITId - b.WITId);
+          const work=this.workitems.filter(o=>o.WITId==this.workId);
+                  this.statuss = work[0].ActionType;
+                  this.iscompleted=work[0].IsCompleted;
+                  const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+                  const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
+                  const countt = totalreviewcount - reviewedcount;
+                  if (this.statuss === 'Review') {
+                    if (countt === 1) {
+                      this.finalStatus = 'Reviewed';
+                    } else if (countt > 1) {
+                      this.finalStatus = 'Pending Review';
+                    } else if (countt === totalreviewcount) {
+                      this.finalStatus = 'Pending Review';
+                    }
+                  } else {
+                    if (countt === 1) {
+                      this.finalStatus = 'Approved';
+                    } else if (countt > 1) {
+                      this.finalStatus = 'Pending Approve';
+                    } else if (countt === totalreviewcount) {
+                      this.finalStatus = 'Pending Approve';
+                    }
+                  }
+                  console.log('status', this.finalStatus);
+                }
+              }
+              this.spinner.hide();
+            });
+          }
 }

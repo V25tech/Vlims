@@ -19,6 +19,9 @@ export class DocumentRevisionService {
   updatedocrevconfig(objrequest: DocumentAdditionalTasks) {    
     return this.http.postJsonLogin(objrequest, "api/additionaltask/updateadditionaltask", this.type);
   }
+  getbyId1(id: number) {        
+    return this.http.getwithheader("api/documentrequest/getbyId" + "?aTID=" + id, this.type);
+  }
   getbyId(id: string){
     return this.http.getwithheader("api/additionaltask/"+id,this.type);
   }

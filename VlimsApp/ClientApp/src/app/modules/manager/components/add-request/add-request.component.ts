@@ -16,8 +16,8 @@ import { WorkitemsService } from 'src/app/modules/services/workitems.service';
   styleUrls: ['./add-request.component.scss'],
 })
 export class AddRequestComponent {
-  departmentsSource = [];
-  requestId:number=0;workId:number=0;statuss:string=''
+  departmentsSource = []; type:string=''
+  requestId:number=0;workId:number=0;statuss:string='';iscompleted:boolean=false;
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus:string=''
   typeSource = [];
@@ -45,23 +45,29 @@ export class AddRequestComponent {
       this.commonsvc.createdBy=user;
     }
     this.route.params.subscribe(params => {
+      debugger
       this.requestId = params['requestId'];
       this.workId = params['workId'];
+      this.type=params['type'];
     });
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
-    if (segments[segments.length - 4].toString() == 'view') {
+    if (this.type == 'view') {
       this.viewMode = true;
       this.getbyId(this.requestId);
+      this.getworkflowitems();
     }
-    else if (segments.slice(-1).toString() == 'edit' && this.commonsvc.request) {
+    else if (segments.slice(-1).toString() == 'edit') {
       this.editMode = true;
+      if(this.commonsvc.request==null)
+      {
+        this.location.back();
+      }
       this.request = this.commonsvc.request;
     }
     this.getdepartments();
     this.getdocumenttypeconfig();
     this.getworkflowinfo();
-    this.getworkflowitems();
   }
   getbyId(arg0: number) {
     this.spinner.show();
@@ -171,6 +177,7 @@ export class AddRequestComponent {
           this.workitems.sort((a, b) => a.WITId - b.WITId);
           const work=this.workitems.filter(o=>o.WITId==this.workId);
                   this.statuss = work[0].ActionType;
+                  this.iscompleted=work[0].IsCompleted;
                   const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
                   const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
                   const countt = totalreviewcount - reviewedcount;
