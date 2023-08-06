@@ -10,6 +10,7 @@ import { UsersconfigurationService } from 'src/app/modules/services/usersconfigu
 import { usergroupconfigurationService } from 'src/app/modules/services/add-usergroupconfiguration.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-workflow',
@@ -66,7 +67,7 @@ export class AddWorkflowComponent {
 
   
 
-  constructor(
+  constructor(private toastr: ToastrService,
     private location: Location,
     private router: Router,
     private loader:NgxSpinnerService,
@@ -163,6 +164,7 @@ else if(lastSegment=="view")
     }
         return this.workflowsvc.addworkflow(workflow).subscribe((data:any)=>{
         //this.loader.hide();
+        this.toastr.success('workflow Saved Succesfull!', 'Saved.!');
         this.router.navigate(['/workflow']);
     },(error:any)=>{
 
