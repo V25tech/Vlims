@@ -21,7 +21,7 @@ export class DocumentTypesComponent {
   @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
   @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
   // Pagination properties
-  currentPage = 1;
+  currentPage = 10;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
   docTypesDatasource = [];
