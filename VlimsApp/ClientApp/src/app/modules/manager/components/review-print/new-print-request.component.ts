@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { DocumentPreperationConfiguration, DocumentPrintConfiguration, RequestContext, WorkItemsConfiguration } from '../../../../models/model';
@@ -10,6 +10,8 @@ import { DocumentPreperationService } from '../../../services/document-preperati
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 
 @Component({
@@ -31,26 +33,32 @@ export class NewPrintRequestComponent implements OnInit {
   editMode: boolean = false;
   viewMode: boolean = false;
   preparations: DocumentPreperationConfiguration[] = [];
-  username:string=''
-  requestId:number=0;workId:number=0;statuss:string='';iscompleted:boolean=false;type:string='';finalStatus:string='';
+  username: string = ''
+  requestId: number = 0; workId: number = 0; statuss: string = ''; iscompleted: boolean = false; type: string = ''; finalStatus: string = '';
   workitems: Array<WorkItemsConfiguration> = [];
-  constructor(private commonsvc: CommonService,private location: Location,
+  modalRef: BsModalRef | undefined;
+  pdfBytes: Uint8Array | undefined;
+  safePdfDataUrl: SafeResourceUrl | undefined;
+  data: string = '<base64-encoded-data>';
+  pdfUrl: string | null = null;
+  
+  constructor(private commonsvc: CommonService, private location: Location,
     private route: ActivatedRoute,
-    private workitemssvc:WorkitemsService,
+    private workitemssvc: WorkitemsService,
+    private modalService: BsModalService, private sanitizer: DomSanitizer,
     private toastr: ToastrService, private spinner: NgxSpinnerService, private docprintservice: NewPrintRequestService, private docPreperationService: DocumentPreperationService, private router: Router, private wfservice: WorkflowServiceService, private docservice: DocumentPreperationService) { }
 
   ngOnInit() {
-    const user=localStorage.getItem("username");
-    if(user!=null && user!=undefined)
-    {
-      this.commonsvc.createdBy=user;
-      this.username=user;
+    const user = localStorage.getItem("username");
+    if (user != null && user != undefined) {
+      this.commonsvc.createdBy = user;
+      this.username = user;
     }
     this.route.params.subscribe(params => {
       debugger
       this.requestId = params['requestId'];
       this.workId = params['workId'];
-      this.type=params['type'];
+      this.type = params['type'];
     });
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
@@ -75,17 +83,17 @@ export class NewPrintRequestComponent implements OnInit {
       console.log('request', data);
     });
   }
-  approve(){
-    this.print.Status=this.finalStatus;
-    this.print.ModifiedBy=this.username;
+  approve() {
+    this.print.Status = this.finalStatus;
+    this.print.ModifiedBy = this.username;
     this.savePrintRequest();
   }
-  reinitiative(){
+  reinitiative() {
     //this.effective.Status='Re-Initiated'
     //this.saveEffective();
     this.location.back();
   }
-  reject(){
+  reject() {
     //this.effective.Status='Rejected'
     //this.saveEffective();
     this.location.back();
@@ -120,7 +128,7 @@ export class NewPrintRequestComponent implements OnInit {
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsSource = data.Response;
       this.workflowsSource = this.workflowsSource.filter((p: any) => p.workflowName);
-      
+
     });
   }
   savePrintRequest() {
@@ -139,10 +147,10 @@ export class NewPrintRequestComponent implements OnInit {
     this.print.CreatedDate = new Date();
     this.print.ModifiedDate = new Date();
     this.docprintservice.AddNewPrintRequest(this.print).subscribe(res => {
-      this.commonsvc.printConfig = new DocumentPrintConfiguration();this.spinner.hide();
-      this.location.back();      
+      this.commonsvc.printConfig = new DocumentPrintConfiguration(); this.spinner.hide();
+      this.location.back();
       this.toastr.success('Document Print Request Saved Succesfull!', 'Saved.!');
-    }, er =>{
+    }, er => {
       this.spinner.hide();
       console.log(er);
     });
@@ -153,9 +161,9 @@ export class NewPrintRequestComponent implements OnInit {
     this.docprintservice.UpdatePrintRequest(this.print).subscribe(res => {
       this.commonsvc.printConfig = new DocumentPrintConfiguration();
       this.spinner.hide();
-      this.location.back();      
+      this.location.back();
       this.toastr.success('Document Print Request updated Succesfull!', 'Updated.!');
-    }, er =>{
+    }, er => {
       this.spinner.hide();
       console.log(er);
     });
@@ -166,47 +174,87 @@ export class NewPrintRequestComponent implements OnInit {
   }
   getworkflowitems() {
     this.spinner.show();
-    const user=localStorage.getItem("username");
-    if(user!=null && user!=undefined){
-      this.commonsvc.createdBy=user;
+    const user = localStorage.getItem("username");
+    if (user != null && user != undefined) {
+      this.commonsvc.createdBy = user;
     }
     return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
       debugger
       this.workitems = data.Response;
-      if(this.workitems.length>0){
-        this.workitems=this.workitems.filter(p=>p.ReferenceId==this.requestId);
-        if(this.workitems)
-        {
+      if (this.workitems.length > 0) {
+        this.workitems = this.workitems.filter(p => p.ReferenceId == this.requestId);
+        if (this.workitems) {
           this.workitems.sort((a, b) => a.WITId - b.WITId);
-          const work=this.workitems.filter(o=>o.WITId==this.workId);
-                  this.statuss = work[0].ActionType;
-                  this.iscompleted=work[0].IsCompleted;
-                  const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
-                  const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
-                  const countt = totalreviewcount - reviewedcount;
-                  if (this.statuss === 'Review') {
-                    if (countt === 1) {
-                      this.finalStatus = 'Reviewed';
-                    } else if (countt > 1) {
-                      this.finalStatus = 'Pending Review';
-                    } else if (countt === totalreviewcount) {
-                      this.finalStatus = 'Pending Review';
-                    }
-                  } else {
-                    if (countt === 1) {
-                      this.finalStatus = 'Approved';
-                    } else if (countt > 1) {
-                      this.finalStatus = 'Pending Approve';
-                    } else if (countt === totalreviewcount) {
-                      this.finalStatus = 'Pending Approve';
-                    }
-                  }
-                  console.log('status', this.finalStatus);
-                }
-              }
-              this.spinner.hide();
-            });
+          const work = this.workitems.filter(o => o.WITId == this.workId);
+          this.statuss = work[0].ActionType;
+          this.iscompleted = work[0].IsCompleted;
+          const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+          const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
+          const countt = totalreviewcount - reviewedcount;
+          if (this.statuss === 'Review') {
+            if (countt === 1) {
+              this.finalStatus = 'Reviewed';
+            } else if (countt > 1) {
+              this.finalStatus = 'Pending Review';
+            } else if (countt === totalreviewcount) {
+              this.finalStatus = 'Pending Review';
+            }
+          } else {
+            if (countt === 1) {
+              this.finalStatus = 'Approved';
+            } else if (countt > 1) {
+              this.finalStatus = 'Pending Approve';
+            } else if (countt === totalreviewcount) {
+              this.finalStatus = 'Pending Approve';
+            }
           }
+          console.log('status', this.finalStatus);
+        }
+      }
+      this.spinner.hide();
+    });
+  }
+
+  
+  closeModel() {
+    if (this.modalRef)
+      this.modalRef.hide();
+  }
+
+  openViewer(template: TemplateRef<any>): void {
+    if (this.pdfBytes) {
+      const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;      
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    }
+  }
+
+  // Function to convert base64 to Blob
+  private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
+  previewprint(template: TemplateRef<any>) {
+    this.spinner.show();
+    this.docprintservice.preview(this.print).subscribe((data: any) => {      
+      this.pdfBytes = data;
+      this.spinner.hide();
+      this.openViewer(template);
+    }, er => {
+      this.spinner.hide();
+    });
+  }
+
 }
 
 

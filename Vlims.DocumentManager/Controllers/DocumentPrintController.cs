@@ -104,6 +104,25 @@ public class DocumentPrintController : ControllerBase
         var result = documentPrintService.DeleteAllDocumentPrint(dEIDs);
         return result;
     }
-  
+
+
+    [HttpPost("preview")]
+    public ActionResult PreviewDocumentPreparation(DocumentPrint documentPrint)
+    {
+
+        if (documentPrint!=null)
+        {
+            string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Exsting");
+            uploadsFolder = Path.Combine(uploadsFolder, "sample.pdf");
+
+            if (System.IO.File.Exists(uploadsFolder))
+            {
+                var pdfBytes = System.IO.File.ReadAllBytes(uploadsFolder);
+                return Ok(pdfBytes); //r
+            }
+        }
+        return BadRequest();
+    }
+
 }
 

@@ -10,10 +10,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
+
 @Component({
   selector: 'existing-document-request',
   templateUrl: './review-existing-document-request.component.html',
-  styleUrls: ['./review-existing-document-request.component.scss']
+  styleUrls: ['./review-existing-document-request.component.scss'],  
 })
 export class ReviewExistingDocumentRequestComponent implements OnInit {
   existingDocReq: ExistingDocumentRequest = new ExistingDocumentRequest();
@@ -22,10 +23,9 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   fileUploadLink = '';
   id: string = '';
   selectedFile: any;
-  isUploaded: boolean = false;
+  isUploaded: boolean = false;  
   @ViewChild("fileInput", { static: false })
   InputVar: ElementRef | undefined;
-  fileBytes: Uint8Array = new Uint8Array();
   modalRef: BsModalRef | undefined;
   pdfBytes: Uint8Array | undefined;
   safePdfDataUrl: SafeResourceUrl | undefined;
@@ -188,10 +188,8 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
 
   openViewer(template: TemplateRef<any>): void {
     if (this.pdfBytes) {
-      console.log("safePdfDataUrl" + "-" + this.pdfBytes);
       const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
-      console.log("safePdfDataUrl" + "-" + this.safePdfDataUrl);
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;      
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     }
   }
@@ -213,10 +211,8 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   }
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show();
-    this.existingDocReqservice.preview(this.existingDocReq).subscribe((data: any) => {
-      debugger
-      this.fileBytes = data;
-      this.pdfBytes = this.fileBytes;
+    this.existingDocReqservice.preview(this.existingDocReq).subscribe((data: any) => {      
+      this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template);
     }, er => {
