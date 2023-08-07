@@ -348,6 +348,7 @@ export class ExistingDocumentRequest {
   reviewDate: Date | undefined;
 }
 
+
 export class DocumentRevisionRequest {
   status: string = '';
   version: Number = 0;
@@ -357,6 +358,40 @@ export class DocumentRevisionRequest {
   createdDate: Date | undefined;
   modifiedBy: string = '';
   effectiveDate: Date | undefined;
+  reviewDate: Date | undefined;
+  modifiedDate: Date | undefined;
+}
+export class functionalprofile {
+  sfpid:number=0;
+  role: boolean = false;
+  adminMgmt: boolean = false;
+  securityMgmt: boolean = false;
+  securityConfig: boolean = false;
+  approvalConfigs: boolean = false;
+  hirearchyMgmt: Date | undefined;
+  roleConfig: boolean = false;
+  deptConfig: boolean = false;
+  setFunctionalprofile: boolean = false;
+  plantMgmt: boolean = false;
+  userMgmt: boolean = false;
+  userConfig: boolean = false;
+  userGroupConfig: boolean = false;
+  documentMaster: boolean = false;
+  documentTypeConfig: boolean = false;
+  documentTemplateConfig: boolean = false;
+  workflowConfig: boolean = false;
+  dashboardConfig: boolean = false;
+  notificationConfig: boolean = false;
+  documentManager: boolean = false;
+  documentRequest: boolean = false;
+  documentPreperation: boolean = false;
+  documentEffective: boolean = false;
+  additionalTasks: boolean = false;
+  documentRevison: boolean = false;
+  workItemsassigned: boolean = false;
+  ActivateStatus:boolean = false;
+  docrepository:boolean = false;
+  Audit:boolean = false;
   reviewDate: Date | undefined;
   modifiedDate: Date | undefined;
 }

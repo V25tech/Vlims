@@ -8,40 +8,40 @@
   </div>
   <div class="row p-2">
     <div class="col">
-      <form (ngSubmit)="adddoctype(documentType)"  #fm="ngForm">
+      <form (ngSubmit)="onSubmit(profile)"  #fm="ngForm">
       <div class="p-4 bg-white shadow-dark rounded-2">
         
         
         
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
-              >Admin Management</label
+            <label for="profile" class="col-sm-2 col-form-label"
+              ><b>Admin Management</b></label
             >
-            <div class="col-sm-10">
+            <!-- <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="am"
-                name="am"
+                type="checkbox"
+                
+                id="adminMgmt"
+                name="adminMgmt"
                 placeholder=""
-                [(ngModel)]="documentType.Am" [disabled]="viewMode"
+                [(ngModel)]="profile.adminMgmt" [disabled]="viewMode"
                
-              />
-            </div>
+              /> 
+            </div>-->
           </div>
 
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Security Management</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="sm"
-                name="sm"
+                type="checkbox"
+                
+                id="securityMgmt"
+                name="securityMgmt"
                 placeholder=""
-                [(ngModel)]="documentType.sm" [disabled]="viewMode"
+                [(ngModel)]="profile.securityMgmt" [disabled]="viewMode"
                
               />
             </div>
@@ -50,60 +50,60 @@
             <label for="prefix" class="col-sm-2 col-form-label">Security Configurations</label>
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="Security"
-                name="Security"
+                type="checkbox"
+                
+                id="securityConfig"
+                name="securityConfig"
                 placeholder=""
-                [(ngModel)]="documentType.Security" [disabled]="viewMode"
+                [(ngModel)]="profile.securityConfig" [disabled]="viewMode"
                 
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >E sign and Aprroval Configurations</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="esign"
-                name="esign"
+                type="checkbox"
+                
+                id="approvalConfigs"
+                name="approvalConfigs"
                 placeholder=""
-                [(ngModel)]="documentType.esign" [disabled]="viewMode"
+                [(ngModel)]="profile.approvalConfigs" [disabled]="viewMode"
                
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Hirearchy Management</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="Hirearchy"
-                name="Hirearchy"
+                type="checkbox"
+                
+                id="hirearchyMgmt"
+                name="hirearchyMgmt"
                 placeholder=""
-                [(ngModel)]="documentType.Hirearchy" [disabled]="viewMode"
+                [(ngModel)]="profile.hirearchyMgmt" [disabled]="viewMode"
                
               />
             </div>
           </div>
               <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Role Configuration</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
+                type="checkbox"
+                
                 id="role"
                 name="role"
                 placeholder=""
-                [(ngModel)]="documentType.role" [disabled]="viewMode"
+                [(ngModel)]="profile.role" [disabled]="viewMode"
                
               />
             </div>
@@ -112,77 +112,77 @@
             <label for="prefix" class="col-sm-2 col-form-label">Department Configuratio</label>
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="Department"
-                name="Department"
+                type="checkbox"
+                
+                id="deptConfig"
+                name="deptConfig"
                 placeholder=""
-                [(ngModel)]="documentType.Department" [disabled]="viewMode"
+                [(ngModel)]="profile.deptConfig" [disabled]="viewMode"
                 
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Set Functional Profile</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="Set"
-                name="Set"
+                type="checkbox"
+                
+                id="setFunctionalprofile"
+                name="setFunctionalprofile"
                 placeholder=""
-                [(ngModel)]="documentType.Set" [disabled]="viewMode"
+                [(ngModel)]="profile.setFunctionalprofile" [disabled]="viewMode"
                
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Plant Managementt</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="PlantM"
-                name="PlantM"
+                type="checkbox"
+                
+                id="plantMgmt"
+                name="plantMgmt"
                 placeholder=""
-                [(ngModel)]="documentType.PlantM" [disabled]="viewMode"
+                [(ngModel)]="profile.plantMgmt" [disabled]="viewMode"
                
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >User Managementt</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="UserM"
-                name="UserM"
+                type="checkbox"
+                
+                id="userMgmt"
+                name="userMgmt"
                 placeholder=""
-                [(ngModel)]="documentType.UserM" [disabled]="viewMode"
+                [(ngModel)]="profile.userMgmt" [disabled]="viewMode"
                
               />
             </div>
           </div>
           
               <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >User Configuration</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="userconfig"
-                name="userconfig"
+                type="checkbox"
+                
+                id="userConfig"
+                name="userConfig"
                 placeholder=""
-                [(ngModel)]="documentType.userconfig" [disabled]="viewMode"
+                [(ngModel)]="profile.userConfig" [disabled]="viewMode"
                
               />
             </div>
@@ -191,77 +191,76 @@
             <label for="prefix" class="col-sm-2 col-form-label">Activate/De-Activate</label>
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
+                type="checkbox"
+                
                 id="Activate"
                 name="Activate"
                 placeholder=""
-                [(ngModel)]="documentType.Activate" [disabled]="viewMode"
+                [(ngModel)]="profile.ActivateStatus" [disabled]="viewMode"
                 
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >User Group Configuration</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="usergroup"
-                name="usergroup"
+                type="checkbox"
+                
+                id="userGroupConfig"
+                name="userGroupConfig"
                 placeholder=""
-                [(ngModel)]="documentType.usergroup" [disabled]="viewMode"
+                [(ngModel)]="profile.userGroupConfig" [disabled]="viewMode"
                
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Audit Log</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
+                type="checkbox"
+                
                 id="Audit"
                 name="Audit"
                 placeholder=""
-                [(ngModel)]="documentType.Audit" [disabled]="viewMode"
+                [(ngModel)]="profile.Audit" [disabled]="viewMode"
                
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
-              >Document Master</label
+            <label for="profile" class="col-sm-2 col-form-label"
+              ><b>Document Master</b> </label
             >
             <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="dc"
-                name="dc"
-                placeholder=""
-                [(ngModel)]="documentType.dc" [disabled]="viewMode"
+              <!-- <input
+                type="checkbox"                
+                id="documentmaster"
+                name="documentmaster"
+                checked="true"
+                [(ngModel)]="profile.documentMaster"  
                
-              />
+              /> -->
             </div>
           </div>
           
               <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Document Type Configuration</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="dtc"
-                name="dtc"
+                type="checkbox"
+                
+                id="documentTypeConfig"
+                name="documentTypeConfig"
                 placeholder=""
-                [(ngModel)]="documentType.dtc" [disabled]="viewMode"
+                [(ngModel)]="profile.documentTypeConfig" [disabled]="viewMode"
                
               />
             </div>
@@ -270,223 +269,191 @@
             <label for="prefix" class="col-sm-2 col-form-label">Document Template Configuration</label>
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="documenttemplate"
-                name="documenttemplate"
+                type="checkbox"
+                
+                id="documentTemplateConfig"
+                name="documentTemplateConfig"
                 placeholder=""
-                [(ngModel)]="documentType.documenttemplate" [disabled]="viewMode"
+                [(ngModel)]="profile.documentTemplateConfig" [disabled]="viewMode"
                 
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >WorkFlow Configuration</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="workflow"
-                name="workflow"
+                type="checkbox"
+                
+                id="workflowConfig"
+                name="workflowConfig"
                 placeholder=""
-                [(ngModel)]="documentType.workflow" [disabled]="viewMode"
+                [(ngModel)]="profile.workflowConfig" [disabled]="viewMode"
                
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Dash Board Configuration</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="dashboard"
-                name="dashboard"
+                type="checkbox"
+                
+                id="dashboardConfig"
+                name="dashboardConfig"
                 placeholder=""
-                [(ngModel)]="documentType.dashboard" [disabled]="viewMode"
+                [(ngModel)]="profile.dashboardConfig" [disabled]="viewMode"
                
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Notification Configuration</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="Notification"
-                name="Notification"
+                type="checkbox"
+                
+                id="notificationConfig"
+                name="notificationConfig"
                 placeholder=""
-                [(ngModel)]="documentType.Notification" [disabled]="viewMode"
+                [(ngModel)]="profile.notificationConfig" [disabled]="viewMode"
                
               />
             </div>
           </div>
-              <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
-              >Document Master</label
-            >
+          <div class="form-group row">
+            <label for="prefix" class="col-sm-2 col-form-label"><b>Document Manager</b></label>
             <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="documentmaster"
-                name="documentmaster"
+              <!-- <input
+                type="checkbox"
+                
+                id="documentManager"
+                name="documentManager"
                 placeholder=""
-                [(ngModel)]="documentType.documentmaster" [disabled]="viewMode"
-               
-              />
+                [(ngModel)]="profile.documentManager" [disabled]="viewMode"
+                
+              /> -->
             </div>
           </div>
           <div class="form-group row">
             <label for="prefix" class="col-sm-2 col-form-label">Document Request</label>
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="documentrequest"
-                name="documentrequest"
+                type="checkbox"
+                
+                id="documentRequest"
+                name="documentRequest"
                 placeholder=""
-                [(ngModel)]="documentType.documentrequest" [disabled]="viewMode"
+                [(ngModel)]="profile.documentRequest" [disabled]="viewMode"
                 
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Document Preparation</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
+                type="checkbox"
+                
                 id="documentpreparation"
                 name="documentpreparation"
                 placeholder=""
-                [(ngModel)]="documentType.documentpreparation" [disabled]="viewMode"
+                [(ngModel)]="profile.documentPreperation" [disabled]="viewMode"
                
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Document EffectiveOut</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="documenteffective"
-                name="documenteffective"
+                type="checkbox"
+                
+                id="documentEffective"
+                name="documentEffective"
                 placeholder=""
-                [(ngModel)]="documentType.documenteffective" [disabled]="viewMode"
+                [(ngModel)]="profile.documentEffective" [disabled]="viewMode"
                
               />
             </div>
           </div>
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Additional Tasks</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="Additional"
-                name="Additional"
+                type="checkbox"
+                
+                id="additionalTasks"
+                name="additionalTasks"
                 placeholder=""
-                [(ngModel)]="documentType.Additional" [disabled]="viewMode"
+                [(ngModel)]="profile.additionalTasks" [disabled]="viewMode"
                
               />
             </div>
           </div>
+                    
                     <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
-              >Additional Tasks</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="Additional"
-                name="Additional"
-                placeholder=""
-                [(ngModel)]="documentType.Additional" [disabled]="viewMode"
-               
-              />
-            </div>
-          </div>
-                    <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Document Revision</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="documentrevision"
-                name="documentrevision"
+                type="checkbox"
+                
+                id="documentRevison"
+                name="documentRevison"
                 placeholder=""
-                [(ngModel)]="documentType.documentrevision" [disabled]="viewMode"
+                [(ngModel)]="profile.documentRevison" [disabled]="viewMode"
                
               />
             </div>
           </div>
                     <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Document Repository</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
+                type="checkbox"
+                
                 id="docrepository"
                 name="docrepository"
                 placeholder=""
-                [(ngModel)]="documentType.docrepository" [disabled]="viewMode"
+                [(ngModel)]="profile.docrepository" [disabled]="viewMode"
                
               />
             </div>
           </div>
                     <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
+            <label for="profile" class="col-sm-2 col-form-label"
               >Work Assigned To ME</label
             >
             <div class="col-sm-10">
               <input
-                type="text"
-                class="form-control"
-                id="WATM"
-                name="WATM"
+                type="checkbox"
+                
+                id="workItemsassigned"
+                name="workItemsassigned"
                 placeholder=""
-                [(ngModel)]="documentType.WATM" [disabled]="viewMode"
+                [(ngModel)]="profile.workItemsassigned" [disabled]="viewMode"
                
               />
             </div>
           </div>
           
-          <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label"
-              >Reports</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="reports"
-                name="reports"
-                placeholder=""
-                [(ngModel)]="documentType.WATM" [disabled]="viewMode"
-               
-              />
-            </div>
-          </div>
+         
           
           
           
@@ -507,7 +474,7 @@
       <div class="form-group row my-4">
         <div class="col-sm-10 offset-sm-2">
           <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
-          <button type="submit" class="btn btn-primary" *ngIf="!editMode">Submit</button>
+          <button type="submit" class="btn btn-primary" *ngIf="!editMode" (click)="onSubmit(profile)">Submit</button>
           <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
         </div>
       </div>

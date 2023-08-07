@@ -1,445 +1,445 @@
 
-    using System;
-    using System.Collections.Generic;
-    
-    
-    // Comment
-    public class SetFunctionalProfile
+using System;
+using System.Collections.Generic;
+
+
+// Comment
+public class SetFunctionalProfile
+{
+
+    private int sfpidField;
+
+    private bool? roleField;
+
+    private bool? adminmanagementField;
+
+    private bool? securitymanagementField;
+
+    private bool? securityconfigurationsField;
+
+    private bool? esignandaprrovalconfigurationsField;
+
+    private bool?  hirearchymanagementField;
+
+    private bool?  roleconfigurationField;
+
+    private bool?  departmentconfigurationField;
+
+    private bool?  setfunctionalprofileField;
+
+    private bool?  plantmanagementField;
+
+    private bool?  usermanagementField;
+
+    private bool?  usergroupconfigurationField;
+
+    private bool?  activatestatus;
+
+    private bool?  auditlogField;
+
+    private bool?  documentmasterField;
+
+    private bool?  documenttypeconfigurationField;
+
+    private bool?  documenttemplateconfigurationField;
+
+    private bool?  workflowconfigurationField;
+
+    private bool?  dashboardconfigurationField;
+
+    private bool?  notificationconfigurationField;
+
+
+    private bool?  documentrequestField;
+
+    private bool?  documentpreparationField;
+
+    private bool?  documenteffectiveoutField;
+
+    private bool?  additionaltasksField;
+
+
+    private bool?  documentrevisionField;
+
+    private bool?  documentrepositoryField;
+
+
+
+    private string createdbyField;
+
+    private DateTime? createddateField;
+
+    private string modifiedbyField;
+
+    private DateTime? modifieddateField;
+
+    public int SFPID
     {
-        
-        private System.Boolean? sfpidField;
-        
-        private System.Boolean? roleField;
-        
-        private System.Boolean? adminmanagementField;
-        
-        private System.Boolean? securitymanagementField;
-        
-        private System.Boolean? securityconfigurationsField;
-        
-        private System.Boolean? esignandaprrovalconfigurationsField;
-        
-        private System.Boolean? hirearchymanagementField;
-        
-        private System.Boolean? roleconfigurationField;
-        
-        private System.Boolean? departmentconfigurationField;
-        
-        private System.Boolean? setfunctionalprofileField;
-        
-        private System.Boolean? plantmanagementField;
-        
-        private System.Boolean? usermanagementField;
-        
-        private System.Boolean? usergroupconfigurationField;
-        
-        private System.Boolean? activatestatus;
-        
-        private System.Boolean? auditlogField;
-        
-        private System.Boolean? documentmasterField;
-        
-        private System.Boolean? documenttypeconfigurationField;
-        
-        private System.Boolean? documenttemplateconfigurationField;
-        
-        private System.Boolean? workflowconfigurationField;
-        
-        private System.Boolean? dashboardconfigurationField;
-        
-        private System.Boolean? notificationconfigurationField;
-        
-        
-        private System.Boolean? documentrequestField;
-        
-        private System.Boolean? documentpreparationField;
-        
-        private System.Boolean? documenteffectiveoutField;
-        
-        private System.Boolean? additionaltasksField;
-        
-        
-        private System.Boolean? documentrevisionField;
-        
-        private System.Boolean? documentrepositoryField;
-        
-        
-        
-        private string createdbyField;
-        
-        private DateTime? createddateField;
-        
-        private string modifiedbyField;
-        
-        private DateTime? modifieddateField;
-        
-        public System.Boolean? SFPID
+        get
         {
-            get
-            {
-                return this.sfpidField;
-            }
-            set
-            {
-                this.sfpidField = value;
-            }
+            return this.sfpidField;
         }
-        
-        public System.Boolean? Role
+        set
         {
-            get
-            {
-                return this.roleField;
-            }
-            set
-            {
-                this.roleField = value;
-            }
+            this.sfpidField = value;
         }
-        
-        public System.Boolean? AdminManagement
+    }
+
+    public bool?  role
+    {
+        get
         {
-            get
-            {
-                return this.adminmanagementField;
-            }
-            set
-            {
-                this.adminmanagementField = value;
-            }
+            return this.roleField;
         }
-        
-        public System.Boolean? SecurityManagement
+        set
         {
-            get
-            {
-                return this.securitymanagementField;
-            }
-            set
-            {
-                this.securitymanagementField = value;
-            }
+            this.roleField = value;
         }
-        
-        public System.Boolean? SecurityConfigurations
+    }
+
+    public bool?  adminMgmt
+    {
+        get
         {
-            get
-            {
-                return this.securityconfigurationsField;
-            }
-            set
-            {
-                this.securityconfigurationsField = value;
-            }
+            return this.adminmanagementField;
         }
-        
-        public System.Boolean? EsignandAprrovalConfigurations
+        set
         {
-            get
-            {
-                return this.esignandaprrovalconfigurationsField;
-            }
-            set
-            {
-                this.esignandaprrovalconfigurationsField = value;
-            }
+            this.adminmanagementField = value;
         }
-        
-        public System.Boolean? HirearchyManagement
+    }
+
+    public bool?  SecurityManagement
+    {
+        get
         {
-            get
-            {
-                return this.hirearchymanagementField;
-            }
-            set
-            {
-                this.hirearchymanagementField = value;
-            }
+            return this.securitymanagementField;
         }
-        
-        public System.Boolean? RoleConfiguration
+        set
         {
-            get
-            {
-                return this.roleconfigurationField;
-            }
-            set
-            {
-                this.roleconfigurationField = value;
-            }
+            this.securitymanagementField = value;
         }
-        
-        public System.Boolean? DepartmentConfiguration
+    }
+
+    public bool?  securityMgmt
+    {
+        get
         {
-            get
-            {
-                return this.departmentconfigurationField;
-            }
-            set
-            {
-                this.departmentconfigurationField = value;
-            }
+            return this.securityconfigurationsField;
         }
-        
-      
-        public System.Boolean? PlantManagement
+        set
         {
-            get
-            {
-                return this.plantmanagementField;
-            }
-            set
-            {
-                this.plantmanagementField = value;
-            }
+            this.securityconfigurationsField = value;
         }
-        
-        public System.Boolean? UserManagement
+    }
+
+    public bool?  approvalConfigs
+    {
+        get
         {
-            get
-            {
-                return this.usermanagementField;
-            }
-            set
-            {
-                this.usermanagementField = value;
-            }
+            return this.esignandaprrovalconfigurationsField;
         }
-        
-        public System.Boolean? UserGroupConfiguration
+        set
         {
-            get
-            {
-                return this.usergroupconfigurationField;
-            }
-            set
-            {
-                this.usergroupconfigurationField = value;
-            }
+            this.esignandaprrovalconfigurationsField = value;
         }
-        
-        public System.Boolean? Activatestatus
+    }
+
+    public bool?  HirearchyManagement
+    {
+        get
         {
-            get
-            {
-                return this.Activatestatus;
-            }
-            set
-            {
-                this.Activatestatus = value;
-            }
+            return this.hirearchymanagementField;
         }
-        
-        public System.Boolean? AuditLog
+        set
         {
-            get
-            {
-                return this.auditlogField;
-            }
-            set
-            {
-                this.auditlogField = value;
-            }
+            this.hirearchymanagementField = value;
         }
-        
-        public System.Boolean? DocumentMaster
+    }
+
+    public bool?  roleConfig
+    {
+        get
         {
-            get
-            {
-                return this.documentmasterField;
-            }
-            set
-            {
-                this.documentmasterField = value;
-            }
+            return this.roleconfigurationField;
         }
-        
-        public System.Boolean? DocumentTypeConfiguration
+        set
         {
-            get
-            {
-                return this.documenttypeconfigurationField;
-            }
-            set
-            {
-                this.documenttypeconfigurationField = value;
-            }
+            this.roleconfigurationField = value;
         }
-        
-        public System.Boolean? DocumentTemplateConfiguration
+    }
+
+    public bool?  deptConfig
+    {
+        get
         {
-            get
-            {
-                return this.documenttemplateconfigurationField;
-            }
-            set
-            {
-                this.documenttemplateconfigurationField = value;
-            }
+            return this.departmentconfigurationField;
         }
-        
-        public System.Boolean? WorkFlowConfiguration
+        set
         {
-            get
-            {
-                return this.workflowconfigurationField;
-            }
-            set
-            {
-                this.workflowconfigurationField = value;
-            }
+            this.departmentconfigurationField = value;
         }
-        
-        public System.Boolean? DashBoardConfiguration
+    }
+
+
+    public bool? plantMgmt
+    {
+        get
         {
-            get
-            {
-                return this.dashboardconfigurationField;
-            }
-            set
-            {
-                this.dashboardconfigurationField = value;
-            }
+            return this.plantmanagementField;
         }
-        
-        public System.Boolean? NotificationConfiguration
+        set
         {
-            get
-            {
-                return this.notificationconfigurationField;
-            }
-            set
-            {
-                this.notificationconfigurationField = value;
-            }
+            this.plantmanagementField = value;
         }
-        
-    
-        
-        public System.Boolean? DocumentRequest
+    }
+
+    public bool?  userMgmt
+    {
+        get
         {
-            get
-            {
-                return this.documentrequestField;
-            }
-            set
-            {
-                this.documentrequestField = value;
-            }
+            return this.usermanagementField;
         }
-        
-        public System.Boolean? DocumentPreparation
+        set
         {
-            get
-            {
-                return this.documentpreparationField;
-            }
-            set
-            {
-                this.documentpreparationField = value;
-            }
+            this.usermanagementField = value;
         }
-        
-        public System.Boolean? DocumentEffectiveOut
+    }
+
+    public bool?  userGroupConfig
+    {
+        get
         {
-            get
-            {
-                return this.documenteffectiveoutField;
-            }
-            set
-            {
-                this.documenteffectiveoutField = value;
-            }
+            return this.usergroupconfigurationField;
         }
-        
-        public System.Boolean? AdditionalTasks
+        set
         {
-            get
-            {
-                return this.additionaltasksField;
-            }
-            set
-            {
-                this.additionaltasksField = value;
-            }
+            this.usergroupconfigurationField = value;
         }
-        
-       
-        
-        public System.Boolean? DocumentRevision
+    }
+
+    public bool?  Activatestatus
+    {
+        get
         {
-            get
-            {
-                return this.documentrevisionField;
-            }
-            set
-            {
-                this.documentrevisionField = value;
-            }
+            return this.Activatestatus;
         }
-        
-        public System.Boolean? DocumentRepository
+        set
         {
-            get
-            {
-                return this.documentrepositoryField;
-            }
-            set
-            {
-                this.documentrepositoryField = value;
-            }
+            this.Activatestatus = value;
         }
-        
-       
-        
-      
-        
-        public string CreatedBy
+    }
+
+    public bool?  Audit
+    {
+        get
         {
-            get
-            {
-                return this.createdbyField;
-            }
-            set
-            {
-                this.createdbyField = value;
-            }
+            return this.auditlogField;
         }
-        
-        public DateTime? CreatedDate
+        set
         {
-            get
-            {
-                return this.createddateField;
-            }
-            set
-            {
-                this.createddateField = value;
-            }
+            this.auditlogField = value;
         }
-        
-        public string ModifiedBy
+    }
+
+    public bool?  documentMaster
+    {
+        get
         {
-            get
-            {
-                return this.modifiedbyField;
-            }
-            set
-            {
-                this.modifiedbyField = value;
-            }
+            return this.documentmasterField;
         }
-        
-        public DateTime? ModifiedDate
+        set
         {
-            get
-            {
-                return this.modifieddateField;
-            }
-            set
-            {
-                this.modifieddateField = value;
-            }
+            this.documentmasterField = value;
         }
-    
+    }
+
+    public bool?  documentTypeConfig
+    {
+        get
+        {
+            return this.documenttypeconfigurationField;
+        }
+        set
+        {
+            this.documenttypeconfigurationField = value;
+        }
+    }
+
+    public bool?  documentTemplateConfig
+    {
+        get
+        {
+            return this.documenttemplateconfigurationField;
+        }
+        set
+        {
+            this.documenttemplateconfigurationField = value;
+        }
+    }
+
+    public bool?  workflowConfig
+    {
+        get
+        {
+            return this.workflowconfigurationField;
+        }
+        set
+        {
+            this.workflowconfigurationField = value;
+        }
+    }
+
+    public bool?  dashboardConfig
+    {
+        get
+        {
+            return this.dashboardconfigurationField;
+        }
+        set
+        {
+            this.dashboardconfigurationField = value;
+        }
+    }
+
+    public bool?  notificationConfig
+    {
+        get
+        {
+            return this.notificationconfigurationField;
+        }
+        set
+        {
+            this.notificationconfigurationField = value;
+        }
+    }
+
+
+
+    public bool?  documentRequest
+    {
+        get
+        {
+            return this.documentrequestField;
+        }
+        set
+        {
+            this.documentrequestField = value;
+        }
+    }
+
+    public bool?  documentPreperation
+    {
+        get
+        {
+            return this.documentpreparationField;
+        }
+        set
+        {
+            this.documentpreparationField = value;
+        }
+    }
+
+    public bool?  documentEffective
+    {
+        get
+        {
+            return this.documenteffectiveoutField;
+        }
+        set
+        {
+            this.documenteffectiveoutField = value;
+        }
+    }
+
+    public bool?  additionalTasks
+    {
+        get
+        {
+            return this.additionaltasksField;
+        }
+        set
+        {
+            this.additionaltasksField = value;
+        }
+    }
+
+
+
+    public bool?  documentRevison
+    {
+        get
+        {
+            return this.documentrevisionField;
+        }
+        set
+        {
+            this.documentrevisionField = value;
+        }
+    }
+
+    public bool?  DocumentRepository
+    {
+        get
+        {
+            return this.documentrepositoryField;
+        }
+        set
+        {
+            this.documentrepositoryField = value;
+        }
+    }
+
+
+
+
+
+    public string CreatedBy
+    {
+        get
+        {
+            return this.createdbyField;
+        }
+        set
+        {
+            this.createdbyField = value;
+        }
+    }
+
+    public DateTime? CreatedDate
+    {
+        get
+        {
+            return this.createddateField;
+        }
+        set
+        {
+            this.createddateField = value;
+        }
+    }
+
+    public string ModifiedBy
+    {
+        get
+        {
+            return this.modifiedbyField;
+        }
+        set
+        {
+            this.modifiedbyField = value;
+        }
+    }
+
+    public DateTime? ModifiedDate
+    {
+        get
+        {
+            return this.modifieddateField;
+        }
+        set
+        {
+            this.modifieddateField = value;
+        }
+    }
+
 }

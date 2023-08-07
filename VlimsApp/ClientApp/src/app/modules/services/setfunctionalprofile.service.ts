@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RequestContext } from '../../models/model';
+import { RequestContext, functionalprofile } from '../../models/model';
 import { HttpbaseService } from '../../shared/httpbase.service';
 
 
@@ -13,10 +13,10 @@ export class setfunctionalprofileconfigurationservice {
 
   getsetfunctionalprofileconfiguration(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/setfunctionalprofileconfiguration/getsetfunctionalprofileconfiguration", this.type);
+    return this.http.postJsonLogin(objrequest, "api/SetFunctionalProfile/getsetfunctionalprofileconfiguration", this.type);
   }
-  addsetfunctionalprofileconfiguration(objrequest: setfunctionalprofileconfigurationservice) {
+  addsetfunctionalprofileconfiguration(objrequest: functionalprofile) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/setfunctionalprofileconfiguration/addsetfunctionalprofileconfiguration", this.type);
+    return this.http.postJsonLogin(objrequest, "api/SetFunctionalProfile/saveprofileconfiguration", this.type);
   }
 }

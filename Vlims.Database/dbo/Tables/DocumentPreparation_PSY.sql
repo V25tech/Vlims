@@ -5,7 +5,7 @@
     [documentno_PSY]        NVARCHAR (50)  NULL,
     [documenttype_PSY]      NVARCHAR (50)  NULL,
     [department_PSY]        NVARCHAR (50)  NULL,
-    [document_PSY]          NVARCHAR (500) NULL,
+    [document_PSY]          VARCHAR (500)  NULL,
     [template_PSY]          NVARCHAR (50)  NULL,
     [wokflow_PSY]           NVARCHAR (50)  NULL,
     [details_PSY]           NVARCHAR (50)  NULL,
@@ -18,6 +18,8 @@
     [Refrence_PSY]          INT            NULL,
     CONSTRAINT [PK_DocumentPreparation_PSY] PRIMARY KEY CLUSTERED ([DPNID_PSY] ASC)
 );
+
+
 
 
 
