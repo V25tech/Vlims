@@ -42,7 +42,7 @@ export class SecuritymgmtComponent {
   submit(securityType: SecurityManagement) {
     debugger
     /*if (this.editMode) {*/
-    this.toastr.success('Security Changes Saved Succesfull!', 'Saved.!');
+    //this.toastr.success('Security Changes Saved Succesfull!', 'Saved.!');
     this.doctypeservice.addsecurityconfiguration(securityType).subscribe((res: any) => {
     });
     //}
