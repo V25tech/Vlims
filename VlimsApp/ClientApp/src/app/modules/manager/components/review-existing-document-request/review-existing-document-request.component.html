@@ -42,7 +42,10 @@
             <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentTitle" name="documentTitle"
-                placeholder="Document Title" [(ngModel)]="existingDocReq.documenttitle"/>
+                placeholder="Document Title" [(ngModel)]="existingDocReq.documenttitle" #documenttitleInput="ngModel" required/>
+                <div *ngIf="documenttitleInput.invalid && (documenttitleInput.dirty || documenttitleInput.touched)" class="text-danger">
+                  Document Title is required.
+                </div>                
             </div>
           </div>
 
@@ -50,7 +53,10 @@
             <label for="documentType" class="col-sm-2 col-form-label">Document Number</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="dnumber" name="Dnumber" placeholder="Document Number"
-                [(ngModel)]="existingDocReq.documentno"/>
+                [(ngModel)]="existingDocReq.documentno"  #documentno="ngModel" required/>
+                <div *ngIf="documentno.invalid && (documentno.dirty || documentno.touched)" class="text-danger">
+                  Document Number is required.
+                </div>                
             </div>
           </div>
 

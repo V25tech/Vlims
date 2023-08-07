@@ -14,7 +14,7 @@ export class ExistingDocumentRequestService {
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/GetAllDocEff", this.type);
   }
   GetExistingDocumentById(Id: string) {   
-    return this.http.getwithheader("/api/existingdocumentreq/"+Id,this.type);
+    return this.http.getwithheader("api/existingdocumentreq/"+Id,this.type);
   }
   adddExistingDocument(objrequest: ExistingDocumentRequest) {
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/savedocumenteffective", this.type);

@@ -96,6 +96,7 @@ export class ReviewRevisionComponent {
   }
   toDate(pdate: Date | undefined) {
     if (pdate == undefined) return undefined;
+    pdate = new Date(pdate);
     const yyyy = pdate.getFullYear();
     let mm = pdate.getMonth() + 1;
     let dd = pdate.getDate();

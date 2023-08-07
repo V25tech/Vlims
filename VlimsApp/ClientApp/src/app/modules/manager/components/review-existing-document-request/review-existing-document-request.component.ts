@@ -33,7 +33,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   pdfUrl: string | null = null;
   effectiveDate: string | undefined;
   reviewDate: string | undefined;
-  departmentsSource= [];
+  departmentsSource = [];
   typeSource = [];
 
 
@@ -46,8 +46,8 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
     this.getdocumenttypeconfig();
     if (this.id) { //edit mode
       this.editMode = true;
-      if (this.commonsvc.existingDocReq) {
-        this.existingDocReq = this.commonsvc.existingDocReq;        
+      if (this.commonsvc.existingDocReq.edrId > 0) {
+        this.existingDocReq = this.commonsvc.existingDocReq;
         this.effectiveDate = this.toDate(this.existingDocReq.effectiveDate);
         this.reviewDate = this.toDate(this.existingDocReq.reviewDate);
       }
@@ -70,7 +70,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   getExistingDocument(id: string) {
     this.spinner.show();
     this.existingDocReqservice.GetExistingDocumentById(id).subscribe((res: any) => {
-      this.existingDocReq = res;      
+      this.existingDocReq = res;
       this.effectiveDate = this.toDate(this.existingDocReq.effectiveDate);
       this.reviewDate = this.toDate(this.existingDocReq.reviewDate);
       this.spinner.hide();
@@ -94,7 +94,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   }
 
   Save() {
-    if (this.editMode) {      
+    if (this.editMode) {
       this.Update();
     }
     else {
@@ -133,6 +133,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
 
   toDate(pdate: Date | undefined) {
     if (pdate == undefined) return undefined;
+    pdate = new Date(pdate);
     const yyyy = pdate.getFullYear();
     let mm = pdate.getMonth() + 1;
     let dd = pdate.getDate();
@@ -163,7 +164,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
     this.existingDocReqservice.upload(formData)
       .subscribe(
         (response: any) => {
-          this.existingDocReq.document = response.filePath;
+          this.existingDocReq.document = response.uniqueFileName;
           this.isUploaded = true; // Set upload status to true after successful upload
           this.spinner.hide();
         },
