@@ -26,7 +26,7 @@ public static class SetFunctionalProfileConverter
                 {
                     DataRow row = dataset.Tables[0].Rows[i];
                     setFunctionalProfileData = new SetFunctionalProfile();
-                    setFunctionalProfileData.SFPID = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.SFPID.Trim('@')]);
+                    setFunctionalProfileData.SFPID = Convert.ToInt16(row[SetFunctionalProfileConstants.SFPID.Trim('@')]);
                     setFunctionalProfileData.Role = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Role.Trim('@')]);
                     setFunctionalProfileData.AdminManagement = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.AdminManagement.Trim('@')]);
                     setFunctionalProfileData.SecurityManagement = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Security_Management.Trim('@')]);

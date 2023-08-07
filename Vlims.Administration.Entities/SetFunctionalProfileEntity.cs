@@ -7,7 +7,7 @@
     public class SetFunctionalProfile
     {
         
-        private System.Boolean? sfpidField;
+        private int sfpidField;
         
         private System.Boolean? roleField;
         
@@ -73,7 +73,7 @@
         
         private DateTime? modifieddateField;
         
-        public System.Boolean? SFPID
+        public int SFPID
         {
             get
             {
