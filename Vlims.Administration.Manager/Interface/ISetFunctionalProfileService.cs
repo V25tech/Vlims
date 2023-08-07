@@ -15,7 +15,7 @@ public interface ISetFunctionalProfileService
 
     ResponseContext<SetFunctionalProfile> GetAllSetFunctionalProfile(RequestContext requestContext);
 
-    SetFunctionalProfile GetSetFunctionalProfileBySFPID(int sFPID);
+    //SetFunctionalProfile GetSetFunctionalProfileBySFPID(int sFPID);
 
     bool SaveSetFunctionalProfile(SetFunctionalProfile setFunctionalProfile);
 

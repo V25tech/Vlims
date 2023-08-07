@@ -1,7 +1,7 @@
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
     using Vlims.Administration.Entities;
-    using Vlims.Administration.Manager;
+using Vlims.Administration.Manager;
     using Vlims.Common;
 
 
@@ -9,7 +9,7 @@
     /// Comment
     /// </summary>
     [ApiController()]
-    [Route("api/setfunctionalprofileconfiguration")]
+    [Route("api/SetFunctionalProfile")]
     public class SetFunctionalProfileController : ControllerBase
     {
         
@@ -29,57 +29,50 @@
         /// </summary>
         /// <param name="requestContext"></param>
         [HttpPost("getallprofileconfig")]
-        public ActionResult GetAllDepartmentConfiguration([FromQuery] RequestContext requestContext)
+        public ActionResult GetAllSetFunctionalProfile([FromQuery] RequestContext requestContext)
         {
             var result = functionalConfigurationService.GetAllSetFunctionalProfile(requestContext);
             return Ok(result);
         }
         
-        /// <summary>
-        /// This method is used to Get DepartmentConfiguration By Id dPCFId
-        /// </summary>
-        /// <param name="dPCFId"></param>
-        [HttpGet("{dPCFId}")]
-        public ActionResult<SetFunctionalProfile> GetDepartmentConfigurationByDPCFId(int dPCFId)
-        {
-            var result = functionalConfigurationService.GetSetFunctionalProfileBySFPID(dPCFId);
-            return result;
-        }
+        ///// <summary>
+        ///// This method is used to Get DepartmentConfiguration By Id dPCFId
+        ///// </summary>
+        ///// <param name="dPCFId"></param>
+        //[HttpGet("{dPCFId}")]
+        //public ActionResult<SetFunctionalProfile> GetFunctionalProfileConfigByDPCFId(int dPCFId)
+        //{
+        //    var result = functionalConfigurationService.GetSetFunctionalProfileBySFPID(dPCFId);
+        //    return result;
+        //}
         
         /// <summary>
         /// This Method is used to Save DepartmentConfiguration
         /// </summary>
         /// <param name="departmentConfiguration"></param>
         [HttpPost("saveprofileconfiguration")]
-        public ActionResult<System.Boolean> SaveDepartmentConfiguration(SetFunctionalProfile profileConfiguration)
+        public ActionResult<bool> SaveSetFunctionalProfile(SetFunctionalProfile profileConfiguration)
         {
-            //RequestContext reqCxt = new RequestContext();
-            //reqCxt.PageNumber = 1;reqCxt.PageSize = 50;
-            //var resultDeparts = functionalConfigurationService.GetAllDepartmentConfiguration(reqCxt);
-            //if(resultDeparts.Response.Count(item=>item.DepartmentName.Equals(departmentConfiguration.DepartmentName))==1)
-            //{
-            //    //Raise duplicate validation
-            //   return Ok(false);
-            //}
+       
             var result = functionalConfigurationService.SaveSetFunctionalProfile(profileConfiguration);
             return result;
         }
-        /// <summary>
-        /// This method is used to Get DocumentTypeConfiguration By Id dTCId
-        /// </summary>
-        /// <param name="dTCId"></param>
-        [HttpGet("getbyId")]
-        public ActionResult<SetFunctionalProfile> GetDocumentTypeConfigurationByDTCId(int dTCId)
-        {
-            var result = functionalConfigurationService.GetSetFunctionalProfileBySFPID(dTCId);
-            return result;
-        }
+        ///// <summary>
+        ///// This method is used to Get DocumentTypeConfiguration By Id dTCId
+        ///// </summary>
+        ///// <param name="dTCId"></param>
+        //[HttpGet("getbyId")]
+        //public ActionResult<SetFunctionalProfile> GetDocumentTypeConfigurationByDTCId(int dTCId)
+        //{
+        //    var result = functionalConfigurationService.GetSetFunctionalProfileBySFPID(dTCId);
+        //    return result;
+        //}
         /// <summary>
         /// This Method is used to update DepartmentConfiguration
         /// </summary>
         /// <param name="departmentConfiguration"></param>
         [HttpPost("updateprofileconfiguration")]
-        public ActionResult<System.Boolean> UpdateDepartmentConfiguration(SetFunctionalProfile departmentConfiguration)
+        public ActionResult<System.Boolean> UpdateSetFunctionalProfile(SetFunctionalProfile departmentConfiguration)
         {
             var result = functionalConfigurationService.UpdateSetFunctionalProfile(departmentConfiguration);
             return result;

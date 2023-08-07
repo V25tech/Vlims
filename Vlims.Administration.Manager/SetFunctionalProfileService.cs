@@ -43,10 +43,10 @@ public class SetFunctionalProfileService : ISetFunctionalProfileService
         }
     }
 
-    public SetFunctionalProfile GetSetFunctionalProfileBySFPID(int sFPID)
-    {
-        throw new NotImplementedException();
-    }
+    //public SetFunctionalProfile GetSetFunctionalProfileBySFPID(int sFPID)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     public bool SaveSetFunctionalProfile(SetFunctionalProfile setFunctionalProfile)
     {

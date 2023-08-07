@@ -24,6 +24,7 @@ import { NewPlantRegistrationComponent } from '../authentication/components/New-
 import { RegisterComponent } from '../authentication/components/register/register.component';
 import { AddusergroupconfigurationComponent } from '../authentication/components/Add-user-group-configuration/add-usergroupconfiguration.component';
 import { AddRoleComponent } from '../authentication/components/Roles/new-role.component';
+import { SetfunctionalprofileComponent } from '../authentication/components/set-functional-profile/setfunctionalprofile.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -161,6 +162,10 @@ const routes: Routes = [
   {
     path: 'admin/approval',
     component: ApprovalConfigurationsComponent,
+  },
+  {
+    path: 'admin/profile',
+    component: SetfunctionalprofileComponent,
   },
   
 ];
