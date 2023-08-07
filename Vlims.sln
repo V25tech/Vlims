@@ -57,7 +57,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VlimsWeb", "VlimsWeb\VlimsW
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Vlims.Database", "Vlims.Database\Vlims.Database.sqlproj", "{AE1A4C20-28F0-46A4-9FFF-B119C6C24BC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VlimsApp", "VlimsApp\VlimsApp.csproj", "{2245EBBE-81D1-482A-8EB1-C1484B854E97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VlimsApp", "VlimsApp\VlimsApp.csproj", "{2245EBBE-81D1-482A-8EB1-C1484B854E97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

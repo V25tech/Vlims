@@ -8,8 +8,13 @@
     [Status_PSY]           NVARCHAR (50)  NULL,
     [Version]              NVARCHAR (50)  NULL,
     [Refrence_PSY]         INT            NULL,
+    [EffectiveDate_PSY]    DATETIME       NULL,
+    [ReviewDate_PSY]       DATETIME       NULL,
+    [workflow_PSY]         NVARCHAR (100) NULL,
     CONSTRAINT [PK_AdditionalTask_PSY] PRIMARY KEY CLUSTERED ([ATID_PSY] ASC)
 );
+
+
 
 
 
