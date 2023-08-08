@@ -41,13 +41,15 @@
                 name="DepartmentName"
                 [options]="types" 
                 [(ngModel)]="addrole.Department"
-                optionLabel="DepartmentName" placeholder="Select a Department"
-                optionValue="DepartmentName" [required]="true"
-                #DepartmentNameInput="ngModel"
-              >
+                optionLabel="DepartmentName"
+                
+                optionValue="DepartmentName"
+                [required]="true"
+                #DepartmentNameInput="ngModel">
+              
              
               
-              </p-dropdown>
+                   </p-dropdown>
               <div *ngIf="DepartmentNameInput.invalid && (DepartmentNameInput.dirty || DepartmentNameInput.touched)" class="text-danger">
                 Select Your Role.
               </div>
