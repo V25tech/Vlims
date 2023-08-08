@@ -117,7 +117,7 @@ namespace PolicySummary.DMS.Services
                 throw;
             }
         }
-        public string Importbulkdocuments(IFormFile p_fileInfo)
+        public bool Importbulkdocuments(IFormFile p_fileInfo)
         {
             DataSet l_dsInfo;
             List<string> l_numericColumns = null;
@@ -179,7 +179,7 @@ namespace PolicySummary.DMS.Services
             {
                 throw;
             }
-            return baseDirectory;
+            return true;
         }
 
         /// <summary>

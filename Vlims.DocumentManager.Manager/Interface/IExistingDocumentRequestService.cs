@@ -24,6 +24,6 @@ public interface IExistingDocumentRequestService
     bool DeleteExistingDocumentRequestByEDRId(string eDRId);
 
     bool DeleteAllExistingDocumentRequest(List<int> eDRIds);
-    string Importbulkdocuments(IFormFile p_fileInfo);
+    bool Importbulkdocuments(IFormFile p_fileInfo);
 }
 
