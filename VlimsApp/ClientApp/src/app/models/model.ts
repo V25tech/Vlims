@@ -108,6 +108,7 @@ export class DocumentAdditionalTasks {
   effectiveDate: Date | undefined;
   reviewDate: Date | undefined;
   modifiedDate: Date | undefined;
+  workflow:string='';
 }
 
 export class noticationconfiguration {

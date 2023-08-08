@@ -6,7 +6,7 @@
  SELECT DE.*,DP.template_PSY,DP.document_PSY as document
  ,count(*) over() as TotalRows 
  FROM [dbo].[DocumentEffective_PSY] DE WITH (NOLOCK)
- JOIN dbo.DocumentPreparation_PSY DP ON DE.Refrence_PSY=DP.Refrence_PSY
+INNER JOIN dbo.DocumentPreparation_PSY DP ON DE.Refrence_PSY=DP.Refrence_PSY AND DP.Status_PSY='APPROVED'
  Order by [DEID_PSY]  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 

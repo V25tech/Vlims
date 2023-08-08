@@ -3,12 +3,13 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/common.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { DocumentAdditionalTasks, RequestContext, WorkItemsConfiguration } from 'src/app/models/model';
+import { DocumentAdditionalTasks, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { ToastrService } from 'ngx-toastr';
 import { DocumentRevisionService } from 'src/app/modules/services/document-revision.service';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
+import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 
 @Component({
   selector: 'app-review-revision',
@@ -23,8 +24,8 @@ export class ReviewRevisionComponent {
   id: string = '';
   effectiveDate: string | undefined;
   reviewDate: string | undefined;
-  departmentsSource = [];
-  typeSource = [];
+  departmentsSource = [];workflownamee:string=''
+  typeSource= [];workflowsSource :workflowconiguration[]= [];
   requestId:number=0;workId:number=0;statuss:string='';iscompleted:boolean=false;type:string=''
   username:string=''
   workitems: Array<WorkItemsConfiguration> = [];
@@ -34,6 +35,7 @@ export class ReviewRevisionComponent {
     private spinner: NgxSpinnerService, private commonsvc: CommonService, 
     private workitemssvc:WorkitemsService,
     private route1: ActivatedRoute,
+    private wfservice: WorkflowServiceService,
     private documentRevisionService: DocumentRevisionService,
     private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService) { }
 
@@ -53,6 +55,7 @@ export class ReviewRevisionComponent {
     this.id = this.route.snapshot.paramMap.get('id') ?? '';
     this.getdepartments();
     this.getdocumenttypeconfig();
+    this.getworkflowinfo();
     if (this.type == 'view') {
       this.viewMode = true;
       this.getbyId(this.requestId);
@@ -62,7 +65,9 @@ export class ReviewRevisionComponent {
       this.editMode = true;
       if (this.commonsvc.revision.atid) {
         console.log('revision',this.commonsvc.revision);
-        this.revision = this.commonsvc.revision;
+        this.getworkflowinfo();
+       
+        //this.revision = this.commonsvc.revision;
         // this.effectiveDate = this.toDate(this.revision.effectiveDate);
         // this.reviewDate = this.toDate(this.revision.reviewDate);
         //   this.effectiveDate = this.toDate(this.revision.effectiveDate);
@@ -76,7 +81,16 @@ export class ReviewRevisionComponent {
     this.spinner.show();
     return this.documentRevisionService.getbyId1(arg0).subscribe((data: any) => {
       this.revision = data;
-      this.getworkflowitems();
+      if(this.workflowsSource.length>0)
+      {
+        debugger
+         this.workflownamee=this.workflowsSource.find(o=>o.workflowName==this.revision.workflow)?.workflowName as string;
+        if(this.workflownamee!=null || this.workflownamee!=undefined)
+        {
+      this.revision.workflow=this.workflownamee;
+        }
+      }
+      //this.getworkflowitems();
       this.spinner.hide();
       console.log('request', this.revision);
     });
@@ -125,16 +139,32 @@ export class ReviewRevisionComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
       this.typeSource = data.Response;
+      
     });
   }
-
+  getworkflowinfo() {
+    //let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.wfservice.getworkflow(this.commonsvc.req).subscribe((data: any) => {
+      this.workflowsSource = data.Response;
+      this.getbyId(parseInt(this.id));
+      console.log(this.workflowsSource);
+    });
+  }
   saveRequest() {
+    debugger
+    this.revision.status="Revision";
+    if(this.revision.workflow!=this.workflownamee)
+    {
     if (this.editMode || this.viewMode) {
       this.updateRequest();
     }
     else {
       this.addRequest();
     }
+  }
+  else{
+    this.toastr.error('same workflow cannot create revision');
+  }
   }
 
   addRequest() {

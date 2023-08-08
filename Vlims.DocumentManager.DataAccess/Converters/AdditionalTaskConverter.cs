@@ -41,7 +41,7 @@ namespace Vlims.DocumentManager.DataAccess
                         additionalTaskData = new AdditionalTask();
                         additionalTaskData.ATID = Convert.ToString(row[AdditionalTaskConstants.ATID.Trim('@')]);
                         additionalTaskData.Status = Convert.ToString(row[AdditionalTaskConstants.Status_PSY.Trim('@')]);
-                        //additionalTaskData.DocumentEffectiveID = Convert.ToInt16(row[AdditionalTaskConstants.DocumentEffective_ID.Trim('@')]);
+                        additionalTaskData.Version = Convert.ToInt16(row[AdditionalTaskConstants.Version.Trim('@')]);
                         additionalTaskData.Documentno= Convert.ToString(row[AdditionalTaskConstants.documentno.Trim('@')]);
                         additionalTaskData.CreatedBy = Convert.ToString(row[AdditionalTaskConstants.CreatedBy.Trim('@')]);
                         additionalTaskData.CreatedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.CreatedDate.Trim('@')]);
@@ -51,7 +51,7 @@ namespace Vlims.DocumentManager.DataAccess
                         additionalTaskData.DocumentTitle = Convert.ToString(row[AdditionalTaskConstants.DocumentTitle.Trim('@')]);
                         additionalTaskData.DocumentType = Convert.ToString(row[AdditionalTaskConstants.DocumentType.Trim('@')]);
                         additionalTaskData.ModifiedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.ModifiedDate.Trim('@')]);
-
+                        additionalTaskData.Workflow= row["wokflow_PSY"].ToString();
                         DateTime? effective = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.EffectiveDate.Trim('@')]);
                         DateTime? reviwed = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.Reviewdate.Trim('@')]);
                         additionalTaskData.EffectiveDate = effective;// GetUIDate(effective);
