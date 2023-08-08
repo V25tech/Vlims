@@ -7,6 +7,7 @@ using System.Data;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Vlims.Common;
+using Vlims.Administration.Entities;
 
 
 
@@ -14,20 +15,20 @@ using Vlims.Common;
 public static class SetFunctionalProfileConverter
 {
 
-    public static List<SetFunctionalProfile> SetAllSetFunctionalProfile(DataSet dataset)
+    public static List<setfuctionalprofile> SetAllSetFunctionalProfile(DataSet dataset)
     {
         try
         {
-            List<SetFunctionalProfile> result = new List<SetFunctionalProfile>();
-            SetFunctionalProfile setFunctionalProfileData;
+            List<setfuctionalprofile> result = new List<setfuctionalprofile>();
+            setfuctionalprofile setFunctionalProfileData;
             if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
                 {
                     DataRow row = dataset.Tables[0].Rows[i];
-                    setFunctionalProfileData = new SetFunctionalProfile();
-                    setFunctionalProfileData.SFPID = Convert.ToInt16(row[SetFunctionalProfileConstants.SFPID.Trim('@')]);
-                    setFunctionalProfileData.role = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Role.Trim('@')]);
+                    setFunctionalProfileData = new setfuctionalprofile();
+                    setFunctionalProfileData.sfpid = Convert.ToInt16(row[SetFunctionalProfileConstants.SFPID.Trim('@')]);
+                    setFunctionalProfileData.role = row[SetFunctionalProfileConstants.Role.Trim('@')].ToString();
                     setFunctionalProfileData.adminMgmt = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.AdminManagement.Trim('@')]);
                     setFunctionalProfileData.SecurityManagement = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Security_Management.Trim('@')]);
                     setFunctionalProfileData.securityMgmt = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Security_Configurations.Trim('@')]);
@@ -44,20 +45,11 @@ public static class SetFunctionalProfileConverter
                     setFunctionalProfileData.documentTypeConfig = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Document_Type_Configuration.Trim('@')]);
                     setFunctionalProfileData.documentTemplateConfig = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Document_Template_Configuration.Trim('@')]);
                     setFunctionalProfileData.workflowConfig = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.WorkFlow_Configuration.Trim('@')]);
-                    setFunctionalProfileData.dashboardConfig = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Dash_Board_Configuration.Trim('@')]);
-                    setFunctionalProfileData.notificationConfig = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Notification_Configuration.Trim('@')]);
                     setFunctionalProfileData.documentRequest = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Document_Request.Trim('@')]);
                     setFunctionalProfileData.documentPreperation = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Document_Preparation.Trim('@')]);
                     setFunctionalProfileData.documentEffective = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Document_EffectiveOut.Trim('@')]);
-                    setFunctionalProfileData.additionalTasks = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Additional_Tasks.Trim('@')]);
                     setFunctionalProfileData.documentRevison = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Document_Revision.Trim('@')]);
-                    setFunctionalProfileData.DocumentRepository = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Document_Repository.Trim('@')]);
-                    setFunctionalProfileData.DocumentRepository = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Document_Repository.Trim('@')]);
-                    setFunctionalProfileData.DocumentRepository = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Document_Repository.Trim('@')]);
-                    setFunctionalProfileData.CreatedBy = Convert.ToString(row[SetFunctionalProfileConstants.CreatedBy.Trim('@')]);
-                    setFunctionalProfileData.CreatedDate = DatatypeConverter.SetDateTime(row[SetFunctionalProfileConstants.CreatedDate.Trim('@')]);
-                    setFunctionalProfileData.ModifiedBy = Convert.ToString(row[SetFunctionalProfileConstants.ModifiedBy.Trim('@')]);
-                    setFunctionalProfileData.ModifiedDate = DatatypeConverter.SetDateTime(row[SetFunctionalProfileConstants.ModifiedDate.Trim('@')]);
+                    setFunctionalProfileData.DocumentRepository = DatatypeConverter.SetBoolValue(row[SetFunctionalProfileConstants.Document_Repository.Trim('@')]);                                  
                     result.Add(setFunctionalProfileData);
                 }
             }
@@ -69,7 +61,7 @@ public static class SetFunctionalProfileConverter
         }
     }
 
-    public static SetFunctionalProfile SetSetFunctionalProfile(DataSet dataset)
+    public static setfuctionalprofile SetSetFunctionalProfile(DataSet dataset)
     {
         var result = SetAllSetFunctionalProfile(dataset);
         if (result.Count > 0)
