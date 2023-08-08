@@ -175,7 +175,7 @@ export class AddRequestComponent {
       debugger
       this.workitems = data.Response;
       if(this.workitems.length>0){
-        this.workitems=this.workitems.filter(p=>p.ReferenceId==this.requestId);
+        this.workitems=this.workitems.filter(p=>p.ReferenceId== this.requestId && p.TaskType=='Request');
         if(this.workitems)
         {
           this.workitems.sort((a, b) => a.WITId - b.WITId);
