@@ -20,7 +20,7 @@ ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRID_PSY] = @DRID_
 
 IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
-EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DRID_PSY,@ModifiedBy_PSY
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DRID_PSY,@ModifiedBy_PSY,'REQUEST'
 END
 
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')

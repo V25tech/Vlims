@@ -35,8 +35,11 @@ export class PreparationComponent {
     this.docPreperationService.getdocumentpreparations(request).subscribe((data: any) => {
       this.preparationsDatasource = data.response;
       if(this.preparationsDatasource.length<10)
+      {
       this.currentPage=10;
       this.totalCount = data.rowCount;
+      }
+      console.log('preparations',this.preparationsDatasource);
       this.spinner.hide();
     }, er => {
       console.log(er);
