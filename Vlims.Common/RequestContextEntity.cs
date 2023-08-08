@@ -34,5 +34,6 @@ namespace Vlims.Common
                 this.pagesizeField = value;
             }
         }
+       // public string UserName { get; set; }
     }
 }

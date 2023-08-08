@@ -13,6 +13,7 @@ import { DocumentTypeConfiguration, RequestContext } from 'src/app/models/model'
 })
 export class DocumentTypeServiceService {
 type:string="master";
+
   constructor(private http: HttpbaseService) { }
 
   getdoctypeconfig(objrequest: RequestContext) {

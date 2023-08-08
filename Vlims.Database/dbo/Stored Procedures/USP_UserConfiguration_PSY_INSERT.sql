@@ -31,7 +31,7 @@ Standarduser_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY)
+ModifiedDate_PSY,Password_PSY)
  VALUES 
 (@UserManagementID_PSY,
 @FirstName_PSY,
@@ -47,7 +47,7 @@ ModifiedDate_PSY)
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate() );
+ GetDate(),'Passw0rd' );
  SELECT @ID = @@IDENTITY; 
  select @ID 
   

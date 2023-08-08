@@ -29,11 +29,6 @@ public static class ExistingDocumentRequestValidator
         {
             StringBuilder validationMessages = new StringBuilder();
             ValidationHelper validationHelper = new ValidationHelper();
-            validationMessages.Append(validationHelper.NullCheckValidator(existingDocumentRequest.EDRId, nameof(existingDocumentRequest.EDRId)));
-            validationMessages.Append(validationHelper.LengthCheckValidator(existingDocumentRequest.EDRId, 50, nameof(existingDocumentRequest.EDRId)));
-            validationMessages.Append(validationHelper.NullCheckValidator(existingDocumentRequest.Documentmanagerid, nameof(existingDocumentRequest.Documentmanagerid)));
-            validationMessages.Append(validationHelper.LengthCheckValidator(existingDocumentRequest.Documentmanagerid, 50, nameof(existingDocumentRequest.Documentmanagerid)));
-            validationMessages.Append(validationHelper.LengthCheckValidator(existingDocumentRequest.reason, 50, nameof(existingDocumentRequest.reason)));
             validationMessages.Append(validationHelper.LengthCheckValidator(existingDocumentRequest.CreatedBy, 100, nameof(existingDocumentRequest.CreatedBy)));
             validationMessages.Append(validationHelper.LengthCheckValidator(existingDocumentRequest.ModifiedBy, 100, nameof(existingDocumentRequest.ModifiedBy)));
             if (!String.IsNullOrEmpty(validationMessages.ToString()))

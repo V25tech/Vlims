@@ -24,7 +24,7 @@ public interface IDocumentPrintService
 
     ResponseContext<DocumentPrint> GetAllDocumentPrint(RequestContext requestContext);
 
-    DocumentPrint GetDocumentPrintByDRId(string dRId);
+    DocumentPrint GetDocumentPrintByDRId(int dRId);
 
     bool SaveDocumentPrint(DocumentPrint documentPrint);
 

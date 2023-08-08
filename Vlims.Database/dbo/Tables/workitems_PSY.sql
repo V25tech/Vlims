@@ -13,6 +13,8 @@
     [ModifiedBy_PSY]      NVARCHAR (100) NULL,
     [ModifiedDate_PSY]    DATETIME       NULL,
     [RefrenceId_PSY]      INT            NULL,
+    [ActionType_PSY] NVARCHAR(100) NULL, 
+    [IsCompleted_PSY] BIT NULL, 
     CONSTRAINT [PK_workitems_PSY] PRIMARY KEY CLUSTERED ([WITId_PSY] ASC)
 );
 

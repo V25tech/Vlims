@@ -27,9 +27,9 @@ namespace PolicySummary.Controllers
     [Route("api/existingdocumentreq")]
     public class ExistingDocumentRequestController : ControllerBase
     {
-        
+
         private readonly IExistingDocumentRequestService existingDocumentRequestService;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,7 +38,7 @@ namespace PolicySummary.Controllers
         {
             this.existingDocumentRequestService = _existingDocumentRequestService;
         }
-        
+
         /// <summary>
         /// This method is used to Get List of DocumentEffective
         /// </summary>
@@ -49,7 +49,7 @@ namespace PolicySummary.Controllers
             var result = existingDocumentRequestService.GetAllExistingDocumentRequest(requestContext);
             return Ok(result);
         }
-        
+
         /// <summary>
         /// This method is used to Get DocumentEffective By Id dEID
         /// </summary>
@@ -60,7 +60,7 @@ namespace PolicySummary.Controllers
             var result = existingDocumentRequestService.GetExistingDocumentRequestByEDRId(dEID);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Save DocumentEffective
         /// </summary>
@@ -71,7 +71,7 @@ namespace PolicySummary.Controllers
             var result = existingDocumentRequestService.SaveExistingDocumentRequest(documentEffective);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to update DocumentEffective
         /// </summary>
@@ -104,7 +104,7 @@ namespace PolicySummary.Controllers
             var result = existingDocumentRequestService.DeleteExistingDocumentRequestByEDRId(dEID);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Delete DocumentEffective By Multiple ids dEIDs
         /// </summary>
@@ -132,6 +132,52 @@ namespace PolicySummary.Controllers
                 //responseContext = result.Response.FirstOrDefault(o => o.documenttype.Equals(name, StringComparison.InvariantCultureIgnoreCase));
             }
             return Ok(responseContext);
+        }
+
+
+        [HttpPost("upload")]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            try
+            {
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Exsting");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                string uniqueFileName = file.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+
+                return Ok(new { message = "File uploaded successfully.", uniqueFileName });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while uploading the file: {ex.Message}");
+            }
+        }
+
+        [HttpPost("preview")]
+        public ActionResult PreviewDocumentPreparation(ExistingDocumentRequest existingDocumentRequest)
+        {
+
+            if (!string.IsNullOrEmpty(existingDocumentRequest.document))
+            {
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Exsting");
+                uploadsFolder = Path.Combine(uploadsFolder, existingDocumentRequest.document);
+
+                if (System.IO.File.Exists(uploadsFolder))
+                {
+                    var pdfBytes = System.IO.File.ReadAllBytes(uploadsFolder);
+                    return Ok(pdfBytes); //r
+                }
+            }
+            return BadRequest();
         }
     }
 }

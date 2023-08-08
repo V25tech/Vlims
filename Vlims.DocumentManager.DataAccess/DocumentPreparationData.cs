@@ -45,7 +45,7 @@ namespace Vlims.DocumentManager.DataAccess
             }
         }
         
-        public static DataSet GetDocumentPreparationByDPNID(string dPNID)
+        public static DataSet GetDocumentPreparationByDPNID(int dPNID)
         {
             try
             {

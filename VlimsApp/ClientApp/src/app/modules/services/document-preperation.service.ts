@@ -32,6 +32,8 @@ export class DocumentPreperationService {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/upload",this.type);
   }
- 
+  getbyId(id: number) {        
+    return this.http.getwithheader("api/documentpreparation/getbyId" + "?dPNID=" + id, this.type);
+  }
 
 }

@@ -1,0 +1,134 @@
+<div class="container-fluid">
+  <div class="row p-2">
+    <div class="col">
+      <h4 class="page-title">{{editMode? 'Update': 'New' }} Document Request</h4>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <form (ngSubmit)="saveRequest()" #fm="ngForm">
+        <div class="p-4 bg-white shadow-dark rounded-2">
+          <div class="form-group row">
+            <label for="reqCode" class="col-sm-2 col-form-label">Req Code</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="reqCode" name="reqCode" placeholder="System Generated"
+                [(ngModel)]="revision.atid" [disabled]="viewMode" readonly />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="documentTitle" name="documentTitle"
+                placeholder="Document Title" [(ngModel)]="revision.documentTitle" disabled="viewMode"/>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label">Document Number</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="dnumber" name="Dnumber" placeholder="Document Number"
+                [(ngModel)]="revision.documentno" disabled="viewMode"/>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="docType" class="col-sm-2 col-form-label">Document Type<span
+                style="color: red; font-weight: bolder;">*</span></label>
+            <div class="col-sm-10">
+              <p-dropdown name="docType" [options]="typeSource" [(ngModel)]="revision.documentType"
+                optionLabel="Documenttypename" optionValue="Documenttypename" [disabled]="viewMode"
+                [autoDisplayFirst]="false" [required]="true" #DocumenttypeInput="ngModel" [disabled]="true">
+              </p-dropdown>
+              <div *ngIf="DocumenttypeInput.invalid && (DocumenttypeInput.dirty || DocumenttypeInput.touched)"
+                class="text-danger">
+                Document Type is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="department" class="col-sm-2 col-form-label">Department<span
+                style="color: red; font-weight: bolder;">*</span></label>
+            <div class="col-sm-10">
+              <p-dropdown name="department" [options]="departmentsSource" [(ngModel)]="revision.department"
+                optionLabel="DepartmentName" optionValue="DepartmentName" [disabled]="viewMode" [required]="true"
+                [autoDisplayFirst]="false" #DepartmentInput="ngModel" [disabled]="true">
+              </p-dropdown>
+              <div *ngIf="DepartmentInput.invalid && (DepartmentInput.dirty || DepartmentInput.touched)"
+                class="text-danger">
+                Department is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="document" class="col-sm-2 col-form-label">Browse Document</label>
+            <div *ngIf="revision.document" class="col-sm-1">
+              <a class="link-opacity-100-hover" (click)="revision.document =revision.document">View Document</a>
+            </div>
+          </div>
+
+
+
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label">Effective Date</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="edate" name="Edate" placeholder="Effective Date"
+                [(ngModel)]="effectiveDate" (change)="revision.effectiveDate = getAsDate($event)"
+                #effectiveDateInput="ngModel" required disabled="viewMode"/>
+              <div *ngIf="effectiveDateInput.invalid && (effectiveDateInput.dirty || effectiveDateInput.touched)"
+                class="text-danger">
+                Effective Date is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="documentType" class="col-sm-2 col-form-label">Review Date</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="rdate" name="Rdate" placeholder="Review Date"
+                [(ngModel)]="reviewDate" (change)="revision.reviewDate = getAsDate($event)" #reviewDateInput="ngModel"
+                required disabled="viewMode"/>
+              <div *ngIf="reviewDateInput.invalid && (reviewDateInput.dirty || reviewDateInput.touched)"
+                class="text-danger">
+                Review Date is required.
+              </div>
+            </div>
+          </div>
+
+
+          <!-- <div class="form-group row">
+            <label for="workflow" class="col-sm-2 col-form-label">Workflow<span
+                style="color: red; font-weight: bolder;">*</span></label>
+            <div class="col-sm-10">
+              <p-dropdown name="workflow" [options]="workflowsSource" [(ngModel)]="revision.workflow"
+                optionLabel="workflowName" optionValue="workflowName" [disabled]="viewMode" [required]="true"
+                [autoDisplayFirst]="false" #WorkFlowInput="ngModel">
+              </p-dropdown>
+              <div *ngIf="WorkFlowInput.invalid && (WorkFlowInput.dirty || WorkFlowInput.touched)" class="text-danger">
+                Workflow is required.
+              </div>
+            </div>
+          </div> -->
+
+
+          <div class="form-group row my-4">
+            <div class="col-sm-10 offset-sm-2">
+              <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary" *ngIf="!viewMode"
+                [disabled]="!fm.form.valid">Submit</button>
+                <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
+            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button>
+            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

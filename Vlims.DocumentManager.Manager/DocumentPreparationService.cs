@@ -60,7 +60,7 @@ namespace Vlims.DocumentManager.Manager
         //    }
         //}
 
-        public DocumentPreparation GetDocumentPreparationByDPNID(string dPNID)
+        public DocumentPreparation GetDocumentPreparationByDPNID(int dPNID)
         {
             try
             {

@@ -64,7 +64,7 @@ public class Startup
         services.AddScoped<ISecurityManagementService, SecurityManagementService>();
         services.AddScoped<IUserGroupConfigurationService, UserGroupConfigurationService>();
         services.AddScoped<IPlantManagementService, PlantManagementService>();
-
+        services.AddScoped<ISetFunctionalProfileService, SetFunctionalProfileService>();
     }
 
     

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { Paginator } from 'primeng/paginator';
+import { Table } from 'primeng/table';
 import { RequestContext, Usergroupconfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { usergroupconfigurationService } from '../../../services/add-usergroupconfiguration.service';
@@ -12,6 +14,12 @@ import { usergroupconfigurationService } from '../../../services/add-usergroupco
   templateUrl: './usergroupconfiguration.component.html'
 })
 export class UsergroupconfigurationComponent implements OnInit {
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 10;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
 
   name: string = 'Product Type';
   types: Usergroupconfiguration[] = [];

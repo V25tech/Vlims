@@ -27,7 +27,7 @@ namespace Vlims.DocumentManager.Manager
         
         ResponseContext<AdditionalTask> GetAllAdditionalTask(RequestContext requestContext);
         
-        AdditionalTask GetAdditionalTaskByATID(string aTID);
+        AdditionalTask GetAdditionalTaskByATID(int aTID);
         
         bool SaveAdditionalTask(AdditionalTask additionalTask);
         

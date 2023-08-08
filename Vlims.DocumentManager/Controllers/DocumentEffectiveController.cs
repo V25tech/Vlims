@@ -54,8 +54,8 @@ namespace PolicySummary.Controllers
         /// This method is used to Get DocumentEffective By Id dEID
         /// </summary>
         /// <param name="dEID"></param>
-        [HttpGet("{dEID}")]
-        public ActionResult<DocumentEffective> GetDocumentEffectiveByDEID(string dEID)
+        [HttpGet("getbyId")]
+        public ActionResult<DocumentEffective> GetDocumentEffectiveByDEID(int dEID)
         {
             var result = documentEffectiveService.GetDocumentEffectiveByDEID(dEID);
             return result;

@@ -27,9 +27,10 @@
                 <ng-template pTemplate="body" let-assigned let-i="rowIndex">
                     <tr>  
                         <td>{{ i + 1 }}</td>  
-                        <td>
-                            <a href="javascript:void(0);" (click)="viewtask(assigned.TaskType,assigned.ReferenceId)">{{ assigned.TaskType }}</a>
-                        </td>
+                         <td>
+                            <a href="javascript:void(0)" (click)="viewtask(assigned)">{{ assigned.TaskType }}</a>
+                        </td> 
+                       
                         <td>{{assigned.TaskName}}</td>
                         <td>{{assigned.Stage}}</td>
                         <td>{{assigned.assignedGroup}}</td>

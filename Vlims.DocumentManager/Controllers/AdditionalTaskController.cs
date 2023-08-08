@@ -43,7 +43,7 @@ namespace PolicySummary.Controllers
         /// </summary>
         /// <param name="requestContext"></param>
         [HttpPost("GetAddtask")]
-        public ActionResult GetAllAdditionalTask(RequestContext requestContext)
+        public ActionResult GetAllAdditionalTask([FromQuery] RequestContext requestContext)
         {
             var result = additionalTaskService.GetAllAdditionalTask(requestContext);
             return Ok(result);
@@ -53,8 +53,8 @@ namespace PolicySummary.Controllers
         /// This method is used to Get AdditionalTask By Id aTID
         /// </summary>
         /// <param name="aTID"></param>
-        [HttpGet("{aTID}")]
-        public ActionResult<AdditionalTask> GetAdditionalTaskByATID(string aTID)
+        [HttpGet("getbyId")]
+        public ActionResult<AdditionalTask> GetAdditionalTaskByATID(int aTID)
         {
             var result = additionalTaskService.GetAdditionalTaskByATID(aTID);
             return result;

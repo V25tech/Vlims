@@ -54,7 +54,7 @@ namespace PolicySummary.Controllers
         /// </summary>
         /// <param name="uCFId"></param>
         [HttpGet("getbyId")]
-        public ActionResult<UserConfiguration> GetUserConfigurationByUCFId(string uCFId)
+        public ActionResult<UserConfiguration> GetUserConfigurationByUCFId(int uCFId)
         {
             var result = userConfigurationService.GetUserConfigurationByUCFId(uCFId);
             return result;

@@ -13,7 +13,7 @@ Version,
  count(*) over() as TotalRows  ,
  de.document_PSY,de.department_PSY,de.documentno_PSY,de.documenttitle_PSY,de.documenttype_PSY,de.EffectiveDate_PSY,de.Reviewdate_PSY
 
- FROM [dbo].[AdditionalTask_PSY] AT WITH (NOLOCK) inner join DocumentEffective_PSY de on AT.DocumentEffective_ID=de.DEID_PSY
+ FROM [dbo].[AdditionalTask_PSY] AT WITH (NOLOCK) inner join DocumentEffective_PSY de on AT.Refrence_PSY=de.Refrence_PSY
  
  Order by [ATID_PSY]  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 

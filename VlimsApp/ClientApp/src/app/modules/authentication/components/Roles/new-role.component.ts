@@ -6,6 +6,8 @@ import { DepartmentconfigurationService } from 'src/app/modules/services/departm
 import { RolesconfigurationService } from 'src/app/modules/services/rolesconfiguration.service';
 import { UsersconfigurationService } from 'src/app/modules/services/usersconfiguration.service';
 import { CommonService } from 'src/app/shared/common.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -24,7 +26,7 @@ export class AddRoleComponent implements OnInit {
   isactivedirectory: boolean = false;
   isstandarduser: boolean = false;
   title: string = "Add Role Configuration";
-  constructor(private commonsvc: CommonService, private rolesservice: RolesconfigurationService,
+  constructor(private commonsvc: CommonService,private toastr: ToastrService, private rolesservice: RolesconfigurationService,
     private deptservice: DepartmentconfigurationService,
     private userservice: UsersconfigurationService,
     private router: Router, private cdr: ChangeDetectorRef,private location: Location) { }
@@ -66,7 +68,8 @@ export class AddRoleComponent implements OnInit {
     adaddrole.ModifiedBy = "admin";
     adaddrole.CreatedDate = new Date();
     adaddrole.ModifiedDate = new Date();
-    //this.router.navigate(['/products']);
+    this.toastr.success('New Role Saved Succesfull!', 'Saved.!');
+    this.router.navigate(['/admin/roles']);
     if (this.editMode) 
 {
     this.rolesservice.Updaterole(adaddrole).subscribe((res: any) => {

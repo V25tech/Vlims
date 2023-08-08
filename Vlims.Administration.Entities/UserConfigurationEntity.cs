@@ -255,5 +255,7 @@ namespace Vlims.Administration.Entities
                 this.modifieddateField = value;
             }
         }
+
+        public string Password { get; set; }
     }
 }

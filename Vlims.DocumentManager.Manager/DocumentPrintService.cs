@@ -23,7 +23,7 @@ public class DocumentPrintService : IDocumentPrintService
         }
     }
 
-    public DocumentPrint GetDocumentPrintByDRId(string dRId)
+    public DocumentPrint GetDocumentPrintByDRId(int dRId)
     {
         try
         {

@@ -14,7 +14,7 @@ export class AdminHomeComponent {
     if (navTo === 'security') {
       this.router.navigate(['/admin/security']);
     } else if (navTo === 'hierrachy') {
-      this.router.navigate(['/admin/department']);
+      this.router.navigate(['/admin/profile']);
     } else if (navTo === 'plant') {
       this.router.navigate(['/admin/plant']);
     } else if (navTo === 'User') {
@@ -29,7 +29,7 @@ export class AdminHomeComponent {
       this.router.navigate(['/admin/approvalconfig']);
     }  else if (navTo === 'departments') {
       this.router.navigate(['/admin/departments']);
-    } else if (navTo === 'home') {
+    }  else if (navTo === 'home') {
       this.router.navigate(['/home']);
     }
   }

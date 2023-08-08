@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-      <h4 class="page-title">New Role Registration</h4>
+      <h4 class="page-title">{{title}}</h4>
     </div>
   </div>
   <div class="row p-2">
@@ -10,18 +10,26 @@
         <div class="p-4 bg-white shadow-dark rounded-2">
 
           <div class="form-group row">
-            <label for="Role" class="col-sm-2 col-form-label">Role</label>
+            <label for="role" class="col-sm-2 col-form-label">Role<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
-                     id="role"
-                     name="role"
+                     id="roleid"
+                     name="roleid"
                      placeholder=""
-                     [(ngModel)]="addrole.Role" [disabled]="viewMode" />
+                     [(ngModel)]="addrole.Role" [disabled]="viewMode"
+                     required
+                     #roleidInput="ngModel"
+                     />
+                     <div *ngIf="roleidInput.invalid && (roleidInput.dirty || roleidInput.touched)" class="text-danger">
+                      Select Your Role.
+                    </div>
+                     
+                     
             </div>
           </div>
           <div class="form-group row">
-            <label for="prefix" class="col-sm-2 col-form-label">Department</label>
+            <label for="DepartmentName" class="col-sm-2 col-form-label">Department</label>
             <div class="col-sm-10">
               <!-- <input type="text"
                      class="form-control"
@@ -31,32 +39,43 @@
                      [(ngModel)]="addrole.Department" [disabled]="viewMode" /> -->
                      <p-dropdown
                 name="DepartmentName"
-                [options]="types"
+                [options]="types" 
                 [(ngModel)]="addrole.Department"
                 optionLabel="DepartmentName" placeholder="Select a Department"
-                optionValue="DepartmentName"
+                optionValue="DepartmentName" [required]="true"
+                #DepartmentNameInput="ngModel"
               >
+             
+              
               </p-dropdown>
+              <div *ngIf="DepartmentNameInput.invalid && (DepartmentNameInput.dirty || DepartmentNameInput.touched)" class="text-danger">
+                Select Your Role.
+              </div>
             </div>
           </div>
 
 
           <div class="form-group row">
-            <label for="prefix" class="col-sm-2 col-form-label">Comments</label>
+            <label for="comments" class="col-sm-2 col-form-label">Comments</label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="comments"
                      name="comments"
                      placeholder=""
-                     [(ngModel)]="addrole.Comments" [disabled]="viewMode" />
+                     [(ngModel)]="addrole.Comments" [disabled]="viewMode"
+                     required
+                     #commentsInput="ngModel" />
+                     <div *ngIf="commentsInput.invalid && (commentsInput.dirty || commentsInput.touched)" class="text-danger">
+                      Write Comments.
+                    </div>
             </div>
           </div>
         </div>
         <div class="form-group row my-4">
           <div class="col-sm-10 offset-sm-2">
             <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
-            <button type="submit" class="btn btn-primary" *ngIf="!editMode">Submit</button>
+            <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid">Submit</button>
             <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
           </div>
         </div>

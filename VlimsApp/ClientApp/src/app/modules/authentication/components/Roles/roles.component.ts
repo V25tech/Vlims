@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Paginator } from 'primeng/paginator';
+import { Table } from 'primeng/table';
 import { RequestContext, RoleConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { RolesconfigurationService } from '../../../services/rolesconfiguration.service';
@@ -10,6 +12,12 @@ import { RolesconfigurationService } from '../../../services/rolesconfiguration.
   templateUrl: './roles.component.html',
 })
 export class RolesComponent implements OnInit {
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   types: Array<RoleConfiguration> = [];
   rol = new RoleConfiguration();
   constructor(private commonsvc: CommonService, private doctypeservice: RolesconfigurationService  ,private router: Router) { }
@@ -21,6 +29,10 @@ export class RolesComponent implements OnInit {
       return this.doctypeservice.getroles(objrequest).subscribe((data: any) => {
         debugger
         this.types = data.Response;
+        if(this.types!=null && this.types.length<10)
+        {
+          this.currentPage=10;
+        }
         console.log(this.types);
       }, er => {
       

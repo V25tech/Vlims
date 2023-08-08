@@ -63,12 +63,16 @@
   <div class="row p-2">
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table [value]="types" tableStyleClass="table table-striped">
+        <p-table [value]="types" tableStyleClass="table table-striped" [rows]="itemsPerPage"
+            [paginator]="true" [totalRecords]="types.length"
+            [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
           <ng-template pTemplate="header">
             <tr>            
-              <th>#</th>
-              <th pSortableColumn="usergroupname" style="width:30%">User Group Name<p-sortIcon field="usergroupname"></p-sortIcon></th>
-              <th pSortableColumn="code" style="width:25%">Unique Code<p-sortIcon field="code"></p-sortIcon></th>
+              <th>S.No</th>
+              <th pSortableColumn="usergroupname" style="width:20%">User Group Name<p-sortIcon field="usergroupname"></p-sortIcon></th>
+              <th pSortableColumn="code" style="width:20%">Unique Code<p-sortIcon field="code"></p-sortIcon></th>
+              <th pSortableColumn="registeredby" style="width:20%">Registered By<p-sortIcon field="registeredby"></p-sortIcon></th>
+              <th pSortableColumn="registeredon" style="width:20%">Registered On<p-sortIcon field="registeredon"></p-sortIcon></th>
               <th pSortableColumn="totalusers" style="width:20%">Total Users<p-sortIcon field="totalusers"></p-sortIcon></th>
               <th style="width:80px">Actions</th>
             </tr>
@@ -78,6 +82,8 @@
               <td>{{ i + 1 }}</td>  
               <td>{{doc?.usergroupname}}</td>
               <td>{{doc?.code}}</td>
+              <td>{{doc?.createdBy}}</td>
+              <td>{{doc?.createdDate}}</td>              
               <td>{{doc?.totalusers}}</td>              
               <td class="text-center" (click)="editdoc(doc)"><i class="bi bi-pencil"></i></td>
             </tr>

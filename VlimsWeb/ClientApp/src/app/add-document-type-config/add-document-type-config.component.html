@@ -54,9 +54,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" (click)="closepopup();" *ngIf="viewMode">Approve</button>
-        <button type="button" class="btn btn-info" (click)="closepopup();" *ngIf="viewMode">Re-Initiate</button>
-        <button type="button" class="btn btn-danger" (click)="closepopup();" *ngIf="viewMode">Reject</button>
+        <button type="submit" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && adddoc.status!='Approved'" (click)="approve()">Approve</button>
+        <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && adddoc.status!='Approved'" (click)="reinitiative()">Re-Initiative</button>
+        <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && adddoc.status!='Approved'" (click)="reject()">Reject</button>
         <button type="button" class="btn btn-secondary" (click)="closepopup();">Close</button>
         <button type="submit" class="btn btn-primary" *ngIf="!viewMode">Submit</button>
       </div>

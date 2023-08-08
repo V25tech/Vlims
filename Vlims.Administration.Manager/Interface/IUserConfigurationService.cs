@@ -26,7 +26,7 @@ namespace Vlims.Administration.Manager
         
         ResponseContext<UserConfiguration> GetAllUserConfiguration(RequestContext requestContext);
         
-        UserConfiguration GetUserConfigurationByUCFId(string uCFId);
+        UserConfiguration GetUserConfigurationByUCFId(int uCFId);
         
         bool SaveUserConfiguration(UserConfiguration userConfiguration);
         

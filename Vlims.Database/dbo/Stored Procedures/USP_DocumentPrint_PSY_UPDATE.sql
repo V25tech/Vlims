@@ -4,7 +4,8 @@
 @noofcopies_PSY NVarChar(50),
 @workflow_PSY NVarChar(50),
 @reason_PSY NVarChar(50),
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100) ,
+@Status_PSY NVarchar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -15,7 +16,14 @@ documentno_PSY=@documentno_PSY,
 noofcopies_PSY=@noofcopies_PSY,
 workflow_PSY=@workflow_PSY,
 reason_PSY=@reason_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [DRId_PSY] = @DRId_PSY ;  select @DRId_PSY; 
+ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [DRId_PSY] = @DRId_PSY ; 
+
+IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
+BEGIN
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DRId_PSY,@ModifiedBy_PSY
+END
+
+select @DRId_PSY; 
   
   END TRY 
  BEGIN CATCH 

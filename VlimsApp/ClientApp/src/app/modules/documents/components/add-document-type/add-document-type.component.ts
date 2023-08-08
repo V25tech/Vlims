@@ -9,6 +9,7 @@ import { DepartmentconfigurationService } from 'src/app/modules/services/departm
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -18,16 +19,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AddDocumentTypeComponent {
   documentType = new DocumentTypeConfiguration();
-  departments:DepartmentConfiguration[]=[];
-  selectedDepartments:DepartmentConfiguration[] = [];
-  viewMode:boolean=false;editMode:boolean=false;
-  typeId:number=0;
-  constructor(
+  departments: DepartmentConfiguration[] = [];
+  selectedDepartments: DepartmentConfiguration[] = [];
+  viewMode: boolean = false; editMode: boolean = false;
+  typeId: number = 0;
+  constructor(private toastr: ToastrService,
     private location: Location,
     private deptservice: DepartmentconfigurationService,
     private doctypeservice: DocumentTypeServiceService,
     private spinner: NgxSpinnerService,
-    private commonsvc:CommonService,
+    private commonsvc: CommonService,
     private cdr: ChangeDetectorRef,
     //private loader: SpinnerService,
     private router: Router
@@ -35,22 +36,23 @@ export class AddDocumentTypeComponent {
     this.selectedDepartments = [];
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
-    if(lastSegment=="edit")
-    {
-      let id=parseInt(segments[segments.length-1],10);
-      this.typeId=id;
-      this.editMode=true;this.viewMode=false;
+    if (lastSegment == "edit") {
+      let id = parseInt(segments[segments.length - 1], 10);
+      this.typeId = id;
+      this.editMode = true; this.viewMode = false;
       this.getbyId();
       //this.documentType=this.commonsvc.documentType;
     }
-    else if(lastSegment=="view") {
-      this.viewMode=true;this.editMode=false;
-      this.documentType=this.commonsvc.documentType;
+    
+    else if (lastSegment == "view") {
+      this.typeId = parseInt(segments[segments.length - 1], 10);
+      this.getbyId();
+      this.viewMode = true; this.editMode = false;
+      this.documentType = this.commonsvc.documentType;
     }
     this.getdepartments();
     this.cdr.detectChanges();
@@ -58,78 +60,98 @@ export class AddDocumentTypeComponent {
   onCancel() {
     this.location.back();
   }
-  getbyId()
-  {
+  getbyId() {
     debugger
-    this.doctypeservice.getbyId(this.typeId).subscribe((data:any)=>{
-      this.documentType=data;
-    },((error:any)=>{
+    this.doctypeservice.getbyId(this.typeId).subscribe((data: any) => {
+      this.documentType = data;
+    }, ((error: any) => {
 
     }));
   }
   getdepartments() {
     //this.loader.show();
     this.spinner.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
-      return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-        debugger
-        this.departments = data.Response;
-        if(this.departments!=null && this.editMode)
-        {
-          const myList: string[] = this.documentType.Assigntodepartment.split(",");
-          myList.forEach(element => {
-            const dept=this.departments.find(o=>o.DepartmentName===element);
-            if(dept!==undefined)
-            this.selectedDepartments.push(dept);    
-          });
-          this.selectedDepartments
-        }
-         this.spinner.hide();
-        console.log(this.departments);
-      }, (error:any) => {
-        // this.toastr.error('loading failed');
-        // this.loader.hide();
-      });
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+   // this.toastr.success('Document type Saved Succesfull!', 'Saved.!');
+    return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+      debugger
+      this.departments = data.Response;
+      if (this.departments != null && this.editMode) {
+        const myList: string[] = this.documentType.Assigntodepartment.split(",");
+        myList.forEach(element => {
+          const dept = this.departments.find(o => o.DepartmentName === element);
+          if (dept !== undefined)
+            this.selectedDepartments.push(dept);
+        });
+        this.selectedDepartments
+      }
+      this.spinner.hide();
+      console.log(this.departments);
+    }, (error: any) => {
+      // this.toastr.error('loading failed');
+      // this.loader.hide();
+    });
   }
   adddoctype(documentType: DocumentTypeConfiguration) {
     debugger
-    if(this.editMode)
-    {
-      this.updatetype(documentType);
+    if (this.editMode) {
+      this.documentType = documentType;
+      this.updatetype();
     }
-    else{
+    else {
       this.inserttype(documentType);
     }
-    documentType.CreatedBy="admin";
+    documentType.CreatedBy = "admin";
     documentType.ModifiedBy = "admin";
-    documentType.DTCId="1";
+    documentType.DTCId = "1";
     const dateToSend: Date = new Date();
     const isoDateString: string = dateToSend.toISOString();
     //documentType.ModifiedDate=isoDateString;
-    documentType.Status="pending"
-    documentType.Assigntodepartment=this.selectedDepartments.map((obj)=>obj.DepartmentName).join(",");
+    documentType.Status = "pending"
+    documentType.Assigntodepartment = this.selectedDepartments.map((obj) => obj.DepartmentName).join(",");
     //documentType.SelectedDepartments=this.selectedDepartments;
-    if(this.selectedDepartments!=null && this.selectedDepartments.length>0)
-    {
-      if(this.editMode)
-    {
-      this.doctypeservice.updatedoctypeconfig(documentType).subscribe((res:any)=>{     
-        this.location.back();
-      });
+    if (this.selectedDepartments != null && this.selectedDepartments.length > 0) this.toastr.success('Document Request Saved Succesfull!', 'Saved.!');{
+      if (this.editMode) {
+        this.doctypeservice.updatedoctypeconfig(documentType).subscribe((res: any) => {
+          this.location.back();
+          
+        });
+      }
+      else {
+        this.doctypeservice.adddoctypeconfig(documentType).subscribe((res: any) => {
+          this.location.back();
+        });
+      }
     }
-    else
-    {
-    this.doctypeservice.adddoctypeconfig(documentType).subscribe((res:any)=>{     
+  }
+  inserttype(documentType: DocumentTypeConfiguration) {
+
+  }
+  updatetype() {
+    debugger;
+    this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {
+      this.commonsvc.documentType = new DocumentTypeConfiguration();
       this.location.back();
+      this.spinner.hide();
+    }, er => {
+      console.log(er);
+      this.spinner.hide();
     });
   }
-  }
-  }
-  inserttype(documentType: DocumentTypeConfiguration){
+  closepopup() {
 
   }
-  updatetype(documentType: DocumentTypeConfiguration){
-
+  approve() {
+    this.documentType.Status = 'Approved'
+    this.updatetype();
+  }
+  reinitiative() {
+    this.documentType.Status = 'Re-Initiated'
+    this.updatetype();
+  }
+  reject() {
+    this.documentType.Status = 'Rejected'
+    this.updatetype();
   }
 
 }

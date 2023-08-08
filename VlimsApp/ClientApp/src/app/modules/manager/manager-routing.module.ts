@@ -8,12 +8,16 @@ import { ReviewPrepationComponent } from './components/review-prepation/review-p
 import { EffectivesComponent } from './components/effectives/effectives.component';
 import { ReviewEffectiveComponent } from './components/review-effective/review-effective.component';
 import { DocumentManagerHomeComponent } from './components/document-manager-home/document-manager-home.component';
-import { DocumentPrintComponent } from './components/Print/document-print.component';
-import { NewPrintRequestComponent } from './components/Print/new-print-request.component';
+import { DocumentPrintComponent } from './components/print/document-print.component';
+import { ExistingDocumentRequestComponent } from './components/existing-document-request/existing-document-request.component';
+import { ReviewExistingDocumentRequestComponent } from './components/review-existing-document-request/review-existing-document-request.component';
+import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
+import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
+import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
-  
+
   { path: 'document-manager', component: DocumentManagerHomeComponent, canActivate: [AuthGuard] },
   {
     path: 'requests',
@@ -36,6 +40,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'requests/view/:requestId/:workId/:type',
+    component: AddRequestComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'preparations',
     component: PreparationComponent,
     canActivate: [AuthGuard],
@@ -44,7 +53,17 @@ const routes: Routes = [
     path: 'preparation/review',
     component: ReviewPrepationComponent,
     canActivate: [AuthGuard],
-  },  
+  },
+  {
+    path: 'preparation/view/:id',
+    component: ReviewPrepationComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'preparation/view/:requestId/:workId/:type',
+    component: ReviewPrepationComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'effectives',
     component: EffectivesComponent,
@@ -52,6 +71,16 @@ const routes: Routes = [
   },
   {
     path: 'effectives/review',
+    component: ReviewEffectiveComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'effectives/view/:requestId/:workId/:type',
+    component: ReviewEffectiveComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'effectives/view/:requestId/:workId/:type',
     component: ReviewEffectiveComponent,
     canActivate: [AuthGuard],
   },
@@ -68,6 +97,36 @@ const routes: Routes = [
   {
     path: 'print/edit',
     component: NewPrintRequestComponent,
+    canActivate: [AuthGuard],
+  }, 
+  {
+    path: 'print/view/:requestId/:workId/:type',
+    component: NewPrintRequestComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'existingdoc',
+    component: ExistingDocumentRequestComponent,
+  },
+  {
+    path: 'existingdoc/add',
+    component: ReviewExistingDocumentRequestComponent
+  },
+  {
+    path: 'existingdoc/edit/:id',
+    component: ReviewExistingDocumentRequestComponent
+  },
+  {
+    path: 'revision',
+    component: DocumentRevisionRequestsComponent
+  },
+  {
+    path: 'revision/edit/:id',
+    component: ReviewRevisionComponent
+  },
+  {
+    path: 'revision/view/:requestId/:workId/:type',
+    component: ReviewRevisionComponent,
     canActivate: [AuthGuard],
   },
 ];

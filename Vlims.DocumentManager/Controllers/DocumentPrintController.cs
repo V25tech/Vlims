@@ -43,8 +43,8 @@ public class DocumentPrintController : ControllerBase
     /// This method is used to Get DocumentEffective By Id dEID
     /// </summary>
     /// <param name="dEID"></param>
-    [HttpGet("{dEID}")]
-    public ActionResult<DocumentPrint> GetDocumentPrintByDRId(string dEID)
+   [HttpGet("getbyId")]
+    public ActionResult<DocumentPrint> GetDocumentPrintByDRId(int dEID)
     {
         var result = documentPrintService.GetDocumentPrintByDRId(dEID);
         return result;
@@ -104,6 +104,25 @@ public class DocumentPrintController : ControllerBase
         var result = documentPrintService.DeleteAllDocumentPrint(dEIDs);
         return result;
     }
-  
+
+
+    [HttpPost("preview")]
+    public ActionResult PreviewDocumentPreparation(DocumentPrint documentPrint)
+    {
+
+        if (documentPrint!=null)
+        {
+            string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Exsting");
+            uploadsFolder = Path.Combine(uploadsFolder, "sample.pdf");
+
+            if (System.IO.File.Exists(uploadsFolder))
+            {
+                var pdfBytes = System.IO.File.ReadAllBytes(uploadsFolder);
+                return Ok(pdfBytes); //r
+            }
+        }
+        return BadRequest();
+    }
+
 }
 

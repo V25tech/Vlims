@@ -3,7 +3,7 @@
 @documentno_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
 @department_PSY NVarChar(50),
-@document_PSY NVarChar(200),
+@document_PSY NVarChar(500),
 @template_PSY NVarChar(50),
 @wokflow_PSY NVarChar(50),
 @details_PSY NVarChar(50),
@@ -19,7 +19,7 @@
  (Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY)
  SELECT 1,NULL,NULL,@documenttype_PSY,@department_PSY,NULL,NULL,NULL,NULL,@CreatedBy_PSY,Getdate(),@ModifiedBy_PSY,Getdate(),'Approved'
  
- UPDATE Documentrequest_PSY SET Status_PSY='Approved',Approvedby_PSY=@ModifiedBy_PSY,ApprovedON_PSY=GETDATE() where DRID_PSY=@Documentmanagerid_PSY
+ --UPDATE Documentrequest_PSY SET Status_PSY='Approved',Approvedby_PSY=@ModifiedBy_PSY,ApprovedON_PSY=GETDATE() where DRID_PSY=@Documentmanagerid_PSY
 
  SELECT @ID = @@IDENTITY; 
 

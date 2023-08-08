@@ -17,11 +17,29 @@ import { ReviewPrepationComponent } from './components/review-prepation/review-p
 import { EffectivesComponent } from './components/effectives/effectives.component';
 import { ReviewEffectiveComponent } from './components/review-effective/review-effective.component';
 import { DocumentManagerHomeComponent } from './components/document-manager-home/document-manager-home.component';
-import { DocumentPrintComponent } from './components/Print/document-print.component';
-import { NewPrintRequestComponent } from './components/Print/new-print-request.component';
+import { DocumentPrintComponent } from './components/print/document-print.component';
+import { ExistingDocumentRequestComponent } from './components/existing-document-request/existing-document-request.component';
+import { ReviewExistingDocumentRequestComponent } from './components/review-existing-document-request/review-existing-document-request.component';
+import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
+import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
+import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
 
 @NgModule({
-  declarations: [RequestsComponent, AddRequestComponent, PreparationComponent, ReviewPrepationComponent, EffectivesComponent, ReviewEffectiveComponent, DocumentManagerHomeComponent, DocumentPrintComponent, NewPrintRequestComponent],
+  declarations: [
+    RequestsComponent,
+    AddRequestComponent,
+    PreparationComponent,
+    ReviewPrepationComponent,
+    EffectivesComponent,
+    ReviewEffectiveComponent,
+    DocumentManagerHomeComponent,
+    DocumentPrintComponent,
+    NewPrintRequestComponent,
+    ExistingDocumentRequestComponent,
+    ReviewExistingDocumentRequestComponent,
+    DocumentRevisionRequestsComponent,
+    ReviewRevisionComponent
+  ],
   imports: [
     CommonModule,
     ManagerRoutingModule,
@@ -34,4 +52,4 @@ import { NewPrintRequestComponent } from './components/Print/new-print-request.c
     ToastModule,
   ],
 })
-export class ManagerModule {}
+export class ManagerModule { }

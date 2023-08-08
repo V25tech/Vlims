@@ -30,8 +30,8 @@ namespace PolicySummary.Sheet1.Services
             {
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
-                validationMessages.Append(validationHelper.NullCheckValidator(plantManagement.PMId, nameof(plantManagement.PMId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PMId,50, nameof(plantManagement.PMId)));
+                //validationMessages.Append(validationHelper.NullCheckValidator(plantManagement.PMId, nameof(plantManagement.PMId)));
+                //validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PMId,50, nameof(plantManagement.PMId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(plantManagement.AdminManagerId, nameof(plantManagement.AdminManagerId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.AdminManagerId,50, nameof(plantManagement.AdminManagerId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PlantName,50, nameof(plantManagement.PlantName)));

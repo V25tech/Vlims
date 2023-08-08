@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { RequestContext, UserConfiguration } from '../../../../models/model';
+import { Paginator } from 'primeng/paginator';
+import { Table } from 'primeng/table';
+import { RequestContext, RoleConfiguration, UserConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { UsersconfigurationService } from '../../../services/usersconfiguration.service';
 
@@ -13,8 +15,13 @@ import { UsersconfigurationService } from '../../../services/usersconfiguration.
   
 })
 export class UserConfigurationComponent implements OnInit {
+  @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
+  @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
+  // Pagination properties
+  currentPage = 10;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   types: UserConfiguration[] = [];
-
   name: string = 'Product Type';
   newtype: UserConfiguration | undefined;
   objProductType: UserConfiguration | undefined;

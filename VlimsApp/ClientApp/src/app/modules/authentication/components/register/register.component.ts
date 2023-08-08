@@ -6,6 +6,7 @@ import { DepartmentconfigurationService } from '../../../services/departmentconf
 import { RolesconfigurationService } from '../../../services/rolesconfiguration.service';
 import { UsersconfigurationService } from '../../../services/usersconfiguration.service';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
     private deptservice: DepartmentconfigurationService,
     private userservice: UsersconfigurationService,
     private location: Location,
+    private toastr: ToastrService,
     private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -70,17 +72,30 @@ export class RegisterComponent implements OnInit {
     adduser.ModifiedBy = "admin";
     adduser.CreatedDate=new Date();
     adduser.ModifiedDate=new Date();
+    this.toastr.success('New User  Saved Succesfull!', 'Saved.!');
     //this.router.navigate(['/products']);
-    this.userservice.adduser(adduser).subscribe((res: any) => {
+    if(adduser.UserID==='admin')
+    {
+      alert("User Id 'Admin' is invalid")
+    }
+    else
+    {
+      this.userservice.adduser(adduser).subscribe((res: any) => {
       this.location.back();
     });
   }
+  }
   else
   { 
+    if(adduser.UserID==='admin')
+    {
+      alert("User Id 'Admin' is invalid")
+    }
+   else {
     this.userservice.update(adduser).subscribe((data:any)=>{
       this.location.back();
     });
-
+   }
   }
   }
   getbyId()

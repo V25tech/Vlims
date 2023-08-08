@@ -41,11 +41,21 @@ namespace Vlims.DocumentManager.DataAccess
                         additionalTaskData = new AdditionalTask();
                         additionalTaskData.ATID = Convert.ToString(row[AdditionalTaskConstants.ATID.Trim('@')]);
                         additionalTaskData.Status = Convert.ToString(row[AdditionalTaskConstants.Status_PSY.Trim('@')]);
-                        additionalTaskData.Documentmanagerid = Convert.ToString(row[AdditionalTaskConstants.Documentmanagerid.Trim('@')]);
+                        //additionalTaskData.DocumentEffectiveID = Convert.ToInt16(row[AdditionalTaskConstants.DocumentEffective_ID.Trim('@')]);
+                        additionalTaskData.Documentno= Convert.ToString(row[AdditionalTaskConstants.documentno.Trim('@')]);
                         additionalTaskData.CreatedBy = Convert.ToString(row[AdditionalTaskConstants.CreatedBy.Trim('@')]);
                         additionalTaskData.CreatedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.CreatedDate.Trim('@')]);
                         additionalTaskData.ModifiedBy = Convert.ToString(row[AdditionalTaskConstants.ModifiedBy.Trim('@')]);
+                        additionalTaskData.Department= Convert.ToString(row[AdditionalTaskConstants.Department.Trim('@')]);
+                        additionalTaskData.Document = Convert.ToString(row[AdditionalTaskConstants.Document.Trim('@')]);
+                        additionalTaskData.DocumentTitle = Convert.ToString(row[AdditionalTaskConstants.DocumentTitle.Trim('@')]);
+                        additionalTaskData.DocumentType = Convert.ToString(row[AdditionalTaskConstants.DocumentType.Trim('@')]);
                         additionalTaskData.ModifiedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.ModifiedDate.Trim('@')]);
+
+                        DateTime? effective = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.EffectiveDate.Trim('@')]);
+                        DateTime? reviwed = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.Reviewdate.Trim('@')]);
+                        additionalTaskData.EffectiveDate = effective;// GetUIDate(effective);
+                        additionalTaskData.ReviewDate = reviwed;// GetUIDate(reviwed);
                         result.Add(additionalTaskData);
                     }
                 }
@@ -56,7 +66,18 @@ namespace Vlims.DocumentManager.DataAccess
                 throw;
             }
         }
-        
+        private static string GetUIDate(DateTime? documentEffectiveData)
+        {
+            string dateString = string.Empty; if (documentEffectiveData != null)
+            {
+                int year = (int)(documentEffectiveData?.Year);
+                int month = (int)(documentEffectiveData?.Month);
+                int day = (int)(documentEffectiveData?.Day);
+                DateTime date = new DateTime(year, month, day);
+                dateString = date.ToString("yyyy-MM-dd");
+            }
+            return dateString;
+        }
         public static AdditionalTask SetAdditionalTask(DataSet dataset)
         {
             var result = SetAllAdditionalTask(dataset);

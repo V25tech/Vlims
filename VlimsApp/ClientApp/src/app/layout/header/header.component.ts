@@ -8,17 +8,18 @@ import { LoginService } from 'src/app/modules/authentication/services/login.serv
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
+user:string='admin';
   constructor(private loginservice: LoginService, private router: Router){    
   }
-
   logout(){
     this.loginservice.logout();
     this.router.navigate(['/login']);
   }
-
- 
   ngOnInit(): void {
-    
+    const user=localStorage.getItem("username");
+    if(user!=null && user!=undefined)
+    {
+      this.user=user;
+    }
   }
 }

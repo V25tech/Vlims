@@ -15,7 +15,9 @@
       <div class="p-4 bg-white shadow-dark rounded-2">
         <p-table
           [value]="preparationsDatasource"
-          tableStyleClass="table table-striped"
+          tableStyleClass="table table-striped" [rows]="itemsPerPage"
+            [paginator]="true" [totalRecords]="preparationsDatasource.length"
+            [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage" 
         >
           <ng-template pTemplate="header">
             <tr>
@@ -56,7 +58,7 @@
                   >{{ docPreperation.status }}
                 </span>
               </td>
-              <td class="text-center"><a (click)="navigateToAddPreparation(docPreperation)"><i class="bi bi-arrow-right"></i></a></td>
+              <td class="text-center"><a (click)="navigateToAddPreparation(docPreperation)"><i *ngIf="docPreperation?.status=='In Progress' || docPreperation?.status=='IN-PROGRESS'" class="bi bi-arrow-right"></i></a></td>
             </tr>
           </ng-template>
         </p-table>

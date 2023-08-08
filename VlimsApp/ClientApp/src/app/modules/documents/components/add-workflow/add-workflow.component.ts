@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { Workflow } from '../../models/workflows';
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { UsersconfigurationService } from 'src/app/modules/services/usersconfigu
 import { usergroupconfigurationService } from 'src/app/modules/services/add-usergroupconfiguration.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-workflow',
@@ -66,7 +67,7 @@ export class AddWorkflowComponent {
 
   
 
-  constructor(
+  constructor(private toastr: ToastrService,
     private location: Location,
     private router: Router,
     private loader:NgxSpinnerService,
@@ -75,7 +76,8 @@ export class AddWorkflowComponent {
     private userssvc:UsersconfigurationService,
     private usergroupsvc:usergroupconfigurationService,
     private workflowsvc:WorkflowServiceService,
-    private commonsvc:CommonService
+    private commonsvc:CommonService,
+    private cdr: ChangeDetectorRef
   ) {}
 ngOnInit(){
   const urlPath = this.router.url;
@@ -90,6 +92,10 @@ if(lastSegment=="add")
  let addcount=parseInt(segments[segments.length - 1],10);
  addcount++;
 this.workflow.code="Flow-"+addcount;  
+this.workflow.reviewsType='user';
+this.workflow.approvalsType='user';
+this.workflow.reviewsCount=0;
+this.workflow.approvalsCount=0;
 this.getdepartments();
 this.getdocumenttypeconfig();
 this.getusergroupInfo();
@@ -126,6 +132,14 @@ else if(lastSegment=="view")
   getbyId(id: number) {
     return this.workflowsvc.getbyId(id).subscribe((data:any)=>{
       this.workflow=data;
+      if(this.workflow.reviewers!=null && this.workflow.reviewers!=undefined)
+      {
+      this.workflow.review=this.workflow.reviewers[0]; 
+      }
+      if(this.workflow.approvals!=null && this.workflow.approvals!=undefined)
+      {
+      this.workflow.approve=this.workflow.approvals[0]; 
+      }
       console.log('u',this.workflow);
     },(error:any)=>{
 
@@ -136,12 +150,21 @@ else if(lastSegment=="view")
     workflow.CreatedBy=this.commonsvc.createdBy;
     workflow.ModifiedBy=this.commonsvc.createdBy;
     workflow.Status="In-Progress";
+    // workflow.reviewers=[];
+    // if(workflow.review!=null && workflow.review!=undefined){
+    // workflow.reviewers.push(workflow.review);
+    // }
+    // workflow.approvals=[];
+    // if(workflow.approve!=null && workflow.approve!=undefined){
+    // workflow.approvals.push(workflow.approve);
+    // }
     if(workflow.department!=null)
     {
      workflow.departments= workflow.department.map(o=>o.DepartmentName).join(",");
     }
         return this.workflowsvc.addworkflow(workflow).subscribe((data:any)=>{
         //this.loader.hide();
+        this.toastr.success('workflow Saved Succesfull!', 'Saved.!');
         this.router.navigate(['/workflow']);
     },(error:any)=>{
 
@@ -180,7 +203,7 @@ else if(lastSegment=="view")
   }
   getusers() {
     this.loader.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+   let objrequest: RequestContext={PageNumber:1,PageSize:100,Id:0};
       return this.userssvc.getusers(objrequest).subscribe((data: any) => {
         
         this.users = data.Response;
@@ -203,5 +226,20 @@ else if(lastSegment=="view")
 
     }
     ));
+  }
+  calculateapprovalscount(){
+    
+    if(this.workflow.approvals!=null || this.workflow.approvals!=undefined)
+    {
+    this.workflow.approvalsCount = this.workflow.approvals?.length;
+    }
+  }
+  calculatereviewscount(){
+    
+   
+    if(this.workflow.reviewers!=null || this.workflow.reviewers!=undefined)
+    {
+    this.workflow.reviewsCount = this.workflow.reviewers?.length;
+    }
   }
 }

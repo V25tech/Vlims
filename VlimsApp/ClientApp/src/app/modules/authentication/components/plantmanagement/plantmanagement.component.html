@@ -15,12 +15,13 @@
   <div class="row p-2">
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table tableStyleClass="table table-striped" [value]="types">
+        <p-table tableStyleClass="table table-striped" [value]="types" [rows]="itemsPerPage"
+            [paginator]="true" [totalRecords]="types.length"
+            [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
          
           <ng-template pTemplate="header">
             <tr>
               <th>S.No</th>
-
               <!--<th pSortableColumn="S.No" style="width:20%">S.No</th>-->
               <th pSortableColumn="Plant Name" style="width:10%">Plant Name</th>
               <th pSortableColumn="Plant Code" style="width:15%">Plant Code</th>
@@ -41,7 +42,7 @@
               <td>{{doc?.ModifiedBy}}</td>
               <td>{{doc?.ModifiedDate }}</td>             
               <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
-              <td class="text-center"><i class="bi bi-pencil"></i></td>
+              <td class="text-center"><i class="bi bi-pencil" (click)="editdoc(doc)"></i></td>
               <!--(click)="editdoc(doc)"-->
             </tr>
           </ng-template>

@@ -6,7 +6,7 @@
   </div>
   <div class="row p-2">
     <div class="col">
-      <form (ngSubmit)="savePreparation()">
+      <form (ngSubmit)="savePreparation()" #fm="ngForm">
         <div class="p-4 bg-white shadow-dark rounded-2">
           <!-- <div class="form-group row">
             <label for="reqCode" class="col-sm-2 col-form-label"
@@ -26,43 +26,52 @@
           </div> -->
 
           <div class="form-group row">
-            <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
+            <label for="documentTitle" class="col-sm-2 col-form-label">Document Title<span
+              style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentTitle" name="documentTitle"
-                placeholder="Document Title" [(ngModel)]="preparation.documenttitle" />
-            </div>
+                placeholder="Document Title" [(ngModel)]="preparation.documenttitle" [disabled]="viewMode" #docTitleInput="ngModel" required/>
+                <div *ngIf="docTitleInput.invalid && (docTitleInput.dirty || docTitleInput.touched)" class="text-danger">
+                  Document Title is required.
+                </div>
+            </div>            
           </div>
 
           <div class="form-group row">
             <label for="docNoType" class="col-sm-2 col-form-label">
-              Document Number </label>
+              Document Number</label>
             <div class="col-sm-10">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" name="docNoType" type="radio" id="docNoType2" [(ngModel)]="docNoType"
-                  value="System Generated" />
+                  value="System Generated" [disabled]="viewMode" />
                 <label class="form-check-label" for="docNoType2">System Generated</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" name="docNoType" type="radio" id="docNoType1" [(ngModel)]="docNoType"
-                  value="User Defined" />
+                  value="User Defined" [disabled]="viewMode"/>
                 <label class="form-check-label" for="docNoType1">User Defined</label>
               </div>
             </div>
           </div>
 
           <div class="form-group row" *ngIf="docNoType === 'User Defined'">
-            <label for="documentNumber" class="col-sm-2 col-form-label">Document Number</label>
+            <label for="documentNumber" class="col-sm-2 col-form-label">Document Number<span
+              style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentNumber" name="documentNumber"
-                placeholder="Document Number" [(ngModel)]="preparation.documentno" />
+                placeholder="Document Number" [(ngModel)]="preparation.documentno" [disabled]="viewMode" #documentNumber="ngModel" required/>
+                <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="text-danger">
+                  Document Number Title is required.
+                </div>
             </div>
           </div>
 
           <div class="form-group row" *ngIf="docNoType !== 'User Defined'">
-            <label for="documentNumber" class="col-sm-2 col-form-label">Document Number</label>
+            <label for="documentNumber" class="col-sm-2 col-form-label">Document Number<span
+              style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentNumber" name="documentNumber"
-                placeholder="System Generated" [(ngModel)]="preparation.documentno" readonly />
+                placeholder="System Generated" [(ngModel)]="preparation.documentno" readonly [disabled]="viewMode" />
             </div>
           </div>
 
@@ -70,7 +79,7 @@
             <label for="docType" class="col-sm-2 col-form-label">Document Type</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documenttype" name="documenttype"
-                [(ngModel)]="preparation.documenttype" readonly />
+                [(ngModel)]="preparation.documenttype" readonly [disabled]="viewMode" />
             </div>
           </div>
 
@@ -78,7 +87,7 @@
             <label for="department" class="col-sm-2 col-form-label">Department</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="Department" name="Department"
-                [(ngModel)]="preparation.department" readonly />
+                [(ngModel)]="preparation.department" readonly [disabled]="viewMode"/>
             </div>
           </div>
 
@@ -86,30 +95,40 @@
             <label for="workflow" class="col-sm-2 col-form-label">Workflow</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="Workflow" name="Workflow" [(ngModel)]="preparation.wokflow"
-                readonly />
+                readonly [disabled]="viewMode"/>
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="template" class="col-sm-2 col-form-label">Template</label>
+            <label for="template" class="col-sm-2 col-form-label">Template<span
+              style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <p-dropdown name="template" [options]="templatesSource" [(ngModel)]="preparation.template"
-                optionLabel="Templatename" optionValue="Templatename">
+                optionLabel="Templatename" optionValue="Templatename" [disabled]="viewMode" [required]="true"
+                [autoDisplayFirst]="false" #templateInput="ngModel">
               </p-dropdown>
+              <div *ngIf="templateInput.invalid && (templateInput.dirty || templateInput.touched)" class="text-danger">
+                Template is required.
+              </div>
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="document" class="col-sm-2 col-form-label">Document</label>
+            <label for="document" class="col-sm-2 col-form-label">Document<span
+              style="color: red; font-weight: bolder;">*</span></label>
             <div *ngIf="!preparation.document" class="col-sm-10">
               <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput [disabled]="isUploaded"
-                (change)="onFileSelected($event)">
+                (change)="onFileSelected($event)" [disabled]="viewMode" required>
+                <!-- <div *ngIf="!preparation.document && isFileError" class="text-danger">
+                  Document is required.
+                </div> -->
             </div>
-            <div *ngIf="preparation.document" class="col-sm-2">
+            
+            <div *ngIf="preparation.document" class="col-sm-1">
               <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
             </div>
-            <div *ngIf="preparation.document" class="col-sm-8">
-              <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()">Delete</button>
+            <div *ngIf="preparation.document" class="col-sm-9">
+              <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>
             </div>
           </div>
           <div *ngIf="selectedFile && !isUploaded" class="form-group row">
@@ -123,7 +142,7 @@
             <label for="Details" class="col-sm-2 col-form-label">Details</label>
             <div class="col-sm-10">
               <textarea class="form-control mw-350" id="Details" name="Details" rows="3" placeholder="Details"
-                [(ngModel)]="preparation.details"></textarea>
+                [(ngModel)]="preparation.details" [disabled]="viewMode"></textarea>
             </div>
           </div>
         </div>
@@ -133,7 +152,12 @@
             <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">
               Cancel
             </button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid || !preparation.document" *ngIf="!viewMode">Submit</button>
+           
+            <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
+            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button>
+            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
+            
           </div>
         </div>
       </form>
