@@ -364,7 +364,7 @@ export class DocumentRevisionRequest {
 }
 export class functionalprofile {
   sfpid:number=0;
-  role: boolean = false;
+  role: string = '';
   adminMgmt: boolean = false;
   securityMgmt: boolean = false;
   securityConfig: boolean = false;

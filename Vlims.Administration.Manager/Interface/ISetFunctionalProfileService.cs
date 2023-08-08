@@ -1,28 +1,25 @@
 
-
-using System;
-using System.Text;
-using System.IO;
-using System.Linq;
-using System.Data;
-using System.Collections.Generic;
+using Vlims.Administration.Entities;
 using Vlims.Common;
 
-
-// Comment
-public interface ISetFunctionalProfileService
+namespace Vlims.Administration.Manager
 {
 
-    ResponseContext<SetFunctionalProfile> GetAllSetFunctionalProfile(RequestContext requestContext);
+    // Comment
+    public interface ISetFunctionalProfileService
+    {
 
-    //SetFunctionalProfile GetSetFunctionalProfileBySFPID(int sFPID);
+        ResponseContext<setfuctionalprofile> GetAllSetFunctionalProfile(RequestContext requestContext);
 
-    bool SaveSetFunctionalProfile(SetFunctionalProfile setFunctionalProfile);
+        //SetFunctionalProfile GetSetFunctionalProfileBySFPID(int sFPID);
 
-    bool UpdateSetFunctionalProfile(SetFunctionalProfile setFunctionalProfile);
+        bool SaveSetFunctionalProfile(setfuctionalprofile setFunctionalProfile);
 
-    //bool DeleteSetFunctionalProfileBySFPID(System.Boolean? sFPID);
+        bool UpdateSetFunctionalProfile(setfuctionalprofile setFunctionalProfile);
 
-    //bool DeleteAllSetFunctionalProfile(List<int> sFPIDs);
+        //bool DeleteSetFunctionalProfileBySFPID(System.Boolean? sFPID);
+
+        //bool DeleteAllSetFunctionalProfile(List<int> sFPIDs);
+    }
+
 }
-
