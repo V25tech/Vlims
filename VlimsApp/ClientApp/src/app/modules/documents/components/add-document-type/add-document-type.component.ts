@@ -110,7 +110,7 @@ export class AddDocumentTypeComponent {
     documentType.Status = "pending"
     documentType.Assigntodepartment = this.selectedDepartments.map((obj) => obj.DepartmentName).join(",");
     //documentType.SelectedDepartments=this.selectedDepartments;
-    if (this.selectedDepartments != null && this.selectedDepartments.length > 0) this.toastr.success('Document Request Saved Succesfull!', 'Saved.!');{
+    if (this.selectedDepartments != null && this.selectedDepartments.length > 0) this.toastr.success('Document Type Saved Succesfull!', 'Saved.!');{
       if (this.editMode) {
         this.doctypeservice.updatedoctypeconfig(documentType).subscribe((res: any) => {
           this.location.back();
