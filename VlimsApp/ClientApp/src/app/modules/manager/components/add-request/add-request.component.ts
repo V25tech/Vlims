@@ -18,7 +18,7 @@ import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 export class AddRequestComponent {
   departmentsSource = []; type:string=''
   requestId:number=0;workId:number=0;statuss:string='';iscompleted:boolean=false;
-  username:string=''
+  username:string='';isreview:boolean=false;isapprove:boolean=false;reviewpendingcount=0;
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus:string=''
   typeSource = [];
@@ -81,9 +81,17 @@ export class AddRequestComponent {
   }
   approve() {
     //this.request.status = this.statuss;
+    
     this.request.modifiedBy=this.username;
     this.request.status=this.finalStatus;
+    if(this.isapprove && this.reviewpendingcount>0)
+    {
+      this.toastr.error('Reviews Pending');
+    }
+    else
+    {
     this.updateRequest();
+    }
   }
   reinitiative() {
     this.request.status = 'Re-Initiated'
@@ -183,9 +191,11 @@ export class AddRequestComponent {
                   this.statuss = work[0].ActionType;
                   this.iscompleted=work[0].IsCompleted;
                   const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted==false).length;
                   const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
                   const countt = totalreviewcount - reviewedcount;
                   if (this.statuss === 'Review') {
+                    this.isreview=true;
                     if (countt === 1) {
                       this.finalStatus = 'Reviewed';
                     } else if (countt > 1) {
@@ -195,6 +205,7 @@ export class AddRequestComponent {
                     }
                   } else {
                     if (countt === 1) {
+                      this.isapprove=true;
                       this.finalStatus = 'Approved';
                     } else if (countt > 1) {
                       this.finalStatus = 'Pending Approve';

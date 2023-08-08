@@ -46,7 +46,7 @@ SELECT @ID = @@IDENTITY;
 INSERT INTO DocumentPrint_PSY(documenttitle_PSY,printtype_PSY,documentno_PSY,noofcopies_PSY,workflow_PSY,reason_PSY,CreatedBy_PSY,CreatedDate_PSY,
 ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY)
 select dp.documenttitle_PSY,dp.documenttype_PSY,dp.documentno_PSY,0,
-dp.wokflow_PSY,null,@ModifiedBy_PSY,GETDATE(),@ModifiedBy_PSY,GETDATE(),'In-Progress',@referenceId from DocumentPreparation_PSY dp where Refrence_PSY=@referenceId;
+dp.wokflow_PSY,null,@ModifiedBy_PSY,GETDATE(),@ModifiedBy_PSY,GETDATE(),'In-Progress',@referenceId from DocumentPreparation_PSY dp where DPNID_PSY=@Documentmanagerid_PSY;
 SELECT @ID = @@IDENTITY;
 
 

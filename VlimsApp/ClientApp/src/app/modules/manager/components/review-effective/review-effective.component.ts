@@ -13,6 +13,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DocumentPreperationService } from 'src/app/modules/services/document-preperation.service';
 import { DocumentEffectiveService } from 'src/app/modules/services/document-effective.service';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-review-effective',
@@ -36,6 +37,7 @@ export class ReviewEffectiveComponent {
   editMode: boolean = false;
   viewMode: boolean = false;
   requestId:number=0;workId:number=0;statuss:string='';type:string='';iscompleted:boolean=false;
+  isreview:boolean=false;isapprove:boolean=false;reviewpendingcount=0;
   username:string=''
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus:string=''
@@ -48,6 +50,7 @@ export class ReviewEffectiveComponent {
   constructor(private location: Location, private router: Router,
     private workitemssvc:WorkitemsService,
     private route: ActivatedRoute,
+    private toastr: ToastrService,
     private modalService: BsModalService, private documentEffectiveService: DocumentEffectiveService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private docPreperationService: DocumentPreperationService,) { }
 
   ngOnInit() {
@@ -88,7 +91,14 @@ export class ReviewEffectiveComponent {
     //this.effective.Status='Approved'
     this.effective.ModifiedBy=this.username;
     this.effective.Status=this.finalStatus;
+    if(this.isapprove && this.reviewpendingcount>0)
+    {
+      this.toastr.error('Reviews Pending');
+    }
+    else
+    {
     this.saveEffective();
+    }
   }
   reinitiative(){
     this.effective.Status='Re-Initiated'
@@ -191,9 +201,11 @@ export class ReviewEffectiveComponent {
                   this.statuss = work[0].ActionType;
                   this.iscompleted=work[0].IsCompleted;
                   const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted==false).length;
                   const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
                   const countt = totalreviewcount - reviewedcount;
                   if (this.statuss === 'Review') {
+                    this.isreview=true;
                     if (countt === 1) {
                       this.finalStatus = 'Reviewed';
                     } else if (countt > 1) {
@@ -203,6 +215,7 @@ export class ReviewEffectiveComponent {
                     }
                   } else {
                     if (countt === 1) {
+                      this.isapprove=true;
                       this.finalStatus = 'Approved';
                     } else if (countt > 1) {
                       this.finalStatus = 'Pending Approve';
