@@ -27,6 +27,7 @@ export class AddTemplateComponent implements OnInit {
   typesDatasource: DocumentTypeConfiguration[] = [];
   selectedtype=new DocumentTypeConfiguration();
   templateForm=new DocumentTemplateConfiguration();
+  grid:DocumentTemplateConfiguration[]=[];
   showGrid: boolean = false;
   rows: number = 0;
   cols: number = 0;
@@ -67,7 +68,7 @@ export class AddTemplateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger
+    
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
@@ -77,39 +78,40 @@ export class AddTemplateComponent implements OnInit {
     this.footerRows = 1;
     this.footerCols = 1;
     this.generateFooterGrid();
-    //this.commonsvc.templateCount++; // Increment the templateCount
+
+    this.getTemplates();
+    this.getdocumenttypeconfig();
+
     if(lastSegment=="add")
     {
      let addcount=parseInt(segments[segments.length - 1],10);
      addcount++;
     this.templateForm.Uniquecode="Temp "+addcount;  
-    this.getdocumenttypeconfig();
     }
     else if(lastSegment=="edit")
     {
-      debugger;
+      ;
       this.title='Edit Document Template';
+      this.editMode=true;
         let id=parseInt(segments[segments.length-1],10);
-        this.getdocumenttypeconfig();
         this.getbyId(id);
     }
     else if(lastSegment=="view")
     {
-      debugger;
+      ;
       this.title='View Document Template';
       this.viewMode=true;
         let ide=segments[segments.length-1];
-        this.getdocumenttypeconfig();
         this.getbyId(parseInt(segments[segments.length - 1]));
     }
     
   }
   getbyId(id:number)
   {
-    debugger
+    
     this.loader.show();
     this.templatesvc.getbyId(id).subscribe((data:any)=>{
-      debugger
+      
       this.templateForm=data;
       if(this.typesDatasource.length>0)
       {
@@ -130,10 +132,10 @@ export class AddTemplateComponent implements OnInit {
   }
   getbyName(name:string)
   {
-    debugger
+    
     this.loader.show();
     this.templatesvc.getdoctemplatebyname(name).subscribe((data:any)=>{
-      debugger
+      
       this.templateForm=data;
       if(this.typesDatasource.length>0)
       {
@@ -152,8 +154,16 @@ export class AddTemplateComponent implements OnInit {
 
     });
   }
+  getTemplates() {
+    this.loader.show();
+   //let objrequest: RequestContext={PageNumber:1,PageSize:100,Id:0};
+      return this.templatesvc.getdocttemplate(this.commonsvc.req).subscribe((data: any) => {
+        this.grid = data.Response;
+        this.loader.hide();
+      });
+  }
   addTemplate() {
-    debugger
+    
     this.loader.show();
     this.templateForm.documenttype=this.selectedtype.Documenttypename;
     this.templateForm.headerTable=this.gridData;
@@ -162,29 +172,51 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.columns=this.colsArray.length.toString();
     this.templateForm.footerrows=this.rowsFooterArray.length.toString();
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
-    this.toastr.success('Document Template Saved Succesfull!', 'Saved.!');
     if(this.editMode)
     {
+      this.templateForm.ModifiedBy=this.commonsvc.getUsername();
       this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
+        this.toastr.success('Document Template Updated Succesfull!', 'Updated.!');
       this.loader.hide();
+      this.location.back();
     }, (error:any) => {
       this.loader.hide();
     });
     }
     else
-    {
+    { 
+      if(!this.isduplicate())
+      {
+        this.templateForm.CreatedBy=this.commonsvc.getUsername();
+        this.templateForm.ModifiedBy=this.commonsvc.getUsername();
       this.templatesvc.adddoctemplate(this.templateForm).subscribe((data:any)=>{ 
+        this.toastr.success('Document Template Saved Succesfull!', 'Saved.!');
         this.loader.hide();
+        this.location.back();
       }, (error:any) => {
         this.loader.hide();
       });
     }
+    }
     //let type=this.templateForm.documenttype.Documenttypename
     //this.documentService.addTemplate(this.templateForm).subscribe(() => {
-    this.router.navigate(['/templates']);
+    //this.router.navigate(['/templates']);
     //});
   }
-
+  isduplicate() {
+    if (this.grid != null && this.grid.length > 0) {
+      const type = this.grid.find(p => p.Templatename == this.templateForm.Templatename);
+      if (type != null || type != undefined) {
+        this.toastr.error('Duplicate Entity');
+        this.loader.hide();
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
   onCancel() {
     this.location.back();
   }
@@ -230,9 +262,9 @@ export class AddTemplateComponent implements OnInit {
     this.loader.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.doctypeservice.getdoctypeconfig(objrequest).subscribe((data: any) => {
-        debugger
+        
         this.typesDatasource = data.Response;
-        debugger
+        
         this.loader.hide();
         console.log(this.typesDatasource);
       }, (error:any) => {
@@ -240,7 +272,7 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   approve() {
-    debugger;
+    ;
     this.templateForm.Status = 'Approved'   
     this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
       this.loader.hide();
@@ -265,14 +297,10 @@ export class AddTemplateComponent implements OnInit {
     });
   }
   updateTemplate() {
-    debugger;
+    ;
     this.doctypeservice.updatedoctypeconfig(this.selectedtype).subscribe(res => {
       this.commonsvc.template = new DocumentTemplateConfiguration();
       this.location.back();
-      //this.spinner.hide();
-    //}, er => {
-    //  console.log(er);
-    //  this.spinner.hide();
     });
   }
 }

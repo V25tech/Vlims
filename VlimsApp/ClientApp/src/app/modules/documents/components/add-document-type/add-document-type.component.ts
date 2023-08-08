@@ -19,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddDocumentTypeComponent {
   documentType = new DocumentTypeConfiguration();
+  grid:DocumentTypeConfiguration[]=[];
   departments: DepartmentConfiguration[] = [];
   selectedDepartments: DepartmentConfiguration[] = [];
   viewMode: boolean = false; editMode: boolean = false;
@@ -55,13 +56,14 @@ export class AddDocumentTypeComponent {
       this.documentType = this.commonsvc.documentType;
     }
     this.getdepartments();
+    this.getTypes();
     this.cdr.detectChanges();
   }
   onCancel() {
     this.location.back();
   }
   getbyId() {
-    debugger
+    
     this.doctypeservice.getbyId(this.typeId).subscribe((data: any) => {
       this.documentType = data;
     }, ((error: any) => {
@@ -74,7 +76,7 @@ export class AddDocumentTypeComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
    // this.toastr.success('Document type Saved Succesfull!', 'Saved.!');
     return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.departments = data.Response;
       if (this.departments != null && this.editMode) {
         const myList: string[] = this.documentType.Assigntodepartment.split(",");
@@ -93,42 +95,46 @@ export class AddDocumentTypeComponent {
     });
   }
   adddoctype(documentType: DocumentTypeConfiguration) {
-    debugger
     if (this.editMode) {
       this.documentType = documentType;
       this.updatetype();
-    }
-    else {
-      this.inserttype(documentType);
-    }
-    documentType.CreatedBy = "admin";
-    documentType.ModifiedBy = "admin";
-    documentType.DTCId = "1";
-    const dateToSend: Date = new Date();
-    const isoDateString: string = dateToSend.toISOString();
-    //documentType.ModifiedDate=isoDateString;
-    documentType.Status = "pending"
-    documentType.Assigntodepartment = this.selectedDepartments.map((obj) => obj.DepartmentName).join(",");
-    //documentType.SelectedDepartments=this.selectedDepartments;
-    if (this.selectedDepartments != null && this.selectedDepartments.length > 0) this.toastr.success('Document Type Saved Succesfull!', 'Saved.!');{
-      if (this.editMode) {
-        this.doctypeservice.updatedoctypeconfig(documentType).subscribe((res: any) => {
-          this.location.back();
-          
-        });
-      }
-      else {
-        this.doctypeservice.adddoctypeconfig(documentType).subscribe((res: any) => {
-          this.location.back();
-        });
+    } else {
+      if (!this.isduplicate()) {
+        this.addtype(documentType);
       }
     }
   }
   inserttype(documentType: DocumentTypeConfiguration) {
 
   }
+  isduplicate() {
+    if (this.grid != null && this.grid.length > 0) {
+      const type = this.grid.find(p => p.Documenttypename == this.documentType.Documenttypename);
+      if (type != null || type != undefined) {
+        this.toastr.error('Duplicate Entity');
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+  addtype(documentType: DocumentTypeConfiguration){
+    documentType.CreatedBy = this.commonsvc.getUsername();
+    documentType.ModifiedBy = this.commonsvc.getUsername();
+    documentType.DTCId = "1";
+    const dateToSend: Date = new Date();
+    const isoDateString: string = dateToSend.toISOString();
+    documentType.Status = "pending"
+    documentType.Assigntodepartment = this.selectedDepartments.map((obj) => obj.DepartmentName).join(",");
+    this.doctypeservice.adddoctypeconfig(documentType).subscribe((res: any) => {
+      this.toastr.success('Document Type Saved Succesfull!', 'Saved.!');
+      this.location.back();
+    });
+  }
   updatetype() {
-    debugger;
+    this.documentType.ModifiedBy=this.commonsvc.getUsername();
     this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {
       this.commonsvc.documentType = new DocumentTypeConfiguration();
       this.location.back();
@@ -153,5 +159,13 @@ export class AddDocumentTypeComponent {
     this.documentType.Status = 'Rejected'
     this.updatetype();
   }
-
+  getTypes() {
+    this.spinner.show();
+   let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
+      return this.doctypeservice.getdoctypeconfig(this.commonsvc.req).subscribe((data: any) => {
+        
+        this.grid = data.Response;
+        this.spinner.hide();
+      });
+  }
 }

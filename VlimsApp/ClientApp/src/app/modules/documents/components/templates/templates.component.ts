@@ -36,8 +36,8 @@ export class TemplatesComponent {
   getdocumenttypeconfig() {
     this.spinner.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:100,Id:0};
-      return this.templatesvc.getdocttemplate(objrequest).subscribe((data: any) => {
-        debugger
+      return this.templatesvc.getdocttemplate(this.commonsvc.req).subscribe((data: any) => {
+        
         this.types = data.Response;
         this.commonsvc.templateCount=this.types.length;
         this.spinner.hide();
@@ -47,7 +47,7 @@ export class TemplatesComponent {
       });
   }
   editdoc(editband: DocumentTemplateConfiguration) {
-    debugger
+    
     this.commonsvc.template=editband;
     //this.router.navigate(['/templates/view',editband.Templatename]);
     this.router.navigate(['/templates/edit',editband.DTID]);
@@ -66,15 +66,22 @@ export class TemplatesComponent {
 
 
   getStatusClass(status: string): string {
+    
     if (status === 'In Progress') {
       return 'status-in-progress';
-    } else if (status === 'Completed') {
+    } else if (status === 'In-Progress') {
+      return 'status-in-progress';
+    }else if (status === 'Completed') {
       return 'status-completed';
     } else if (status === 'Under Review') {
       return 'status-under-review';
     }else if (status === 'Pending') {
       return 'status-in-progress'; 
-    } else {
+    }else if (status === 'APPROVED') {
+      return 'status-approved';
+    }else if (status === 'Approved') {
+      return 'status-approved';
+    }else {
       return '';
     }
   }

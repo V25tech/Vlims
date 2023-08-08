@@ -101,7 +101,14 @@ export class AssignedComponent implements OnInit {
       return 'status-completed';
     } else if (status === 'in progress') {
       return 'status-in-progress';
-    } else if (status === 'under review') {
+    }
+    else if (status === 'In-Progress') {
+      return 'status-in-progress';
+    }  
+    else if (status === 'Reviewed') {
+      return 'status-under-review';
+    }
+    else if (status === 'under review') {
       return 'status-under-review';
     }
     else if (status === 'pending') {

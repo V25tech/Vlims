@@ -32,7 +32,7 @@ export class DocumentTypesComponent {
     private commonsvc: CommonService) {}
 
   ngOnInit() {
-    debugger
+    
     this.getdocumenttypeconfig();
   }
 
@@ -40,7 +40,7 @@ export class DocumentTypesComponent {
     this.spinner.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
       return this.documenttypeService.getdoctypeconfig(objrequest).subscribe((data: any) => {
-        debugger
+        
         this.types = data.Response;
         this.spinner.hide();
         console.log(this.types);
@@ -54,12 +54,12 @@ export class DocumentTypesComponent {
     this.router.navigate(['/document-type/add']);
   }
   editdoc(editband: DocumentTypeConfiguration) {
-    debugger
+    
     this.commonsvc.documentType=editband;
     this.router.navigate(['/document-type/edit',editband.DTCId]);
   }
   getStatusClass(status: string): string {
-    debugger
+    
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Completed') {

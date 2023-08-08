@@ -30,6 +30,7 @@ export class LoginComponent {
     // }
     if(this.loginService.login(this.username, this.password,this.lstusers)){
       localStorage.setItem("username", this.username);
+      this.commonsvc.setUsername(this.username);
       this.commonsvc.createdBy=this.username;
       this.loginSuccess.emit();
       this.router.navigate(['/documents']);
