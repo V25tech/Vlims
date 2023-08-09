@@ -17,6 +17,10 @@ adddepartment(objrequest: DepartmentConfiguration) {
   
   return this.http.postJsonLogin(objrequest, "api/departmentconfiguration/savedepartmentconfiguration",this.type);
   }
+  update(objrequest: DepartmentConfiguration) {
+  
+    return this.http.postJsonLogin(objrequest, "api/departmentconfiguration/updatedepartmentconfiguration",this.type);
+    }
   getbyId(objname: number) {
     
     return this.http.getwithheader("api/departmentconfiguration/getbyId" + "?dTCId=" + objname, this.type);
