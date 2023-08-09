@@ -56,6 +56,8 @@ namespace Vlims.Administration.Manager
                 String validationMessages = SetFunctionalProfileValidator.IsValidSetFunctionalProfile(setFunctionalProfile);
                 if (validationMessages.Length <= 0)
                 {
+                    setFunctionalProfile.CreatedBy = "admin";
+                    setFunctionalProfile.ModifiedBy = "admin";
                     var result = SetFunctionalProfileData.SaveSetFunctionalProfile(setFunctionalProfile);
                     return result;
                 }

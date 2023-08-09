@@ -13,10 +13,10 @@ export class setfunctionalprofileconfigurationservice {
 
   getsetfunctionalprofileconfiguration(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/SetFunctionalProfile/getsetfunctionalprofileconfiguration", this.type);
+    return this.http.postJsonLogin(objrequest, "api/SetFunctionalProfile/getallprofileconfig", this.type);
   }
   addsetfunctionalprofileconfiguration(objrequest: functionalprofile) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/SetFunctionalProfile/saveprofileconfiguration", this.type);
+    return this.http.postJsonLogin(objrequest, "api/SetFunctionalProfile/save", this.type);
   }
 }

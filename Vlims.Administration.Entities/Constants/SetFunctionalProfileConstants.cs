@@ -24,7 +24,7 @@ public class SetFunctionalProfileConstants
 
     public const string Department_Configuration = "@Department_Configuration_PSY";
 
-    public const string Set_Functional_Profile = "@Set_Functional_Profile_PSY";
+    public const string Set_Functional_Profile = "@Set_FunctionalProfile_PSY";
 
     public const string Plant_Management = "@Plant_Management_PSY";
 

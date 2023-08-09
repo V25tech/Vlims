@@ -372,7 +372,7 @@ export class functionalprofile {
   hirearchyMgmt: Date | undefined;
   roleConfig: boolean = false;
   deptConfig: boolean = false;
-  setFunctionalprofile: boolean = false;
+  //setFunctionalprofile: boolean = false;
   plantMgmt: boolean = false;
   userMgmt: boolean = false;
   userConfig: boolean = false;
@@ -395,4 +395,6 @@ export class functionalprofile {
   Audit:boolean = false;
   reviewDate: Date | undefined;
   modifiedDate: Date | undefined;
+  modifiedby: string ='';
+  createdby: string ='';
 }

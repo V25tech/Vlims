@@ -50,11 +50,11 @@ public class SetFunctionalProfileController : ControllerBase
     /// </summary>
     /// <param name="departmentConfiguration"></param>
     [HttpPost("save")]
-    public ActionResult<Boolean> SaveSetFunctionalProfile(UserConfiguration profileConfiguration)
+    public ActionResult<Boolean> SaveSetFunctionalProfile(setfuctionalprofile profileConfiguration)
     {
 
-        //var result = functionalConfigurationService.SaveSetFunctionalProfile(profileConfiguration);
-        return true;
+        var result = functionalConfigurationService.SaveSetFunctionalProfile(profileConfiguration);
+        return result;
     }
     ///// <summary>
     ///// This method is used to Get DocumentTypeConfiguration By Id dTCId
@@ -71,14 +71,14 @@ public class SetFunctionalProfileController : ControllerBase
     /// </summary>
     /// <param name="departmentConfiguration"></param>
     [HttpPost("update")]
-    public ActionResult<System.Boolean> UpdateSetFunctionalProfile(setfuctionalprofile departmentConfiguration)
+    public ActionResult<System.Boolean> UpdateSetFunctionalProfile(setfuctionalprofile setfuctionalprofileInfo)
     {
         try
         {
-            //var result = functionalConfigurationService.UpdateSetFunctionalProfile(departmentConfiguration);
-            return true;
+            var result = functionalConfigurationService.UpdateSetFunctionalProfile(setfuctionalprofileInfo);
+            return result;
         }
-        catch 
+        catch
         {
 
             throw;

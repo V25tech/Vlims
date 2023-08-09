@@ -15,13 +15,13 @@ namespace Vlims.Administration.Entities
 
         public bool? adminMgmt { get; set; }
 
-        public bool? SecurityManagement { get; set; }
+        public bool? securityConfig { get; set; }
 
         public bool? securityMgmt { get; set; }
 
         public bool? approvalConfigs { get; set; }
 
-        public bool? HirearchyManagement { get; set; }
+        public bool? hirearchyMgmt { get; set; }
 
         public bool? roleConfig { get; set; }
 
@@ -50,12 +50,17 @@ namespace Vlims.Administration.Entities
         public bool? workflowConfig { get; set; }
 
 
+        //public bool? setFunctionalprofile { get; set; }
+
+        public bool? dashboardConfig { get; set; }
+
 
         public bool? documentRequest { get; set; }
 
 
         public bool? documentEffective { get; set; }
 
+        public bool? notificationConfig { get; set; }
 
         public bool? workflowEffective { get; set; }
 
@@ -64,8 +69,14 @@ namespace Vlims.Administration.Entities
 
         public bool? DocumentRepository { get; set; }
 
+        public bool? additionalTasks { get; set; }
+
 
         public bool? documentPreperation { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public string ModifiedBy { get; set;}
 
 
 
