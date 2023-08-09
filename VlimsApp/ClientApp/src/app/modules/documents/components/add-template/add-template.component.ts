@@ -296,11 +296,4 @@ export class AddTemplateComponent implements OnInit {
       this.loader.hide();
     });
   }
-  updateTemplate() {
-    ;
-    this.doctypeservice.updatedoctypeconfig(this.selectedtype).subscribe(res => {
-      this.commonsvc.template = new DocumentTemplateConfiguration();
-      this.location.back();
-    });
-  }
 }

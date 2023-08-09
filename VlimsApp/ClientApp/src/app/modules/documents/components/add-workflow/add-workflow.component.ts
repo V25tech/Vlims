@@ -81,7 +81,7 @@ export class AddWorkflowComponent {
     private cdr: ChangeDetectorRef
   ) {}
 ngOnInit(){
-  debugger
+  
   const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
@@ -125,7 +125,7 @@ else if(lastSegment=="view")
     })
   }
   getbyId(id: number) {
-    debugger
+    
     return this.workflowsvc.getbyId(id).subscribe((data:any)=>{
       this.workflow=data;
     if(this.users.length>0)
@@ -158,15 +158,14 @@ else if(lastSegment=="view")
       this.update(workflow);
     }
     else{
-      debugger
+      
       if(!this.isduplicate()){
       this.add(workflow);}
     }
   }
   update(workflow: workflowconiguration) {
-    debugger
+    
     workflow.ModifiedBy=this.commonsvc.getUsername();
-  workflow.Status="In-Progress";
   if(workflow.department!=null)
   {
    workflow.departments= workflow.department.map(o=>o.DepartmentName).join(",");
@@ -189,9 +188,9 @@ else if(lastSegment=="view")
       ));
   }
   isduplicate() {
-    debugger
+    
     if (this.grid != null && this.grid.length > 0) {
-      const type = this.grid.find(p => p.workflowName == this.workflow.workflowName);
+      const type = this.grid.find(p => p.workflowName?.toLocaleLowerCase() == this.workflow.workflowName?.toLocaleLowerCase());
       if (type != null || type != undefined) {
         this.toastr.error('Duplicate Entity');
         this.loader.hide();
@@ -206,7 +205,6 @@ else if(lastSegment=="view")
 add(workflow:workflowconiguration){
   workflow.CreatedBy=this.commonsvc.getUsername();
   workflow.ModifiedBy=this.commonsvc.getUsername();
-  workflow.Status="In-Progress";
   if(workflow.department!=null)
   {
    workflow.departments= workflow.department.map(o=>o.DepartmentName).join(",");
