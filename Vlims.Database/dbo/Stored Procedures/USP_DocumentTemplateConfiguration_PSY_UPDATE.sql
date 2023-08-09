@@ -31,12 +31,12 @@ document_PSY=@document_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY, 
 Status_PSY=@Status_PSY WHERE  [DTID_PSY] = @DTID_PSY ;  select @DTID_PSY;
 
-IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
-BEGIN
+--IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
+--BEGIN
 
-UPDATE workitems_PSY SET Status_PSY='APPROVED' WHERE RefrenceId_PSY=@DTID_PSY  and TaskType_PSY='Template'
+--UPDATE workitems_PSY SET Status_PSY='APPROVED' WHERE RefrenceId_PSY=@DTID_PSY  and TaskType_PSY='Template'
 
-END
+--END
   
   END TRY 
  BEGIN CATCH 

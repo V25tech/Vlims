@@ -19,14 +19,14 @@ Assigntodepartment_PSY=@Assigntodepartment_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,
 Status_PSY=@Status_PSY WHERE  [DTCId_PSY] = @DTCId_PSY ;  select @DTCId_PSY; 
 
-IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
-BEGIN
+--IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
+--BEGIN
 
 
 
-UPDATE workitems_PSY SET Status_PSY='APPROVED' WHERE RefrenceId_PSY=@DTCId_PSY AND  TaskType_PSY='Type'
+--UPDATE workitems_PSY SET Status_PSY='APPROVED' WHERE RefrenceId_PSY=@DTCId_PSY AND  TaskType_PSY='Type'
 
-END
+--END
   
 
 
