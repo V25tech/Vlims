@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApprovalManagament } from '../../../../models/model';
+import { ApprovalManagament, RequestContext } from '../../../../models/model';
 import { ApprovalConfigurationService } from '../../../services/approval-configuration.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,24 +14,47 @@ export class ApprovalConfigurationsComponent implements OnInit {
   editMode:boolean=false;
   viewMode:boolean=false;
   approvalconfig=new ApprovalManagament();
+  Approvaltypeservice: any;
+  types: ApprovalManagament[] = [];
   constructor(private router: Router,private toastr: ToastrService, private appconfigserv: ApprovalConfigurationService) { }
 
   ngOnInit() {
     debugger
+    this.getApproval();
    // this.tabselect = this.router.url.split('/').pop(); 
   }
-  addapprovalconfig(newdept: ApprovalManagament) {
+  addApproval(newApproval: ApprovalManagament) {
     debugger
     //newdept.CreatedBy = "admin";
     //newdept.ModifiedBy = "admin";
-    //this.router.navigate(['/products']);
-    this.toastr.success('Approvals Saved Succesfull!', 'Saved.!');
-    this.appconfigserv.addapprovalconfiguration(newdept).subscribe((res: any) => {
+    //this.router.navigate(['/products']);   
+    this.appconfigserv.addapprovalconfiguration(newApproval).subscribe((res: any) => {
       this.router.navigate(['/mainpage/hierarchy']);
     });
 
 
   }
+
+  getApproval() {
+    //this.loader.show();
+   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+      return this.appconfigserv.getapprovalconfiguration(objrequest).subscribe((data: any) => {
+        debugger
+        this.types = data;
+        this.approvalconfig=data;
+        //this.loader.hide();
+        console.log(this.types);
+      }, er => {
+        //this.toastr.error('loading failed');
+        //this.loader.hide();
+      });
+}
+ 
+  submit(newApproval: ApprovalManagament) {
+    debugger
+    this.appconfigserv.addapprovalconfiguration(newApproval);
+  }
+ 
   onCancel() {
     this.router.navigate(['/admin']);
   }

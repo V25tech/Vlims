@@ -283,9 +283,9 @@ export class LoginConfiguration {
 }
 export class ApprovalManagament {
 
-  public NoOfApprovals1: number = 0;
-  public NoOfApprovals2: number = 0;
-  public NoOfApprovals3: number = 0;
+  public DocTypeNoOfApprovals: number = 0;
+  public DocTempNoOfApprovals: number = 0;
+  public WFlowNoOfApprovals: number = 0;
 
 }
 

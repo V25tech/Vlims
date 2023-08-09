@@ -76,6 +76,7 @@ namespace Vlims.Administration.Entities
 
     public class ApprovalkConfigurationConstants
     {
+
         public const string DocTypeNoOfApprovals = "@DocTypeNoOfApprovals";
 
         public const string DocTempNoOfApprovals = "@DocTempNoOfApprovals";

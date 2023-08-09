@@ -52,7 +52,7 @@ namespace PolicySummary.Controllers
         [HttpPost("GetApprovalConfiguration")]
         public ActionResult GetapprovalConfiguration(RequestContext requestContext)
         {
-            var result = userConfigurationService.GetAllUserConfiguration(requestContext);
+            var result = userConfigurationService.GetAllApprovalConfiguration(requestContext);
             return Ok(result);
         }
 
@@ -79,9 +79,9 @@ namespace PolicySummary.Controllers
         }
 
         [HttpPost("saveApprovalConfiguration")]
-        public ActionResult<System.Boolean> SaveapprovalConfiguration(UserConfiguration userConfiguration)
+        public ActionResult<System.Boolean> SaveapprovalConfiguration(ApprovalConfiguration apprConfiguration)
         {
-            var result = userConfigurationService.SaveUserConfiguration(userConfiguration);
+            var result = userConfigurationService.SaveApprovalConfiguration(apprConfiguration);
             return result;
         }
 

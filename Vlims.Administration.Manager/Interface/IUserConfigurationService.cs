@@ -44,6 +44,8 @@ namespace Vlims.Administration.Manager
 
         bool SaveApprovalConfiguration(ApprovalConfiguration ApprovalConfiguration);
 
+        ApprovalConfiguration GetAllApprovalConfiguration(RequestContext requestContext);
+
 
     }
 

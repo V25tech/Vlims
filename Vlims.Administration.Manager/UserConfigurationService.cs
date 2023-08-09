@@ -79,10 +79,8 @@ namespace PolicySummary.Sheet1.Services
         {
             try
             {
-                ApprovalConfiguration.DocTempNoOfApprovals = "1";
-
-
-                var result = UserConfigurationData.SaveUserConfiguration(ApprovalConfiguration);
+                //ApprovalConfiguration.DocTempNoOfApprovals = "1";
+                var result = UserConfigurationData.SaveApprovalConfiguration(ApprovalConfiguration);
                 return result;
 
 
@@ -99,10 +97,14 @@ namespace PolicySummary.Sheet1.Services
             ApprovalConfiguration approvalConfiguration = null;
             try
             {
+                approvalConfiguration = new ApprovalConfiguration();
                 DataSet dataset = UserConfigurationData.GetApprovalConfiguration(requestContext);
-                approvalConfiguration.DocTempNoOfApprovals = dataset.Tables[0].Rows[0]["DocTempNoOfApprovals"].ToString();
-                approvalConfiguration.DocTypeNoOfApprovals = dataset.Tables[0].Rows[0]["DocTypeNoOfApprovals"].ToString();
-                approvalConfiguration.WFlowNoOfApprovals = dataset.Tables[0].Rows[0]["WFlowNoOfApprovals"].ToString();
+                if (dataset != null && dataset.Tables[0] != null && dataset.Tables[0].Rows.Count > 0)
+                {
+                    approvalConfiguration.DocTempNoOfApprovals = dataset.Tables[0].Rows[0]["DocTempNoOfApprovals"].ToString();
+                    approvalConfiguration.DocTypeNoOfApprovals = dataset.Tables[0].Rows[0]["DocTypeNoOfApprovals"].ToString();
+                    approvalConfiguration.WFlowNoOfApprovals = dataset.Tables[0].Rows[0]["WFlowNoOfApprovals"].ToString();
+                }
                 return approvalConfiguration;
             }
             catch (System.Exception ex)

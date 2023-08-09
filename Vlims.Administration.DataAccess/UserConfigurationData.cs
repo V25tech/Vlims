@@ -104,12 +104,12 @@ namespace Vlims.Administration.DataAccess
             try
             {
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.DocTypeNoOfApprovals,});
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.DocTempNoOfApprovals,});
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.WFlowNoOfApprovals,});
+                //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.DocTypeNoOfApprovals,});
+                //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.DocTempNoOfApprovals,});
+                //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.WFlowNoOfApprovals,});
 
 
-                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(UserConfigurationConstants.USP_UserConfiguration_PSY_GET_ALL, sqlparms, ExecutionType.Dataset);
+                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(ApprovalkConfigurationConstants.USP_ApprovalConfiguration_PSY_GET, sqlparms, ExecutionType.Dataset);
                 return dataset;
             }
             catch (System.Exception ex)

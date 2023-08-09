@@ -14,11 +14,11 @@ export class ApprovalConfigurationService {
 
   getapprovalconfiguration(objrequest: RequestContext) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/approvalconfiguration/ApprovalConfiguration",this.type);
+    return this.http.postJsonLogin(objrequest, "api/userconfiguration/GetApprovalConfiguration",this.type);
 }
 addapprovalconfiguration(objrequest: ApprovalManagament) {
   debugger
-  return this.http.postJsonLogin(objrequest, "api/approvalconfiguration/saveApprovalConfiguration",this.type);
+  return this.http.postJsonLogin(objrequest, "api/userconfiguration/saveApprovalConfiguration",this.type);
 }
 }
 
