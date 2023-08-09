@@ -66,7 +66,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTypeConfigurationConstants.Assigntodepartment, Value = documentTypeConfiguration.Assigntodepartment });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTypeConfigurationConstants.CreatedBy, Value = documentTypeConfiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTypeConfigurationConstants.ModifiedBy, Value = documentTypeConfiguration.ModifiedBy });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTypeConfigurationConstants.Status_PSY, Value = "Pending" });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTypeConfigurationConstants.Status_PSY, Value = "Active" });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentTypeConfigurationConstants.USP_DocumentTypeConfiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

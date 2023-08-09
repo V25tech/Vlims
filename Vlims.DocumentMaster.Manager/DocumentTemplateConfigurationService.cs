@@ -53,7 +53,7 @@ namespace Vlims.DocumentMaster.Manager
         {
             try
             {
-                documentTemplateConfiguration.Status = "In-Progress";
+                documentTemplateConfiguration.Status = "Active";
                 if (documentTemplateConfiguration!=null && string.IsNullOrEmpty(documentTemplateConfiguration.DocumentMasterId))
                 {
                     documentTemplateConfiguration.DocumentMasterId = "1";
