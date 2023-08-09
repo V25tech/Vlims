@@ -7,7 +7,7 @@
   </div>
   <div class="row p-2">
     <div class="col">
-      <form (ngSubmit)="adddoctype(adduser)" #fm="ngForm">
+      <form (ngSubmit)="submit(adduser)" #fm="ngForm">
         <div class="p-4 bg-white shadow-dark rounded-2">
 
           <div class="form-group row">
@@ -18,7 +18,7 @@
                      id="firstname"
                      name="firstname"
                      placeholder="Enter First Nmae"
-                     [(ngModel)]="adduser.FirstName" (ngModelChange)="calculateTotalUsers()" [disabled]="viewMode"
+                     [(ngModel)]="adduser.FirstName" (ngModelChange)="calculateTotalUsers()" [disabled]="editMode"
                      required
                      #firstnameInput="ngModel" />
                      <div *ngIf="firstnameInput.invalid && (firstnameInput.dirty || firstnameInput.touched)" class="text-danger">
@@ -34,7 +34,7 @@
                      id="lastname"
                      name="lastname"
                      placeholder="Enter Last Name"
-                     [(ngModel)]="adduser.LastName" (ngModelChange)="calculateTotalUsers()" [disabled]="viewMode" 
+                     [(ngModel)]="adduser.LastName" (ngModelChange)="calculateTotalUsers()" [disabled]="editMode" 
                      required
                      #lastnameInput="ngModel"/>
                      <div *ngIf="lastnameInput.invalid && (lastnameInput.dirty || lastnameInput.touched)" class="text-danger">
@@ -50,7 +50,7 @@
                      id="userid"
                      name="userid"
                      placeholder="Enter Userid"
-                     [(ngModel)]="adduser.UserID" readonly [disabled]="viewMode" 
+                     [(ngModel)]="adduser.UserID" readonly [disabled]="editMode" 
                      required
                      #useridInput="ngModel"/>
                      <div *ngIf="useridInput.invalid && (useridInput.dirty || useridInput.touched)" class="text-danger">

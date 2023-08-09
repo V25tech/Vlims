@@ -211,7 +211,8 @@ export class UserConfiguration {
   CreatedDate: Date | undefined;
   ModifiedBy: string = ''
   ModifiedDate: Date | undefined;
-  Password: string | null = ''
+  Password: string | null = '';
+  Status:string='';
 }
 export class WorkItemsConfiguration {
   WITId: number = 0
