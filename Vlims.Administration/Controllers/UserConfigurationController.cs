@@ -93,7 +93,15 @@ namespace PolicySummary.Controllers
         [HttpPost("updateuserconfiguration")]
         public ActionResult<System.Boolean> UpdateUserConfiguration(UserConfiguration userConfiguration)
         {
-            var result = userConfigurationService.UpdateUserConfiguration(userConfiguration);
+            bool result = false;
+            if (userConfiguration.EmailId != null)
+            {
+                 result = userConfigurationService.UpdateUserConfiguration(userConfiguration);
+            }
+            else
+            {
+                result = userConfigurationService.UpdateUserStatusConfiguration(userConfiguration);
+            }
             return result;
         }
         

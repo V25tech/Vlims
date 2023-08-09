@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core'; import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
-import { activateDeactivateuser, RequestContext, RoleConfiguration } from '../../../../models/model';
+import { activateDeactivateuser, RequestContext, RoleConfiguration, UserConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { ActivateDeactivateService } from '../../../services/activate-deactivate.service';
 import { UsersconfigurationService } from '../../../services/usersconfiguration.service';
 
 @Component({
   selector: 'app-activate-deactivateuser',
-  templateUrl: './activate-deactivateuser.component.html',
-  styleUrls: ['./activate-deactivateuser.component.css']
+  templateUrl: './activate-deactivateuser.component.html'
+
 })
 export class ActivateDeactivateuserComponent implements OnInit {
   types: activateDeactivateuser[] = [];
-  constructor(private commonsvc: CommonService, private doctypeservice: ActivateDeactivateService, private Userservice: UsersconfigurationService, private router: Router) { }
+  adduser = new UserConfiguration();
+  constructor(private commonsvc: CommonService, private doctypeservice: ActivateDeactivateService, private toastr: ToastrService, private userservice: UsersconfigurationService, private Userservice: UsersconfigurationService, private router: Router) { }
 
   ngOnInit() {
     this.get_activate_deactivateuser();
@@ -33,7 +35,23 @@ export class ActivateDeactivateuserComponent implements OnInit {
   navigateToAddRoles(): void {
     this.router.navigate(['/document-type/add']);
   }
-  editdoc(doc: RoleConfiguration) {
+  editdoc(doc: activateDeactivateuser) {
+    this.adduser.UCFId = doc.UCFId;
+    this.adduser.UserManagementID = "1";
+    debugger;
+    if (doc.Status == 'Active') {
+      this.adduser.Status = 'InActive';     
+      this.userservice.update(this.adduser).subscribe((data: any) => {
+      });
+      this.toastr.success('User  is made InActive!', 'Successfully.!');
+    }
+    else {
+      this.adduser.Status = 'Active';      
+      this.userservice.update(this.adduser).subscribe((data: any) => {
+      });
+      this.toastr.success('User  is made Active!', 'Successfully.!');
+    }
+    
 
   }
   getStatusClass(status: string): string {

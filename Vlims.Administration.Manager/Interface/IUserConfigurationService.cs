@@ -32,6 +32,8 @@ namespace Vlims.Administration.Manager
         
         bool UpdateUserConfiguration(UserConfiguration userConfiguration);
         
+        bool UpdateUserStatusConfiguration(UserConfiguration userConfiguration);
+
         bool DeleteUserConfigurationByUCFId(string uCFId);
         
         bool DeleteAllUserConfiguration(List<int> uCFIds);

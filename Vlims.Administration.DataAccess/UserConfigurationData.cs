@@ -89,7 +89,7 @@ namespace Vlims.Administration.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.DocTypeNoOfApprovals, Value = ApprovalConfiguration.DocTypeNoOfApprovals });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.DocTempNoOfApprovals, Value = ApprovalConfiguration.DocTempNoOfApprovals });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.WFlowNoOfApprovals, Value = ApprovalConfiguration.WFlowNoOfApprovals });
-               
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(ApprovalkConfigurationConstants.USP_ApprovalConfiguration_PSY_INSERT_ALL, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -150,7 +150,21 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-
+        public static bool UpdateUserStatusConfiguration(UserConfiguration userConfiguration)
+        {
+            try
+            {
+                List<SqlParameter> sqlparms = new List<SqlParameter>();
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.UCFId, Value = userConfiguration.UCFId });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.Status, Value = userConfiguration.Status });
+                Object result = dataAccessHelper.ExecuteStoredProcedure(UserConfigurationConstants.USP_UserConfiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
+                return (Convert.ToInt32(result) > 0);
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
         public static bool DeleteUserConfigurationByUCFId(string uCFId)
         {
             try

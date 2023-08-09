@@ -27,7 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    DocumentsModule,
+    
     TableModule,
     AppRoutingModule,
     AuthenticationRoutingModule,

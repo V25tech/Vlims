@@ -31,13 +31,13 @@
           <ng-template pTemplate="body" let-doc let-i="rowIndex">
             <tr>
               <td>{{ i + 1 }}</td>
-              <td>{{doc?.s.no}}</td>
-              <td>{{doc?.username}}</td>
-              <td>{{doc?.userid}}</td>
-              <td>{{doc?.role}}</td>
-              <td>{{doc?.department}}</td>
-              <td>{{doc?.registeredon}}</td>
-              <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
+              <td>{{doc?.Empid}}</td>
+              <td>{{doc?.UserID}}</td>
+              <td>{{doc?.UserID}}</td>
+              <td>{{doc?.Role}}</td>
+              <td>{{doc?.Department}}</td>
+              <td>{{doc?.Doj}}</td>
+              <td><span class="status">{{doc.Status}} </span></td>
               <td class="text-center" (click)="editdoc(doc)"><i class="bi bi-pencil"></i></td>
             </tr>
           </ng-template>

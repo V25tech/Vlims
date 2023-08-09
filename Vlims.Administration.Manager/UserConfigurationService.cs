@@ -112,19 +112,16 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
-
-
-
-
-
+        
         public bool UpdateUserConfiguration(UserConfiguration userConfiguration)
         {
+            bool result = false;
             try
             {
                 String validationMessages = UserConfigurationValidator.IsValidUserConfiguration(userConfiguration);
                 if (validationMessages.Length <= 0)
                 {
-                    bool result = UserConfigurationData.UpdateUserConfiguration(userConfiguration);
+                    result = UserConfigurationData.UpdateUserConfiguration(userConfiguration);
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -134,7 +131,24 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
-
+        public bool UpdateUserStatusConfiguration(UserConfiguration userConfiguration)
+        {
+            bool result = false;
+            try
+            {
+                String validationMessages = UserConfigurationValidator.IsValidUserConfiguration(userConfiguration);
+                if (validationMessages.Length <= 0)
+                {
+                    result = UserConfigurationData.UpdateUserStatusConfiguration(userConfiguration);
+                    return result;
+                }
+                throw new System.Exception(validationMessages);
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
         public bool DeleteUserConfigurationByUCFId(string uCFId)
         {
             try

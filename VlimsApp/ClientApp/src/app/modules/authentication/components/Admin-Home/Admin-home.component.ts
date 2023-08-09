@@ -29,7 +29,9 @@ export class AdminHomeComponent {
       this.router.navigate(['/admin/approvalconfig']);
     }  else if (navTo === 'departments') {
       this.router.navigate(['/admin/departments']);
-    }  else if (navTo === 'home') {
+    } else if (navTo === 'activeuser') {
+      this.router.navigate(['/admin/activeuser']);
+    } else if (navTo === 'home') {
       this.router.navigate(['/home']);
     }
   }

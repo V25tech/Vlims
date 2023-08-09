@@ -36,6 +36,7 @@ import { RegisterComponent } from '../authentication/components/register/registe
 import { AddusergroupconfigurationComponent } from '../authentication/components/Add-user-group-configuration/add-usergroupconfiguration.component';
 import { AddRoleComponent } from '../authentication/components/Roles/new-role.component';
 import { SetfunctionalprofileComponent } from '../authentication/components/set-functional-profile/setfunctionalprofile.component';
+import { ActivateDeactivateuserComponent } from '../authentication/components/Activate-deactivate-user/activate-deactivateuser.component';
 
 
 
@@ -62,7 +63,8 @@ import { SetfunctionalprofileComponent } from '../authentication/components/set-
     AddDepartmentComponent,
     NewPlantRegistrationComponent,
     AddRoleComponent,
-    SetfunctionalprofileComponent
+    SetfunctionalprofileComponent,
+    ActivateDeactivateuserComponent
     
    
 

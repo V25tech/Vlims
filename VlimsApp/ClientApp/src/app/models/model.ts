@@ -212,6 +212,7 @@ export class UserConfiguration {
   ModifiedBy: string = ''
   ModifiedDate: Date | undefined;
   Password: string | null = ''
+  Status : string=''
 }
 export class WorkItemsConfiguration {
   WITId: number = 0
@@ -271,7 +272,7 @@ export class activateDeactivateuser {
   public Department: string = ''
   public Registeredon: string = ''
   public Status: string = ''
-
+  public UCFId:string=''
 
 }
 export class LoginConfiguration {
