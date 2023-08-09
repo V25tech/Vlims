@@ -41,7 +41,7 @@ export class WorkflowsComponent {
     this.loader.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.workflowsvc.getworkflow(objrequest).subscribe((data: any) => {
-        debugger
+        
         this.types = data.Response;
         this.commonsvc.templateCount=this.types.length;
         this.loader.hide();
@@ -52,7 +52,7 @@ export class WorkflowsComponent {
       ));
   }
   editdoc(editband: workflowconiguration) {
-    debugger
+    
     //this.router.navigate(['/templates/view',editband.Templatename]);
     this.router.navigate(['/workflows/edit',editband.WFCId]);
   }

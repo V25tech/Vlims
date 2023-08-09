@@ -6,7 +6,7 @@
   </div>
   <div class="row p-2">
     <div class="col">
-      <!-- <form (ngSubmit)="addTemplate()"> -->
+      <form (ngSubmit)="addTemplate()" #fm="ngForm">
       <div class="p-4 bg-white shadow-dark rounded-2">
         <div class="form-group row">
           <label for="templateName" class="col-sm-2 col-form-label">Template Name <span style="color: red; font-weight: bolder;">*</span></label>
@@ -16,7 +16,7 @@
                    id="Templatename"
                    name="Templatename"
                    placeholder="Template Name"
-                   [(ngModel)]="templateForm.Templatename"
+                   [(ngModel)]="templateForm.Templatename" [disabled]="editMode" 
                    required
                      #TemplatenameInput="ngModel"
                       />
@@ -48,7 +48,7 @@
           <label for="docType" class="col-sm-2 col-form-label">Document Type <span style="color: red; font-weight: bolder;">*</span></label>
           <div class="col-sm-10">
             <p-dropdown [options]="typesDatasource" [(ngModel)]="selectedtype" placeholder="Select a Document Type"
-                        optionLabel="Documenttypename"></p-dropdown>
+                        optionLabel="Documenttypename" id="types" name="types"></p-dropdown>
             <!-- <input
               type="text"
               class="form-control mw-350"
@@ -80,7 +80,7 @@
           </div>
         </div>
       </div>
-
+      </form>
       <div class="p-4 mt-3 bg-white shadow-dark rounded-2">
         <h5 class="page-card-title">Header Template</h5>
         <div class="template-block">
@@ -194,10 +194,10 @@
                   (click)="onCancel()">
             Cancel
           </button>
-          <button type="submit" class="btn btn-primary" (click)="addTemplate()">Submit</button>
-          <button type="submit" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="approve()">Approve</button>
-          <button type="submit" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="reinitiative()">Re-Initiative</button>
-          <button type="submit" class="col-xs-1 mx-8 offset-sm-1 btn btn-danger" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="reject()">Reject</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid" (click)="addTemplate()">Submit</button>
+          <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="approve()">Approve</button>
+          <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="reinitiative()">Re-Initiative</button>
+          <button type="button" class="col-xs-1 mx-8 offset-sm-1 btn btn-danger" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="reject()">Reject</button>
         </div>
       </div>
       <!-- </form> -->

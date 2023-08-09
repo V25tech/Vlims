@@ -17,7 +17,7 @@
                      id="documentType"
                      name="documentType"
                      placeholder="Document Type Name"
-                     [(ngModel)]="documentType.Documenttypename" [disabled]="viewMode" 
+                     [(ngModel)]="documentType.Documenttypename" [disabled]="editMode" 
                      required
                      #documentTypeInput="ngModel"
                      />
@@ -105,8 +105,8 @@
             <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && documentType.Status!='Approved'"  (click)="reject();" >Reject</button>
 
             
-            <button type="submit" class="btn btn-primary" *ngIf="!editMode">Submit</button>
-            <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
+            <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid">Submit</button>
+            <button type="submit" class="btn btn-primary" *ngIf="editMode" [disabled]="!fm.form.valid">Update</button>
           </div>
         </div>
 

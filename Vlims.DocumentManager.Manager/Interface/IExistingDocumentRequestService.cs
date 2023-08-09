@@ -5,6 +5,7 @@ using System.Linq;
 using System.Data;
 using System.Collections.Generic;
 using Vlims.Common;
+using Microsoft.AspNetCore.Http;
 
 
 
@@ -23,5 +24,6 @@ public interface IExistingDocumentRequestService
     bool DeleteExistingDocumentRequestByEDRId(string eDRId);
 
     bool DeleteAllExistingDocumentRequest(List<int> eDRIds);
+    bool Importbulkdocuments(IFormFile p_fileInfo);
 }
 

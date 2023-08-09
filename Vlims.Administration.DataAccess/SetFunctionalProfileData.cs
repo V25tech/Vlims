@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PolicySummary.DMS.Data
+namespace Vlims.Data
 {
     using System;
     using System.Data;
@@ -16,6 +16,7 @@ namespace PolicySummary.DMS.Data
     using System.Collections.Generic;
     using Newtonsoft.Json;
     using Vlims.Common;
+    using Vlims.Administration.Entities;
 
 
 
@@ -54,17 +55,17 @@ namespace PolicySummary.DMS.Data
             }
         }
 
-        public static bool SaveSetFunctionalProfile(SetFunctionalProfile setFunctionalProfile)
+        public static bool SaveSetFunctionalProfile(setfuctionalprofile setFunctionalProfile)
         {
             try
             {
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Role, Value = setFunctionalProfile.role });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.Role, Value = setFunctionalProfile.role });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.AdminManagement, Value = setFunctionalProfile.adminMgmt });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Security_Management, Value = setFunctionalProfile.SecurityManagement });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Security_Configurations, Value = setFunctionalProfile.securityMgmt });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Security_Management, Value = setFunctionalProfile.securityMgmt });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Security_Configurations, Value = setFunctionalProfile.securityConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.E_sign_and_Aprroval_Configurations, Value = setFunctionalProfile.approvalConfigs });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Hirearchy_Management, Value = setFunctionalProfile.HirearchyManagement });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Hirearchy_Management, Value = setFunctionalProfile.hirearchyMgmt != null ? setFunctionalProfile.hirearchyMgmt : false });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Role_Configuration, Value = setFunctionalProfile.roleConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Department_Configuration, Value = setFunctionalProfile.deptConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Plant_Management, Value = setFunctionalProfile.plantMgmt });
@@ -76,16 +77,16 @@ namespace PolicySummary.DMS.Data
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Type_Configuration, Value = setFunctionalProfile.documentTypeConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Template_Configuration, Value = setFunctionalProfile.documentTemplateConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.WorkFlow_Configuration, Value = setFunctionalProfile.workflowConfig });
+                //sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Set_Functional_Profile, Value = setFunctionalProfile.setFunctionalprofile });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Dash_Board_Configuration, Value = setFunctionalProfile.dashboardConfig });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Notification_Configuration, Value = setFunctionalProfile.notificationConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Request, Value = setFunctionalProfile.documentRequest });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Preparation, Value = setFunctionalProfile.documentPreperation });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_EffectiveOut, Value = setFunctionalProfile.documentEffective });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Additional_Tasks, Value = setFunctionalProfile.additionalTasks });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Notification_Configuration, Value = setFunctionalProfile.notificationConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Revision, Value = setFunctionalProfile.documentRevison });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Repository, Value = setFunctionalProfile.DocumentRepository });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Repository, Value = setFunctionalProfile.DocumentRepository });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Repository, Value = setFunctionalProfile.DocumentRepository });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Repository, Value = setFunctionalProfile.DocumentRepository != null ? setFunctionalProfile.DocumentRepository : false });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Additional_Tasks, Value = setFunctionalProfile.additionalTasks });
+                //sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Repository, Value = setFunctionalProfile.DocumentRepository });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.CreatedBy, Value = setFunctionalProfile.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.ModifiedBy, Value = setFunctionalProfile.ModifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(SetFunctionalProfileConstants.USP_SetFunctionalProfile_PSY_INSERT, sqlparms, ExecutionType.Scalar);
@@ -97,18 +98,18 @@ namespace PolicySummary.DMS.Data
             }
         }
 
-        public static bool UpdateSetFunctionalProfile(SetFunctionalProfile setFunctionalProfile)
+        public static bool UpdateSetFunctionalProfile(setfuctionalprofile setFunctionalProfile)
         {
             try
             {
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.SFPID, Value = setFunctionalProfile.SFPID });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.SFPID, Value = setFunctionalProfile.sfpid });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Role, Value = setFunctionalProfile.role });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.AdminManagement, Value = setFunctionalProfile.adminMgmt });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Security_Management, Value = setFunctionalProfile.SecurityManagement });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Security_Configurations, Value = setFunctionalProfile.securityMgmt });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Security_Management, Value = setFunctionalProfile.securityMgmt });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Security_Configurations, Value = setFunctionalProfile.securityConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.E_sign_and_Aprroval_Configurations, Value = setFunctionalProfile.approvalConfigs });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Hirearchy_Management, Value = setFunctionalProfile.HirearchyManagement });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Hirearchy_Management, Value = setFunctionalProfile.hirearchyMgmt });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Role_Configuration, Value = setFunctionalProfile.roleConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Department_Configuration, Value = setFunctionalProfile.deptConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Plant_Management, Value = setFunctionalProfile.plantMgmt });
@@ -119,18 +120,18 @@ namespace PolicySummary.DMS.Data
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Type_Configuration, Value = setFunctionalProfile.documentTypeConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Template_Configuration, Value = setFunctionalProfile.documentTemplateConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.WorkFlow_Configuration, Value = setFunctionalProfile.workflowConfig });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Dash_Board_Configuration, Value = setFunctionalProfile.dashboardConfig });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Notification_Configuration, Value = setFunctionalProfile.notificationConfig });
+                //sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Dash_Board_Configuration, Value = setFunctionalProfile.dashboardConfig });
+                //sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Notification_Configuration, Value = setFunctionalProfile.notificationConfig });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Master, Value = setFunctionalProfile.documentMaster });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Request, Value = setFunctionalProfile.documentRequest });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Preparation, Value = setFunctionalProfile.documentPreperation });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_EffectiveOut, Value = setFunctionalProfile.documentEffective });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Additional_Tasks, Value = setFunctionalProfile.additionalTasks });
+                //sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Additional_Tasks, Value = setFunctionalProfile.additionalTasks });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Revision, Value = setFunctionalProfile.documentRevison });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Repository, Value = setFunctionalProfile.DocumentRepository });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Repository, Value = setFunctionalProfile.DocumentRepository });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = SetFunctionalProfileConstants.Document_Repository, Value = setFunctionalProfile.DocumentRepository });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.ModifiedBy, Value = setFunctionalProfile.ModifiedBy });
+                //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.ModifiedBy, Value = setFunctionalProfile.ModifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(SetFunctionalProfileConstants.USP_SetFunctionalProfile_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

@@ -21,22 +21,16 @@ export class DepartmentComponent implements OnInit {
   rowsPerPageOptions = [10, 20, 50];
   types: DepartmentConfiguration[] = [];
   viewMode:boolean=false;
-  constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService, private spinner: NgxSpinnerService, private router: Router) { }
+  constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService, private loader: NgxSpinnerService, private router: Router) { }
 
   ngOnInit() {
     this.getdepartments();
   }
 getdepartments() {
-    //this.loader.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
-      return this.doctypeservice.getdepartments(objrequest).subscribe((data: any) => {
-        debugger
+    this.loader.show();
+      return this.doctypeservice.getdepartments(this.commonsvc.req).subscribe((data: any) => {
         this.types = data.Response;
-        //this.loader.hide();
-        console.log(this.types);
-      }, er => {
-        //this.toastr.error('loading failed');
-        //this.loader.hide();
+        this.loader.hide();
       });
 }
   getStatusClass(status: string): string {
@@ -44,6 +38,8 @@ getdepartments() {
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Completed') {
+      return 'status-completed';
+    }else if (status === 'Active') {
       return 'status-completed';
     } else if (status === 'Under Review') {
       return 'status-under-review';
@@ -61,13 +57,13 @@ getdepartments() {
     this.router.navigate(['/admin/departments/edit', doc.DPCFId]);
   }
   submit(newdept: DepartmentConfiguration) {
-    debugger
+    
     this.adddoctype(newdept);
   }
   adddoctype(newdept: DepartmentConfiguration) {
-    debugger
-    newdept.CreatedBy = "admin"; this.navigateToAddDepartment
-    newdept.ModifiedBy = "admin";
+    
+    newdept.CreatedBy = this.commonsvc.getUsername(); this.navigateToAddDepartment
+    newdept.ModifiedBy = this.commonsvc.getUsername();
     //this.router.navigate(['/products']);
     this.doctypeservice.adddepartment(newdept).subscribe((res: any) => {
       //this.toastr.success('Added');

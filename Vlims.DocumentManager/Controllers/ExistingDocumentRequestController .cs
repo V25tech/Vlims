@@ -179,5 +179,11 @@ namespace PolicySummary.Controllers
             }
             return BadRequest();
         }
+        [HttpPost("import")]
+        public ActionResult<bool> ImportBulkDocuments(IFormFile fileInfo)
+        {
+            var result = existingDocumentRequestService.Importbulkdocuments(fileInfo);
+            return result;
+        }
     }
 }

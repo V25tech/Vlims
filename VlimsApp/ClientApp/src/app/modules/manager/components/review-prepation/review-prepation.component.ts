@@ -12,6 +12,7 @@ import { DocumentPreperationService } from 'src/app/modules/services/document-pr
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-review-prepation',
@@ -38,6 +39,7 @@ export class ReviewPrepationComponent {
   viewMode: boolean = false;
   editMode: boolean = false;
   requestId:number=0;workId:number=0;statuss:string='';type:string='';iscompleted:boolean=false;
+  isreview:boolean=false;isapprove:boolean=false;reviewpendingcount=0;
   username:string=''
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus:string=''
@@ -52,6 +54,7 @@ export class ReviewPrepationComponent {
   constructor(private location: Location, private router: Router, 
     private workitemssvc:WorkitemsService,
     private route: ActivatedRoute,
+    private toastr: ToastrService,
     private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
   ngOnInit() {
@@ -95,7 +98,14 @@ export class ReviewPrepationComponent {
     //this.preparation.status = 'Approved'
     this.preparation.ModifiedBy=this.username;
     this.preparation.status=this.finalStatus;
+    if(this.isapprove && this.reviewpendingcount>0)
+    {
+      this.toastr.error('Reviews Pending');
+    }
+    else
+    {
     this.savePreparation();
+    }
   }
   reinitiative() {
     this.location.back();
@@ -221,7 +231,7 @@ export class ReviewPrepationComponent {
       debugger
       this.workitems = data.Response;
       if(this.workitems.length>0){
-        this.workitems=this.workitems.filter(p=>p.ReferenceId==this.requestId);
+        this.workitems=this.workitems.filter(p=>p.ReferenceId==this.requestId && p.TaskType=='Preparation');
         if(this.workitems)
         {
           this.workitems.sort((a, b) => a.WITId - b.WITId);
@@ -229,9 +239,11 @@ export class ReviewPrepationComponent {
                   this.statuss = work[0].ActionType;
                   this.iscompleted=work[0].IsCompleted;
                   const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted==false).length;
                   const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
                   const countt = totalreviewcount - reviewedcount;
                   if (this.statuss === 'Review') {
+                    this.isreview=true;
                     if (countt === 1) {
                       this.finalStatus = 'Reviewed';
                     } else if (countt > 1) {
@@ -241,6 +253,7 @@ export class ReviewPrepationComponent {
                     }
                   } else {
                     if (countt === 1) {
+                      this.isapprove=true;
                       this.finalStatus = 'Approved';
                     } else if (countt > 1) {
                       this.finalStatus = 'Pending Approve';

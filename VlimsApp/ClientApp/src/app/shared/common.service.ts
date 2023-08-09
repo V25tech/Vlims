@@ -63,9 +63,13 @@ export class CommonService {
     //this.retaileR.RetailId = 1;
 
   }
+  private storage = localStorage;
+  setUsername(username: string) {
+    this.storage.setItem('username', username);
+  }
 
-  
-  
-
-  
+  getUsername() {
+    const username = this.storage.getItem('username');
+    return username !== null ? username : 'defaultUsername';
+  }
 }

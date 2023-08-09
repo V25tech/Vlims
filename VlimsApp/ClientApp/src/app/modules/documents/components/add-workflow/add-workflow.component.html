@@ -6,7 +6,7 @@
   </div>
   <div class="row p-2">
     <div class="col">
-      <form (ngSubmit)="addWorkflow(workflow)">
+      <form (ngSubmit)="addWorkflow(workflow)" #fm="ngForm">
         <div class="p-4 bg-white shadow-dark rounded-2">
           <div class="form-group row">
             <label for="workflowName" class="col-sm-2 col-form-label"
@@ -19,7 +19,7 @@
                 id="workflowName"
                 name="workflowName"
                 placeholder="Enter workflow Name"
-                [(ngModel)]="workflow.workflowName"
+                [(ngModel)]="workflow.workflowName" [disabled]="editMode"
                 required
                 #workflowNameInput="ngModel"
               />
@@ -105,7 +105,7 @@
           <h5 class="page-card-title">Reviewers</h5>
           <div class="form-group row">
             <label for="reviewsCount" class="col-sm-2 col-form-label"
-              >No. of Reviews
+              >No. of Reviews<span style="color: red; font-weight: bolder;">*</span>
             </label>
             <div class="col-sm-10">
               <input
@@ -143,7 +143,7 @@
                   >User(s)</label
                 >
               </div>
-              <div class="form-check form-check-inline">
+              <!-- <div class="form-check form-check-inline">
                 <input
                   class="form-check-input"
                   name="reviewsType1"
@@ -153,22 +153,22 @@
                   value="group" [disabled]="true"
                 />
                 <label class="form-check-label" for="reviewsType1">User Group</label>
-              </div>
+              </div> -->
             </div>
           </div>
 
           <div class="form-group row" *ngIf="workflow.reviewsType === 'user'">
             <label for="reviewers" class="col-sm-2 col-form-label"
-              >Reviewer(s)</label
+              >Reviewer(s)<span style="color: red; font-weight: bolder;">*</span></label
             >
             <div class="col-sm-10">
               <p-multiSelect
                 [options]="users"
                 [(ngModel)]="workflow.reviewers"
                 defaultLabel="Select a User"
+                id="UserID"
                 name="UserID"
                 optionLabel="UserID"
-                
                 display="chip"  (ngModelChange)="calculatereviewscount()"
               ></p-multiSelect>
               <!-- <p-dropdown
@@ -219,7 +219,7 @@
           <h5 class="page-card-title">Approvers</h5>
           <div class="form-group row">
             <label for="reviewsCount" class="col-sm-2 col-form-label"
-              >No. of Approvals
+              >No. of Approvals<span style="color: red; font-weight: bolder;">*</span>
             </label>
             <div class="col-sm-10">
               <input
@@ -251,7 +251,7 @@
                   >User(s)</label
                 >
               </div>
-              <div class="form-check form-check-inline">
+              <!-- <div class="form-check form-check-inline">
                 <input
                   class="form-check-input"
                   name="approvalType1"
@@ -261,22 +261,22 @@
                   value="group" [disabled]="true"
                 />
                 <label class="form-check-label" for="approvalType1">User Group</label>
-              </div>
+              </div> -->
             </div>
           </div>
 
           <div class="form-group row" *ngIf="workflow.approvalsType === 'user'">
             <label for="reviewers" class="col-sm-2 col-form-label"
-              >Approver(s)</label
+              >Approver(s)<span style="color: red; font-weight: bolder;">*</span></label
             >
             <div class="col-sm-10">
               <p-multiSelect
                 [options]="users"
                 [(ngModel)]="workflow.approvals"
                 defaultLabel="Select a User"
-                name="UserID"
+                id="UserID1"
+                name="UserID1"
                 optionLabel="UserID"
-              
                 display="chip" (ngModelChange)="calculateapprovalscount()"
               ></p-multiSelect>
               <!-- <p-dropdown
@@ -318,7 +318,7 @@
             >
               Cancel
             </button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid" >Submit</button>
           </div>
         </div>
       </form>

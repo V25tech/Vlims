@@ -16,13 +16,14 @@
         <div class="col">
             <div class="p-4 bg-white shadow-dark rounded-2">
             <p-table #workflowTable [value]="types"
-            [globalFilterFields]="['docStage', 'docType', 'department','registeredBy', 'status']"
+            [globalFilterFields]="['documentstage', 'documenttype', 'department','CreatedBy', 'Status','workflowName']"
              tableStyleClass="table table-striped" [rows]="itemsPerPage"
             [paginator]="true" [totalRecords]="types.length"
             [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>#</th>
+                        <th pSortableColumn="workflowName" style="width:20%">Workflow<p-sortIcon field="workflowName"></p-sortIcon></th>
                         <th pSortableColumn="documentstage" style="width:20%">Document Stage<p-sortIcon field="documentstage"></p-sortIcon></th>
                         <th pSortableColumn="documenttype" style="width:10%">Document Type <p-sortIcon field="documenttype"></p-sortIcon></th>
                         <th pSortableColumn="department" style="width:15%">Department<p-sortIcon field="department"></p-sortIcon></th>
@@ -36,13 +37,14 @@
                 <ng-template pTemplate="body" let-docItem let-i="rowIndex">
                     <tr>  
                         <td>{{ i + 1 }}</td>  
+                        <td>{{docItem.workflowName}}</td>
                         <td>{{docItem.documentstage}}</td>
                         <td>{{docItem.documenttype}}</td>
                         <td>{{docItem.department}}</td>
                         <td>{{docItem.CreatedBy}}</td>
                         <td>{{docItem.CreatedDate}}</td>
                         <td><span class="status text-nowrap" [ngClass]="getStatusClass(docItem['Status'])">{{docItem.Status}} </span></td>
-                        <td class="text-center" (click)="editdoc(docItem)"><i class="bi bi-pencil"></i></td>
+                        <td class="text-center" *ngIf="docItem.Status!='Approved'" (click)="editdoc(docItem)"><i class="bi bi-pencil"></i></td>
                     </tr>
                 </ng-template>
             </p-table>

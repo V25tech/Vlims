@@ -27,7 +27,7 @@ WHERE  [DEID_PSY] = @DEID_PSY ;
 
 IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
-EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DEID_PSY,@ModifiedBy_PSY
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DEID_PSY,@ModifiedBy_PSY,'EFFECTIVE'
 END
 
 DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentEffective_PSY where DEID_PSY=@DEID_PSY)
@@ -39,14 +39,14 @@ DECLARE @ID INT,@wokflow_PSY nvarchar(200),@version int=0
 set @wokflow_PSY=(select Workflow_PSY from Documentrequest_PSY where DRID_PSY=@referenceId)
 SET @version=(SELECT COUNT(*)+1 FROM AdditionalTask_PSY WHERE Refrence_PSY=@referenceId AND Status_PSY='APPROVED')
 INSERT INTO AdditionalTask_PSY(DocumentEffective_ID,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Version,Refrence_PSY)
-VALUES('1',
+VALUES(@DEID_PSY,
 @ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'APPROVED',@version,@referenceId)
 SELECT @ID = @@IDENTITY;
 
 INSERT INTO DocumentPrint_PSY(documenttitle_PSY,printtype_PSY,documentno_PSY,noofcopies_PSY,workflow_PSY,reason_PSY,CreatedBy_PSY,CreatedDate_PSY,
 ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY)
 select dp.documenttitle_PSY,dp.documenttype_PSY,dp.documentno_PSY,0,
-dp.wokflow_PSY,null,@ModifiedBy_PSY,GETDATE(),@ModifiedBy_PSY,GETDATE(),'In-Progress',@referenceId from DocumentPreparation_PSY dp where Refrence_PSY=@referenceId;
+dp.wokflow_PSY,null,@ModifiedBy_PSY,GETDATE(),@ModifiedBy_PSY,GETDATE(),'In-Progress',@referenceId from DocumentPreparation_PSY dp where DPNID_PSY=@Documentmanagerid_PSY;
 SELECT @ID = @@IDENTITY;
 
 

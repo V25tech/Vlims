@@ -8,6 +8,7 @@ import { DepartmentConfiguration, RequestContext } from '../../../../models/mode
 import { CommonService } from '../../../../shared/common.service';
 import { DepartmentconfigurationService } from '../../../services/departmentconfiguration.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-add-department',
@@ -22,7 +23,9 @@ export class AddDepartmentComponent implements OnInit {
    editMode: boolean = false;
    title:string='Add Department Configuration'
   constructor(private commonsvc: CommonService,private toastr: ToastrService, private doctypeservice: DepartmentconfigurationService,
-    private router: Router, private cdr: ChangeDetectorRef,private location: Location) { }
+    private router: Router, private cdr: ChangeDetectorRef,
+    private loader:NgxSpinnerService,
+    private location: Location) { }
 
   ngOnInit() {
     const urlPath = this.router.url;
@@ -47,7 +50,7 @@ export class AddDepartmentComponent implements OnInit {
     this.cdr.detectChanges();
   }
     getbyId(id:number) {
-      debugger
+      
       this.doctypeservice.getbyId(id).subscribe((data: any) => {
         this.newdept = data;
       }, ((error: any) => {
@@ -55,63 +58,72 @@ export class AddDepartmentComponent implements OnInit {
       }));
     }
     // submit(form: NgForm) {
-    //   debugger
+    //   
     //   if (form.valid) {
-    //     debugger
+    //     
     //   }
     // }
   submit(newdept: DepartmentConfiguration) {
-    debugger
-    this.adddoctype(newdept);
+    if(this.editMode)
+    {
+      this.update(newdept);
+    }
+    else{
+      this.adddoctype(newdept);
+    }
     
     this.location.back();
+  }
+  update(newdept: DepartmentConfiguration) {
+    this.loader.show();
+    newdept.ModifiedBy=this.commonsvc.getUsername();
+    return this.doctypeservice.update(newdept).subscribe((response)=>{
+      this.toastr.success('Updated Successfully');
+      this.loader.hide();
+    })
   }
   onCancel() {
     this.location.back();
   }
   adddoctype(newdept: DepartmentConfiguration) {
-    debugger
-    newdept.CreatedBy = "admin";
-    newdept.ModifiedBy = "admin";
-
+    this.loader.show();
+    newdept.CreatedBy = this.commonsvc.getUsername();
+    newdept.ModifiedBy = this.commonsvc.getUsername();
     newdept.CreatedDate = new Date();
     newdept.ModifiedDate = new Date();
    if(!this.isduplicate()){
     this.doctypeservice.adddepartment(newdept).subscribe((res: any) => {
-      //this.toastr.success('Added');
-      this.router.navigate(['/admin/department']);
       this.toastr.success('Department added Succesfull!', 'Saved.!');
+      this.loader.hide();
+      this.location.back();
     });
-  }
-  else
-  {
-    this.toastr.error("Department Already Exist");
   }
   }
   closepopup() {
-    this.router.navigate(['/admin/department']);
+    //this.router.navigate(['/admin/department']);
+    this.location.back();
   }
-  isduplicate()
-  {
-    debugger
-    if(this.griddata.length>0)
-    {
-      let user=this.griddata.find(o=>o.DepartmentName.toLocaleLowerCase()==this.newdept.DepartmentName.toLocaleLowerCase());
-    if(user==null || user==undefined)
-    {
+  isduplicate() {
+    if (this.griddata != null && this.griddata.length > 0) {
+      const type = this.griddata.find(p => p.DepartmentName.toLocaleLowerCase() == this.newdept.DepartmentName.toLocaleLowerCase());
+      if (type != null || type != undefined) {
+        this.toastr.error('Already Exists');
+        this.loader.hide();
+        return true;
+      } else {
+        return false;
+      }
+    } else {
       return false;
     }
-    else return true;
-  }
-  else return false;
-  return true;
   }
   getdepartments() {
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+   this.loader.show();
       return this.doctypeservice.getdepartments(this.commonsvc.req).subscribe((data: any) => {
-        debugger
         this.griddata=data.Response;
+        this.loader.hide();
       }, er => {
+        this.loader.hide();
       });
 }
 }

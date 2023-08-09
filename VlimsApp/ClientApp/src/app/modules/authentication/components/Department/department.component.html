@@ -6,7 +6,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="page-title flex-grow-1">Department Configuration</h4>
         <div class="d-flex page-title-actions">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')" placeholder="Search">
           <!--<button class="btn btn-primary" type="button" [routerLink]="['/mainpage/hierarchy/adddept']">
             Add
           </button>-->
@@ -18,7 +18,9 @@
   <div class="row p-2">
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table [value]="types" tableStyleClass="table table-striped" [rows]="itemsPerPage"
+        <p-table #templatesTable [value]="types" 
+        [globalFilterFields]="['DepartmentName', 'DepartmentCode', 'Description','RegisteredBy']"
+        tableStyleClass="table table-striped" [rows]="itemsPerPage"
             [paginator]="true" [totalRecords]="types.length"
             [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
           <ng-template pTemplate="header">
@@ -41,7 +43,7 @@
               <td>{{doc?.Comments}}</td>
               <td>{{doc?.ModifiedBy}}</td>
               <td>{{doc?.ModifiedDate | date }}</td>
-              <td><span (click)="getStatusClass(doc['Status'])">Success</span></td>
+              <td><span class="status" [ngClass]="getStatusClass('Active')">Active</span></td>
               <td class="text-right" (click)="editBrand(doc)"><i class="bi bi-pencil"></i></td>
             </tr>
           </ng-template>

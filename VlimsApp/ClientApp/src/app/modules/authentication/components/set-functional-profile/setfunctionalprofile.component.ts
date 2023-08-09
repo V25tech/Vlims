@@ -35,6 +35,9 @@ getsetfunctionalprofile() {
   onSubmit(profileinfo:functionalprofile)
   {   
     debugger;
+    profileinfo.role='test';
+    profileinfo.createdby='admin';
+    profileinfo.modifiedby='admin';
     this.setprofileservice.addsetfunctionalprofileconfiguration(profileinfo).subscribe((res: any) => {
   });
   }

@@ -21,6 +21,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AddWorkflowComponent {
   title:string='New Workflow Configuration';
   workflow = new workflowconiguration();
+  grid:workflowconiguration[]=[]
   types: Array<DocumentTypeConfiguration>=[];
   departs: Array<DepartmentConfiguration>=[];
   usergroups: Array<Usergroupconfiguration> = [];
@@ -36,7 +37,7 @@ export class AddWorkflowComponent {
   approvals:string[] | null=null;
   reviwersgroup:string| null=null;
   approvalsgroup:string | null=null;
-  id:number=0;
+  id:number=0; editMode:boolean=false;viewMode:boolean=false;
   addReviewer() {
     this.reviewers.push({ value: '' });
   }
@@ -80,12 +81,16 @@ export class AddWorkflowComponent {
     private cdr: ChangeDetectorRef
   ) {}
 ngOnInit(){
+  debugger
   const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
-  // this.commonsvc.templateCount++;
-  // this.workflow.code="Flow-"+this.commonsvc.templateCount;
-  
+    //default
+    this.getdepartments();
+    this.getdocumenttypeconfig();
+    this.getusers();
+    this.getallworkflows();
+    //this.getusergroupInfo();
 
 if(lastSegment=="add")
 {
@@ -96,30 +101,20 @@ this.workflow.reviewsType='user';
 this.workflow.approvalsType='user';
 this.workflow.reviewsCount=0;
 this.workflow.approvalsCount=0;
-this.getdepartments();
-this.getdocumenttypeconfig();
-this.getusergroupInfo();
-this.getusers();
 }
 else if(lastSegment=="edit")
 {
   this.title='Edit Workflow Configuration';
+  this.editMode=true;
     this.id=parseInt(segments[segments.length-1],10);
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
-    this.usergroupsvc.getusergroupconfiguration(objrequest).subscribe((data:any) => {
-      this.usergroups = data.Response;
-      console.log('usergroups',this.usergroups)
-      this.getdepartments();
-      this.getdocumenttypeconfig();
-      this.getusers();
       this.getbyId(this.id);
-    });
 }
 else if(lastSegment=="view")
 {
+  this.viewMode=true;
   this.title='View Document Template';
     let id=segments[segments.length-1];
-    this.getdocumenttypeconfig();
     this.getbyName(id);
 }
 }
@@ -130,8 +125,20 @@ else if(lastSegment=="view")
     })
   }
   getbyId(id: number) {
+    debugger
     return this.workflowsvc.getbyId(id).subscribe((data:any)=>{
       this.workflow=data;
+    if(this.users.length>0)
+    {
+      const rev = this.users.filter(user => this.workflow.reviewers?.some(reviewer => reviewer.UCFId === user.UCFId));
+      const app = this.users.filter(user => this.workflow.approvals?.some(approver => approver.UCFId === user.UCFId));
+      if(rev.length>0 && app.length>0)
+      {
+        this.workflow.reviewers=rev;
+        this.workflow.approvals=app;
+      }
+    }
+      console.log('users',this.users);
       if(this.workflow.reviewers!=null && this.workflow.reviewers!=undefined)
       {
       this.workflow.review=this.workflow.reviewers[0]; 
@@ -141,37 +148,75 @@ else if(lastSegment=="view")
       this.workflow.approve=this.workflow.approvals[0]; 
       }
       console.log('u',this.workflow);
+      this.cdr.detectChanges();
     },(error:any)=>{
 
     })
   }
   addWorkflow(workflow:workflowconiguration) {
-    //this.loader.show();
-    workflow.CreatedBy=this.commonsvc.createdBy;
-    workflow.ModifiedBy=this.commonsvc.createdBy;
-    workflow.Status="In-Progress";
-    // workflow.reviewers=[];
-    // if(workflow.review!=null && workflow.review!=undefined){
-    // workflow.reviewers.push(workflow.review);
-    // }
-    // workflow.approvals=[];
-    // if(workflow.approve!=null && workflow.approve!=undefined){
-    // workflow.approvals.push(workflow.approve);
-    // }
-    if(workflow.department!=null)
-    {
-     workflow.departments= workflow.department.map(o=>o.DepartmentName).join(",");
+    if(this.editMode){
+      this.update(workflow);
     }
-        return this.workflowsvc.addworkflow(workflow).subscribe((data:any)=>{
-        //this.loader.hide();
-        this.toastr.success('workflow Saved Succesfull!', 'Saved.!');
-        this.router.navigate(['/workflow']);
-    },(error:any)=>{
-
-    })
-    console.log(this.reviewers);
+    else{
+      debugger
+      if(!this.isduplicate()){
+      this.add(workflow);}
+    }
   }
+  update(workflow: workflowconiguration) {
+    debugger
+    workflow.ModifiedBy=this.commonsvc.getUsername();
+  workflow.Status="In-Progress";
+  if(workflow.department!=null)
+  {
+   workflow.departments= workflow.department.map(o=>o.DepartmentName).join(",");
+  }
+      return this.workflowsvc.update(workflow).subscribe((data:any)=>{
+      this.toastr.success('workflow Updated Succesfull!', 'Updated.!');
+      this.location.back();
+  });
+  }
+  getallworkflows() {
+    this.loader.show();
+      return this.workflowsvc.getworkflow(this.commonsvc.req).subscribe((data: any) => {
+        this.grid = data.Response;
+        this.commonsvc.templateCount=this.types.length;
+        this.loader.hide();
+        console.log(this.types);
+      },((error:any)=>{
 
+      }
+      ));
+  }
+  isduplicate() {
+    debugger
+    if (this.grid != null && this.grid.length > 0) {
+      const type = this.grid.find(p => p.workflowName == this.workflow.workflowName);
+      if (type != null || type != undefined) {
+        this.toastr.error('Duplicate Entity');
+        this.loader.hide();
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+add(workflow:workflowconiguration){
+  workflow.CreatedBy=this.commonsvc.getUsername();
+  workflow.ModifiedBy=this.commonsvc.getUsername();
+  workflow.Status="In-Progress";
+  if(workflow.department!=null)
+  {
+   workflow.departments= workflow.department.map(o=>o.DepartmentName).join(",");
+  }
+      return this.workflowsvc.addworkflow(workflow).subscribe((data:any)=>{
+      //this.loader.hide();
+      this.toastr.success('workflow Saved Succesfull!', 'Saved.!');
+      this.location.back();
+  });
+}
   onCancel() {
     //this.workflow.approvalsGroup=this.usergroups[0];
     this.location.back();
@@ -205,13 +250,17 @@ else if(lastSegment=="view")
     this.loader.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:100,Id:0};
       return this.userssvc.getusers(objrequest).subscribe((data: any) => {
-        
         this.users = data.Response;
         this.loader.hide();
+        // if(this.editMode){
+        // this.getbyId(this.id);}
       },((error:any)=>{
 
       }
       ));
+  }
+  trackByUserId(index: number, user: UserConfiguration) {
+    return user.UserID; // Adjust property name as needed
   }
   getusergroupInfo() {
     this.loader.show();

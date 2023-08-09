@@ -25,4 +25,8 @@ addworkflow(objrequest: workflowconiguration) {
   
   return this.http.postJsonLogin(objrequest, "api/workflowconiguration/saveworkflowconiguration",this.type);
 }
+update(objrequest: workflowconiguration) {
+  
+  return this.http.postJsonLogin(objrequest, "api/workflowconiguration/updateworkflowconiguration",this.type);
+}
 }
