@@ -258,4 +258,53 @@ namespace Vlims.Administration.Entities
 
         public string Password { get; set; }
     }
+
+    public class ApprovalConfiguration
+    {
+        private string DocTypeNoOfApprovalsField;
+        private string DocTempNoOfApprovalsField;
+        private string WFlowNoOfApprovalsField;
+
+
+        public string DocTypeNoOfApprovals
+        {
+            get
+            {
+                return this.DocTypeNoOfApprovalsField;
+            }
+            set
+            {
+                this.DocTypeNoOfApprovalsField = value;
+            }
+        }
+
+        public string DocTempNoOfApprovals
+        {
+            get
+            {
+                return this.DocTempNoOfApprovalsField;
+            }
+            set
+            {
+                this.DocTempNoOfApprovalsField = value;
+            }
+        }
+
+        public string WFlowNoOfApprovals
+        {
+            get
+            {
+                return this.WFlowNoOfApprovalsField;
+            }
+            set
+            {
+                this.WFlowNoOfApprovalsField = value;
+            }
+        }
+
+
+
+    }
+
+
 }

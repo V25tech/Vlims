@@ -81,6 +81,49 @@ namespace Vlims.Administration.DataAccess
             }
         }
 
+        public static bool SaveApprovalConfiguration(ApprovalConfiguration ApprovalConfiguration)
+        {
+            try
+            {
+                List<SqlParameter> sqlparms = new List<SqlParameter>();
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.DocTypeNoOfApprovals, Value = ApprovalConfiguration.DocTypeNoOfApprovals });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.DocTempNoOfApprovals, Value = ApprovalConfiguration.DocTempNoOfApprovals });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.WFlowNoOfApprovals, Value = ApprovalConfiguration.WFlowNoOfApprovals });
+               
+                Object result = dataAccessHelper.ExecuteStoredProcedure(ApprovalkConfigurationConstants.USP_ApprovalConfiguration_PSY_INSERT_ALL, sqlparms, ExecutionType.Scalar);
+                return (Convert.ToInt32(result) > 0);
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static DataSet GetApprovalConfiguration(RequestContext requestContext)
+        {
+            try
+            {
+                List<SqlParameter> sqlparms = new List<SqlParameter>();
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.DocTypeNoOfApprovals,});
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.DocTempNoOfApprovals,});
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ApprovalkConfigurationConstants.WFlowNoOfApprovals,});
+
+
+                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(UserConfigurationConstants.USP_UserConfiguration_PSY_GET_ALL, sqlparms, ExecutionType.Dataset);
+                return dataset;
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+
+
+
+
+
         public static bool UpdateUserConfiguration(UserConfiguration userConfiguration)
         {
             try
@@ -158,6 +201,11 @@ namespace Vlims.Administration.DataAccess
             {
                 throw;
             }
+        }
+
+        public static bool SaveUserConfiguration(ApprovalConfiguration approvalConfiguration)
+        {
+            throw new NotImplementedException();
         }
     }
 }

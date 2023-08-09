@@ -48,7 +48,14 @@ namespace PolicySummary.Controllers
             var result = userConfigurationService.GetAllUserConfiguration(requestContext);
             return Ok(result);
         }
-        
+
+        [HttpPost("GetApprovalConfiguration")]
+        public ActionResult GetapprovalConfiguration(RequestContext requestContext)
+        {
+            var result = userConfigurationService.GetAllUserConfiguration(requestContext);
+            return Ok(result);
+        }
+
         /// <summary>
         /// This method is used to Get UserConfiguration By Id uCFId
         /// </summary>
@@ -70,7 +77,15 @@ namespace PolicySummary.Controllers
             var result = userConfigurationService.SaveUserConfiguration(userConfiguration);
             return result;
         }
-        
+
+        [HttpPost("saveApprovalConfiguration")]
+        public ActionResult<System.Boolean> SaveapprovalConfiguration(UserConfiguration userConfiguration)
+        {
+            var result = userConfigurationService.SaveUserConfiguration(userConfiguration);
+            return result;
+        }
+
+
         /// <summary>
         /// This Method is used to update UserConfiguration
         /// </summary>

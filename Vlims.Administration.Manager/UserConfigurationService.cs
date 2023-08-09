@@ -15,7 +15,7 @@ namespace PolicySummary.Sheet1.Services
     using System.Linq;
     using System.Data;
     using System.Collections.Generic;
-   
+
     using Vlims.Administration.Entities;
     using Vlims.Administration.DataAccess;
     using Vlims.Common;
@@ -25,8 +25,8 @@ namespace PolicySummary.Sheet1.Services
     // Comment
     public class UserConfigurationService : IUserConfigurationService
     {
-        
-       
+
+
         public ResponseContext<UserConfiguration> GetAllUserConfiguration(RequestContext requestContext)
         {
             try
@@ -40,7 +40,7 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
-        
+
         public UserConfiguration GetUserConfigurationByUCFId(int uCFId)
         {
             try
@@ -54,13 +54,13 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
-        
+
         public bool SaveUserConfiguration(UserConfiguration userConfiguration)
         {
             try
             {
                 userConfiguration.UserManagementID = "1";
-                
+
                 String validationMessages = UserConfigurationValidator.IsValidUserConfiguration(userConfiguration);
                 if (validationMessages.Length <= 0)
                 {
@@ -74,7 +74,47 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
-        
+
+        public bool SaveApprovalConfiguration(ApprovalConfiguration ApprovalConfiguration)
+        {
+            try
+            {
+                ApprovalConfiguration.DocTempNoOfApprovals = "1";
+
+
+                var result = UserConfigurationData.SaveUserConfiguration(ApprovalConfiguration);
+                return result;
+
+
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+        public ApprovalConfiguration GetAllApprovalConfiguration(RequestContext requestContext)
+        {
+            ApprovalConfiguration approvalConfiguration = null;
+            try
+            {
+                DataSet dataset = UserConfigurationData.GetApprovalConfiguration(requestContext);
+                approvalConfiguration.DocTempNoOfApprovals = dataset.Tables[0].Rows[0]["DocTempNoOfApprovals"].ToString();
+                approvalConfiguration.DocTypeNoOfApprovals = dataset.Tables[0].Rows[0]["DocTypeNoOfApprovals"].ToString();
+                approvalConfiguration.WFlowNoOfApprovals = dataset.Tables[0].Rows[0]["WFlowNoOfApprovals"].ToString();
+                return approvalConfiguration;
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+
+
+
         public bool UpdateUserConfiguration(UserConfiguration userConfiguration)
         {
             try
@@ -92,7 +132,7 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
-        
+
         public bool DeleteUserConfigurationByUCFId(string uCFId)
         {
             try
@@ -104,7 +144,7 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
-        
+
         public bool DeleteAllUserConfiguration(List<int> uCFIds)
         {
             try
@@ -116,7 +156,7 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
-        
+
         public List<UserConfiguration> GetUserConfigurationByUserManagementId(System.Int32? uMId)
         {
             try
@@ -130,7 +170,7 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
-        
+
         public bool DeleteUserConfigurationByUserManagementId(System.Int32? uMId)
         {
             try

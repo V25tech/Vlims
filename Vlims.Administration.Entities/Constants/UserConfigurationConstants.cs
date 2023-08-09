@@ -73,4 +73,22 @@ namespace Vlims.Administration.Entities
         
         public const string USP_UserConfiguration_PSY_By_UMId_DELETE = "dbo.USP_UserConfiguration_PSY_By_UMId_DELETE";
     }
+
+    public class ApprovalkConfigurationConstants
+    {
+        public const string DocTypeNoOfApprovals = "@DocTypeNoOfApprovals";
+
+        public const string DocTempNoOfApprovals = "@DocTempNoOfApprovals";
+
+        public const string WFlowNoOfApprovals = "@WFlowNoOfApprovals";
+
+
+        public const string USP_ApprovalConfiguration_PSY_INSERT_ALL = "dbo.USP_APPROVALcONFIGURATION_PSY_INSERT";
+
+        public const string USP_ApprovalConfiguration_PSY_GET = "dbo.USP_GETAPPROVALCONFIG_PSY";
+
+
+
+    }
+
 }

@@ -39,5 +39,15 @@ namespace Vlims.Administration.Manager
         List<UserConfiguration> GetUserConfigurationByUserManagementId(System.Int32? uMId);
         
         bool DeleteUserConfigurationByUserManagementId(System.Int32? uMId);
+
+
+
+        bool SaveApprovalConfiguration(ApprovalConfiguration ApprovalConfiguration);
+
+
     }
+
+
+
+   
 }
