@@ -10,7 +10,8 @@
 @Activedirectory_PSY NVarChar(50),
 @Standarduser_PSY NVarChar(50),
 @CreatedBy_PSY NVarChar(100),
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@Status_PSY NVarchar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -31,7 +32,7 @@ Standarduser_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY,Password_PSY)
+ModifiedDate_PSY,Password_PSY,Status_PSY)
  VALUES 
 (@UserManagementID_PSY,
 @FirstName_PSY,
@@ -47,7 +48,7 @@ ModifiedDate_PSY,Password_PSY)
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate(),'Passw0rd' );
+ GetDate(),'Passw0rd',@Status_PSY );
  SELECT @ID = @@IDENTITY; 
  select @ID 
   

@@ -126,7 +126,6 @@ export class AddDocumentTypeComponent {
     documentType.DTCId = "1";
     const dateToSend: Date = new Date();
     const isoDateString: string = dateToSend.toISOString();
-    documentType.Status = "pending"
     documentType.Assigntodepartment = this.selectedDepartments.map((obj) => obj.DepartmentName).join(",");
     this.doctypeservice.adddoctypeconfig(documentType).subscribe((res: any) => {
       this.toastr.success('Document Type Saved Succesfull!', 'Saved.!');

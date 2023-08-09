@@ -6,6 +6,7 @@ import { Table } from 'primeng/table';
 import { RequestContext, RoleConfiguration, UserConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { UsersconfigurationService } from '../../../services/usersconfiguration.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -31,24 +32,26 @@ export class UserConfigurationComponent implements OnInit {
   pageConfig: any;
   searchstr: string='';
 
-  constructor(private commonsvc: CommonService, private doctypeservice: UsersconfigurationService ,private router: Router) { }
+  constructor(private commonsvc: CommonService, private doctypeservice: UsersconfigurationService,
+    private loader:NgxSpinnerService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getusers();
   }
   getusers() {
-   let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
-      return this.doctypeservice.getusers(objrequest).subscribe((data: any) => {
-        debugger
+    this.loader.show();
+      return this.doctypeservice.getusers(this.commonsvc.req).subscribe((data: any) => {
         this.types = data.Response;
         
-        console.log(this.types);
+        console.log('users',this.types);
+        this.loader.hide();
       }, er => {
        
       });
   }
   editdoc(doc: UserConfiguration) {
-    debugger
+    
     this.commonsvc.userConfig = doc;
     this.router.navigate(['/admin/users/edit', doc.UCFId]);
   }
@@ -58,10 +61,14 @@ export class UserConfigurationComponent implements OnInit {
   }
   
   getStatusClass(status: string): string {
-    debugger
+    
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Completed') {
+      return 'status-completed';
+    }else if (status === 'Active') {
+      return 'status-completed';
+    } else if (status === 'Active') {
       return 'status-completed';
     } else if (status === 'Under Review') {
       return 'status-under-review';

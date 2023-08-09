@@ -9,7 +9,9 @@
 @EmailId_PSY NVarChar(50),
 @Activedirectory_PSY NVarChar(50),
 @Standarduser_PSY NVarChar(50),
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@Password_PSY NVarchar(500),
+@Status_PSY NVarchar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -25,7 +27,7 @@ Empid_PSY=@Empid_PSY,
 EmailId_PSY=@EmailId_PSY,
 Activedirectory_PSY=@Activedirectory_PSY,
 Standarduser_PSY=@Standarduser_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [UCFId_PSY] = @UCFId_PSY ;  select @UCFId_PSY; 
+ModifiedBy_PSY=@ModifiedBy_PSY,Password_PSY=@Password_PSY,Status_PSY=@Status_PSY WHERE  [UCFId_PSY] = @UCFId_PSY ;  select @UCFId_PSY; 
   
   END TRY 
  BEGIN CATCH 
