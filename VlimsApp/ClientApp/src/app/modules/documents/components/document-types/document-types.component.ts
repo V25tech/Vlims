@@ -64,7 +64,11 @@ export class DocumentTypesComponent {
       return 'status-in-progress';
     } else if (status === 'Completed') {
       return 'status-completed';
-    } else if (status === 'Under Review') {
+    } else if (status === 'Active') {
+      return 'status-completed';
+    } else if (status === 'Active') {
+      return 'status-completed';
+    }else if (status === 'Under Review') {
       return 'status-under-review';
     }else if (status === 'Pending') {
       return 'status-in-progress'; 
