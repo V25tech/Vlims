@@ -49,6 +49,21 @@ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PS
 
 END
 
+IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
+BEGIN
+DECLARE @COUNT INT=0,@REF INT=0
+SET @REF=(SELECT Refrence_PSY FROM DocumentPreparation_PSY WHERE DPNID_PSY=@DPNID_PSY)
+SET @COUNT=(SELECT COUNT(*) FROM DocumentPreparation_PSY WHERE Refrence_PSY=@REF)
+DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DPNID_PSY
+DELETE FROM DocumentPreparation_PSY WHERE DPNID_PSY=@DPNID_PSY
+IF(@COUNT=1)
+BEGIN
+UPDATE Documentrequest_PSY SET Status_PSY='IN-PROGRESS' WHERE DRID_PSY=@REF
+UPDATE workitems_PSY SET Stage_PSY='Pending',Status_PSY='IN-PROGRESS',IsCompleted_PSY=0 WHERE RefrenceId_PSY=@REF
+END
+
+END
+
 
 select @DPNID_PSY; 
 

@@ -20,7 +20,7 @@
                   id="documentTitle"
                   name="documentTitle"
                   placeholder="Document Title"
-                  [(ngModel)]="effective.documenttitle"
+                  [(ngModel)]="effective.documenttitle" disabled="viewMode"
                   readonly
                 />
               </div>
@@ -38,7 +38,7 @@
                   id="documentNumber"
                   name="documentNumber"
                   placeholder="System Generated"
-                  [(ngModel)]="effective.documentno"
+                  [(ngModel)]="effective.documentno" disabled="viewMode"
                   readonly
                 />
               </div>
@@ -55,7 +55,7 @@
                 id="docType"
                 name="docType"
                 placeholder="Document Type"
-                [(ngModel)]="effective.documenttype"
+                [(ngModel)]="effective.documenttype" disabled="viewMode"
                 readonly
               />
               </div>
@@ -72,7 +72,7 @@
                 id="department"
                 name="department"
                 placeholder="Department"
-                [(ngModel)]="effective.department"
+                [(ngModel)]="effective.department" disabled="viewMode"
                 readonly
               />
               </div>
@@ -111,7 +111,7 @@
                 id="effectiveDate"
                 name="effectiveDate"
                 placeholder="Effective Date"
-                [(ngModel)]="effective.effectiveDate"
+                [(ngModel)]="effective.effectiveDate" disabled="viewMode"
               />
               </div>
             </div>
@@ -125,7 +125,7 @@
                     id="reviewDate"
                     name="reviewDate"
                     placeholder="Review Date"
-                    [(ngModel)]="effective.reviewDate"
+                    [(ngModel)]="effective.reviewDate" disabled="viewMode"
                   />
                 </div>
               </div>
@@ -143,7 +143,7 @@
               <button type="submit" class="btn btn-primary" *ngIf="!viewMode">Submit</button>
              
               <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
-            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button>
+            <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button> -->
             <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
             
             </div>

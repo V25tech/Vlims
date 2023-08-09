@@ -189,7 +189,7 @@ export class NewPrintRequestComponent implements OnInit {
           this.statuss = work[0].ActionType;
           this.iscompleted = work[0].IsCompleted;
           const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
-          const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
+          const reviewedcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted).length;
           const countt = totalreviewcount - reviewedcount;
           if (this.statuss === 'Review') {
             if (countt === 1) {

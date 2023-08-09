@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { RequestContext, UserConfiguration } from 'src/app/models/model';
 import { UsersconfigurationService } from '../../services/usersconfiguration.service';
 import { CommonService } from 'src/app/shared/common.service';
+import { ToastrService } from 'ngx-toastr';
 
 const AUTH_STORAGE_KEY = 'isLoggedIn';
 
@@ -29,6 +30,7 @@ export class LoginService {
 
   
   constructor(private http: HttpClient,private userssvc:UsersconfigurationService,
+    private toaster:ToastrService,
     private commonsvc:CommonService ) {}
 
   login(username: string, password: string,lstusers:UserConfiguration[]) {
@@ -63,5 +65,6 @@ getusers(){
   logout() {
     localStorage.removeItem(AUTH_STORAGE_KEY);
     this.updateLoginStatus(false);
+    this.isvalid=false;
   }
 }

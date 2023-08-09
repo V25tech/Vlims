@@ -107,14 +107,15 @@ export class ReviewEffectiveComponent {
   }
   reject(){
     this.effective.Status='Rejected'
-    //this.saveEffective();
-    this.location.back();
+    this.effective.ModifiedBy=this.commonsvc.getUsername();
+    this.saveEffective();
+    //this.location.back();
   }
 
   saveEffective() {
     console.log(this.effective);
     this.spinner.show();
-    if(this.viewMode)
+    if(this.viewMode && this.effective.Status!='Rejected')
     {
       this.effective.ModifiedBy=this.commonsvc.createdBy;
       this.effective.Status=this.finalStatus;
@@ -201,7 +202,7 @@ export class ReviewEffectiveComponent {
                   this.statuss = work[0].ActionType;
                   this.iscompleted=work[0].IsCompleted;
                   const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
-                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted==false).length;
+                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted==false).length;
                   const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
                   const countt = totalreviewcount - reviewedcount;
                   if (this.statuss === 'Review') {

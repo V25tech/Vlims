@@ -99,9 +99,10 @@ export class AddRequestComponent {
     //this.updateRequest();
   }
   reject() {
+    this.request.modifiedBy=this.commonsvc.getUsername();
     this.request.status = 'Rejected'
     this.location.back();
-    //this.updateRequest();
+    this.updateRequest();
   }
 
   saveRequest() {
@@ -135,7 +136,7 @@ export class AddRequestComponent {
   }
 
   updateRequest() {
-    if(this.viewMode)
+    if(this.viewMode && this.request.status!='Rejected')
     {
       this.request.modifiedBy=this.commonsvc.createdBy;
       this.request.status=this.finalStatus;
@@ -191,7 +192,9 @@ export class AddRequestComponent {
                   this.statuss = work[0].ActionType;
                   this.iscompleted=work[0].IsCompleted;
                   const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
-                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted==false).length;
+                  debugger
+                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted==false).length;
+                  console.log('pendingcount-',this.reviewpendingcount);
                   const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
                   const countt = totalreviewcount - reviewedcount;
                   if (this.statuss === 'Review') {

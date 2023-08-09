@@ -111,11 +111,14 @@ export class ReviewPrepationComponent {
     this.location.back();
   }
   reject() {
-    this.location.back();
+    this.preparation.ModifiedBy=this.commonsvc.getUsername();
+    this.preparation.status='Rejected';
+    this.savePreparation();
+    //this.location.back();
   }
   savePreparation() {    
     this.spinner.show();
-    if(this.viewMode)
+    if(this.viewMode && this.preparation.status!='Rejected')
     {
       this.preparation.ModifiedBy=this.commonsvc.createdBy;
       this.preparation.status=this.finalStatus;
@@ -239,7 +242,7 @@ export class ReviewPrepationComponent {
                   this.statuss = work[0].ActionType;
                   this.iscompleted=work[0].IsCompleted;
                   const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
-                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted==false).length;
+                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted==false).length;
                   const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
                   const countt = totalreviewcount - reviewedcount;
                   if (this.statuss === 'Review') {

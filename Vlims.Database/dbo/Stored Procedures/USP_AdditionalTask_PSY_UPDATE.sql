@@ -7,12 +7,11 @@
 -- UPDATE [dbo].[AdditionalTask_PSY] SET 
 --ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,version=@Version WHERE  [ATID_PSY] = @ATID_PSY ; 
 
-DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from AdditionalTask_PSY where ATID_PSY=@ATID_PSY)
-DECLARE @OLDPREPARATIONID INT=0;SET @OLDPREPARATIONID=(SELECT TOP(1) DPNID_PSY FROM DocumentPreparation_PSY WHERE Refrence_PSY=@referenceId AND Status_PSY='APPROVED' ORDER BY DPNID_PSY DESC)
+DECLARE @DOCEFFID int=0; set @DOCEFFID=(select DocumentEffective_ID from AdditionalTask_PSY where ATID_PSY=@ATID_PSY)
+DECLARE @DOCPREPID INT=0; SET @DOCPREPID=(select Documentmanagerid_PSY from DocumentEffective_PSY where DEID_PSY=@DOCEFFID)
+DECLARE @referenceId INT=0; SET @referenceId=(select Refrence_PSY from AdditionalTask_PSY where ATID_PSY=@ATID_PSY)
 DECLARE @OLDPREPARATIONDOCTYPE NVARCHAR(200);SET @OLDPREPARATIONDOCTYPE=(SELECT TOP(1) DP.documenttype_PSY FROM DocumentPreparation_PSY DP
-JOIN DocumentEffective_PSY DE ON DE.Documentmanagerid_PSY=DP.DPNID_PSY
-JOIN AdditionalTask_PSY AT ON AT.DocumentEffective_ID=DE.DEID_PSY
-WHERE AT.ATID_PSY=@ATID_PSY)
+WHERE DP.DPNID_PSY=@DOCPREPID)
 
 --IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 --BEGIN
@@ -26,7 +25,7 @@ INSERT INTO DocumentPreparation_PSY(Documentmanagerid_PSY,documenttitle_PSY,docu
 department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,DOCStatus_PSY,Refrence_PSY)
 SELECT Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,
 template_PSY,@Workflow_PSY,details_PSY,@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',DOCStatus_PSY,@referenceId FROM DocumentPreparation_PSY
-WHERE Refrence_PSY=@referenceId AND Status_PSY='APPROVED'
+WHERE DPNID_PSY=@DOCPREPID
 SELECT @ID1 = @@IDENTITY;
 
 INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)

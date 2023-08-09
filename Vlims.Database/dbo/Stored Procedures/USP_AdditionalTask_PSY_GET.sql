@@ -12,8 +12,8 @@ AT.Status_PSY,
 Version,
  count(*) over() as TotalRows  ,
  de.document_PSY,de.department_PSY,de.documentno_PSY,de.documenttitle_PSY,de.documenttype_PSY,de.EffectiveDate_PSY,de.Reviewdate_PSY,dp.wokflow_PSY
- FROM [dbo].[AdditionalTask_PSY] AT WITH (NOLOCK) inner join DocumentEffective_PSY de on AT.Refrence_PSY=de.Refrence_PSY 
- INNER JOIN DocumentPreparation_PSY DP ON DP.Refrence_PSY=DE.Refrence_PSY AND DP.Status_PSY='APPROVED'
+ FROM [dbo].[AdditionalTask_PSY] AT WITH (NOLOCK) inner join DocumentEffective_PSY de on AT.DocumentEffective_ID=de.DEID_PSY 
+ INNER JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY AND DP.Status_PSY='APPROVED'
  where [ATID_PSY] = @ATID_PSY   
  END TRY 
  BEGIN CATCH 

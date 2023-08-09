@@ -49,6 +49,18 @@ select dp.documenttitle_PSY,dp.documenttype_PSY,dp.documentno_PSY,0,
 dp.wokflow_PSY,null,@ModifiedBy_PSY,GETDATE(),@ModifiedBy_PSY,GETDATE(),'In-Progress',@referenceId from DocumentPreparation_PSY dp where DPNID_PSY=@Documentmanagerid_PSY;
 SELECT @ID = @@IDENTITY;
 
+END
+
+IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
+BEGIN
+DECLARE @REF INT=0
+SET @REF=(SELECT Documentmanagerid_PSY FROM DocumentEffective_PSY WHERE DEID_PSY=@DEID_PSY)
+DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DEID_PSY
+DELETE FROM DocumentEffective_PSY WHERE DEID_PSY=@DEID_PSY
+
+UPDATE DocumentPreparation_PSY SET Status_PSY='IN-PROGRESS' WHERE DPNID_PSY=@REF
+UPDATE workitems_PSY SET Stage_PSY='Pending',Status_PSY='IN-PROGRESS',IsCompleted_PSY=0 WHERE RefrenceId_PSY=@REF
+
 
 END
 

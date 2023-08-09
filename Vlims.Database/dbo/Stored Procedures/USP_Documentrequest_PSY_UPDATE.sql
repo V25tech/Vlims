@@ -43,6 +43,12 @@ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PS
 
 END
 
+IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
+BEGIN
+DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DRID_PSY
+DELETE FROM Documentrequest_PSY WHERE DRID_PSY=@DRID_PSY
+END
+
 select @DRID_PSY; 
   
   END TRY 
