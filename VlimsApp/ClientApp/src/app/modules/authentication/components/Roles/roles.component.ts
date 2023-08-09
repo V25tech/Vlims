@@ -5,6 +5,8 @@ import { Table } from 'primeng/table';
 import { RequestContext, RoleConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { RolesconfigurationService } from '../../../services/rolesconfiguration.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,15 +22,18 @@ export class RolesComponent implements OnInit {
   rowsPerPageOptions = [10, 20, 50];
   types: Array<RoleConfiguration> = [];
   rol = new RoleConfiguration();
-  constructor(private commonsvc: CommonService, private doctypeservice: RolesconfigurationService  ,private router: Router) { }
+  constructor(private commonsvc: CommonService,
+    private loader:NgxSpinnerService,
+    private toastr:ToastrService,
+     private doctypeservice: RolesconfigurationService  ,private router: Router) { }
   ngOnInit() {
     this.getroles();
   }
   getroles() {
-   let objrequest: RequestContext={PageNumber:1,PageSize:10,Id:0};
-      return this.doctypeservice.getroles(objrequest).subscribe((data: any) => {
-        debugger
+    this.loader.show();
+      return this.doctypeservice.getroles(this.commonsvc.req).subscribe((data: any) => {
         this.types = data.Response;
+        this.loader.hide();
         if(this.types!=null && this.types.length<10)
         {
           this.currentPage=10;
@@ -42,17 +47,21 @@ export class RolesComponent implements OnInit {
     this.router.navigate(['/admin/roles/add']);
   }
   editdoc(doc: RoleConfiguration) {
-    debugger
+    
     this.commonsvc.roleConfig = doc;
     this.router.navigate(['/admin/roles/edit', doc.ROCFId]);
   }
   getStatusClass(status: string): string {
-    debugger
+    
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Completed') {
       return 'status-completed';
-    } else if (status === 'Under Review') {
+    } else if (status === 'Active') {
+      return 'status-completed';
+    } else if (status === 'Active') {
+      return 'status-completed';
+    }else if (status === 'Under Review') {
       return 'status-under-review';
     } else if (status === 'Pending') {
       return 'status-in-progress';
