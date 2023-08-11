@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApprovalManagament, RequestContext } from '../../../../models/model';
 import { ApprovalConfigurationService } from '../../../services/approval-configuration.service';
 import { ToastrService } from 'ngx-toastr';
+import { CommonService } from 'src/app/shared/common.service';
 
 @Component({
   selector: 'app-approval-configurations',
@@ -16,10 +17,14 @@ export class ApprovalConfigurationsComponent implements OnInit {
   approvalconfig=new ApprovalManagament();
   Approvaltypeservice: any;
   types: ApprovalManagament[] = [];
-  constructor(private router: Router,private toastr: ToastrService, private appconfigserv: ApprovalConfigurationService) { }
+  access:boolean=false;
+  constructor(private router: Router,private toastr: ToastrService, 
+    private commonsvc:CommonService,
+    private appconfigserv: ApprovalConfigurationService) { }
 
   ngOnInit() {
     debugger
+    this.access = this.commonsvc.getUserRoles()?.approvalConfigs ?? false;
     this.getApproval();
    // this.tabselect = this.router.url.split('/').pop(); 
   }

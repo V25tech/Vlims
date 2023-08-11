@@ -18,6 +18,7 @@ export class DocumentRevisionRequestsComponent implements OnInit{
   currentPage = 1;
   itemsPerPage = 10;
   rowsPerPageOptions = [1,10, 20, 50];
+  access:boolean=false;
   constructor(private router: Router,private spinner: NgxSpinnerService, private commonsvc: CommonService, private documentRevisionService: DocumentRevisionService) {}
 
   navigateToAddRequest(): void {
@@ -27,6 +28,7 @@ export class DocumentRevisionRequestsComponent implements OnInit{
   revisionDatasource = [];
 
   ngOnInit() {   
+    this.access = this.commonsvc.getUserRoles()?.documentRevison ?? false;
     this.getdocumentRevisions();
 
   }

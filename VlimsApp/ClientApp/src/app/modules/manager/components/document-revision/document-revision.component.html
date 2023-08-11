@@ -44,7 +44,8 @@
                         <td>{{revision?.reviewDate| date}}</td>                        
                         <td><span class="status" [ngClass]="getStatusClass(revision['status'])">{{revision.status}} </span></td>
                         <td>{{revision?.version}}</td>
-                        <td class="text-center"><i (click)="editdocrevision(revision)" class="bi bi-pencil"></i></td>
+                        <td class="text-center" *ngIf="access"><i (click)="editdocrevision(revision)" class="bi bi-pencil"></i></td>
+                        <td *ngIf="!access">Restricted</td>
                     </tr>
                 </ng-template>
             </p-table>

@@ -20,12 +20,14 @@ export class AssignedComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
+  access:boolean=false;
   constructor(private workitemssvc:WorkitemsService,
     private router:Router,
     private loader:NgxSpinnerService,
     private commonsvc:CommonService) {}
 
     ngOnInit() {
+      this.access = this.commonsvc.getUserRoles()?.workItemsassigned ?? false;
       this.getworkflowitems();
     }
   getworkflowitems() {

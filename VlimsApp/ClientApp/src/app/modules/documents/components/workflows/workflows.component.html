@@ -44,7 +44,8 @@
                         <td>{{docItem.CreatedBy}}</td>
                         <td>{{docItem.CreatedDate}}</td>
                         <td><span class="status text-nowrap" [ngClass]="getStatusClass(docItem['Status'])">{{docItem.Status}} </span></td>
-                        <td class="text-center" *ngIf="docItem.Status!='Approved'" (click)="editdoc(docItem)"><i class="bi bi-pencil"></i></td>
+                        <td class="text-center" *ngIf="access" ><i class="bi bi-pencil" *ngIf="docItem.Status!='Approved'" (click)="editdoc(docItem)"></i></td>
+                        <td *ngIf="!access">Restricted</td>
                     </tr>
                 </ng-template>
             </p-table>

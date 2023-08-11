@@ -27,10 +27,10 @@
                 <ng-template pTemplate="body" let-assigned let-i="rowIndex">
                     <tr>  
                         <td>{{ i + 1 }}</td>  
-                         <td>
+                         <td *ngIf="access">
                             <a href="javascript:void(0)" (click)="viewtask(assigned)">{{ assigned.TaskType }}</a>
                         </td> 
-                       
+                       <td *ngIf="!access">Restricted</td>
                         <td>{{assigned.TaskName}}</td>
                         <td>{{assigned.Stage}}</td>
                         <!-- <td>{{assigned.assignedGroup}}</td> -->

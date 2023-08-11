@@ -21,7 +21,7 @@ export class PreparationComponent {
   rowsPerPageOptions = [10, 20, 50];
   preparationsDatasource: DocumentPreperationConfiguration[] = [];
   totalCount = 0;
-
+  access:boolean=false;
   constructor(private router: Router, private spinner: NgxSpinnerService, private commonsvc: CommonService, private docPreperationService: DocumentPreperationService) { }
 
   navigateToAddPreparation(docPreperation: DocumentPreperationConfiguration): void {
@@ -30,6 +30,7 @@ export class PreparationComponent {
   }
 
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.documentPreperation ?? false;
     this.spinner.show();
     let request: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.docPreperationService.getdocumentpreparations(request).subscribe((data: any) => {
