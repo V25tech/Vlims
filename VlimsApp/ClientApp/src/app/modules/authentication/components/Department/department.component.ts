@@ -21,9 +21,11 @@ export class DepartmentComponent implements OnInit {
   rowsPerPageOptions = [10, 20, 50];
   types: DepartmentConfiguration[] = [];
   viewMode:boolean=false;
+  access:boolean=false;
   constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService, private loader: NgxSpinnerService, private router: Router) { }
 
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.deptConfig ?? false;
     this.getdepartments();
   }
 getdepartments() {

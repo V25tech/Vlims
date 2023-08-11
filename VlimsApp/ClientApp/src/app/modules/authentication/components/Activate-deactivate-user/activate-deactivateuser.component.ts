@@ -5,6 +5,7 @@ import { activateDeactivateuser, RequestContext, RoleConfiguration, UserConfigur
 import { CommonService } from '../../../../shared/common.service';
 import { ActivateDeactivateService } from '../../../services/activate-deactivate.service';
 import { UsersconfigurationService } from '../../../services/usersconfiguration.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-activate-deactivateuser',
@@ -14,23 +15,47 @@ import { UsersconfigurationService } from '../../../services/usersconfiguration.
 export class ActivateDeactivateuserComponent implements OnInit {
   types: activateDeactivateuser[] = [];
   adduser = new UserConfiguration();
-  constructor(private commonsvc: CommonService, private doctypeservice: ActivateDeactivateService, private toastr: ToastrService, private userservice: UsersconfigurationService, private Userservice: UsersconfigurationService, private router: Router) { }
+  access:boolean=false;username:string='';
+  constructor(private commonsvc: CommonService, private doctypeservice: ActivateDeactivateService, 
+    private toastr: ToastrService, private userservice: UsersconfigurationService, 
+    private loader:NgxSpinnerService,
+    private router: Router) { }
 
   ngOnInit() {
+    this.username=this.commonsvc.getUsername();
+    this.access = this.commonsvc.getUserRoles()?.Activatestatus ?? false;
     this.get_activate_deactivateuser();
   }
   get_activate_deactivateuser() {
-    let objrequest: RequestContext = {
-      PageNumber: 1, PageSize: 1,
-      Id: 0
-    };
-    return this.Userservice.getusers(objrequest).subscribe((data: any) => {
+    this.loader.show();
+    return this.userservice.getusers(this.commonsvc.req).subscribe((data: any) => {
       debugger
       this.types = data.Response;
-      console.log(this.types);
+      this.loader.hide();
     }, er => {
 
     });
+  }
+  update(user:UserConfiguration,event: Event){
+    debugger
+    this.loader.show();
+    const checkbox = event.target as HTMLInputElement;
+    if(user.UserID!=this.commonsvc.getUsername()){
+    user.ModifiedBy=this.commonsvc.getUsername();
+    user.Status = checkbox.checked ? 'Active' : 'IN-ACTIVE';
+    this.userservice.update(user).subscribe((data:any)=>{
+      this.toastr.success('update success');
+      this.get_activate_deactivateuser();
+      this.loader.hide();
+    },((error:any)=>{
+      this.toastr.error('update failed');
+      this.loader.hide();
+    }));
+    }
+    else{
+      this.toastr.error('same user cannot update');
+      this.loader.hide();
+    }
   }
   navigateToAddRoles(): void {
     this.router.navigate(['/document-type/add']);

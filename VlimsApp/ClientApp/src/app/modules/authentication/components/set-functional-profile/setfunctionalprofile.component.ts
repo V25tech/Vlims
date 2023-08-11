@@ -6,6 +6,8 @@ import { RequestContext, RoleConfiguration, functionalprofile } from '../../../.
 import { CommonService } from '../../../../shared/common.service';
 import { setfunctionalprofileconfigurationservice } from '../../../services/setfunctionalprofile.service';
 import { RolesconfigurationService } from 'src/app/modules/services/rolesconfiguration.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -20,38 +22,67 @@ export class SetfunctionalprofileComponent implements OnInit {
   profile=new functionalprofile()
   editMode:boolean=false;
   viewMode:boolean=false;
-  constructor(private commonsvc: CommonService, private doctypeservice: RolesconfigurationService ,private setprofileservice: setfunctionalprofileconfigurationservice  ,private router: Router) { }
+  access:boolean=false;
+  constructor(private commonsvc: CommonService, private doctypeservice: RolesconfigurationService ,
+    private setprofileservice: setfunctionalprofileconfigurationservice  ,
+    private toaster:ToastrService,
+    private loader:NgxSpinnerService,
+    private router: Router) { }
 
   ngOnInit() {
+    this.access = this.commonsvc.getUsername() === 'admin' ? true : false;
     this.getsetfunctionalprofile();
     this.getroles();
   }
 getsetfunctionalprofile() {
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
-      return this.setprofileservice.getsetfunctionalprofileconfiguration(objrequest).subscribe((data: any) => {
-        debugger
+ this.loader.show();
+      return this.setprofileservice.getsetfunctionalprofileconfiguration(this.commonsvc.req).subscribe((data: any) => {
         this.types = data.Response;
+        this.loader.hide();
         console.log(this.types);
       }, er => {
      
       });
   }
   getroles() {
-    let objrequest: RequestContext={PageNumber:1,PageSize:10,Id:0};
-       return this.doctypeservice.getroles(objrequest).subscribe((data: any) => {
-         debugger
-         this.roleTypes = data.Response;         
+    this.loader.show();
+       return this.doctypeservice.getroles(this.commonsvc.req).subscribe((data: any) => {
+         this.roleTypes = data.Response; 
+         this.loader.hide();        
        });
    }
   onSubmit(profileinfo:functionalprofile)
   {   
-    debugger;
-    profileinfo.role='test';
-    profileinfo.createdby='admin';
-    profileinfo.modifiedby='admin';
-    profileinfo.role=this.selectedRoles.Role;
+    debugger
+    this.loader.show();
+    if(profileinfo.sfpid>0){
+      profileinfo.modifiedby=this.commonsvc.getUsername();
+      if(profileinfo.createdby==null || undefined){
+        profileinfo.createdby=this.commonsvc.getUsername();
+      }
+      this.setprofileservice.update(profileinfo).subscribe((data:any)=>{
+        this.toaster.success('role permissions updated');
+        this.loader.hide();
+      })
+    }
+    else{
+    profileinfo.createdby=this.commonsvc.getUsername();
+    profileinfo.modifiedby=this.commonsvc.getUsername();
+    //profileinfo.role=this.selectedRoles.Role;
     this.setprofileservice.addsetfunctionalprofileconfiguration(profileinfo).subscribe((res: any) => {
+      this.toaster.success('role permissions added');
+      this.loader.hide();
   });
+}
+  }
+  binddata(rolename:String){
+    debugger
+    const role=this.types.find(o=>o.role==rolename);
+    if(role!=null && role!=undefined)
+    {
+      this.profile=role;
+      console.log(this.profile);
+    }
   }
   onCancel()
   {

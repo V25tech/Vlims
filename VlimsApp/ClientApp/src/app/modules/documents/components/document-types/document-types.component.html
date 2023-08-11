@@ -6,7 +6,7 @@
                 <h4 class="page-title flex-grow-1">Document Types</h4>
                 <div class="d-flex page-title-actions">
                   <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search">
-                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddDocumentType()">Add</button>
+                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddDocumentType()" *ngIf="access">Add</button>
                 </div>
               </div>
         </div>

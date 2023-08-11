@@ -42,7 +42,8 @@
               <td>{{doc?.ModifiedBy}}</td>
               <td>{{doc?.ModifiedDate }}</td>             
               <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
-              <td class="text-center"><i class="bi bi-pencil" (click)="editdoc(doc)"></i></td>
+              <td class="text-center" *ngIf="access"><i class="bi bi-pencil" (click)="editdoc(doc)"></i></td>
+              <td *ngIf="!access">Restricted</td>
               <!--(click)="editdoc(doc)"-->
             </tr>
           </ng-template>

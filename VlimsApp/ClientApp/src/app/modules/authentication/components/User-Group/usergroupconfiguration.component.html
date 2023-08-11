@@ -55,7 +55,7 @@
         <h4 class="page-title flex-grow-1">User Group Configuration</h4>
         <div class="d-flex page-title-actions">
           <input type="text" class="form-control" placeholder="Search">
-          <button class="btn btn-primary mx-2" type="button" (click)="addusergroup()" >Add</button>
+          <button class="btn btn-primary mx-2" type="button" (click)="addusergroup()" *ngIf="access">Add</button>
         </div>
       </div>
     </div>

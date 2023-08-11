@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DocumentTypeConfiguration } from '../modules/documents/models/DocumentTypeConfiguration';
 import { DocumentTemplateConfiguration } from '../modules/documents/models/DocumentTemplateConfiguration';
-import { DepartmentConfiguration, DocumentAdditionalTasks, DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentPrintConfiguration, DocumentRequestConfiguration, ExistingDocumentRequest, PlantConfiguration, RequestContext1, RoleConfiguration, UserConfiguration, Usergroupconfiguration } from '../models/model';
+import { DepartmentConfiguration, DocumentAdditionalTasks, DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentPrintConfiguration, DocumentRequestConfiguration, ExistingDocumentRequest, PlantConfiguration, RequestContext1, RoleConfiguration, UserConfiguration, Usergroupconfiguration, functionalprofile } from '../models/model';
 import { DepartmentComponent } from '../modules/authentication/components/Department/department.component';
+import { setfunctionalprofileconfigurationservice } from '../modules/services/setfunctionalprofile.service';
 
 
 
@@ -67,9 +68,23 @@ export class CommonService {
   setUsername(username: string) {
     this.storage.setItem('username', username);
   }
-
+  setUserRoles(roles:functionalprofile){
+    const rolesString = JSON.stringify(roles);
+  this.storage.setItem('roles', rolesString);
+  }
+  removeUserRole(){
+    this.storage.removeItem('roles');
+  }
   getUsername() {
     const username = this.storage.getItem('username');
     return username !== null ? username : 'defaultUsername';
+  }
+  getUserRoles(): functionalprofile | null {
+    const rolesString = this.storage.getItem('roles');
+    if (rolesString) {
+      return JSON.parse(rolesString);
+    } else {
+      return null; // Or handle the absence of roles as needed
+    }
   }
 }

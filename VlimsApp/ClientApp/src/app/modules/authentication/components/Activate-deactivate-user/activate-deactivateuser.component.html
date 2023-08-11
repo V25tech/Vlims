@@ -5,7 +5,7 @@
         <h4 class="page-title flex-grow-1">Document Types</h4>
         <div class="d-flex page-title-actions">
           <input type="text" class="form-control" placeholder="Search">
-          <button class="btn btn-primary mx-2" type="button">Add</button>
+          <!-- <button class="btn btn-primary mx-2" type="button" >Add</button> -->
         </div>
       </div>
     </div>
@@ -17,7 +17,7 @@
           <ng-template pTemplate="header">
             <tr>
               <th>#</th>
-              <th pSortableColumn="S.no" style="width:20%">S No<p-sortIcon field="sno"></p-sortIcon></th>
+              <!-- <th pSortableColumn="S.no" style="width:20%">S No<p-sortIcon field="sno"></p-sortIcon></th> -->
               <th pSortableColumn="username" style="width:10%">username<p-sortIcon field="username"></p-sortIcon></th>
               <th pSortableColumn="UserId" style="width:15%">User Id<p-sortIcon field="UserId"></p-sortIcon></th>
               <th pSortableColumn="Role" style="width:20%">Role<p-sortIcon field="Role"></p-sortIcon></th>
@@ -31,14 +31,20 @@
           <ng-template pTemplate="body" let-doc let-i="rowIndex">
             <tr>
               <td>{{ i + 1 }}</td>
-              <td>{{doc?.Empid}}</td>
+              <!-- <td>{{doc?.Empid}}</td> -->
               <td>{{doc?.UserID}}</td>
               <td>{{doc?.UserID}}</td>
               <td>{{doc?.Role}}</td>
               <td>{{doc?.Department}}</td>
               <td>{{doc?.Doj}}</td>
               <td><span class="status">{{doc.Status}} </span></td>
-              <td class="text-center" (click)="editdoc(doc)"><i class="bi bi-pencil"></i></td>
+              <td class="text-center" *ngIf="username!=doc?.UserID && access">
+                <!-- <input class="form-check form-switch" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked="doc.Status=='Active'"> -->
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" #switchCheckbox [checked]="doc.Status === 'Active' ? true : false" (click)="update(doc,$event)">
+                </div>
+              </td>
+              <td *ngIf="!access">Restricted</td>
             </tr>
           </ng-template>
         </p-table>

@@ -7,7 +7,7 @@
                 <div class="d-flex page-title-actions">
                     <input type="text" class="form-control" pInputText type="text" (input)="workflowTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search Workflows" />
                 
-                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddWorkflow()">Add</button>
+                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddWorkflow()" *ngIf="access">Add</button>
                 </div>
               </div>
         </div>

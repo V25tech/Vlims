@@ -6,7 +6,7 @@
         <h4 class="page-title flex-grow-1">User Configuration</h4>
         <div class="d-flex page-title-actions">
           <input type="text" class="form-control" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')" placeholder="Search">
-          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddUser()">Add</button>
+          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddUser()" *ngIf="access">Add</button>
         </div>
       </div>
     </div>
@@ -44,7 +44,8 @@
               <td>{{doc?.EmailId}}</td>
               <td>{{doc?.ModifiedBy}}</td>
               <td><span class="status"  [ngClass]="getStatusClass(doc['Status'])">{{doc?.Status}} </span></td>
-              <td class="text-center" (click)="editdoc(doc)"><i class="bi bi-pencil"></i></td>
+              <td class="text-center" (click)="editdoc(doc)" *ngIf="access"><i class="bi bi-pencil"></i></td>
+              <td *ngIf="!access">Restricted</td>
             </tr>
           </ng-template>
         </p-table>

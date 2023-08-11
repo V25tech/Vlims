@@ -31,12 +31,13 @@ export class UserConfigurationComponent implements OnInit {
   actiontype: number=0;
   pageConfig: any;
   searchstr: string='';
-
+  access:boolean=false;
   constructor(private commonsvc: CommonService, private doctypeservice: UsersconfigurationService,
     private loader:NgxSpinnerService,
     private router: Router) { }
 
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.userConfig ?? false;
     this.getusers();
   }
   getusers() {

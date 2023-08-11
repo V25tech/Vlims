@@ -8,7 +8,7 @@
                   
                  <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search Templates" />
                 
-                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddTemplate()">Add</button>
+                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddTemplate()" *ngIf="access">Add</button>
                 </div>
               </div>
         </div>

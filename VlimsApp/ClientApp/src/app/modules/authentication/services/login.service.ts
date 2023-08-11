@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { RequestContext, UserConfiguration } from 'src/app/models/model';
+import { RequestContext, UserConfiguration, functionalprofile } from 'src/app/models/model';
 import { UsersconfigurationService } from '../../services/usersconfiguration.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { ToastrService } from 'ngx-toastr';
@@ -33,7 +33,7 @@ export class LoginService {
     private toaster:ToastrService,
     private commonsvc:CommonService ) {}
 
-  login(username: string, password: string,lstusers:UserConfiguration[]) {
+  login(username: string, password: string,lstusers:UserConfiguration[],roles:functionalprofile[]) {
     if(username==='admin')
     {
        this.isvalid = username === 'admin' && password === 'quoting123';
@@ -48,6 +48,14 @@ export class LoginService {
       let user=lstusers.find(o=>o.UserID==username && o.Password==password);
       if(user!=null && user!=undefined)
       {
+        const role=roles.find(o=>o.role.toLocaleLowerCase()==user?.Role.toLocaleLowerCase());
+        if(role!=null && role!=undefined)
+        {
+          this.commonsvc.setUserRoles(role);
+        }
+        else{
+          this.commonsvc.removeUserRole();
+        }
         localStorage.setItem(AUTH_STORAGE_KEY, 'true');
         this.updateLoginStatus(true);
         this.isvalid=true;

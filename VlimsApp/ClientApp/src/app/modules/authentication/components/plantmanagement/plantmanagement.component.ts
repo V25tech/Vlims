@@ -22,7 +22,9 @@ export class PlantComponent implements OnInit {
   currentPage = 10;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
+  access:boolean=false;
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.plantMgmt ?? false;
     this.getplantconfiguration();
   }
   getplantconfiguration() {

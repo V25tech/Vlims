@@ -22,11 +22,13 @@ export class RolesComponent implements OnInit {
   rowsPerPageOptions = [10, 20, 50];
   types: Array<RoleConfiguration> = [];
   rol = new RoleConfiguration();
+  access:boolean=false;
   constructor(private commonsvc: CommonService,
     private loader:NgxSpinnerService,
     private toastr:ToastrService,
      private doctypeservice: RolesconfigurationService  ,private router: Router) { }
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.roleConfig ?? false;
     this.getroles();
   }
   getroles() {

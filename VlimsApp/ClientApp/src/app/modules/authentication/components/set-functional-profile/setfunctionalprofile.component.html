@@ -14,30 +14,16 @@
         <div class="form-group row">
           <label for="role" class="col-sm-2 col-form-label">Role <span style="color: red; font-weight: bolder;">*</span></label>
           <div class="col-sm-10">
+            <p-dropdown
+            name="role"
+            id="role"
+            [options]="roleTypes"
+            [(ngModel)]="profile.role"
+            optionLabel="Role" placeholder="Select a Role"
+            optionValue="Role" (ngModelChange)="binddata(profile.role)"
+          >
+          </p-dropdown>
 
-            <div *ngIf="viewMode">
-              <p-multiSelect [options]="roleTypes" [(ngModel)]="selectedRoles" defaultLabel="Select a Role" name="Role" id="Role" optionLabel="Role" display="chip" [disabled]="viewMode">
-                <ng-template pTemplate="selectedItems" let-options>
-                  <ng-container *ngTemplateOutlet="customTemplate; context: {$implicit: options}"></ng-container>
-                </ng-template>
-              </p-multiSelect>
-              <ng-template #customTemplate let-options>
-                <div class="p-chips-container p-inputtext" *ngIf="roleTypes && roleTypes.length">
-                  <span class="p-chip p-highlight">{{ roleTypes[0].Role }}</span>
-                  <span *ngIf="roleTypes.length > 1" class="p-chip">+{{ roleTypes.length - 1 }}</span>
-                </div>
-              </ng-template>
-            </div>
-            <div *ngIf="!viewMode">
-              <p-multiSelect [options]="roleTypes" [(ngModel)]="selectedRoles" defaultLabel="Select a Role"
-                             name="Role" id="Role" optionLabel="Role"
-                             display="chip"   required
-                             #departmentInput="ngModel"  >
-                             <div *ngIf="departmentInput.invalid && (departmentInput.dirty || departmentInput.touched)" class="text-danger">
-                              Enter department.
-                             </div>      
-              </p-multiSelect>
-            </div>
           </div>
         </div>
         
@@ -45,40 +31,24 @@
             <label for="profile" class="col-sm-2 col-form-label"
               ><b>Admin Management</b></label
             >
-            <!-- <div class="col-sm-10">
-              <input
-                type="checkbox"
-                
-                id="adminMgmt"
-                name="adminMgmt"
-                placeholder=""
-                [(ngModel)]="profile.adminMgmt" [disabled]="viewMode"
-               
-              /> 
-            </div>-->
           </div>
-
           <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >Security Management</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input type="checkbox"
-                
+              class="form-check-input"
                 id="securityMgmt"
                 name="securityMgmt"
                 placeholder=""
-                [(ngModel)]="profile.securityMgmt" [disabled]="viewMode"
-               
-              />
+                [(ngModel)]="profile.securityMgmt" [disabled]="viewMode" />
             </div>
-          </div>
-                    <div class="form-group row">
             <label for="prefix" class="col-sm-2 col-form-label">Security Configurations</label>
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="securityConfig"
                 name="securityConfig"
                 placeholder=""
@@ -86,15 +56,13 @@
                 
               />
             </div>
-          </div>
-          <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >E sign and Aprroval Configurations</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="approvalConfigs"
                 name="approvalConfigs"
                 placeholder=""
@@ -105,28 +73,20 @@
           </div>
           <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
-              >Hirearchy Management</label
+              ><b>Hirearchy Management</b></label
             >
             <div class="col-sm-10">
-              <input
-                type="checkbox"
-                
-                id="hirearchyMgmt"
-                name="hirearchyMgmt"
-                placeholder=""
-                [(ngModel)]="profile.hirearchyMgmt" [disabled]="viewMode"
-               
-              />
+             
             </div>
           </div>
-              <div class="form-group row">
+              <!-- <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >Role Configuration</label
             >
             <div class="col-sm-10">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="role"
                 name="role"
                 placeholder=""
@@ -140,7 +100,7 @@
             <div class="col-sm-10">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="deptConfig"
                 name="deptConfig"
                 placeholder=""
@@ -156,7 +116,7 @@
             <div class="col-sm-10">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="setFunctionalprofile"
                 name="setFunctionalprofile"
                 placeholder=""
@@ -164,15 +124,54 @@
                
               />
             </div>
+          </div> -->
+          <div class="form-group row">
+            <label for="profile" class="col-sm-2 col-form-label">Role Configuration</label>
+            <div class="col-sm-1">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="role"
+                name="role"
+                placeholder=""
+                [(ngModel)]="profile.roleConfig"
+                [disabled]="viewMode"
+              />
+            </div>
+            <label for="prefix" class="col-sm-2 col-form-label">Department Configuration</label>
+            <div class="col-sm-1">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="deptConfig"
+                name="deptConfig"
+                placeholder=""
+                [(ngModel)]="profile.deptConfig"
+                [disabled]="viewMode"
+              />
+            </div>
+          
+            <label for="profile" class="col-sm-2 col-form-label">Set Functional Profile</label>
+            <div class="col-sm-1">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="setFunctionalprofile"
+                name="setFunctionalprofile"
+                placeholder=""
+                
+                [disabled]="viewMode"
+              />
           </div>
+        </div>
           <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
-              >Plant Managementt</label
+              ><b>Plant Managementt</b></label
             >
             <div class="col-sm-10">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="plantMgmt"
                 name="plantMgmt"
                 placeholder=""
@@ -183,18 +182,9 @@
           </div>
           <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
-              >User Managementt</label
+              ><b>User Managementt</b></label
             >
             <div class="col-sm-10">
-              <input
-                type="checkbox"
-                
-                id="userMgmt"
-                name="userMgmt"
-                placeholder=""
-                [(ngModel)]="profile.userMgmt" [disabled]="viewMode"
-               
-              />
             </div>
           </div>
           
@@ -202,10 +192,10 @@
             <label for="profile" class="col-sm-2 col-form-label"
               >User Configuration</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="userConfig"
                 name="userConfig"
                 placeholder=""
@@ -213,29 +203,25 @@
                
               />
             </div>
-          </div>
-          <div class="form-group row">
             <label for="prefix" class="col-sm-2 col-form-label">Activate/De-Activate</label>
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="Activate"
                 name="Activate"
                 placeholder=""
-                [(ngModel)]="profile.ActivateStatus" [disabled]="viewMode"
+                [(ngModel)]="profile.Activatestatus" [disabled]="viewMode"
                 
               />
             </div>
-          </div>
-          <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >User Group Configuration</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="userGroupConfig"
                 name="userGroupConfig"
                 placeholder=""
@@ -243,15 +229,13 @@
                
               />
             </div>
-          </div>
-          <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >Audit Log</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="Audit"
                 name="Audit"
                 placeholder=""
@@ -280,10 +264,10 @@
             <label for="profile" class="col-sm-2 col-form-label"
               >Document Type Configuration</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="documentTypeConfig"
                 name="documentTypeConfig"
                 placeholder=""
@@ -291,13 +275,11 @@
                
               />
             </div>
-          </div>
-          <div class="form-group row">
             <label for="prefix" class="col-sm-2 col-form-label">Document Template Configuration</label>
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="documentTemplateConfig"
                 name="documentTemplateConfig"
                 placeholder=""
@@ -305,15 +287,13 @@
                 
               />
             </div>
-          </div>
-          <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >WorkFlow Configuration</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="workflowConfig"
                 name="workflowConfig"
                 placeholder=""
@@ -321,15 +301,13 @@
                
               />
             </div>
-          </div>
-          <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >Dash Board Configuration</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="dashboardConfig"
                 name="dashboardConfig"
                 placeholder=""
@@ -337,15 +315,13 @@
                
               />
             </div>
-          </div>
-          <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >Notification Configuration</label
             >
             <div class="col-sm-10">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="notificationConfig"
                 name="notificationConfig"
                 placeholder=""
@@ -370,10 +346,10 @@
           </div>
           <div class="form-group row">
             <label for="prefix" class="col-sm-2 col-form-label">Document Request</label>
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="documentRequest"
                 name="documentRequest"
                 placeholder=""
@@ -381,15 +357,13 @@
                 
               />
             </div>
-          </div>
-          <div class="form-group row">
-            <label for="profile" class="col-sm-2 col-form-label"
+                     <label for="profile" class="col-sm-2 col-form-label"
               >Document Preparation</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="documentpreparation"
                 name="documentpreparation"
                 placeholder=""
@@ -397,15 +371,13 @@
                
               />
             </div>
-          </div>
-          <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >Document EffectiveOut</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="documentEffective"
                 name="documentEffective"
                 placeholder=""
@@ -413,15 +385,13 @@
                
               />
             </div>
-          </div>
-          <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >Additional Tasks</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="additionalTasks"
                 name="additionalTasks"
                 placeholder=""
@@ -429,16 +399,13 @@
                
               />
             </div>
-          </div>
-                    
-                    <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >Document Revision</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="documentRevison"
                 name="documentRevison"
                 placeholder=""
@@ -446,15 +413,13 @@
                
               />
             </div>
-          </div>
-                    <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >Document Repository</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="docrepository"
                 name="docrepository"
                 placeholder=""
@@ -462,15 +427,13 @@
                
               />
             </div>
-          </div>
-                    <div class="form-group row">
             <label for="profile" class="col-sm-2 col-form-label"
               >Work Assigned To ME</label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-1">
               <input
                 type="checkbox"
-                
+                class="form-check-input"
                 id="workItemsassigned"
                 name="workItemsassigned"
                 placeholder=""
@@ -498,10 +461,10 @@
         
       </div>
 
-      <div class="form-group row my-4">
+      <div class="form-group row my-4" *ngIf="access">
         <div class="col-sm-10 offset-sm-2">
           <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
-          <button type="submit" class="btn btn-primary" *ngIf="!editMode" (click)="onSubmit(profile)">Submit</button>
+          <button type="submit" class="btn btn-primary" *ngIf="!editMode">Submit</button>
           <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
         </div>
       </div>
@@ -513,3 +476,21 @@
 
 
   </body>
+  <style>
+    /* Style for the unchecked checkbox */
+    .form-check-input {
+      /* Adjust background color and border to make it brighter */
+      background-color: #ffffff; /* Brighter background color */
+      border: 2px solid #007bff; /* Brighter border color */
+      /* Add any other desired styles */
+    }
+  
+    /* Style for the checked checkbox */
+    .form-check-input:checked {
+      /* Keep the same styles for the checked state or customize as needed */
+      background-color: #007bff; /* Keep the same or adjust as desired */
+      border: 2px solid #007bff; /* Keep the same or adjust as desired */
+    }
+  
+    /* Adjust label styles for better alignment */
+  </style>
