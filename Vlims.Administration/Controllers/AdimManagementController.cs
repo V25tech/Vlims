@@ -62,7 +62,7 @@ namespace Vlims.Administration
         }
         
         /// <summary>
-        /// This Method is used to Save AdimManagement
+        /// This Method is  used to Save AdimManagement
         /// </summary>
         /// <param name="adimManagement"></param>
         [HttpPost("saveadimmanagement")]
