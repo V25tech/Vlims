@@ -54,11 +54,11 @@ getdepartments() {
     }
   }
   navigateToAddDepartment(): void {
-    this.router.navigate(['/admin/departments/add']);
+    this.router.navigate(['/admin/hierarchy/departments/add']);
   }
   editBrand(doc : DepartmentConfiguration)
   {
-    this.router.navigate(['/admin/departments/edit', doc.DPCFId]);
+    this.router.navigate(['/admin/hierarchy/departments/edit', doc.DPCFId]);
   }
   submit(newdept: DepartmentConfiguration) {
     

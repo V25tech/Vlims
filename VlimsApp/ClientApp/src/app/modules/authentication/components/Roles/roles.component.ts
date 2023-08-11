@@ -46,12 +46,12 @@ export class RolesComponent implements OnInit {
       });
   }
   navigateToAddRoles(): void {
-    this.router.navigate(['/admin/roles/add']);
+    this.router.navigate(['/admin/hierarchy/roles/add']);
   }
   editdoc(doc: RoleConfiguration) {
     
     this.commonsvc.roleConfig = doc;
-    this.router.navigate(['/admin/roles/edit', doc.ROCFId]);
+    this.router.navigate(['/admin/hierarchy/roles/edit', doc.ROCFId]);
   }
   getStatusClass(status: string): string {
     

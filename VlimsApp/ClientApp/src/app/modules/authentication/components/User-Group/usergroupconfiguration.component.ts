@@ -49,11 +49,11 @@ export class UsergroupconfigurationComponent implements OnInit {
   editdoc(doc: Usergroupconfiguration) {
     debugger
     this.commonsvc.userGroupConfig = doc;
-    this.router.navigate(['/admin/groups/edit', doc.Ugcid]);
+    this.router.navigate(['/admin/usermanagement/groups/edit', doc.Ugcid]);
   }
   addusergroup(): void {
     debugger
-    this.router.navigate(['admin/groups/add',this.types.length]);
+    this.router.navigate(['admin/usermanagement/groups/add',this.types.length]);
   }
   getStatusClass(status: string): string {
     debugger
