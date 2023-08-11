@@ -29,5 +29,9 @@ export class ExistingDocumentRequestService {
   upload(objrequest: FormData){
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/upload",this.type);
   }
+
+  import(objrequest: FormData){
+    return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/import",this.type);
+  }
 }
 

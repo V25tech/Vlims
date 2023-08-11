@@ -10,11 +10,12 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'existing-document-request',
   templateUrl: './review-existing-document-request.component.html',
-  styleUrls: ['./review-existing-document-request.component.scss'],  
+  styleUrls: ['./review-existing-document-request.component.scss'],
 })
 export class ReviewExistingDocumentRequestComponent implements OnInit {
   existingDocReq: ExistingDocumentRequest = new ExistingDocumentRequest();
@@ -23,7 +24,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   fileUploadLink = '';
   id: string = '';
   selectedFile: any;
-  isUploaded: boolean = false;  
+  isUploaded: boolean = false;
   @ViewChild("fileInput", { static: false })
   InputVar: ElementRef | undefined;
   modalRef: BsModalRef | undefined;
@@ -35,9 +36,10 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   reviewDate: string | undefined;
   departmentsSource = [];
   typeSource = [];
+  printType = 'single';
 
   constructor(private commonsvc: CommonService, private location: Location, private spinner: NgxSpinnerService, private modalService: BsModalService, private sanitizer: DomSanitizer, private existingDocReqservice: ExistingDocumentRequestService, private route: ActivatedRoute,
-    private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService) { }
+    private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService, private toastr: ToastrService,) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id') ?? '';
@@ -97,7 +99,11 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
       this.Update();
     }
     else {
-      this.Add();
+      if (this.printType == 'bulk') {
+        this.importBulkFile();
+      } else {
+        this.Add();
+      }
     }
   }
 
@@ -188,7 +194,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   openViewer(template: TemplateRef<any>): void {
     if (this.pdfBytes) {
       const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;      
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     }
   }
@@ -210,7 +216,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   }
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show();
-    this.existingDocReqservice.preview(this.existingDocReq).subscribe((data: any) => {      
+    this.existingDocReqservice.preview(this.existingDocReq).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template);
@@ -219,6 +225,27 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
     });
   }
 
+  importBulkFile() {
+    if (!this.selectedFile) {
+      console.error('No file selected.');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+    this.spinner.show();
+    this.existingDocReqservice.import(formData)
+      .subscribe(
+        (response: any) => {
+          this.spinner.hide();
+          this.toastr.success('Import!', 'Successfully.!');
+          this.location.back();
+        },
+        (error) => {
+          console.error('Error uploading file:', error);
+          this.spinner.hide();
+        }
+      );
+  }
 }
 
 

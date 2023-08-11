@@ -180,10 +180,10 @@ namespace PolicySummary.Controllers
             return BadRequest();
         }
         [HttpPost("import")]
-        public ActionResult<bool> ImportBulkDocuments(IFormFile fileInfo)
+        public async Task<IActionResult> ImportBulkDocuments(IFormFile file)
         {
-            var result = existingDocumentRequestService.Importbulkdocuments(fileInfo);
-            return result;
+            var result = existingDocumentRequestService.Importbulkdocuments(file);
+            return Ok(result);
         }
     }
 }
