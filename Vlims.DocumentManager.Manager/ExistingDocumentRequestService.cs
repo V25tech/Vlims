@@ -134,14 +134,7 @@ namespace PolicySummary.DMS.Services
                 System.IO.Compression.ZipFile.ExtractToDirectory(file, Path.GetDirectoryName(file), true);
                 //baseDirectory = baseDirectory + Constants.XmlPath + p_file.FileName.Replace(Constants.Zip, string.Empty);
                 l_dsInfo = ReadExcelFileWithValueType(p_fileInfo, l_numericColumns);
-                List<string> lstEntityNamesFromExcel = new List<string>();
-                lstEntityNamesFromExcel = l_dsInfo.Tables[0].AsEnumerable()
-                                                      .Select(dr => dr.Field<string>("Name").Replace(" ", "").ToLower())
-                                                      .ToList();
-                var duplicateModelEntity = lstEntityNamesFromExcel?.GroupBy(x => x)
-                                    .Where(g => g.Count() > 1)
-                                    .Select(y => y.Key)
-                                    .ToList();
+                List<string> lstEntityNamesFromExcel = new List<string>();              
                 if (l_dsInfo.Tables[0]?.Rows?.Count > 0)
                 {
                     var ValidNameRegExp = string.Empty;
@@ -151,10 +144,15 @@ namespace PolicySummary.DMS.Services
                         existingDocumentRequest.documenttype = row["DocumentType"]?.ToString();
                         existingDocumentRequest.department = row["Department"]?.ToString();
                         existingDocumentRequest.documenttitle = row["DocumentTitle"]?.ToString();
-                        existingDocumentRequest.documentno = row["DocumentNumber"]?.ToString();
-                        existingDocumentRequest.effectiveDate =Convert.ToDateTime(row["EffectiveDate"]?.ToString());
-                        existingDocumentRequest.reviewDate = Convert.ToDateTime(row["ReviewDate"]?.ToString());
-                        existingDocumentRequest.document = row["Document"]?.ToString();                        
+                        existingDocumentRequest.documentno = row["DocumentNo"]?.ToString();
+                        existingDocumentRequest.effectiveDate = DateTime.Now;
+                            //Convert.ToDateTime(row["EffectiveDate"]?.ToString());
+                        existingDocumentRequest.reviewDate = DateTime.Now;
+                        existingDocumentRequest.sampletemplate = "Test";
+                        existingDocumentRequest.CreatedBy = "ADMIN";
+                        existingDocumentRequest.ModifiedBy = "ADMIN";
+                        existingDocumentRequest.CreatedDate = DateTime.Now;
+                        existingDocumentRequest.document = row["UploadDocument"]?.ToString();                        
                         SaveExistingDocumentRequest(existingDocumentRequest);
                     }
                     #region Commented Region
