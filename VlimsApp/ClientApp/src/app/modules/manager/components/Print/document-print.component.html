@@ -6,26 +6,26 @@
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="page-title flex-grow-1">Document Print Request</h4>
         <div class="d-flex page-title-actions">
-          <input type="text" class="form-control" placeholder="Search">
-          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPrint()">Add</button>
+          <input type="text" class="form-control" placeholder="Search" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')">
+          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPrint()">New</button>
         </div>
       </div>
     </div>
   </div>
-  <div class="row p-2">
+  <div class="row p-2">  
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table [value]="requests" tableStyleClass="table table-striped">
+        <p-table #templatesTable [value]="requests" tableStyleClass="table table-striped">
           <ng-template pTemplate="header">
             <tr>
               <th>S.No</th>              
-              <th pSortableColumn="documenttype" style="width:10%">Document Type <p-sortIcon field="documenttype"></p-sortIcon></th>
-              <th pSortableColumn="documnetname" style="width:15%">Document Name<p-sortIcon field="documentname"></p-sortIcon></th>
+              <th pSortableColumn="documenttype" style="width:20%">Document Type <p-sortIcon field="documenttype"></p-sortIcon></th>
+              <th pSortableColumn="documnetname" style="width:25%">Document Name<p-sortIcon field="documentname"></p-sortIcon></th>
               <th pSortableColumn="documentnumber" style="width:20%">Document Number<p-sortIcon field="documentnumber"></p-sortIcon></th>
-              <th pSortableColumn="reason" style="width:100px">Reason <p-sortIcon field="reason"></p-sortIcon></th>
-              <th pSortableColumn="workflow" style="width:100px">workflow <p-sortIcon field="workflow"></p-sortIcon></th>
-              <th pSortableColumn="noofcopies" style="width:100px">Printed Count <p-sortIcon field="noofcopies"></p-sortIcon></th>
-              <th pSortableColumn="Status" style="width:100px">Status <p-sortIcon field="Status"></p-sortIcon></th>
+              <th pSortableColumn="modifiedDate" style="width:100px">Printed On <p-sortIcon field="modifiedDate"></p-sortIcon></th>
+              <th pSortableColumn="workflow" style="width:100px">Printed by <p-sortIcon field="modifiedby"></p-sortIcon></th>
+              <th pSortableColumn="noofcopies" style="width:100px">Print Count <p-sortIcon field="noofcopies"></p-sortIcon></th>
+              <!-- <th pSortableColumn="Status" style="width:100px">Status <p-sortIcon field="Status"></p-sortIcon></th> -->
               <th style="width:80px">Actions</th>
 
             </tr>
@@ -36,11 +36,11 @@
               <td>{{doc?.printtype}}</td>
               <td>{{doc?.documenttitle}}</td>
               <td>{{doc?.documentNumber}}</td>
-              <td>{{doc?.reason}}</td>
-              <td>{{doc?.workflow}}</td>
+              <td>{{doc?.modifiedDate | date}}</td>
+              <td>{{doc?.modifiedBy}}</td>
               <td>{{doc?.noofcopies}}</td>
 
-              <td><span class="status" [ngClass]="getStatusClass(doc['status'])">{{doc.status}} </span></td>
+              <!-- <td><span class="status" [ngClass]="getStatusClass(doc['status'])">{{doc.status}} </span></td> -->
               <td class="text-center" (click)="editdoc(doc)"><i class="bi bi-pencil"></i></td>
             </tr>
           </ng-template>
