@@ -36,7 +36,6 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   departmentsSource = [];
   typeSource = [];
 
-
   constructor(private commonsvc: CommonService, private location: Location, private spinner: NgxSpinnerService, private modalService: BsModalService, private sanitizer: DomSanitizer, private existingDocReqservice: ExistingDocumentRequestService, private route: ActivatedRoute,
     private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService) { }
 
