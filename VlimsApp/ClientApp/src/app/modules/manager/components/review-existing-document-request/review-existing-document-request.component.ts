@@ -33,6 +33,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
   effectiveDate: string | undefined;
+  isFileUploadError: boolean = false;
   reviewDate: string | undefined;
   departmentsSource = [];
   typeSource = [];
@@ -108,13 +109,18 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   }
 
   Add() {
+
     if (!this.viewMode) {
       this.existingDocReq.createdBy = 'admin';
       this.existingDocReq.modifiedBy = 'admin';
       this.existingDocReq.createdDate = new Date();
       this.existingDocReq.modifiedDate = new Date();
+      if (!this.selectedFile || !this.existingDocReq.document) {
+        console.error('No file selected.');
+        this.isFileUploadError = true;
+        return;
+      }
       this.spinner.show();
-
       this.existingDocReqservice.adddExistingDocument(this.existingDocReq).subscribe(res => {
         this.location.back();
         this.spinner.hide();
@@ -126,6 +132,11 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   }
 
   Update() {
+    if (!this.selectedFile || !this.existingDocReq.document) {
+      console.error('No file selected.');
+      this.isFileUploadError = true;
+      return;
+    }
     this.existingDocReqservice.UpdateExistingDocument(this.existingDocReq).subscribe(res => {
       this.commonsvc.existingDocReq = new ExistingDocumentRequest();
       this.location.back();
@@ -157,10 +168,12 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
     this.isUploaded = false; // Reset upload status when a new file is selected
+    this.isFileUploadError = false;
   }
   onUpload(): void {
     if (!this.selectedFile) {
       console.error('No file selected.');
+      this.isFileUploadError = true;
       return;
     }
     const formData = new FormData();
@@ -182,6 +195,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   onDeleteFile(): void {
     this.selectedFile = null;
     this.isUploaded = false;
+    this.isFileUploadError = true;
     this.existingDocReq.document = '';
     if (this.InputVar) this.InputVar.nativeElement.value = "";
   }
@@ -228,6 +242,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   importBulkFile() {
     if (!this.selectedFile) {
       console.error('No file selected.');
+      this.isFileUploadError = true;
       return;
     }
     const formData = new FormData();
