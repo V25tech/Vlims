@@ -74,6 +74,8 @@ namespace Vlims.Administration.Entities
 
         public bool? documentPreperation { get; set; }
 
+        public bool? workItemsassigned { get; set; }
+
         public string CreatedBy { get; set; }
 
         public string ModifiedBy { get; set;}
