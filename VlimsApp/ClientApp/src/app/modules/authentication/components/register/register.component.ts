@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
   griddata:UserConfiguration[]=[];
   isactivedirectory: boolean = false;
   isstandarduser: boolean = false;
-  title: string = "Add User Configuration";
+  title: string = "New User Configuration";
   objname: string = '';
   userid:string='';
   constructor(private commonsvc: CommonService, private rolesservice: RolesconfigurationService,
@@ -55,6 +55,7 @@ export class RegisterComponent implements OnInit {
       this.cdr.detectChanges();
     }
     else if (lastSegment == "edit") {
+      this.title = "Modify New User Configuration"
       this.editMode = true;
       this.userid=segments[segments.length - 1];
       this.getbyId();
