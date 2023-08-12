@@ -368,3 +368,4 @@ FodyWeavers.xsd
 /Vlims.Administration/Properties/ServiceDependencies/Dlimsadmin - Web Deploy/profile.arm.json
 /Vlims.Administration/Properties/ServiceDependencies/Dlimsadmin - Zip Deploy/profile.arm.json
 /Vlims.Administration/Properties/ServiceDependencies/DMSAdmin1 - Zip Deploy/profile.arm.json
+/Vlims.DocumentManager/Uploads/Testdoc.docx
