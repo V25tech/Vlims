@@ -87,4 +87,12 @@ export class CommonService {
       return null; // Or handle the absence of roles as needed
     }
   }
+  setadminroles(){
+    const admin=new functionalprofile();
+    admin.userMgmt=true;
+    admin.deptConfig=true;
+    admin.roleConfig=true;
+    const rolesString = JSON.stringify(admin);
+  this.storage.setItem('roles', rolesString);
+  }
 }

@@ -39,6 +39,7 @@ export class LoginService {
        this.isvalid = username === 'admin' && password === 'quoting123';
 
       if (this.isvalid) {
+        this.commonsvc.setadminroles();
         localStorage.setItem(AUTH_STORAGE_KEY, 'true');
         this.updateLoginStatus(true);
       }
@@ -73,6 +74,7 @@ getusers(){
   logout() {
     localStorage.removeItem(AUTH_STORAGE_KEY);
     this.updateLoginStatus(false);
+    this.commonsvc.removeUserRole();
     this.isvalid=false;
   }
 }

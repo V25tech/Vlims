@@ -37,7 +37,7 @@ export class UserConfigurationComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.access = this.commonsvc.getUserRoles()?.userConfig ?? false;
+    this.access = this.commonsvc.getUserRoles()?.userMgmt ?? false;
     this.getusers();
   }
   getusers() {

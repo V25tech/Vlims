@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { RequestContext, RoleConfiguration, functionalprofile } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { setfunctionalprofileconfigurationservice } from '../../../services/setfunctionalprofile.service';
@@ -26,6 +27,7 @@ export class SetfunctionalprofileComponent implements OnInit {
   constructor(private commonsvc: CommonService, private doctypeservice: RolesconfigurationService ,
     private setprofileservice: setfunctionalprofileconfigurationservice  ,
     private toaster:ToastrService,
+    private location: Location,
     private loader:NgxSpinnerService,
     private router: Router) { }
 
@@ -86,6 +88,6 @@ getsetfunctionalprofile() {
   }
   onCancel()
   {
-    
+    this.location.back();
   }
 }

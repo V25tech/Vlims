@@ -35,6 +35,7 @@ export class DocumentTypesComponent {
   ngOnInit() {
     debugger
     this.access = this.commonsvc.getUserRoles()?.documentTypeConfig ?? false;
+    console.log('access',this.access);
     this.getdocumenttypeconfig();
   }
 

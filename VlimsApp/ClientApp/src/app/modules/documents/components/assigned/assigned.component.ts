@@ -28,6 +28,7 @@ export class AssignedComponent implements OnInit {
 
     ngOnInit() {
       this.access = this.commonsvc.getUserRoles()?.workItemsassigned ?? false;
+      console.log('access',this.access);
       this.getworkflowitems();
     }
   getworkflowitems() {

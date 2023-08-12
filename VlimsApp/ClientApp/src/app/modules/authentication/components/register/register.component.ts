@@ -143,7 +143,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   closepopup() {
-    this.router.navigate(['/mainpage/users']);
+   this.location.back();
   }
   getdepartments() {
    this.loader.show();
@@ -165,7 +165,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   onCancel() {
-    this.router.navigate(['/admin/users']);
+    this.location.back();
   }
   calculateTotalUsers(): void {
     if(this.adduser.FirstName!=null || this.adduser.LastName!=null)
