@@ -116,8 +116,8 @@ export class AddRequestComponent {
 
   addRequest() {
     if (!this.viewMode) {
-      this.request.createdBy = 'admin';
-      this.request.modifiedBy = 'admin';
+      this.request.createdBy = this.commonsvc.getUsername();
+      this.request.modifiedBy = this.commonsvc.getUsername();
       this.request.status = 'In-Progress';
       this.request.createdDate = new Date().toISOString();
       this.request.modifiedDate = new Date().toISOString();

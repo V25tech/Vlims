@@ -20,7 +20,7 @@
                   id="documentTitle"
                   name="documentTitle"
                   placeholder="Document Title"
-                  [(ngModel)]="effective.documenttitle" disabled="viewMode"
+                  [(ngModel)]="effective.documenttitle" 
                   readonly
                 />
               </div>
@@ -38,7 +38,7 @@
                   id="documentNumber"
                   name="documentNumber"
                   placeholder="System Generated"
-                  [(ngModel)]="effective.documentno" disabled="viewMode"
+                  [(ngModel)]="effective.documentno" 
                   readonly
                 />
               </div>
@@ -55,7 +55,7 @@
                 id="docType"
                 name="docType"
                 placeholder="Document Type"
-                [(ngModel)]="effective.documenttype" disabled="viewMode"
+                [(ngModel)]="effective.documenttype" 
                 readonly
               />
               </div>
@@ -72,7 +72,7 @@
                 id="department"
                 name="department"
                 placeholder="Department"
-                [(ngModel)]="effective.department" disabled="viewMode"
+                [(ngModel)]="effective.department" 
                 readonly
               />
               </div>
@@ -111,7 +111,7 @@
                 id="effectiveDate"
                 name="effectiveDate"
                 placeholder="Effective Date"
-                [(ngModel)]="effective.effectiveDate" disabled="viewMode"
+                [(ngModel)]="effective.effectiveDate" [disabled]="viewMode"
               />
               </div>
             </div>
@@ -125,7 +125,7 @@
                     id="reviewDate"
                     name="reviewDate"
                     placeholder="Review Date"
-                    [(ngModel)]="effective.reviewDate" disabled="viewMode"
+                    [(ngModel)]="effective.reviewDate" [disabled]="viewMode"
                   />
                 </div>
               </div>
