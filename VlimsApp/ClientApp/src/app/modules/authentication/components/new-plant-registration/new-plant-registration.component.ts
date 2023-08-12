@@ -15,7 +15,7 @@ export class NewPlantRegistrationComponent implements OnInit {
   editMode:boolean=false;
   viewMode: boolean = false;
   plantid: number = 0;
-  title: string = 'Add Plant Configuration';
+  title: string = 'Add New Plant Configuration';
 
   constructor(private commonsvc: CommonService,private toastr: ToastrService, private doctypeservice: NewPlantRegistrationConfigurationService, private router: Router, private cdr: ChangeDetectorRef) { }
 
@@ -28,7 +28,7 @@ export class NewPlantRegistrationComponent implements OnInit {
       this.plantid = id;
       this.editMode = true; this.viewMode = false;
       this.getbyId();
-      this.title = "Edit Plan Configuration";
+      this.title = "Modify Plant Configuration";
       //this.documentType=this.commonsvc.documentType;
     }
     else if (lastSegment == "view") {
