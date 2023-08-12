@@ -114,6 +114,10 @@
               <div *ngIf="!existingDocReq.document" class="col-sm-10">
                 <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput
                   [disabled]="isUploaded" (change)="onFileSelected($event)">
+                  <div *ngIf="isFileUploadError && printType == 'single'"
+                  class="text-danger">
+                  Document file upload is required.
+                </div>
               </div>
               <div *ngIf="existingDocReq.document" class="col-sm-1">
                 <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
@@ -146,6 +150,10 @@
                 <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput
                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                   [disabled]="isUploaded" (change)="onFileSelected($event)">
+                  <div *ngIf="isFileUploadError && printType == 'bulk'"
+                  class="text-danger">
+                  Document file is required.
+                </div>
               </div>              
             </div>
           </fieldset>
