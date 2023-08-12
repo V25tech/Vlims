@@ -25,6 +25,7 @@ export class DocumentTypesComponent {
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
   docTypesDatasource = [];
+  access:boolean=false;
   //docs:DocumentTypeConfiguration[]=[];
   types:DocumentTypeConfiguration[]=[];
   constructor(private router:Router, private documenttypeService: DocumentTypeServiceService,
@@ -32,7 +33,8 @@ export class DocumentTypesComponent {
     private commonsvc: CommonService) {}
 
   ngOnInit() {
-    
+    debugger
+    this.access = this.commonsvc.getUserRoles()?.documentTypeConfig ?? false;
     this.getdocumenttypeconfig();
   }
 

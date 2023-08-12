@@ -7,7 +7,7 @@
         <h4 class="page-title flex-grow-1">Plant Management</h4>
         <div class="d-flex page-title-actions">
           <input type="text" class="form-control" placeholder="Search">
-          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPlant()">Add</button>
+          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPlant()" *ngIf="access">Add</button>
         </div>
       </div>
     </div>
@@ -42,7 +42,8 @@
               <td>{{doc?.ModifiedBy}}</td>
               <td>{{doc?.ModifiedDate }}</td>             
               <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
-              <td class="text-center"><i class="bi bi-pencil" (click)="editdoc(doc)"></i></td>
+              <td class="text-center" *ngIf="access"><i class="bi bi-pencil" (click)="editdoc(doc)"></i></td>
+              <td *ngIf="!access">Restricted</td>
               <!--(click)="editdoc(doc)"-->
             </tr>
           </ng-template>

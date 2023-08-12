@@ -391,7 +391,7 @@ export class functionalprofile {
   additionalTasks: boolean = false;
   documentRevison: boolean = false;
   workItemsassigned: boolean = false;
-  ActivateStatus:boolean = false;
+  Activatestatus:boolean = false;
   docrepository:boolean = false;
   Audit:boolean = false;
   reviewDate: Date | undefined;

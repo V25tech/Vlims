@@ -58,7 +58,6 @@ export class ReviewPrepationComponent {
     private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
   ngOnInit() {
-    debugger
     const user=localStorage.getItem("username");
     if(user!=null && user!=undefined)
     {

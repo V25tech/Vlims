@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { RequestContext, SecurityManagement } from '../../../../models/model';
 import { SecuritymanagementService } from '../../../services/securitymanagement.service';
 import { ToastrService } from 'ngx-toastr';
+import { CommonService } from 'src/app/shared/common.service';
 
 @Component({
   selector: 'app-securitymgmt',
@@ -18,10 +19,14 @@ export class SecuritymgmtComponent {
   editMode:boolean=false;
   viewMode:boolean=false;
   securityType: SecurityManagement = new SecurityManagement;
-  constructor(private doctypeservice: SecuritymanagementService,private toastr: ToastrService, private spinner: NgxSpinnerService, 
+  access:boolean=false;
+  constructor(private doctypeservice: SecuritymanagementService,private toastr: ToastrService,
+     private spinner: NgxSpinnerService, 
+     private commonsvc:CommonService,
     private router: Router,private location: Location) { }
 
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.securityConfig ?? false;
     this.getsecuritymanagement();
   }
   onCancel() {

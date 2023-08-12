@@ -23,7 +23,7 @@ export class TemplatesComponent {
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
   docTypesDatasource = [];
-
+  access:boolean=false;
   templatesDatasource: TemplateForm[] = [];
   types:DocumentTemplateConfiguration[]=[];
   constructor(private router:Router,private templatesvc: DocumentTemplateServiceService,
@@ -31,6 +31,7 @@ export class TemplatesComponent {
     private commonsvc: CommonService) {}
 
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.documentTemplateConfig ?? false;
     this.getdocumenttypeconfig();
   }
   getdocumenttypeconfig() {

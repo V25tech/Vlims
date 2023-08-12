@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Vlims.Common;
 using Vlims.Administration.Entities;
+using System.Xml.Serialization;
 
 
 
@@ -28,28 +29,20 @@ public static class SetFunctionalProfileConverter
                     DataRow row = dataset.Tables[0].Rows[i];
                     setFunctionalProfileData = new setfuctionalprofile();
                     setFunctionalProfileData.sfpid = Convert.ToInt16(row[SetFunctionalProfileConstants.SFPID.Trim('@')]);
+                    int id = setFunctionalProfileData.sfpid;
                     setFunctionalProfileData.role = row[SetFunctionalProfileConstants.Role.Trim('@')].ToString();
-                    setFunctionalProfileData.adminMgmt = DatatypeConverter.SetBoolValue(row["AdminManagement_PSY"]);
-                    setFunctionalProfileData.securityMgmt = DatatypeConverter.SetBoolValue(row["SecurityManagement_PSY"]);
-                    setFunctionalProfileData.securityConfig = DatatypeConverter.SetBoolValue(row["SecurityConfigurations_PSY"]);
-                    setFunctionalProfileData.approvalConfigs = DatatypeConverter.SetBoolValue(row["EsignandAprrovalConfigurations_PSY"]);
-                    setFunctionalProfileData.hirearchyMgmt = DatatypeConverter.SetBoolValue(row["HirearchyManagement_PSY"]);
-                    setFunctionalProfileData.roleConfig = DatatypeConverter.SetBoolValue(row["RoleConfiguration_PSY"]);
-                    setFunctionalProfileData.deptConfig = DatatypeConverter.SetBoolValue(row["DepartmentConfiguration_PSY"]);
-                    setFunctionalProfileData.plantMgmt = DatatypeConverter.SetBoolValue(row["PlantManagement_PSY"]);
-                    setFunctionalProfileData.userMgmt = DatatypeConverter.SetBoolValue(row["UserManagement_PSY"]);
-                    setFunctionalProfileData.userGroupConfig = DatatypeConverter.SetBoolValue(row["UserGroupConfiguration_PSY"]);
-                    setFunctionalProfileData.Activatestatus = DatatypeConverter.SetBoolValue(row["ActivateStatus"]);
-                    setFunctionalProfileData.Audit = DatatypeConverter.SetBoolValue(row["AuditLog_PSY"]);
-                    setFunctionalProfileData.documentMaster = DatatypeConverter.SetBoolValue(row["DocumentMaster_PSY"]);
-                    setFunctionalProfileData.documentTypeConfig = DatatypeConverter.SetBoolValue(row["DocumentTypeConfiguration_PSY"]);
-                    setFunctionalProfileData.documentTemplateConfig = DatatypeConverter.SetBoolValue(row["DocumentTemplateConfiguration_PSY"]);
-                    setFunctionalProfileData.workflowConfig = DatatypeConverter.SetBoolValue(row["WorkFlowConfiguration_PSY"]);
-                    setFunctionalProfileData.documentRequest = DatatypeConverter.SetBoolValue(row["DocumentRequest_PSY"]);
-                    setFunctionalProfileData.documentPreperation = DatatypeConverter.SetBoolValue(row["DocumentPreparation_PSY"]);
-                    setFunctionalProfileData.documentEffective = DatatypeConverter.SetBoolValue(row["DocumentEffectiveOut_PSY"]);
-                    setFunctionalProfileData.documentRevison = DatatypeConverter.SetBoolValue(row["DocumentRevision_PSY"]);
-                    setFunctionalProfileData.DocumentRepository = DatatypeConverter.SetBoolValue(row["DocumentRepository_PSY"]);                                  
+                    string docvalue = Convert.ToString(row[SetFunctionalProfileConstants.Document.Trim('@')]);
+                    if (!string.IsNullOrEmpty(docvalue))
+                    {
+                        // Create an XmlSerializer for the Person type
+                        var serializer1 = new XmlSerializer(typeof(setfuctionalprofile));
+                        // Create a StringReader to read the XML data
+                        var reader = new StringReader(Convert.ToString(row[SetFunctionalProfileConstants.Document.Trim('@')]));
+                        // Deserialize the XML data back to a Person object
+                        var person = (setfuctionalprofile)serializer1.Deserialize(reader);
+                        setFunctionalProfileData = person;
+                        setFunctionalProfileData.sfpid = id;
+                    }
                     result.Add(setFunctionalProfileData);
                 }
             }

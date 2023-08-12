@@ -19,4 +19,8 @@ export class setfunctionalprofileconfigurationservice {
     debugger
     return this.http.postJsonLogin(objrequest, "api/SetFunctionalProfile/save", this.type);
   }
+  update(objrequest: functionalprofile) {
+    debugger
+    return this.http.postJsonLogin(objrequest, "api/SetFunctionalProfile/update", this.type);
+  }
 }

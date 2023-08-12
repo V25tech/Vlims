@@ -38,6 +38,8 @@ import { AddRoleComponent } from '../authentication/components/Roles/new-role.co
 import { SetfunctionalprofileComponent } from '../authentication/components/set-functional-profile/setfunctionalprofile.component';
 import { ActivateDeactivateuserComponent } from '../authentication/components/Activate-deactivate-user/activate-deactivateuser.component';
 import { ChangepasswordComponent } from '../authentication/components/changepassword/changepassword.component';
+import { HierarchyComponent } from '../authentication/components/hierarchy/hierarchy.component';
+import { UsermanagementComponent } from '../authentication/components/usermanagement/usermanagement.component';
 
 
 
@@ -66,8 +68,9 @@ import { ChangepasswordComponent } from '../authentication/components/changepass
     AddRoleComponent,
     SetfunctionalprofileComponent,
     ActivateDeactivateuserComponent,
-    ChangepasswordComponent
-   
+    ChangepasswordComponent,
+    HierarchyComponent,
+   UsermanagementComponent
 
   ],
   imports: [

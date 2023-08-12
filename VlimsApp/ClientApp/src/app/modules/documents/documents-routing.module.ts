@@ -26,6 +26,9 @@ import { AddusergroupconfigurationComponent } from '../authentication/components
 import { AddRoleComponent } from '../authentication/components/Roles/new-role.component';
 import { SetfunctionalprofileComponent } from '../authentication/components/set-functional-profile/setfunctionalprofile.component';
 import { ActivateDeactivateuserComponent } from '../authentication/components/Activate-deactivate-user/activate-deactivateuser.component';
+import { ChangepasswordComponent } from '../authentication/components/changepassword/changepassword.component';
+import { HierarchyComponent } from '../authentication/components/hierarchy/hierarchy.component';
+import { UsermanagementComponent } from '../authentication/components/usermanagement/usermanagement.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -97,51 +100,51 @@ const routes: Routes = [
     component: AdminHomeComponent
   },
   {
-    path: 'admin/groups',
+    path: 'admin/usermanagement/groups',
     component: UsergroupconfigurationComponent,
   },
   {
-    path: 'admin/groups/add/:count',
+    path: 'admin/usermanagement/groups/add/:count',
     component: AddusergroupconfigurationComponent,
   },
   {
-    path: 'admin/groups/edit/:groupId',
+    path: 'admin/usermanagement/groups/edit/:groupId',
     component: AddusergroupconfigurationComponent,
   },
   {
-    path: 'admin/departments',
+    path: 'admin/hierarchy/departments',
     component: DepartmentComponent,
   },
   {
-    path: 'admin/departments/add',
+    path: 'admin/hierarchy/departments/add',
     component: AddDepartmentComponent,
   },
   {
-    path: 'admin/departments/edit/:deptId',
+    path: 'admin/hierarchy/departments/edit/:deptId',
     component: AddDepartmentComponent,
   },
   {
-    path: 'admin/roles',
+    path: 'admin/hierarchy/roles',
     component: RolesComponent,
   },
   {
-    path: 'admin/roles/add',
+    path: 'admin/hierarchy/roles/add',
     component: AddRoleComponent,
   },
   {
-    path: 'admin/roles/edit/:deptId',
+    path: 'admin/hierarchy/roles/edit/:deptId',
     component: AddRoleComponent,
   },
   {
-    path: 'admin/users',
+    path: 'admin/usermanagement/users',
     component: UserConfigurationComponent,
   },
   {
-    path: 'admin/users/add',
+    path: 'admin/usermanagement/users/add',
     component: RegisterComponent,
   },
   {
-    path: 'admin/users/edit/:userId',
+    path: 'admin/usermanagement/users/edit/:userId',
     component: RegisterComponent,
   },
   {
@@ -165,14 +168,33 @@ const routes: Routes = [
     component: ApprovalConfigurationsComponent,
   },
   {
-    path: 'admin/profile',
+    path: 'admin/hierarchy/profile',
     component: SetfunctionalprofileComponent,
   },
   {
-    path: 'admin/activeuser',
+    path: 'admin/usermanagement/activeuser',
     component: ActivateDeactivateuserComponent,
+  },
+  {
+    path: 'admin/change',
+    component: ChangepasswordComponent,
+  },
+  {
+    path: 'admin/hierarchy',
+    component: HierarchyComponent,
+  },
+  {
+    path: 'admin/usermanagement',
+    component: UsermanagementComponent,
+  },
+  {
+    path: 'home/hierarchy',
+    component: AdminHomeComponent,
+  },
+  {
+    path: 'home/admin',
+    component: AdminHomeComponent,
   }
-  
 ];
 
 @NgModule({

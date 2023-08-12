@@ -23,6 +23,7 @@ export class WorkflowsComponent {
   docTypesDatasource = [];
   workflowsDatasource = [];
   types:workflowconiguration[]=[];
+  access:boolean=false;
   constructor(
     private router: Router,
     private loader:NgxSpinnerService,
@@ -31,6 +32,7 @@ export class WorkflowsComponent {
   ) {}
 
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.workflowConfig ?? false;
     this.getdocumenttypeconfig();
   }
 

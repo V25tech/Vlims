@@ -31,12 +31,13 @@ export class UserConfigurationComponent implements OnInit {
   actiontype: number=0;
   pageConfig: any;
   searchstr: string='';
-
+  access:boolean=false;
   constructor(private commonsvc: CommonService, private doctypeservice: UsersconfigurationService,
     private loader:NgxSpinnerService,
     private router: Router) { }
 
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.userConfig ?? false;
     this.getusers();
   }
   getusers() {
@@ -53,11 +54,11 @@ export class UserConfigurationComponent implements OnInit {
   editdoc(doc: UserConfiguration) {
     
     this.commonsvc.userConfig = doc;
-    this.router.navigate(['/admin/users/edit', doc.UCFId]);
+    this.router.navigate(['/admin/usermanagement/users/edit', doc.UCFId]);
   }
 
   navigateToAddUser(): void {
-    this.router.navigate(['/admin/users/add']);
+    this.router.navigate(['/admin/usermanagement/users/add']);
   }
   
   getStatusClass(status: string): string {

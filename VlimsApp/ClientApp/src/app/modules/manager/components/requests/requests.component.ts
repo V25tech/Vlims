@@ -19,6 +19,7 @@ export class RequestsComponent implements OnInit{
   currentPage = 1;
   itemsPerPage = 10;
   rowsPerPageOptions = [1,10, 20, 50];
+  access:boolean=false;
   constructor(private router: Router,private spinner: NgxSpinnerService, private commonsvc: CommonService, private documentRequestService: DocumentRequestService) {}
 
   navigateToAddRequest(): void {
@@ -29,6 +30,7 @@ export class RequestsComponent implements OnInit{
 
   ngOnInit() {   
     //this.dataPaginator.rows = 10;
+    this.access = this.commonsvc.getUserRoles()?.documentRequest ?? false;
     this.getdocumentrequest();
 
   }

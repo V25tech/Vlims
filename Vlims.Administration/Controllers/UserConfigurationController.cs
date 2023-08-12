@@ -26,9 +26,9 @@ namespace PolicySummary.Controllers
     [Route("api/userconfiguration")]
     public class UserConfigurationController : ControllerBase
     {
-        
+
         private readonly IUserConfigurationService userConfigurationService;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -37,7 +37,7 @@ namespace PolicySummary.Controllers
         {
             this.userConfigurationService = userConfigurationService;
         }
-        
+
         /// <summary>
         /// This method is used to Get List of UserConfiguration
         /// </summary>
@@ -66,7 +66,7 @@ namespace PolicySummary.Controllers
             var result = userConfigurationService.GetUserConfigurationByUCFId(uCFId);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Save UserConfiguration
         /// </summary>
@@ -93,18 +93,10 @@ namespace PolicySummary.Controllers
         [HttpPost("updateuserconfiguration")]
         public ActionResult<System.Boolean> UpdateUserConfiguration(UserConfiguration userConfiguration)
         {
-            bool result = false;
-            if (userConfiguration.EmailId != null)
-            {
-                 result = userConfigurationService.UpdateUserConfiguration(userConfiguration);
-            }
-            else
-            {
-                result = userConfigurationService.UpdateUserStatusConfiguration(userConfiguration);
-            }
+            var result = userConfigurationService.UpdateUserConfiguration(userConfiguration);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Delete UserConfiguration By Id uCFId
         /// </summary>
@@ -115,7 +107,7 @@ namespace PolicySummary.Controllers
             var result = userConfigurationService.DeleteUserConfigurationByUCFId(uCFId);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Delete UserConfiguration By Multiple ids uCFIds
         /// </summary>
@@ -126,7 +118,7 @@ namespace PolicySummary.Controllers
             var result = userConfigurationService.DeleteAllUserConfiguration(uCFIds);
             return result;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -137,7 +129,7 @@ namespace PolicySummary.Controllers
             var result = userConfigurationService.GetUserConfigurationByUserManagementId(uMId);
             return result;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

@@ -20,7 +20,7 @@ export class UsergroupconfigurationComponent implements OnInit {
   currentPage = 10;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
-
+  access:boolean=false;
   name: string = 'Product Type';
   types: Usergroupconfiguration[] = [];
   //newtype: usergroupconfigurationService;
@@ -33,6 +33,7 @@ export class UsergroupconfigurationComponent implements OnInit {
   constructor(private commonsvc: CommonService, private doctypeservice: usergroupconfigurationService,  private router: Router) { }
 
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.userGroupConfig ?? false;
     this.getusergroupInfo();
   }
   getusergroupInfo() {
@@ -48,11 +49,11 @@ export class UsergroupconfigurationComponent implements OnInit {
   editdoc(doc: Usergroupconfiguration) {
     debugger
     this.commonsvc.userGroupConfig = doc;
-    this.router.navigate(['/admin/groups/edit', doc.Ugcid]);
+    this.router.navigate(['/admin/usermanagement/groups/edit', doc.Ugcid]);
   }
   addusergroup(): void {
     debugger
-    this.router.navigate(['admin/groups/add',this.types.length]);
+    this.router.navigate(['admin/usermanagement/groups/add',this.types.length]);
   }
   getStatusClass(status: string): string {
     debugger

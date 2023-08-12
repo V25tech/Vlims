@@ -21,9 +21,11 @@ export class DepartmentComponent implements OnInit {
   rowsPerPageOptions = [10, 20, 50];
   types: DepartmentConfiguration[] = [];
   viewMode:boolean=false;
+  access:boolean=false;
   constructor(private commonsvc: CommonService, private doctypeservice: DepartmentconfigurationService, private loader: NgxSpinnerService, private router: Router) { }
 
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.deptConfig ?? false;
     this.getdepartments();
   }
 getdepartments() {
@@ -52,11 +54,11 @@ getdepartments() {
     }
   }
   navigateToAddDepartment(): void {
-    this.router.navigate(['/admin/departments/add']);
+    this.router.navigate(['/admin/hierarchy/departments/add']);
   }
   editBrand(doc : DepartmentConfiguration)
   {
-    this.router.navigate(['/admin/departments/edit', doc.DPCFId]);
+    this.router.navigate(['/admin/hierarchy/departments/edit', doc.DPCFId]);
   }
   submit(newdept: DepartmentConfiguration) {
     

@@ -20,11 +20,12 @@ export class EffectivesComponent {
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
   effectivesDatasource: DocumentEffectiveConfiguration[]  = [];
-
+  access:boolean=false;
   constructor(private router: Router, private documentEffectiveService: DocumentEffectiveService,private spinner: NgxSpinnerService, private commonsvc: CommonService) {}
 
   
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.documentEffective ?? false;
     this.spinner.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.documentEffectiveService.getdocumenteffective(objrequest).subscribe((data: any) => {

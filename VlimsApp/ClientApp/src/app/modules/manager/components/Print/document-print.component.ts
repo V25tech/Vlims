@@ -22,6 +22,7 @@ export class DocumentPrintComponent implements OnInit {
   actiontype: number = 0;
   pageConfig: any;
   searchstr: string = '';
+  access:boolean=false;
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService, private docservice: DocumentPreperationService, private router: Router) { }
 
   navigateToAddPrint(): void {
@@ -29,7 +30,7 @@ export class DocumentPrintComponent implements OnInit {
     this.router.navigate(['/print/add']);
   }
   ngOnInit() {
-    debugger;
+    this.access = this.commonsvc.getUserRoles()?.documentRevison ?? false;
     //this.tabselect = this.router.url.split('/').pop();
     this.GetDocumentPrint();
 

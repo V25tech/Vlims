@@ -2,37 +2,38 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-home',
-  templateUrl: './admin-home.component.html',
-  styleUrls: ['./admin-home.component.scss'],
+  selector: 'app-hierarchy',
+  templateUrl: './hierarchy.component.html',
+  styleUrls: ['./hierarchy.component.scss']
 })
-export class AdminHomeComponent {
+export class HierarchyComponent {
   constructor(private router: Router) {}
-
   navigateTo(navTo: any) {
     debugger;
     if (navTo === 'security') {
       this.router.navigate(['/admin/security']);
     } else if (navTo === 'hierrachy') {
-      this.router.navigate(['/admin/hierarchy']);
+      this.router.navigate(['/admin/profile']);
+    } else if (navTo === 'profile') {
+      this.router.navigate(['/admin/hierarchy/profile']);
     } else if (navTo === 'plant') {
       this.router.navigate(['/admin/plant']);
     } else if (navTo === 'User') {
-      this.router.navigate(['/admin/usermanagement']);
+      this.router.navigate(['/admin/users']);
     } else if (navTo === 'Approval') {
       this.router.navigate(['/admin/approval']);
     } else if (navTo === 'groups') {
       this.router.navigate(['admin/groups']);
     } else if (navTo === 'Roles') {
-      this.router.navigate(['/admin/roles']);    }
+      this.router.navigate(['/admin/hierarchy/roles']);    }
     else if (navTo === 'Approvalconfig') {
       this.router.navigate(['/admin/approvalconfig']);
     }  else if (navTo === 'departments') {
-      this.router.navigate(['/admin/departments']);
+      this.router.navigate(['/admin/hierarchy/departments']);
     } else if (navTo === 'activeuser') {
       this.router.navigate(['/admin/activeuser']);
     } else if (navTo === 'home') {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/admin']);
     }
   }
 }

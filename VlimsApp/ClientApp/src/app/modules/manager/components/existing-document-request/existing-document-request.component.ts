@@ -20,7 +20,7 @@ export class ExistingDocumentRequestComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 10;
   rowsPerPageOptions = [1, 10, 20, 50];
-
+  access:boolean=false;
   constructor(private router: Router, private spinner: NgxSpinnerService, private commonsvc: CommonService, private existingDocReqservice: ExistingDocumentRequestService) { }
 
   navigateToAddRequest(): void {
@@ -30,6 +30,7 @@ export class ExistingDocumentRequestComponent implements OnInit {
   existingDocDatasource: ExistingDocumentRequest[] = [];
 
   ngOnInit() {
+    this.access = this.commonsvc.getUserRoles()?.documentRevison ?? false;
     this.getdocumentrequest();    
    // this.existingDocDatasource = this.getDummyData();
     this.currentPage = 10;

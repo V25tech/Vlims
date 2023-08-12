@@ -21,6 +21,8 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToastrModule } from 'ngx-toastr';
 
+
+
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LeftNavComponent],
   imports: [
