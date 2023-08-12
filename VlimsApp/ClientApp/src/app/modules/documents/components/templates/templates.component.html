@@ -3,12 +3,12 @@
         <div class="col">
            
             <div class="d-flex justify-content-between align-items-center">
-                <h4 class="page-title flex-grow-1">Document Templates</h4>
+                <h4 class="page-title flex-grow-1">Document template configuration</h4>
                 <div class="d-flex page-title-actions">
                   
                  <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search Templates" />
                 
-                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddTemplate()">Add</button>
+                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddTemplate()">New</button>
                 </div>
               </div>
         </div>
@@ -42,7 +42,7 @@
                         <td>{{template?.Uniquecode}}</td>
                         <td>{{template?.Templatename}}</td>
                         <td>{{template?.CreatedBy}}</td>
-                        <td>{{template?.CreatedBy}}</td>
+                        <td>{{template?.CreatedDate | date }}</td>
                         <td><span class="status" [ngClass]="getStatusClass(template['Status'])">{{template?.Status}} </span></td>
                         <td class="text-center"><i (click)="editdoc(template)" class="bi bi-pencil"></i></td>
                     </tr>

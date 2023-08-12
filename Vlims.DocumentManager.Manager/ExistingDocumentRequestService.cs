@@ -128,13 +128,14 @@ namespace PolicySummary.DMS.Services
             {
                 string file = string.Empty; string errMsg = string.Empty;
                 file = FileManager.GetFilePath(p_fileInfo);
-                baseDirectory = Path.GetDirectoryName(file) + "/" + p_fileInfo.FileName.Replace("\".zip\"", string.Empty);
-                if (Directory.Exists(baseDirectory))
-                    Directory.Delete(baseDirectory, true);
-                System.IO.Compression.ZipFile.ExtractToDirectory(file, Path.GetDirectoryName(file), true);
+                //baseDirectory = Path.GetDirectoryName(file) + "/" + p_fileInfo.FileName.Replace("\".zip\"", string.Empty);
+                //if (Directory.Exists(baseDirectory))
+                //    Directory.Delete(baseDirectory, true);
+                //System.IO.Compression.ZipFile.ExtractToDirectory(file, Path.GetDirectoryName(file), true);
                 //baseDirectory = baseDirectory + Constants.XmlPath + p_file.FileName.Replace(Constants.Zip, string.Empty);
                 l_dsInfo = ReadExcelFileWithValueType(p_fileInfo, l_numericColumns);
                 List<string> lstEntityNamesFromExcel = new List<string>();              
+                
                 if (l_dsInfo.Tables[0]?.Rows?.Count > 0)
                 {
                     var ValidNameRegExp = string.Empty;

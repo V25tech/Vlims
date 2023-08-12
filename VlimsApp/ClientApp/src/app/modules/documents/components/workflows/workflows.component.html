@@ -3,11 +3,11 @@
         <div class="col">
            
             <div class="d-flex justify-content-between align-items-center">
-                <h4 class="page-title flex-grow-1">Workflows</h4>
+                <h4 class="page-title flex-grow-1">Work flow configuration</h4>
                 <div class="d-flex page-title-actions">
                     <input type="text" class="form-control" pInputText type="text" (input)="workflowTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search Workflows" />
                 
-                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddWorkflow()">Add</button>
+                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddWorkflow()">New</button>
                 </div>
               </div>
         </div>
@@ -30,7 +30,7 @@
                         <th pSortableColumn="CreatedBy" style="width:20%">Registered by<p-sortIcon field="CreatedBy"></p-sortIcon></th>
                         <th pSortableColumn="CreatedDate" style="width:200px">Registered On <p-sortIcon field="CreatedDate"></p-sortIcon></th>
                         <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
-                        <th style="width:80px">Actions</th>
+                        <th style="width:80px">Modify</th>
 
                     </tr>
                 </ng-template>

@@ -104,7 +104,7 @@ this.workflow.approvalsCount=0;
 }
 else if(lastSegment=="edit")
 {
-  this.title='Edit Workflow Configuration';
+  this.title='Modify Workflow Configuration';
   this.editMode=true;
     this.id=parseInt(segments[segments.length-1],10);
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
