@@ -90,7 +90,6 @@ export class ReviewPrepationComponent {
     return this.docPreperationService.getbyId(arg0).subscribe((data: any) => {
       this.preparation = data;
       this.spinner.hide();
-      console.log('request', this.preparation);
     });
   }
   approve() {

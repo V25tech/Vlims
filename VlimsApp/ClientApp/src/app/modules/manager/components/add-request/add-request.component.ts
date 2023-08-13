@@ -76,7 +76,6 @@ export class AddRequestComponent {
     return this.documentRequestService.getbyId(arg0).subscribe((data: any) => {
       this.request = data;
       this.spinner.hide();
-      console.log('request', data);
     });
   }
   approve() {

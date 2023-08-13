@@ -84,7 +84,6 @@ export class ReviewEffectiveComponent {
     return this.documentEffectiveService.getbyId(arg0).subscribe((data:any)=>{
       this.effective=data;
       this.spinner.hide();
-      console.log('request',data);
     });
   }
   approve(){

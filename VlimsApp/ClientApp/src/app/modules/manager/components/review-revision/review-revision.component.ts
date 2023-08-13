@@ -24,81 +24,53 @@ export class ReviewRevisionComponent {
   id: string = '';
   effectiveDate: string | undefined;
   reviewDate: string | undefined;
-  departmentsSource = [];workflownamee:string=''
-  typeSource= [];workflowsSource :workflowconiguration[]= [];
-  requestId:number=0;workId:number=0;statuss:string='';iscompleted:boolean=false;type:string=''
-  username:string=''
+  departmentsSource = []; workflownamee: string = ''
+  typeSource = []; workflowsSource: workflowconiguration[] = [];
+  requestId: number = 0; workId: number = 0; statuss: string = ''; iscompleted: boolean = false; type: string = ''
+  username: string = ''
   workitems: Array<WorkItemsConfiguration> = [];
-  finalStatus:string=''
+  finalStatus: string = ''
 
   constructor(private router: Router, private location: Location, private toastr: ToastrService, private route: ActivatedRoute,
-    private spinner: NgxSpinnerService, private commonsvc: CommonService, 
-    private workitemssvc:WorkitemsService,
+    private spinner: NgxSpinnerService, private commonsvc: CommonService,
+    private workitemssvc: WorkitemsService,
     private route1: ActivatedRoute,
     private wfservice: WorkflowServiceService,
     private documentRevisionService: DocumentRevisionService,
     private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService) { }
 
   ngOnInit() {
-    debugger
-    const user=localStorage.getItem("username");
-    if(user!=null && user!=undefined)
-    {
-      this.commonsvc.createdBy=user;
-      this.username=user;
-    }
-    this.route.params.subscribe(params => {
-      this.requestId = params['requestId'];
-      this.workId = params['workId'];
-      this.type=params['type'];
-    });
+    const user = localStorage.getItem("username");
+    if (user != null && user != undefined) {
+      this.commonsvc.createdBy = user;
+      this.username = user;
+    }    
     this.id = this.route.snapshot.paramMap.get('id') ?? '';
     this.getdepartments();
     this.getdocumenttypeconfig();
     this.getworkflowinfo();
-    if (this.type == 'view') {
-      this.viewMode = true;
-      this.getbyId(this.requestId);
-      
-    }
-    else if (this.id) { //edit mode
+    if (this.id) { //edit mode
       this.editMode = true;
       if (this.commonsvc.revision.atid) {
-        console.log('revision',this.commonsvc.revision);
-        this.getworkflowinfo();
-       
-        //this.revision = this.commonsvc.revision;
-        // this.effectiveDate = this.toDate(this.revision.effectiveDate);
-        // this.reviewDate = this.toDate(this.revision.reviewDate);
-        //   this.effectiveDate = this.toDate(this.revision.effectiveDate);
-        //  this.reviewDate = this.toDate(this.revision.reviewDate);
+        this.revision = this.commonsvc.revision;
+        this.effectiveDate = this.toDate(this.revision.effectiveDate);
+        this.reviewDate = this.toDate(this.revision.reviewDate);
       }
       else
-        this.getDocumentRevision(this.id);
+        this.getDocumentRevision(Number.parseInt(this.id));
     }
   }
   getbyId(arg0: number) {
     this.spinner.show();
-    return this.documentRevisionService.getbyId1(arg0).subscribe((data: any) => {
-      this.revision = data;
-      if(this.workflowsSource.length>0)
-      {
-        debugger
-         this.workflownamee=this.workflowsSource.find(o=>o.workflowName==this.revision.workflow)?.workflowName as string;
-        if(this.workflownamee!=null || this.workflownamee!=undefined)
-        {
-      this.revision.workflow=this.workflownamee;
-        }
-      }
-      //this.getworkflowitems();
+    return this.documentRevisionService.getbyId(arg0).subscribe((data: any) => {
+      this.revision = data;      
       this.spinner.hide();
-      console.log('request', this.revision);
     });
   }
   approve() {
     debugger
-    this.revision.modifiedBy=this.username;
-    this.revision.status=this.finalStatus;
+    this.revision.modifiedBy = this.username;
+    this.revision.status = this.finalStatus;
     alert(this.revision.status);
     this.saveRequest();
   }
@@ -120,10 +92,10 @@ export class ReviewRevisionComponent {
     return event.target.valueAsDate;
   }
 
-  getDocumentRevision(id: string) {
+  getDocumentRevision(id: number) {
     this.spinner.show();
     return this.documentRevisionService.getbyId(id).subscribe((data: any) => {
-      this.reviewDate = data;
+      this.revision = data;
       this.effectiveDate = this.toDate(this.revision.effectiveDate);
       this.reviewDate = this.toDate(this.revision.reviewDate);
       this.spinner.hide();
@@ -139,32 +111,29 @@ export class ReviewRevisionComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
       this.typeSource = data.Response;
-      
+
     });
   }
   getworkflowinfo() {
     //let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.wfservice.getworkflow(this.commonsvc.req).subscribe((data: any) => {
       this.workflowsSource = data.Response;
-      this.getbyId(parseInt(this.id));
-      console.log(this.workflowsSource);
     });
   }
   saveRequest() {
     debugger
-    this.revision.status="Revision";
-    if(this.revision.workflow!=this.workflownamee)
-    {
-    if (this.editMode || this.viewMode) {
-      this.updateRequest();
+    this.revision.status = "Revision";
+    if (this.revision.workflow != this.workflownamee) {
+      if (this.editMode || this.viewMode) {
+        this.updateRequest();
+      }
+      else {
+        this.addRequest();
+      }
     }
     else {
-      this.addRequest();
+      this.toastr.error('same workflow cannot create revision');
     }
-  }
-  else{
-    this.toastr.error('same workflow cannot create revision');
-  }
   }
 
   addRequest() {
@@ -209,45 +178,44 @@ export class ReviewRevisionComponent {
   }
   getworkflowitems() {
     this.spinner.show();
-    const user=localStorage.getItem("username");
-    if(user!=null && user!=undefined){
-      this.commonsvc.createdBy=user;
+    const user = localStorage.getItem("username");
+    if (user != null && user != undefined) {
+      this.commonsvc.createdBy = user;
     }
     return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
       debugger
       this.workitems = data.Response;
-      if(this.workitems.length>0){
-        this.workitems=this.workitems.filter(p=>p.ReferenceId==this.requestId);
-        if(this.workitems)
-        {
+      if (this.workitems.length > 0) {
+        this.workitems = this.workitems.filter(p => p.ReferenceId == this.requestId);
+        if (this.workitems) {
           this.workitems.sort((a, b) => a.WITId - b.WITId);
-          const work=this.workitems.filter(o=>o.WITId==this.workId);
-                  this.statuss = work[0].ActionType;
-                  this.iscompleted=work[0].IsCompleted;
-                  const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
-                  const reviewedcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted).length;
-                  const countt = totalreviewcount - reviewedcount;
-                  if (this.statuss === 'Review') {
-                    if (countt === 1) {
-                      this.finalStatus = 'Reviewed';
-                    } else if (countt > 1) {
-                      this.finalStatus = 'Pending Review';
-                    } else if (countt === totalreviewcount) {
-                      this.finalStatus = 'Pending Review';
-                    }
-                  } else {
-                    if (countt === 1) {
-                      this.finalStatus = 'Approved';
-                    } else if (countt > 1) {
-                      this.finalStatus = 'Pending Approve';
-                    } else if (countt === totalreviewcount) {
-                      this.finalStatus = 'Pending Approve';
-                    }
-                  }
-                  console.log('status', this.finalStatus);
-                }
-              }
-              this.spinner.hide();
-            });
+          const work = this.workitems.filter(o => o.WITId == this.workId);
+          this.statuss = work[0].ActionType;
+          this.iscompleted = work[0].IsCompleted;
+          const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+          const reviewedcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted).length;
+          const countt = totalreviewcount - reviewedcount;
+          if (this.statuss === 'Review') {
+            if (countt === 1) {
+              this.finalStatus = 'Reviewed';
+            } else if (countt > 1) {
+              this.finalStatus = 'Pending Review';
+            } else if (countt === totalreviewcount) {
+              this.finalStatus = 'Pending Review';
+            }
+          } else {
+            if (countt === 1) {
+              this.finalStatus = 'Approved';
+            } else if (countt > 1) {
+              this.finalStatus = 'Pending Approve';
+            } else if (countt === totalreviewcount) {
+              this.finalStatus = 'Pending Approve';
+            }
           }
+          console.log('status', this.finalStatus);
+        }
+      }
+      this.spinner.hide();
+    });
+  }
 }
