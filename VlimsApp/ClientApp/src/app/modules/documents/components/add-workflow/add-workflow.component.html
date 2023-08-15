@@ -51,7 +51,7 @@
           </div>
           <div class="form-group row">
             <label for="workflow" class="col-sm-2 col-form-label"
-              >Document Stage <span style="color: red; font-weight: bolder;">*</span></label
+              >Document Stage<span style="color: red; font-weight: bolder;">*</span></label
             >
             <div class="col-sm-10">
               <p-dropdown
@@ -60,8 +60,14 @@
                 [(ngModel)]="workflow.documentstage"
                 optionLabel="label"
                 optionValue="label"
-              >
+                [required]="true"
+                [autoDisplayFirst]="false"
+                placeholder="Select Document Stage"
+                #documentstage="ngModel">
               </p-dropdown>
+              <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
+                Document Stage is required.
+              </div>
             </div>
           </div>
           <div class="form-group row">
@@ -76,30 +82,36 @@
                 optionLabel="Documenttypename"
                 placeholder="Enter Document Type"
                 optionValue="Documenttypename"
-              >
-                
+                [required]="true"
+                [autoDisplayFirst]="false"
+                #documenttypeInput="ngModel">
               </p-dropdown>
+              <div *ngIf="documenttypeInput.invalid && (documenttypeInput.dirty || documenttypeInput.touched)" class="text-danger">
+                Document Type is required.
+              </div>
             </div>
           </div>
 
           <div class="form-group row">
             <label for="department" class="col-sm-2 col-form-label"
-              >Department <span style="color: red; font-weight: bolder;">*</span></label
-            >
+              >Department <span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <p-multiSelect
                 [options]="departs"
                 [(ngModel)]="workflow.department"
-                defaultLabel="Select a Department"
+                placeholder="Enter Department"
                 name="department"
                 optionLabel="DepartmentName"
                 display="chip"
-              ></p-multiSelect>
+                [required]="true"
+                #departmentInput="ngModel">
+              </p-multiSelect>
+              <div *ngIf="departmentInput.invalid && (departmentInput.dirty || departmentInput.touched)" class="text-danger">
+                Department is required.
+              </div>
             </div>
           </div>
-
         </div>
-
         
         <div class="p-4 bg-white mt-3 shadow-dark rounded-2">
           <h5 class="page-card-title">Reviewers</h5>
@@ -120,7 +132,7 @@
                 required
                 #reviewsCountInput="ngModel"
               />
-               <!-- Show validation error message -->
+               
     <!-- <div *ngIf="workflow.reviewsCount > 1" class="text-danger">
       Select Only One Reviwer.
             </div> -->
@@ -170,7 +182,12 @@
                 name="UserID"
                 optionLabel="UserID"
                 display="chip"  (ngModelChange)="calculatereviewscount()"
-              ></p-multiSelect>
+                [required]="true"
+                #reviewers="ngModel">
+              </p-multiSelect>
+              <div *ngIf="reviewers.invalid && (reviewers.dirty || reviewers.touched)" class="text-danger">
+                Reviewer(s) is required.
+              </div>
               <!-- <p-dropdown
                 name="UserID"
                 [options]="users"
@@ -278,7 +295,12 @@
                 name="UserID1"
                 optionLabel="UserID"
                 display="chip" (ngModelChange)="calculateapprovalscount()"
-              ></p-multiSelect>
+                [required]="true"
+                #approvals="ngModel">
+              </p-multiSelect>
+              <div *ngIf="approvals.invalid && (approvals.dirty || approvals.touched)" class="text-danger">
+                Approver(s) is required.
+              </div>
               <!-- <p-dropdown
               name="UserID"
               [options]="users"

@@ -16,11 +16,11 @@ import { WorkitemsService } from 'src/app/modules/services/workitems.service';
   styleUrls: ['./add-request.component.scss'],
 })
 export class AddRequestComponent {
-  departmentsSource = []; type:string=''
-  requestId:number=0;workId:number=0;statuss:string='';iscompleted:boolean=false;
-  username:string='';isreview:boolean=false;isapprove:boolean=false;reviewpendingcount=0;
+  departmentsSource = []; type: string = ''
+  requestId: number = 0; workId: number = 0; statuss: string = ''; iscompleted: boolean = false;
+  username: string = ''; isreview: boolean = false; isapprove: boolean = false; reviewpendingcount = 0;
   workitems: Array<WorkItemsConfiguration> = [];
-  finalStatus:string=''
+  finalStatus: string = ''
   typeSource = [];
   workflowsSource = [];
   request = new DocumentRequestConfiguration();
@@ -33,24 +33,21 @@ export class AddRequestComponent {
   ];
 
 
-  constructor(private router: Router, private location: Location, private toastr: ToastrService, 
-    private workitemssvc:WorkitemsService,
+  constructor(private router: Router, private location: Location, private toastr: ToastrService,
+    private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private documentRequestService: DocumentRequestService) { }
 
   ngOnInit() {
-    debugger
-    const user=localStorage.getItem("username");
-    if(user!=null && user!=undefined)
-    {
-      this.commonsvc.createdBy=user;
-      this.username=user;
+    const user = localStorage.getItem("username");
+    if (user != null && user != undefined) {
+      this.commonsvc.createdBy = user;
+      this.username = user;
     }
     this.route.params.subscribe(params => {
-      debugger
       this.requestId = params['requestId'];
       this.workId = params['workId'];
-      this.type=params['type'];
+      this.type = params['type'];
     });
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
@@ -61,8 +58,7 @@ export class AddRequestComponent {
     }
     else if (segments.slice(-1).toString() == 'edit') {
       this.editMode = true;
-      if(this.commonsvc.request==null)
-      {
+      if (this.commonsvc.request == null) {
         this.location.back();
       }
       this.request = this.commonsvc.request;
@@ -80,16 +76,14 @@ export class AddRequestComponent {
   }
   approve() {
     //this.request.status = this.statuss;
-    
-    this.request.modifiedBy=this.username;
-    this.request.status=this.finalStatus;
-    if(this.isapprove && this.reviewpendingcount>0)
-    {
+
+    this.request.modifiedBy = this.username;
+    this.request.status = this.finalStatus;
+    if (this.isapprove && this.reviewpendingcount > 0) {
       this.toastr.error('Reviews Pending');
     }
-    else
-    {
-    this.updateRequest();
+    else {
+      this.updateRequest();
     }
   }
   reinitiative() {
@@ -98,7 +92,7 @@ export class AddRequestComponent {
     //this.updateRequest();
   }
   reject() {
-    this.request.modifiedBy=this.commonsvc.getUsername();
+    this.request.modifiedBy = this.commonsvc.getUsername();
     this.request.status = 'Rejected'
     this.location.back();
     this.updateRequest();
@@ -135,10 +129,9 @@ export class AddRequestComponent {
   }
 
   updateRequest() {
-    if(this.viewMode && this.request.status!='Rejected')
-    {
-      this.request.modifiedBy=this.commonsvc.createdBy;
-      this.request.status=this.finalStatus;
+    if (this.viewMode && this.request.status != 'Rejected') {
+      this.request.modifiedBy = this.commonsvc.createdBy;
+      this.request.status = this.finalStatus;
     }
     this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
       this.commonsvc.request = new DocumentRequestConfiguration();
@@ -174,48 +167,47 @@ export class AddRequestComponent {
   }
   getworkflowitems() {
     this.spinner.show();
-    const user=localStorage.getItem("username");
-    if(user!=null && user!=undefined){
-      this.commonsvc.createdBy=user;
+    const user = localStorage.getItem("username");
+    if (user != null && user != undefined) {
+      this.commonsvc.createdBy = user;
     }
     return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
-      debugger
+
       this.workitems = data.Response;
-      if(this.workitems.length>0){
-        this.workitems=this.workitems.filter(p=>p.ReferenceId== this.requestId && p.TaskType=='Request');
-        if(this.workitems)
-        {
+      if (this.workitems.length > 0) {
+        this.workitems = this.workitems.filter(p => p.ReferenceId == this.requestId && p.TaskType == 'Request');
+        if (this.workitems) {
           this.workitems.sort((a, b) => a.WITId - b.WITId);
-          const work=this.workitems.filter(o=>o.WITId==this.workId);
-                  this.statuss = work[0].ActionType;
-                  this.iscompleted=work[0].IsCompleted;
-                  const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
-                  debugger
-                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted==false).length;
-                  const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
-                  const countt = totalreviewcount - reviewedcount;
-                  if (this.statuss === 'Review') {
-                    this.isreview=true;
-                    if (countt === 1) {
-                      this.finalStatus = 'Reviewed';
-                    } else if (countt > 1) {
-                      this.finalStatus = 'Pending Review';
-                    } else if (countt === totalreviewcount) {
-                      this.finalStatus = 'Pending Review';
-                    }
-                  } else {
-                    if (countt === 1) {
-                      this.isapprove=true;
-                      this.finalStatus = 'Approved';
-                    } else if (countt > 1) {
-                      this.finalStatus = 'Pending Approve';
-                    } else if (countt === totalreviewcount) {
-                      this.finalStatus = 'Pending Approve';
-                    }
-                  }
-                }
-              }
-              this.spinner.hide();
-            });
+          const work = this.workitems.filter(o => o.WITId == this.workId);
+          this.statuss = work[0].ActionType;
+          this.iscompleted = work[0].IsCompleted;
+          const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+
+          this.reviewpendingcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted == false).length;
+          const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
+          const countt = totalreviewcount - reviewedcount;
+          if (this.statuss === 'Review') {
+            this.isreview = true;
+            if (countt === 1) {
+              this.finalStatus = 'Reviewed';
+            } else if (countt > 1) {
+              this.finalStatus = 'Pending Review';
+            } else if (countt === totalreviewcount) {
+              this.finalStatus = 'Pending Review';
+            }
+          } else {
+            if (countt === 1) {
+              this.isapprove = true;
+              this.finalStatus = 'Approved';
+            } else if (countt > 1) {
+              this.finalStatus = 'Pending Approve';
+            } else if (countt === totalreviewcount) {
+              this.finalStatus = 'Pending Approve';
+            }
           }
+        }
+      }
+      this.spinner.hide();
+    });
+  }
 }

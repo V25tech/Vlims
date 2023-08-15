@@ -22,7 +22,7 @@ export class DocumentRevisionRequestsComponent implements OnInit{
   constructor(private router: Router,private spinner: NgxSpinnerService, private commonsvc: CommonService, private documentRevisionService: DocumentRevisionService) {}
 
   navigateToAddRequest(): void {
-    this.router.navigate(['/requests/add']);
+    this.router.navigate(['/revision/add']);
   }
 
   revisionDatasource = [];
@@ -54,7 +54,6 @@ export class DocumentRevisionRequestsComponent implements OnInit{
     this.spinner.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.documentRevisionService.getdocumentRevisions(objrequest).subscribe((data: any) => {     
-      debugger
       this.revisionDatasource = data.response;
       if(this.revisionDatasource.length<10)
       this.currentPage=10;
