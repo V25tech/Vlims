@@ -29,10 +29,10 @@ namespace Vlims.Services
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.DTCId,50, nameof(documentTypeConfiguration.DTCId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(documentTypeConfiguration.DocumentMasterId, nameof(documentTypeConfiguration.DocumentMasterId)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.DocumentMasterId,50, nameof(documentTypeConfiguration.DocumentMasterId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.Documenttypename,50, nameof(documentTypeConfiguration.Documenttypename)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.Documenttypename,150, nameof(documentTypeConfiguration.Documenttypename)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.documenttypeprefix,50, nameof(documentTypeConfiguration.documenttypeprefix)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.Description,50, nameof(documentTypeConfiguration.Description)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.Assigntodepartment,50, nameof(documentTypeConfiguration.Assigntodepartment)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.Description,500, nameof(documentTypeConfiguration.Description)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.Assigntodepartment,500, nameof(documentTypeConfiguration.Assigntodepartment)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.CreatedBy,100, nameof(documentTypeConfiguration.CreatedBy)));
                 validationMessages.Append(validationHelper.LengthCheckValidator(documentTypeConfiguration.ModifiedBy,100, nameof(documentTypeConfiguration.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))

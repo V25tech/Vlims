@@ -3,4 +3,25 @@
   max-width: 350px;
 }
 
+.p-multiselect-label {
+  display: block;
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
+// ::ng-deep p-multiselect.p-multiselect.chip .p-multiselect-label{
+//   display: flex;
+//   flex-wrap: wrap;
+//   white-space: nowrap;
+//   cursor: pointer;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }
+
+::ng-deep .p-multiselect-label-container {
+  overflow: hidden;
+  flex: 1 1 auto;
+  cursor: pointer;
+}

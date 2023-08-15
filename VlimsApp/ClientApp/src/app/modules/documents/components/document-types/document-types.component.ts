@@ -1,12 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-
 import { Router } from '@angular/router';
-
-
-
 import { CommonService } from 'src/app/shared/common.service';
-import { DocumentTypeConfiguration } from '../../models/DocumentTypeConfiguration';
-import { RequestContext } from 'src/app/models/model';
+import { DocumentTypeConfiguration, RequestContext } from 'src/app/models/model';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Table } from 'primeng/table';
@@ -33,7 +28,6 @@ export class DocumentTypesComponent {
     private commonsvc: CommonService) {}
 
   ngOnInit() {
-    debugger
     this.access = this.commonsvc.getUserRoles()?.documentTypeConfig ?? false;
     console.log('access',this.access);
     this.getdocumenttypeconfig();

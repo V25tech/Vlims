@@ -36,10 +36,10 @@
                     <tr>  
                         <td>{{ i + 1 }}</td>  
                         <td>{{doc?.Documenttypename}}</td>
-            <td>{{doc?.documenttypeprefix}}</td>
-            <td>{{doc?.Description}}</td>
-            <td>{{doc?.ModifiedBy}}</td>
-            <td>{{doc?.ModifiedDate | date}}</td>
+                        <td>{{doc?.documenttypeprefix}}</td>
+                        <td>{{doc?.Description}}</td>
+                        <td>{{doc?.ModifiedBy}}</td>
+                        <td>{{doc?.ModifiedDate | date}}</td>
                         <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
                         <td class="text-center" *ngIf="access"><i *ngIf="doc?.Status!='Approved'" (click)="editdoc(doc)" class="bi bi-pencil"></i></td>
                         <td *ngIf="!access">Restricted</td>

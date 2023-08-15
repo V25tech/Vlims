@@ -1,4 +1,4 @@
-export class DocumentTypeConfiguration {
+export class DocumentTypeConfigurationG {
     DTCId: string="";
     DocumentMasterId: string="";
     Documenttypename: string="";
@@ -9,5 +9,6 @@ export class DocumentTypeConfiguration {
     CreatedDate: string | null="";
     ModifiedBy: string="";
     ModifiedDate: string | null="";
-    Status: string | null="";
+    Status: string | null="";    
+    Assigntodepartments: string[]=[];
   }

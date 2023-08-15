@@ -19,11 +19,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddDocumentTypeComponent {
   documentType = new DocumentTypeConfiguration();
-  grid:DocumentTypeConfiguration[]=[];
-  departments: DepartmentConfiguration[] = [];
-  selectedDepartments: DepartmentConfiguration[] = [];
+  grid: DocumentTypeConfiguration[] = [];
+  departments: string[] = [];
+  isSubmiting = false;
   viewMode: boolean = false; editMode: boolean = false;
-  typeId: number = 0;
+  selectedDepartments: string[] = [];
+
   constructor(private toastr: ToastrService,
     private location: Location,
     private deptservice: DepartmentconfigurationService,
@@ -33,68 +34,59 @@ export class AddDocumentTypeComponent {
     private cdr: ChangeDetectorRef,
     //private loader: SpinnerService,
     private router: Router
-  ) {
-    this.selectedDepartments = [];
-  }
+  ) { }
 
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
+    this.getdepartments();
     if (lastSegment == "edit") {
       let id = parseInt(segments[segments.length - 1], 10);
-      this.typeId = id;
-      this.editMode = true; this.viewMode = false;
-      this.getbyId();
-      //this.documentType=this.commonsvc.documentType;
+      this.editMode = true;
+      if (this.commonsvc.documentType.DTCId) {
+        this.selectedDepartments = this.commonsvc.documentType?.Assigntodepartment?.split(',');
+        this.documentType = this.commonsvc.documentType;
+      }
+      else
+        this.getbyId(id);
     }
-    
     else if (lastSegment == "view") {
-      this.typeId = parseInt(segments[segments.length - 1], 10);
-      this.getbyId();
-      this.viewMode = true; this.editMode = false;
-      this.documentType = this.commonsvc.documentType;
+      let id = parseInt(segments[segments.length - 1], 10);
+      this.viewMode = true;
+      this.getbyId(id);
     }
-    this.getdepartments();
-    this.getTypes();
+    this.getDocTypes();
     this.cdr.detectChanges();
   }
+
   onCancel() {
     this.location.back();
   }
-  getbyId() {
-    
-    this.doctypeservice.getbyId(this.typeId).subscribe((data: any) => {
-      this.documentType = data;
-    }, ((error: any) => {
 
+  getbyId(id: number) {
+    this.doctypeservice.getbyId(id).subscribe((data: any) => {
+      this.selectedDepartments = data?.Assigntodepartment?.split(',');
+      this.documentType = data;
+      this.getdepartments();
+    }, ((error: any) => {
+      console.log(error);
     }));
   }
   getdepartments() {
-    //this.loader.show();
     this.spinner.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
-   // this.toastr.success('Document type Saved Succesfull!', 'Saved.!');
     return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-      
       this.departments = data.Response;
-      if (this.departments != null && this.editMode) {
-        const myList: string[] = this.documentType.Assigntodepartment.split(",");
-        myList.forEach(element => {
-          const dept = this.departments.find(o => o.DepartmentName === element);
-          if (dept !== undefined)
-            this.selectedDepartments.push(dept);
-        });
-        this.selectedDepartments
-      }
       this.spinner.hide();
-      console.log(this.departments);
     }, (error: any) => {
-      // this.toastr.error('loading failed');
-      // this.loader.hide();
+      console.log(error);
     });
   }
-  adddoctype(documentType: DocumentTypeConfiguration) {
+
+  saveDocType(documentType: DocumentTypeConfiguration) {
+    this.isSubmiting = true;
+    this.documentType.Assigntodepartment = this.selectedDepartments.join(',');
     if (this.editMode) {
       this.documentType = documentType;
       this.updatetype();
@@ -104,48 +96,57 @@ export class AddDocumentTypeComponent {
       }
     }
   }
-  inserttype(documentType: DocumentTypeConfiguration) {
 
-  }
   isduplicate() {
+    let isDuplicate = false;
     if (this.grid != null && this.grid.length > 0) {
-      const type = this.grid.find(p => p.Documenttypename == this.documentType.Documenttypename);
-      if (type != null || type != undefined) {
-        this.toastr.error('Duplicate Entity');
-        return true;
-      } else {
-        return false;
+      let dtypes = this.grid.filter(p => p.Documenttypename === this.documentType.Documenttypename);
+      if (dtypes != null && dtypes.length > 0) {
+        for (let i = 0; i < dtypes.length; i++) {
+          if (!isDuplicate && dtypes[i].Assigntodepartment == this.documentType.Assigntodepartment) {
+            this.toastr.error('Duplicate Entity');
+            this.isSubmiting = false;
+            isDuplicate = true
+          }
+        }
       }
-    } else {
-      return false;
     }
+    return isDuplicate;
   }
-  addtype(documentType: DocumentTypeConfiguration){
+
+  addtype(documentType: DocumentTypeConfiguration) {
     documentType.CreatedBy = this.commonsvc.getUsername();
     documentType.ModifiedBy = this.commonsvc.getUsername();
     documentType.DTCId = "1";
-    const dateToSend: Date = new Date();
-    const isoDateString: string = dateToSend.toISOString();
-    documentType.Assigntodepartment = this.selectedDepartments.map((obj) => obj.DepartmentName).join(",");
     this.doctypeservice.adddoctypeconfig(documentType).subscribe((res: any) => {
-      this.toastr.success('Document Type Saved Succesfull!', 'Saved.!');
+      this.toastr.success('Document type saved succesfull!', 'Saved.!');
       this.location.back();
+    }, er => {
+      console.log(er);
+      this.toastr.error('Document type adding failed', 'Internal server error', {
+        timeOut: 3000,
+      });
+      this.isSubmiting = false;
     });
   }
   updatetype() {
-    this.documentType.ModifiedBy=this.commonsvc.getUsername();
+    this.documentType.ModifiedBy = this.commonsvc.getUsername();
     this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {
       this.commonsvc.documentType = new DocumentTypeConfiguration();
-      this.location.back();
+      this.toastr.success('Document type update succesfull!', 'Updated.!');
       this.spinner.hide();
+      this.location.back();
     }, er => {
       console.log(er);
+      this.isSubmiting = false;
       this.spinner.hide();
+      this.toastr.error('Document type adding failed', 'Internal server error', {
+        timeOut: 3000,
+      });
     });
   }
-  closepopup() {
 
-  }
+
   approve() {
     this.documentType.Status = 'Approved'
     this.updatetype();
@@ -158,13 +159,13 @@ export class AddDocumentTypeComponent {
     this.documentType.Status = 'Rejected'
     this.updatetype();
   }
-  getTypes() {
+  getDocTypes() {
     this.spinner.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
-      return this.doctypeservice.getdoctypeconfig(this.commonsvc.req).subscribe((data: any) => {
-        
-        this.grid = data.Response;
-        this.spinner.hide();
-      });
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    return this.doctypeservice.getdoctypeconfig(this.commonsvc.req).subscribe((data: any) => {
+
+      this.grid = data.Response;
+      this.spinner.hide();
+    });
   }
 }
