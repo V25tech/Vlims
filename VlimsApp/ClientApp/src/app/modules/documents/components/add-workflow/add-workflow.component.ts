@@ -125,14 +125,12 @@ export class AddWorkflowComponent {
           this.workflow.approvals = app;
         }
       }
-      console.log('users', this.users);
       if (this.workflow.reviewers != null && this.workflow.reviewers != undefined) {
         this.workflow.review = this.workflow.reviewers[0];
       }
       if (this.workflow.approvals != null && this.workflow.approvals != undefined) {
         this.workflow.approve = this.workflow.approvals[0];
       }
-      console.log('u', this.workflow);
       this.cdr.detectChanges();
     }, (error: any) => {
 
