@@ -138,17 +138,16 @@ export class AddWorkflowComponent {
   }
   addWorkflow(workflow: workflowconiguration) {
     if (this.editMode) {
-      this.update(workflow);
+      if (!this.isApprovalsNdReviewerSame())
+        this.update(workflow);
     }
     else {
-
       if (!this.isduplicate()) {
         this.add(workflow);
       }
     }
   }
   update(workflow: workflowconiguration) {
-
     workflow.ModifiedBy = this.commonsvc.getUsername();
     if (workflow.department != null) {
       workflow.departments = workflow.department.map(o => o.DepartmentName).join(",");
@@ -168,14 +167,9 @@ export class AddWorkflowComponent {
   }
   isduplicate() {
     if (this.grid != null && this.grid.length > 0) {
+      if (this.isApprovalsNdReviewerSame()) return true;
       const type = this.grid.find(p => p.workflowName?.toLocaleLowerCase() == this.workflow.workflowName?.toLocaleLowerCase());
-      const sameUser = this.workflow.approvals?.find(p => this.workflow.reviewers?.includes(p));
-      if (sameUser != null) {
-        this.toastr.info("Approvals and Reviewers can't be same.", 'Inforamtion');
-        this.loader.hide();
-        return true;
-      }
-      else if (type != null || type != undefined) {
+      if (type != null || type != undefined) {
         this.toastr.info("Workflow name already exists.", 'Duplicate Entity');
         this.loader.hide();
         return true;
@@ -183,6 +177,18 @@ export class AddWorkflowComponent {
     }
     return false;
   }
+
+  isApprovalsNdReviewerSame() {
+    const reviewers = this.workflow.reviewers?.map(p => p.UserID);
+    const sameUser = this.workflow.approvals?.find(p => reviewers?.includes(p.UserID));
+    if (sameUser != null) {
+      this.toastr.info("Approvals and Reviewers can't be same.", 'Inforamtion');
+      this.loader.hide();
+      return true;
+    }
+    return false;
+  }
+
   add(workflow: workflowconiguration) {
     workflow.CreatedBy = this.commonsvc.getUsername();
     workflow.ModifiedBy = this.commonsvc.getUsername();
