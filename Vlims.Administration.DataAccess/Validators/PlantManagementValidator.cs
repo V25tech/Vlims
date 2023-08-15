@@ -23,7 +23,7 @@ namespace PolicySummary.Sheet1.Services
     // Comment
     public static class PlantManagementValidator
     {
-        
+
         public static string IsValidPlantManagement(PlantManagement plantManagement)
         {
             try
@@ -31,18 +31,18 @@ namespace PolicySummary.Sheet1.Services
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
                 //validationMessages.Append(validationHelper.NullCheckValidator(plantManagement.PMId, nameof(plantManagement.PMId)));
-                //validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PMId,50, nameof(plantManagement.PMId)));
+                //validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PMId,150, nameof(plantManagement.PMId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(plantManagement.AdminManagerId, nameof(plantManagement.AdminManagerId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.AdminManagerId,50, nameof(plantManagement.AdminManagerId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PlantName,50, nameof(plantManagement.PlantName)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PlantCode,50, nameof(plantManagement.PlantCode)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PlantAddress,50, nameof(plantManagement.PlantAddress)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.Comments,50, nameof(plantManagement.Comments)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.CreatedBy,100, nameof(plantManagement.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.ModifiedBy,100, nameof(plantManagement.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.AdminManagerId, 150, nameof(plantManagement.AdminManagerId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PlantName, 150, nameof(plantManagement.PlantName)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PlantCode, 150, nameof(plantManagement.PlantCode)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.PlantAddress, 150, nameof(plantManagement.PlantAddress)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.Comments, 500, nameof(plantManagement.Comments)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.CreatedBy, 100, nameof(plantManagement.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(plantManagement.ModifiedBy, 150, nameof(plantManagement.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

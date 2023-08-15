@@ -25,7 +25,7 @@ namespace Vlims.DocumentManager.DataAccess
     // Comment
     public static class DocumentrequestValidator
     {
-        
+
         public static string IsValidDocumentrequest(Documentrequest documentrequest)
         {
             try
@@ -33,18 +33,18 @@ namespace Vlims.DocumentManager.DataAccess
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
                 validationMessages.Append(validationHelper.NullCheckValidator(documentrequest.DRID, nameof(documentrequest.DRID)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.DRID,50, nameof(documentrequest.DRID)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.DRID, 150, nameof(documentrequest.DRID)));
                 validationMessages.Append(validationHelper.NullCheckValidator(documentrequest.documentmanagerid, nameof(documentrequest.documentmanagerid)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.documentmanagerid,50, nameof(documentrequest.documentmanagerid)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.documenttype,50, nameof(documentrequest.documenttype)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.department,50, nameof(documentrequest.department)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.Purpose,50, nameof(documentrequest.Purpose)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.AssigntoGroup,50, nameof(documentrequest.AssigntoGroup)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.CreatedBy,100, nameof(documentrequest.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.ModifiedBy,100, nameof(documentrequest.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.documentmanagerid, 150, nameof(documentrequest.documentmanagerid)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.documenttype, 150, nameof(documentrequest.documenttype)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.department, 500, nameof(documentrequest.department)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.Purpose, 500, nameof(documentrequest.Purpose)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.AssigntoGroup, 500, nameof(documentrequest.AssigntoGroup)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.CreatedBy, 150, nameof(documentrequest.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentrequest.ModifiedBy, 150, nameof(documentrequest.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

@@ -16,7 +16,7 @@ namespace Vlims.DocumentManager.DataAccess
     using System.Data;
     using System.Collections.Generic;
     using Newtonsoft.Json;
-   
+
     //using VAMLIbrary.Core.Validators;
     using Vlims.DMS.Entities;
     using Vlims.Common;
@@ -25,7 +25,7 @@ namespace Vlims.DocumentManager.DataAccess
     // Comment
     public static class DocumentPreparationValidator
     {
-        
+
         public static string IsValidDocumentPreparation(DocumentPreparation documentPreparation)
         {
             try
@@ -33,22 +33,22 @@ namespace Vlims.DocumentManager.DataAccess
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
                 validationMessages.Append(validationHelper.NullCheckValidator(documentPreparation.DPNID, nameof(documentPreparation.DPNID)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.DPNID,50, nameof(documentPreparation.DPNID)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.DPNID, 150, nameof(documentPreparation.DPNID)));
                 validationMessages.Append(validationHelper.NullCheckValidator(documentPreparation.Documentmanagerid, nameof(documentPreparation.Documentmanagerid)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.Documentmanagerid,50, nameof(documentPreparation.Documentmanagerid)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.documenttitle,50, nameof(documentPreparation.documenttitle)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.documentno,50, nameof(documentPreparation.documentno)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.documenttype,50, nameof(documentPreparation.documenttype)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.department,50, nameof(documentPreparation.department)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.document,200, nameof(documentPreparation.document)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.template,50, nameof(documentPreparation.template)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.wokflow,50, nameof(documentPreparation.wokflow)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.details,50, nameof(documentPreparation.details)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.CreatedBy,100, nameof(documentPreparation.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.ModifiedBy,100, nameof(documentPreparation.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.Documentmanagerid, 150, nameof(documentPreparation.Documentmanagerid)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.documenttitle, 150, nameof(documentPreparation.documenttitle)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.documentno, 150, nameof(documentPreparation.documentno)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.documenttype, 150, nameof(documentPreparation.documenttype)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.department, 150, nameof(documentPreparation.department)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.document, 200, nameof(documentPreparation.document)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.template, 150, nameof(documentPreparation.template)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.wokflow, 150, nameof(documentPreparation.wokflow)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.details, 150, nameof(documentPreparation.details)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.CreatedBy, 150, nameof(documentPreparation.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentPreparation.ModifiedBy, 150, nameof(documentPreparation.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

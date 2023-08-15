@@ -8,46 +8,46 @@
 //------------------------------------------------------------------------------
 
 
-    using System;
-    using System.Text;
-    using System.IO;
-    using System.Linq;
-    using System.Data;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
+using System;
+using System.Text;
+using System.IO;
+using System.Linq;
+using System.Data;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Vlims.Common;
 
 
 
 // Comment
 public static class DocumentRevisionValidator
+{
+
+    public static string IsValidDocumentRevision(AdditionalTask documentRevision)
     {
-        
-        public static string IsValidDocumentRevision(AdditionalTask  documentRevision)
+        try
         {
-            try
+            StringBuilder validationMessages = new StringBuilder();
+            ValidationHelper validationHelper = new ValidationHelper();
+            validationMessages.Append(validationHelper.NullCheckValidator(documentRevision.DRId, nameof(documentRevision.DRId)));
+            validationMessages.Append(validationHelper.LengthCheckValidator(documentRevision.DRId, 150, nameof(documentRevision.DRId)));
+            validationMessages.Append(validationHelper.NullCheckValidator(documentRevision.Documentmanagerid, nameof(documentRevision.Documentmanagerid)));
+            validationMessages.Append(validationHelper.LengthCheckValidator(documentRevision.Documentmanagerid, 150, nameof(documentRevision.Documentmanagerid)));
+            validationMessages.Append(validationHelper.LengthCheckValidator(documentRevision.CreatedBy, 150, nameof(documentRevision.CreatedBy)));
+            validationMessages.Append(validationHelper.LengthCheckValidator(documentRevision.ModifiedBy, 150, nameof(documentRevision.ModifiedBy)));
+            if (!String.IsNullOrEmpty(validationMessages.ToString()))
             {
-                StringBuilder validationMessages = new StringBuilder();
-                ValidationHelper validationHelper = new ValidationHelper();
-                validationMessages.Append(validationHelper.NullCheckValidator(documentRevision.DRId, nameof(documentRevision.DRId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentRevision.DRId,50, nameof(documentRevision.DRId)));
-                validationMessages.Append(validationHelper.NullCheckValidator(documentRevision.Documentmanagerid, nameof(documentRevision.Documentmanagerid)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentRevision.Documentmanagerid,50, nameof(documentRevision.Documentmanagerid)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentRevision.CreatedBy,100, nameof(documentRevision.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentRevision.ModifiedBy,100, nameof(documentRevision.ModifiedBy)));
-                if (!String.IsNullOrEmpty(validationMessages.ToString()))
-                {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
-                }
-                else
-                {
-                    return Convert.ToString(validationMessages);
-                }
+                return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
             }
-            catch (System.Exception ex)
+            else
             {
-                throw;
+                return Convert.ToString(validationMessages);
             }
         }
+        catch (System.Exception ex)
+        {
+            throw;
+        }
     }
+}
 

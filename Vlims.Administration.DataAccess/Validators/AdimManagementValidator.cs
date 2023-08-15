@@ -23,7 +23,7 @@ namespace Vlims.Administration.DataAccess
     // Comment
     public static class AdimManagementValidator
     {
-        
+
         public static string IsValidAdimManagement(AdimManagement adimManagement)
         {
             try
@@ -31,16 +31,16 @@ namespace Vlims.Administration.DataAccess
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
                 validationMessages.Append(validationHelper.NullCheckValidator(adimManagement.AMId, nameof(adimManagement.AMId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.AMId,50, nameof(adimManagement.AMId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.SecurityManagement,50, nameof(adimManagement.SecurityManagement)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.HierarchyManagement,50, nameof(adimManagement.HierarchyManagement)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.PlantManagement,50, nameof(adimManagement.PlantManagement)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.UserManagement,50, nameof(adimManagement.UserManagement)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.CreatedBy,100, nameof(adimManagement.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.ModifiedBy,100, nameof(adimManagement.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.AMId, 150, nameof(adimManagement.AMId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.SecurityManagement, 150, nameof(adimManagement.SecurityManagement)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.HierarchyManagement, 150, nameof(adimManagement.HierarchyManagement)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.PlantManagement, 150, nameof(adimManagement.PlantManagement)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.UserManagement, 150, nameof(adimManagement.UserManagement)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.CreatedBy, 150, nameof(adimManagement.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(adimManagement.ModifiedBy, 150, nameof(adimManagement.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

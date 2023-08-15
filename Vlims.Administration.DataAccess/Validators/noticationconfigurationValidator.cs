@@ -24,21 +24,21 @@ namespace Vlims.Administration.DataAccess
     // Comment
     public static class noticationconfigurationValidator
     {
-        
+
         public static string IsValidnoticationconfiguration(noticationconfiguration noticationconfiguration)
         {
             try
             {
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
-                validationMessages.Append(validationHelper.LengthCheckValidator(noticationconfiguration.NCId,50, nameof(noticationconfiguration.NCId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(noticationconfiguration.NCId, 150, nameof(noticationconfiguration.NCId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(noticationconfiguration.DocumentMasterId, nameof(noticationconfiguration.DocumentMasterId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(noticationconfiguration.DocumentMasterId,50, nameof(noticationconfiguration.DocumentMasterId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(noticationconfiguration.CreatedBy,100, nameof(noticationconfiguration.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(noticationconfiguration.ModifiedBy,100, nameof(noticationconfiguration.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(noticationconfiguration.DocumentMasterId, 150, nameof(noticationconfiguration.DocumentMasterId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(noticationconfiguration.CreatedBy, 150, nameof(noticationconfiguration.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(noticationconfiguration.ModifiedBy, 150, nameof(noticationconfiguration.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

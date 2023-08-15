@@ -16,7 +16,7 @@ namespace PolicySummary.Sheet1.Services
     using System.Data;
     using System.Collections.Generic;
     using Newtonsoft.Json;
-    
+
     using Vlims.Administration.Entities;
     using Vlims.Common;
 
@@ -24,7 +24,7 @@ namespace PolicySummary.Sheet1.Services
     // Comment
     public static class HierarchyManagementValidator
     {
-        
+
         public static string IsValidHierarchyManagement(HierarchyManagement hierarchyManagement)
         {
             try
@@ -32,17 +32,17 @@ namespace PolicySummary.Sheet1.Services
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
                 validationMessages.Append(validationHelper.NullCheckValidator(hierarchyManagement.HMId, nameof(hierarchyManagement.HMId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.HMId,50, nameof(hierarchyManagement.HMId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.HMId, 150, nameof(hierarchyManagement.HMId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(hierarchyManagement.AdminManagerId, nameof(hierarchyManagement.AdminManagerId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.AdminManagerId,50, nameof(hierarchyManagement.AdminManagerId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.DepartmentConfiguration,50, nameof(hierarchyManagement.DepartmentConfiguration)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.RoleConfiguration,50, nameof(hierarchyManagement.RoleConfiguration)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.SetFunctionalProfile,50, nameof(hierarchyManagement.SetFunctionalProfile)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.CreatedBy,100, nameof(hierarchyManagement.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.ModifiedBy,100, nameof(hierarchyManagement.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.AdminManagerId, 150, nameof(hierarchyManagement.AdminManagerId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.DepartmentConfiguration, 150, nameof(hierarchyManagement.DepartmentConfiguration)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.RoleConfiguration, 150, nameof(hierarchyManagement.RoleConfiguration)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.SetFunctionalProfile, 150, nameof(hierarchyManagement.SetFunctionalProfile)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.CreatedBy, 150, nameof(hierarchyManagement.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(hierarchyManagement.ModifiedBy, 150, nameof(hierarchyManagement.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

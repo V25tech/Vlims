@@ -24,7 +24,7 @@ namespace Vlims.Administration.DataAccess
     // Comment
     public static class UserManagementValidator
     {
-        
+
         public static string IsValidUserManagement(UserManagement userManagement)
         {
             try
@@ -32,18 +32,18 @@ namespace Vlims.Administration.DataAccess
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
                 validationMessages.Append(validationHelper.NullCheckValidator(userManagement.UMId, nameof(userManagement.UMId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.UMId,50, nameof(userManagement.UMId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.UMId, 150, nameof(userManagement.UMId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(userManagement.AdminManagerId, nameof(userManagement.AdminManagerId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.AdminManagerId,50, nameof(userManagement.AdminManagerId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.UserConfiguration,50, nameof(userManagement.UserConfiguration)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.Status,50, nameof(userManagement.Status)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.UserGroupConfiguration,50, nameof(userManagement.UserGroupConfiguration)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.AuditLogs,50, nameof(userManagement.AuditLogs)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.CreatedBy,100, nameof(userManagement.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.ModifiedBy,100, nameof(userManagement.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.AdminManagerId, 150, nameof(userManagement.AdminManagerId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.UserConfiguration, 150, nameof(userManagement.UserConfiguration)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.Status, 150, nameof(userManagement.Status)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.UserGroupConfiguration, 150, nameof(userManagement.UserGroupConfiguration)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.AuditLogs, 150, nameof(userManagement.AuditLogs)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.CreatedBy, 150, nameof(userManagement.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(userManagement.ModifiedBy, 150, nameof(userManagement.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

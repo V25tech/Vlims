@@ -8,44 +8,44 @@
 //------------------------------------------------------------------------------
 
 
-    using System;
-    using System.Text;
-    using System.IO;
-    using System.Linq;
-    using System.Data;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
+using System;
+using System.Text;
+using System.IO;
+using System.Linq;
+using System.Data;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Vlims.Common;
 
 
 
 // Comment
 public static class DocumentPrintValidator
+{
+
+    public static string IsValidDocumentPrint(DocumentPrint documentPrint)
     {
-        
-        public static string IsValidDocumentPrint(DocumentPrint documentPrint)
+        try
         {
-            try
+            StringBuilder validationMessages = new StringBuilder();
+            ValidationHelper validationHelper = new ValidationHelper();
+            // validationMessages.Append(validationHelper.NullCheckValidator(documentPrint.DRId, nameof(documentPrint.DRId)));
+            //validationMessages.Append(validationHelper.LengthCheckValidator(documentPrint.DRId,50, nameof(documentPrint.DRId)));
+            validationMessages.Append(validationHelper.LengthCheckValidator(documentPrint.CreatedBy, 150, nameof(documentPrint.CreatedBy)));
+            validationMessages.Append(validationHelper.LengthCheckValidator(documentPrint.ModifiedBy, 150, nameof(documentPrint.ModifiedBy)));
+            if (!String.IsNullOrEmpty(validationMessages.ToString()))
             {
-                StringBuilder validationMessages = new StringBuilder();
-                ValidationHelper validationHelper = new ValidationHelper();
-               // validationMessages.Append(validationHelper.NullCheckValidator(documentPrint.DRId, nameof(documentPrint.DRId)));
-                //validationMessages.Append(validationHelper.LengthCheckValidator(documentPrint.DRId,50, nameof(documentPrint.DRId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPrint.CreatedBy,100, nameof(documentPrint.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentPrint.ModifiedBy,100, nameof(documentPrint.ModifiedBy)));
-                if (!String.IsNullOrEmpty(validationMessages.ToString()))
-                {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
-                }
-                else
-                {
-                    return Convert.ToString(validationMessages);
-                }
+                return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
             }
-            catch (System.Exception ex)
+            else
             {
-                throw;
+                return Convert.ToString(validationMessages);
             }
         }
+        catch (System.Exception ex)
+        {
+            throw;
+        }
     }
+}
 
