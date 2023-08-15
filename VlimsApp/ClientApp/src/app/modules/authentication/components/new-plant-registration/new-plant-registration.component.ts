@@ -15,7 +15,7 @@ export class NewPlantRegistrationComponent implements OnInit {
   editMode:boolean=false;
   viewMode: boolean = false;
   plantid: number = 0;
-  title: string = 'Add New Plant Configuration';
+  title: string = 'New Plant Registration';
 
   constructor(private commonsvc: CommonService,private toastr: ToastrService, private doctypeservice: NewPlantRegistrationConfigurationService, private router: Router, private cdr: ChangeDetectorRef) { }
 
