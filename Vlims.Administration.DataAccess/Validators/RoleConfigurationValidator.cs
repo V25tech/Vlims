@@ -24,24 +24,24 @@ namespace Vlims.Administration.DataAccess
     // Comment
     public static class RoleConfigurationValidator
     {
-        
+
         public static string IsValidRoleConfiguration(RoleConfiguration roleConfiguration)
         {
             try
             {
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
-                //validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.ROCFId,50, nameof(roleConfiguration.ROCFId)));
+                //validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.ROCFId,150, nameof(roleConfiguration.ROCFId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(roleConfiguration.HierarchyManagementId, nameof(roleConfiguration.HierarchyManagementId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.HierarchyManagementId,50, nameof(roleConfiguration.HierarchyManagementId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.Role,50, nameof(roleConfiguration.Role)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.Department,50, nameof(roleConfiguration.Department)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.Comments,50, nameof(roleConfiguration.Comments)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.CreatedBy,100, nameof(roleConfiguration.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.ModifiedBy,100, nameof(roleConfiguration.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.HierarchyManagementId, 150, nameof(roleConfiguration.HierarchyManagementId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.Role, 150, nameof(roleConfiguration.Role)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.Department, 500, nameof(roleConfiguration.Department)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.Comments, 500, nameof(roleConfiguration.Comments)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.CreatedBy, 150, nameof(roleConfiguration.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(roleConfiguration.ModifiedBy, 150, nameof(roleConfiguration.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

@@ -15,7 +15,7 @@ namespace Vlims.DocumentManager.DataAccess
     using System.Linq;
     using System.Data;
     using System.Collections.Generic;
-    using Newtonsoft.Json;    
+    using Newtonsoft.Json;
     using Vlims.DMS.Entities;
     using Vlims.Common;
 
@@ -23,7 +23,7 @@ namespace Vlims.DocumentManager.DataAccess
     // Comment
     public static class DocumentEffectiveValidator
     {
-        
+
         public static string IsValidDocumentEffective(DocumentEffective documentEffective)
         {
             try
@@ -31,19 +31,19 @@ namespace Vlims.DocumentManager.DataAccess
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
                 validationMessages.Append(validationHelper.NullCheckValidator(documentEffective.DEID, nameof(documentEffective.DEID)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.DEID,50, nameof(documentEffective.DEID)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.DEID, 150, nameof(documentEffective.DEID)));
                 validationMessages.Append(validationHelper.NullCheckValidator(documentEffective.Documentmanagerid, nameof(documentEffective.Documentmanagerid)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.Documentmanagerid,50, nameof(documentEffective.Documentmanagerid)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.documenttitle,50, nameof(documentEffective.documenttitle)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.documentno,50, nameof(documentEffective.documentno)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.documenttype,50, nameof(documentEffective.documenttype)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.Department,50, nameof(documentEffective.Department)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.document,50, nameof(documentEffective.document)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.CreatedBy,100, nameof(documentEffective.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.ModifiedBy,100, nameof(documentEffective.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.Documentmanagerid, 150, nameof(documentEffective.Documentmanagerid)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.documenttitle, 150, nameof(documentEffective.documenttitle)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.documentno, 150, nameof(documentEffective.documentno)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.documenttype, 150, nameof(documentEffective.documenttype)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.Department, 500, nameof(documentEffective.Department)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.document, 500, nameof(documentEffective.document)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.CreatedBy, 150, nameof(documentEffective.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentEffective.ModifiedBy, 150, nameof(documentEffective.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

@@ -29,8 +29,8 @@ public static class ExistingDocumentRequestValidator
         {
             StringBuilder validationMessages = new StringBuilder();
             ValidationHelper validationHelper = new ValidationHelper();
-            validationMessages.Append(validationHelper.LengthCheckValidator(existingDocumentRequest.CreatedBy, 100, nameof(existingDocumentRequest.CreatedBy)));
-            validationMessages.Append(validationHelper.LengthCheckValidator(existingDocumentRequest.ModifiedBy, 100, nameof(existingDocumentRequest.ModifiedBy)));
+            validationMessages.Append(validationHelper.LengthCheckValidator(existingDocumentRequest.CreatedBy, 150, nameof(existingDocumentRequest.CreatedBy)));
+            validationMessages.Append(validationHelper.LengthCheckValidator(existingDocumentRequest.ModifiedBy, 150, nameof(existingDocumentRequest.ModifiedBy)));
             if (!String.IsNullOrEmpty(validationMessages.ToString()))
             {
                 return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));

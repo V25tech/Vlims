@@ -18,7 +18,7 @@ namespace Vlims.Services
     // Comment
     public static class DocumentTemplateConfigurationValidator
     {
-        
+
         public static string IsValidDocumentTemplateConfiguration(DocumentTemplateConfiguration documentTemplateConfiguration)
         {
             try
@@ -28,21 +28,21 @@ namespace Vlims.Services
                 //validationMessages.Append(validationHelper.NullCheckValidator(documentTemplateConfiguration.DTID, nameof(documentTemplateConfiguration.DTID)));
                 //validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.DTID,50, nameof(documentTemplateConfiguration.DTID)));
                 validationMessages.Append(validationHelper.NullCheckValidator(documentTemplateConfiguration.DocumentMasterId, nameof(documentTemplateConfiguration.DocumentMasterId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.DocumentMasterId,50, nameof(documentTemplateConfiguration.DocumentMasterId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.Templatename,50, nameof(documentTemplateConfiguration.Templatename)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.Uniquecode,50, nameof(documentTemplateConfiguration.Uniquecode)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.documenttype,50, nameof(documentTemplateConfiguration.documenttype)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.header,50, nameof(documentTemplateConfiguration.header)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.rows,50, nameof(documentTemplateConfiguration.rows)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.columns,50, nameof(documentTemplateConfiguration.columns)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.footer,50, nameof(documentTemplateConfiguration.footer)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.footerrows,50, nameof(documentTemplateConfiguration.footerrows)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.footercolumns,50, nameof(documentTemplateConfiguration.footercolumns)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.CreatedBy,100, nameof(documentTemplateConfiguration.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.ModifiedBy,100, nameof(documentTemplateConfiguration.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.DocumentMasterId, 150, nameof(documentTemplateConfiguration.DocumentMasterId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.Templatename, 150, nameof(documentTemplateConfiguration.Templatename)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.Uniquecode, 150, nameof(documentTemplateConfiguration.Uniquecode)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.documenttype, 150, nameof(documentTemplateConfiguration.documenttype)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.header, 150, nameof(documentTemplateConfiguration.header)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.rows, 150, nameof(documentTemplateConfiguration.rows)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.columns, 150, nameof(documentTemplateConfiguration.columns)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.footer, 150, nameof(documentTemplateConfiguration.footer)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.footerrows, 150, nameof(documentTemplateConfiguration.footerrows)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.footercolumns, 150, nameof(documentTemplateConfiguration.footercolumns)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.CreatedBy, 150, nameof(documentTemplateConfiguration.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(documentTemplateConfiguration.ModifiedBy, 150, nameof(documentTemplateConfiguration.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

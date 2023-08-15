@@ -18,7 +18,7 @@ namespace Vlims.DocumentMaster.DataAccess
     // Comment
     public static class workflowconigurationValidator
     {
-        
+
         public static string IsValidworkflowconiguration(workflowconiguration workflowconiguration)
         {
             try
@@ -28,15 +28,15 @@ namespace Vlims.DocumentMaster.DataAccess
                 //validationMessages.Append(validationHelper.NullCheckValidator(workflowconiguration.WFCId, nameof(workflowconiguration.WFCId)));
                 //validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.WFCId,50, nameof(workflowconiguration.WFCId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(workflowconiguration.DocumentMasterId, nameof(workflowconiguration.DocumentMasterId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.DocumentMasterId,50, nameof(workflowconiguration.DocumentMasterId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.documentstage,50, nameof(workflowconiguration.documentstage)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.documenttype,50, nameof(workflowconiguration.documenttype)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.departments,50, nameof(workflowconiguration.departments)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.CreatedBy,100, nameof(workflowconiguration.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.ModifiedBy,100, nameof(workflowconiguration.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.DocumentMasterId, 150, nameof(workflowconiguration.DocumentMasterId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.documentstage, 150, nameof(workflowconiguration.documentstage)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.documenttype, 150, nameof(workflowconiguration.documenttype)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.departments, 500, nameof(workflowconiguration.departments)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.CreatedBy, 150, nameof(workflowconiguration.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workflowconiguration.ModifiedBy, 150, nameof(workflowconiguration.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

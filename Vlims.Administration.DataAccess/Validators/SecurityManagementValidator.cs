@@ -23,7 +23,7 @@ namespace Vlims.Administration.DataAccess
     // Comment
     public static class SecurityManagementValidator
     {
-        
+
         public static string IsValidSecurityManagement(SecurityManagement securityManagement)
         {
             try
@@ -31,16 +31,16 @@ namespace Vlims.Administration.DataAccess
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
                 validationMessages.Append(validationHelper.NullCheckValidator(securityManagement.SMId, nameof(securityManagement.SMId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.SMId,50, nameof(securityManagement.SMId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.SMId, 150, nameof(securityManagement.SMId)));
                 validationMessages.Append(validationHelper.NullCheckValidator(securityManagement.AdminManagerId, nameof(securityManagement.AdminManagerId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.AdminManagerId,50, nameof(securityManagement.AdminManagerId)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.MinimumUserIdLength,50, nameof(securityManagement.MinimumUserIdLength)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.MinimumPasswordLength,50, nameof(securityManagement.MinimumPasswordLength)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.CreatedBy,100, nameof(securityManagement.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.ModifiedBy,100, nameof(securityManagement.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.AdminManagerId, 150, nameof(securityManagement.AdminManagerId)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.MinimumUserIdLength, 150, nameof(securityManagement.MinimumUserIdLength)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.MinimumPasswordLength, 150, nameof(securityManagement.MinimumPasswordLength)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.CreatedBy, 150, nameof(securityManagement.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(securityManagement.ModifiedBy, 150, nameof(securityManagement.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {

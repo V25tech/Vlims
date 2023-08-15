@@ -24,24 +24,24 @@ namespace PolicySummary.DMS.Services
     // Comment
     public static class workitemsValidator
     {
-        
+
         public static string IsValidworkitems(workitems workitems)
         {
             try
             {
                 StringBuilder validationMessages = new StringBuilder();
                 ValidationHelper validationHelper = new ValidationHelper();
-                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.TaskType,50, nameof(workitems.TaskType)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.Stage,50, nameof(workitems.Stage)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.AssignedToGroup,50, nameof(workitems.AssignedToGroup)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.InitiatedOn,50, nameof(workitems.InitiatedOn)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.Status,50, nameof(workitems.Status)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.DueDate,50, nameof(workitems.DueDate)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.CreatedBy,100, nameof(workitems.CreatedBy)));
-                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.ModifiedBy,100, nameof(workitems.ModifiedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.TaskType, 150, nameof(workitems.TaskType)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.Stage, 150, nameof(workitems.Stage)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.AssignedToGroup, 500, nameof(workitems.AssignedToGroup)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.InitiatedOn, 150, nameof(workitems.InitiatedOn)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.Status, 150, nameof(workitems.Status)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.DueDate, 150, nameof(workitems.DueDate)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.CreatedBy, 150, nameof(workitems.CreatedBy)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(workitems.ModifiedBy, 150, nameof(workitems.ModifiedBy)));
                 if (!String.IsNullOrEmpty(validationMessages.ToString()))
                 {
-                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','),1));
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
                 }
                 else
                 {
