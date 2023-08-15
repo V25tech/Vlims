@@ -80,7 +80,6 @@ export class NewPrintRequestComponent implements OnInit {
     return this.docprintservice.getbyId(arg0).subscribe((data: any) => {
       this.print = data;
       this.spinner.hide();
-      console.log('request', data);
     });
   }
   approve() {
@@ -107,7 +106,6 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   documentNumberChange(event: any) {
-    console.log(event.value);
     let preps = this.preparations.filter(p => p.documentno === event.value);
     if (preps && preps.length > 0) {
       this.print.documenttitle = preps[0].documenttitle;
@@ -119,8 +117,6 @@ export class NewPrintRequestComponent implements OnInit {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.docprintservice.GetNewPrintRequest(objrequest).subscribe((data: any) => {
       this.types = data.Response;
-      console.log(this.types);
-
     });
   }
   getworkflowinfo() {
@@ -208,7 +204,6 @@ export class NewPrintRequestComponent implements OnInit {
               this.finalStatus = 'Pending Approve';
             }
           }
-          console.log('status', this.finalStatus);
         }
       }
       this.spinner.hide();

@@ -77,7 +77,6 @@ export class ReviewEffectiveComponent {
       this.effective = this.commonsvc.efffective;
     }
     else this.location.back();
-    console.log(this.effective);
   }
   getbyId(arg0: number) {
     this.spinner.show();
@@ -112,7 +111,6 @@ export class ReviewEffectiveComponent {
   }
 
   saveEffective() {
-    console.log(this.effective);
     this.spinner.show();
     if(this.viewMode && this.effective.Status!='Rejected')
     {
@@ -120,7 +118,6 @@ export class ReviewEffectiveComponent {
       this.effective.Status=this.finalStatus;
     }
     this.documentEffectiveService.ManageDocumentEffective(this.effective).subscribe(res => {
-      console.log(res);
       this.spinner.hide();
       this.location.back();
     }, er => {
@@ -142,10 +139,8 @@ export class ReviewEffectiveComponent {
 
   openViewer(template: TemplateRef<any>): void {
     if (this.pdfBytes) {
-      console.log("safePdfDataUrl" + "-" + this.pdfBytes);
       const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
       this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
-      console.log("safePdfDataUrl" + "-" + this.safePdfDataUrl);
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     }
   }
@@ -223,7 +218,6 @@ export class ReviewEffectiveComponent {
                       this.finalStatus = 'Pending Approve';
                     }
                   }
-                  console.log('status', this.finalStatus);
                 }
               }
               this.spinner.hide();

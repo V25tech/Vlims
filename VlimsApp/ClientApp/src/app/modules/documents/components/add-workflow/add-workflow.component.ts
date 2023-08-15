@@ -181,7 +181,6 @@ else if(lastSegment=="view")
         this.grid = data.Response;
         this.commonsvc.templateCount=this.types.length;
         this.loader.hide();
-        console.log(this.types);
       },((error:any)=>{
 
       }

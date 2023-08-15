@@ -34,7 +34,6 @@ export class EffectivesComponent {
       {
       this.currentPage=10;
       }
-      console.log('eff',data);
       this.spinner.hide();
     }, er =>{
       console.log(er);

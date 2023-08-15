@@ -47,7 +47,6 @@ export class WorkflowsComponent {
         this.types = data.Response;
         this.commonsvc.templateCount=this.types.length;
         this.loader.hide();
-        console.log(this.types);
       },((error:any)=>{
 
       }

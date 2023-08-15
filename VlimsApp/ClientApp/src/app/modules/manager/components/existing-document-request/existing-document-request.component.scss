@@ -7,4 +7,11 @@
   .w-150{
     width: 150px;
   }
-  
+  .p-paginator .p-dropdown {    
+    height: unset;
+  }
+
+  :host ::ng-deep .p-paginator .p-dropdown {    
+    height: unset;
+    min-width: unset;
+  }

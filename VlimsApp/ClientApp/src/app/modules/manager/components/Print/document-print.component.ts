@@ -22,20 +22,16 @@ export class DocumentPrintComponent implements OnInit {
   actiontype: number = 0;
   pageConfig: any;
   searchstr: string = '';
-  access:boolean=false;
+  access: boolean = false;
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService, private docservice: DocumentPreperationService, private router: Router) { }
 
   navigateToAddPrint(): void {
-    debugger;
     this.router.navigate(['/print/add']);
   }
   ngOnInit() {
     this.access = this.commonsvc.getUserRoles()?.documentRevison ?? false;
-    //this.tabselect = this.router.url.split('/').pop();
     this.GetDocumentPrint();
-
   }
-
 
   GetDocumentPrint() {
     let objrequest: RequestContext = {
@@ -43,20 +39,16 @@ export class DocumentPrintComponent implements OnInit {
       Id: 0
     };
     return this.doctypeservice.GetDocumentPrint(objrequest).subscribe((data: any) => {
-      debugger
       this.requests = data.response;
-      console.log(this.requests);
     });
   }
   getdocumentrequest() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.docservice.getdocumentpreparations(objrequest).subscribe((data: any) => {
-      debugger
       this.requestsInfo = data.response;
     });
   }
   getStatusClass(status: string): string {
-    debugger;
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Completed') {
@@ -73,7 +65,6 @@ export class DocumentPrintComponent implements OnInit {
     }
   }
   editdoc(request: DocumentPrintConfiguration) {
-    debugger
     this.commonsvc.printConfig = request;
     this.router.navigate(['/print/edit']);
   }

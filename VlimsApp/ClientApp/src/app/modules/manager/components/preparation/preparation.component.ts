@@ -40,7 +40,6 @@ export class PreparationComponent {
       this.currentPage=10;
       this.totalCount = data.rowCount;
       }
-      console.log('preparations',this.preparationsDatasource);
       this.spinner.hide();
     }, er => {
       console.log(er);

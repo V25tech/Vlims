@@ -34,7 +34,6 @@ export class ExistingDocumentRequestComponent implements OnInit {
     this.getdocumentrequest();    
    // this.existingDocDatasource = this.getDummyData();
     this.currentPage = 10;
-    console.log(this.existingDocDatasource);
   }
 
   getdocumentrequest() {
@@ -44,7 +43,6 @@ export class ExistingDocumentRequestComponent implements OnInit {
       this.existingDocDatasource = data.response;
       if (this.existingDocDatasource.length < 10)
         this.currentPage = 10;
-      console.log(data);
       this.spinner.hide();
     }, er => {
       console.error('An error occurred:', er);

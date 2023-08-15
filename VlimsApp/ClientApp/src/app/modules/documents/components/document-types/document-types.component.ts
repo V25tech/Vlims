@@ -40,7 +40,6 @@ export class DocumentTypesComponent {
         
         this.types = data.Response;
         this.spinner.hide();
-        console.log(this.types);
       },
       (error: any) => {
         console.error('An error occurred:', error);

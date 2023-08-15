@@ -123,7 +123,6 @@ export class ReviewPrepationComponent {
     }
     this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
       this.commonsvc.preperation = new DocumentPreperationConfiguration();
-      console.log(res);
       this.spinner.hide();
       this.location.back();
     }, er => {
@@ -180,10 +179,8 @@ export class ReviewPrepationComponent {
 
   openViewer(template: TemplateRef<any>): void {
     if (this.pdfBytes) {
-      console.log("safePdfDataUrl" + "-" + this.pdfBytes);
       const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
       this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
-      console.log("safePdfDataUrl" + "-" + this.safePdfDataUrl);
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     }
   }
@@ -262,7 +259,6 @@ export class ReviewPrepationComponent {
                       this.finalStatus = 'Pending Approve';
                     }
                   }
-                  console.log('status', this.finalStatus);
                 }
               }
               this.spinner.hide();

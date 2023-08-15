@@ -212,7 +212,6 @@ export class ReviewRevisionComponent {
               this.finalStatus = 'Pending Approve';
             }
           }
-          console.log('status', this.finalStatus);
         }
       }
       this.spinner.hide();

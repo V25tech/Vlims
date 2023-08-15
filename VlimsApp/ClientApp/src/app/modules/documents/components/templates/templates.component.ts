@@ -42,7 +42,6 @@ export class TemplatesComponent {
         this.types = data.Response;
         this.commonsvc.templateCount=this.types.length;
         this.spinner.hide();
-        console.log(this.types);
       }, (error:any) => {
        
       });

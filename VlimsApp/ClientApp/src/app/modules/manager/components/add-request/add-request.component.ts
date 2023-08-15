@@ -170,7 +170,6 @@ export class AddRequestComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsSource = data.Response;
-      console.log(this.workflowsSource);
     });
   }
   getworkflowitems() {
@@ -193,7 +192,6 @@ export class AddRequestComponent {
                   const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
                   debugger
                   this.reviewpendingcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted==false).length;
-                  console.log('pendingcount-',this.reviewpendingcount);
                   const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
                   const countt = totalreviewcount - reviewedcount;
                   if (this.statuss === 'Review') {
@@ -215,7 +213,6 @@ export class AddRequestComponent {
                       this.finalStatus = 'Pending Approve';
                     }
                   }
-                  console.log('status', this.finalStatus);
                 }
               }
               this.spinner.hide();
