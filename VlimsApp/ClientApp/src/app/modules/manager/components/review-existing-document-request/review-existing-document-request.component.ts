@@ -124,6 +124,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
       this.existingDocReqservice.adddExistingDocument(this.existingDocReq).subscribe(res => {
         this.location.back();
         this.spinner.hide();
+        this.toastr.success('Document details saved suscessfully','Saved.!');
       }, er => {
         console.log(er);
         this.spinner.hide();
@@ -132,7 +133,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   }
 
   Update() {
-    if (!this.selectedFile || !this.existingDocReq.document) {
+    if (!this.existingDocReq.document) {
       console.error('No file selected.');
       this.isFileUploadError = true;
       return;
@@ -141,6 +142,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
       this.commonsvc.existingDocReq = new ExistingDocumentRequest();
       this.location.back();
       this.spinner.hide();
+      this.toastr.success('Document details update suscessfully','Updated.!');
     }, er => {
       console.log(er);
       this.spinner.hide();
