@@ -194,7 +194,8 @@ internal class HeaderFooter
 
         foreach (HtmlNode rowNode in htmlDocument.DocumentNode.SelectNodes("//div[@class='table-row']"))
         {
-            Table table = GenerateTableFromRowNode(rowNode);
+            //Table table = GenerateTableFromRowNode(rowNode);
+            Table table = GenerateTableFromRowNode1(rowNode);
             header.AppendChild(table);
         }
 
@@ -207,13 +208,72 @@ internal class HeaderFooter
 
         foreach (HtmlNode rowNode in htmlDocument.DocumentNode.SelectNodes("//div[@class='table-row']"))
         {
-            Table table = GenerateTableFromRowNode(rowNode);
+            //Table table = GenerateTableFromRowNode(rowNode);
+            Table table = GenerateTableFromRowNode1(rowNode);
             footer.AppendChild(table);
         }
 
         part.Footer = footer;
         part.Footer.Save();
     }
+    private static Table GenerateTableFromRowNode1(HtmlNode rowNode)
+    {
+        Table table = new Table();
+        TableRow tableRow = new TableRow();
+        bool isLabel = true;
+
+        HtmlNodeCollection cellNodes = rowNode.SelectNodes(".//div[@class='table-cell label-cell'] | .//div[@class='table-cell value-cell']");
+
+        if (cellNodes != null)
+        {
+            // Define table border properties
+            TableProperties tableProperties = new TableProperties(
+                new TableBorders(
+                    new TopBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" },
+                    new BottomBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" },
+                    new LeftBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" },
+                    new RightBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" },
+                    new InsideHorizontalBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" },
+                    new InsideVerticalBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" }
+                )
+            );
+            table.AppendChild(tableProperties);
+            foreach (HtmlNode cellNode in cellNodes)
+            {
+                TableCell tableCell = new TableCell();
+
+                if (isLabel)
+                {
+                    tableCell.AppendChild(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = "50%" }, // Adjust width as needed
+                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center },
+                        new DocumentFormat.OpenXml.Wordprocessing.Shading() { Val = ShadingPatternValues.Clear, Color = "auto" } // Adjust fill color as needed
+                    ));
+                    tableCell.AppendChild(new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Text(cellNode.InnerText))));
+
+                    isLabel = false;
+                }
+                else
+                {
+                    tableCell.AppendChild(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = "50%" }, // Adjust width as needed
+                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center },
+                        new DocumentFormat.OpenXml.Wordprocessing.Shading() { Val = ShadingPatternValues.Clear, Color = "auto" } // Adjust fill color as needed
+                    ));
+                    tableCell.AppendChild(new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Text(cellNode.InnerText))));
+
+                    isLabel = true;
+                }
+
+                tableRow.AppendChild(tableCell);
+            }
+
+            table.AppendChild(tableRow);
+        }
+
+        return table;
+    }
+
 
     //private static Table GenerateTableFromRowNode(HtmlNode rowNode)
     //{
