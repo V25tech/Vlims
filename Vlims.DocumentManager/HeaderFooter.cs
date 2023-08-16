@@ -235,9 +235,12 @@ internal class HeaderFooter
                     new RightBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" },
                     new InsideHorizontalBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" },
                     new InsideVerticalBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" }
-                )
+                ),
+            new TableWidth() { Type = TableWidthUnitValues.Pct, Width = "100%" } // Set table width to 100%
             );
             table.AppendChild(tableProperties);
+            // Calculate the number of cells per row (label and value)
+            int cellsPerRow = cellNodes.Count / 2;
             foreach (HtmlNode cellNode in cellNodes)
             {
                 TableCell tableCell = new TableCell();
@@ -245,7 +248,7 @@ internal class HeaderFooter
                 if (isLabel)
                 {
                     tableCell.AppendChild(new TableCellProperties(
-                        new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = "50%" }, // Adjust width as needed
+                        new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = cellsPerRow>0 ? (100 / cellsPerRow).ToString() : "50" + "%" }, // Adjust width as needed
                         new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center },
                         new DocumentFormat.OpenXml.Wordprocessing.Shading() { Val = ShadingPatternValues.Clear, Color = "auto" } // Adjust fill color as needed
                     ));
@@ -256,7 +259,7 @@ internal class HeaderFooter
                 else
                 {
                     tableCell.AppendChild(new TableCellProperties(
-                        new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = "50%" }, // Adjust width as needed
+                        new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = cellsPerRow > 0 ? (100 / cellsPerRow).ToString() : "50" + "%" }, // Adjust width as needed
                         new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center },
                         new DocumentFormat.OpenXml.Wordprocessing.Shading() { Val = ShadingPatternValues.Clear, Color = "auto" } // Adjust fill color as needed
                     ));
@@ -421,7 +424,7 @@ internal class HeaderFooter
         return tableCell;
     }
 
-    
+
 
     private static DocumentFormat.OpenXml.Drawing.Paragraph CreateHtmlParagraph(string htmlContent)
     {
@@ -569,6 +572,28 @@ internal class HeaderFooter
         tableHtml.Append("</style>");
         tableHtml.Append("<div class=\"table-container\">");
 
+        if (Template.titleTable != null)
+        {
+            foreach (List<HeaderTable> row in Template.titleTable)
+            {
+                tableHtml.Append("<div class=\"table-row\">");
+                foreach (HeaderTable item in row)
+                {
+                    tableHtml.Append("<div class=\"table-cell ");
+
+                    if (item.selectedOption == 1)
+                    {
+                        tableHtml.Append("label-cell");
+                    }
+                    tableHtml.Append("\">");
+                    tableHtml.Append(item.inputValue);
+                    tableHtml.Append("</div>");
+                }
+                tableHtml.Append("</div>");
+            }
+        }
+
+
         foreach (List<HeaderTable> row in Template.headerTable)
         {
             tableHtml.Append("<div class=\"table-row\">");
@@ -642,7 +667,7 @@ internal class HeaderFooter
 
                 tableHtml.Append("\">");
                 if (item.selectedOption == 1)
-                    tableHtml.Append(item.inputValue+" "+":");
+                    tableHtml.Append(item.inputValue + " " + ":");
                 else
                     tableHtml.Append(item.inputValue);
                 tableHtml.Append("</div>");

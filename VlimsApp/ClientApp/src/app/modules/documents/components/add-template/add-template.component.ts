@@ -51,10 +51,14 @@ export class AddTemplateComponent implements OnInit {
   showGrid: boolean = false;
   rows: number = 0;
   cols: number = 0;
+  headerRow:number=0;
+  headerColumn:number=0;
+  headerrowarray:number[]=[];
+  headercolarray:number[]=[];
   rowsArray: number[] = [];
   colsArray: number[] = [];
   gridData: any = [];
-
+  headerData:any=[];
   footerRows: number = 0;
   footerCols: number = 0;
   rowsFooterArray: number[] = [];
@@ -98,7 +102,9 @@ export class AddTemplateComponent implements OnInit {
     this.footerRows = 1;
     this.footerCols = 2;
     this.generateFooterGrid();
-
+    this.headerRow=1;
+    this.headerColumn=1;
+    this.generateheaderrow();
     this.getTemplates();
     this.getdocumenttypeconfig();
 
@@ -127,6 +133,30 @@ export class AddTemplateComponent implements OnInit {
     }
     
   }
+  generateheaderrow() {
+    debugger
+    this.showGrid = true;
+    // Set the number of rows and columns based on user input
+    // this.rows = 5;
+    // this.cols = 5;
+    this.headerrowarray = Array.from({ length: this.headerRow });
+    this.headercolarray = Array.from({ length: this.headerColumn });
+    this.headerData = [];
+    for (let i = 0; i < this.headerRow; i++) {
+      const row: any[] = [];
+      for (let j = 0; j < this.headerColumn; j++) {
+        if (j !== 0 && j % 2 !== 0)
+        {
+          row.push({ selectedOption: 2, inputValue: '' });
+        }
+        else {
+        row.push({ selectedOption: 1, inputValue: '' });
+        }
+      }
+      console.log(row);
+      this.headerData.push(row);
+    }
+  }
 
   getEditorContent() {
     console.log(this.editorContent);
@@ -150,6 +180,7 @@ export class AddTemplateComponent implements OnInit {
       this.footerCols=parseInt(this.templateForm.footercolumns,10);
       this.gridData=this.templateForm.headerTable;
       this.gridFooterData=this.templateForm.footerTable;
+      this.headerData=this.templateForm.titleTable;
       if(this.templateForm.Page!=null){
       this.pages = this.templateForm.Page;
       }
@@ -194,7 +225,9 @@ export class AddTemplateComponent implements OnInit {
   addTemplate() {
     debugger
     this.loader.show();
+    console.log(this.headerData);
     this.templateForm.documenttype=this.selectedtype.Documenttypename;
+    this.templateForm.titleTable=this.headerData;
     this.templateForm.headerTable=this.gridData;
     this.templateForm.footerTable=this.gridFooterData;
     this.templateForm.rows=this.rowsArray.length.toString();
@@ -229,9 +262,9 @@ export class AddTemplateComponent implements OnInit {
       });
     }
     }
-    // this.templatesvc.adddoctemplate(this.templateForm).subscribe(() => {
-    // this.router.navigate(['/templates']);
-    // });
+    this.templatesvc.adddoctemplate(this.templateForm).subscribe(() => {
+    this.router.navigate(['/templates']);
+    });
   }
   isduplicate() {
     if (this.grid != null && this.grid.length > 0) {

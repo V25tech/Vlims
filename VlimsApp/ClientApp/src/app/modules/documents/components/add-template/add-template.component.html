@@ -99,6 +99,41 @@
       </div>
       </form>
       <div class="p-4 mt-3 bg-white shadow-dark rounded-2">
+        <h5 class="page-card-title">Header Row</h5> 
+        <div class="template-block">
+          <div class="template-grid">
+            <ng-container *ngIf="showGrid">
+              <table class="w-100">
+                <tbody>
+                  <tr *ngFor="let row of headerData; let rowIndex = index">
+                    <ng-container *ngFor="let cell of row; let colIndex = index">
+                      <td>
+                        <div class="template-cell">
+                          <div class="custom-select" style="width: 84px;">
+                            <select class="select-dropdown form-select"
+                            [(ngModel)]="headerData[rowIndex][colIndex].selectedOption">
+                              <option *ngFor="let option of selectOptions"
+                                      [value]="option.value">
+                                {{ option.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <input [(ngModel)]="
+                          headerData[rowIndex][colIndex].inputValue
+                            " [placeholder]="headerData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"
+                                 class="form-control"
+                                 type="text" />
+                        </div>
+                      </td>
+                    </ng-container>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 mt-3 bg-white shadow-dark rounded-2">
         <h5 class="page-card-title">Header Template-(4 Col max.)</h5> 
         <div class="template-block">
           <div class="template-grid">
