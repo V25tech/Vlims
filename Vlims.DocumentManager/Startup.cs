@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using PolicySummary.DMS.Services;
 using Vlims.DocumentManager.Manager;
+using Vlims.DocumentManager.Manager.Interface;
 
 public class Startup
 {
@@ -51,6 +52,7 @@ public class Startup
         Services.AddScoped<IDocumentrequestService, DocumentrequestService>();
         Services.AddScoped<IDocumentPrintService, DocumentPrintService>();
         Services.AddScoped<IExistingDocumentRequestService, ExistingDocumentRequestService>();
+        Services.AddScoped<IAzureBlobService, AzureBlobService>();
         Services.AddEndpointsApiExplorer();
         Services.AddSwaggerGen();
     }

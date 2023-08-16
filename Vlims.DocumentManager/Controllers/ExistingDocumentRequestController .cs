@@ -17,6 +17,7 @@ namespace PolicySummary.Controllers
     using Vlims.DocumentManager.Manager;
     using Vlims.Common;
     using Vlims.DMS.Entities;
+    using Vlims.DocumentManager.Manager.Interface;
 
 
 
@@ -29,14 +30,15 @@ namespace PolicySummary.Controllers
     {
 
         private readonly IExistingDocumentRequestService existingDocumentRequestService;
-
+        private readonly IAzureBlobService azureBlobService;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="existingDocumentRequestService"></param>
-        public ExistingDocumentRequestController(IExistingDocumentRequestService _existingDocumentRequestService)
+        public ExistingDocumentRequestController(IExistingDocumentRequestService _existingDocumentRequestService, IAzureBlobService _azureBlobService)
         {
             this.existingDocumentRequestService = _existingDocumentRequestService;
+            this.azureBlobService = _azureBlobService;
         }
 
         /// <summary>
@@ -140,19 +142,9 @@ namespace PolicySummary.Controllers
         {
             try
             {
-                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Exsting");
-                if (!Directory.Exists(uploadsFolder))
-                {
-                    Directory.CreateDirectory(uploadsFolder);
-                }
+                string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
 
-                string uniqueFileName = file.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(fileStream);
-                }
+                var resp = await azureBlobService.UploadFiles(file, uniqueFileName).ConfigureAwait(false);
 
                 return Ok(new { message = "File uploaded successfully.", uniqueFileName });
             }
@@ -168,13 +160,11 @@ namespace PolicySummary.Controllers
 
             if (!string.IsNullOrEmpty(existingDocumentRequest.document))
             {
-                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Exsting");
-                uploadsFolder = Path.Combine(uploadsFolder, existingDocumentRequest.document);
+                var res = azureBlobService.GetFileFromAzure(existingDocumentRequest.document);
 
-                if (System.IO.File.Exists(uploadsFolder))
-                {
-                    var pdfBytes = System.IO.File.ReadAllBytes(uploadsFolder);
-                    return Ok(pdfBytes); //r
+                if (res!=null && res.Length>1)
+                {   
+                    return Ok(res); 
                 }
             }
             return BadRequest();
