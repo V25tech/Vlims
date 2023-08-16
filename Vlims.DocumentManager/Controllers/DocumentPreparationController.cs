@@ -97,16 +97,20 @@ namespace PolicySummary.Controllers
                 var template = result.FirstOrDefault(o => o.Templatename.Equals(documentPreparation.template, StringComparison.InvariantCultureIgnoreCase));
                 if (template != null)
                 {
-                    DataTable hTable = null;
-                    DataTable fTable = null;
-                    if (template.headerTable != null && template.footerTable != null)
-                    {
-                        hTable = PrepareDataTable(template);
-                        fTable = PrepareDataTable1(template);
-                    }
-                    string headertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), hTable);
-                    string footertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), fTable);
-                    HeaderFooter.getData(headertable, footertable, documentPreparation.path);
+                    //DataTable hTable = null;
+                    //DataTable fTable = null;
+                    //if (template.headerTable != null && template.footerTable != null)
+                    //{
+                    //    string ss = HeaderFooter.PrepareHeaderdiv(template);
+                    //    hTable = PrepareDataTable(template);
+                    //    fTable = PrepareDataTable1(template);
+                    //}
+                    //string headertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), hTable);
+                    //string footertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), fTable);
+                    string headertable = HeaderFooter.PrepareHeaderdiv(template);
+                    string footertable = HeaderFooter.PrepareFooterdiv(template);
+                    string tempFilePath = Path.GetTempFileName() + ".docx";
+                    HeaderFooter.getData(headertable, footertable, tempFilePath, template);
 
                     // Generate the output file path dynamically
                     string outputFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); // Set the folder where you want to save the converted PDFs
@@ -114,7 +118,7 @@ namespace PolicySummary.Controllers
                     string outputFilePath = Path.Combine(outputFolderPath, outputFileName);
 
                     // Convert the content to PDF using iTextSharp
-                    HeaderFooter.generatePDF(documentPreparation.path, outputFilePath);
+                    HeaderFooter.generatePDF(tempFilePath, outputFilePath);
 
                     pdfBytes = System.IO.File.ReadAllBytes(outputFilePath);
                 }

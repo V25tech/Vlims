@@ -22,7 +22,7 @@ namespace Vlims.DocumentMaster.DataAccess
     public static class workflowconigurationConverter
     {
 
-        public static List<workflowconiguration> SetAllworkflowconiguration(DataSet dataset)
+        public static List<workflowconiguration> SetAllworkflowconiguration(DataSet dataset, bool isgetall= true)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         workflowconigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[workflowconigurationConstants.ModifiedDate.Trim('@')]);
                         workflowconigurationData.ModifiedBy = Convert.ToString(row[workflowconigurationConstants.ModifiedBy.Trim('@')]);
                         workflowconigurationData.Status = Convert.ToString(row[workflowconigurationConstants.Status.Trim('@')]);
-                        if (!islist)
+                        if (!isgetall)
                         {
                             string docvalue = Convert.ToString(row["Document_PSY"]);
                             if (!string.IsNullOrEmpty(docvalue))

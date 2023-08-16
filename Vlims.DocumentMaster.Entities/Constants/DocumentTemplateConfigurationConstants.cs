@@ -49,6 +49,8 @@ namespace Vlims.DocumentMaster.Entities
 
         public const string Status = "@Status_PSY";
 
+        public const string Pages = "@Pages";
+
         public const string USP_DocumentTemplateConfiguration_PSY_GET_ALL = "dbo.USP_DocumentTemplateConfiguration_PSY_GET_ALL";
         
         public const string USP_DocumentTemplateConfiguration_PSY_GET = "dbo.USP_DocumentTemplateConfiguration_PSY_GET";

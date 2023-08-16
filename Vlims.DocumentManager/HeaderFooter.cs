@@ -14,10 +14,11 @@ using RightBorder = DocumentFormat.OpenXml.Wordprocessing.RightBorder;
 using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
 using Aspose.Words;
 using System.Data;
+using Vlims.DocumentMaster.Entities;
 
 internal class HeaderFooter
 {
-    public static void getData(string htmlheaderTable, string htmlfooterTable, string outputPath)
+    public static void getData(string htmlheaderTable, string htmlfooterTable, string outputPath, DocumentTemplateConfiguration template)
     {
         try
         {
@@ -31,7 +32,7 @@ internal class HeaderFooter
             //string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "f3.docx");//testheaderfooter.docx";
 
             //ConvertHtmlTableToWordTableInHeader(outputPath, htmlheaderTable);
-            ConvertHtmlTableToWordTableInHeader1(outputPath, htmlheaderTable, htmlfooterTable);
+            ConvertHtmlTableToWordTableInHeader1(outputPath, htmlheaderTable, htmlfooterTable, template);
             //ConvertHtmlTableToWordTableInHeaderAndFooter(outputPath, htmlheaderTable, htmlfooterTable);
         }
         catch (Exception ex)
@@ -87,10 +88,12 @@ internal class HeaderFooter
         }
     }
 
-    public static void ConvertHtmlTableToWordTableInHeader1(string filePath, string htmlTable, string htmlfooterTable)
+    public static void ConvertHtmlTableToWordTableInHeader1(string filePath, string htmlTable, string htmlfooterTable, DocumentTemplateConfiguration template)
     {
-        using (WordprocessingDocument document = WordprocessingDocument.Open(filePath, true))
+        //string tempFilePath = Path.GetTempFileName() + ".docx";
+        using (WordprocessingDocument document = WordprocessingDocument.Create(filePath, WordprocessingDocumentType.Document))
         {
+
             // Get the main document part
             MainDocumentPart mainPart;
             if (document.MainDocumentPart != null)
@@ -100,63 +103,336 @@ internal class HeaderFooter
                 mainPart = document.AddMainDocumentPart();
                 new DocumentFormat.OpenXml.Wordprocessing.Document(new DocumentFormat.OpenXml.Wordprocessing.Body()).Save(mainPart);
             }
-            //MainDocumentPart mainPart = document.AddMainDocumentPart();
-            //new Document(new Body()).Save(mainPart);
 
-            // Create a new header part and assign an ID
-            HeaderPart headerPart = mainPart.AddNewPart<HeaderPart>();
-            string headerPartId = mainPart.GetIdOfPart(headerPart);
-
-            // Create a new footer part and assign an ID
-            FooterPart footerPart = mainPart.AddNewPart<FooterPart>();
-            string footerPartId = mainPart.GetIdOfPart(footerPart);
-
-            // Create a new header reference and assign the ID
-            HeaderReference headerReference = new HeaderReference() { Type = HeaderFooterValues.Default, Id = headerPartId };
-            // Create a new footer reference and assign the ID
-            FooterReference footerReference = new FooterReference() { Type = HeaderFooterValues.Default, Id = footerPartId };
-
-            // Get the header part's section properties
-            SectionProperties sectionProperties = mainPart.Document.Body.Elements<SectionProperties>().FirstOrDefault();
-            if (sectionProperties == null)
+            // Iterate through each page and add header and footer tables
+            for (int page = 0; page < template.Pages; page++)
             {
-                // If section properties do not exist, create them
-                sectionProperties = new SectionProperties();
+                // Create a new section properties for each page
+                SectionProperties sectionProperties = new SectionProperties(
+                    new PageSize() { Width = 11906U, Height = 16838U }, // Adjust page size as needed
+                    new PageMargin() { Top = 1417, Right = 1417, Bottom = 1417, Left = 1417, Header = 708, Footer = 708 }
+                );
+
+                if (page > 0)
+                {
+                    DocumentFormat.OpenXml.Drawing.Paragraph pageBreak = new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Break() { Type = BreakValues.Page }));
+                    mainPart.Document.Body.Append(pageBreak);
+                }
+
+                // Create a new header part and assign an ID
+                HeaderPart headerPart = mainPart.AddNewPart<HeaderPart>();
+                string headerPartId = mainPart.GetIdOfPart(headerPart);
+
+                // Create a new footer part and assign an ID
+                FooterPart footerPart = mainPart.AddNewPart<FooterPart>();
+                string footerPartId = mainPart.GetIdOfPart(footerPart);
+
+                // Create a new header reference and assign the ID
+                HeaderReference headerReference = new HeaderReference() { Type = HeaderFooterValues.Default, Id = headerPartId };
+                // Create a new footer reference and assign the ID
+                FooterReference footerReference = new FooterReference() { Type = HeaderFooterValues.Default, Id = footerPartId };
+
+                sectionProperties.RemoveAllChildren<HeaderReference>();
+                sectionProperties.RemoveAllChildren<FooterReference>();
+                // Set the header reference on the section properties
+                sectionProperties.InsertAt(headerReference, 0);
+                // Set the footer reference on the section properties
+                sectionProperties.InsertAt(footerReference, 1);
+
+                // Add section properties to the body
                 mainPart.Document.Body.Append(sectionProperties);
+
+                // Create a new header with a table
+                Header header = new Header();
+                headerPart.Header = header;
+
+                // Create a new footer with a table
+                Footer footer = new Footer();
+                footerPart.Footer = footer;
+
+                // Load the HTML content into paragraphs for header and footer
+                HtmlDocument htmlHeaderDocument = new HtmlDocument();
+                htmlHeaderDocument.LoadHtml(htmlTable);
+                GenerateHeaderContent(headerPart, htmlHeaderDocument);
+
+                HtmlDocument htmlFooterDocument = new HtmlDocument();
+                htmlFooterDocument.LoadHtml(htmlfooterTable);
+                GenerateFooterContent(footerPart, htmlFooterDocument);
+
+                // Add the table to the header
+                //header.Append(headerElements);
+                //headerPart.Header.Save();
+
+                //footer.Append(footerElements);
+                //footerPart.Footer.Save();
+
+                // Add dynamic content to the body
+                if (page < template.Page.ToList().Count)
+                {
+                    string bodyContent = template.Page[page].text;
+                    string[] lines = bodyContent.Split('\n');
+
+                    foreach (string line in lines)
+                    {
+                        DocumentFormat.OpenXml.Wordprocessing.Body body = mainPart.Document.Body;
+                        DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
+                        Run run = new Run();
+                        Text text = new Text(line.Trim()); // Trim to remove any leading/trailing spaces
+                        run.Append(text);
+                        paragraph.Append(run);
+                        body.Append(paragraph);
+                    }
+                }
+            }
+        }
+        //filePath = tempFilePath;
+    }
+
+    private static void GenerateHeaderContent(HeaderPart part, HtmlDocument htmlDocument)
+    {
+        Header header = new Header();
+
+        foreach (HtmlNode rowNode in htmlDocument.DocumentNode.SelectNodes("//div[@class='table-row']"))
+        {
+            Table table = GenerateTableFromRowNode(rowNode);
+            header.AppendChild(table);
+        }
+
+        part.Header = header;
+        part.Header.Save();
+    }
+    private static void GenerateFooterContent(FooterPart part, HtmlDocument htmlDocument)
+    {
+        Footer footer = new Footer();
+
+        foreach (HtmlNode rowNode in htmlDocument.DocumentNode.SelectNodes("//div[@class='table-row']"))
+        {
+            Table table = GenerateTableFromRowNode(rowNode);
+            footer.AppendChild(table);
+        }
+
+        part.Footer = footer;
+        part.Footer.Save();
+    }
+
+    //private static Table GenerateTableFromRowNode(HtmlNode rowNode)
+    //{
+    //    Table table = new Table();
+    //    HtmlNodeCollection cellNodes = rowNode.SelectNodes(".//div[@class='table-cell label-cell']");
+
+    //    if (cellNodes != null)
+    //    {
+    //        TableRow tableRow = new TableRow();
+
+    //        foreach (HtmlNode cellNode in cellNodes)
+    //        {
+    //            TableCell tableCell = new TableCell(new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new Run(new Text(cellNode.InnerText))));
+    //            tableRow.AppendChild(tableCell);
+    //        }
+
+    //        table.AppendChild(tableRow);
+    //    }
+    //    HtmlNodeCollection cellNodes1 = rowNode.SelectNodes(".//div[@class='table-cell value-cell']");
+
+    //    if (cellNodes1 != null)
+    //    {
+    //        TableRow tableRow = new TableRow();
+
+    //        foreach (HtmlNode cellNode in cellNodes1)
+    //        {
+    //            TableCell tableCell = new TableCell(new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new Run(new Text(cellNode.InnerText))));
+    //            tableRow.AppendChild(tableCell);
+    //        }
+
+    //        table.AppendChild(tableRow);
+    //    }
+
+    //    return table;
+    //}
+    private static Table GenerateTableFromRowNode(HtmlNode rowNode)
+    {
+        Table table = new Table();
+        TableRow tableRow = new TableRow();
+
+        HtmlNodeCollection cellNodes = rowNode.SelectNodes(".//div[@class='table-cell label-cell'] | .//div[@class='table-cell value-cell']");
+
+        if (cellNodes != null)
+        {
+            foreach (HtmlNode cellNode in cellNodes)
+            {
+                TableCell tableCell = new TableCell();
+                if (cellNode.Attributes["class"] != null)
+                {
+                    string cellClass = cellNode.Attributes["class"].Value;
+                    TableCellProperties cellProperties = new TableCellProperties();
+                    if (cellClass.Contains("label-cell"))
+                    {
+                        //TableCell tableCell1 = ApplyCellStyle(cellNode.Attributes["class"].Value, cellNode.InnerText);
+                        // Apply style for label cells
+                        cellProperties.AppendChild(new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = "800" }); // Adjust width as needed
+                        cellProperties.AppendChild(new TableCellBorders(new BottomBorder(), new LeftBorder(), new RightBorder(), new TopBorder()));
+                        //cellProperties.AppendChild(new DocumentFormat.OpenXml.Wordprocessing.Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "E5E5E5" }); // Adjust fill color as needed
+                        //cellProperties.AppendChild(new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center });
+
+                        // Add spacing between cells
+                        TableCellMargin cellMargin = new TableCellMargin(new TableCellLeftMargin() { Width = 800 }, new TableCellRightMargin() { Width = 800 });
+                        cellProperties.Append(cellMargin);
+
+                        tableCell.AppendChild(cellProperties);
+
+                        DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
+                        Run run = new Run(new Text(cellNode.InnerText));
+                        paragraph.Append(run);
+                        tableCell.AppendChild(paragraph);
+                    }
+                    else if (cellClass.Contains("value-cell"))
+                    {
+                        // Apply style for value cells
+                        cellProperties.AppendChild(new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = "800" }); // Adjust width as needed
+                        cellProperties.AppendChild(new TableCellBorders(new BottomBorder(), new LeftBorder(), new RightBorder(), new TopBorder()));
+                        //cellProperties.AppendChild(new DocumentFormat.OpenXml.Wordprocessing.Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF" }); // Adjust fill color as needed
+                        //cellProperties.AppendChild(new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center });
+                        cellProperties.AppendChild(new Justification() { Val = JustificationValues.Right });
+
+                        // Add spacing between cells
+                        TableCellMargin cellMargin = new TableCellMargin(new TableCellLeftMargin() { Width = 800 }, new TableCellRightMargin() { Width = 800 });
+                        cellProperties.Append(cellMargin);
+
+                        tableCell.AppendChild(cellProperties);
+
+                        DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
+                        Run run = new Run(new Text(cellNode.InnerText));
+                        paragraph.Append(run);
+                        tableCell.AppendChild(paragraph);
+                    }
+                }
+                //TableCell tableCell = new TableCell(new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new Run(new Text(cellNode.InnerText))));
+                tableRow.AppendChild(tableCell);
+
+                if (tableRow.ChildElements.Count == 2)
+                {
+                    // Add the completed row to the table
+                    table.AppendChild(tableRow);
+
+                    // Start a new row for the next pair of label and value cells
+                    tableRow = new TableRow();
+                }
             }
 
-            // Set the header reference on the section properties
-            sectionProperties.InsertAt(headerReference, 0);
-            // Set the footer reference on the section properties
-            sectionProperties.InsertAt(footerReference, 1);
-
-            // Load the HTML table using HtmlAgilityPack
-            //HtmlDocument htmlDocument = new HtmlDocument();
-            //htmlDocument.LoadHtml(htmlTable);
-            //htmlDocument.LoadHtml(htmlfooterTable);
-
-            // Create a new header with a table
-            Header header = new Header();
-            headerPart.Header = header;
-
-            // Create a new footer with a table
-            Footer footer = new Footer();
-            footerPart.Footer = footer;
-
-            // Create a table in the header
-            Table wordTable = new Table();
-            // Create a table in the footer
-            Table wordTable1 = new Table();
-
-            wordTable = ConvertHtmlTableToWordTable1(htmlTable);
-            wordTable1 = ConvertHtmlTableToWordTable1(htmlfooterTable);
-            // Add the table to the header
-            header.Append(wordTable);
-            headerPart.Header.Save();
-
-            footer.Append(wordTable1);
-            footerPart.Footer.Save();
+            // Check if there's an incomplete row and add it to the table
+            if (tableRow.ChildElements.Count > 0)
+            {
+                table.AppendChild(tableRow);
+            }
         }
+
+        return table;
+    }
+    private static TableCell ApplyCellStyle(string className, string text)
+    {
+        TableCell tableCell = new TableCell();
+
+        switch (className)
+        {
+            case "label-cell":
+                // Apply label cell style
+                tableCell.AppendChild(new TableCellProperties(new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "200" }));
+                // ... other styling properties ...
+                break;
+
+            case "value-cell":
+                // Apply value cell style
+                tableCell.AppendChild(new TableCellProperties(new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "200" }));
+                // ... other styling properties ...
+                break;
+
+            // Add more cases for other classes as needed
+
+            default:
+                // Apply default style
+                tableCell.AppendChild(new TableCellProperties(new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "200" }));
+                // ... other default styling properties ...
+                break;
+        }
+
+        // Add cell content
+        tableCell.AppendChild(new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Text(text))));
+
+        return tableCell;
+    }
+
+    
+
+    private static DocumentFormat.OpenXml.Drawing.Paragraph CreateHtmlParagraph(string htmlContent)
+    {
+        DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
+
+        // Split the HTML content into lines and create runs for each line
+        string[] lines = htmlContent.Split('\n');
+        foreach (string line in lines)
+        {
+            Run run = new Run();
+            Text text = new Text(line.Trim());
+            run.Append(text);
+            paragraph.Append(run);
+        }
+
+        return paragraph;
+    }
+    private static List<OpenXmlElement> ParseHtmlToElements(string htmlContent)
+    {
+        List<OpenXmlElement> elements = new List<OpenXmlElement>();
+
+        HtmlAgilityPack.HtmlDocument htmlDocument = new HtmlAgilityPack.HtmlDocument();
+        htmlDocument.LoadHtml(htmlContent);
+
+        foreach (HtmlAgilityPack.HtmlNode node in htmlDocument.DocumentNode.ChildNodes)
+        {
+            if (node.NodeType == HtmlAgilityPack.HtmlNodeType.Element)
+            {
+                OpenXmlElement element = CreateElementFromHtmlNode(node);
+                if (element != null)
+                {
+                    elements.Add(element);
+                }
+            }
+        }
+
+        return elements;
+    }
+
+    private static OpenXmlElement CreateElementFromHtmlNode(HtmlAgilityPack.HtmlNode node)
+    {
+        // Map HTML element names to OpenXml elements
+        Dictionary<string, Type> elementMappings = new Dictionary<string, Type>
+    {
+        { "div", typeof(DocumentFormat.OpenXml.Wordprocessing.Paragraph) },
+        { "span", typeof(DocumentFormat.OpenXml.Wordprocessing.Run) },
+        // Add more mappings as needed
+    };
+
+        if (elementMappings.ContainsKey(node.Name))
+        {
+            Type elementType = elementMappings[node.Name];
+            OpenXmlElement element = Activator.CreateInstance(elementType) as OpenXmlElement;
+
+            // Process attributes and child nodes as needed
+            // For example, handle CSS classes and other attributes
+
+            // Recursively add child nodes
+            foreach (HtmlAgilityPack.HtmlNode childNode in node.ChildNodes)
+            {
+                OpenXmlElement childElement = CreateElementFromHtmlNode(childNode);
+                if (childElement != null)
+                {
+                    element.Append(childElement);
+                }
+            }
+
+            return element;
+        }
+
+        return null;
     }
     private static Table ConvertHtmlTableToWordTable1(string htmlTable)
     {
@@ -219,6 +495,109 @@ internal class HeaderFooter
     /// <param name="htmlDocument"></param>
     /// <returns></returns>
 
+    public static string PrepareHeaderdiv(DocumentTemplateConfiguration Template)
+    {
+        string table = string.Empty;
+        StringBuilder tableHtml = new StringBuilder();
+        // Add CSS styles
+        tableHtml.Append("<style>");
+        tableHtml.Append(".table-container { display: table; width: 100%; border-collapse: collapse; }");
+        tableHtml.Append(".table-row { display: table-row; }");
+        tableHtml.Append(".table-cell { display: table-cell; padding: 1px;}");
+        tableHtml.Append(".label-cell { text-align: left; font-weight: bold; width: 50px; }");
+        tableHtml.Append(".value-cell { text-align: center; width: 50px; }");
+        tableHtml.Append("</style>");
+        tableHtml.Append("<div class=\"table-container\">");
+
+        foreach (List<HeaderTable> row in Template.headerTable)
+        {
+            tableHtml.Append("<div class=\"table-row\">");
+
+            foreach (HeaderTable item in row)
+            {
+
+
+                tableHtml.Append("<div class=\"table-cell ");
+
+                if (item.selectedOption == 1)
+                {
+                    tableHtml.Append("label-cell");
+                }
+                else
+                {
+                    tableHtml.Append("value-cell");
+                }
+
+                tableHtml.Append("\">");
+                if (item.selectedOption == 1)
+                    tableHtml.Append(item.inputValue + " " + ":");
+                else
+                    tableHtml.Append(item.inputValue);
+                tableHtml.Append("</div>");
+
+                //IsLabel = !IsLabel; // Toggle between label and value for each cell
+            }
+
+            tableHtml.Append("</div>");
+
+        }
+        tableHtml.Append("</div>");
+        table = tableHtml.ToString();
+        return table;
+
+    }
+
+    public static string PrepareFooterdiv(DocumentTemplateConfiguration Template)
+    {
+        string table = string.Empty;
+        StringBuilder tableHtml = new StringBuilder();
+        // Add CSS styles
+        tableHtml.Append("<style>");
+        tableHtml.Append(".table-container { display: table; width: 100%; border-collapse: collapse; }");
+        tableHtml.Append(".table-row { display: table-row; }");
+        tableHtml.Append(".table-cell { display: table-cell; padding: 1px;}");
+        tableHtml.Append(".label-cell { text-align: left; font-weight: bold; width: 50px; }");
+        tableHtml.Append(".value-cell { text-align: center; width: 50px; }");
+        tableHtml.Append("</style>");
+        tableHtml.Append("<div class=\"table-container\">");
+
+        foreach (List<FooterTable> row in Template.footerTable)
+        {
+            tableHtml.Append("<div class=\"table-row\">");
+
+            foreach (FooterTable item in row)
+            {
+
+
+                tableHtml.Append("<div class=\"table-cell ");
+
+                if (item.selectedOption == 1)
+                {
+                    tableHtml.Append("label-cell");
+                }
+                else
+                {
+                    tableHtml.Append("value-cell");
+                }
+
+                tableHtml.Append("\">");
+                if (item.selectedOption == 1)
+                    tableHtml.Append(item.inputValue+" "+":");
+                else
+                    tableHtml.Append(item.inputValue);
+                tableHtml.Append("</div>");
+
+                //IsLabel = !IsLabel; // Toggle between label and value for each cell
+            }
+
+            tableHtml.Append("</div>");
+
+        }
+        tableHtml.Append("</div>");
+        table = tableHtml.ToString();
+        return table;
+
+    }
 
     public static string PrepareHtmlTable(int p_rows, int p_columns, DataTable dt_table = null)
     {

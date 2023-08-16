@@ -82,6 +82,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.CreatedBy, Value = documentTemplateConfiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.ModifiedBy, Value = documentTemplateConfiguration.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Status, Value = documentTemplateConfiguration.Status });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentTemplateConfigurationConstants.Pages, Value = documentTemplateConfiguration.Pages });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -120,6 +121,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = DocumentTemplateConfigurationConstants.document, Value = xmlString });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.ModifiedBy, Value = documentTemplateConfiguration.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Status, Value = documentTemplateConfiguration.Status });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentTemplateConfigurationConstants.Pages, Value = documentTemplateConfiguration.Pages });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

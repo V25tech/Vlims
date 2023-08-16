@@ -36,7 +36,6 @@ getdepartments() {
       });
 }
   getStatusClass(status: string): string {
-    debugger
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Completed') {

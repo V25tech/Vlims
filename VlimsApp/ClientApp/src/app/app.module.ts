@@ -20,6 +20,9 @@ import { MessageService } from 'primeng/api';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToastrModule } from 'ngx-toastr';
+import { QuillModule } from 'ngx-quill';
+import { NgxEditorModule } from 'ngx-editor';
+
 
 
 
@@ -39,7 +42,9 @@ import { ToastrModule } from 'ngx-toastr';
     NgxSpinnerModule,
     ModalModule,
     PaginatorModule,
-    ToastrModule.forRoot()
+    NgxEditorModule,
+    ToastrModule.forRoot(),
+    QuillModule.forRoot(),
   ],
   exports: [TableModule],
 

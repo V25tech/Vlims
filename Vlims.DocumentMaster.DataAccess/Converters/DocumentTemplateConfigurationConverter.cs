@@ -62,6 +62,8 @@ namespace Vlims.DocumentMaster.DataAccess
                                 var person = (DocumentTemplateConfiguration)serializer1.Deserialize(reader);
                                 documentTemplateConfigurationData.headerTable = person.headerTable;
                                 documentTemplateConfigurationData.footerTable = person.footerTable;
+                                documentTemplateConfigurationData.Page=person.Page;
+                                documentTemplateConfigurationData.Pages=person.Pages;
                             }
                         }
                         documentTemplateConfigurationData.CreatedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.CreatedBy.Trim('@')]);
