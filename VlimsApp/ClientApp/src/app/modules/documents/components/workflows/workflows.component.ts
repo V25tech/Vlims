@@ -41,11 +41,15 @@ export class WorkflowsComponent {
   }
   getdocumenttypeconfig() {
     this.loader.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
+   let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
       return this.workflowsvc.getworkflow(objrequest).subscribe((data: any) => {
         
         this.types = data.Response;
         this.commonsvc.templateCount=this.types.length;
+        if(this.types.length<10)
+        {
+          this.currentPage=10;
+        }
         this.loader.hide();
       },((error:any)=>{
 

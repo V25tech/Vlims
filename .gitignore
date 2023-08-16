@@ -380,3 +380,4 @@ FodyWeavers.xsd
 /Vlims.Administration.DataAccess/Validators/UserGroupConfigurationValidator.cs.txt
 /Vlims.Administration.DataAccess/Validators/UserManagementValidator.cs.txt
 /Vlims.Administration.DataAccess/Validators/workitemsValidator.cs.txt
+/Vlims.DocumentManager/Uploads
