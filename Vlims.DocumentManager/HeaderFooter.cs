@@ -89,7 +89,7 @@ internal class HeaderFooter
 
     public static void ConvertHtmlTableToWordTableInHeader1(string filePath, string htmlTable, string htmlfooterTable)
     {
-        using (WordprocessingDocument document = WordprocessingDocument.Open(filePath, true))
+        using (WordprocessingDocument document = WordprocessingDocument.Create(filePath, WordprocessingDocumentType.Document))
         {
             // Get the main document part
             MainDocumentPart mainPart;

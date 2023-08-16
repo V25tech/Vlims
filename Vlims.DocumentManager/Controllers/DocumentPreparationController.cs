@@ -93,7 +93,7 @@ namespace PolicySummary.Controllers
             DataSet dataset = DocumentTemplateConfigurationData.GetAllDocumentTemplateConfiguration(request);
             if (dataset != null && dataset.Tables[0].Rows.Count > 0)
             {
-                result = DocumentTemplateConfigurationConverter.SetAllDocumentTemplateConfiguration(dataset,true);
+                result = DocumentTemplateConfigurationConverter.SetAllDocumentTemplateConfiguration(dataset, true);
                 var template = result.FirstOrDefault(o => o.Templatename.Equals(documentPreparation.template, StringComparison.InvariantCultureIgnoreCase));
                 if (template != null)
                 {
@@ -106,7 +106,11 @@ namespace PolicySummary.Controllers
                     }
                     string headertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), hTable);
                     string footertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), fTable);
-                    HeaderFooter.getData(headertable, footertable, documentPreparation.path);
+
+
+                    string tempFilePath = Path.GetTempFileName() + ".docx";
+
+                    HeaderFooter.getData(headertable, footertable, tempFilePath);
 
                     // Generate the output file path dynamically
                     string outputFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); // Set the folder where you want to save the converted PDFs
@@ -114,7 +118,7 @@ namespace PolicySummary.Controllers
                     string outputFilePath = Path.Combine(outputFolderPath, outputFileName);
 
                     // Convert the content to PDF using iTextSharp
-                    HeaderFooter.generatePDF(documentPreparation.path, outputFilePath);
+                    HeaderFooter.generatePDF(tempFilePath, outputFilePath);
 
                     pdfBytes = System.IO.File.ReadAllBytes(outputFilePath);
                 }
@@ -124,73 +128,114 @@ namespace PolicySummary.Controllers
 
         private DataTable PrepareDataTable1(DocumentTemplateConfiguration template)
         {
-            DataTable table = new DataTable();
-            template.footerTable[0].ForEach(o =>
-            {
-                table.Columns.Add(new DataColumn(o.inputValue));
-            });
-            List<string> col = new List<string>();
-            foreach (DataColumn column in table.Columns)
-            {
-                col.Add(column.ColumnName);
-            }
-            for (int i = 1; i < template.footerTable.Count; i++)
-            {
-                var obj = template.footerTable[i];
+            //DataTable table = new DataTable();
+            //template.footerTable[0].ForEach(o =>
+            //{
+            //    table.Columns.Add(new DataColumn(o.inputValue));
+            //});
+            //List<string> col = new List<string>();
+            //foreach (DataColumn column in table.Columns)
+            //{
+            //    col.Add(column.ColumnName);
+            //}
+            //for (int i = 1; i < template.footerTable.Count; i++)
+            //{
+            //    var obj = template.footerTable[i];
 
-                // Create a new row for each item in the headerTable
-                foreach (var item in obj)
+            //    // Create a new row for each item in the headerTable
+            //    foreach (var item in obj)
+            //    {
+            //        DataRow newRow = table.NewRow();
+
+            //        // Populate the columns in the new row
+            //        foreach (string columnName in col)
+            //        {
+            //            newRow[columnName] = item.inputValue;
+            //        }
+
+            //        // Add the new row to the DataTable
+            //        table.Rows.Add(newRow);
+            //    }
+            //}
+            //return table;
+            DataTable table = new DataTable();
+            foreach (List<FooterTable> item in template.footerTable)
+            {
+                if (item == template.footerTable.First())
+                {//columns
+                    var colums = item.Select(p => new DataColumn(p.inputValue)).ToArray();
+                    table.Columns.AddRange(colums);
+                }
+                else
                 {
                     DataRow newRow = table.NewRow();
-
-                    // Populate the columns in the new row
-                    foreach (string columnName in col)
+                    int c = 0;
+                    foreach (FooterTable item2 in item)
                     {
-                        newRow[columnName] = item.inputValue;
+                        newRow[c++] = item2.inputValue;
                     }
-
-                    // Add the new row to the DataTable
                     table.Rows.Add(newRow);
                 }
             }
             return table;
         }
 
+        //private DataTable PrepareDataTable(DocumentTemplateConfiguration template)
+        //{
+
+        //    DataTable table = new DataTable();
+        //    template.headerTable[0].ForEach(o =>
+        //    {
+        //        table.Columns.Add(new DataColumn(o.inputValue));
+        //    });
+        //    List<string> col = new List<string>();
+        //    foreach (DataColumn column in table.Columns)
+        //    {
+        //        col.Add(column.ColumnName);
+        //    }
+        //    for (int i = 1; i < template.headerTable.Count; i++)
+        //    {
+        //        var obj = template.headerTable[i];
+
+        //        // Create a new row for each item in the headerTable
+        //        foreach (var item in obj)
+        //        {
+        //            DataRow newRow = table.NewRow();
+
+        //            // Populate the columns in the new row
+        //            foreach (string columnName in col)
+        //            {
+        //                newRow[columnName] = item.inputValue;
+        //            }
+
+        //            // Add the new row to the DataTable
+        //            table.Rows.Add(newRow);
+        //        }
+        //    }
+        //    return table;
         private DataTable PrepareDataTable(DocumentTemplateConfiguration template)
         {
-
             DataTable table = new DataTable();
-            template.headerTable[0].ForEach(o =>
+            foreach (List<HeaderTable> item in template.headerTable)
             {
-                table.Columns.Add(new DataColumn(o.inputValue));
-            });
-            List<string> col = new List<string>();
-            foreach (DataColumn column in table.Columns)
-            {
-                col.Add(column.ColumnName);
-            }
-            for (int i = 1; i < template.headerTable.Count; i++)
-            {
-                var obj = template.headerTable[i];
-
-                // Create a new row for each item in the headerTable
-                foreach (var item in obj)
+                if (item == template.headerTable.First())
+                {//columns
+                    var colums = item.Select(p => new DataColumn(p.inputValue)).ToArray();
+                    table.Columns.AddRange(colums);
+                }
+                else
                 {
                     DataRow newRow = table.NewRow();
-
-                    // Populate the columns in the new row
-                    foreach (string columnName in col)
+                    int c = 0;
+                    foreach (HeaderTable item2 in item)
                     {
-                        newRow[columnName] = item.inputValue;
+                        newRow[c++] = item2.inputValue;
                     }
-
-                    // Add the new row to the DataTable
                     table.Rows.Add(newRow);
                 }
             }
             return table;
         }
-
 
 
         private void PrepareFooterTable(DocumentTemplateConfiguration template, DocumentPreparation documentPreparation)
