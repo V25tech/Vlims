@@ -19,7 +19,7 @@
             [globalFilterFields]="['workflowName','documentstage', 'documenttype', 'department','CreatedBy', 'Status','workflowName']"
              tableStyleClass="table table-striped" [rows]="itemsPerPage"
             [paginator]="true" [totalRecords]="types.length"
-            [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
+            [rowsPerPageOptions]="rowsPerPageOptions" >
                 <ng-template pTemplate="header">
                     <tr>
                         <th>#</th>

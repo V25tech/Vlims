@@ -16,7 +16,7 @@
             <div class="p-4 bg-white shadow-dark rounded-2">
             <p-table  [value]="revisionDatasource" tableStyleClass="table table-striped" [rows]="itemsPerPage"
             [paginator]="true" [totalRecords]="revisionDatasource.length"
-            [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage" >
+            [rowsPerPageOptions]="rowsPerPageOptions" >
                 <ng-template pTemplate="header">
                     <tr>
                         <th>#</th>
