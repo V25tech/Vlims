@@ -58,7 +58,9 @@ export class RequestsComponent implements OnInit{
     return this.documentRequestService.getdocumentrequest(objrequest).subscribe((data: any) => {     
       this.requestsDatasource = data.response;
       if(this.requestsDatasource.length<10)
+      {
       this.currentPage=10;
+      }
       this.spinner.hide();
     }, er => {
       console.error('An error occurred:', er);
