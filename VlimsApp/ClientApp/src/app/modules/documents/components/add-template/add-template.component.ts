@@ -259,9 +259,9 @@ export class AddTemplateComponent implements OnInit {
       });
     }
     }
-    this.templatesvc.adddoctemplate(this.templateForm).subscribe(() => {
-    this.router.navigate(['/templates']);
-    });
+    // this.templatesvc.adddoctemplate(this.templateForm).subscribe(() => {
+    // this.router.navigate(['/templates']);
+    // });
   }
   isduplicate() {
     if (this.grid != null && this.grid.length > 0) {
