@@ -23,8 +23,6 @@ import { ReviewExistingDocumentRequestComponent } from './components/review-exis
 import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
 import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
 import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
-import { QuillModule } from 'ngx-quill';
-import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
@@ -52,8 +50,6 @@ import { NgxEditorModule } from 'ngx-editor';
     MultiSelectModule,
     DropdownModule,
     ToastModule,
-    QuillModule,
-    NgxEditorModule
   ],
 })
 export class ManagerModule { }
