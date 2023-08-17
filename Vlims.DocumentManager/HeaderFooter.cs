@@ -236,7 +236,7 @@ internal class HeaderFooter
                     new InsideHorizontalBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" },
                     new InsideVerticalBorder() { Val = BorderValues.Single, Size = 2, Space = 0, Color = "000000" }
                 ),
-            new TableWidth() { Type = TableWidthUnitValues.Pct, Width = "100%" } // Set table width to 100%
+                new TableWidth() { Type = TableWidthUnitValues.Pct, Width = "100%" } // Set table width to 100%
             );
             table.AppendChild(tableProperties);
             // Calculate the number of cells per row (label and value)
@@ -245,30 +245,28 @@ internal class HeaderFooter
             {
                 TableCell tableCell = new TableCell();
 
+                TableCellProperties cellProperties = new TableCellProperties();
+                cellProperties.AppendChild(new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = cellsPerRow > 0 ? (100 / cellsPerRow).ToString() : "50%" }); // Adjust width as needed
+                cellProperties.AppendChild(new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center });
+                cellProperties.AppendChild(new DocumentFormat.OpenXml.Wordprocessing.Shading() { Val = ShadingPatternValues.Clear, Color = "auto" }); // Adjust fill color as needed
+                cellProperties.AppendChild(new TableCellBorders(new BottomBorder(), new LeftBorder(), new RightBorder(), new TopBorder()));
+
+                // Set bold text for label cell
                 if (isLabel)
                 {
-                    tableCell.AppendChild(new TableCellProperties(
-                        new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = cellsPerRow>0 ? (100 / cellsPerRow).ToString() : "50" + "%" }, // Adjust width as needed
-                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center },
-                        new DocumentFormat.OpenXml.Wordprocessing.Shading() { Val = ShadingPatternValues.Clear, Color = "auto" } // Adjust fill color as needed
-                    ));
-                    tableCell.AppendChild(new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Text(cellNode.InnerText))));
-
-                    isLabel = false;
+                    Run run = new Run(new Text(cellNode.InnerText));
+                    run.RunProperties = new RunProperties(new Bold());
+                    DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph(run);
+                    tableCell.AppendChild(cellProperties);
+                    tableCell.AppendChild(paragraph);
                 }
                 else
                 {
-                    tableCell.AppendChild(new TableCellProperties(
-                        new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = cellsPerRow > 0 ? (100 / cellsPerRow).ToString() : "50" + "%" }, // Adjust width as needed
-                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center },
-                        new DocumentFormat.OpenXml.Wordprocessing.Shading() { Val = ShadingPatternValues.Clear, Color = "auto" } // Adjust fill color as needed
-                    ));
                     tableCell.AppendChild(new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Text(cellNode.InnerText))));
-
-                    isLabel = true;
                 }
 
                 tableRow.AppendChild(tableCell);
+                isLabel = !isLabel;
             }
 
             table.AppendChild(tableRow);
@@ -276,6 +274,8 @@ internal class HeaderFooter
 
         return table;
     }
+
+
 
 
     //private static Table GenerateTableFromRowNode(HtmlNode rowNode)
