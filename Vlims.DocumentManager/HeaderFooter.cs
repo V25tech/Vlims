@@ -153,7 +153,7 @@ internal class HeaderFooter
                 // Load the HTML content into paragraphs for header and footer
                 HtmlDocument htmlHeaderDocument = new HtmlDocument();
                 htmlHeaderDocument.LoadHtml(htmlTable);
-                GenerateHeaderContent(headerPart, htmlHeaderDocument);
+                GenerateHeaderContent(headerPart, htmlHeaderDocument,template);
 
                 HtmlDocument htmlFooterDocument = new HtmlDocument();
                 htmlFooterDocument.LoadHtml(htmlfooterTable);
@@ -188,7 +188,7 @@ internal class HeaderFooter
         //filePath = tempFilePath;
     }
 
-    private static void GenerateHeaderContent(HeaderPart part, HtmlDocument htmlDocument)
+    private static void GeneratTitleContent(HeaderPart part, HtmlDocument htmlDocument)
     {
         Header header = new Header();
 
@@ -202,6 +202,40 @@ internal class HeaderFooter
         part.Header = header;
         part.Header.Save();
     }
+    private static void GenerateHeaderContent(HeaderPart part, HtmlDocument htmlDocument, DocumentTemplateConfiguration template)
+    {
+        Header header = new Header();
+
+        if (template.titleTable != null)
+        {
+            string title = PrepareTitlediv(template);
+            HtmlDocument htmlTitleDocument = new HtmlDocument();
+            htmlTitleDocument.LoadHtml(title);
+
+            Table titleTable = new Table();
+            foreach (HtmlNode rowNode in htmlTitleDocument.DocumentNode.SelectNodes("//div[@class='table-row']"))
+            {
+                Table generatedTable = GenerateTableFromRowNode1(rowNode);
+                titleTable.AppendChild(generatedTable);
+            }
+            header.AppendChild(titleTable);
+        }
+
+        Table contentTable = new Table();
+        foreach (HtmlNode rowNode in htmlDocument.DocumentNode.SelectNodes("//div[@class='table-row']"))
+        {
+            Table generatedTable = GenerateTableFromRowNode1(rowNode);
+            contentTable.AppendChild(generatedTable);
+        }
+        header.AppendChild(contentTable);
+
+        part.Header = header;
+        part.Header.Save();
+    }
+
+
+
+
     private static void GenerateFooterContent(FooterPart part, HtmlDocument htmlDocument)
     {
         Footer footer = new Footer();
@@ -246,12 +280,13 @@ internal class HeaderFooter
                 TableCell tableCell = new TableCell();
 
                 TableCellProperties cellProperties = new TableCellProperties();
-                cellProperties.AppendChild(new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = cellsPerRow > 0 ? (100 / cellsPerRow).ToString() : "50%" }); // Adjust width as needed
+                cellProperties.AppendChild(new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = cellsPerRow > 0 ? (100 / cellsPerRow).ToString() : "100%" }); // Adjust width as needed
                 cellProperties.AppendChild(new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center });
                 cellProperties.AppendChild(new DocumentFormat.OpenXml.Wordprocessing.Shading() { Val = ShadingPatternValues.Clear, Color = "auto" }); // Adjust fill color as needed
                 cellProperties.AppendChild(new TableCellBorders(new BottomBorder(), new LeftBorder(), new RightBorder(), new TopBorder()));
 
                 // Set bold text for label cell
+                
                 if (isLabel)
                 {
                     Run run = new Run(new Text(cellNode.InnerText));
@@ -260,10 +295,12 @@ internal class HeaderFooter
                     tableCell.AppendChild(cellProperties);
                     tableCell.AppendChild(paragraph);
                 }
-                else
+                else if(!isLabel)
                 {
                     tableCell.AppendChild(new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Text(cellNode.InnerText))));
                 }
+                //else
+                //    tableCell.AppendChild(new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Text(cellNode.InnerText))));
 
                 tableRow.AppendChild(tableCell);
                 isLabel = !isLabel;
@@ -274,6 +311,8 @@ internal class HeaderFooter
 
         return table;
     }
+
+
 
 
 
@@ -557,7 +596,57 @@ internal class HeaderFooter
     /// </summary>
     /// <param name="htmlDocument"></param>
     /// <returns></returns>
+    public static string PrepareTitlediv(DocumentTemplateConfiguration Template)
+    {
+        string table = string.Empty;
+        StringBuilder tableHtml = new StringBuilder();
+        // Add CSS styles
+        tableHtml.Append("<style>");
+        tableHtml.Append(".table-container { display: table; width: 100%; border-collapse: collapse; }");
+        tableHtml.Append(".table-row { display: table-row; }");
+        tableHtml.Append(".table-cell { display: table-cell; padding: 1px;}");
+        tableHtml.Append(".label-cell { text-align: left; font-weight: bold; width: 50px; }");
+        tableHtml.Append(".value-cell { text-align: center; width: 50px; }");
+        tableHtml.Append("</style>");
+        tableHtml.Append("<div class=\"table-container\">");
 
+        foreach (List<HeaderTable> row in Template.titleTable)
+        {
+            tableHtml.Append("<div class=\"table-row\">");
+
+            foreach (HeaderTable item in row)
+            {
+
+
+                tableHtml.Append("<div class=\"table-cell ");
+
+                if (item.selectedOption == 1)
+                {
+                    tableHtml.Append("label-cell");
+                }
+                else
+                {
+                    tableHtml.Append("value-cell");
+                }
+
+                tableHtml.Append("\">");
+                if (item.selectedOption == 1)
+                    tableHtml.Append(item.inputValue + " " + ":");
+                else
+                    tableHtml.Append(item.inputValue);
+                tableHtml.Append("</div>");
+
+                //IsLabel = !IsLabel; // Toggle between label and value for each cell
+            }
+
+            tableHtml.Append("</div>");
+
+        }
+        tableHtml.Append("</div>");
+        table = tableHtml.ToString();
+        return table;
+
+    }
     public static string PrepareHeaderdiv(DocumentTemplateConfiguration Template)
     {
         string table = string.Empty;
@@ -572,26 +661,26 @@ internal class HeaderFooter
         tableHtml.Append("</style>");
         tableHtml.Append("<div class=\"table-container\">");
 
-        if (Template.titleTable != null)
-        {
-            foreach (List<HeaderTable> row in Template.titleTable)
-            {
-                tableHtml.Append("<div class=\"table-row\">");
-                foreach (HeaderTable item in row)
-                {
-                    tableHtml.Append("<div class=\"table-cell ");
+        //if (Template.titleTable != null)
+        //{
+        //    foreach (List<HeaderTable> row in Template.titleTable)
+        //    {
+        //        tableHtml.Append("<div class=\"table-row\">");
+        //        foreach (HeaderTable item in row)
+        //        {
+        //            tableHtml.Append("<div class=\"table-cell ");
 
-                    if (item.selectedOption == 1)
-                    {
-                        tableHtml.Append("label-cell");
-                    }
-                    tableHtml.Append("\">");
-                    tableHtml.Append(item.inputValue);
-                    tableHtml.Append("</div>");
-                }
-                tableHtml.Append("</div>");
-            }
-        }
+        //            if (item.selectedOption == 1)
+        //            {
+        //                tableHtml.Append("label-cell");
+        //            }
+        //            tableHtml.Append("\">");
+        //            tableHtml.Append(item.inputValue);
+        //            tableHtml.Append("</div>");
+        //        }
+        //        tableHtml.Append("</div>");
+        //    }
+        //}
 
 
         foreach (List<HeaderTable> row in Template.headerTable)
