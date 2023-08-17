@@ -109,7 +109,7 @@
                     <ng-container *ngFor="let cell of row; let colIndex = index">
                       <td>
                         <div class="template-cell">
-                          <div class="custom-select" style="width: 84px;">
+                          <div class="custom-select" style="width: 84px; padding-right: 2px;">
                             <select class="select-dropdown form-select"
                             [(ngModel)]="headerData[rowIndex][colIndex].selectedOption">
                               <option *ngFor="let option of selectOptions"
