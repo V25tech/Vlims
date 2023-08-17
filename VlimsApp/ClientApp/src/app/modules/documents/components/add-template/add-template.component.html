@@ -118,11 +118,14 @@
                               </option>
                             </select>
                           </div>
-                          <input [(ngModel)]="
+                          <!-- <input [(ngModel)]="
                           headerData[rowIndex][colIndex].inputValue
                             " [placeholder]="headerData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"
                                  class="form-control"
-                                 type="text" />
+                                 type="text" /> -->
+                                 <textarea class="form-control" [(ngModel)]="headerData[rowIndex][colIndex].inputValue" 
+                                 [placeholder]="headerData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"
+                                  style="height: 2cm;"></textarea>
                         </div>
                       </td>
                     </ng-container>

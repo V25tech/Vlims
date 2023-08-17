@@ -289,11 +289,34 @@ internal class HeaderFooter
 
                 if (isLabel)
                 {
-                    Run run = new Run(new Text(cellNode.InnerText));
-                    run.RunProperties = new RunProperties(new Bold());
-                    DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph(run);
-                    tableCell.AppendChild(cellProperties);
-                    tableCell.AppendChild(paragraph);
+                    if (cellsPerRow == 0)
+                    {
+                        string bodyContent = cellNode.InnerText;
+                        string[] lines = bodyContent.Split('\n');
+
+                        foreach (string line in lines)
+                        {
+                            DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
+                            Run run = new Run();
+                            run.RunProperties = new RunProperties(new Bold());
+                            Text text = new Text(line.Trim()); // Trim to remove any leading/trailing spaces
+                            run.Append(text);
+                            paragraph.Append(run);
+                            paragraph.ParagraphProperties = new DocumentFormat.OpenXml.Drawing.ParagraphProperties(new Justification() { Val = JustificationValues.Center });
+                            tableCell.AppendChild(paragraph);
+                        }
+                        tableCell.AppendChild(cellProperties);
+                        //tableRow.AppendChild(tableCell);
+                    }
+                    else
+                    {
+                        Run run = new Run(new Text(cellNode.InnerText));
+                        run.RunProperties = new RunProperties(new Bold());
+                        DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph(run);
+                        tableCell.AppendChild(cellProperties);
+                        tableCell.AppendChild(paragraph);
+                    }
+
                 }
                 else if (!isLabel)
                 {
@@ -630,10 +653,7 @@ internal class HeaderFooter
                 }
 
                 tableHtml.Append("\">");
-                if (item.selectedOption == 1)
-                    tableHtml.Append(item.inputValue + " " + ":");
-                else
-                    tableHtml.Append(item.inputValue);
+                tableHtml.Append(item.inputValue);
                 tableHtml.Append("</div>");
 
                 //IsLabel = !IsLabel; // Toggle between label and value for each cell
