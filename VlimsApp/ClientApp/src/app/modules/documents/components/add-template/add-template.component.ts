@@ -9,7 +9,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/shared/common.service';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 import { ToastrService } from 'ngx-toastr';
-import { Editor } from 'ngx-editor';
 
 
 
@@ -30,7 +29,6 @@ interface Page {
   styleUrls: ['./add-template.component.scss'],
 })
 export class AddTemplateComponent implements OnInit {
-  @ViewChild(Editor) editor!: Editor;
   html = '';
   numOfPages: number = 1;
   pages: Page[] = [{ text: '',pagenumber:1 }];
@@ -92,7 +90,6 @@ export class AddTemplateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.editor = new Editor();
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
