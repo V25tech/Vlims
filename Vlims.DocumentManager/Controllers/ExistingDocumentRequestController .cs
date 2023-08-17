@@ -162,10 +162,20 @@ namespace PolicySummary.Controllers
             {
                 var res = azureBlobService.GetFileFromAzure(existingDocumentRequest.document);
 
-                if (res!=null && res.Length>1)
-                {   
-                    return Ok(res); 
+                if (res != null && res.Length > 1)
+                {
+                    return Ok(res);
                 }
+            }
+            return BadRequest();
+        }
+        [HttpGet("template")]
+        public ActionResult DownloadTemplate()
+        {
+            var res = azureBlobService.GetFileFromAzure("template.xlsx");
+            if (res != null && res.Length > 1)
+            {
+                return Ok(res);
             }
             return BadRequest();
         }
