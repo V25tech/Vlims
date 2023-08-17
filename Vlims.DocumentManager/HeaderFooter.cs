@@ -153,7 +153,7 @@ internal class HeaderFooter
                 // Load the HTML content into paragraphs for header and footer
                 HtmlDocument htmlHeaderDocument = new HtmlDocument();
                 htmlHeaderDocument.LoadHtml(htmlTable);
-                GenerateHeaderContent(headerPart, htmlHeaderDocument,template);
+                GenerateHeaderContent(headerPart, htmlHeaderDocument, template);
 
                 HtmlDocument htmlFooterDocument = new HtmlDocument();
                 htmlFooterDocument.LoadHtml(htmlfooterTable);
@@ -286,7 +286,7 @@ internal class HeaderFooter
                 cellProperties.AppendChild(new TableCellBorders(new BottomBorder(), new LeftBorder(), new RightBorder(), new TopBorder()));
 
                 // Set bold text for label cell
-                
+
                 if (isLabel)
                 {
                     Run run = new Run(new Text(cellNode.InnerText));
@@ -295,7 +295,7 @@ internal class HeaderFooter
                     tableCell.AppendChild(cellProperties);
                     tableCell.AppendChild(paragraph);
                 }
-                else if(!isLabel)
+                else if (!isLabel)
                 {
                     tableCell.AppendChild(new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Text(cellNode.InnerText))));
                 }
@@ -704,7 +704,12 @@ internal class HeaderFooter
 
                 tableHtml.Append("\">");
                 if (item.selectedOption == 1)
-                    tableHtml.Append(item.inputValue + " " + ":");
+                {
+                    if (!string.IsNullOrEmpty(item.inputValue))
+                        tableHtml.Append(item.inputValue + " " + ":");
+                    else
+                        tableHtml.Append(item.inputValue);
+                }
                 else
                     tableHtml.Append(item.inputValue);
                 tableHtml.Append("</div>");
@@ -756,7 +761,12 @@ internal class HeaderFooter
 
                 tableHtml.Append("\">");
                 if (item.selectedOption == 1)
-                    tableHtml.Append(item.inputValue + " " + ":");
+                {
+                    if (!string.IsNullOrEmpty(item.inputValue))
+                        tableHtml.Append(item.inputValue + " " + ":");
+                    else
+                        tableHtml.Append(item.inputValue);
+                }
                 else
                     tableHtml.Append(item.inputValue);
                 tableHtml.Append("</div>");
