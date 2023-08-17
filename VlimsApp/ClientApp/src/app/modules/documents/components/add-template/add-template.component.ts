@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { Router } from '@angular/router';
@@ -9,10 +9,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/shared/common.service';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 import { ToastrService } from 'ngx-toastr';
-//import { Editor } from 'ngx-editor';
-
-
-
 
 
 
@@ -20,29 +16,13 @@ interface SelectOption {
   name: string;
   value: number;
 }
-interface Page {
-  text: string;
-  pagenumber:number;
-}
+
 @Component({
   selector: 'app-add-template',
   templateUrl: './add-template.component.html',
   styleUrls: ['./add-template.component.scss'],
 })
 export class AddTemplateComponent implements OnInit {
-
-  html = '';
-  numOfPages: number = 1;
-  pages: Page[] = [{ text: '',pagenumber:1 }];
-  currentPage: number = 0;
-
-  editorContent: string = '<p>Hello ngx-quill!</p>'; // Initial editor content
-
-  // Editor configuration
-  editorConfig = {
-    // Your configuration options here
-  };
-
   title:string='New Document Template';
   typesDatasource: DocumentTypeConfiguration[] = [];
   selectedtype=new DocumentTypeConfiguration();
@@ -51,14 +31,10 @@ export class AddTemplateComponent implements OnInit {
   showGrid: boolean = false;
   rows: number = 0;
   cols: number = 0;
-  headerRow:number=0;
-  headerColumn:number=0;
-  headerrowarray:number[]=[];
-  headercolarray:number[]=[];
   rowsArray: number[] = [];
   colsArray: number[] = [];
   gridData: any = [];
-  headerData:any=[];
+
   footerRows: number = 0;
   footerCols: number = 0;
   rowsFooterArray: number[] = [];
@@ -67,9 +43,9 @@ export class AddTemplateComponent implements OnInit {
 
   selectOptions: SelectOption[] = [
     { name: 'Label', value: 1 },
-     { name: 'Value', value: 2 },
-    // { name: 'Property', value: 3 },
-    // { name: 'Custom', value: 4 },
+    { name: 'Field', value: 2 },
+    { name: 'Property', value: 3 },
+    { name: 'Custom', value: 4 },
   ];
   viewMode:boolean=false;editMode:boolean=false;
   // templateForm: TemplateForm = {
@@ -92,19 +68,17 @@ export class AddTemplateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.editor = new Editor();
+    
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
     this.rows = 1;
-    this.cols = 2;
+    this.cols = 1;
     this.generateTeplateGrid();
     this.footerRows = 1;
-    this.footerCols = 2;
+    this.footerCols = 1;
     this.generateFooterGrid();
-    this.headerRow=1;
-    this.headerColumn=1;
-    this.generateheaderrow();
+
     this.getTemplates();
     this.getdocumenttypeconfig();
 
@@ -113,7 +87,6 @@ export class AddTemplateComponent implements OnInit {
      let addcount=parseInt(segments[segments.length - 1],10);
      addcount++;
     this.templateForm.Uniquecode="Temp "+addcount;  
-    this.templateForm.Pages=1;
     }
     else if(lastSegment=="edit")
     {
@@ -133,35 +106,6 @@ export class AddTemplateComponent implements OnInit {
     }
     
   }
-  generateheaderrow() {
-    debugger
-    this.showGrid = true;
-    // Set the number of rows and columns based on user input
-    // this.rows = 5;
-    // this.cols = 5;
-    this.headerrowarray = Array.from({ length: this.headerRow });
-    this.headercolarray = Array.from({ length: this.headerColumn });
-    this.headerData = [];
-    for (let i = 0; i < this.headerRow; i++) {
-      const row: any[] = [];
-      for (let j = 0; j < this.headerColumn; j++) {
-        if (j !== 0 && j % 2 !== 0)
-        {
-          row.push({ selectedOption: 2, inputValue: '' });
-        }
-        else {
-        row.push({ selectedOption: 1, inputValue: '' });
-        }
-      }
-      console.log(row);
-      this.headerData.push(row);
-    }
-  }
-
-  getEditorContent() {
-    console.log(this.editorContent);
-  }
-
   getbyId(id:number)
   {
     
@@ -180,10 +124,6 @@ export class AddTemplateComponent implements OnInit {
       this.footerCols=parseInt(this.templateForm.footercolumns,10);
       this.gridData=this.templateForm.headerTable;
       this.gridFooterData=this.templateForm.footerTable;
-      this.headerData=this.templateForm.titleTable;
-      if(this.templateForm.Page!=null){
-      this.pages = this.templateForm.Page;
-      }
       console.log(this.templateForm);
       this.loader.hide();
     },(error:any)=>{
@@ -223,19 +163,15 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   addTemplate() {
-    debugger
+    
     this.loader.show();
-    console.log(this.headerData);
     this.templateForm.documenttype=this.selectedtype.Documenttypename;
-    this.templateForm.titleTable=this.headerData;
     this.templateForm.headerTable=this.gridData;
     this.templateForm.footerTable=this.gridFooterData;
     this.templateForm.rows=this.rowsArray.length.toString();
     this.templateForm.columns=this.colsArray.length.toString();
     this.templateForm.footerrows=this.rowsFooterArray.length.toString();
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
-    this.templateForm.Page=this.pages;
-    console.log(this.templateForm);
     if(this.editMode)
     {
       this.templateForm.ModifiedBy=this.commonsvc.getUsername();
@@ -262,9 +198,10 @@ export class AddTemplateComponent implements OnInit {
       });
     }
     }
-    this.templatesvc.adddoctemplate(this.templateForm).subscribe(() => {
-    this.router.navigate(['/templates']);
-    });
+    //let type=this.templateForm.documenttype.Documenttypename
+    //this.documentService.addTemplate(this.templateForm).subscribe(() => {
+    //this.router.navigate(['/templates']);
+    //});
   }
   isduplicate() {
     if (this.grid != null && this.grid.length > 0) {
@@ -285,29 +222,18 @@ export class AddTemplateComponent implements OnInit {
   }
 
   generateTeplateGrid() {
-    debugger
     this.showGrid = true;
     // Set the number of rows and columns based on user input
     // this.rows = 5;
     // this.cols = 5;
     this.rowsArray = Array.from({ length: this.rows });
     this.colsArray = Array.from({ length: this.cols });
-    if(this.cols % 2 !==0)
-    {
-      debugger
-      this.cols=this.cols+1;
-    }
+
     this.gridData = [];
     for (let i = 0; i < this.rows; i++) {
       const row: any[] = [];
       for (let j = 0; j < this.cols; j++) {
-        if (j !== 0 && j % 2 !== 0)
-        {
-          row.push({ selectedOption: 2, inputValue: '' });
-        }
-        else {
         row.push({ selectedOption: 1, inputValue: '' });
-        }
       }
       console.log(row);
       this.gridData.push(row);
@@ -318,22 +244,12 @@ export class AddTemplateComponent implements OnInit {
     this.showGrid = true;
     this.rowsFooterArray = Array.from({ length: this.footerRows });
     this.colsFooterArray = Array.from({ length: this.footerCols });
-    if(this.footerCols % 2 !==0)
-    {
-      debugger
-      this.footerCols=this.footerCols+1;
-    }
+
     this.gridFooterData = [];
     for (let i = 0; i < this.footerRows; i++) {
       const row: any[] = [];
       for (let j = 0; j < this.footerCols; j++) {
-        if (j !== 0 && j % 2 !== 0)
-        {
-          row.push({ selectedOption: 2, inputValue: '' });
-        }
-        else {
         row.push({ selectedOption: 1, inputValue: '' });
-        }
       }
       this.gridFooterData.push(row);
     }
@@ -380,27 +296,4 @@ export class AddTemplateComponent implements OnInit {
       this.loader.hide();
     });
   }
-
-  generatePages() {
-    this.pages = Array.from({ length: this.templateForm.Pages }, (_,index) => (
-      { text: '',
-      pagenumber:index+1}));
-    this.currentPage = 0;
-  }
-
-  prevPage() {
-    debugger
-    console.log(this.currentPage)
-    if (this.currentPage > 0) {
-      this.currentPage--;
-    }
-  }
-
-  nextPage() {
-    debugger
-    if (this.currentPage < this.templateForm.Pages - 1) {
-      this.currentPage++;
-    }
-  }
-
 }
