@@ -21,6 +21,7 @@ namespace Vlims.Common
                 case DefinitionStatus.New:
                     auditLog.Action = Actions.Added;
                     auditLog.Message = "Added" + auditLog.Type.ToLower() + " " + auditLog.EntityName;
+                    
                     break;
                 case DefinitionStatus.Modify:
                     auditLog.Action = Actions.Modified;
@@ -29,6 +30,7 @@ namespace Vlims.Common
                 default:
                     break;
             }
+            InsertAuditLog(auditLog);
         }
         /// <summary>
         /// Inserting Audit Infor

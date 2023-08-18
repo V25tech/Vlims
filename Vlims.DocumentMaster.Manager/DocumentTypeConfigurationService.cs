@@ -33,7 +33,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public DocumentTypeConfiguration GetDocumentTypeConfigurationByDTCId(int dTCId)
         {
             try
@@ -47,7 +47,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool SaveDocumentTypeConfiguration(DocumentTypeConfiguration documentTypeConfiguration)
         {
             try
@@ -60,6 +60,7 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     var result = DocumentTypeConfigurationData.SaveDocumentTypeConfiguration(documentTypeConfiguration);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.New });
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -69,7 +70,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool UpdateDocumentTypeConfiguration(DocumentTypeConfiguration documentTypeConfiguration)
         {
             try
@@ -78,6 +79,7 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = DocumentTypeConfigurationData.UpdateDocumentTypeConfiguration(documentTypeConfiguration);
+                     AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.Modify });
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -87,7 +89,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteDocumentTypeConfigurationByDTCId(int dTCId)
         {
             try
@@ -99,7 +101,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteAllDocumentTypeConfiguration(List<int> dTCIds)
         {
             try

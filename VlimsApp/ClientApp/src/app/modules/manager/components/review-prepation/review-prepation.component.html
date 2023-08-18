@@ -152,12 +152,13 @@
             <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">
               Cancel
             </button>
-            <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid || !preparation.document" *ngIf="!viewMode">Submit</button>
-           
+            <!--[disabled]="!fm.form.valid || !preparation.document"-->
+            <button type="submit" class="btn btn-primary" *ngIf="!viewMode">Submit</button>
+
             <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
             <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button> -->
             <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
-            
+
           </div>
         </div>
       </form>

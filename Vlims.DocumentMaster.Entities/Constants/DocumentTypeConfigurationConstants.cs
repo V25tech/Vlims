@@ -15,7 +15,8 @@ namespace Vlims.DocumentMaster.Entities
     
     public class DocumentTypeConfigurationConstants
     {
-        
+        public const string DocumentType = "DocumentType";
+
         public const string DTCId = "@DTCId_PSY";
         
         public const string DocumentMasterId = "@DocumentMasterId_PSY";
