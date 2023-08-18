@@ -382,3 +382,4 @@ FodyWeavers.xsd
 /Vlims.Administration.DataAccess/Validators/workitemsValidator.cs.txt
 /Vlims.DocumentManager/Uploads
 /Vlims.Common/DataAccessHelper.cs
+/VlimsApp/ClientApp/src/app/modules/documents/components/add-template/add-template.component.html
