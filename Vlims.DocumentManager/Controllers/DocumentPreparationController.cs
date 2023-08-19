@@ -113,9 +113,9 @@ namespace PolicySummary.Controllers
                     HeaderFooter.getData(headertable, footertable, tempFilePath, template);
 
 
-                    string tempFilePath = Path.GetTempFileName() + ".docx";
+                    //string tempFilePath = Path.GetTempFileName() + ".docx";
 
-                    HeaderFooter.getData(headertable, footertable, tempFilePath);
+                    HeaderFooter.getData(headertable, footertable, tempFilePath,template);
 
                     // Generate the output file path dynamically
                     string outputFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); // Set the folder where you want to save the converted PDFs

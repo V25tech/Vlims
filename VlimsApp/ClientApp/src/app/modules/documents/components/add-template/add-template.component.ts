@@ -34,13 +34,6 @@ export class AddTemplateComponent implements OnInit {
   pages: Page[] = [{ text: '',pagenumber:1 }];
   currentPage: number = 0;
 
-  editorContent: string = '<p>Hello ngx-quill!</p>'; // Initial editor content
-
-  // Editor configuration
-  editorConfig = {
-    // Your configuration options here
-  };
-
   title:string='New Document Template';
   typesDatasource: DocumentTypeConfiguration[] = [];
   selectedtype=new DocumentTypeConfiguration();
@@ -155,9 +148,6 @@ export class AddTemplateComponent implements OnInit {
     }
   }
 
-  getEditorContent() {
-    console.log(this.editorContent);
-  }
 
   getbyId(id:number)
   {
