@@ -61,7 +61,7 @@ namespace Vlims.DocumentManager.DataAccess
                         documentEffectiveData.ModifiedBy = Convert.ToString(row[DocumentEffectiveConstants.ModifiedBy.Trim('@')]);
                         documentEffectiveData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.ModifiedDate.Trim('@')]);
                         documentEffectiveData.Status = Convert.ToString(row[DocumentEffectiveConstants.Status.Trim('@')]);
-                        //documentEffectiveData.template = Convert.ToString(row[DocumentEffectiveConstants.template.Trim('@')]);
+                        documentEffectiveData.template = Convert.ToString(row[DocumentEffectiveConstants.template.Trim('@')]);
                         result.Add(documentEffectiveData);
                     }
                 }

@@ -29,6 +29,7 @@ export class EffectivesComponent {
     this.spinner.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.documentEffectiveService.getdocumenteffective(objrequest).subscribe((data: any) => {
+      debugger
       this.effectivesDatasource = data.response;
       if(this.effectivesDatasource.length<10)
       {

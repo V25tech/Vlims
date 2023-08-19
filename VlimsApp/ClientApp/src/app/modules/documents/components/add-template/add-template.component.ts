@@ -33,7 +33,7 @@ export class AddTemplateComponent implements OnInit {
   numOfPages: number = 1;
   pages: Page[] = [{ text: '',pagenumber:1 }];
   currentPage: number = 0;
-
+  id:number=0;
   title:string='New Document Template';
   typesDatasource: DocumentTypeConfiguration[] = [];
   selectedtype=new DocumentTypeConfiguration();
@@ -111,7 +111,8 @@ export class AddTemplateComponent implements OnInit {
       this.title='Edit Document Template';
       this.editMode=true;
         let id=parseInt(segments[segments.length-1],10);
-        this.getbyId(id);
+        this.id=id;
+        //this.getbyId(id);
     }
     else if(lastSegment=="view")
     {
@@ -154,7 +155,7 @@ export class AddTemplateComponent implements OnInit {
     
     this.loader.show();
     this.templatesvc.getbyId(id).subscribe((data:any)=>{
-      
+      debugger
       this.templateForm=data;
       if(this.typesDatasource.length>0)
       {
@@ -335,7 +336,9 @@ export class AddTemplateComponent implements OnInit {
       return this.doctypeservice.getdoctypeconfig(objrequest).subscribe((data: any) => {
         
         this.typesDatasource = data.Response;
-        
+        if(this.editMode){
+          this.getbyId(this.id);
+        }
         this.loader.hide();
         console.log(this.typesDatasource);
       }, (error:any) => {
