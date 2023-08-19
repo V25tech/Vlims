@@ -23,6 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 
 
+
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LeftNavComponent],
   imports: [
@@ -39,7 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
     NgxSpinnerModule,
     ModalModule,
     PaginatorModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
   exports: [TableModule],
 

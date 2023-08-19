@@ -8,9 +8,9 @@ export class AppintializorService {
     //types: Array<DocumentTypeConfiguration>=[];
     jsonUrls:Array<string>=[];
     baseUrl: string = "";
-  documentmasterUrl: string ="https://dmsdocmasterv2.azurewebsites.net/";
-  documentmanagerUrl: string ="https://dmsdocmanagerv2.azurewebsites.net/";
-  adminUrl: string ="https://dmsadminv2.azurewebsites.net/";
+  documentmasterUrl: string = "";
+  documentmanagerUrl: string = "";
+  adminUrl: string = "";
     configUrl = 'assets/serverconfig.json'
     constructor(private http: HttpClient) {
         

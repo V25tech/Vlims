@@ -23,7 +23,7 @@ namespace Vlims.DocumentMaster.DataAccess
     public static class DocumentTemplateConfigurationConverter
     {
 
-        public static List<DocumentTemplateConfiguration> SetAllDocumentTemplateConfiguration(DataSet dataset,bool fromprep=false)
+        public static List<DocumentTemplateConfiguration> SetAllDocumentTemplateConfiguration(DataSet dataset, bool fromprep = false)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.footer = Convert.ToString(row[DocumentTemplateConfigurationConstants.footer.Trim('@')]);
                         documentTemplateConfigurationData.footerrows = Convert.ToString(row[DocumentTemplateConfigurationConstants.footerrows.Trim('@')]);
                         documentTemplateConfigurationData.footercolumns = Convert.ToString(row[DocumentTemplateConfigurationConstants.footercolumns.Trim('@')]);
-                       
+
                         if (!islist || fromprep)
                         {
                             string docvalue = Convert.ToString(row[DocumentTemplateConfigurationConstants.document.Trim('@')]);
@@ -62,6 +62,10 @@ namespace Vlims.DocumentMaster.DataAccess
                                 var person = (DocumentTemplateConfiguration)serializer1.Deserialize(reader);
                                 documentTemplateConfigurationData.headerTable = person.headerTable;
                                 documentTemplateConfigurationData.footerTable = person.footerTable;
+                                documentTemplateConfigurationData.Page = person.Page;
+                                documentTemplateConfigurationData.Pages = person.Pages;
+                                if (person.titleTable != null)
+                                    documentTemplateConfigurationData.titleTable = person.titleTable;
                             }
                         }
                         documentTemplateConfigurationData.CreatedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.CreatedBy.Trim('@')]);

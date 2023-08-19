@@ -242,10 +242,21 @@ namespace Vlims.DocumentMaster.Entities
                 this.statusField = value;
             }
         }
+        public int Pages { get; set; }
+
+        public List<Page> Page { get; set; }
         public string description { get; set; }
         public List<List<HeaderTable>> headerTable { get; set; }
         public List<List<FooterTable>> footerTable { get; set; }
+
+        public List<List<HeaderTable>> titleTable { get; set; }
     }
+    public class Page
+    {
+        public string text { get; set; }
+        public int pagenumber { get; set; }
+    }
+
     public class HeaderTable
     {
         public int selectedOption { get; set; }

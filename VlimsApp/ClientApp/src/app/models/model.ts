@@ -165,6 +165,13 @@ export class DocumentTemplateConfiguration {
   Status: string | null = '';
   headerTable: HeaderTable[] | null = [];
   footerTable: FooterTable[] | null = [];
+  titleTable:HeaderTable[] | null=[];
+  Page:Page[] | null=[];
+  Pages:number=0;
+}
+interface Page {
+  text: string;
+  pagenumber:number;
 }
 export class reviewers {
   value: string = ''

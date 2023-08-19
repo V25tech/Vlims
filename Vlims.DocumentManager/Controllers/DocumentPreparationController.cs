@@ -97,15 +97,20 @@ namespace PolicySummary.Controllers
                 var template = result.FirstOrDefault(o => o.Templatename.Equals(documentPreparation.template, StringComparison.InvariantCultureIgnoreCase));
                 if (template != null)
                 {
-                    DataTable hTable = null;
-                    DataTable fTable = null;
-                    if (template.headerTable != null && template.footerTable != null)
-                    {
-                        hTable = PrepareDataTable(template);
-                        fTable = PrepareDataTable1(template);
-                    }
-                    string headertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), hTable);
-                    string footertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), fTable);
+                    //DataTable hTable = null;
+                    //DataTable fTable = null;
+                    //if (template.headerTable != null && template.footerTable != null)
+                    //{
+                    //    string ss = HeaderFooter.PrepareHeaderdiv(template);
+                    //    hTable = PrepareDataTable(template);
+                    //    fTable = PrepareDataTable1(template);
+                    //}
+                    //string headertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), hTable);
+                    //string footertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), fTable);
+                    string headertable = HeaderFooter.PrepareHeaderdiv(template);
+                    string footertable = HeaderFooter.PrepareFooterdiv(template);
+                    string tempFilePath = Path.GetTempFileName() + ".docx";
+                    HeaderFooter.getData(headertable, footertable, tempFilePath, template);
 
 
                     string tempFilePath = Path.GetTempFileName() + ".docx";

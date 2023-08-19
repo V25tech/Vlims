@@ -12,7 +12,8 @@
 @document_PSY XML,
 @CreatedBy_PSY NVarChar(100),
 @ModifiedBy_PSY NVarChar(100),
-@Status_PSY NVarChar(100)
+@Status_PSY NVarChar(100),
+@Pages int
  AS 
  BEGIN 
   BEGIN TRY 
@@ -35,7 +36,7 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-Status_PSY)
+Status_PSY,Pages)
  VALUES 
 (@DocumentMasterId_PSY,
 @Templatename_PSY,
@@ -53,7 +54,7 @@ Status_PSY)
  GetDate() ,
 @ModifiedBy_PSY,
  GetDate(),
- @Status_PSY);
+ @Status_PSY,@Pages);
  SELECT @ID = @@IDENTITY; 
 
  --INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
