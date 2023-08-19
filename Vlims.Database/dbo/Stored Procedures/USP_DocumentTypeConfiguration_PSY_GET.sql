@@ -1,4 +1,6 @@
-﻿  CREATE PROCEDURE [dbo].[USP_DocumentTypeConfiguration_PSY_GET] @DTCId_PSY int 
+﻿
+
+  CREATE PROCEDURE [dbo].[USP_DocumentTypeConfiguration_PSY_GET] @DTCId_PSY int 
  AS 
  BEGIN 
  BEGIN TRY 
@@ -13,7 +15,8 @@ CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
 Status_PSY
-  FROM [dbo].[DocumentTypeConfiguration_PSY] WITH (NOLOCK) where [DTCId_PSY] = @DTCId_PSY   
+  FROM [dbo].[DocumentTypeConfiguration_PSY] WITH (NOLOCK) where [DTCId_PSY] = @DTCId_PSY  
+  ORDER BY CreatedDate_PSY desc
  END TRY 
  BEGIN CATCH 
   SELECT ERROR_MESSAGE(); 

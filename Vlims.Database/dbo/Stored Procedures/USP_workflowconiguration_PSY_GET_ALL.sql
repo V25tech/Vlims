@@ -1,4 +1,8 @@
-﻿ CREATE PROCEDURE [dbo].[USP_workflowconiguration_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
+﻿
+
+
+
+ CREATE PROCEDURE [dbo].[USP_workflowconiguration_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
  BEGIN TRY 
@@ -15,10 +19,11 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-Status_PSY
+Status_PSY,
+Document_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[workflowconiguration_PSY] WITH (NOLOCK) 
- Order by [WFCId_PSY]  
+ Order by CreatedDate_PSY DESC 
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 

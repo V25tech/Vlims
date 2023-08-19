@@ -1,4 +1,6 @@
-﻿ CREATE PROCEDURE [dbo].[USP_SecurityManagement_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
+﻿
+
+ CREATE PROCEDURE [dbo].[USP_SecurityManagement_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
  BEGIN TRY 
@@ -15,7 +17,7 @@ ModifiedBy_PSY,
 ModifiedDate_PSY  
  ,count(*) over() as TotalRows 
  FROM [dbo].[SecurityManagement_PSY] WITH (NOLOCK) 
- Order by [SMId_PSY]  
+ Order by CreatedDate_PSY desc   
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 

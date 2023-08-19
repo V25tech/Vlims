@@ -1,5 +1,6 @@
 ﻿
 
+
  CREATE PROCEDURE [dbo].[USP_UserGroupConfiguration_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
@@ -17,7 +18,7 @@ ModifiedDate_PSY,
 document_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[UserGroupConfiguration_PSY] WITH (NOLOCK) 
- Order by [Ugcid_PSY]  
+ Order by CreatedDate_PSY DESC  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 

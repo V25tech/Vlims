@@ -1,4 +1,5 @@
 ﻿
+
  CREATE PROCEDURE [dbo].[USP_UserConfiguration_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
@@ -22,7 +23,7 @@ ModifiedDate_PSY,
 Status_PSY,Password_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[UserConfiguration_PSY] WITH (NOLOCK) 
- Order by [UCFId_PSY]  
+ Order by CreatedDate_PSY DESC  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 

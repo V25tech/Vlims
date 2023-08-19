@@ -1,4 +1,6 @@
-﻿ CREATE PROCEDURE [dbo].[USP_DocumentPreparation_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
+﻿
+
+ CREATE PROCEDURE [dbo].[USP_DocumentPreparation_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
  BEGIN TRY 
@@ -19,7 +21,7 @@ ModifiedDate_PSY,
 Status_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[DocumentPreparation_PSY] DE WITH (NOLOCK) 
- Order by [DPNID_PSY]  
+ Order by CreatedDate_PSY DESC  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 

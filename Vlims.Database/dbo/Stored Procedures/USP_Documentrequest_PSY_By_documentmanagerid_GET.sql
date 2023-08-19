@@ -1,4 +1,6 @@
-﻿  CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_By_documentmanagerid_GET] @documentmanagerid int 
+﻿
+
+  CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_By_documentmanagerid_GET] @documentmanagerid int 
  AS 
  BEGIN 
  BEGIN TRY 
@@ -13,7 +15,8 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY 
-  FROM [dbo].[Documentrequest_PSY] WITH (NOLOCK) where documentmanagerid_PSY = @documentmanagerid   
+  FROM [dbo].[Documentrequest_PSY] WITH (NOLOCK) where documentmanagerid_PSY = @documentmanagerid 
+  order by CreatedDate_PSY desc
  END TRY 
  BEGIN CATCH 
   SELECT ERROR_MESSAGE(); 

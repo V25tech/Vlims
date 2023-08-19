@@ -1,4 +1,5 @@
-﻿ CREATE PROCEDURE [dbo].[USP_AdditionalTask_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
+﻿
+ CREATE PROCEDURE [dbo].[USP_AdditionalTask_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
  BEGIN TRY 
@@ -16,7 +17,7 @@ Version,
  FROM [dbo].[AdditionalTask_PSY] AT WITH (NOLOCK) inner join DocumentEffective_PSY de on AT.DocumentEffective_ID=de.DEID_PSY
  INNER JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY AND DP.Status_PSY='APPROVED'
  
- Order by [ATID_PSY]  
+ Order by AT.CreatedDate_PSY DESC  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 
