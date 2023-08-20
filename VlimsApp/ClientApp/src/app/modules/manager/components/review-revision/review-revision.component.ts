@@ -53,6 +53,7 @@ export class ReviewRevisionComponent {
       this.editMode = true;
       if (this.commonsvc.revision.atid) {
         this.revision = this.commonsvc.revision;
+        this.workflownamee=this.revision.workflow;
         this.effectiveDate = this.toDate(this.revision.effectiveDate);
         this.reviewDate = this.toDate(this.revision.reviewDate);
       }
@@ -96,6 +97,7 @@ export class ReviewRevisionComponent {
     this.spinner.show();
     return this.documentRevisionService.getbyId(id).subscribe((data: any) => {
       this.revision = data;
+      this.workflownamee=this.revision.workflow;
       this.effectiveDate = this.toDate(this.revision.effectiveDate);
       this.reviewDate = this.toDate(this.revision.reviewDate);
       this.spinner.hide();
@@ -123,7 +125,7 @@ export class ReviewRevisionComponent {
   saveRequest() {
     debugger
     this.revision.status = "Revision";
-    if (this.revision.workflow != this.workflownamee) {
+    if (this.revision.workflow.toLocaleLowerCase() != this.workflownamee.toLocaleLowerCase()) {
       if (this.editMode || this.viewMode) {
         this.updateRequest();
       }
