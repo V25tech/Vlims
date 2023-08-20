@@ -68,7 +68,7 @@
               <div>
                 <p-multiSelect [options]="departments" class="custom-ms" [(ngModel)]="selectedDepartments" [filter]="true" defaultLabel="Select a Department"
                                name="department" id="department" display="chip" optionLabel="DepartmentName" optionValue="DepartmentName" [resetFilterOnHide]="true"
-                               #departmentInput="ngModel" [required]="true" [maxSelectedLabels]="2" [disabled]="viewMode">
+                               #departmentInput="ngModel" [required]="true"  [disabled]="viewMode">
                 </p-multiSelect>
                 <div *ngIf="departmentInput.invalid && (departmentInput.dirty || departmentInput.touched)" class="text-danger">
                   Enter department.
