@@ -83,7 +83,7 @@ namespace Vlims.DocumentMaster.DataAccess
 
         public static workflowconiguration Setworkflowconiguration(DataSet dataset)
         {
-            var result = SetAllworkflowconiguration(dataset);
+            var result = SetAllworkflowconiguration(dataset,false);
             if (result.Count > 0)
             {
                 return result.FirstOrDefault();
