@@ -75,8 +75,6 @@ export class AddRequestComponent {
     });
   }
   approve() {
-    //this.request.status = this.statuss;
-
     this.request.modifiedBy = this.username;
     this.request.status = this.finalStatus;
     if (this.isapprove && this.reviewpendingcount > 0) {
@@ -93,8 +91,7 @@ export class AddRequestComponent {
   }
   reject() {
     this.request.modifiedBy = this.commonsvc.getUsername();
-    this.request.status = 'Rejected'
-    this.location.back();
+    this.request.status = 'Rejected'   
     this.updateRequest();
   }
 

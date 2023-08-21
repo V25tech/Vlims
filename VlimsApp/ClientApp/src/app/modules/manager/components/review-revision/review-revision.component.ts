@@ -69,7 +69,6 @@ export class ReviewRevisionComponent {
     });
   }
   approve() {
-    debugger
     this.revision.modifiedBy = this.username;
     this.revision.status = this.finalStatus;
     alert(this.revision.status);
@@ -79,7 +78,9 @@ export class ReviewRevisionComponent {
     this.location.back();
   }
   reject() {
-    this.location.back();
+    this.revision.modifiedBy = this.commonsvc.getUsername();
+    this.revision.status = 'Rejected'   
+    this.updateRequest();
   }
   toDate(pdate: Date | undefined) {
     if (pdate == undefined) return undefined;
