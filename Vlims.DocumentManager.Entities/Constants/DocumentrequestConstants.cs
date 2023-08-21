@@ -11,33 +11,35 @@ namespace Vlims.DMS.Entities
 {
     using System;
     using System.Collections.Generic;
-    
-    
+
+
     public class DocumentrequestConstants
     {
-        
+
+        public const string documentrequest = "documentrequest";
+
         public const string DRID = "@DRID_PSY";
 
         //public const string DRID = "@DRID_PSY";
-        
+
         public const string documentmanagerid = "@documentmanagerid_PSY";
-        
+
         public const string documenttype = "@documenttype_PSY";
-        
+
         public const string department = "@department_PSY";
-        
+
         public const string Purpose = "@Purpose_PSY";
-        
+
         public const string ApprovalsCount = "@ApprovalsCount_PSY";
-        
+
         public const string AssigntoGroup = "@AssigntoGroup_PSY";
-        
+
         public const string CreatedBy = "@CreatedBy_PSY";
-        
+
         public const string CreatedDate = "@CreatedDate_PSY";
-        
+
         public const string ModifiedBy = "@ModifiedBy_PSY";
-        
+
         public const string ModifiedDate = "@ModifiedDate_PSY";
 
         public const string Status = "@Status_PSY";
@@ -51,19 +53,19 @@ namespace Vlims.DMS.Entities
         public const string Approvedby = "@Approvedby_PSY";
 
         public const string USP_Documentrequest_PSY_GET_ALL = "dbo.USP_Documentrequest_PSY_GET_ALL";
-        
+
         public const string USP_Documentrequest_PSY_GET = "dbo.USP_Documentrequest_PSY_GET";
-        
+
         public const string USP_Documentrequest_PSY_INSERT = "dbo.USP_Documentrequest_PSY_INSERT";
-        
+
         public const string USP_Documentrequest_PSY_UPDATE = "dbo.USP_Documentrequest_PSY_UPDATE";
-        
+
         public const string USP_Documentrequest_PSY_DELETE = "dbo.USP_Documentrequest_PSY_DELETE";
-        
+
         public const string USP_Documentrequest_PSY_DELETE_ALL = "dbo.USP_Documentrequest_PSY_DELETE_ALL";
-        
+
         public const string USP_QuickDocumentrequest_INSERT = "dbo.USP_QuickDocumentrequest_INSERT";
-        
+
         public const string USP_QuickDocumentrequest_UPDATE = "dbo.USP_QuickDocumentrequest_UPDATE";
     }
 }

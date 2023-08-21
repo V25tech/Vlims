@@ -76,6 +76,7 @@ namespace Vlims.DocumentManager.Manager
                 documentrequest.documentmanagerid = "1";
                 //documentrequest.Status = "In-Progress";
                 var result = DocumentrequestData.SaveDocumentrequest(documentrequest);
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.documentrequest, state = DefinitionStatus.New });
                 return result;
             }
             catch (System.Exception ex)

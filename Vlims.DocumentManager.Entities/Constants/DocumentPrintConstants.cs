@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class DocumentPrintConstants
 {
 
+    public const string dprintname = "dprintname";
+
     public const string DRId = "@DRId_PSY";
 
     public const string documenttitle = "@documenttitle_PSY";

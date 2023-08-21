@@ -46,6 +46,7 @@ public class DocumentPrintService : IDocumentPrintService
             {
                 documentPrint.Status = "Active";
                 var result = DocumentPrintData.SaveDocumentPrint(documentPrint);
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentPrint.documenttitle, Type = DocumentPrintConstants.dprintname, state = DefinitionStatus.New });
                 return result;
             }
             throw new System.Exception(validationMessages);

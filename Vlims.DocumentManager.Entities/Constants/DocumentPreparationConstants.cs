@@ -11,55 +11,58 @@ namespace Vlims.DMS.Entities
 {
     using System;
     using System.Collections.Generic;
-    
-    
+
+
     public class DocumentPreparationConstants
     {
-        
+
+
+        public const string documentpreparation = "documentpreparation";
+
         public const string DPNID = "@DPNID_PSY";
-        
+
         public const string Documentmanagerid = "@Documentmanagerid_PSY";
-        
+
         public const string documenttitle = "@documenttitle_PSY";
-        
+
         public const string documentno = "@documentno_PSY";
-        
+
         public const string documenttype = "@documenttype_PSY";
-        
+
         public const string department = "@department_PSY";
-        
+
         public const string document = "@document_PSY";
-        
+
         public const string template = "@template_PSY";
-        
+
         public const string wokflow = "@wokflow_PSY";
-        
+
         public const string details = "@details_PSY";
-        
+
         public const string CreatedBy = "@CreatedBy_PSY";
-        
+
         public const string CreatedDate = "@CreatedDate_PSY";
 
         public const string Status = "@Status_PSY";
 
         public const string ModifiedBy = "@ModifiedBy_PSY";
-        
+
         public const string ModifiedDate = "@ModifiedDate_PSY";
-        
+
         public const string USP_DocumentPreparation_PSY_GET_ALL = "dbo.USP_DocumentPreparation_PSY_GET_ALL";
-        
+
         public const string USP_DocumentPreparation_PSY_GET = "dbo.USP_DocumentPreparation_PSY_GET";
-        
+
         public const string USP_DocumentPreparation_PSY_INSERT = "dbo.USP_DocumentPreparation_PSY_INSERT";
-        
+
         public const string USP_DocumentPreparation_PSY_UPDATE = "dbo.USP_DocumentPreparation_PSY_UPDATE";
-        
+
         public const string USP_DocumentPreparation_PSY_DELETE = "dbo.USP_DocumentPreparation_PSY_DELETE";
-        
+
         public const string USP_DocumentPreparation_PSY_DELETE_ALL = "dbo.USP_DocumentPreparation_PSY_DELETE_ALL";
-        
+
         public const string USP_QuickDocumentPreparation_INSERT = "dbo.USP_QuickDocumentPreparation_INSERT";
-        
+
         public const string USP_QuickDocumentPreparation_UPDATE = "dbo.USP_QuickDocumentPreparation_UPDATE";
     }
 }

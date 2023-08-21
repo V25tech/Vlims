@@ -76,8 +76,9 @@ namespace Vlims.DocumentManager.Manager
                 //String validationMessages = DocumentEffectiveValidator.IsValidDocumentEffective(documentEffective);
                 //if (validationMessages.Length <= 0)
                 //{
-                    var result = DocumentEffectiveData.SaveDocumentEffective(documentEffective);
-                    return result;
+                var result = DocumentEffectiveData.SaveDocumentEffective(documentEffective);
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentEffective.documenttitle, Type = DocumentEffectiveConstants.documenteffective, state = DefinitionStatus.New });
+                return result;
                 //}
                 //throw new System.Exception(validationMessages);
             }
@@ -94,8 +95,8 @@ namespace Vlims.DocumentManager.Manager
                 //String validationMessages = DocumentEffectiveValidator.IsValidDocumentEffective(documentEffective);
                 //if (validationMessages.Length <= 0)
                 //{
-                    bool result = DocumentEffectiveData.UpdateDocumentEffective(documentEffective);
-                    return result;
+                bool result = DocumentEffectiveData.UpdateDocumentEffective(documentEffective);
+                return result;
                 //}
                 //throw new System.Exception(validationMessages);
             }
