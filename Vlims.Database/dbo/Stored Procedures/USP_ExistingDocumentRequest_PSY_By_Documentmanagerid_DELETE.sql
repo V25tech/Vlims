@@ -2,7 +2,7 @@
  AS 
  BEGIN 
   BEGIN TRY 
- DELETE FROM [dbo].[ExistingDocumentRequest_PSY]  WHERE Documentmanagerid_PSY IN (@Documentmanagerid) 
+ DELETE FROM [dbo].[ExistingDocumentRequest_PSY]  --WHERE Documentmanagerid_PSY IN (@Documentmanagerid) 
   END TRY 
  BEGIN CATCH 
  SELECT ERROR_MESSAGE(); 

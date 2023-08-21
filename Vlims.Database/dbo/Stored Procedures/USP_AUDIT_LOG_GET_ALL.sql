@@ -11,11 +11,11 @@
       ,[Action]
       ,[CreatedDate]
       ,[State]
-      ,[AuditId]
+      ,Audit_id
   FROM [dbo].[AUDIT_LOG_PSY]
 
   END TRY 
- BEGIN CATCH 
+ BEGIN CATCH
   SELECT ERROR_MESSAGE(); 
  END CATCH 
  END
