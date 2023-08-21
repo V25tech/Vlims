@@ -880,6 +880,9 @@ internal class HeaderFooter
 
     public static void generatePDF(string inputFilePath, string outputFilePath)
     {
+        string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", "Aspose.WordsProductFamily.LIC");
+        License asposeLicense = new License();
+        asposeLicense.SetLicense(uploadsFolder);
         // Load the input DOCX document using Aspose.Words
         Aspose.Words.Document doc = new Aspose.Words.Document(inputFilePath);
 

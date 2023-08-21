@@ -25,7 +25,7 @@ namespace Vlims.Administration.Manager
     public class DepartmentConfigurationService : IDepartmentConfigurationService
     {
 
-        
+
         public ResponseContext<DepartmentConfiguration> GetAllDepartmentConfiguration(RequestContext requestContext)
         {
             try
@@ -39,7 +39,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public DepartmentConfiguration GetDepartmentConfigurationByDPCFId(string dPCFId)
         {
             try
@@ -53,7 +53,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool SaveDepartmentConfiguration(DepartmentConfiguration departmentConfiguration)
         {
             try
@@ -63,6 +63,7 @@ namespace Vlims.Administration.Manager
                 if (validationMessages.Length <= 0)
                 {
                     var result = DepartmentConfigurationData.SaveDepartmentConfiguration(departmentConfiguration);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = departmentConfiguration.DepartmentName, Type = DepartmentConfigurationConstants.DepartmentName1, state = DefinitionStatus.New });
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -72,7 +73,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool UpdateDepartmentConfiguration(DepartmentConfiguration departmentConfiguration)
         {
             try
@@ -90,7 +91,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteDepartmentConfigurationByDPCFId(string dPCFId)
         {
             try
@@ -102,7 +103,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteAllDepartmentConfiguration(List<int> dPCFIds)
         {
             try
@@ -114,7 +115,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public List<DepartmentConfiguration> GetDepartmentConfigurationByHierarchyManagementId(System.Int32? hMId)
         {
             try
@@ -128,7 +129,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteDepartmentConfigurationByHierarchyManagementId(System.Int32? hMId)
         {
             try

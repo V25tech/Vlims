@@ -21,9 +21,9 @@ namespace Vlims.Administration.Manager
     // Comment
     public class RoleConfigurationService : IRoleConfigurationService
     {
-        
-       
-        
+
+
+
         public ResponseContext<RoleConfiguration> GetAllRoleConfiguration(RequestContext requestContext)
         {
             try
@@ -37,7 +37,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public RoleConfiguration GetRoleConfigurationByROCFId(string rOCFId)
         {
             try
@@ -51,7 +51,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool SaveRoleConfiguration(RoleConfiguration roleConfiguration)
         {
             try
@@ -61,6 +61,7 @@ namespace Vlims.Administration.Manager
                 if (validationMessages.Length <= 0)
                 {
                     var result = RoleConfigurationData.SaveRoleConfiguration(roleConfiguration);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = roleConfiguration.Role, Type = RoleConfigurationConstants.RoleNew, state = DefinitionStatus.New });
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -70,7 +71,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool UpdateRoleConfiguration(RoleConfiguration roleConfiguration)
         {
             try
@@ -88,7 +89,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteRoleConfigurationByROCFId(string rOCFId)
         {
             try
@@ -100,7 +101,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteAllRoleConfiguration(List<int> rOCFIds)
         {
             try
@@ -112,7 +113,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public List<RoleConfiguration> GetRoleConfigurationByHierarchyManagementId(System.Int32? hMId)
         {
             try
@@ -126,7 +127,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteRoleConfigurationByHierarchyManagementId(System.Int32? hMId)
         {
             try

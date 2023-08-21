@@ -65,6 +65,7 @@ namespace PolicySummary.Sheet1.Services
                 if (validationMessages.Length <= 0)
                 {
                     var result = UserConfigurationData.SaveUserConfiguration(userConfiguration);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = userConfiguration.UserID, Type = UserConfigurationConstants.userconfiguration1, state = DefinitionStatus.New });
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -112,7 +113,7 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
-        
+
         public bool UpdateUserConfiguration(UserConfiguration userConfiguration)
         {
             bool result = false;

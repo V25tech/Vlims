@@ -24,9 +24,9 @@ namespace Vlims.Administration.Manager
     // Comment
     public class SecurityManagementService : ISecurityManagementService
     {
-        
-      
-        
+
+
+
         public ResponseContext<SecurityManagement> GetAllSecurityManagement(RequestContext requestContext)
         {
             try
@@ -42,7 +42,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public SecurityManagement GetSecurityManagementBySMId(string sMId)
         {
             try
@@ -56,7 +56,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool SaveSecurityManagement(SecurityManagement securityManagement)
         {
             try
@@ -65,6 +65,7 @@ namespace Vlims.Administration.Manager
                 if (validationMessages.Length <= 0)
                 {
                     var result = SecurityManagementData.SaveSecurityManagement(securityManagement);
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -74,7 +75,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool UpdateSecurityManagement(SecurityManagement securityManagement)
         {
             try
@@ -92,7 +93,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteSecurityManagementBySMId(string sMId)
         {
             try
@@ -104,7 +105,7 @@ namespace Vlims.Administration.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteAllSecurityManagement(List<int> sMIds)
         {
             try

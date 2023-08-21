@@ -11,27 +11,29 @@ namespace Vlims.Administration.Entities
 {
     using System;
     using System.Collections.Generic;
-    
-    
+
+
     public class UserGroupConfigurationConstants
     {
-        
+
+        public const string Usergroupname1 = "Usergroupname1";
+
         public const string Ugcid = "@Ugcid_PSY";
-        
+
         public const string Usermanagementid = "@Usermanagementid_PSY";
-        
+
         public const string Usergroupname = "@Usergroupname_PSY";
-        
+
         public const string Code = "@Code_PSY";
-        
+
         public const string Users = "@Users_PSY";
-        
+
         public const string Totalusers = "@Totalusers_PSY";
-        
+
         public const string CreatedBy = "@CreatedBy_PSY";
-        
+
         public const string CreatedDate = "@CreatedDate_PSY";
-        
+
         public const string ModifiedBy = "@ModifiedBy_PSY";
 
         public const string document = "@document_PSY";
@@ -39,27 +41,27 @@ namespace Vlims.Administration.Entities
         public const string Status = "@Status_PSY";
 
         public const string ModifiedDate = "@ModifiedDate_PSY";
-        
+
         public const string USP_UserGroupConfiguration_PSY_GET_ALL = "dbo.USP_UserGroupConfiguration_PSY_GET_ALL";
-        
+
         public const string USP_UserGroupConfiguration_PSY_GET = "dbo.USP_UserGroupConfiguration_PSY_GET";
-        
+
         public const string USP_UserGroupConfiguration_PSY_INSERT = "dbo.USP_UserGroupConfiguration_PSY_INSERT";
-        
+
         public const string USP_UserGroupConfiguration_PSY_UPDATE = "dbo.USP_UserGroupConfiguration_PSY_UPDATE";
-        
+
         public const string USP_UserGroupConfiguration_PSY_DELETE = "dbo.USP_UserGroupConfiguration_PSY_DELETE";
-        
+
         public const string USP_UserGroupConfiguration_PSY_DELETE_ALL = "dbo.USP_UserGroupConfiguration_PSY_DELETE_ALL";
-        
+
         public const string USP_QuickUserGroupConfiguration_INSERT = "dbo.USP_QuickUserGroupConfiguration_INSERT";
-        
+
         public const string USP_QuickUserGroupConfiguration_UPDATE = "dbo.USP_QuickUserGroupConfiguration_UPDATE";
-        
+
         public const string UMId = "@UMId_PSY";
-        
+
         public const string USP_UserGroupConfiguration_PSY_By_UMId_GET = "dbo.USP_UserGroupConfiguration_PSY_By_UMId_GET";
-        
+
         public const string USP_UserGroupConfiguration_PSY_By_UMId_DELETE = "dbo.USP_UserGroupConfiguration_PSY_By_UMId_DELETE";
     }
 }

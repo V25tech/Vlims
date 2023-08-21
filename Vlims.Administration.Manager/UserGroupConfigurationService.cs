@@ -67,9 +67,10 @@ namespace Vlims.Administration.Manager
                 //if (validationMessages.Length <= 0)
                 //{
                 var result = UserGroupConfigurationData.SaveUserGroupConfiguration(userGroupConfiguration);
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = userGroupConfiguration.usergroupname, Type = UserGroupConfigurationConstants.Usergroupname1, state = DefinitionStatus.New });
                 return result;
                 //}
-                throw new System.Exception(validationMessages);
+                //throw new System.Exception(validationMessages);
             }
             catch (System.Exception ex)
             {

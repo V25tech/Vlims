@@ -68,6 +68,7 @@ namespace Vlims.Administration.Manager
                 plantManagement.CreatedBy = "admin";
                 plantManagement.ModifiedBy = "admin";
                 var result = PlantManagementData.SavePlantManagement(plantManagement);
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = plantManagement.PlantName, Type = PlantManagementConstants.PlantName1, state = DefinitionStatus.New });
                 return result;
                 //}
                 //throw new System.Exception(validationMessages);

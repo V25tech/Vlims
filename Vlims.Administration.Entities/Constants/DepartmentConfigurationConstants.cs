@@ -11,49 +11,52 @@ namespace Vlims.Administration.Entities
 {
     using System;
     using System.Collections.Generic;
-    
-    
+
+
     public class DepartmentConfigurationConstants
     {
-        
+
+        public static string DepartmentName1 = "DepartmentName1";
+
         public const string DPCFId = "@DPCFId_PSY";
-        
+
         public const string HierarchyManagementId = "@HierarchyManagementId_PSY";
-        
+
         public const string DepartmentName = "@DepartmentName_PSY";
-        
+
         public const string DepartmentCode = "@DepartmentCode_PSY";
-        
+
         public const string Comments = "@Comments_PSY";
-        
+
         public const string CreatedBy = "@CreatedBy_PSY";
-        
+
         public const string CreatedDate = "@CreatedDate_PSY";
-        
+
         public const string ModifiedBy = "@ModifiedBy_PSY";
-        
+
         public const string ModifiedDate = "@ModifiedDate_PSY";
-        
+
         public const string USP_DepartmentConfiguration_PSY_GET_ALL = "dbo.USP_DepartmentConfiguration_PSY_GET_ALL";
-        
+
         public const string USP_DepartmentConfiguration_PSY_GET = "dbo.USP_DepartmentConfiguration_PSY_GET";
-        
+
         public const string USP_DepartmentConfiguration_PSY_INSERT = "dbo.USP_DepartmentConfiguration_PSY_INSERT";
-        
+
         public const string USP_DepartmentConfiguration_PSY_UPDATE = "dbo.USP_DepartmentConfiguration_PSY_UPDATE";
-        
+
         public const string USP_DepartmentConfiguration_PSY_DELETE = "dbo.USP_DepartmentConfiguration_PSY_DELETE";
-        
+
         public const string USP_DepartmentConfiguration_PSY_DELETE_ALL = "dbo.USP_DepartmentConfiguration_PSY_DELETE_ALL";
-        
+
         public const string USP_QuickDepartmentConfiguration_INSERT = "dbo.USP_QuickDepartmentConfiguration_INSERT";
-        
+
         public const string USP_QuickDepartmentConfiguration_UPDATE = "dbo.USP_QuickDepartmentConfiguration_UPDATE";
-        
+
         public const string HMId = "@HMId_PSY";
-        
+
         public const string USP_DepartmentConfiguration_PSY_By_HMId_GET = "dbo.USP_DepartmentConfiguration_PSY_By_HMId_GET";
-        
+
         public const string USP_DepartmentConfiguration_PSY_By_HMId_DELETE = "dbo.USP_DepartmentConfiguration_PSY_By_HMId_DELETE";
+
     }
 }
