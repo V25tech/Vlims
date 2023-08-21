@@ -19,9 +19,9 @@ namespace Vlims.DocumentMaster.Manager
     // Comment
     public class workflowconigurationService : IworkflowconigurationService
     {
-        
-        
-        
+
+
+
         public ResponseContext<workflowconiguration> GetAllworkflowconiguration(RequestContext requestContext)
         {
             try
@@ -35,7 +35,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public workflowconiguration GetworkflowconigurationByWFCId(int wFCId)
         {
             try
@@ -49,12 +49,12 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool Saveworkflowconiguration(workflowconiguration workflowconiguration)
         {
             try
             {
-              if(workflowconiguration!=null && workflowconiguration.WFCId==null )
+                if (workflowconiguration != null && workflowconiguration.WFCId == null)
                 {
                     workflowconiguration.DocumentMasterId = "1";
                 }
@@ -63,6 +63,7 @@ namespace Vlims.DocumentMaster.Manager
                 {
                     workflowconiguration.Status = "Active";
                     var result = workflowconigurationData.Saveworkflowconiguration(workflowconiguration);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = workflowconiguration.workflowName, Type = workflowconigurationConstants.workflowName1, state = DefinitionStatus.New });
                     if (result)
                         workflowconigurationData.WorkspaceUserMapping(workflowconiguration);
                     return result;
@@ -74,7 +75,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool Updateworkflowconiguration(workflowconiguration workflowconiguration)
         {
             try
@@ -92,7 +93,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteworkflowconigurationByWFCId(int wFCId)
         {
             try
@@ -104,7 +105,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteAllworkflowconiguration(List<int> wFCIds)
         {
             try

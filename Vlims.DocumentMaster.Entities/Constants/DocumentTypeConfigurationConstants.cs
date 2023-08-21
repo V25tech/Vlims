@@ -11,48 +11,48 @@ namespace Vlims.DocumentMaster.Entities
 {
     using System;
     using System.Collections.Generic;
-    
-    
+
+
     public class DocumentTypeConfigurationConstants
     {
         public const string DocumentType = "DocumentType";
 
         public const string DTCId = "@DTCId_PSY";
-        
+
         public const string DocumentMasterId = "@DocumentMasterId_PSY";
-        
+
         public const string Documenttypename = "@Documenttypename_PSY";
-        
+
         public const string documenttypeprefix = "@documenttypeprefix_PSY";
-        
+
         public const string Description = "@Description_PSY";
-        
+
         public const string Assigntodepartment = "@Assigntodepartment_PSY";
-        
+
         public const string CreatedBy = "@CreatedBy_PSY";
-        
+
         public const string CreatedDate = "@CreatedDate_PSY";
-        
+
         public const string ModifiedBy = "@ModifiedBy_PSY";
-        
+
         public const string ModifiedDate = "@ModifiedDate_PSY";
 
         public const string Status_PSY = "@Status_PSY";
 
         public const string USP_DocumentTypeConfiguration_PSY_GET_ALL = "dbo.USP_DocumentTypeConfiguration_PSY_GET_ALL";
-        
+
         public const string USP_DocumentTypeConfiguration_PSY_GET = "dbo.USP_DocumentTypeConfiguration_PSY_GET";
-        
+
         public const string USP_DocumentTypeConfiguration_PSY_INSERT = "dbo.USP_DocumentTypeConfiguration_PSY_INSERT";
-        
+
         public const string USP_DocumentTypeConfiguration_PSY_UPDATE = "dbo.USP_DocumentTypeConfiguration_PSY_UPDATE";
-        
+
         public const string USP_DocumentTypeConfiguration_PSY_DELETE = "dbo.USP_DocumentTypeConfiguration_PSY_DELETE";
-        
+
         public const string USP_DocumentTypeConfiguration_PSY_DELETE_ALL = "dbo.USP_DocumentTypeConfiguration_PSY_DELETE_ALL";
-        
+
         public const string USP_QuickDocumentTypeConfiguration_INSERT = "dbo.USP_QuickDocumentTypeConfiguration_INSERT";
-        
+
         public const string USP_QuickDocumentTypeConfiguration_UPDATE = "dbo.USP_QuickDocumentTypeConfiguration_UPDATE";
     }
 }

@@ -79,7 +79,7 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = DocumentTypeConfigurationData.UpdateDocumentTypeConfiguration(documentTypeConfiguration);
-                     AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.Modify });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.Modify });
                     return result;
                 }
                 throw new System.Exception(validationMessages);

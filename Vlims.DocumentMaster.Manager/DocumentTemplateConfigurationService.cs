@@ -20,7 +20,7 @@ namespace Vlims.DocumentMaster.Manager
     // Comment
     public class DocumentTemplateConfigurationService : IDocumentTemplateConfigurationService
     {
-        
+
         public ResponseContext<DocumentTemplateConfiguration> GetAllDocumentTemplateConfiguration(RequestContext requestContext)
         {
             try
@@ -34,7 +34,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public DocumentTemplateConfiguration GetDocumentTemplateConfigurationByDTID(int dTID)
         {
             try
@@ -48,13 +48,13 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool SaveDocumentTemplateConfiguration(DocumentTemplateConfiguration documentTemplateConfiguration)
         {
             try
             {
                 documentTemplateConfiguration.Status = "Active";
-                if (documentTemplateConfiguration!=null && string.IsNullOrEmpty(documentTemplateConfiguration.DocumentMasterId))
+                if (documentTemplateConfiguration != null && string.IsNullOrEmpty(documentTemplateConfiguration.DocumentMasterId))
                 {
                     documentTemplateConfiguration.DocumentMasterId = "1";
                     documentTemplateConfiguration.header = "header";
@@ -64,6 +64,7 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     var result = DocumentTemplateConfigurationData.SaveDocumentTemplateConfiguration(documentTemplateConfiguration);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentTemplateConfiguration.Templatename, Type = DocumentTemplateConfigurationConstants.Templatename1, state = DefinitionStatus.New });
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -73,7 +74,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool UpdateDocumentTemplateConfiguration(DocumentTemplateConfiguration documentTemplateConfiguration)
         {
             try
@@ -91,7 +92,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteDocumentTemplateConfigurationByDTID(int dTID)
         {
             try
@@ -103,7 +104,7 @@ namespace Vlims.DocumentMaster.Manager
                 throw;
             }
         }
-        
+
         public bool DeleteAllDocumentTemplateConfiguration(List<int> dTIDs)
         {
             try
