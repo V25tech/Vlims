@@ -301,6 +301,58 @@ export class AddTemplateComponent implements OnInit {
       this.gridData.push(row);
     }
   }
+  addNewRow() {
+    if (this.gridData.length > 0) {
+      const lastRow = this.gridData[this.gridData.length - 1];
+      const newRow = [...lastRow]; // Clone the last row's data
+
+      // Apply your custom logic for the new row here
+      newRow.forEach((cell, colIndex) => {
+        if (colIndex !== 0 && colIndex % 2 !== 0) {
+          newRow[colIndex] = { selectedOption: 2, inputValue: '' };
+        } else {
+          newRow[colIndex] = { selectedOption: 1, inputValue: '' };
+        }
+      });
+
+      this.gridData.push(newRow);
+    } else {
+      // If no rows exist, generate a new row using your existing method
+      this.generateTeplateGrid();
+    }
+  }
+  addfooterRow() {
+    if (this.gridFooterData.length > 0) {
+      const lastRow = this.gridFooterData[this.gridFooterData.length - 1];
+      const newRow = [...lastRow]; // Clone the last row's data
+
+      // Apply your custom logic for the new row here
+      newRow.forEach((cell, colIndex) => {
+        if (colIndex !== 0 && colIndex % 2 !== 0) {
+          newRow[colIndex] = { selectedOption: 2, inputValue: '' };
+        } else {
+          newRow[colIndex] = { selectedOption: 1, inputValue: '' };
+        }
+      });
+
+      this.gridFooterData.push(newRow);
+    } else {
+      // If no rows exist, generate a new row using your existing method
+      this.generateTeplateGrid();
+    }
+  }
+
+  // Delete a row at the specified index from the gridData array
+  deleteRow(rowIndex: number) {
+    if(this.gridData.length>1){
+    this.gridData.splice(rowIndex, 1);
+    }
+  }
+  deletefooterRow(rowIndex: number) {
+    if(this.gridFooterData.length>1){
+    this.gridFooterData.splice(rowIndex, 1);
+    }
+  }
 
   generateFooterGrid() {
     this.showGrid = true;

@@ -162,11 +162,21 @@
                                  class="form-control"
                                  type="text" />
                         </div>
+                        
                       </td>
                     </ng-container>
+                    <td>
+                      <button class="btn btn-danger btn-sm delete-button"
+                              (click)="deleteRow(rowIndex)">
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
+              <button class="btn btn-primary mt-2" (click)="addNewRow()">
+                Add New Row
+              </button>
             </ng-container>
           </div>
           <div class="template-actions">
@@ -217,9 +227,18 @@
                         </div>
                       </td>
                     </ng-container>
+                    <td>
+                      <button class="btn btn-danger btn-sm delete-button"
+                              (click)="deletefooterRow(rowIndex)">
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
+              <button class="btn btn-primary mt-2" (click)="addfooterRow()">
+                Add New Row
+              </button>
             </ng-container>
           </div>
           <div class="template-actions">
