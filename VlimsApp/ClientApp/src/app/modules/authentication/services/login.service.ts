@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { RequestContext, UserConfiguration, functionalprofile } from 'src/app/models/model';
+import { UserConfiguration, functionalprofile } from 'src/app/models/model';
 import { UsersconfigurationService } from '../../services/usersconfiguration.service';
 import { CommonService } from 'src/app/shared/common.service';
-import { ToastrService } from 'ngx-toastr';
+
 
 const AUTH_STORAGE_KEY = 'isLoggedIn';
 
@@ -12,7 +12,6 @@ const AUTH_STORAGE_KEY = 'isLoggedIn';
   providedIn: 'root',
 })
 export class LoginService {
-  lstusers:UserConfiguration[]=[];
   isvalid=false;
   private loginStatusChanged = new Subject<boolean>();
   loginStatusChanged$ = this.loginStatusChanged.asObservable();
@@ -30,51 +29,34 @@ export class LoginService {
 
   
   constructor(private http: HttpClient,private userssvc:UsersconfigurationService,
-    private toaster:ToastrService,
     private commonsvc:CommonService ) {}
 
   login(username: string, password: string,lstusers:UserConfiguration[],roles:functionalprofile[]) {
-    if(username==='admin')
-    {
-       this.isvalid = username === 'admin' && password === 'quoting123';
-
+       this.isvalid = username.toLocaleLowerCase() === 'admin' && password === 'quoting123';
       if (this.isvalid) {
         this.commonsvc.setadminroles();
         localStorage.setItem(AUTH_STORAGE_KEY, 'true');
         this.updateLoginStatus(true);
       }
-    }
-    else if(lstusers!=null && lstusers!=undefined)
-    {
-      let user=lstusers.find(o=>o.UserID==username && o.Password==password);
-      if(user!=null && user!=undefined)
-      {
-        const role=roles.find(o=>o.role.toLocaleLowerCase()==user?.Role.toLocaleLowerCase());
-        if(role!=null && role!=undefined)
-        {
-          this.commonsvc.setUserRoles(role);
-        }
-        else{
-          this.commonsvc.removeUserRole();
-        }
-        localStorage.setItem(AUTH_STORAGE_KEY, 'true');
-        this.updateLoginStatus(true);
-        this.isvalid=true;
-      }
-    }
     return this.isvalid;
   }
-getusers(){
-  let p_context=new RequestContext();
-   p_context.PageNumber=1;p_context.PageSize=100;p_context.PageSize=0;
-    return this.userssvc.getusers(p_context).subscribe((data:any)=>{
-      this.lstusers=data.Response;
-    });
-}
   logout() {
     localStorage.removeItem(AUTH_STORAGE_KEY);
     this.updateLoginStatus(false);
     this.commonsvc.removeUserRole();
     this.isvalid=false;
+  }
+  updateuser(roles:functionalprofile[],user:UserConfiguration){
+    const role = roles.find(
+      (o) => o.role.toLowerCase() === user?.Role.toLowerCase()
+    );
+
+    if (role != null && role != undefined) {
+      this.commonsvc.setUserRoles(role);
+    } else {
+      this.commonsvc.removeUserRole();
+    }
+    localStorage.setItem(AUTH_STORAGE_KEY, 'true');
+    this.updateLoginStatus(true);
   }
 }

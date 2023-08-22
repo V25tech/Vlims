@@ -29,6 +29,7 @@ export class RequestsComponent implements OnInit{
   requestsDatasource = [];
 
   ngOnInit() {   
+    debugger
     //this.dataPaginator.rows = 10;
     this.access = this.commonsvc.getUserRoles()?.documentRequest ?? false;
     this.getdocumentrequest();

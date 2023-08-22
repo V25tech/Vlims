@@ -14,10 +14,12 @@ import { setfunctionalprofileconfigurationservice } from 'src/app/modules/servic
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
+//const AUTH_STORAGE_KEY = 'isLoggedIn';
 export class LoginComponent {
   @ViewChild('usernameInput') usernameInput!: ElementRef;
   @Output() loginSuccess: EventEmitter<void> = new EventEmitter<void>();
   lstusers:UserConfiguration[]=[];
+  user:UserConfiguration=new UserConfiguration();
   roles:functionalprofile[]=[];
   username: string = '';
   password: string = '';
@@ -25,10 +27,11 @@ export class LoginComponent {
     private toastr:ToastrService,
     private renderer: Renderer2,
     private setfunctionalsvc:setfunctionalprofileconfigurationservice,
+    private usersvc:UsersconfigurationService,
    private loader:NgxSpinnerService,private commonsvc:CommonService ) {}
 
    ngOnInit(){
-    this.getusers();
+    //this.getusers();
     this.getsetfunctionalprofile();
    }
    ngAfterViewInit() {
@@ -36,27 +39,45 @@ export class LoginComponent {
     this.renderer.selectRootElement(this.usernameInput.nativeElement).focus();
   }
   login() {
-    // if (this.username == 'admin' && this.password == 'admin') {
-    //   localStorage.setItem('username', 'admin');
-    //   this.router.navigate(['/documents']);
-    // }
-    debugger
-    if(this.loginService.login(this.username, this.password,this.lstusers,this.roles)){
-      localStorage.setItem("username", this.username);
-      this.commonsvc.setUsername(this.username);
-      this.commonsvc.createdBy=this.username;
-      this.loginSuccess.emit();
-      this.router.navigate(['/documents']);
-      this.toastr.success('Welcome '+this.username, 'Success', {
-        timeOut: 1000, // Set the display time in milliseconds (3 seconds)
-      });
+    
+    this.loader.show();
+    if(this.user.UserID.toLocaleLowerCase()==='admin')
+    {
+    if(this.loginService.login(this.user.UserID, this.user.Password ?? '',this.lstusers,this.roles)){
+      this.isvaliduser();
     }
     else{
       this.toastr.error('login failed');
         }
+      }
+      else{
+
+        this.userssvc.login(this.user).subscribe((data:any)=>{
+          
+            this.user=data;
+            this.loginService.updateuser(this.roles,this.user);
+            this.isvaliduser();
+        },(error:any)=>{
+          this.loader.hide();
+          this.toastr.error('login failed');
+        });
+      }
+
+  }
+  isvaliduser(){
+    
+    localStorage.setItem("username", this.user.UserID);
+    this.commonsvc.setUsername(this.user.UserID);
+    this.commonsvc.createdBy=this.user.UserID;
+    this.loader.hide();
+    this.loginSuccess.emit();
+    this.router.navigate(['/documents']);
+    this.toastr.success('Welcome '+this.user.UserID, 'Success', {
+      timeOut: 1000, // Set the display time in milliseconds (3 seconds)
+    });
   }
   getusers(){
-    debugger
+    
     this.loader.show();
     let objrequest=new RequestContext();
     objrequest.PageNumber=1;objrequest.PageSize=50;
@@ -67,7 +88,7 @@ export class LoginComponent {
   }
   getsetfunctionalprofile() {
        return this.setfunctionalsvc.getsetfunctionalprofileconfiguration(this.commonsvc.req).subscribe((data: any) => {
-         debugger
+         
          this.roles = data.Response;
        });
       }

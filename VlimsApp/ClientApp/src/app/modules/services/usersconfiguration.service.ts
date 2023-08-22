@@ -26,4 +26,8 @@ getbyId(objrequest: string) {
   
   return this.http.getwithheader("api/userconfiguration/getbyId" + "?uCFId=" + objrequest ,this.type);
 }
+login(objrequest: UserConfiguration) {
+  
+  return this.http.postJsonLogin(objrequest, "api/userconfiguration/login",this.type);
+}
 }

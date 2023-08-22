@@ -17,6 +17,8 @@ namespace PolicySummary.Controllers
     using Vlims.Administration.Manager;
     using Vlims.Common;
     using Vlims.Administration.Entities;
+    using System.Reflection;
+    using PolicySummary.Sheet1.Services;
 
 
     /// <summary>
@@ -65,6 +67,29 @@ namespace PolicySummary.Controllers
         {
             var result = userConfigurationService.GetUserConfigurationByUCFId(uCFId);
             return result;
+        }
+        /// <summary>
+        /// login
+        /// </summary>
+        /// <param name="userConfiguration"></param>
+        /// <returns></returns>
+        [HttpPost("login")]
+        public ActionResult Login(UserConfiguration userConfiguration)
+        {
+            RequestContext requestContext = new RequestContext();
+            requestContext.PageNumber = 1;
+            requestContext.PageSize = 200;
+            var user = userConfigurationService.GetAllUserConfiguration(requestContext).Response.FirstOrDefault(o=>o.UserID.Equals(userConfiguration.UserID,StringComparison.InvariantCultureIgnoreCase) && o.Password==userConfiguration.Password);
+            if (user == null)
+            {
+                return BadRequest("Invalid username or password.");
+            }
+            else
+            {
+
+                return Ok(user);
+            }
+
         }
 
         /// <summary>
