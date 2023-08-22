@@ -109,7 +109,7 @@ internal class HeaderFooter
                 // Create a new section properties for each page
                 SectionProperties sectionProperties = new SectionProperties(
                     new PageSize() { Width = 11906U, Height = 16838U }, // Adjust page size as needed
-                    new PageMargin() { Top = 1417, Right = 1417, Bottom = 1417, Left = 1417, Header = 708, Footer = 708 }
+                    new PageMargin() { Top = 2000, Right = 1417, Bottom = 1417, Left = 1417, Header = 708, Footer = 708 }
                 );
                 Page currentPage = template.Page[page];
                 if (page > 0)
