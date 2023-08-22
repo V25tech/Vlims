@@ -111,7 +111,7 @@ internal class HeaderFooter
                     new PageSize() { Width = 11906U, Height = 16838U }, // Adjust page size as needed
                     new PageMargin() { Top = 1417, Right = 1417, Bottom = 1417, Left = 1417, Header = 708, Footer = 708 }
                 );
-
+                Page currentPage = template.Page[page];
                 if (page > 0)
                 {
                     DocumentFormat.OpenXml.Drawing.Paragraph pageBreak = new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Break() { Type = BreakValues.Page }));
@@ -165,28 +165,94 @@ internal class HeaderFooter
                 //footer.Append(footerElements);
                 //footerPart.Footer.Save();
 
-                // Add dynamic content to the body
-                if (page < template.Page.ToList().Count)
-                {
-                    string bodyContent = template.Page[page].text;
-                    string[] lines = bodyContent.Split('\n');
+                GenerateDynamicBodyContent(mainPart, currentPage);
 
-                    foreach (string line in lines)
-                    {
-                        DocumentFormat.OpenXml.Wordprocessing.Body body = mainPart.Document.Body;
-                        DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
-                        Run run = new Run();
-                        Text text = new Text(line.Trim()); // Trim to remove any leading/trailing spaces
-                        run.Append(text);
-                        paragraph.Append(run);
-                        body.Append(paragraph);
-                    }
-                }
+                // Add dynamic content to the body
+                //if (page < template.Page.ToList().Count)
+                //{
+                //    string bodyContent = template.Page[page].text;
+                //    string[] lines = bodyContent.Split('\n');
+
+                //    foreach (string line in lines)
+                //    {
+                //        DocumentFormat.OpenXml.Wordprocessing.Body body = mainPart.Document.Body;
+                //        DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
+                //        Run run = new Run();
+                //        Text text = new Text(line.Trim()); // Trim to remove any leading/trailing spaces
+                //        run.Append(text);
+                //        paragraph.Append(run);
+                //        body.Append(paragraph);
+                //    }
+                //}
             }
         }
         //filePath = tempFilePath;
     }
 
+    private static void GenerateDynamicBodyContent(MainDocumentPart mainPart, Page currentPage)
+    {
+        if (currentPage.pagetype == "grid")
+        {
+            // Generate and add table to the body
+            string htmlTable = PrepareBodydiv(currentPage.bodyData);
+            HtmlDocument htmlHeaderDocument = new HtmlDocument();
+            htmlHeaderDocument.LoadHtml(htmlTable);
+            Table table = GenerateTableFromRowNodeBody(htmlHeaderDocument);
+            DocumentFormat.OpenXml.Wordprocessing.Body body = mainPart.Document.Body;
+            DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
+            paragraph.Append(table);
+            body.Append(paragraph);
+        }
+        else if (currentPage.pagetype == "text")
+        {
+            // Add text content to the body
+            string bodyContent = currentPage.text;
+            string[] lines = bodyContent.Split('\n');
+
+            foreach (string line in lines)
+            {
+                DocumentFormat.OpenXml.Wordprocessing.Body body = mainPart.Document.Body;
+                DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
+                Run run = new Run();
+                Text text = new Text(line.Trim()); // Trim to remove any leading/trailing spaces
+                run.Append(text);
+                paragraph.Append(run);
+                body.Append(paragraph);
+            }
+            //DocumentFormat.OpenXml.Wordprocessing.Body body = mainPart.Document.Body;
+            //foreach (var line in page.bodyData)
+            //{
+            //    DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph = new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new Run(new Text(line)));
+            //    body.Append(paragraph);
+            //}
+        }
+    }
+
+    private static Table GenerateTableFromRowNodeBody(HtmlDocument htmlDocument)
+    {
+        Table contentTable = new Table();
+        foreach (HtmlNode rowNode in htmlDocument.DocumentNode.SelectNodes("//div[@class='table-row']"))
+        {
+            Table generatedTable = GenerateTableFromRowNode1(rowNode);
+            contentTable.AppendChild(generatedTable);
+        }
+        return contentTable;
+    }
+
+    private static void GenerateBodyContent(FooterPart part, HtmlDocument htmlDocument)
+    {
+        Footer footer = new Footer();
+
+        foreach (HtmlNode rowNode in htmlDocument.DocumentNode.SelectNodes("//div[@class='table-row']"))
+        {
+            //Table table = GenerateTableFromRowNode(rowNode);
+            Table table = GenerateTableFromRowNode1(rowNode);
+            footer.AppendChild(table);
+        }
+
+        part.Footer = footer;
+        part.Footer.Save();
+    }
     private static void GeneratTitleContent(HeaderPart part, HtmlDocument htmlDocument)
     {
         Header header = new Header();
@@ -285,7 +351,11 @@ internal class HeaderFooter
                 cellProperties.AppendChild(new TableCellBorders(new BottomBorder(), new LeftBorder(), new RightBorder(), new TopBorder()));
 
                 // Set bold text for label cell
-
+                bool islabell = cellNode.OuterHtml.Contains("label");
+                if (islabell)
+                {
+                    isLabel = true;
+                }
                 if (isLabel)
                 {
                     if (cellsPerRow == 0)
@@ -788,6 +858,53 @@ internal class HeaderFooter
                 }
                 else
                     tableHtml.Append(item.inputValue);
+                tableHtml.Append("</div>");
+
+                //IsLabel = !IsLabel; // Toggle between label and value for each cell
+            }
+
+            tableHtml.Append("</div>");
+
+        }
+        tableHtml.Append("</div>");
+        table = tableHtml.ToString();
+        return table;
+
+    }
+    public static string PrepareBodydiv(List<List<BodyDataElement>> Template)
+    {
+        string table = string.Empty;
+        StringBuilder tableHtml = new StringBuilder();
+        // Add CSS styles
+        tableHtml.Append("<style>");
+        tableHtml.Append(".table-container { display: table; width: 100%; border-collapse: collapse; }");
+        tableHtml.Append(".table-row { display: table-row; }");
+        tableHtml.Append(".table-cell { display: table-cell; padding: 1px;}");
+        tableHtml.Append(".label-cell { text-align: left; font-weight: bold; width: 50px; }");
+        tableHtml.Append(".value-cell { text-align: center; width: 50px; }");
+        tableHtml.Append("</style>");
+        tableHtml.Append("<div class=\"table-container\">");
+        foreach (List<BodyDataElement> row in Template)
+        {
+            tableHtml.Append("<div class=\"table-row\">");
+
+            foreach (BodyDataElement item in row)
+            {
+
+
+                tableHtml.Append("<div class=\"table-cell ");
+
+                if (item.selectedOption == 1)
+                {
+                    tableHtml.Append("label-cell");
+                }
+                else
+                {
+                    tableHtml.Append("value-cell");
+                }
+
+                tableHtml.Append("\">");
+                tableHtml.Append(item.inputValue);
                 tableHtml.Append("</div>");
 
                 //IsLabel = !IsLabel; // Toggle between label and value for each cell

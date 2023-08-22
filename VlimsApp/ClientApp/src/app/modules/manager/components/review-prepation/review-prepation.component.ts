@@ -178,6 +178,7 @@ export class ReviewPrepationComponent {
   }
 
   openViewer(template: TemplateRef<any>): void {
+    
     if (this.pdfBytes) {
       const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
       this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
@@ -203,7 +204,7 @@ export class ReviewPrepationComponent {
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show();
     this.docPreperationService.preview(this.preparation).subscribe((data: any) => {
-      debugger
+      
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();
@@ -226,7 +227,7 @@ export class ReviewPrepationComponent {
       this.commonsvc.createdBy=user;
     }
     return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
-      debugger
+      
       this.workitems = data.Response;
       if(this.workitems.length>0){
         this.workitems=this.workitems.filter(p=>p.ReferenceId==this.requestId && p.TaskType=='Preparation');

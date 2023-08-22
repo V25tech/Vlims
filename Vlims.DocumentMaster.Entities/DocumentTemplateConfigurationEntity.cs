@@ -250,11 +250,17 @@ namespace Vlims.DocumentMaster.Entities
         public List<List<FooterTable>> footerTable { get; set; }
 
         public List<List<HeaderTable>> titleTable { get; set; }
+
+        public List<BodyTable> bodyData { get; set; }
     }
     public class Page
     {
         public string text { get; set; }
         public int pagenumber { get; set; }
+
+        public string pagetype { get; set; }
+
+        public List<List<BodyDataElement>> bodyData { get; set; }
     }
 
     public class HeaderTable
@@ -266,5 +272,19 @@ namespace Vlims.DocumentMaster.Entities
     {
         public int selectedOption { get; set; }
         public string inputValue { get; set; }
+    }
+    public class BodyDataElement
+    {
+        public int selectedOption { get; set; }
+        public string inputValue { get; set; }
+    }
+
+    public class BodyTable
+    {
+        public string text { get; set; }
+        public int pagenumber { get; set; }
+        public string pagetype { get; set; }
+
+        public List<BodyDataElement> bodyData { get; set; } 
     }
 }

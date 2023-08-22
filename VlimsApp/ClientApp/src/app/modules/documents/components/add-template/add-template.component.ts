@@ -21,7 +21,13 @@ interface SelectOption {
 }
 interface Page {
   text: string;
-  pagenumber:number;
+  pagenumber: number;
+  pagetype: string;
+  bodyData: BodyDataElement[][];
+}
+interface BodyDataElement {
+  selectedOption: number;
+  inputValue: string;
 }
 @Component({
   selector: 'app-add-template',
@@ -31,7 +37,7 @@ interface Page {
 export class AddTemplateComponent implements OnInit {
   html = '';
   numOfPages: number = 1;
-  pages: Page[] = [{ text: '',pagenumber:1 }];
+  pages: Page[] = [{ text: '', pagenumber: 1, pagetype: 'text', bodyData: [] }];
   currentPage: number = 0;
   id:number=0;
   title:string='New Document Template';
@@ -50,6 +56,7 @@ export class AddTemplateComponent implements OnInit {
   colsArray: number[] = [];
   gridData: any = [];
   headerData:any=[];
+  bodyData:any=[];
   footerRows: number = 0;
   footerCols: number = 0;
   rowsFooterArray: number[] = [];
@@ -97,6 +104,7 @@ export class AddTemplateComponent implements OnInit {
     this.generateheaderrow();
     this.getTemplates();
     this.getdocumenttypeconfig();
+    //  this.generateP();
 
     if(lastSegment=="add")
     {
@@ -124,8 +132,28 @@ export class AddTemplateComponent implements OnInit {
     }
     
   }
+  generateP():BodyDataElement[] {
+    
+    const bodyData: BodyDataElement[] = [];
+    for (let i = 0; i <1; i++) {
+      const row: BodyDataElement[] = [];
+      for (let j = 0; j < 4; j++) {
+        if (j !== 0 && j % 2 !== 0)
+        {
+          row.push({ selectedOption: 2, inputValue: '' });
+        }
+        else {
+        row.push({ selectedOption: 1, inputValue: '' });
+        }
+      }
+      bodyData.push(...row);
+    }
+    console.log('data',bodyData);
+    //this.pages[this.currentPage].bodyData=this.bodyData;
+    return bodyData;
+  }
   generateheaderrow() {
-    debugger
+    
     this.showGrid = true;
     // Set the number of rows and columns based on user input
     // this.rows = 5;
@@ -155,7 +183,7 @@ export class AddTemplateComponent implements OnInit {
     
     this.loader.show();
     this.templatesvc.getbyId(id).subscribe((data:any)=>{
-      debugger
+      
       this.templateForm=data;
       if(this.typesDatasource.length>0)
       {
@@ -170,7 +198,7 @@ export class AddTemplateComponent implements OnInit {
       this.gridFooterData=this.templateForm.footerTable;
       this.headerData=this.templateForm.titleTable;
       if(this.templateForm.Page!=null){
-      this.pages = this.templateForm.Page;
+      this.pages=this.templateForm.Page;
       }
       console.log(this.templateForm);
       this.loader.hide();
@@ -211,7 +239,7 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   addTemplate() {
-    debugger
+    
     this.loader.show();
     console.log(this.headerData);
     this.templateForm.documenttype=this.selectedtype.Documenttypename;
@@ -273,7 +301,7 @@ export class AddTemplateComponent implements OnInit {
   }
 
   generateTeplateGrid() {
-    debugger
+    
     this.showGrid = true;
     // Set the number of rows and columns based on user input
     // this.rows = 5;
@@ -282,7 +310,7 @@ export class AddTemplateComponent implements OnInit {
     this.colsArray = Array.from({ length: this.cols });
     if(this.cols % 2 !==0)
     {
-      debugger
+      
       this.cols=this.cols+1;
     }
     this.gridData = [];
@@ -353,6 +381,11 @@ export class AddTemplateComponent implements OnInit {
     this.gridFooterData.splice(rowIndex, 1);
     }
   }
+  deletebodyRow(rowIndex: number) {
+    if(this.pages[this.currentPage].bodyData.length>1){
+    this.pages[this.currentPage].bodyData.splice(rowIndex, 1);
+    }
+  }
 
   generateFooterGrid() {
     this.showGrid = true;
@@ -360,7 +393,7 @@ export class AddTemplateComponent implements OnInit {
     this.colsFooterArray = Array.from({ length: this.footerCols });
     if(this.footerCols % 2 !==0)
     {
-      debugger
+      
       this.footerCols=this.footerCols+1;
     }
     this.gridFooterData = [];
@@ -424,14 +457,37 @@ export class AddTemplateComponent implements OnInit {
   }
 
   generatePages() {
-    this.pages = Array.from({ length: this.templateForm.Pages }, (_,index) => (
-      { text: '',
-      pagenumber:index+1}));
+    this.pages = Array.from({ length: this.templateForm.Pages }, (_, index) => (
+      {
+        text: '',
+        pagenumber: index,
+        pagetype: 'text',
+        bodyData: [] // Initialize bodyData with an empty row
+      }));
     this.currentPage = 0;
   }
+  // Method to set the page type and bodyData for a specific page
+setPageTypeAndBodyData(pageIndex: number, pageType: string) {
+  
+  if (pageType === 'grid') {
+    this.pages[pageIndex].pagetype = 'grid';
+    this.pages[pageIndex].bodyData.push(this.generateP());
+    // if(this.pages[pageIndex].bodyData!=null){
+    //   this.pages[pageIndex].bodyData.forEach(p=>{
+    //     p.forEach(o=>{
+    //       if(o.)
+    //     })
+    //   });
+    // }
+  } else {
+    this.pages[pageIndex].pagetype = 'text';
+    this.pages[pageIndex].bodyData = [];
+  }
+  console.log(this.pages);
+}
 
   prevPage() {
-    debugger
+    
     console.log(this.currentPage)
     if (this.currentPage > 0) {
       this.currentPage--;
@@ -439,10 +495,36 @@ export class AddTemplateComponent implements OnInit {
   }
 
   nextPage() {
-    debugger
+    
     if (this.currentPage < this.templateForm.Pages - 1) {
       this.currentPage++;
     }
   }
+  getPlaceholder(row: number, col: number): string {
+    
+    const flatIndex = row * 4 + col;
+    return this.pages[this.currentPage].bodyData[flatIndex][col].selectedOption === 1
+      ? 'Enter label'
+      : 'Enter Value';
+  }
+  addbodyRow() {
+    if (this.pages[this.currentPage].bodyData.length > 0) {
+      const lastRow = this.pages[this.currentPage].bodyData[this.pages[this.currentPage].bodyData.length - 1];
+      const newRow = [...lastRow]; // Clone the last row's data
 
+      // Apply your custom logic for the new row here
+      newRow.forEach((cell, colIndex) => {
+        if (colIndex !== 0 && colIndex % 2 !== 0) {
+          newRow[colIndex] = { selectedOption: 2, inputValue: '' };
+        } else {
+          newRow[colIndex] = { selectedOption: 1, inputValue: '' };
+        }
+      });
+
+      this.pages[this.currentPage].bodyData.push(newRow);
+    } else {
+      // If no rows exist, generate a new row using your existing method
+      //this.generateTeplateGrid();
+    }
+  }
 }

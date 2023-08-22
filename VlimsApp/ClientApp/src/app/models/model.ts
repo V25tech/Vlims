@@ -172,6 +172,8 @@ export class DocumentTemplateConfiguration {
 interface Page {
   text: string;
   pagenumber:number;
+  pagetype:string;
+  bodyData:BodyDataElement[][];
 }
 export class reviewers {
   value: string = ''
@@ -313,6 +315,10 @@ export class FileResponse {
 export class HeaderTable {
   public selectedOption: number = 0;
   public inputValue: string = '';
+}
+interface BodyDataElement {
+  selectedOption: number;
+  inputValue: string;
 }
 export class FooterTable {
   public selectedOption: number = 0;
