@@ -1,14 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TemplateForm} from '../../models/templates';
 import { DocumentTemplateConfiguration } from '../../models/DocumentTemplateConfiguration';
-import { RequestContext } from 'src/app/models/model';
+import { DocumentPreperationConfiguration, RequestContext } from 'src/app/models/model';
 import { CommonService } from 'src/app/shared/common.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 import { Table } from 'primeng/table';
 import { Paginator } from 'primeng/paginator';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { DomSanitizer } from '@angular/platform-browser';
+import { DocumentPreperationService } from 'src/app/modules/services/document-preperation.service';
 
 @Component({
   selector: 'app-templates',
@@ -19,6 +22,11 @@ export class TemplatesComponent {
   @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
   @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
   // Pagination properties
+  modalRef: BsModalRef | undefined;
+  pdfBytes: Uint8Array | undefined;
+  pdfUrl: string | null = null;
+  preparation: DocumentPreperationConfiguration = new DocumentPreperationConfiguration();
+  fileBytes: Uint8Array = new Uint8Array();
   currentPage = 10;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
@@ -28,6 +36,8 @@ export class TemplatesComponent {
   types:DocumentTemplateConfiguration[]=[];
   constructor(private router:Router,private templatesvc: DocumentTemplateServiceService,
     private spinner: NgxSpinnerService,
+    private modalService: BsModalService, private sanitizer: DomSanitizer,
+    private preparationsvc:DocumentPreperationService,
     private commonsvc: CommonService) {}
 
   ngOnInit() {
@@ -63,8 +73,49 @@ export class TemplatesComponent {
     this.templatesDatasource = this.templatesDatasource.filter(item => item.templateName.toLowerCase().includes(filterValue.toLowerCase()));
   }
 
-
-
+  closeModel() {
+    if (this.modalRef)
+      this.modalRef.hide();
+  }
+  openViewer(template: TemplateRef<any>): void {
+    
+    if (this.pdfBytes) {
+      const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    }
+  }
+  previewtemplate(template: TemplateRef<any>,objtemp: DocumentTemplateConfiguration) {
+    
+    this.spinner.show();
+    this.preparation.template=objtemp.Templatename;
+    this.preparation.CreatedDate=objtemp.CreatedDate;
+    this.preparation.ModifiedDate=objtemp.ModifiedDate;
+    this.preparationsvc.preview(this.preparation).subscribe((data: any) => {
+      
+      this.fileBytes = data;
+      this.pdfBytes = this.fileBytes;
+      this.spinner.hide();
+      this.openViewer(template);
+    }, (error:any) => {
+      this.spinner.hide();
+    });
+  }
+  // Function to convert base64 to Blob
+  private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
   getStatusClass(status: string): string {
     
     if (status === 'In Progress') {

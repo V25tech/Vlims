@@ -87,7 +87,7 @@
                    id="noofpages"
                    name="noofpages"
                    placeholder="No. of Pages"
-                   [(ngModel)]="templateForm.Pages" [disabled]="editMode"  (change)="generatePages()"
+                   [(ngModel)]="templateForm.Pages" [disabled]="editMode"   (change)="generatePages()"
                    required
                      #noofpagesInput="ngModel"
                       />
@@ -111,7 +111,8 @@
                         <div class="template-cell">
                           <div class="custom-select" style="width: 84px; padding-right: 2px;">
                             <select class="select-dropdown form-select"
-                            [(ngModel)]="headerData[rowIndex][colIndex].selectedOption">
+                            [(ngModel)]="headerData[rowIndex][colIndex].selectedOption" 
+                            >
                               <option *ngFor="let option of selectOptions"
                                       [value]="option.value">
                                 {{ option.name }}
@@ -123,9 +124,9 @@
                             " [placeholder]="headerData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"
                                  class="form-control"
                                  type="text" /> -->
-                                 <textarea class="form-control" [(ngModel)]="headerData[rowIndex][colIndex].inputValue" 
+                                 <textarea class="form-control" style="height: 33px;" [(ngModel)]="headerData[rowIndex][colIndex].inputValue" 
                                  [placeholder]="headerData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"
-                                  style="height: 2cm;"></textarea>
+                                 ></textarea>
                         </div>
                       </td>
                     </ng-container>
@@ -267,11 +268,85 @@
         <h5 class="page-card-title">Body Template</h5>
         <div class="template-block">
           <div class="template-grid">
+            <ng-container *ngIf="pages[currentPage].pagetype==='grid'">
+              <table class="w-100">
+                <tbody>
+                  <tr *ngFor="let row of pages[this.currentPage].bodyData; let rowIndex = index">
+                    <ng-container *ngFor="let cell of row; let colIndex = index">
+                      <td>
+                        <div class="template-cell">
+                          <div class="custom-select">
+                            <select class="select-dropdown form-select"
+                                    [(ngModel)]="
+                                    pages[this.currentPage].bodyData[rowIndex][colIndex].selectedOption
+                              ">
+                              <option *ngFor="let option of selectOptions"
+                                      [value]="option.value">
+                                {{ option.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <!-- <input [(ngModel)]="
+                          pages[this.currentPage].bodyData[rowIndex][colIndex].inputValue"
+                          [placeholder]="pages[this.currentPage].bodyData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"
+                                 class="form-control"
+                                 type="text" /> -->
+                                 <textarea class="form-control" style="height: 33px;" [(ngModel)]="
+                                 pages[this.currentPage].bodyData[rowIndex][colIndex].inputValue" [placeholder]="pages[this.currentPage].bodyData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"
+                                  ></textarea>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <td>
+                      <button class="btn btn-danger btn-sm delete-button"
+                              (click)="deletebodyRow(rowIndex)">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-primary mt-2" (click)="addbodyRow()">
+                Add New Row
+              </button>
+            </ng-container>
+            <div class="template-grid" *ngIf="pages[currentPage].pagetype==='text'">
         <textarea class="form-control" [(ngModel)]="pages[currentPage].text" placeholder="Page {{ currentPage + 1 }}" style="height: 10cm;"></textarea>
+      </div>
         </div>
         </div>
-        <div class="form-group row my-4" style="margin-left: 29.666667%;">
+        <div class="form-group row my-4" > 
+          <!-- style="margin-left: 29.666667%;" -->
         <div class="col-sm-10 offset-sm-2">
+          <!-- <div class="form-group row"> -->
+            <!-- <label for="reviewsType" class="col-sm-2 col-form-label"> </label> -->
+            <!-- <div class="col-sm-10"> -->
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  name="reviewsType"
+                  type="radio"
+                  id="reviewsType2"
+                  [(ngModel)]="pages[currentPage].pagetype"
+                  value="grid" (click)="setPageTypeAndBodyData(currentPage,'grid')"
+                />
+                <label class="form-check-label" for="reviewsType2"
+                  >Grid</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  name="reviewsType1"
+                  type="radio"
+                  id="reviewsType1"
+                  [(ngModel)]="pages[currentPage].pagetype"
+                  value="text"  (click)="setPageTypeAndBodyData(currentPage,'text')"
+                   />
+                <label class="form-check-label" for="reviewsType1">Text</label>
+              </div>
+            <!-- </div> -->
+          <!-- </div> -->
           <label for="templateName" class="col-sm-2 col-form-label">Page No. {{currentPage + 1}}</label>
           <button class="btn btn-primary" (click)="prevPage()">Previous</button>
           <button type="button"
@@ -288,7 +363,7 @@
                   (click)="onCancel()">
             Cancel
           </button>
-          <button type="submit" class="btn btn-primary"  (click)="addTemplate()">Submit</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid"  (click)="addTemplate()">Submit</button>
           <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="approve()">Approve</button>
           <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="reinitiative()">Re-Initiative</button>
           <button type="button" class="col-xs-1 mx-8 offset-sm-1 btn btn-danger" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="reject()">Reject</button>
