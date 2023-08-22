@@ -111,7 +111,7 @@ internal class HeaderFooter
                     new PageSize() { Width = 11906U, Height = 16838U }, // Adjust page size as needed
                     new PageMargin() { Top = 2000, Right = 1417, Bottom = 1417, Left = 1417, Header = 708, Footer = 708 }
                 );
-                Page currentPage = template.Page[page];
+                Page currentPage = (template.Page != null && template.Page.Count > 0) ? template.Page[page] : null;
                 if (page > 0)
                 {
                     DocumentFormat.OpenXml.Drawing.Paragraph pageBreak = new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Break() { Type = BreakValues.Page }));
@@ -164,8 +164,8 @@ internal class HeaderFooter
 
                 //footer.Append(footerElements);
                 //footerPart.Footer.Save();
-
-                GenerateDynamicBodyContent(mainPart, currentPage);
+                if (currentPage != null)
+                    GenerateDynamicBodyContent(mainPart, currentPage);
 
                 // Add dynamic content to the body
                 //if (page < template.Page.ToList().Count)
