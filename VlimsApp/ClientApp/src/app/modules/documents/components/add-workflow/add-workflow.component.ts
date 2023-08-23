@@ -54,10 +54,10 @@ export class AddWorkflowComponent {
     this.approvers.splice(index, 1);
   }
   stageSource = [
-    { label: 'Preparation', value: 'Preparation' },
-    { label: 'Validating', value: 'Validating' },
-    { label: 'Excuting', value: 'Excuting' },
-    { label: 'Approval', value: 'Approval' },
+    { label: 'Request', value: 'Request' },
+    { label: 'Preperation', value: 'Preperation' },
+    { label: 'Effective', value: 'Effective' },
+    { label: 'Revison', value: 'Revison' },
   ];
 
   constructor(private toastr: ToastrService,
