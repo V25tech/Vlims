@@ -252,6 +252,7 @@ namespace Vlims.DocumentMaster.Entities
         public List<List<HeaderTable>> titleTable { get; set; }
 
         public List<BodyTable> bodyData { get; set; }
+        public bool IsParent { get; set; }
     }
     public class Page
     {

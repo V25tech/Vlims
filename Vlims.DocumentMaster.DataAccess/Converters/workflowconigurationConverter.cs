@@ -50,6 +50,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         workflowconigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[workflowconigurationConstants.ModifiedDate.Trim('@')]);
                         workflowconigurationData.ModifiedBy = Convert.ToString(row[workflowconigurationConstants.ModifiedBy.Trim('@')]);
                         workflowconigurationData.Status = Convert.ToString(row[workflowconigurationConstants.Status.Trim('@')]);
+                        workflowconigurationData.IsParent = Convert.ToBoolean(row[workflowconigurationConstants.IsParent.Trim('@')]);
                         if (!isgetall)
                         {
                             string docvalue = Convert.ToString(row["Document_PSY"]);

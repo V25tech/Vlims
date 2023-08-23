@@ -31,6 +31,7 @@ export class DocumentTypeConfiguration {
   ModifiedBy: string = ''
   ModifiedDate: string | null = null;
   Status: string | null = null;
+  IsParent:boolean=false;
 }
 export class DocumentRequestConfiguration {
   drid: string = '';
@@ -144,6 +145,7 @@ export class workflowconiguration {
   ModifiedBy: string = '';
   ModifiedDate: string | null = null;
   Status: string | null = '';
+  IsParent:boolean=false;
 }
 export class DocumentTemplateConfiguration {
   DTID: string = ''
@@ -168,6 +170,7 @@ export class DocumentTemplateConfiguration {
   titleTable:HeaderTable[] | null=[];
   Page:Page[] | null=[];
   Pages:number=0;
+  IsParent:boolean=false;
 }
 interface Page {
   text: string;

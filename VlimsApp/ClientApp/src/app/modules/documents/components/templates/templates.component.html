@@ -48,8 +48,9 @@
                             <a href="javascript:void(0)" (click)="previewtemplate(template1,template)">Preview</a>
                         </td> 
                         <td><span class="status" [ngClass]="getStatusClass(template['Status'])">{{template?.Status}} </span></td>
-                        <td class="text-center" *ngIf="access"><i (click)="editdoc(template)" class="bi bi-pencil"></i></td>
-                        <td *ngIf="!access">Restricted</td>
+                        <td class="text-center" *ngIf="access && !template?.IsParent"><i (click)="editdoc(template)" class="bi bi-pencil"></i></td>
+                        <td *ngIf="!access"><b>Restricted</b></td>
+                        <td *ngIf="access && template?.IsParent"><b>Locked</b></td>
                     </tr>
                 </ng-template>
             </p-table>

@@ -14,6 +14,9 @@ CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
 Status_PSY,
+(
+SELECT dbo.USP_DOCUMENT_TYPE_WHEREUSED(Documenttypename_PSY)
+) AS IsParent,
  count(*) over() as TotalRows 
  FROM [dbo].[DocumentTypeConfiguration_PSY] WITH (NOLOCK) 
  Order by [DTCId_PSY],CreatedDate_PSY,ModifiedDate_PSY desc

@@ -182,6 +182,7 @@ namespace Vlims.DocumentMaster.Entities
                 this.modifieddateField = value;
             }
         }
+        public bool IsParent { get; set; }
     }
     public class WorkFlowMapping
     {

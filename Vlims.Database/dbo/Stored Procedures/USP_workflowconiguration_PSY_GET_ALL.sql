@@ -1,8 +1,4 @@
-﻿
-
-
-
- CREATE PROCEDURE [dbo].[USP_workflowconiguration_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
+﻿ CREATE PROCEDURE [dbo].[USP_workflowconiguration_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
  BEGIN TRY 
@@ -20,7 +16,8 @@ CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
 Status_PSY,
-Document_PSY
+Document_PSY,
+(SELECT DBO.USP_WORKFLOW_WHERE_USED(workflowName_PSY)) AS IsParent
  ,count(*) over() as TotalRows 
  FROM [dbo].[workflowconiguration_PSY] WITH (NOLOCK) 
  Order by CreatedDate_PSY DESC 

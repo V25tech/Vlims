@@ -41,8 +41,11 @@
                         <td>{{doc?.ModifiedBy}}</td>
                         <td>{{doc?.ModifiedDate | date}}</td>
                         <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
-                        <td class="text-center" *ngIf="access"><i *ngIf="doc?.Status!='Approved'" (click)="editdoc(doc)" class="bi bi-pencil"></i></td>
-                        <td *ngIf="!access">Restricted</td>
+                        <td class="text-center" *ngIf="access && !doc?.IsParent"><i (click)="editdoc(doc)" class="bi bi-pencil"></i></td>
+                        <td *ngIf="!access"><b>Restricted</b></td>
+                        <td *ngIf="access && doc?.IsParent"><b>Locked</b></td>
+                        <!-- <td *ngIf="access && doc?.IsParent">Restricted</td> -->
+                        <!-- <td *ngIf="doc?.IsParent">Restricted</td> -->
                     </tr>
                 </ng-template>
             </p-table>

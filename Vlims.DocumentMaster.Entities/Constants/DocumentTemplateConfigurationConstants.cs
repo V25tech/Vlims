@@ -32,6 +32,7 @@ namespace Vlims.DocumentMaster.Entities
         public const string header = "@header_PSY";
 
         public const string rows = "@rows_PSY";
+        public const string IsParent = "@IsParent";
 
         public const string columns = "@columns_PSY";
 

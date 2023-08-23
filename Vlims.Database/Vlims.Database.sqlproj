@@ -307,6 +307,9 @@
     <Build Include="dbo\Tables\AUDIT_LOG_PSY.sql" />
     <Build Include="dbo\Stored Procedures\USP_AUDIT_LOG_PSY_INSERT.sql" />
     <Build Include="dbo\Stored Procedures\USP_AUDIT_LOG_GET_ALL.sql" />
+    <Build Include="dbo\Functions\USP_DOCUMENT_TYPE_WHEREUSED.sql" />
+    <Build Include="dbo\Functions\USP_DOCUMENT_TEMPLATE_WHEREUSED.sql" />
+    <Build Include="dbo\Functions\USP_WORKFLOW_WHERE_USED.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vlims.Database.refactorlog" />
