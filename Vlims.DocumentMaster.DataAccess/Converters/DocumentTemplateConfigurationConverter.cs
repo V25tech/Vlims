@@ -48,7 +48,8 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.footer = Convert.ToString(row[DocumentTemplateConfigurationConstants.footer.Trim('@')]);
                         documentTemplateConfigurationData.footerrows = Convert.ToString(row[DocumentTemplateConfigurationConstants.footerrows.Trim('@')]);
                         documentTemplateConfigurationData.footercolumns = Convert.ToString(row[DocumentTemplateConfigurationConstants.footercolumns.Trim('@')]);
-                        documentTemplateConfigurationData.IsParent = Convert.ToBoolean(row[DocumentTemplateConfigurationConstants.IsParent.Trim('@')]);
+                        if (islist)
+                            documentTemplateConfigurationData.IsParent = Convert.ToBoolean(row[DocumentTemplateConfigurationConstants.IsParent.Trim('@')]);
                         if (!islist || fromprep)
                         {
                             string docvalue = Convert.ToString(row[DocumentTemplateConfigurationConstants.document.Trim('@')]);

@@ -15,11 +15,12 @@ namespace Vlims.DocumentMaster.DataAccess
     using System.Collections.Generic;
     using Vlims.DocumentMaster.Entities;
     using Vlims.Common;
+    using System.Collections;
 
     // Comment
     public static class DocumentTypeConfigurationConverter
     {
-        
+
         public static List<DocumentMaster.Entities.DocumentTypeConfiguration> SetAllDocumentTypeConfiguration(DataSet dataset)
         {
             try
@@ -28,6 +29,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 DocumentTypeConfiguration documentTypeConfigurationData;
                 if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
                 {
+                    bool islist = dataset.Tables[0].Rows.Count > 1;
                     for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
@@ -43,7 +45,8 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTypeConfigurationData.ModifiedBy = Convert.ToString(row[DocumentTypeConfigurationConstants.ModifiedBy.Trim('@')]);
                         documentTypeConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentTypeConfigurationConstants.ModifiedDate.Trim('@')]);
                         documentTypeConfigurationData.Status = Convert.ToString(row[DocumentTypeConfigurationConstants.Status_PSY.Trim('@')]);
-                        documentTypeConfigurationData.IsParent = Convert.ToBoolean(row[DocumentTypeConfigurationConstants.IsParent.Trim('@')]);
+                        if (islist)
+                            documentTypeConfigurationData.IsParent = Convert.ToBoolean(row[DocumentTypeConfigurationConstants.IsParent.Trim('@')]);
                         result.Add(documentTypeConfigurationData);
                     }
                 }
@@ -54,7 +57,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
-        
+
         public static DocumentTypeConfiguration SetDocumentTypeConfiguration(DataSet dataset)
         {
             var result = SetAllDocumentTypeConfiguration(dataset);
