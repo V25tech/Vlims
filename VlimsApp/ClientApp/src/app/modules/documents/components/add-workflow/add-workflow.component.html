@@ -114,33 +114,52 @@
             </div>
           </div>
         </div>
-        
+        <form #fm1="ngForm">
         <div class="p-4 bg-white mt-3 shadow-dark rounded-2">
           <h5 class="page-card-title">Reviewers</h5>
-          <div class="form-group row">
-            <label for="reviewsCount" class="col-sm-2 col-form-label"
-              >No. of Reviews<span style="color: red; font-weight: bolder;">*</span>
-            </label>
+          <div class="form-group row" *ngIf="workflow.reviewsType === 'user'">
+            <label for="reviewers" class="col-sm-2 col-form-label"
+              >Reviewer(s)</label
+            >
             <div class="col-sm-10">
-              <input
-                type="number"
-                class="form-control"
-                id="reviewsCount"
-                name="reviewsCount"
-                max="10"
-                min="1"
-                placeholder="Select No. of Reviews"
-                [(ngModel)]="workflow.reviewsCount" readonly
-                
-              />
-              <!-- required
-                #reviewsCountInput="ngModel" -->
-               
-    <!-- <div *ngIf="workflow.reviewsCount > 1" class="text-danger">
-      Select Only One Reviwer.
-            </div> -->
+              <p-multiSelect
+                [options]="users"
+                [(ngModel)]="workflow.reviewers"
+                defaultLabel="Select a User"
+                id="UserID"
+                name="UserID"
+                optionLabel="UserID"
+                display="chip"  (ngModelChange)="calculatereviewscount()"
+                >
+              </p-multiSelect>
+              <!-- <div *ngIf="reviewers.invalid && (reviewers.dirty || reviewers.touched)" class="text-danger">
+                Reviewer(s) is required.
+              </div> -->
+              <!-- <p-dropdown
+                name="UserID"
+                [options]="users"
+                [(ngModel)]="workflow.review" 
+                optionLabel="UserID" placeholder="Select a User"
+              >
+              </p-dropdown> -->
             </div>
+            <!-- <div class="col-sm-10">
+              <div class="d-flex align-items-center mb-2" *ngFor="let reviewer of reviewers; let i = index">
+                <p-dropdown name= "reviewer{{i}}" [options]="reviewersDatasource" [(ngModel)]="reviewer.value" optionLabel="label"  [group]="true">
+                  <ng-template let-group pTemplate="group">
+                    <div class="flex align-items-center">
+                        <span>{{ group.label }}</span>
+                    </div>
+                </ng-template>
+                </p-dropdown>
+                
+                <a (click)="removeReviewer(i)"><i class="bi bi-x fs-4 mx-2 text-secondary"></i></a>
+                
+              </div>
+              <a (click)="addReviewer()"><i class="bi bi-person-add fs-4 me-2 "></i> Add Reviewer</a>
+            </div> -->
           </div>
+          
 
           <div class="form-group row">
             <label for="reviewsType" class="col-sm-2 col-form-label"> </label>
@@ -172,48 +191,29 @@
             </div>
           </div>
 
-          <div class="form-group row" *ngIf="workflow.reviewsType === 'user'">
-            <label for="reviewers" class="col-sm-2 col-form-label"
-              >Reviewer(s)<span style="color: red; font-weight: bolder;">*</span></label
-            >
+          <div class="form-group row">
+            <label for="reviewsCount" class="col-sm-2 col-form-label"
+              >No. of Reviews
+            </label>
             <div class="col-sm-10">
-              <p-multiSelect
-                [options]="users"
-                [(ngModel)]="workflow.reviewers"
-                defaultLabel="Select a User"
-                id="UserID"
-                name="UserID"
-                optionLabel="UserID"
-                display="chip"  (ngModelChange)="calculatereviewscount()"
-                [required]="true"
-                #reviewers="ngModel">
-              </p-multiSelect>
-              <div *ngIf="reviewers.invalid && (reviewers.dirty || reviewers.touched)" class="text-danger">
-                Reviewer(s) is required.
-              </div>
-              <!-- <p-dropdown
-                name="UserID"
-                [options]="users"
-                [(ngModel)]="workflow.review" 
-                optionLabel="UserID" placeholder="Select a User"
-              >
-              </p-dropdown> -->
-            </div>
-            <!-- <div class="col-sm-10">
-              <div class="d-flex align-items-center mb-2" *ngFor="let reviewer of reviewers; let i = index">
-                <p-dropdown name= "reviewer{{i}}" [options]="reviewersDatasource" [(ngModel)]="reviewer.value" optionLabel="label"  [group]="true">
-                  <ng-template let-group pTemplate="group">
-                    <div class="flex align-items-center">
-                        <span>{{ group.label }}</span>
-                    </div>
-                </ng-template>
-                </p-dropdown>
+              <input
+                type="number"
+                class="form-control"
+                id="reviewsCount"
+                name="reviewsCount"
+                max="10"
+                min="1"
+                placeholder="Select No. of Reviews"
+                [(ngModel)]="workflow.reviewsCount" readonly
                 
-                <a (click)="removeReviewer(i)"><i class="bi bi-x fs-4 mx-2 text-secondary"></i></a>
-                
-              </div>
-              <a (click)="addReviewer()"><i class="bi bi-person-add fs-4 me-2 "></i> Add Reviewer</a>
+              />
+              <!-- required
+                #reviewsCountInput="ngModel" -->
+               
+    <!-- <div *ngIf="workflow.reviewsCount > 1" class="text-danger">
+      Select Only One Reviwer.
             </div> -->
+            </div>
           </div>
 
           <div class="form-group row" *ngIf="workflow.reviewsType !== 'user'">
@@ -234,26 +234,39 @@
 
           
         </div>
-
+      </form>
         <div class="p-4 bg-white mt-3 shadow-dark rounded-2">
           <h5 class="page-card-title">Approvers</h5>
-          <div class="form-group row">
-            <label for="reviewsCount" class="col-sm-2 col-form-label"
-              >No. of Approvals<span style="color: red; font-weight: bolder;">*</span>
-            </label>
+          <div class="form-group row" *ngIf="workflow.approvalsType === 'user'">
+            <label for="reviewers" class="col-sm-2 col-form-label"
+              >Approver(s)<span style="color: red; font-weight: bolder;">*</span></label
+            >
             <div class="col-sm-10">
-              <input
-                type="number"
-                class="form-control"
-                id="approvalsCount"
-                name="approvalsCount"
-                max="10"
-                min="1"
-                placeholder="Select No. of Reviews"
-                [(ngModel)]="workflow.approvalsCount" readonly
-              />
+              <p-multiSelect
+                [options]="users"
+                [(ngModel)]="workflow.approvals"
+                defaultLabel="Select a User"
+                id="UserID1"
+                name="UserID1"
+                optionLabel="UserID"
+                display="chip" (ngModelChange)="calculateapprovalscount()"
+                [required]="true"
+                #approvals="ngModel">
+              </p-multiSelect>
+              <div *ngIf="approvals.invalid && (approvals.dirty || approvals.touched)" class="text-danger">
+                Approver(s) is required.
+              </div>
+              <!-- <p-dropdown
+              name="UserID"
+              [options]="users"
+              [(ngModel)]="workflow.approve" 
+              optionLabel="UserID" placeholder="Select a User"
+            >
+            </p-dropdown> -->
             </div>
+           
           </div>
+         
 
           <div class="form-group row">
             <label for="approvalType" class="col-sm-2 col-form-label"> </label>
@@ -285,34 +298,22 @@
             </div>
           </div>
 
-          <div class="form-group row" *ngIf="workflow.approvalsType === 'user'">
-            <label for="reviewers" class="col-sm-2 col-form-label"
-              >Approver(s)<span style="color: red; font-weight: bolder;">*</span></label
-            >
+          <div class="form-group row">
+            <label for="reviewsCount" class="col-sm-2 col-form-label"
+              >No. of Approvals<span style="color: red; font-weight: bolder;">*</span>
+            </label>
             <div class="col-sm-10">
-              <p-multiSelect
-                [options]="users"
-                [(ngModel)]="workflow.approvals"
-                defaultLabel="Select a User"
-                id="UserID1"
-                name="UserID1"
-                optionLabel="UserID"
-                display="chip" (ngModelChange)="calculateapprovalscount()"
-                [required]="true"
-                #approvals="ngModel">
-              </p-multiSelect>
-              <div *ngIf="approvals.invalid && (approvals.dirty || approvals.touched)" class="text-danger">
-                Approver(s) is required.
-              </div>
-              <!-- <p-dropdown
-              name="UserID"
-              [options]="users"
-              [(ngModel)]="workflow.approve" 
-              optionLabel="UserID" placeholder="Select a User"
-            >
-            </p-dropdown> -->
+              <input
+                type="number"
+                class="form-control"
+                id="approvalsCount"
+                name="approvalsCount"
+                max="10"
+                min="1"
+                placeholder="Select No. of Reviews"
+                [(ngModel)]="workflow.approvalsCount" readonly
+              />
             </div>
-           
           </div>
 
           <div class="form-group row" *ngIf="workflow.approvalsType !== 'user'">
