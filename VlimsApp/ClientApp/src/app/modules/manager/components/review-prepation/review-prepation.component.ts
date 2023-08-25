@@ -123,6 +123,7 @@ export class ReviewPrepationComponent {
     }
     this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
       this.commonsvc.preperation = new DocumentPreperationConfiguration();
+      this.toastr.success("Document Preparation Approved successfully");
       this.spinner.hide();
       this.location.back();
     }, er => {

@@ -167,9 +167,9 @@ export class ReviewRevisionComponent {
     this.spinner.show();
     this.documentRevisionService.updatedocrevconfig(this.revision).subscribe(res => {
       this.commonsvc.revision = new DocumentAdditionalTasks();
+      this.toastr.success('Document Revision Succesfull!', 'Saved.!');
       this.spinner.hide();
       this.location.back();
-      this.toastr.success('Document Request Saved Succesfull!', 'Saved.!');
     }, er => {
       console.log(er);
       this.spinner.hide();

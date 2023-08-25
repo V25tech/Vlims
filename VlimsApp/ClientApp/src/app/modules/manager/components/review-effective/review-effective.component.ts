@@ -95,6 +95,7 @@ export class ReviewEffectiveComponent {
     }
     else
     {
+      
     this.saveEffective();
     }
   }
@@ -118,6 +119,7 @@ export class ReviewEffectiveComponent {
       this.effective.Status=this.finalStatus;
     }
     this.documentEffectiveService.ManageDocumentEffective(this.effective).subscribe(res => {
+      this.toastr.success("Document Effectice Approved Successfully!");
       this.spinner.hide();
       this.location.back();
     }, er => {

@@ -97,6 +97,7 @@ export class AddRequestComponent {
 
   saveRequest() {
     if (this.editMode) {
+      
       this.updateRequest();
     }
     else {
@@ -132,6 +133,7 @@ export class AddRequestComponent {
     }
     this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
       this.commonsvc.request = new DocumentRequestConfiguration();
+      this.toastr.success('Document Request Approved Succesfull!', 'Saved.!');
       this.location.back();
       this.spinner.hide();
     }, er => {
