@@ -33,39 +33,66 @@ export class LoginComponent {
    ngOnInit(){
     //this.getusers();
     this.getsetfunctionalprofile();
+    this.checkadminuser();
    }
+  checkadminuser() {
+    //check admin user exists or not
+    //if admin user not exist then create with default password
+    const admin=new UserConfiguration();
+    admin.UserID="Admin";
+    this.userssvc.login(admin).subscribe((data:any)=>{
+          
+      this.user=data;
+      this.loginService.updateuser(this.roles,this.user);
+      this.isvaliduser();
+  },(error:any)=>{
+    //create admin user
+    this.createadminuser(this.user);
+  });
+  }
+  createadminuser(user: UserConfiguration) {
+    throw new Error('Method not implemented.');
+  }
    ngAfterViewInit() {
     // Set focus on the input element when the view is initialized
     this.renderer.selectRootElement(this.usernameInput.nativeElement).focus();
   }
   login() {
-    
+    debugger
     this.loader.show();
-    if(this.user.UserID.toLocaleLowerCase()==='admin')
-    {
-    if(this.loginService.login(this.user.UserID, this.user.Password ?? '',this.lstusers,this.roles)){
-      this.isvaliduser();
-    }
-    else{
-      this.toastr.error('login failed');
-        }
-      }
-      else{
+    // if(this.user.UserID.toLocaleLowerCase()==='admin')
+    // {
+    // if(this.loginService.login(this.user.UserID, this.user.Password ?? '',this.lstusers,this.roles)){
+    //   this.isvaliduser();
+    // }
+    // else{
+    //   this.toastr.error('login failed');
+    //     }
+    //   }
+    //   else{
 
         this.userssvc.login(this.user).subscribe((data:any)=>{
-          
+          debugger
             this.user=data;
+            this.commonsvc.setUser(this.user);
+            if(this.user.UserID==="Admin")
+            {
+              this.loginService.updateuser(this.roles,this.user);
+              this.commonsvc.setadminroles();
+            }
+            else{
             this.loginService.updateuser(this.roles,this.user);
+            }
             this.isvaliduser();
         },(error:any)=>{
           this.loader.hide();
           this.toastr.error('login failed');
         });
-      }
+      //}
 
   }
   isvaliduser(){
-    
+    debugger
     localStorage.setItem("username", this.user.UserID);
     this.commonsvc.setUsername(this.user.UserID);
     this.commonsvc.createdBy=this.user.UserID;

@@ -25,7 +25,7 @@ namespace Vlims.Administration.DataAccess
     public static class UserConfigurationConverter
     {
 
-        public static List<UserConfiguration> SetAllUserConfiguration(DataSet dataset)
+        public static List<UserConfiguration> SetAllUserConfiguration(DataSet dataset, bool isadmin = true)
         {
             try
             {
@@ -33,6 +33,11 @@ namespace Vlims.Administration.DataAccess
                 UserConfiguration userConfigurationData;
                 if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
                 {
+                    if (isadmin)
+                    {
+                        RemoveAdminRecord(dataset);
+                    }
+
                     for (int i = 0; (i < dataset.Tables[0].Rows.Count); i++)
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
@@ -41,7 +46,10 @@ namespace Vlims.Administration.DataAccess
                         userConfigurationData.UserManagementID = Convert.ToString(row[UserConfigurationConstants.UserManagementID.Trim('@')]);
                         userConfigurationData.FirstName = Convert.ToString(row[UserConfigurationConstants.FirstName.Trim('@')]);
                         userConfigurationData.LastName = Convert.ToString(row[UserConfigurationConstants.LastName.Trim('@')]);
-                        userConfigurationData.UserID = userConfigurationData.FirstName + userConfigurationData.LastName;//Convert.ToString(row[UserConfigurationConstants.UserID.Trim('@')]);
+                        if (!isadmin)
+                            userConfigurationData.UserID = Convert.ToString(row[UserConfigurationConstants.UserID.Trim('@')]);
+                        else
+                            userConfigurationData.UserID = userConfigurationData.FirstName + userConfigurationData.LastName;//Convert.ToString(row[UserConfigurationConstants.UserID.Trim('@')]);
                         userConfigurationData.Department = Convert.ToString(row[UserConfigurationConstants.Department.Trim('@')]);
                         userConfigurationData.Role = Convert.ToString(row[UserConfigurationConstants.Role.Trim('@')]);
                         userConfigurationData.Doj = Convert.ToString(row[UserConfigurationConstants.Doj.Trim('@')]);
@@ -63,6 +71,15 @@ namespace Vlims.Administration.DataAccess
             catch (System.Exception ex)
             {
                 throw;
+            }
+        }
+
+        private static void RemoveAdminRecord(DataSet dataset)
+        {
+            DataRow foundRow = dataset.Tables[0].AsEnumerable().FirstOrDefault(o => o.Field<string>("UserID_PSY").Equals("admin", StringComparison.InvariantCultureIgnoreCase));
+            if (foundRow != null)
+            {
+                dataset.Tables[0].Rows.Remove(foundRow);
             }
         }
 

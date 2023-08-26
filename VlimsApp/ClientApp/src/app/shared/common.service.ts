@@ -68,6 +68,10 @@ export class CommonService {
   setUsername(username: string) {
     this.storage.setItem('username', username);
   }
+  setUser(user:UserConfiguration){
+    const userstring = JSON.stringify(user);
+    this.storage.setItem('user',userstring);
+  }
   setUserRoles(roles:functionalprofile){
     const rolesString = JSON.stringify(roles);
   this.storage.setItem('roles', rolesString);
@@ -83,6 +87,14 @@ export class CommonService {
     const rolesString = this.storage.getItem('roles');
     if (rolesString) {
       return JSON.parse(rolesString);
+    } else {
+      return null; // Or handle the absence of roles as needed
+    }
+  }
+  getUser(): UserConfiguration | null {
+    const userstring = this.storage.getItem('user');
+    if (userstring) {
+      return JSON.parse(userstring);
     } else {
       return null; // Or handle the absence of roles as needed
     }

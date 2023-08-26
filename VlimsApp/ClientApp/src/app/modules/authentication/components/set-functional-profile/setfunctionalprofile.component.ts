@@ -32,7 +32,9 @@ export class SetfunctionalprofileComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.access = this.commonsvc.getUsername() === 'admin' ? true : false;
+    debugger
+    console.log(this.commonsvc.getUsername());
+    this.access = this.commonsvc.getUsername().toLocaleLowerCase() === 'admin' ? true : false;
     this.getsetfunctionalprofile();
     this.getroles();
   }

@@ -27,12 +27,12 @@ namespace PolicySummary.Sheet1.Services
     {
 
 
-        public ResponseContext<UserConfiguration> GetAllUserConfiguration(RequestContext requestContext)
+        public ResponseContext<UserConfiguration> GetAllUserConfiguration(RequestContext requestContext, bool isadmin = true)
         {
             try
             {
                 DataSet dataset = UserConfigurationData.GetAllUserConfiguration(requestContext);
-                List<UserConfiguration> result = UserConfigurationConverter.SetAllUserConfiguration(dataset);
+                List<UserConfiguration> result = UserConfigurationConverter.SetAllUserConfiguration(dataset,isadmin);
                 return new ResponseContext<UserConfiguration>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
             }
             catch (System.Exception ex)

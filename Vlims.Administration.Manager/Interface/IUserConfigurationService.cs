@@ -24,7 +24,7 @@ namespace Vlims.Administration.Manager
     public interface IUserConfigurationService
     {
         
-        ResponseContext<UserConfiguration> GetAllUserConfiguration(RequestContext requestContext);
+        ResponseContext<UserConfiguration> GetAllUserConfiguration(RequestContext requestContext,bool isadmin=true);
         
         UserConfiguration GetUserConfigurationByUCFId(int uCFId);
         

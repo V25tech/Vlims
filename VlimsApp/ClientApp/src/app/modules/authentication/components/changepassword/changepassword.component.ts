@@ -29,7 +29,7 @@ export class ChangepasswordComponent {
     ){}
    
   ngOnInit(){
-    this.getusers();
+    //this.getusers();
   }
   getusers() {
     this.loader.show();
@@ -42,19 +42,21 @@ export class ChangepasswordComponent {
   }
     
   changePassword() {
+    debugger
     // Implement change password logic here
+    this.currentuser = this.commomsvc.getUser() ?? new UserConfiguration();
     if (this.currentPassword !== this.currentuser.Password) {
-      this.toaster.error("Old password don't match");
+      this.toaster.error("Old password don't match",'Not Match');
       return;
     }
     if (this.newPassword !== this.confirmNewPassword) {
-      this.toaster.error("New password and confirm new password don't match");
+      this.toaster.error("New password and confirm new password don't match",'Not Match');
       return;
     }
     if(this.currentuser!=null || this.currentuser!=undefined){
       this.currentuser.Password=this.newPassword;
     this.userssvc.update(this.currentuser).subscribe((data:any)=>{
-      this.toaster.success("Password Changed Successfully");
+      this.toaster.success("Password Changed Successfully",'Success');
       this.loginservice.logout();
     this.router.navigate(['/login']);
     });
