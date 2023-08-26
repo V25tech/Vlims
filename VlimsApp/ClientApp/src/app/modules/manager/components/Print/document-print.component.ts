@@ -9,7 +9,8 @@ import { DocumentPreperationService } from '../../../services/document-preperati
 
 @Component({
   selector: 'app-document-print',
-  templateUrl: './document-print.component.html'
+  templateUrl: './document-print.component.html',
+  styleUrls:['./document-print.component.scss']
 })
 export class DocumentPrintComponent implements OnInit {
   name: string = 'Product Type';
@@ -23,6 +24,9 @@ export class DocumentPrintComponent implements OnInit {
   pageConfig: any;
   searchstr: string = '';
   access: boolean = false;
+  currentPage = 1;
+  itemsPerPage = 10;
+  rowsPerPageOptions = [10, 20, 50];
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService, private docservice: DocumentPreperationService, private router: Router) { }
 
   navigateToAddPrint(): void {

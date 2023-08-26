@@ -27,12 +27,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
     `]
 })
 export class NewPrintRequestComponent implements OnInit {
-  types: DocumentPrintConfiguration[] = [];
   print = new DocumentPrintConfiguration();
-  workflowsSource = [];
+  public workflowsSource: any[] = [];
   editMode: boolean = false;
   viewMode: boolean = false;
-  preparations: DocumentPreperationConfiguration[] = [];
+  preparations: any[] = [];
   username: string = ''
   requestId: number = 0; workId: number = 0; statuss: string = ''; iscompleted: boolean = false; type: string = ''; finalStatus: string = '';
   workitems: Array<WorkItemsConfiguration> = [];
@@ -41,7 +40,7 @@ export class NewPrintRequestComponent implements OnInit {
   safePdfDataUrl: SafeResourceUrl | undefined;
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
-  
+
   constructor(private commonsvc: CommonService, private location: Location,
     private route: ActivatedRoute,
     private workitemssvc: WorkitemsService,
@@ -50,6 +49,7 @@ export class NewPrintRequestComponent implements OnInit {
 
   ngOnInit() {
     const user = localStorage.getItem("username");
+    
     if (user != null && user != undefined) {
       this.commonsvc.createdBy = user;
       this.username = user;
@@ -64,14 +64,14 @@ export class NewPrintRequestComponent implements OnInit {
     const segments = urlPath.split('/');
     if (this.type == 'view') {
       this.viewMode = true;
-      this.getbyId(this.requestId);
-      this.getworkflowitems();
+      this.getbyId(this.requestId);      
     }
     else if (segments.slice(-1).toString() == 'edit' && this.commonsvc.printConfig) {
       this.editMode = true;
       this.print = this.commonsvc.printConfig;
-    }
-    this.GetNewPrintRequest();
+      //this.workflowsSource = [{ workflowName: this.print.workflow }];
+      this.preparations = [{ documentno: this.print.documentNumber }];
+    }    
     this.getworkflowinfo();
     this.getdocumentpreparations();
   }
@@ -113,18 +113,12 @@ export class NewPrintRequestComponent implements OnInit {
     }
   }
 
-  GetNewPrintRequest() {
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
-    return this.docprintservice.GetNewPrintRequest(objrequest).subscribe((data: any) => {
-      this.types = data.Response;
-    });
-  }
+
   getworkflowinfo() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
-      this.workflowsSource = data.Response;
-      this.workflowsSource = this.workflowsSource.filter((p: any) => p.workflowName);
-
+      let workflowsSource = data.Response;
+      this.workflowsSource = workflowsSource.filter((p: any) => p.workflowName);
     });
   }
   savePrintRequest() {
@@ -210,7 +204,7 @@ export class NewPrintRequestComponent implements OnInit {
     });
   }
 
-  
+
   closeModel() {
     if (this.modalRef)
       this.modalRef.hide();
@@ -219,7 +213,7 @@ export class NewPrintRequestComponent implements OnInit {
   openViewer(template: TemplateRef<any>): void {
     if (this.pdfBytes) {
       const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;      
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     }
   }
@@ -241,7 +235,7 @@ export class NewPrintRequestComponent implements OnInit {
   }
   previewprint(template: TemplateRef<any>) {
     this.spinner.show();
-    this.docprintservice.preview(this.print).subscribe((data: any) => {      
+    this.docprintservice.preview(this.print).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template);

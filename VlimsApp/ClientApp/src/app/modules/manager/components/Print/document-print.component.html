@@ -15,7 +15,9 @@
   <div class="row p-2">  
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table #templatesTable [value]="requests" tableStyleClass="table table-striped">
+        <p-table #templatesTable [value]="requests" tableStyleClass="table table-striped" [rows]="itemsPerPage"
+        [paginator]="true" [totalRecords]="requests.length"
+        [rowsPerPageOptions]="rowsPerPageOptions" >
           <ng-template pTemplate="header">
             <tr>
               <th>S.No</th>              

@@ -1,0 +1,18 @@
+
+.form-control, .form-select {
+    max-width: 350px;
+  }
+  
+  a{
+    cursor: pointer;
+  }
+  
+  
+  .p-paginator .p-dropdown {    
+    height: unset;
+  }
+
+  :host ::ng-deep .p-paginator .p-dropdown {    
+    height: unset;
+    min-width: unset;
+  }
