@@ -148,23 +148,7 @@ namespace PolicySummary.DMS.Services
                         existingDocumentRequest.CreatedDate = DateTime.Now;
                         existingDocumentRequest.document = row["UploadDocument"]?.ToString();
                         SaveExistingDocumentRequest(existingDocumentRequest);
-                    }
-                    #region Commented Region
-                    //if ((p_lookupTableInfo.LookupFactors == null || p_lookupTableInfo.LookupFactors.Count.Equals(0)) &&
-                    //    l_l_dsInfoInfo != null && l_l_dsInfoInfo.Tables != null && l_l_dsInfoInfo.Tables.Count > 0 && l_l_dsInfoInfo.Tables[0].Rows != null && l_l_dsInfoInfo.Tables[0].Rows.Count > 1)
-                    //    throw new Exception(message: string.Format(Constants.MultpleRowsError, "lookup"));
-
-                    //LookupTableInfo lookupTableInfo = p_lookupTableInfo;
-                    //if (p_IsMultiDimension)
-                    //    lookupTableInfo.RateTable = ConvertToMultiPlanLookupTableData(l_l_dsInfoInfo, p_lookupTableInfo);
-                    //else
-                    //{
-                    //    lookupTableInfo = BuildLookupTableDataFormDataTable(l_l_dsInfoInfo, p_lookupTableInfo);
-                    //}
-                    //if (p_lookupTableInfo.Mode.Equals(DefinitionStatus.New))
-                    //    isRatesDataImported = RatesDAO.InsertLookupData(lookupTableInfo, new WorkspaceContext());
-                    //else isRatesDataImported = RatesDAO.UpdateLookupTableData(lookupTableInfo, new WorkspaceContext()); 
-                    #endregion
+                    }                    
                 }
             }
             catch

@@ -26,6 +26,7 @@ export class AddRequestComponent {
   request = new DocumentRequestConfiguration();
   editMode: boolean = false;
   viewMode: boolean = false;
+  toastMsg: string = '';
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -81,6 +82,7 @@ export class AddRequestComponent {
       this.toastr.error('Reviews Pending');
     }
     else {
+      this.toastMsg = this.finalStatus;
       this.updateRequest();
     }
   }
@@ -91,13 +93,14 @@ export class AddRequestComponent {
   }
   reject() {
     this.request.modifiedBy = this.commonsvc.getUsername();
-    this.request.status = 'Rejected'   
+    this.request.status = 'Rejected'
+    this.toastMsg = this.request.status;
     this.updateRequest();
   }
 
   saveRequest() {
     if (this.editMode) {
-      
+      this.toastMsg = 'Updated';
       this.updateRequest();
     }
     else {
@@ -133,7 +136,7 @@ export class AddRequestComponent {
     }
     this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
       this.commonsvc.request = new DocumentRequestConfiguration();
-      this.toastr.success('Document Request Approved Succesfull!', 'Saved.!');
+      this.toastr.success(`Document Request ${this.toastMsg} Succesfull!`, 'Saved.!');
       this.location.back();
       this.spinner.hide();
     }, er => {
