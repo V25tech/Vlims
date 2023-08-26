@@ -32,6 +32,7 @@ export class AddusergroupconfigurationComponent implements OnInit {
     const lastSegment = segments[segments.length - 2];
     if(lastSegment=="add")
     {
+      this.title = "New User Group Configuration"
       let addcount=parseInt(segments[segments.length - 1],10);
      addcount++;
       this.newdept.code="UG-"+addcount;
