@@ -97,103 +97,128 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminHomeComponent
+    component: AdminHomeComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/usermanagement/groups',
     component: UsergroupconfigurationComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/usermanagement/groups/add/:count',
     component: AddusergroupconfigurationComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/usermanagement/groups/edit/:groupId',
     component: AddusergroupconfigurationComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/hierarchy/departments',
     component: DepartmentComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/hierarchy/departments/add',
     component: AddDepartmentComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/hierarchy/departments/edit/:deptId',
     component: AddDepartmentComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/hierarchy/roles',
     component: RolesComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/hierarchy/roles/add',
     component: AddRoleComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/hierarchy/roles/edit/:deptId',
     component: AddRoleComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/usermanagement/users',
     component: UserConfigurationComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/usermanagement/users/add',
     component: RegisterComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/usermanagement/users/edit/:userId',
     component: RegisterComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/security',
     component: SecuritymgmtComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/plant',
     component: PlantComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/plant/edit/:plantId',
     component: NewPlantRegistrationComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/addplant',
     component: NewPlantRegistrationComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/approval',
     component: ApprovalConfigurationsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/hierarchy/profile',
     component: SetfunctionalprofileComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/usermanagement/activeuser',
     component: ActivateDeactivateuserComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/change',
     component: ChangepasswordComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/hierarchy',
     component: HierarchyComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/usermanagement',
     component: UsermanagementComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'home/hierarchy',
     component: AdminHomeComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'home/admin',
     component: AdminHomeComponent,
+    canActivate: [AuthGuard],
   }
 ];
 

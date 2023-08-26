@@ -110,19 +110,23 @@ const routes: Routes = [
   },
   {
     path: 'existingdoc/add',
-    component: ReviewExistingDocumentRequestComponent
+    component: ReviewExistingDocumentRequestComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'existingdoc/edit/:id',
-    component: ReviewExistingDocumentRequestComponent
+    component: ReviewExistingDocumentRequestComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'revision',
-    component: DocumentRevisionRequestsComponent
+    component: DocumentRevisionRequestsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'revision/edit/:id',
-    component: ReviewRevisionComponent
+    component: ReviewRevisionComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'revision/view/:requestId/:workId/:type',

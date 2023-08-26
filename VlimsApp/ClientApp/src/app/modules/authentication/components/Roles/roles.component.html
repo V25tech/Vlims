@@ -39,11 +39,16 @@
               <td>{{doc?.Department}}</td>
               <td>{{doc?.Comments}}</td>
               <td>{{doc?.CreatedBy}}</td>
-              <td>{{doc?.CreatedDate}}</td>              
+              <td>{{doc?.CreatedDate | date}}</td>              
               <td>{{doc?.ModifiedBy}}</td>  
-              <td><span class="status" [ngClass]="getStatusClass('Active')">Active</span></td>            
+              <td><span class="status" [ngClass]="{'status-completed':true}">Active</span></td>           
               <td class="text-center" (click)="editdoc(doc)" *ngIf="access"><i class="bi bi-pencil"></i></td>
-              <td *ngIf="!access">Restricted</td>
+              <td class="text-center" *ngIf="!access">
+                <i class="bi bi-lock bi-lg" 
+                [ngClass]="{'text-primary':true}"
+                title="No Permissions">
+            </i>
+        </td>
             </tr>
           </ng-template>
         </p-table>
