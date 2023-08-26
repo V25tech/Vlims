@@ -45,8 +45,18 @@
                         <td>{{docType?.approvedOn| date}}</td> -->
                         <td><span class="status" [ngClass]="getStatusClass(docType['status'])">{{docType.status}} </span></td>
                         <td class="text-center" *ngIf="access && docType?.status=='In-Progress'"><i (click)="editdocreq(docType)" class="bi bi-pencil"></i></td>
-                        <td *ngIf="!access">Restricted</td>
-                        <td *ngIf="access && docType?.status=='Approved'"><b>Restricted</b></td>
+                        <td *ngIf="!access">
+                            <i class="bi bi-lock bi-lg" 
+                            [ngClass]="{'text-primary':true}"
+                            title="No Permissions">
+                            </i>
+                        </td>
+                        <td *ngIf="access && islocked(docType?.status)">
+                            <i class="bi bi-lock bi-lg" 
+                            [ngClass]="{'text-primary':true}"
+                            title="{{ 'Locked'}}">
+                            </i>
+                          </td>
                     </tr>
                 </ng-template>
             </p-table>

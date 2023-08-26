@@ -58,8 +58,24 @@ export class PreparationComponent {
       return 'status-approved';
     } else if (status === 'Pending') {
       return 'status-pending';
+    }else if (status === 'REVIEWED') {
+      return 'status-in-progress';
     } else {
       return '';
+    }
+  }
+  islocked(status:string): boolean{
+    switch (status) {
+      case 'Reviewed':
+        return true;
+        case 'Approved':
+        return true;
+        case 'REVIEWED':
+        return true;
+        case 'APPROVED':
+        return true;
+      default:
+        return false;
     }
   }
 }

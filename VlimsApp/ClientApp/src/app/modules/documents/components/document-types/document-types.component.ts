@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Table } from 'primeng/table';
 import { Paginator } from 'primeng/paginator';
 
+
 @Component({
   selector: 'app-document-types',
   templateUrl: './document-types.component.html',
