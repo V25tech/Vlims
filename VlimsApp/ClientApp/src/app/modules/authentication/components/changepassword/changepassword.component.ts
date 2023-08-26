@@ -66,4 +66,23 @@ export class ChangepasswordComponent {
   onCancel(){
     this.location.back();
   }
+  getPasswordComplexityText(password: string): string {
+    if (password.length >= 8) {
+      return 'High'; // Password length is considered complex
+    } else if (password.length >= 6) {
+      return 'Medium'; // Password length is considered medium
+    } else {
+      return 'Low'; // Password length is considered weak
+    }
+  }
+  getPasswordComplexityClass(password: string): string {
+    if (password.length >= 8) {
+      return 'high'; // Password length is considered complex
+    } else if (password.length >= 6) {
+      return 'medium'; // Password length is considered medium
+    } else {
+      return 'low'; // Password length is considered weak
+    }
+  }
+  
 }

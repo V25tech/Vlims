@@ -19,7 +19,7 @@
                      placeholder="Document Type Name"
                      [(ngModel)]="documentType.Documenttypename" [disabled]="editMode" 
                      required
-                     #documentTypeInput="ngModel"
+                     #documentTypeInput="ngModel" maxlength="25"
                      />
                      <div *ngIf="documentTypeInput.invalid && (documentTypeInput.dirty || documentTypeInput.touched)" class="text-danger">
                       Enter Document Type.
