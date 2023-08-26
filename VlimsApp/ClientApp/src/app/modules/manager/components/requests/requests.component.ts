@@ -90,5 +90,18 @@ export class RequestsComponent implements OnInit{
   //     this.doctypes = data.Response;
   //   });
   // }
-  
+  islocked(status:string): boolean{
+    switch (status) {
+      case 'Reviewed':
+        return true;
+        case 'Approved':
+        return true;
+        case 'REVIEWED':
+        return true;
+        case 'APPROVED':
+        return true;
+      default:
+        return false;
+    }
+  }
 }

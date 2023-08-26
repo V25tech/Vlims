@@ -42,7 +42,12 @@
 
               <!-- <td><span class="status" [ngClass]="getStatusClass(doc['status'])">{{doc.status}} </span></td> -->
               <td class="text-center" (click)="editdoc(doc)" *ngIf="access"><i class="bi bi-pencil"></i></td>
-              <td *ngIf="!access">Restricted</td>
+              <td *ngIf="!access">
+                <i class="bi bi-lock bi-lg" 
+                [ngClass]="{'text-primary':true}"
+                title="No Permissions">
+                </i>
+              </td>
             </tr>
           </ng-template>
         </p-table>

@@ -67,8 +67,19 @@
                 </span>
               </td>
               <td class="text-center" *ngIf="access && docPreperation?.status=='IN-PROGRESS'"><a (click)="navigateToAddPreparation(docPreperation)"><i  class="bi bi-arrow-right"></i></a></td>
-              <td *ngIf="!access">Restricted</td>
-              <td *ngIf="access && docPreperation?.status=='Approved' || docPreperation?.status=='Reviewed'"><b>Restricted</b></td>
+              <td *ngIf="!access">
+                <i class="bi bi-lock bi-lg" 
+                [ngClass]="{'text-primary':true}"
+                title="No Permissions">
+                </i>
+              </td>
+              <td *ngIf="access && islocked(docPreperation?.status)">
+                <i class="bi bi-lock bi-lg" 
+                [ngClass]="{'text-primary':true}"
+                title="{{ 'Locked'}}">
+                </i>
+              </td>
+              <!-- <td *ngIf="access && docPreperation?.status=='Approved' || docPreperation?.status=='Reviewed'"><b>Restricted</b></td> -->
             </tr>
           </ng-template>
         </p-table>

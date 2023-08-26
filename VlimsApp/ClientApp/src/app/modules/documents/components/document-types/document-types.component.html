@@ -40,12 +40,17 @@
                         <td>{{doc?.Description}}</td>
                         <td>{{doc?.ModifiedBy}}</td>
                         <td>{{doc?.ModifiedDate | date}}</td>
-                        <td><span class="status" [ngClass]="getStatusClass(doc['Status'])">{{doc.Status}} </span></td>
+                        <td><span class="status" [ngClass]="{'status-completed':true}">{{doc.Status}} </span></td>
                         <td class="text-center" *ngIf="access && !doc?.IsParent"><i (click)="editdoc(doc)" class="bi bi-pencil"></i></td>
-                        <td *ngIf="!access"><b>Restricted</b></td>
-                        <td *ngIf="access && doc?.IsParent"><b>Locked</b></td>
-                        <!-- <td *ngIf="access && doc?.IsParent">Restricted</td> -->
-                        <!-- <td *ngIf="doc?.IsParent">Restricted</td> -->
+                        <td *ngIf="!access">
+                            <i class="bi bi-lock bi-lg" 
+                            [ngClass]="{'text-primary':true}"
+                            title="No Permissions">
+                        </i>
+                    </td>
+                        <td *ngIf="access && doc?.IsParent"><i class="bi bi-lock bi-lg" 
+                            [ngClass]="{'text-primary':true}"
+                            title="{{ doc?.IsParent ? 'Locked' : 'Unlocked' }}"></i></td>
                     </tr>
                 </ng-template>
             </p-table>
