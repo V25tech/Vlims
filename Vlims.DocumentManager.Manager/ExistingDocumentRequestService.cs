@@ -120,22 +120,16 @@ namespace PolicySummary.DMS.Services
         public bool Importbulkdocuments(IFormFile p_fileInfo)
         {
             DataSet l_dsInfo;
-            List<string> l_numericColumns = null;
+            List<string> l_dateColumns = new List<string> { "EffectiveDate", "ReviewDate" };
             ExistingDocumentRequest existingDocumentRequest = null;
             string isRatesDataImported = string.Empty;
             string baseDirectory = string.Empty;
             try
             {
                 string file = string.Empty; string errMsg = string.Empty;
-                file = FileManager.GetFilePath(p_fileInfo);
-                //baseDirectory = Path.GetDirectoryName(file) + "/" + p_fileInfo.FileName.Replace("\".zip\"", string.Empty);
-                //if (Directory.Exists(baseDirectory))
-                //    Directory.Delete(baseDirectory, true);
-                //System.IO.Compression.ZipFile.ExtractToDirectory(file, Path.GetDirectoryName(file), true);
-                //baseDirectory = baseDirectory + Constants.XmlPath + p_file.FileName.Replace(Constants.Zip, string.Empty);
-                l_dsInfo = ReadExcelFileWithValueType(p_fileInfo, l_numericColumns);
-                List<string> lstEntityNamesFromExcel = new List<string>();              
-                
+                l_dsInfo = ReadExcelFileWithValueType(p_fileInfo, new List<string>(), l_dateColumns);
+                List<string> lstEntityNamesFromExcel = new List<string>();
+
                 if (l_dsInfo.Tables[0]?.Rows?.Count > 0)
                 {
                     var ValidNameRegExp = string.Empty;
@@ -146,14 +140,13 @@ namespace PolicySummary.DMS.Services
                         existingDocumentRequest.department = row["Department"]?.ToString();
                         existingDocumentRequest.documenttitle = row["DocumentTitle"]?.ToString();
                         existingDocumentRequest.documentno = row["DocumentNo"]?.ToString();
-                        existingDocumentRequest.effectiveDate = DateTime.Now;
-                            //Convert.ToDateTime(row["EffectiveDate"]?.ToString());
-                        existingDocumentRequest.reviewDate = DateTime.Now;
+                        existingDocumentRequest.effectiveDate = Convert.ToDateTime(row["EffectiveDate"]?.ToString());
+                        existingDocumentRequest.reviewDate = Convert.ToDateTime(row["ReviewDate"]?.ToString());
                         existingDocumentRequest.sampletemplate = "Test";
                         existingDocumentRequest.CreatedBy = "ADMIN";
                         existingDocumentRequest.ModifiedBy = "ADMIN";
                         existingDocumentRequest.CreatedDate = DateTime.Now;
-                        existingDocumentRequest.document = row["UploadDocument"]?.ToString();                        
+                        existingDocumentRequest.document = row["UploadDocument"]?.ToString();
                         SaveExistingDocumentRequest(existingDocumentRequest);
                     }
                     #region Commented Region
@@ -187,7 +180,7 @@ namespace PolicySummary.DMS.Services
         /// <param name="p_fileInfo"></param>
         /// <param name="p_numericColumns"></param>
         /// <returns></returns>
-        private DataSet ReadExcelFileWithValueType(IFormFile p_fileInfo, List<string> p_numericColumns)
+        private DataSet ReadExcelFileWithValueType(IFormFile p_fileInfo, List<string> p_numericColumns, List<string> p_dateColumns = null)
         {
             DataSet l_dsInfo = null;
             ExcelDocument excelDoc = new ExcelDocument();
@@ -195,7 +188,7 @@ namespace PolicySummary.DMS.Services
             {
                 string fileName = FileManager.GetFilePath(p_fileInfo);
                 if (File.Exists(fileName))
-                    l_dsInfo = excelDoc.ReadExcelSheet(fileName, true, p_numericColumns);
+                    l_dsInfo = excelDoc.ReadExcelSheet(fileName, true, p_numericColumns, p_dateColumns);
                 FileManager.RemoveFile(new FileInformation { FileName = fileName });
             }
             catch

@@ -33,7 +33,7 @@ namespace Vlims.DMS.Entities
         private string getTempExcelFilePath()
         {
             string exportfileName = "temp_" + DateTime.Now.Ticks.ToString() + ".xlsx";
-            string directory =  Path.Combine(Directory.GetCurrentDirectory(), "TempFiles");
+            string directory = Path.Combine(Directory.GetCurrentDirectory(), "TempFiles");
             if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
             //ConfigurationManager.AppSettings["TempFiles"];
             exportfileName = Path.Combine(directory, exportfileName);//directory + exportfileName;
@@ -47,9 +47,9 @@ namespace Vlims.DMS.Entities
         /// <param name="p_firstRowIsHeader"></param>
         /// <param name="p_numericColumns"></param>
         /// <returns></returns>
-        public DataSet ReadExcelSheet(string p_fname, bool p_firstRowIsHeader, List<string> p_numericColumns)
+        public DataSet ReadExcelSheet(string p_fname, bool p_firstRowIsHeader, List<string> p_numericColumns, List<string> p_dateColumns = null)
         {
-            return ReadExcelWithNumericColumns(p_fname, p_firstRowIsHeader, p_numericColumns);
+            return ReadExcelWithNumericColumns(p_fname, p_firstRowIsHeader, p_numericColumns, p_dateColumns);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Vlims.DMS.Entities
         /// <param name="p_firstRowIsHeader"></param>
         /// <param name="p_numericColumns"></param>
         /// <returns></returns>
-        private DataSet ReadExcelWithNumericColumns(string p_fname, bool p_firstRowIsHeader, List<string> p_numericColumns)
+        private DataSet ReadExcelWithNumericColumns(string p_fname, bool p_firstRowIsHeader, List<string> p_numericColumns, List<string> p_dateColumns = null)
         {
             DataSet dSet = new DataSet();
             string cellValue = string.Empty;
@@ -134,10 +134,10 @@ namespace Vlims.DMS.Entities
                                     }
                                     if (dTab.Columns.Count > columnIndex)
                                     {
-                                        if (p_numericColumns != null && p_numericColumns.Any(col => col.Equals(dTab.Columns[columnIndex].ColumnName.Trim())))
-                                            tempRow[columnIndex] = GetCellValue(doc, cell, true);
-                                        else
-                                            tempRow[columnIndex] = GetCellValue(doc, cell, false);
+                                        var isNumeric = p_numericColumns != null && p_numericColumns.Any(col => col.Equals(dTab.Columns[columnIndex].ColumnName.Trim()));
+                                        var isDate = p_dateColumns != null && p_dateColumns.Any(col => col.Equals(dTab.Columns[columnIndex].ColumnName.Trim()));
+
+                                        tempRow[columnIndex] = GetCellValue(doc, cell, isNumeric, isDate);
                                     }
                                     columnIndex++;
                                 }
@@ -221,7 +221,7 @@ namespace Vlims.DMS.Entities
         /// <param name="cell"></param>
         /// <param name="isNumeric"></param>
         /// <returns></returns>
-        private string GetCellValue(SpreadsheetDocument doc, Cell cell, bool isNumeric)
+        private string GetCellValue(SpreadsheetDocument doc, Cell cell, bool isNumeric, bool isDate = false)
         {
             string value = cell.InnerText;
             double oaValue = 0;
@@ -229,6 +229,16 @@ namespace Vlims.DMS.Entities
             {
                 if (cell.DataType != null && cell.DataType.Value == CellValues.SharedString)
                     return doc.WorkbookPart.SharedStringTablePart.SharedStringTable.ChildElements.GetItem(int.Parse(value)).InnerText;
+                else if (cell.DataType == null && isDate)
+                {
+                    int styleIndex = (int)cell.StyleIndex.Value;
+                    CellFormat cellFormat = doc.WorkbookPart.WorkbookStylesPart.Stylesheet.CellFormats.ChildElements[int.Parse(cell.StyleIndex.InnerText)] as CellFormat;
+                    uint formatId = cellFormat.NumberFormatId.Value;
+                    if (double.TryParse(cell.InnerText, out double oaDate))
+                    {
+                        value = DateTime.FromOADate(oaDate).ToShortDateString();
+                    }
+                }
                 else if (isNumeric && double.TryParse(cell.InnerText, out oaValue))
                     return oaValue.ToString();
 
@@ -284,7 +294,7 @@ namespace Vlims.DMS.Entities
                 workbookpart.Workbook.Save();
                 spreadsheetDocument.Close();
             }
-            catch 
+            catch
             {
                 throw;
             }
