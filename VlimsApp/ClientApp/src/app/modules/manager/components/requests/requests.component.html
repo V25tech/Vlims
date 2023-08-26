@@ -45,13 +45,13 @@
                         <td>{{docType?.approvedOn| date}}</td> -->
                         <td><span class="status" [ngClass]="getStatusClass(docType['status'])">{{docType.status}} </span></td>
                         <td class="text-center" *ngIf="access && docType?.status=='In-Progress'"><i (click)="editdocreq(docType)" class="bi bi-pencil"></i></td>
-                        <td *ngIf="!access">
+                        <td class="text-center" *ngIf="!access">
                             <i class="bi bi-lock bi-lg" 
                             [ngClass]="{'text-primary':true}"
                             title="No Permissions">
                             </i>
                         </td>
-                        <td *ngIf="access && islocked(docType?.status)">
+                        <td class="text-center" *ngIf="access && islocked(docType?.status)">
                             <i class="bi bi-lock bi-lg" 
                             [ngClass]="{'text-primary':true}"
                             title="{{ 'Locked'}}">

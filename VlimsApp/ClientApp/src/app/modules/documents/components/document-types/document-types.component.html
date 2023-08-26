@@ -42,13 +42,13 @@
                         <td>{{doc?.ModifiedDate | date}}</td>
                         <td><span class="status" [ngClass]="{'status-completed':true}">{{doc.Status}} </span></td>
                         <td class="text-center" *ngIf="access && !doc?.IsParent"><i (click)="editdoc(doc)" class="bi bi-pencil"></i></td>
-                        <td *ngIf="!access">
+                        <td class="text-center" *ngIf="!access">
                             <i class="bi bi-lock bi-lg" 
                             [ngClass]="{'text-primary':true}"
                             title="No Permissions">
                         </i>
                     </td>
-                        <td *ngIf="access && doc?.IsParent"><i class="bi bi-lock bi-lg" 
+                        <td class="text-center" *ngIf="access && doc?.IsParent"><i class="bi bi-lock bi-lg" 
                             [ngClass]="{'text-primary':true}"
                             title="{{ doc?.IsParent ? 'Locked' : 'Unlocked' }}"></i></td>
                     </tr>

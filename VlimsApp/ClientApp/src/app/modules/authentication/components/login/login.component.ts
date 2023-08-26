@@ -72,7 +72,8 @@ export class LoginComponent {
     this.loader.hide();
     this.loginSuccess.emit();
     this.router.navigate(['/documents']);
-    this.toastr.success('Welcome '+this.user.UserID, 'Success', {
+    this.commonsvc.startSessionTimeout(30);
+    this.toastr.success('Welcome '+this.user.UserID, 'Login Success', {
       timeOut: 1000, // Set the display time in milliseconds (3 seconds)
     });
   }

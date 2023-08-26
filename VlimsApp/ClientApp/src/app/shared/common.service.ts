@@ -11,6 +11,7 @@ import { setfunctionalprofileconfigurationservice } from '../modules/services/se
   providedIn: 'root'
 })
 export class CommonService {
+  private readonly sessionTimeoutKey = 'sessionTimeout';
   documentType=new DocumentTypeConfiguration();
   template=new DocumentTemplateConfiguration();
   templateCount: number = 0;
@@ -93,5 +94,26 @@ export class CommonService {
     admin.roleConfig=true;
     const rolesString = JSON.stringify(admin);
   this.storage.setItem('roles', rolesString);
+  }
+  startSessionTimeout(minutes: number) {
+    const sessionTimeoutMilliseconds = minutes * 60 * 1000;
+    const expirationTimestamp = Date.now() + sessionTimeoutMilliseconds;
+    localStorage.setItem(this.sessionTimeoutKey, expirationTimestamp.toString());
+  }
+
+  resetSessionTimeout(minutes: number) {
+    console.log('reset called');
+    const sessionTimeoutMilliseconds = minutes * 60 * 1000;
+    const currentTime = Date.now();
+    const newSessionTimeout = currentTime + sessionTimeoutMilliseconds;
+    localStorage.setItem(this.sessionTimeoutKey, newSessionTimeout.toString());
+  }
+  
+
+  isSessionExpired(): boolean {
+    const sessionTimeout = parseInt(localStorage.getItem(this.sessionTimeoutKey) || '0', 10);
+    console.log('session',sessionTimeout);
+    const currentTime = Date.now();
+    return currentTime >= sessionTimeout;
   }
 }

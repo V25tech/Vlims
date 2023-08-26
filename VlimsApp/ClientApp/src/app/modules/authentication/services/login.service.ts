@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { UserConfiguration, functionalprofile } from 'src/app/models/model';
 import { UsersconfigurationService } from '../../services/usersconfiguration.service';
 import { CommonService } from 'src/app/shared/common.service';
+import { Router } from '@angular/router';
 
 
 const AUTH_STORAGE_KEY = 'isLoggedIn';
@@ -29,6 +30,7 @@ export class LoginService {
 
   
   constructor(private http: HttpClient,private userssvc:UsersconfigurationService,
+    private router: Router,
     private commonsvc:CommonService ) {}
 
   login(username: string, password: string,lstusers:UserConfiguration[],roles:functionalprofile[]) {
@@ -45,6 +47,7 @@ export class LoginService {
     this.updateLoginStatus(false);
     this.commonsvc.removeUserRole();
     this.isvalid=false;
+    this.router.navigate(['/login']);
   }
   updateuser(roles:functionalprofile[],user:UserConfiguration){
     const role = roles.find(

@@ -63,13 +63,13 @@
                   ><i class="bi bi-arrow-right"></i
                 ></a>
               </td>
-              <td *ngIf="!access">
+              <td class="text-center" *ngIf="!access">
                 <i class="bi bi-lock bi-lg" 
                 [ngClass]="{'text-primary':true}"
                 title="No Permissions">
                 </i>
               </td>
-              <td *ngIf="access && islocked(effective?.status)">
+              <td class="text-center" *ngIf="access && islocked(effective?.status)">
                 <i class="bi bi-lock bi-lg" 
                 [ngClass]="{'text-primary':true}"
                 title="{{ 'Locked'}}">

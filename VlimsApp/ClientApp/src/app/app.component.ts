@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener } from '@angular/core';
 
 import { LoginService } from "./modules/authentication/services/login.service";
+import { CommonService } from './shared/common.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,14 +15,22 @@ export class AppComponent implements OnInit {
   isNavOpen: boolean = false;
   isLoggedIn: boolean = false;
 
-  constructor(private loginService:LoginService){
+  constructor(private loginService:LoginService,
+    private commonsvc:CommonService,
+    private loginsvc:LoginService,
+    private toastr:ToastrService
+    ){
+      //this.checkSessionTimeoutPeriodically();
     this.isLoggedIn = this.loginService.isLoggedIn();
   }
 
   ngOnInit() {
     this.loginService.loginStatusChanged$.subscribe((status: boolean) => {
       this.isLoggedIn = status;
+
+      
     });
+    this.checkSessionTimeoutPeriodically();
   }
 
   toggleSidenav(): void {
@@ -31,5 +41,19 @@ export class AppComponent implements OnInit {
     console.log('from emitter');
     this.isLoggedIn = true;
   }
+  @HostListener('document:click')
+  @HostListener('document:keydown')
+  resetSessionTimeout() {
+    this.commonsvc.resetSessionTimeout(30);
+  }
 
+  checkSessionTimeoutPeriodically() {
+    setInterval(() => {
+      console.log('checking');
+      if (this.commonsvc.isSessionExpired()) {
+        this.toastr.info('Thank you for using our application. You have been successfully logged out.', 'Session Timeout');
+        this.loginService.logout();
+      }
+    }, 30000); // Check every minute (adjust interval as needed)
+  }
 }

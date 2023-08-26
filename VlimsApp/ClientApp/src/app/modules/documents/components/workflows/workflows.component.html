@@ -45,13 +45,13 @@
                         <td>{{docItem.CreatedDate | date}}</td>
                         <td><span class="status" [ngClass]="{'status-completed':true}">{{docItem?.Status}} </span></td>
                         <td class="text-center"  *ngIf="access && !docItem?.IsParent"><i class="bi bi-pencil" (click)="editdoc(docItem)"></i></td>
-                        <td *ngIf="!access">
+                        <td class="text-center" *ngIf="!access">
                             <i class="bi bi-lock bi-lg" 
                             [ngClass]="{'text-primary':true}"
                             title="No Permissions">
                             </i>
                         </td>
-                        <td *ngIf="access && docItem?.IsParent">
+                        <td class="text-center" *ngIf="access && docItem?.IsParent">
                             <i class="bi bi-lock bi-lg" 
                             [ngClass]="{'text-primary':true}"
                             title="{{ docItem?.IsParent ? 'Locked' : 'Unlocked' }}">
