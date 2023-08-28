@@ -38,11 +38,12 @@ export class ReviewPrepationComponent {
   pdfUrl: string | null = null;
   viewMode: boolean = false;
   editMode: boolean = false;
-  requestId:number=0;workId:number=0;statuss:string='';type:string='';iscompleted:boolean=false;
-  isreview:boolean=false;isapprove:boolean=false;reviewpendingcount=0;
-  username:string=''
+  requestId: number = 0; workId: number = 0; statuss: string = ''; type: string = ''; iscompleted: boolean = false;
+  isreview: boolean = false; isapprove: boolean = false; reviewpendingcount = 0;
+  username: string = ''
   workitems: Array<WorkItemsConfiguration> = [];
-  finalStatus:string=''
+  finalStatus: string = ''
+  toastMsg: string | null = null;
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -51,23 +52,22 @@ export class ReviewPrepationComponent {
 
   templatesSource = [];
 
-  constructor(private location: Location, private router: Router, 
-    private workitemssvc:WorkitemsService,
+  constructor(private location: Location, private router: Router,
+    private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
   ngOnInit() {
-    const user=localStorage.getItem("username");
-    if(user!=null && user!=undefined)
-    {
-      this.commonsvc.createdBy=user;
-      this.username=user;
+    const user = localStorage.getItem("username");
+    if (user != null && user != undefined) {
+      this.commonsvc.createdBy = user;
+      this.username = user;
     }
     this.route.params.subscribe(params => {
       this.requestId = params['requestId'];
       this.workId = params['workId'];
-      this.type=params['type'];
+      this.type = params['type'];
     });
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
@@ -83,7 +83,7 @@ export class ReviewPrepationComponent {
       this.location.back();
     }
     this.getdocttemplate();
-    
+
   }
   getbyId(arg0: number) {
     this.spinner.show();
@@ -93,37 +93,36 @@ export class ReviewPrepationComponent {
     });
   }
   approve() {
-    //this.preparation.status = 'Approved'
-    this.preparation.ModifiedBy=this.username;
-    this.preparation.status=this.finalStatus;
-    if(this.isapprove && this.reviewpendingcount>0)
-    {
+    this.preparation.ModifiedBy = this.username;
+    this.preparation.status = this.finalStatus;
+    if (this.isapprove && this.reviewpendingcount > 0) {
       this.toastr.error('Reviews Pending');
     }
-    else
-    {
-    this.savePreparation();
+    else {
+      this.toastMsg = this.preparation.status;
+      this.savePreparation();
     }
   }
   reinitiative() {
     this.location.back();
   }
   reject() {
-    this.preparation.ModifiedBy=this.commonsvc.getUsername();
-    this.preparation.status='Rejected';
+    this.preparation.ModifiedBy = this.commonsvc.getUsername();
+    this.preparation.status = 'Rejected';
+    this.toastMsg = this.preparation.status;
     this.savePreparation();
     //this.location.back();
   }
-  savePreparation() {    
+  savePreparation() {
     this.spinner.show();
-    if(this.viewMode && this.preparation.status!='Rejected')
-    {
-      this.preparation.ModifiedBy=this.commonsvc.createdBy;
-      this.preparation.status=this.finalStatus;
+    if (this.viewMode && this.preparation.status != 'Rejected') {
+      this.preparation.ModifiedBy = this.commonsvc.createdBy;
+      this.preparation.status = this.finalStatus;
     }
+    this.toastMsg = this.toastMsg ?? 'Updated'
     this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
       this.commonsvc.preperation = new DocumentPreperationConfiguration();
-      this.toastr.success("Document Preparation Approved successfully");
+      this.toastr.success(`Document Preparation ${this.toastMsg}  successfully`);
       this.spinner.hide();
       this.location.back();
     }, er => {
@@ -179,7 +178,7 @@ export class ReviewPrepationComponent {
   }
 
   openViewer(template: TemplateRef<any>): void {
-    
+
     if (this.pdfBytes) {
       const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
       this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
@@ -205,7 +204,7 @@ export class ReviewPrepationComponent {
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show();
     this.docPreperationService.preview(this.preparation).subscribe((data: any) => {
-      
+
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();
@@ -223,47 +222,46 @@ export class ReviewPrepationComponent {
   }
   getworkflowitems() {
     this.spinner.show();
-    const user=localStorage.getItem("username");
-    if(user!=null && user!=undefined){
-      this.commonsvc.createdBy=user;
+    const user = localStorage.getItem("username");
+    if (user != null && user != undefined) {
+      this.commonsvc.createdBy = user;
     }
     return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
-      
+
       this.workitems = data.Response;
-      if(this.workitems.length>0){
-        this.workitems=this.workitems.filter(p=>p.ReferenceId==this.requestId && p.TaskType=='Preparation');
-        if(this.workitems)
-        {
+      if (this.workitems.length > 0) {
+        this.workitems = this.workitems.filter(p => p.ReferenceId == this.requestId && p.TaskType == 'Preparation');
+        if (this.workitems) {
           this.workitems.sort((a, b) => a.WITId - b.WITId);
-          const work=this.workitems.filter(o=>o.WITId==this.workId);
-                  this.statuss = work[0].ActionType;
-                  this.iscompleted=work[0].IsCompleted;
-                  const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
-                  this.reviewpendingcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted==false).length;
-                  const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
-                  const countt = totalreviewcount - reviewedcount;
-                  if (this.statuss === 'Review') {
-                    this.isreview=true;
-                    if (countt === 1) {
-                      this.finalStatus = 'Reviewed';
-                    } else if (countt > 1) {
-                      this.finalStatus = 'Pending Review';
-                    } else if (countt === totalreviewcount) {
-                      this.finalStatus = 'Pending Review';
-                    }
-                  } else {
-                    if (countt === 1) {
-                      this.isapprove=true;
-                      this.finalStatus = 'Approved';
-                    } else if (countt > 1) {
-                      this.finalStatus = 'Pending Approve';
-                    } else if (countt === totalreviewcount) {
-                      this.finalStatus = 'Pending Approve';
-                    }
-                  }
-                }
-              }
-              this.spinner.hide();
-            });
+          const work = this.workitems.filter(o => o.WITId == this.workId);
+          this.statuss = work[0].ActionType;
+          this.iscompleted = work[0].IsCompleted;
+          const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+          this.reviewpendingcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted == false).length;
+          const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
+          const countt = totalreviewcount - reviewedcount;
+          if (this.statuss === 'Review') {
+            this.isreview = true;
+            if (countt === 1) {
+              this.finalStatus = 'Reviewed';
+            } else if (countt > 1) {
+              this.finalStatus = 'Pending Review';
+            } else if (countt === totalreviewcount) {
+              this.finalStatus = 'Pending Review';
+            }
+          } else {
+            if (countt === 1) {
+              this.isapprove = true;
+              this.finalStatus = 'Approved';
+            } else if (countt > 1) {
+              this.finalStatus = 'Pending Approve';
+            } else if (countt === totalreviewcount) {
+              this.finalStatus = 'Pending Approve';
+            }
           }
+        }
+      }
+      this.spinner.hide();
+    });
+  }
 }
