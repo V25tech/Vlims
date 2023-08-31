@@ -40,6 +40,7 @@ export class NewPrintRequestComponent implements OnInit {
   safePdfDataUrl: SafeResourceUrl | undefined;
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
+  toastMsg: string | null = null;
 
   constructor(private commonsvc: CommonService, private location: Location,
     private route: ActivatedRoute,
@@ -55,7 +56,6 @@ export class NewPrintRequestComponent implements OnInit {
       this.username = user;
     }
     this.route.params.subscribe(params => {
-      debugger
       this.requestId = params['requestId'];
       this.workId = params['workId'];
       this.type = params['type'];
@@ -85,15 +85,18 @@ export class NewPrintRequestComponent implements OnInit {
   approve() {
     this.print.Status = this.finalStatus;
     this.print.ModifiedBy = this.username;
-    this.savePrintRequest();
+    this.toastMsg = this.print.Status;
+    this.updateRequest();
   }
   reinitiative() {
     //this.effective.Status='Re-Initiated'
-    //this.saveEffective();
+    //this.toastMsg = this.print.Status;
+    //this.updateRequest();
     this.location.back();
   }
   reject() {
     //this.effective.Status='Rejected'
+    //this.toastMsg = this.print.Status;
     //this.saveEffective();
     this.location.back();
   }
@@ -139,7 +142,7 @@ export class NewPrintRequestComponent implements OnInit {
     this.docprintservice.AddNewPrintRequest(this.print).subscribe(res => {
       this.commonsvc.printConfig = new DocumentPrintConfiguration(); this.spinner.hide();
       this.location.back();
-      this.toastr.success('Document Print Request Saved Succesfull!', 'Saved.!');
+      this.toastr.success('Document print request saved succesfull!', 'Saved.!');
     }, er => {
       this.spinner.hide();
       console.log(er);
@@ -147,12 +150,13 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   updateRequest() {
-    this.spinner.show();
+    this.spinner.show();    
+    this.toastMsg = this.toastMsg ?? 'Updated'
     this.docprintservice.UpdatePrintRequest(this.print).subscribe(res => {
       this.commonsvc.printConfig = new DocumentPrintConfiguration();
       this.spinner.hide();
       this.location.back();
-      this.toastr.success('Document Print Request updated Succesfull!', 'Updated.!');
+      this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
     }, er => {
       this.spinner.hide();
       console.log(er);
