@@ -13,8 +13,8 @@ export class DocumentPreperationService {
 
   constructor(private http: HttpbaseService) {
   }
-  getdocumentpreparations(objrequest: RequestContext): Observable<ArrayBuffer> {    
-    return this.http.postJsonLogin(objrequest, "api/documentpreparation/GetAllDocPrep",this.type);
+  getdocumentpreparations(objrequest: RequestContext): Observable<ArrayBuffer> {
+    return this.http.postJsonLogin(objrequest, "api/documentpreparation/GetAllDocPrep", this.type);
   }
   getdocumentrequestbyId(objrequest: RequestContext) {
     debugger
@@ -22,17 +22,21 @@ export class DocumentPreperationService {
   }
   ManageDocument(objrequest: DocumentPreperationConfiguration) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/documentpreparation/updatedocumentpreparation",this.type);
+    return this.http.postJsonLogin(objrequest, "api/documentpreparation/updatedocumentpreparation", this.type);
   }
   preview(objrequest: DocumentPreperationConfiguration) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/documentpreparation/preview",this.type);
+    return this.http.postJsonLogin(objrequest, "api/documentpreparation/preview", this.type);
   }
-  upload(objrequest: FormData){
+
+  previewtemplate(dtid: number) {
+    return this.http.getwithheader("api/documentpreparation/previewtemplate" + "?dtid=" + dtid, this.type);
+  }
+  upload(objrequest: FormData) {
     debugger
-    return this.http.postJsonLogin(objrequest, "api/documentpreparation/upload",this.type);
+    return this.http.postJsonLogin(objrequest, "api/documentpreparation/upload", this.type);
   }
-  getbyId(id: number) {        
+  getbyId(id: number) {
     return this.http.getwithheader("api/documentpreparation/getbyId" + "?dPNID=" + id, this.type);
   }
 

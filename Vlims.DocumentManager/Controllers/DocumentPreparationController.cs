@@ -80,6 +80,40 @@ namespace PolicySummary.Controllers
             var result = documentPreparationService.SaveDocumentPreparation(documentPreparation);
             return result;
         }
+
+        [HttpGet("previewtemplate")]
+        public ActionResult PreviewDocumentTemplate(int dtid)
+        {
+            byte[] pdfBytes = null;
+
+            if (dtid > 0)
+            {
+                DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByDTID(dtid);
+                DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
+                string headertable = HeaderFooter.PrepareHeaderdiv(template);
+                string footertable = HeaderFooter.PrepareFooterdiv(template);
+                string tempFilePath = Path.GetTempFileName() + ".docx";
+                HeaderFooter.getData(headertable, footertable, tempFilePath, template);
+
+
+                //string tempFilePath = Path.GetTempFileName() + ".docx";
+
+                //HeaderFooter.getData(headertable, footertable, tempFilePath,template);
+
+                // Generate the output file path dynamically
+                string outputFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); // Set the folder where you want to save the converted PDFs
+                string outputFileName = HeaderFooter.GenerateUniqueFileName(); // Function to generate a unique file name
+                string outputFilePath = Path.Combine(outputFolderPath, outputFileName);
+
+                // Convert the content to PDF using iTextSharp
+                HeaderFooter.generatePDF(tempFilePath, outputFilePath);
+
+                pdfBytes = System.IO.File.ReadAllBytes(outputFilePath);
+            }
+
+            return Ok(pdfBytes); //result;
+        }
+
         /// <summary>
         /// This Method is used to Preview DocumentPreparation
         /// </summary>
