@@ -22,6 +22,7 @@ namespace PolicySummary.Controllers
     using Vlims.DocumentMaster.DataAccess;
     using DocumentFormat.OpenXml.Wordprocessing;
     using System.Collections;
+    using System.IO;
 
     //using Microsoft.Office.Interop.Word;
 
@@ -93,25 +94,22 @@ namespace PolicySummary.Controllers
                 string headertable = HeaderFooter.PrepareHeaderdiv(template);
                 string footertable = HeaderFooter.PrepareFooterdiv(template);
                 string tempFilePath = Path.GetTempFileName() + ".docx";
-                HeaderFooter.getData(headertable, footertable, tempFilePath, template);
-
-
-                //string tempFilePath = Path.GetTempFileName() + ".docx";
-
-                //HeaderFooter.getData(headertable, footertable, tempFilePath,template);
-
-                // Generate the output file path dynamically
-                string outputFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); // Set the folder where you want to save the converted PDFs
-                string outputFileName = HeaderFooter.GenerateUniqueFileName(); // Function to generate a unique file name
-                string outputFilePath = Path.Combine(outputFolderPath, outputFileName);
-
+                Stream docStream = new System.IO.MemoryStream();
+                
+                //HeaderFooter.getData(headertable, footertable, tempFilePath, template);
+                docStream = HeaderFooter.getData(headertable, footertable, docStream, template);
+                                
                 // Convert the content to PDF using iTextSharp
-                HeaderFooter.generatePDF(tempFilePath, outputFilePath);
+                Stream pdfStream =  HeaderFooter.generatePDF(docStream);
 
-                pdfBytes = System.IO.File.ReadAllBytes(outputFilePath);
+                using (var memoryStream = new MemoryStream())
+                {
+                    pdfStream.Seek(0, SeekOrigin.Begin);
+                    pdfStream.CopyTo(memoryStream);
+                    pdfBytes = memoryStream.ToArray();
+                }
             }
-
-            return Ok(pdfBytes); //result;
+            return Ok(pdfBytes); 
         }
 
         /// <summary>
