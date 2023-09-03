@@ -16,12 +16,17 @@ documentno_PSY=@documentno_PSY,
 noofcopies_PSY=@noofcopies_PSY,
 workflow_PSY=@workflow_PSY,
 reason_PSY=@reason_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [DRId_PSY] = @DRId_PSY ; 
+ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRId_PSY] = @DRId_PSY ; 
 
---IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
---BEGIN
---EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DRId_PSY,@ModifiedBy_PSY
---END
+IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
+BEGIN
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DRId_PSY,@ModifiedBy_PSY,'PRINT'
+END
+
+IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
+BEGIN
+UPDATE workitems_PSY SET Stage_PSY='Pending',Status_PSY='IN-PROGRESS',IsCompleted_PSY=0 WHERE RefrenceId_PSY=@DRId_PSY
+END
 
 select @DRId_PSY; 
   

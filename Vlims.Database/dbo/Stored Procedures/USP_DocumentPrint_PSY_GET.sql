@@ -3,17 +3,20 @@
  BEGIN 
  BEGIN TRY 
   SELECT DRId_PSY,
-documenttitle_PSY,
+DP.documenttitle_PSY,
 printtype_PSY,
-documentno_PSY,
+DP.documentno_PSY,
 noofcopies_PSY,
 workflow_PSY,
 reason_PSY,
-CreatedBy_PSY,
-CreatedDate_PSY,
-ModifiedBy_PSY,
-ModifiedDate_PSY,Status_PSY 
-  FROM [dbo].[DocumentPrint_PSY] WITH (NOLOCK) where [DRId_PSY] = @DRId_PSY   
+DP.CreatedBy_PSY,
+DP.CreatedDate_PSY,
+DP.ModifiedBy_PSY,
+DP.ModifiedDate_PSY,DP.Status_PSY,DSP.template_PSY 
+  FROM [dbo].[DocumentPrint_PSY] DP WITH (NOLOCK)
+  JOIN dbo.DocumentEffective_PSY DE ON DE.Refrence_PSY=DP.Refrence_PSY
+ JOIN dbo.DocumentPreparation_PSY DSP ON DSP.Refrence_PSY=DE.Refrence_PSY
+  where [DRId_PSY] = @DRId_PSY   
  END TRY 
  BEGIN CATCH 
   SELECT ERROR_MESSAGE(); 

@@ -236,12 +236,15 @@ export class ReviewPrepationComponent {
           this.statuss = work[0].ActionType;
           this.iscompleted = work[0].IsCompleted;
           const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+          const totalapprovecount = this.workitems.filter(o => o.ActionType === this.statuss).length;
           this.reviewpendingcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted == false).length;
           const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
+          const approvedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
           const countt = totalreviewcount - reviewedcount;
+          const approvecountt = totalapprovecount - approvedcount;
           if (this.statuss === 'Review') {
             this.isreview = true;
-            if (countt === 1) {
+            if (countt === 1 || countt==0) {
               this.finalStatus = 'Reviewed';
             } else if (countt > 1) {
               this.finalStatus = 'Pending Review';
@@ -249,7 +252,7 @@ export class ReviewPrepationComponent {
               this.finalStatus = 'Pending Review';
             }
           } else {
-            if (countt === 1) {
+            if (approvecountt === 1 || approvecountt==0) {
               this.isapprove = true;
               this.finalStatus = 'Approved';
             } else if (countt > 1) {

@@ -44,6 +44,7 @@ export class DocumentPrintComponent implements OnInit {
     };
     return this.doctypeservice.GetDocumentPrint(objrequest).subscribe((data: any) => {
       this.requests = data.response;
+      console.log(this.requests);
     });
   }
   getdocumentrequest() {

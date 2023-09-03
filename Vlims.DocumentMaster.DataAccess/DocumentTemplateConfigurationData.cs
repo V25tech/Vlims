@@ -52,7 +52,20 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
-        
+
+        public static DataSet GetDocumentTemplateConfigurationByTemplate(string templateName) 
+        {
+            try
+            {
+                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_TEMPLATE, DocumentTemplateConfigurationConstants.Templatename, DbType.Int32, templateName, ExecutionType.Dataset);
+                return dataset;
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
+
         public static bool SaveDocumentTemplateConfiguration(DocumentTemplateConfiguration documentTemplateConfiguration)
         {
             try

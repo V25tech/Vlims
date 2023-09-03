@@ -34,6 +34,7 @@ export class NewPrintRequestComponent implements OnInit {
   preparations: any[] = [];
   username: string = ''
   requestId: number = 0; workId: number = 0; statuss: string = ''; iscompleted: boolean = false; type: string = ''; finalStatus: string = '';
+  isapprove: boolean = false; reviewpendingcount = 0;
   workitems: Array<WorkItemsConfiguration> = [];
   modalRef: BsModalRef | undefined;
   pdfBytes: Uint8Array | undefined;
@@ -64,7 +65,8 @@ export class NewPrintRequestComponent implements OnInit {
     const segments = urlPath.split('/');
     if (this.type == 'view') {
       this.viewMode = true;
-      this.getbyId(this.requestId);      
+      this.getbyId(this.requestId); 
+      this.getworkflowitems();     
     }
     else if (segments.slice(-1).toString() == 'edit' && this.commonsvc.printConfig) {
       this.editMode = true;
@@ -78,15 +80,23 @@ export class NewPrintRequestComponent implements OnInit {
   getbyId(arg0: number) {
     this.spinner.show();
     return this.docprintservice.getbyId(arg0).subscribe((data: any) => {
+      console.log(data);
       this.print = data;
       this.spinner.hide();
     });
   }
   approve() {
+    debugger
     this.print.Status = this.finalStatus;
     this.print.ModifiedBy = this.username;
-    this.toastMsg = this.print.Status;
+    
+    if (this.isapprove && this.reviewpendingcount > 0) {
+      this.toastr.error('Reviews Pending');
+    }
+    else{
+      this.toastMsg = this.print.Status;
     this.updateRequest();
+    }
   }
   reinitiative() {
     //this.effective.Status='Re-Initiated'
@@ -167,6 +177,7 @@ export class NewPrintRequestComponent implements OnInit {
     this.router.navigate(['/print']);
   }
   getworkflowitems() {
+    debugger
     this.spinner.show();
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
@@ -176,17 +187,22 @@ export class NewPrintRequestComponent implements OnInit {
       debugger
       this.workitems = data.Response;
       if (this.workitems.length > 0) {
-        this.workitems = this.workitems.filter(p => p.ReferenceId == this.requestId);
+        this.workitems = this.workitems.filter(p => p.ReferenceId == this.requestId && p.TaskType == 'Print');
         if (this.workitems) {
           this.workitems.sort((a, b) => a.WITId - b.WITId);
           const work = this.workitems.filter(o => o.WITId == this.workId);
           this.statuss = work[0].ActionType;
           this.iscompleted = work[0].IsCompleted;
           const totalreviewcount = this.workitems.filter(o => o.ActionType === this.statuss).length;
-          const reviewedcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted).length;
+          const totalapprovecount = this.workitems.filter(o => o.ActionType === this.statuss).length;
+          this.reviewpendingcount = this.workitems.filter(o => o.ActionType === 'Review' && o.IsCompleted == false).length;
+          const reviewedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
+          const approvedcount = this.workitems.filter(o => o.ActionType === this.statuss && o.IsCompleted).length;
           const countt = totalreviewcount - reviewedcount;
+          const approvecountt = totalapprovecount - approvedcount;
           if (this.statuss === 'Review') {
-            if (countt === 1) {
+            //this.isreview = true;
+            if (countt === 1 || countt==0) {
               this.finalStatus = 'Reviewed';
             } else if (countt > 1) {
               this.finalStatus = 'Pending Review';
@@ -194,7 +210,8 @@ export class NewPrintRequestComponent implements OnInit {
               this.finalStatus = 'Pending Review';
             }
           } else {
-            if (countt === 1) {
+            if (approvecountt === 1 || approvecountt==0) {
+              this.isapprove = true;
               this.finalStatus = 'Approved';
             } else if (countt > 1) {
               this.finalStatus = 'Pending Approve';
@@ -238,8 +255,13 @@ export class NewPrintRequestComponent implements OnInit {
     return new Blob(byteArrays, { type: contentType });
   }
   previewprint(template: TemplateRef<any>) {
+    debugger
     this.spinner.show();
-    this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
+    const prep=new DocumentPreperationConfiguration();
+    prep.template=this.print.template;
+    prep.CreatedDate=null;
+    prep.ModifiedDate=null;
+    this.docPreperationService.preview(prep).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template);

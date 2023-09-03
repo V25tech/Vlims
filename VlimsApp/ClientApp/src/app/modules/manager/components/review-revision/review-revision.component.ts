@@ -126,17 +126,17 @@ export class ReviewRevisionComponent {
   saveRequest() {
     debugger
     this.revision.status = "Revision";
-    if (this.revision.workflow.toLocaleLowerCase() != this.workflownamee.toLocaleLowerCase()) {
+    //if (this.revision.workflow.toLocaleLowerCase() != this.workflownamee.toLocaleLowerCase()) {
       if (this.editMode || this.viewMode) {
         this.updateRequest();
       }
       else {
         this.addRequest();
       }
-    }
-    else {
-      this.toastr.error('same workflow cannot create revision');
-    }
+    // }
+    // else {
+    //   this.toastr.error('same workflow cannot create revision');
+    // }
   }
 
   addRequest() {
