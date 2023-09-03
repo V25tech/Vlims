@@ -254,14 +254,9 @@ export class NewPrintRequestComponent implements OnInit {
     }
     return new Blob(byteArrays, { type: contentType });
   }
-  previewprint(template: TemplateRef<any>) {
-    debugger
-    this.spinner.show();
-    const prep=new DocumentPreperationConfiguration();
-    prep.template=this.print.template;
-    prep.CreatedDate=null;
-    prep.ModifiedDate=null;
-    this.docPreperationService.preview(prep).subscribe((data: any) => {
+  previewprint(template: TemplateRef<any>) {    
+    this.spinner.show();    
+    this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template);
