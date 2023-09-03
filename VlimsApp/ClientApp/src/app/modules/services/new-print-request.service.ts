@@ -27,10 +27,7 @@ export class NewPrintRequestService {
   getbyId(docreq: number) {
     return this.http.getwithheader("api/documentprint/getbyId" + "?dEID=" + docreq, this.type);
   }
-
-  preview(objrequest: DocumentPrintConfiguration) {
-    return this.http.postJsonLogin(objrequest, "api/documentprint/preview", this.type);
-  }
+  
 }
 
 

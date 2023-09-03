@@ -159,16 +159,8 @@ export class ReviewEffectiveComponent {
     }
     return new Blob(byteArrays, { type: contentType });
   }
-  previewtemplate(template: TemplateRef<any>) {
-    this.spinner.show();
-    let preparation = new DocumentPreperationConfiguration();
-    preparation.path = this.effective.document;
-    preparation.document = this.effective.document;
-    preparation.CreatedDate = null;
-    preparation.ModifiedDate = null;
-    preparation.template = this.effective.template ?? 'Annexure3';
-    this.docPreperationService.preview(preparation).subscribe((data: any) => {
-      debugger
+  previewtemplate(template: TemplateRef<any>) {    
+    this.docPreperationService.preview(this.effective.template).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();

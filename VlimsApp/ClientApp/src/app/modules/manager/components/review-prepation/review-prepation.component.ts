@@ -203,8 +203,7 @@ export class ReviewPrepationComponent {
   }
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show();
-    this.docPreperationService.preview(this.preparation).subscribe((data: any) => {
-
+    this.docPreperationService.preview(this.preparation.template).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();

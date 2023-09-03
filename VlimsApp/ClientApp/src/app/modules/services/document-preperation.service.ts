@@ -24,9 +24,8 @@ export class DocumentPreperationService {
     debugger
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/updatedocumentpreparation", this.type);
   }
-  preview(objrequest: DocumentPreperationConfiguration) {
-    debugger
-    return this.http.postJsonLogin(objrequest, "api/documentpreparation/preview", this.type);
+  preview(templte: string) {
+    return this.http.getwithheader("api/documentpreparation/preview?templateinf=" + templte, this.type);
   }
 
   previewtemplate(dtid: number) {

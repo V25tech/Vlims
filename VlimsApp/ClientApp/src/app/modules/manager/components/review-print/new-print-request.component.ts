@@ -239,7 +239,7 @@ export class NewPrintRequestComponent implements OnInit {
   }
   previewprint(template: TemplateRef<any>) {
     this.spinner.show();
-    this.docprintservice.preview(this.print).subscribe((data: any) => {
+    this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template);
