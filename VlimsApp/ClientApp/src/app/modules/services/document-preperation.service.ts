@@ -30,7 +30,7 @@ export class DocumentPreperationService {
   }
 
   previewtemplate(dtid: number) {
-    return this.http.getwithheader("api/documentpreparation/previewtemplate" + "?dtid=" + dtid, this.type);
+    return this.http.getwithheader("api/documentpreparation/templatepreview" + "?dtid=" + dtid, this.type);
   }
   upload(objrequest: FormData) {
     debugger

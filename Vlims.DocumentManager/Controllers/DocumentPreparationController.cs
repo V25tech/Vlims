@@ -82,7 +82,7 @@ namespace PolicySummary.Controllers
             return result;
         }
 
-        [HttpGet("previewtemplate")]
+        [HttpGet("templatepreview")]
         public ActionResult PreviewDocumentTemplate(int dtid)
         {
             byte[] pdfBytes = null;
