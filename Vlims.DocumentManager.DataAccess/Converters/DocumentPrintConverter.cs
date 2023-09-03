@@ -47,6 +47,7 @@ public static class DocumentPrintConverter
                     documentPrintData.ModifiedBy = Convert.ToString(row[DocumentPrintConstants.ModifiedBy.Trim('@')]);
                     documentPrintData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPrintConstants.ModifiedDate.Trim('@')]);
                     documentPrintData.Status = Convert.ToString(row[DocumentPrintConstants.Status.Trim('@')]);
+                    documentPrintData.Template = Convert.ToString(row[DocumentPrintConstants.Template.Trim('@')]);
                     result.Add(documentPrintData);
                 }
             }

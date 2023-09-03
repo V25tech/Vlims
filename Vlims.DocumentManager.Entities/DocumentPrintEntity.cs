@@ -161,5 +161,6 @@ public class DocumentPrint
             this.modifieddateField = value;
         }
     }
+    public string Template { get; set; }
 }
 

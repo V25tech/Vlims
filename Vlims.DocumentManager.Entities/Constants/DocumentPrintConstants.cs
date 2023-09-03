@@ -30,7 +30,7 @@ public class DocumentPrintConstants
 
     public const string Status = "@Status_PSY";
 
-
+    public const string Template = "@template_PSY";
     public const string ModifiedDate = "@ModifiedDate_PSY";
 
     public const string USP_DocumentPrint_PSY_GET_ALL = "dbo.USP_DocumentPrint_PSY_GET_ALL";

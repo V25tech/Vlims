@@ -348,6 +348,7 @@ export class DocumentPrintConfiguration {
   public documentNumber: string = '';
   public printtype: string = '';
   public noofcopies: string = '';
+  public template:string='';
 }
 
 export class ExistingDocumentRequest {
@@ -406,6 +407,7 @@ export class functionalprofile {
   documentEffective: boolean = false;
   additionalTasks: boolean = false;
   documentRevison: boolean = false;
+  downloadPrint:boolean=false;
   workItemsassigned: boolean = false;
   Activatestatus:boolean = false;
   docrepository:boolean = false;
