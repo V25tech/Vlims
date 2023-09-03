@@ -152,5 +152,6 @@ namespace Vlims.DMS.Entities
                 this.workflowField = value;
             }
         }
+        public string Template { get; set; }
     }
 }
