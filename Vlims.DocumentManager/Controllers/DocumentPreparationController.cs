@@ -89,24 +89,31 @@ namespace PolicySummary.Controllers
 
             if (dtid > 0)
             {
-                DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByDTID(dtid);
-                DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
-                string headertable = HeaderFooter.PrepareHeaderdiv(template);
-                string footertable = HeaderFooter.PrepareFooterdiv(template);
-                string tempFilePath = Path.GetTempFileName() + ".docx";
-                Stream docStream = new System.IO.MemoryStream();
-                
-                //HeaderFooter.getData(headertable, footertable, tempFilePath, template);
-                docStream = HeaderFooter.getData(headertable, footertable, docStream, template);
-                                
-                // Convert the content to PDF using iTextSharp
-                Stream pdfStream =  HeaderFooter.generatePDF(docStream);
-
-                using (var memoryStream = new MemoryStream())
+                try
                 {
-                    pdfStream.Seek(0, SeekOrigin.Begin);
-                    pdfStream.CopyTo(memoryStream);
-                    pdfBytes = memoryStream.ToArray();
+                    DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByDTID(dtid);
+                    DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
+                    string headertable = HeaderFooter.PrepareHeaderdiv(template);
+                    string footertable = HeaderFooter.PrepareFooterdiv(template);
+                    //string tempFilePath = Path.GetTempFileName() + ".docx";
+                    Stream docStream = new System.IO.MemoryStream();
+
+                    //HeaderFooter.getData(headertable, footertable, tempFilePath, template);
+                    docStream = HeaderFooter.getData(headertable, footertable, docStream, template);
+
+                    // Convert the content to PDF using iTextSharp
+                    Stream pdfStream = HeaderFooter.generatePDF(docStream);
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        pdfStream.Seek(0, SeekOrigin.Begin);
+                        pdfStream.CopyTo(memoryStream);
+                        pdfBytes = memoryStream.ToArray();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
                 }
             }
             return Ok(pdfBytes); 
