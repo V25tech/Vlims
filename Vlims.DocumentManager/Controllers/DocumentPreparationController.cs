@@ -86,46 +86,72 @@ namespace PolicySummary.Controllers
         public ActionResult PreviewDocumentTemplate(int dtid)
         {
             byte[] pdfBytes = null;
-
             if (dtid > 0)
             {
                 try
                 {
                     DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByDTID(dtid);
-                    DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
-                    string headertable = HeaderFooter.PrepareHeaderdiv(template);
-                    string footertable = HeaderFooter.PrepareFooterdiv(template);
-                    //string tempFilePath = Path.GetTempFileName() + ".docx";
-                    Stream docStream = new System.IO.MemoryStream();
-
-                    //HeaderFooter.getData(headertable, footertable, tempFilePath, template);
-                    docStream = HeaderFooter.getData(headertable, footertable, docStream, template);
-
-                    // Convert the content to PDF using iTextSharp
-                    Stream pdfStream = HeaderFooter.generatePDF(docStream);
-
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        pdfStream.Seek(0, SeekOrigin.Begin);
-                        pdfStream.CopyTo(memoryStream);
-                        pdfBytes = memoryStream.ToArray();
-                    }
+                    pdfBytes = DownloadTemplate(dataset);
                 }
                 catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
             }
-            return Ok(pdfBytes); 
+            return Ok(pdfBytes);
         }
-
+        [HttpGet("templatepreviewInfo")]
+        public ActionResult PreviewTemplate(string templateName)
+        {
+            byte[] pdfBytes = null;
+            if (templateName != null)
+            {
+                try
+                {
+                    DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateName);
+                    pdfBytes = DownloadTemplate(dataset);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            return Ok(pdfBytes);
+        }
+        private byte[] DownloadTemplate(DataSet dataset)
+        {
+            byte[] pdfBytes = null;
+            try
+            {
+                DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
+                string headertable = HeaderFooter.PrepareHeaderdiv(template);
+                string footertable = HeaderFooter.PrepareFooterdiv(template);
+                //string tempFilePath = Path.GetTempFileName() + ".docx";
+                Stream docStream = new System.IO.MemoryStream();
+                //HeaderFooter.getData(headertable, footertable, tempFilePath, template);
+                docStream = HeaderFooter.getData(headertable, footertable, docStream, template);
+                // Convert the content to PDF using iTextSharp
+                Stream pdfStream = HeaderFooter.generatePDF(docStream);
+                using (var memoryStream = new MemoryStream())
+                {
+                    pdfStream.Seek(0, SeekOrigin.Begin);
+                    pdfStream.CopyTo(memoryStream);
+                    pdfBytes = memoryStream.ToArray();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            return pdfBytes;
+        }
         /// <summary>
         /// This Method is used to Preview DocumentPreparation
         /// </summary>
         /// <param name="documentPreparation"></param>
         /// <returns></returns>
         [HttpPost("preview")]
-        public ActionResult PreviewDocumentPreparation(DocumentPreparation documentPreparation)
+        public ActionResult PreviewDocumentPreparation(string templateinf)
         {
             List<DocumentTemplateConfiguration> result; byte[] pdfBytes = null;
             RequestContext request = new RequestContext() { PageNumber = 1, PageSize = 50 };
@@ -133,28 +159,13 @@ namespace PolicySummary.Controllers
             if (dataset != null && dataset.Tables[0].Rows.Count > 0)
             {
                 result = DocumentTemplateConfigurationConverter.SetAllDocumentTemplateConfiguration(dataset, true);
-                var template = result.FirstOrDefault(o => o.Templatename.Equals(documentPreparation.template, StringComparison.InvariantCultureIgnoreCase));
+                var template = result.FirstOrDefault(o => o.Templatename.Equals(templateinf, StringComparison.InvariantCultureIgnoreCase));
                 if (template != null)
                 {
-                    //DataTable hTable = null;
-                    //DataTable fTable = null;
-                    //if (template.headerTable != null && template.footerTable != null)
-                    //{
-                    //    string ss = HeaderFooter.PrepareHeaderdiv(template);
-                    //    hTable = PrepareDataTable(template);
-                    //    fTable = PrepareDataTable1(template);
-                    //}
-                    //string headertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), hTable);
-                    //string footertable = HeaderFooter.PrepareHtmlTable(Convert.ToInt32(template.rows), Convert.ToInt32(template.columns), fTable);
                     string headertable = HeaderFooter.PrepareHeaderdiv(template);
                     string footertable = HeaderFooter.PrepareFooterdiv(template);
                     string tempFilePath = Path.GetTempFileName() + ".docx";
                     HeaderFooter.getData(headertable, footertable, tempFilePath, template);
-
-
-                    //string tempFilePath = Path.GetTempFileName() + ".docx";
-
-                    //HeaderFooter.getData(headertable, footertable, tempFilePath,template);
 
                     // Generate the output file path dynamically
                     string outputFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); // Set the folder where you want to save the converted PDFs
@@ -163,7 +174,6 @@ namespace PolicySummary.Controllers
 
                     // Convert the content to PDF using iTextSharp
                     HeaderFooter.generatePDF(tempFilePath, outputFilePath);
-
                     pdfBytes = System.IO.File.ReadAllBytes(outputFilePath);
                 }
             }
