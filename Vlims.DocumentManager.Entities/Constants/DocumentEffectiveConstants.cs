@@ -34,6 +34,7 @@ namespace Vlims.DMS.Entities
         public const string EffectiveDate = "@EffectiveDate_PSY";
 
         public const string Reviewdate = "@Reviewdate_PSY";
+        //public const string template = "template_PSY";
 
         public const string CreatedBy = "@CreatedBy_PSY";
 
