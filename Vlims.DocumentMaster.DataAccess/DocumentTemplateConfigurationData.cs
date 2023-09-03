@@ -57,7 +57,7 @@ namespace Vlims.DocumentMaster.DataAccess
         {
             try
             {
-                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_TEMPLATE, DocumentTemplateConfigurationConstants.Templatename, DbType.Int32, templateName, ExecutionType.Dataset);
+                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_TEMPLATE, DocumentTemplateConfigurationConstants.Templatename, DbType.String, templateName, ExecutionType.Dataset);
                 return dataset;
             }
             catch (System.Exception ex)

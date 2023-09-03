@@ -43,7 +43,7 @@
               <td>{{doc?.noofcopies}}</td>
 
               <!-- <td><span class="status" [ngClass]="getStatusClass(doc['status'])">{{doc.status}} </span></td> -->
-              <td class="text-center" (click)="editdoc(doc)" *ngIf="access && doc?.status==='IN-PROGRESS'"><i class="bi bi-pencil"></i></td>
+              <td class="text-center" (click)="editdoc(doc)" *ngIf="access && doc?.status==='In-Progress'"><i class="bi bi-pencil"></i></td>
               <td class="text-center" *ngIf="!access">
                 <i class="bi bi-lock bi-lg" 
                 [ngClass]="{'text-primary':true}"
