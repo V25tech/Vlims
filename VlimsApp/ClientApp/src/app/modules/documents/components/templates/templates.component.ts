@@ -88,10 +88,11 @@ export class TemplatesComponent {
   previewtemplate(template: TemplateRef<any>,objtemp: DocumentTemplateConfiguration) {
     
     this.spinner.show();
-    this.preparation.template=objtemp.Templatename;
-    this.preparation.CreatedDate=objtemp.CreatedDate;
-    this.preparation.ModifiedDate=objtemp.ModifiedDate;
-    this.preparationsvc.preview(this.preparation).subscribe((data: any) => {
+    // this.preparation.template=objtemp.Templatename;
+    // this.preparation.CreatedDate=objtemp.CreatedDate;
+    // this.preparation.ModifiedDate=objtemp.ModifiedDate;
+    // //this.preparation.dpnid = objtemp.
+    this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
       
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;

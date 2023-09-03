@@ -36,9 +36,20 @@ internal class HeaderFooter
             //ConvertHtmlTableToWordTableInHeaderAndFooter(outputPath, htmlheaderTable, htmlfooterTable);
         }
         catch (Exception ex)
-        {
-
+        {           
             //throw;
+        }
+    }
+
+    public static Stream getData(string htmlheaderTable, string htmlfooterTable, Stream stream, DocumentTemplateConfiguration template)
+    {
+        try
+        {
+            return ConvertHtmlTableToWordTableInHeader1(stream, htmlheaderTable, htmlfooterTable, template);
+        }
+        catch (Exception ex)
+        {
+            return null;
         }
     }
 
@@ -187,6 +198,109 @@ internal class HeaderFooter
             }
         }
         //filePath = tempFilePath;
+        //return stream;
+    }
+
+    public static Stream ConvertHtmlTableToWordTableInHeader1(Stream stream, string htmlTable, string htmlfooterTable, DocumentTemplateConfiguration template)
+    {
+        using (WordprocessingDocument document = WordprocessingDocument.Create(stream, WordprocessingDocumentType.Document))
+        {
+
+            // Get the main document part
+            MainDocumentPart mainPart;
+            if (document.MainDocumentPart != null)
+                mainPart = document.MainDocumentPart;
+            else
+            {
+                mainPart = document.AddMainDocumentPart();
+                new DocumentFormat.OpenXml.Wordprocessing.Document(new DocumentFormat.OpenXml.Wordprocessing.Body()).Save(mainPart);
+            }
+
+            // Iterate through each page and add header and footer tables
+            for (int page = 0; page < template.Pages; page++)
+            {
+                // Create a new section properties for each page
+                SectionProperties sectionProperties = new SectionProperties(
+                    new PageSize() { Width = 11906U, Height = 16838U }, // Adjust page size as needed
+                    new PageMargin() { Top = 2000, Right = 1417, Bottom = 1417, Left = 1417, Header = 708, Footer = 708 }
+                );
+                Page currentPage = (template.Page != null && template.Page.Count > 0) ? template.Page[page] : null;
+                if (page > 0)
+                {
+                    DocumentFormat.OpenXml.Drawing.Paragraph pageBreak = new DocumentFormat.OpenXml.Drawing.Paragraph(new Run(new Break() { Type = BreakValues.Page }));
+                    mainPart.Document.Body.Append(pageBreak);
+                }
+
+                // Create a new header part and assign an ID
+                HeaderPart headerPart = mainPart.AddNewPart<HeaderPart>();
+                string headerPartId = mainPart.GetIdOfPart(headerPart);
+
+                // Create a new footer part and assign an ID
+                FooterPart footerPart = mainPart.AddNewPart<FooterPart>();
+                string footerPartId = mainPart.GetIdOfPart(footerPart);
+
+                // Create a new header reference and assign the ID
+                HeaderReference headerReference = new HeaderReference() { Type = HeaderFooterValues.Default, Id = headerPartId };
+                // Create a new footer reference and assign the ID
+                FooterReference footerReference = new FooterReference() { Type = HeaderFooterValues.Default, Id = footerPartId };
+
+                sectionProperties.RemoveAllChildren<HeaderReference>();
+                sectionProperties.RemoveAllChildren<FooterReference>();
+                // Set the header reference on the section properties
+                sectionProperties.InsertAt(headerReference, 0);
+                // Set the footer reference on the section properties
+                sectionProperties.InsertAt(footerReference, 1);
+
+                // Add section properties to the body
+                mainPart.Document.Body.Append(sectionProperties);
+
+                // Create a new header with a table
+                Header header = new Header();
+                headerPart.Header = header;
+
+                // Create a new footer with a table
+                Footer footer = new Footer();
+                footerPart.Footer = footer;
+
+                // Load the HTML content into paragraphs for header and footer
+                HtmlDocument htmlHeaderDocument = new HtmlDocument();
+                htmlHeaderDocument.LoadHtml(htmlTable);
+                GenerateHeaderContent(headerPart, htmlHeaderDocument, template);
+
+                HtmlDocument htmlFooterDocument = new HtmlDocument();
+                htmlFooterDocument.LoadHtml(htmlfooterTable);
+                GenerateFooterContent(footerPart, htmlFooterDocument);
+
+                // Add the table to the header
+                //header.Append(headerElements);
+                //headerPart.Header.Save();
+
+                //footer.Append(footerElements);
+                //footerPart.Footer.Save();
+                if (currentPage != null)
+                    GenerateDynamicBodyContent(mainPart, currentPage);
+
+                // Add dynamic content to the body
+                //if (page < template.Page.ToList().Count)
+                //{
+                //    string bodyContent = template.Page[page].text;
+                //    string[] lines = bodyContent.Split('\n');
+
+                //    foreach (string line in lines)
+                //    {
+                //        DocumentFormat.OpenXml.Wordprocessing.Body body = mainPart.Document.Body;
+                //        DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
+                //        Run run = new Run();
+                //        Text text = new Text(line.Trim()); // Trim to remove any leading/trailing spaces
+                //        run.Append(text);
+                //        paragraph.Append(run);
+                //        body.Append(paragraph);
+                //    }
+                //}
+            }
+        }
+        //filePath = tempFilePath;
+        return stream;
     }
 
     private static void GenerateDynamicBodyContent(MainDocumentPart mainPart, Page currentPage)
@@ -1005,5 +1119,16 @@ internal class HeaderFooter
 
         // Save the document as PDF using Aspose.Words
         doc.Save(outputFilePath, SaveFormat.Pdf);
+    }
+
+
+    public static Stream generatePDF(Stream stream)
+    {
+        // Load the input DOCX document using Aspose.Words
+        Aspose.Words.Document doc = new Aspose.Words.Document(stream);
+        System.IO.Stream pdfStream = new System.IO.MemoryStream();
+        // Save the document as PDF using Aspose.Words
+        doc.Save(pdfStream, SaveFormat.Pdf);
+        return pdfStream;
     }
 }

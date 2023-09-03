@@ -17,7 +17,7 @@
                      id="documentType"
                      name="documentType"
                      placeholder="Document Type Name"
-                     [(ngModel)]="documentType.Documenttypename" [disabled]="editMode" 
+                     [(ngModel)]="documentType.Documenttypename" [disabled]="documentType.IsParent && editMode" 
                      required
                      #documentTypeInput="ngModel" maxlength="150"
                      />

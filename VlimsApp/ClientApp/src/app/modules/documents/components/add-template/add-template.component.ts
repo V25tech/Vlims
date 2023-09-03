@@ -11,10 +11,6 @@ import { DocumentTemplateServiceService } from 'src/app/modules/services/documen
 import { ToastrService } from 'ngx-toastr';
 
 
-
-
-
-
 interface SelectOption {
   name: string;
   value: number;
@@ -62,6 +58,7 @@ export class AddTemplateComponent implements OnInit {
   rowsFooterArray: number[] = [];
   colsFooterArray: number[] = [];
   gridFooterData: any = [];
+  isSumbited = false;
 
   selectOptions: SelectOption[] = [
     { name: 'Label', value: 1 },
