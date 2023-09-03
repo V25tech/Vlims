@@ -100,15 +100,15 @@ namespace PolicySummary.Controllers
             }
             return Ok(pdfBytes);
         }
-        [HttpGet("templatepreviewInfo")]
-        public ActionResult PreviewTemplate(string templateName)
+        [HttpGet("preview")]
+        public ActionResult PreviewTemplate(string templateinf)
         {
             byte[] pdfBytes = null;
-            if (templateName != null)
+            if (templateinf != null)
             {
                 try
                 {
-                    DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateName);
+                    DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
                     pdfBytes = DownloadTemplate(dataset);
                 }
                 catch (Exception ex)
@@ -150,35 +150,35 @@ namespace PolicySummary.Controllers
         /// </summary>
         /// <param name="documentPreparation"></param>
         /// <returns></returns>
-        [HttpPost("preview")]
-        public ActionResult PreviewDocumentPreparation(string templateinf)
-        {
-            List<DocumentTemplateConfiguration> result; byte[] pdfBytes = null;
-            RequestContext request = new RequestContext() { PageNumber = 1, PageSize = 50 };
-            DataSet dataset = DocumentTemplateConfigurationData.GetAllDocumentTemplateConfiguration(request);
-            if (dataset != null && dataset.Tables[0].Rows.Count > 0)
-            {
-                result = DocumentTemplateConfigurationConverter.SetAllDocumentTemplateConfiguration(dataset, true);
-                var template = result.FirstOrDefault(o => o.Templatename.Equals(templateinf, StringComparison.InvariantCultureIgnoreCase));
-                if (template != null)
-                {
-                    string headertable = HeaderFooter.PrepareHeaderdiv(template);
-                    string footertable = HeaderFooter.PrepareFooterdiv(template);
-                    string tempFilePath = Path.GetTempFileName() + ".docx";
-                    HeaderFooter.getData(headertable, footertable, tempFilePath, template);
+        //[HttpPost("preview")]
+        //public ActionResult PreviewDocumentPreparation(string templateinf)
+        //{
+        //    List<DocumentTemplateConfiguration> result; byte[] pdfBytes = null;
+        //    RequestContext request = new RequestContext() { PageNumber = 1, PageSize = 50 };
+        //    DataSet dataset = DocumentTemplateConfigurationData.GetAllDocumentTemplateConfiguration(request);
+        //    if (dataset != null && dataset.Tables[0].Rows.Count > 0)
+        //    {
+        //        result = DocumentTemplateConfigurationConverter.SetAllDocumentTemplateConfiguration(dataset, true);
+        //        var template = result.FirstOrDefault(o => o.Templatename.Equals(templateinf, StringComparison.InvariantCultureIgnoreCase));
+        //        if (template != null)
+        //        {
+        //            string headertable = HeaderFooter.PrepareHeaderdiv(template);
+        //            string footertable = HeaderFooter.PrepareFooterdiv(template);
+        //            string tempFilePath = Path.GetTempFileName() + ".docx";
+        //            HeaderFooter.getData(headertable, footertable, tempFilePath, template);
 
-                    // Generate the output file path dynamically
-                    string outputFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); // Set the folder where you want to save the converted PDFs
-                    string outputFileName = HeaderFooter.GenerateUniqueFileName(); // Function to generate a unique file name
-                    string outputFilePath = Path.Combine(outputFolderPath, outputFileName);
+        //            // Generate the output file path dynamically
+        //            string outputFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); // Set the folder where you want to save the converted PDFs
+        //            string outputFileName = HeaderFooter.GenerateUniqueFileName(); // Function to generate a unique file name
+        //            string outputFilePath = Path.Combine(outputFolderPath, outputFileName);
 
-                    // Convert the content to PDF using iTextSharp
-                    HeaderFooter.generatePDF(tempFilePath, outputFilePath);
-                    pdfBytes = System.IO.File.ReadAllBytes(outputFilePath);
-                }
-            }
-            return Ok(pdfBytes); //result;
-        }
+        //            // Convert the content to PDF using iTextSharp
+        //            HeaderFooter.generatePDF(tempFilePath, outputFilePath);
+        //            pdfBytes = System.IO.File.ReadAllBytes(outputFilePath);
+        //        }
+        //    }
+        //    return Ok(pdfBytes); //result;
+        //}
 
         private DataTable PrepareDataTable1(DocumentTemplateConfiguration template)
         {
