@@ -1124,9 +1124,6 @@ internal class HeaderFooter
 
     public static Stream generatePDF(Stream stream)
     {
-        string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", "Aspose.WordsProductFamily.LIC");
-        License asposeLicense = new License();
-        asposeLicense.SetLicense(uploadsFolder);
         // Load the input DOCX document using Aspose.Words
         Aspose.Words.Document doc = new Aspose.Words.Document(stream);
         System.IO.Stream pdfStream = new System.IO.MemoryStream();
