@@ -10,6 +10,9 @@ import { DepartmentconfigurationService } from 'src/app/modules/services/departm
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
+import { DocumentPreperationService } from 'src/app/modules/services/document-preperation.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-review-revision',
@@ -29,14 +32,21 @@ export class ReviewRevisionComponent {
   requestId: number = 0; workId: number = 0; statuss: string = ''; iscompleted: boolean = false; type: string = ''
   username: string = ''
   workitems: Array<WorkItemsConfiguration> = [];
-  finalStatus: string = ''
+  finalStatus: string = '';
+  fileBytes: Uint8Array = new Uint8Array();
+  modalRef: BsModalRef | undefined;
+  pdfBytes: Uint8Array | undefined;
+  safePdfDataUrl: SafeResourceUrl | undefined;
+  data: string = '<base64-encoded-data>';
+  pdfUrl: string | null = null;
 
   constructor(private router: Router, private location: Location, private toastr: ToastrService, private route: ActivatedRoute,
     private spinner: NgxSpinnerService, private commonsvc: CommonService,
     private workitemssvc: WorkitemsService,
-    private route1: ActivatedRoute,
     private wfservice: WorkflowServiceService,
+    private docPreperationService: DocumentPreperationService,
     private documentRevisionService: DocumentRevisionService,
+    private modalService: BsModalService, private sanitizer: DomSanitizer,
     private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService) { }
 
   ngOnInit() {
@@ -219,5 +229,45 @@ export class ReviewRevisionComponent {
       }
       this.spinner.hide();
     });
+  }
+
+  previewtemplate(template: TemplateRef<any>) {
+    this.spinner.show();
+    this.docPreperationService.preview(this.revision.template).subscribe((data: any) => {
+      this.fileBytes = data;
+      this.pdfBytes = this.fileBytes;
+      this.spinner.hide();
+      this.openViewer(template);
+    }, er => {
+      this.spinner.hide();
+    });
+  }
+  openViewer(template: TemplateRef<any>): void {
+
+    if (this.pdfBytes) {
+      const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    }
+  }
+
+  // Function to convert base64 to Blob
+  private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
+  closeModel() {
+    if (this.modalRef)
+      this.modalRef.hide();
   }
 }

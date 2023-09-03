@@ -110,6 +110,7 @@ export class DocumentAdditionalTasks {
   reviewDate: Date | undefined;
   modifiedDate: Date | undefined;
   workflow:string='';
+  template:string = '';  
 }
 
 export class noticationconfiguration {
