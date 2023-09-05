@@ -20,12 +20,13 @@ import { MessageService } from 'primeng/api';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToastrModule } from 'ngx-toastr';
+import { AuditlogComponentComponent } from './auditlog-component/auditlog-component.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LeftNavComponent],
+  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent],
   imports: [
     BrowserModule,
     FormsModule,

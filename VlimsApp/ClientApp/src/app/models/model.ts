@@ -418,3 +418,14 @@ export class functionalprofile {
   modifiedby: string ='';
   createdby: string ='';
 }
+export class AuditConfiguration {
+  DocumentType: string = ''
+  Department: string = ''
+  Users: string = ''
+  ModifiedBy: any;
+  CreatedBy: any;
+  CreatedDate: Date | undefined;
+  ModifiedDate: Date | undefined;
+  DepartmentName: any;
+  id: any;
+}

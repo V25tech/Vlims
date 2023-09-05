@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="page-title flex-grow-1">Document Preparation Configuration</h4>
         <div class="d-flex page-title-actions">
-          <input type="text" class="form-control" placeholder="Search" />
+          <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"placeholder="Search" />
           
         </div>
       </div>
@@ -13,8 +13,9 @@
   <div class="row p-2">
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table
+        <p-table #templatesTable
           [value]="preparationsDatasource"
+          [globalFilterFields]="['documentno','reqcode','documentname','documenttype','department','assignedtogroup','status']"
           tableStyleClass="table table-striped" [rows]="itemsPerPage"
             [paginator]="true" [totalRecords]="preparationsDatasource.length"
             [rowsPerPageOptions]="rowsPerPageOptions" 

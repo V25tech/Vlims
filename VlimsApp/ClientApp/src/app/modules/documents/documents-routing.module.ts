@@ -29,6 +29,7 @@ import { ActivateDeactivateuserComponent } from '../authentication/components/Ac
 import { ChangepasswordComponent } from '../authentication/components/changepassword/changepassword.component';
 import { HierarchyComponent } from '../authentication/components/hierarchy/hierarchy.component';
 import { UsermanagementComponent } from '../authentication/components/usermanagement/usermanagement.component';
+import { AuditlogComponentComponent } from 'src/app/auditlog-component/auditlog-component.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -213,6 +214,11 @@ const routes: Routes = [
   {
     path: 'home/hierarchy',
     component: AdminHomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin/audit',
+    component: AuditlogComponentComponent,
     canActivate: [AuthGuard],
   },
   {
