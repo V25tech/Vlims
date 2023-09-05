@@ -383,3 +383,7 @@ FodyWeavers.xsd
 /Vlims.DocumentManager/Uploads
 /Vlims.Common/DataAccessHelper.cs
 /VlimsApp/ClientApp/src/app/modules/documents/components/add-template/add-template.component.html
+/VlimsApp/ClientApp/src/app/modules/authentication/components/Audit/audit-module.component.html
+/VlimsApp/ClientApp/src/app/modules/authentication/components/Audit/audit-module.component.scss
+/VlimsApp/ClientApp/src/app/modules/authentication/components/Audit/audit-module.component.spec.ts
+/VlimsApp/ClientApp/src/app/modules/authentication/components/Audit/audit-module.component.ts
