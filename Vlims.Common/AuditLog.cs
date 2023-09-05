@@ -5,10 +5,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vlims.Administration.Manager;
 
 namespace Vlims.Common
 {
-    public class AuditLog
+    public class AuditLog : IAuditConfigurationService
     {
         /// <summary>
         /// Saving Audit 
@@ -21,7 +22,7 @@ namespace Vlims.Common
                 case DefinitionStatus.New:
                     auditLog.Action = Actions.Added;
                     auditLog.Message = "Added" + auditLog.Type.ToLower() + " " + auditLog.EntityName;
-                    
+
                     break;
                 case DefinitionStatus.Modify:
                     auditLog.Action = Actions.Modified;
@@ -65,7 +66,9 @@ namespace Vlims.Common
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static List<AuditLogEntity> GetAuditLogEntities(string type)
+
+
+        public List<AuditLogEntity> GetAllAuditConfiguration(string type)
         {
             List<AuditLogEntity> result = new List<AuditLogEntity>();
             List<SqlParameter> l_params = new List<SqlParameter>
@@ -92,6 +95,11 @@ namespace Vlims.Common
                 }
             }
             return result;
+        }
+
+        public bool SaveAuditConfiguration(AuditLogEntity roleConfiguration)
+        {
+            throw new NotImplementedException();
         }
     }
 }
