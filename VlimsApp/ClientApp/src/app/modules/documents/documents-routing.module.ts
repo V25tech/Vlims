@@ -217,7 +217,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'admin/audit',
+    path: 'admin/auditlog',
     component: AuditlogComponentComponent,
     canActivate: [AuthGuard],
   },
