@@ -11,8 +11,9 @@ namespace PolicySummary.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Vlims.Administration.Manager;
-    using Vlims.Common;
+    
     using Vlims.Administration.Entities;
+    using Vlims.Common;
 
 
     /// <summary>
@@ -22,9 +23,9 @@ namespace PolicySummary.Controllers
     [Route("api/auditconfiguration")]
     public class AuditConfigurationController : ControllerBase
     {
-        
+
         private readonly IAuditConfigurationService auditConfigurationService;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -33,7 +34,7 @@ namespace PolicySummary.Controllers
         {
             this.auditConfigurationService = auditConfigService;
         }
-        
+
         /// <summary>
         /// This method is used to Get List of RoleConfiguration
         /// </summary>

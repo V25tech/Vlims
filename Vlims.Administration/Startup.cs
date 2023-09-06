@@ -67,10 +67,10 @@ public class Startup
         services.AddScoped<IUserGroupConfigurationService, UserGroupConfigurationService>();
         services.AddScoped<IPlantManagementService, PlantManagementService>();
         services.AddScoped<ISetFunctionalProfileService, SetFunctionalProfileService>();
-        services.AddScoped<IAuditConfigurationService, AuditLog>();
+        services.AddScoped<IAuditConfigurationService, AuditConfigurationService>();
     }
 
-    
+
     public void configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory)
     {
         if (env.IsDevelopment())

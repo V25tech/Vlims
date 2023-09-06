@@ -9,20 +9,18 @@ using Vlims.Administration.Manager;
 
 namespace Vlims.Common
 {
-    public class AuditLog : IAuditConfigurationService
+    public class AuditLog 
     {
-        /// <summary>
-        /// Saving Audit 
-        /// </summary>
-        /// <param name="auditLog"></param>
-        public static void SaveAuditLog(AuditLogEntity auditLog)
+  
+
+
+        public static bool SaveAuditLog(AuditLogEntity auditLog)
         {
             switch (auditLog.state)
             {
                 case DefinitionStatus.New:
                     auditLog.Action = Actions.Added;
                     auditLog.Message = "Added" + auditLog.Type.ToLower() + " " + auditLog.EntityName;
-
                     break;
                 case DefinitionStatus.Modify:
                     auditLog.Action = Actions.Modified;
@@ -32,6 +30,7 @@ namespace Vlims.Common
                     break;
             }
             InsertAuditLog(auditLog);
+            return true;
         }
         /// <summary>
         /// Inserting Audit Infor
@@ -68,7 +67,7 @@ namespace Vlims.Common
         /// <returns></returns>
 
 
-        public List<AuditLogEntity> GetAllAuditConfiguration(string type)
+        public static List<AuditLogEntity> GetAllAuditConfiguration(string type)
         {
             List<AuditLogEntity> result = new List<AuditLogEntity>();
             //List<SqlParameter> l_params = new List<SqlParameter>
@@ -97,9 +96,6 @@ namespace Vlims.Common
             return result;
         }
 
-        public bool SaveAuditConfiguration(AuditLogEntity roleConfiguration)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
