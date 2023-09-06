@@ -36,8 +36,11 @@ export class AuditlogComponentComponent {
   }
   getauditmodule() {
     this.loader.show();
+    debugger;
        return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
-         this.griddata=data.Response;
+        debugger;
+         this.griddata=data;
+         this.types=data;
          this.loader.hide();
        }, er => {
          this.loader.hide();

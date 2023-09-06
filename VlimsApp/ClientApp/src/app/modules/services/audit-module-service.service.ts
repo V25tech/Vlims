@@ -20,7 +20,7 @@ export class AuditConfiurationService {
 
   getAuditModule(objrequest: RequestContext) {
     
-    return this.http.postJsonLogin(objrequest, "api/departmentconfiguration/getdepartments",this.type);
+    return this.http.postJsonLogin(objrequest, "api/auditconfiguration/getaudit",this.type);
 }
 
  

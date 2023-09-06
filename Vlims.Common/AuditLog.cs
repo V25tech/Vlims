@@ -9,9 +9,9 @@ using Vlims.Administration.Manager;
 
 namespace Vlims.Common
 {
-    public class AuditLog 
+    public class AuditLog
     {
-  
+
 
 
         public static bool SaveAuditLog(AuditLogEntity auditLog)
@@ -74,21 +74,23 @@ namespace Vlims.Common
             //{
             //    new SqlParameter {SqlDbType=SqlDbType.VarChar,ParameterName="type",Value=type}
             //};
-            object obj = dataAccessHelper.ExecuteStoredProcedure("USP_AUDIT_LOG_GET_ALL", null, ExecutionType.NonQuery, 600);
-            DataSet? ds = obj as DataSet;
+            DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure("USP_AUDIT_LOG_GET_ALL", null, ExecutionType.Dataset,600);
+
+            //object obj = dataAccessHelper.ExecuteStoredProcedure("USP_AUDIT_LOG_GET_ALL", null, ExecutionType.NonQuery, 600);
+            DataSet? ds = dataset;
             if (ds != null)
             {
                 foreach (var item in ds.Tables[0].AsEnumerable())
                 {
                     AuditLogEntity entity = new AuditLogEntity()
                     {
-                        EntityName = Convert.ToString(item["@EntityName"].ToString()),
-                        UserName = Convert.ToString(item["@UserName"]),
-                        Message = Convert.ToString(item["@Message"]),
-                        Type = Convert.ToString(item["@Type"]),
-                        Action = (Actions)Enum.Parse(typeof(Actions), Convert.ToString(item["@Action"])),
-                        CreatedDate = Convert.ToDateTime(item["@CreatedDate"]),
-                        state = (DefinitionStatus)Enum.Parse(typeof(DefinitionStatus), Convert.ToString(item["@state"])),
+                        EntityName = Convert.ToString(item["EntityName"].ToString()),
+                        UserName = Convert.ToString(item["UserName"]),
+                        Message = Convert.ToString(item["Message"]),
+                        Type = Convert.ToString(item["Type"]),
+                        Action = (Actions)Enum.Parse(typeof(Actions), Convert.ToString(item["Action"])),
+                        CreatedDate = Convert.ToDateTime(item["CreatedDate"]),
+                        state = (DefinitionStatus)Enum.Parse(typeof(DefinitionStatus), Convert.ToString(item["state"])),
                     };
                     result.Add(entity);
                 }
@@ -96,6 +98,6 @@ namespace Vlims.Common
             return result;
         }
 
-       
+
     }
 }

@@ -40,10 +40,10 @@ namespace PolicySummary.Controllers
         /// </summary>
         /// <param name="requestContext"></param>
         [HttpPost("getaudit")]
-        public ActionResult<List<AuditLogEntity>> GetAllAuditConfiguration(string type)
+        public ActionResult GetAllAuditConfiguration(string type)
         {
             var result = auditConfigurationService.GetAllAuditConfiguration(type);
-            return result;
+            return Ok(result);
         }
         
        
