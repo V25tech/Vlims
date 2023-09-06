@@ -19,7 +19,7 @@ namespace PolicySummary.Controllers
     /// Comment
     /// </summary>
     [ApiController()]
-    [Route("api/roleconfiguration")]
+    [Route("api/auditconfiguration")]
     public class AuditConfigurationController : ControllerBase
     {
         

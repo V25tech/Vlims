@@ -22,6 +22,7 @@ export class AddDocumentTypeComponent {
   grid: DocumentTypeConfiguration[] = [];
   departments: string[] = [];
   isSubmiting = false;
+  title:string='New Document type Registration';
   viewMode: boolean = false; editMode: boolean = false;
   selectedDepartments: string[] = [];
 
@@ -42,7 +43,9 @@ export class AddDocumentTypeComponent {
     const lastSegment = segments[segments.length - 2];
     this.getdepartments();
     if (lastSegment == "edit") {
+
       let id = parseInt(segments[segments.length - 1], 10);
+      this.title='Modify Document Type Registration';
       this.editMode = true;
       if (this.commonsvc.documentType.DTCId) {
         this.selectedDepartments = this.commonsvc.documentType?.Assigntodepartment?.split(',');

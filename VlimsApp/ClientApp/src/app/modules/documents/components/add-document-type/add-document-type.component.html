@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-      <h4 class="page-title">New Document type Registration</h4>
+      <h4 class="page-title">{{title}}</h4>
     </div>
   </div>
   <div class="row p-2">
@@ -10,29 +10,36 @@
         <div class="p-4 bg-white shadow-dark rounded-2">
 
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label">Document Type <span style="color: red; font-weight: bolder;">*</span></label>
+            <label for="documentType" class="col-sm-2 col-form-label">Document Type Name <span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="documentType"
                      name="documentType"
                      placeholder="Document Type Name"
-                     [(ngModel)]="documentType.Documenttypename" [disabled]="documentType.IsParent && editMode" 
+                     [(ngModel)]="documentType.Documenttypename"
+                     [attr.disabled]="documentType.IsParent && editMode ? true : null"
                      required
-                     #documentTypeInput="ngModel" maxlength="150"
+                     #documentTypeInput="ngModel"
+                     maxlength="150"
                      />
-                     <div *ngIf="documentTypeInput.invalid && (documentTypeInput.dirty || documentTypeInput.touched)" class="text-danger">
-                      Enter Document Type.
-                    </div>
+              <div *ngIf="documentTypeInput.invalid && (documentTypeInput.dirty || documentTypeInput.touched)" class="text-danger">
+                Enter Document Type.
+              </div>
             </div>
           </div>
+          
+
+
+          
           <div class="form-group row">
-            <label for="prefix" class="col-sm-2 col-form-label">Prefix <span style="color: red; font-weight: bolder;">*</span></label>
+            <label for="prefix" class="col-sm-2 col-form-label">Document Prefix Name <span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="prefix"
                      name="prefix"
+                     pattern="^[a-zA-Z\s]*$"
                      placeholder="Enter Prefix Name"
                      [(ngModel)]="documentType.documenttypeprefix" [disabled]="viewMode" maxlength="8"
                      required
@@ -76,7 +83,7 @@
 
         <div class="form-group row my-4">
           <div class="col-sm-10 offset-sm-2">
-            <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
+            <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Back</button>
 
             <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && documentType.Status!='Approved'"  (click)="approve();" >Approve</button>
             <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && documentType.Status!='Approved'" (click)="reinitiative();" >Re-Initiate</button>

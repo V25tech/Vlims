@@ -71,11 +71,11 @@ namespace Vlims.Common
         public List<AuditLogEntity> GetAllAuditConfiguration(string type)
         {
             List<AuditLogEntity> result = new List<AuditLogEntity>();
-            List<SqlParameter> l_params = new List<SqlParameter>
-            {
-                new SqlParameter {SqlDbType=SqlDbType.VarChar,ParameterName="type",Value=type}
-            };
-            object obj = dataAccessHelper.ExecuteStoredProcedure("USP_AUDIT_LOG_GET_ALL", l_params, ExecutionType.NonQuery, 600);
+            //List<SqlParameter> l_params = new List<SqlParameter>
+            //{
+            //    new SqlParameter {SqlDbType=SqlDbType.VarChar,ParameterName="type",Value=type}
+            //};
+            object obj = dataAccessHelper.ExecuteStoredProcedure("USP_AUDIT_LOG_GET_ALL", null, ExecutionType.NonQuery, 600);
             DataSet? ds = obj as DataSet;
             if (ds != null)
             {

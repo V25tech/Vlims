@@ -12,6 +12,7 @@ using PolicySummary.Sheet1.Services;
 using Vlims.Administration;
 //using Serilog;
 using Vlims.Administration.Manager;
+using Vlims.Common;
 
 public class Startup
 {
@@ -66,6 +67,7 @@ public class Startup
         services.AddScoped<IUserGroupConfigurationService, UserGroupConfigurationService>();
         services.AddScoped<IPlantManagementService, PlantManagementService>();
         services.AddScoped<ISetFunctionalProfileService, SetFunctionalProfileService>();
+        services.AddScoped<IAuditConfigurationService, AuditLog>();
     }
 
     
