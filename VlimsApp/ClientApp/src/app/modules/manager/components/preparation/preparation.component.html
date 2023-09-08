@@ -3,10 +3,19 @@
     <div class="col">
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="page-title flex-grow-1">Document Preparation Configuration</h4>
-        <div class="d-flex page-title-actions">
-          <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"placeholder="Search" />
-          
+        <div class="back-icon" style="margin-right: 10px;">
+               <a href="javascript:void(0);" onclick="history.back();">
+                       <i class="bi bi-arrow-left-circle-fill" style="font-size: 32px;"></i>
+                    </a>
         </div>
+        <div class="d-flex page-title-actions">
+          <div class="input-group">
+
+            <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')" placeholder="Search">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+
+              </div>
+            </div>
       </div>
     </div>
   </div>
@@ -15,20 +24,20 @@
       <div class="p-4 bg-white shadow-dark rounded-2">
         <p-table #templatesTable
           [value]="preparationsDatasource"
-          [globalFilterFields]="['documentno','reqcode','documentname','documenttype','department','assignedtogroup','status']"
+          [globalFilterFields]="['documentno','requestcode','documenttitle','documenttype','department','assignedtogroup','status']"
           tableStyleClass="table table-striped" [rows]="itemsPerPage"
             [paginator]="true" [totalRecords]="preparationsDatasource.length"
             [rowsPerPageOptions]="rowsPerPageOptions" 
         >
           <ng-template pTemplate="header">
             <tr>
-              <th style="width: 60px">#</th>
+              <th style="width: 60px">S.No</th>
               <th pSortableColumn="documentno" style="width: 15%">
-                Document No<p-sortIcon field="documentno"></p-sortIcon>
+                Document No.<p-sortIcon field="documentno"></p-sortIcon>
               </th>
 
-              <th pSortableColumn="reqCode" style="width: 10%">
-                Req Code<p-sortIcon field="reqCode"></p-sortIcon>
+              <th pSortableColumn="request Code" style="width: 10%">
+                Req Code<p-sortIcon field="request Code"></p-sortIcon>
               </th>
               <th pSortableColumn="documenttitle" style="width: 15%">
                 Document Name<p-sortIcon field="documenttitle"></p-sortIcon>

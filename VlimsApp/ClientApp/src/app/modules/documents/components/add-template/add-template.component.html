@@ -360,7 +360,7 @@
           <button type="button"
                   class="btn btn-outline-secondary mx-2"
                   (click)="onCancel()">
-            Cancel
+            Back
           </button>
           <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid"  (click)="addTemplate()">{{editMode?'Update':'Submit'}} </button>
           <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="approve()">Approve</button>
