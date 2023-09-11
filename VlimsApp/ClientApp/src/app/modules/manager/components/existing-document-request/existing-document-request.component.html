@@ -41,7 +41,8 @@
                       <td>{{existingdoc?.documenttype}}</td>
                       <td>{{existingdoc?.department}}</td>
                       <td>{{existingdoc?.effectiveDate | date}}</td>
-                      <td>{{existingdoc?.reviewDate| date}}</td>
+                      <td *ngIf ="existingdoc?.reviewDate=='01-01-1900 00:00:00'">NA</td>
+                      <td *ngIf="existingdoc?.reviewDate!='01-01-1900 00:00:00'">{{existingdoc?.reviewDate| date}}</td>
                       <!-- <td>{{existingdoc?.approvedby}}</td>
                       <td>{{existingdoc?.approvedOn| date}}</td> -->
                       <td class="text-center" *ngIf="access"><i (click)="editExistingDoc(existingdoc)" class="bi bi-pencil"></i></td>

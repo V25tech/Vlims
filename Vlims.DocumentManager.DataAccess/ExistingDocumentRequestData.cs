@@ -55,7 +55,7 @@ public static class ExistingDocumentRequestData
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.sampletemplate, Value = existingDocumentRequest.sampletemplate });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.CreatedBy, Value = existingDocumentRequest.CreatedBy });
             sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = ExistingDocumentRequestConstants.EffectiveDate, Value = existingDocumentRequest.effectiveDate });
-            sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = ExistingDocumentRequestConstants.ReviewDate, Value = existingDocumentRequest.reviewDate });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.ReviewDate, Value = existingDocumentRequest.reviewDate });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.ModifiedBy, Value = existingDocumentRequest.ModifiedBy });
             Object result = dataAccessHelper.ExecuteStoredProcedure(ExistingDocumentRequestConstants.USP_ExistingDocumentRequest_PSY_INSERT, sqlparms, ExecutionType.Scalar);
             return (Convert.ToInt32(result) > 0);

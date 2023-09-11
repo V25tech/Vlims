@@ -141,14 +141,17 @@ namespace PolicySummary.DMS.Services
                         existingDocumentRequest.documenttitle = row["DocumentTitle"]?.ToString();
                         existingDocumentRequest.documentno = row["DocumentNo"]?.ToString();
                         existingDocumentRequest.effectiveDate = Convert.ToDateTime(row["EffectiveDate"]?.ToString());
-                        existingDocumentRequest.reviewDate = Convert.ToDateTime(row["ReviewDate"]?.ToString());
+                        if (row["ReviewDate"] != null && row["ReviewDate"] != "")
+                            existingDocumentRequest.reviewDate = row["ReviewDate"]?.ToString();
+                        else
+                            existingDocumentRequest.reviewDate = "";
                         existingDocumentRequest.sampletemplate = "Test";
                         existingDocumentRequest.CreatedBy = "ADMIN";
                         existingDocumentRequest.ModifiedBy = "ADMIN";
                         existingDocumentRequest.CreatedDate = DateTime.Now;
                         existingDocumentRequest.document = row["UploadDocument"]?.ToString();
                         SaveExistingDocumentRequest(existingDocumentRequest);
-                    }                    
+                    }
                 }
             }
             catch
