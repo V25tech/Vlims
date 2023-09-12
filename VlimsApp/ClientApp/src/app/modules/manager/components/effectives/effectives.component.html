@@ -3,8 +3,17 @@
     <div class="col">
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="page-title flex-grow-1">Document Effective</h4>
+        <div class="back-icon" style="margin-right: 10px;">
+          <a href="javascript:void(0);" onclick="history.back();">
+              <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+          </a>
+      </div>
         <div class="d-flex page-title-actions">
-          <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" />
+          <div class="input-group">
+            <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -21,16 +30,16 @@
         >
           <ng-template pTemplate="header">
             <tr>
-              <th style="width: 60px">#</th>
+              <th style="width: 60px">S.No</th>
 
-              <th pSortableColumn="reqCode" style="width: 10%">
-                Req Code<p-sortIcon field="reqCode"></p-sortIcon>
+              <th pSortableColumn="requestCode" style="width: 10%">
+                Request Code<p-sortIcon field="requestCode"></p-sortIcon>
               </th>
               <th pSortableColumn="documentTitle" style="width: 20%">
                 Document Title <p-sortIcon field="documentTitle"></p-sortIcon>
               </th>
-              <th pSortableColumn="documentNumber" style="width: 10%">
-                Document Number <p-sortIcon field="documentNumber"></p-sortIcon>
+              <th pSortableColumn="documentNo" style="width: 10%">
+                Document No <p-sortIcon field="document No"></p-sortIcon>
               </th>
               <th pSortableColumn="documentType" style="width: 20%">
                 Document type <p-sortIcon field="documentType"></p-sortIcon>

@@ -1,169 +1,174 @@
 <div class="container-fluid">
-    <div class="row p-2">
-      <div class="col">
-        <h4 class="page-title">Update Document Effective</h4>
+  <div class="row p-2">
+    <div class="col d-flex justify-content-between align-items-center">
+      <h4 class="page-title">Update Document Effective</h4>
+      <div class="back-icon" style="margin-right: 10px;">
+        <a href="javascript:void(0);" onclick="history.back();">
+          <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+        </a>
       </div>
-    </div>
-    <div class="row p-2">
-      <div class="col">
-        <form (ngSubmit)="saveEffective()">
-          <div class="p-4 bg-white shadow-dark rounded-2">
-            
-            <div class="form-group row">
-              <label for="documentTitle" class="col-sm-2 col-form-label"
-                >Document Title</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="documentTitle"
-                  name="documentTitle"
-                  placeholder="Document Title"
-                  [(ngModel)]="effective.documenttitle" 
-                  readonly
-                />
-              </div>
-            </div>
-           
-  
-            <div class="form-group row" >
-              <label for="documentNumber" class="col-sm-2 col-form-label"
-                >Document Number</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="documentNumber"
-                  name="documentNumber"
-                  placeholder="System Generated"
-                  [(ngModel)]="effective.documentno" 
-                  readonly
-                />
-              </div>
-            </div>
-  
-            <div class="form-group row">
-              <label for="docType" class="col-sm-2 col-form-label"
-                >Document Type</label
-              >
-              <div class="col-sm-10">
-                <input
+    </div>   
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <form (ngSubmit)="saveEffective()">
+        <div class="p-4 bg-white shadow-dark rounded-2">
+          
+          <div class="form-group row">
+            <label for="documentTitle" class="col-sm-2 col-form-label"
+              >Document Title</label
+            >
+            <div class="col-sm-10">
+              <input
                 type="text"
                 class="form-control"
-                id="docType"
-                name="docType"
-                placeholder="Document Type"
-                [(ngModel)]="effective.documenttype" 
+                id="documentTitle"
+                name="documentTitle"
+                placeholder="Document Title"
+                [(ngModel)]="effective.documenttitle" 
                 readonly
               />
-              </div>
             </div>
-  
-            <div class="form-group row">
-              <label for="department" class="col-sm-2 col-form-label"
-                >Department</label
-              >
-              <div class="col-sm-10">
-                <input
-                type="text"
-                class="form-control"
-                id="department"
-                name="department"
-                placeholder="Department"
-                [(ngModel)]="effective.department" 
-                readonly
-              />
-              </div>
-            </div>
-  
-            <!-- <div class="form-group row">
-              <label for="workflow" class="col-sm-2 col-form-label"
-                >Workflow</label
-              >
-              <div class="col-sm-10">
-                <input
-                type="text"
-                class="form-control"
-                id="workflow"
-                name="workflow"
-                placeholder="workflow"
-                [(ngModel)]="effective.workflow"
-                readonly
-              />
-              </div>
-            </div> -->
-  
-            <div class="form-group row">
-              <label for="document" class="col-sm-2 col-form-label">Document</label>
-              <div class="col-sm-10">
-                <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
-              </div>
-            </div>
-  
-            <div class="form-group row">
-              <label for="effectiveDate" class="col-sm-2 col-form-label">Effective Date</label>
-              <div class="col-sm-10">
-                <input
-                type="date"
-                class="form-control w-150"
-                id="effectiveDate"
-                name="effectiveDate"
-                placeholder="Effective Date"
-                [(ngModel)]="effective.effectiveDate" [disabled]="viewMode"
-              />
-              </div>
-            </div>
+          </div>
+         
 
-            <div class="form-group row">
-                <label for="reviewDate" class="col-sm-2 col-form-label">Review Date</label>
-                <div class="col-sm-10">
-                    <input
-                    type="date"
-                    class="form-control w-150"
-                    id="reviewDate"
-                    name="reviewDate"
-                    placeholder="Review Date"
-                    [(ngModel)]="effective.reviewDate" [disabled]="viewMode"
-                  />
-                </div>
-              </div>
-          </div>
-  
-          <div class="form-group row my-4">
-            <div class="col-sm-10 offset-sm-2">
-              <button
-                type="button"
-                class="btn btn-outline-secondary mx-2"
-                (click)="onCancel()"
-              >
-                Cancel
-              </button>
-              <button type="submit" class="btn btn-primary" *ngIf="!viewMode">Submit</button>
-             
-              <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
-            <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button> -->
-            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
-            
+          <div class="form-group row" >
+            <label for="documentNumber" class="col-sm-2 col-form-label"
+              >Document Number</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="documentNumber"
+                name="documentNumber"
+                placeholder="System Generated"
+                [(ngModel)]="effective.documentno" 
+                readonly
+              />
             </div>
           </div>
-        </form>
-      </div>
+
+          <div class="form-group row">
+            <label for="docType" class="col-sm-2 col-form-label"
+              >Document Type</label
+            >
+            <div class="col-sm-10">
+              <input
+              type="text"
+              class="form-control"
+              id="docType"
+              name="docType"
+              placeholder="Document Type"
+              [(ngModel)]="effective.documenttype" 
+              readonly
+            />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="department" class="col-sm-2 col-form-label"
+              >Department</label
+            >
+            <div class="col-sm-10">
+              <input
+              type="text"
+              class="form-control"
+              id="department"
+              name="department"
+              placeholder="Department"
+              [(ngModel)]="effective.department" 
+              readonly
+            />
+            </div>
+          </div>
+
+          <!-- <div class="form-group row">
+            <label for="workflow" class="col-sm-2 col-form-label"
+              >Workflow</label
+            >
+            <div class="col-sm-10">
+              <input
+              type="text"
+              class="form-control"
+              id="workflow"
+              name="workflow"
+              placeholder="workflow"
+              [(ngModel)]="effective.workflow"
+              readonly
+            />
+            </div>
+          </div> -->
+
+          <div class="form-group row">
+            <label for="document" class="col-sm-2 col-form-label">Document</label>
+            <div class="col-sm-10">
+              <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="effectiveDate" class="col-sm-2 col-form-label">Effective Date</label>
+            <div class="col-sm-10">
+              <input
+              type="date"
+              class="form-control w-150"
+              id="effectiveDate"
+              name="effectiveDate"
+              placeholder="Effective Date"
+              [(ngModel)]="effective.effectiveDate" [disabled]="viewMode"
+            />
+            </div>
+          </div>
+
+          <div class="form-group row">
+              <label for="reviewDate" class="col-sm-2 col-form-label">Review Date</label>
+              <div class="col-sm-10">
+                  <input
+                  type="date"
+                  class="form-control w-150"
+                  id="reviewDate"
+                  name="reviewDate"
+                  placeholder="Review Date"
+                  [(ngModel)]="effective.reviewDate" [disabled]="viewMode"
+                />
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group row my-4">
+          <div class="col-sm-10 offset-sm-2">
+            <button
+              type="button"
+              class="btn btn-outline-secondary mx-2"
+              (click)="onCancel()"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary" *ngIf="!viewMode">Submit</button>
+           
+            <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
+          <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button> -->
+          <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
+          
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-  
-  <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Preview</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
-    </div>
-  </ng-template>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Preview</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+  </div>
+</ng-template>

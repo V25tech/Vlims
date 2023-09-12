@@ -4,9 +4,17 @@
     <div class="col">
 
       <div class="d-flex justify-content-between align-items-center">
-        <h4 class="page-title flex-grow-1">Document Repository</h4>
+        <h4 class="page-title flex-grow-1">Document Print Request</h4>
+        <div class="back-icon" style="margin-right: 10px;">
+          <a href="javascript:void(0);" onclick="history.back();">
+              <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+          </a>
+      </div>
         <div class="d-flex page-title-actions">
-          <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')" placeholder="Search" >
+          <div class="input-group">
+            <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" />
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+          </div>
           <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPrint()" *ngIf="access">New</button>
         </div>
       </div>
