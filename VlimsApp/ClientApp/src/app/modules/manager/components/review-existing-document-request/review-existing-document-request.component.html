@@ -101,11 +101,7 @@
               <div class="col-sm-10">
                 <input type="date" class="form-control" id="rdate" name="Rdate" placeholder="Review Date"
                   [(ngModel)]="reviewDate" (change)="existingDocReq.reviewDate = getAsDate($event)"
-                  #reviewDateInput="ngModel" required />
-                <div *ngIf="reviewDateInput.invalid && (reviewDateInput.dirty || reviewDateInput.touched)"
-                  class="text-danger">
-                  Review Date is required.
-                </div>
+                  #reviewDateInput="ngModel"  />
               </div>
             </div>
 
