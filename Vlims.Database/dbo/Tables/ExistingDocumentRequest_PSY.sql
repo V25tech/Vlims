@@ -11,9 +11,11 @@
     [ModifiedBy_PSY]     NVARCHAR (100) NULL,
     [ModifiedDate_PSY]   DATETIME       NULL,
     [effectivedate_PSY]  DATETIME       NULL,
-    [reviewdate_PSY]     DATETIME       NULL,
+    [reviewdate_PSY]     NVARCHAR (150) NULL,
     CONSTRAINT [PK_ExistingDocumentRequest_PSY] PRIMARY KEY CLUSTERED ([EDRId_PSY] ASC)
 );
+
+
 
 
 

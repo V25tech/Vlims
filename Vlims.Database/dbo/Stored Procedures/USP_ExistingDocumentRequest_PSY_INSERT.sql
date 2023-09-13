@@ -1,16 +1,18 @@
 ﻿
 
+
+
   CREATE PROCEDURE [dbo].[USP_ExistingDocumentRequest_PSY_INSERT] 
-@documentno_PSY NVarChar(50),
-@documenttitle_PSY NVarChar(50),
-@printtype_PSY NVarChar(50),
-@department_PSY NVarChar(50),
-@browse_PSY NVarChar(50),
-@sampletemplate_PSY NVarChar(50),
+@documentno_PSY NVarChar(150),
+@documenttitle_PSY NVarChar(150),
+@printtype_PSY NVarChar(150),
+@department_PSY NVarChar(150),
+@browse_PSY NVarChar(150),
+@sampletemplate_PSY NVarChar(150),
 @CreatedBy_PSY NVarChar(100),
 @ModifiedBy_PSY NVarChar(100),
 @effectivedate_PSY datetime,
-@reviewdate_PSY datetime
+@reviewdate_PSY NVarChar(100)
  AS 
  BEGIN 
   BEGIN TRY 
