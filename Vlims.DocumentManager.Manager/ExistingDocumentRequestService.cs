@@ -28,14 +28,14 @@ namespace PolicySummary.DMS.Services
     public class ExistingDocumentRequestService : IExistingDocumentRequestService
     {
 
-
+        List<ExistingDocumentRequest> result = null;
 
         public ResponseContext<ExistingDocumentRequest> GetAllExistingDocumentRequest(RequestContext requestContext)
         {
             try
             {
                 DataSet dataset = ExistingDocumentRequestData.GetAllExistingDocumentRequest(requestContext);
-                List<ExistingDocumentRequest> result = ExistingDocumentRequestConverter.SetAllExistingDocumentRequest(dataset);
+                result = ExistingDocumentRequestConverter.SetAllExistingDocumentRequest(dataset);
                 return new ResponseContext<ExistingDocumentRequest>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
             }
             catch (System.Exception ex)
@@ -128,21 +128,22 @@ namespace PolicySummary.DMS.Services
             string baseDirectory = string.Empty;
             try
             {
+                var docs = GetAllExistingDocumentRequest(new RequestContext { PageNumber = 1, PageSize = 50 });
+
                 string file = string.Empty; string errMsg = string.Empty;
                 l_dsInfo = ReadExcelFileWithValueType(p_fileInfo, new List<string>(), l_dateColumns);
                 List<string> lstEntityNamesFromExcel = new List<string>();
-
                 if (l_dsInfo.Tables[0]?.Rows?.Count > 0)
                 {
                     var ValidNameRegExp = string.Empty;
                     foreach (DataRow row in l_dsInfo.Tables[0]?.Rows)
                     {
                         existingDocumentRequest = new ExistingDocumentRequest();
-                        existingDocumentRequest.documenttype = row["DocumentType"]?.ToString();
-                        existingDocumentRequest.department = row["Department"]?.ToString();
-                        existingDocumentRequest.documenttitle = row["DocumentTitle"]?.ToString();
-                        existingDocumentRequest.documentno = row["DocumentNo"]?.ToString();
-                        existingDocumentRequest.effectiveDate = Convert.ToDateTime(row["EffectiveDate"]?.ToString());
+                        existingDocumentRequest.documenttype = row["DocumentType"]?.ToString().Trim();
+                        existingDocumentRequest.department = row["Department"]?.ToString().Trim();
+                        existingDocumentRequest.documenttitle = row["DocumentTitle"]?.ToString().Trim();
+                        existingDocumentRequest.documentno = row["DocumentNo"]?.ToString().Trim();
+                        existingDocumentRequest.effectiveDate = Convert.ToDateTime(row["EffectiveDate"]?.ToString().Trim());
                         if (row["ReviewDate"] != null && row["ReviewDate"] != "")
                             existingDocumentRequest.reviewDate = row["ReviewDate"]?.ToString();
                         else
@@ -151,8 +152,13 @@ namespace PolicySummary.DMS.Services
                         existingDocumentRequest.CreatedBy = "ADMIN";
                         existingDocumentRequest.ModifiedBy = "ADMIN";
                         existingDocumentRequest.CreatedDate = DateTime.Now;
-                        existingDocumentRequest.document = row["UploadDocument"]?.ToString();
-                        SaveExistingDocumentRequest(existingDocumentRequest);
+                        existingDocumentRequest.document = row["UploadDocument"]?.ToString().Trim();
+
+
+                        if (docs.Response?.ToList().Where(r => r.documentno.Equals(existingDocumentRequest.documentno)).Count() == 0)
+                            SaveExistingDocumentRequest(existingDocumentRequest);
+                        else
+                            throw new Exception("Duplicate exists with " + existingDocumentRequest.documentno);
                     }
                 }
             }
