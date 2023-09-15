@@ -56,7 +56,7 @@
                         <td>{{template?.CreatedBy}}</td>
                         <td>{{template?.CreatedDate | date }}</td>
                         <td>
-                            <a href="javascript:void(0)" (click)="previewtemplate(template,template)">Preview</a>
+                            <a href="javascript:void(0)" (click)="previewtemplate(template1,template)">Preview</a>
                         </td> 
                         <td><span class="status" [ngClass]="{'status-completed':true}">{{template?.Status}} </span></td>
                         <td class="text-center" *ngIf="access && !template?.IsParent"><i (click)="editdoc(template)" class="bi bi-pencil"></i></td>
@@ -81,7 +81,20 @@
 </div>
 
 
-
+<ng-template #template1>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Preview</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+    </div>
+  </ng-template>
 
 <style>
 
