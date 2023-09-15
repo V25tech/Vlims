@@ -1,7 +1,21 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-      <h4 class="page-title">{{title}}</h4>
+     
+      <div class="col d-flex justify-content-between align-items-center">
+        <h4 class="page-title">{{title}}</h4>
+  
+        <div class="back-icon" style="margin-right: 10px;">
+  
+          <a href="javascript:void(0);" onclick="history.back();">
+  
+            <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+  
+          </a>
+  
+        </div>
+  
+      </div>
     </div>
   </div>
   <div class="row p-2">
@@ -74,9 +88,7 @@
             </div>
           </div> -->
           <div class="form-group row">
-            <label for="comments" class="col-sm-2 col-form-label">Comments
-              <span style="color: red; font-weight: bolder;">*</span>
-            </label>
+            <label for="comments" class="col-sm-2 col-form-label">Comments</label>
             <div class="col-sm-10">
               <textarea 
                      class="form-control"
@@ -87,8 +99,8 @@
                      [(ngModel)]="addrole.Comments" [disabled]="viewMode"
                      required
                      #commentsInput="ngModel" ></textarea>
-                     <div *ngIf="commentsInput.invalid && (commentsInput.dirty || commentsInput.touched)" class="text-danger">
-                      Write Comments.
+                     <div *ngIf="commentsInput.invalid && (commentsInput.dirty || commentsInput.touched)" >
+                    
                     </div>
             </div>
           </div>

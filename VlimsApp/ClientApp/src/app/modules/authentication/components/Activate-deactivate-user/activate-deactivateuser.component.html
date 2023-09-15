@@ -1,60 +1,156 @@
 <div class="container-fluid">
   <div class="row p-2">
-    <div class="col">
-      <div class="d-flex justify-content-between align-items-center">
-        <h4 class="page-title flex-grow-1">
-          Activate or De Activate users</h4>
-        <div class="d-flex page-title-actions">
-          <input type="text" class="form-control" placeholder="Search">
-          <!-- <button class="btn btn-primary mx-2" type="button" >Add</button> -->
-        </div>
+      <div class="col">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="page-title flex-grow-1">
+            Activate or De Activate users</h4>
+
+              <div class="back-icon" style="margin-right: 10px;">
+                  <a href="javascript:void(0);" onclick="history.back();">
+                      <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+                  </a>
+              </div>
+              
+              <div class="d-flex page-title-actions">
+                  <div class="input-group custom-input-group">
+                      <!-- Magnifying glass icon -->
+                      <span class="input-group-text custom-input-group-text">
+                          <i class="fas fa-search custom-search-icon"></i>
+                      </span>
+                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search">
+                  </div>
+                    
+                 
+              </div>
+          </div>
       </div>
-    </div>
   </div>
   <div class="row p-2">
-    <div class="col">
-      <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table [value]="types" tableStyleClass="table table-striped">
-          <ng-template pTemplate="header">
-            <tr>
-              <th>s.no</th>
-              <!-- <th pSortableColumn="S.no" style="width:20%">S No<p-sortIcon field="sno"></p-sortIcon></th> -->
-              <th pSortableColumn="username" style="width:10%">username<p-sortIcon field="username"></p-sortIcon></th>
-              <th pSortableColumn="UserId" style="width:15%">User Id<p-sortIcon field="UserId"></p-sortIcon></th>
-              <th pSortableColumn="Role" style="width:20%">Role<p-sortIcon field="Role"></p-sortIcon></th>
-              <th pSortableColumn="Department" style="width:200px">Department <p-sortIcon field="Department"></p-sortIcon></th>
-              <th pSortableColumn="RegisteredOn" style="width:200px">Registered On <p-sortIcon field="RegisteredOn"></p-sortIcon></th>
-              <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
-              <th style="width:80px">Actions</th>
-
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-doc let-i="rowIndex">
-            <tr>
-              <td>{{ i + 1 }}</td>
-              <!-- <td>{{doc?.Empid}}</td> -->
-              <td>{{doc?.UserID}}</td>
-              <td>{{doc?.UserID}}</td>
-              <td>{{doc?.Role}}</td>
-              <td>{{doc?.Department}}</td>
-              <td>{{doc?.Doj}}</td>
-              <td><span class="status">{{doc.Status}} </span></td>
-              <td class="text-center" *ngIf="username!=doc?.UserID && access">
-                <!-- <input class="form-check form-switch" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked="doc.Status=='Active'"> -->
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" #switchCheckbox [checked]="doc.Status === 'Active' ? true : false" (click)="update(doc,$event)">
-                </div>
-              </td>
-              <td class="text-center" *ngIf="!access">
-                <i class="bi bi-lock bi-lg" 
-                [ngClass]="{'text-primary':true}"
-                title="No Permissions">
-            </i>
-        </td>
-            </tr>
-          </ng-template>
-        </p-table>
+      <div class="col">
+          <div class="p-4 bg-white shadow-dark rounded-2">
+            <p-table #templatesTable
+             [value]="types" 
+             [globalFilterFields]="['username', 'UserId', 'Role','Department','Status','RegisteredOn']"
+             tableStyleClass="table table-striped">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>s.no</th>
+                  <!-- <th pSortableColumn="S.no" style="width:20%">S No<p-sortIcon field="sno"></p-sortIcon></th> -->
+                  <th pSortableColumn="username" style="width:10%">username<p-sortIcon field="username"></p-sortIcon></th>
+                  <th pSortableColumn="UserId" style="width:15%">User Id<p-sortIcon field="UserId"></p-sortIcon></th>
+                  <th pSortableColumn="Role" style="width:20%">Role<p-sortIcon field="Role"></p-sortIcon></th>
+                  <th pSortableColumn="Department" style="width:200px">Department <p-sortIcon field="Department"></p-sortIcon></th>
+                  <th pSortableColumn="RegisteredOn" style="width:200px">Registered On <p-sortIcon field="RegisteredOn"></p-sortIcon></th>
+                  <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
+                  <th style="width:80px">Actions</th>
+    
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-doc let-i="rowIndex">
+                <tr>
+                  <td>{{ i + 1 }}</td>
+                  <!-- <td>{{doc?.Empid}}</td> -->
+                  <td>{{doc?.UserID}}</td>
+                  <td>{{doc?.UserID}}</td>
+                  <td>{{doc?.Role}}</td>
+                  <td>{{doc?.Department}}</td>
+                  <td>{{doc?.Doj}}</td>
+                  <td><span class="status">{{doc.Status}} </span></td>
+                  <td class="text-center" *ngIf="username!=doc?.UserID && access">
+                    <!-- <input class="form-check form-switch" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked="doc.Status=='Active'"> -->
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" #switchCheckbox [checked]="doc.Status === 'Active' ? true : false" (click)="update(doc,$event)">
+                    </div>
+                  </td>
+                  <td class="text-center" *ngIf="!access">
+                    <i class="bi bi-lock bi-lg" 
+                    [ngClass]="{'text-primary':true}"
+                    title="No Permissions">
+                </i>
+            </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
       </div>
-    </div>
   </div>
-</div>  
+</div>
+
+
+
+<style>
+
+  /* Styles for .custom-input-group */
+
+  .custom-input-group {
+
+      background-color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      border: 1px solid #ccc;
+
+      border-radius: 5px;
+
+  }
+
+  .custom-input-group-text {
+
+          background: white;
+
+          border: none;
+
+          padding: 0;
+
+          vertical-align: middle;
+
+      }
+
+
+
+      .custom-search-icon {
+
+          font-size: 14px;
+
+          margin-right: 5px;
+
+          margin-left: 9px;
+
+          color: #555;
+
+      }
+
+
+
+      .custom-input {
+
+          border: none;
+
+          padding: 5px;
+
+          vertical-align: middle;
+
+          background-color: white;
+
+          box-shadow: none;
+
+      }
+
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

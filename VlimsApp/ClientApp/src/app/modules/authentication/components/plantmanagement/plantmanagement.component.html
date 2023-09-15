@@ -1,21 +1,37 @@
-
 <div class="container-fluid">
   <div class="row p-2">
-    <div class="col">
+      <div class="col">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="page-title flex-grow-1">Plant Management</h4>
 
-      <div class="d-flex justify-content-between align-items-center">
-        <h4 class="page-title flex-grow-1">Plant Management</h4>
-        <div class="d-flex page-title-actions">
-          <input type="text" class="form-control" placeholder="Search">
-          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPlant()" *ngIf="access">New</button>
-        </div>
+              <div class="back-icon" style="margin-right: 10px;">
+                  <a href="javascript:void(0);" onclick="history.back();">
+                      <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+                  </a>
+              </div>
+              
+              <div class="d-flex page-title-actions">
+                  <div class="input-group custom-input-group">
+                      <!-- Magnifying glass icon -->
+                      <span class="input-group-text custom-input-group-text">
+                          <i class="fas fa-search custom-search-icon"></i>
+                      </span>
+                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search">
+                  </div>
+                    
+                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPlant()" *ngIf="access">New</button>
+              </div>
+          </div>
       </div>
-    </div>
   </div>
   <div class="row p-2">
-    <div class="col">
-      <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table #templatesTable tableStyleClass="table table-striped" [value]="types" [rows]="itemsPerPage"
+      <div class="col">
+          <div class="p-4 bg-white shadow-dark rounded-2">
+            <p-table #templatesTable
+            [value]="types"
+             tableStyleClass="table table-striped" 
+             [globalFilterFields]="['Plant Name', 'Plant Code', 'PlantAddress','Registered By','Registered On']"
+            [rows]="itemsPerPage"
             [paginator]="true" [totalRecords]="types.length"
             [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
          
@@ -55,7 +71,69 @@
             </tr>
           </ng-template>
         </p-table>
+          </div>
       </div>
-    </div>
   </div>
 </div>
+
+<style>
+
+  /* Styles for .custom-input-group */
+
+  .custom-input-group {
+
+      background-color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      border: 1px solid #ccc;
+
+      border-radius: 5px;
+
+  }
+
+  .custom-input-group-text {
+
+          background: white;
+
+          border: none;
+
+          padding: 0;
+
+          vertical-align: middle;
+
+      }
+
+
+
+      .custom-search-icon {
+
+          font-size: 14px;
+
+          margin-right: 5px;
+
+          margin-left: 9px;
+
+          color: #555;
+
+      }
+
+
+
+      .custom-input {
+
+          border: none;
+
+          padding: 5px;
+
+          vertical-align: middle;
+
+          background-color: white;
+
+          box-shadow: none;
+
+      }
+
+  </style>
