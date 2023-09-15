@@ -524,4 +524,29 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
       //this.generateTeplateGrid();
     }
   }
+  addbodyNewText() {
+    debugger
+    if (this.pages[this.currentPage].bodyData.length > 0) {
+      const lastRow = this.pages[this.currentPage].bodyData[this.pages[this.currentPage].bodyData.length - 1];
+      const newRow = [...lastRow]; // Clone the last row's data
+
+      // Apply your custom logic for the new row here
+      // if(newRow.length>0)
+      // {
+      //   newRow=newRow[0];
+      // }
+      newRow.forEach((cell, colIndex) => {
+        if (colIndex !== 0 && colIndex % 2 !== 0) {
+          newRow[colIndex] = { selectedOption: 2, inputValue: '' };
+        } else {
+          newRow[colIndex] = { selectedOption: 1, inputValue: '' };
+        }
+      });
+
+      this.pages[this.currentPage].bodyData.push(newRow);
+    } else {
+      // If no rows exist, generate a new row using your existing method
+      //this.generateTeplateGrid();
+    }
+  }
 }

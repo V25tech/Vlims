@@ -161,7 +161,7 @@
                     <ng-container *ngFor="let cell of row; let colIndex = index">
                       <td>
                         <div class="template-cell">
-                          <div class="custom-select" style="width: 84px;">
+                          <div class="custom-select">
                             <select class="select-dropdown form-select"
                             [(ngModel)]="gridData[rowIndex][colIndex].selectedOption">
                               <option *ngFor="let option of selectOptions"
