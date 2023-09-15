@@ -10,19 +10,13 @@
 namespace PolicySummary.DMS.Services
 {
     using System;
-    using System.Text;
     using System.IO;
     using System.Linq;
     using System.Data;
     using System.Collections.Generic;
     using Vlims.Common;
-    using Microsoft.VisualBasic;
     using Microsoft.AspNetCore.Http;
     using Vlims.DMS.Entities;
-    using System.Globalization;
-    using System.Reflection.Metadata;
-
-
 
     // Comment
     public class ExistingDocumentRequestService : IExistingDocumentRequestService
@@ -129,11 +123,10 @@ namespace PolicySummary.DMS.Services
             try
             {
                 var docs = GetAllExistingDocumentRequest(new RequestContext { PageNumber = 1, PageSize = 50 });
-
                 string file = string.Empty; string errMsg = string.Empty;
                 l_dsInfo = ReadExcelFileWithValueType(p_fileInfo, new List<string>(), l_dateColumns);
                 List<string> lstEntityNamesFromExcel = new List<string>();
-                if (l_dsInfo.Tables[0]?.Rows?.Count > 0)
+                if (l_dsInfo.Tables[0]?.Rows?.Count > 0)                
                 {
                     var ValidNameRegExp = string.Empty;
                     foreach (DataRow row in l_dsInfo.Tables[0]?.Rows)
@@ -153,13 +146,15 @@ namespace PolicySummary.DMS.Services
                         existingDocumentRequest.ModifiedBy = "ADMIN";
                         existingDocumentRequest.CreatedDate = DateTime.Now;
                         existingDocumentRequest.document = row["UploadDocument"]?.ToString().Trim();
-
-
                         if (docs.Response?.ToList().Where(r => r.documentno.Equals(existingDocumentRequest.documentno)).Count() == 0)
                             SaveExistingDocumentRequest(existingDocumentRequest);
                         else
                             throw new Exception("Duplicate exists with " + existingDocumentRequest.documentno);
                     }
+                }
+                else
+                {
+                    throw new Exception("Excel sheet is empty..Import excel with valid data");
                 }
             }
             catch

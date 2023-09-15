@@ -116,7 +116,7 @@
               <label for="document" class="col-sm-2 col-form-label">Browse Document</label>
               <div *ngIf="!existingDocReq.document" class="col-sm-10">
                 <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput
-                  [disabled]="isUploaded" (change)="onFileSelected($event)">
+                accept=".pdf" [disabled]="isUploaded" (change)="onFileSelected($event)">
                   <div *ngIf="isFileUploadError && printType == 'single'"
                   class="text-danger">
                   Document file upload is required.
