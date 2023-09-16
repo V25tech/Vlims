@@ -182,8 +182,15 @@ namespace PolicySummary.Controllers
         [HttpPost("import")]
         public async Task<IActionResult> ImportBulkDocuments(IFormFile file)
         {
-            var result = existingDocumentRequestService.Importbulkdocuments(file);
-            return Ok(result);
+            try
+            {
+                var result = existingDocumentRequestService.Importbulkdocuments(file);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while uploading the file: {ex.Message}");
+            }
         }
     }
 }

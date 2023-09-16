@@ -149,7 +149,7 @@ namespace PolicySummary.DMS.Services
                         if (docs.Response?.ToList().Where(r => r.documentno.Equals(existingDocumentRequest.documentno)).Count() == 0)
                             SaveExistingDocumentRequest(existingDocumentRequest);
                         else
-                            throw new Exception("Duplicate exists with " + existingDocumentRequest.documentno);
+                            throw new Exception("Duplicate exists with Document No : " + existingDocumentRequest.documentno);
                     }
                 }
                 else

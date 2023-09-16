@@ -259,8 +259,10 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
           this.toastr.success('Import!', 'Successfully.!');
           this.location.back();
         },
-        (error) => {
-          console.error('Error uploading file:', error);
+        (error: any) => {
+          debugger;
+          console.log('Error uploading file:', error);
+          this.toastr.error(error.error);          
           this.spinner.hide();
         }
       );
