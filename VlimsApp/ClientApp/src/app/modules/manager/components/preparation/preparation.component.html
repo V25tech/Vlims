@@ -1,102 +1,150 @@
 <div class="container-fluid">
   <div class="row p-2">
-    <div class="col">
-      <div class="d-flex justify-content-between align-items-center">
-        <h4 class="page-title flex-grow-1">Document Preparation Configuration</h4>
-        
-        <div class="back-icon" style="margin-right: 10px;">
-          <a href="javascript:void(0);" onclick="history.back();">
-              <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
-          </a>
-      </div>
+      <div class="col">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="page-title flex-grow-1">Document Preparation Configuration</h4>
 
-
-        <div class="d-flex page-title-actions">
-          <div class="input-group">
-
-            <input type="text" class="form-control" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')" placeholder="Search">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-
+              <div class="back-icon" style="margin-right: 10px;">
+                  <a href="javascript:void(0);" onclick="history.back();">
+                      <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+                  </a>
               </div>
-            </div>
+              
+              <div class="d-flex page-title-actions">
+                  <div class="input-group custom-input-group">
+                      <!-- Magnifying glass icon -->
+                      <span class="input-group-text custom-input-group-text">
+                          <i class="fas fa-search custom-search-icon"></i>
+                      </span>
+                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search">
+                  </div>
+                    
+              </div>
+          </div>
       </div>
-    </div>
   </div>
   <div class="row p-2">
-    <div class="col">
-      <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table #templatesTable
-          [value]="preparationsDatasource"
-          [globalFilterFields]="['documentno','requestcode','documenttitle','documenttype','department','assignedtogroup','status']"
-          tableStyleClass="table table-striped" [rows]="itemsPerPage"
-            [paginator]="true" [totalRecords]="preparationsDatasource.length"
-            [rowsPerPageOptions]="rowsPerPageOptions" 
-        >
-          <ng-template pTemplate="header">
-            <tr>
-              <th style="width: 60px">S.No</th>
-              <th pSortableColumn="documentno" style="width: 15%">
-                Document No.<p-sortIcon field="documentno"></p-sortIcon>
-              </th>
-
-              <th pSortableColumn="request Code" style="width: 10%">
-                Request Code<p-sortIcon field="request Code"></p-sortIcon>
-              </th>
-              <th pSortableColumn="documenttitle" style="width: 15%">
-                Document Name<p-sortIcon field="documenttitle"></p-sortIcon>
-              </th>
-              <th pSortableColumn="documentType" style="width: 15%">
-                Document type <p-sortIcon field="documentType"></p-sortIcon>
-              </th>
-              <th pSortableColumn="department" style="width: 15%">
-                Department<p-sortIcon field="department"></p-sortIcon>
-              </th>
-
-              <th pSortableColumn="assignedToGroup" style="width: 100px">
-                Assigned to Group<p-sortIcon
-                  field="assignedToGroup"
-                ></p-sortIcon>
-              </th>
-              <th pSortableColumn="status" style="width: 100px">
-                Status <p-sortIcon field="status"></p-sortIcon>
-              </th>
-              <th class="text-center" style="width: 80px">Actions</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-docPreperation let-i="rowIndex">
-            <tr>
-              <td>{{ i + 1 }}</td>
-              <td>{{ docPreperation.documentno }}</td>
-              <td>{{ docPreperation.dpnid }}</td>
-              <td>{{ docPreperation.documenttitle }}</td>
-              <td>{{ docPreperation.documenttype }}</td>
-              <td>{{ docPreperation.department }}</td>
-              <td>{{ docPreperation.template }}</td>
-              <td>
-                <span
-                  class="status"
-                  [ngClass]="getStatusClass(docPreperation['status'])"
-                  >{{ docPreperation.status }}
-                </span>
-              </td>
-              <td class="text-center" *ngIf="access && docPreperation?.status=='IN-PROGRESS'"><a (click)="navigateToAddPreparation(docPreperation)"><i  class="bi bi-arrow-right"></i></a></td>
-              <td class="text-center" *ngIf="!access">
-                <i class="bi bi-lock bi-lg" 
-                [ngClass]="{'text-primary':true}"
-                title="No Permissions">
-                </i>
-              </td>
-              <td class="text-center" *ngIf="access && islocked(docPreperation?.status)">
-                <i class="bi bi-lock bi-lg" 
-                [ngClass]="{'text-primary':true}"
-                title="{{ 'Locked'}}">
-                </i>
-              </td>
-              <!-- <td *ngIf="access && docPreperation?.status=='Approved' || docPreperation?.status=='Reviewed'"><b>Restricted</b></td> -->
-            </tr>
-          </ng-template>
-        </p-table>
+      <div class="col">
+          <div class="p-4 bg-white shadow-dark rounded-2">
+            <p-table #templatesTable
+            [value]="preparationsDatasource"
+            [globalFilterFields]="['documentno','documenttitle','documenttype','department','assignedtogroup','status']"
+            tableStyleClass="table table-striped" [rows]="itemsPerPage"
+              [paginator]="true" [totalRecords]="preparationsDatasource.length"
+              [rowsPerPageOptions]="rowsPerPageOptions" 
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 60px">S.No</th>
+                <th pSortableColumn="documentno" style="width: 15%">
+                  Document No<p-sortIcon field="documentno"></p-sortIcon>
+                </th>
+  
+                <th pSortableColumn="request Code" style="width: 10%">
+                  Request Code<p-sortIcon field="request Code"></p-sortIcon>
+                </th>
+                <th pSortableColumn="documenttitle" style="width: 15%">
+                  Document Name<p-sortIcon field="documenttitle"></p-sortIcon>
+                </th>
+                <th pSortableColumn="documentType" style="width: 15%">
+                  Document Type<p-sortIcon field="documentType"></p-sortIcon>
+                </th>
+                <th pSortableColumn="department" style="width: 15%">
+                  Department<p-sortIcon field="department"></p-sortIcon>
+                </th>
+  
+                <th pSortableColumn="assignedToGroup" style="width: 100px">
+                  Assigned to group<p-sortIcon
+                    field="assignedToGroup"
+                  ></p-sortIcon>
+                </th>
+                <th pSortableColumn="status" style="width: 100px">
+                  Status <p-sortIcon field="status"></p-sortIcon>
+                </th>
+                <th class="text-center" style="width: 80px">Actions</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-docPreperation let-i="rowIndex">
+              <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ docPreperation.documentno }}</td>
+                <td>{{ docPreperation.dpnid }}</td>
+                <td>{{ docPreperation.documenttitle }}</td>
+                <td>{{ docPreperation.documenttype }}</td>
+                <td>{{ docPreperation.department }}</td>
+                <td>{{ docPreperation.template }}</td>
+                <td>
+                  <span
+                    class="status"
+                    [ngClass]="getStatusClass(docPreperation['status'])"
+                    >{{ docPreperation.status }}
+                  </span>
+                </td>
+                <td class="text-center" *ngIf="access && docPreperation?.status=='IN-PROGRESS'"><a (click)="navigateToAddPreparation(docPreperation)"><i  class="bi bi-arrow-right"></i></a></td>
+                <td class="text-center" *ngIf="!access">
+                  <i class="bi bi-lock bi-lg" 
+                  [ngClass]="{'text-primary':true}"
+                  title="No Permissions">
+                  </i>
+                </td>
+                <td class="text-center" *ngIf="access && islocked(docPreperation?.status)">
+                  <i class="bi bi-lock bi-lg" 
+                  [ngClass]="{'text-primary':true}"
+                  title="{{ 'Locked'}}">
+                  </i>
+                </td>
+                <!-- <td *ngIf="access && docPreperation?.status=='Approved' || docPreperation?.status=='Reviewed'"><b>Restricted</b></td> -->
+              </tr>
+            </ng-template>
+          </p-table>
+          </div>
       </div>
-    </div>
   </div>
 </div>
+
+
+<style>
+  /* Styles for .custom-input-group */
+  .custom-input-group {
+      background-color: white;
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+  .custom-input-group-text {
+          background: white;
+          border: none;
+          padding: 0;
+          vertical-align: middle;
+      }
+
+      .custom-search-icon {
+          font-size: 14px;
+          margin-right: 5px;
+          margin-left: 9px;
+          color: #555;
+      }
+
+      .custom-input {
+          border: none;
+          padding: 5px;
+          vertical-align: middle;
+          background-color: white;
+          box-shadow: none;
+      }
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
