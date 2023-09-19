@@ -74,6 +74,7 @@ export class DocumentPreperationConfiguration {
   path: string = '';
   dpnid: string = '';
   referenceId:number=0;
+  isrevision:boolean=false;
 }
 
 export class DocumentEffectiveConfiguration {
@@ -94,6 +95,7 @@ export class DocumentEffectiveConfiguration {
   workflow: string = '';
   template: string = '';
   referenceId:number=0;
+  isrevision:boolean=false;
 }
 export class DocumentAdditionalTasks {
   documentTitle: string = ''

@@ -68,7 +68,8 @@
               <tr>
                 <td>{{ i + 1 }}</td>
                 <td>{{ docPreperation.documentno }}</td>
-                <td>{{ docPreperation.referenceId }}</td>
+                <td *ngIf="!docPreperation.isrevision">{{ docPreperation.referenceId }}</td>
+                <td *ngIf="docPreperation.isrevision">{{ docPreperation.referenceId }}-Revision</td>
                 <td>{{ docPreperation.documenttitle }}</td>
                 <td>{{ docPreperation.documenttype }}</td>
                 <td>{{ docPreperation.department }}</td>

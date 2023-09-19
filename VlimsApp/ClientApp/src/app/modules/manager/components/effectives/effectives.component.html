@@ -61,7 +61,8 @@
             <ng-template pTemplate="body" let-effective let-i="rowIndex">
               <tr>
                 <td>{{ i + 1 }}</td>
-                <td>{{ effective.referenceId }}</td>
+                <td *ngIf="!effective.isrevision">{{ effective.referenceId }}</td>
+                <td *ngIf="effective.isrevision">{{ effective.referenceId }}-Revision</td>
                 <td>{{ effective.documenttitle }}</td>
                 <td>{{ effective.documentno }}</td>
                 <td>{{ effective.documenttype }}</td>

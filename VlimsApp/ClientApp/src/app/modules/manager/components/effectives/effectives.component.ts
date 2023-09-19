@@ -31,6 +31,15 @@ export class EffectivesComponent {
     this.documentEffectiveService.getdocumenteffective(objrequest).subscribe((data: any) => {
       debugger
       this.effectivesDatasource = data.response;
+      let ids: number[] = [];
+      this.effectivesDatasource.forEach(p=>{
+        if(ids.includes(p.referenceId)){
+          p.isrevision=true;
+        }
+        else{
+          ids.push(p.referenceId);
+        }
+      })
       console.log('effectives',this.effectivesDatasource);
       if(this.effectivesDatasource.length<10)
       {

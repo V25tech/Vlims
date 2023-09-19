@@ -35,6 +35,15 @@ export class PreparationComponent {
     let request: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.docPreperationService.getdocumentpreparations(request).subscribe((data: any) => {
       this.preparationsDatasource = data.response;
+      let ids: number[] = [];
+      this.preparationsDatasource.forEach(p=>{
+        if(ids.includes(p.referenceId)){
+          p.isrevision=true;
+        }
+        else{
+          ids.push(p.referenceId);
+        }
+      })
       console.log(this.preparationsDatasource);
       if(this.preparationsDatasource.length<10)
       {
