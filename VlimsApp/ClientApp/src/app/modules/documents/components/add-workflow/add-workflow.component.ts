@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { Workflow } from '../../models/workflows';
 import { Router } from '@angular/router';
@@ -12,14 +12,22 @@ import { CommonService } from 'src/app/shared/common.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { ToastrService } from 'ngx-toastr';
 
+interface stage {
+  label:string;
+  value:string;
+}
+
 @Component({
   selector: 'app-add-workflow',
   templateUrl: './add-workflow.component.html',
   styleUrls: ['./add-workflow.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class AddWorkflowComponent {
   title: string = 'New Workflow Configuration';
+  selectedStage:stage[]=[];
+  stagess:string[] | undefined=[];
   workflow = new workflowconiguration();
   grid: workflowconiguration[] = []
   types: Array<DocumentTypeConfiguration> = [];
@@ -53,12 +61,14 @@ export class AddWorkflowComponent {
   removeApprover(index: number) {
     this.approvers.splice(index, 1);
   }
-  stageSource = [
+  stageSource:stage[] = [
     { label: 'Request', value: 'Request' },
     { label: 'Preperation', value: 'Preperation' },
     { label: 'Effective', value: 'Effective' },
     { label: 'Revison', value: 'Revison' },
+    { label: 'Print', value: 'Print' },
   ];
+  //{ value: string }[] = [{ value: '' }];
 
   constructor(private toastr: ToastrService,
     private location: Location,
@@ -94,17 +104,25 @@ export class AddWorkflowComponent {
       this.workflow.approvalsCount = 0;
     }
     else if (lastSegment == "edit") {
+      debugger
       this.title = 'Modify Workflow Configuration';
       this.editMode = true;
       this.id = parseInt(segments[segments.length - 1], 10);
       let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
       this.getbyId(this.id);
+      console.log('ngOnInit', this.selectedStage);
     }
     else if (lastSegment == "view") {
       this.viewMode = true;
       this.title = 'View Document Template';
       let id = segments[segments.length - 1];
       this.getbyName(id);
+    }
+  }
+  ngAfterViewInit() {
+    if (this.editMode) {
+      // Only populate selectedStage if it's edit mode
+     //this.getbyId(this.id);
     }
   }
   getbyName(id: string) {
@@ -114,9 +132,11 @@ export class AddWorkflowComponent {
     })
   }
   getbyId(id: number) {
-
+    console.log('default',this.stageSource);
     return this.workflowsvc.getbyId(id).subscribe((data: any) => {
       this.workflow = data;
+      const selectedStageLabels = this.workflow.documentstage?.split(",") || [];
+      this.selectedStage = this.stageSource.filter(stage => selectedStageLabels.includes(stage.label));
       if (this.users.length > 0) {
         const rev = this.users.filter(user => this.workflow.reviewers?.some(reviewer => reviewer.UCFId === user.UCFId));
         const app = this.users.filter(user => this.workflow.approvals?.some(approver => approver.UCFId === user.UCFId));
@@ -131,12 +151,16 @@ export class AddWorkflowComponent {
       if (this.workflow.approvals != null && this.workflow.approvals != undefined) {
         this.workflow.approve = this.workflow.approvals[0];
       }
+      console.log('selected stages',this.selectedStage);
       this.cdr.detectChanges();
     }, (error: any) => {
 
     })
   }
+ 
   addWorkflow(workflow: workflowconiguration) {
+    debugger
+    workflow.documentstage=this.selectedStage.map(o=>o.label).join(",")
     if (this.editMode) {
       if (!this.isApprovalsNdReviewerSame())
         this.update(workflow);

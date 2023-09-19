@@ -36,7 +36,7 @@ internal class HeaderFooter
             //ConvertHtmlTableToWordTableInHeaderAndFooter(outputPath, htmlheaderTable, htmlfooterTable);
         }
         catch (Exception ex)
-        {           
+        {
             //throw;
         }
     }
@@ -305,7 +305,22 @@ internal class HeaderFooter
 
     private static void GenerateDynamicBodyContent(MainDocumentPart mainPart, Page currentPage)
     {
-        if (currentPage.pagetype == "grid")
+        //if (currentPage.pagetype == "grid")
+        if(currentPage.istextposition)
+        {
+            generateText(mainPart, currentPage);
+            generateGrid(mainPart, currentPage);
+        }
+        else
+        {
+            generateGrid(mainPart, currentPage);
+            generateText(mainPart, currentPage);
+        }
+    }
+
+    private static void generateGrid(MainDocumentPart mainPart, Page currentPage)
+    {
+        if (currentPage.isgrid)
         {
             // Generate and add table to the body
             string htmlTable = PrepareBodydiv(currentPage.bodyData);
@@ -317,7 +332,11 @@ internal class HeaderFooter
             paragraph.Append(table);
             body.Append(paragraph);
         }
-        else if (currentPage.pagetype == "text")
+    }
+
+    private static void generateText(MainDocumentPart mainPart, Page currentPage)
+    {
+        if (currentPage.istext)
         {
             // Add text content to the body
             string bodyContent = currentPage.text;
@@ -333,12 +352,6 @@ internal class HeaderFooter
                 paragraph.Append(run);
                 body.Append(paragraph);
             }
-            //DocumentFormat.OpenXml.Wordprocessing.Body body = mainPart.Document.Body;
-            //foreach (var line in page.bodyData)
-            //{
-            //    DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph = new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new Run(new Text(line)));
-            //    body.Append(paragraph);
-            //}
         }
     }
 
@@ -908,9 +921,9 @@ internal class HeaderFooter
                 tableHtml.Append("\">");
                 if (item.selectedOption == 1)
                 {
-                    if (!string.IsNullOrEmpty(item.inputValue))
-                        tableHtml.Append(item.inputValue + " " + ":");
-                    else
+                    //if (!string.IsNullOrEmpty(item.inputValue))
+                    //    tableHtml.Append(item.inputValue + " " + ":");
+                    //else
                         tableHtml.Append(item.inputValue);
                 }
                 else
@@ -965,9 +978,9 @@ internal class HeaderFooter
                 tableHtml.Append("\">");
                 if (item.selectedOption == 1)
                 {
-                    if (!string.IsNullOrEmpty(item.inputValue))
-                        tableHtml.Append(item.inputValue + " " + ":");
-                    else
+                    //if (!string.IsNullOrEmpty(item.inputValue))
+                    //    tableHtml.Append(item.inputValue + " " + ":");
+                    //else
                         tableHtml.Append(item.inputValue);
                 }
                 else

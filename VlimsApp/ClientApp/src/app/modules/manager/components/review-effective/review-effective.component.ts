@@ -2,7 +2,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Effective } from '../../models/effective';
-import { DocumentEffectiveConfiguration, DocumentPreperationConfiguration, RequestContext, WorkItemsConfiguration } from 'src/app/models/model';
+import { DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
@@ -14,6 +14,7 @@ import { DocumentPreperationService } from 'src/app/modules/services/document-pr
 import { DocumentEffectiveService } from 'src/app/modules/services/document-effective.service';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 import { ToastrService } from 'ngx-toastr';
+import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 
 @Component({
   selector: 'app-review-effective',
@@ -23,10 +24,10 @@ import { ToastrService } from 'ngx-toastr';
 export class ReviewEffectiveComponent {
 
   effective = new DocumentEffectiveConfiguration();
-
+  workflowsourcedata:workflowconiguration[]=[];
   typeSource = [];
   workflowsSource = [];
-  templatesSource = [];
+  templatesSource:Array<DocumentTemplateConfiguration> = [];
   departmentsSource = [];
   fileBytes: Uint8Array = new Uint8Array();
   modalRef: BsModalRef | undefined;
@@ -52,6 +53,7 @@ export class ReviewEffectiveComponent {
     private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
+    private templateService:DocumentTemplateServiceService,
     private modalService: BsModalService, private documentEffectiveService: DocumentEffectiveService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private docPreperationService: DocumentPreperationService,) { }
 
   ngOnInit() {
@@ -71,9 +73,12 @@ export class ReviewEffectiveComponent {
       this.viewMode = true;
       this.getbyId(this.requestId);
       this.getworkflowitems();
+      this.getworkflowinfo();
     }
     else if (this.commonsvc.efffective.deid) {
       this.effective = this.commonsvc.efffective;
+      this.getdocttemplate();
+      this.getworkflowinfo();
     }
     else this.location.back();
   }
@@ -82,6 +87,12 @@ export class ReviewEffectiveComponent {
     return this.documentEffectiveService.getbyId(arg0).subscribe((data: any) => {
       this.effective = data;
       this.spinner.hide();
+    });
+  }
+  getdocttemplate() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.templateService.getdocttemplate(objrequest).subscribe((data: any) => {
+      this.templatesSource = data.Response;
     });
   }
   approve() {
@@ -159,14 +170,27 @@ export class ReviewEffectiveComponent {
     }
     return new Blob(byteArrays, { type: contentType });
   }
-  previewtemplate(template: TemplateRef<any>) {    
-    this.docPreperationService.preview(this.effective.template).subscribe((data: any) => {
+  previewtemplate(template: TemplateRef<any>) {  
+    let id=0;
+    const obj= this.templatesSource.find(o=>o.Templatename===this.effective.template);
+    if(obj!=null && obj!=undefined){
+      id=parseInt(obj.DTID);
+    }  
+    this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();
       this.openViewer(template);
     }, er => {
       this.spinner.hide();
+    });
+  }
+  getworkflowinfo() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 100, Id: 0 };
+    this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
+      this.workflowsourcedata = data.Response;
+      this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documentstage?.includes("Effective"));
+      debugger
     });
   }
   getworkflowitems() {

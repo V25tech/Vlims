@@ -35,6 +35,7 @@ export class PreparationComponent {
     let request: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.docPreperationService.getdocumentpreparations(request).subscribe((data: any) => {
       this.preparationsDatasource = data.response;
+      console.log(this.preparationsDatasource);
       if(this.preparationsDatasource.length<10)
       {
       this.currentPage=10;

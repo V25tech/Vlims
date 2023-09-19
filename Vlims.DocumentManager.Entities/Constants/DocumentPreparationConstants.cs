@@ -23,6 +23,8 @@ namespace Vlims.DMS.Entities
 
         public const string Documentmanagerid = "@Documentmanagerid_PSY";
 
+        public const string referenceid = "@Refrence_PSY";
+
         public const string documenttitle = "@documenttitle_PSY";
 
         public const string documentno = "@documentno_PSY";

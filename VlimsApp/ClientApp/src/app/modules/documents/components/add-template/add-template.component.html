@@ -277,11 +277,12 @@
         <textarea  class="form-control page-textarea"  [(ngModel)]="page.text" placeholder="Page {{ i + 1 }}"></textarea>
       </div> -->
 
-      <div class="p-4 mt-3 bg-white shadow-dark rounded-2">
+      <div *ngIf="isbody" class="p-4 mt-3 bg-white shadow-dark rounded-2">
         <h5 class="page-card-title">Body Template</h5>
         <div class="template-block">
           <div class="template-grid">
-            <ng-container *ngIf="pages[currentPage].pagetype==='grid'">
+            <!-- <ng-container *ngIf="pages[currentPage].pagetype==='grid'"> -->
+              <ng-container *ngIf="pages[currentPage].isgrid">
               <table class="w-100">
                 <tbody>
                   <tr *ngFor="let row of pages[this.currentPage].bodyData; let rowIndex = index">
@@ -322,10 +323,26 @@
               <button class="btn btn-primary mt-2" (click)="addbodyRow()">
                 Add New Row
               </button>
+              <!-- <button *ngIf="!pages[currentPage].isoption" class="btn btn-primary col-xs-1 mx-2 mt-2" (click)="addtext()">
+                Add New Text
+              </button> -->
             </ng-container>
-            <div class="template-grid" *ngIf="pages[currentPage].pagetype==='text'">
-        <textarea class="form-control" [(ngModel)]="pages[currentPage].text" placeholder="Page {{ currentPage + 1 }}" style="height: 10cm;"></textarea>
+            <!-- <div class="col-xs-1 mx-2 mt-2" *ngIf="pages[currentPage].isoption">
+            <textarea class="form-control" [(ngModel)]="this.pages[this.currentPage].optiontext" placeholder="Page {{ currentPage + 1 }}" style="height: 2cm;"></textarea>
+            <button class="btn btn-danger btn-sm delete-button mt-2" (click)="deleteoption()">Delete</button>
+          </div> -->
+            <!-- <div *ngIf="pages[currentPage].pagetype==='text'"> -->
+              <div class="col-xs-1 mx-2 mt-2" *ngIf="pages[currentPage].istext">
+        <textarea class="form-control" [(ngModel)]="pages[currentPage].text" placeholder="Page {{ currentPage + 1 }}" style="height: 2cm;"></textarea>
+        <button *ngIf="pages[currentPage].istext" class="btn btn-danger btn-sm delete-button mt-2" (click)="deletetext()">Delete Text</button>
+        <button *ngIf="pages[currentPage].isgrid" class="btn btn-danger btn-sm delete-button col-xs-1 mx-2 mt-2" (click)="deletegrid()">Delete Grid</button>
       </div>
+      <button *ngIf="!pages[currentPage].isgrid" class="btn btn-primary mt-2" (click)="enablegrid()">
+        Add Grid
+      </button>
+      <button *ngIf="!pages[currentPage].istext" class="btn btn-primary col-xs-1 mx-2 mt-2" (click)="enabletext()">
+        Add Text
+      </button>
         </div>
         </div>
         <div class="form-group row my-4" > 
@@ -334,7 +351,7 @@
           <!-- <div class="form-group row"> -->
             <!-- <label for="reviewsType" class="col-sm-2 col-form-label"> </label> -->
             <!-- <div class="col-sm-10"> -->
-              <div class="form-check form-check-inline">
+              <!-- <div class="form-check form-check-inline">
                 <input
                   class="form-check-input"
                   name="reviewsType"
@@ -357,10 +374,10 @@
                   value="text"  (click)="setPageTypeAndBodyData(currentPage,'text')"
                    />
                 <label class="form-check-label" for="reviewsType1">Text</label>
-              </div>
+              </div> -->
             <!-- </div> -->
           <!-- </div> -->
-          <label for="templateName" class="col-sm-2 col-form-label">Page No. {{currentPage + 1}}</label>
+          <label for="templateName" class="col-sm-3 col-form-label">Page No. {{currentPage + 1}}/{{templateForm.Pages}} Starts with-{{pages[currentPage].istextposition ? 'text' : 'grid'}}</label>
           <button class="btn btn-primary" (click)="prevPage()">Previous</button>
           <button type="button"
           class="btn btn-outline-secondary mx-2" (click)="nextPage()">Next</button>

@@ -24,15 +24,15 @@ DECLARE @ID1 INT
 INSERT INTO DocumentPreparation_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,
 department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,DOCStatus_PSY,Refrence_PSY)
 SELECT Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,
-template_PSY,@Workflow_PSY,details_PSY,@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',DOCStatus_PSY,@referenceId FROM DocumentPreparation_PSY
+template_PSY,null,details_PSY,@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',DOCStatus_PSY,@referenceId FROM DocumentPreparation_PSY
 WHERE DPNID_PSY=@DOCPREPID
 SELECT @ID1 = @@IDENTITY;
 
-INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT @OLDPREPARATIONDOCTYPE,'Preparation','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@ID1,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Review'
+--INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
+-- SELECT @OLDPREPARATIONDOCTYPE,'Preparation','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@ID1,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Review'
 
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT @OLDPREPARATIONDOCTYPE,'Preparation','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@ID1,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Approve'
+-- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
+-- SELECT @OLDPREPARATIONDOCTYPE,'Preparation','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@ID1,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Approve'
 
 
 --INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)

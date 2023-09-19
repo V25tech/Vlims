@@ -16,7 +16,7 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-Status_PSY
+Status_PSY,Refrence_PSY
   FROM [dbo].[DocumentPreparation_PSY] WITH (NOLOCK) where [DPNID_PSY] = @DPNID_PSY   
  END TRY 
  BEGIN CATCH 

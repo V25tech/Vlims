@@ -32,7 +32,7 @@ public class DocumentPrintConstants
 
     public const string Template = "@template_PSY";
     public const string ModifiedDate = "@ModifiedDate_PSY";
-
+    public const string referenceid = "@Refrence_PSY";
     public const string USP_DocumentPrint_PSY_GET_ALL = "dbo.USP_DocumentPrint_PSY_GET_ALL";
 
     public const string USP_DocumentPrint_PSY_GET = "dbo.USP_DocumentPrint_PSY_GET";

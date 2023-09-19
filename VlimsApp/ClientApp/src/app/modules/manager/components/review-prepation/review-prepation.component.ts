@@ -1,7 +1,7 @@
 import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DocumentPreperationConfiguration, RequestContext, WorkItemsConfiguration } from 'src/app/models/model';
+import { DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
@@ -27,6 +27,7 @@ export class ReviewPrepationComponent {
   departmentsSource = [];
   typeSource = [];
   workflowsSource = [];
+  workflowsourcedata:workflowconiguration[]=[];
   docNoType = 'User Defined';
   @ViewChild("fileInput", { static: false })
   InputVar: ElementRef | undefined;
@@ -50,7 +51,7 @@ export class ReviewPrepationComponent {
     { label: 'Stage 2', value: 'option3' },
   ];
 
-  templatesSource = [];
+  templatesSource:Array<DocumentTemplateConfiguration> = [];
 
   constructor(private location: Location, private router: Router,
     private workitemssvc: WorkitemsService,
@@ -83,13 +84,21 @@ export class ReviewPrepationComponent {
       this.location.back();
     }
     this.getdocttemplate();
-
+    this.getworkflowinfo();
   }
   getbyId(arg0: number) {
     this.spinner.show();
     return this.docPreperationService.getbyId(arg0).subscribe((data: any) => {
       this.preparation = data;
       this.spinner.hide();
+    });
+  }
+  getworkflowinfo() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 100, Id: 0 };
+    this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
+      this.workflowsourcedata = data.Response;
+      this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documentstage?.includes("Preperation"));
+      debugger
     });
   }
   approve() {
@@ -202,8 +211,12 @@ export class ReviewPrepationComponent {
     return new Blob(byteArrays, { type: contentType });
   }
   previewtemplate(template: TemplateRef<any>) {
-    this.spinner.show();
-    this.docPreperationService.preview(this.preparation.template).subscribe((data: any) => {
+    this.spinner.show(); let id=0;
+    const obj= this.templatesSource.find(o=>o.Templatename===this.preparation.template);
+    if(obj!=null && obj!=undefined){
+      id=parseInt(obj.DTID);
+    }
+    this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();
@@ -265,5 +278,11 @@ export class ReviewPrepationComponent {
       }
       this.spinner.hide();
     });
+  }
+  edittemplate(template:string){
+   const obj= this.templatesSource.find(o=>o.Templatename===template);
+    if(obj!=null && obj!=undefined){
+      this.router.navigate(['/templates/body',obj.DTID]);
+    }
   }
 }

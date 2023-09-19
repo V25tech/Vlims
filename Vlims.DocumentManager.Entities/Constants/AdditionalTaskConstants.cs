@@ -26,6 +26,7 @@ namespace Vlims.DMS.Entities
 
         public const string DocumentEffective_ID = "@DocumentEffective_ID";
 
+        public const string referenceid = "@Refrence_PSY";
 
         public const string CreatedBy = "@CreatedBy_PSY";
         

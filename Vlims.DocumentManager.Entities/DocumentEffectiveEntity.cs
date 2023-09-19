@@ -227,5 +227,7 @@ namespace Vlims.DMS.Entities
                 this.workIdField = value;
             }
         }
+        public string Workflow { get; set; }
+        public int ReferenceId { get; set; }
     }
 }

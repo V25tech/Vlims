@@ -82,6 +82,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'templates/body/:templateName',
+    component: AddTemplateComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'workflow',
     component: WorkflowsComponent,
     canActivate: [AuthGuard],

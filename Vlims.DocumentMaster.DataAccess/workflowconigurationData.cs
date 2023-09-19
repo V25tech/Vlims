@@ -58,26 +58,28 @@ namespace Vlims.DocumentMaster.DataAccess
         {
             bool insert = false; List<WorkFlowMapping> lstReviwers = new List<WorkFlowMapping>();
             List<WorkFlowMapping> lstApprovers = new List<WorkFlowMapping>();
-            p_workflowconiguration.reviewers.ForEach(p =>
-            {
-                WorkFlowMapping mapping= new WorkFlowMapping();
-                mapping.UserId = Convert.ToInt32(p.UCFId);
-                mapping.UserName = p.UserID;
-                mapping.WorkFlowId =Convert.ToInt32(p_workflowconiguration.WFCId);
-                mapping.WorkFlowName = p_workflowconiguration.workflowName;
-                mapping.Type = "Review";
-                lstReviwers.Add(mapping);
-            });
-            p_workflowconiguration.approvals.ForEach(p =>
-            {
-                WorkFlowMapping mapping = new WorkFlowMapping();
-                mapping.UserId = Convert.ToInt32(p.UCFId);
-                mapping.UserName = p.UserID;
-                mapping.WorkFlowId = Convert.ToInt32(p_workflowconiguration.WFCId);
-                mapping.WorkFlowName = p_workflowconiguration.workflowName;
-                mapping.Type = "Approve";
-                lstApprovers.Add(mapping);
-            });
+            if (p_workflowconiguration != null && p_workflowconiguration.reviewers.Any())
+                p_workflowconiguration.reviewers.ForEach(p =>
+                {
+                    WorkFlowMapping mapping = new WorkFlowMapping();
+                    mapping.UserId = Convert.ToInt32(p.UCFId);
+                    mapping.UserName = p.UserID;
+                    mapping.WorkFlowId = Convert.ToInt32(p_workflowconiguration.WFCId);
+                    mapping.WorkFlowName = p_workflowconiguration.workflowName;
+                    mapping.Type = "Review";
+                    lstReviwers.Add(mapping);
+                });
+            if (p_workflowconiguration != null && p_workflowconiguration.approvals.Any())
+                p_workflowconiguration.approvals.ForEach(p =>
+                {
+                    WorkFlowMapping mapping = new WorkFlowMapping();
+                    mapping.UserId = Convert.ToInt32(p.UCFId);
+                    mapping.UserName = p.UserID;
+                    mapping.WorkFlowId = Convert.ToInt32(p_workflowconiguration.WFCId);
+                    mapping.WorkFlowName = p_workflowconiguration.workflowName;
+                    mapping.Type = "Approve";
+                    lstApprovers.Add(mapping);
+                });
             DataTable workflowusersmappings = GetWorkflowUserMapping();
             if (lstReviwers.Count > 0)
             {
@@ -95,7 +97,7 @@ namespace Vlims.DocumentMaster.DataAccess
             }
 
             List<SqlParameter> sqlparms = new List<SqlParameter>();
-            sqlparms.Add(new SqlParameter { SqlDbType =SqlDbType.Structured, ParameterName = "@mappings", Value = workflowusersmappings });
+            sqlparms.Add(new SqlParameter { SqlDbType = SqlDbType.Structured, ParameterName = "@mappings", Value = workflowusersmappings });
             Object result = dataAccessHelper.ExecuteStoredProcedure("[dbo].[USP_WorkFlowUsersMappings_PSY_INSERT]", sqlparms, ExecutionType.NonQuery);
             return insert;
         }

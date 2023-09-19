@@ -260,7 +260,10 @@ namespace Vlims.DocumentMaster.Entities
         public int pagenumber { get; set; }
 
         public string pagetype { get; set; }
+        public bool istext { get; set; }
+        public bool isgrid { get; set; }
 
+        public bool istextposition { get; set; }
         public List<List<BodyDataElement>> bodyData { get; set; }
     }
 
@@ -285,7 +288,9 @@ namespace Vlims.DocumentMaster.Entities
         public string text { get; set; }
         public int pagenumber { get; set; }
         public string pagetype { get; set; }
+       
+        public List<BodyDataElement> bodyData { get; set; }
 
-        public List<BodyDataElement> bodyData { get; set; } 
+        
     }
 }

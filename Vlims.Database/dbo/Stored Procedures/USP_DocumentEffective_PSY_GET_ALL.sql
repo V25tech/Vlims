@@ -5,7 +5,7 @@
  AS 
  BEGIN 
  BEGIN TRY 
- SELECT DE.*,DP.template_PSY
+ SELECT DE.*,DP.template_PSY,DE.Workflow_PSY as wokflow_PSY,DE.Refrence_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[DocumentEffective_PSY] DE WITH (NOLOCK)
 INNER JOIN dbo.DocumentPreparation_PSY DP ON DE.Documentmanagerid_PSY=DP.DPNID_PSY AND DP.Status_PSY='APPROVED'

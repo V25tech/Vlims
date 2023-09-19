@@ -55,6 +55,7 @@ export class DocumentRevisionRequestsComponent implements OnInit{
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.documentRevisionService.getdocumentRevisions(objrequest).subscribe((data: any) => {     
       this.revisionDatasource = data.response;
+      console.log('revisions',this.revisionDatasource);
       if(this.revisionDatasource.length<10)
       this.currentPage=10;
       this.spinner.hide();

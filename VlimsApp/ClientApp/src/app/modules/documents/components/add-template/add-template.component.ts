@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/shared/common.service';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 
 interface SelectOption {
@@ -20,6 +21,11 @@ interface Page {
   pagenumber: number;
   pagetype: string;
   bodyData: BodyDataElement[][];
+  // optiontext:string;
+  // isoption:boolean;
+  istext:boolean;
+  isgrid:boolean;
+  istextposition:boolean;
 }
 interface BodyDataElement {
   selectedOption: number;
@@ -33,7 +39,7 @@ interface BodyDataElement {
 export class AddTemplateComponent implements OnInit {
   html = '';
   numOfPages: number = 1;
-  pages: Page[] = [{ text: '', pagenumber: 1, pagetype: 'text', bodyData: [] }];
+  pages: Page[] = [{ text: '', pagenumber: 1, pagetype: 'text', bodyData: [],istext:false,isgrid:false,istextposition:false }];
   currentPage: number = 0;
   id:number=0;
   title:string='New Document Template';
@@ -66,7 +72,7 @@ export class AddTemplateComponent implements OnInit {
     // { name: 'Property', value: 3 },
     // { name: 'Custom', value: 4 },
   ];
-  viewMode:boolean=false;editMode:boolean=false;
+  viewMode:boolean=false;editMode:boolean=false;isbody:boolean=false;
   // templateForm: TemplateForm = {
   //   id: 0,
   //   templateName: '',
@@ -126,6 +132,16 @@ export class AddTemplateComponent implements OnInit {
       this.viewMode=true;
         let ide=segments[segments.length-1];
         this.getbyId(parseInt(segments[segments.length - 1]));
+    }
+    else if(lastSegment=="body")
+    {
+      ;
+      this.title='Edit Document Template';
+      this.editMode=true;
+      this.isbody=true;
+        let id=parseInt(segments[segments.length-1],10);
+        this.id=id;
+        //this.getbyId(id);
     }
     
   }
@@ -454,12 +470,16 @@ export class AddTemplateComponent implements OnInit {
   }
 
   generatePages() {
+    this.pages=[];
     this.pages = Array.from({ length: this.templateForm.Pages }, (_, index) => (
       {
         text: '',
         pagenumber: index,
         pagetype: 'text',
-        bodyData: [] // Initialize bodyData with an empty row
+        bodyData: [] ,// Initialize bodyData with an empty row
+        istext:false,
+        isgrid:false,
+        istextposition:false
       }));
     this.currentPage = 0;
   }
@@ -526,6 +546,7 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
   }
   addbodyNewText() {
     debugger
+
     if (this.pages[this.currentPage].bodyData.length > 0) {
       const lastRow = this.pages[this.currentPage].bodyData[this.pages[this.currentPage].bodyData.length - 1];
       const newRow = [...lastRow]; // Clone the last row's data
@@ -548,5 +569,37 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
       // If no rows exist, generate a new row using your existing method
       //this.generateTeplateGrid();
     }
+  }
+  addtext(){
+    //this.pages[this.currentPage].isoption=true;
+  }
+  deleteoption(){
+    // this.pages[this.currentPage].isoption=false;
+    // this.pages[this.currentPage].optiontext='';
+  }
+  enablegrid(){
+    debugger
+    if(!this.pages[this.currentPage].istext)
+    {
+      this.pages[this.currentPage].istextposition=false;
+    }
+    this.pages[this.currentPage].isgrid=true;
+    this.pages[this.currentPage].bodyData.push(this.generateP());
+  }
+  enabletext(){
+    if(!this.pages[this.currentPage].isgrid)
+    {
+      this.pages[this.currentPage].istextposition=true;
+    }
+    this.pages[this.currentPage].istext=true;
+  }
+  deletetext(){
+    this.pages[this.currentPage].istextposition=false;
+    this.pages[this.currentPage].istext=false;
+    this.pages[this.currentPage].text='';
+  }
+  deletegrid(){
+    this.pages[this.currentPage].isgrid=false;
+    this.pages[this.currentPage].bodyData=[];
   }
 }

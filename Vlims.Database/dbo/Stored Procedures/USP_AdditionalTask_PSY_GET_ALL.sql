@@ -12,7 +12,7 @@ AT.ModifiedBy_PSY,
 AT.ModifiedDate_PSY,
 AT.Status_PSY,
 DP.template_PSY,
-Version,
+Version,AT.Refrence_PSY,
  count(*) over() as TotalRows  ,
  de.document_PSY,de.department_PSY,de.documentno_PSY,de.documenttitle_PSY,de.documenttype_PSY,de.EffectiveDate_PSY,de.Reviewdate_PSY,DP.wokflow_PSY
 

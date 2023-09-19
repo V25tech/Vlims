@@ -31,6 +31,7 @@ export class EffectivesComponent {
     this.documentEffectiveService.getdocumenteffective(objrequest).subscribe((data: any) => {
       debugger
       this.effectivesDatasource = data.response;
+      console.log('effectives',this.effectivesDatasource);
       if(this.effectivesDatasource.length<10)
       {
       this.currentPage=10;

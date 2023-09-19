@@ -153,5 +153,6 @@ namespace Vlims.DMS.Entities
             }
         }
         public string Template { get; set; }
+        public int ReferenceId { get; set; }
     }
 }

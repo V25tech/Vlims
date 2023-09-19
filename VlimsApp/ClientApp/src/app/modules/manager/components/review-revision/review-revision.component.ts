@@ -131,6 +131,7 @@ export class ReviewRevisionComponent {
     //let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.wfservice.getworkflow(this.commonsvc.req).subscribe((data: any) => {
       this.workflowsSource = data.Response;
+      this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Revison"));
     });
   }
   saveRequest() {

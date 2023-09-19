@@ -130,8 +130,10 @@ export class NewPrintRequestComponent implements OnInit {
   getworkflowinfo() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
-      let workflowsSource = data.Response;
-      this.workflowsSource = workflowsSource.filter((p: any) => p.workflowName);
+      this.workflowsSource = data.Response;
+      debugger
+      this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Print"));
+      this.workflowsSource = this.workflowsSource.filter((p: any) => p.workflowName);
     });
   }
   savePrintRequest() {

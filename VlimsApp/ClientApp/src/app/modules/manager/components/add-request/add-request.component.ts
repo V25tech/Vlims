@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { DocumentRequestConfiguration, RequestContext, WorkItemsConfiguration } from 'src/app/models/model';
+import { DocumentRequestConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
@@ -22,7 +22,7 @@ export class AddRequestComponent {
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus: string = ''
   typeSource = [];
-  workflowsSource = [];
+  workflowsSource:workflowconiguration[] = [];
   request = new DocumentRequestConfiguration();
   editMode: boolean = false;
   viewMode: boolean = false;
@@ -165,6 +165,7 @@ export class AddRequestComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsSource = data.Response;
+      this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Request"));
     });
   }
   getworkflowitems() {

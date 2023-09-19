@@ -51,6 +51,7 @@ namespace Vlims.DocumentManager.DataAccess
                         additionalTaskData.DocumentTitle = Convert.ToString(row[AdditionalTaskConstants.DocumentTitle.Trim('@')]);
                         additionalTaskData.DocumentType = Convert.ToString(row[AdditionalTaskConstants.DocumentType.Trim('@')]);
                         additionalTaskData.Template = Convert.ToString(row[DocumentEffectiveConstants.template.Trim('@')]);
+                        additionalTaskData.ReferenceId= Convert.ToInt32(row[DocumentEffectiveConstants.referenceid.Trim('@')]);
                         additionalTaskData.ModifiedDate = DatatypeConverter.SetDateTime(row[AdditionalTaskConstants.ModifiedDate.Trim('@')]);
                         additionalTaskData.Workflow= row["wokflow_PSY"].ToString();
                         DateTime? effective = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.EffectiveDate.Trim('@')]);

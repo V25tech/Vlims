@@ -14,6 +14,7 @@
     [ModifiedDate_PSY]      DATETIME       NULL,
     [Status_PSY]            NVARCHAR (50)  NULL,
     [Refrence_PSY]          INT            NULL,
+    [Workflow_PSY] NVARCHAR(200) NULL, 
     CONSTRAINT [PK_DocumentEffective_PSY] PRIMARY KEY CLUSTERED ([DEID_PSY] ASC)
 );
 

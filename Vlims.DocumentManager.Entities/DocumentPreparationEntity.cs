@@ -228,5 +228,6 @@ namespace Vlims.DMS.Entities
             }
         }
         public string path { get; set; }
+        public int ReferenceId { get; set; }
     }
 }

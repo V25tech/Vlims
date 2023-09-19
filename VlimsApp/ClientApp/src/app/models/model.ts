@@ -73,6 +73,7 @@ export class DocumentPreperationConfiguration {
   document: string = '';
   path: string = '';
   dpnid: string = '';
+  referenceId:number=0;
 }
 
 export class DocumentEffectiveConfiguration {
@@ -92,6 +93,7 @@ export class DocumentEffectiveConfiguration {
   Status: string = '';
   workflow: string = '';
   template: string = '';
+  referenceId:number=0;
 }
 export class DocumentAdditionalTasks {
   documentTitle: string = ''
@@ -111,6 +113,7 @@ export class DocumentAdditionalTasks {
   modifiedDate: Date | undefined;
   workflow:string='';
   template:string = '';  
+  referenceId:number=0;
 }
 
 export class noticationconfiguration {
@@ -178,6 +181,9 @@ interface Page {
   pagenumber:number;
   pagetype:string;
   bodyData:BodyDataElement[][];
+  istext:boolean;
+  isgrid:boolean;
+  istextposition:boolean;
 }
 export class reviewers {
   value: string = ''

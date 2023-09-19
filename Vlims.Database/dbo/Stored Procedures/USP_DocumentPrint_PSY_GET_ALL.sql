@@ -5,21 +5,21 @@
  AS   
  BEGIN   
  BEGIN TRY   
- SELECT DRId_PSY,  
+ SELECT DISTINCT DRId_PSY,  
 DP.documenttitle_PSY,  
 printtype_PSY,  
 DP.documentno_PSY,  
 noofcopies_PSY,  
-workflow_PSY,  
+DP.workflow_PSY,  
 reason_PSY,  
 DP.CreatedBy_PSY,  
 DP.CreatedDate_PSY,  
 DP.ModifiedBy_PSY,  
 DP.ModifiedDate_PSY,  
-DP.Status_PSY,DSP.template_PSY,
+DP.Status_PSY,DSP.template_PSY,DP.Refrence_PSY,
  count(*) over() as TotalRows   
  FROM [dbo].[DocumentPrint_PSY] DP WITH (NOLOCK)  
- JOIN dbo.DocumentEffective_PSY DE ON DE.Documentmanagerid_PSY=DP.Refrence_PSY
+ JOIN dbo.DocumentEffective_PSY DE ON DE.Refrence_PSY=DP.Refrence_PSY
  JOIN dbo.DocumentPreparation_PSY DSP ON DSP.DPNID_PSY=DE.Documentmanagerid_PSY
  Order by DP.CreatedDate_PSY desc    
  OFFSET @PageSize * (@PageNumber - 1) ROWS   
