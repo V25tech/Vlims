@@ -25,6 +25,7 @@ export class AddDocumentTypeComponent {
   title:string='New Document type Registration';
   viewMode: boolean = false; editMode: boolean = false;
   selectedDepartments: string[] = [];
+  showAllDepartments = false;
 
   constructor(private toastr: ToastrService,
     private location: Location,
@@ -66,6 +67,15 @@ export class AddDocumentTypeComponent {
   onCancel() {
     this.location.back();
   }
+
+  removeDepartment(department: string, event: Event): void {
+    event.stopPropagation();
+    const index = this.selectedDepartments.indexOf(department);
+    if (index !== -1) {
+      this.selectedDepartments.splice(index, 1);
+    }
+  }
+
 
   getbyId(id: number) {
     this.doctypeservice.getbyId(id).subscribe((data: any) => {
