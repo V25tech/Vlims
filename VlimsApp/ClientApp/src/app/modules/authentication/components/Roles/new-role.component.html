@@ -71,22 +71,7 @@
             </div>
           </div>
 
-          <!-- <div class="form-group row">
-            <label for="Comments" class="col-sm-2 col-form-label">Comments</label>
-            <div class="col-sm-10">
-              <textarea class="form-control"
-                        id="Comments"
-                        name="Comments"
-                        rows="3"
-                        placeholder="Comments please"
-                        [(ngModel)]="newdept.Comments" [disabled]="viewMode"
-                        required
-           #CommentsInput="ngModel"></textarea>
-    <div *ngIf="CommentsInput.invalid && (CommentsInput.dirty || CommentsInput.touched)" class="text-danger">
-      Comments is required.
-            </div>
-            </div>
-          </div> -->
+        
           <div class="form-group row">
             <label for="comments" class="col-sm-2 col-form-label">Comments</label>
             <div class="col-sm-10">
@@ -97,11 +82,9 @@
                      rows="3"
                      placeholder="Comments please"
                      [(ngModel)]="addrole.Comments" [disabled]="viewMode"
-                     required
+                     
                      #commentsInput="ngModel" ></textarea>
-                     <div *ngIf="commentsInput.invalid && (commentsInput.dirty || commentsInput.touched)" >
                     
-                    </div>
             </div>
           </div>
         </div>
