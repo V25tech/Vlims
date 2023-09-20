@@ -36,6 +36,7 @@ export class LoginComponent {
     this.checkadminuser();
    }
   checkadminuser() {
+    this.loader.show();
     //check admin user exists or not
     //if admin user not exist then create with default password
     const admin=new UserConfiguration();
@@ -45,6 +46,7 @@ export class LoginComponent {
       this.user=data;
       this.loginService.updateuser(this.roles,this.user);
       this.isvaliduser();
+      this.loader.hide();
   },(error:any)=>{
     //create admin user
     this.createadminuser(this.user);
@@ -115,9 +117,10 @@ export class LoginComponent {
       });
   }
   getsetfunctionalprofile() {
+    this.loader.show();
        return this.setfunctionalsvc.getsetfunctionalprofileconfiguration(this.commonsvc.req).subscribe((data: any) => {
-         
          this.roles = data.Response;
+         this.loader.hide();
        });
       }
 }
