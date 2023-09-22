@@ -63,7 +63,7 @@ export class AddWorkflowComponent {
   }
   stageSource:stage[] = [
     { label: 'Request', value: 'Request' },
-    { label: 'Preperation', value: 'Preperation' },
+    { label: 'preparation', value: 'preparation' },
     { label: 'Effective', value: 'Effective' },
     { label: 'Revison', value: 'Revison' },
     { label: 'Print', value: 'Print' },

@@ -27,7 +27,7 @@ namespace Vlims.DocumentManager.DataAccess
     // Comment
     public static class DocumentPreparationConverter
     {
-        
+
         public static List<DocumentPreparation> SetAllDocumentPreparation(DataSet dataset)
         {
             try
@@ -54,9 +54,11 @@ namespace Vlims.DocumentManager.DataAccess
                         documentPreparationData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentPreparationConstants.CreatedDate.Trim('@')]);
                         documentPreparationData.ModifiedBy = Convert.ToString(row[DocumentPreparationConstants.ModifiedBy.Trim('@')]);
                         documentPreparationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPreparationConstants.ModifiedDate.Trim('@')]);
-                        documentPreparationData.Status= Convert.ToString(row[DocumentPreparationConstants.Status.Trim('@')]);
+                        documentPreparationData.Status = Convert.ToString(row[DocumentPreparationConstants.Status.Trim('@')]);
                         documentPreparationData.path = documentPreparationData.document;
-                        documentPreparationData.ReferenceId= Convert.ToInt32(row[DocumentPreparationConstants.referenceid.Trim('@')]);
+                        object value = row["Refrence_PSY"];
+                        if (value != DBNull.Value)
+                            documentPreparationData.ReferenceId = Convert.ToInt32(row[DocumentPreparationConstants.referenceid.Trim('@')]);
                         result.Add(documentPreparationData);
                     }
                 }
@@ -67,7 +69,7 @@ namespace Vlims.DocumentManager.DataAccess
                 throw;
             }
         }
-        
+
         public static DocumentPreparation SetDocumentPreparation(DataSet dataset)
         {
             var result = SetAllDocumentPreparation(dataset);
