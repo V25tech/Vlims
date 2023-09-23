@@ -65,7 +65,6 @@ export class AddWorkflowComponent {
     { label: 'Request', value: 'Request' },
     { label: 'preparation', value: 'preparation' },
     { label: 'Effective', value: 'Effective' },
-    { label: 'Revison', value: 'Revison' },
     { label: 'Print', value: 'Print' },
   ];
   //{ value: string }[] = [{ value: '' }];

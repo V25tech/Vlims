@@ -5,7 +5,7 @@
     <div class="row p-2">
         <div class="col">
             <div class="d-flex justify-content-between align-items-center">
-                <h4 class="page-title flex-grow-1">Work flow configuration</h4>
+                <h4 class="page-title flex-grow-1">Workflow Configuration</h4>
 
                 <div class="back-icon" style="margin-right: 10px;">
                     <a href="javascript:void(0);" onclick="history.back();">
@@ -19,7 +19,7 @@
                         <span class="input-group-text custom-input-group-text">
                             <i class="fas fa-search custom-search-icon"></i>
                         </span>
-                        <input type="text" class="form-control custom-input" pInputText type="text" (input)="workflowTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search">
+                        <input type="text" class="form-control custom-input" pInputText type="text" (input)="workflowTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="250">
                     </div>
                       
                     <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddWorkflow()" *ngIf="access">New</button>

@@ -1,7 +1,15 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-      <h4 class="page-title">{{title}}</h4>
+     <div class="col d-flex justify-content-between align-items-center">
+    <h4 class="page-title">{{title}}</h4>
+        <div class="back-icon" style="margin-right: 10px;">
+       <a href="javascript:void(0);" onclick="history.back();">
+        <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+          </a>
+   </div>
+  
+      </div>
     </div>
   </div>
   <div class="row p-2">
@@ -10,7 +18,7 @@
         <div class="p-4 bg-white shadow-dark rounded-2">
 
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label">Document Type Name <span style="color: red; font-weight: bolder;">*</span></label>
+            <label for="documentType" class="col-sm-2 col-form-label">Document Type Name<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
@@ -24,7 +32,7 @@
                      maxlength="150"
                      />
               <div *ngIf="documentTypeInput.invalid && (documentTypeInput.dirty || documentTypeInput.touched)" class="text-danger">
-                Enter Document Type.
+                Enter Document Type
               </div>
             </div>
           </div>
@@ -33,87 +41,57 @@
 
           
           <div class="form-group row">
-            <label for="prefix" class="col-sm-2 col-form-label">Document Prefix Name <span style="color: red; font-weight: bolder;">*</span></label>
+            <label for="prefix" class="col-sm-2 col-form-label">Document Type Prefix <span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="prefix"
                      name="prefix"
                      pattern="^[a-zA-Z0-9\s]*$"
-                     placeholder="Enter Prefix Name"
+                     placeholder="Document Type Prefix"
                      [(ngModel)]="documentType.documenttypeprefix" [disabled]="viewMode" maxlength="8"
-                     required
+                       required
                      #prefixInput="ngModel"
                       />
                       <div *ngIf="prefixInput.invalid && (prefixInput.dirty || prefixInput.touched)" class="text-danger">
-                        Enter prefix name.
+                        Enter Document Type Prefix
         
                       </div>
             </div>
           </div>
-          <!-- <div class="form-group row">
+          <div class="form-group row">
             <label for="description" class="col-sm-2 col-form-label">Description  </label>
             <div class="col-sm-10">
               <textarea class="form-control"
                         id="description"
-                        name="description"
+                        name="Enter Description"
                         rows="3"
                         placeholder="Description"
                         [(ngModel)]="documentType.Description" [disabled]="viewMode">                     
                       </textarea>                      
             </div>
-          </div> -->
-         
-          <div class="form-group row" style="min-height: 38px;">
-            <label for="department" class="col-sm-2 col-form-label">Assign to Department <span style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10"  >
+          </div> 
+          <div class="form-group row">
+            <label for="department" class="col-sm-2 col-form-label">Assign to Department<span style="color: red; font-weight: bolder;">*</span></label>
+            <div class="col-sm-10">
               <div>
-                <p-multiSelect #departmentDropdown [options]="departments" class="custom-ms" [(ngModel)]="selectedDepartments" [filter]="true"
-                               defaultLabel="Select a Department"  name="department" id="department" display="chip"
-                               optionLabel="DepartmentName" optionValue="DepartmentName" [resetFilterOnHide]="true"
-                               #departmentInput="ngModel" [required]="true" [disabled]="viewMode"
-                               [ngStyle]="{'max-height.px': 500, 'overflow-y': 'auto', 'width': '100%'}"> 
-                  <ng-template let-department pTemplate="selectedItems"  >
-                    <div *ngIf="selectedDepartments.length > 0" >
-                      <!-- <div  *ngFor="let item of selectedDepartments" class="selected-item" style="margin-right: 5px; margin-bottom: 5px; padding: 5px; background-color: #f2f2f2; border-radius: 3px;">
-                        {{ selectedDepartments[0] }},{{selectedDepartments.length}} <span (click)="removeDepartment(item, $event)" style="cursor: pointer;">&#10005;</span>
-          
-                      </div> -->
-                      <span *ngIf="selectedDepartments.length>1">{{ selectedDepartments[0] }},+{{selectedDepartments.length-1}}</span>
-                      <span  *ngIf="selectedDepartments.length==1">{{ selectedDepartments[0] }}</span>
-                    </div>
-                    <div *ngIf="selectedDepartments.length > 50 && !showAllDepartments">
-                      <div class="view-more" (click)="showAllDepartments = true" style="cursor: pointer; color: blue; margin-top: 5px;">
-                        View More...
-                      </div>
-                    </div>
-                    <div *ngIf="showAllDepartments">
-                      <div *ngFor="let item of selectedDepartments" class="selected-item" style="margin-right: 5px; margin-bottom: 5px; padding: 5px; background-color: #f2f2f2; border-radius: 3px;">
-                        {{ item }} <span (click)="removeDepartment(item, $event)" style="cursor: pointer;">&#10005;</span>
-          
-                      </div>
-                      <div *ngIf="selectedDepartments.length > 5">
-                        <div class="view-more" (click)="showAllDepartments = false" style="cursor: pointer; color: blue; margin-top: 5px;">
-                          View Less...
-                        </div>
-                      </div>
-                    </div>
-                  </ng-template>
+                <p-multiSelect [options]="departments" class="custom-ms" [(ngModel)]="selectedDepartments" [filter]="true" defaultLabel="Select Department"
+                               name="department" id="department" display="chip" optionLabel="DepartmentName" optionValue="DepartmentName" [resetFilterOnHide]="true"
+                               #departmentInput="ngModel" [required]="true"  [disabled]="viewMode">
                 </p-multiSelect>
                 <div *ngIf="departmentInput.invalid && (departmentInput.dirty || departmentInput.touched)" class="text-danger">
-                  Enter department.
-                </div>
+                  Select Department
+                 </div>
               </div>
             </div>
           </div>
-          
-
 
 
         </div>
+
         <div class="form-group row my-4">
           <div class="col-sm-10 offset-sm-2">
-            <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Back</button>
+            <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
 
             <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && documentType.Status!='Approved'"  (click)="approve();" >Approve</button>
             <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && documentType.Status!='Approved'" (click)="reinitiative();" >Re-Initiate</button>
