@@ -219,7 +219,15 @@ export class AddWorkflowComponent {
     }
     return false;
   }
-
+  typeChange(){
+    if(this.workflow.documenttype!=null && this.workflow.documenttype!=undefined){
+    const selectedtype=this.types.filter(o=>o.Documenttypename.toLocaleLowerCase()===this.workflow.documenttype?.toLocaleLowerCase());
+    if(selectedtype!=null && selectedtype!=undefined)
+    {
+      this.workflow.department=this.departs.filter(o=>o.DepartmentName.includes(selectedtype[0].Assigntodepartment));
+    }
+  }
+  }
   add(workflow: workflowconiguration) {
     workflow.CreatedBy = this.commonsvc.getUsername();
     workflow.ModifiedBy = this.commonsvc.getUsername();
@@ -310,4 +318,5 @@ export class AddWorkflowComponent {
       this.workflow.reviewsCount = this.workflow.reviewers?.length;
     }
   }
+
 }

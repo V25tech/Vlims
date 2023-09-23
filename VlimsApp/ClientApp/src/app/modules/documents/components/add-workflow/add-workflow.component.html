@@ -110,7 +110,7 @@
                 optionValue="Documenttypename"
                 [required]="true"
                 [autoDisplayFirst]="false"
-                #documenttypeInput="ngModel">
+                #documenttypeInput="ngModel"  (onChange)="typeChange()">
               </p-dropdown>
               <div *ngIf="documenttypeInput.invalid && (documenttypeInput.dirty || documenttypeInput.touched)" class="text-danger">
                 Document Type is required.
@@ -132,7 +132,7 @@
                 optionLabel="DepartmentName"
                 display="chip"
                 [required]="true"
-                #departmentInput="ngModel">
+                #departmentInput="ngModel"  [disabled]="true">
               </p-multiSelect>
               <div *ngIf="departmentInput.invalid && (departmentInput.dirty || departmentInput.touched)" class="text-danger">
                 Department is required.
