@@ -184,6 +184,8 @@ export class AddWorkflowComponent {
       this.location.back();
       this.isButtonDisabled = false;
     });
+  }else{
+    return false;
   }
   }
   getallworkflows() {
@@ -232,6 +234,8 @@ export class AddWorkflowComponent {
       this.location.back();
       this.isButtonDisabled = false;
     });
+  }else{
+    return false;
   }
   }
   onCancel() {

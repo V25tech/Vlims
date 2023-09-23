@@ -85,6 +85,8 @@ export class AddDepartmentComponent implements OnInit {
       this.loader.hide();
       this.isButtonDisabled=false;
     })
+  }else{
+    return false;
   }
   }
   onCancel() {
