@@ -25,6 +25,7 @@ interface stage {
 })
 
 export class AddWorkflowComponent {
+  isButtonDisabled = false;
   title: string = 'New Workflow Configuration';
   selectedStage:stage[]=[];
   stagess:string[] | undefined=[];
@@ -176,10 +177,14 @@ export class AddWorkflowComponent {
     if (workflow.department != null) {
       workflow.departments = workflow.department.map(o => o.DepartmentName).join(",");
     }
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     return this.workflowsvc.update(workflow).subscribe((data: any) => {
       this.toastr.success('workflow Updated Succesfull!', 'Updated.!');
       this.location.back();
+      this.isButtonDisabled = false;
     });
+  }
   }
   getallworkflows() {
     this.loader.show();
@@ -219,11 +224,15 @@ export class AddWorkflowComponent {
     if (workflow.department != null) {
       workflow.departments = workflow.department.map(o => o.DepartmentName).join(",");
     }
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     return this.workflowsvc.addworkflow(workflow).subscribe((data: any) => {
       //this.loader.hide();
       this.toastr.success('workflow Saved Succesfull!', 'Saved.!');
       this.location.back();
+      this.isButtonDisabled = false;
     });
+  }
   }
   onCancel() {
     //this.workflow.approvalsGroup=this.usergroups[0];

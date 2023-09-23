@@ -16,6 +16,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   
 })
 export class AddDepartmentComponent implements OnInit {
+  isButtonDisabled = false;
   newdept = new DepartmentConfiguration();
   griddata:DepartmentConfiguration[]=[];
   viewMode: boolean = false;
@@ -77,10 +78,14 @@ export class AddDepartmentComponent implements OnInit {
   update(newdept: DepartmentConfiguration) {
     this.loader.show();
     newdept.ModifiedBy=this.commonsvc.getUsername();
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     return this.doctypeservice.update(newdept).subscribe((response)=>{
       this.toastr.success('Updated Successfully');
       this.loader.hide();
+      this.isButtonDisabled=false;
     })
+  }
   }
   onCancel() {
     this.location.back();
@@ -92,11 +97,15 @@ export class AddDepartmentComponent implements OnInit {
     newdept.CreatedDate = new Date();
     newdept.ModifiedDate = new Date();
    if(!this.isduplicate()){
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     this.doctypeservice.adddepartment(newdept).subscribe((res: any) => {
       this.toastr.success('Department added Succesfull!', 'Saved.!');
       this.loader.hide();
       this.location.back();
+      this.isButtonDisabled=false;
     });
+  }
   }
   }
   closepopup() {

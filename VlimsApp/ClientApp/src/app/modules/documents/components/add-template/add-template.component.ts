@@ -37,6 +37,7 @@ interface BodyDataElement {
   styleUrls: ['./add-template.component.scss'],
 })
 export class AddTemplateComponent implements OnInit {
+  isButtonDisabled = false;
   html = '';
   numOfPages: number = 1;
   pages: Page[] = [{ text: '', pagenumber: 1, pagetype: 'text', bodyData: [],istext:false,isgrid:false,istextposition:false }];
@@ -268,13 +269,17 @@ export class AddTemplateComponent implements OnInit {
     if(this.editMode)
     {
       this.templateForm.ModifiedBy=this.commonsvc.getUsername();
+      if (!this.isButtonDisabled) {
+        this.isButtonDisabled = true;
       this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
         this.toastr.success('Document Template Updated Succesfull!', 'Updated.!');
       this.loader.hide();
       this.location.back();
+      this.isButtonDisabled = false;
     }, (error:any) => {
       this.loader.hide();
     });
+  }
     }
     else
     { 
@@ -282,14 +287,18 @@ export class AddTemplateComponent implements OnInit {
       {
         this.templateForm.CreatedBy=this.commonsvc.getUsername();
         this.templateForm.ModifiedBy=this.commonsvc.getUsername();
+        if (!this.isButtonDisabled) {
+          this.isButtonDisabled = true;
       this.templatesvc.adddoctemplate(this.templateForm).subscribe((data:any)=>{ 
         this.toastr.success('Document Template Saved Succesfull!', 'Saved.!');
         this.loader.hide();
         this.location.back();
+        this.isButtonDisabled = false;
       }, (error:any) => {
         this.loader.hide();
       });
     }
+  }
     }
     // this.templatesvc.adddoctemplate(this.templateForm).subscribe(() => {
     // this.router.navigate(['/templates']);

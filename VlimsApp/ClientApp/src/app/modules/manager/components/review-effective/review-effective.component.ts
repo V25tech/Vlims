@@ -22,7 +22,7 @@ import { DocumentTemplateServiceService } from 'src/app/modules/services/documen
   styleUrls: ['./review-effective.component.scss']
 })
 export class ReviewEffectiveComponent {
-
+  isButtonDisabled = false;
   effective = new DocumentEffectiveConfiguration();
   workflowsourcedata:workflowconiguration[]=[];
   typeSource = [];
@@ -126,14 +126,18 @@ export class ReviewEffectiveComponent {
       this.effective.Status = this.finalStatus;
     }
     this.toastMsg = this.toastMsg ?? 'Updated'
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     this.documentEffectiveService.ManageDocumentEffective(this.effective).subscribe(res => {
       this.toastr.success(`Document Effectice ${this.toastMsg} Successfully!`);
       this.spinner.hide();
       this.location.back();
+      this.isButtonDisabled = false;
     }, er => {
       console.log(er);
       this.spinner.hide();
     });
+  }
   }
 
   onCancel() {

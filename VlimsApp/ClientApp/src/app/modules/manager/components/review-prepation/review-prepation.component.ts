@@ -20,7 +20,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./review-prepation.component.scss']
 })
 export class ReviewPrepationComponent {
-
+  isButtonDisabled = false;
   preparation: DocumentPreperationConfiguration = new DocumentPreperationConfiguration();
   selectedFile: any;
   isUploaded: boolean = false;
@@ -128,16 +128,20 @@ export class ReviewPrepationComponent {
       this.preparation.ModifiedBy = this.commonsvc.createdBy;
       this.preparation.status = this.finalStatus;
     }
-    this.toastMsg = this.toastMsg ?? 'Updated'
+    this.toastMsg = this.toastMsg ?? 'Updated';
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
       this.commonsvc.preperation = new DocumentPreperationConfiguration();
       this.toastr.success(`Document Preparation ${this.toastMsg}  successfully`);
       this.spinner.hide();
       this.location.back();
+      this.isButtonDisabled=false;
     }, er => {
       console.log(er);
       this.spinner.hide();
-    })
+    });
+  }
   }
 
   onCancel() {

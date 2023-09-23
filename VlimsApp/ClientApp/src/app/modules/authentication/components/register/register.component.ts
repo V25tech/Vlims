@@ -15,6 +15,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  isButtonDisabled = false;
   adduser = new UserConfiguration();
   //newuser = new UserConfiguration();
   editMode: boolean = false;
@@ -95,11 +96,15 @@ export class RegisterComponent implements OnInit {
     }
    else {
     adduser.ModifiedBy=this.commonsvc.getUsername();
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     this.userservice.update(adduser).subscribe((data:any)=>{
       this.toastr.success('updated successfully');
       this.loader.hide();
       this.location.back();
+      this.isButtonDisabled=false;
     });
+  }
    }
   }
   adddoctype(adduser: UserConfiguration) {
@@ -118,14 +123,18 @@ export class RegisterComponent implements OnInit {
     }
     else
     {
+      if (!this.isButtonDisabled) {
+        this.isButtonDisabled = true;
       this.userservice.adduser(adduser).subscribe((res: any) => {
         this.loader.hide();
         this.toastr.success('user added successfully');
       this.location.back();
+      this.isButtonDisabled=false;
     },(error:any)=>{
       this.loader.hide();
       this.toastr.error(error);
     });
+  }
   }
   }
   getusers() {
