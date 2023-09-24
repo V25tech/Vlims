@@ -16,6 +16,7 @@ import { WorkitemsService } from 'src/app/modules/services/workitems.service';
   styleUrls: ['./add-request.component.scss'],
 })
 export class AddRequestComponent {
+  isButtonDisabled = false;
   departmentsSource = []; type: string = ''
   requestId: number = 0; workId: number = 0; statuss: string = ''; iscompleted: boolean = false;
   username: string = ''; isreview: boolean = false; isapprove: boolean = false; reviewpendingcount = 0;
@@ -116,16 +117,19 @@ export class AddRequestComponent {
       this.request.createdDate = new Date().toISOString();
       this.request.modifiedDate = new Date().toISOString();
       this.spinner.show();
-
+      if (!this.isButtonDisabled) {
+        this.isButtonDisabled = true;
       this.documentRequestService.adddocreqconfig(this.request).subscribe(res => {
         this.commonsvc.request = new DocumentRequestConfiguration();
         this.location.back();
         this.spinner.hide();
         this.toastr.success('Document Request Saved Succesfull!', 'Saved.!');
+        this.isButtonDisabled=false;
       }, er => {
         console.log(er);
         this.spinner.hide();
       });
+    }
     }
   }
 
@@ -134,15 +138,19 @@ export class AddRequestComponent {
       this.request.modifiedBy = this.commonsvc.createdBy;
       this.request.status = this.finalStatus;
     }
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
       this.commonsvc.request = new DocumentRequestConfiguration();
       this.toastr.success(`Document Request ${this.toastMsg} Succesfull!`, 'Saved.!');
       this.location.back();
       this.spinner.hide();
+      this.isButtonDisabled=false;
     }, er => {
       console.log(er);
       this.spinner.hide();
     });
+  }
   }
 
   onCancel() {

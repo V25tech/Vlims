@@ -25,6 +25,7 @@ interface stage {
 })
 
 export class AddWorkflowComponent {
+  isButtonDisabled = false;
   title: string = 'New Workflow Configuration';
   selectedStage:stage[]=[];
   stagess:string[] | undefined=[];
@@ -175,10 +176,16 @@ export class AddWorkflowComponent {
     if (workflow.department != null) {
       workflow.departments = workflow.department.map(o => o.DepartmentName).join(",");
     }
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     return this.workflowsvc.update(workflow).subscribe((data: any) => {
       this.toastr.success('workflow Updated Succesfull!', 'Updated.!');
       this.location.back();
+      this.isButtonDisabled = false;
     });
+  }else{
+    return false;
+  }
   }
   getallworkflows() {
     this.loader.show();
@@ -211,18 +218,32 @@ export class AddWorkflowComponent {
     }
     return false;
   }
-
+  typeChange(){
+    if(this.workflow.documenttype!=null && this.workflow.documenttype!=undefined){
+    const selectedtype=this.types.filter(o=>o.Documenttypename.toLocaleLowerCase()===this.workflow.documenttype?.toLocaleLowerCase());
+    if(selectedtype!=null && selectedtype!=undefined)
+    {
+      this.workflow.department=this.departs.filter(o=>o.DepartmentName.includes(selectedtype[0].Assigntodepartment));
+    }
+  }
+  }
   add(workflow: workflowconiguration) {
     workflow.CreatedBy = this.commonsvc.getUsername();
     workflow.ModifiedBy = this.commonsvc.getUsername();
     if (workflow.department != null) {
       workflow.departments = workflow.department.map(o => o.DepartmentName).join(",");
     }
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     return this.workflowsvc.addworkflow(workflow).subscribe((data: any) => {
       //this.loader.hide();
       this.toastr.success('workflow Saved Succesfull!', 'Saved.!');
       this.location.back();
+      this.isButtonDisabled = false;
     });
+  }else{
+    return false;
+  }
   }
   onCancel() {
     //this.workflow.approvalsGroup=this.usergroups[0];
@@ -296,4 +317,5 @@ export class AddWorkflowComponent {
       this.workflow.reviewsCount = this.workflow.reviewers?.length;
     }
   }
+
 }

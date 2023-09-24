@@ -390,7 +390,7 @@
                   (click)="onCancel()">
             Cancel
           </button>
-          <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid"  (click)="addTemplate()">{{editMode?'Update':'Submit'}} </button>
+          <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid || isButtonDisabled"  (click)="addTemplate()">{{editMode?'Update':'Submit'}} </button>
           <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="approve()">Approve</button>
           <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="reinitiative()">Re-Initiative</button>
           <button type="button" class="col-xs-1 mx-8 offset-sm-1 btn btn-danger" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="reject()">Reject</button>

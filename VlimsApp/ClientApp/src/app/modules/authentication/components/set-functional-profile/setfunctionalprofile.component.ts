@@ -17,6 +17,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   
 })
 export class SetfunctionalprofileComponent implements OnInit {
+  isButtonDisabled = false;
   types: functionalprofile[]=[];
   roleTypes: RoleConfiguration[] = [];
   selectedRoles=new  RoleConfiguration();
@@ -64,19 +65,27 @@ getsetfunctionalprofile() {
       if(profileinfo.createdby==null || undefined){
         profileinfo.createdby=this.commonsvc.getUsername();
       }
+      if (!this.isButtonDisabled) {
+        this.isButtonDisabled = true;
       this.setprofileservice.update(profileinfo).subscribe((data:any)=>{
         this.toaster.success('role permissions updated');
         this.loader.hide();
+        this.isButtonDisabled=false;
       })
+    }
     }
     else{
     profileinfo.createdby=this.commonsvc.getUsername();
     profileinfo.modifiedby=this.commonsvc.getUsername();
     //profileinfo.role=this.selectedRoles.Role;
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     this.setprofileservice.addsetfunctionalprofileconfiguration(profileinfo).subscribe((res: any) => {
       this.toaster.success('role permissions added');
       this.loader.hide();
+      this.isButtonDisabled=false;
   });
+}
 }
   }
   binddata(rolename:String){

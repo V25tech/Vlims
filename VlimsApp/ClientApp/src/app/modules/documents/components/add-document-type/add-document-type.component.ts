@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Location } from '@angular/common';
-
 import { Router } from '@angular/router';
 import { DocumentType } from '../../models/document-type';
 import { DepartmentConfiguration, DocumentTypeConfiguration, RequestContext } from 'src/app/models/model';
@@ -18,6 +17,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-document-type.component.scss'],
 })
 export class AddDocumentTypeComponent {
+  isButtonDisabled = false;
+  isSubmitting = false;
+
   documentType = new DocumentTypeConfiguration();
   grid: DocumentTypeConfiguration[] = [];
   departments: string[] = [];
@@ -37,7 +39,6 @@ export class AddDocumentTypeComponent {
     //private loader: SpinnerService,
     private router: Router
   ) { }
-
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
@@ -131,9 +132,14 @@ export class AddDocumentTypeComponent {
     documentType.CreatedBy = this.commonsvc.getUsername();
     documentType.ModifiedBy = this.commonsvc.getUsername();
     documentType.DTCId = "1";
+    if (!this.isSubmitting) {
+      this.isButtonDisabled = true;
+      this.isSubmitting = true;
     this.doctypeservice.adddoctypeconfig(documentType).subscribe((res: any) => {
       this.toastr.success('Document type saved succesfull!', 'Saved.!');
       this.location.back();
+      this.isButtonDisabled = false;
+      this.isSubmitting = false;
     }, er => {
       console.log(er);
       this.toastr.error('Document type adding failed', 'Internal server error', {
@@ -142,8 +148,12 @@ export class AddDocumentTypeComponent {
       this.isSubmiting = false;
     });
   }
+  }
   updatetype() {
     this.documentType.ModifiedBy = this.commonsvc.getUsername();
+    if (!this.isSubmitting) {
+      this.isButtonDisabled = true;
+      this.isSubmitting = true;
     this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {
       this.commonsvc.documentType = new DocumentTypeConfiguration();
       this.toastr.success('Document type update succesfull!', 'Updated.!');
@@ -157,6 +167,7 @@ export class AddDocumentTypeComponent {
         timeOut: 3000,
       });
     });
+  }
   }
 
 

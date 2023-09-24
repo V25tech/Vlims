@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './add-usergroupconfiguration.component.html'
 })
 export class AddusergroupconfigurationComponent implements OnInit {
+  isButtonDisabled = false;
   types: UserConfiguration[] = [];
   newdept= new Usergroupconfiguration();
   editMode: boolean = false;
@@ -67,14 +68,22 @@ export class AddusergroupconfigurationComponent implements OnInit {
       newdept.Registeredby="admin";
       newdept.Modify = "admin";
       if (this.editMode) {
+        if (!this.isButtonDisabled) {
+          this.isButtonDisabled = true;
         this.ugService.Updateusergroupconfiguration(newdept).subscribe((res: any) => {
           this.router.navigate(['/admin/groups/edit/' + newdept.Ugcid]);
+          this.isButtonDisabled=false;
         });
       }
+      }
       else {
+        if (!this.isButtonDisabled) {
+          this.isButtonDisabled = true;
         this.ugService.addusergroupconfiguration(newdept).subscribe((res: any) => {
           this.router.navigate(['/admin/groups/edit' + newdept.Ugcid]);
+          this.isButtonDisabled=false;
         });
+      }
         this.toastr.success('User Group  Saved Succesfull!', 'Saved.!');
       }
     }

@@ -20,7 +20,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./review-revision.component.scss']
 })
 export class ReviewRevisionComponent {
-
+  isButtonDisabled = false;
   revision = new DocumentAdditionalTasks();
   editMode: boolean = false;
   viewMode: boolean = false;
@@ -158,15 +158,18 @@ export class ReviewRevisionComponent {
       this.revision.createdDate = new Date();
       this.revision.modifiedDate = new Date();
       this.spinner.show();
-
+      if (!this.isButtonDisabled) {
+        this.isButtonDisabled = true;
       this.documentRevisionService.adddocrevconfig(this.revision).subscribe(res => {
         this.spinner.hide();
         this.toastr.success('Document Request Saved Succesfull!', 'Saved.!');
         this.location.back();
+        this.isButtonDisabled=false;
       }, er => {
         console.log(er);
         this.spinner.hide();
       });
+    }
     }
   }
 
@@ -176,15 +179,19 @@ export class ReviewRevisionComponent {
       //this.revision.status = this.finalStatus;
     }
     this.spinner.show();
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     this.documentRevisionService.updatedocrevconfig(this.revision).subscribe(res => {
       this.commonsvc.revision = new DocumentAdditionalTasks();
       this.toastr.success('Document Revision Succesfull!', 'Saved.!');
       this.spinner.hide();
       this.location.back();
+      this.isButtonDisabled=false;
     }, er => {
       console.log(er);
       this.spinner.hide();
     });
+  }
   }
 
   onCancel() {

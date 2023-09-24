@@ -17,6 +17,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 })
 export class AddRoleComponent implements OnInit {
+  isButtonDisabled = false;
   addrole = new RoleConfiguration();
   griddata:RoleConfiguration[]=[];
   editMode: boolean = false;
@@ -76,11 +77,15 @@ export class AddRoleComponent implements OnInit {
   update(addrole: RoleConfiguration) {
     addrole.ModifiedBy=this.commonsvc.getUsername();
    this.loader.show();
+   if (!this.isButtonDisabled) {
+    this.isButtonDisabled = true;
     this.rolesservice.Updaterole(addrole).subscribe((res: any) => {
       this.toastr.success('Updated Succesfull!', 'Updated.!');
       this.loader.hide();
       this.location.back();
+      this.isButtonDisabled=false;
     });
+  }
   }
   adddoctype(adaddrole: RoleConfiguration) {
    this.loader.show();
@@ -88,11 +93,15 @@ export class AddRoleComponent implements OnInit {
     adaddrole.ModifiedBy = this.commonsvc.getUsername();
     adaddrole.CreatedDate = new Date();
     adaddrole.ModifiedDate = new Date();
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     this.rolesservice.addrole(adaddrole).subscribe((data:any)=>{
       this.toastr.success('New Role Saved Succesfull!', 'Saved.!');
       this.loader.hide();
       this.location.back();
+      this.isButtonDisabled=false;
     });
+  }
   }
   closepopup() {
     this.router.navigate(['/mainpage/roles']);

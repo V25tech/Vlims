@@ -27,6 +27,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
     `]
 })
 export class NewPrintRequestComponent implements OnInit {
+  isButtonDisabled = false;
   print = new DocumentPrintConfiguration();
   public workflowsSource: any[] = [];
   editMode: boolean = false;
@@ -151,28 +152,36 @@ export class NewPrintRequestComponent implements OnInit {
     this.print.Status = 'In-Progress';
     this.print.CreatedDate = new Date();
     this.print.ModifiedDate = new Date();
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     this.docprintservice.AddNewPrintRequest(this.print).subscribe(res => {
       this.commonsvc.printConfig = new DocumentPrintConfiguration(); this.spinner.hide();
       this.location.back();
       this.toastr.success('Document print request saved succesfull!', 'Saved.!');
+      this.isButtonDisabled=false;
     }, er => {
       this.spinner.hide();
       console.log(er);
     });
   }
+  }
 
   updateRequest() {
     this.spinner.show();    
     this.toastMsg = this.toastMsg ?? 'Updated'
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
     this.docprintservice.UpdatePrintRequest(this.print).subscribe(res => {
       this.commonsvc.printConfig = new DocumentPrintConfiguration();
       this.spinner.hide();
       this.location.back();
       this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
+      this.isButtonDisabled=false;
     }, er => {
       this.spinner.hide();
       console.log(er);
     });
+  }
   }
 
   onCancel() {
