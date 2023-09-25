@@ -35,12 +35,12 @@
                        class="form-control"
                        id="minlength"
                        name="minlength"
-                       placeholder=""
+                       placeholder="Enter user Id length"
                        [(ngModel)]="securityType.MinimumUserIdLength" [disabled]="viewMode"
                        required
                        #minlengthInput="ngModel" />
                 <div *ngIf="minlengthInput.invalid && (minlengthInput.dirty || minlengthInput.touched)" class="text-danger">
-                  Minimum UserId is required.
+                  Minimum UserID is required
                 </div>
               </div>
             </div>
@@ -52,12 +52,12 @@
                        class="form-control"
                        id="minpass"
                        name="minpass"
-                       placeholder=""
+                       placeholder="Enter Password Length"
                        [(ngModel)]="securityType.MinimumPasswordLength" [disabled]="viewMode"
                        required
                        #minpassInput="ngModel" />
                 <div *ngIf="minpassInput.invalid && (minpassInput.dirty || minpassInput.touched)" class="text-danger">
-                  Minimum password is required.
+                  Minimum password is required
                 </div>
               </div>
             </div>
@@ -69,12 +69,12 @@
                        class="form-control"
                        id="passwordcomplexity"
                        name="passwordcomplexity"
-                       placeholder=""
+                       placeholder="Enter Password Complexity"
                        [(ngModel)]="securityType.PasswordComplexity" [disabled]="viewMode"
                        required
                        #departmentNameInput="ngModel" />
                 <div *ngIf="departmentNameInput.invalid && (departmentNameInput.dirty || departmentNameInput.touched)" class="text-danger">
-                  PassWord Complexity is Required.
+                  Password Complexity is Required
                 </div>
 
               </div>
@@ -88,12 +88,12 @@
                        class="form-control"
                        id="Iattempts"
                        name="Iattempts"
-                       placeholder=""
+                       placeholder="Enter no. of invalid Attempts"
                        [(ngModel)]="securityType.InvalidAttempts" [disabled]="viewMode"
                        required
                        #IattemptsInput="ngModel" />
                 <div *ngIf="IattemptsInput.invalid && (IattemptsInput.dirty || IattemptsInput.touched)" class="text-danger">
-                  Give No Of Attempts.
+                  Give No.Of Attempts
                 </div>
 
               </div>
@@ -105,12 +105,12 @@
                        class="form-control"
                        id="sessiontimeout"
                        name="sessiontimeout"
-                       placeholder=""
+                       placeholder="Enter Session TimeOut"
                        [(ngModel)]="securityType.SessionTimeOut" [disabled]="viewMode"
                        required
                        #sessiontimeoutInput="ngModel" />
                 <div *ngIf="sessiontimeoutInput.invalid && (sessiontimeoutInput.dirty || sessiontimeoutInput.touched)" class="text-danger">
-                  Enter Session TimeOut.
+                  Enter Session TimeOut
                 </div>
               </div>
             </div>

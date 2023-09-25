@@ -30,13 +30,13 @@
                      class="form-control"
                      id="rolename"
                      name="rolename"
-                     placeholder="Role Name"
+                     placeholder="Enter Role"
                      [(ngModel)]="addrole.Role" [disabled]="editMode"
                      required
                      #rolenameInput="ngModel"
                      />
                      <div *ngIf="rolenameInput.invalid && (rolenameInput.dirty || rolenameInput.touched)" class="text-danger">
-                      Enter Role.
+                      Role is required
                     </div>
                      
                      
@@ -56,17 +56,17 @@
                 name="DepartmentName"
                 [options]="types" 
                 [(ngModel)]="addrole.Department"
+                placeholder="Select Department"
                 optionLabel="DepartmentName"
-                
-                optionValue="DepartmentName"
                 [required]="true"
+                display="chip"
                 #DepartmentNameInput="ngModel">
               
              
               
                    </p-dropdown>
               <div *ngIf="DepartmentNameInput.invalid && (DepartmentNameInput.dirty || DepartmentNameInput.touched)" class="text-danger">
-                Select Your Role.
+                Department required
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@
                      rows="3"
                      placeholder="Comments please"
                      [(ngModel)]="addrole.Comments" [disabled]="viewMode"
-                     
+                     maxlength="250"
                      #commentsInput="ngModel" ></textarea>
                     
             </div>
@@ -90,7 +90,7 @@
         </div>
         <div class="form-group row my-4">
           <div class="col-sm-10 offset-sm-2">
-            <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Back</button>
+            <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
             <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid || isButtonDisabled">Submit</button>
             <button type="submit" class="btn btn-primary" *ngIf="editMode" [disabled]="!fm.form.valid || isButtonDisabled">Update</button>
           </div>

@@ -16,7 +16,7 @@
                       <span class="input-group-text custom-input-group-text">
                           <i class="fas fa-search custom-search-icon"></i>
                       </span>
-                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search">
+                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="250">
                   </div>
                     
                   <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddDepartment()" *ngIf="access">New</button>
@@ -41,7 +41,7 @@
                   <th pSortableColumn="RegisteredBy" style="width:20%">Registered by<p-sortIcon field="Registered by"></p-sortIcon></th>
                   <th pSortableColumn="RegisteredOn" style="width:1n00px">Registered On <p-sortIcon field="Registered On"></p-sortIcon></th>
                   <th pSortableColumn="Status" style="width:100px">Status <p-sortIcon field="Status"></p-sortIcon></th>
-                  <th>Actions</th>
+                  <th>Modify</th>
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-doc let-i="rowIndex">

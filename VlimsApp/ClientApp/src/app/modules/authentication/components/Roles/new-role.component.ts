@@ -28,7 +28,7 @@ export class AddRoleComponent implements OnInit {
   roles: RoleConfiguration[] = [];
   isactivedirectory: boolean = false;
   isstandarduser: boolean = false;
-  title: string = "Add Role Configuration";
+  title: string = "New Role Configuration";
   constructor(private commonsvc: CommonService,private toastr: ToastrService,
      private rolesservice: RolesconfigurationService,
     private deptservice: DepartmentconfigurationService,
@@ -56,7 +56,7 @@ export class AddRoleComponent implements OnInit {
     }
     else if (lastSegment == "edit") {
       this.editMode = true;
-      this.title = "Edit Role Configuration"
+      this.title = "Modify Role Configuration"
       this.roleid=parseInt(segments[segments.length-1],10);
     }
     this.getdepartments();
