@@ -219,11 +219,16 @@ export class AddWorkflowComponent {
     return false;
   }
   typeChange(){
+    debugger;
     if(this.workflow.documenttype!=null && this.workflow.documenttype!=undefined){
     const selectedtype=this.types.filter(o=>o.Documenttypename.toLocaleLowerCase()===this.workflow.documenttype?.toLocaleLowerCase());
     if(selectedtype!=null && selectedtype!=undefined)
     {
-      this.workflow.department=this.departs.filter(o=>o.DepartmentName.includes(selectedtype[0].Assigntodepartment));
+    
+      const selectedDepartments = selectedtype[0].Assigntodepartment.split(",");
+      this.workflow.department = this.departs.filter(o => selectedDepartments.some(selectedDept => o.DepartmentName.includes(selectedDept)));
+
+      
     }
   }
   }
