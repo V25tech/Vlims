@@ -17,7 +17,7 @@
                       <span class="input-group-text custom-input-group-text">
                           <i class="fas fa-search custom-search-icon"></i>
                       </span>
-                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search">
+                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="250">
                   </div>
                     
                  
@@ -34,9 +34,9 @@
              tableStyleClass="table table-striped">
               <ng-template pTemplate="header">
                 <tr>
-                  <th>s.no</th>
+                  <th>S.No</th>
                   <!-- <th pSortableColumn="S.no" style="width:20%">S No<p-sortIcon field="sno"></p-sortIcon></th> -->
-                  <th pSortableColumn="username" style="width:10%">username<p-sortIcon field="username"></p-sortIcon></th>
+                  <th pSortableColumn="username" style="width:10%">User Name<p-sortIcon field="username"></p-sortIcon></th>
                   <th pSortableColumn="UserId" style="width:15%">User Id<p-sortIcon field="UserId"></p-sortIcon></th>
                   <th pSortableColumn="Role" style="width:20%">Role<p-sortIcon field="Role"></p-sortIcon></th>
                   <th pSortableColumn="Department" style="width:200px">Department <p-sortIcon field="Department"></p-sortIcon></th>

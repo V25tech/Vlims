@@ -16,7 +16,7 @@
                       <span class="input-group-text custom-input-group-text">
                           <i class="fas fa-search custom-search-icon"></i>
                       </span>
-                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search">
+                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="250">
                   </div>
                     
               </div>
@@ -61,7 +61,7 @@
                 <th pSortableColumn="status" style="width: 100px">
                   Status <p-sortIcon field="status"></p-sortIcon>
                 </th>
-                <th class="text-center" style="width: 80px">Actions</th>
+                <th class="text-center" style="width: 80px">Modify</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-docPreperation let-i="rowIndex">

@@ -34,9 +34,9 @@
               style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentTitle" name="documentTitle"
-                placeholder="Document Title" [(ngModel)]="preparation.documenttitle" [disabled]="viewMode" #docTitleInput="ngModel" required/>
+                placeholder="Enter Document Title" [(ngModel)]="preparation.documenttitle" [disabled]="viewMode" #docTitleInput="ngModel" required/>
                 <div *ngIf="docTitleInput.invalid && (docTitleInput.dirty || docTitleInput.touched)" class="text-danger">
-                  Document Title is required.
+                  Document Title is required
                 </div>
             </div>            
           </div>
@@ -47,7 +47,7 @@
             <div class="col-sm-10">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" name="docNoType" type="radio" id="docNoType2" [(ngModel)]="docNoType"
-                  value="System Generated" [disabled]="viewMode" />
+                  value="System Generated" [disabled]="viewMode" placeholder="Enter Document Number" />
                 <label class="form-check-label" for="docNoType2">System Generated</label>
               </div>
               <div class="form-check form-check-inline">
@@ -59,13 +59,13 @@
           </div>
 
           <div class="form-group row" *ngIf="docNoType === 'User Defined'">
-            <label for="documentNumber" class="col-sm-2 col-form-label">Document No.<span
+            <label for="documentNumber" class="col-sm-2 col-form-label">Document No<span
               style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="documentNumber" name="documentNumber"
-                placeholder="Document Number" [(ngModel)]="preparation.documentno" [disabled]="viewMode" #documentNumber="ngModel" required/>
+                placeholder=" Enter Document Number" [(ngModel)]="preparation.documentno" [disabled]="viewMode" #documentNumber="ngModel" required/>
                 <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="text-danger">
-                  Document Number Title is required.
+                  Document Number is required
                 </div>
             </div>
           </div>
@@ -97,12 +97,13 @@
             <div class="col-sm-10">
             <p-dropdown name="workflow" [options]="workflowsourcedata" [(ngModel)]="preparation.wokflow"
             optionLabel="workflowName" optionValue="workflowName" [disabled]="viewMode || editMode" [required]="true"
-            [autoDisplayFirst]="false" #WorkFlowInput="ngModel">
+            [autoDisplayFirst]="false" #WorkFlowInput="ngModel" placeholder="Select Workflow">
           </p-dropdown>
-            </div>
           <div *ngIf="WorkFlowInput.invalid && (WorkFlowInput.dirty || WorkFlowInput.touched)" class="text-danger">
-            Workflow is required.
+            Workflow is required
           </div>
+            </div>
+          
           </div>
 
           <div class="form-group row">
@@ -111,11 +112,11 @@
             <div class="col-sm-10">
               <p-dropdown name="template" [options]="templatesSource" [(ngModel)]="preparation.template"
                           optionLabel="Templatename" optionValue="Templatename" [disabled]="viewMode" [required]="true"
-                          [autoDisplayFirst]="false" #templateInput="ngModel">
+                          [autoDisplayFirst]="false" #templateInput="ngModel" placeholder="Select Template">
               </p-dropdown>
               <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!='' && !viewMode" href="javascript:void(0)" (click)="edittemplate(preparation.template)">Modify</a>
               <div *ngIf="templateInput.invalid && (templateInput.dirty || templateInput.touched)" class="text-danger">
-                Template is required.
+                Template is required
               </div>
             </div>
           </div>
@@ -144,7 +145,7 @@
 
           <div class="form-group row">
             <label for="Details" class="col-sm-2 col-form-label">Details</label>
-            <div class="col-sm-10">
+            <div class="col-sm-10"> 
               <textarea class="form-control mw-350" id="Details" name="Details" rows="3" placeholder="Details"
                 [(ngModel)]="preparation.details" [disabled]="viewMode"></textarea>
             </div>

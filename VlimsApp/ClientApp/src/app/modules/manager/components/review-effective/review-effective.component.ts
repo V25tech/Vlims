@@ -129,7 +129,7 @@ export class ReviewEffectiveComponent {
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
     this.documentEffectiveService.ManageDocumentEffective(this.effective).subscribe(res => {
-      this.toastr.success(`Document Effectice ${this.toastMsg} Successfully!`);
+      this.toastr.success(`Document Effective ${this.toastMsg} Successfully!`);
       this.spinner.hide();
       this.location.back();
       this.isButtonDisabled = false;
