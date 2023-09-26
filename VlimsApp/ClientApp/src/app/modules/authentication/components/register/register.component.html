@@ -84,6 +84,7 @@
               [(ngModel)]="adduser.Department"
               placeholder="Select Department"
               optionLabel="DepartmentName" 
+              optionValue="DepartmentName"
                
               [required]="true"
                display="chip"
@@ -115,6 +116,7 @@
                display="chip"
                [required]="true"
                #roleInput="ngModel"
+               optionValue="Role"
               >
             </p-dropdown>
               <div *ngIf="roleInput.invalid && (roleInput.dirty || roleInput.touched)" class="text-danger">
