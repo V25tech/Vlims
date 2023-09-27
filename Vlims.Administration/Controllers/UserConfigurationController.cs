@@ -80,7 +80,7 @@ namespace PolicySummary.Controllers
             RequestContext requestContext = new RequestContext();
             requestContext.PageNumber = 1;
             requestContext.PageSize = 200;
-            var user = userConfigurationService.GetAllUserConfiguration(requestContext,false).Response.FirstOrDefault(o => o.UserID.Equals(userConfiguration.UserID, StringComparison.InvariantCultureIgnoreCase));
+            var user = userConfigurationService.GetAllUserConfiguration(requestContext, false).Response.FirstOrDefault(o => o.UserID.Equals(userConfiguration.UserID, StringComparison.InvariantCultureIgnoreCase) && o.Status == "Active");
             if (user == null)
             {
                 if (userConfiguration.UserID == "Admin")
