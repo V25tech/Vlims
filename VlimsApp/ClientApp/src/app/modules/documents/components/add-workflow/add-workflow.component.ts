@@ -284,6 +284,7 @@ export class AddWorkflowComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 100, Id: 0 };
     return this.userssvc.getusers(objrequest).subscribe((data: any) => {
       this.users = data.Response;
+      this.users= this.users.filter(p=>p.Status=="Active");
       this.loader.hide();
       // if(this.editMode){
       // this.getbyId(this.id);}

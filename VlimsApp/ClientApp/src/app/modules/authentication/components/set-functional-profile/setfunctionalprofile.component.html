@@ -7,19 +7,12 @@
   
 
 <div class="col d-flex justify-content-between align-items-center">
-
   <h4 class="page-title">Set Functional Profile</h4>
-
       <div class="back-icon" style="margin-right: 10px;">
-
         <a href="javascript:void(0);" onclick="history.back();">
-
           <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
-
         </a>
-
       </div>
-
     </div>
 </div>
 </div>
@@ -33,6 +26,7 @@
       <div class="col-sm-10">
         <p-dropdown
         name="role"
+        [required]="true"
         id="role"
         [options]="roleTypes"
         [(ngModel)]="profile.role"
@@ -389,7 +383,7 @@
           />
         </div>
         <label for="profile" class="col-sm-2 col-form-label"
-          >Document Effectiveout</label
+          >Document Effective</label
         >
         <div class="col-sm-1">
           <input
@@ -445,7 +439,7 @@
           />
         </div>
         <label for="profile" class="col-sm-2 col-form-label"
-          >Work Assigned To ME</label
+          >Work assigned to Me</label
         >
         <div class="col-sm-1">
           <input
@@ -495,7 +489,7 @@
   <div class="form-group row my-4" *ngIf="access">
     <div class="col-sm-10 offset-sm-2">
       <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
-      <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="isButtonDisabled">Submit</button>
+      <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid || isButtonDisabled">Submit</button>
       <button type="submit" class="btn btn-primary" *ngIf="editMode" [disabled]="isButtonDisabled">Update</button>
     </div>
   </div>
@@ -524,4 +518,12 @@
 }
 
 /* Adjust label styles for better alignment */
+
+  /* Style to remove red border highlight */
+  .custom-border {
+    border: 2px solid #ccc !important;
+  }
+
+
+
 </style>
