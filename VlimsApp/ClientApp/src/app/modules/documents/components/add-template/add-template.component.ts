@@ -9,7 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/shared/common.service';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 import { ToastrService } from 'ngx-toastr';
-import { faL } from '@fortawesome/free-solid-svg-icons';
+import { faL, faSortNumericDown } from '@fortawesome/free-solid-svg-icons';
 
 
 interface SelectOption {
@@ -253,9 +253,9 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   addTemplate() {
-    
+    debugger;
     this.loader.show();
-    console.log(this.headerData);
+    console.log(this.headerData);    
     this.templateForm.documenttype=this.selectedtype.Documenttypename;
     this.templateForm.titleTable=this.headerData;
     this.templateForm.headerTable=this.gridData;
