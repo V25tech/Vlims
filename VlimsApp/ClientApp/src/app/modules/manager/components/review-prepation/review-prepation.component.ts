@@ -97,7 +97,7 @@ export class ReviewPrepationComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 100, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsourcedata = data.Response;
-      this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documentstage?.includes("Preperation"));
+      this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documentstage?.includes("Preparation"));
       debugger
     });
   }
