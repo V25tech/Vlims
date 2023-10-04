@@ -30,7 +30,8 @@ export class ExistingDocumentRequestComponent implements OnInit {
   existingDocDatasource: ExistingDocumentRequest[] = [];
 
   ngOnInit() {
-    this.access = this.commonsvc.getUserRoles()?.documentRevison ?? false;
+    debugger;
+    this.access = this.commonsvc.getUserRoles()?.docrepository ?? false;
     this.getdocumentrequest();    
    // this.existingDocDatasource = this.getDummyData();
     this.currentPage = 10;
