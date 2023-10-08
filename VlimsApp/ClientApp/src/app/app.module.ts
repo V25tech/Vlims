@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +21,7 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToastrModule } from 'ngx-toastr';
 import { AuditlogComponentComponent } from './auditlog-component/auditlog-component.component';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 
 
@@ -31,7 +32,7 @@ import { AuditlogComponentComponent } from './auditlog-component/auditlog-compon
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    
+    ReactiveFormsModule,
     TableModule,
     AppRoutingModule,
     AuthenticationRoutingModule,
@@ -41,6 +42,7 @@ import { AuditlogComponentComponent } from './auditlog-component/auditlog-compon
     NgxSpinnerModule,
     ModalModule,
     PaginatorModule,
+    NgxSummernoteModule,
     ToastrModule.forRoot(),
   ],
   exports: [TableModule],

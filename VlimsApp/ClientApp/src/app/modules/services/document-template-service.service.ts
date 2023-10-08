@@ -33,4 +33,8 @@ getbyId(id: number) {
   
   return this.http.getwithheader("api/documenttemplateconfiguration/getbyId"+"?dTID="+id,this.type);
 }
+getTemplate(templte: string) {
+  debugger
+  return this.http.getwithheader("api/documenttemplateconfiguration/getpdf?templateinf=" + templte, this.type);
+}
 }

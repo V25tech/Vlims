@@ -44,6 +44,7 @@ export class LoginComponent {
     this.userssvc.login(admin).subscribe((data:any)=>{
           
       this.user=data;
+      console.log('admin',this.user);
       this.loginService.updateuser(this.roles,this.user);
       this.isvaliduser();
       this.loader.hide();

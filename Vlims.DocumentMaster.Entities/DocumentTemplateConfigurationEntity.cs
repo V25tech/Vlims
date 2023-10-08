@@ -256,6 +256,9 @@ namespace Vlims.DocumentMaster.Entities
     }
     public class Page
     {
+        public string header { get; set; }
+
+        public string footer { get; set; }
         public string text { get; set; }
         public int pagenumber { get; set; }
 

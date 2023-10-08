@@ -180,7 +180,8 @@ export class ReviewEffectiveComponent {
     if(obj!=null && obj!=undefined){
       id=parseInt(obj.DTID);
     }  
-    this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
+    this.templateService.getTemplate(this.effective.template).subscribe((data: any) => {
+    //this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();

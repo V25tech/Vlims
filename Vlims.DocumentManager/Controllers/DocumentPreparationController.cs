@@ -23,6 +23,8 @@ namespace PolicySummary.Controllers
     using DocumentFormat.OpenXml.Wordprocessing;
     using System.Collections;
     using System.IO;
+    //using Spire.Doc;
+    //using Document = Spire.Doc.Document;
 
     //using Microsoft.Office.Interop.Word;
 
@@ -118,6 +120,40 @@ namespace PolicySummary.Controllers
             }
             return Ok(pdfBytes);
         }
+        [HttpGet("getTemplate")]
+        public ActionResult GetTemplate(string templateinf)
+        {
+            try
+            {
+                DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
+                DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
+                if (template != null)
+                {
+                    //string headertable = HeaderFooter.PrepareHeaderdiv(template);
+                    //string footertable = HeaderFooter.PrepareFooterdiv(template);
+                    ////string titleTable = HeaderFooter.PrepareTitlediv(template);
+                    //template.header = headertable;
+                    //template.footer = footertable;
+
+                    //Document document = new Spire.Doc.Document();
+                    //Section section = document.AddSection();
+                    //section.PageSetup.Margins.All = 72f;
+                    //Spire.Doc.Pa
+                    //HeaderFooter header = document.Sections[0].HeadersFooters.Header;
+
+                    //Spire.Doc.Paragraph = section
+
+
+                }
+                return Ok(template);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private byte[] DownloadTemplate(DataSet dataset)
         {
             byte[] pdfBytes = null;

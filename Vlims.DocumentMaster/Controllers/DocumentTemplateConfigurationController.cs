@@ -11,9 +11,14 @@ namespace Vlims.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
+    using System.Text;
     using System.Xml.Serialization;
     using Microsoft.AspNetCore.Mvc;
+    using Spire.Doc;
+    using Spire.Doc.Documents;
     using Vlims.Common;
+    using Vlims.DocumentMaster.DataAccess;
     using Vlims.DocumentMaster.Entities;
     using Vlims.DocumentMaster.Manager;
 
@@ -24,9 +29,12 @@ namespace Vlims.Controllers
     [Route("api/documenttemplateconfiguration")]
     public class DocumentTemplateConfigurationController : ControllerBase
     {
-        
+
         private readonly IDocumentTemplateConfigurationService documentTemplateConfigurationService;
-        
+
+        private readonly string htmlUpper = "<html>\r\n<head>\r\n<style type=\"text/css\">\r\n        li, p, table {\r\n            font-family: 'Lucida Sans Unicode', sans-serif;\r\n            font-size: 14pt;\r\n        }\r\n\t\ttable {\r\n            font-family: 'Lucida Sans Unicode', sans-serif;\r\n            font-size: 14pt;\r\n            border: 1px solid black; /* Set border to 1px solid black */\r\n            width: 100%;\r\n        }\r\n</style>\r\n</head>\r\n<body>";
+        private readonly string htmllower = "</body>\r\n</html>";
+
         /// <summary>
         /// 
         /// </summary>
@@ -46,7 +54,7 @@ namespace Vlims.Controllers
             var result = documentTemplateConfigurationService.GetAllDocumentTemplateConfiguration(requestContext);
             return Ok(result);
         }
-        
+
         /// <summary>
         /// This method is used to Get DocumentTemplateConfiguration By Id dTID
         /// </summary>
@@ -86,7 +94,7 @@ namespace Vlims.Controllers
             var result = documentTemplateConfigurationService.SaveDocumentTemplateConfiguration(documentTemplateConfiguration);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to update DocumentTemplateConfiguration
         /// </summary>
@@ -95,9 +103,9 @@ namespace Vlims.Controllers
         public ActionResult<System.Boolean> UpdateDocumentTemplateConfiguration(DocumentTemplateConfiguration documentTemplateConfiguration)
         {
             var result = documentTemplateConfigurationService.UpdateDocumentTemplateConfiguration(documentTemplateConfiguration);
-            return result;            
+            return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Delete DocumentTemplateConfiguration By Id dTID
         /// </summary>
@@ -108,7 +116,7 @@ namespace Vlims.Controllers
             var result = documentTemplateConfigurationService.DeleteDocumentTemplateConfigurationByDTID(dTID);
             return result;
         }
-        
+
         /// <summary>
         /// This Method is used to Delete DocumentTemplateConfiguration By Multiple ids dTIDs
         /// </summary>
@@ -118,6 +126,197 @@ namespace Vlims.Controllers
         {
             var result = documentTemplateConfigurationService.DeleteAllDocumentTemplateConfiguration(dTIDs);
             return result;
+        }
+        [HttpGet("getpdf")]
+        public  ActionResult<byte[]> getpdf(string templateinf)
+        {
+            byte[] bytes = null;
+            DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
+            DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
+           
+            StringBuilder builder = new StringBuilder();
+            builder.Append(htmlUpper);
+            Document document = new Spire.Doc.Document();
+            Section section = document.AddSection();
+            section.PageSetup.Margins.All = 72f;
+            HeaderFooter header = section.HeadersFooters.Header;
+            Paragraph headerParagraph = header.AddParagraph();
+            StringBuilder headerbuilder = new StringBuilder();
+            headerbuilder.Append(htmlUpper);
+            headerbuilder.Append(template.Page[0].header);
+            headerbuilder.Append(htmllower);
+            headerParagraph.AppendHTML(headerbuilder.ToString());
+            headerParagraph.Format.BeforeSpacing = 0;
+            headerParagraph.Format.AfterSpacing = 0;
+            headerParagraph.Format.PageBreakBefore = false;
+
+            //section.PageSetup.Margins.Top = 0f;
+
+            //section.PageSetup.Margins.Bottom = 0f;
+
+
+            HeaderFooter footer = section.HeadersFooters.Footer;
+            Paragraph footerParagraph = footer.AddParagraph();
+            StringBuilder footerbuilder = new StringBuilder();
+            footerbuilder.Append(htmlUpper);
+            footerbuilder.Append(template.Page[0].footer);
+            footerbuilder.Append(htmllower);
+            footerParagraph.AppendHTML(footerbuilder.ToString());
+            footerParagraph.Format.BeforeSpacing = 0;
+            footerParagraph.Format.AfterSpacing = 0;
+            footerParagraph.Format.PageBreakBefore = false;
+
+            Paragraph paragraph = section.AddParagraph();
+
+            for (int i = 0; i < template.Pages; i++)
+            {
+                builder.Append(htmlUpper);
+                builder.Append(template.Page[i].text);
+                builder.Append(htmllower);
+                builder.Append("<div style=\"page-break-before: always;\"></div>");
+            }
+            paragraph.Format.BeforeSpacing = -10;
+
+            paragraph.Format.AfterSpacing = 0;
+            paragraph.AppendHTML(builder.ToString());
+            document.SaveToFile("DocumentWithMargins.docx", FileFormat.Docx2013);
+            document.Dispose();
+
+
+            Document doc = new Document();
+            doc.LoadFromFile("DocumentWithMargins.docx");
+            byte[] pdfBytes = ConvertDocxToPdfBytes(doc);
+            //string pdfFilePath = "DocumentWithHeaderTable.pdf";
+            //doc.SaveToFile(pdfFilePath, FileFormat.PDF);
+
+            doc.Dispose();
+            bytes = pdfBytes;
+            return bytes;
+
+        }
+
+
+        static byte[] ConvertDocxToPdfBytes(Document document)
+
+        {
+
+            using (MemoryStream stream = new MemoryStream())
+
+            {
+
+                document.SaveToStream(stream, FileFormat.PDF);
+
+                return stream.ToArray();
+
+            }
+
+        }
+        public static string PrepareHeaderdiv(DocumentTemplateConfiguration Template)
+        {
+            string table = string.Empty;
+            StringBuilder tableHtml = new StringBuilder();
+            // Add CSS styles
+            tableHtml.Append("<style>");
+            tableHtml.Append(".table-container { display: table; width: 100%; border-collapse: collapse; }");
+            tableHtml.Append(".table-row { display: table-row; }");
+            tableHtml.Append(".table-cell { display: table-cell; padding: 1px;}");
+            tableHtml.Append(".label-cell { text-align: left; font-weight: bold; width: 50px; }");
+            tableHtml.Append(".value-cell { text-align: center; width: 50px; }");
+            tableHtml.Append("</style>");
+            tableHtml.Append("<div class=\"table-container\">");
+
+            foreach (List<HeaderTable> row in Template.headerTable)
+            {
+                tableHtml.Append("<div class=\"table-row\">");
+
+                foreach (HeaderTable item in row)
+                {
+                    tableHtml.Append("<div class=\"table-cell ");
+
+                    if (item.selectedOption == 1)
+                    {
+                        tableHtml.Append("label-cell");
+                    }
+                    else
+                    {
+                        tableHtml.Append("value-cell");
+                    }
+
+                    tableHtml.Append("\">");
+                    if (item.selectedOption == 1)
+                    {
+
+                        tableHtml.Append(item.inputValue);
+                    }
+                    else
+                        tableHtml.Append(item.inputValue);
+                    tableHtml.Append("</div>");
+                }
+
+                tableHtml.Append("</div>");
+
+            }
+            tableHtml.Append("</div>");
+            table = tableHtml.ToString();
+            return table;
+
+        }
+
+        public static string PrepareFooterdiv(DocumentTemplateConfiguration Template)
+        {
+            string table = string.Empty;
+            StringBuilder tableHtml = new StringBuilder();
+            // Add CSS styles
+            tableHtml.Append("<style>");
+            tableHtml.Append(".table-container { display: table; width: 100%; border-collapse: collapse; }");
+            tableHtml.Append(".table-row { display: table-row; }");
+            tableHtml.Append(".table-cell { display: table-cell; padding: 1px;}");
+            tableHtml.Append(".label-cell { text-align: left; font-weight: bold; width: 50px; }");
+            tableHtml.Append(".value-cell { text-align: center; width: 50px; }");
+            tableHtml.Append("</style>");
+            tableHtml.Append("<div class=\"table-container\">");
+
+            foreach (List<FooterTable> row in Template.footerTable)
+            {
+                tableHtml.Append("<div class=\"table-row\">");
+
+                foreach (FooterTable item in row)
+                {
+
+
+                    tableHtml.Append("<div class=\"table-cell ");
+
+                    if (item.selectedOption == 1)
+                    {
+                        tableHtml.Append("label-cell");
+                    }
+                    else
+                    {
+                        tableHtml.Append("value-cell");
+                    }
+
+                    tableHtml.Append("\">");
+                    if (item.selectedOption == 1)
+                    {
+                        //if (!string.IsNullOrEmpty(item.inputValue))
+                        //    tableHtml.Append(item.inputValue + " " + ":");
+                        //else
+                        tableHtml.Append(item.inputValue);
+                    }
+                    else
+                        tableHtml.Append(item.inputValue);
+                    tableHtml.Append("</div>");
+
+                    //IsLabel = !IsLabel; // Toggle between label and value for each cell
+                }
+
+                tableHtml.Append("</div>");
+
+            }
+            tableHtml.Append("</div>");
+            table = tableHtml.ToString();
+            return table;
+
         }
     }
 }

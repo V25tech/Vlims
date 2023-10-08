@@ -32,7 +32,7 @@ namespace PolicySummary.Sheet1.Services
             try
             {
                 DataSet dataset = UserConfigurationData.GetAllUserConfiguration(requestContext);
-                List<UserConfiguration> result = UserConfigurationConverter.SetAllUserConfiguration(dataset,isadmin);
+                List<UserConfiguration> result = UserConfigurationConverter.SetAllUserConfiguration(dataset, isadmin);
                 return new ResponseContext<UserConfiguration>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
             }
             catch (System.Exception ex)
@@ -60,6 +60,8 @@ namespace PolicySummary.Sheet1.Services
             try
             {
                 userConfiguration.UserManagementID = "1";
+                if (userConfiguration.UserID.Equals("Admin", StringComparison.InvariantCultureIgnoreCase))
+                    userConfiguration.Status = "Active";
 
                 String validationMessages = UserConfigurationValidator.IsValidUserConfiguration(userConfiguration);
                 if (validationMessages.Length <= 0)

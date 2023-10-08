@@ -121,7 +121,7 @@
             </div>
           </div>
 
-          <div class="form-group row">
+          <div class="form-group row" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!=''">
             <label for="document" class="col-sm-2 col-form-label">Document<span
               style="color: red; font-weight: bolder;">*</span></label>
             <!-- <div *ngIf="!preparation.document" class="col-sm-10">
@@ -131,6 +131,7 @@
             
             <div  class="col-sm-1">
               <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
+              <!-- <a class="link-opacity-100-hover" (click)="getTemplate()">View Document</a> -->
             </div>
             <div *ngIf="preparation.document" class="col-sm-9">
               <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>

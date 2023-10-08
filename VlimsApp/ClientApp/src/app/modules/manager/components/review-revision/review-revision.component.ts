@@ -13,6 +13,7 @@ import { WorkflowServiceService } from 'src/app/modules/services/workflow-servic
 import { DocumentPreperationService } from 'src/app/modules/services/document-preperation.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 
 @Component({
   selector: 'app-review-revision',
@@ -47,6 +48,7 @@ export class ReviewRevisionComponent {
     private docPreperationService: DocumentPreperationService,
     private documentRevisionService: DocumentRevisionService,
     private modalService: BsModalService, private sanitizer: DomSanitizer,
+    private templateService:DocumentTemplateServiceService,
     private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService) { }
 
   ngOnInit() {
@@ -241,7 +243,8 @@ export class ReviewRevisionComponent {
 
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show();
-    this.docPreperationService.preview(this.revision.template).subscribe((data: any) => {
+    this.templateService.getTemplate(this.revision.template).subscribe((data: any) => {
+    //this.docPreperationService.preview(this.revision.template).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();

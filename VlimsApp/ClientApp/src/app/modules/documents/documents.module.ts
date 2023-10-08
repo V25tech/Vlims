@@ -1,7 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ToastModule } from 'primeng/toast';
@@ -40,6 +40,7 @@ import { ActivateDeactivateuserComponent } from '../authentication/components/Ac
 import { ChangepasswordComponent } from '../authentication/components/changepassword/changepassword.component';
 import { HierarchyComponent } from '../authentication/components/hierarchy/hierarchy.component';
 import { UsermanagementComponent } from '../authentication/components/usermanagement/usermanagement.component';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 
 
@@ -77,6 +78,7 @@ import { UsermanagementComponent } from '../authentication/components/usermanage
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     DocumentsRoutingModule,
     FontAwesomeModule,
     TableModule,
@@ -84,6 +86,7 @@ import { UsermanagementComponent } from '../authentication/components/usermanage
     DropdownModule,
     ToastModule,
     NgxSpinnerModule,
+    NgxSummernoteModule
     
   ],
   providers: [] 

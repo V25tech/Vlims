@@ -27,6 +27,9 @@ export class DocumentPreperationService {
   preview(templte: string) {
     return this.http.getwithheader("api/documentpreparation/preview?templateinf=" + templte, this.type);
   }
+  getTemplate(templte: string) {
+    return this.http.getwithheader("api/documentpreparation/getTemplate?templateinf=" + templte, this.type);
+  }
 
   previewtemplate(dtid: number) {
     debugger

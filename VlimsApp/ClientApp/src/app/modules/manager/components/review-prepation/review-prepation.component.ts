@@ -14,12 +14,15 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-review-prepation',
   templateUrl: './review-prepation.component.html',
   styleUrls: ['./review-prepation.component.scss']
 })
 export class ReviewPrepationComponent {
+  
+  template=new DocumentTemplateConfiguration();
   isButtonDisabled = false;
   preparation: DocumentPreperationConfiguration = new DocumentPreperationConfiguration();
   selectedFile: any;
@@ -78,7 +81,6 @@ export class ReviewPrepationComponent {
       this.getworkflowitems();
     }
     else if (this.commonsvc.preperation.dpnid) {
-      debugger;
       this.preparation = this.commonsvc.preperation;
     }
     else {
@@ -95,7 +97,6 @@ export class ReviewPrepationComponent {
     });
   }
   getworkflowinfo() {
-    debugger;
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 100, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsourcedata = data.Response;
@@ -216,13 +217,29 @@ export class ReviewPrepationComponent {
     }
     return new Blob(byteArrays, { type: contentType });
   }
+  getTemplate(){
+    let id=0;
+    const obj= this.templatesSource.find(o=>o.Templatename===this.preparation.template);
+    if(obj!=null && obj!=undefined){
+      id=parseInt(obj.DTID);
+    }
+    this.templateService.getTemplate(this.preparation.template).subscribe((data: any) => {
+    //this.docPreperationService.getTemplate(this.preparation.template).subscribe((data: any) => {
+      debugger
+      this.template=data;
+      //this.generatePDF(data);
+    }, er => {
+      
+    });
+  }
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show(); let id=0;
     const obj= this.templatesSource.find(o=>o.Templatename===this.preparation.template);
     if(obj!=null && obj!=undefined){
       id=parseInt(obj.DTID);
     }
-    this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
+    this.templateService.getTemplate(this.preparation.template).subscribe((data: any) => {
+    // this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();
@@ -239,7 +256,6 @@ export class ReviewPrepationComponent {
     });
   }
   getworkflowitems() {
-    debugger;
     this.spinner.show();
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {

@@ -346,6 +346,7 @@ internal class HeaderFooter
             {
                 DocumentFormat.OpenXml.Wordprocessing.Body body = mainPart.Document.Body;
                 DocumentFormat.OpenXml.Drawing.Paragraph paragraph = new DocumentFormat.OpenXml.Drawing.Paragraph();
+                
                 Run run = new Run();
                 Text text = new Text(line.Trim()); // Trim to remove any leading/trailing spaces
                 run.Append(text);
@@ -877,36 +878,12 @@ internal class HeaderFooter
         tableHtml.Append("</style>");
         tableHtml.Append("<div class=\"table-container\">");
 
-        //if (Template.titleTable != null)
-        //{
-        //    foreach (List<HeaderTable> row in Template.titleTable)
-        //    {
-        //        tableHtml.Append("<div class=\"table-row\">");
-        //        foreach (HeaderTable item in row)
-        //        {
-        //            tableHtml.Append("<div class=\"table-cell ");
-
-        //            if (item.selectedOption == 1)
-        //            {
-        //                tableHtml.Append("label-cell");
-        //            }
-        //            tableHtml.Append("\">");
-        //            tableHtml.Append(item.inputValue);
-        //            tableHtml.Append("</div>");
-        //        }
-        //        tableHtml.Append("</div>");
-        //    }
-        //}
-
-
         foreach (List<HeaderTable> row in Template.headerTable)
         {
             tableHtml.Append("<div class=\"table-row\">");
 
             foreach (HeaderTable item in row)
             {
-
-
                 tableHtml.Append("<div class=\"table-cell ");
 
                 if (item.selectedOption == 1)
@@ -921,16 +898,12 @@ internal class HeaderFooter
                 tableHtml.Append("\">");
                 if (item.selectedOption == 1)
                 {
-                    //if (!string.IsNullOrEmpty(item.inputValue))
-                    //    tableHtml.Append(item.inputValue + " " + ":");
-                    //else
+                    
                         tableHtml.Append(item.inputValue);
                 }
                 else
                     tableHtml.Append(item.inputValue);
                 tableHtml.Append("</div>");
-
-                //IsLabel = !IsLabel; // Toggle between label and value for each cell
             }
 
             tableHtml.Append("</div>");

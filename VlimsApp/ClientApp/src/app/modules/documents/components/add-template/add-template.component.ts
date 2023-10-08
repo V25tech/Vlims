@@ -9,7 +9,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/shared/common.service';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 import { ToastrService } from 'ngx-toastr';
-import { faL, faSortNumericDown } from '@fortawesome/free-solid-svg-icons';
+import { faL } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 interface SelectOption {
@@ -21,11 +22,13 @@ interface Page {
   pagenumber: number;
   pagetype: string;
   bodyData: BodyDataElement[][];
-  // optiontext:string;
-  // isoption:boolean;
+  header:string;
+  footer:string;
   istext:boolean;
   isgrid:boolean;
   istextposition:boolean;
+  isheader:boolean;
+  isfooter:boolean;
 }
 interface BodyDataElement {
   selectedOption: number;
@@ -37,10 +40,13 @@ interface BodyDataElement {
   styleUrls: ['./add-template.component.scss'],
 })
 export class AddTemplateComponent implements OnInit {
+  form: FormGroup;
+  form1: FormGroup;
+  form2: FormGroup;
   isButtonDisabled = false;
-  html = '';
+  html = '';html1='';html2='';
   numOfPages: number = 1;
-  pages: Page[] = [{ text: '', pagenumber: 1, pagetype: 'text', bodyData: [],istext:false,isgrid:false,istextposition:false }];
+  pages: Page[] = [{ text: '', pagenumber: 1, pagetype: 'text', bodyData: [],istext:false,isgrid:false,istextposition:false,isheader:true,isfooter:true,header:'',footer:'' }];
   currentPage: number = 0;
   id:number=0;
   title:string='New Document Template';
@@ -49,8 +55,8 @@ export class AddTemplateComponent implements OnInit {
   templateForm=new DocumentTemplateConfiguration();
   grid:DocumentTemplateConfiguration[]=[];
   showGrid: boolean = false;
-  rows: number = 0;
-  cols: number = 0;
+  rows: number = 0;bodyrows:number=1;
+  cols: number = 0;bodycols:number=2;
   headerRow:number=0;
   headerColumn:number=0;
   headerrowarray:number[]=[];
@@ -90,10 +96,21 @@ export class AddTemplateComponent implements OnInit {
     private loader:NgxSpinnerService,
     private commonsvc:CommonService,
     private templatesvc:DocumentTemplateServiceService,
-    private router: Router
-  ) {}
+    private router: Router,private fb: FormBuilder
+  ) {
+    this.form = this.fb.group({
+      html: new FormControl('', Validators.required)
+    });
+    this.form1= this.fb.group({
+      html1: new FormControl('', Validators.required)
+    });
+    this.form2= this.fb.group({
+      html2: new FormControl('', Validators.required)
+    });
+  }
 
   ngOnInit(): void {
+    
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
@@ -146,12 +163,65 @@ export class AddTemplateComponent implements OnInit {
     }
     
   }
+  
+  config: any = {
+    airMode: false,
+    tabDisable: true,
+    popover: {
+      table: [
+        ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+        ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]
+      ],
+      image: [
+        ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+        ['float', ['floatLeft', 'floatRight', 'floatNone']],
+        ['remove', ['removeMedia']]
+      ],
+      link: [['link', ['linkDialogShow', 'unlink']]],
+      air: [
+        [
+          'font',
+          [
+            'bold',
+            'italic',
+            'underline',
+            'strikethrough',
+            'superscript',
+            'subscript',
+            'clear'
+          ]
+        ]
+      ]
+    },
+    height: '200px',
+    uploadImagePath: '/api/upload',
+    toolbar: [
+      ['misc', ['undo', 'redo']],
+      [
+        'font',
+        [
+          'bold',
+          'italic',
+          'underline',
+          'strikethrough',
+          'superscript',
+          'subscript',
+          'clear'
+        ]
+      ],
+      ['fontsize', ['fontname', 'fontsize', 'color']],
+      ['para', ['style0', 'ul', 'ol', 'paragraph', 'height']],
+      ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+      ['customButtons', ['testBtn']]
+    ]
+  };
+
   generateP():BodyDataElement[] {
     
     const bodyData: BodyDataElement[] = [];
-    for (let i = 0; i <1; i++) {
+    for (let i = 0; i <this.bodyrows; i++) {
       const row: BodyDataElement[] = [];
-      for (let j = 0; j < 4; j++) {
+      for (let j = 0; j < this.bodycols; j++) {
         if (j !== 0 && j % 2 !== 0)
         {
           row.push({ selectedOption: 2, inputValue: '' });
@@ -253,9 +323,11 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   addTemplate() {
-    debugger;
+    debugger
     this.loader.show();
-    console.log(this.headerData);    
+    console.log(this.headerData);
+    // this.templateForm.header=this.html1;
+    // this.templateForm.footer=this.html2;
     this.templateForm.documenttype=this.selectedtype.Documenttypename;
     this.templateForm.titleTable=this.headerData;
     this.templateForm.headerTable=this.gridData;
@@ -488,7 +560,11 @@ export class AddTemplateComponent implements OnInit {
         bodyData: [] ,// Initialize bodyData with an empty row
         istext:false,
         isgrid:false,
-        istextposition:false
+        istextposition:false,
+        isheader:true,
+        isfooter:true,
+        header:'',
+        footer:''
       }));
     this.currentPage = 0;
   }
@@ -586,14 +662,35 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     // this.pages[this.currentPage].isoption=false;
     // this.pages[this.currentPage].optiontext='';
   }
-  enablegrid(){
-    debugger
+  enablegrid(isrow:boolean=false){
+    if(isrow){
     if(!this.pages[this.currentPage].istext)
     {
       this.pages[this.currentPage].istextposition=false;
     }
     this.pages[this.currentPage].isgrid=true;
     this.pages[this.currentPage].bodyData.push(this.generateP());
+  }else{
+    if(!this.pages[this.currentPage].istext)
+    {
+      this.pages[this.currentPage].istextposition=false;
+    }
+    this.pages[this.currentPage].isgrid=true;
+    this.pages[this.currentPage].bodyData=[];
+    this.pages[this.currentPage].bodyData.push(this.generateP());
+  }
+  }
+  enableheader(){
+    debugger
+    this.pages[this.currentPage].isheader = !this.pages[this.currentPage].isheader;
+    console.log('header',this.pages[this.currentPage].isheader);
+    //this.pages[this.currentPage].isheader=true;
+  }
+  enablefooter(){
+    debugger
+    this.pages[this.currentPage].isfooter = !this.pages[this.currentPage].isfooter;
+    console.log('footer',this.pages[this.currentPage].isfooter)
+    //this.pages[this.currentPage].isfooter=true;
   }
   enabletext(){
     if(!this.pages[this.currentPage].isgrid)
@@ -609,6 +706,7 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
   }
   deletegrid(){
     this.pages[this.currentPage].isgrid=false;
+    this.pages[this.currentPage].istextposition=true;
     this.pages[this.currentPage].bodyData=[];
   }
 }

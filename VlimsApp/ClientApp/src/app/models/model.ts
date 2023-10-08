@@ -180,12 +180,16 @@ export class DocumentTemplateConfiguration {
 }
 interface Page {
   text: string;
+  header:string;
+  footer:string;
   pagenumber:number;
   pagetype:string;
   bodyData:BodyDataElement[][];
   istext:boolean;
   isgrid:boolean;
   istextposition:boolean;
+  isheader:boolean;
+  isfooter:boolean;
 }
 export class reviewers {
   value: string = ''
