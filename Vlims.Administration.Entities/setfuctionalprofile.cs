@@ -67,7 +67,7 @@ namespace Vlims.Administration.Entities
         public bool? documentRevison { get; set; }
 
 
-        public bool? DocumentRepository { get; set; }
+        public bool? docrepository { get; set; }
 
         public bool? additionalTasks { get; set; }
 

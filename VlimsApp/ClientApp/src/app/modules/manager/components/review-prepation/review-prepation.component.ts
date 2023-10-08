@@ -78,6 +78,7 @@ export class ReviewPrepationComponent {
       this.getworkflowitems();
     }
     else if (this.commonsvc.preperation.dpnid) {
+      debugger;
       this.preparation = this.commonsvc.preperation;
     }
     else {
@@ -94,6 +95,7 @@ export class ReviewPrepationComponent {
     });
   }
   getworkflowinfo() {
+    debugger;
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 100, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsourcedata = data.Response;
@@ -237,6 +239,7 @@ export class ReviewPrepationComponent {
     });
   }
   getworkflowitems() {
+    debugger;
     this.spinner.show();
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {

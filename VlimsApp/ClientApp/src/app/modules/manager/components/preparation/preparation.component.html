@@ -40,9 +40,9 @@
                   Document No<p-sortIcon field="documentno"></p-sortIcon>
                 </th>
   
-                <th pSortableColumn="request Code" style="width: 10%">
+                <!-- <th pSortableColumn="request Code" style="width: 10%">
                   Request Code<p-sortIcon field="request Code"></p-sortIcon>
-                </th>
+                </th> -->
                 <th pSortableColumn="documenttitle" style="width: 15%">
                   Document Name<p-sortIcon field="documenttitle"></p-sortIcon>
                 </th>
@@ -68,8 +68,8 @@
               <tr>
                 <td>{{ i + 1 }}</td>
                 <td>{{ docPreperation.documentno }}</td>
-                <td *ngIf="!docPreperation.isrevision">{{ docPreperation.referenceId }}</td>
-                <td *ngIf="docPreperation.isrevision">{{ docPreperation.referenceId }}-Revision</td>
+                <!-- <td *ngIf="!docPreperation.isrevision">{{ docPreperation.referenceId }}</td>
+                <td *ngIf="docPreperation.isrevision">{{ docPreperation.referenceId }}-Revision</td> -->
                 <td>{{ docPreperation.documenttitle }}</td>
                 <td>{{ docPreperation.documenttype }}</td>
                 <td>{{ docPreperation.department }}</td>
