@@ -8,7 +8,7 @@
     [document_PSY]          VARCHAR (500)  NULL,
     [template_PSY]          NVARCHAR (150) NULL,
     [wokflow_PSY]           NVARCHAR (150) NULL,
-    [details_PSY]           NVARCHAR (250) NULL,
+    [details_PSY]           NVARCHAR (MAX) NULL,
     [CreatedBy_PSY]         NVARCHAR (100) NULL,
     [CreatedDate_PSY]       DATETIME       NULL,
     [ModifiedBy_PSY]        NVARCHAR (100) NULL,

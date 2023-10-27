@@ -3,7 +3,7 @@
     [documentmanagerid_PSY] NVARCHAR (50)  NOT NULL,
     [documenttype_PSY]      NVARCHAR (150) NULL,
     [department_PSY]        NVARCHAR (150) NOT NULL,
-    [Purpose_PSY]           NVARCHAR (150) NULL,
+    [Purpose_PSY]           NVARCHAR (MAX) NULL,
     [ApprovalsCount_PSY]    INT            NULL,
     [AssigntoGroup_PSY]     NVARCHAR (50)  NULL,
     [CreatedBy_PSY]         NVARCHAR (100) NULL,

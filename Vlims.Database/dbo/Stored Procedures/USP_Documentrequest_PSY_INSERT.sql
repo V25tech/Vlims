@@ -4,7 +4,7 @@
 CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_INSERT] @documentmanagerid_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
 @department_PSY NVarChar(50),
-@Purpose_PSY NVarChar(50),
+@Purpose_PSY NVarChar(max),
 @ApprovalsCount_PSY Int,
 @AssigntoGroup_PSY NVarChar(50),
 @CreatedBy_PSY NVarChar(100),

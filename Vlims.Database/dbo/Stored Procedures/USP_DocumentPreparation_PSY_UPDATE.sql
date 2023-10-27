@@ -6,7 +6,7 @@
 @document_PSY NVarChar(500),
 @template_PSY NVarChar(50),
 @wokflow_PSY NVarChar(50),
-@details_PSY NVarChar(50),
+@details_PSY NVarChar(max),
 @ModifiedBy_PSY NVarChar(100),
 @Status_PSY NVarChar(100)
  AS 
