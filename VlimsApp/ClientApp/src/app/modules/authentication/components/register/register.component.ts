@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DepartmentConfiguration, RequestContext, RoleConfiguration, UserConfiguration } from '../../../../models/model';
+import { DepartmentConfiguration, RequestContext, RoleConfiguration, SecurityManagement, UserConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { DepartmentconfigurationService } from '../../../services/departmentconfiguration.service';
 import { RolesconfigurationService } from '../../../services/rolesconfiguration.service';
@@ -8,6 +8,7 @@ import { UsersconfigurationService } from '../../../services/usersconfiguration.
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SecuritymanagementService } from 'src/app/modules/services/securitymanagement.service';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class RegisterComponent implements OnInit {
   isButtonDisabled = false;
   adduser = new UserConfiguration();
+  securityInfo: SecurityManagement[] = [];
   //newuser = new UserConfiguration();
   editMode: boolean = false;
   viewMode: boolean = false;
@@ -32,9 +34,11 @@ export class RegisterComponent implements OnInit {
   constructor(private commonsvc: CommonService, private rolesservice: RolesconfigurationService,
     private deptservice: DepartmentconfigurationService,
     private userservice: UsersconfigurationService,
+    private securityService:SecuritymanagementService,
     private location: Location,
     private loader:NgxSpinnerService,
     private toastr: ToastrService,
+    private objRequest:RequestContext,
     private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -44,6 +48,7 @@ export class RegisterComponent implements OnInit {
     this.getdepartments();
     this.getroles();
     this.getusers();
+    this.getSecurityInfo();
     if (lastSegment == "view") {
       this.viewMode = true;
       if (this.viewMode) {
@@ -158,6 +163,14 @@ export class RegisterComponent implements OnInit {
       this.adduser=data;
     });
   }
+
+  getSecurityInfo()
+  {
+    return this.securityService.getsecuritymanagement(this.objRequest).subscribe((data:any)=>{
+      this.securityInfo=data;
+    });
+  }
+  //securityService
   closepopup() {
    this.location.back();
   }
