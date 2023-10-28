@@ -89,7 +89,7 @@
               [required]="true"
                display="chip"
               #djInput="ngModel"
-              
+              (onChange)="onChange()"
               >            
             </p-dropdown>
             <div *ngIf="djInput.invalid && (djInput.dirty || djInput.touched)" class="text-danger">

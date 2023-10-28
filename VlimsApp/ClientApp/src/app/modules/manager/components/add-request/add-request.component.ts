@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { DocumentRequestConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
+import { DocumentRequestConfiguration, DocumentTypeConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
@@ -22,7 +22,7 @@ export class AddRequestComponent {
   username: string = ''; isreview: boolean = false; isapprove: boolean = false; reviewpendingcount = 0;
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus: string = ''
-  typeSource = [];
+  typeSource:DocumentTypeConfiguration[] = [];
   workflowsSource:workflowconiguration[] = [];
   request = new DocumentRequestConfiguration();
   editMode: boolean = false;
@@ -221,5 +221,10 @@ export class AddRequestComponent {
       }
       this.spinner.hide();
     });
+  }
+  onChange(){
+    debugger
+    const type=this.typeSource.filter(o=>o.Documenttypename===this.request.documenttype);
+    this.request.department=type[0].Assigntodepartment;
   }
 }

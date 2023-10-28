@@ -116,10 +116,17 @@ export class RegisterComponent implements OnInit {
     adduser.CreatedDate=new Date();
     adduser.ModifiedDate=new Date();
     adduser.Status="Active";
+    const duplicateemail=this.griddata.filter(o=>o.EmailId.toLocaleLowerCase()===adduser.EmailId.toLocaleLowerCase());
     if(adduser.UserID.toLocaleLowerCase()==='admin')
     {
       this.toastr.error('admin user Already Exists')
-      this.loader.show();
+      this.loader.hide();
+      return;
+    }
+    else if(duplicateemail.length>0){
+      this.toastr.error('Email Already Exists')
+      this.loader.hide();
+      return;
     }
     else
     {
@@ -181,6 +188,10 @@ export class RegisterComponent implements OnInit {
     {
     this.adduser.UserID = this.adduser.FirstName+this.adduser.LastName;
     }
+  }
+  onChange(){
+
+    this.roles=this.roles.filter(o=>o.Department===this.adduser.Department);
   }
 }
 
