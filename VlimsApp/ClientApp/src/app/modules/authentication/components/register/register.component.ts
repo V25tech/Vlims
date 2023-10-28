@@ -18,27 +18,28 @@ import { SecuritymanagementService } from 'src/app/modules/services/securitymana
 export class RegisterComponent implements OnInit {
   isButtonDisabled = false;
   adduser = new UserConfiguration();
-  securityInfo: SecurityManagement[] = [];
   //newuser = new UserConfiguration();
   editMode: boolean = false;
   viewMode: boolean = false;
   //objname: string;
   types: DepartmentConfiguration[] = [];
   roles: RoleConfiguration[] = [];
-  griddata:UserConfiguration[]=[];
+  griddata: UserConfiguration[] = [];
   isactivedirectory: boolean = false;
   isstandarduser: boolean = false;
   title: string = "New User Configuration";
   objname: string = '';
-  userid:string='';
+  userid: string = '';
+  //securityInfo: SecurityManagement[] = [];
+  securityType: SecurityManagement = new SecurityManagement;
   constructor(private commonsvc: CommonService, private rolesservice: RolesconfigurationService,
     private deptservice: DepartmentconfigurationService,
     private userservice: UsersconfigurationService,
-    private securityService:SecuritymanagementService,
+    private securityService: SecuritymanagementService,
     private location: Location,
-    private loader:NgxSpinnerService,
+    private loader: NgxSpinnerService,
     private toastr: ToastrService,
-    private objRequest:RequestContext,
+
     private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -48,11 +49,11 @@ export class RegisterComponent implements OnInit {
     this.getdepartments();
     this.getroles();
     this.getusers();
-    this.getSecurityInfo();
+    this.getSecurityInfo()
     if (lastSegment == "view") {
       this.viewMode = true;
       if (this.viewMode) {
-        
+
         this.objname = this.commonsvc.objname;
         //this.getdocTypeByName(this.objname);
         this.adduser = this.commonsvc.userConfig;
@@ -63,20 +64,31 @@ export class RegisterComponent implements OnInit {
     else if (lastSegment == "edit") {
       this.title = "Modify New User Configuration"
       this.editMode = true;
-      this.userid=segments[segments.length - 1];
+      this.userid = segments[segments.length - 1];
       this.getbyId();
     }
 
   }
   submit(adduser: UserConfiguration) {
     debugger
-    if(this.editMode){
-      this.update(adduser);
+
+
+
+    if (this.adduser.UserID.length >this.securityType.MinimumUserIdLength.length) {
+      this.toastr.error('User ID length must not exceed ' + this.securityType.MinimumUserIdLength  + ' characters.');
+    } else {
+      if (this.editMode) {
+        this.update(adduser);
+      } else {
+        if (!this.isduplicate()) {
+          this.adddoctype(adduser);
+        }
+      }
     }
-    else{
-      if(!this.isduplicate())
-    this.adddoctype(adduser);
-    }
+
+
+    
+  
   }
   isduplicate() {
     if (this.griddata != null && this.griddata.length > 0) {
@@ -94,23 +106,22 @@ export class RegisterComponent implements OnInit {
   }
   update(adduser: UserConfiguration) {
     this.loader.show();
-    if(adduser.UserID.toLocaleLowerCase()==='admin')
-    {
+    if (adduser.UserID.toLocaleLowerCase() === 'admin') {
       this.toastr.error('admin user Already Exists')
       this.loader.hide();
     }
-   else {
-    adduser.ModifiedBy=this.commonsvc.getUsername();
-    if (!this.isButtonDisabled) {
-      this.isButtonDisabled = true;
-    this.userservice.update(adduser).subscribe((data:any)=>{
-      this.toastr.success('updated successfully');
-      this.loader.hide();
-      this.location.back();
-      this.isButtonDisabled=false;
-    });
-  }
-   }
+    else {
+      adduser.ModifiedBy = this.commonsvc.getUsername();
+      if (!this.isButtonDisabled) {
+        this.isButtonDisabled = true;
+        this.userservice.update(adduser).subscribe((data: any) => {
+          this.toastr.success('updated successfully');
+          this.loader.hide();
+          this.location.back();
+          this.isButtonDisabled = false;
+        });
+      }
+    }
   }
   adddoctype(adduser: UserConfiguration) {
     this.loader.show();
@@ -118,57 +129,46 @@ export class RegisterComponent implements OnInit {
     adduser.Standarduser = "false";
     adduser.CreatedBy = this.commonsvc.getUsername();
     adduser.ModifiedBy = this.commonsvc.getUsername();
-    adduser.CreatedDate=new Date();
-    adduser.ModifiedDate=new Date();
-    adduser.Status="Active";
-    if(adduser.UserID.toLocaleLowerCase()==='admin')
-    {
+    adduser.CreatedDate = new Date();
+    adduser.ModifiedDate = new Date();
+    adduser.Status = "Active";
+    if (adduser.UserID.toLocaleLowerCase() === 'admin') {
       this.toastr.error('admin user Already Exists')
       this.loader.show();
     }
-    else
-    {
+    else {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
-      this.userservice.adduser(adduser).subscribe((res: any) => {
-        this.loader.hide();
-        this.toastr.success('user added successfully');
-      this.location.back();
-      this.isButtonDisabled=false;
-    },(error:any)=>{
-      this.loader.hide();
-      this.toastr.error(error);
-    });
-  }
-  }
+        this.userservice.adduser(adduser).subscribe((res: any) => {
+          this.loader.hide();
+          this.toastr.success('user added successfully');
+          this.location.back();
+          this.isButtonDisabled = false;
+        }, (error: any) => {
+          this.loader.hide();
+          this.toastr.error(error);
+        });
+      }
+    }
   }
   getusers() {
     this.loader.show();
-       return this.userservice.getusers(this.commonsvc.req).subscribe((data: any) => {
-         this.griddata = data.Response;
-         this.loader.hide();
-       }, er => {
-       });
-   }
-  getbyId()
-  {
-    return this.userservice.getbyId(this.userid).subscribe((data:any)=>{
-      this.adduser=data;
+    return this.userservice.getusers(this.commonsvc.req).subscribe((data: any) => {
+      this.griddata = data.Response;
+      this.loader.hide();
+    }, er => {
     });
   }
-
-  getSecurityInfo()
-  {
-    return this.securityService.getsecuritymanagement(this.objRequest).subscribe((data:any)=>{
-      this.securityInfo=data;
+  getbyId() {
+    return this.userservice.getbyId(this.userid).subscribe((data: any) => {
+      this.adduser = data;
     });
   }
-  //securityService
   closepopup() {
-   this.location.back();
+    this.location.back();
   }
   getdepartments() {
-   this.loader.show();
+    this.loader.show();
     return this.deptservice.getdepartments(this.commonsvc.req).subscribe((data: any) => {
       this.types = data.Response;
       this.loader.hide();
@@ -190,10 +190,17 @@ export class RegisterComponent implements OnInit {
     this.location.back();
   }
   calculateTotalUsers(): void {
-    if(this.adduser.FirstName!=null || this.adduser.LastName!=null)
-    {
-    this.adduser.UserID = this.adduser.FirstName+this.adduser.LastName;
+    if (this.adduser.FirstName != null || this.adduser.LastName != null) {
+      this.adduser.UserID = this.adduser.FirstName + this.adduser.LastName;
+
     }
+  }
+  getSecurityInfo() {
+    debugger
+    return this.securityService.getsecuritymanagement(this.commonsvc.req).subscribe((data: any) => {
+      //var securityInfo = data;
+      this.securityType = data.Response[0];
+    });
   }
 }
 
