@@ -253,6 +253,7 @@ export class ReviewPrepationComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.templateService.getdocttemplate(objrequest).subscribe((data: any) => {
       this.templatesSource = data.Response;
+      this.templatesSource=this.templatesSource.filter(o=>o.documenttype===this.preparation.documenttype);
     });
   }
   getworkflowitems() {

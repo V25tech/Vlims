@@ -140,6 +140,7 @@ export class AddRequestComponent {
     }
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
+      this.spinner.show();
     this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
       this.commonsvc.request = new DocumentRequestConfiguration();
       this.toastr.success(`Document Request ${this.toastMsg} Succesfull!`, 'Saved.!');

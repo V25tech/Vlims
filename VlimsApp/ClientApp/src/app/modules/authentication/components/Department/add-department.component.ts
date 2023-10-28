@@ -73,7 +73,7 @@ export class AddDepartmentComponent implements OnInit {
       this.adddoctype(newdept);
     }
     
-    this.location.back();
+    //this.location.back();
   }
   update(newdept: DepartmentConfiguration) {
     this.loader.show();
@@ -83,6 +83,7 @@ export class AddDepartmentComponent implements OnInit {
     return this.doctypeservice.update(newdept).subscribe((response)=>{
       this.toastr.success('Updated Successfully');
       this.loader.hide();
+      this.location.back();
       this.isButtonDisabled=false;
     })
   }else{
