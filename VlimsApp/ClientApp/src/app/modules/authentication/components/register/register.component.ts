@@ -88,7 +88,7 @@ export class RegisterComponent implements OnInit {
 
 
     
-  
+
   }
   isduplicate() {
     if (this.griddata != null && this.griddata.length > 0) {
@@ -196,10 +196,8 @@ export class RegisterComponent implements OnInit {
     }
   }
   getSecurityInfo() {
-    debugger
     return this.securityService.getsecuritymanagement(this.commonsvc.req).subscribe((data: any) => {
-      //var securityInfo = data;
-      this.securityType = data.Response[0];
+      var securityInfo = data;
     });
   }
 }
