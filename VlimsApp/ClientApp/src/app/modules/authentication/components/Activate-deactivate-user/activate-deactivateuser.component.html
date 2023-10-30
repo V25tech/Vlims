@@ -3,7 +3,7 @@
       <div class="col">
           <div class="d-flex justify-content-between align-items-center">
             <h4 class="page-title flex-grow-1">
-            Activate or De Activate users</h4>
+              Activate or De Activate users</h4>  
 
               <div class="back-icon" style="margin-right: 10px;">
                   <a href="javascript:void(0);" onclick="history.back();">
@@ -20,8 +20,7 @@
                       <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="250">
                   </div>
                     
-                 
-              </div>
+                </div>
           </div>
       </div>
   </div>
@@ -31,13 +30,15 @@
             <p-table #templatesTable
              [value]="types" 
              [globalFilterFields]="['username', 'UserId', 'Role','Department','Status','RegisteredOn']"
-             tableStyleClass="table table-striped">
+             tableStyleClass="table table-striped" [rows]="itemsPerPage"
+             [paginator]="true" [totalRecords]="types.length"
+             [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
               <ng-template pTemplate="header">
                 <tr>
                   <th>S.No</th>
                   <!-- <th pSortableColumn="S.no" style="width:20%">S No<p-sortIcon field="sno"></p-sortIcon></th> -->
                   <th pSortableColumn="username" style="width:10%">User Name<p-sortIcon field="username"></p-sortIcon></th>
-                  <th pSortableColumn="UserId" style="width:15%">User Id<p-sortIcon field="UserId"></p-sortIcon></th>
+                  <th pSortableColumn="UserId" style="width:15%">User ID<p-sortIcon field="UserId"></p-sortIcon></th>
                   <th pSortableColumn="Role" style="width:20%">Role<p-sortIcon field="Role"></p-sortIcon></th>
                   <th pSortableColumn="Department" style="width:200px">Department <p-sortIcon field="Department"></p-sortIcon></th>
                   <th pSortableColumn="RegisteredOn" style="width:200px">Registered On <p-sortIcon field="RegisteredOn"></p-sortIcon></th>
@@ -54,7 +55,7 @@
                   <td>{{doc?.UserID}}</td>
                   <td>{{doc?.Role}}</td>
                   <td>{{doc?.Department}}</td>
-                  <td>{{doc?.Doj}}</td>
+                  <td>{{ doc?.Doj | date: 'dd/MM/yyyy' }}</td>
                   <td><span class="status">{{doc.Status}} </span></td>
                   <td class="text-center" *ngIf="username!=doc?.UserID && access">
                     <!-- <input class="form-check form-switch" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked="doc.Status=='Active'"> -->
@@ -75,6 +76,25 @@
       </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -139,13 +159,6 @@
       }
 
   </style>
-
-
-
-
-
-
-
 
 
 
