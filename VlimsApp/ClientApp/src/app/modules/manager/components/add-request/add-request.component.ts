@@ -224,7 +224,9 @@ export class AddRequestComponent {
   }
   onChange(){
     debugger
-    const type=this.typeSource.filter(o=>o.Documenttypename===this.request.documenttype);
+    const type=this.typeSource.filter(o=>o.Documenttypename.toLocaleLowerCase()===this.request.documenttype.toLocaleLowerCase());
     this.request.department=type[0].Assigntodepartment;
+    const filtersource=this.workflowsSource.filter(o=>o.documenttype?.toLocaleLowerCase()===this.request.documenttype.toLocaleLowerCase());
+    this.workflowsSource=filtersource;
   }
 }

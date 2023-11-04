@@ -57,7 +57,7 @@ export class CommonService {
 
   constructor() {
     this.req.PageNumber=1;
-    this.req.PageSize=200;
+    this.req.PageSize=1000;
     this.req.Id=0;
     this.req.UserName='admin';
     //this.retaileR = new Retailer();

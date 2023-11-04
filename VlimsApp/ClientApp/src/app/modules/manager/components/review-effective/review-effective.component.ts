@@ -195,6 +195,7 @@ export class ReviewEffectiveComponent {
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsourcedata = data.Response;
       this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documentstage?.includes("Effective"));
+      this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documenttype?.toLocaleLowerCase()===this.effective.documenttype.toLocaleLowerCase());
       debugger
     });
   }

@@ -101,6 +101,7 @@ export class ReviewPrepationComponent {
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsourcedata = data.Response;
       this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documentstage?.includes("Preparation"));
+      this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documenttype?.toLocaleLowerCase()===this.preparation.documenttype.toLocaleLowerCase());
       debugger
     });
   }
@@ -253,7 +254,7 @@ export class ReviewPrepationComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.templateService.getdocttemplate(objrequest).subscribe((data: any) => {
       this.templatesSource = data.Response;
-      this.templatesSource=this.templatesSource.filter(o=>o.documenttype===this.preparation.documenttype);
+      this.templatesSource=this.templatesSource.filter(o=>o.documenttype.toLocaleLowerCase()===this.preparation.documenttype.toLocaleLowerCase());
     });
   }
   getworkflowitems() {
