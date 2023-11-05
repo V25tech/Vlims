@@ -124,6 +124,8 @@ export class NewPrintRequestComponent implements OnInit {
     if (preps && preps.length > 0) {
       this.print.documenttitle = preps[0].documenttitle;
       this.print.printtype = preps[0].documenttype;
+      this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Print"));
+      this.workflowsSource=this.workflowsSource.filter(o=>o.documenttype?.toLocaleLowerCase()===preps[0].documenttype.toLocaleLowerCase());
     }
   }
 
@@ -154,6 +156,7 @@ export class NewPrintRequestComponent implements OnInit {
     this.print.ModifiedDate = new Date();
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
+      this.spinner.show();
     this.docprintservice.AddNewPrintRequest(this.print).subscribe(res => {
       this.commonsvc.printConfig = new DocumentPrintConfiguration(); this.spinner.hide();
       this.location.back();
