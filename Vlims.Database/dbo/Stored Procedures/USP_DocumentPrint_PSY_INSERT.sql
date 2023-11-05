@@ -11,7 +11,7 @@
   BEGIN TRY 
   
  DECLARE @ID INT,@REFRENCEID INT
- SET @REFRENCEID=(SELECT TOP(1) Refrence_PSY FROM DocumentPreparation_PSY WHERE @documentno_PSY=@documentno_PSY)
+ SET @REFRENCEID=(SELECT TOP(1) DEID_PSY FROM DocumentEffective_PSY WHERE documentno_PSY =@documentno_PSY)
 
 
 
