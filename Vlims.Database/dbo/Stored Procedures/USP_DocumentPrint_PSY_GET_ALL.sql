@@ -19,8 +19,8 @@ DP.ModifiedDate_PSY,
 DP.Status_PSY,DSP.template_PSY,DP.Refrence_PSY,
  count(*) over() as TotalRows   
  FROM [dbo].[DocumentPrint_PSY] DP WITH (NOLOCK)  
- JOIN dbo.DocumentEffective_PSY DE ON DE.Refrence_PSY=DP.Refrence_PSY
- JOIN dbo.DocumentPreparation_PSY DSP ON DSP.DPNID_PSY=DE.Documentmanagerid_PSY
+ JOIN dbo.DocumentEffective_PSY DE ON DE.DEID_PSY=DP.Refrence_PSY
+ JOIN dbo.DocumentPreparation_PSY DSP ON DSP.DPNID_PSY=DE.Refrence_PSY
  Order by DP.CreatedDate_PSY desc    
  OFFSET @PageSize * (@PageNumber - 1) ROWS   
   FETCH NEXT @PageSize ROWS ONLY;   
