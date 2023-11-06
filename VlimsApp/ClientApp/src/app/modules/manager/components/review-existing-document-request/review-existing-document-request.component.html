@@ -80,7 +80,7 @@
             </div>
 
             <div class="form-group row">
-              <label for="documentType" class="col-sm-2 col-form-label">Document No</label>
+              <label for="documentType" class="col-sm-2 col-form-label">Document Number</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="dnumber" name="Dnumber" placeholder="Document Number"
                   [(ngModel)]="existingDocReq.documentno" #documentno="ngModel" required />
@@ -93,7 +93,7 @@
             <div class="form-group row">
               <label for="documentType" class="col-sm-2 col-form-label">Effective Date</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" id="edate" name="Edate" placeholder="Effective Date"
+                <input type="date" class="form-control" id="edate" name="Edate"  placeholder="Effective Date"
                   [(ngModel)]="effectiveDate" (change)="existingDocReq.effectiveDate = getAsDate($event)"
                   #effectiveDateInput="ngModel" required />
                 <div *ngIf="effectiveDateInput.invalid && (effectiveDateInput.dirty || effectiveDateInput.touched)"
@@ -163,11 +163,11 @@
           <!-- Bulk option controls end here -->
 
           <div class="form-group row my-4">
-            <div class="col-sm-10 offset-sm-2">
-              <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
+            <div class="col-sm-10 offset-sm-2">             
               <button type="submit" class="btn btn-primary" *ngIf="!editMode"
                 [disabled]="!fm.form.valid">Submit</button>
               <button type="submit" class="btn btn-primary" *ngIf="editMode" [disabled]="!fm.form.valid">Update</button>
+              <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
             </div>
           </div>
         </div>
