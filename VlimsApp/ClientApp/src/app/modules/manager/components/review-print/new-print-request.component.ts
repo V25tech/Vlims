@@ -112,8 +112,8 @@ export class NewPrintRequestComponent implements OnInit {
     this.location.back();
   }
   getdocumentpreparations() {
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
-    return this.docPreperationService.getdocumentpreparations(objrequest).subscribe((data: any) => {
+    //let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    return this.docPreperationService.getdocumentpreparations(this.commonsvc.req).subscribe((data: any) => {
       this.preparations = data.response;
       this.preparations = this.preparations.filter(p => p.documentno);
     });
@@ -270,7 +270,8 @@ export class NewPrintRequestComponent implements OnInit {
   }
   previewprint(template: TemplateRef<any>) {    
     this.spinner.show();    
-    this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
+    //this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
+      this.docPreperationService.getTemplate(this.print.template).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template);
