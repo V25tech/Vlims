@@ -48,6 +48,8 @@ export class ReviewEffectiveComponent {
     { label: 'Stage 1', value: 'option2' },
     { label: 'Stage 2', value: 'option3' },
   ];
+  effectivedate: Date | undefined;
+  reviewdate: Date | undefined;
 
   constructor(private location: Location, private router: Router,
     private workitemssvc: WorkitemsService,
@@ -120,6 +122,18 @@ export class ReviewEffectiveComponent {
   }
 
   saveEffective() {
+    debugger;
+    this.effectivedate= new Date(this.effective.effectiveDate);
+    this.reviewdate= new Date (this.effective.reviewDate);
+      if (!this.effectivedate || !this.reviewdate) 
+      {
+         null;
+      }
+      if (this.effectivedate >= this.reviewdate)
+       {
+          this.toastr.error('Review Date should be greater than effective Date'); 
+          return;
+       }    
     this.spinner.show();
     if (this.viewMode && this.effective.Status != 'Rejected') {
       this.effective.ModifiedBy = this.commonsvc.createdBy;

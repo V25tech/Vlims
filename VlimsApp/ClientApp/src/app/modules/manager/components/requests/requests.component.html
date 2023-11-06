@@ -28,7 +28,7 @@
         <div class="col">
             <div class="p-4 bg-white shadow-dark rounded-2">
                 <p-table #templatesTable [value]="requestsDatasource"
-                 [globalFilterFields]="['drid', 'documenttype', 'department','documenttype','Workflow']"
+                 [globalFilterFields]="['drid', 'documenttype', 'department','documenttype','workflow']"
                  tableStyleClass="table table-striped" [rows]="itemsPerPage"
                  [paginator]="true" [totalRecords]="requestsDatasource.length"
                  [rowsPerPageOptions]="rowsPerPageOptions" >
@@ -40,7 +40,7 @@
                         <th pSortableColumn="department" style="width:15%">Department   <p-sortIcon field="department"></p-sortIcon></th>
                         <!-- <th pSortableColumn="modifiedBy" style="width:20%">Registered by<p-sortIcon field="modifiedBy"></p-sortIcon></th>
                         <th pSortableColumn="modifiedDate" style="width:200px">Registered On <p-sortIcon field="modifiedDate"></p-sortIcon></th> -->
-                        <th pSortableColumn="Workflow" style="width:20%">Workflow<p-sortIcon field="workflow"></p-sortIcon></th>
+                        <th pSortableColumn="workflow" style="width:20%">Workflow<p-sortIcon field="workflow"></p-sortIcon></th>
                         <!-- <th pSortableColumn="approvedby" style="width:20%">Approved by<p-sortIcon field="approvedby"></p-sortIcon></th>
                         <th pSortableColumn="approvedOn" style="width:200px">Approved On <p-sortIcon field="approvedOn"></p-sortIcon></th> -->
                         <th pSortableColumn="status" style="width:200px">Status <p-sortIcon field="status"></p-sortIcon></th>
