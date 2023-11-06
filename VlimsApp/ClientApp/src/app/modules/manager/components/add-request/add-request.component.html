@@ -20,7 +20,7 @@
             <label for="reqCode" class="col-sm-2 col-form-label">Request Code</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="reqCode" name="reqCode" placeholder="System Generated"
-                [(ngModel)]="request.drid" [disabled]="viewMode" readonly />
+                [(ngModel)]="request.drid" [disabled]="viewMode||editMode" readonly />
             </div>
           </div>
 
