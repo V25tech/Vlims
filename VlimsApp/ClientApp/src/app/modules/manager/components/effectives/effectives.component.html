@@ -28,7 +28,7 @@
           <div class="p-4 bg-white shadow-dark rounded-2">
             <p-table #templatesTable
             [value]="effectivesDatasource"
-            [globalFilterFields]="['reqcode','documenttitle','documentnumber','documenttype','department','status']"
+            [globalFilterFields]="['referenceId','documenttitle','documentno','documenttype','department','status']"
             tableStyleClass="table table-striped" [rows]="itemsPerPage"
               [paginator]="true" [totalRecords]="effectivesDatasource.length"
               [rowsPerPageOptions]="rowsPerPageOptions"
@@ -37,17 +37,17 @@
               <tr>
                 <th style="width: 60px">S.No</th>
   
-                <th pSortableColumn="requestCode" style="width: 10%">
-                  Request Code<p-sortIcon field="requestCode"></p-sortIcon>
+                <th pSortableColumn="referenceId" style="width: 10%">
+                  Request Code<p-sortIcon field="referenceId"></p-sortIcon>
                 </th>
-                <th pSortableColumn="documentTitle" style="width: 20%">
-                  Document Title<p-sortIcon field="documentTitle"></p-sortIcon>
+                <th pSortableColumn="documenttitle" style="width: 20%">
+                  Document Title<p-sortIcon field="documenttitle"></p-sortIcon>
                 </th>
-                <th pSortableColumn="documentNo" style="width: 10%">
-                  Document No<p-sortIcon field="document No"></p-sortIcon>
+                <th pSortableColumn="documentno" style="width: 10%">
+                  Document No<p-sortIcon field="documentno"></p-sortIcon>
                 </th>
-                <th pSortableColumn="documentType" style="width: 20%">
-                  Document Type<p-sortIcon field="documentType"></p-sortIcon>
+                <th pSortableColumn="documenttype" style="width: 20%">
+                  Document Type<p-sortIcon field="documenttype"></p-sortIcon>
                 </th>
                 <th pSortableColumn="department" style="width: 20%">
                   Department<p-sortIcon field="department"></p-sortIcon>

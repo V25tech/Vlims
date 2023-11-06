@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col d-flex justify-content-between align-items-center">
-      <h4 class="page-title">Update Document Effective</h4>
+      <h4 class="page-title">Modify Document Effective</h4>
       <div class="back-icon" style="margin-right: 10px;">
         <a href="javascript:void(0);" onclick="history.back();">
           <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
@@ -14,6 +14,8 @@
       <form (ngSubmit)="saveEffective()">
         <div class="p-4 bg-white shadow-dark rounded-2">
           
+
+
           <div class="form-group row">
             <label for="documentTitle" class="col-sm-2 col-form-label"
               >Document Title</label
@@ -30,7 +32,6 @@
               />
             </div>
           </div>
-         
 
           <div class="form-group row" >
             <label for="documentNumber" class="col-sm-2 col-form-label"
@@ -49,6 +50,7 @@
             </div>
           </div>
 
+
           <div class="form-group row">
             <label for="docType" class="col-sm-2 col-form-label"
               >Document Type</label
@@ -66,6 +68,7 @@
             </div>
           </div>
 
+
           <div class="form-group row">
             <label for="department" class="col-sm-2 col-form-label"
               >Department</label
@@ -82,6 +85,50 @@
             />
             </div>
           </div>
+
+          <div class="form-group row">
+            <label for="document" class="col-sm-2 col-form-label">Document</label>
+            <div class="col-sm-10">
+              <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label for="effectiveDate" class="col-sm-2 col-form-label">Effective Date</label>
+            <div class="col-sm-10">
+              <input
+              type="date"
+              class="form-control w-150"
+              id="effectiveDate"
+              name="effectiveDate"
+              placeholder="Effective Date"
+              [(ngModel)]="effective.effectiveDate" [disabled]="viewMode"
+            />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="reviewDate" class="col-sm-2 col-form-label">Review Date</label>
+            <div class="col-sm-10">
+                <input
+                type="date"
+                class="form-control w-150"
+                id="reviewDate"
+                name="reviewDate"
+                placeholder="Review Date"
+                [(ngModel)]="effective.reviewDate" [disabled]="viewMode"
+              />
+            </div>
+          </div>
+      
+         
+
+       
+
+        
+
+        
           <div class="form-group row">
             <label for="workflow" class="col-sm-2 col-form-label">Workflow</label>
             <!-- <div class="col-sm-10">
@@ -115,40 +162,11 @@
             </div>
           </div> -->
 
-          <div class="form-group row">
-            <label for="document" class="col-sm-2 col-form-label">Document</label>
-            <div class="col-sm-10">
-              <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
-            </div>
-          </div>
+         
 
-          <div class="form-group row">
-            <label for="effectiveDate" class="col-sm-2 col-form-label">Effective Date</label>
-            <div class="col-sm-10">
-              <input
-              type="date"
-              class="form-control w-150"
-              id="effectiveDate"
-              name="effectiveDate"
-              placeholder="Effective Date"
-              [(ngModel)]="effective.effectiveDate" [disabled]="viewMode"
-            />
-            </div>
-          </div>
+        
 
-          <div class="form-group row">
-              <label for="reviewDate" class="col-sm-2 col-form-label">Review Date</label>
-              <div class="col-sm-10">
-                  <input
-                  type="date"
-                  class="form-control w-150"
-                  id="reviewDate"
-                  name="reviewDate"
-                  placeholder="Review Date"
-                  [(ngModel)]="effective.reviewDate" [disabled]="viewMode"
-                />
-              </div>
-            </div>
+       
         </div>
 
         <div class="form-group row my-4">

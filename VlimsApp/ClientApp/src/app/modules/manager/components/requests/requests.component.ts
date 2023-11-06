@@ -18,7 +18,7 @@ export class RequestsComponent implements OnInit{
   // Pagination properties
   currentPage = 1;
   itemsPerPage = 10;
-  rowsPerPageOptions = [1,10, 20, 50];
+  rowsPerPageOptions = [10, 20, 50];
   access:boolean=false;
   constructor(private router: Router,private spinner: NgxSpinnerService, private commonsvc: CommonService, private documentRequestService: DocumentRequestService) {}
 
