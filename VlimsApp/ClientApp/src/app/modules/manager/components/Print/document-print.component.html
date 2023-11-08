@@ -30,16 +30,16 @@
           <div class="p-4 bg-white shadow-dark rounded-2">
             <p-table #templatesTable
             [value]="requests"
-            [globalFilterFields]="['Document Type','Document Name','Document Number','Printed On','Printed by','Print Count']"
+            [globalFilterFields]="['printtype','documenttitle','documentNumber','noofcopies','Printed by','Print Count']"
             tableStyleClass="table table-striped" [rows]="itemsPerPage"
            [paginator]="true" [totalRecords]="requests.length"
            [rowsPerPageOptions]="rowsPerPageOptions" >
              <ng-template pTemplate="header">
                <tr>
                  <th>S.No</th>              
-                 <th pSortableColumn="documenttype" style="width:20%">Document Type <p-sortIcon field="documenttype"></p-sortIcon></th>
-                 <th pSortableColumn="documnetname" style="width:25%">Document Name<p-sortIcon field="documentname"></p-sortIcon></th>
-                 <th pSortableColumn="documentnumber" style="width:20%">Document Number<p-sortIcon field="documentnumber"></p-sortIcon></th>
+                 <th pSortableColumn="printtype" style="width:20%">Document Type <p-sortIcon field="printtype"></p-sortIcon></th>
+                 <th pSortableColumn="documenttitle" style="width:25%">Document Name<p-sortIcon field="documenttitle"></p-sortIcon></th>
+                 <th pSortableColumn="documentNumber" style="width:20%">Document Number<p-sortIcon field="documentNumber"></p-sortIcon></th>
                  <th pSortableColumn="modifiedDate" style="width:100px">Printed On <p-sortIcon field="modifiedDate"></p-sortIcon></th>
                  <th pSortableColumn="workflow" style="width:100px">Printed by <p-sortIcon field="modifiedby"></p-sortIcon></th>
                  <th pSortableColumn="noofcopies" style="width:100px">Print Count <p-sortIcon field="noofcopies"></p-sortIcon></th>
@@ -54,7 +54,7 @@
                  <td>{{doc?.printtype}}</td>
                  <td>{{doc?.documenttitle}}</td>
                  <td>{{doc?.documentNumber}}</td>
-                 <td>{{doc?.modifiedDate | date}}</td>
+                 <td>{{doc?.modifiedDate | date:'dd/MM/yyy'}}</td>
                  <td>{{doc?.modifiedBy}}</td>
                  <td>{{doc?.noofcopies}}</td>
    
