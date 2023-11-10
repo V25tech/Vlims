@@ -42,7 +42,7 @@
               <div class="col-sm-10">
                 <p-dropdown name="docType" [options]="typeSource" [(ngModel)]="existingDocReq.documenttype"
                   optionLabel="Documenttypename" optionValue="Documenttypename" [disabled]="viewMode"
-                  [autoDisplayFirst]="false" [required]="true" #DocumenttypeInput="ngModel">
+                  [autoDisplayFirst]="false" [required]="true" #DocumenttypeInput="ngModel" placeholder="Select Document Type">
                 </p-dropdown>
                 <div *ngIf="DocumenttypeInput.invalid && (DocumenttypeInput.dirty || DocumenttypeInput.touched)"
                   class="text-danger">
@@ -57,7 +57,7 @@
               <div class="col-sm-10">
                 <p-dropdown name="department" [options]="departmentsSource" [(ngModel)]="existingDocReq.department"
                   optionLabel="DepartmentName" optionValue="DepartmentName" [disabled]="viewMode" [required]="true"
-                  [autoDisplayFirst]="false" #DepartmentInput="ngModel">
+                  [autoDisplayFirst]="false" #DepartmentInput="ngModel" placeholder="Select Department">
                 </p-dropdown>
                 <div *ngIf="DepartmentInput.invalid && (DepartmentInput.dirty || DepartmentInput.touched)"
                   class="text-danger">

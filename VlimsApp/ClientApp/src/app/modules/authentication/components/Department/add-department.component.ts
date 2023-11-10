@@ -81,7 +81,7 @@ export class AddDepartmentComponent implements OnInit {
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
     return this.doctypeservice.update(newdept).subscribe((response)=>{
-      this.toastr.success('Updated Successfully');
+      this.toastr.success('Department Updated Successfully');
       this.loader.hide();
       this.location.back();
       this.isButtonDisabled=false;

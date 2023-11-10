@@ -19,7 +19,7 @@
                         <span class="input-group-text custom-input-group-text">
                             <i class="fas fa-search custom-search-icon"></i>
                         </span>
-                        <input type="text" class="form-control custom-input" pInputText type="text" (input)="workflowTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="250">
+                        <input type="text" class="form-control custom-input" pInputText type="text" (input)="workflowTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="49">
                     </div>
                       
                     <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddWorkflow()" *ngIf="access">New</button>
@@ -31,7 +31,7 @@
         <div class="col">
             <div class="p-4 bg-white shadow-dark rounded-2">
                 <p-table #workflowTable [value]="types"
-                [globalFilterFields]="['workflowName','documentstage', 'documenttype', 'department','CreatedBy', 'Status','workflowName']"
+                [globalFilterFields]="['workflowName','documentstage', 'documenttype', 'departments','CreatedBy', 'Status','workflowName']"
                  tableStyleClass="table table-striped" [rows]="itemsPerPage"
                 [paginator]="true" [totalRecords]="types.length"
                 [rowsPerPageOptions]="rowsPerPageOptions" >
@@ -41,8 +41,8 @@
                             <th pSortableColumn="workflowName" style="width:20%">Workflow<p-sortIcon field="workflowName"></p-sortIcon></th>
                             <th pSortableColumn="documentstage" style="width:20%">Document Stage<p-sortIcon field="documentstage"></p-sortIcon></th>
                             <th pSortableColumn="documenttype" style="width:10%">Document Type <p-sortIcon field="documenttype"></p-sortIcon></th>
-                            <th pSortableColumn="department" style="width:15%">Department<p-sortIcon field="department"></p-sortIcon></th>
-                            <th pSortableColumn="CreatedBy" style="width:20%">Registered by<p-sortIcon field="CreatedBy"></p-sortIcon></th>
+                            <th pSortableColumn="departments" style="width:15%">Department<p-sortIcon field="departments"></p-sortIcon></th>
+                            <th pSortableColumn="CreatedBy" style="width:20%">Registered By<p-sortIcon field="CreatedBy"></p-sortIcon></th>
                             <th pSortableColumn="CreatedDate" style="width:200px">Registered On <p-sortIcon field="CreatedDate"></p-sortIcon></th>
                             <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
                             <th style="width:80px">Modify</th>
@@ -57,7 +57,7 @@
                             <td class="text-nowrap">{{docItem.documenttype}}</td>
                             <td>{{docItem.departments}}</td>
                             <td>{{docItem.CreatedBy}}</td>
-                            <td>{{docItem.CreatedDate | date}}</td>
+                            <td>{{docItem.CreatedDate | date:'dd/MM/yyyy'}}</td>
                             <td><span class="status" [ngClass]="{'status-completed':true}">{{docItem?.Status}} </span></td>
                             <td class="text-center"  *ngIf="access && !docItem?.IsParent"><i class="bi bi-pencil" (click)="editdoc(docItem)"></i></td>
                             <td class="text-center" *ngIf="!access">
