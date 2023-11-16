@@ -1,8 +1,8 @@
-﻿  CREATE PROCEDURE [dbo].[USP_DocumentTypeConfiguration_PSY_INSERT] @DocumentMasterId_PSY NVarChar(50),
+﻿CREATE PROCEDURE [dbo].[USP_DocumentTypeConfiguration_PSY_INSERT] @DocumentMasterId_PSY NVarChar(50),
 @Documenttypename_PSY NVarChar(50),
 @documenttypeprefix_PSY NVarChar(50),
-@Description_PSY NVarChar(50),
-@Assigntodepartment_PSY NVarChar(50),
+@Description_PSY NVarChar(500),
+@Assigntodepartment_PSY NVarChar(4000),
 @CreatedBy_PSY NVarChar(100),
 @ModifiedBy_PSY NVarChar(100),
 @Status_PSY NVarChar(100) 

@@ -2,9 +2,9 @@
 
   CREATE PROCEDURE [dbo].[USP_DocumentTypeConfiguration_PSY_UPDATE] @DTCId_PSY int, @DocumentMasterId_PSY NVarChar(50),
 @Documenttypename_PSY NVarChar(50),
-@documenttypeprefix_PSY NVarChar(50),
+@documenttypeprefix_PSY NVarChar(100),
 @Description_PSY NVarChar(50),
-@Assigntodepartment_PSY NVarChar(50),
+@Assigntodepartment_PSY NVarChar(500),
 @ModifiedBy_PSY NVarChar(100),
 @Status_PSY NVarChar(100)
  AS 

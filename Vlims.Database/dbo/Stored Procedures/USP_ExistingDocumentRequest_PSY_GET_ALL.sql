@@ -1,4 +1,6 @@
 ﻿
+
+
  CREATE PROCEDURE [dbo].[USP_ExistingDocumentRequest_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
@@ -18,7 +20,7 @@ effectivedate_PSY,
 reviewdate_PSY 
  ,count(*) over() as TotalRows 
  FROM [dbo].[ExistingDocumentRequest_PSY] WITH (NOLOCK) 
- Order by [EDRId_PSY]  
+ Order by [EDRId_PSY] DESC
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 

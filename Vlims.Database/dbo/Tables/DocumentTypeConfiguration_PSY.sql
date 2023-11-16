@@ -4,7 +4,7 @@
     [Documenttypename_PSY]   NVARCHAR (50)  NULL,
     [documenttypeprefix_PSY] NVARCHAR (50)  NULL,
     [Description_PSY]        NVARCHAR (450) NULL,
-    [Assigntodepartment_PSY] NVARCHAR (150) NULL,
+    [Assigntodepartment_PSY] NVARCHAR (MAX) NULL,
     [CreatedBy_PSY]          NVARCHAR (100) NULL,
     [CreatedDate_PSY]        DATETIME       NULL,
     [ModifiedBy_PSY]         NVARCHAR (100) NULL,
@@ -12,6 +12,8 @@
     [Status_PSY]             NVARCHAR (50)  NULL,
     CONSTRAINT [PK_DocumentTypeConfiguration_PSY] PRIMARY KEY CLUSTERED ([DTCId_PSY] ASC)
 );
+
+
 
 
 
