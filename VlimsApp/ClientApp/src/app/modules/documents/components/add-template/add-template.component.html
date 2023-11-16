@@ -1,6 +1,3 @@
-<!-- <head>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>> -->
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
@@ -160,4 +157,31 @@
    
   </div>
 </div>
+<script>
+  $.summernote.dom.walkPoint = (function (_super) {
+    debugger
+        return function () {
+          debugger
+            var startPoint = arguments[0]
+            var endPoint = arguments[1]
+            var handler = arguments[2]
+            var isSkipInnerOffset = arguments[3]
+            let point = startPoint;
+
+            while (point) {
+                handler(point);
+
+                if ($.summernote.dom.isSamePoint(point, endPoint)) {
+                    break;
+                }
+                const isSkipOffset = isSkipInnerOffset &&
+                    startPoint.node !== point.node &&
+                    endPoint.node !== point.node;
+                point = $.summernote.dom.nextPoint(point, isSkipOffset);
+            }
+        };
+
+    })($.summernote.dom.walkPoint);
+</script>
+
 
