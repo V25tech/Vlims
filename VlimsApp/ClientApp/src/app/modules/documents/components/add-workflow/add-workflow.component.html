@@ -37,10 +37,10 @@
                 placeholder="Enter workflow Name"
                 [(ngModel)]="workflow.workflowName" [disabled]="editMode"
                 required
-                #workflowNameInput="ngModel"
+                #workflowNameInput="ngModel" maxlength="49"
               />
               <div *ngIf="workflowNameInput.invalid && (workflowNameInput.dirty || workflowNameInput.touched)" class="text-danger">
-                Workflow is Required
+                Workflow Name is Required
               </div>
             </div>
           </div>

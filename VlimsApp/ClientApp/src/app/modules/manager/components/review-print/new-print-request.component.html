@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col d-flex justify-content-between align-items-center">
-      <h4 class="page-title">{{editMode? 'Update': 'Add'}} Print Request</h4>
+      <h4 class="page-title">New Print Request</h4>
       <div class="back-icon" style="margin-right: 10px;">
         <a href="javascript:void(0);" onclick="history.back();">
           <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
@@ -22,7 +22,7 @@
             <div class="col-sm-10">
               <p-dropdown name="docType" [options]="preparations" [(ngModel)]="print.documentNumber"
                 optionLabel="documentno" optionValue="documentno" (onChange)="documentNumberChange($event)" 
-                [autoDisplayFirst]="false" [required]="true"
+                [autoDisplayFirst]="false" [required]="true" placeholder="Select Document No"
                 #documentnoInput="ngModel" [disabled]="viewMode">
               </p-dropdown>
               <div *ngIf="documentnoInput.invalid && (documentnoInput.dirty || documentnoInput.touched)" class="text-danger">
@@ -53,7 +53,7 @@
               style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="number" class="form-control" id="noofcopies" name="noofcopies" placeholder=""
-                [(ngModel)]="print.noofcopies" [disabled]="viewMode"  #noofcopiesInput="ngModel"  required/>
+                [(ngModel)]="print.noofcopies" [disabled]="viewMode"  #noofcopiesInput="ngModel"  required placeholder="Choose No Of Copies" min="1"  max="9"/>
                 <div *ngIf="noofcopiesInput.invalid && (noofcopiesInput.dirty || noofcopiesInput.touched)" class="text-danger">
                   No Of Copies is required.
                 </div>
@@ -66,7 +66,7 @@
             <div class="col-sm-10">
               <div class="col-sm-10">
                 <p-dropdown name="workflow" [options]="workflowsSource" [(ngModel)]="print.workflow"
-                  optionLabel="workflowName" optionValue="workflowName" [autoDisplayFirst]="false" [required]="true"
+                  optionLabel="workflowName" optionValue="workflowName" placeholder="Select Workflow" [autoDisplayFirst]="false" [required]="true"
                   #WorkflowInput="ngModel" [disabled]="viewMode">
                 </p-dropdown>
                 <div *ngIf="WorkflowInput.invalid && (WorkflowInput.dirty || WorkflowInput.touched)" class="text-danger">
@@ -77,10 +77,16 @@
           </div>
 
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label">Reason</label>
+            <label for="documentType" class="col-sm-2 col-form-label">Reason<span
+              style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="reason" name="Reason" placeholder=""
-                [(ngModel)]="print.reason" [disabled]="viewMode" />
+              <input type="text" class="form-control" id="reason" name="Reason" placeholder="Give Reason"
+                [(ngModel)]="print.reason" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249"
+                />
+                <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                  Give Print Reason.
+  
+                </div>
             </div>
           </div>
 

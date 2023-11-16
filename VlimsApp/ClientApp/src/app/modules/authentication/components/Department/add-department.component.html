@@ -33,6 +33,7 @@
                      id="departmentName"
                      name="departmentName"
                      placeholder="Enter Department Name"
+                     maxlength="49"
                      [(ngModel)]="newdept.DepartmentName" [disabled]="editMode"
                      required
                      #departmentNameInput="ngModel" />
@@ -50,6 +51,7 @@
                      id="DepartmentCode"
                      name="DepartmentCode"
                      placeholder="Enter Department Code"
+                     maxlength="8"
                      [(ngModel)]="newdept.DepartmentCode" [disabled]="viewMode"
                      required
            #DepartmentCodeInput="ngModel" />
@@ -65,11 +67,17 @@
               <textarea class="form-control"
                         id="Comments"
                         name="Comments"
+                        maxlength="499"
                         rows="3"
                         placeholder="Comments"
                         [(ngModel)]="newdept.Comments" [disabled]="viewMode"
+                        required 
+                        #commentsCxhvcjInput="ngModel"
                         
-           #CommentsInput="ngModel"></textarea>
+                        ></textarea>
+                        <div *ngIf="commentsCxhvcjInput.invalid && (commentsCxhvcjInput.dirty || commentsCxhvcjInput.touched)" class="text-danger">
+                            Comments.
+                        </div>
            <!-- Show validation error message -->
    
             </div>

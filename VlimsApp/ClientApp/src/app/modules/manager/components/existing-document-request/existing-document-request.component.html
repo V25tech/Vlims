@@ -16,7 +16,7 @@
                         <span class="input-group-text custom-input-group-text">
                             <i class="fas fa-search custom-search-icon"></i>
                         </span>
-                        <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search">
+                        <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="249">
                     </div>
                       
                     <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddRequest()" *ngIf="access">New</button>
@@ -55,10 +55,10 @@
                       <td>{{existingdoc?.documentno}}</td>
                       <td>{{existingdoc?.documenttype}}</td>
                       <td>{{existingdoc?.department}}</td>
-                      <td>{{existingdoc?.effectiveDate | date}}</td>
+                      <td>{{existingdoc?.effectiveDate | date:'dd/MM/yyyy'}}</td>
                       <!-- <td *ngIf ="existingdoc?.reviewDate=='1/1/1900 12:00:00 AM'">NA</td>
                       <td *ngIf="existingdoc?.reviewDate!='1/1/1900 12:00:00 AM'">{{existingdoc?.reviewDate| date}}</td> -->
-                      <td >{{existingdoc?.reviewDate}}</td>
+                      <td >{{existingdoc?.reviewDate | date:'dd/MM/yyyy'}}</td>
                       <!-- <td>{{existingdoc?.approvedby}}</td>
                       <td>{{existingdoc?.approvedOn| date}}</td> -->
                       <td class="text-center" *ngIf="access"><i (click)="editExistingDoc(existingdoc)" class="bi bi-pencil"></i></td>
