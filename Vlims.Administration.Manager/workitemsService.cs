@@ -27,11 +27,11 @@ public class workitemsService : IworkitemsService
         
    
         
-        public ResponseContext<workitems> GetAllworkitems(RequestContext requestContext)
+        public ResponseContext<workitems> GetAllworkitems(RequestContext requestContext, string p_UserName)
         {
             try
             {
-                DataSet dataset = workitemsData.GetAllworkitems(requestContext);
+                DataSet dataset = workitemsData.GetAllworkitems(requestContext,p_UserName);
                 List<workitems> result = workitemsConverter.SetAllworkitems(dataset);
                 return new ResponseContext<workitems>() { RowCount = CommonConverter.SetRowsCount(dataset), Response = result };
             }

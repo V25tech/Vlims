@@ -40,7 +40,7 @@ export class AssignedComponent implements OnInit {
     {
       this.commonsvc.createdBy=user;
     }
-    return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
+    return this.workitemssvc.getworkitems(this.commonsvc.req,user).subscribe((data: any) => {
       this.types = data.Response;
       if(this.types.length>0)
       {

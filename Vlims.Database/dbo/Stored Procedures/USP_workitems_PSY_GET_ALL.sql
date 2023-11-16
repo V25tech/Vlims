@@ -3,7 +3,7 @@
 
 
 
- CREATE PROCEDURE [dbo].[USP_workitems_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
+ CREATE PROCEDURE [dbo].[USP_workitems_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1, @UserName varchar(500)=NULL  
  AS 
  BEGIN 
  BEGIN TRY 
@@ -21,7 +21,7 @@ ModifiedBy_PSY,
 ModifiedDate_PSY,
 RefrenceId_PSY,InitiatedBy_PSY,ActionType_PSY,IsCompleted_PSY
  ,count(*) over() as TotalRows 
- FROM [dbo].[workitems_PSY] WITH (NOLOCK) 
+ FROM [dbo].[workitems_PSY] WITH (NOLOCK) WHERE (@UserName IS NULL OR InitiatedBy_PSY = @UserName)
  Order by WITId_PSY DESC
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 

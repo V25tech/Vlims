@@ -20,7 +20,7 @@ using Vlims.DMS.Entities;
 public interface IworkitemsService
 {
 
-    ResponseContext<workitems> GetAllworkitems(RequestContext requestContext);
+    ResponseContext<workitems> GetAllworkitems(RequestContext requestContext,string p_UserName);
 
     workitems GetworkitemsByWITId(System.Int32? wITId);
 

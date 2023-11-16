@@ -33,9 +33,9 @@ public class workitemsController : ControllerBase
     /// </summary>
     /// <param name="requestContext"></param>
     [HttpPost("GetAllworkitems")]
-    public ActionResult<ResponseContext<workitems>> GetAllworkitems(RequestContext requestContext)
+    public ActionResult<ResponseContext<workitems>> GetAllworkitems(RequestContext requestContext,string p_UserName=null)
     {
-        var result = workitemsService.GetAllworkitems(requestContext);
+        var result = workitemsService.GetAllworkitems(requestContext, p_UserName);
         return result;
     }
 

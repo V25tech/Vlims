@@ -25,7 +25,7 @@ public static class workitemsData
 {
 
 
-    public static DataSet GetAllworkitems(RequestContext requestContext)
+    public static DataSet GetAllworkitems(RequestContext requestContext, string p_UserName)
     {
         try
         {
@@ -34,6 +34,7 @@ public static class workitemsData
             List<SqlParameter> sqlparms = new List<SqlParameter>();
             sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = RequestContextConstants.PageNumber, Value = requestContext.PageNumber });
             sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = RequestContextConstants.PageSize, Value = requestContext.PageSize });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = RequestContextConstants.UserName, Value = p_UserName });
             DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(workitemsConstants.USP_workitems_PSY_GET_ALL, sqlparms, ExecutionType.Dataset);
             return dataset;
         }
