@@ -1,12 +1,11 @@
-﻿
-
-
-
-
- CREATE PROCEDURE [dbo].[USP_workitems_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1, @UserName varchar(500)=NULL  
+﻿ CREATE PROCEDURE [dbo].[USP_workitems_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1, @UserName varchar(500)=NULL  
  AS 
  BEGIN 
  BEGIN TRY 
+ IF(@UserName='NULL')
+ BEGIN
+ SET @UserName=NULL
+ END
  SELECT WITId_PSY,
 TaskType_PSY,
 TaskName_PSY,
