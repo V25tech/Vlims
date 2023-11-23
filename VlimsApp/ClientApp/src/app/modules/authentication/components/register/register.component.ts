@@ -69,27 +69,38 @@ export class RegisterComponent implements OnInit {
     }
 
   }
+ 
+
+
   submit(adduser: UserConfiguration) {
-    debugger
+    debugger;
+  
+    let MinUserId: number = parseInt(this.securityType.MinimumUserIdLength, 10);
+    let MinInvalidAttempt: number = parseInt(this.securityType.InvalidAttempts, 10);
 
-
-
-    if (this.adduser.UserID.length >this.securityType.MinimumUserIdLength.length) {
-      this.toastr.error('User ID length must not exceed ' + this.securityType.MinimumUserIdLength  + ' characters.');
+    let MinInvalidAttemplateside: number = parseInt(this.adduser.InvAttempt, 10);
+    
+  
+    
+  
+    if (this.adduser.UserID.length > MinUserId) {
+      this.toastr.error('User ID length must not exceed ' + this.securityType.MinimumUserIdLength + ' characters.');
     } else {
-      if (this.editMode) {
-        this.update(adduser);
+      if (MinInvalidAttemplateside > MinInvalidAttempt) {
+        this.toastr.error('Invalid Attempts on login should not be greater than ' + this.securityType.InvalidAttempts);
       } else {
-        if (!this.isduplicate()) {
-          this.adddoctype(adduser);
+        if (this.editMode) {
+          this.update(adduser);
+        } else {
+          if (!this.isduplicate()) {
+            this.adddoctype(adduser);
+          }
         }
       }
     }
-
-
-    
-
   }
+
+  
   isduplicate() {
     if (this.griddata != null && this.griddata.length > 0) {
       const type = this.griddata.find(p => p.UserID.toLocaleLowerCase() == this.adduser.UserID.toLocaleLowerCase());
@@ -195,10 +206,29 @@ export class RegisterComponent implements OnInit {
 
     }
   }
+  // getSecurityInfo() {
+  //   return this.securityService.getsecuritymanagement(this.commonsvc.req).subscribe((data: any) => {
+      
+  //     this.types = data.Response;
+  //     this.securityType = data.Response[0];
+  //     debugger
+  //     console.log(data.Response[0])
+  //   });
+  // }
+
+
+
   getSecurityInfo() {
+    debugger
     return this.securityService.getsecuritymanagement(this.commonsvc.req).subscribe((data: any) => {
-      var securityInfo = data;
+      if (data.Response && data.Response.length > 0) {
+        this.securityType = data.Response[0];
+        console.log(this.securityType);
+      } else {
+        console.error('Invalid data format for security management');
+      }
     });
   }
+  
 }
 

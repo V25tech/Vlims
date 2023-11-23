@@ -140,7 +140,7 @@
                      name="doj"
                      placeholder="Enter DOJ"
                      [(ngModel)]="adduser.Doj" [disabled]="viewMode"
-                     required
+                     
                      #dojInput="ngModel"
                      />
                      <div *ngIf="dojInput.invalid && (dojInput.dirty || dojInput.touched)" class="text-danger">
@@ -174,7 +174,7 @@
                      name="emailid"
                      placeholder="Enter Email Id"
                      [(ngModel)]="adduser.EmailId" [disabled]="viewMode" 
-                     required
+                     
                      #emailidInput="ngModel"/>
                      <div *ngIf="emailidInput.invalid && (emailidInput.dirty || emailidInput.touched)" class="text-danger">
                       Email Id is required

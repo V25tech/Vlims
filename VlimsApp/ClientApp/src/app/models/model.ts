@@ -220,6 +220,7 @@ export class RoleConfiguration {
   ModifiedDate: Date | undefined;
 }
 export class UserConfiguration {
+  
   UCFId: string = ''
   UserManagementID: string = ''
   FirstName: string = ''
@@ -233,10 +234,12 @@ export class UserConfiguration {
   Activedirectory: string = ''
   Standarduser: string = ''
   CreatedBy: string = ''
+  InvAttempt:string='';
   CreatedDate: Date | undefined;
   ModifiedBy: string = ''
   ModifiedDate: Date | undefined;
   Password: string | null = ''
+  //InvAttempt:number=0
   Status : string=''
 }
 export class WorkItemsConfiguration {
