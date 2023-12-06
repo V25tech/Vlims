@@ -3,6 +3,7 @@ import { HttpbaseService } from 'src/app/shared/httpbase.service';
 
 
 import { DocumentTemplateConfiguration, RequestContext } from 'src/app/models/model';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -36,5 +37,11 @@ getbyId(id: number) {
 getTemplate(templte: string) {
   debugger
   return this.http.getwithheader("api/documenttemplateconfiguration/getpdf?templateinf=" + templte, this.type);
+}
+uploadImage(file: File): Observable<any> {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  return this.http.postJsonLogin(formData,"api/documenttemplateconfiguration/upload-image",this.type);
 }
 }

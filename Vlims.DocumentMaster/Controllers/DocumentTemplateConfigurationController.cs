@@ -15,9 +15,11 @@ namespace Vlims.Controllers
     using System.Text;
     using System.Xml.Serialization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Hosting;
     using Spire.Doc;
     using Spire.Doc.Documents;
     using Vlims.Common;
+    using Vlims.DocumentManager.Manager;
     using Vlims.DocumentMaster.DataAccess;
     using Vlims.DocumentMaster.Entities;
     using Vlims.DocumentMaster.Manager;
@@ -84,6 +86,32 @@ namespace Vlims.Controllers
             }
             return Ok(responseContext);
         }
+        [HttpPost("upload-image")]
+        public IActionResult UploadImage(IFormFile image)
+        {
+            try
+            {
+                if (image != null && image.Length > 0)
+                {
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Logo");
+                    var uniqueFileName = $"{Path.GetRandomFileName()}_{image.FileName}";
+
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        image.CopyTo(stream);
+                    }
+
+                    return Ok(new { Success = true, Message = uniqueFileName });
+                }
+
+                return BadRequest("Invalid image file");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
         /// <summary>
         /// This Method is used to Save DocumentTemplateConfiguration
         /// </summary>
@@ -132,8 +160,10 @@ namespace Vlims.Controllers
         {
             byte[] bytes = null;
             DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
+            DataSet ds_template= DocumentTemplateConfigurationData.GetTemplateHeaderFooterDetails(templateinf);
             DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
-           
+            DocumentTemplateConfiguration template1 = DocumentTemplateConfigurationConverter.SetDocumentTemplateHeaderFooterConfiguration(ds_template);
+
             StringBuilder builder = new StringBuilder();
             builder.Append(htmlUpper);
             Document document = new Spire.Doc.Document();
@@ -143,7 +173,7 @@ namespace Vlims.Controllers
             Paragraph headerParagraph = header.AddParagraph();
             StringBuilder headerbuilder = new StringBuilder();
             headerbuilder.Append(htmlUpper);
-            headerbuilder.Append(template.Page[0].header);
+            headerbuilder.Append(PrepareHeaderStaticdiv(template,template1));
             headerbuilder.Append(htmllower);
             headerParagraph.AppendHTML(headerbuilder.ToString());
             headerParagraph.Format.BeforeSpacing = 0;
@@ -159,7 +189,7 @@ namespace Vlims.Controllers
             Paragraph footerParagraph = footer.AddParagraph();
             StringBuilder footerbuilder = new StringBuilder();
             footerbuilder.Append(htmlUpper);
-            footerbuilder.Append(template.Page[0].footer);
+            footerbuilder.Append(PrepareStaticdiv(template,template1));
             footerbuilder.Append(htmllower);
             footerParagraph.AppendHTML(footerbuilder.ToString());
             footerParagraph.Format.BeforeSpacing = 0;
@@ -185,10 +215,11 @@ namespace Vlims.Controllers
 
             Document doc = new Document();
             doc.LoadFromFile("DocumentWithMargins.docx");
+            string pathhh = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithMargins.docx");
+            byte[] pdfBytes1= System.IO.File.ReadAllBytes(pathhh);
+            string pdfFilePath = "DocumentWithHeaderTable.pdf";
+            doc.SaveToFile(pdfFilePath, FileFormat.PDF);
             byte[] pdfBytes = ConvertDocxToPdfBytes(doc);
-            //string pdfFilePath = "DocumentWithHeaderTable.pdf";
-            //doc.SaveToFile(pdfFilePath, FileFormat.PDF);
-
             doc.Dispose();
             bytes = pdfBytes;
             return bytes;
@@ -209,6 +240,152 @@ namespace Vlims.Controllers
                 return stream.ToArray();
 
             }
+
+        }
+
+        public static string PrepareStaticdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1)
+        {
+            string table = string.Empty;
+            StringBuilder htmlBuilder = new StringBuilder();
+            //htmlBuilder.Append("<style>");
+            //htmlBuilder.Append(".table-container { display: table; width: 100%; border-collapse: collapse; }");
+            //htmlBuilder.Append(".table-row { display: table-row; }");
+            //htmlBuilder.Append(".table-cell { display: table-cell; padding: 1px;}");
+            //htmlBuilder.Append(".label-cell { text-align: left; font-weight: bold; width: 50px; }");
+            //htmlBuilder.Append(".value-cell { text-align: center; width: 50px; }");
+            //htmlBuilder.Append("</style>");
+            //htmlBuilder.Append("<div class=\"table-container\">");
+
+            // Append the style information
+            htmlBuilder.AppendLine("<style type=\"text/css\">");
+            htmlBuilder.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");
+            htmlBuilder.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}");
+            htmlBuilder.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}");
+            htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:center;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-weight:bold;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine("</style>");
+
+            htmlBuilder.AppendLine("<table class=\"tg\">");
+            htmlBuilder.AppendLine("<thead>");
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine("    <th class=\"tg-zd42\"></th>");
+            htmlBuilder.AppendLine("    <th class=\"tg-adin\">Prepared By</th>");
+            htmlBuilder.AppendLine("    <th class=\"tg-adin\">Checked By</th>");
+            htmlBuilder.AppendLine("    <th class=\"tg-adin\">Approved By</th>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("</thead>");
+            htmlBuilder.AppendLine("<tbody>");
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine("    <th class=\"tg-adin\">Signature</th>");
+            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine("    <th class=\"tg-adin\">Date</th>");
+            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine("    <th class=\"tg-adin\">Name</th>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.PreparedBy}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.ReviewedBy}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.ApprovedBy}</td>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine("    <th class=\"tg-adin\">Designation</th>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.PreparedRole}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.ReviewedRole}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.ApprovedRole}</td>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine("    <th class=\"tg-adin\">Department</th>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.PrepareDept}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.ReviewedDept}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.ApprovedDept}</td>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("</tbody>");
+            htmlBuilder.AppendLine("</table>");
+            table = htmlBuilder.ToString();
+            return table;
+
+        }
+
+        public static string PrepareHeaderStaticdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1)
+        {
+            string table = string.Empty;
+            StringBuilder htmlBuilder = new StringBuilder();
+
+            //DocumentPreparationService prepservice = new DocumentPreparationService();
+            //DocumentEffectiveService effectiveService= new DocumentEffectiveService();
+            //AdditionalTaskService taskService = new AdditionalTaskService();
+            //DocumentrequestService documentrequestService = new DocumentrequestService();
+
+            //RequestContext context = new RequestContext();
+            //context.PageNumber = 1; context.PageSize = 1000;
+            //var prep=prepservice.GetAllDocumentPreparation(context).Response.Where(o=>o.template.Equals(template.Templatename,StringComparison.InvariantCultureIgnoreCase));
+            //var reqList = documentrequestService.GetAllDocumentrequest(context).Response.Where(o => o..Equals(template.Templatename, StringComparison.InvariantCultureIgnoreCase)); ;
+            //var effList = effectiveService.GetAllDocumentEffective(context);
+            //var revisionList = taskService.GetAllAdditionalTask(context);
+
+            // Read the contents of the SVG file
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path = Path.Combine(currentDirectory,"Logo", template.header);
+            string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
+            string dataUri = $"data:image/jpeg;base64,{base64EncodedImage}";
+            // Append the style information
+            htmlBuilder.AppendLine("<style type=\"text/css\">");
+            htmlBuilder.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");
+            htmlBuilder.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}");
+            htmlBuilder.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}");
+            htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:center;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-weight:bold;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine("</style>");
+
+            // Append the table
+            htmlBuilder.AppendLine("<table class=\"tg\">");
+            htmlBuilder.AppendLine("<thead>");
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""80"" height=""80"" /></th>");
+            //htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""20"" height=""20"" /></th>");
+            //htmlBuilder.AppendLine($@"<img src=""{dataUri}"" width=""20"" height=""20"" />");
+            htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{template.titleTable[0][0].inputValue}</th>");
+            htmlBuilder.AppendLine("    <th class=\"tg-iucd\"></th>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("</thead>");
+            htmlBuilder.AppendLine("<tbody>");
+            htmlBuilder.AppendLine("  <tr>");
+            //htmlBuilder.AppendLine("    <td class=\"tg-iucd\" colspan=\"2\">Title: Preparation, checking, approval, control, distribution, <br>revision, retrieval &amp; destruction of standard operating procedure</td>");
+            //htmlBuilder.AppendLine($"   <td class=\"ttg-iucd\" colspan=\"t2\"t><span style=\"tfont-weight:bold\"t>Title:</span> {template1.DocumentTitle}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\" colspan=\"2\"><span style=\"font-weight:bold\">Title:</span> {template1.DocumentTitle}</td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">SOP No.</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{template1.DocumentNo}</td>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Revision No.</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{template1.Version}</td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Supersedes</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{template1.Supersedes}</td>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Depaertment</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{template1.Department}</td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Page No.</td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-iucd\">1 of 29</td>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Effective Date</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{template1.EffectiveDate}</td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Review Date</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{template1.ReviewDate}</td>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("</tbody>");
+            htmlBuilder.AppendLine("</table>");
+            table = htmlBuilder.ToString();
+            return table;
 
         }
         public static string PrepareHeaderdiv(DocumentTemplateConfiguration Template)

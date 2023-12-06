@@ -84,10 +84,65 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
+        public static List<DocumentTemplateConfiguration> SetAllDocumentTemplateHeaderFooterConfiguration(DataSet dataset)
+        {
+            try
+            {
+                List<DocumentTemplateConfiguration> result = new List<DocumentTemplateConfiguration>();
+                DocumentTemplateConfiguration documentTemplateConfigurationData; bool islist;
+                if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
+                {
+                    islist = dataset.Tables[0].Rows.Count > 1;
+                    for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
+                    {
+                        DataRow row = dataset.Tables[0].Rows[i];
+                        documentTemplateConfigurationData = new DocumentTemplateConfiguration();
+                        documentTemplateConfigurationData.DocumentTitle = Convert.ToString(row["documenttitle_PSY"]);
+                        documentTemplateConfigurationData.DocumentNo = Convert.ToString(row["documentno_PSY"]);
+                        documentTemplateConfigurationData.Version = Convert.ToInt32(row["Version"]);
+                        documentTemplateConfigurationData.Supersedes = Convert.ToInt32(row["Supersedes"]);
+                        documentTemplateConfigurationData.Department = Convert.ToString(row["department_PSY"]);
+                        documentTemplateConfigurationData.EffectiveDate = Convert.ToDateTime(row["EffectiveDate_PSY"]).ToShortDateString();
+                        documentTemplateConfigurationData.ReviewDate = Convert.ToDateTime(row["Reviewdate_PSY"]).ToShortDateString();
+                        documentTemplateConfigurationData.ReviewedBy = Convert.ToString(row["REVIWED_BY"]);
+                        documentTemplateConfigurationData.PreparedBy = Convert.ToString(row["PREPARED_BY"]);
+                        documentTemplateConfigurationData.ApprovedBy = Convert.ToString(row["APPROVED_BY"]);
+                        documentTemplateConfigurationData.ApprovedDept = Convert.ToString(row["APPROVEDDEPT"]);
+                        documentTemplateConfigurationData.ApprovedRole = Convert.ToString(row["APPROVEDROLE"]);
+                        documentTemplateConfigurationData.ReviewedDept = Convert.ToString(row["REVIWEDDEPT"]);
+                        documentTemplateConfigurationData.ReviewedRole = Convert.ToString(row["REVIWEDROLE"]);
+                        string depts = Convert.ToString(row["PREPAREDDEPT"]);
+                        if (!string.IsNullOrEmpty(depts))
+                        {
+                            string[] values = depts.Split(',');
+                            HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.PrepareDept = string.Join(",", uniqueValues);
+                        }
+                        //documentTemplateConfigurationData.PrepareDept = Convert.ToString(row["PREPAREDDEPT"]);
+                        documentTemplateConfigurationData.PreparedRole = Convert.ToString(row["PREPAREDROLE"]);
+                        result.Add(documentTemplateConfigurationData);
+                    }
+                }
+                return result;
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
 
         public static DocumentTemplateConfiguration SetDocumentTemplateConfiguration(DataSet dataset)
         {
             var result = SetAllDocumentTemplateConfiguration(dataset);
+            if (result.Count > 0)
+            {
+                return result.FirstOrDefault();
+            }
+            return null;
+        }
+        public static DocumentTemplateConfiguration SetDocumentTemplateHeaderFooterConfiguration(DataSet dataset)
+        {
+            var result = SetAllDocumentTemplateHeaderFooterConfiguration(dataset);
             if (result.Count > 0)
             {
                 return result.FirstOrDefault();

@@ -66,6 +66,19 @@ namespace Vlims.DocumentMaster.DataAccess
             }
         }
 
+        public static DataSet GetTemplateHeaderFooterDetails(string templateName)
+        {
+            try
+            {
+                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure("dbo.USP_GetTemplateHeaderFooterDetails", "@TemplateName", DbType.String, templateName, ExecutionType.Dataset);
+                return dataset;
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
+
         public static bool SaveDocumentTemplateConfiguration(DocumentTemplateConfiguration documentTemplateConfiguration)
         {
             try

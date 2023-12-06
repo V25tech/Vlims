@@ -102,7 +102,6 @@ export class ReviewPrepationComponent {
       this.workflowsourcedata = data.Response;
       this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documentstage?.includes("Preparation"));
       this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documenttype?.toLocaleLowerCase()===this.preparation.documenttype.toLocaleLowerCase());
-      debugger
     });
   }
   approve() {
@@ -226,7 +225,7 @@ export class ReviewPrepationComponent {
     }
     this.templateService.getTemplate(this.preparation.template).subscribe((data: any) => {
     //this.docPreperationService.getTemplate(this.preparation.template).subscribe((data: any) => {
-      debugger
+      
       this.template=data;
       //this.generatePDF(data);
     }, er => {

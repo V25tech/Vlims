@@ -253,6 +253,24 @@ namespace Vlims.DocumentMaster.Entities
 
         public List<BodyTable> bodyData { get; set; }
         public bool IsParent { get; set; }
+
+        public string DocumentTitle { get; set; }
+        public string DocumentNo { get; set; }
+        public int Version { get; set; }
+        public int Supersedes { get; set; }
+        public string Department { get; set; }
+        public string EffectiveDate { get; set; }
+        public string ReviewDate { get; set; }
+        public string ReviewedBy { get; set; }
+        public string ApprovedBy { get; set; }
+        public string PreparedBy { get; set; }
+        public string ApprovedDept { get; set; }
+        public string ReviewedDept { get; set; }
+        public string PrepareDept { get; set; }
+        public string ApprovedRole { get; set; }
+        public string ReviewedRole { get; set; }
+        public string PreparedRole { get; set; }
+        public string PreparedDate { get; set; }
     }
     public class Page
     {

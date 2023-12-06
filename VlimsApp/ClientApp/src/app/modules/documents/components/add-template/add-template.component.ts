@@ -17,6 +17,10 @@ interface SelectOption {
   name: string;
   value: number;
 }
+interface stage {
+  label:string;
+  value:string;
+}
 interface Page {
   text: string;
   pagenumber: number;
@@ -40,6 +44,26 @@ interface BodyDataElement {
   styleUrls: ['./add-template.component.scss'],
 })
 export class AddTemplateComponent implements OnInit {
+  stageSource:stage[] = [
+    { label: 'Title', value: 'Title' },
+    { label: 'SOP No.', value: 'Preparation' },
+    { label: 'Revision No.', value: 'Effective' },
+    { label: 'Supersedes', value: 'Print' },
+    { label: 'Department', value: 'Print' },
+    { label: 'Page No.', value: 'Print' },
+    { label: 'Effective Date', value: 'Print' },
+    { label: 'Review Date', value: 'Print' },
+    { label: 'Prepared By', value: 'Print' },
+    { label: 'Checked By', value: 'Print' },
+    { label: 'Approved By', value: 'Print' },
+    { label: 'Signature', value: 'Print' },
+    { label: 'Date', value: 'Print' },
+    { label: 'Name', value: 'Print' },
+    { label: 'Designation', value: 'Print' },
+    { label: 'Department', value: 'Print' },
+    { label: 'Custom', value: 'Print' },
+  ];
+  selectedStage:stage[]=[];
   form: FormGroup;
   form1: FormGroup;
   form2: FormGroup;
@@ -708,5 +732,20 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     this.pages[this.currentPage].isgrid=false;
     this.pages[this.currentPage].istextposition=true;
     this.pages[this.currentPage].bodyData=[];
+  }
+  onLogoUpload(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.templatesvc.uploadImage(file).subscribe((data:any)=> {
+          debugger
+          console.log('image',data.Message);
+          this.templateForm.header=data.Message;
+          //console.log('Image uploaded successfully:', response);
+        },
+        error => {
+          console.error('Error uploading image:', error);
+        }
+      );
+    }
   }
 }

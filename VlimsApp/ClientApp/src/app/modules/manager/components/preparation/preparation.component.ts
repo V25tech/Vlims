@@ -33,7 +33,7 @@ export class PreparationComponent {
     this.access = this.commonsvc.getUserRoles()?.documentPreperation ?? false;
     this.spinner.show();
     let request: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
-    this.docPreperationService.getdocumentpreparations(request).subscribe((data: any) => {
+    this.docPreperationService.getdocumentpreparations(this.commonsvc.req).subscribe((data: any) => {
       this.preparationsDatasource = data.response;
       let ids: number[] = [];
       this.preparationsDatasource.forEach(p=>{

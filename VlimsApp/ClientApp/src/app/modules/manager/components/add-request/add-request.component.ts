@@ -77,6 +77,7 @@ export class AddRequestComponent {
     });
   }
   approve() {
+    debugger
     this.request.modifiedBy = this.username;
     this.request.status = this.finalStatus;
     if (this.isapprove && this.reviewpendingcount > 0) {
@@ -100,6 +101,7 @@ export class AddRequestComponent {
   }
 
   saveRequest() {
+    debugger
     if (this.editMode) {
       this.toastMsg = 'Updated';
       this.updateRequest();
@@ -178,6 +180,7 @@ export class AddRequestComponent {
     });
   }
   getworkflowitems() {
+    debugger
     this.spinner.show();
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
