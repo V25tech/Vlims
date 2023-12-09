@@ -17,6 +17,7 @@
     [ModifiedDate_PSY]     DATETIME       NULL,
     [Status_PSY]           NVARCHAR (50)  NULL,
     [Password_PSY] NVARCHAR(200) NULL, 
+    [InvAttemt_PSY] BIT NULL, 
     CONSTRAINT [PK_UserConfiguration_PSY] PRIMARY KEY CLUSTERED ([UCFId_PSY] ASC)
 );
 
