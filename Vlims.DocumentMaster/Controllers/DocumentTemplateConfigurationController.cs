@@ -222,7 +222,7 @@ namespace Vlims.Controllers
             byte[] pdfBytes = ConvertDocxToPdfBytes(doc);
             doc.Dispose();
             bytes = pdfBytes;
-            return bytes;
+            return pdfBytes1;
 
         }
 
@@ -333,8 +333,12 @@ namespace Vlims.Controllers
             // Read the contents of the SVG file
             string currentDirectory = Directory.GetCurrentDirectory();
             string path = Path.Combine(currentDirectory,"Logo", template.header);
-            string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
-            string dataUri = $"data:image/jpeg;base64,{base64EncodedImage}";
+            string dataUri = string.Empty;
+            if (Directory.Exists(path))
+            {
+                string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
+                dataUri = $"data:image/jpeg;base64,{base64EncodedImage}";
+            }
             // Append the style information
             htmlBuilder.AppendLine("<style type=\"text/css\">");
             htmlBuilder.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");

@@ -59,7 +59,8 @@
                         <td>{{revision?.reviewDate| date: 'dd/MM/yyyy'}}</td>                        
                         <td><span class="status" [ngClass]="getStatusClass(revision['status'])">{{revision.status}} </span></td>
                         <td>{{revision?.version}}</td>
-                        <td class="text-center" *ngIf="access"><i (click)="editdocrevision(revision)" class="bi bi-pencil"></i></td>
+                        <td class="text-center" *ngIf="access"><i (click)="editdocrevision(revision)" class="bi bi-pencil"></i>
+                            <i (click)="previewtemplate(revision)" class="bi bi-download"></i></td>
                         <td class="text-center" *ngIf="!access">
                             <i class="bi bi-lock bi-lg" 
                             [ngClass]="{'text-primary':true}"

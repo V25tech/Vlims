@@ -395,6 +395,7 @@ export class DocumentRevisionRequest {
   effectiveDate: Date | undefined;
   reviewDate: Date | undefined;
   modifiedDate: Date | undefined;
+  template:string='';
 }
 export class functionalprofile {
   sfpid:number=0;
