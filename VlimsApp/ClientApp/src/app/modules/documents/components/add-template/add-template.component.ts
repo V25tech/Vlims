@@ -736,10 +736,12 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
   onLogoUpload(event: any): void {
     const file = event.target.files[0];
     if (file) {
+      this.loader.show();
       this.templatesvc.uploadImage(file).subscribe((data:any)=> {
           debugger
           console.log('image',data.Message);
           this.templateForm.header=data.Message;
+          this.loader.hide();
           //console.log('Image uploaded successfully:', response);
         },
         error => {
@@ -747,5 +749,10 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
         }
       );
     }
+  }
+  onDeleteFile(): void {
+   
+    this.templateForm.header = '';
+    
   }
 }

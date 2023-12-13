@@ -57,7 +57,7 @@ namespace Vlims.DocumentMaster.Manager
                 if (documentTemplateConfiguration != null && string.IsNullOrEmpty(documentTemplateConfiguration.DocumentMasterId))
                 {
                     documentTemplateConfiguration.DocumentMasterId = "1";
-                    documentTemplateConfiguration.header = "header";
+                    //documentTemplateConfiguration.header = "header";
                     documentTemplateConfiguration.footer = "footer";
                 }
                 String validationMessages = DocumentTemplateConfigurationValidator.IsValidDocumentTemplateConfiguration(documentTemplateConfiguration);

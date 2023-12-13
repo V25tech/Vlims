@@ -334,7 +334,7 @@ namespace Vlims.Controllers
             string currentDirectory = Directory.GetCurrentDirectory();
             string path = Path.Combine(currentDirectory,"Logo", template.header);
             string dataUri = string.Empty;
-            if (Directory.Exists(path))
+            if (System.IO.File.Exists(path))
             {
                 string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
                 dataUri = $"data:image/jpeg;base64,{base64EncodedImage}";
