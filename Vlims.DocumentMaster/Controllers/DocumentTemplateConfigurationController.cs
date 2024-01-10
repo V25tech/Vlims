@@ -156,11 +156,11 @@ namespace Vlims.Controllers
             return result;
         }
         [HttpGet("getpdf")]
-        public  ActionResult<byte[]> getpdf(string templateinf)
+        public ActionResult<byte[]> getpdf(string templateinf)
         {
             byte[] bytes = null;
             DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
-            DataSet ds_template= DocumentTemplateConfigurationData.GetTemplateHeaderFooterDetails(templateinf);
+            DataSet ds_template = DocumentTemplateConfigurationData.GetTemplateHeaderFooterDetails(templateinf);
             DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
             DocumentTemplateConfiguration template1 = DocumentTemplateConfigurationConverter.SetDocumentTemplateHeaderFooterConfiguration(ds_template);
 
@@ -173,7 +173,7 @@ namespace Vlims.Controllers
             Paragraph headerParagraph = header.AddParagraph();
             StringBuilder headerbuilder = new StringBuilder();
             headerbuilder.Append(htmlUpper);
-            headerbuilder.Append(PrepareHeaderStaticdiv(template,template1));
+            headerbuilder.Append(PrepareHeaderStaticdiv(template, template1));
             headerbuilder.Append(htmllower);
             headerParagraph.AppendHTML(headerbuilder.ToString());
             headerParagraph.Format.BeforeSpacing = 0;
@@ -189,7 +189,7 @@ namespace Vlims.Controllers
             Paragraph footerParagraph = footer.AddParagraph();
             StringBuilder footerbuilder = new StringBuilder();
             footerbuilder.Append(htmlUpper);
-            footerbuilder.Append(PrepareStaticdiv(template,template1));
+            footerbuilder.Append(PrepareStaticdiv(template, template1));
             footerbuilder.Append(htmllower);
             footerParagraph.AppendHTML(footerbuilder.ToString());
             footerParagraph.Format.BeforeSpacing = 0;
@@ -216,7 +216,7 @@ namespace Vlims.Controllers
             Document doc = new Document();
             doc.LoadFromFile("DocumentWithMargins.docx");
             string pathhh = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithMargins.docx");
-            byte[] pdfBytes1= System.IO.File.ReadAllBytes(pathhh);
+            byte[] pdfBytes1 = System.IO.File.ReadAllBytes(pathhh);
             string pdfFilePath = "DocumentWithHeaderTable.pdf";
             doc.SaveToFile(pdfFilePath, FileFormat.PDF);
             byte[] pdfBytes = ConvertDocxToPdfBytes(doc);
@@ -290,13 +290,15 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Name</th>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.PreparedBy}</td>");
+            //htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.PreparedBy}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.PreparedBy?.Substring(0, template1.PreparedBy?.IndexOf(',') ?? template1.PreparedBy.Length)}</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.ReviewedBy}</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.ApprovedBy}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Designation</th>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.PreparedRole}</td>");
+            //htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.PreparedRole}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.PreparedRole?.Substring(0, template1.PreparedRole?.IndexOf(',') ?? template1.PreparedRole.Length)}</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.ReviewedRole}</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{template1.ApprovedRole}</td>");
             htmlBuilder.AppendLine("  </tr>");
@@ -332,7 +334,7 @@ namespace Vlims.Controllers
 
             // Read the contents of the SVG file
             string currentDirectory = Directory.GetCurrentDirectory();
-            string path = Path.Combine(currentDirectory,"Logo", template.header);
+            string path = Path.Combine(currentDirectory, "Logo", template.header);
             string dataUri = string.Empty;
             if (System.IO.File.Exists(path))
             {
