@@ -7,24 +7,46 @@ DECLARE @REVIEWERS TABLE(TEMPLATE_NAME VARCHAR(500), USERNAME VARCHAR(500),DEPTN
 DECLARE @APPROVERS TABLE(TEMPLATE_NAME VARCHAR(500), USERNAME VARCHAR(500),DEPTNAME VARCHAR(500),ROLENAME VARCHAR(500))
 DECLARE @PREPAREDBY TABLE(TEMPLATE_NAME VARCHAR(500), USERNAME VARCHAR(500),DEPTNAME VARCHAR(500),ROLENAME VARCHAR(500))
 
+DECLARE @WORKFLOWS TABLE(WORKFLOWNAME VARCHAR(500))
+INSERT @WORKFLOWS
+SELECT WORKFLOW_PSY FROM Documentrequest_PSY DR
+JOIN DocumentPreparation_PSY DP ON DP.Refrence_PSY=DR.DRID_PSY WHERE DP.template_PSY=@TEMPLATENAME
+INSERT @WORKFLOWS
+SELECT WOKFLOW_PSY FROM DocumentPreparation_PSY WHERE template_PSY=@TEMPLATENAME
+INSERT @WORKFLOWS
+SELECT Workflow_PSY FROM DocumentEffective_PSY DE
+JOIN DocumentPreparation_PSY DP ON DP.Documentmanagerid_PSY=DP.DPNID_PSY WHERE DP.template_PSY=@TEMPLATENAME
+
 
 INSERT @REVIEWERS
-SELECT DISTINCT DP.template_PSY,WFM.UserName,USR.Department_PSY,USR.Role_PSY FROM WorkflowUsersMapping WFM 
-JOIN Documentrequest_PSY DR ON DR.Workflow_PSY=WFM.WorkFlowName
-JOIN DocumentPreparation_PSY DP ON DP.wokflow_PSY=WFM.WorkFlowName
-JOIN DocumentEffective_PSY DE ON DE.Workflow_PSY=WFM.WorkFlowName
-JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
-JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=WFM.UserName
-WHERE DP.template_PSY=@TemplateName AND WFM.Type='Review'
+SELECT @TEMPLATENAME,USR.Department_PSY,USR.Role_PSY FROM WorkflowUsersMapping WUM
+JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=WUM.USERNAME
+JOIN @WORKFLOWS WF ON WF.WORKFLOWNAME=WUM.WorkFlowName
+WHERE  WUM.Type='REVIEW'
 
 INSERT @APPROVERS
-SELECT DISTINCT DP.template_PSY,WFM.UserName,USR.Department_PSY,USR.Role_PSY FROM WorkflowUsersMapping WFM 
-JOIN Documentrequest_PSY DR ON DR.Workflow_PSY=WFM.WorkFlowName
-JOIN DocumentPreparation_PSY DP ON DP.wokflow_PSY=WFM.WorkFlowName
-JOIN DocumentEffective_PSY DE ON DE.Workflow_PSY=WFM.WorkFlowName
-JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
-JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=WFM.UserName
-WHERE DP.template_PSY=@TemplateName AND WFM.Type='Approve'
+SELECT @TEMPLATENAME,USR.Department_PSY,USR.Role_PSY FROM WorkflowUsersMapping WUM
+JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=WUM.USERNAME
+JOIN @WORKFLOWS WF ON WF.WORKFLOWNAME=WUM.WorkFlowName
+WHERE  WUM.Type='APPROVE'
+
+--INSERT @REVIEWERS
+--SELECT DISTINCT DP.template_PSY,WFM.UserName,USR.Department_PSY,USR.Role_PSY FROM WorkflowUsersMapping WFM 
+--JOIN Documentrequest_PSY DR ON DR.Workflow_PSY=WFM.WorkFlowName
+--JOIN DocumentPreparation_PSY DP ON DP.wokflow_PSY=WFM.WorkFlowName
+--JOIN DocumentEffective_PSY DE ON DE.Workflow_PSY=WFM.WorkFlowName
+--JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
+--JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=WFM.UserName
+--WHERE DP.template_PSY=@TemplateName AND WFM.Type='Review'
+
+--INSERT @APPROVERS
+--SELECT DISTINCT DP.template_PSY,WFM.UserName,USR.Department_PSY,USR.Role_PSY FROM WorkflowUsersMapping WFM 
+--JOIN Documentrequest_PSY DR ON DR.Workflow_PSY=WFM.WorkFlowName
+--JOIN DocumentPreparation_PSY DP ON DP.wokflow_PSY=WFM.WorkFlowName
+--JOIN DocumentEffective_PSY DE ON DE.Workflow_PSY=WFM.WorkFlowName
+--JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
+--JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=WFM.UserName
+--WHERE DP.template_PSY=@TemplateName AND WFM.Type='Approve'
 
 INSERT @PREPAREDBY
 SELECT DISTINCT DP.template_PSY ,DRT.CreatedBy_PSY,USR.Department_PSY,USR.Role_PSY
