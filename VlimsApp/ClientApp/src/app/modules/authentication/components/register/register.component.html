@@ -26,39 +26,57 @@
         <div class="p-4 bg-white shadow-dark rounded-2">
 
           <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label">First Name<span style="color: red; font-weight: bolder;">*</span></label>
+            <label for="firstname" class="col-sm-2 col-form-label">First Name<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
-              <input type="text"
-                     class="form-control"
-                     id="firstname"
-                     name="firstname"
-                     placeholder="Enter First Name"
-                     [(ngModel)]="adduser.FirstName" (ngModelChange)="calculateTotalUsers()" [disabled]="editMode"
-                     required
-                     #firstnameInput="ngModel" />
-                     <div *ngIf="firstnameInput.invalid && (firstnameInput.dirty || firstnameInput.touched)" class="text-danger">
-                      First Name is required
-                    </div>
+                <input type="text"
+                       class="form-control"
+                       id="firstname"
+                       name="firstname"
+                       placeholder="Enter First Name"
+                       [(ngModel)]="adduser.FirstName"
+                       [disabled]="editMode" 
+                       pattern="[A-Za-z ]*"
+                       required
+                       #firstnameInput="ngModel"/>
+                <div *ngIf="firstnameInput.invalid && (firstnameInput.dirty || firstnameInput.touched)" class="text-danger">
+                    <ng-container *ngIf="firstnameInput.hasError('required')">
+                        First Name is required
+                    </ng-container>
+                    <ng-container *ngIf="firstnameInput.hasError('pattern')">
+                        First Name cannot contain special characters
+                    </ng-container>
+                </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label for="lastname" class="col-sm-2 col-form-label">Last Name<span style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10">
+        </div>
+        
+        <div class="form-group row">
+          <label for="lastname" class="col-sm-2 col-form-label">Last Name<span style="color: red; font-weight: bolder;">*</span></label>
+          <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="lastname"
                      name="lastname"
+                     maxlength="24"
                      placeholder="Enter Last Name"
-                     [(ngModel)]="adduser.LastName" (ngModelChange)="calculateTotalUsers()" [disabled]="editMode" 
+                     [(ngModel)]="adduser.LastName"
+                     (ngModelChange)="calculateTotalUsers()" 
+                     [disabled]="editMode" 
                      required
+                     pattern="[A-Za-z ]*"
                      #lastnameInput="ngModel"/>
-                     <div *ngIf="lastnameInput.invalid && (lastnameInput.dirty || lastnameInput.touched)" class="text-danger">
-                     Last Name is required
-                    </div>
-            </div>
+              <div *ngIf="lastnameInput.invalid && (lastnameInput.dirty || lastnameInput.touched)" class="text-danger">
+                  <ng-container *ngIf="lastnameInput.hasError('required')">
+                      Last Name is required
+                  </ng-container>
+                  <ng-container *ngIf="lastnameInput.hasError('pattern')">
+                      Last Name cannot contain special characters
+                  </ng-container>
+              </div>
           </div>
+      </div>
+      
           <div class="form-group row">
-            <label for="userid" class="col-sm-2 col-form-label">User Id<span style="color: red; font-weight: bolder;">*</span></label>
+            <label for="userid" class="col-sm-2 col-form-label">User ID<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
@@ -132,57 +150,77 @@
           </div>
 
           <div class="form-group row">
-            <label for="doj" class="col-sm-2 col-form-label">DOJ<span style="color: red; font-weight: bolder;">*</span></label>
+            <label for="doj" class="col-sm-2 col-form-label">DOJ</label>
             <div class="col-sm-10">
-              <input type="date"
-                     class="form-control"
-                     id="doj"
-                     name="doj"
-                     placeholder="Enter DOJ"
-                     [(ngModel)]="adduser.Doj" [disabled]="viewMode"
-                     
-                     #dojInput="ngModel"
-                     />
-                     <div *ngIf="dojInput.invalid && (dojInput.dirty || dojInput.touched)" class="text-danger">
-                      DOJ is required
-                    </div>
+                <input type="date"
+                       class="form-control"
+                       id="doj"
+                       name="doj"
+                       placeholder="Enter DOJ"
+                       [(ngModel)]="adduser.Doj"
+                       [disabled]="viewMode"
+                       [max]="today"
+                       #dojInput="ngModel" />
+                <div *ngIf="dojInput.invalid && (dojInput.dirty || dojInput.touched)" class="text-danger">
+                    DOJ is required
+                </div>
             </div>
-          </div>
+        </div>
+        
+
+
           <div class="form-group row">
-            <label for="Empid" class="col-sm-2 col-form-label">Emp Id<span style="color: red; font-weight: bolder;">*</span></label>
+            <label for="Empid" class="col-sm-2 col-form-label">Employee ID<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="Empid"
                      name="Empid"
-                     placeholder="Enter Emp Id"
+                     maxlength="10"
+                     placeholder="Enter Employee ID"
                      [(ngModel)]="adduser.Empid" [disabled]="viewMode" 
                      required
+                     pattern="[0-9]+"
                      #EmpidInput="ngModel"/>
                      <div *ngIf="EmpidInput.invalid && (EmpidInput.dirty || EmpidInput.touched)" class="text-danger">
-                      Employee Id is required
+                      <ng-container *ngIf="EmpidInput.hasError('pattern')">
+                        Please enter only numbers
+                      </ng-container>
+                      <ng-container *ngIf="EmpidInput.hasError('required')">
+                        Employee Id  is required
+                      </ng-container>
                     </div>
 
             </div>
           </div>
+
+
+          
+
           <div class="form-group row">
-            <label for="emailid" class="col-sm-2 col-form-label">Email Id<span style="color: red; font-weight: bolder;">*</span></label>
+            <label for="emailid" class="col-sm-2 col-form-label">E_Mail ID</label>
             <div class="col-sm-10">
-              <input type="text"
-                     class="form-control"
-                     id="emailid"
-                     name="emailid"
-                     placeholder="Enter Email Id"
-                     [(ngModel)]="adduser.EmailId" [disabled]="viewMode" 
-                     
-                     #emailidInput="ngModel"/>
-                     <div *ngIf="emailidInput.invalid && (emailidInput.dirty || emailidInput.touched)" class="text-danger">
-                      Email Id is required
-                    </div>
-
-
+                <input type="text"
+                       class="form-control"
+                       id="emailid"
+                       name="emailid"
+                       placeholder="Enter Email Id"
+                       [(ngModel)]="adduser.EmailId"
+                       [disabled]="viewMode" 
+                       
+                       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                       #emailidInput="ngModel"/>
+                <div *ngIf="emailidInput.invalid && (emailidInput.dirty || emailidInput.touched)" class="text-danger">
+                    <ng-container *ngIf="emailidInput.hasError('required')">
+                        Email Id is required
+                    </ng-container>
+                    <ng-container *ngIf="emailidInput.hasError('pattern')">
+                        Please enter a valid email address
+                    </ng-container>
+                </div>
             </div>
-          </div>
+        </div>
+        
         </div>
         <div class="form-group row my-4">
           <div class="col-sm-10 offset-sm-2">

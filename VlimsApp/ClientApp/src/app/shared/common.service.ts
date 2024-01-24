@@ -69,10 +69,12 @@ export class CommonService {
     this.storage.setItem('username', username);
   }
   setUser(user:UserConfiguration){
+    debugger
     const userstring = JSON.stringify(user);
     this.storage.setItem('user',userstring);
   }
   setUserRoles(roles:functionalprofile){
+    debugger
     const rolesString = JSON.stringify(roles);
   this.storage.setItem('roles', rolesString);
   }
@@ -84,6 +86,7 @@ export class CommonService {
     return username !== null ? username : 'defaultUsername';
   }
   getUserRoles(): functionalprofile | null {
+    debugger
     const rolesString = this.storage.getItem('roles');
     if (rolesString) {
       return JSON.parse(rolesString);
@@ -100,10 +103,13 @@ export class CommonService {
     }
   }
   setadminroles(){
+    debugger
     const admin=new functionalprofile();
     admin.userMgmt=true;
     admin.deptConfig=true;
     admin.roleConfig=true;
+    admin.plantMgmt=true;
+    admin.securityConfig=true;
     const rolesString = JSON.stringify(admin);
   this.storage.setItem('roles', rolesString);
   }

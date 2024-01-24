@@ -28,7 +28,7 @@
       <div class="col">
           <div class="p-4 bg-white shadow-dark rounded-2">
             <p-table #templatesTable [value]="types" 
-            [globalFilterFields]="['Role', 'Department', 'CreatedBy','ModifiedBy']"
+            [globalFilterFields]="['Role', 'Department', 'CreatedBy','ModifiedBy','Comments']"
             tableStyleClass="table table-striped" [rows]="itemsPerPage"
                 [paginator]="true" [totalRecords]="types.length"
                 [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
@@ -52,7 +52,7 @@
                   <td>{{doc?.Department}}</td>
                   <td>{{doc?.Comments}}</td>
                   <td>{{doc?.CreatedBy}}</td>
-                  <td>{{doc?.CreatedDate | date}}</td>              
+                  <td>{{doc?.CreatedDate | date :'dd/MM/yyyy'}}</td>              
                   
                   <td><span class="status" [ngClass]="{'status-completed':true}">Active</span></td>           
                   <td class="text-center" (click)="editdoc(doc)" *ngIf="access"><i class="bi bi-pencil"></i></td>
@@ -129,5 +129,14 @@
           box-shadow: none;
 
       }
+
+      .p-paginator .p-dropdown {    
+      height: unset;
+    }
+
+    :host ::ng-deep .p-paginator .p-dropdown {    
+      height: unset;
+      min-width: unset;
+    }
 
   </style>

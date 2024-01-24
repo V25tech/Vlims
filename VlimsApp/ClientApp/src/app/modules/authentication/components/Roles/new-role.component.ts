@@ -28,7 +28,7 @@ export class AddRoleComponent implements OnInit {
   roles: RoleConfiguration[] = [];
   isactivedirectory: boolean = false;
   isstandarduser: boolean = false;
-  title: string = "New Role Configuration";
+  title: string = "New Role Registration";
   constructor(private commonsvc: CommonService,private toastr: ToastrService,
      private rolesservice: RolesconfigurationService,
     private deptservice: DepartmentconfigurationService,
@@ -56,7 +56,7 @@ export class AddRoleComponent implements OnInit {
     }
     else if (lastSegment == "edit") {
       this.editMode = true;
-      this.title = "Modify Role Configuration"
+      this.title = "Modify Role"
       this.roleid=parseInt(segments[segments.length-1],10);
     }
     this.getdepartments();
@@ -80,7 +80,7 @@ export class AddRoleComponent implements OnInit {
    if (!this.isButtonDisabled) {
     this.isButtonDisabled = true;
     this.rolesservice.Updaterole(addrole).subscribe((res: any) => {
-      this.toastr.success('Updated Succesfull!', 'Updated.!');
+      this.toastr.success('Roles Updated Succesfull!', 'Updated.!');
       this.loader.hide();
       this.location.back();
       this.isButtonDisabled=false;

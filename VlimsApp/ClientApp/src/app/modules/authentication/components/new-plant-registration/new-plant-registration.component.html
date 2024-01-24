@@ -57,7 +57,7 @@
                 [(ngModel)]="adddoc.PlantCode"
                 maxlength="6"
                 required
-                pattern="[0-9]+"
+                
                 #plantcodeInput="ngModel"
               />
               <div *ngIf="plantcodeInput.invalid && (plantcodeInput.dirty || plantcodeInput.touched)" class="text-danger">
@@ -94,19 +94,24 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="Comments" class="col-sm-2 col-form-label">Comments</label>
+            <label for="Comments" class="col-sm-2 col-form-label">Comments<span style="color: red; font-weight: bolder;">*</span> </label>
             <div class="col-sm-10">
-              <input type="text"
-                     class="form-control"
-                     id="Comments"
-                     name="Comments"
-                     maxlength="250"
-                     placeholder="Comments"
-                     [(ngModel)]="adddoc.Comments"                      
-                     #CommentsInput="ngModel" />
-                     <div *ngIf="CommentsInput.invalid && (CommentsInput.dirty || CommentsInput.touched)" class="text-danger">
-                      
-                    </div>
+              <textarea class="form-control"
+                        id="Comments"
+                        name="Comments"
+                        maxlength="250"
+                        rows="3"
+                        placeholder="Comments"
+                        [(ngModel)]="adddoc.Comments" [disabled]="viewMode"
+                        required 
+                        #commentsCxhvcjInput="ngModel"
+                        
+                        ></textarea>
+                        <div *ngIf="commentsCxhvcjInput.invalid && (commentsCxhvcjInput.dirty || commentsCxhvcjInput.touched)" class="text-danger">
+                            Comments.
+                        </div>
+           <!-- Show validation error message -->
+   
             </div>
           </div>
 

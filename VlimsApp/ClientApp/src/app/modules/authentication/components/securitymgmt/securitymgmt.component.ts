@@ -18,11 +18,13 @@ export class SecuritymgmtComponent {
   types: SecurityManagement[] = [];
   editMode:boolean=false;
   viewMode:boolean=false;
-  securityType: SecurityManagement = new SecurityManagement;
+  securityType = new SecurityManagement();
   access:boolean=false;
-  constructor(private doctypeservice: SecuritymanagementService,private toastr: ToastrService,
+  isFormSubmitted = false;
+  constructor(private Secuypeservice: SecuritymanagementService,private toastr: ToastrService,
      private spinner: NgxSpinnerService, 
      private commonsvc:CommonService,
+     
     private router: Router,private location: Location) { }
 
   ngOnInit() {
@@ -32,13 +34,15 @@ export class SecuritymgmtComponent {
   onCancel() {
     this.location.back();
   }
+
+ 
   getsecuritymanagement() {
     debugger;
     let objrequest: RequestContext = {
       PageNumber: 1, PageSize: 1,
       Id: 0
     };
-    return this.doctypeservice.getsecuritymanagement(objrequest).subscribe((data: any) => {
+    return this.Secuypeservice.getsecuritymanagement(objrequest).subscribe((data: any) => {
       debugger
       this.types = data.Response;
       this.securityType = data.Response[0];
@@ -47,9 +51,12 @@ export class SecuritymgmtComponent {
   submit(securityType: SecurityManagement) {
     debugger
     /*if (this.editMode) {*/
-    //this.toastr.success('Security Changes Saved Succesfull!', 'Saved.!');
-    this.doctypeservice.addsecurityconfiguration(securityType).subscribe((res: any) => {
+    
+    this.Secuypeservice.updatesecurityconfiguration(securityType).subscribe((res: any) => {
+      this.toastr.success('Security Changes Saved Succesfull!', 'Updated.!');
+      this.isFormSubmitted = true;
     });
+    
     //}
     //else {
     //  this.adddoctype(doctype);

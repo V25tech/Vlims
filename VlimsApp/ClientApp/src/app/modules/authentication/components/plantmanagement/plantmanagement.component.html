@@ -16,10 +16,10 @@
                       <span class="input-group-text custom-input-group-text">
                           <i class="fas fa-search custom-search-icon"></i>
                       </span>
-                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="25o">
+                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="49">
                   </div>
                     
-                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPlant()" *ngIf="access">New</button>
+                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddPlant()" >New</button>
               </div>
           </div>
       </div>
@@ -30,7 +30,7 @@
             <p-table #templatesTable
             [value]="types"
              tableStyleClass="table table-striped" 
-             [globalFilterFields]="['Plant Name', 'Plant Code', 'PlantAddress','Registered By','Registered On']"
+             [globalFilterFields]="['PlantName', 'PlantCode', 'PlantAddress','ModifiedBy','ModifiedDate']"
             [rows]="itemsPerPage"
             [paginator]="true" [totalRecords]="types.length"
             [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
@@ -39,12 +39,12 @@
             <tr>
               <th>S.No</th>
               <!--<th pSortableColumn="S.No" style="width:20%">S.No</th>-->
-              <th pSortableColumn="Plant Name" style="width:10%">Plant Name<p-sortIcon field="Plant Name"></p-sortIcon> </th>
-              <th pSortableColumn="Plant Code" style="width:15%">Plant Code<p-sortIcon field="plant Code"></p-sortIcon></th>
-              <th pSortableColumn="PlantAddress" style="width:20%">Address<p-sortIcon field="Plant Address"></p-sortIcon></th>
+              <th pSortableColumn="PlantName" style="width:10%">Plant Name<p-sortIcon field="PlantName"></p-sortIcon> </th>
+              <th pSortableColumn="PlantCode" style="width:15%">Plant Code<p-sortIcon field="PlantCode"></p-sortIcon></th>
+              <th pSortableColumn="PlantAddress" style="width:20%">Address<p-sortIcon field="PlantAddress"></p-sortIcon></th>
             
-              <th pSortableColumn="Registered By" style="width:200px">Registered By<p-sortIcon field="Registered By"></p-sortIcon></th>
-              <th pSortableColumn="Registered On" style="width:200px">Registered On<p-sortIcon field="Registered On"></p-sortIcon></th>
+              <th pSortableColumn="ModifiedBy" style="width:200px">Registered By<p-sortIcon field="ModifiedBy"></p-sortIcon></th>
+              <th pSortableColumn="ModifiedDate" style="width:200px">Registered On<p-sortIcon field="ModifiedDate"></p-sortIcon></th>
               <th style="width:80px">Status</th>
               <th style="width:80px">Modify</th>
 
@@ -59,7 +59,7 @@
               <td>{{doc?.PlantAddress}}</td>
               <!-- <td>{{doc?.Comments}}</td> -->
               <td>{{doc?.ModifiedBy}}</td>
-              <td>{{doc?.ModifiedDate }}</td>             
+              <td>{{doc?.ModifiedDate | date :'dd/MM/yyyy'}}</td>             
               <td><span class="status" [ngClass]="{'status-completed':true}">Active</span></td>
               <td class="text-center" *ngIf="access"><i class="bi bi-pencil" (click)="editdoc(doc)"></i></td>
               <td class="text-center" *ngIf="!access">
@@ -137,5 +137,14 @@
 
       }
 
+
+      .p-paginator .p-dropdown {    
+      height: unset;
+    }
+
+    :host ::ng-deep .p-paginator .p-dropdown {    
+      height: unset;
+      min-width: unset;
+    }
   </style>
 
