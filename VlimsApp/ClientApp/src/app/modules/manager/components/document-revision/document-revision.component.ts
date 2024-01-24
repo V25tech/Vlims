@@ -132,7 +132,7 @@ export class DocumentRevisionRequestsComponent implements OnInit{
   previewtemplate(objtemp: DocumentRevisionRequest) {
     
     this.spinner.show();
-    this.templatesvc.getTemplate(objtemp.template).subscribe((data: any) => {
+    this.templatesvc.getTemplate(objtemp.template,false).subscribe((data: any) => {
     this.ExportFiles(data,"docx",objtemp.template,"docx");
     this.spinner.hide();
     }, (error:any) => {
