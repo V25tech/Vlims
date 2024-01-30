@@ -16,6 +16,7 @@ import { SecuritymanagementService } from 'src/app/modules/services/securitymana
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  today: string | undefined;
   isButtonDisabled = false;
   adduser = new UserConfiguration();
   //newuser = new UserConfiguration();
@@ -27,7 +28,7 @@ export class RegisterComponent implements OnInit {
   griddata: UserConfiguration[] = [];
   isactivedirectory: boolean = false;
   isstandarduser: boolean = false;
-  title: string = "New User Configuration";
+  title: string = "New User";
   objname: string = '';
   userid: string = '';
   //securityInfo: SecurityManagement[] = [];
@@ -43,6 +44,9 @@ export class RegisterComponent implements OnInit {
     private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
+
+    const currentDate = new Date();
+    this.today = currentDate.toISOString().split('T')[0]; // format as YYYY-MM-DD
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
@@ -62,7 +66,7 @@ export class RegisterComponent implements OnInit {
       this.cdr.detectChanges();
     }
     else if (lastSegment == "edit") {
-      this.title = "Modify New User Configuration"
+      this.title = "Modify  User"
       this.editMode = true;
       this.userid = segments[segments.length - 1];
       this.getbyId();
@@ -231,4 +235,14 @@ export class RegisterComponent implements OnInit {
   }
   
 }
+
+
+
+
+
+
+
+
+
+
 
