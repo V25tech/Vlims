@@ -1,0 +1,4 @@
+/* You can add global styles to this file, and also import other style files */
+.ck-editor_editable_inline{
+    min-height: 500px !important;
+}

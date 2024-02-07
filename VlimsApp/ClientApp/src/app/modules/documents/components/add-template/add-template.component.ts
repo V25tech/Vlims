@@ -11,6 +11,10 @@ import { DocumentTemplateServiceService } from 'src/app/modules/services/documen
 import { ToastrService } from 'ngx-toastr';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import * as Editor from 'ckeditor5-custom-build/build/ckeditor'
+//import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 
 interface SelectOption {
@@ -114,6 +118,19 @@ export class AddTemplateComponent implements OnInit {
   //   status: '',
   // };
 
+  //Ckeditor Configuration
+  public model = {
+    editorData: '<p>Hello, world!</p>'
+  };
+  public Editor: any = Editor;
+  config = {
+    fontSize: {
+      options: [9, 11, 13, 14, 15, 16, 17, 19, 21],
+    },
+    //toolbar: ['heading', '|', 'bold', 'italic', 'fontSize', 'AutoLink', 'Autoformat', 'FontColor', 'FontFamily','|', 'Table','TableToolbar'],
+  };
+  
+
   constructor(private toastr: ToastrService,
     private location: Location,
     private doctypeservice:DocumentTypeServiceService,
@@ -188,57 +205,57 @@ export class AddTemplateComponent implements OnInit {
     
   }
   
-  config: any = {
-    airMode: false,
-    tabDisable: true,
-    popover: {
-      table: [
-        ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-        ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]
-      ],
-      image: [
-        ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-        ['float', ['floatLeft', 'floatRight', 'floatNone']],
-        ['remove', ['removeMedia']]
-      ],
-      link: [['link', ['linkDialogShow', 'unlink']]],
-      air: [
-        [
-          'font',
-          [
-            'bold',
-            'italic',
-            'underline',
-            'strikethrough',
-            'superscript',
-            'subscript',
-            'clear'
-          ]
-        ]
-      ]
-    },
-    height: '200px',
-    uploadImagePath: '/api/upload',
-    toolbar: [
-      ['misc', ['undo', 'redo']],
-      [
-        'font',
-        [
-          'bold',
-          'italic',
-          'underline',
-          'strikethrough',
-          'superscript',
-          'subscript',
-          'clear'
-        ]
-      ],
-      ['fontsize', ['fontname', 'fontsize', 'color']],
-      ['para', ['style0', 'ul', 'ol', 'paragraph', 'height']],
-      ['insert', ['table', 'picture', 'link', 'video', 'hr']],
-      ['customButtons', ['testBtn']]
-    ]
-  };
+  //config: any = {
+  //  airMode: false,
+  //  tabDisable: true,
+  //  popover: {
+  //    table: [
+  //      ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+  //      ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]
+  //    ],
+  //    image: [
+  //      ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+  //      ['float', ['floatLeft', 'floatRight', 'floatNone']],
+  //      ['remove', ['removeMedia']]
+  //    ],
+  //    link: [['link', ['linkDialogShow', 'unlink']]],
+  //    air: [
+  //      [
+  //        'font',
+  //        [
+  //          'bold',
+  //          'italic',
+  //          'underline',
+  //          'strikethrough',
+  //          'superscript',
+  //          'subscript',
+  //          'clear'
+  //        ]
+  //      ]
+  //    ]
+  //  },
+  //  height: '200px',
+  //  uploadImagePath: '/api/upload',
+  //  toolbar: [
+  //    ['misc', ['undo', 'redo']],
+  //    [
+  //      'font',
+  //      [
+  //        'bold',
+  //        'italic',
+  //        'underline',
+  //        'strikethrough',
+  //        'superscript',
+  //        'subscript',
+  //        'clear'
+  //      ]
+  //    ],
+  //    ['fontsize', ['fontname', 'fontsize', 'color']],
+  //    ['para', ['style0', 'ul', 'ol', 'paragraph', 'height']],
+  //    ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+  //    ['customButtons', ['testBtn']]
+  //  ]
+  //};
 
   generateP():BodyDataElement[] {
     
