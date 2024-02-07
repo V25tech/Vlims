@@ -13,12 +13,12 @@ import * as Editor from 'ckeditor5-custom-build/build/ckeditor';
 export class AppComponent implements OnInit{
  
   public Editor:any = Editor;
-  config = {
-    fontSize: {
-      options: [9, 11, 13, 14, 15, 16, 17, 19, 21],
-    },
-    toolbar: ['heading', '|', 'bold', 'italic', 'fontSize'],
-  };
+  //config = {
+  //  fontSize: {
+  //    options: [9, 11, 13, 14, 15, 16, 17, 19, 21],
+  //  },
+  //  toolbar: ['heading', '|', 'bold', 'italic', 'fontSize'],
+  //};
   public onReady(editor: any) {
     editor.config._config.fontSize.options
      editor.config._config.fontSize.options = [
