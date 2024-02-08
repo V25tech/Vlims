@@ -302,15 +302,16 @@
       
      
 
-      <div *ngIf="isbody" class="p-4 mt-3 bg-white shadow-dark rounded-2">
+      <div  class="p-4 mt-3 bg-white shadow-dark rounded-2">
         <h5 class="page-card-title">Body Template</h5>
         <div class="template-block">
           <!-- <div class="template-grid"> -->
            
-                <form [formGroup]="form" id="bodyid">
-                  <div formControlName="html" [ngxSummernote]="config" [(ngModel)]="pages[this.currentPage].text">
-                  </div>
-                </form>    
+          <form [formGroup]="form" id="bodyid">
+            <ckeditor [(ngModel)]="pages[this.currentPage].text" [editor]="Editor"></ckeditor>
+            <!--<div formControlName="html" [ngxSummernote]="config" [(ngModel)]="pages[this.currentPage].text">
+            </div>-->
+          </form>    
         
         <!-- </div> -->
         <div class="form-group row my-4" > 

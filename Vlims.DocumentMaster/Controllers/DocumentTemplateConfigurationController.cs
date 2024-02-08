@@ -94,6 +94,8 @@ namespace Vlims.Controllers
                 if (image != null && image.Length > 0)
                 {
                     var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Logo");
+                    if(!Directory.Exists(uploadsFolder))
+                        Directory.CreateDirectory(uploadsFolder);
                     var uniqueFileName = $"{Path.GetRandomFileName()}_{image.FileName}";
 
                     var filePath = Path.Combine(uploadsFolder, uniqueFileName);
