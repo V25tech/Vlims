@@ -119,15 +119,51 @@ export class AddTemplateComponent implements OnInit {
   // };
 
   //Ckeditor Configuration
-  public model = {
-    editorData: '<p>Hello, world!</p>'
-  };
   public Editor: any = Editor;
   config = {
     fontSize: {
       options: [9, 11, 13, 14, 15, 16, 17, 19, 21],
     },
-    //toolbar: ['heading', '|', 'bold', 'italic', 'fontSize', 'AutoLink', 'Autoformat', 'FontColor', 'FontFamily','|', 'Table','TableToolbar'],
+    toolbar: ['undo',
+      'redo',
+      '|',
+      'heading',
+      'fontFamily',
+      'fontSize',
+      '|',
+      'bold',
+      'italic',
+      'underline',
+      'fontColor',
+      'fontBackgroundColor',
+      'highlight',
+      '|',
+      'link',
+      'CKFinder',
+      'imageUpload',
+      'mediaEmbed',
+      '|',
+      'alignment',
+      'bulletedList',
+      'numberedList',
+      '|',
+      'indent',
+      'outdent',
+      '|',
+      'insertTable',
+      'blockQuote',
+      'specialCharacters'],
+    titleConfig: {
+      isEnabled: false
+    }
+    //heading: {
+    //  options: [
+    //    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+    //    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+    //    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+    //  ]
+    //},
+   
   };
   
 
