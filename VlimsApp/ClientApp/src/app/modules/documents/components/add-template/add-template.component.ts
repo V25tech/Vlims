@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
-import * as Editor from 'ckeditor5-custom-build/build/ckeditor'
+import * as Editor from 'ckeditor5-custom-build/build/ckeditor';
 //import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
@@ -126,10 +126,7 @@ export class AddTemplateComponent implements OnInit {
     },
     toolbar: ['undo',
       'redo',
-      '|',
       'heading',
-      'fontFamily',
-      'fontSize',
       '|',
       'bold',
       'italic',
@@ -137,6 +134,8 @@ export class AddTemplateComponent implements OnInit {
       'fontColor',
       'fontBackgroundColor',
       'highlight',
+      'fontFamily',
+      'fontSize',
       '|',
       'link',
       'CKFinder',
@@ -153,9 +152,7 @@ export class AddTemplateComponent implements OnInit {
       'insertTable',
       'blockQuote',
       'specialCharacters'],
-    titleConfig: {
-      isEnabled: false
-    }
+    
     //heading: {
     //  options: [
     //    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
