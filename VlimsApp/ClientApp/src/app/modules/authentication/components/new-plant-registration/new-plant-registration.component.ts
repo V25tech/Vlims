@@ -55,8 +55,7 @@ export class NewPlantRegistrationComponent implements OnInit {
     this.router.navigate(['/admin/plant']);
   }
   onCancel() {
-    this.adddoc = new PlantConfiguration(); // Resetting adddoc to an empty object
-    //this.router.navigate(['/admin/plant']);
+    this.router.navigate(['/admin/plant']);
   }
   getbyId() {
     debugger

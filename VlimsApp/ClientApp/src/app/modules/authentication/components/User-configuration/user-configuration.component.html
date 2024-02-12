@@ -37,12 +37,10 @@
               <th>S.No</th>              
               <th pSortableColumn="FirstName" style="width:10%">First Name<p-sortIcon field="FirstName"></p-sortIcon></th>
               <th pSortableColumn="LastName" style="width:15%">Last Name<p-sortIcon field="LastName"></p-sortIcon></th>
-              
               <th pSortableColumn="UserID" style="width:20%">User ID<p-sortIcon field="UserID"></p-sortIcon></th>
               <th pSortableColumn="Department" style="width:200px">Department<p-sortIcon field="Department"></p-sortIcon></th>
               <th pSortableColumn="Role" style="width:200px">Role <p-sortIcon field="Role"></p-sortIcon></th>
-
-               <th pSortableColumn="Empid" style="width:200px">Employee Id<p-sortIcon field="Empid"></p-sortIcon></th>
+              <!-- <th pSortableColumn="Empid" style="width:200px">Employee Id<p-sortIcon field="Empid"></p-sortIcon></th> -->
               <th pSortableColumn="EmailId" style="width:200px">E-Mail ID<p-sortIcon field="EmailId"></p-sortIcon></th>
               
               
@@ -57,11 +55,9 @@
               <td>{{doc?.FirstName}}</td>
               <td>{{doc?.LastName}}</td>
               <td>{{doc?.UserID}}</td>
-              
               <td>{{doc?.Department}}</td>
-               
+              <!-- <td>{{doc?.Empid}}</td> -->
               <td>{{doc?.Role}}</td>
-              <td>{{doc?.Empid}}</td> 
               <td>{{doc?.EmailId}}</td>
               
               <!-- <td>{{doc?.ModifiedBy}}</td> -->

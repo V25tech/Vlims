@@ -32,8 +32,7 @@ export class SecuritymgmtComponent {
     this.getsecuritymanagement();
   }
   onCancel() {
-    // Reset the securityType object to clear all fields
-    this.securityType = new SecurityManagement();
+    this.location.back();
   }
 
  

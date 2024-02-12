@@ -94,6 +94,8 @@ namespace Vlims.Controllers
                 if (image != null && image.Length > 0)
                 {
                     var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Logo");
+                    if(!Directory.Exists(uploadsFolder))
+                        Directory.CreateDirectory(uploadsFolder);
                     var uniqueFileName = $"{Path.GetRandomFileName()}_{image.FileName}";
 
                     var filePath = Path.Combine(uploadsFolder, uniqueFileName);
@@ -156,7 +158,7 @@ namespace Vlims.Controllers
             return result;
         }
         [HttpGet("getpdf")]
-        public ActionResult<byte[]> getpdf(string templateinf, bool p_isPdf)
+        public ActionResult<byte[]> getpdf(string templateinf, bool p_isPdf=true)
         {
             byte[] bytes = null;
             DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
@@ -300,21 +302,21 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Name</th>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(!string.IsNullOrEmpty(template1.PreparedBy) ? template1.PreparedBy : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(!string.IsNullOrEmpty(template1.ReviewedBy) ? template1.ReviewedBy : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(!string.IsNullOrEmpty(template1.ApprovedBy) ? template1.ApprovedBy : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PreparedBy) ? template1.PreparedBy : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewedBy) ? template1.ReviewedBy : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ApprovedBy) ? template1.ApprovedBy : "test") : "test")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Designation</th>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(!string.IsNullOrEmpty(template1.PreparedRole) ? template1.PreparedRole : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(!string.IsNullOrEmpty(template1.ReviewedRole) ? template1.ReviewedRole : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(!string.IsNullOrEmpty(template1.ApprovedRole) ? template1.ApprovedRole : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PreparedRole) ? template1.PreparedRole : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewedRole) ? template1.ReviewedRole : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ApprovedRole) ? template1.ApprovedRole : "test") : "test")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Department</th>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(!string.IsNullOrEmpty(template1.PrepareDept) ? template1.PrepareDept : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(!string.IsNullOrEmpty(template1.ReviewedDept) ? template1.ReviewedDept : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(!string.IsNullOrEmpty(template1.ApprovedDept) ? template1.ApprovedDept : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PrepareDept) ? template1.PrepareDept : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewedDept) ? template1.ReviewedDept : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ApprovedDept) ? template1.ApprovedDept : "test") : "test")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</tbody>");
             htmlBuilder.AppendLine("</table>");
@@ -366,7 +368,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""80"" height=""80"" /></th>");
             //htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""20"" height=""20"" /></th>");
             //htmlBuilder.AppendLine($@"<img src=""{dataUri}"" width=""20"" height=""20"" />");
-            htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue : "test")}</th>");
+            htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue : "test") : "test")}</th>");
             htmlBuilder.AppendLine("    <th class=\"tg-iucd\"></th>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</thead>");
@@ -374,27 +376,27 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("  <tr>");
             //htmlBuilder.AppendLine("    <td class=\"tg-iucd\" colspan=\"2\">Title: Preparation, checking, approval, control, distribution, <br>revision, retrieval &amp; destruction of standard operating procedure</td>");
             //htmlBuilder.AppendLine($"   <td class=\"ttg-iucd\" colspan=\"t2\"t><span style=\"tfont-weight:bold\"t>Title:</span> {template1.DocumentTitle}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\" colspan=\"2\"><span style=\"font-weight:bold\">Title:</span> {(!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\" colspan=\"2\"><span style=\"font-weight:bold\">Title:</span> {(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">SOP No.</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "test") : "test")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Revision No.</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Supersedes</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Depaertment</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(!string.IsNullOrEmpty(template1.Department) ? template1.Department : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Department) ? template1.Department : "test") : "test")}</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Page No.</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{p_PageNo } of {template.Pages}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{p_PageNo} of {template.Pages}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Effective Date</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Review Date</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</tbody>");
             htmlBuilder.AppendLine("</table>");

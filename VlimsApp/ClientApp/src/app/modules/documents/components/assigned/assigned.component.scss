@@ -1,13 +1,8 @@
 .p-paginator .p-dropdown {    
-  height: unset;
-}
+    height: unset;
+  }
 
-:host ::ng-deep .p-paginator .p-dropdown {    
-  height: unset;
-  min-width: unset;
-}
-// p-table td {
-//   border: solid 1px #666;
-//   width: 110px;
-//   word-wrap: break-word;
-// }
+  :host ::ng-deep .p-paginator .p-dropdown {    
+    height: unset;
+    min-width: unset;
+  }
