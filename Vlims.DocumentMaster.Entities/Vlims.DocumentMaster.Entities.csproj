@@ -8,11 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="1.0.4" />
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.17.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Vlims.Administration.Entities\Vlims.Administration.Entities.csproj" />
   </ItemGroup>
 

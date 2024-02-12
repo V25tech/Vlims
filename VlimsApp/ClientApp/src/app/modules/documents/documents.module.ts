@@ -40,7 +40,7 @@ import { ActivateDeactivateuserComponent } from '../authentication/components/Ac
 import { ChangepasswordComponent } from '../authentication/components/changepassword/changepassword.component';
 import { HierarchyComponent } from '../authentication/components/hierarchy/hierarchy.component';
 import { UsermanagementComponent } from '../authentication/components/usermanagement/usermanagement.component';
-import { NgxSummernoteModule } from 'ngx-summernote';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 
@@ -86,7 +86,7 @@ import { NgxSummernoteModule } from 'ngx-summernote';
     DropdownModule,
     ToastModule,
     NgxSpinnerModule,
-    NgxSummernoteModule
+    CKEditorModule
     
   ],
   providers: [] 
