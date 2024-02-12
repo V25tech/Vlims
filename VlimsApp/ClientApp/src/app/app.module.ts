@@ -22,8 +22,6 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ToastrModule } from 'ngx-toastr';
 import { AuditlogComponentComponent } from './auditlog-component/auditlog-component.component';
 import { NgxSummernoteModule } from 'ngx-summernote';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
 
 
 
@@ -46,7 +44,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     PaginatorModule,
     NgxSummernoteModule,
     ToastrModule.forRoot(),
-    CKEditorModule
   ],
   exports: [TableModule],
 

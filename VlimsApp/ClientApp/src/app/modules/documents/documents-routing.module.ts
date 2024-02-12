@@ -51,6 +51,7 @@ const routes: Routes = [
     component: AddDocumentTypeComponent,
     canActivate: [AuthGuard],
   },
+
   {
     path: 'document-type/edit/:typeId',
     component: AddDocumentTypeComponent,
@@ -127,6 +128,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'departments',
+    component: DepartmentComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'admin/hierarchy/departments/add',
     component: AddDepartmentComponent,
     canActivate: [AuthGuard],
@@ -138,6 +144,11 @@ const routes: Routes = [
   },
   {
     path: 'admin/hierarchy/roles',
+    component: RolesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'role',
     component: RolesComponent,
     canActivate: [AuthGuard],
   },
@@ -157,6 +168,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'userconfig',
+    component: UserConfigurationComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'admin/usermanagement/users/add',
     component: RegisterComponent,
     canActivate: [AuthGuard],
@@ -172,7 +188,18 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'securityM',
+    component: SecuritymgmtComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'admin/plant',
+    component: PlantComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'plant',
     component: PlantComponent,
     canActivate: [AuthGuard],
   },
@@ -196,8 +223,20 @@ const routes: Routes = [
     component: SetfunctionalprofileComponent,
     canActivate: [AuthGuard],
   },
+
+  {
+    path: 'SetFprofile',
+    component: SetfunctionalprofileComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'admin/usermanagement/activeuser',
+    component: ActivateDeactivateuserComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'activeconfig',
     component: ActivateDeactivateuserComponent,
     canActivate: [AuthGuard],
   },
@@ -206,6 +245,7 @@ const routes: Routes = [
     component: ChangepasswordComponent,
     canActivate: [AuthGuard],
   },
+  
   {
     path: 'admin/hierarchy',
     component: HierarchyComponent,
@@ -216,6 +256,7 @@ const routes: Routes = [
     component: UsermanagementComponent,
     canActivate: [AuthGuard],
   },
+  
   {
     path: 'home/hierarchy',
     component: AdminHomeComponent,

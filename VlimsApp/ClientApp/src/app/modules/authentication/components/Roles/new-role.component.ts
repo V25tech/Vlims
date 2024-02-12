@@ -141,7 +141,8 @@ console.log('dept',this.types);
     });
   }
   onCancel() {
-    this.location.back();
+    // Reset the addrole object to clear all fields
+    this.addrole = new RoleConfiguration();
   }
   getbyId(id:number) {
     

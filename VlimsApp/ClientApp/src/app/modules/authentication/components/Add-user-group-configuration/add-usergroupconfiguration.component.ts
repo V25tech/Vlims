@@ -67,17 +67,11 @@ export class AddusergroupconfigurationComponent implements OnInit {
       debugger
       newdept.Registeredby="admin";
       newdept.Modify = "admin";
-      if(newdept.totalusers=="0"){
-        this.toastr.error('select a users');
-        return;
-      }
       if (this.editMode) {
         if (!this.isButtonDisabled) {
           this.isButtonDisabled = true;
         this.ugService.Updateusergroupconfiguration(newdept).subscribe((res: any) => {
-          this.toastr.success('updated successfully');
-          this.location.back();
-          //this.router.navigate(['/admin/groups/edit/' + newdept.Ugcid]);
+          this.router.navigate(['/admin/groups/edit/' + newdept.Ugcid]);
           this.isButtonDisabled=false;
         });
       }
@@ -86,9 +80,7 @@ export class AddusergroupconfigurationComponent implements OnInit {
         if (!this.isButtonDisabled) {
           this.isButtonDisabled = true;
         this.ugService.addusergroupconfiguration(newdept).subscribe((res: any) => {
-          this.toastr.success('created successfully');
-          this.location.back();
-          //this.router.navigate(['/admin/groups/edit' + newdept.Ugcid]);
+          this.router.navigate(['/admin/groups/edit' + newdept.Ugcid]);
           this.isButtonDisabled=false;
         });
       }
