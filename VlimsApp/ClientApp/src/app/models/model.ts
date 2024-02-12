@@ -254,7 +254,6 @@ export class WorkItemsConfiguration {
   ReferenceId: number = 0
   ActionType: string = ''
   IsCompleted: boolean = false
-  ModifiedDate: any;
 }
 export class PlantConfiguration {
  // DPCFId: string = ''

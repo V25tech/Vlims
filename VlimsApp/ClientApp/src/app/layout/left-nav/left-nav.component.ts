@@ -29,16 +29,16 @@ export class LeftNavComponent {
       isActive: false,
       iconClass: 'bi bi-house-door',
     },
-    // {
-    //   label: 'Dashboard',
-    //   path: '/dashboard',
-    //   isOpen: false,
-    //   children: null,
-    //   isActive: false,
-    //   iconClass: 'fa-solid fa-chart-pie',
-    // },
     {
-      label: 'Work Assigned to Me',
+      label: 'Dashboard',
+      path: '/dashboard',
+      isOpen: false,
+      children: null,
+      isActive: false,
+      iconClass: 'fa-solid fa-chart-pie',
+    },
+    {
+      label: 'Assigned to Me',
       path: '/assigned',
       isOpen: false,
       children: null,
@@ -76,22 +76,22 @@ export class LeftNavComponent {
           isActive: false,
           iconClass: '',
         },
-        // {
-        //   label: 'Notification Configuration',
-        //   path: '/docMaster',
-        //   isOpen: false,
-        //   children: null,
-        //   isActive: false,
-        //   iconClass: '',
-        // },
-        // {
-        //   label: 'Dashboard Configuration',
-        //   path: '/docMaster',
-        //   isOpen: false,
-        //   children: null,
-        //   isActive: false,
-        //   iconClass: '',
-        // },
+        {
+          label: 'Notification Configuration',
+          path: '/docMaster',
+          isOpen: false,
+          children: null,
+          isActive: false,
+          iconClass: '',
+        },
+        {
+          label: 'Dashboard Configuration',
+          path: '/docMaster',
+          isOpen: false,
+          children: null,
+          isActive: false,
+          iconClass: '',
+        },
       ],
     },
     {
@@ -151,127 +151,63 @@ export class LeftNavComponent {
         }
       ],
     },
-    // {
-    //   label: 'Document Repository',
-    //   path: '/docRepo',
-    //   isOpen: false,
-    //   isActive: false,
-    //   iconClass: 'bi bi-database-up',
-    //   children: [
-    //     {
-    //       label: 'Document Types',
-    //       path: '/docRepo',
-    //       isOpen: false,
-    //       children: null,
-    //       isActive: false,
-    //       iconClass: '',
-    //     },
-    //     {
-    //       label: 'Template Configuration',
-    //       path: '/docRepo',
-    //       isOpen: false,
-    //       children: null,
-    //       isActive: false,
-    //       iconClass: '',
-    //     },
-    //     {
-    //       label: 'Workflow Configuration',
-    //       path: '/docRepo',
-    //       isOpen: false,
-    //       children: null,
-    //       isActive: false,
-    //       iconClass: '',
-    //     },
-    //     {
-    //       label: 'Notification Configuration',
-    //       path: '/docRepo',
-    //       isOpen: false,
-    //       children: null,
-    //       isActive: false,
-    //       iconClass: '',
-    //     },
-    //     {
-    //       label: 'Dashboard Configuration',
-    //       path: '/docRepo',
-    //       isOpen: false,
-    //       children: null,
-    //       isActive: false,
-    //       iconClass: '',
-    //     },
-    //   ],
-    // },
     {
-      label: 'Admin Management',
-      path: '',
+      label: 'Document Repository',
+      path: '/docRepo',
       isOpen: false,
       isActive: false,
-      iconClass: 'bi bi-gear-wide-connected',
+      iconClass: 'bi bi-database-up',
       children: [
         {
-          label: 'Department Configuration',
-          path: 'departments',
+          label: 'Document Types',
+          path: '/docRepo',
           isOpen: false,
           children: null,
           isActive: false,
-          iconClass: ''
+          iconClass: '',
         },
         {
-          label: 'Security Management',
-          path: 'securityM',
+          label: 'Template Configuration',
+          path: '/docRepo',
           isOpen: false,
           children: null,
           isActive: false,
-          iconClass: ''
+          iconClass: '',
         },
         {
-          label: 'Role Configuration',
-          path: 'role',
+          label: 'Workflow Configuration',
+          path: '/docRepo',
           isOpen: false,
           children: null,
           isActive: false,
-          iconClass: ''
-         
+          iconClass: '',
         },
         {
-          label: 'Set Functional Profile',
-          path: 'SetFprofile',
+          label: 'Notification Configuration',
+          path: '/docRepo',
           isOpen: false,
           children: null,
           isActive: false,
-          iconClass: ''
-          
+          iconClass: '',
         },
         {
-          label: 'Plant Management',
-          path: 'plant',
+          label: 'Dashboard Configuration',
+          path: '/docRepo',
           isOpen: false,
           children: null,
           isActive: false,
-          iconClass: ''
-          
+          iconClass: '',
         },
-        {
-          label: 'User Configuration',
-          path: 'userconfig',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: ''
-          
-        },
-        {
-          label: 'Active or Deactivate Users',
-          path: 'activeconfig',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: ''
-          
-        }
-        // Add more child items as needed
-      ]
-    }
-    
+      ],
+    },
+    {
+      label: 'Switch to Admin',
+      path: '/admin',
+      isOpen: false,
+      children: null,
+      isActive: false,
+      iconClass: 'bi bi-gear-wide-connected',
+    },
   ];
 
   toggleLeftNav() {

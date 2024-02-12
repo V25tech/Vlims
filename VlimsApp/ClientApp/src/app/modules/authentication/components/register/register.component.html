@@ -36,7 +36,6 @@
                        [(ngModel)]="adduser.FirstName"
                        [disabled]="editMode" 
                        pattern="[A-Za-z ]*"
-                       maxlength="24"
                        required
                        #firstnameInput="ngModel"/>
                 <div *ngIf="firstnameInput.invalid && (firstnameInput.dirty || firstnameInput.touched)" class="text-danger">
@@ -44,7 +43,7 @@
                         First Name is required
                     </ng-container>
                     <ng-container *ngIf="firstnameInput.hasError('pattern')">
-                        First Name cannot contain special characters and numbers.
+                        First Name cannot contain special characters
                     </ng-container>
                 </div>
             </div>
@@ -70,7 +69,7 @@
                       Last Name is required
                   </ng-container>
                   <ng-container *ngIf="lastnameInput.hasError('pattern')">
-                      Last Name cannot contain special characters and numbers.
+                      Last Name cannot contain special characters
                   </ng-container>
               </div>
           </div>
@@ -208,7 +207,6 @@
                        placeholder="Enter Email Id"
                        [(ngModel)]="adduser.EmailId"
                        [disabled]="viewMode" 
-                       maxlength="99"
                        
                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                        #emailidInput="ngModel"/>

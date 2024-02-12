@@ -11,9 +11,4 @@
     <Compile Remove="SetFunctionalProfileEntity.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="1.0.4" />
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.17.0" />
-  </ItemGroup>
-
 </Project>
