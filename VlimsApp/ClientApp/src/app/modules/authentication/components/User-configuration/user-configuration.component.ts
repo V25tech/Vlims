@@ -19,7 +19,7 @@ export class UserConfigurationComponent implements OnInit {
   @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
   @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
   // Pagination properties
-  currentPage = 10;
+  currentPage = 0;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
   types: UserConfiguration[] = [];

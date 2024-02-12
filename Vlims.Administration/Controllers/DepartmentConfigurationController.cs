@@ -15,7 +15,7 @@ namespace Vlims.Controllers
     using Vlims.Administration.Manager;
     using Vlims.Common;
 
-
+    ///okok
     /// <summary>
     /// Comment
     /// </summary>
@@ -26,7 +26,7 @@ namespace Vlims.Controllers
         
         private readonly IDepartmentConfigurationService departmentConfigurationService;
         
-        /// <summary>
+        /// <summary
         /// 
         /// </summary>
         /// <param name="departmentConfigurationService"></param>
