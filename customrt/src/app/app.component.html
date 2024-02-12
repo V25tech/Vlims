@@ -1,0 +1,8 @@
+<div role="main">
+<h1>cKEditor</h1>
+<ckeditor [(ngModel)]="model.editorData" [editor]="Editor" [config]="config" (ready)="onReady($event)"
+    (change)="onChange($event)"></ckeditor>
+
+</div>
+{{model.editorData}}
+<router-outlet></router-outlet>
