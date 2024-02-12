@@ -121,7 +121,7 @@
             </div>
           </div>
 
-          <div class="form-group row" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!=''">
+          <!-- <div class="form-group row" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!=''">
             <label for="document" class="col-sm-2 col-form-label">Document<span
               style="color: red; font-weight: bolder;">*</span></label>
             <div *ngIf="!preparation.document" class="col-sm-10">
@@ -136,7 +136,7 @@
             <div *ngIf="preparation.document" class="col-sm-9">
               <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>
             </div>
-          </div>
+          </div> -->
           <div *ngIf="selectedFile && !isUploaded" class="form-group row">
             <label for="document" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
@@ -145,7 +145,7 @@
           </div>         
 
           <div class="form-group row">
-            <label for="Details" class="col-sm-2 col-form-label">Details</label>
+            <label for="Details" class="col-sm-2 col-form-label">Comments</label>
             <div class="col-sm-10"> 
               <textarea class="form-control mw-350" id="Details" name="Details" rows="3" placeholder="Details"
                 [(ngModel)]="preparation.details" [disabled]="viewMode"></textarea>
