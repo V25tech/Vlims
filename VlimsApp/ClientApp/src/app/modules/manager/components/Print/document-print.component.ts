@@ -6,6 +6,7 @@ import { DocumentPrintConfiguration, DocumentRequestConfiguration } from '../../
 import { DocumentPrintService } from '../../../services/document-print.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { DocumentPreperationService } from '../../../services/document-preperation.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-document-print',
@@ -27,7 +28,9 @@ export class DocumentPrintComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
-  constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService, private docservice: DocumentPreperationService, private router: Router) { }
+  constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService, private docservice: DocumentPreperationService,
+    private spinner: NgxSpinnerService,
+     private router: Router) { }
 
   navigateToAddPrint(): void {
     this.router.navigate(['/print/add']);
@@ -38,19 +41,23 @@ export class DocumentPrintComponent implements OnInit {
   }
 
   GetDocumentPrint() {
+    this.spinner.show();
     let objrequest: RequestContext = {
       PageNumber: 1, PageSize: 50,
       Id: 0
     };
-    return this.doctypeservice.GetDocumentPrint(objrequest).subscribe((data: any) => {
+    return this.doctypeservice.GetDocumentPrint(this.commonsvc.req).subscribe((data: any) => {
       this.requests = data.response;
       console.log(this.requests);
+      this.spinner.hide();
     });
   }
   getdocumentrequest() {
+    this.spinner.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
-    return this.docservice.getdocumentpreparations(objrequest).subscribe((data: any) => {
+    return this.docservice.getdocumentpreparations(this.commonsvc.req).subscribe((data: any) => {
       this.requestsInfo = data.response;
+      this.spinner.hide();
     });
   }
   getStatusClass(status: string): string {
