@@ -12,12 +12,12 @@ import { ToastrService } from 'ngx-toastr';
 export class NewPlantRegistrationComponent implements OnInit {
   types: Array<PlantConfiguration> = [];
   adddoc = new PlantConfiguration();
-  editMode:boolean=false;
+  editMode: boolean = false;
   viewMode: boolean = false;
   plantid: number = 0;
   title: string = 'New Plant Registration';
 
-  constructor(private commonsvc: CommonService,private toastr: ToastrService, private doctypeservice: NewPlantRegistrationConfigurationService, private router: Router, private cdr: ChangeDetectorRef) { }
+  constructor(private commonsvc: CommonService, private toastr: ToastrService, private doctypeservice: NewPlantRegistrationConfigurationService, private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     const urlPath = this.router.url;
@@ -55,7 +55,8 @@ export class NewPlantRegistrationComponent implements OnInit {
     this.router.navigate(['/admin/plant']);
   }
   onCancel() {
-    this.router.navigate(['/admin/plant']);
+    this.adddoc = new PlantConfiguration(); // Resetting adddoc to an empty object
+    //this.router.navigate(['/admin/plant']);
   }
   getbyId() {
     debugger

@@ -26,3 +26,13 @@
   cursor: pointer;
   min-height: 34px;
 }
+
+
+::ng-deep p-multiselect .p-multiselect-label {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+::ng-deep p-multiselect .p-multiselect-token {
+  margin-bottom: .5rem
+}
