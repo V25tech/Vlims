@@ -247,31 +247,18 @@ export class LeftNavComponent {
           isOpen: false,
           children: null,
           isActive: false,
-          iconClass: ''
-          
+          iconClass: '',
         },
-        {
-          label: 'User Configuration',
-          path: 'userconfig',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: ''
-          
-        },
-        {
-          label: 'Active or Deactivate Users',
-          path: 'activeconfig',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: ''
-          
-        }
-        // Add more child items as needed
-      ]
-    }
-    
+      ],
+    },
+    {
+      label: 'Switch to Admin',
+      path: '/admin',
+      isOpen: false,
+      children: null,
+      isActive: false,
+      iconClass: 'bi bi-gear-wide-connected',
+    },
   ];
 
   toggleLeftNav() {
@@ -288,6 +275,7 @@ export class LeftNavComponent {
   }
 
   toggleNavItem(item: any): void {
+    debugger
     if (item.path) this.router.navigate([item.path]);
     else if (!item.path && item.children) {
       item.isOpen = !item.isOpen; // Toggle the open state of the item
