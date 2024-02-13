@@ -13,85 +13,84 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-add-department',
   templateUrl: './add-department.component.html'
-  
+
 })
 export class AddDepartmentComponent implements OnInit {
   isButtonDisabled = false;
   newdept = new DepartmentConfiguration();
-  griddata:DepartmentConfiguration[]=[];
+  griddata: DepartmentConfiguration[] = [];
   viewMode: boolean = false;
   departId: number = 0;
-   editMode: boolean = false;
-   title:string='Add Department Configuration'
-  constructor(private commonsvc: CommonService,private toastr: ToastrService, private doctypeservice: DepartmentconfigurationService,
+  editMode: boolean = false;
+  title: string = 'Add Department Configuration'
+  constructor(private commonsvc: CommonService, private toastr: ToastrService, private doctypeservice: DepartmentconfigurationService,
     private router: Router, private cdr: ChangeDetectorRef,
-    private loader:NgxSpinnerService,
+    private loader: NgxSpinnerService,
     private location: Location) { }
 
   ngOnInit() {
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
-     if (lastSegment == "edit") {
+    if (lastSegment == "edit") {
       this.title = "Edit Department Configuration"
       this.editMode = true;
-      let id=parseInt(segments[segments.length - 1],10);
+      let id = parseInt(segments[segments.length - 1], 10);
       this.getbyId(id);
     }
     else if (lastSegment == "view") {
       this.viewMode = true; this.editMode = false;
       this.newdept = this.commonsvc.departConfig;
     }
-    else if(lastSegment == "add")
-    {
+    else if (lastSegment == "add") {
 
     }
     //this.get();
     this.getdepartments();
     this.cdr.detectChanges();
   }
-    getbyId(id:number) {
-      
-      this.doctypeservice.getbyId(id).subscribe((data: any) => {
-        this.newdept = data;
-      }, ((error: any) => {
+  getbyId(id: number) {
 
-      }));
-    }
-    // submit(form: NgForm) {
-    //   
-    //   if (form.valid) {
-    //     
-    //   }
-    // }
+    this.doctypeservice.getbyId(id).subscribe((data: any) => {
+      this.newdept = data;
+    }, ((error: any) => {
+
+    }));
+  }
+  // submit(form: NgForm) {
+  //   
+  //   if (form.valid) {
+  //     
+  //   }
+  // }
   submit(newdept: DepartmentConfiguration) {
-    if(this.editMode)
-    {
+    if (this.editMode) {
       this.update(newdept);
     }
-    else{
+    else {
       this.adddoctype(newdept);
     }
-    
+
     //this.location.back();
   }
   update(newdept: DepartmentConfiguration) {
     this.loader.show();
-    newdept.ModifiedBy=this.commonsvc.getUsername();
+    newdept.ModifiedBy = this.commonsvc.getUsername();
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
-    return this.doctypeservice.update(newdept).subscribe((response)=>{
-      this.toastr.success('Department Updated Successfully');
-      this.loader.hide();
-      this.location.back();
-      this.isButtonDisabled=false;
-    })
-  }else{
-    return false;
-  }
+      return this.doctypeservice.update(newdept).subscribe((response) => {
+        this.toastr.success('Department Updated Successfully');
+        this.loader.hide();
+        this.location.back();
+        this.isButtonDisabled = false;
+      })
+    } else {
+      return false;
+    }
   }
   onCancel() {
-    this.location.back();
+    // Reset the DepartmentConfiguration object to clear all fields
+    this.newdept = new DepartmentConfiguration();
   }
   adddoctype(newdept: DepartmentConfiguration) {
     this.loader.show();
@@ -99,17 +98,17 @@ export class AddDepartmentComponent implements OnInit {
     newdept.ModifiedBy = this.commonsvc.getUsername();
     newdept.CreatedDate = new Date();
     newdept.ModifiedDate = new Date();
-   if(!this.isduplicate()){
-    if (!this.isButtonDisabled) {
-      this.isButtonDisabled = true;
-    this.doctypeservice.adddepartment(newdept).subscribe((res: any) => {
-      this.toastr.success('Department added Succesfull!', 'Saved.!');
-      this.loader.hide();
-      this.location.back();
-      this.isButtonDisabled=false;
-    });
-  }
-  }
+    if (!this.isduplicate()) {
+      if (!this.isButtonDisabled) {
+        this.isButtonDisabled = true;
+        this.doctypeservice.adddepartment(newdept).subscribe((res: any) => {
+          this.toastr.success('Department added Succesfull!', 'Saved.!');
+          this.loader.hide();
+          this.location.back();
+          this.isButtonDisabled = false;
+        });
+      }
+    }
   }
   closepopup() {
     //this.router.navigate(['/admin/department']);
@@ -130,12 +129,12 @@ export class AddDepartmentComponent implements OnInit {
     }
   }
   getdepartments() {
-   this.loader.show();
-      return this.doctypeservice.getdepartments(this.commonsvc.req).subscribe((data: any) => {
-        this.griddata=data.Response;
-        this.loader.hide();
-      }, er => {
-        this.loader.hide();
-      });
-}
+    this.loader.show();
+    return this.doctypeservice.getdepartments(this.commonsvc.req).subscribe((data: any) => {
+      this.griddata = data.Response;
+      this.loader.hide();
+    }, er => {
+      this.loader.hide();
+    });
+  }
 }

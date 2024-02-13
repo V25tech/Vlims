@@ -1,72 +1,72 @@
 <div class="container-fluid">
   <div class="row p-2">
-      <div class="col">
-          <div class="d-flex justify-content-between align-items-center">
-            <h4 class="page-title flex-grow-1">Role Configuration</h4>
+    <div class="col">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="page-title flex-grow-1">Role Configuration</h4>
 
-              <div class="back-icon" style="margin-right: 10px;">
-                  <a href="javascript:void(0);" onclick="history.back();">
-                      <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
-                  </a>
-              </div>
-              
-              <div class="d-flex page-title-actions">
-                  <div class="input-group custom-input-group">
-                      <!-- Magnifying glass icon -->
-                      <span class="input-group-text custom-input-group-text">
-                          <i class="fas fa-search custom-search-icon"></i>
-                      </span>
-                      <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="250">
-                  </div>
-                    
-                  <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddRoles()"  *ngIf="access">New</button>
-              </div>
+        <div class="back-icon" style="margin-right: 10px;">
+          <a href="javascript:void(0);" onclick="history.back();">
+            <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+          </a>
+        </div>
+
+        <div class="d-flex page-title-actions">
+          <div class="input-group custom-input-group">
+            <!-- Magnifying glass icon -->
+            <span class="input-group-text custom-input-group-text">
+              <i class="fas fa-search custom-search-icon"></i>
+            </span>
+            <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')" placeholder="Search" maxlength="49">
           </div>
+
+          <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddRoles()" *ngIf="access">New</button>
+        </div>
       </div>
+    </div>
   </div>
   <div class="row p-2">
-      <div class="col">
-          <div class="p-4 bg-white shadow-dark rounded-2">
-            <p-table #templatesTable [value]="types" 
-            [globalFilterFields]="['Role', 'Department', 'CreatedBy','ModifiedBy','Comments']"
-            tableStyleClass="table table-striped" [rows]="itemsPerPage"
-                [paginator]="true" [totalRecords]="types.length"
-                [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
-              <ng-template pTemplate="header">
-                <tr>
-                  <th>S.No</th>             
-                  <th pSortableColumn="Role" style="width:10%">Role Name <p-sortIcon field="Role"></p-sortIcon></th>
-                  <th pSortableColumn="Department" style="width:15%">Department<p-sortIcon field="Department"></p-sortIcon></th>
-                  <th pSortableColumn="Comments" style="width:20%">Comments<p-sortIcon field="Comments"></p-sortIcon></th>
-                  <th pSortableColumn="CreatedBy" style="width:200px">Registered By<p-sortIcon field="CreatedBy"></p-sortIcon></th>
-                  <th pSortableColumn="CreatedDate" style="width:200px">Registered On <p-sortIcon field="CreatedDate"></p-sortIcon></th>              
-                  
-                  <th pSortableColumn="Status" style="width:200px">Status<p-sortIcon field="Status"></p-sortIcon></th>
-                  <th style="width:80px">Modify</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-doc let-i="rowIndex">
-                <tr>
-                  <td>{{ i + 1 }}</td>             
-                  <td>{{doc?.Role}}</td>
-                  <td>{{doc?.Department}}</td>
-                  <td>{{doc?.Comments}}</td>
-                  <td>{{doc?.CreatedBy}}</td>
-                  <td>{{doc?.CreatedDate | date :'dd/MM/yyyy'}}</td>              
-                  
-                  <td><span class="status" [ngClass]="{'status-completed':true}">Active</span></td>           
-                  <td class="text-center" (click)="editdoc(doc)" *ngIf="access"><i class="bi bi-pencil"></i></td>
-                  <td class="text-center" *ngIf="!access">
-                    <i class="bi bi-lock bi-lg" 
-                    [ngClass]="{'text-primary':true}"
-                    title="No Permissions">
+    <div class="col">
+      <div class="p-4 bg-white shadow-dark rounded-2">
+        <p-table #templatesTable [value]="types"
+                 [globalFilterFields]="['Role', 'Department', 'CreatedBy','ModifiedBy','Comments']"
+                 tableStyleClass="table table-striped" [rows]="itemsPerPage"
+                 [paginator]="true" [totalRecords]="types.length"
+                 [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>S.No</th>
+              <th pSortableColumn="Role" style="width:10%">Role Name <p-sortIcon field="Role"></p-sortIcon></th>
+              <!-- <th pSortableColumn="Department" style="width:15%">Department<p-sortIcon field="Department"></p-sortIcon></th> -->
+              <!-- <th pSortableColumn="Comments" style="width:20%">Comments<p-sortIcon field="Comments"></p-sortIcon></th> -->
+              <th pSortableColumn="CreatedBy" style="width:200px">Registered By<p-sortIcon field="CreatedBy"></p-sortIcon></th>
+              <th pSortableColumn="CreatedDate" style="width:200px">Registered On <p-sortIcon field="CreatedDate"></p-sortIcon></th>
+
+              <th pSortableColumn="Status" style="width:200px">Status<p-sortIcon field="Status"></p-sortIcon></th>
+              <th style="width:80px">Modify</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-doc let-i="rowIndex">
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{doc?.Role}}</td>
+              <td>{{doc?.Department}}</td>
+              <!-- <td>{{doc?.Comments}}</td> -->
+              <td>{{doc?.CreatedBy}}</td>
+              <td>{{doc?.CreatedDate | date :'dd/MM/yyyy'}}</td>
+
+              <td><span class="status" [ngClass]="{'status-completed':true}">Active</span></td>
+              <td class="text-center" (click)="editdoc(doc)" *ngIf="access"><i class="bi bi-pencil"></i></td>
+              <td class="text-center" *ngIf="!access">
+                <i class="bi bi-lock bi-lg"
+                   [ngClass]="{'text-primary':true}"
+                   title="No Permissions">
                 </i>
-            </td>
-                </tr>
-              </ng-template>
-            </p-table>
-          </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
       </div>
+    </div>
   </div>
 </div>
 
@@ -75,68 +75,47 @@
   /* Styles for .custom-input-group */
 
   .custom-input-group {
-
-      background-color: white;
-
-      display: flex;
-
-      align-items: center;
-
-      border: 1px solid #ccc;
-
-      border-radius: 5px;
-
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
   }
 
   .custom-input-group-text {
-
-          background: white;
-
-          border: none;
-
-          padding: 0;
-
-          vertical-align: middle;
-
-      }
+    background: white;
+    border: none;
+    padding: 0;
+    vertical-align: middle;
+  }
 
 
 
-      .custom-search-icon {
-
-          font-size: 14px;
-
-          margin-right: 5px;
-
-          margin-left: 9px;
-
-          color: #555;
-
-      }
+  .custom-search-icon {
+    font-size: 14px;
+    margin-right: 5px;
+    margin-left: 9px;
+    color: #555;
+  }
 
 
 
-      .custom-input {
 
-          border: none;
 
-          padding: 5px;
+  .custom-input {
+    border: none;
+    padding: 5px;
+    vertical-align: middle;
+    background-color: white;
+    box-shadow: none;
+  }
 
-          vertical-align: middle;
+  .p-paginator .p-dropdown {
+    height: unset;
+  }
 
-          background-color: white;
-
-          box-shadow: none;
-
-      }
-
-      .p-paginator .p-dropdown {    
-      height: unset;
-    }
-
-    :host ::ng-deep .p-paginator .p-dropdown {    
-      height: unset;
-      min-width: unset;
-    }
-
-  </style>
+  :host ::ng-deep .p-paginator .p-dropdown {
+    height: unset;
+    min-width: unset;
+  }
+</style>

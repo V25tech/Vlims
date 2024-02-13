@@ -2,21 +2,21 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-      
+
       <div class="col d-flex justify-content-between align-items-center">
 
         <h4 class="page-title">{{title}}</h4>
-  
+
         <div class="back-icon" style="margin-right: 10px;">
-  
+
           <a href="javascript:void(0);" onclick="history.back();">
-  
+
             <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
-  
+
           </a>
-  
+
         </div>
-  
+
       </div>
     </div>
   </div>
@@ -28,30 +28,31 @@
           <div class="form-group row">
             <label for="firstname" class="col-sm-2 col-form-label">First Name<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
-                <input type="text"
-                       class="form-control"
-                       id="firstname"
-                       name="firstname"
-                       placeholder="Enter First Name"
-                       [(ngModel)]="adduser.FirstName"
-                       [disabled]="editMode" 
-                       pattern="[A-Za-z ]*"
-                       required
-                       #firstnameInput="ngModel"/>
-                <div *ngIf="firstnameInput.invalid && (firstnameInput.dirty || firstnameInput.touched)" class="text-danger">
-                    <ng-container *ngIf="firstnameInput.hasError('required')">
-                        First Name is required
-                    </ng-container>
-                    <ng-container *ngIf="firstnameInput.hasError('pattern')">
-                        First Name cannot contain special characters
-                    </ng-container>
-                </div>
+              <input type="text"
+                     class="form-control"
+                     id="firstname"
+                     name="firstname"
+                     placeholder="Enter First Name"
+                     [(ngModel)]="adduser.FirstName"
+                     [disabled]="editMode"
+                     pattern="[A-Za-z ]*"
+                     maxlength="24"
+                     required
+                     #firstnameInput="ngModel" />
+              <div *ngIf="firstnameInput.invalid && (firstnameInput.dirty || firstnameInput.touched)" class="text-danger">
+                <ng-container *ngIf="firstnameInput.hasError('required')">
+                  First Name is required
+                </ng-container>
+                <ng-container *ngIf="firstnameInput.hasError('pattern')">
+                  First Name cannot contain special characters and numbers.
+                </ng-container>
+              </div>
             </div>
-        </div>
-        
-        <div class="form-group row">
-          <label for="lastname" class="col-sm-2 col-form-label">Last Name<span style="color: red; font-weight: bolder;">*</span></label>
-          <div class="col-sm-10">
+          </div>
+
+          <div class="form-group row">
+            <label for="lastname" class="col-sm-2 col-form-label">Last Name<span style="color: red; font-weight: bolder;">*</span></label>
+            <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="lastname"
@@ -59,22 +60,22 @@
                      maxlength="24"
                      placeholder="Enter Last Name"
                      [(ngModel)]="adduser.LastName"
-                     (ngModelChange)="calculateTotalUsers()" 
-                     [disabled]="editMode" 
+                     (ngModelChange)="calculateTotalUsers()"
+                     [disabled]="editMode"
                      required
                      pattern="[A-Za-z ]*"
-                     #lastnameInput="ngModel"/>
+                     #lastnameInput="ngModel" />
               <div *ngIf="lastnameInput.invalid && (lastnameInput.dirty || lastnameInput.touched)" class="text-danger">
-                  <ng-container *ngIf="lastnameInput.hasError('required')">
-                      Last Name is required
-                  </ng-container>
-                  <ng-container *ngIf="lastnameInput.hasError('pattern')">
-                      Last Name cannot contain special characters
-                  </ng-container>
+                <ng-container *ngIf="lastnameInput.hasError('required')">
+                  Last Name is required
+                </ng-container>
+                <ng-container *ngIf="lastnameInput.hasError('pattern')">
+                  Last Name cannot contain special characters and numbers.
+                </ng-container>
               </div>
+            </div>
           </div>
-      </div>
-      
+
           <div class="form-group row">
             <label for="userid" class="col-sm-2 col-form-label">User ID<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
@@ -83,12 +84,12 @@
                      id="userid"
                      name="userid"
                      placeholder="Enter User ID"
-                     [(ngModel)]="adduser.UserID" readonly [disabled]="editMode" 
+                     [(ngModel)]="adduser.UserID" readonly [disabled]="editMode"
                      required
-                     #useridInput="ngModel"/>
-                     <div *ngIf="useridInput.invalid && (useridInput.dirty || useridInput.touched)" class="text-danger">
-                     User ID is required
-                    </div>
+                     #useridInput="ngModel" />
+              <div *ngIf="useridInput.invalid && (useridInput.dirty || useridInput.touched)" class="text-danger">
+                User ID is required
+              </div>
 
             </div>
           </div>
@@ -96,23 +97,19 @@
             <label for="prefix" class="col-sm-2 col-form-label">Department<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
 
-              <p-dropdown
-              name="DepartmentName"
-              [options]="types"
-              [(ngModel)]="adduser.Department"
-              placeholder="Select Department"
-              optionLabel="DepartmentName" 
-              optionValue="DepartmentName"
-               
-              [required]="true"
-               display="chip"
-              #djInput="ngModel"
-              
-              >            
-            </p-dropdown>
-            <div *ngIf="djInput.invalid && (djInput.dirty || djInput.touched)" class="text-danger">
-              Department is required
-            </div>
+              <p-dropdown name="DepartmentName"
+                          [options]="types"
+                          [(ngModel)]="adduser.Department"
+                          placeholder="Select Department"
+                          optionLabel="DepartmentName"
+                          optionValue="DepartmentName"
+                          [required]="true"
+                          display="chip"
+                          #djInput="ngModel">
+              </p-dropdown>
+              <div *ngIf="djInput.invalid && (djInput.dirty || djInput.touched)" class="text-danger">
+                Department is required
+              </div>
 
               <!-- <select class="form-control" [(ngModel)]="adduser.Department" name="department" [disabled]="viewMode">
                 <option value="Select">Select</option>
@@ -125,22 +122,20 @@
             <label for="prefix" class="col-sm-2 col-form-label">Role<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
 
-              <p-dropdown
-              name="Role"
-              [options]="roles"
-              [(ngModel)]="adduser.Role"
-              optionLabel="Role"
-               placeholder="Select Role"
-               display="chip"
-               [required]="true"
-               #roleInput="ngModel"
-               optionValue="Role"
-              >
-            </p-dropdown>
+              <p-dropdown name="Role"
+                          [options]="roles"
+                          [(ngModel)]="adduser.Role"
+                          optionLabel="Role"
+                          placeholder="Select Role"
+                          display="chip"
+                          [required]="true"
+                          #roleInput="ngModel"
+                          optionValue="Role">
+              </p-dropdown>
               <div *ngIf="roleInput.invalid && (roleInput.dirty || roleInput.touched)" class="text-danger">
                 Role is required
               </div>
-              
+
               <!-- <select class="form-control" [(ngModel)]="adduser.Role" name="role" [disabled]="viewMode">
                 <option value="Select">Select</option>
                 <option *ngFor="let role of roles" value={{role.Role}}>{{role?.Role}}</option>
@@ -152,21 +147,21 @@
           <div class="form-group row">
             <label for="doj" class="col-sm-2 col-form-label">DOJ</label>
             <div class="col-sm-10">
-                <input type="date"
-                       class="form-control"
-                       id="doj"
-                       name="doj"
-                       placeholder="Enter DOJ"
-                       [(ngModel)]="adduser.Doj"
-                       [disabled]="viewMode"
-                       [max]="today"
-                       #dojInput="ngModel" />
-                <div *ngIf="dojInput.invalid && (dojInput.dirty || dojInput.touched)" class="text-danger">
-                    DOJ is required
-                </div>
+              <input type="date"
+                     class="form-control"
+                     id="doj"
+                     name="doj"
+                     placeholder="Enter DOJ"
+                     [(ngModel)]="adduser.Doj"
+                     [disabled]="viewMode"
+                     [max]="today"
+                     #dojInput="ngModel" />
+              <div *ngIf="dojInput.invalid && (dojInput.dirty || dojInput.touched)" class="text-danger">
+                DOJ is required
+              </div>
             </div>
-        </div>
-        
+          </div>
+
 
 
           <div class="form-group row">
@@ -178,49 +173,49 @@
                      name="Empid"
                      maxlength="10"
                      placeholder="Enter Employee ID"
-                     [(ngModel)]="adduser.Empid" [disabled]="viewMode" 
+                     [(ngModel)]="adduser.Empid" [disabled]="viewMode"
                      required
                      pattern="[0-9]+"
-                     #EmpidInput="ngModel"/>
-                     <div *ngIf="EmpidInput.invalid && (EmpidInput.dirty || EmpidInput.touched)" class="text-danger">
-                      <ng-container *ngIf="EmpidInput.hasError('pattern')">
-                        Please enter only numbers
-                      </ng-container>
-                      <ng-container *ngIf="EmpidInput.hasError('required')">
-                        Employee Id  is required
-                      </ng-container>
-                    </div>
+                     #EmpidInput="ngModel" />
+              <div *ngIf="EmpidInput.invalid && (EmpidInput.dirty || EmpidInput.touched)" class="text-danger">
+                <ng-container *ngIf="EmpidInput.hasError('pattern')">
+                  Please enter only numbers
+                </ng-container>
+                <ng-container *ngIf="EmpidInput.hasError('required')">
+                  Employee Id  is required
+                </ng-container>
+              </div>
 
             </div>
           </div>
 
 
-          
+
 
           <div class="form-group row">
             <label for="emailid" class="col-sm-2 col-form-label">E_Mail ID</label>
             <div class="col-sm-10">
-                <input type="text"
-                       class="form-control"
-                       id="emailid"
-                       name="emailid"
-                       placeholder="Enter Email Id"
-                       [(ngModel)]="adduser.EmailId"
-                       [disabled]="viewMode" 
-                       
-                       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                       #emailidInput="ngModel"/>
-                <div *ngIf="emailidInput.invalid && (emailidInput.dirty || emailidInput.touched)" class="text-danger">
-                    <ng-container *ngIf="emailidInput.hasError('required')">
-                        Email Id is required
-                    </ng-container>
-                    <ng-container *ngIf="emailidInput.hasError('pattern')">
-                        Please enter a valid email address
-                    </ng-container>
-                </div>
+              <input type="text"
+                     class="form-control"
+                     id="emailid"
+                     name="emailid"
+                     placeholder="Enter Email Id"
+                     [(ngModel)]="adduser.EmailId"
+                     [disabled]="viewMode"
+                     maxlength="99"
+                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                     #emailidInput="ngModel" />
+              <div *ngIf="emailidInput.invalid && (emailidInput.dirty || emailidInput.touched)" class="text-danger">
+                <ng-container *ngIf="emailidInput.hasError('required')">
+                  Email Id is required
+                </ng-container>
+                <ng-container *ngIf="emailidInput.hasError('pattern')">
+                  Please enter a valid email address
+                </ng-container>
+              </div>
             </div>
-        </div>
-        
+          </div>
+
         </div>
         <div class="form-group row my-4">
           <div class="col-sm-10 offset-sm-2">
@@ -238,6 +233,6 @@
 
 <style>
   .form-control {
-  max-width: 350px;
-}
+    max-width: 350px;
+  }
 </style>
