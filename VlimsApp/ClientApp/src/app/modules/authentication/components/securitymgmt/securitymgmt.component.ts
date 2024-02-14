@@ -16,27 +16,26 @@ import { CommonService } from 'src/app/shared/common.service';
 
 export class SecuritymgmtComponent {
   types: SecurityManagement[] = [];
-  editMode: boolean = false;
-  viewMode: boolean = false;
+  editMode:boolean=false;
+  viewMode:boolean=false;
   securityType = new SecurityManagement();
-  access: boolean = false;
+  access:boolean=false;
   isFormSubmitted = false;
-  constructor(private Secuypeservice: SecuritymanagementService, private toastr: ToastrService,
-    private spinner: NgxSpinnerService,
-    private commonsvc: CommonService,
-
-    private router: Router, private location: Location) { }
+  constructor(private Secuypeservice: SecuritymanagementService,private toastr: ToastrService,
+     private spinner: NgxSpinnerService, 
+     private commonsvc:CommonService,
+     
+    private router: Router,private location: Location) { }
 
   ngOnInit() {
     this.access = this.commonsvc.getUserRoles()?.securityConfig ?? false;
     this.getsecuritymanagement();
   }
   onCancel() {
-    // Reset the securityType object to clear all fields
-    this.securityType = new SecurityManagement();
+    this.location.back();
   }
 
-
+ 
   getsecuritymanagement() {
     debugger;
     let objrequest: RequestContext = {
@@ -52,18 +51,18 @@ export class SecuritymgmtComponent {
   submit(securityType: SecurityManagement) {
     debugger
     /*if (this.editMode) {*/
-
+    
     this.Secuypeservice.updatesecurityconfiguration(securityType).subscribe((res: any) => {
       this.toastr.success('Security Changes Saved Succesfull!', 'Updated.!');
       this.isFormSubmitted = true;
     });
-
+    
     //}
     //else {
     //  this.adddoctype(doctype);
     //}
 
   }
-
-
+  
+  
 }
