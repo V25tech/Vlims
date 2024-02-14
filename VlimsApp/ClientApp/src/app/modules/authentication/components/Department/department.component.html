@@ -37,7 +37,7 @@
                   <th>S.No</th>
                   <th pSortableColumn="DepartmentName" style="width:20%">Department Name<p-sortIcon field="DepartmentName"></p-sortIcon></th>
                   <th pSortableColumn="DepartmentCode" style="width:10%">Department Code<p-sortIcon field="DepartmentCode"></p-sortIcon> </th>
-                  <th pSortableColumn="Comments" style="width:15%">Comments<p-sortIcon field="Comments"></p-sortIcon></th>
+                  <!-- <th pSortableColumn="Comments" style="width:15%">Comments<p-sortIcon field="Comments"></p-sortIcon></th> -->
                   <th pSortableColumn="ModifiedBy" style="width:20%">Registered By<p-sortIcon field="ModifiedBy"></p-sortIcon></th>
                   <th pSortableColumn="ModifiedDate" style="width:1n00px">Registered On <p-sortIcon field="ModifiedDate"></p-sortIcon></th>
                   <th pSortableColumn="Status" style="width:100px">Status <p-sortIcon field="Status"></p-sortIcon></th>
@@ -49,7 +49,7 @@
                   <td>{{ i + 1 }}</td> 
                   <td>{{doc?.DepartmentName}}</td>
                   <td>{{doc?.DepartmentCode}}</td>
-                  <td>{{doc?.Comments}}</td>
+                  <!-- <td>{{doc?.Comments}}</td> -->
                   <td>{{doc?.ModifiedBy}}</td>
                   <td>{{doc?.ModifiedDate | date :'dd/MM/yyyy'}}</td>
                   <td><span class="status" [ngClass]="{'status-completed':true}">Active</span></td>

@@ -91,7 +91,8 @@ export class AddDepartmentComponent implements OnInit {
   }
   }
   onCancel() {
-    this.location.back();
+    // Reset the DepartmentConfiguration object to clear all fields
+    this.newdept = new DepartmentConfiguration();
   }
   adddoctype(newdept: DepartmentConfiguration) {
     this.loader.show();

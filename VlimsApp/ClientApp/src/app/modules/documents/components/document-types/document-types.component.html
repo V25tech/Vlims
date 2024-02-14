@@ -39,7 +39,7 @@
                             <th pSortableColumn="Documenttypename" style="width:20%">Document Type Name<p-sortIcon field="Documenttypename"></p-sortIcon></th>
                             <th pSortableColumn="documenttypeprefix" style="width:10%">Document Type Prefix<p-sortIcon field="documenttypeprefix"></p-sortIcon></th>
                             
-                             <th pSortableColumn="Description" style="width:15%">Description<p-sortIcon field="Description"></p-sortIcon></th> 
+                             <!-- <th pSortableColumn="Description" style="width:15%">Description<p-sortIcon field="Description"></p-sortIcon></th>  -->
                             <th pSortableColumn="ModifiedBy" style="width:20%">Registered By<p-sortIcon field="ModifiedBy"></p-sortIcon></th>
                             <th pSortableColumn="ModifiedDate" style="width:200px">Registered On <p-sortIcon field="ModifiedDate"></p-sortIcon></th>
                             <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
@@ -52,7 +52,7 @@
                             <td>{{ i + 1 }}</td>  
                             <td>{{doc?.Documenttypename}}</td>
                             <td>{{doc?.documenttypeprefix}}</td>
-                             <td>{{doc?.Description}}</td> 
+                             <!-- <td>{{doc?.Description}}</td>  -->
                             <td>{{doc?.ModifiedBy}}</td>
                             <td>{{doc?.ModifiedDate | date:'dd/MM/yyyy'}}</td>
                             <td><span class="status" [ngClass]="{'status-completed':true}">{{doc.Status}} </span></td>

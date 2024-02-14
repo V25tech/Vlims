@@ -130,7 +130,7 @@ export class RegisterComponent implements OnInit {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
         this.userservice.update(adduser).subscribe((data: any) => {
-          this.toastr.success('updated successfully');
+          this.toastr.success('User updated successfully');
           this.loader.hide();
           this.location.back();
           this.isButtonDisabled = false;
@@ -202,7 +202,8 @@ export class RegisterComponent implements OnInit {
     });
   }
   onCancel() {
-    this.location.back();
+    // Reset the adduser object to clear all fields
+    this.adduser = new UserConfiguration();
   }
   calculateTotalUsers(): void {
     if (this.adduser.FirstName != null || this.adduser.LastName != null) {
