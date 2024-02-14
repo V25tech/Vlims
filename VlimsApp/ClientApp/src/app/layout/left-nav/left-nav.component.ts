@@ -277,52 +277,11 @@ export class LeftNavComponent {
     },
     {
       label: 'Switch to Admin',
-      path: '',
+      path: '/admin',
       isOpen: false,
+      children: null,
       isActive: false,
-      iconClass: 'bi bi-ui-checks-grid',
-      children: [
-        {
-          label: 'Security Management',
-          path: '/admin/security',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: '',
-        },
-        {
-          label: 'Hierarchy Management',
-          path: '/admin/hierarchy',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: '',
-        },
-        {
-          label: 'Plant Management',
-          path: '/admin/plant',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: '',
-        },
-        {
-          label: 'User Management',
-          path: '/admin/usermanagement',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: '',
-        },
-        {
-          label: 'Audit Management',
-          path: '/admin/auditlog',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: '',
-        }
-      ],
+      iconClass: 'bi bi-gear-wide-connected',
     },
   ];
 
@@ -340,7 +299,6 @@ export class LeftNavComponent {
   }
 
   toggleNavItem(item: any): void {
-    debugger
     if (item.path) this.router.navigate([item.path]);
     else if (!item.path && item.children) {
       item.isOpen = !item.isOpen; // Toggle the open state of the item
