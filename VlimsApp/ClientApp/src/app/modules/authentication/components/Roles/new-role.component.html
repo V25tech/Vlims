@@ -1,20 +1,20 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-
+     
       <div class="col d-flex justify-content-between align-items-center">
         <h4 class="page-title">{{title}}</h4>
-
+  
         <div class="back-icon" style="margin-right: 10px;">
-
+  
           <a href="javascript:void(0);" onclick="history.back();">
-
+  
             <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
-
+  
           </a>
-
+  
         </div>
-
+  
       </div>
     </div>
   </div>
@@ -34,18 +34,18 @@
                      [(ngModel)]="addrole.Role" [disabled]="editMode"
                      required
                      #rolenameInput="ngModel"
-                     maxlength="49" />
-              <div *ngIf="rolenameInput.invalid && (rolenameInput.dirty || rolenameInput.touched)" class="text-danger">
-                Role is required
-              </div>
-
-
+                     maxlength="49"
+                     />
+                     <div *ngIf="rolenameInput.invalid && (rolenameInput.dirty || rolenameInput.touched)" class="text-danger">
+                      Role is required
+                    </div>
+                     
+                     
             </div>
           </div>
           <div class="form-group row">
             <label for="DepartmentName" class="col-sm-2 col-form-label">
-              Department<span style="color: red; font-weight: bolder;">*</span>
-            </label>
+              Department<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <!-- <input type="text"
                      class="form-control"
@@ -53,43 +53,47 @@
                      name="department"
                      placeholder=""
                      [(ngModel)]="addrole.Department" [disabled]="viewMode" /> -->
-              <p-dropdown name="DepartmentName"
-                          [options]="types"
-                          [(ngModel)]="addrole.Department"
-                          placeholder="Select Department"
-                          optionLabel="DepartmentName"
-                          [required]="true"
-                          display="chip"
-                          optionValue="DepartmentName"
-                          #DepartmentNameInput="ngModel">
-
-
-
-              </p-dropdown>
+                     <p-dropdown
+                name="DepartmentName"
+                [options]="types" 
+                [(ngModel)]="addrole.Department"
+                placeholder="Select Department"
+                optionLabel="DepartmentName"
+              
+                [required]="true"
+                display="chip"
+                optionValue="DepartmentName"
+                #DepartmentNameInput="ngModel">
+              
+             
+              
+                   </p-dropdown>
               <div *ngIf="DepartmentNameInput.invalid && (DepartmentNameInput.dirty || DepartmentNameInput.touched)" class="text-danger">
                 Department required
               </div>
             </div>
           </div>
 
-
+        
           <div class="form-group row">
-            <label for="comments" class="col-sm-2 col-form-label">Comments</label>
+            <label for="comments" class="col-sm-2 col-form-label">Comments<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
-              <textarea class="form-control"
-                        id="comments"
-                        name="comments"
-                        rows="3"
-                        placeholder="Comments please"
-                        [(ngModel)]="addrole.Comments" [disabled]="viewMode"
-                        maxlength="500"
-                        #commentsInput="ngModel">
+              <textarea 
+                     class="form-control"
+                     id="comments"
+                     name="comments"
+                     rows="3"
+                     placeholder="Comments please"
+                     [(ngModel)]="addrole.Comments" [disabled]="viewMode"
+                     maxlength="250"
+                     required
+                     #commentsInput="ngModel">
                       
                     </textarea>
-              <div *ngIf="commentsInput.invalid && (commentsInput.dirty || commentsInput.touched)" class="text-danger">
-                Comments Required
-              </div>
-
+                    <div *ngIf="commentsInput.invalid && (commentsInput.dirty || commentsInput.touched)" class="text-danger">
+                      Comments Required
+                    </div>
+                    
             </div>
           </div>
         </div>
@@ -108,6 +112,6 @@
 
 <style>
   .form-control {
-    max-width: 350px;
-  }
+  max-width: 350px;
+}
 </style>
