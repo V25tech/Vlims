@@ -3,24 +3,24 @@
   <div class="container-fluid">
     <div class="row p-2">
       <div class="col">
+       
+       
 
+<div class="col d-flex justify-content-between align-items-center">
+  <h4 class="page-title">System Configuration</h4>
+   
 
+      <div class="back-icon" style="margin-right: 10px;">
 
-        <div class="col d-flex justify-content-between align-items-center">
-          <h4 class="page-title">Security Configuration</h4>
+        <a href="javascript:void(0);" onclick="history.back();">
 
+          <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
 
-          <div class="back-icon" style="margin-right: 10px;">
+        </a>
 
-            <a href="javascript:void(0);" onclick="history.back();">
+      </div>
 
-              <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
-
-            </a>
-
-          </div>
-
-        </div>
+    </div>
       </div>
     </div>
     <div class="row p-2">
@@ -29,7 +29,7 @@
           <div class="p-4 bg-white shadow-dark rounded-2">
 
             <div class="form-group row">
-              <label for="minimumuseridlength" class="col-sm-2 col-form-label">Minimum User ID Length<span style="color: red; font-weight: bolder;">*</span></label>
+              <label for="minimumuseridlength" class="col-sm-2 col-form-label">Minimum User Id Length<span style="color: red; font-weight: bolder;">*</span></label>
               <div class="col-sm-10">
                 <input type="text"
                        class="form-control"
@@ -38,7 +38,6 @@
                        placeholder="Enter user Id length"
                        [(ngModel)]="securityType.MinimumUserIdLength" [disabled]="viewMode"
                        required
-                       maxlength="24"
                        #minlengthInput="ngModel" />
                 <div *ngIf="minlengthInput.invalid && (minlengthInput.dirty || minlengthInput.touched)" class="text-danger">
                   Minimum UserID is required
@@ -56,7 +55,6 @@
                        placeholder="Enter Password Length"
                        [(ngModel)]="securityType.MinimumPasswordLength" [disabled]="viewMode"
                        required
-                       maxlength="24"
                        #minpassInput="ngModel" />
                 <div *ngIf="minpassInput.invalid && (minpassInput.dirty || minpassInput.touched)" class="text-danger">
                   Minimum password is required
@@ -120,7 +118,7 @@
 
           </div>
 
-          <div class="form-group row my-4" *ngIf="access">
+          <div class="form-group row my-4"  *ngIf="access">
             <div class="col-sm-10 offset-sm-2">
               <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
               <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid">Update</button>
@@ -144,45 +142,47 @@
 
 <div class="container-fluid" *ngIf="isFormSubmitted">
   <div class="row p-2">
-    <div class="col">
-      <div class="d-flex justify-content-between align-items-center">
-        <h4 class="page-title flex-grow-1">Updated Security Mangement Values</h4>
-        <div class="d-flex page-title-actions">
-        </div>
+      <div class="col">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="page-title flex-grow-1">Updated Security Mangement Values</h4>          
+              <div class="d-flex page-title-actions">             
+              </div>
+          </div>
       </div>
-    </div>
   </div>
   <div class="row p-2">
-    <div class="col">
-      <div class="p-4 bg-white shadow-dark rounded-2">
-        <p-table [value]="types"
-                 tableStyleClass="table table-striped">
-          <ng-template pTemplate="header">
-            <tr>
-              <th>S.No</th>
-              <th pSortableColumn="MinimumUserIdLength" style="width:20%">Minimum User Id Length<p-sortIcon field="MinimumUserIdLength"></p-sortIcon></th>
-              <th pSortableColumn="MinimumPasswordLength" style="width:10%">Minimum Password Length<p-sortIcon field="MinimumPasswordLength"></p-sortIcon> </th>
-              <th pSortableColumn="PasswordComplexity" style="width:15%">Password Complexity<p-sortIcon field="PasswordComplexity"></p-sortIcon></th>
-              <th pSortableColumn="InvalidAttempts" style="width:20%">Invalid Attempts<p-sortIcon field="InvalidAttempts"></p-sortIcon></th>
-              <th pSortableColumn="SessionTimeOut" style="width:1n00px">Session Time Out<p-sortIcon field="SessionTimeOut"></p-sortIcon></th>
-
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-SECURITY let-i="rowIndex">
-            <tr>
-              <td>{{ i + 1 }}</td>
-              <td>{{SECURITY?.MinimumUserIdLength}}</td>
-              <td>{{SECURITY?.MinimumPasswordLength}}</td>
-              <td>{{SECURITY?.PasswordComplexity}}</td>
-              <td>{{SECURITY?.InvalidAttempts}}</td>
-              <td>{{SECURITY?.SessionTimeOut}}</td>
-
-
-            </tr>
-          </ng-template>
-        </p-table>
+      <div class="col">
+          <div class="p-4 bg-white shadow-dark rounded-2">
+            <p-table [value]="types"           
+            tableStyleClass="table table-striped"
+            
+              >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>S.No</th>
+                  <th pSortableColumn="MinimumUserIdLength" style="width:20%">Minimum User Id Length<p-sortIcon field="MinimumUserIdLength"></p-sortIcon></th>
+                  <th pSortableColumn="MinimumPasswordLength" style="width:10%">Minimum Password Length<p-sortIcon field="MinimumPasswordLength"></p-sortIcon> </th>
+                  <th pSortableColumn="PasswordComplexity" style="width:15%">Password Complexity<p-sortIcon field="PasswordComplexity"></p-sortIcon></th>
+                  <th pSortableColumn="InvalidAttempts" style="width:20%">Invalid Attempts<p-sortIcon field="InvalidAttempts"></p-sortIcon></th>
+                  <th pSortableColumn="SessionTimeOut" style="width:1n00px">Session Time Out<p-sortIcon field="SessionTimeOut"></p-sortIcon></th>
+                  
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-SECURITY let-i="rowIndex">
+                <tr>
+                  <td>{{ i + 1 }}</td> 
+                  <td>{{SECURITY?.MinimumUserIdLength}}</td>
+                  <td>{{SECURITY?.MinimumPasswordLength}}</td>
+                  <td>{{SECURITY?.PasswordComplexity}}</td>
+                  <td>{{SECURITY?.InvalidAttempts}}</td>
+                  <td>{{SECURITY?.SessionTimeOut}}</td>
+                  
+                  
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
       </div>
-    </div>
   </div>
 </div>
 
@@ -212,36 +212,59 @@
   /* Styles for .custom-input-group */
 
   .custom-input-group {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+      background-color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      border: 1px solid #ccc;
+
+      border-radius: 5px;
+
   }
 
   .custom-input-group-text {
-    background: white;
-    border: none;
-    padding: 0;
-    vertical-align: middle;
-  }
+
+          background: white;
+
+          border: none;
+
+          padding: 0;
+
+          vertical-align: middle;
+
+      }
 
 
 
-  .custom-search-icon {
-    font-size: 14px;
-    margin-right: 5px;
-    margin-left: 9px;
-    color: #555;
-  }
+      .custom-search-icon {
+
+          font-size: 14px;
+
+          margin-right: 5px;
+
+          margin-left: 9px;
+
+          color: #555;
+
+      }
 
 
 
-  .custom-input {
-    border: none;
-    padding: 5px;
-    vertical-align: middle;
-    background-color: white;
-    box-shadow: none;
-  }
-</style>
+      .custom-input {
+
+          border: none;
+
+          padding: 5px;
+
+          vertical-align: middle;
+
+          background-color: white;
+
+          box-shadow: none;
+
+      }
+
+  </style>

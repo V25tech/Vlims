@@ -16,9 +16,13 @@ import { Router } from '@angular/router';
 export class ChangepasswordComponent {
   griddata:UserConfiguration[]=[];
   currentuser=new UserConfiguration();
+  otherUser=new UserConfiguration();
   currentPassword: string = '';
   newPassword: string = '';
+  newPassword1: string = '';
   confirmNewPassword: string = '';
+  confirmNewPassword1: string = '';
+  isadmin:boolean=false;
 
   constructor(private location: Location,
     private commomsvc:CommonService,
@@ -29,7 +33,12 @@ export class ChangepasswordComponent {
     ){}
    
   ngOnInit(){
-    //this.getusers();
+    debugger
+    this.currentuser=this.commomsvc.getUser() ??  new UserConfiguration();
+    if(this.currentuser!=null && this.currentuser!=undefined){
+      this.isadmin=this.currentuser.UserID=='Admin';
+    }
+    this.getusers();
   }
   getusers() {
     this.loader.show();
@@ -86,5 +95,25 @@ export class ChangepasswordComponent {
       return 'low'; // Password length is considered weak
     }
   }
-  
+  changePasswordOther() {
+    debugger
+    // Implement change password logic here
+    if (this.newPassword1 !== this.confirmNewPassword1) {
+      this.toaster.error("New password and confirm new password don't match",'Not Match');
+      return;
+    }
+    if(this.otherUser!=null || this.otherUser!=undefined){
+      this.otherUser.Password=this.newPassword1;
+    this.userssvc.update(this.otherUser).subscribe((data:any)=>{
+      this.toaster.success("Password Changed Successfully",'Success');
+      this.otherUser=new UserConfiguration();
+      this.newPassword1='';this.confirmNewPassword1='';
+    //   this.loginservice.logout();
+    // this.router.navigate(['/login']);
+    });
+  }
+  else{
+    this.toaster.error("Update Failed");
+  }
+  }
 }

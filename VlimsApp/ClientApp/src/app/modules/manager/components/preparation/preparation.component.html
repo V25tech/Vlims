@@ -28,7 +28,7 @@
           <div class="p-4 bg-white shadow-dark rounded-2">
             <p-table #templatesTable
             [value]="preparationsDatasource"
-            [globalFilterFields]="['documentno','documenttitle','documenttype','department','assignedtogroup','status']"
+            [globalFilterFields]="['documentno','documenttitle','documenttype','department','template','status']"
             tableStyleClass="table table-striped" [rows]="itemsPerPage"
               [paginator]="true" [totalRecords]="preparationsDatasource.length"
               [rowsPerPageOptions]="rowsPerPageOptions" 
@@ -53,9 +53,9 @@
                   Department<p-sortIcon field="department"></p-sortIcon>
                 </th>
   
-                <th pSortableColumn="assignedToGroup" style="width: 100px">
-                  Assigned to group<p-sortIcon
-                    field="assignedToGroup"
+                <th pSortableColumn="template" style="width: 100px">
+                  Template<p-sortIcon
+                    field="template"
                   ></p-sortIcon>
                 </th>
                 <th pSortableColumn="status" style="width: 100px">
