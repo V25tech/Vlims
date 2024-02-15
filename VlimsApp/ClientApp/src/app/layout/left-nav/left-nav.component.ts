@@ -230,7 +230,7 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: ''
-
+         
         },
         {
           label: 'Set Functional Profile',
@@ -239,7 +239,7 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: ''
-
+          
         },
         {
           label: 'Plant Management',
@@ -248,9 +248,8 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: ''
-
+          
         },
-
         {
           label: 'User Configuration',
           path: 'userconfig',
@@ -258,7 +257,7 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: ''
-
+          
         },
         {
           label: 'Active or Deactivate Users',
@@ -267,22 +266,12 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: ''
-
+          
         }
         // Add more child items as needed
       ]
     }
-
-      ],
-    },
-    {
-      label: 'Switch to Admin',
-      path: '/admin',
-      isOpen: false,
-      children: null,
-      isActive: false,
-      iconClass: 'bi bi-gear-wide-connected',
-    },
+    
   ];
 
   toggleLeftNav() {

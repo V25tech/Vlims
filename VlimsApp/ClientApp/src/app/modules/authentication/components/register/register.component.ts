@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   griddata: UserConfiguration[] = [];
   isactivedirectory: boolean = false;
   isstandarduser: boolean = false;
-  title: string = "New User";
+  title: string = "New User Registration";
   objname: string = '';
   userid: string = '';
   //securityInfo: SecurityManagement[] = [];

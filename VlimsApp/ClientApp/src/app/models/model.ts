@@ -268,6 +268,7 @@ export class PlantConfiguration {
   ModifiedDate: Date | undefined;
   Status: string = '';
   PMId: number = 0;
+  
 
 }
 export class SecurityManagement {
