@@ -60,7 +60,7 @@
           <label for="docType" class="col-sm-2 col-form-label">Document Type <span style="color: red; font-weight: bolder;">*</span></label>
           <div class="col-sm-10">
             <p-dropdown [options]="typesDatasource" [(ngModel)]="selectedtype" placeholder="Select Document Type"
-                optionLabel="Documenttypename" id="types" name="types" [autoDisplayFirst]="false" [required]="true" #DocumenttypenameInput="ngModel" >
+                optionLabel="Documenttypename" id="types" name="types" [autoDisplayFirst]="false" [required]="true" #DocumenttypenameInput="ngModel" [disabled]="editMode"  >
              </p-dropdown>
              <div *ngIf="DocumenttypenameInput.invalid && (DocumenttypenameInput.dirty || DocumenttypenameInput.touched)" class="text-danger">
               Document Type is required
