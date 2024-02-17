@@ -98,18 +98,45 @@ export class AddDocumentTypeComponent {
     });
   }
 
+
+
+
+
+
+
+
   saveDocType(documentType: DocumentTypeConfiguration) {
-    this.isSubmiting = true;
-    this.documentType.Assigntodepartment = this.selectedDepartments.join(',');
-    if (this.editMode) {
-      this.documentType = documentType;
-      this.updatetype();
+  this.isSubmiting = true;
+  this.documentType.Assigntodepartment = this.selectedDepartments.join(',');
+
+  if (this.editMode) {
+    // Update mode
+    this.documentType = documentType;
+    this.updatetype();
+  } else {
+    // Add mode
+    if (!this.isduplicateDocumentType() && !this.isduplicatePrefix()) {
+      // If both name and prefix are not duplicate, proceed to add
+      this.addtype(documentType);
     } else {
-      if (!this.isduplicate()) {
-        this.addtype(documentType);
+      // If name or prefix is duplicate, show error message or handle as needed
+      if (this.isduplicateDocumentType()) {
+        this.toastr.error('Document Type Name must be unique.');
       }
+      if (this.isduplicatePrefix()) {
+        this.toastr.error('Document Type Prefix must be unique.');
+      }
+      this.isSubmiting = false;
     }
   }
+}
+
+
+
+
+
+
+  
 
   isduplicate() {
     let isDuplicate = false;
@@ -128,6 +155,30 @@ export class AddDocumentTypeComponent {
     return isDuplicate;
   }
 
+
+
+
+
+
+  isduplicatePrefix() {
+    let isDuplicate = false;
+    if (this.grid != null && this.grid.length > 0) {
+      isDuplicate = this.grid.some(p => p.documenttypeprefix === this.documentType.documenttypeprefix);
+    }
+    return isDuplicate;
+  }
+  isduplicateDocumentType() {
+    let isDuplicate = false;
+    if (this.grid != null && this.grid.length > 0) {
+      isDuplicate = this.grid.some(p => p.Documenttypename === this.documentType.Documenttypename);
+    }
+    return isDuplicate;
+  }
+  
+
+
+
+  
   addtype(documentType: DocumentTypeConfiguration) {
     documentType.CreatedBy = this.commonsvc.getUsername();
     documentType.ModifiedBy = this.commonsvc.getUsername();
@@ -150,25 +201,38 @@ export class AddDocumentTypeComponent {
   }
   }
   updatetype() {
+    debugger
     this.documentType.ModifiedBy = this.commonsvc.getUsername();
     if (!this.isSubmitting) {
       this.isButtonDisabled = true;
-      this.isSubmitting = true;
-    this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {
-      this.commonsvc.documentType = new DocumentTypeConfiguration();
-      this.toastr.success('Document type update succesfull!', 'Updated.!');
-      this.spinner.hide();
-      this.location.back();
-    }, er => {
-      console.log(er);
-      this.isSubmiting = false;
-      this.spinner.hide();
-      this.toastr.error('Document type adding failed', 'Internal server error', {
-        timeOut: 3000,
+      //this.isSubmitting = true;
+  
+      if (this.isduplicateDocumentType()) {
+        // If the document type name is duplicate, show error message and stop updating
+        this.toastr.error('Document Type Name Already Exists must be unique.');
+        this.isSubmiting = false;
+        this.isButtonDisabled = false;
+        return;
+      }
+  
+      // If the document type name is unique, proceed with updating
+      this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {
+        this.commonsvc.documentType = new DocumentTypeConfiguration();
+        this.toastr.success('Document type update successful!', 'Updated.');
+        this.spinner.hide();
+        this.location.back();
+      }, er => {
+        console.log(er);
+        this.isSubmiting = false;
+        this.isButtonDisabled = false;
+        this.spinner.hide();
+        this.toastr.error('Document type update failed', 'Internal server error', {
+          timeOut: 3000,
+        });
       });
-    });
+    }
   }
-  }
+  
 
 
   approve() {

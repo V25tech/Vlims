@@ -49,9 +49,12 @@
                      name="prefix"
                      pattern="^[a-zA-Z0-9\s]*$"
                      placeholder="Document Type Prefix"
-                     [(ngModel)]="documentType.documenttypeprefix" [disabled]="viewMode" maxlength="8"
-                       required
+                     [(ngModel)]="documentType.documenttypeprefix"
+                     [disabled]="viewMode"
+                     maxlength="8"
+                     required
                      #prefixInput="ngModel"
+                     [disabled]="editMode"
                       />
                       <div *ngIf="prefixInput.invalid && (prefixInput.dirty || prefixInput.touched)" class="text-danger">
                         Enter Document Type Prefix.

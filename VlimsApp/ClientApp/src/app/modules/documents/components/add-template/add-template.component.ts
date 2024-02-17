@@ -209,8 +209,7 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.Pages=1;
     }
     else if(lastSegment=="edit")
-    {
-      ;
+    {debugger
       this.title='Edit Document Template';
       this.editMode=true;
         let id=parseInt(segments[segments.length-1],10);
@@ -414,6 +413,7 @@ export class AddTemplateComponent implements OnInit {
     console.log(this.templateForm);
     if(this.editMode)
     {
+      debugger
       this.templateForm.ModifiedBy=this.commonsvc.getUsername();
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
