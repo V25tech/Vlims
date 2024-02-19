@@ -45,7 +45,7 @@ export class AssignedComponent implements OnInit {
       if(this.types.length>0)
       {
         debugger
-        this.types=this.types.filter(p=>p.InitiatedBy==user).sort((a, b) => b.WITId - a.WITId);
+        this.types = this.types.filter(p => p.CreatedBy ==user).sort((a, b) => b.WITId - a.WITId);
       }
         if(this.types.length<10)
         this.currentPage=10;

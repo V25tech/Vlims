@@ -8,12 +8,13 @@
     </div> -->
 
     <div class="col col-lg-3">
-      <div class="card" (click)="navigateTo('assigned')">
+      <div class="card" (click)="userRole!= 'adminrole' && navigateTo('assigned')">
         <div class="card-body">
           <i class="fa fa-briefcase"></i>
           <h5 class="card-title">
             Work Items<br />
             Assigned to me
+            <!--<h6 class="align-items-center">{{this.workItemsCount}}</h6>-->
           </h5>
         </div>
       </div>
@@ -29,7 +30,7 @@
     </div> -->
 
     <div class="col col-lg-3">
-      <div class="card" (click)="navigateTo('document-master')">
+      <div class="card" (click)="userRole != 'adminrole' && navigateTo('document-master')">
         <div class="card-body">
           <i class="fa-regular fa-life-ring"></i>
           <h5 class="card-title">Document Master</h5>
@@ -40,7 +41,7 @@
     
 
     <div class="col col-lg-3">
-      <div class="card" (click)="navigateTo('document-manager')">
+      <div class="card" (click)="userRole != 'adminrole' && navigateTo('document-manager')">
         <div class="card-body">
           <i class="fa-solid fa-folder-tree"></i>
           <h5 class="card-title">Document Manager</h5>
