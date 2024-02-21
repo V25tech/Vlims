@@ -30,7 +30,7 @@
                      name="departmentName"
                      placeholder="Enter Department Name"
                      maxlength="49"
-                     [(ngModel)]="newdept.DepartmentName" [disabled]="editMode"
+                     [(ngModel)]="newdept.DepartmentName" 
                      required
                      maxlength="49"
                      #departmentNameInput="ngModel" />
@@ -49,7 +49,7 @@
                      name="DepartmentCode"
                      placeholder="Enter Department Code"
                      maxlength="8"
-                     [(ngModel)]="newdept.DepartmentCode" [disabled]="viewMode"
+                     [(ngModel)]="newdept.DepartmentCode" [disabled]="viewMode" [disabled]="editMode"
                      required
                      maxlength="49"
            #DepartmentCodeInput="ngModel" />

@@ -43,36 +43,37 @@
                      
             </div>
           </div>
-          <div class="form-group row">
+         
+          <!-- <div class="form-group row">
             <label for="DepartmentName" class="col-sm-2 col-form-label">
               Department<span style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10">
+            <div class="col-sm-10"> -->
               <!-- <input type="text"
                      class="form-control"
                      id="department"
                      name="department"
                      placeholder=""
                      [(ngModel)]="addrole.Department" [disabled]="viewMode" /> -->
-                     <p-dropdown
+                     <!-- <p-dropdown
                 name="DepartmentName"
-                [options]="types" 
+                [options]="types"
                 [(ngModel)]="addrole.Department"
                 placeholder="Select Department"
                 optionLabel="DepartmentName"
-              
+             
                 [required]="true"
                 display="chip"
                 optionValue="DepartmentName"
                 #DepartmentNameInput="ngModel">
-              
              
-              
-                   </p-dropdown>
-              <div *ngIf="DepartmentNameInput.invalid && (DepartmentNameInput.dirty || DepartmentNameInput.touched)" class="text-danger">
+             
+             
+                   </p-dropdown> -->
+              <!-- <div *ngIf="DepartmentNameInput.invalid && (DepartmentNameInput.dirty || DepartmentNameInput.touched)" class="text-danger">
                 Department required
               </div>
             </div>
-          </div>
+          </div> -->
 
         
           <div class="form-group row">
