@@ -83,7 +83,7 @@ namespace PolicySummary.Controllers
             var user = userConfigurationService.GetAllUserConfiguration(requestContext, false).Response.FirstOrDefault(o => o.UserID.Equals(userConfiguration.UserID, StringComparison.InvariantCultureIgnoreCase) && o.Status == "Active");
             if (user == null)
             {
-                if (userConfiguration.UserID == "Admin")
+                if (userConfiguration.UserID.Equals("Admin", StringComparison.InvariantCultureIgnoreCase))
                 {
                     userConfiguration.Password = "Passw0rd";
                     return Ok(userConfigurationService.SaveUserConfiguration(userConfiguration));
