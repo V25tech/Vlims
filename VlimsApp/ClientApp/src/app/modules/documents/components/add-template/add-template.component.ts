@@ -122,7 +122,7 @@ export class AddTemplateComponent implements OnInit {
   public Editor: any = Editor;
   config = {
     fontSize: {
-      options: [9, 11, 13, 14, 15, 16, 17, 19, 21],
+      options: [8,9,10,11,12,13,14,15,16,17,18,19,20],
     },
     toolbar: ['undo',
       'redo',

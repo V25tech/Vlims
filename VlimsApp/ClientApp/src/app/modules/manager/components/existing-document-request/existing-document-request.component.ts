@@ -64,6 +64,7 @@ export class ExistingDocumentRequestComponent implements OnInit {
   }
 
   editExistingDoc(existingDocReq: ExistingDocumentRequest) {
+    debugger
     this.commonsvc.existingDocReq = existingDocReq;
     this.router.navigate(['/existingdoc/edit/' + existingDocReq.edrId]);
   }

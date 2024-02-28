@@ -36,7 +36,7 @@
                 <tr>
                   <th>S.No</th>             
                   <th pSortableColumn="Role" style="width:10%">Role Name <p-sortIcon field="Role"></p-sortIcon></th>
-                  <th pSortableColumn="Department" style="width:15%">Department<p-sortIcon field="Department"></p-sortIcon></th>
+                  <!-- <th pSortableColumn="Department" style="width:15%">Department<p-sortIcon field="Department"></p-sortIcon></th> -->
                   <!-- <th pSortableColumn="Comments" style="width:20%">Comments<p-sortIcon field="Comments"></p-sortIcon></th> -->
                   <th pSortableColumn="CreatedBy" style="width:200px">Registered By<p-sortIcon field="CreatedBy"></p-sortIcon></th>
                   <th pSortableColumn="CreatedDate" style="width:200px">Registered On <p-sortIcon field="CreatedDate"></p-sortIcon></th>              
@@ -49,7 +49,7 @@
                 <tr>
                   <td>{{ i + 1 }}</td>             
                   <td>{{doc?.Role}}</td>
-                  <td>{{doc?.Department}}</td>
+                  <!-- <td>{{doc?.Department}}</td> -->
                   <!-- <td>{{doc?.Comments}}</td> -->
                   <td>{{doc?.CreatedBy}}</td>
                   <td>{{doc?.CreatedDate | date :'dd/MM/yyyy'}}</td>              
