@@ -107,6 +107,7 @@ export class AddRequestComponent {
     debugger
     if (this.editMode) {
       this.toastMsg = 'Updated';
+      this.request.status = 'In-Progress';
       this.updateRequest();
     }
     else {
