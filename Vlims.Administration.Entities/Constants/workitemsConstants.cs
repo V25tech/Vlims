@@ -44,7 +44,7 @@ namespace PolicySummary.DMS.Entities
         public const string ActionType = "@ActionType_PSY";
         public const string IsCompleted = "@IsCompleted_PSY";
 
-        public const string USP_workitems_PSY_GET_ALL = "dbo.USP_workitems_PSY_GET_ALL";
+        public const string USP_workitems_PSY_GET_ALL = "dbo.USP_workitems_PSY_GET_ALL_1";
         
         public const string USP_workitems_PSY_GET = "dbo.USP_workitems_PSY_GET";
         

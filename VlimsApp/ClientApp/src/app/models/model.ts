@@ -254,7 +254,8 @@ export class WorkItemsConfiguration {
   ReferenceId: number = 0
   ActionType: string = ''
   IsCompleted: boolean = false
-  CreatedBy: string =''
+  CreatedBy: string = ''
+  ModifiedBy: string = ''
 }
 export class PlantConfiguration {
  // DPCFId: string = ''

@@ -55,9 +55,9 @@ namespace Vlims.DMS.Entities
 
         public const string USP_DocumentEffective_PSY_GET = "dbo.USP_DocumentEffective_PSY_GET";
 
-        public const string USP_DocumentEffective_PSY_INSERT = "dbo.USP_DocumentEffective_PSY_INSERT";
+        public const string USP_DocumentEffective_PSY_INSERT = "dbo.USP_DocumentEffective_PSY_INSERT_1";
 
-        public const string USP_DocumentEffective_PSY_UPDATE = "dbo.USP_DocumentEffective_PSY_UPDATE";
+        public const string USP_DocumentEffective_PSY_UPDATE = "dbo.USP_DocumentEffective_PSY_UPDATE_1";
 
         public const string USP_DocumentEffective_PSY_APPROVE = "dbo.USP_DocumentEffective_PSY_APPROVE";
 

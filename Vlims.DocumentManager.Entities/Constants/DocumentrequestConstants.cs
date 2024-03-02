@@ -56,9 +56,9 @@ namespace Vlims.DMS.Entities
 
         public const string USP_Documentrequest_PSY_GET = "dbo.USP_Documentrequest_PSY_GET";
 
-        public const string USP_Documentrequest_PSY_INSERT = "dbo.USP_Documentrequest_PSY_INSERT";
+        public const string USP_Documentrequest_PSY_INSERT = "dbo.USP_Documentrequest_PSY_INSERT_1";
 
-        public const string USP_Documentrequest_PSY_UPDATE = "dbo.USP_Documentrequest_PSY_UPDATE";
+        public const string USP_Documentrequest_PSY_UPDATE = "dbo.USP_Documentrequest_PSY_UPDATE_1";
 
         public const string USP_Documentrequest_PSY_DELETE = "dbo.USP_Documentrequest_PSY_DELETE";
 

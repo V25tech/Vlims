@@ -61,7 +61,7 @@ namespace Vlims.DMS.Entities
         
         public const string USP_AdditionalTask_PSY_INSERT = "dbo.USP_AdditionalTask_PSY_INSERT";
         
-        public const string USP_AdditionalTask_PSY_UPDATE = "dbo.USP_AdditionalTask_PSY_UPDATE";
+        public const string USP_AdditionalTask_PSY_UPDATE = "dbo.USP_AdditionalTask_PSY_UPDATE_1";
         
         public const string USP_AdditionalTask_PSY_DELETE = "dbo.USP_AdditionalTask_PSY_DELETE";
         
