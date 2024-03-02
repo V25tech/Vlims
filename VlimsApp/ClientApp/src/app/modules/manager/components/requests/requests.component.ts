@@ -100,6 +100,10 @@ export class RequestsComponent implements OnInit{
         return true;
         case 'APPROVED':
         return true;
+        case 'Rejected':
+        return false;
+        case 'Returned':
+        return false;
       default:
         return false;
     }

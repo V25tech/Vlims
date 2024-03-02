@@ -9,7 +9,16 @@
  AS 
  BEGIN 
   BEGIN TRY 
-  
+
+  DECLARE @ISWORKITEMS BIT,@CREATED_BY VARCHAR(500)
+  SET @CREATED_BY=(SELECT CreatedBy_PSY FROM dbo.Documentrequest_PSY WHERE DRID_PSY = @DRID_PSY)
+  IF (SELECT COUNT(*) FROM dbo.Documentrequest_PSY WHERE DRID_PSY = @DRID_PSY AND Workflow_PSY IS NULL) > 0
+  BEGIN
+  SET @ISWORKITEMS=1;
+  END
+ 
+ IF(@Status_PSY='IN-PROGRESS' OR @Status_PSY='IN PROGRESS')
+BEGIN
  UPDATE [dbo].[Documentrequest_PSY] SET documentmanagerid_PSY=@documentmanagerid_PSY,
 documenttype_PSY=@documenttype_PSY,
 department_PSY=@department_PSY,
@@ -17,6 +26,20 @@ Purpose_PSY=@Purpose_PSY,
 ApprovalsCount_PSY=@ApprovalsCount_PSY,
 AssigntoGroup_PSY=@AssigntoGroup_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRID_PSY] = @DRID_PSY ;  
+END
+ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
+BEGIN
+--reject functionality is reset values and update status as rejected
+UPDATE [dbo].[Documentrequest_PSY] SET documenttype_PSY=NULL,department_PSY=null,Purpose_PSY=null,ApprovalsCount_PSY=null,
+AssigntoGroup_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRID_PSY] = @DRID_PSY ;
+--once rejected delete workitems assigned to users
+DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DRID_PSY
+END
+ELSE IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
+BEGIN
+--return functionality is just update status as 'return'
+UPDATE [dbo].[Documentrequest_PSY] SET ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRID_PSY] = @DRID_PSY ;
+END
 
 IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
@@ -32,7 +55,7 @@ DECLARE @ID INT
 INSERT INTO DocumentPreparation_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,
 department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,DOCStatus_PSY,Refrence_PSY)
 VALUES('1',NULL,NULL,@documenttype_PSY,@department_PSY,null,null,NUll,NULL,
-@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',NULL,@DRID_PSY);
+@CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',NULL,@DRID_PSY);
 SELECT @ID = @@IDENTITY;
 
 --INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
@@ -43,11 +66,11 @@ SELECT @ID = @@IDENTITY;
 
 END
 
-IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
-BEGIN
-DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DRID_PSY
-DELETE FROM Documentrequest_PSY WHERE DRID_PSY=@DRID_PSY
-END
+--IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
+--BEGIN
+--DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DRID_PSY
+--DELETE FROM Documentrequest_PSY WHERE DRID_PSY=@DRID_PSY
+--END
 
 select @DRID_PSY; 
   

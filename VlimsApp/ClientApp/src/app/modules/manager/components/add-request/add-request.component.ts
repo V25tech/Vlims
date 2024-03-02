@@ -88,8 +88,11 @@ export class AddRequestComponent {
       this.updateRequest();
     }
   }
-  reinitiative() {
-    this.request.status = 'Re-Initiated'
+  return() {
+    this.request.modifiedBy = this.commonsvc.getUsername();
+    this.request.status = 'Returned'
+    this.toastMsg = this.request.status;
+    this.updateRequest();
     this.location.back();
     //this.updateRequest();
   }
@@ -136,7 +139,7 @@ export class AddRequestComponent {
   }
 
   updateRequest() {
-    if (this.viewMode && this.request.status != 'Rejected') {
+    if (this.viewMode && this.request.status != 'Rejected' && this.request.status != 'Returned') {
       this.request.modifiedBy = this.commonsvc.createdBy;
       this.request.status = this.finalStatus;
     }

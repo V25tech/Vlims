@@ -24,7 +24,7 @@ DECLARE @ID1 INT
 INSERT INTO DocumentPreparation_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,
 department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,DOCStatus_PSY,Refrence_PSY)
 SELECT Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,
-template_PSY,null,details_PSY,@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',DOCStatus_PSY,@referenceId FROM DocumentPreparation_PSY
+template_PSY,null,details_PSY,CreatedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',DOCStatus_PSY,@referenceId FROM DocumentPreparation_PSY
 WHERE DPNID_PSY=@DOCPREPID
 SELECT @ID1 = @@IDENTITY;
 
