@@ -11,6 +11,8 @@
     [EffectiveDate_PSY]    DATETIME       NULL,
     [ReviewDate_PSY]       DATETIME       NULL,
     [workflow_PSY]         NVARCHAR (100) NULL,
+    [GUID_AD] UNIQUEIDENTIFIER NULL, 
+    [ReferenceGuid_PSY] NCHAR(10) NULL, 
     CONSTRAINT [PK_AdditionalTask_PSY] PRIMARY KEY CLUSTERED ([ATID_PSY] ASC)
 );
 

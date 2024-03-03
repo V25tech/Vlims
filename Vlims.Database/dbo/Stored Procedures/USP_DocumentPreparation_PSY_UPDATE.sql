@@ -12,8 +12,9 @@
  AS 
  BEGIN 
   BEGIN TRY 
-  DECLARE @ISWORKITEMS BIT,@CREATED_BY VARCHAR(500)
+  DECLARE @ISWORKITEMS BIT,@CREATED_BY VARCHAR(500),@ParentGuid uniqueidentifier
   SET @CREATED_BY=(SELECT CreatedBy_PSY FROM dbo.DocumentPreparation_PSY WHERE DPNID_PSY = @DPNID_PSY)
+  SET @ParentGuid=(SELECT GUID_DP FROM DocumentPreparation_PSY WHERE DPNID_PSY=@DPNID_PSY)
   IF (SELECT COUNT(*) FROM dbo.DocumentPreparation_PSY WHERE DPNID_PSY = @DPNID_PSY AND wokflow_PSY IS NULL) > 0
   BEGIN
   SET @ISWORKITEMS=1;
@@ -38,7 +39,7 @@ BEGIN
 UPDATE dbo.DocumentPreparation_PSY SET documenttitle_PSY=null,documentno_PSY=null,document_PSY=null,
 template_PSY=null,wokflow_PSY=null,details_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY where DPNID_PSY=@DPNID_PSY
 --once rejected delete workitems assigned to users
-DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DPNID_PSY
+DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid
 END
 ELSE IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
 BEGIN
@@ -65,12 +66,13 @@ END
 DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentPreparation_PSY where DPNID_PSY=@DPNID_PSY)
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
+
 UPDATE DocumentPreparation_PSY SET Status_PSY=@Status_PSY WHERE DPNID_PSY=@DPNID_PSY
 DECLARE @ID INT
 INSERT INTO DocumentEffective_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,EffectiveDate_PSY,Reviewdate_PSY,
-CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY)
+CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY,GUID_DE,ReferenceGuid_PSY)
 VALUES(@DPNID_PSY,@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,@document_PSY,null,null,
-@CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId)
+@CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId,NEWID(),@ParentGuid)
 SELECT @ID = @@IDENTITY;
 
 END

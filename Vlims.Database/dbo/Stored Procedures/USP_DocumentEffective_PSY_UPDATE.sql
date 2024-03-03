@@ -14,8 +14,9 @@
  BEGIN 
   BEGIN TRY 
   
-  DECLARE @ISWORKITEMS BIT,@CREATED_BY VARCHAR(500)
+  DECLARE @ISWORKITEMS BIT,@CREATED_BY VARCHAR(500),@ParentGuid_PSY uniqueidentifier
   SET @CREATED_BY=(SELECT CreatedBy_PSY FROM dbo.DocumentEffective_PSY WHERE DEID_PSY=@DEID_PSY)
+  SET @ParentGuid_PSY=(SELECT GUID_DE FROM DocumentEffective_PSY WHERE DEID_PSY=@DEID_PSY)
   IF (SELECT COUNT(*) FROM dbo.DocumentEffective_PSY WHERE DEID_PSY = @DEID_PSY AND Workflow_PSY IS NULL) > 0
   BEGIN
   SET @ISWORKITEMS=1;
@@ -42,7 +43,7 @@ BEGIN
  UPDATE [dbo].[DocumentEffective_PSY] SET EffectiveDate_PSY=null,Reviewdate_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,
 Workflow_PSY=null WHERE  [DEID_PSY] = @DEID_PSY ;
 --once rejected delete workitems assigned to users
-DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DEID_PSY
+DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid_PSY
 END
 ELSE IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
 BEGIN
@@ -69,11 +70,12 @@ DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentE
 
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
+
 DECLARE @ID INT DECLARE @printID int,@version int=0
 SET @version=(SELECT COUNT(*)+1 FROM AdditionalTask_PSY WHERE Refrence_PSY=@referenceId AND Status_PSY='APPROVED')
-INSERT INTO AdditionalTask_PSY(DocumentEffective_ID,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Version,Refrence_PSY)
+INSERT INTO AdditionalTask_PSY(DocumentEffective_ID,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Version,Refrence_PSY,GUID_AD,ReferenceGuid_PSY)
 VALUES(@DEID_PSY,
-@CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'APPROVED',@version,@referenceId)
+@CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'APPROVED',@version,@referenceId,NEWID(),@ParentGuid_PSY)
 SELECT @ID = @@IDENTITY;
 
 

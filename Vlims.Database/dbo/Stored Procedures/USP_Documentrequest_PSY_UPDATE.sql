@@ -11,8 +11,9 @@
  BEGIN 
   BEGIN TRY 
 
-  DECLARE @ISWORKITEMS BIT,@CREATED_BY VARCHAR(500)
+  DECLARE @ISWORKITEMS BIT,@CREATED_BY VARCHAR(500),@ParentGuid uniqueidentifier
   SET @CREATED_BY=(SELECT CreatedBy_PSY FROM dbo.Documentrequest_PSY WHERE DRID_PSY = @DRID_PSY)
+  set @ParentGuid=(select GUID_DR FROM Documentrequest_PSY WHERE DRID_PSY=@DRID_PSY)
   IF (SELECT COUNT(*) FROM dbo.Documentrequest_PSY WHERE DRID_PSY = @DRID_PSY AND Workflow_PSY IS NULL) > 0
   BEGIN
   SET @ISWORKITEMS=1;
@@ -34,7 +35,7 @@ BEGIN
 UPDATE [dbo].[Documentrequest_PSY] SET documenttype_PSY=NULL,Workflow_PSY=null,
 AssigntoGroup_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRID_PSY] = @DRID_PSY ;
 --once rejected delete workitems assigned to users
-DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DRID_PSY
+DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid
 END
 ELSE IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
 BEGIN
@@ -49,15 +50,16 @@ END
 
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
+
 UPDATE Documentrequest_PSY SET Status_PSY=@Status_PSY WHERE DRID_PSY=@DRID_PSY
 DECLARE @nvarcharValue NVARCHAR(50);DECLARE @WORKFLOW NVARCHAR(50);
 --SET @nvarcharValue = CAST(@DRID_PSY AS NVARCHAR(50));
 SET @WORKFLOW=(SELECT Workflow_PSY FROM Documentrequest_PSY WHERE DRID_PSY=@DRID_PSY)
 DECLARE @ID INT
 INSERT INTO DocumentPreparation_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,
-department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,DOCStatus_PSY,Refrence_PSY)
+department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,DOCStatus_PSY,Refrence_PSY,GUID_DP,ReferenceGuid_PSY)
 VALUES('1',NULL,NULL,@documenttype_PSY,@department_PSY,null,null,NUll,NULL,
-@CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',NULL,@DRID_PSY);
+@CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',NULL,@DRID_PSY,NEWID(),@ParentGuid);
 SELECT @ID = @@IDENTITY;
 
 END

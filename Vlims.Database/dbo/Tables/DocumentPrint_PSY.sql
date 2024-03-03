@@ -12,6 +12,8 @@
     [ModifiedDate_PSY]  DATETIME       NULL,
     [Status_PSY]        NVARCHAR (150) NULL,
     [Refrence_PSY]      INT            NULL,
+    [GUID_DPP] UNIQUEIDENTIFIER NULL, 
+    [ReferenceGuid_PSY] UNIQUEIDENTIFIER NULL, 
     CONSTRAINT [PK_DocumentPrint_PSY] PRIMARY KEY CLUSTERED ([DRId_PSY] ASC)
 );
 
