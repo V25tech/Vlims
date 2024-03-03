@@ -59,7 +59,7 @@
                         <!-- <td>{{docType?.approvedby}}</td>
                         <td>{{docType?.approvedOn| date}}</td> -->
                         <td><span class="status" [ngClass]="getStatusClass(docType['status'])">{{docType.status}} </span></td>
-                        <td class="text-center" *ngIf="access && docType?.status=='In-Progress' || 'Rejected' || 'RETURNED'"><i (click)="editdocreq(docType)" class="bi bi-pencil"></i></td>
+                        <td class="text-center" *ngIf="access && (docType?.status === 'In-Progress' || docType?.status === 'Rejected' || docType?.status === 'Returned')"><i (click)="editdocreq(docType)" class="bi bi-pencil"></i></td>
                         <td class="text-center" *ngIf="!access">
                             <i class="bi bi-lock bi-lg" 
                             [ngClass]="{'text-primary':true}"

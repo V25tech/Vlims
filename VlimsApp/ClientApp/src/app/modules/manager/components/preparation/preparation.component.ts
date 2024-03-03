@@ -58,18 +58,23 @@ export class PreparationComponent {
   }
 
   getStatusClass(status: string): string {
+    debugger
     if (status === 'In Progress') {
       return 'status-in-progress';
-    } else if (status === 'Completed') {
-      return 'status-completed';
-    } else if (status === 'Under Review') {
-      return 'status-under-review';
-    } else if (status === 'Approved') {
-      return 'status-approved';
-    } else if (status === 'Pending') {
-      return 'status-pending';
-    }else if (status === 'REVIEWED') {
+    } else if (status === 'Rejected') {
+      return 'status-reject';
+    }else if (status === 'Returned') {
+      return 'status-return';
+    }
+    else if (status === 'In-Progress') {
       return 'status-in-progress';
+    }else if (status === 'IN-PROGRESS') {
+      return 'status-in-progress';
+    }
+     else if (status === 'Re-Initiated') {
+      return 'status-under-review';
+    }else if (status === 'Approved') {
+      return 'status-approved';
     } else {
       return '';
     }
@@ -84,9 +89,9 @@ export class PreparationComponent {
         return true;
         case 'APPROVED':
         return true;
-        case 'Returned':
-        return false;
         case 'Rejected':
+        return false;
+        case 'Returned':
         return false;
       default:
         return false;

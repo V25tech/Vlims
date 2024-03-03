@@ -99,6 +99,7 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentrequestConstants.ApprovalsCount, Value = documentrequest.ApprovalsCount });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentrequestConstants.AssigntoGroup, Value = documentrequest.AssigntoGroup });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentrequestConstants.ModifiedBy, Value = documentrequest.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentrequestConstants.Workflow, Value = documentrequest.Workflow });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentrequestConstants.Status, Value = documentrequest.Status });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentrequestConstants.USP_Documentrequest_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);

@@ -59,7 +59,12 @@ export class AddRequestComponent {
       this.getworkflowitems();
     }
     else if (segments.slice(-1).toString() == 'edit') {
+      if(this.commonsvc.request.status=='Rejected' || this.commonsvc.request.status=='Returned'){
+          this.editMode=false;
+      }
+      else{
       this.editMode = true;
+      }
       if (this.commonsvc.request == null) {
         this.location.back();
       }
@@ -105,7 +110,7 @@ export class AddRequestComponent {
 
   saveRequest() {
     debugger
-    if (this.editMode) {
+    if (this.editMode || this.request.status=='Rejected' || this.request.status=='Returned') {
       this.toastMsg = 'Updated';
       this.request.status = 'In-Progress';
       this.updateRequest();
@@ -140,6 +145,7 @@ export class AddRequestComponent {
   }
 
   updateRequest() {
+    debugger
     if (this.viewMode && this.request.status != 'Rejected' && this.request.status != 'Returned') {
       this.request.modifiedBy = this.commonsvc.createdBy;
       this.request.status = this.finalStatus;

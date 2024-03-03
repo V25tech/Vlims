@@ -5,6 +5,7 @@
 @ApprovalsCount_PSY Int,
 @AssigntoGroup_PSY NVarChar(50),
 @ModifiedBy_PSY NVarChar(100),
+@Workflow_PSY NVarchar(250),
 @Status_PSY Nvarchar(100)
  AS 
  BEGIN 
@@ -25,12 +26,12 @@ department_PSY=@department_PSY,
 Purpose_PSY=@Purpose_PSY,
 ApprovalsCount_PSY=@ApprovalsCount_PSY,
 AssigntoGroup_PSY=@AssigntoGroup_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRID_PSY] = @DRID_PSY ;  
+ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,Workflow_PSY=@Workflow_PSY WHERE  [DRID_PSY] = @DRID_PSY ;  
 END
 ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
 BEGIN
 --reject functionality is reset values and update status as rejected
-UPDATE [dbo].[Documentrequest_PSY] SET documenttype_PSY=NULL,department_PSY=null,Purpose_PSY=null,ApprovalsCount_PSY=null,
+UPDATE [dbo].[Documentrequest_PSY] SET documenttype_PSY=NULL,Workflow_PSY=null,
 AssigntoGroup_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRID_PSY] = @DRID_PSY ;
 --once rejected delete workitems assigned to users
 DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DRID_PSY
@@ -48,6 +49,7 @@ END
 
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
+UPDATE Documentrequest_PSY SET Status_PSY=@Status_PSY WHERE DRID_PSY=@DRID_PSY
 DECLARE @nvarcharValue NVARCHAR(50);DECLARE @WORKFLOW NVARCHAR(50);
 --SET @nvarcharValue = CAST(@DRID_PSY AS NVARCHAR(50));
 SET @WORKFLOW=(SELECT Workflow_PSY FROM Documentrequest_PSY WHERE DRID_PSY=@DRID_PSY)
@@ -58,19 +60,16 @@ VALUES('1',NULL,NULL,@documenttype_PSY,@department_PSY,null,null,NUll,NULL,
 @CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',NULL,@DRID_PSY);
 SELECT @ID = @@IDENTITY;
 
---INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
--- SELECT @documenttype_PSY,'Preparation','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@WORKFLOW AND WSR.Type='Review'
-
--- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
--- SELECT @documenttype_PSY,'Preparation','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@WORKFLOW AND WSR.Type='Approve'
-
 END
 
---IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
---BEGIN
---DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DRID_PSY
---DELETE FROM Documentrequest_PSY WHERE DRID_PSY=@DRID_PSY
---END
+IF(@ISWORKITEMS=1)
+BEGIN
+INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY)
+ SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@DRID_PSY,WSR.Type,0,@CREATED_BY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Review'
+
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY)
+ SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@DRID_PSY,WSR.Type,0,@CREATED_BY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Approve'
+END
 
 select @DRID_PSY; 
   
