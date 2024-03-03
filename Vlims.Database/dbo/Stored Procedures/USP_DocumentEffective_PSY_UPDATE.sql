@@ -62,7 +62,8 @@ END
 
 IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
-EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DEID_PSY,@ModifiedBy_PSY,'EFFECTIVE'
+UPDATE DocumentEffective_PSY SET Status_PSY=@Status_PSY WHERE DEID_PSY=@DEID_PSY
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DEID_PSY,@ModifiedBy_PSY,'EFFECTIVE',@ParentGuid_PSY
 END
 
 DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentEffective_PSY where DEID_PSY=@DEID_PSY)
@@ -70,7 +71,7 @@ DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentE
 
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
-
+UPDATE DocumentEffective_PSY SET Status_PSY=@Status_PSY WHERE DEID_PSY=@DEID_PSY
 DECLARE @ID INT DECLARE @printID int,@version int=0
 SET @version=(SELECT COUNT(*)+1 FROM AdditionalTask_PSY WHERE Refrence_PSY=@referenceId AND Status_PSY='APPROVED')
 INSERT INTO AdditionalTask_PSY(DocumentEffective_ID,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Version,Refrence_PSY,GUID_AD,ReferenceGuid_PSY)

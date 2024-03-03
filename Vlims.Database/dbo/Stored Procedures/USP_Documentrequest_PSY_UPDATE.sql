@@ -45,7 +45,8 @@ END
 
 IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
-EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DRID_PSY,@ModifiedBy_PSY,'REQUEST'
+UPDATE Documentrequest_PSY SET Status_PSY=@Status_PSY WHERE DRID_PSY=@DRID_PSY
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DRID_PSY,@ModifiedBy_PSY,'REQUEST',@ParentGuid
 END
 
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
