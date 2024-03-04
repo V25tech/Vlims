@@ -48,7 +48,8 @@ END
 ELSE IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
 BEGIN
 --return functionality is just update status as 'return'
- UPDATE [dbo].[DocumentEffective_PSY] SET ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DEID_PSY] = @DEID_PSY ;
+ UPDATE [dbo].[DocumentEffective_PSY] SET Workflow_PSY=null, ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DEID_PSY] = @DEID_PSY ;
+ DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid_PSY;
 END
 
 IF(@ISWORKITEMS=1)
