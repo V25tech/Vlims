@@ -6,6 +6,7 @@ import { DocumentPrintConfiguration, DocumentRequestConfiguration } from '../../
 import { DocumentPrintService } from '../../../services/document-print.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { DocumentPreperationService } from '../../../services/document-preperation.service';
+import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 
 @Component({
   selector: 'app-document-print',
@@ -27,7 +28,9 @@ export class DocumentPrintComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
-  constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService, private docservice: DocumentPreperationService, private router: Router) { }
+  constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService, 
+    private templatesvc:DocumentTemplateServiceService,
+    private docservice: DocumentPreperationService, private router: Router) { }
 
   navigateToAddPrint(): void {
     this.router.navigate(['/print/add']);
@@ -73,6 +76,51 @@ export class DocumentPrintComponent implements OnInit {
     this.commonsvc.printConfig = request;
     this.router.navigate(['/print/edit']);
   }
-
+  print(request: DocumentPrintConfiguration){
+    this.templatesvc.getTemplate(request.template,false).subscribe((data:any)=>{
+      debugger
+      this.exportFiles(data,"docx",request.template,"docx");
+    });
+  }
+  exportFiles(
+    fileContent: any,
+    fileType: string,
+    fileName: string,
+    fileExtension?: string
+  ) {
+    debugger
+    // Convert base64 content to Uint8Array
+    const binary_string = window.atob(fileContent);
+    const len = binary_string.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) {
+      bytes[i] = binary_string.charCodeAt(i);
+    }
+  
+    // Create a new window to display the content
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      // Create a Blob from the bytes
+      const blob = new Blob([bytes], {
+        type: fileType ? fileType : 'application/octet-stream'
+      });
+  
+      // Create a URL for the Blob
+      const url = window.URL.createObjectURL(blob);
+  
+      // Wait for the new window to load
+      printWindow.onload = () => {
+        // Print the content
+        printWindow.print();
+        // Close the window after printing (optional)
+        // printWindow.close();
+      };
+  
+      // Set the content of the new window to the Blob URL
+      printWindow.location.href = url;
+    } else {
+      console.error('Failed to open print window');
+    }
+  }
 }
 

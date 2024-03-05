@@ -108,6 +108,7 @@ export class DocumentRevisionRequestsComponent implements OnInit{
     link.click();
     window.URL.revokeObjectURL(link.href);
   }
+  
   hasValue(value:any) {
     let variables = {};
     //  if(value===0)
