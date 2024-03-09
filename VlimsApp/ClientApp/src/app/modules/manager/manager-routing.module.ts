@@ -14,6 +14,7 @@ import { ReviewExistingDocumentRequestComponent } from './components/review-exis
 import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
 import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
 import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
+import { ExistingDocumentsComponent } from './components/existing-documents/existing-documents.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
@@ -131,6 +132,11 @@ const routes: Routes = [
   {
     path: 'revision/view/:requestId/:workId/:type',
     component: ReviewRevisionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'existingdocuments',
+    component: ExistingDocumentsComponent,
     canActivate: [AuthGuard],
   },
 ];

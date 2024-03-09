@@ -23,6 +23,8 @@ import { ReviewExistingDocumentRequestComponent } from './components/review-exis
 import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
 import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
 import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
+import { ExistingDocumentsService } from './services/existing-documents.service';
+import { ExistingDocumentsComponent } from './components/existing-documents/existing-documents.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { ReviewRevisionComponent } from './components/review-revision/review-rev
     ExistingDocumentRequestComponent,
     ReviewExistingDocumentRequestComponent,
     DocumentRevisionRequestsComponent,
-    ReviewRevisionComponent
+    ReviewRevisionComponent,
+    ExistingDocumentsComponent
   ],
   imports: [
     CommonModule,
@@ -51,5 +54,6 @@ import { ReviewRevisionComponent } from './components/review-revision/review-rev
     DropdownModule,
     ToastModule,
   ],
+  providers: [ExistingDocumentsService]
 })
 export class ManagerModule { }
