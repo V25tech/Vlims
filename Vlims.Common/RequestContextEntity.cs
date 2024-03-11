@@ -10,7 +10,7 @@ namespace Vlims.Common
         private int pagenumberField = 1;
 
         private int pagesizeField = 9999;
-        public string userName { get; set; }
+        public string? userName { get; set; }
 
         public int PageNumber
         {

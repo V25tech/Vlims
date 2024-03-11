@@ -29,7 +29,6 @@ export class ExistingDocumentRequestComponent implements OnInit {
   pdfBytes: Uint8Array | undefined;
   pdfUrl: string | null = null;
   modalRef: BsModalRef | undefined;
-  isDataLoaded: boolean = false;
 
   constructor(private router: Router, private spinner: NgxSpinnerService, private commonsvc: CommonService, private existingDocReqservice: ExistingDocumentRequestService
     , private sanitizer: DomSanitizer, private modalService: BsModalService) { }
@@ -55,7 +54,6 @@ export class ExistingDocumentRequestComponent implements OnInit {
       this.existingDocDatasource = data.response;
       if (this.existingDocDatasource.length < 10)
         this.currentPage = 10;
-      this.isDataLoaded = true;
       this.spinner.hide();
     }, er => {
       console.error('An error occurred:', er);
@@ -83,7 +81,6 @@ export class ExistingDocumentRequestComponent implements OnInit {
 
  
   previewtemplate(template: TemplateRef<any>, docInfo: ExistingDocumentRequest): void {
-    this.spinner.show(); let id = 0;
     this.spinner.show();
     this.existingDocReqservice.preview(docInfo).subscribe((data: any) => {
       this.pdfBytes = data;

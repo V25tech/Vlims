@@ -9,6 +9,7 @@ namespace Vlims.DocumentManager.Entities.Constants
     public class DocumentsDatabaseConstants
     {
         #region Exisiting Documents
+        public const string USP_ExistingDocuments_PSY_GET_ALL = "dbo.USP_ExistingDocuments_PSY_GET_ALL";
         public static string Id = "ID_PSY";
         public static string DocumentNo = "documentno_PSY";
         public static string DocumentName = "documenttitle_PSY";
