@@ -41,7 +41,7 @@ export class ExistingDocumentsComponent implements OnInit {
   getExistingDocuments() {
     try {
       this.spinner.show();
-      let objrequest: RequestContext1 = { PageNumber: 1, PageSize: 50, UserName: "admin", Id:0 };
+      let objrequest: RequestContext1 = { PageNumber: 1, PageSize: 50, UserName:localStorage.getItem("username"), Id:0 };
 
       this.existdocService.getAllDocuments(objrequest).subscribe(data => {
         this.documents = data;
@@ -55,17 +55,18 @@ export class ExistingDocumentsComponent implements OnInit {
     }
   }
   editdoc(doc: any) {
-    this.router.navigate(["", { querParams: { id: doc.id }, relativeTo: this.access }]);
+    this.router.navigate(["revision/edit/" + doc.id], { queryParams: { order: 'popular' } });
   }
-  previewtemplate(template: TemplateRef<any>): void {
+  previewtemplate(template: TemplateRef<any>, docInfo: any): void {
     this.spinner.show();
-    //this.existingDocReqservice.preview(docInfo).subscribe((data: any) => {
-    //  this.pdfBytes = data;
-    //  this.spinner.hide();
-    //  this.openViewer(template);
-    //}, er => {
-    //  this.spinner.hide();
-    //});
+    docInfo.edrId = docInfo.id;
+    this.existdocService.preview(docInfo).subscribe((data: any) => {
+      this.pdfBytes = data;
+      this.spinner.hide();
+      this.openViewer(template);
+    }, er => {
+      this.spinner.hide();
+    });
   }
   openViewer(template: TemplateRef<any>): void {
 

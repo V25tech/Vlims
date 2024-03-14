@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpbaseService } from 'src/app/shared/httpbase.service';
-import { RequestContext } from '../../../models/model';
+import { ExistingDocumentRequest, RequestContext } from '../../../models/model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +13,7 @@ export class ExistingDocumentsService {
     return this.http.postJsonLogin(objrequest, "api/documents", this.type);
 
   }
-
+  preview(objrequest: ExistingDocumentRequest) {
+    return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/preview", this.type);
+  }
 }

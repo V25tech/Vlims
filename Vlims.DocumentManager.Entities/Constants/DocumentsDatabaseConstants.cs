@@ -30,6 +30,8 @@ namespace Vlims.DocumentManager.Entities.Constants
         public static string Documentmanagerid = "Documentmanagerid_PSY";
         public static string EffectiveDate = "effectivedate_PSY";
         public static string ReviewDate = "reviewdate_PSY";
+        public static string TableName = "TableName_PSY";
+
         #endregion
     }
 }

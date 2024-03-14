@@ -40,7 +40,6 @@ export class ExistingDocumentRequestComponent implements OnInit {
   existingDocDatasource: ExistingDocumentRequest[] = [];
 
   ngOnInit() {
-    debugger;
     this.access = this.commonsvc.getUserRoles()?.docrepository ?? false;
     this.getdocumentrequest();    
    // this.existingDocDatasource = this.getDummyData();
@@ -62,7 +61,6 @@ export class ExistingDocumentRequestComponent implements OnInit {
   }
 
   editExistingDoc(existingDocReq: ExistingDocumentRequest) {
-    debugger
     this.commonsvc.existingDocReq = existingDocReq;
     this.router.navigate(['/existingdoc/edit/' + existingDocReq.edrId]);
   }

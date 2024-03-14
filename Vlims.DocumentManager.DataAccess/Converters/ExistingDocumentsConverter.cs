@@ -55,17 +55,20 @@ namespace Vlims.DocumentManager.DataAccess.Converters
                         document.DocumentType = Convert.ToString(row[DocumentsDatabaseConstants.DocumentType]);
                         document.Department = Convert.ToString(row[DocumentsDatabaseConstants.Department]);
                         document.CreatedBy = Convert.ToString(row[DocumentsDatabaseConstants.CreatedBy]);
-                        document.CreatedOn = Convert.ToString(row[DocumentsDatabaseConstants.CreatedOn]);
+                        document.CreatedOn = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.CreatedOn]);
                         document.ModifiedBy = Convert.ToString(row[DocumentsDatabaseConstants.ModifiedBy]);
-                        document.ModifiedOn = Convert.ToString(row[DocumentsDatabaseConstants.ModifiedOn]);
-                        //document.Status = Convert.ToString(row[DocumentsDatabaseConstants.Status]);
+                        document.ModifiedOn = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.ModifiedOn]);
+                        document.EffectiveDate = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.EffectiveDate]);
+                        document.ReviewDate = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.ReviewDate]);
+                        document.EntityName = Convert.ToString(row[DocumentsDatabaseConstants.TableName]);
+                        document.Document = Convert.ToString(row[DocumentsDatabaseConstants.Document]);
                 }
                 return document;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
     }
