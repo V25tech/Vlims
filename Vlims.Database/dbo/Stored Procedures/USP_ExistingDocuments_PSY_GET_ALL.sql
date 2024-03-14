@@ -3,26 +3,27 @@
  BEGIN 
  BEGIN TRY 
  
-  SELECT DRId_PSY as ID_PSY,
-	Documentmanagerid_PSY,
-	documenttitle_PSY,
-	documentno_PSY,
-	documenttype_PSY,
-	department_PSY,
-	document_PSY,
-	EffectiveDate_PSY,
-	Reviewdate_PSY,
-	CreatedBy_PSY,
-	CreatedDate_PSY,
-	ModifiedBy_PSY,
-	ModifiedDate_PSY,
-	Status_PSY,
-	Refrence_PSY
-    ,count(*) over() as TotalRows
-  FROM [dbo].[DocumentRevision_PSY] WITH (NOLOCK) where Status_PSY ='Approved'
-	 Order by ModifiedDate_PSY DESC  
-	 OFFSET @PageSize * (@PageNumber - 1) ROWS 
-	  FETCH NEXT @PageSize ROWS ONLY; 
+  SELECT ATID_PSY as ID_PSY,
+AT.DocumentEffective_ID,
+AT.CreatedBy_PSY,
+AT.CreatedDate_PSY,
+AT.ModifiedBy_PSY,
+AT.ModifiedDate_PSY,
+--AT.Status_PSY,
+DP.template_PSY,
+AT.GUID_AD AS document_PSY,
+'AT' as TableName_PSY,
+
+Version,AT.Refrence_PSY,
+ count(*) over() as TotalRows  ,
+ de.document_PSY,de.department_PSY,de.documentno_PSY,de.documenttitle_PSY,de.documenttype_PSY,de.EffectiveDate_PSY,de.Reviewdate_PSY,DP.wokflow_PSY
+
+ FROM [dbo].[AdditionalTask_PSY] AT WITH (NOLOCK) inner join DocumentEffective_PSY de on AT.DocumentEffective_ID=de.DEID_PSY
+ INNER JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY AND DP.Status_PSY='APPROVED' where AT.CreatedBy_PSY = @UserName
+ 
+ Order by AT.CreatedDate_PSY DESC  
+ OFFSET @PageSize * (@PageNumber - 1) ROWS 
+  FETCH NEXT @PageSize ROWS ONLY; 
 
 
  SELECT EDRId_PSY as ID_PSY,
@@ -31,16 +32,17 @@ documenttitle_PSY,
 documenttype_PSY,
 department_PSY,
 document_PSY,
-sampletemplate_PSY as Template_PSY,
+Effectivedate_PSY,
+Reviewdate_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-effectivedate_PSY,
-reviewdate_PSY 
+'Effective' as TableName_PSY
+
  ,count(*) over() as TotalRows 
- FROM [dbo].[ExistingDocumentRequest_PSY] WITH (NOLOCK) 
- Order by [EDRId_PSY] DESC
+ FROM [dbo].ExistingDocumentRequest_PSY WITH (NOLOCK) where CreatedBy_PSY = @UserName
+ Order by EDRId_PSY DESC
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 
@@ -48,7 +50,3 @@ reviewdate_PSY
   SELECT ERROR_MESSAGE(); 
  END CATCH 
  END
-
- select * from dbo.workitems_PSY
-
- select * from dbo.DocumentPreparation_PSY

@@ -122,9 +122,9 @@ export class ReviewEffectiveComponent {
   }
 
   saveEffective() {
-    debugger;
     this.effectivedate= new Date(this.effective.effectiveDate);
-    this.reviewdate= new Date (this.effective.reviewDate);
+    this.reviewdate = new Date(this.effective.reviewDate);
+
       if (!this.effectivedate || !this.reviewdate) 
       {
          null;
@@ -138,6 +138,9 @@ export class ReviewEffectiveComponent {
     if (this.viewMode && this.effective.Status != 'Rejected' && this.effective.Status != 'Returned') {
       this.effective.ModifiedBy = this.commonsvc.createdBy;
       this.effective.Status = this.finalStatus;
+    } else if ((!this.viewMode || this.editMode) && (this.effective.Status == 'Rejected' || this.effective.Status == "Returned")) {
+      this.effective.ModifiedBy = this.commonsvc.createdBy;
+      this.effective.Status = "InProgress";
     }
     this.toastMsg = this.toastMsg ?? 'Updated'
     if (!this.isButtonDisabled) {
