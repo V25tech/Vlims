@@ -19,7 +19,7 @@ export class ExistingDocumentRequestService {
   adddExistingDocument(objrequest: ExistingDocumentRequest) {
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/savedocumenteffective", this.type);
   }
-  UpdateExistingDocument(objrequest: ExistingDocumentRequest) {   
+  UpdateExistingDocument(objrequest: any) {   
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/updatedocumenteffective", this.type);
   }
   

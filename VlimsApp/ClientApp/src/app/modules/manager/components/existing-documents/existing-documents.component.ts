@@ -55,7 +55,7 @@ export class ExistingDocumentsComponent implements OnInit {
     }
   }
   editdoc(doc: any) {
-    this.router.navigate(["revision/edit/" + doc.id], { queryParams: { order: 'popular' } });
+    this.router.navigate(["revision/edit/" + doc.id], { queryParams: { entityName: doc.entityName } });
   }
   previewtemplate(template: TemplateRef<any>, docInfo: any): void {
     this.spinner.show();

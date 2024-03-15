@@ -1,6 +1,6 @@
 import { Component, TemplateRef } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/common.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DocumentAdditionalTasks, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
@@ -14,6 +14,7 @@ import { DocumentPreperationService } from 'src/app/modules/services/document-pr
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
+import { ExistingDocumentRequestService } from '../../../services/existing-document-request.service';
 
 @Component({
   selector: 'app-review-revision',
@@ -40,7 +41,7 @@ export class ReviewRevisionComponent {
   safePdfDataUrl: SafeResourceUrl | undefined;
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
-
+  entityName: string|null = null;
   constructor(private router: Router, private location: Location, private toastr: ToastrService, private route: ActivatedRoute,
     private spinner: NgxSpinnerService, private commonsvc: CommonService,
     private workitemssvc: WorkitemsService,
@@ -48,8 +49,9 @@ export class ReviewRevisionComponent {
     private docPreperationService: DocumentPreperationService,
     private documentRevisionService: DocumentRevisionService,
     private modalService: BsModalService, private sanitizer: DomSanitizer,
-    private templateService:DocumentTemplateServiceService,
-    private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService) { }
+    private templateService: DocumentTemplateServiceService,
+    private deptservice: DepartmentconfigurationService, private doctypeserv: DocumentTypeServiceService
+    , private activate: ActivatedRoute, private existingDocReqservice: ExistingDocumentRequestService) { }
 
   ngOnInit() {
     const user = localStorage.getItem("username");
@@ -65,14 +67,27 @@ export class ReviewRevisionComponent {
       this.editMode = true;
       if (this.commonsvc.revision.atid) {
         this.revision = this.commonsvc.revision;
-        this.workflownamee=this.revision.workflow;
+        this.workflownamee = this.revision.workflow;
         this.effectiveDate = this.toDate(this.revision.effectiveDate);
         this.reviewDate = this.toDate(this.revision.reviewDate);
       }
-      else
-        this.getDocumentRevision(Number.parseInt(this.id));
+      else {
+        this.activate.queryParams.subscribe((params: Params) => {
+          if (params != null) {
+            if (params['entityName']) {
+              this.entityName = params['entityName'];
+              if (this.entityName?.toLowerCase() == 'at') {
+                this.getDocumentRevision(Number.parseInt(this.id));
+              } else {
+                this.getExistingDocumentById(this.id);
+              }
+            }
+          }
+        })
+      }
     }
   }
+
   getbyId(arg0: number) {
     this.spinner.show();
     return this.documentRevisionService.getbyId(arg0).subscribe((data: any) => {
@@ -137,7 +152,6 @@ export class ReviewRevisionComponent {
     });
   }
   saveRequest() {
-    debugger
     this.revision.status = "Revision";
     //if (this.revision.workflow.toLocaleLowerCase() != this.workflownamee.toLocaleLowerCase()) {
       if (this.editMode || this.viewMode) {
@@ -183,16 +197,29 @@ export class ReviewRevisionComponent {
     this.spinner.show();
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
-    this.documentRevisionService.updatedocrevconfig(this.revision).subscribe(res => {
-      this.commonsvc.revision = new DocumentAdditionalTasks();
-      this.toastr.success('Document Revision Succesfull!', 'Saved.!');
-      this.spinner.hide();
-      this.location.back();
-      this.isButtonDisabled=false;
-    }, er => {
-      console.log(er);
-      this.spinner.hide();
-    });
+      if (this.entityName?.toLowerCase() == 'at') {
+        this.documentRevisionService.updatedocrevconfig(this.revision).subscribe(res => {
+          this.commonsvc.revision = new DocumentAdditionalTasks();
+          this.toastr.success('Document Revision Succesfull!', 'Saved.!');
+          this.spinner.hide();
+          this.location.back();
+          this.isButtonDisabled = false;
+
+        }, er => {
+          console.log(er);
+          this.spinner.hide();
+        });
+      } else {
+        this.existingDocReqservice.UpdateExistingDocument(this.revision).subscribe(res => {
+          //this.commonsvc.existingDocReq = new ExistingDocumentRequest();
+          this.location.back();
+          this.spinner.hide();
+          this.toastr.success('Document details update suscessfully', 'Updated.!');
+        }, er => {
+          console.log(er);
+          this.spinner.hide();
+        });
+      }
   }
   }
 
@@ -206,7 +233,6 @@ export class ReviewRevisionComponent {
       this.commonsvc.createdBy = user;
     }
     return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
-      debugger
       this.workitems = data.Response;
       if (this.workitems.length > 0) {
         this.workitems = this.workitems.filter(p => p.ReferenceId == this.requestId);
@@ -280,5 +306,22 @@ export class ReviewRevisionComponent {
   closeModel() {
     if (this.modalRef)
       this.modalRef.hide();
+  }
+  getExistingDocumentById(id: string) {
+    try {
+      this.spinner.show();
+      this.existingDocReqservice.GetExistingDocumentById(id).subscribe((data: any) => {
+        this.revision = data;
+        this.workflownamee = this.revision.workflow;
+        this.effectiveDate = this.toDate(this.revision.effectiveDate);
+        this.reviewDate = this.toDate(this.revision.reviewDate);
+        this.spinner.hide();
+      }, er => {
+        this.spinner.hide();
+        console.log(er);
+      });
+    } catch (e) {
+      this.spinner.hide();
+    }
   }
 }
