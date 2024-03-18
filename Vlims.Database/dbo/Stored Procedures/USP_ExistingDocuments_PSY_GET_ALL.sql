@@ -19,7 +19,7 @@ Version,AT.Refrence_PSY,
  de.document_PSY,de.department_PSY,de.documentno_PSY,de.documenttitle_PSY,de.documenttype_PSY,de.EffectiveDate_PSY,de.Reviewdate_PSY,DP.wokflow_PSY
 
  FROM [dbo].[AdditionalTask_PSY] AT WITH (NOLOCK) inner join DocumentEffective_PSY de on AT.DocumentEffective_ID=de.DEID_PSY
- INNER JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY AND DP.Status_PSY='APPROVED' where AT.CreatedBy_PSY = @UserName
+ INNER JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY AND DP.Status_PSY='APPROVED' --where AT.CreatedBy_PSY = @UserName
  
  Order by AT.CreatedDate_PSY DESC  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
@@ -41,7 +41,7 @@ ModifiedDate_PSY,
 'Effective' as TableName_PSY
 
  ,count(*) over() as TotalRows 
- FROM [dbo].ExistingDocumentRequest_PSY WITH (NOLOCK) where CreatedBy_PSY = @UserName
+ FROM [dbo].ExistingDocumentRequest_PSY WITH (NOLOCK) --where CreatedBy_PSY = @UserName
  Order by EDRId_PSY DESC
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 

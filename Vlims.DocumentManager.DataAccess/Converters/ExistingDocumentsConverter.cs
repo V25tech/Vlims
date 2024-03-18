@@ -36,7 +36,7 @@ namespace Vlims.DocumentManager.DataAccess.Converters
                 }
                 return documents;
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 
 				throw;
@@ -59,8 +59,15 @@ namespace Vlims.DocumentManager.DataAccess.Converters
                         document.ModifiedBy = Convert.ToString(row[DocumentsDatabaseConstants.ModifiedBy]);
                         document.ModifiedOn = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.ModifiedOn]);
                         document.EffectiveDate = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.EffectiveDate]);
+                    if (Convert.ToString(row[DocumentsDatabaseConstants.ReviewDate]) == "NA")
+                    {
+                        document.ReviewDate = null;
+                    }
+                    else
+                    {
                         document.ReviewDate = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.ReviewDate]);
-                        document.EntityName = Convert.ToString(row[DocumentsDatabaseConstants.TableName]);
+                    }
+                    document.EntityName = Convert.ToString(row[DocumentsDatabaseConstants.TableName]);
                         document.Document = Convert.ToString(row[DocumentsDatabaseConstants.Document]);
                 }
                 return document;
