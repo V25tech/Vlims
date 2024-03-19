@@ -12,7 +12,7 @@ AT.ModifiedDate_PSY,
 --AT.Status_PSY,
 DP.template_PSY,
 AT.GUID_AD AS document_PSY,
-'AT' as TableName_PSY,
+'Revision Document' as TableName_PSY,
 
 Version,AT.Refrence_PSY,
  count(*) over() as TotalRows  ,
@@ -38,7 +38,7 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-'Effective' as TableName_PSY
+'Existing Document' as TableName_PSY
 
  ,count(*) over() as TotalRows 
  FROM [dbo].ExistingDocumentRequest_PSY WITH (NOLOCK) --where CreatedBy_PSY = @UserName

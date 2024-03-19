@@ -41,10 +41,18 @@ export class ExistingDocumentsComponent implements OnInit {
   getExistingDocuments() {
     try {
       this.spinner.show();
-      let objrequest: RequestContext1 = { PageNumber: 1, PageSize: 50, UserName:localStorage.getItem("username"), Id:0 };
+      let objrequest: RequestContext1 = { PageNumber: 1, PageSize: 1000, UserName:localStorage.getItem("username"), Id:0 };
 
-      this.existdocService.getAllDocuments(objrequest).subscribe(data => {
-        this.documents = data;
+      this.existdocService.getAllDocuments(objrequest).subscribe((data: any) => {
+        if (data != null && data.exisitingDocuments.length > 0 && data != undefined) {
+          data.exisitingDocuments.forEach((item: any) => {
+            item.effectiveDate = this.commonsvc.setDate(item.effectiveDate);
+            if (item.entityName.toLowerCase() == 'revision document') {
+              item.reviewDate = this.commonsvc.setDate(item.reviewDate);
+            }
+          })
+          this.documents = data;
+        }       
         this.spinner.hide();
       }, err => {
         this.spinner.hide();

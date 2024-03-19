@@ -59,15 +59,21 @@ namespace Vlims.DocumentManager.DataAccess.Converters
                         document.ModifiedBy = Convert.ToString(row[DocumentsDatabaseConstants.ModifiedBy]);
                         document.ModifiedOn = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.ModifiedOn]);
                         document.EffectiveDate = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.EffectiveDate]);
-                    if (Convert.ToString(row[DocumentsDatabaseConstants.ReviewDate]) == "NA")
-                    {
-                        document.ReviewDate = null;
-                    }
-                    else
-                    {
-                        document.ReviewDate = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.ReviewDate]);
-                    }
-                    document.EntityName = Convert.ToString(row[DocumentsDatabaseConstants.TableName]);
+
+                        if (Convert.ToString(row[DocumentsDatabaseConstants.TableName]) == "Revision Document")
+                        {
+                            document.ReviewDate = Convert.ToDateTime(DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.ReviewDate]));
+                        }
+                        else
+                        {
+                            document.ReviewDate = Convert.ToString(row[DocumentsDatabaseConstants.ReviewDate]);
+                        }
+                    //else
+                    //{
+                    //document.EffectiveDate = DatatypeConverter.SetDateTime(Convert.ToDateTime(row[DocumentsDatabaseConstants.EffectiveDate]));
+                    //document.EffectiveDate = Convert.ToString(row[DocumentsDatabaseConstants.EffectiveDate]);
+                    //}
+                        document.EntityName = Convert.ToString(row[DocumentsDatabaseConstants.TableName]);
                         document.Document = Convert.ToString(row[DocumentsDatabaseConstants.Document]);
                 }
                 return document;

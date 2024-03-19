@@ -24,7 +24,7 @@ namespace Vlims.DocumentManager.Entities
         public DateTime? ModifiedOn { get; set;}
         public string? Status { get; set;}
         public DateTime? EffectiveDate { get; set; }
-        public DateTime? ReviewDate { get; set; }
+        public dynamic? ReviewDate { get; set; }
         public string? EntityName { get; set; }
         public string? Document { get; set; }
 
