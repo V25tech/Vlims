@@ -53,7 +53,7 @@ export class ExistingDocumentRequestComponent implements OnInit {
       if (data != null && data.response.length > 0 && data != undefined) {
         data.response.forEach((item: any) => {
           item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
-            item.reviewDateValue = item.reviewDate;
+          item.reviewDateValue = this.commonsvc.setDate(item.reviewDate);
         })
       }       
       this.existingDocDatasource = data.response;
