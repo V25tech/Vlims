@@ -27,7 +27,7 @@
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
         <p-table #templatesTable [value]="documents?.exisitingDocuments"
-                 [globalFilterFields]="['Documenttypename', 'documenttypeprefix', 'Description','ModifiedBy','Status']"
+                 [globalFilterFields]="['documentName', 'documentNo']"
                  tableStyleClass="table table-striped"
                  [rows]="itemsPerPage"
                  [paginator]="true"
@@ -37,7 +37,7 @@
           <ng-template pTemplate="header">
             <tr>
               <th>S.No</th>
-              <th style="width:80%">ID<p-sortIcon></p-sortIcon></th>
+              <th style="width:80%">Document No.<p-sortIcon></p-sortIcon></th>
               <!--<th pSortableColumn="documenttypeprefix" style="width:10%">Document No<p-sortIcon field="documentNo"></p-sortIcon></th>-->
               <th pSortableColumn="documentName" style="width:20%">Document Name<p-sortIcon field="documentName"></p-sortIcon></th>
               <th pSortableColumn="documentType" style="width:200px">Document Type<p-sortIcon field="documentType"></p-sortIcon></th>
@@ -57,8 +57,8 @@
               <td>{{doc?.documentName}}</td>
               <td>{{doc?.documentType}}</td>
               <td>{{doc?.department}}</td>
-              <td>{{doc?.effectiveDate}}</td>
-              <td>{{ doc?.reviewDate}}</td>
+              <td>{{doc?.effectiveDateValue}}</td>
+              <td>{{ doc?.reviewDateValue}}</td>
               <td>{{doc?.entityName}}</td>
               <td class="text-center" *ngIf="access">
                 <i (click)="editdoc(doc)" class="bi bi-pencil"></i>
@@ -71,7 +71,7 @@
               </td>
 
               <td>
-                <a href="javascript:void(0);" (click)="previewtemplate(template,doc)">Preview</a>
+                <a href="javascript:void(0);" (click)="previewDocument(template,doc)">Preview</a>
               </td>
             </tr>
           </ng-template>

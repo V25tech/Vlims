@@ -46,9 +46,9 @@ export class ExistingDocumentsComponent implements OnInit {
       this.existdocService.getAllDocuments(objrequest).subscribe((data: any) => {
         if (data != null && data.exisitingDocuments.length > 0 && data != undefined) {
           data.exisitingDocuments.forEach((item: any) => {
-            item.effectiveDate = this.commonsvc.setDate(item.effectiveDate);
-            if (item.entityName.toLowerCase() == 'revision document') {
-              item.reviewDate = this.commonsvc.setDate(item.reviewDate);
+            item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
+            if (item.entityName.toLowerCase() == 'new document') {
+              item.reviewDateValue = this.commonsvc.setDate(item.reviewDate);
             }
           })
           this.documents = data;
@@ -65,6 +65,15 @@ export class ExistingDocumentsComponent implements OnInit {
   editdoc(doc: any) {
     this.router.navigate(["revision/edit/" + doc.id], { queryParams: { entityName: doc.entityName } });
   }
+
+  previewDocument(template: TemplateRef<any>, docInfo: any) {
+    if (docInfo.entityName.toLowerCase() == 'new document') {
+      this.previewRevisionDocument(template, docInfo)
+    } else {
+      this.previewtemplate(template, docInfo);
+    }
+  }
+
   previewtemplate(template: TemplateRef<any>, docInfo: any): void {
     this.spinner.show();
     docInfo.edrId = docInfo.id;
@@ -101,5 +110,15 @@ export class ExistingDocumentsComponent implements OnInit {
   closeModel() {
     if (this.modalRef)
       this.modalRef.hide();
+  }
+  previewRevisionDocument(template: TemplateRef<any>, docInfo: any) {
+    this.spinner.show();
+    this.existdocService.getTemplate(docInfo.template).subscribe((data: any) => {
+      this.pdfBytes = data;
+      this.spinner.hide();
+      this.openViewer(template);
+    }, (error: any) => {
+      this.spinner.hide();
+    });
   }
 }

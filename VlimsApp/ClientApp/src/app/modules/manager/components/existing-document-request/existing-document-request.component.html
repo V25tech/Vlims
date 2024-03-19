@@ -57,10 +57,10 @@
                       <td>{{existingdoc?.documentno}}</td>
                       <td>{{existingdoc?.documenttype}}</td>
                       <td>{{existingdoc?.department}}</td>
-                      <td>{{existingdoc?.effectiveDate | date:'dd/MM/yyyy'}}</td>
+                      <td>{{existingdoc?.effectiveDateValue}}</td>
                       <!-- <td *ngIf ="existingdoc?.reviewDate=='1/1/1900 12:00:00 AM'">NA</td>
                       <td *ngIf="existingdoc?.reviewDate!='1/1/1900 12:00:00 AM'">{{existingdoc?.reviewDate| date}}</td> -->
-                      <td >{{existingdoc?.reviewDate | date:'dd/MM/yyyy'}}</td>
+                      <td >{{existingdoc?.reviewDateValue}}</td>
                       <!-- <td>{{existingdoc?.approvedby}}</td>
                       <td>{{existingdoc?.approvedOn| date}}</td> -->
                       <td class="text-center" *ngIf="access">

@@ -76,7 +76,7 @@ export class ReviewRevisionComponent {
           if (params != null) {
             if (params['entityName']) {
               this.entityName = params['entityName'];
-              if (this.entityName?.toLowerCase() == 'at') {
+              if (this.entityName?.toLowerCase() == 'new document') {
                 this.getDocumentRevision(Number.parseInt(this.id));
               } else {
                 this.getExistingDocumentById(this.id);
@@ -197,7 +197,7 @@ export class ReviewRevisionComponent {
     this.spinner.show();
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
-      if (this.entityName?.toLowerCase() == 'at') {
+      if (this.entityName?.toLowerCase() == 'new document') {
         this.documentRevisionService.updatedocrevconfig(this.revision).subscribe(res => {
           this.commonsvc.revision = new DocumentAdditionalTasks();
           this.toastr.success('Document Revision Succesfull!', 'Saved.!');

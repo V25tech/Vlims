@@ -16,4 +16,7 @@ export class ExistingDocumentsService {
   preview(objrequest: ExistingDocumentRequest) {
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/preview", this.type);
   }
+  getTemplate(templte: string, ispdf: boolean = true, type = 'master') {
+    return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&p_isPdf=${ispdf}`, type);
+  }
 }

@@ -27,6 +27,8 @@ namespace Vlims.DocumentManager.Entities
         public dynamic? ReviewDate { get; set; }
         public string? EntityName { get; set; }
         public string? Document { get; set; }
+        public string? Template { get; set; }
+
 
 
     }

@@ -125,7 +125,6 @@ export class DocumentRevisionRequestsComponent implements OnInit{
     return uuid;
   }
   previewtemplate(objtemp: DocumentRevisionRequest) {
-    debugger
     this.spinner.show();
     this.templatesvc.getTemplate(objtemp.template,false).subscribe((data: any) => {
     this.ExportFiles(data,"docx",objtemp.template,"docx");

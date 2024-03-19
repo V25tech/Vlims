@@ -60,10 +60,11 @@ namespace Vlims.DocumentManager.DataAccess.Converters
                         document.ModifiedOn = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.ModifiedOn]);
                         document.EffectiveDate = DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.EffectiveDate]);
 
-                        if (Convert.ToString(row[DocumentsDatabaseConstants.TableName]) == "Revision Document")
+                        if (Convert.ToString(row[DocumentsDatabaseConstants.TableName]) == "New Document")
                         {
                             document.ReviewDate = Convert.ToDateTime(DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.ReviewDate]));
-                        }
+                            document.Template = Convert.ToString(row[DocumentsDatabaseConstants.Template]);
+                    }
                         else
                         {
                             document.ReviewDate = Convert.ToString(row[DocumentsDatabaseConstants.ReviewDate]);

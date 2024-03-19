@@ -50,6 +50,12 @@ export class ExistingDocumentRequestComponent implements OnInit {
     this.spinner.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.existingDocReqservice.GetExistingDocumentAll(objrequest).subscribe((data: any) => {
+      if (data != null && data.response.length > 0 && data != undefined) {
+        data.response.forEach((item: any) => {
+          item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
+            item.reviewDateValue = item.reviewDate;
+        })
+      }       
       this.existingDocDatasource = data.response;
       if (this.existingDocDatasource.length < 10)
         this.currentPage = 10;

@@ -46,7 +46,7 @@ public class ExistingDocumentRequest
     private DateTime? modifieddateField;
 
     public DateTime effectiveDate { get; set; }
-    public string reviewDate { get; set; }
+    public string? reviewDate { get; set; }
 
     public int EDRId
     {
