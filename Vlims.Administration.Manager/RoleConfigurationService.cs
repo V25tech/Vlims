@@ -61,8 +61,7 @@ namespace Vlims.Administration.Manager
                 if (validationMessages.Length <= 0)
                 {
                     var result = RoleConfigurationData.SaveRoleConfiguration(roleConfiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = roleConfiguration.Role, Type = RoleConfigurationConstants.RoleNew, state = DefinitionStatus.New });
-                    return result;
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = roleConfiguration.CreatedBy, EntityName = roleConfiguration.Role, Type = RoleConfigurationConstants.RoleType, state = DefinitionStatus.New, EntityInfo = roleConfiguration, Unique = roleConfiguration.Role });
                 }
                 throw new System.Exception(validationMessages);
             }
@@ -80,6 +79,7 @@ namespace Vlims.Administration.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = RoleConfigurationData.UpdateRoleConfiguration(roleConfiguration);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = roleConfiguration.CreatedBy, EntityName = roleConfiguration.Role, Type = RoleConfigurationConstants.RoleType, state = DefinitionStatus.Modify, EntityInfo = roleConfiguration, Unique = roleConfiguration.Role });
                     return result;
                 }
                 throw new System.Exception(validationMessages);

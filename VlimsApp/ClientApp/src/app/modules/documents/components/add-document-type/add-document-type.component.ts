@@ -207,13 +207,7 @@ export class AddDocumentTypeComponent {
       this.isButtonDisabled = true;
       //this.isSubmitting = true;
   
-      if (this.isduplicateDocumentType()) {
-        // If the document type name is duplicate, show error message and stop updating
-        this.toastr.error('Document Type Name Already Exists must be unique.');
-        this.isSubmiting = false;
-        this.isButtonDisabled = false;
-        return;
-      }
+   
   
       // If the document type name is unique, proceed with updating
       this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {

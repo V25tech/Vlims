@@ -64,7 +64,8 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     var result = DocumentTemplateConfigurationData.SaveDocumentTemplateConfiguration(documentTemplateConfiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentTemplateConfiguration.Templatename, Type = DocumentTemplateConfigurationConstants.Templatename1, state = DefinitionStatus.New });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTemplateConfiguration.CreatedBy, EntityName = documentTemplateConfiguration.Templatename, Type = DocumentTemplateConfigurationConstants.TemplateType, state = DefinitionStatus.New, EntityInfo = documentTemplateConfiguration, Unique = documentTemplateConfiguration.Uniquecode });
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -83,6 +84,8 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = DocumentTemplateConfigurationData.UpdateDocumentTemplateConfiguration(documentTemplateConfiguration);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTemplateConfiguration.CreatedBy, EntityName = documentTemplateConfiguration.Templatename, Type = DocumentTemplateConfigurationConstants.TemplateType, state = DefinitionStatus.Modify, EntityInfo = documentTemplateConfiguration, Unique = documentTemplateConfiguration.Uniquecode });
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);

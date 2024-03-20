@@ -60,7 +60,8 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     var result = DocumentTypeConfigurationData.SaveDocumentTypeConfiguration(documentTypeConfiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.New });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTypeConfiguration.CreatedBy, EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.New, EntityInfo = documentTypeConfiguration, Unique = documentTypeConfiguration.documenttypeprefix });
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -71,6 +72,7 @@ namespace Vlims.DocumentMaster.Manager
             }
         }
 
+
         public bool UpdateDocumentTypeConfiguration(DocumentTypeConfiguration documentTypeConfiguration)
         {
             try
@@ -79,7 +81,7 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = DocumentTypeConfigurationData.UpdateDocumentTypeConfiguration(documentTypeConfiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.Modify });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTypeConfiguration.CreatedBy, EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.Modify, EntityInfo = documentTypeConfiguration, Unique = documentTypeConfiguration.documenttypeprefix });
                     return result;
                 }
                 throw new System.Exception(validationMessages);

@@ -68,7 +68,8 @@ namespace Vlims.Administration.Manager
                 plantManagement.CreatedBy = "admin";
                 plantManagement.ModifiedBy = "admin";
                 var result = PlantManagementData.SavePlantManagement(plantManagement);
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = plantManagement.PlantName, Type = PlantManagementConstants.PlantName1, state = DefinitionStatus.New });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = plantManagement.CreatedBy, EntityName = plantManagement.PlantName, Type = PlantManagementConstants.PlantType, state = DefinitionStatus.Modify, EntityInfo = plantManagement, Unique = plantManagement.PlantCode });
+
                 return result;
                 //}
                 //throw new System.Exception(validationMessages);
@@ -87,6 +88,8 @@ namespace Vlims.Administration.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = PlantManagementData.UpdatePlantManagement(plantManagement);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = plantManagement.CreatedBy, EntityName = plantManagement.PlantName, Type = PlantManagementConstants.PlantType, state = DefinitionStatus.Modify, EntityInfo = plantManagement, Unique = plantManagement.PlantCode });
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);
