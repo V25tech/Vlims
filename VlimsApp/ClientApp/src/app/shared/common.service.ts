@@ -5,6 +5,7 @@ import { DepartmentConfiguration, DocumentAdditionalTasks,DocumentTypeConfigurat
 import { DepartmentComponent } from '../modules/authentication/components/Department/department.component';
 import { setfunctionalprofileconfigurationservice } from '../modules/services/setfunctionalprofile.service';
 import { DatePipe, formatDate } from '@angular/common';
+import { UserPermissions } from '../models/userpermissions';
 
 
 
@@ -27,6 +28,8 @@ export class CommonService {
   efffective = new DocumentEffectiveConfiguration();  
   printConfig = new DocumentPrintConfiguration();  
   existingDocReq = new ExistingDocumentRequest();
+  public userPermissions = new UserPermissions();
+  public userEntityPermissions$ = new BehaviorSubject<any>(null);
   
   createdBy = 'admin';
   
@@ -60,7 +63,9 @@ export class CommonService {
     this.req.PageNumber=1;
     this.req.PageSize=1000;
     this.req.Id=0;
-    this.req.UserName='admin';
+    this.req.UserName = 'admin';
+    this.userEntityPermissions$.next(JSON.parse(JSON.stringify(localStorage.getItem("roles"))));
+    this.setUserPermissions();
     //this.retaileR = new Retailer();
     //this.retaileR.RetailId = 1;
 
@@ -138,5 +143,19 @@ export class CommonService {
     let dp = new DatePipe(navigator.language);
     let l_date = dp.transform(date, 'dd/MM/yyyy', navigator.language);
     return l_date;
+  }
+  setUserPermissions() {
+    this.userEntityPermissions$.subscribe(data => {
+      if (data != null) {
+        this.setPermissions(data);
+      }
+    })
+  }
+  setPermissions(data: UserPermissions) {
+    this.userPermissions = new UserPermissions(data.adminMgmt, data.securityConfig, data.securityConfig, data.approvalConfigs, data.hirearchyMgmt, data.roleConfig
+      , data.deptConfig, data.plantMgmt, data.userMgmt, data.userGroupConfig, data.activatestatus, data.audit, data.documentMaster, data.documentTypeConfig
+      , data.documentTemplateConfig, data.workflowConfig, data.dashboardConfig, data.documentRequest, data.documentEffective, data.notificationConfig, data.documentRevison
+      , data.docrepository, data.additionalTasks, data.documentPreperation, data.workItemsassigned, data.downloadPrint);
+    console.log(this.userPermissions);
   }
 }
