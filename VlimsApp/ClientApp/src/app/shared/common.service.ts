@@ -136,7 +136,7 @@ export class CommonService {
       return '';
 
     let dp = new DatePipe(navigator.language);
-    let l_date = dp.transform(date, 'dd/MM/yyyy', navigator.language)//d;p.transform(date, 'dd/MM/yyyy');
+    let l_date = dp.transform(date, 'dd/MM/yyyy', navigator.language);
     return l_date;
   }
 }

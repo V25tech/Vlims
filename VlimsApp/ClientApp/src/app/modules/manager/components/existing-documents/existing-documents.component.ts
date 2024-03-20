@@ -47,9 +47,7 @@ export class ExistingDocumentsComponent implements OnInit {
         if (data != null && data.exisitingDocuments.length > 0 && data != undefined) {
           data.exisitingDocuments.forEach((item: any) => {
             item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
-            if (item.entityName.toLowerCase() == 'new document') {
-              item.reviewDateValue = this.commonsvc.setDate(item.reviewDate);
-            }
+            item.reviewDateValue = (item.reviewDate != null || item.reviewDate != 'NA') ? this.commonsvc.setDate(item.reviewDate): 'NA';
           })
           this.documents = data;
         }       

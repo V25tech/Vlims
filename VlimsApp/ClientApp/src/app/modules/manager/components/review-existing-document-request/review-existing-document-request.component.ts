@@ -1,4 +1,4 @@
-
+  
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ExistingDocumentRequest, RequestContext } from '../../../../models/model';
@@ -119,7 +119,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   Add() {
 
     if (!this.viewMode) {
-      let reqObj = JSON.parse(JSON.stringify(this.existingDocReq))
+      let reqObj = JSON.parse(JSON.stringify(this.existingDocReq));
       reqObj.createdBy = 'admin';
       reqObj.modifiedBy = 'admin';
       reqObj.createdDate = new Date();
