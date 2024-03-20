@@ -12,7 +12,7 @@ AT.ModifiedDate_PSY,
 --AT.Status_PSY,
 DP.template_PSY,
 AT.GUID_AD AS document_PSY,
-'Revision Document' as TableName_PSY,
+'New Document' as TableName_PSY,
 
 Version,AT.Refrence_PSY,
  count(*) over() as TotalRows  ,
