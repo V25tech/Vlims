@@ -14,6 +14,7 @@ import { ReviewExistingDocumentRequestComponent } from './components/review-exis
 import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
 import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
 import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
+import { ExistingDocumentsComponent } from './components/existing-documents/existing-documents.component';
 import { AuditmanagerhomepageComponent } from './components/auditmanagerhomepage/auditmanagerhomepage.component';
 import { AuditrequestgridpageComponent } from './components/auditrequestgridpage/auditrequestgridpage.component';
 import { AuditpreparationgridpageComponent } from './components/auditpreparationgridpage/auditpreparationgridpage.component';
@@ -199,6 +200,11 @@ const routes: Routes = [
   {
     path: 'revision/view/:requestId/:workId/:type',
     component: ReviewRevisionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'existingdocuments',
+    component: ExistingDocumentsComponent,
     canActivate: [AuthGuard],
   },
 ];

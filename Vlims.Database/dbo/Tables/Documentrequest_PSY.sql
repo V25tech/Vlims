@@ -14,6 +14,7 @@
     [Approvedby_PSY]        NVARCHAR (100) NULL,
     [ApprovedON_PSY]        DATETIME       NULL,
     [Workflow_PSY]          NVARCHAR (100) NULL,
+    [GUID_DR] UNIQUEIDENTIFIER NULL, 
     CONSTRAINT [PK_Documentrequest_PSY] PRIMARY KEY CLUSTERED ([DRID_PSY] ASC)
 );
 

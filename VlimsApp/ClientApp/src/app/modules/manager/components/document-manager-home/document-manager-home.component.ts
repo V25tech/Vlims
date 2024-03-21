@@ -11,7 +11,6 @@ export class DocumentManagerHomeComponent {
 
   navigateTo(navTo: any) {
     if (navTo === 'requests') {
-      debugger;
       this.router.navigate(['/requests']);
     } else if (navTo === 'preparations') {
       this.router.navigate(['/preparations']);
@@ -31,6 +30,9 @@ export class DocumentManagerHomeComponent {
     }
     else if(navTo === 'document-revision'){    
       this.router.navigate(['/revision']);
+    }
+    else if (navTo === 'existingdocuments') {
+      this.router.navigate(['/' + navTo]);
     }
     else if(navTo === 'auditmanager'){    
       this.router.navigate(['/auditmanager']);

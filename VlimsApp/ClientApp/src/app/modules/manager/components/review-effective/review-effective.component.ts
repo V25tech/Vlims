@@ -108,11 +108,11 @@ export class ReviewEffectiveComponent {
       this.saveEffective();
     }
   }
-  reinitiative() {
-    this.effective.Status = 'Re-Initiated'
+  return() {
+    this.effective.Status = 'Returned'
     this.toastMsg = this.effective.Status;
-    //this.saveEffective();
-    this.location.back();
+    this.effective.ModifiedBy = this.commonsvc.getUsername();
+    this.saveEffective();
   }
   reject() {
     this.effective.Status = 'Rejected'
@@ -135,7 +135,7 @@ export class ReviewEffectiveComponent {
           return;
        }    
     this.spinner.show();
-    if (this.viewMode && this.effective.Status != 'Rejected') {
+    if (this.viewMode && this.effective.Status != 'Rejected' && this.effective.Status != 'Returned') {
       this.effective.ModifiedBy = this.commonsvc.createdBy;
       this.effective.Status = this.finalStatus;
     }

@@ -29,7 +29,7 @@ CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
 Status_PSY,
-Workflow_PSY)
+Workflow_PSY,GUID_DR)
  VALUES 
 (@documentmanagerid_PSY,
 @documenttype_PSY,
@@ -42,15 +42,17 @@ Workflow_PSY)
 @ModifiedBy_PSY,
  GetDate(),
  @Status_PSY,
- @Workflow_PSY);
+ @Workflow_PSY,NEWID());
  SELECT @ID = @@IDENTITY; 
 
+ DECLARE @PARENTGUID_PSY UNIQUEIDENTIFIER
+ SET @PARENTGUID_PSY=(SELECT GUID_DR FROM Documentrequest_PSY WHERE DRID_PSY=@ID)
 
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Review'
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY)
+ SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0,@CreatedBy_PSY,@PARENTGUID_PSY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Review'
 
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Approve'
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY)
+ SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@ID,WSR.Type,0,@CreatedBy_PSY,@PARENTGUID_PSY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Approve'
 
  select @ID 
   

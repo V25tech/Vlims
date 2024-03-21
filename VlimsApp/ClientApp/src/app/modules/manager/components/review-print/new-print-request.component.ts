@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 
 
 @Component({
@@ -48,6 +49,7 @@ export class NewPrintRequestComponent implements OnInit {
     private route: ActivatedRoute,
     private workitemssvc: WorkitemsService,
     private modalService: BsModalService, private sanitizer: DomSanitizer,
+    private templatesvc:DocumentTemplateServiceService,
     private toastr: ToastrService, private spinner: NgxSpinnerService, private docprintservice: NewPrintRequestService, private docPreperationService: DocumentPreperationService, private router: Router, private wfservice: WorkflowServiceService, private docservice: DocumentPreperationService) { }
 
   ngOnInit() {
@@ -120,10 +122,12 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   documentNumberChange(event: any) {
+    debugger
     let preps = this.preparations.filter(p => p.documentno === event.value);
     if (preps && preps.length > 0) {
       this.print.documenttitle = preps[0].documenttitle;
       this.print.printtype = preps[0].documenttype;
+      this.print.template=preps[0].template;
       this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Print"));
       this.workflowsSource=this.workflowsSource.filter(o=>o.documenttype?.toLocaleLowerCase()===preps[0].documenttype.toLocaleLowerCase());
     }
@@ -269,15 +273,25 @@ export class NewPrintRequestComponent implements OnInit {
     return new Blob(byteArrays, { type: contentType });
   }
   previewprint(template: TemplateRef<any>) {    
+    debugger
     this.spinner.show();    
     //this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
-      this.docPreperationService.getTemplate(this.print.template).subscribe((data: any) => {
-      this.pdfBytes = data;
-      this.spinner.hide();
-      this.openViewer(template);
-    }, er => {
-      this.spinner.hide();
-    });
+      this.templatesvc.getTemplate(this.print.template).subscribe((data: any) => {
+        //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
+          this.pdfBytes = data;
+          //this.pdfBytes = this.fileBytes;
+          this.spinner.hide();
+          this.openViewer(template);
+        }, (error:any) => {
+          this.spinner.hide();
+        });
+    //   this.docPreperationService.getTemplate(this.print.template).subscribe((data: any) => {
+    //   this.pdfBytes = data;
+    //   this.spinner.hide();
+    //   this.openViewer(template);
+    // }, er => {
+    //   this.spinner.hide();
+    // });
   }
 
 }

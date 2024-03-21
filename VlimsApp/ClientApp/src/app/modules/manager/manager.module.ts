@@ -23,6 +23,8 @@ import { ReviewExistingDocumentRequestComponent } from './components/review-exis
 import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
 import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
 import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
+import { ExistingDocumentsService } from './services/existing-documents.service';
+import { ExistingDocumentsComponent } from './components/existing-documents/existing-documents.component';
 import { AuditmanagerhomepageComponent } from './components/auditmanagerhomepage/auditmanagerhomepage.component';
 import { AuditrequestgridpageComponent } from './components/auditrequestgridpage/auditrequestgridpage.component';
 import { AuditpreparationgridpageComponent } from './components/auditpreparationgridpage/auditpreparationgridpage.component';
@@ -48,6 +50,8 @@ import { AuditPreparationNewPageComponent } from './components/audit-preparation
     ReviewExistingDocumentRequestComponent,
     DocumentRevisionRequestsComponent,
     ReviewRevisionComponent,
+    ExistingDocumentsComponent
+    ReviewRevisionComponent,
     AuditmanagerhomepageComponent,
     AuditrequestgridpageComponent,
     AuditpreparationgridpageComponent,
@@ -69,5 +73,6 @@ import { AuditPreparationNewPageComponent } from './components/audit-preparation
     DropdownModule,
     ToastModule,
   ],
+  providers: [ExistingDocumentsService]
 })
 export class ManagerModule { }

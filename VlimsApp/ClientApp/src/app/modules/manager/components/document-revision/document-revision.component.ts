@@ -73,41 +73,36 @@ export class DocumentRevisionRequestsComponent implements OnInit{
     this.commonsvc.revision = revision;
     this.router.navigate(['/revision/edit/'+revision.atid]);
   }
-  ExportFiles(
-    fileContent: any,
-    fileType: string,
-    fileName: string,
-    fileExtension?: string
-  ) {
-    let variables = {};
-    //CHECKING FILE CONTENT THERE OR NOT
-    //if (!this.hasValue(fileContent))
-      //SHOWING ERROR MESSAGE
-      //this..Information("Unable to Export File, File Content Not Passed");
-    //CHECKINg FILE NAME THERE OR NOT
-    //if (!this.hasValue(fileName))
-      //SHOWING ERROR MESSAGE
-     // this.us.Information("Unable to Export File, File Name Not Passed");
-    //EVEN WHEN WE PASS BYTE[] as error FROM API..ITS RECEIVING IN UI AS base64 string
-    //FOR THAT CONVERTING THAT TO REQUIRED FORMAT
-    var binary_string = window.atob(fileContent);
-    var len = binary_string.length;
-    var bytes = new Uint8Array(len);
-    for (var i = 0; i < len; i++) {
-      bytes[i] = binary_string.charCodeAt(i);
+  ExportFiles(fileContent: any, fileType: string, fileName: string, fileExtension?: string) {
+    try {
+        // Convert base64 string to binary data
+        const binaryString = atob(fileContent);
+        const length = binaryString.length;
+        const bytes = new Uint8Array(length);
+        for (let i = 0; i < length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
+
+        // Create Blob from binary data
+        const blob = new Blob([bytes], { type: fileType || 'application/octet-stream' });
+
+        // Create download link
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = fileName ? `${fileName}.${fileExtension || 'docx'}` : `${this.GetGUID()}.${fileExtension || 'docx'}`;
+
+        // Trigger download
+        link.click();
+
+        // Clean up
+        window.URL.revokeObjectURL(link.href);
+    } catch (error) {
+        console.error('Error exporting file:', error);
+        // Handle error as needed
     }
-    var link = document.createElement("a");
-    link.href = window.URL.createObjectURL(
-      new Blob([bytes], {
-        type: fileType ? fileType : "application/octet-stream",
-      })
-    );
-    link.download = fileName
-      ? fileName + "." + fileExtension
-      : this.GetGUID() + "." + fileExtension;
-    link.click();
-    window.URL.revokeObjectURL(link.href);
-  }
+}
+
+  
   hasValue(value:any) {
     let variables = {};
     //  if(value===0)
@@ -130,7 +125,7 @@ export class DocumentRevisionRequestsComponent implements OnInit{
     return uuid;
   }
   previewtemplate(objtemp: DocumentRevisionRequest) {
-    
+    debugger
     this.spinner.show();
     this.templatesvc.getTemplate(objtemp.template,false).subscribe((data: any) => {
     this.ExportFiles(data,"docx",objtemp.template,"docx");

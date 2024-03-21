@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\modules\manager\components\existing-documents\existing-documents.component.ts" />
+    <None Remove="ClientApp\src\app\modules\manager\services\existing-documents.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\src\app\model\" />   
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\modules\manager\components\existing-documents\existing-documents.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\manager\services\existing-documents.service.ts" />
   </ItemGroup>
 
 </Project>

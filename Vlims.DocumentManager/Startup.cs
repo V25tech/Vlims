@@ -53,6 +53,7 @@ public class Startup
         Services.AddScoped<IDocumentPrintService, DocumentPrintService>();
         Services.AddScoped<IExistingDocumentRequestService, ExistingDocumentRequestService>();
         Services.AddScoped<IAzureBlobService, AzureBlobService>();
+        Services.AddScoped<IExisitingDocumentsService, ExisitingDocumentsService>();
         Services.AddEndpointsApiExplorer();
         Services.AddSwaggerGen();
     }

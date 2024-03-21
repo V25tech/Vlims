@@ -36,7 +36,7 @@ getbyId(id: number) {
 }
 getTemplate(templte: string,ispdf:boolean=true) {
   debugger
-  return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&ispdf=${ispdf}`, this.type);
+  return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&p_isPdf=${ispdf}`, this.type);
 }
 uploadImage(file: File): Observable<any> {
   const formData = new FormData();

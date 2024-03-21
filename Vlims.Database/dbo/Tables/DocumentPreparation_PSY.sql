@@ -16,6 +16,8 @@
     [Status_PSY]            NVARCHAR (100) NULL,
     [DOCStatus_PSY]         NVARCHAR (250) NULL,
     [Refrence_PSY]          INT            NULL,
+    [GUID_DP] UNIQUEIDENTIFIER NULL, 
+    [ReferenceGuid_PSY] UNIQUEIDENTIFIER NULL, 
     CONSTRAINT [PK_DocumentPreparation_PSY] PRIMARY KEY CLUSTERED ([DPNID_PSY] ASC)
 );
 
