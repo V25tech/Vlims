@@ -23,6 +23,15 @@ import { ReviewExistingDocumentRequestComponent } from './components/review-exis
 import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
 import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
 import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
+import { AuditmanagerhomepageComponent } from './components/auditmanagerhomepage/auditmanagerhomepage.component';
+import { AuditrequestgridpageComponent } from './components/auditrequestgridpage/auditrequestgridpage.component';
+import { AuditpreparationgridpageComponent } from './components/auditpreparationgridpage/auditpreparationgridpage.component';
+import { AuditeffectivegridpageComponent } from './components/auditeffectivegridpage/auditeffectivegridpage.component';
+import { AuditrevisiongridpageComponent } from './components/auditrevisiongridpage/auditrevisiongridpage.component';
+import { AuditprintgridpageComponent } from './components/auditprintgridpage/auditprintgridpage.component';
+import { AuditexistinggridpageComponent } from './components/auditexistinggridpage/auditexistinggridpage.component';
+import { AuditRequestNewPageComponent } from './components/audit-request-new-page/audit-request-new-page.component';
+import { AuditPreparationNewPageComponent } from './components/audit-preparation-new-page/audit-preparation-new-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +47,16 @@ import { ReviewRevisionComponent } from './components/review-revision/review-rev
     ExistingDocumentRequestComponent,
     ReviewExistingDocumentRequestComponent,
     DocumentRevisionRequestsComponent,
-    ReviewRevisionComponent
+    ReviewRevisionComponent,
+    AuditmanagerhomepageComponent,
+    AuditrequestgridpageComponent,
+    AuditpreparationgridpageComponent,
+    AuditeffectivegridpageComponent,
+    AuditrevisiongridpageComponent,
+    AuditprintgridpageComponent,
+    AuditexistinggridpageComponent,
+    AuditRequestNewPageComponent,
+    AuditPreparationNewPageComponent
   ],
   imports: [
     CommonModule,

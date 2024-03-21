@@ -85,6 +85,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   }
 
   getdepartments() {
+    
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
       this.departmentsSource = data.Response;

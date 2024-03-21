@@ -32,6 +32,9 @@ export class DocumentManagerHomeComponent {
     else if(navTo === 'document-revision'){    
       this.router.navigate(['/revision']);
     }
+    else if(navTo === 'auditmanager'){    
+      this.router.navigate(['/auditmanager']);
+    }
 
   }
 }

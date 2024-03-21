@@ -8,6 +8,9 @@ export class RequestContext1 {
   public PageSize: number = 0;
   public Id: number = 0;
   public UserName: string | null = null;
+  public type:string | null = null;
+ 
+  
 }
 export class dashboardconfiguration {
   dCId: string = ''
@@ -254,6 +257,8 @@ export class WorkItemsConfiguration {
   ReferenceId: number = 0
   ActionType: string = ''
   IsCompleted: boolean = false
+  CreatedBy: string = ''
+  ModifiedBy: string = ''
 }
 export class PlantConfiguration {
  // DPCFId: string = ''
@@ -268,6 +273,7 @@ export class PlantConfiguration {
   ModifiedDate: Date | undefined;
   Status: string = '';
   PMId: number = 0;
+  
 
 }
 export class SecurityManagement {
@@ -443,5 +449,12 @@ export class AuditConfiguration {
   CreatedDate: Date | undefined;
   ModifiedDate: Date | undefined;
   DepartmentName: any;
+
   id: any;
+  //EntityInfo:string=''
+  EntityInfo: any; // Property for holding a JSON object
+  Unique: any; // Property for holding a JSON object
+  VersionNumber: number | undefined; // Include the VersionNumber property
+  state: number | undefined;
+ 
 }

@@ -1,18 +1,18 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-
+      
       <div class="col d-flex justify-content-between align-items-center">
         <h4 class="page-title">{{editMode? 'Modify': 'New' }} Department Registration</h4>
-
+  
         <div class="back-icon" style="margin-right: 10px;">
-          <a href="javascript:void(0);" onclick="history.back();">
-            <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+          <a href="javascript:void(0);" onclick="history.back();"> 
+            <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i> 
           </a>
-
-        </div>
+  
+        </div> 
       </div>
-
+      
     </div>
   </div>
   <div class="row p-2">
@@ -30,14 +30,14 @@
                      name="departmentName"
                      placeholder="Enter Department Name"
                      maxlength="49"
-                     [(ngModel)]="newdept.DepartmentName" [disabled]="editMode"
+                     [(ngModel)]="newdept.DepartmentName" 
                      required
                      maxlength="49"
                      #departmentNameInput="ngModel" />
-              <!-- Show validation error message -->
-              <div *ngIf="departmentNameInput.invalid && (departmentNameInput.dirty || departmentNameInput.touched)" class="text-danger">
-                Department Name is required
-              </div>
+           <!-- Show validation error message -->
+    <div *ngIf="departmentNameInput.invalid && (departmentNameInput.dirty || departmentNameInput.touched)" class="text-danger">
+      Department Name is required
+    </div>
             </div>
           </div>
           <div class="form-group row">
@@ -47,38 +47,40 @@
                      class="form-control"
                      id="DepartmentCode"
                      name="DepartmentCode"
-                     pattern="[a-zA-Z]+"
                      placeholder="Enter Department Code"
                      maxlength="8"
-                     [(ngModel)]="newdept.DepartmentCode" [disabled]="viewMode"
+                     [(ngModel)]="newdept.DepartmentCode" [disabled]="viewMode" [disabled]="editMode"
                      required
-                     maxlength="9"
-                     #DepartmentCodeInput="ngModel" />
-              <!-- Show validation error message -->
-              <div *ngIf="DepartmentCodeInput.invalid && (DepartmentCodeInput.dirty || DepartmentCodeInput.touched)" class="text-danger">
-                Department Code should only contain alphabetic characters.
-              </div>
+                     maxlength="49"
+           #DepartmentCodeInput="ngModel" />
+            <!-- Show validation error message -->
+    <div *ngIf="DepartmentCodeInput.invalid && (DepartmentCodeInput.dirty || DepartmentCodeInput.touched)" class="text-danger">
+      Department Code is required
             </div>
           </div>
+          </div>
           <div class="form-group row">
-            <label for="Comments" class="col-sm-2 col-form-label">Comments</label>
+            <label for="Comments" class="col-sm-2 col-form-label">Comments </label>
             <div class="col-sm-10">
               <textarea class="form-control"
                         id="Comments"
                         name="Comments"
-                        maxlength="500"
+                        maxlength="250"
                         rows="3"
                         placeholder="Comments"
                         [(ngModel)]="newdept.Comments" [disabled]="viewMode"
-                        #commentsCxhvcjInput="ngModel"></textarea>
-              <div *ngIf="commentsCxhvcjInput.invalid && (commentsCxhvcjInput.dirty || commentsCxhvcjInput.touched)" class="text-danger">
-                Comments.
-              </div>
-              <!-- Show validation error message -->
-
+                         
+                        #commentsCxhvcjInput="ngModel"
+                        
+                        ></textarea>
+                        <div *ngIf="commentsCxhvcjInput.invalid && (commentsCxhvcjInput.dirty || commentsCxhvcjInput.touched)" class="text-danger">
+                            Comments.
+                        </div>
+           <!-- Show validation error message -->
+   
             </div>
           </div>
-
+          
 
 
         </div>
@@ -98,6 +100,6 @@
 
 <style>
   .form-control {
-    max-width: 350px;
-  }
+  max-width: 350px;
+}
 </style>
