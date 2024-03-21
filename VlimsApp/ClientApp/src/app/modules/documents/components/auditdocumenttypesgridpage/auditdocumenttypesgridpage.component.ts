@@ -30,21 +30,32 @@ export class AuditdocumenttypesgridpageComponent {
     this.access = this.commonsvc.getUserRoles()?.deptConfig ?? false;
     this.getauditmodule();
     this.route.queryParams.subscribe(params => {
-    this.prefix = params['prefix'];
+      this.prefix = params['prefix'];
       // Now you have the prefix value here, you can use it as needed
-  });
+    });
   }
+  
   getauditmodule() {
+    debugger
     this.loader.show();
-    debugger;
-    this.commonsvc.req.type="DocumentType"
-       return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
-        debugger;
-         
-         this.types=data;
-         this.loader.hide();
-       }, er => {
-         this.loader.hide();
-       });
- }
+    this.commonsvc.req.type="DocumentType";
+    this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
+      debugger
+      this.types = this.removeDuplicates(data, 'Unique'); // Filter duplicates based on EntityName
+      debugger
+      this.loader.hide();
+    }, er => {
+      this.loader.hide();
+    });
+  }
+  
+  // Function to remove duplicate entries from an array based on a specific property
+  removeDuplicates(array: any[], property: string): any[] {
+    debugger
+    return array.filter((obj, index, self) =>
+      index === self.findIndex((o) => (
+        o[property] === obj[property]
+      ))
+    );
+  }
 }

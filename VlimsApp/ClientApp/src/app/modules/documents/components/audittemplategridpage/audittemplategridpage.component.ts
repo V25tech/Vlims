@@ -31,15 +31,22 @@ export class AudittemplategridpageComponent {
   }
   getauditmodule() {
     this.loader.show();
-    debugger;
+    
     this.commonsvc.req.type="TemplateType"
        return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
-        debugger;
-         
-         this.types=data;
+        this.types = this.removeDuplicates(data, 'Unique'); 
          this.loader.hide();
        }, er => {
          this.loader.hide();
        });
  }
+
+ removeDuplicates(array: any[], property: string): any[] {
+  debugger
+  return array.filter((obj, index, self) =>
+    index === self.findIndex((o) => (
+      o[property] === obj[property]
+    ))
+  );
+}
 }
