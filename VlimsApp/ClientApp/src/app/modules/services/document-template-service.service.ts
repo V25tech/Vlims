@@ -4,6 +4,7 @@ import { HttpbaseService } from 'src/app/shared/httpbase.service';
 
 import { DocumentTemplateConfiguration, RequestContext } from 'src/app/models/model';
 import { Observable } from 'rxjs';
+import { CommonService } from 'src/app/shared/common.service';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class DocumentTemplateServiceService {
   type:string="master";
-  constructor(private http: HttpbaseService) { }
+  constructor(private http: HttpbaseService,private commonsvc:CommonService) { }
 
   getdocttemplate(objrequest: RequestContext) {
    
@@ -36,7 +37,11 @@ getbyId(id: number) {
 }
 getTemplate(templte: string,ispdf:boolean=true) {
   debugger
-  return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&p_isPdf=${ispdf}`, this.type);
+  return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&p_user=${this.commonsvc.getUsername()}&p_isPdf=${ispdf}`, this.type);
+}
+geturl() {
+  debugger
+  return this.http.getwithheader(`api/documenttemplateconfiguration/geturl`, this.type);
 }
 uploadImage(file: File): Observable<any> {
   const formData = new FormData();

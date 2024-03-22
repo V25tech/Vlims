@@ -41,6 +41,7 @@ import { ChangepasswordComponent } from '../authentication/components/changepass
 import { HierarchyComponent } from '../authentication/components/hierarchy/hierarchy.component';
 import { UsermanagementComponent } from '../authentication/components/usermanagement/usermanagement.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 
 
 
@@ -86,8 +87,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     DropdownModule,
     ToastModule,
     NgxSpinnerModule,
-    CKEditorModule
-    
+    CKEditorModule,
+    NgxDocViewerModule
   ],
   providers: [] 
 })

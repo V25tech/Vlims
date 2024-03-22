@@ -367,6 +367,7 @@ export class DocumentPrintConfiguration {
   public printtype: string = '';
   public noofcopies: string = '';
   public template:string='';
+  public printCopy='';
 }
 
 export class ExistingDocumentRequest {

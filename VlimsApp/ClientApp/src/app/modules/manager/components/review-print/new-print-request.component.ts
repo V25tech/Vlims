@@ -14,6 +14,10 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 
+interface PrintType {
+  label:string;
+  value:string;
+}
 
 @Component({
   selector: 'app-new-print-request.component',
@@ -45,6 +49,20 @@ export class NewPrintRequestComponent implements OnInit {
   pdfUrl: string | null = null;
   toastMsg: string | null = null;
 
+  stageSource:PrintType[] = [
+    { label: 'Master Copy', value: 'Master Copy' },
+    { label: 'Controlled Copy', value: 'Controlled Copy' },
+    { label: 'Uncontrolled Copy', value: 'Uncontrolled Copy' },
+    { label: 'Reference Copy', value: 'Reference Copy' },
+    { label: 'Display Copy', value: 'Display Copy' },
+    { label: 'Discontinued Copy', value: 'Discontinued Copy' },
+    { label: 'Obsoluted Copy', value: 'Obsoluted Copy' },
+    { label: 'Validation Batch', value: 'Validation Batch' },
+    { label: 'Stability Batch', value: 'Stability Batch' },
+    { label: 'MLT Batch', value: 'MLT Batch' },
+    { label: 'Hold Time study', value: 'Hold Time study' },
+  ];
+  selectedStage:PrintType[]=[];
   constructor(private commonsvc: CommonService, private location: Location,
     private route: ActivatedRoute,
     private workitemssvc: WorkitemsService,

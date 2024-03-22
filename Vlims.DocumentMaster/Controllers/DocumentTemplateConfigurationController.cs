@@ -23,6 +23,14 @@ namespace Vlims.Controllers
     using Vlims.DocumentMaster.DataAccess;
     using Vlims.DocumentMaster.Entities;
     using Vlims.DocumentMaster.Manager;
+    using Spire.Doc;
+    using Spire.Pdf;
+    using FileFormat = Spire.Doc.FileFormat;
+    using System.Drawing.Printing;
+    using DocumentFormat.OpenXml.Packaging;
+    using iTextSharp.text.pdf;
+    using Microsoft.SharePoint.Client;
+
 
     /// <summary>
     /// Comment
@@ -94,7 +102,7 @@ namespace Vlims.Controllers
                 if (image != null && image.Length > 0)
                 {
                     var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Logo");
-                    if(!Directory.Exists(uploadsFolder))
+                    if (!Directory.Exists(uploadsFolder))
                         Directory.CreateDirectory(uploadsFolder);
                     var uniqueFileName = $"{Path.GetRandomFileName()}_{image.FileName}";
 
@@ -157,8 +165,61 @@ namespace Vlims.Controllers
             var result = documentTemplateConfigurationService.DeleteAllDocumentTemplateConfiguration(dTIDs);
             return result;
         }
+        
+        public byte[] geturl()
+        {
+            byte[] bytes = null;
+            string docxFilePath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithMargins.docx");
+            string pdfFilePath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithHeaderTable.pdf");
+
+            // Create a new PDF document
+            iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document();
+
+            // Create a new PDF writer
+            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(pdfFilePath, FileMode.Create));
+
+            // Open the PDF document for writing
+            pdfDoc.Open();
+
+            // Open the DOCX file using Open XML SDK
+            using (WordprocessingDocument doc = WordprocessingDocument.Open(docxFilePath, false))
+            {
+                DocumentFormat.OpenXml.Wordprocessing.Body body = doc.MainDocumentPart.Document.Body;
+
+                // Iterate through paragraphs and tables in the DOCX and add them to the PDF
+                foreach (var element in body.Elements())
+                {
+                    if (element is DocumentFormat.OpenXml.Wordprocessing.Paragraph para)
+                    {
+                        // Create a new paragraph in the PDF
+                        pdfDoc.Add(new iTextSharp.text.Paragraph(para.InnerText));
+                    }
+                    else if (element is DocumentFormat.OpenXml.Wordprocessing.Table table)
+                    {
+                        // Process tables
+                        PdfPTable pdfTable = new PdfPTable(table.Elements<DocumentFormat.OpenXml.Wordprocessing.TableRow>().First().Elements<DocumentFormat.OpenXml.Wordprocessing.TableCell>().Count());
+                        foreach (var row in table.Elements<DocumentFormat.OpenXml.Wordprocessing.TableRow>())
+                        {
+                            foreach (var cell in row.Elements<DocumentFormat.OpenXml.Wordprocessing.TableCell>())
+                            {
+                                pdfTable.AddCell(cell.InnerText);
+                            }
+                        }
+                        pdfDoc.Add(pdfTable);
+                    }
+                }
+            }
+
+            // Close the PDF document
+            pdfDoc.Close();
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithHeaderTable.pdf");
+             bytes = System.IO.File.ReadAllBytes(path);
+           return bytes;
+        }
+
         [HttpGet("getpdf")]
-        public ActionResult<byte[]> getpdf(string templateinf, bool p_isPdf=true)
+        public ActionResult<byte[]> getpdf(string templateinf,string p_user, bool p_isPdf = true)
         {
             byte[] bytes = null;
             DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
@@ -170,6 +231,7 @@ namespace Vlims.Controllers
             builder.Append(htmlUpper);
             Document document = new Spire.Doc.Document();
             Section section = document.AddSection();
+            section.PageSetup.PageSize = PageSize.A4;
             section.PageSetup.Margins.All = 72f;
 
 
@@ -182,7 +244,7 @@ namespace Vlims.Controllers
             Paragraph footerParagraph = footer.AddParagraph();
             StringBuilder footerbuilder = new StringBuilder();
             footerbuilder.Append(htmlUpper);
-            footerbuilder.Append(PrepareStaticdiv(template, template1));
+            footerbuilder.Append(PrepareStaticdiv(template, template1,p_user));
             footerbuilder.Append(htmllower);
             footerParagraph.AppendHTML(footerbuilder.ToString());
             footerParagraph.Format.BeforeSpacing = 0;
@@ -229,14 +291,18 @@ namespace Vlims.Controllers
             string pdfFilePath = "DocumentWithHeaderTable.pdf";
             doc.SaveToFile(pdfFilePath, FileFormat.PDF);
             byte[] pdfBytes = ConvertDocxToPdfBytes(doc);
+            //byte[] pdfBytes = geturl();
             doc.Dispose();
             bytes = pdfBytes;
+            //PrintDocument();
             if (!p_isPdf)
                 return pdfBytes1;
             else
                 return bytes;
 
         }
+
+
 
 
         static byte[] ConvertDocxToPdfBytes(Document document)
@@ -255,7 +321,7 @@ namespace Vlims.Controllers
 
         }
 
-        public static string PrepareStaticdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1)
+        public static string PrepareStaticdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1,string p_user)
         {
             string table = string.Empty;
             StringBuilder htmlBuilder = new StringBuilder();
@@ -271,11 +337,12 @@ namespace Vlims.Controllers
             // Append the style information
             htmlBuilder.AppendLine("<style type=\"text/css\">");
             htmlBuilder.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");
-            htmlBuilder.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}");
-            htmlBuilder.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}");
+            htmlBuilder.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:5px 5px;word-break:normal;}");
+            htmlBuilder.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}");
             htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:center;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-weight:bold;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".p {border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine("</style>");
 
             htmlBuilder.AppendLine("<table class=\"tg\">");
@@ -320,6 +387,12 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</tbody>");
             htmlBuilder.AppendLine("</table>");
+            // Add the label after the table
+            htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">Print Type: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintCopy) ? template1.PrintCopy : "test") : "test")}, Printed By: {p_user}, Date: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}, </td>");
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">Print Reason: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintReason) ? template1.PrintReason : "test") : "test")}</td>");
+            //htmlBuilder.AppendLine($"<p>Print Type: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintCopy) ? template1.PrintCopy : "test") : "test")}</p>");
             table = htmlBuilder.ToString();
             return table;
 
@@ -345,17 +418,23 @@ namespace Vlims.Controllers
             // Read the contents of the SVG file
             string currentDirectory = Directory.GetCurrentDirectory();
             string path = Path.Combine(currentDirectory, "Logo", template.header);
-            string dataUri = string.Empty;
+            string footerpath = Path.Combine(currentDirectory, "Logo", template.footer);
+            string dataUri = string.Empty; string dataUri1 = string.Empty;
             if (System.IO.File.Exists(path))
             {
                 string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
                 dataUri = $"data:image/jpeg;base64,{base64EncodedImage}";
             }
+            if (System.IO.File.Exists(footerpath))
+            {
+                string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(footerpath));
+                dataUri1 = $"data:image/jpeg;base64,{base64EncodedImage}";
+            }
             // Append the style information
             htmlBuilder.AppendLine("<style type=\"text/css\">");
             htmlBuilder.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");
-            htmlBuilder.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}");
-            htmlBuilder.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}");
+            htmlBuilder.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:5px 5px;word-break:normal;}");
+            htmlBuilder.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}");
             htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:center;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-weight:bold;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
@@ -369,7 +448,7 @@ namespace Vlims.Controllers
             //htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""20"" height=""20"" /></th>");
             //htmlBuilder.AppendLine($@"<img src=""{dataUri}"" width=""20"" height=""20"" />");
             htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue : "test") : "test")}</th>");
-            htmlBuilder.AppendLine("    <th class=\"tg-iucd\"></th>");
+            htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri1}"" width=""100"" height=""100"" style=""align:center"" /></th>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</thead>");
             htmlBuilder.AppendLine("<tbody>");
