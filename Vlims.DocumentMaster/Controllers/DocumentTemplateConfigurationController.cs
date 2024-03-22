@@ -389,7 +389,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("</table>");
             // Add the label after the table
             htmlBuilder.AppendLine("  <tr>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">Print Type: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintCopy) ? template1.PrintCopy : "test") : "test")}, Printed By: {p_user}, Date: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}, </td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">Print Type: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintCopy) ? template1.PrintCopy : "test") : "test")}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}, </td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">Print Reason: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintReason) ? template1.PrintReason : "test") : "test")}</td>");
             //htmlBuilder.AppendLine($"<p>Print Type: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintCopy) ? template1.PrintCopy : "test") : "test")}</p>");
