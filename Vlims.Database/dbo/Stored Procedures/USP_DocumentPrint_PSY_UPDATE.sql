@@ -46,7 +46,10 @@ ELSE IF(@Status_PSY='APPROVE' OR @Status_PSY='APPROVED')
 BEGIN
 UPDATE DocumentPrint_PSY SET ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE DRId_PSY=@DRId_PSY
 END
-
+ELSE IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
+BEGIN
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DRId_PSY,@ModifiedBy_PSY,'PRINT',@ParentGuid_PSY
+END
 IF(@ISWORKITEMS=1)
 BEGIN
 INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY)
@@ -56,10 +59,7 @@ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PS
  SELECT @documentno_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@DRId_PSY,WSR.Type,0,@CREATED_BY,@ParentGuid_PSY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Approve'
 END
 
-IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
-BEGIN
-EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DRId_PSY,@ModifiedBy_PSY,'PRINT',@ParentGuid_PSY
-END
+
 
 
 
