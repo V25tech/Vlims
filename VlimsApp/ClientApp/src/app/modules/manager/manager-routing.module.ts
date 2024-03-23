@@ -26,6 +26,7 @@ import { AuditRoleAddPageComponent } from '../authentication/components/audit-ro
 import { FunctionalProfileAddPageComponent } from '../authentication/components/functional-profile-add-page/functional-profile-add-page.component';
 import { AuditRequestNewPageComponent } from './components/audit-request-new-page/audit-request-new-page.component';
 import { AuditPreparationNewPageComponent } from './components/audit-preparation-new-page/audit-preparation-new-page.component';
+import { AuditEffectiveNewPageComponent } from './components/audit-effective-new-page/audit-effective-new-page.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
@@ -68,6 +69,13 @@ const routes: Routes = [
     component: PreparationComponent,
     canActivate: [AuthGuard],
   },
+
+  {
+    path: 'auditeffectiveaddpage',
+    component: AuditEffectiveNewPageComponent,
+    canActivate: [AuthGuard],
+  },
+
   {
     path: 'auditpreparations',
     component: AuditpreparationgridpageComponent,

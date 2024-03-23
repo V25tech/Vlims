@@ -34,6 +34,7 @@ import { AuditprintgridpageComponent } from './components/auditprintgridpage/aud
 import { AuditexistinggridpageComponent } from './components/auditexistinggridpage/auditexistinggridpage.component';
 import { AuditRequestNewPageComponent } from './components/audit-request-new-page/audit-request-new-page.component';
 import { AuditPreparationNewPageComponent } from './components/audit-preparation-new-page/audit-preparation-new-page.component';
+import { AuditEffectiveNewPageComponent } from './components/audit-effective-new-page/audit-effective-new-page.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { AuditPreparationNewPageComponent } from './components/audit-preparation
     ReviewExistingDocumentRequestComponent,
     DocumentRevisionRequestsComponent,
     ReviewRevisionComponent,
-    ExistingDocumentsComponent
+    ExistingDocumentsComponent,
     ReviewRevisionComponent,
     AuditmanagerhomepageComponent,
     AuditrequestgridpageComponent,
@@ -60,7 +61,8 @@ import { AuditPreparationNewPageComponent } from './components/audit-preparation
     AuditprintgridpageComponent,
     AuditexistinggridpageComponent,
     AuditRequestNewPageComponent,
-    AuditPreparationNewPageComponent
+    AuditPreparationNewPageComponent,
+    AuditEffectiveNewPageComponent
   ],
   imports: [
     CommonModule,
