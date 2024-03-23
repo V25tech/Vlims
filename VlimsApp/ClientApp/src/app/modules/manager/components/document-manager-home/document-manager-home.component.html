@@ -15,7 +15,7 @@
 
 
 
-    <div class="col col-lg-3">
+    <div class="col col-lg-3" *ngIf="commonSrvc.userPermissions.documentRequest">
       <div class="card" (click)="navigateTo('requests')">
         <div class="card-body">
           <!-- <i class="fa fa-chart-pie"></i> -->
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div class="col col-lg-3">
+    <div class="col col-lg-3" *ngIf="commonSrvc.userPermissions.documentPreperation">
       <div class="card" (click)="navigateTo('preparations')">
         <div class="card-body">
           <i class="fa fa-pen-ruler"></i>
@@ -36,7 +36,7 @@
 
 
 
-    <div class="col col-lg-3">
+    <div class="col col-lg-3" *ngIf="commonSrvc.userPermissions.documentEffective">
       <div class="card" (click)="navigateTo('effectives')">
         <div class="card-body">
           <i class="fa fa-square-poll-vertical"></i>
@@ -45,16 +45,16 @@
       </div>
     </div>
 
-    <div class="col col-lg-3">
+    <!--<div class="col col-lg-3">
       <div class="card" (click)="navigateTo('document-revision')">
         <div class="card-body">
           <i class="fa fa-cash-register"></i>
           <h5 class="card-title">Document Revision</h5>
         </div>
       </div>
-    </div>
+    </div>-->
 
-    <div class="col col-lg-3">
+    <div class="col col-lg-3" *ngIf="commonSrvc.userPermissions.downloadPrint">
       <div class="card" (click)="navigateTo('document-print')">
         <div class="card-body">
           <i class="fa fa-print"></i>
@@ -63,7 +63,7 @@
       </div>
     </div>
 
-    <div class="col col-lg-3">
+    <div class="col col-lg-3" *ngIf="commonSrvc.userPermissions.docrepository">
       <div class="card" (click)="navigateTo('existing-document-requests')">
         <div class="card-body">
           <i class="fa fa-print"></i>
@@ -73,11 +73,11 @@
     </div>
 
 
-    <div class="col col-lg-3">
+    <div class="col col-lg-3" *ngIf="commonSrvc.userPermissions.docrepository">
       <div class="card" (click)="navigateTo('existingdocuments')">
         <div class="card-body">
           <i class="fa fa-print"></i>
-          <h5 class="card-title">Existing Documents</h5>
+          <h5 class="card-title">Documents Repository</h5>
         </div>
       </div>
     </div>

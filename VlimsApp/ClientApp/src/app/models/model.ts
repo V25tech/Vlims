@@ -385,8 +385,8 @@ export class ExistingDocumentRequest {
   createdDate: Date | undefined;
   modifiedBy: string = '';
   modifiedDate: Date | undefined;
-  effectiveDate: Date | undefined;
-  reviewDate: Date | undefined;
+  effectiveDate?: Date | undefined;
+  reviewDate?: Date | undefined;
 }
 
 

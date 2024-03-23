@@ -11,7 +11,6 @@ export class WorkitemsService {
 
   constructor(private http: HttpbaseService) { }
   getworkitems(objrequest: RequestContext1,username:string | null = null) {
-    debugger
     // const url = username
     // ? `api/workitems/GetAllworkitems?p_UserName=${username}`
     // : 'api/workitems/GetAllworkitems';

@@ -68,11 +68,11 @@ END
 
 IF(@ISWORKITEMS=1)
 BEGIN
-INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY)
- SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@DRID_PSY,WSR.Type,0,@CREATED_BY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Review'
+INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,CreatedDate_PSY, ModifiedBy_PSY,ModifiedDate_PSY, RefrenceGuid_PSY)
+ SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,@CREATED_BY,GetDate(),@Status_PSY,GetDate(),@DRID_PSY,WSR.Type,0,WSR.UserName,GETDATE(),WSR.UserName,GETDATE(),@ParentGuid from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Review'
 
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY)
- SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,WSR.UserName,GetDate(),@Status_PSY,GetDate(),@DRID_PSY,WSR.Type,0,@CREATED_BY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Approve'
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,CreatedDate_PSY, ModifiedBy_PSY,ModifiedDate_PSY, RefrenceGuid_PSY)
+ SELECT @documenttype_PSY,'Request','Pending',@AssigntoGroup_PSY,@CREATED_BY,GetDate(),@Status_PSY,GetDate(),@DRID_PSY,WSR.Type,0,WSR.UserName,GETDATE(),WSR.UserName,GETDATE(),@ParentGuid from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@Workflow_PSY AND WSR.Type='Approve'
 END
 
 select @DRID_PSY; 

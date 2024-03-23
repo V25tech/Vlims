@@ -40,7 +40,6 @@ export class ExistingDocumentRequestComponent implements OnInit {
   existingDocDatasource: ExistingDocumentRequest[] = [];
 
   ngOnInit() {
-    debugger;
     this.access = this.commonsvc.getUserRoles()?.docrepository ?? false;
     this.getdocumentrequest();    
    // this.existingDocDatasource = this.getDummyData();
@@ -51,6 +50,12 @@ export class ExistingDocumentRequestComponent implements OnInit {
     this.spinner.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.existingDocReqservice.GetExistingDocumentAll(objrequest).subscribe((data: any) => {
+      if (data != null && data.response.length > 0 && data != undefined) {
+        data.response.forEach((item: any) => {
+          item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
+          item.reviewDateValue = this.commonsvc.setDate(item.reviewDate);
+        })
+      }       
       this.existingDocDatasource = data.response;
       if (this.existingDocDatasource.length < 10)
         this.currentPage = 10;
@@ -62,7 +67,6 @@ export class ExistingDocumentRequestComponent implements OnInit {
   }
 
   editExistingDoc(existingDocReq: ExistingDocumentRequest) {
-    debugger
     this.commonsvc.existingDocReq = existingDocReq;
     this.router.navigate(['/existingdoc/edit/' + existingDocReq.edrId]);
   }

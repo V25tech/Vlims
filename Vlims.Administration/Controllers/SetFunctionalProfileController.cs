@@ -50,7 +50,7 @@ public class SetFunctionalProfileController : ControllerBase
     /// </summary>
     /// <param name="departmentConfiguration"></param>
     [HttpPost("save")]
-    public ActionResult<Boolean> SaveSetFunctionalProfile(setfuctionalprofile profileConfiguration)
+    public ActionResult<Boolean> SaveSetFunctionalProfile([FromQuery] setfuctionalprofile profileConfiguration)
     {
 
         var result = functionalConfigurationService.SaveSetFunctionalProfile(profileConfiguration);

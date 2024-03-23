@@ -46,8 +46,14 @@ export class ExistingDocumentsComponent implements OnInit {
         type: null
       };
 
-      this.existdocService.getAllDocuments(objrequest).subscribe(data => {
-        this.documents = data;
+      this.existdocService.getAllDocuments(objrequest).subscribe((data: any) => {
+        if (data != null && data.exisitingDocuments.length > 0 && data != undefined) {
+          data.exisitingDocuments.forEach((item: any) => {
+            item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
+            item.reviewDateValue = (item.reviewDate != null || item.reviewDate != 'NA') ? this.commonsvc.setDate(item.reviewDate): 'NA';
+          })
+          this.documents = data;
+        }       
         this.spinner.hide();
       }, err => {
         this.spinner.hide();
@@ -58,17 +64,27 @@ export class ExistingDocumentsComponent implements OnInit {
     }
   }
   editdoc(doc: any) {
-    this.router.navigate(["", { querParams: { id: doc.id }, relativeTo: this.access }]);
+    this.router.navigate(["revision/edit/" + doc.id], { queryParams: { entityName: doc.entityName } });
   }
-  previewtemplate(template: TemplateRef<any>): void {
+
+  previewDocument(template: TemplateRef<any>, docInfo: any) {
+    if (docInfo.entityName.toLowerCase() == 'new document') {
+      this.previewRevisionDocument(template, docInfo)
+    } else {
+      this.previewtemplate(template, docInfo);
+    }
+  }
+
+  previewtemplate(template: TemplateRef<any>, docInfo: any): void {
     this.spinner.show();
-    //this.existingDocReqservice.preview(docInfo).subscribe((data: any) => {
-    //  this.pdfBytes = data;
-    //  this.spinner.hide();
-    //  this.openViewer(template);
-    //}, er => {
-    //  this.spinner.hide();
-    //});
+    docInfo.edrId = docInfo.id;
+    this.existdocService.preview(docInfo).subscribe((data: any) => {
+      this.pdfBytes = data;
+      this.spinner.hide();
+      this.openViewer(template);
+    }, er => {
+      this.spinner.hide();
+    });
   }
   openViewer(template: TemplateRef<any>): void {
 
@@ -95,5 +111,15 @@ export class ExistingDocumentsComponent implements OnInit {
   closeModel() {
     if (this.modalRef)
       this.modalRef.hide();
+  }
+  previewRevisionDocument(template: TemplateRef<any>, docInfo: any) {
+    this.spinner.show();
+    this.existdocService.getTemplate(docInfo.template).subscribe((data: any) => {
+      this.pdfBytes = data;
+      this.spinner.hide();
+      this.openViewer(template);
+    }, (error: any) => {
+      this.spinner.hide();
+    });
   }
 }

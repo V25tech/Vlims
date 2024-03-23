@@ -15,10 +15,10 @@
             <span class="input-group-text custom-input-group-text">
               <i class="fas fa-search custom-search-icon"></i>
             </span>
-            <input type="text" class="form-control custom-input" pInputText type="text" placeholder="Search" maxlength="249">
+            <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="249">
           </div>
 
-          <button class="btn btn-primary mx-2" type="button" *ngIf="access">New</button>
+          <!--<button class="btn btn-primary mx-2" type="button" *ngIf="access">New</button>-->
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
         <p-table #templatesTable [value]="documents?.exisitingDocuments"
-                 [globalFilterFields]="['Documenttypename', 'documenttypeprefix', 'Description','ModifiedBy','Status']"
+                 [globalFilterFields]="['documentName', 'documentNo']"
                  tableStyleClass="table table-striped"
                  [rows]="itemsPerPage"
                  [paginator]="true"
@@ -37,18 +37,16 @@
           <ng-template pTemplate="header">
             <tr>
               <th>S.No</th>
-              <th style="width:80%">ID<p-sortIcon></p-sortIcon></th>
+              <th style="width:80%">Document No.<p-sortIcon></p-sortIcon></th>
               <!--<th pSortableColumn="documenttypeprefix" style="width:10%">Document No<p-sortIcon field="documentNo"></p-sortIcon></th>-->
               <th pSortableColumn="documentName" style="width:20%">Document Name<p-sortIcon field="documentName"></p-sortIcon></th>
               <th pSortableColumn="documentType" style="width:200px">Document Type<p-sortIcon field="documentType"></p-sortIcon></th>
-              <th pSortableColumn="department" style="width:200px">Department <p-sortIcon field="department"></p-sortIcon></th>
-              <th style="width:80px" pSortableColumn="createdBy" >Created By<p-sortIcon field="createdBy"></p-sortIcon></th>
-              <th pSortableColumn="createdOn" style="width:20%">Created On<p-sortIcon field="createdOn"></p-sortIcon></th>
-              <th pSortableColumn="modifiedBy" style="width:10%">Modified By<p-sortIcon field="modifiedBy"></p-sortIcon></th>
-              <th pSortableColumn="ModifiedBy" style="width:20%">Modified On<p-sortIcon field="modifiedOn"></p-sortIcon></th>
-              <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
-              <th style="width:80px">Modify</th>
-
+              <th pSortableColumn="department" style="width:200px">Department<p-sortIcon field="department"></p-sortIcon></th>
+              <th style="width:80px" pSortableColumn="effectiveDate">Effective Date<p-sortIcon field="createdBy"></p-sortIcon></th>
+              <th pSortableColumn="reviewDate" style="width:20%">Review Date<p-sortIcon field="createdOn"></p-sortIcon></th>
+              <th style="width:80%">Preparation Type<p-sortIcon></p-sortIcon></th>
+              <th style="width:80%">Actions<p-sortIcon field="modifiedBy"></p-sortIcon></th>
+              <th style="width:80%">Preview Document<p-sortIcon field="modifiedOn"></p-sortIcon></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-doc let-i="rowIndex">
@@ -59,22 +57,21 @@
               <td>{{doc?.documentName}}</td>
               <td>{{doc?.documentType}}</td>
               <td>{{doc?.department}}</td>
-              <td>{{doc?.createdBy}}</td>
-              <td>{{doc?.createdOn}}</td>
-              <td>{{doc?.modifiedBy}}</td>
-              <td>{{doc?.modifiedOn}}</td>
-              <td><span class="status">{{doc.status}} </span></td>
-              <td class="text-center" *ngIf="access && !doc?.IsParent"><i (click)="editdoc(doc)" class="bi bi-pencil"></i></td>
-              <td class="text-center" *ngIf="!access">
+              <td>{{doc?.effectiveDateValue}}</td>
+              <td>{{ doc?.reviewDateValue}}</td>
+              <td>{{doc?.entityName}}</td>
+              <td class="text-center" *ngIf="access">
+                <i (click)="editdoc(doc)" class="bi bi-pencil"></i>
+              </td>
+              <td *ngIf="!access">
                 <i class="bi bi-lock bi-lg"
                    [ngClass]="{'text-primary':true}"
                    title="No Permissions">
                 </i>
               </td>
-              <td class="text-center" *ngIf="access && doc?.IsParent">
-                <i class="bi bi-lock bi-lg"
-                   [ngClass]="{'text-primary':true}"
-                   title="{{ doc?.IsParent ? 'Document type in use' : 'Unlocked' }}"></i>
+
+              <td>
+                <a href="javascript:void(0);" (click)="previewDocument(template,doc)">Preview</a>
               </td>
             </tr>
           </ng-template>
@@ -84,3 +81,19 @@
     </div>
   </div>
 </div>
+
+<!--Preview Document Template-->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Preview</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+  </div>
+</ng-template>

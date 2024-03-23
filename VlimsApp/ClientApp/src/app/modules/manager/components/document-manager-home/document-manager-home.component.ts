@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonService } from '../../../../shared/common.service';
 
 @Component({
   selector: 'app-document-manager-home',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./document-manager-home.component.scss']
 })
 export class DocumentManagerHomeComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private commonSrvc: CommonService) { }
 
   navigateTo(navTo: any) {
     if (navTo === 'requests') {

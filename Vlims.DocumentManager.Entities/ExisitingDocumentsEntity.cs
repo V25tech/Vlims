@@ -19,9 +19,17 @@ namespace Vlims.DocumentManager.Entities
         public string? DocumentType { get; set; }
         public string? Department {  get; set; }
         public string? CreatedBy { get; set;}
-        public string? CreatedOn { get; set;}
+        public DateTime? CreatedOn { get; set;}
         public string? ModifiedBy { get;set;}
-        public string? ModifiedOn { get; set;}
+        public DateTime? ModifiedOn { get; set;}
         public string? Status { get; set;}
+        public DateTime? EffectiveDate { get; set; }
+        public dynamic? ReviewDate { get; set; }
+        public string? EntityName { get; set; }
+        public string? Document { get; set; }
+        public string? Template { get; set; }
+
+
+
     }
 }

@@ -8,7 +8,7 @@ using Vlims.DocumentManager.Manager.Interface;
 namespace Vlims.DocumentManager.Controllers
 {
     [Route("api/documents")]
-    [ApiController]
+    [ApiController()]
     public class ExistingDocumentsController : ControllerBase
     {
         private readonly IExisitingDocumentsService exisitingDocumentsService;
@@ -17,11 +17,11 @@ namespace Vlims.DocumentManager.Controllers
             this.exisitingDocumentsService = exisitingDocumentsService;
         }
         /// <summary>
-        /// This method is used to Get List of Documentrequest
+        /// This method is used to Get List of Documents
         /// </summary>
         /// <param name="requestContext"></param>
         [HttpPost("")]
-        public async Task<IActionResult> GetAllDocuments(RequestContext requestContext) 
+        public async Task<ActionResult> GetAllDocuments(RequestContext requestContext) 
         {
             var result = await exisitingDocumentsService.GetAllExistingDocuments(requestContext);
             return Ok(result);

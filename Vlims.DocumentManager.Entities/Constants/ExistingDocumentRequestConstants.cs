@@ -58,9 +58,5 @@ public class ExistingDocumentRequestConstants
 
     public const string USP_QuickExistingDocumentRequest_UPDATE = "dbo.USP_QuickExistingDocumentRequest_UPDATE";
 
-    #region Existing Documents
-    public const string USP_ExistingDocuments_PSY_GET_ALL = "dbo.USP_ExistingDocuments_PSY_GET_ALL";
-
-    #endregion
 }
 
