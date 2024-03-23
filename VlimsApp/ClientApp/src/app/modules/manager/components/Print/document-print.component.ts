@@ -46,7 +46,13 @@ export class DocumentPrintComponent implements OnInit {
       Id: 0
     };
     return this.doctypeservice.GetDocumentPrint(objrequest).subscribe((data: any) => {
-      this.requests = data.response;
+      if(data!=null&&data.response!=null&&data.response.length>0){
+        data.response.forEach((item:any)=>{
+          item.modifiedDate=this.commonsvc.setDate(item.modifiedDate)
+        })
+        this.requests = data.response;
+       } 
+      // this.requests = data.response;
       console.log(this.requests);
     });
   }

@@ -31,6 +31,11 @@ export class PlantComponent implements OnInit {
       Id: 0
     };
     return this.doctypeservice.getplantconfiguration(objrequest).subscribe((data: any) => {
+      if(data!=null&&data.Response!=null&&data.Response.length>0){
+        data.Response.forEach((item:any)=>{
+          item.ModifiedDate=this.commonsvc.setDate(item.ModifiedDate)
+        })
+       } 
       debugger
       this.types = data.Response;
       console.log(this.types);

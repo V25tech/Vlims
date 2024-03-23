@@ -51,7 +51,7 @@
                   <td>{{doc?.DepartmentCode}}</td>
                   <!-- <td>{{doc?.Comments}}</td> -->
                   <td>{{doc?.ModifiedBy}}</td>
-                  <td>{{doc?.ModifiedDate | date :'dd/MM/yyyy'}}</td>
+                  <td>{{doc?.ModifiedDate}}</td>
                   <td><span class="status" [ngClass]="{'status-completed':true}">Active</span></td>
                   <td class="text-center" (click)="editBrand(doc)" *ngIf="access"><i class="bi bi-pencil"></i></td>
                   <td class="text-center" *ngIf="!access">

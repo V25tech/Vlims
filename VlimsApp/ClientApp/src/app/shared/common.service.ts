@@ -152,7 +152,7 @@ export class CommonService {
     })
   }
   setPermissions(data: UserPermissions) {
-    this.userPermissions = new UserPermissions(data.adminMgmt, data.securityConfig, data.securityConfig, data.approvalConfigs, data.hirearchyMgmt, data.roleConfig
+    this.userPermissions = new UserPermissions(data.adminMgmt, data.securityConfig,data.securityMgmt, data.approvalConfigs, data.hirearchyMgmt, data.roleConfig
       , data.deptConfig, data.plantMgmt, data.userMgmt, data.userGroupConfig, data.activatestatus, data.audit, data.documentMaster, data.documentTypeConfig
       , data.documentTemplateConfig, data.workflowConfig, data.dashboardConfig, data.documentRequest, data.documentEffective, data.notificationConfig, data.documentRevison
       , data.docrepository, data.additionalTasks, data.documentPreperation, data.workItemsassigned, data.downloadPrint);

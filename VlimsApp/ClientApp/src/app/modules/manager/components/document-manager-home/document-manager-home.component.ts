@@ -8,7 +8,7 @@ import { CommonService } from '../../../../shared/common.service';
   styleUrls: ['./document-manager-home.component.scss']
 })
 export class DocumentManagerHomeComponent {
-  constructor(private router: Router, private commonSrvc: CommonService) { }
+  constructor(private router: Router, public commonSrvc: CommonService) { }
 
   navigateTo(navTo: any) {
     if (navTo === 'requests') {

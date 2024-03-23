@@ -96,7 +96,7 @@ namespace Vlims.DocumentManager.Manager
                 //if (validationMessages.Length <= 0)
                 //{
                 bool result = DocumentEffectiveData.UpdateDocumentEffective(documentEffective);
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentEffective.CreatedBy, EntityName = documentEffective.documenttype, Type = DocumentEffectiveConstants.EffectiveType, state = DefinitionStatus.Modify, EntityInfo = documentEffective, Unique = documentEffective.documentno });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentEffective.CreatedBy, EntityName = documentEffective.documenttype, Type = DocumentEffectiveConstants.EffectiveType, state = DefinitionStatus.Modify, EntityInfo = documentEffective, Unique = documentEffective.documenttitle });
 
                 return result;
                 //}
