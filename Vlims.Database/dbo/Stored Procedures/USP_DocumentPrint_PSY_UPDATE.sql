@@ -46,8 +46,9 @@ ELSE IF(@Status_PSY='APPROVE' OR @Status_PSY='APPROVED')
 BEGIN
 UPDATE DocumentPrint_PSY SET ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE DRId_PSY=@DRId_PSY
 END
-ELSE IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
+IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
+UPDATE DocumentPreparation_PSY SET Status_PSY=@Status_PSY, ModifiedBy_PSY=@ModifiedBy_PSY, ModifiedDate_PSY=GETDATE()
 EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DRId_PSY,@ModifiedBy_PSY,'PRINT',@ParentGuid_PSY
 END
 IF(@ISWORKITEMS=1)

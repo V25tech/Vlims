@@ -65,7 +65,7 @@ SELECT @ID = @@IDENTITY;
 --SELECT @ID = @@IDENTITY;
 
 END
-ELSE IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
+IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
 UPDATE DocumentEffective_PSY SET Status_PSY=@Status_PSY WHERE DEID_PSY=@DEID_PSY
 EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DEID_PSY,@ModifiedBy_PSY,'EFFECTIVE',@ParentGuid_PSY

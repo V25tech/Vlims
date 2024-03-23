@@ -59,7 +59,7 @@ VALUES(@DPNID_PSY,@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@departme
 @CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId,NEWID(),@ParentGuid)
 SELECT @ID = @@IDENTITY;
 END
-ELSE IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
+IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
 UPDATE DocumentPreparation_PSY SET Status_PSY=@Status_PSY WHERE DPNID_PSY=@DPNID_PSY
 EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DPNID_PSY,@ModifiedBy_PSY,'PREPARATION',@ParentGuid

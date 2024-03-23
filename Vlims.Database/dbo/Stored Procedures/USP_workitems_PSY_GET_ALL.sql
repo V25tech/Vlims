@@ -20,7 +20,7 @@ ModifiedBy_PSY,
 ModifiedDate_PSY,
 RefrenceId_PSY,InitiatedBy_PSY,ActionType_PSY,IsCompleted_PSY
  ,count(*) over() as TotalRows 
- FROM [dbo].[workitems_PSY] WITH (NOLOCK) WHERE (@UserName IS NULL OR InitiatedBy_PSY = @UserName) AND IsCompleted_PSY=0
+ FROM [dbo].[workitems_PSY] WITH (NOLOCK) WHERE (@UserName IS NULL OR CreatedBy_PSY = @UserName) AND IsCompleted_PSY=0
  Order by WITId_PSY DESC
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 

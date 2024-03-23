@@ -54,9 +54,9 @@ INSERT INTO DocumentPreparation_PSY(Documentmanagerid_PSY,documenttitle_PSY,docu
 department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,DOCStatus_PSY,Refrence_PSY,GUID_DP,ReferenceGuid_PSY)  
 VALUES('1',NULL,NULL,@documenttype_PSY,@department_PSY,null,null,NUll,NULL,  
 @CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',NULL,@DRID_PSY,NEWID(),@ParentGuid);  
-SELECT @ID = @@IDENTITY;  
+--SELECT @ID = @@IDENTITY;  
 END  
-ELSE IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')  
+IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')  
 BEGIN  
 UPDATE Documentrequest_PSY SET Status_PSY=@Status_PSY WHERE DRID_PSY=@DRID_PSY  
 EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DRID_PSY,@ModifiedBy_PSY,'REQUEST',@ParentGuid  
