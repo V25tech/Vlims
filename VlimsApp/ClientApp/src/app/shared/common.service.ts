@@ -64,7 +64,7 @@ export class CommonService {
     this.req.PageSize=1000;
     this.req.Id=0;
     this.req.UserName = 'admin';
-    this.userEntityPermissions$.next(JSON.parse(JSON.stringify(localStorage.getItem("roles"))));
+    this.userEntityPermissions$.next(localStorage.getItem("roles"));
     this.setUserPermissions();
     //this.retaileR = new Retailer();
     //this.retaileR.RetailId = 1;
@@ -147,7 +147,7 @@ export class CommonService {
   setUserPermissions() {
     this.userEntityPermissions$.subscribe(data => {
       if (data != null) {
-        this.setPermissions(data);
+        this.setPermissions(JSON.parse(data));
       }
     })
   }

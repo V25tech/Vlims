@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonService } from '../../../../shared/common.service';
+import { CommonService } from '../../../shared/common.service';
 
 @Component({
-  selector: 'app-document-manager-home',
-  templateUrl: './document-manager-home.component.html',
-  styleUrls: ['./document-manager-home.component.scss']
+  selector: 'app-reports-home',
+  templateUrl: './reportsdashboard.component.html',
+//  styleUrls: ['./document-manager-home.component.scss']
 })
-export class DocumentManagerHomeComponent {
+export class ReportsDashboardComponent {
   constructor(private router: Router, public commonSrvc: CommonService) { }
 
   navigateTo(navTo: any) {
@@ -26,10 +26,10 @@ export class DocumentManagerHomeComponent {
     } else if (navTo === 'home') {
       this.router.navigate(['/home']);
     }
-    else if(navTo === 'existing-document-requests'){    
+    else if (navTo === 'existing-document-requests') {
       this.router.navigate(['/existingdoc']);
     }
-    else if(navTo === 'document-revision'){    
+    else if (navTo === 'document-revision') {
       this.router.navigate(['/revision']);
     }
     else if (navTo === 'existingdocuments') {
