@@ -38,6 +38,8 @@ export class DocumentsLandingComponent implements OnInit {
       this.router.navigate(['/document-manager']);
     } else if (navTo === 'admin') {
       this.router.navigate(['/admin']);
+    } else if (navTo === 'reports') {
+      this.router.navigate(['/reports']);
     }
 
   }

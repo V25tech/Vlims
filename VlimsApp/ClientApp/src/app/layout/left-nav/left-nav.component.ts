@@ -270,6 +270,40 @@ export class LeftNavComponent {
         }
         // Add more child items as needed
       ]
+    },
+
+    {
+      label: 'Reports',
+      path: '',
+      isOpen: false,
+      isActive: false,
+      iconClass: 'bi bi-ui-checks-grid',
+      children: [
+        //{
+        //  label: 'Document Type Index',
+        //  path: '/doctypeindex',
+        //  isOpen: false,
+        //  children: null,
+        //  isActive: false,
+        //  iconClass: '',
+        //},
+        {
+          label: 'Documents Index',
+          path: '/docindex',
+          isOpen: false,
+          children: null,
+          isActive: false,
+          iconClass: '',
+        },
+        //{
+        //  label: 'Document Print List',
+        //  path: '/docprintindex',
+        //  isOpen: false,
+        //  children: null,
+        //  isActive: false,
+        //  iconClass: '',
+        //}
+      ],
     }
     
   ];

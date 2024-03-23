@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'documents', component: DocumentsRoutingModule },
   { path: 'manager', component: ManagerRoutingModule },
   { path: 'admin-home', component: AuthenticationModule },
+  { path: 'reports', loadChildren: () => import('./modules/reports/reports.module').then(mod => mod.ReportsModule) }
 ];
 
 @NgModule({

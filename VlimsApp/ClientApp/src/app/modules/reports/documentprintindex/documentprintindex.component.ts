@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { CommonService } from '../../../shared/common.service';
 
 @Component({
-  selector: 'app-reports-home',
-  templateUrl: './reportsdashboard.component.html',
+  selector: 'app-docprint-index',
+  templateUrl: './documentprintindex.component.html',
   //  styleUrls: ['./document-manager-home.component.scss']
 })
 export class DocumentPrintIndexComponent {

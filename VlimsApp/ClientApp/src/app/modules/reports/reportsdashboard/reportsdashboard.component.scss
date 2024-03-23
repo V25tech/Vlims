@@ -1,0 +1,53 @@
+.card {
+  border: none;
+  background: linear-gradient(313deg, #3f51b5, #2196f3);
+  background: linear-gradient(90deg, var(--c1, #3f51b5), var(--c2, #2196f3) 51%, var(--c1, #4dafff)) var(--x, 0)/ 200%;
+  min-width: 240px;
+  min-height: 200px;
+  color: #dae7ff;
+  box-shadow: 0 0 8px 0px #a9a9a9;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+
+  &:hover {
+    --x: 50%;
+    color: #fff;
+  }
+
+  .card-body {
+    align-items: flex-end;
+    display: flex;
+    transition: font 0.3s ease;
+
+    i {
+      position: absolute;
+      font-size: 8rem;
+      right: -2rem;
+      top: 2rem;
+      opacity: 0.1;
+      color: #9fc1ff;
+      transition: font 0.3s ease;
+    }
+
+
+
+    &:hover {
+
+      i {
+        font-size: 10rem;
+        right: -2rem;
+        top: 2rem;
+        opacity: 0.1;
+        color: #9fc1ff;
+      }
+    }
+  }
+}
+
+a {
+  cursor: pointer;
+}
