@@ -100,8 +100,7 @@ import { AuditTemplateTypeNewPageComponent } from './components/audit-template-t
     DropdownModule,
     ToastModule,
     NgxSpinnerModule,
-    CKEditorModule,
-    NgxDocViewerModule
+    CKEditorModule
   ],
   providers: [] 
 })
