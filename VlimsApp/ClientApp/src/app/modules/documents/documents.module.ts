@@ -101,7 +101,6 @@ import { AuditTemplateTypeNewPageComponent } from './components/audit-template-t
     ToastModule,
     NgxSpinnerModule,
     CKEditorModule
-    
   ],
   providers: [] 
 })

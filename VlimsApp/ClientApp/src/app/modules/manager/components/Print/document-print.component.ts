@@ -88,7 +88,6 @@ export class DocumentPrintComponent implements OnInit {
     fileName: string,
     fileExtension?: string
   ) {
-    debugger
     // Convert base64 content to Uint8Array
     const binary_string = window.atob(fileContent);
     const len = binary_string.length;
@@ -97,30 +96,20 @@ export class DocumentPrintComponent implements OnInit {
       bytes[i] = binary_string.charCodeAt(i);
     }
   
-    // Create a new window to display the content
-    const printWindow = window.open('', '_blank');
-    if (printWindow) {
-      // Create a Blob from the bytes
-      const blob = new Blob([bytes], {
-        type: fileType ? fileType : 'application/octet-stream'
-      });
+    // Create a Blob from the bytes
+    const blob = new Blob([bytes], {
+      type: fileType ? fileType : 'application/octet-stream'
+    });
   
-      // Create a URL for the Blob
-      const url = window.URL.createObjectURL(blob);
+    // Create a download link
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = fileName + (fileExtension ? '.' + fileExtension : '');
   
-      // Wait for the new window to load
-      printWindow.onload = () => {
-        // Print the content
-        printWindow.print();
-        // Close the window after printing (optional)
-        // printWindow.close();
-      };
-  
-      // Set the content of the new window to the Blob URL
-      printWindow.location.href = url;
-    } else {
-      console.error('Failed to open print window');
-    }
+    // Trigger the download
+    link.click();
   }
+  
+  
 }
 

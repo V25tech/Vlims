@@ -48,27 +48,9 @@ UPDATE dbo.DocumentPreparation_PSY SET wokflow_PSY=null ,ModifiedBy_PSY=@Modifie
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid
 END
 
-
-IF(@ISWORKITEMS=1)
+ELSE IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
-INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY)
- SELECT @documenttype_PSY,'Preparation','Pending',NULL,@CREATED_BY,GetDate(),'IN-PROGRESS',GetDate(),@DPNID_PSY,WSR.Type,0,WSR.UserName,@ParentGuid,GETDATE(),WSR.UserName,GETDATE() from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
-
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY)
- SELECT @documenttype_PSY,'Preparation','Pending',NULL,@CREATED_BY,GetDate(),'IN-PROGRESS',GetDate(),@DPNID_PSY,WSR.Type,0,WSR.UserName,@ParentGuid,GETDATE(),WSR.UserName,GETDATE() from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
-END
-
-IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
-BEGIN
-UPDATE DocumentPreparation_PSY SET Status_PSY=@Status_PSY WHERE DPNID_PSY=@DPNID_PSY
-EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DPNID_PSY,@ModifiedBy_PSY,'PREPARATION',@ParentGuid
-END
-
-
 DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentPreparation_PSY where DPNID_PSY=@DPNID_PSY)
-IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
-BEGIN
-
 UPDATE DocumentPreparation_PSY SET Status_PSY=@Status_PSY WHERE DPNID_PSY=@DPNID_PSY
 DECLARE @ID INT
 INSERT INTO DocumentEffective_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,EffectiveDate_PSY,Reviewdate_PSY,
@@ -76,7 +58,19 @@ CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrenc
 VALUES(@DPNID_PSY,@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,@document_PSY,null,null,
 @CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId,NEWID(),@ParentGuid)
 SELECT @ID = @@IDENTITY;
+END
+IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
+BEGIN
+UPDATE DocumentPreparation_PSY SET Status_PSY=@Status_PSY WHERE DPNID_PSY=@DPNID_PSY
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DPNID_PSY,@ModifiedBy_PSY,'PREPARATION',@ParentGuid
+END
+IF(@ISWORKITEMS=1)
+BEGIN
+INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY)
+ SELECT @documenttype_PSY,'Preparation','Pending',NULL,@CREATED_BY,GetDate(),'IN-PROGRESS',GetDate(),@DPNID_PSY,WSR.Type,0,WSR.UserName,@ParentGuid,GETDATE(),WSR.UserName,GETDATE() from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
 
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY)
+ SELECT @documenttype_PSY,'Preparation','Pending',NULL,@CREATED_BY,GetDate(),'IN-PROGRESS',GetDate(),@DPNID_PSY,WSR.Type,0,WSR.UserName,@ParentGuid,GETDATE(),WSR.UserName,GETDATE() from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
 END
 
 select @DPNID_PSY; 
