@@ -165,58 +165,14 @@ namespace Vlims.Controllers
             var result = documentTemplateConfigurationService.DeleteAllDocumentTemplateConfiguration(dTIDs);
             return result;
         }
-        
-        public byte[] geturl()
+        [HttpGet("getpath")]
+        public ActionResult GetPath()
         {
-            byte[] bytes = null;
-            string docxFilePath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithMargins.docx");
             string pdfFilePath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithHeaderTable.pdf");
-
-            // Create a new PDF document
-            iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document();
-
-            // Create a new PDF writer
-            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(pdfFilePath, FileMode.Create));
-
-            // Open the PDF document for writing
-            pdfDoc.Open();
-
-            // Open the DOCX file using Open XML SDK
-            using (WordprocessingDocument doc = WordprocessingDocument.Open(docxFilePath, false))
-            {
-                DocumentFormat.OpenXml.Wordprocessing.Body body = doc.MainDocumentPart.Document.Body;
-
-                // Iterate through paragraphs and tables in the DOCX and add them to the PDF
-                foreach (var element in body.Elements())
-                {
-                    if (element is DocumentFormat.OpenXml.Wordprocessing.Paragraph para)
-                    {
-                        // Create a new paragraph in the PDF
-                        pdfDoc.Add(new iTextSharp.text.Paragraph(para.InnerText));
-                    }
-                    else if (element is DocumentFormat.OpenXml.Wordprocessing.Table table)
-                    {
-                        // Process tables
-                        PdfPTable pdfTable = new PdfPTable(table.Elements<DocumentFormat.OpenXml.Wordprocessing.TableRow>().First().Elements<DocumentFormat.OpenXml.Wordprocessing.TableCell>().Count());
-                        foreach (var row in table.Elements<DocumentFormat.OpenXml.Wordprocessing.TableRow>())
-                        {
-                            foreach (var cell in row.Elements<DocumentFormat.OpenXml.Wordprocessing.TableCell>())
-                            {
-                                pdfTable.AddCell(cell.InnerText);
-                            }
-                        }
-                        pdfDoc.Add(pdfTable);
-                    }
-                }
-            }
-
-            // Close the PDF document
-            pdfDoc.Close();
-
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithHeaderTable.pdf");
-             bytes = System.IO.File.ReadAllBytes(path);
-           return bytes;
+            return Ok(pdfFilePath);
         }
+
+        
 
         [HttpGet("getpdf")]
         public ActionResult<byte[]> getpdf(string templateinf,string p_user, bool p_isPdf = true)
@@ -244,7 +200,7 @@ namespace Vlims.Controllers
             Paragraph footerParagraph = footer.AddParagraph();
             StringBuilder footerbuilder = new StringBuilder();
             footerbuilder.Append(htmlUpper);
-            footerbuilder.Append(PrepareStaticdiv(template, template1,p_user));
+            footerbuilder.Append(TemplatePreparation.PrepareStaticdiv(template, template1,p_user));
             footerbuilder.Append(htmllower);
             footerParagraph.AppendHTML(footerbuilder.ToString());
             footerParagraph.Format.BeforeSpacing = 0;
@@ -259,7 +215,7 @@ namespace Vlims.Controllers
                 Paragraph headerParagraph = header.AddParagraph();
                 StringBuilder headerbuilder = new StringBuilder();
                 headerbuilder.Append(htmlUpper);
-                headerbuilder.Append(PrepareHeaderStaticdiv(template, template1, i + 1));
+                headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1));
                 headerbuilder.Append(htmllower);
                 headerParagraph.AppendHTML(headerbuilder.ToString());
                 headerParagraph.Format.BeforeSpacing = 0;
@@ -288,9 +244,9 @@ namespace Vlims.Controllers
             doc.LoadFromFile("DocumentWithMargins.docx");
             string pathhh = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithMargins.docx");
             byte[] pdfBytes1 = System.IO.File.ReadAllBytes(pathhh);
-            string pdfFilePath = "DocumentWithHeaderTable.pdf";
+            string pdfFilePath = "DocumentWithHeaderTable.pdf#toolbar=0";
             doc.SaveToFile(pdfFilePath, FileFormat.PDF);
-            byte[] pdfBytes = ConvertDocxToPdfBytes(doc);
+            byte[] pdfBytes = TemplatePreparation.ConvertDocxToPdfBytes(doc);
             //byte[] pdfBytes = geturl();
             doc.Dispose();
             bytes = pdfBytes;
@@ -305,7 +261,11 @@ namespace Vlims.Controllers
 
 
 
-        static byte[] ConvertDocxToPdfBytes(Document document)
+        
+    }
+    public class TemplatePreparation
+    {
+       public static byte[] ConvertDocxToPdfBytes(Document document)
 
         {
 
@@ -321,7 +281,7 @@ namespace Vlims.Controllers
 
         }
 
-        public static string PrepareStaticdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1,string p_user)
+        public static string PrepareStaticdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, string p_user)
         {
             string table = string.Empty;
             StringBuilder htmlBuilder = new StringBuilder();
@@ -589,6 +549,57 @@ namespace Vlims.Controllers
             table = tableHtml.ToString();
             return table;
 
+        }
+        public byte[] geturl()
+        {
+            byte[] bytes = null;
+            string docxFilePath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithMargins.docx");
+            string pdfFilePath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithHeaderTable.pdf");
+
+            // Create a new PDF document
+            iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document();
+
+            // Create a new PDF writer
+            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(pdfFilePath, FileMode.Create));
+
+            // Open the PDF document for writing
+            pdfDoc.Open();
+
+            // Open the DOCX file using Open XML SDK
+            using (WordprocessingDocument doc = WordprocessingDocument.Open(docxFilePath, false))
+            {
+                DocumentFormat.OpenXml.Wordprocessing.Body body = doc.MainDocumentPart.Document.Body;
+
+                // Iterate through paragraphs and tables in the DOCX and add them to the PDF
+                foreach (var element in body.Elements())
+                {
+                    if (element is DocumentFormat.OpenXml.Wordprocessing.Paragraph para)
+                    {
+                        // Create a new paragraph in the PDF
+                        pdfDoc.Add(new iTextSharp.text.Paragraph(para.InnerText));
+                    }
+                    else if (element is DocumentFormat.OpenXml.Wordprocessing.Table table)
+                    {
+                        // Process tables
+                        PdfPTable pdfTable = new PdfPTable(table.Elements<DocumentFormat.OpenXml.Wordprocessing.TableRow>().First().Elements<DocumentFormat.OpenXml.Wordprocessing.TableCell>().Count());
+                        foreach (var row in table.Elements<DocumentFormat.OpenXml.Wordprocessing.TableRow>())
+                        {
+                            foreach (var cell in row.Elements<DocumentFormat.OpenXml.Wordprocessing.TableCell>())
+                            {
+                                pdfTable.AddCell(cell.InnerText);
+                            }
+                        }
+                        pdfDoc.Add(pdfTable);
+                    }
+                }
+            }
+
+            // Close the PDF document
+            pdfDoc.Close();
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithHeaderTable.pdf");
+            bytes = System.IO.File.ReadAllBytes(path);
+            return bytes;
         }
     }
 }
