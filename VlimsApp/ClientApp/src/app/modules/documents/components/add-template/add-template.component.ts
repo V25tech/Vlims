@@ -805,4 +805,26 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     this.templateForm.header = '';
     
   }
+  onLogoUpload1(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.loader.show();
+      this.templatesvc.uploadImage(file).subscribe((data:any)=> {
+          debugger
+          console.log('image',data.Message);
+          this.templateForm.footer=data.Message;
+          this.loader.hide();
+          //console.log('Image uploaded successfully:', response);
+        },
+        error => {
+          console.error('Error uploading image:', error);
+        }
+      );
+    }
+  }
+  onDeleteFile1(): void {
+   
+    this.templateForm.footer = '';
+    
+  }
 }

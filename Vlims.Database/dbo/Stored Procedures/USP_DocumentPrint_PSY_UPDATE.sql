@@ -5,7 +5,8 @@
 @workflow_PSY NVarChar(50),
 @reason_PSY NVarChar(50),
 @ModifiedBy_PSY NVarChar(100) ,
-@Status_PSY NVarchar(100)
+@Status_PSY NVarchar(100),
+@PrintCopy_PSY varchar(500)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -26,12 +27,12 @@ documentno_PSY=@documentno_PSY,
 noofcopies_PSY=@noofcopies_PSY,
 workflow_PSY=@workflow_PSY,
 reason_PSY=@reason_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRId_PSY] = @DRId_PSY ; 
+ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,PrintCopy_PSY=@PrintCopy_PSY WHERE  [DRId_PSY] = @DRId_PSY ; 
 END
 ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
 BEGIN
 UPDATE DocumentPrint_PSY SET documenttitle_PSY=NULL,documentno_PSY=NULL,printtype_PSY=NULL,noofcopies_PSY=NULL,workflow_PSY=NULL,
-reason_PSY=NULL,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE DRId_PSY=@DRId_PSY
+reason_PSY=NULL,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,@PrintCopy_PSY=null WHERE DRId_PSY=@DRId_PSY
 --UPDATE workitems_PSY SET Stage_PSY='Pending',Status_PSY='IN-PROGRESS',IsCompleted_PSY=0 WHERE RefrenceId_PSY=@DRId_PSY
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid_PSY
 END
@@ -45,20 +46,21 @@ ELSE IF(@Status_PSY='APPROVE' OR @Status_PSY='APPROVED')
 BEGIN
 UPDATE DocumentPrint_PSY SET ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE DRId_PSY=@DRId_PSY
 END
-
-IF(@ISWORKITEMS=1)
-BEGIN
-INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY)
- SELECT @documentno_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@DRId_PSY,WSR.Type,0,@CREATED_BY,@ParentGuid_PSY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Review'
-
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY)
- SELECT @documentno_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@DRId_PSY,WSR.Type,0,@CREATED_BY,@ParentGuid_PSY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Approve'
-END
-
 IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
+UPDATE DocumentPreparation_PSY SET Status_PSY=@Status_PSY, ModifiedBy_PSY=@ModifiedBy_PSY, ModifiedDate_PSY=GETDATE()
 EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DRId_PSY,@ModifiedBy_PSY,'PRINT',@ParentGuid_PSY
 END
+IF(@ISWORKITEMS=1)
+BEGIN
+INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY)
+ SELECT @documentno_PSY,'Print','Pending',NULL,@CREATED_BY,GetDate(),'IN-PROGRESS',GetDate(),@DRId_PSY,WSR.Type,0,wsr.UserName,@ParentGuid_PSY,getdate(),WSR.UserName,GETDATE() from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Review'
+
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY)
+ SELECT @documentno_PSY,'Print','Pending',NULL,@CREATED_BY,GetDate(),'IN-PROGRESS',GetDate(),@DRId_PSY,WSR.Type,0,wsr.UserName,@ParentGuid_PSY,getdate(),WSR.UserName,GETDATE() from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Approve'
+END
+
+
 
 
 

@@ -111,12 +111,56 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.ApprovedRole = Convert.ToString(row["APPROVEDROLE"]);
                         documentTemplateConfigurationData.ReviewedDept = Convert.ToString(row["REVIWEDDEPT"]);
                         documentTemplateConfigurationData.ReviewedRole = Convert.ToString(row["REVIWEDROLE"]);
+                        documentTemplateConfigurationData.PrintCopy = Convert.ToString(row["PrintCopy_PSY"]);
+                        documentTemplateConfigurationData.PrintReason = Convert.ToString(row["reason_PSY"]);
                         string depts = Convert.ToString(row["PREPAREDDEPT"]);
                         if (!string.IsNullOrEmpty(depts))
                         {
                             string[] values = depts.Split(',');
-                            HashSet<string> uniqueValues = new HashSet<string>(values);
-                            documentTemplateConfigurationData.PrepareDept = string.Join(",", uniqueValues);
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.PrepareDept = string.Join(",", values.Distinct());
+                        }
+                        if(!string.IsNullOrEmpty(documentTemplateConfigurationData.ReviewedBy))
+                        {
+                            string[] values = documentTemplateConfigurationData.ReviewedBy.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ReviewedBy= string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.PreparedBy))
+                        {
+                            string[] values = documentTemplateConfigurationData.PreparedBy.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.PreparedBy = string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ApprovedBy))
+                        {
+                            string[] values = documentTemplateConfigurationData.ApprovedBy.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ApprovedBy = string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ApprovedDept))
+                        {
+                            string[] values = documentTemplateConfigurationData.ApprovedDept.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ApprovedDept = string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ApprovedRole))
+                        {
+                            string[] values = documentTemplateConfigurationData.ApprovedRole.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ApprovedRole = string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ReviewedDept))
+                        {
+                            string[] values = documentTemplateConfigurationData.ReviewedDept.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ReviewedDept = string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ReviewedRole))
+                        {
+                            string[] values = documentTemplateConfigurationData.ReviewedRole.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ReviewedRole = string.Join(",", values.Distinct());
                         }
                         //documentTemplateConfigurationData.PrepareDept = Convert.ToString(row["PREPAREDDEPT"]);
                         documentTemplateConfigurationData.PreparedRole = Convert.ToString(row["PREPAREDROLE"]);

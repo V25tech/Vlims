@@ -162,5 +162,6 @@ public class DocumentPrint
         }
     }
     public string Template { get; set; }
+    public string PrintCopy { get; set; }
 }
 
