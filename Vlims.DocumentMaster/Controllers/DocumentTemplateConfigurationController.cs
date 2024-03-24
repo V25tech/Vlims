@@ -30,6 +30,7 @@ namespace Vlims.Controllers
     using DocumentFormat.OpenXml.Packaging;
     using iTextSharp.text.pdf;
     using Microsoft.SharePoint.Client;
+    using System.ComponentModel;
 
 
     /// <summary>
@@ -185,6 +186,8 @@ namespace Vlims.Controllers
 
             StringBuilder builder = new StringBuilder();
             builder.Append(htmlUpper);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "license.elic.xml");
+            Spire.Doc.License.LicenseProvider.SetLicenseKey("DQEAncpg8UKrpcZ6bd1acDUrk/DzuHpVVqZMUNaup1CKQyMW0ztEG9JSlYIAt/ms0m/szh02VvrZVOWjJ7Kzd4+wgan7Q3mFjE1cVdyrarldLqFv5SNBWtQPTHwyxbyQGweGCKYNGPJzYhM4sutNkPm+T0BpuFGjuYI4XhHjaAx3RzGbRwgzoFr5eVOZXE8z/fugnveQBjN6xxayvrCWvoAzXav0SHLdZSL6TiqpL0nbsEM9IcIxeB2+JRjdBzQ3JenJSuY2FIsrenGNHNQ50ebnoqw8FkYPQbyklyO7j3HtCzpEht1zGUdNEf94YC33hwVdrF9lzmVoSOToP2iOkysIZTRTlKQ5BTjU5qlmrQiki/1gjeU8FiFKB73VDq5kbXiOyY2ZzHutz+CjCqCM1lStKIMC/n4KumDsnoblURz84q2Fks9crbXDZsaEfZ+kMb1WAyIZj5NQ3ECYXzyvQ4l3U1vawJWLMbgifrlmqh1EDGL3XSspO4zVCtTtBrZubr9JLCwUenVDz6JUAU2au9Q8HD/oHOgJbwfoqK4InTvolSaA8elHHpS/vByUCIiBaU4RodGS5Db63ZNv+1r0NiF8ml1Sl91AYYEYuurGIIMO3fZzBdWwQKCLPgM4/L8b88+g/C55UTnBVOOGkd5BM9qx68isemi+9HR3gz8Jawj3ac766QsVVoizDtVrcEDXxCy4zExlplijmwFxcE6eM2nkLTvroL5uFCSA+6c5T4hRvC4cpcI2bUBtR4sDiznRV97Kwy1cPX9yRYupRlxtbdc33k08clY/D3o/VmmosKy0IVocjKTfMgnQxvyRf6v2TZAVCeUvl/bAleUNuJoc6oNbqTCR92i/7Lsq0bfvvq8MsG29KH2jpsTXafhkWSZpb3SLlB658DHloUc9iqRmjQmjSf55jIwUq1itvypXbeU0ytTgteqniZOn+D3W8jeVeKdftey933cTcFlFRF2+I/mGylL+X+ZrNL0aSkRjqXNCJ2B+8085l7W9VFlPfLot7IePqPpMxLju2keXeQAzC7kON/OYbRVJ6Ejr02mQ+1y4JjLq3cUiTfqMMNuYYqG5/aem05aYW6k2tj3HrwCNq23ssaraZYr6yx3UO7cD072H+rNxJjKsVmTvruvgD4dVu1wJUhE/xE8A5YEAMAvLU6aopXw2sdNnFiIYydTPTOFxEtXSdmIsGj0tYm6ccpXnskAVTToqqTsM3G3a5tmLlVCt/9tbgcas9LsFwTvELnV9yh6jP8Nm171VctFUv8GovAzjneetmbJniGEn3wsTnPJVHvE5j8MnM8vVK3ePYpmriWdCY3bWkdiT6VgPr+E51KqRftxBf67lrsYU+MEFit4+UfzAW3YFlbNU2MIA7mtcawNNfcyh5vmGjLPwsIPCqKCpzL5RWAkf1Qt0nMWQye8loyhD/TdHahinJNFHRY9hyqvM6BjxKWebq8/ShGxHtJFzLkP2U9EBLv/eK+mATc0M3pcdWC+sgKA9DHqTV0xm9KVqCCD6e8yvd654CMgnGJy0PFrGuXgBY6vERriKV55aHa64x5xJEd6iyXeU1PI=");
             Document document = new Spire.Doc.Document();
             Section section = document.AddSection();
             section.PageSetup.PageSize = PageSize.A4;
@@ -241,6 +244,8 @@ namespace Vlims.Controllers
 
 
             Document doc = new Document();
+            
+            
             doc.LoadFromFile("DocumentWithMargins.docx");
             string pathhh = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithMargins.docx");
             byte[] pdfBytes1 = System.IO.File.ReadAllBytes(pathhh);
