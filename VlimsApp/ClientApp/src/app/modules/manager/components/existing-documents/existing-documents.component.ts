@@ -41,7 +41,10 @@ export class ExistingDocumentsComponent implements OnInit {
   getExistingDocuments() {
     try {
       this.spinner.show();
-      let objrequest: RequestContext1 = { PageNumber: 1, PageSize: 1000, UserName:localStorage.getItem("username"), Id:0 };
+      let objrequest: RequestContext1 = {
+          PageNumber: 1, PageSize: 1000, UserName: localStorage.getItem("username"), Id: 0,
+          type: null
+      };
 
       this.existdocService.getAllDocuments(objrequest).subscribe((data: any) => {
         if (data != null && data.exisitingDocuments.length > 0 && data != undefined) {

@@ -48,8 +48,7 @@ import { AuditexistinggridpageComponent } from './components/auditexistinggridpa
     ReviewExistingDocumentRequestComponent,
     DocumentRevisionRequestsComponent,
     ReviewRevisionComponent,
-    ExistingDocumentsComponent
-    ReviewRevisionComponent,
+    ExistingDocumentsComponent,
     AuditmanagerhomepageComponent,
     AuditrequestgridpageComponent,
     AuditpreparationgridpageComponent,
