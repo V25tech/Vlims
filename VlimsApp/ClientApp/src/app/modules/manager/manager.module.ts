@@ -25,6 +25,13 @@ import { NewPrintRequestComponent } from './components/review-print/new-print-re
 import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
 import { ExistingDocumentsService } from './services/existing-documents.service';
 import { ExistingDocumentsComponent } from './components/existing-documents/existing-documents.component';
+import { AuditmanagerhomepageComponent } from './components/auditmanagerhomepage/auditmanagerhomepage.component';
+import { AuditrequestgridpageComponent } from './components/auditrequestgridpage/auditrequestgridpage.component';
+import { AuditpreparationgridpageComponent } from './components/auditpreparationgridpage/auditpreparationgridpage.component';
+import { AuditeffectivegridpageComponent } from './components/auditeffectivegridpage/auditeffectivegridpage.component';
+import { AuditrevisiongridpageComponent } from './components/auditrevisiongridpage/auditrevisiongridpage.component';
+import { AuditprintgridpageComponent } from './components/auditprintgridpage/auditprintgridpage.component';
+import { AuditexistinggridpageComponent } from './components/auditexistinggridpage/auditexistinggridpage.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +49,14 @@ import { ExistingDocumentsComponent } from './components/existing-documents/exis
     DocumentRevisionRequestsComponent,
     ReviewRevisionComponent,
     ExistingDocumentsComponent
+    ReviewRevisionComponent,
+    AuditmanagerhomepageComponent,
+    AuditrequestgridpageComponent,
+    AuditpreparationgridpageComponent,
+    AuditeffectivegridpageComponent,
+    AuditrevisiongridpageComponent,
+    AuditprintgridpageComponent,
+    AuditexistinggridpageComponent
   ],
   imports: [
     CommonModule,

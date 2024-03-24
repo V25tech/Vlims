@@ -35,5 +35,9 @@ export class DocumentManagerHomeComponent {
     else if (navTo === 'existingdocuments') {
       this.router.navigate(['/' + navTo]);
     }
+    else if(navTo === 'auditmanager'){    
+      this.router.navigate(['/auditmanager']);
+    }
+
   }
 }

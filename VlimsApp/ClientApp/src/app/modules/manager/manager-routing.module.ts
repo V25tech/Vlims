@@ -15,14 +15,30 @@ import { DocumentRevisionRequestsComponent } from './components/document-revisio
 import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
 import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
 import { ExistingDocumentsComponent } from './components/existing-documents/existing-documents.component';
+import { AuditmanagerhomepageComponent } from './components/auditmanagerhomepage/auditmanagerhomepage.component';
+import { AuditrequestgridpageComponent } from './components/auditrequestgridpage/auditrequestgridpage.component';
+import { AuditpreparationgridpageComponent } from './components/auditpreparationgridpage/auditpreparationgridpage.component';
+import { AuditeffectivegridpageComponent } from './components/auditeffectivegridpage/auditeffectivegridpage.component';
+import { AuditrevisiongridpageComponent } from './components/auditrevisiongridpage/auditrevisiongridpage.component';
+import { AuditprintgridpageComponent } from './components/auditprintgridpage/auditprintgridpage.component';
+import { AuditexistinggridpageComponent } from './components/auditexistinggridpage/auditexistinggridpage.component';
+import { AuditRoleAddPageComponent } from '../authentication/components/audit-role-add-page/audit-role-add-page.component';
+import { FunctionalProfileAddPageComponent } from '../authentication/components/functional-profile-add-page/functional-profile-add-page.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
 
   { path: 'document-manager', component: DocumentManagerHomeComponent, canActivate: [AuthGuard] },
+  { path: 'auditmanager', component: AuditmanagerhomepageComponent, canActivate: [AuthGuard] },
   {
     path: 'requests',
     component: RequestsComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditrequests',
+    component: AuditrequestgridpageComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -48,6 +64,46 @@ const routes: Routes = [
   {
     path: 'preparations',
     component: PreparationComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auditpreparations',
+    component: AuditpreparationgridpageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditroleaddpage',
+    component: AuditRoleAddPageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditadddfunctionalprofile',
+    component: FunctionalProfileAddPageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditeffectives',
+    component: AuditeffectivegridpageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auditdocumentrevision',
+    component: AuditrevisiongridpageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditdocumentprint',
+    component: AuditprintgridpageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditexistingdocumentrequests',
+    component: AuditexistinggridpageComponent,
     canActivate: [AuthGuard],
   },
   {

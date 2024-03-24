@@ -18,8 +18,8 @@ export class DocumentMasterHomeComponent {
       this.router.navigate(['/workflow']);
     } else if (navTo === 'document-master') {
       this.router.navigate(['/document-master']);
-    } else if (navTo === 'document-manager') {
-      this.router.navigate(['/document-manager']);
+    } else if (navTo === 'auditdocmaster') {
+      this.router.navigate(['/auditdocmaster']);
     } else if (navTo === 'home') {
       this.router.navigate(['/home']);
     }

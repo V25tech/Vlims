@@ -15,6 +15,7 @@ namespace Vlims.DocumentMaster.Manager
     using Vlims.Common;
     using Vlims.DocumentMaster.Entities;
     using Vlims.DocumentMaster.DataAccess;
+    using Vlims.Administration.Entities;
 
     // Comment
     public class workflowconigurationService : IworkflowconigurationService
@@ -63,7 +64,8 @@ namespace Vlims.DocumentMaster.Manager
                 {
                     workflowconiguration.Status = "Active";
                     var result = workflowconigurationData.Saveworkflowconiguration(workflowconiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = workflowconiguration.workflowName, Type = workflowconigurationConstants.workflowName1, state = DefinitionStatus.New });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = workflowconiguration.CreatedBy, EntityName = workflowconiguration.workflowName, Type = workflowconigurationConstants.WorkflowType, state = DefinitionStatus.New,  EntityInfo = workflowconiguration, Unique = workflowconiguration.code });
+
                     if (result)
                         workflowconigurationData.WorkspaceUserMapping(workflowconiguration);
                     return result;
@@ -84,6 +86,8 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = workflowconigurationData.Updateworkflowconiguration(workflowconiguration);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = workflowconiguration.CreatedBy, EntityName = workflowconiguration.workflowName, Type = workflowconigurationConstants.WorkflowType, state = DefinitionStatus.Modify, EntityInfo = workflowconiguration, Unique = workflowconiguration.code });
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);

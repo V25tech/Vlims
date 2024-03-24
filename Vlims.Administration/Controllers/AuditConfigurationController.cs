@@ -45,8 +45,15 @@ namespace PolicySummary.Controllers
             var result = auditConfigurationService.GetAllAuditConfiguration(type);
             return Ok(result);
         }
-        
-       
+
+        [HttpPost("getauditByEntityInfo")]
+        public ActionResult GetAllAuditConfigurationByEntityName(string type)
+        {
+            var result = auditConfigurationService.GetAllAuditConfigurationByEntityName(type);
+            return Ok(result);
+        }
+
+
         /// <summary>
         /// This Method is used to Save RoleConfiguration
         /// </summary>

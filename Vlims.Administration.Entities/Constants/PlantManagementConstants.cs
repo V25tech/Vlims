@@ -15,6 +15,7 @@ namespace Vlims.Administration.Entities
 
     public class PlantManagementConstants
     {
+        public const string PlantType = "PlantType";
         public const string PlantName1 = "PlantName1";
 
         public const string PMId = "@PMId_PSY";
