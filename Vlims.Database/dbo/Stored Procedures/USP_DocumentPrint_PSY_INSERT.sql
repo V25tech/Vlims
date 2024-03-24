@@ -5,7 +5,8 @@
 @workflow_PSY NVarChar(50),
 @reason_PSY NVarChar(50),
 @CreatedBy_PSY NVarChar(100),
-@ModifiedBy_PSY NVarChar(100) 
+@ModifiedBy_PSY NVarChar(100),
+@PrintCopy_PSY varchar(500)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -26,7 +27,7 @@ reason_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY)
+ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PSY)
  VALUES 
 (@documenttitle_PSY,
 @printtype_PSY,
@@ -37,7 +38,7 @@ ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY)
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate(),@REFRENCEID,'In-Progress',NEWID(),@REFERENCEGUID);
+ GetDate(),@REFRENCEID,'In-Progress',NEWID(),@REFERENCEGUID,@PrintCopy_PSY);
  SELECT @ID = @@IDENTITY; 
 
   --DECLARE @ISWORKITEMS BIT

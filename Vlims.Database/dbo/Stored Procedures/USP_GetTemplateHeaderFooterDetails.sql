@@ -90,10 +90,11 @@ STRING_AGG(PR.DEPTNAME, ',') AS PREPAREDDEPT,
 (SELECT STRING_AGG(ROLENAME,',') FROM @APPROVERS) AS APPROVEDROLE,
 (SELECT STRING_AGG(ROLENAME,',') FROM @REVIEWERS) AS REVIWEDROLE,
 STRING_AGG(PR.ROLENAME, ',') AS PREPAREDROLE,
-DP.CreatedDate_PSY AS PREAPREDDATE
+DP.CreatedDate_PSY AS PREAPREDDATE,DPP.PrintCopy_PSY,DPP.reason_PSY
 FROM AdditionalTask_PSY AT
 JOIN DocumentEffective_PSY DE ON DE.DEID_PSY=AT.DocumentEffective_ID
 JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY
+JOIN DocumentPrint_PSY DPP ON DPP.ReferenceGuid_PSY=DP.GUID_DP
 JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
 JOIN Documentrequest_PSY DRT ON DRT.DRID_PSY=DP.Refrence_PSY
 JOIN @PREPAREDBY PR ON PR.TEMPLATE_NAME=DP.template_PSY
@@ -106,6 +107,7 @@ GROUP BY
     DE.EffectiveDate_PSY,
     DE.Reviewdate_PSY,
     DP.CreatedDate_PSY,
-    DRT.department_PSY;
-
+    DRT.department_PSY,
+    DPP.PrintCopy_PSY,
+    DPP.reason_PSY;
 end

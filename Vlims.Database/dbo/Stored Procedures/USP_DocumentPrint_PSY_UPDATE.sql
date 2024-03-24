@@ -5,7 +5,8 @@
 @workflow_PSY NVarChar(50),
 @reason_PSY NVarChar(50),
 @ModifiedBy_PSY NVarChar(100) ,
-@Status_PSY NVarchar(100)
+@Status_PSY NVarchar(100),
+@PrintCopy_PSY varchar(500)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -26,12 +27,12 @@ documentno_PSY=@documentno_PSY,
 noofcopies_PSY=@noofcopies_PSY,
 workflow_PSY=@workflow_PSY,
 reason_PSY=@reason_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRId_PSY] = @DRId_PSY ; 
+ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,PrintCopy_PSY=@PrintCopy_PSY WHERE  [DRId_PSY] = @DRId_PSY ; 
 END
 ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
 BEGIN
 UPDATE DocumentPrint_PSY SET documenttitle_PSY=NULL,documentno_PSY=NULL,printtype_PSY=NULL,noofcopies_PSY=NULL,workflow_PSY=NULL,
-reason_PSY=NULL,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE DRId_PSY=@DRId_PSY
+reason_PSY=NULL,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,@PrintCopy_PSY=null WHERE DRId_PSY=@DRId_PSY
 --UPDATE workitems_PSY SET Stage_PSY='Pending',Status_PSY='IN-PROGRESS',IsCompleted_PSY=0 WHERE RefrenceId_PSY=@DRId_PSY
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid_PSY
 END
