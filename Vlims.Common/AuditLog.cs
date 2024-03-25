@@ -66,7 +66,7 @@ namespace Vlims.Common
             },
                 };
                 result = Convert.ToBoolean(dataAccessHelper.ExecuteStoredProcedure("dbo.USP_AUDIT_LOGS_PSY_INSERT_NEW", parameters, ExecutionType.Scalar, 600));
-            }
+                }
             catch (SqlException ex)
             {
                 throw;

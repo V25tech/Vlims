@@ -19,6 +19,7 @@ namespace Vlims.DocumentManager.Manager
     using Vlims.DMS.Entities;
     using Vlims.DocumentManager.DataAccess;
     using Vlims.DocumentMaster.Manager;
+    using Vlims.DocumentMaster.Entities;
 
 
     // Comment
@@ -76,7 +77,8 @@ namespace Vlims.DocumentManager.Manager
                 documentrequest.documentmanagerid = "1";
                 //documentrequest.Status = "In-Progress";
                 var result = DocumentrequestData.SaveDocumentrequest(documentrequest);
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.documentrequest, state = DefinitionStatus.New });
+                
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentrequest.CreatedBy, EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.RequestType, state = DefinitionStatus.New, EntityInfo = documentrequest, Unique = documentrequest.documenttype });
                 return result;
             }
             catch (System.Exception ex)
@@ -84,7 +86,6 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-
         public bool UpdateDocumentrequest(Documentrequest documentrequest)
         {
             try
@@ -93,6 +94,8 @@ namespace Vlims.DocumentManager.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = DocumentrequestData.UpdateDocumentrequest(documentrequest);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentrequest.CreatedBy, EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.RequestType, state = DefinitionStatus.Modify, EntityInfo = documentrequest, Unique = documentrequest.documenttype });
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);

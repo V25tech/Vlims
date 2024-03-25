@@ -56,7 +56,7 @@
                             <td>{{doc?.documenttypeprefix}}</td>
                             <!-- <td>{{doc?.Description}}</td>  -->
                             <td>{{doc?.ModifiedBy}}</td>
-                            <td>{{doc?.ModifiedDate | date:'dd/MM/yyyy'}}</td>
+                            <td>{{doc?.ModifiedDate}}</td>
                             <td><span class="status" [ngClass]="{'status-completed':true}">{{doc.Status}} </span></td>
                             <td class="text-center" *ngIf="access && !doc?.IsParent"><i (click)="editdoc(doc)" class="bi bi-pencil"></i></td>
                             <td class="text-center" *ngIf="!access">
