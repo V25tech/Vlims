@@ -72,7 +72,7 @@
                    title="Approved">
                    </i>
                    <span class="mx-2"></span> 
-                   <i class="bi bi-printer-fill" title="Print" (click)="print(doc)"></i>
+                   <i class="bi bi-printer-fill" title="Print" (click)="previewtemplate(template1,doc)"></i>
                  </td>
                </tr>
              </ng-template>
@@ -85,7 +85,20 @@
 
 
 
-
+<ng-template #template1>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Preview</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+    </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+  </div>
+</ng-template>
 
 
 

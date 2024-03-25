@@ -169,8 +169,10 @@ namespace Vlims.Controllers
         [HttpGet("getpath")]
         public ActionResult GetPath()
         {
+            // Get the current request's host address dynamically
+            var hostAddress = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/pdfs/DocumentWithHeaderTable.pdf";
             string pdfFilePath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithHeaderTable.pdf");
-            return Ok(pdfFilePath);
+            return Ok(hostAddress);
         }
 
         
@@ -249,7 +251,7 @@ namespace Vlims.Controllers
             doc.LoadFromFile("DocumentWithMargins.docx");
             string pathhh = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithMargins.docx");
             byte[] pdfBytes1 = System.IO.File.ReadAllBytes(pathhh);
-            string pdfFilePath = "DocumentWithHeaderTable.pdf#toolbar=0";
+            string pdfFilePath = "DocumentWithHeaderTable.pdf";
             doc.SaveToFile(pdfFilePath, FileFormat.PDF);
             byte[] pdfBytes = TemplatePreparation.ConvertDocxToPdfBytes(doc);
             //byte[] pdfBytes = geturl();
@@ -409,11 +411,11 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("<table class=\"tg\">");
             htmlBuilder.AppendLine("<thead>");
             htmlBuilder.AppendLine("  <tr>");
-            htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""80"" height=""80"" /></th>");
+            htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""100"" height=""80"" /></th>");
             //htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""20"" height=""20"" /></th>");
             //htmlBuilder.AppendLine($@"<img src=""{dataUri}"" width=""20"" height=""20"" />");
             htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue : "test") : "test")}</th>");
-            htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri1}"" width=""100"" height=""100"" style=""align:center"" /></th>");
+            htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri1}"" width=""100"" height=""80"" style=""align:center"" /></th>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</thead>");
             htmlBuilder.AppendLine("<tbody>");

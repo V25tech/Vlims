@@ -41,7 +41,7 @@ getTemplate(templte: string,ispdf:boolean=true) {
 }
 geturl() {
   debugger
-  return this.http.getwithheader(`api/documenttemplateconfiguration/geturl`, this.type);
+  return this.http.getwithheader(`api/documenttemplateconfiguration/getpath`, this.type);
 }
 uploadImage(file: File): Observable<any> {
   const formData = new FormData();
