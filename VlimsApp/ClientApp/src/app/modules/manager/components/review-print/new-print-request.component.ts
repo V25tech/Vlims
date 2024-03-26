@@ -196,7 +196,11 @@ export class NewPrintRequestComponent implements OnInit {
     this.toastMsg = this.toastMsg ?? 'Updated'
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
-    this.docprintservice.UpdatePrintRequest(this.print).subscribe(res => {
+      let reqObj = JSON.parse(JSON.stringify(this.print))
+      reqObj.modifiedDate = new Date(reqObj.modifiedDate)
+      reqObj.ModifiedDate = reqObj.modifiedDate
+
+      this.docprintservice.UpdatePrintRequest(reqObj).subscribe(res => {
       this.commonsvc.printConfig = new DocumentPrintConfiguration();
       this.spinner.hide();
       this.location.back();
