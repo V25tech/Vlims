@@ -8,6 +8,7 @@ import { Paginator } from 'primeng/paginator';
 import { RequestContext1 } from '../../../../models/model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 
 @Component({
   selector: 'app-exisitngdocuments',
@@ -31,6 +32,7 @@ export class ExistingDocumentsComponent implements OnInit {
   modalRef: BsModalRef | undefined;
 
   constructor(private router: Router, private activate:ActivatedRoute, private spinner: NgxSpinnerService, private commonsvc: CommonService, private existdocService: ExistingDocumentsService
+      ,private templatesvc:DocumentTemplateServiceService
     , private modalService: BsModalService, private sanitizer: DomSanitizer) {
 
   }
@@ -78,7 +80,7 @@ export class ExistingDocumentsComponent implements OnInit {
   previewtemplate(template: TemplateRef<any>, docInfo: any): void {
     this.spinner.show();
     docInfo.edrId = docInfo.id;
-    this.existdocService.preview(docInfo).subscribe((data: any) => {
+    this.templatesvc.getTemplate(docInfo).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template);
@@ -87,12 +89,23 @@ export class ExistingDocumentsComponent implements OnInit {
     });
   }
   openViewer(template: TemplateRef<any>): void {
-
-    if (this.pdfBytes) {
-      const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+    
+    // if (this.pdfBytes) {
+    //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
+    //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+    //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    //   debugger
+      
+    //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
+    // }
+    this.getUrl(template);
+  }
+  getUrl(template: TemplateRef<any>):void{
+    this.templatesvc.geturl().subscribe((data:any)=>{
+      debugger
+      this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    }
+    })
   }
   private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
     const byteCharacters = atob(b64Data);
