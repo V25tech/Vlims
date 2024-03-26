@@ -52,24 +52,6 @@ BEGIN
  DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid_PSY;
 END
 
-ELSE IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
-BEGIN
-DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentEffective_PSY where DEID_PSY=@DEID_PSY)
-UPDATE DocumentEffective_PSY SET Status_PSY=@Status_PSY WHERE DEID_PSY=@DEID_PSY
-DECLARE @ID INT DECLARE @printID int,@version int=0
-SET @version=(SELECT COUNT(*)+1 FROM AdditionalTask_PSY WHERE Refrence_PSY=@referenceId AND Status_PSY='APPROVED')
-INSERT INTO AdditionalTask_PSY(DocumentEffective_ID,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Version,Refrence_PSY,GUID_AD,ReferenceGuid_PSY)
-VALUES(@DEID_PSY,
-@CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'APPROVED',@version,@referenceId,NEWID(),@ParentGuid_PSY)
-SELECT @ID = @@IDENTITY;
---SELECT @ID = @@IDENTITY;
-
-END
-IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
-BEGIN
-UPDATE DocumentEffective_PSY SET Status_PSY=@Status_PSY WHERE DEID_PSY=@DEID_PSY
-EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DEID_PSY,@ModifiedBy_PSY,'EFFECTIVE',@ParentGuid_PSY
-END
 IF(@ISWORKITEMS=1)
 BEGIN
 INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY, CreatedDate_PSY, ModifiedBy_PSY, ModifiedDate_PSY)
@@ -79,6 +61,40 @@ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PS
  SELECT @documenttype_PSY,'Effective','Pending',NULL,@CREATED_BY,GetDate(),'IN-PROGRESS',GetDate(),@DEID_PSY,WSR.Type,0,WSR.UserName,@ParentGuid_PSY, GETDATE(), WSR.UserName, GETDATE() from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
 END
 
+IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
+BEGIN
+UPDATE DocumentEffective_PSY SET Status_PSY=@Status_PSY WHERE DEID_PSY=@DEID_PSY
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY,@DEID_PSY,@ModifiedBy_PSY,'EFFECTIVE',@ParentGuid_PSY
+END
+
+DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentEffective_PSY where DEID_PSY=@DEID_PSY)
+
+
+IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
+BEGIN
+UPDATE DocumentEffective_PSY SET Status_PSY=@Status_PSY WHERE DEID_PSY=@DEID_PSY
+DECLARE @ID INT DECLARE @printID int,@version int=0
+SET @version=(SELECT COUNT(*)+1 FROM AdditionalTask_PSY WHERE Refrence_PSY=@referenceId AND Status_PSY='APPROVED')
+INSERT INTO AdditionalTask_PSY(DocumentEffective_ID,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Version,Refrence_PSY,GUID_AD,ReferenceGuid_PSY)
+VALUES(@DEID_PSY,
+@CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'APPROVED',@version,@referenceId,NEWID(),@ParentGuid_PSY)
+SELECT @ID = @@IDENTITY;
+
+
+
+--SELECT @ID = @@IDENTITY;
+
+END
+
+--IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
+--BEGIN
+--DECLARE @REF INT=0
+--SET @REF=(SELECT Documentmanagerid_PSY FROM DocumentEffective_PSY WHERE DEID_PSY=@DEID_PSY)
+--DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DEID_PSY
+--DELETE FROM DocumentEffective_PSY WHERE DEID_PSY=@DEID_PSY
+--UPDATE DocumentPreparation_PSY SET Status_PSY='IN-PROGRESS' WHERE DPNID_PSY=@REF
+--UPDATE workitems_PSY SET Stage_PSY='Pending',Status_PSY='IN-PROGRESS',IsCompleted_PSY=0 WHERE RefrenceId_PSY=@REF
+--END
 
 select @DEID_PSY; 
 
