@@ -62,6 +62,15 @@ export class DocumentsIndexComponent implements OnInit {
     this.ducomentSrvc.getAllDocuments(objrequest).subscribe((data: any) => {
       if (data != null && data.exisitingDocuments.length > 0 && data != undefined) {
         data.exisitingDocuments.forEach((item: any) => {
+          delete item.createdBy;
+          delete item.createdOn;
+          delete item.modifiedOn;
+          delete item.modifiedBy;
+          delete item.entityName;
+          delete item.id;
+          delete item.status;
+          delete item.template;
+          delete item.document;
           item.effectiveDate = this.commonsvc.setDate(item.effectiveDate);
           item.reviewDate = (item.reviewDate != null || item.reviewDate != 'NA') ? this.commonsvc.setDate(item.reviewDate) : 'NA';
         })

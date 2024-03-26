@@ -66,9 +66,9 @@ public class DocumentPrintController : ControllerBase
     /// </summary>
     /// <param name="documentEffective"></param>
     [HttpPost("updatedocumentprint")]
-    public ActionResult<System.Boolean> UpdateDocumentPrint(DocumentPrint documentEffective)
+    public ActionResult<System.Boolean> UpdateDocumentPrint(DocumentPrint documentPrint)
     {
-        var result = documentPrintService.UpdateDocumentPrint(documentEffective);
+        var result = documentPrintService.UpdateDocumentPrint(documentPrint);
         return result;
     }
 
