@@ -18,13 +18,15 @@ export class DocumentsLandingComponent implements OnInit {
   requestObj = new RequestContext1();
   public workItems : Array<WorkItemsConfiguration> = [];
   workItemsCount = 0;
+  reviewCount = '';
+  approveCount = '';  
   constructor(private router: Router, private loader: NgxSpinnerService, private workitemssvc: WorkitemsService) {
     this.userRole = JSON.parse(this.storage['user']).Role.toLowerCase();
     this.userName = this.storage['username'].toLowerCase();
   }
 
   ngOnInit() {
-    this.getworkflowitems();
+    this.getworkflowitems();    
   }
 
   navigateTo(navTo: any) {
@@ -49,10 +51,17 @@ export class DocumentsLandingComponent implements OnInit {
     this.requestObj.PageNumber = 1;
     this.requestObj.PageSize = 1000;
     this.requestObj.Id = 0;
-    this.requestObj.UserName = this.userName;
+    this.requestObj.UserName = this.userName;    
     return this.workitemssvc.getworkitems(this.requestObj, this.userName).subscribe((data: any) => {
       this.workItems = data.Response;
       this.workItemsCount = 0;
+      if(this.workItems)
+      {
+        let approveCnt = this.workItems.filter(item => item.Status.toLowerCase() == 'in-progress' && item.ActionType.toLowerCase() == 'approve').length;
+        let reviewCnt = this.workItems.filter(item => item.Status.toLowerCase() == 'in-progress' && item.ActionType.toLowerCase() == 'review').length;
+        this.approveCount = approveCnt < 10 ? '0' + approveCnt : '' + approveCnt;
+        this.reviewCount = reviewCnt < 10 ? '0' + reviewCnt : '' + reviewCnt;
+      }
       this.workItemsCount = this.workItems.filter(item => item.Status.toLowerCase() == 'inprogress').length;
       this.loader.hide();
  

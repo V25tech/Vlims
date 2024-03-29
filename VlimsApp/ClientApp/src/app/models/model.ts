@@ -388,6 +388,7 @@ export class ExistingDocumentRequest {
   modifiedDate: Date | undefined;
   effectiveDate?: Date | undefined;
   reviewDate?: Date | undefined;
+  reviewCountDownValue:  number| undefined;
 }
 
 

@@ -21,3 +21,25 @@
   <router-outlet></router-outlet>
 </div>
 <ngx-spinner type="ball-clip-rotate"></ngx-spinner>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Reminder</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="col">
+      <div class="p-4 bg-white shadow-dark rounded-2">
+          <p *ngFor="let existdoc of existingDocDatasource; let i=index">            
+           {{i+1}}. The review date for Document Number {{existdoc.documentno}} is  within the next {{existdoc?.reviewCountDownValue}} days
+          </p>
+      </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+  </div>
+</ng-template>
