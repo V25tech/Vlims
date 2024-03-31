@@ -2,82 +2,116 @@
   <div class="row p-2">
 
     <!-- <div class="row p-2">
-    <div class="col">
-      <h4 class="page-title"><a ><i class="bi bi-house-door"></i></a></h4>
-    </div>
-  </div> -->
-
-    <div class="col col-lg-3">
-      <div class="card" (click)="userRole!= 'adminrole' && navigateTo('assigned')">
-        <div class="card-header bg-transparent d-flex justify-content-between border-0">          
-          <span class="ms-auto" style="color: white;"><cite title="Source Title"><small *ngIf="reviewCount || approveCount">Review: {{reviewCount}} <br /> Approve: {{approveCount}}</small></cite></span>
-        </div> 
-        <div class="card-body">
-          <i class="fa fa-briefcase"></i>
-          <h5 class="card-title">
-            Work Items<br />
-            Assigned to me
-            <!--<h6 class="align-items-center">{{this.workItemsCount}}</h6>-->
-          </h5>
+      <div class="col">
+        <h4 class="page-title"><a ><i class="bi bi-house-door"></i></a></h4>
+      </div>
+    </div> -->
+    <div class="col col-lg-9">
+      <div class="row p-2">
+        <div class="col">
+          <h4 class="page-title"><a (click)="navigateTo('home')"><i class="bi bi-house-door"></i> Home</a></h4>
         </div>
       </div>
-    </div>
 
-    <!-- <div class="col col-lg-3">
-    <div class="card" (click)="navigateTo('dashboard')">
-      <div class="card-body">
-        <i class="fa fa-chart-pie"></i>
-        <h5 class="card-title">Dashboard</h5>
-      </div>
-    </div>
-  </div> -->
+      <div  class="row">
 
-    <div class="col col-lg-3">
-      <div class="card" (click)="userRole != 'adminrole' && navigateTo('document-master')">
-        <div class="card-body">
-          <i class="fa-regular fa-life-ring"></i>
-          <h5 class="card-title">Document Master</h5>
+        <div class="col" [ngClass]="viewreminderDocs ? 'col-lg-3' : 'col-lg-4'">
+          <div class="card" (click)="userRole != 'adminrole' && navigateTo('assigned')">
+            <div class="card-header bg-transparent d-flex justify-content-between border-0">
+              <span class="ms-auto" style="color: white;"><cite title="Source Title"><small
+                    *ngIf="reviewCount || approveCount">Review: {{reviewCount}} <br /> Approve:
+                    {{approveCount}}</small></cite></span>
+            </div>
+            <div class="card-body">
+              <i class="fa fa-briefcase"></i>
+              <h5 class="card-title">
+                Work Items<br />
+                Assigned to me
+              </h5>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
+        <!-- <div class="col col-lg-4">
+          <div class="card" (click)="userRole != 'adminrole' && navigateTo('dashboard')">
+            <div class="card-body">
+              <i class="fa fa-chart-pie"></i>
+              <h5 class="card-title">Dashboard</h5>
+            </div>
+          </div>
+        </div> -->
 
-
-    <div class="col col-lg-3">
-      <div class="card" (click)="userRole != 'adminrole' && navigateTo('document-manager')">
-        <div class="card-body">
-          <i class="fa-solid fa-folder-tree"></i>
-          <h5 class="card-title">Document Manager</h5>
+        <div class="col" [ngClass]="viewreminderDocs ? 'col-lg-3' : 'col-lg-4'">
+          <div class="card" (click)="userRole != 'adminrole' && navigateTo('document-master')">
+            <div class="card-body">
+              <i class="fa-regular fa-life-ring"></i>
+              <h5 class="card-title">Document Master</h5>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- <div class="col col-lg-3">
-    <div class="card" (click)="navigateTo('document-types')">
-      <div class="card-body">
-        <i class="fa-solid fa-database"></i>
-        <h5 class="card-title">Document Repository</h5>
-      </div>
-    </div>
-  </div> -->
 
-    <div class="col col-lg-3">
-      <div class="card" (click)="navigateTo('admin')">
-        <div class="card-body">
-          <i class="fa-solid fa-users-gear"></i>
-          <h5 class="card-title">Admin Management</h5>
+
+        <div class="col" [ngClass]="viewreminderDocs ? 'col-lg-3' : 'col-lg-4'">
+          <div class="card" (click)="userRole != 'adminrole' && navigateTo('document-manager')">
+            <div class="card-body">
+              <i class="fa-solid fa-folder-tree"></i>
+              <h5 class="card-title">Document Manager</h5>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col col-lg-3">
-      <div class="card" (click)="navigateTo('reports')">
-        <div class="card-body">
-          <i class="fa-solid fa-users-gear"></i>
-          <h5 class="card-title">Reports</h5>
+        <!-- <div class="col col-lg-4">
+          <div class="card" (click)="userRole != 'adminrole' && navigateTo('document-types')">
+            <div class="card-body">
+              <i class="fa-solid fa-database"></i>
+              <h5 class="card-title">Document Repository</h5>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="col" [ngClass]="viewreminderDocs ? 'col-lg-3' : 'col-lg-4'">
+          <div class="card" (click)="navigateTo('admin')">
+            <div class="card-body">
+              <i class="fa-solid fa-users-gear"></i>
+              <h5 class="card-title">Admin Management</h5>
+            </div>
+          </div>
         </div>
+
+        <div class="col" [ngClass]="viewreminderDocs ? 'col-lg-3' : 'col-lg-4'">
+          <div class="card" (click)="navigateTo('reports')">
+            <div class="card-body">
+              <i class="fa-solid fa-users-gear"></i>
+              <h5 class="card-title">Reports</h5>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
+    <div *ngIf="viewreminderDocs" class="col-lg-3">
+      <div class="reminder">
+        <div class="reminder__header">
+          <p class="reminder__header-text">Upcoming Reminder</p>
+        </div>
+        <ul>
+          <!-- <li class="reminder__content">
+            <div class="reminder__content-info">
+              <p class="reminder__content-due-date"> <i class="bi bi-clock"></i> Today 11:30 AM</p>
+              <p class="reminder__content-title">Sales Report Q1 2024 Document Approval</p>
+            </div>
+          </li> -->
 
+          <li *ngFor="let existdoc of reminderDocs; let i=index" class="reminder__content">
+            <div class="reminder__content-info">
+              <p class="reminder__content-title">The review date for Document Number {{existdoc.documentno}} is  within the next {{existdoc?.reviewCountDownValue}} days</p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
   </div>
 </div>
