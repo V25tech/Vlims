@@ -86,6 +86,7 @@ getsetfunctionalprofile() {
       this.toaster.success('role permissions added');
       this.loader.hide();
       this.isButtonDisabled=false;
+      this.location.back();
   });
 }
 }
