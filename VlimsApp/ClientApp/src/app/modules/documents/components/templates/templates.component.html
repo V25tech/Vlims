@@ -41,7 +41,7 @@
                         <!-- <th pSortableColumn="description" style="width:15%">Description<p-sortIcon field="description"></p-sortIcon></th> -->
                         <th pSortableColumn="CreatedBy" style="width:20%">Registered By<p-sortIcon field="CreatedBy"></p-sortIcon></th>
                         <th pSortableColumn="CreatedDate" style="width:200px">Registered On <p-sortIcon field="CreatedDate"></p-sortIcon></th>
-                        <th pSortableColumn="Preview" style="width:200px">Preview <p-sortIcon field="Preview"></p-sortIcon></th>
+                        <!-- <th pSortableColumn="Preview" style="width:200px">Preview <p-sortIcon field="Preview"></p-sortIcon></th> -->
                         <th pSortableColumn="Status" style="width:200px">Status <p-sortIcon field="Status"></p-sortIcon></th>
                         <th style="width:80px">Actions</th>
 
@@ -55,9 +55,9 @@
                         <!-- <td>{{template?.Templatename}}</td> -->
                         <td>{{template?.CreatedBy}}</td>
                         <td>{{template?.CreatedDate}}</td>
-                        <td>
+                        <!-- <td>
                             <a href="javascript:void(0)" (click)="previewtemplate(template1,template)">Preview</a>
-                        </td> 
+                        </td>  -->
                         <td><span class="status" [ngClass]="{'status-completed':true}">{{template?.Status}} </span></td>
                         <td class="text-center" *ngIf="access && !template?.IsParent"><i (click)="editdoc(template)" class="bi bi-pencil"></i></td>
                         <td class="text-center" *ngIf="!access">

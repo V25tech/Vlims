@@ -36,7 +36,7 @@ public class ExistingDocumentRequestConstants
 
     public const string EffectiveDate = "@EffectiveDate_PSY";
 
-    public const string ReviewDate = "@ReviewDate_PSY";
+    public const string ReviewDate = "@reviewdate_PSY";
 
     public const string ModifiedBy = "@ModifiedBy_PSY";
 

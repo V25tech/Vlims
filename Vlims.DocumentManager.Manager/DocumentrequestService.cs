@@ -90,10 +90,13 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
+
                 String validationMessages = DocumentrequestValidator.IsValidDocumentrequest(documentrequest);
                 if (validationMessages.Length <= 0)
                 {
                     bool result = DocumentrequestData.UpdateDocumentrequest(documentrequest);
+
+                    documentrequest.CreatedDate= DateTime.Now;
                     AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentrequest.CreatedBy, EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.RequestType, state = DefinitionStatus.Modify, EntityInfo = documentrequest, Unique = documentrequest.documenttype });
 
                     return result;

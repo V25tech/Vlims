@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
             <div class="d-flex justify-content-between align-items-center">
-                <h4 class="page-title"><span class="bold-text">DEPARTMENT TYPE</span><br><span class="bold-text">AUDIT TRIALS</span></h4>
+                <h4 class="page-title"><span class="bold-text">Functional Profile</span><br><span class="bold-text">Audit Trails</span></h4>
                 <div class="back-icon">
                     <a href="javascript:void(0);" onclick="history.back();">
                         <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
@@ -20,7 +20,7 @@
   
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <strong>Version {{ i + 1 }}</strong>
+                                    <strong>Version {{ i + 0 }}</strong>
                                 </div>
                             </div>
   
@@ -149,7 +149,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <strong>Document Revision:</strong>
+                                    <strong>Document Repository:</strong>
                                 </div>
                                 <div class="col-sm-9">
                                     {{ auditConfig.EntityInfo.additionalTasks }}
@@ -176,12 +176,25 @@
 
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <strong>Created By:</strong>
+                                    <strong>Initiated By:</strong>
                                 </div>
                                 <div class="col-sm-9">
                                     {{ auditConfig.EntityInfo.CreatedBy }}
                                 </div>
                             </div>
+
+
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Initiated On:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.createddate | date:'dd/MM/yyyy HH:mm' }}
+                                </div>
+                            </div>
+
+
 
                         </div>
                     </div>

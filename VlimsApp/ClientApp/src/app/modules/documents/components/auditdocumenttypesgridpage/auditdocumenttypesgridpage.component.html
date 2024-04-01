@@ -3,7 +3,7 @@
     <div class="row p-2">
         <div class="col">
             <div class="d-flex justify-content-between align-items-center">
-                <h4 class="page-title flex-grow-1">Audit TrialsDocument Type</h4>
+                <h4 class="page-title flex-grow-1">Document Type List Audit Trails</h4>
 
                 <div class="back-icon custom-back-icon" style="margin-right: 10px;">
                     <a href="javascript:void(0);" onclick="history.back();">
@@ -28,7 +28,7 @@
         <div class="col">
             <div class="p-4 bg-white shadow-dark rounded-2">
                 <p-table #templatesTable [value]="types" 
-                [globalFilterFields]="['Documenttypename', 'documenttypeprefix', 'Description','ModifiedBy','Status']"
+                [globalFilterFields]="['Unique', 'EntityName', 'UserName','CreatedDate']"
                 tableStyleClass="table table-striped"
                 [rows]="itemsPerPage"
                 [paginator]="true" 
@@ -38,12 +38,12 @@
                     <ng-template pTemplate="header">
                         <tr>
                             <th>S.No</th>
-                            <th pSortableColumn="EntityName" style="width:20%">Document Type Prefix<p-sortIcon field="Entity Name"></p-sortIcon></th>
-                             <th pSortableColumn="EntityName" style="width:20%">Entity Name<p-sortIcon field="Entity Name"></p-sortIcon></th>
-                             <th pSortableColumn="Message" style="width:10%">Message<p-sortIcon field="Message"></p-sortIcon> </th>
-                             <th pSortableColumn="Type" style="width:15%">Type<p-sortIcon field="Type"></p-sortIcon></th>
-                             <th pSortableColumn="UserName" style="width:20%">UserName<p-sortIcon field="User Name"></p-sortIcon></th>
-                              <th pSortableColumn="ModifiedDate" style="width:1n00px">Modified Date<p-sortIcon field="ModifiedDate"></p-sortIcon></th>
+                            <th pSortableColumn="Unique" style="width:20%">Document Type Prefix<p-sortIcon field="Unique"></p-sortIcon></th>
+                             <th pSortableColumn="EntityName" style="width:20%">Document Type Name<p-sortIcon field="EntityName"></p-sortIcon></th>
+                             <!-- <th pSortableColumn="Message" style="width:10%">Message<p-sortIcon field="Message"></p-sortIcon> </th>
+                             <th pSortableColumn="Type" style="width:15%">Type<p-sortIcon field="Type"></p-sortIcon></th> -->
+                             <th pSortableColumn="UserName" style="width:20%">Initiated By<p-sortIcon field="UserName"></p-sortIcon></th>
+                              <th pSortableColumn="CreatedDate" style="width:1n00px">Initiated On<p-sortIcon field="CreatedDate"></p-sortIcon></th>
     
                         </tr>
                     </ng-template>
@@ -57,10 +57,10 @@
                             <td>
                                 {{doc?.EntityName}}
                             </td>
-                            <td>{{doc?.Message }}</td>
-                            <td>{{doc?.Type }}</td>
+                            <!-- <td>{{doc?.Message }}</td>
+                            <td>{{doc?.Type }}</td> -->
                             <td>{{doc?.UserName}}</td>
-                            <td>{{doc?.EntityInfo?.CreatedDate }}</td>
+                            <td>{{ doc?.EntityInfo?.CreatedDate | date:'dd/MM/yyyy HH:mm' }}</td>
                         </tr>
                     </ng-template>
                 </p-table>

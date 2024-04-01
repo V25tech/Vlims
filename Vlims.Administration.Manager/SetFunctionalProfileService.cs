@@ -59,8 +59,11 @@ namespace Vlims.Administration.Manager
                     //setFunctionalProfile.CreatedBy = "admin";
                     //setFunctionalProfile.ModifiedBy = "admin";
                     var result = SetFunctionalProfileData.SaveSetFunctionalProfile(setFunctionalProfile);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = setFunctionalProfile.CreatedBy, EntityName = setFunctionalProfile.role, Type = SetFunctionalProfileConstants.ProfileType, state = DefinitionStatus.New,  EntityInfo = setFunctionalProfile, Unique = setFunctionalProfile.role });
+                    setFunctionalProfile.createddate= DateTime.Now;
 
+
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = setFunctionalProfile.CreatedBy, EntityName = setFunctionalProfile.role, Type = SetFunctionalProfileConstants.ProfileType, state = DefinitionStatus.New,  EntityInfo = setFunctionalProfile, Unique = setFunctionalProfile.role });
+                    setFunctionalProfile.createddate = DateTime.Now;  
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -79,6 +82,7 @@ namespace Vlims.Administration.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = SetFunctionalProfileData.UpdateSetFunctionalProfile(setFunctionalProfile);
+                    setFunctionalProfile.createddate= DateTime.Now; 
                     AuditLog.SaveAuditLog(new AuditLogEntity { UserName = setFunctionalProfile.CreatedBy, EntityName = setFunctionalProfile.role, Type = SetFunctionalProfileConstants.ProfileType, state = DefinitionStatus.Modify, EntityInfo = setFunctionalProfile, Unique = setFunctionalProfile.role });
 
                     return result;

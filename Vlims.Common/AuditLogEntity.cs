@@ -17,7 +17,7 @@ namespace Vlims.Common
         public DefinitionStatus state { get; set; }
         public string Unique { get; set; }
 
-        public int VersionNumber { get; set; } // Add VersionNumber property
+        public string printauditid { get; set; } // Add VersionNumber property
                                                // public string JsonData { get; set; } // Add JsonData property
         public dynamic EntityInfo { get; set; } // Add JsonData property
 

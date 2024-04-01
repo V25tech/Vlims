@@ -105,6 +105,9 @@ export class NewPrintRequestComponent implements OnInit {
       this.print = data;
       this.spinner.hide();
     });
+
+
+    
   }
   approve() {
     debugger

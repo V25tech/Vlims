@@ -118,7 +118,7 @@ namespace Vlims.DocumentMaster.DataAccess
             try
             {
                 var serializer = new XmlSerializer(typeof(workflowconiguration));
-                // Create a StringWriter to hold the XML data
+                // Create a StringWriter to hold the XML data    
                 var writer = new StringWriter();
 
                 // Serialize the Person object to XML and write it to the StringWriter
@@ -129,16 +129,16 @@ namespace Vlims.DocumentMaster.DataAccess
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.DocumentMasterId, Value = workflowconiguration.DocumentMasterId });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.workflowName_PSY, Value = workflowconiguration.workflowName });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.code, Value = workflowconiguration.code });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.documentstage, Value = workflowconiguration.documentstage });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.documenttype, Value = workflowconiguration.documenttype });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.department, Value = workflowconiguration.departments });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workflowconigurationConstants.reviewsCount, Value = workflowconiguration.reviewsCount });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workflowconigurationConstants.approvalsCount, Value = workflowconiguration.approvalsCount });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.CreatedBy, Value = workflowconiguration.CreatedBy });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.ModifiedBy, Value = workflowconiguration.ModifiedBy });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.Status, Value = workflowconiguration.Status });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = workflowconigurationConstants.document, Value = xmlString });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.code,             Value = workflowconiguration.code });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.documentstage,    Value = workflowconiguration.documentstage });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.documenttype,     Value = workflowconiguration.documenttype });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.department,       Value = workflowconiguration.departments });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32,  ParameterName  = workflowconigurationConstants.reviewsCount,    Value = workflowconiguration.reviewsCount });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32,  ParameterName  = workflowconigurationConstants.approvalsCount,  Value = workflowconiguration.approvalsCount });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.CreatedBy,        Value = workflowconiguration.CreatedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.ModifiedBy,       Value = workflowconiguration.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.Status,           Value = workflowconiguration.Status });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName    = workflowconigurationConstants.document,         Value = xmlString });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(workflowconigurationConstants.USP_workflowconiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 if (Convert.ToInt32(result) > 0)
                     workflowconiguration.WFCId = result.ToString();

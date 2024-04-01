@@ -5,10 +5,13 @@ using System.Linq;
 using System.Data;
 using System.Collections.Generic;
 using Vlims.Common;
+using Vlims.DocumentMaster.Entities;
 
 // Comment
 public class DocumentPrintService : IDocumentPrintService
 {
+    private static int printCounter = 1;
+
     public ResponseContext<DocumentPrint> GetAllDocumentPrint(RequestContext requestContext)
     {
         try
@@ -46,7 +49,11 @@ public class DocumentPrintService : IDocumentPrintService
             {
                 documentPrint.Status = "Active";
                 var result = DocumentPrintData.SaveDocumentPrint(documentPrint);
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentPrint.documenttitle, Type = DocumentPrintConstants.dprintname, state = DefinitionStatus.New });
+
+                // Generate Unique value
+                string uniqueValue = "print" + printCounter++;
+
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = uniqueValue });
                 return result;
             }
             throw new System.Exception(validationMessages);
@@ -65,6 +72,11 @@ public class DocumentPrintService : IDocumentPrintService
             if (validationMessages.Length <= 0)
             {
                 bool result = DocumentPrintData.UpdateDocumentPrint(documentPrint);
+
+                // Generate Unique value
+                string uniqueValue = "print" + printCounter++;
+
+               // AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = uniqueValue });
                 return result;
             }
             throw new System.Exception(validationMessages);
@@ -99,4 +111,3 @@ public class DocumentPrintService : IDocumentPrintService
         }
     }
 }
-

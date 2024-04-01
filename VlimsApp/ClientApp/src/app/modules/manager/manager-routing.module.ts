@@ -27,6 +27,8 @@ import { FunctionalProfileAddPageComponent } from '../authentication/components/
 import { AuditRequestNewPageComponent } from './components/audit-request-new-page/audit-request-new-page.component';
 import { AuditPreparationNewPageComponent } from './components/audit-preparation-new-page/audit-preparation-new-page.component';
 import { AuditEffectiveNewPageComponent } from './components/audit-effective-new-page/audit-effective-new-page.component';
+import { AuditprintgridpagewComponent } from './components/auditprintgridpagew/auditprintgridpagew.component';
+import { AuditPrintNewPageComponent } from './components/audit-print-new-page/audit-print-new-page.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
@@ -81,6 +83,19 @@ const routes: Routes = [
     component: AuditpreparationgridpageComponent,
     canActivate: [AuthGuard],
   },
+
+  {
+    path: 'auditprint',
+    component: AuditprintgridpagewComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditprinttaddpage',
+    component: AuditPrintNewPageComponent,
+    canActivate: [AuthGuard],
+  },
+
 
   {
     path: 'auditroleaddpage',
