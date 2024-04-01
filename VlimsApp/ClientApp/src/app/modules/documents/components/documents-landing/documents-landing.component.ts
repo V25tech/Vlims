@@ -4,7 +4,8 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { WorkitemsService } from '../../../services/workitems.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { RequestContext1, WorkItemsConfiguration } from '../../../../models/model';
+import { ExistingDocumentRequest, RequestContext, RequestContext1, WorkItemsConfiguration } from '../../../../models/model';
+import { ExistingDocumentRequestService } from 'src/app/modules/services/existing-document-request.service';
 
 @Component({
   selector: 'app-documents-landing',
@@ -17,14 +18,19 @@ export class DocumentsLandingComponent implements OnInit {
   public userName: string;
   requestObj = new RequestContext1();
   public workItems : Array<WorkItemsConfiguration> = [];
+  public reminderDocs: ExistingDocumentRequest[] = [];
+  viewreminderDocs = false;
   workItemsCount = 0;
-  constructor(private router: Router, private loader: NgxSpinnerService, private workitemssvc: WorkitemsService) {
+  reviewCount = '';
+  approveCount = '';  
+  constructor(private router: Router, private loader: NgxSpinnerService, private workitemssvc: WorkitemsService, private existingDocumentRequestService: ExistingDocumentRequestService) {
     this.userRole = JSON.parse(this.storage['user']).Role.toLowerCase();
     this.userName = this.storage['username'].toLowerCase();
   }
 
   ngOnInit() {
-    this.getworkflowitems();
+    this.existingDocumentAll()
+    this.getworkflowitems();    
   }
 
   navigateTo(navTo: any) {
@@ -49,10 +55,19 @@ export class DocumentsLandingComponent implements OnInit {
     this.requestObj.PageNumber = 1;
     this.requestObj.PageSize = 1000;
     this.requestObj.Id = 0;
-    this.requestObj.UserName = this.userName;
+    this.requestObj.UserName = this.userName;    
     return this.workitemssvc.getworkitems(this.requestObj, this.userName).subscribe((data: any) => {
       this.workItems = data.Response;
       this.workItemsCount = 0;
+      if(this.workItems)
+      {
+        let approveCnt = this.workItems.filter(item => item.Status.toLowerCase() == 'in-progress' && item.ActionType.toLowerCase() == 'approve').length;
+        let reviewCnt = this.workItems.filter(item => item.Status.toLowerCase() == 'in-progress' && item.ActionType.toLowerCase() == 'review').length;
+        if(approveCnt > 0)
+           this.approveCount = approveCnt < 10 ? '0' + approveCnt : '' + approveCnt;
+        if(reviewCnt > 0)
+          this.reviewCount = reviewCnt < 10 ? '0' + reviewCnt : '' + reviewCnt;
+      }
       this.workItemsCount = this.workItems.filter(item => item.Status.toLowerCase() == 'inprogress').length;
       this.loader.hide();
  
@@ -62,5 +77,40 @@ export class DocumentsLandingComponent implements OnInit {
     });
 
   }
+
+  existingDocumentAll(){
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    this.existingDocumentRequestService.GetExistingDocumentAll(objrequest).subscribe((data: any) =>{
+      //console.log(data?.response); 
+      let filterdbyreviewDate = data?.response.filter((p:any) => p.reviewDate);
+      
+      filterdbyreviewDate = filterdbyreviewDate.filter((item:ExistingDocumentRequest) => {
+        const currentDate = new Date();
+        const reviewDatePlus15Days = new Date();
+        reviewDatePlus15Days.setDate(currentDate.getDate() + 15);
+  
+        //currentDate.setDate(currentDate.getDate() - 10);
+        // Parse reviewDate string to Date object
+        const reviewDate = new Date(item.reviewDate??'');
+  
+        return (reviewDate > currentDate && reviewDate < reviewDatePlus15Days);
+      });
+      filterdbyreviewDate.forEach((item: any) => {    
+        const reviewDate:Date = new Date(item.reviewDate??'');
+        item.reviewCountDownValue = this.calculateDiff(reviewDate)
+      })
+      this.reminderDocs = filterdbyreviewDate;  
+      if(this.reminderDocs && this.reminderDocs.length >0){
+         this.viewreminderDocs = true;
+      }
+    });
+  }
+
+  calculateDiff(dateSent: Date){
+    let currentDate = new Date();
+    dateSent = new Date(dateSent);
+
+    return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
+ }
 
 }

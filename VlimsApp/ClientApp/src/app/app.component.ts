@@ -1,8 +1,8 @@
-import { Component, OnInit,HostListener } from '@angular/core';
-
+import { Component, OnInit,HostListener, TemplateRef, ViewChild } from '@angular/core';
 import { LoginService } from "./modules/authentication/services/login.service";
 import { CommonService } from './shared/common.service';
 import { ToastrService } from 'ngx-toastr';
+import { ExistingDocumentRequest, RequestContext } from './models/model';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'DocumentManagementSystem';
   isNavOpen: boolean = false;
   isLoggedIn: boolean = false;
-
+  
   constructor(private loginService:LoginService,
     private commonsvc:CommonService,
     private loginsvc:LoginService,
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     this.loginService.loginStatusChanged$.subscribe((status: boolean) => {
       this.isLoggedIn = status;      
     });
-    this.checkSessionTimeoutPeriodically();
+    this.checkSessionTimeoutPeriodically();    
   }
 
   toggleSidenav(): void {
