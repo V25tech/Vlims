@@ -179,7 +179,7 @@ export class AddWorkflowComponent {
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
     return this.workflowsvc.update(workflow).subscribe((data: any) => {
-      this.toastr.success('workflow Updated Succesfull!', 'Updated.!');
+      this.toastr.success('workflow Updated Succesfully!', 'Updated.!');
       this.location.back();
       this.isButtonDisabled = false;
     });
@@ -242,7 +242,7 @@ export class AddWorkflowComponent {
       this.isButtonDisabled = true;
     return this.workflowsvc.addworkflow(workflow).subscribe((data: any) => {
       //this.loader.hide();
-      this.toastr.success('workflow Saved Succesfull!', 'Saved.!');
+      this.toastr.success('Workflow Registered Successfully!', 'Saved.!');
       this.location.back();
       this.isButtonDisabled = false;
     });

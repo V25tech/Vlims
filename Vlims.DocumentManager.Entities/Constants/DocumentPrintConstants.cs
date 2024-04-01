@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class DocumentPrintConstants
 {
+    public const string PrintType = "PrintType";
 
     public const string dprintname = "dprintname";
 

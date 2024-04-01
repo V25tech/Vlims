@@ -58,6 +58,8 @@ namespace Vlims.Common
                 new SqlParameter{SqlDbType=SqlDbType.VarChar,ParameterName="@state",Value=auditLog.state},
                 new SqlParameter{SqlDbType=SqlDbType.VarChar,ParameterName="@Unique",Value=auditLog.Unique},
                 new SqlParameter{SqlDbType=SqlDbType.VarChar,ParameterName="@JsonData",Value=JsonSerializer.Serialize(auditLog.EntityInfo),
+
+
                  
 
 
@@ -101,7 +103,7 @@ namespace Vlims.Common
 
                     AuditLogEntity entity = new AuditLogEntity()
                     {
-                        
+                        //printauditid = Convert.ToInt64(item["AuditId_PSY"]).ToString(),
                         UserName = Convert.ToString(item["UserName"]),
                         Message = Convert.ToString(item["Message"]),
                         Type = Convert.ToString(item["Type"]),
@@ -147,6 +149,7 @@ namespace Vlims.Common
 
                     AuditLogEntity entity = new AuditLogEntity()
                     {
+                        //printauditid = Convert.ToString(item["AuditId_PSY"]),
                         UserName = Convert.ToString(item["UserName"]),
                         Message = Convert.ToString(item["Message"]),
                         Type = Convert.ToString(item["Type"]),                       

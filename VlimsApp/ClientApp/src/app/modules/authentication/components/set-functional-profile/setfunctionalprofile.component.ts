@@ -59,9 +59,11 @@ getsetfunctionalprofile() {
   onSubmit(profileinfo:functionalprofile)
   {   
     debugger
+    profileinfo.modifiedby=this.commonsvc.getUsername();
+
     this.loader.show();
     if(profileinfo.sfpid>0){
-      profileinfo.modifiedby=this.commonsvc.getUsername();
+      // profileinfo.modifiedby=this.commonsvc.getUsername();
       if(profileinfo.createdby==null || undefined){
         profileinfo.createdby=this.commonsvc.getUsername();
       }

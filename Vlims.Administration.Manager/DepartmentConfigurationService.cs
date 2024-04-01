@@ -59,6 +59,7 @@ namespace Vlims.Administration.Manager
             try
             {
                 departmentConfiguration.HierarchyManagementId = "1";
+                departmentConfiguration.CreatedDate = DateTime.Now;
                 String validationMessages = DepartmentConfigurationValidator.IsValidDepartmentConfiguration(departmentConfiguration);
                 if (validationMessages.Length <= 0)
                 {
@@ -82,6 +83,7 @@ namespace Vlims.Administration.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = DepartmentConfigurationData.UpdateDepartmentConfiguration(departmentConfiguration);
+                    departmentConfiguration.CreatedDate = DateTime.Now;  
                     AuditLog.SaveAuditLog(new AuditLogEntity { UserName = departmentConfiguration.CreatedBy, EntityName = departmentConfiguration.DepartmentName, Type = DepartmentConfigurationConstants.DepartmentType, state = DefinitionStatus.Modify, CreatedDate = (DateTime)departmentConfiguration.CreatedDate, EntityInfo = departmentConfiguration,Unique= departmentConfiguration.DepartmentCode});
 
                     return result;

@@ -55,6 +55,7 @@ namespace Vlims.DocumentMaster.Manager
         {
             try
             {
+                    workflowconiguration.CreatedDate = DateTime.Now;
                 if (workflowconiguration != null && workflowconiguration.WFCId == null)
                 {
                     workflowconiguration.DocumentMasterId = "1";

@@ -105,6 +105,7 @@ namespace Vlims.DocumentManager.Manager
                 //if (validationMessages.Length <= 0)
                 //{
                 bool result = DocumentPreparationData.UpdateDocumentPreparation(documentPreparation);
+                documentPreparation.CreatedDate = DateTime.Now;
                 AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPreparation.CreatedBy, EntityName = documentPreparation.documenttitle, Type = DocumentPreparationConstants.PreparationType, state = DefinitionStatus.Modify, EntityInfo = documentPreparation, Unique = documentPreparation.documentno});
 
                 return result;

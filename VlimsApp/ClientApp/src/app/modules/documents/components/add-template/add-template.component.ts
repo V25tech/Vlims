@@ -418,7 +418,7 @@ export class AddTemplateComponent implements OnInit {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
       this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
-        this.toastr.success('Document Template Updated Succesfull!', 'Updated.!');
+        this.toastr.success('Document Template Updated Successfully!', 'Updated.!');
       this.loader.hide();
       this.location.back();
       this.isButtonDisabled = false;
@@ -436,7 +436,7 @@ export class AddTemplateComponent implements OnInit {
         if (!this.isButtonDisabled) {
           this.isButtonDisabled = true;
       this.templatesvc.adddoctemplate(this.templateForm).subscribe((data:any)=>{ 
-        this.toastr.success('Document Template Saved Succesfull!', 'Saved.!');
+        this.toastr.success('Document Template Registered Successfully!', 'Saved.!');
         this.loader.hide();
         this.location.back();
         this.isButtonDisabled = false;

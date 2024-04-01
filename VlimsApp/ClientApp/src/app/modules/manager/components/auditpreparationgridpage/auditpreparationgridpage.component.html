@@ -3,7 +3,7 @@
     <div class="row p-2">
         <div class="col">
             <div class="d-flex justify-content-between align-items-center">
-                <h4 class="page-title flex-grow-1">Audit Trials Document Preparation</h4>
+                <h4 class="page-title flex-grow-1">Document Preparation List Audit Trails</h4>
 
                 <div class="back-icon custom-back-icon" style="margin-right: 10px;">
                     <a href="javascript:void(0);" onclick="history.back();">
@@ -39,11 +39,14 @@
                         <tr>
                             <th>S.No</th>
                             
-                             <th pSortableColumn="EntityName" style="width:20%">Entity Name<p-sortIcon field="Entity Name"></p-sortIcon></th>
-                             <th pSortableColumn="Message" style="width:10%">Message<p-sortIcon field="Message"></p-sortIcon> </th>
-                             <th pSortableColumn="Type" style="width:15%">Type<p-sortIcon field="Type"></p-sortIcon></th>
-                             <th pSortableColumn="UserName" style="width:20%">UserName<p-sortIcon field="User Name"></p-sortIcon></th>
-                              <th pSortableColumn="ModifiedDate" style="width:1n00px">Modified Date<p-sortIcon field="ModifiedDate"></p-sortIcon></th>
+                             <th pSortableColumn="EntityName" style="width:20%">Document Number<p-sortIcon field="Entity Name"></p-sortIcon></th>
+                             <th pSortableColumn="EntityName" style="width:20%">Document Title<p-sortIcon field="Entity Name"></p-sortIcon></th>
+                             <th pSortableColumn="EntityName" style="width:20%">Document Type<p-sortIcon field="Entity Name"></p-sortIcon></th>
+                             <th pSortableColumn="EntityName" style="width:20%">Department<p-sortIcon field="Entity Name"></p-sortIcon></th>
+                             <!-- <th pSortableColumn="Message" style="width:10%">Message<p-sortIcon field="Message"></p-sortIcon> </th>
+                             <th pSortableColumn="Type" style="width:15%">Type<p-sortIcon field="Type"></p-sortIcon></th> -->
+                             <th pSortableColumn="UserName" style="width:20%">Prepared By<p-sortIcon field="User Name"></p-sortIcon></th>
+                              <th pSortableColumn="ModifiedDate" style="width:1n00px">Prepared On<p-sortIcon field="ModifiedDate"></p-sortIcon></th>
     
                         </tr>
                     </ng-template>
@@ -55,10 +58,15 @@
                             </td>
                 
                           
-                            <td>{{doc?.Message }}</td>
-                            <td>{{doc?.Type }}</td>
+                            <td>{{doc?.EntityInfo?.documenttitle}}</td>
+                            <td>{{doc?.EntityInfo?.documenttype}}</td>
+                            <td>{{doc?.EntityInfo?.department}}</td>
+                           
+                            
+                            <!-- <td>{{doc?.Message }}</td>
+                            <td>{{doc?.Type }}</td> -->
                             <td>{{doc?.UserName}}</td>
-                            <td>{{doc?.EntityInfo?.CreatedDate }}</td>
+                            <td>{{doc?.EntityInfo?.CreatedDate | date:'dd/MM/yyyy HH:mm'  }}</td>
                         </tr>
                     </ng-template>
                 </p-table>

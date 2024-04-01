@@ -34,7 +34,10 @@ export class AuditmanagerhomepageComponent {
     }
     else if(navTo === 'auditmanager'){    
       this.router.navigate(['/auditmanager']);
+    } else if (navTo === 'auditprint') {
+      this.router.navigate(['/auditprint']);
     }
+    
 
   }
 }

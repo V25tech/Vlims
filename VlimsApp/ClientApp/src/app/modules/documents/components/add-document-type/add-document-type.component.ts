@@ -187,7 +187,7 @@ export class AddDocumentTypeComponent {
       this.isButtonDisabled = true;
       this.isSubmitting = true;
     this.doctypeservice.adddoctypeconfig(documentType).subscribe((res: any) => {
-      this.toastr.success('Document type saved succesfull!', 'Saved.!');
+      this.toastr.success('Document Type Registered Successfully!', 'Saved.!');
       this.location.back();
       this.isButtonDisabled = false;
       this.isSubmitting = false;
@@ -212,7 +212,7 @@ export class AddDocumentTypeComponent {
       // If the document type name is unique, proceed with updating
       this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {
         this.commonsvc.documentType = new DocumentTypeConfiguration();
-        this.toastr.success('Document type update successful!', 'Updated.');
+        this.toastr.success('Document Type Updated Successfully!', 'Updated.');
         this.spinner.hide();
         this.location.back();
       }, er => {
