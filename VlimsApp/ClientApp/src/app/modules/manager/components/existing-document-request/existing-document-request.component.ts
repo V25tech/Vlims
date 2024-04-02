@@ -29,6 +29,7 @@ export class ExistingDocumentRequestComponent implements OnInit {
   pdfBytes: Uint8Array | undefined;
   pdfUrl: string | null = null;
   modalRef: BsModalRef | undefined;
+  daterev: string | null | undefined;
 
   constructor(private router: Router, private spinner: NgxSpinnerService, private commonsvc: CommonService, private existingDocReqservice: ExistingDocumentRequestService
     , private sanitizer: DomSanitizer, private modalService: BsModalService) { }
@@ -53,7 +54,15 @@ export class ExistingDocumentRequestComponent implements OnInit {
       if (data != null && data.response.length > 0 && data != undefined) {
         data.response.forEach((item: any) => {
           item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
-          item.reviewDateValue = this.commonsvc.setDate(item.reviewDate);
+          this.daterev=this.commonsvc.setDate(item.reviewDate);
+          if(this.daterev=='31/12/9999'||this.daterev=='01/01/1900')
+          {
+            item.reviewDateValue = 'NA';
+          }
+          else
+          {
+            item.reviewDateValue = this.commonsvc.setDate(item.reviewDate);
+          }
         })
       }       
       this.existingDocDatasource = data.response;

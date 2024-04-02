@@ -46,7 +46,10 @@ public static class ExistingDocumentRequestData
     {
         try
         {
-            existingDocumentRequest.reviewDate= DateTime.Now;   
+            if (existingDocumentRequest.reviewDate == null)
+            {
+                existingDocumentRequest.reviewDate = DateTime.MaxValue;
+            }
             List<SqlParameter> sqlparms = new List<SqlParameter>();
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.documentno, Value = existingDocumentRequest.documentno });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = ExistingDocumentRequestConstants.documenttitle, Value = existingDocumentRequest.documenttitle });
