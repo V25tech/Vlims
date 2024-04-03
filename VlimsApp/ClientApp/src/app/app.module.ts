@@ -23,12 +23,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuditlogComponentComponent } from './auditlog-component/auditlog-component.component';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { TrackSearchComponent } from './common/tracksearch/tracksearch.component';
+import { SearchViewComponent } from './common/searchview/searchview.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent],
+  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent, TrackSearchComponent, SearchViewComponent],
   imports: [
     BrowserModule,
     FormsModule,

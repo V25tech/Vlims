@@ -27,6 +27,11 @@ namespace Vlims.DocumentManager.Controllers
             return Ok(result);
         }
 
-
+        [HttpGet("")]
+        public async Task<ActionResult> GetAllTrackedDocuments(string userName, string searchTerm)
+        {
+            var result = await exisitingDocumentsService.GetAllTrackedDocuments(userName,searchTerm);
+            return Ok(result);
+        }
     }
 }

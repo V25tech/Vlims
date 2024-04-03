@@ -322,6 +322,7 @@
     <Build Include="dbo\Stored Procedures\USP_AUDIT_LOGS_PSY_GET_ALL_NEW1.sql" />
     <Build Include="dbo\Stored Procedures\USP_AUDIT_LOGS_PSY_GET_ALL_NEW.sql" />
     <Build Include="dbo\Stored Procedures\USP_AUDIT_LOGS_PSY_GET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\USP_TRACK_SEARCH_PSY.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vlims.Database.refactorlog" />

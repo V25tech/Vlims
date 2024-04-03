@@ -31,7 +31,16 @@ namespace Vlims.DocumentManager.Entities.Constants
         public static string EffectiveDate = "effectivedate_PSY";
         public static string ReviewDate = "reviewdate_PSY";
         public static string TableName = "TableName_PSY";
+        #endregion
 
+        #region TrackSearch
+        public const string USP_TRACK_SEARCH_PSY = "dbo.USP_TRACK_SEARCH_PSY";
+        public static string UserName = "UserName";
+        public static string SearchTerm = "SearchTerm";
+        public static string DocumentNumber = "DocumentNo_PSY";
+        public static string DocumentTitle = "DocumentName_PSY";
+        public static string Stage = "Stage";
+        
         #endregion
     }
 }

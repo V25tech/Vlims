@@ -11,6 +11,6 @@ namespace Vlims.DocumentManager.Manager.Interface
     public interface IExisitingDocumentsService
     {
         Task<DocumentsEntity> GetAllExistingDocuments(RequestContext requestContext);
-
+        Task<List<TrackSearchInfo>> GetAllTrackedDocuments(string userName,string searchTerm);
     }
 }

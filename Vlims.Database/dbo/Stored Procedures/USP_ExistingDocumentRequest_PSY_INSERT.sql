@@ -1,4 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[USP_ExistingDocumentRequest_PSY_INSERT] 
+﻿
+
+
+CREATE PROCEDURE [dbo].[USP_ExistingDocumentRequest_PSY_INSERT] 
     @documentno_PSY NVARCHAR(150),
     @documenttitle_PSY NVARCHAR(150),
     @printtype_PSY NVARCHAR(150),
@@ -8,7 +11,7 @@
     @CreatedBy_PSY NVARCHAR(100),
     @ModifiedBy_PSY NVARCHAR(100),
     @effectivedate_PSY DATETIME,
-    @reviewdate_PSY NVARCHAR(100) = NULL
+    @reviewdate_PSY DATETIME
 AS 
 BEGIN 
     BEGIN TRY 
@@ -41,7 +44,8 @@ BEGIN
             @ModifiedBy_PSY,
             GETDATE(),
             @effectivedate_PSY,
-            CASE WHEN @reviewdate_PSY IS NULL THEN GETDATE() ELSE @reviewdate_PSY END
+            CASE WHEN @reviewdate_PSY IS NULL THEN NULL ELSE @reviewdate_PSY END
+			
         );
         
         SELECT @ID = @@IDENTITY; 

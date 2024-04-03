@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[USP_GetTemplateHeaderFooterDetails]
-@TemplateName varchar(500)
+@TemplateName varchar(500),@Type varchar(200)=NULL,@Id int=0
 as
 begin
 
@@ -78,7 +78,113 @@ JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=DE.CreatedBy_PSY
 JOIN Documentrequest_PSY DRT ON DRT.DRID_PSY=DP.Refrence_PSY
 WHERE DT.Templatename_PSY=@TemplateName AND DE.CreatedBy_PSY NOT IN (SELECT USERNAME FROM @PREPAREDBY)
 
-
+IF(@Type='PREPARATION')
+BEGIN
+SELECT TOP(1) DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,(VERSION-1) AS Supersedes,DP.department_PSY,
+DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DRT.department_PSY,
+(SELECT STRING_AGG(USERNAME,',') FROM @REVIEWERS) AS REVIWED_BY,
+(SELECT STRING_AGG(USERNAME,',') FROM @APPROVERS) AS APPROVED_BY,
+STRING_AGG(PR.UserName, ',') AS PREPARED_BY,
+(SELECT STRING_AGG(DEPTNAME,',') FROM @APPROVERS) AS APPROVEDDEPT,
+(SELECT STRING_AGG(DEPTNAME,',') FROM @REVIEWERS) AS REVIWEDDEPT,
+STRING_AGG(PR.DEPTNAME, ',') AS PREPAREDDEPT,
+(SELECT STRING_AGG(ROLENAME,',') FROM @APPROVERS) AS APPROVEDROLE,
+(SELECT STRING_AGG(ROLENAME,',') FROM @REVIEWERS) AS REVIWEDROLE,
+STRING_AGG(PR.ROLENAME, ',') AS PREPAREDROLE,
+DP.CreatedDate_PSY AS PREAPREDDATE,DPP.PrintCopy_PSY,DPP.reason_PSY
+FROM AdditionalTask_PSY AT
+JOIN DocumentEffective_PSY DE ON DE.DEID_PSY=AT.DocumentEffective_ID
+JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY
+JOIN DocumentPrint_PSY DPP ON DPP.ReferenceGuid_PSY=DP.GUID_DP
+JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
+JOIN Documentrequest_PSY DRT ON DRT.DRID_PSY=DP.Refrence_PSY
+JOIN @PREPAREDBY PR ON PR.TEMPLATE_NAME=DP.template_PSY
+WHERE DT.Templatename_PSY=@TemplateName AND DP.DPNID_PSY=@Id
+GROUP BY
+    DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,DP.department_PSY,DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DP.CreatedDate_PSY,DRT.department_PSY,DPP.PrintCopy_PSY,DPP.reason_PSY;
+END
+ELSE IF(@Type='EFFECTIVE')
+BEGIN
+SELECT TOP(1) DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,(VERSION-1) AS Supersedes,DP.department_PSY,
+DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DRT.department_PSY,
+(SELECT STRING_AGG(USERNAME,',') FROM @REVIEWERS) AS REVIWED_BY,
+(SELECT STRING_AGG(USERNAME,',') FROM @APPROVERS) AS APPROVED_BY,
+STRING_AGG(PR.UserName, ',') AS PREPARED_BY,
+(SELECT STRING_AGG(DEPTNAME,',') FROM @APPROVERS) AS APPROVEDDEPT,
+(SELECT STRING_AGG(DEPTNAME,',') FROM @REVIEWERS) AS REVIWEDDEPT,
+STRING_AGG(PR.DEPTNAME, ',') AS PREPAREDDEPT,
+(SELECT STRING_AGG(ROLENAME,',') FROM @APPROVERS) AS APPROVEDROLE,
+(SELECT STRING_AGG(ROLENAME,',') FROM @REVIEWERS) AS REVIWEDROLE,
+STRING_AGG(PR.ROLENAME, ',') AS PREPAREDROLE,
+DP.CreatedDate_PSY AS PREAPREDDATE,DPP.PrintCopy_PSY,DPP.reason_PSY
+FROM AdditionalTask_PSY AT
+JOIN DocumentEffective_PSY DE ON DE.DEID_PSY=AT.DocumentEffective_ID
+JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY
+JOIN DocumentPrint_PSY DPP ON DPP.ReferenceGuid_PSY=DP.GUID_DP
+JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
+JOIN Documentrequest_PSY DRT ON DRT.DRID_PSY=DP.Refrence_PSY
+JOIN @PREPAREDBY PR ON PR.TEMPLATE_NAME=DP.template_PSY
+WHERE DT.Templatename_PSY=@TemplateName AND DE.DEID_PSY=@Id
+GROUP BY
+    DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,DP.department_PSY,DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DP.CreatedDate_PSY,DRT.department_PSY,DPP.PrintCopy_PSY,DPP.reason_PSY;
+END
+ELSE IF(@Type='REVISION')
+BEGIN
+SELECT TOP(1) DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,(VERSION-1) AS Supersedes,DP.department_PSY,
+DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DRT.department_PSY,
+(SELECT STRING_AGG(USERNAME,',') FROM @REVIEWERS) AS REVIWED_BY,
+(SELECT STRING_AGG(USERNAME,',') FROM @APPROVERS) AS APPROVED_BY,
+STRING_AGG(PR.UserName, ',') AS PREPARED_BY,
+(SELECT STRING_AGG(DEPTNAME,',') FROM @APPROVERS) AS APPROVEDDEPT,
+(SELECT STRING_AGG(DEPTNAME,',') FROM @REVIEWERS) AS REVIWEDDEPT,
+STRING_AGG(PR.DEPTNAME, ',') AS PREPAREDDEPT,
+(SELECT STRING_AGG(ROLENAME,',') FROM @APPROVERS) AS APPROVEDROLE,
+(SELECT STRING_AGG(ROLENAME,',') FROM @REVIEWERS) AS REVIWEDROLE,
+STRING_AGG(PR.ROLENAME, ',') AS PREPAREDROLE,
+DP.CreatedDate_PSY AS PREAPREDDATE,DPP.PrintCopy_PSY,DPP.reason_PSY
+FROM AdditionalTask_PSY AT
+JOIN DocumentEffective_PSY DE ON DE.DEID_PSY=AT.DocumentEffective_ID
+JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY
+JOIN DocumentPrint_PSY DPP ON DPP.ReferenceGuid_PSY=DP.GUID_DP
+JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
+JOIN Documentrequest_PSY DRT ON DRT.DRID_PSY=DP.Refrence_PSY
+JOIN @PREPAREDBY PR ON PR.TEMPLATE_NAME=DP.template_PSY
+WHERE DT.Templatename_PSY=@TemplateName AND AT.ATID_PSY=@Id
+GROUP BY
+    DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,DP.department_PSY,DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DP.CreatedDate_PSY,DRT.department_PSY,DPP.PrintCopy_PSY,DPP.reason_PSY;
+END
+ELSE IF(@Type='PRINT')
+BEGIN
+SELECT TOP(1) DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,(CONVERT(INT, AT.Version) - 1) AS Supersedes,DP.department_PSY,
+DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DP.department_PSY,
+(SELECT STRING_AGG(USERNAME,',') FROM @REVIEWERS) AS REVIWED_BY,
+(SELECT STRING_AGG(USERNAME,',') FROM @APPROVERS) AS APPROVED_BY,
+STRING_AGG(PR.UserName, ',') AS PREPARED_BY,
+(SELECT STRING_AGG(DEPTNAME,',') FROM @APPROVERS) AS APPROVEDDEPT,
+(SELECT STRING_AGG(DEPTNAME,',') FROM @REVIEWERS) AS REVIWEDDEPT,
+STRING_AGG(PR.DEPTNAME, ',') AS PREPAREDDEPT,
+(SELECT STRING_AGG(ROLENAME,',') FROM @APPROVERS) AS APPROVEDROLE,
+(SELECT STRING_AGG(ROLENAME,',') FROM @REVIEWERS) AS REVIWEDROLE,
+STRING_AGG(PR.ROLENAME, ',') AS PREPAREDROLE,
+DP.CreatedDate_PSY AS PREAPREDDATE,DPP.PrintCopy_PSY,DPP.reason_PSY
+FROM DocumentPrint_PSY DPP
+JOIN DocumentPreparation_PSY DP ON DP.GUID_DP=DPP.ReferenceGuid_PSY
+JOIN DocumentEffective_PSY DE ON DE.ReferenceGuid_PSY=DPP.GUID_DPP
+JOIN AdditionalTask_PSY AT ON AT.ReferenceGuid_PSY=DE.GUID_DE
+--WHERE DPP.DRId_PSY=@Id AND DP.template_PSY=@TemplateName
+--JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
+--AdditionalTask_PSY AT
+--JOIN DocumentEffective_PSY DE ON DE.DEID_PSY=AT.DocumentEffective_ID
+--JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY
+--JOIN DocumentPrint_PSY DPP ON DPP.ReferenceGuid_PSY=DP.GUID_DP
+--JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
+--JOIN Documentrequest_PSY DRT ON DRT.DRID_PSY=DP.Refrence_PSY
+JOIN @PREPAREDBY PR ON PR.TEMPLATE_NAME=DP.template_PSY
+WHERE DP.template_PSY=@TemplateName AND DPP.DRId_PSY=@Id
+GROUP BY
+    DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,DP.department_PSY,DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DP.CreatedDate_PSY,DP.department_PSY,DPP.PrintCopy_PSY,DPP.reason_PSY;
+END
+ELSE
 SELECT TOP(1) DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,(VERSION-1) AS Supersedes,DP.department_PSY,
 DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DRT.department_PSY,
 (SELECT STRING_AGG(USERNAME,',') FROM @REVIEWERS) AS REVIWED_BY,

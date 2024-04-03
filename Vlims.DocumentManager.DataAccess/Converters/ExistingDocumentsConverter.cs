@@ -75,5 +75,34 @@ namespace Vlims.DocumentManager.DataAccess.Converters
                 throw ex;
             }
         }
+
+        public static List<TrackSearchInfo> SetAllTrackedDocuments(DataSet dataset)
+        {
+            List<TrackSearchInfo> trackSearchInfo = new List<TrackSearchInfo>();
+            try
+            {
+                if (dataset != null && dataset.Tables != null && dataset.Tables.Count > 0)
+                {
+                    if(dataset.Tables[0].Rows != null && dataset.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow row in dataset.Tables[0].Rows)
+                        {
+                            TrackSearchInfo info = new TrackSearchInfo();
+                            info.Id = 0;
+                            info.DocumentNo = Convert.ToString(row[DocumentsDatabaseConstants.DocumentNo]);
+                            info.DocumentName = Convert.ToString(row[DocumentsDatabaseConstants.DocumentTitle]);
+                            info.Stage = Convert.ToString(row[DocumentsDatabaseConstants.Stage]);
+                            info.Status = Convert.ToString(row[DocumentsDatabaseConstants.Status]);
+                            trackSearchInfo.Add(info);
+                        }
+                    }
+                }
+                return trackSearchInfo;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -30,5 +30,22 @@ namespace Vlims.DocumentManager.DataAccess
 				throw;
 			}
         }
+        public static DataSet GetAllTrackedDocuments(string userName, string searchTerm)
+        {
+            try
+            {
+                DataSet dataSet = new DataSet();
+                List<SqlParameter> sqlparms = new List<SqlParameter>();
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentsDatabaseConstants.UserName, Value = userName });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentsDatabaseConstants.SearchTerm, Value = searchTerm });
+                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(DocumentsDatabaseConstants.USP_TRACK_SEARCH_PSY, sqlparms, ExecutionType.Dataset);
+                return dataset;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

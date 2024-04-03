@@ -3,32 +3,38 @@
       
       <div class="d-flex align-items-center">
         <div class="w-100 d-flex align-items-center">
-            <!-- <img src="../../../assets/images/dms logo.png" height="24px"> -->
-            <h5 class="mb-0">Document Management System</h5>
+          <!-- <img src="../../../assets/images/dms logo.png" height="24px"> -->
+          <h5 class="mb-0">Document Management System</h5>
         </div>
         <!-- <form class="w-100 me-3 search-block" role="search">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-        </form> -->
+    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+  </form> -->
+        <div class="search-container">
+          <input type="text" [(ngModel)]="searchTerm" class="search-input" placeholder="DocumentNo.">
+          <button type="button" class="search-button" (click)="onSearch()">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
 
         <div class="header-actions">
-            
+
           <a class="d-block mx-2 fs-m" [routerLink]="'/assigned'"> <i class="bi bi-bell"></i></a>
         </div>
         <div class="d-lg-flex h-100 mx-lg-2 text-white">
           <div class="btn-group user-info-block" dropdown>
             <a id="button-basic" dropdownToggle type="button" class="dropdown-toggle"
-                    aria-controls="dropdown-basic">
-                    <img src="../../../assets/images/user1.png"  width="32" height="32" class="rounded-circle mx-2">
-                    <span>{{user}}</span> <span class="caret"></span>
-          </a>
+               aria-controls="dropdown-basic">
+              <img src="../../../assets/images/user1.png" width="32" height="32" class="rounded-circle mx-2">
+              <span>{{user}}</span> <span class="caret"></span>
+            </a>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
                 role="menu" aria-labelledby="button-basic">
-                <li role="menuitem"><a class="dropdown-item" (click)="change()">Change Password</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="change()">Change Password</a></li>
               <li role="menuitem"><a class="dropdown-item" (click)="logout()">Sign out</a></li>
             </ul>
           </div>
         </div>
-        
+
       </div>
     </div>
   </header>
