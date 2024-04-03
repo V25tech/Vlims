@@ -19,8 +19,18 @@
               <div class="card-body">
                 
                 <div class="row">
+
+                  <div class="col-sm-12 text-center">
+                    <h5 [ngClass]="{'In-Progress': auditConfig.EntityInfo.Status === 'In-Progress','reviewed': auditConfig.EntityInfo.Status === 'Reviewed', 'approved': auditConfig.EntityInfo.Status === 'Approved', 'returned': auditConfig.EntityInfo.Status === 'Returned', 'rejected': auditConfig.EntityInfo.Status === 'Rejected'}">
+                      <ng-container *ngIf="auditConfig.EntityInfo.Status === 'In-Progress'">Activity: Initiation </ng-container>
+                        <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Reviewed'">Activity: Review</ng-container>
+                        <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Approved'">Activity: Approve</ng-container>
+                        <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Returned'">Activity: Return</ng-container>
+                        <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Rejected'">Activity: Reject</ng-container>
+                    </h5>
+                </div>
                   <div class="col-sm-3">
-                      <strong>Version {{ i + 0 }}</strong>
+                      <strong>Version {{ 0 }}</strong>
                   </div>
               </div>
                 
@@ -105,6 +115,50 @@
                       {{ auditConfig.EntityInfo.CreatedDate | date:'dd/MM/yyyy HH:mm'  }}
                     </div>
                   </div>  
+
+
+
+
+                  <div class="row" *ngIf="auditConfig.EntityInfo.Status === 'Reviewed'">
+                    <div class="col-sm-3">
+                        <strong>Reviewed By:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                        {{ auditConfig.EntityInfo.ModifiedBy }}
+                    </div>
+                </div>
+
+
+                <div class="row" *ngIf="auditConfig.EntityInfo.Status === 'Approved'">
+                  <div class="col-sm-3">
+                      <strong>Approved By:</strong>
+                  </div>
+                  <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.ModifiedBy }}
+                  </div>
+              </div>
+
+
+              <div class="row" *ngIf="auditConfig.EntityInfo.Status === 'Returned'">
+                <div class="col-sm-3">
+                    <strong>Returned By:</strong>
+                </div>
+                <div class="col-sm-9">
+                    {{ auditConfig.EntityInfo.ModifiedBy }}
+                </div>
+            </div>
+
+
+
+            <div class="row" *ngIf="auditConfig.EntityInfo.Status === 'Rejected'">
+              <div class="col-sm-3">
+                  <strong>Rejected By:</strong>
+              </div>
+              <div class="col-sm-9">
+                  {{ auditConfig.EntityInfo.ModifiedBy }}
+              </div>
+          </div>
+               
 
                   <div class="row">
                     <div class="col-sm-3">

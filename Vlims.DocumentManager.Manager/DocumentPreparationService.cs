@@ -86,6 +86,7 @@ namespace Vlims.DocumentManager.Manager
                 //documentPreparation.Documentmanagerid = "1";
                 //documentPreparation.template = "";
                 var result = DocumentPreparationData.SaveDocumentPreparation(documentPreparation);
+                documentPreparation.CreatedDate = DateTime.Now; 
                 AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPreparation.CreatedBy, EntityName = documentPreparation.documenttitle, Type = DocumentPreparationConstants.PreparationType, state = DefinitionStatus.New, EntityInfo = documentPreparation, Unique = documentPreparation.documentno });
                 return result;
                 //}
