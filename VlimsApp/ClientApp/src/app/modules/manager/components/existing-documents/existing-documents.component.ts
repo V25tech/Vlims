@@ -68,27 +68,39 @@ export class ExistingDocumentsComponent implements OnInit {
   editdoc(doc: any) {
     this.router.navigate(["revision/edit/" + doc.id], { queryParams: { entityName: doc.entityName } });
   }
-
+  // checkduplicatetemplate(template: TemplateRef<any>){
+  //   this.templatesvc.isduplicate(this.preparation.template).subscribe((data:any)=>{
+  //     const isduplicate=Boolean(data);
+  //     if(isduplicate){
+  //       this.toastr.error('Template used in multiple preparations unable to view document');
+  //     }else{
+  //       this.previewtemplate(template);
+  //     }
+  //   })
+  // }
   previewDocument(template: TemplateRef<any>, docInfo: any) {
+    debugger
     if (docInfo.entityName.toLowerCase() == 'new document') {
-      this.previewRevisionDocument(template, docInfo)
+      this.previewRevisionDocument(template, docInfo,true)
     } else {
       this.previewtemplate(template, docInfo);
     }
   }
 
   previewtemplate(template: TemplateRef<any>, docInfo: any): void {
+    debugger
     this.spinner.show();
     docInfo.edrId = docInfo.id;
-    this.templatesvc.getTemplate(docInfo).subscribe((data: any) => {
+    this.existdocService.preview(docInfo).subscribe((data: any) => {
+    //this.templatesvc.getTemplate(docInfo).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
-      this.openViewer(template);
+      this.openViewer(template,false);
     }, er => {
       this.spinner.hide();
     });
   }
-  openViewer(template: TemplateRef<any>): void {
+  openViewer(template: TemplateRef<any>,istempcont:boolean): void {
     
     // if (this.pdfBytes) {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
@@ -98,9 +110,20 @@ export class ExistingDocumentsComponent implements OnInit {
       
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }
+    if(!istempcont){
     this.getUrl(template);
+    }else{
+      this.getUrl1(template);
+    }
   }
   getUrl(template: TemplateRef<any>):void{
+    this.existdocService.geturl().subscribe((data:any)=>{
+      debugger
+      this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    })
+  }
+  getUrl1(template: TemplateRef<any>):void{
     this.templatesvc.geturl().subscribe((data:any)=>{
       debugger
       this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
@@ -125,12 +148,12 @@ export class ExistingDocumentsComponent implements OnInit {
     if (this.modalRef)
       this.modalRef.hide();
   }
-  previewRevisionDocument(template: TemplateRef<any>, docInfo: any) {
+  previewRevisionDocument(template: TemplateRef<any>, docInfo: any,istempcont:boolean) {
     this.spinner.show();
     this.existdocService.getTemplate(docInfo.template).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
-      this.openViewer(template);
+      this.openViewer(template,istempcont);
     }, (error: any) => {
       this.spinner.hide();
     });

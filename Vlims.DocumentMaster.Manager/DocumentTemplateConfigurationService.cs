@@ -49,6 +49,18 @@ namespace Vlims.DocumentMaster.Manager
             }
         }
 
+        public bool IsTemplateDuplicate(string p_Template)
+        {
+            try
+            {
+                return DocumentTemplateConfigurationData.IsTemplateDuplicate(p_Template);
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
+
         public bool SaveDocumentTemplateConfiguration(DocumentTemplateConfiguration documentTemplateConfiguration)
         {
             try

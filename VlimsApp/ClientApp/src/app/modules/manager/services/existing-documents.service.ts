@@ -13,6 +13,10 @@ export class ExistingDocumentsService {
     return this.http.postJsonLogin(objrequest, "api/documents", this.type);
 
   }
+  geturl() {
+    debugger
+    return this.http.getwithheader(`api/existingdocumentreq/getpath`, this.type);
+  }
   preview(objrequest: ExistingDocumentRequest) {
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/preview", this.type);
   }

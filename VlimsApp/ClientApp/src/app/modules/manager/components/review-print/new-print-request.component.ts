@@ -309,6 +309,16 @@ export class NewPrintRequestComponent implements OnInit {
     }
     return new Blob(byteArrays, { type: contentType });
   }
+  checkduplicatetemplate(template: TemplateRef<any>){
+    this.templatesvc.isduplicate(this.print.template).subscribe((data:any)=>{
+      const isduplicate=Boolean(data);
+      if(isduplicate){
+        this.toastr.error('Template used in multiple preparations unable to view document');
+      }else{
+        this.previewprint(template);
+      }
+    })
+  }
   previewprint(template: TemplateRef<any>) {    
     debugger
     this.spinner.show();    

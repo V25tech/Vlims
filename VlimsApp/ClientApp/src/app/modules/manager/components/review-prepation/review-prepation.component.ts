@@ -252,6 +252,16 @@ export class ReviewPrepationComponent {
       
     });
   }
+  checkduplicatetemplate(template: TemplateRef<any>){
+    this.templateService.isduplicate(this.preparation.template).subscribe((data:any)=>{
+      const isduplicate=Boolean(data);
+      if(isduplicate){
+        this.toastr.error('Template used in multiple preparations unable to view document');
+      }else{
+        this.previewtemplate(template);
+      }
+    })
+  }
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show(); let id=0;
     const obj= this.templatesSource.find(o=>o.Templatename===this.preparation.template);
@@ -272,8 +282,14 @@ export class ReviewPrepationComponent {
   getdocttemplate() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.templateService.getdocttemplate(objrequest).subscribe((data: any) => {
+      debugger
       this.templatesSource = data.Response;
-      this.templatesSource=this.templatesSource.filter(o=>o.documenttype.toLocaleLowerCase()===this.preparation.documenttype.toLocaleLowerCase());
+      this.templatesSource=this.templatesSource.filter(o=>o.documenttype.toLowerCase()===this.preparation.documenttype.toLowerCase());
+      if(this.preparation.template==null || this.preparation.template==undefined || this.preparation.template==''){
+        debugger
+        const filter = this.templatesSource.find(o => !o.IsParent);
+        this.templatesSource = filter ? [filter] : [];
+      }
     });
   }
   getworkflowitems() {

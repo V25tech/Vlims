@@ -115,7 +115,7 @@
                           [autoDisplayFirst]="false" #templateInput="ngModel" placeholder="Select Template">
               </p-dropdown>
               <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!='' && !viewMode" href="javascript:void(0)" (click)="edittemplate(preparation.template)">Modify</a>
-              <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!='' && viewMode"  href="javascript:void(0)" (click)="previewtemplate(template)">View Document</a>
+              <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!='' && viewMode"  href="javascript:void(0)" (click)="checkduplicatetemplate(template)">View Document</a>
               <div *ngIf="templateInput.invalid && (templateInput.dirty || templateInput.touched)" class="text-danger">
                 Template is required
               </div>

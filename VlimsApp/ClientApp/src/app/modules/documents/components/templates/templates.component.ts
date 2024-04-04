@@ -12,6 +12,8 @@ import { Paginator } from 'primeng/paginator';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DocumentPreperationService } from 'src/app/modules/services/document-preperation.service';
+import { ToastrService } from 'ngx-toastr';
+import { DocumentTemplateConfiguration as add } from 'src/app/models/model';
 
 @Component({
   selector: 'app-templates',
@@ -34,10 +36,12 @@ export class TemplatesComponent {
   access:boolean=false;
   templatesDatasource: TemplateForm[] = [];
   types:DocumentTemplateConfiguration[]=[];
+  copytemplate:add=new add();
   constructor(private router:Router,private templatesvc: DocumentTemplateServiceService,
     private spinner: NgxSpinnerService,
     private modalService: BsModalService, private sanitizer: DomSanitizer,
     private preparationsvc:DocumentPreperationService,
+    private toastr: ToastrService,
     private commonsvc: CommonService) {}
 
   ngOnInit() {
@@ -46,7 +50,6 @@ export class TemplatesComponent {
   }
   getdocumenttypeconfig() {
     this.spinner.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:100,Id:0};
       return this.templatesvc.getdocttemplate(this.commonsvc.req).subscribe((data: any) => {
         if(data!=null&&data.Response!=null&&data.Response.length>0){
           data.Response.forEach((item:any)=>{
@@ -156,4 +159,37 @@ export class TemplatesComponent {
       return '';
     }
   }
+  CopyTemplate(objtemp:DocumentTemplateConfiguration,template2: TemplateRef<any>){
+    debugger
+    this.templatesvc.getbyId(parseInt(objtemp.DTID)).subscribe((data:any)=>{
+      this.copytemplate=data;
+      this.modalRef = this.modalService.show(template2, { class: 'modal-lg' });
+    })
+  }
+  addTemplate(temp:add){
+    debugger
+    this.spinner.show();
+    if(temp!=null && temp!=undefined){
+      const templateExists = this.types.some(o => o.Templatename.toLowerCase() === temp.Templatename.toLowerCase());
+      if (templateExists) {
+        this.toastr.error('Template Name Exists');
+        this.spinner.hide();
+        return;
+      }
+    else{
+      let count = this.types.length;
+      count++;
+      temp.Uniquecode=="Temp "+count;
+      this.templatesvc.adddoctemplate(temp).subscribe((data:any)=>{
+        this.toastr.success('Clone Successfull');
+        this.spinner.hide();
+        if (this.modalRef){
+      this.modalRef.hide();
+        }
+        this.getdocumenttypeconfig();
+      });
+      
+    }
+  }
+}
 }

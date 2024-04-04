@@ -134,6 +134,13 @@ namespace Vlims.Controllers
             return result;
         }
 
+        [HttpGet("isduplicate")]
+        public ActionResult<System.Boolean> IsTemplateDuplicate(string p_template)
+        {
+            var result= documentTemplateConfigurationService.IsTemplateDuplicate(p_template);
+            return result;
+        }
+
         /// <summary>
         /// This Method is used to update DocumentTemplateConfiguration
         /// </summary>

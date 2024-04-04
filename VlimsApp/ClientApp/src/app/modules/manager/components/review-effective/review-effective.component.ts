@@ -203,6 +203,16 @@ export class ReviewEffectiveComponent {
     }
     return new Blob(byteArrays, { type: contentType });
   }
+  checkduplicatetemplate(template: TemplateRef<any>){
+    this.templateService.isduplicate(this.effective.template).subscribe((data:any)=>{
+      const isduplicate=Boolean(data);
+      if(isduplicate){
+        this.toastr.error('Template used in multiple preparations unable to view document');
+      }else{
+        this.previewtemplate(template);
+      }
+    })
+  }
   previewtemplate(template: TemplateRef<any>) {  
     let id=0;
     const obj= this.templatesSource.find(o=>o.Templatename===this.effective.template);

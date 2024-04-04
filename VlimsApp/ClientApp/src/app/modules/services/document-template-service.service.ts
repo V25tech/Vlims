@@ -39,6 +39,10 @@ getTemplate(templte: string,ispdf:boolean=true) {
   debugger
   return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&p_user=${this.commonsvc.getUsername()}&p_isPdf=${ispdf}`, this.type);
 }
+isduplicate(templte: string) {
+  debugger
+  return this.http.getwithheader(`api/documenttemplateconfiguration/isduplicate?p_template=${templte}`, this.type);
+}
 geturl() {
   debugger
   return this.http.getwithheader(`api/documenttemplateconfiguration/getpath`, this.type);

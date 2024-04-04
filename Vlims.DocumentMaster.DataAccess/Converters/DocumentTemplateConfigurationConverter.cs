@@ -162,8 +162,14 @@ namespace Vlims.DocumentMaster.DataAccess
                             //HashSet<string> uniqueValues = new HashSet<string>(values);
                             documentTemplateConfigurationData.ReviewedRole = string.Join(",", values.Distinct());
                         }
-                        //documentTemplateConfigurationData.PrepareDept = Convert.ToString(row["PREPAREDDEPT"]);
                         documentTemplateConfigurationData.PreparedRole = Convert.ToString(row["PREPAREDROLE"]);
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.PreparedRole))
+                        {
+                            string[] values = documentTemplateConfigurationData.PreparedRole.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.PreparedRole = string.Join(",", values.Distinct());
+                        }
+                        //documentTemplateConfigurationData.PrepareDept = Convert.ToString(row["PREPAREDDEPT"]);
                         result.Add(documentTemplateConfigurationData);
                     }
                 }

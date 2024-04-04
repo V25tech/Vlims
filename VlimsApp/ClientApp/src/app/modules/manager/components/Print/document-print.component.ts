@@ -12,6 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Paginator } from 'primeng/paginator';
 import { Table } from 'jspdf-autotable';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-document-print',
@@ -45,6 +46,7 @@ export class DocumentPrintComponent implements OnInit {
     private templatesvc:DocumentTemplateServiceService,
     private modalService: BsModalService, private sanitizer: DomSanitizer,
     private spinner:NgxSpinnerService,
+    private toastr: ToastrService,
     private docservice: DocumentPreperationService, private router: Router) { }
 
   navigateToAddPrint(): void {
@@ -152,6 +154,16 @@ export class DocumentPrintComponent implements OnInit {
       debugger
       this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data) as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    })
+  }
+  checkduplicatetemplate(template: TemplateRef<any>,objtemp: DocumentPrintConfiguration){
+    this.templatesvc.isduplicate(objtemp.template).subscribe((data:any)=>{
+      const isduplicate=Boolean(data);
+      if(isduplicate){
+        this.toastr.error('Template used in multiple preparations unable to view document');
+      }else{
+        this.previewtemplate(template,objtemp);
+      }
     })
   }
   previewtemplate(template: TemplateRef<any>,objtemp: DocumentPrintConfiguration) {

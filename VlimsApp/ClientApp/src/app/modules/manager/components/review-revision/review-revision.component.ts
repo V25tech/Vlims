@@ -266,7 +266,16 @@ export class ReviewRevisionComponent {
       this.spinner.hide();
     });
   }
-
+  checkduplicatetemplate(template: TemplateRef<any>){
+    this.templateService.isduplicate(this.revision.template).subscribe((data:any)=>{
+      const isduplicate=Boolean(data);
+      if(isduplicate){
+        this.toastr.error('Template used in multiple preparations unable to view document');
+      }else{
+        this.previewtemplate(template);
+      }
+    })
+  }
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show();
     this.templateService.getTemplate(this.revision.template).subscribe((data: any) => {

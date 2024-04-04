@@ -12,8 +12,8 @@
   BEGIN TRY 
   
  DECLARE @ID INT,@REFRENCEID INT,@REFERENCEGUID UNIQUEIDENTIFIER,@GUID_DPP UNIQUEIDENTIFIER
- SET @REFRENCEID=(SELECT TOP(1) Refrence_PSY FROM DocumentPreparation_PSY WHERE @documentno_PSY=@documentno_PSY)
- SET @REFERENCEGUID=(SELECT TOP(1) GUID_DP FROM DocumentPreparation_PSY WHERE @documentno_PSY=@documentno_PSY)
+ SET @REFRENCEID=(SELECT TOP(1) Refrence_PSY FROM DocumentPreparation_PSY WHERE documentno_PSY=@documentno_PSY)
+ SET @REFERENCEGUID=(SELECT TOP(1) GUID_DP FROM DocumentPreparation_PSY WHERE documentno_PSY=@documentno_PSY)
 
 
 

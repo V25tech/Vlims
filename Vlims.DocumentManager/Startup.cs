@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using PolicySummary.DMS.Services;
 using Vlims.DocumentManager.Manager;
@@ -74,6 +75,12 @@ public class Startup
         {
             x.AllowAnyOrigin()
             .AllowAnyHeader().AllowAnyMethod();
+        });
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory())),
+            RequestPath = "/pdfs"
         });
         app.UseRouting();
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
