@@ -110,7 +110,14 @@ export class DocumentsLandingComponent implements OnInit {
     let currentDate = new Date();
     dateSent = new Date(dateSent);
 
-    return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
- }
+    let Difference_In_Time =
+    dateSent.getTime() - currentDate.getTime();
+ 
+    // Calculating the no. of days between
+    // two dates
+    return Math.round(Difference_In_Time / (1000 * 3600 * 24));
+
+    //return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
+  }
 
 }
