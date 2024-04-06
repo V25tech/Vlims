@@ -226,7 +226,7 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.Pages=1;
     }
     else if(lastSegment=="edit")
-    {debugger
+    {
       this.title='Edit Document Template';
       this.editMode=true;
         let id=parseInt(segments[segments.length-1],10);
@@ -413,7 +413,7 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   addTemplate() {
-    debugger
+    
     this.loader.show();
     console.log(this.headerData);
     // this.templateForm.header=this.html1;
@@ -428,10 +428,10 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
     this.templateForm.Page=this.pages;
     console.log(this.templateForm);
-    debugger
+    
     if(this.editMode)
     {
-      debugger
+      
       this.templateForm.ModifiedBy=this.commonsvc.getUsername();
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
@@ -722,7 +722,6 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     }
   }
   addbodyNewText() {
-    debugger
 
     if (this.pages[this.currentPage].bodyData.length > 0) {
       const lastRow = this.pages[this.currentPage].bodyData[this.pages[this.currentPage].bodyData.length - 1];
@@ -773,13 +772,11 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
   }
   }
   enableheader(){
-    debugger
     this.pages[this.currentPage].isheader = !this.pages[this.currentPage].isheader;
     console.log('header',this.pages[this.currentPage].isheader);
     //this.pages[this.currentPage].isheader=true;
   }
   enablefooter(){
-    debugger
     this.pages[this.currentPage].isfooter = !this.pages[this.currentPage].isfooter;
     console.log('footer',this.pages[this.currentPage].isfooter)
     //this.pages[this.currentPage].isfooter=true;
@@ -806,7 +803,6 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     if (file) {
       this.loader.show();
       this.templatesvc.uploadImage(file).subscribe((data:any)=> {
-          debugger
           console.log('image',data.Message);
           this.templateForm.header=data.Message;
           this.loader.hide();
@@ -828,7 +824,7 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     if (file) {
       this.loader.show();
       this.templatesvc.uploadImage(file).subscribe((data:any)=> {
-          debugger
+          
           console.log('image',data.Message);
           this.templateForm.footer=data.Message;
           this.loader.hide();
