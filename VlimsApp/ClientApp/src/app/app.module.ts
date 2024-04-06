@@ -25,6 +25,8 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TrackSearchComponent } from './common/tracksearch/tracksearch.component';
 import { SearchViewComponent } from './common/searchview/searchview.component';
+import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+//import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 
@@ -47,7 +49,8 @@ import { SearchViewComponent } from './common/searchview/searchview.component';
     PaginatorModule,
     NgxSummernoteModule,
     ToastrModule.forRoot(),
-    CKEditorModule
+    CKEditorModule, RichTextEditorModule
+
   ],
   exports: [TableModule],
 

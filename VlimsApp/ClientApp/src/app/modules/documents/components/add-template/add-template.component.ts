@@ -14,6 +14,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as Editor from 'ckeditor5-custom-build/build/ckeditor';
 //import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 
@@ -46,8 +47,24 @@ interface BodyDataElement {
   selector: 'app-add-template',
   templateUrl: './add-template.component.html',
   styleUrls: ['./add-template.component.scss'],
+  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService]
+
 })
 export class AddTemplateComponent implements OnInit {
+
+  public tools: object = {
+    items: ['Undo', 'Redo', '|',
+      'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
+      'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
+      'SubScript', 'SuperScript', '|',
+      'LowerCase', 'UpperCase', '|',
+      'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
+      'Indent', 'Outdent', '|',
+      'CreateTable', 'TableRemove', 'TableHeader', 'TableColumns', 'TableRows', 'TableCellHorizontalAlign', 'TableCellVerticalAlign', 'TableEditProperties', '|',
+      'CreateLink', 'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen']
+  };
+
+
   stageSource:stage[] = [
     { label: 'Title', value: 'Title' },
     { label: 'SOP No.', value: 'Preparation' },
@@ -411,6 +428,7 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
     this.templateForm.Page=this.pages;
     console.log(this.templateForm);
+    debugger
     if(this.editMode)
     {
       debugger
