@@ -30,6 +30,8 @@ public interface IDocumentPrintService
 
     bool UpdateDocumentPrint(DocumentPrint documentPrint);
 
+    bool UpdateDocumentPrintCount(DocumentPrint documentPrint);
+
     bool DeleteDocumentPrintByDRId(string dRId);
 
     bool DeleteAllDocumentPrint(List<int> dRIds);

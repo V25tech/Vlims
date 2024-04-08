@@ -64,6 +64,7 @@ export class DocumentPrintComponent implements OnInit {
     };
     return this.doctypeservice.GetDocumentPrint(objrequest).subscribe((data: any) => {
       if(data!=null&&data.response!=null&&data.response.length>0){
+        debugger;
         data.response.forEach((item:any)=>{
           item.modifiedDate=this.commonsvc.setDate(item.modifiedDate)
         })
@@ -159,15 +160,23 @@ export class DocumentPrintComponent implements OnInit {
   checkduplicatetemplate(template: TemplateRef<any>,objtemp: DocumentPrintConfiguration){
     this.templatesvc.isduplicate(objtemp.template).subscribe((data:any)=>{
       const isduplicate=Boolean(data);
+      debugger;
+      if(objtemp.printCount>=objtemp.noofcopies)
+        {          
+          this.toastr.error('Cannot Print the document as Print Count is more than No of Copies requested');
+          return;
+        }
       if(isduplicate){
         this.toastr.error('Template used in multiple preparations unable to view document');
       }else{
+        this.UpdatePrintCount(objtemp);
         this.previewtemplate(template,objtemp);
+
+       
       }
     })
   }
-  previewtemplate(template: TemplateRef<any>,objtemp: DocumentPrintConfiguration) {
-    
+  previewtemplate(template: TemplateRef<any>,objtemp: DocumentPrintConfiguration) {    
     this.spinner.show();
     // this.preparation.template=objtemp.Templatename;
     // this.preparation.CreatedDate=objtemp.CreatedDate;
@@ -197,6 +206,21 @@ export class DocumentPrintComponent implements OnInit {
       byteArrays.push(byteArray);
     }
     return new Blob(byteArrays, { type: contentType });
+  }
+  UpdatePrintCount(objtemp: DocumentPrintConfiguration)
+  {
+    debugger;
+    let reqObj = JSON.parse(JSON.stringify(objtemp))
+    reqObj.modifiedDate = new Date(reqObj.ModifiedDate)
+    reqObj.modifiedDate = reqObj.ModifiedDate    
+    this.doctypeservice.UpdatePrintRequestCount(reqObj).subscribe(res => {
+    this.GetDocumentPrint();
+      //this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
+    }, er => {
+      this.spinner.hide();
+      console.log(er);
+    });
+    
   }
 }
 
