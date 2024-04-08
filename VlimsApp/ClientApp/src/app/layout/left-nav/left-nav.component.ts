@@ -53,7 +53,7 @@ export class LeftNavComponent {
       iconClass: 'bi bi-palette2',
       children: [
         {
-          label: 'Document Types',
+          label: 'Document Type Configuration',
           path: '/document-types',
           isOpen: false,
           children: null,
@@ -126,7 +126,7 @@ export class LeftNavComponent {
           iconClass: '',
         },
         {
-          label: 'Document Revision',
+          label: 'Document Repository',
           path: 'revision',
           isOpen: false,
           children: null,
@@ -207,17 +207,18 @@ export class LeftNavComponent {
       isActive: false,
       iconClass: 'bi bi-gear-wide-connected',
       children: [
+       
         {
-          label: 'Department Configuration',
-          path: 'departments',
+          label: 'Security Management',
+          path: 'securityM',
           isOpen: false,
           children: null,
           isActive: false,
           iconClass: ''
         },
         {
-          label: 'Security Management',
-          path: 'securityM',
+          label: 'Department Configuration',
+          path: 'departments',
           isOpen: false,
           children: null,
           isActive: false,

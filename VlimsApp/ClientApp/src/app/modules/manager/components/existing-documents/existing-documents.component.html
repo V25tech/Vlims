@@ -27,7 +27,7 @@
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
         <p-table #templatesTable [value]="documents?.exisitingDocuments"
-                 [globalFilterFields]="['documentName', 'documentNo']"
+                 [globalFilterFields]="['documentNo', 'documentName','documentType','department','effectiveDateValue','reviewDateValue','entityName']"
                  tableStyleClass="table table-striped"
                  [rows]="itemsPerPage"
                  [paginator]="true"
@@ -37,16 +37,16 @@
           <ng-template pTemplate="header">
             <tr>
               <th>S.No</th>
-              <th style="width:80%">Document No.<p-sortIcon></p-sortIcon></th>
+              <th pSortableColumn="documentNo" style="width:80%">Document No.<p-sortIcon field="documentNo" ></p-sortIcon></th>
               <!--<th pSortableColumn="documenttypeprefix" style="width:10%">Document No<p-sortIcon field="documentNo"></p-sortIcon></th>-->
-              <th pSortableColumn="documentName" style="width:20%">Document Name<p-sortIcon field="documentName"></p-sortIcon></th>
+              <th pSortableColumn="documentName" style="width:20%">Document Title<p-sortIcon field="documentName"></p-sortIcon></th>
               <th pSortableColumn="documentType" style="width:200px">Document Type<p-sortIcon field="documentType"></p-sortIcon></th>
               <th pSortableColumn="department" style="width:200px">Department<p-sortIcon field="department"></p-sortIcon></th>
-              <th style="width:80px" pSortableColumn="effectiveDate">Effective Date<p-sortIcon field="createdBy"></p-sortIcon></th>
-              <th pSortableColumn="reviewDate" style="width:20%">Review Date<p-sortIcon field="createdOn"></p-sortIcon></th>
-              <th style="width:80%">Preparation Type<p-sortIcon></p-sortIcon></th>
-              <th style="width:80%">Actions<p-sortIcon field="modifiedBy"></p-sortIcon></th>
-              <th style="width:80%">Preview<p-sortIcon field="modifiedOn"></p-sortIcon></th>
+              <th pSortableColumn="effectiveDateValue"style="width:80px">Effective Date<p-sortIcon field="effectiveDateValue"></p-sortIcon></th>
+              <th pSortableColumn="reviewDateValue" style="width:20%">Review Date<p-sortIcon field="reviewDateValue"></p-sortIcon></th>
+              <th pSortableColumn="entityName" style="width:80%">Preparation Type<p-sortIcon field="entityName"></p-sortIcon></th>
+              <th style="width:80%">Actions</th>
+              <th style="width:80%">Preview</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-doc let-i="rowIndex">
@@ -97,3 +97,37 @@
     <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
   </div>
 </ng-template>
+
+
+
+<style>
+  /* Styles for .custom-input-group */
+  .custom-input-group {
+      background-color: white;
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+  .custom-input-group-text {
+          background: white;
+          border: none;
+          padding: 0;
+          vertical-align: middle;
+      }
+
+      .custom-search-icon {
+          font-size: 14px;
+          margin-right: 5px;
+          margin-left: 9px;
+          color: #555;
+      }
+
+      .custom-input {
+          border: none;
+          padding: 5px;
+          vertical-align: middle;
+          background-color: white;
+          box-shadow: none;
+      }
+  </style>

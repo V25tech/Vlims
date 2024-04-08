@@ -373,6 +373,8 @@ export class DocumentPrintConfiguration {
   public printCount: string = '';
   public template:string='';
   public printCopy='';
+  public existingdocumentNumber:string='';
+  
 }
 
 export class ExistingDocumentRequest {
