@@ -1,5 +1,6 @@
 ﻿
 
+
  
  CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1    
  AS   
@@ -10,6 +11,7 @@ DP.documenttitle_PSY,
 printtype_PSY,  
 DP.documentno_PSY,  
 noofcopies_PSY,  
+printCount_PSY,
 DP.workflow_PSY,  
 reason_PSY,  
 DP.CreatedBy_PSY,  

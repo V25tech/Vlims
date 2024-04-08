@@ -13,6 +13,7 @@ import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
+import { ExistingDocumentRequestService } from 'src/app/modules/services/existing-document-request.service';
 
 interface PrintType {
   label:string;
@@ -48,6 +49,9 @@ export class NewPrintRequestComponent implements OnInit {
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
   toastMsg: string | null = null;
+  printType = 'single';
+  preparations1: string[] = []; // Array to hold document numbers
+
 
   stageSource:PrintType[] = [
     { label: 'Master Copy', value: 'Master Copy' },
@@ -66,11 +70,14 @@ export class NewPrintRequestComponent implements OnInit {
   constructor(private commonsvc: CommonService, private location: Location,
     private route: ActivatedRoute,
     private workitemssvc: WorkitemsService,
+    private existingDocReqservice: ExistingDocumentRequestService,
     private modalService: BsModalService, private sanitizer: DomSanitizer,
     private templatesvc:DocumentTemplateServiceService,
     private toastr: ToastrService, private spinner: NgxSpinnerService, private docprintservice: NewPrintRequestService, private docPreperationService: DocumentPreperationService, private router: Router, private wfservice: WorkflowServiceService, private docservice: DocumentPreperationService) { }
 
   ngOnInit() {
+
+    this.getDocumentRequest();
     const user = localStorage.getItem("username");
     
     if (user != null && user != undefined) {
@@ -98,6 +105,18 @@ export class NewPrintRequestComponent implements OnInit {
     this.getworkflowinfo();
     this.getdocumentpreparations();
   }
+
+
+  getDocumentRequest() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    this.existingDocReqservice.GetExistingDocumentAll(objrequest).subscribe((data: any) => {
+      // Extracting document numbers from the response data
+      this.preparations1 = data.response.map((doc: any) => doc.documentno);
+    }, er => {
+      console.error('An error occurred:', er);
+    });
+  }
+
   getbyId(arg0: number) {
     this.spinner.show();
     return this.docprintservice.getbyId(arg0).subscribe((data: any) => {
@@ -215,6 +234,18 @@ export class NewPrintRequestComponent implements OnInit {
     });
   }
   }
+  UpdatePrintCount()
+  {
+    debugger;
+    let reqObj = JSON.parse(JSON.stringify(this.print))
+    this.docprintservice.UpdatePrintRequestCount(reqObj).subscribe(res => {
+      //this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
+    }, er => {
+      this.spinner.hide();
+      console.log(er);
+    });
+    
+  }
 
   onCancel() {
     this.router.navigate(['/print']);
@@ -316,6 +347,7 @@ export class NewPrintRequestComponent implements OnInit {
         this.toastr.error('Template used in multiple preparations unable to view document');
       }else{
         this.previewprint(template);
+        this.UpdatePrintCount();
       }
     })
   }

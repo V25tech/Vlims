@@ -62,6 +62,7 @@ public static class DocumentPrintData
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.printtype, Value = documentPrint.printtype });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.documentno, Value = documentPrint.DocumentNumber });
             sqlparms.Add(new SqlParameter { DbType = DbType.Int16, ParameterName = DocumentPrintConstants.noofcopies, Value = documentPrint.noofcopies });
+            sqlparms.Add(new SqlParameter { DbType = DbType.Int16, ParameterName = DocumentPrintConstants.printCount, Value = documentPrint.printCount });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.workflow, Value = documentPrint.workflow });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.reason, Value = documentPrint.reason });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.CreatedBy, Value = documentPrint.CreatedBy });
@@ -86,6 +87,7 @@ public static class DocumentPrintData
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.printtype, Value = documentPrint.printtype });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.documentno, Value = documentPrint.DocumentNumber });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.noofcopies, Value = documentPrint.noofcopies });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.printCount, Value = documentPrint.printCount });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.workflow, Value = documentPrint.workflow });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.reason, Value = documentPrint.reason });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.ModifiedBy, Value = documentPrint.ModifiedBy });
@@ -119,6 +121,23 @@ public static class DocumentPrintData
         {
             var result = dataAccessHelper.ExecuteStoredProcedure(DocumentPrintConstants.USP_DocumentPrint_PSY_DELETE_ALL, DocumentPrintConstants.DRId, DbType.String, string.Join(',', dRIds), ExecutionType.NonQuery);
             return (Convert.ToInt32(result) >= 0);
+        }
+        catch (System.Exception ex)
+        {
+            throw;
+        }
+    }
+
+    public static bool UpdatePrintCount(DocumentPrint documentPrint)
+    {
+        try
+        {
+            List<SqlParameter> sqlparms = new List<SqlParameter>();
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.DRId, Value = documentPrint.DRId });           
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.printCount, Value = documentPrint.printCount });            
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.Status, Value = documentPrint.Status });
+            Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPrintConstants.USP_DocumentPrint_PSY_UPDATE_PRINTCOUNT, sqlparms, ExecutionType.Scalar);
+            return (Convert.ToInt32(result) > 0);
         }
         catch (System.Exception ex)
         {

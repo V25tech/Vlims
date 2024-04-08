@@ -47,6 +47,7 @@ import { AuditworkflowgridpageComponent } from './components/auditworkflowgridpa
 import { AuditDocumetTypeNewPageComponent } from './components/audit-documet-type-new-page/audit-documet-type-new-page.component';
 import { AuditWorkflowTypeNewPageComponent } from './components/audit-workflow-type-new-page/audit-workflow-type-new-page.component';
 import { AuditTemplateTypeNewPageComponent } from './components/audit-template-type-new-page/audit-template-type-new-page.component';
+import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 
@@ -100,7 +101,7 @@ import { AuditTemplateTypeNewPageComponent } from './components/audit-template-t
     DropdownModule,
     ToastModule,
     NgxSpinnerModule,
-    CKEditorModule
+    CKEditorModule, RichTextEditorModule
   ],
   providers: [] 
 })

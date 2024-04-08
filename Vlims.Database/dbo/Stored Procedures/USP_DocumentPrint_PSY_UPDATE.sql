@@ -1,4 +1,6 @@
-﻿  CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_UPDATE] @DRId_PSY int, @documenttitle_PSY NVarChar(50),
+﻿
+
+  CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_UPDATE] @DRId_PSY int, @documenttitle_PSY NVarChar(50),
 @printtype_PSY NVarChar(50),
 @documentno_PSY NVarChar(50),
 @noofcopies_PSY NVarChar(50),
@@ -6,7 +8,8 @@
 @reason_PSY NVarChar(50),
 @ModifiedBy_PSY NVarChar(100) ,
 @Status_PSY NVarchar(100),
-@PrintCopy_PSY varchar(500)
+@PrintCopy_PSY varchar(500),
+@printCount_PSY nVarchar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -27,7 +30,7 @@ documentno_PSY=@documentno_PSY,
 noofcopies_PSY=@noofcopies_PSY,
 workflow_PSY=@workflow_PSY,
 reason_PSY=@reason_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,PrintCopy_PSY=@PrintCopy_PSY WHERE  [DRId_PSY] = @DRId_PSY ; 
+ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,PrintCopy_PSY=@PrintCopy_PSY,printCount_PSY=@printCount_PSY WHERE  [DRId_PSY] = @DRId_PSY ; 
 END
 ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
 BEGIN

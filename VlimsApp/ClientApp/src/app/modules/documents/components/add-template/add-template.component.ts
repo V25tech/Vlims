@@ -14,6 +14,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as Editor from 'ckeditor5-custom-build/build/ckeditor';
 //import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 
@@ -46,8 +47,24 @@ interface BodyDataElement {
   selector: 'app-add-template',
   templateUrl: './add-template.component.html',
   styleUrls: ['./add-template.component.scss'],
+  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService]
+
 })
 export class AddTemplateComponent implements OnInit {
+
+  public tools: object = {
+    items: ['Undo', 'Redo', '|',
+      'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
+      'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
+      'SubScript', 'SuperScript', '|',
+      'LowerCase', 'UpperCase', '|',
+      'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
+      'Indent', 'Outdent', '|',
+      'CreateTable', 'TableRemove', 'TableHeader', 'TableColumns', 'TableRows', 'TableCellHorizontalAlign', 'TableCellVerticalAlign', 'TableEditProperties', '|',
+      'CreateLink', 'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen']
+  };
+
+
   stageSource:stage[] = [
     { label: 'Title', value: 'Title' },
     { label: 'SOP No.', value: 'Preparation' },
@@ -209,7 +226,7 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.Pages=1;
     }
     else if(lastSegment=="edit")
-    {debugger
+    {
       this.title='Edit Document Template';
       this.editMode=true;
         let id=parseInt(segments[segments.length-1],10);
@@ -396,7 +413,7 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   addTemplate() {
-    debugger
+    
     this.loader.show();
     console.log(this.headerData);
     // this.templateForm.header=this.html1;
@@ -411,9 +428,10 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
     this.templateForm.Page=this.pages;
     console.log(this.templateForm);
+    
     if(this.editMode)
     {
-      debugger
+      
       this.templateForm.ModifiedBy=this.commonsvc.getUsername();
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
@@ -704,7 +722,6 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     }
   }
   addbodyNewText() {
-    debugger
 
     if (this.pages[this.currentPage].bodyData.length > 0) {
       const lastRow = this.pages[this.currentPage].bodyData[this.pages[this.currentPage].bodyData.length - 1];
@@ -755,13 +772,11 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
   }
   }
   enableheader(){
-    debugger
     this.pages[this.currentPage].isheader = !this.pages[this.currentPage].isheader;
     console.log('header',this.pages[this.currentPage].isheader);
     //this.pages[this.currentPage].isheader=true;
   }
   enablefooter(){
-    debugger
     this.pages[this.currentPage].isfooter = !this.pages[this.currentPage].isfooter;
     console.log('footer',this.pages[this.currentPage].isfooter)
     //this.pages[this.currentPage].isfooter=true;
@@ -788,7 +803,6 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     if (file) {
       this.loader.show();
       this.templatesvc.uploadImage(file).subscribe((data:any)=> {
-          debugger
           console.log('image',data.Message);
           this.templateForm.header=data.Message;
           this.loader.hide();
@@ -810,7 +824,7 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     if (file) {
       this.loader.show();
       this.templatesvc.uploadImage(file).subscribe((data:any)=> {
-          debugger
+          
           console.log('image',data.Message);
           this.templateForm.footer=data.Message;
           this.loader.hide();

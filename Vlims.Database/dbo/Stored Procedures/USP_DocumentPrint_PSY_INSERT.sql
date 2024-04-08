@@ -1,4 +1,5 @@
-﻿  CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_INSERT] @documenttitle_PSY NVarChar(50),
+﻿
+  CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_INSERT] @documenttitle_PSY NVarChar(50),
 @printtype_PSY NVarChar(50),
 @documentno_PSY NVarChar(50),
 @noofcopies_PSY NVarChar(50),
@@ -6,14 +7,15 @@
 @reason_PSY NVarChar(50),
 @CreatedBy_PSY NVarChar(100),
 @ModifiedBy_PSY NVarChar(100),
-@PrintCopy_PSY varchar(500)
+@PrintCopy_PSY varchar(500),
+@printCount_PSY nVarchar(100)
  AS 
  BEGIN 
   BEGIN TRY 
   
  DECLARE @ID INT,@REFRENCEID INT,@REFERENCEGUID UNIQUEIDENTIFIER,@GUID_DPP UNIQUEIDENTIFIER
- SET @REFRENCEID=(SELECT TOP(1) Refrence_PSY FROM DocumentPreparation_PSY WHERE documentno_PSY=@documentno_PSY)
- SET @REFERENCEGUID=(SELECT TOP(1) GUID_DP FROM DocumentPreparation_PSY WHERE documentno_PSY=@documentno_PSY)
+ SET @REFRENCEID=(SELECT TOP(1) Refrence_PSY FROM DocumentPreparation_PSY WHERE @documentno_PSY=@documentno_PSY)
+ SET @REFERENCEGUID=(SELECT TOP(1) GUID_DP FROM DocumentPreparation_PSY WHERE @documentno_PSY=@documentno_PSY)
 
 
 
@@ -27,7 +29,7 @@ reason_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PSY)
+ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PSY,printCount_PSY)
  VALUES 
 (@documenttitle_PSY,
 @printtype_PSY,
@@ -38,7 +40,7 @@ ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PS
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate(),@REFRENCEID,'In-Progress',NEWID(),@REFERENCEGUID,@PrintCopy_PSY);
+ GetDate(),@REFRENCEID,'In-Progress',NEWID(),@REFERENCEGUID,@PrintCopy_PSY,@printCount_PSY);
  SELECT @ID = @@IDENTITY; 
 
   --DECLARE @ISWORKITEMS BIT
