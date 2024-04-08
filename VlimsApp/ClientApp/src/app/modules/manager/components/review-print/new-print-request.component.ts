@@ -215,6 +215,18 @@ export class NewPrintRequestComponent implements OnInit {
     });
   }
   }
+  UpdatePrintCount()
+  {
+    debugger;
+    let reqObj = JSON.parse(JSON.stringify(this.print))
+    this.docprintservice.UpdatePrintRequestCount(reqObj).subscribe(res => {
+      //this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
+    }, er => {
+      this.spinner.hide();
+      console.log(er);
+    });
+    
+  }
 
   onCancel() {
     this.router.navigate(['/print']);
@@ -316,6 +328,7 @@ export class NewPrintRequestComponent implements OnInit {
         this.toastr.error('Template used in multiple preparations unable to view document');
       }else{
         this.previewprint(template);
+        this.UpdatePrintCount();
       }
     })
   }
