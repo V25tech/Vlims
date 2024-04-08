@@ -1,30 +1,38 @@
-<div class="container-fluid">
+<div  class="container-fluid">
   <div class="row p-2">
       <div class="col">
           <div class="d-flex justify-content-between align-items-center">
               <h4 class="page-title flex-grow-1">Existing Document Request Configuration</h4>
 
               <div class="back-icon" style="margin-right: 10px;">
-                  <a href="javascript:void(0);" onclick="history.back();">
+                  <a *ngIf="!pdfUrl" href="javascript:void(0);" onclick="history.back();">
                       <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
                   </a>
+                  <a *ngIf="pdfUrl" href="javascript:void(0);" (click)="pdfUrl= null">
+                    <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+                </a>
               </div>
               
-              <div class="d-flex page-title-actions">
+              <div *ngIf="!pdfUrl" class="d-flex page-title-actions">
                   <div class="input-group custom-input-group">
                       <!-- Magnifying glass icon -->
                       <span class="input-group-text custom-input-group-text">
                           <i class="fas fa-search custom-search-icon"></i>
                       </span>
                       <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="249">
-                  </div>
-                    
+                  </div>                    
                   <button class="btn btn-primary mx-2" type="button" (click)="navigateToAddRequest()" *ngIf="access">New</button>
               </div>
           </div>
       </div>
   </div>
-  <div class="row p-2">
+ 
+  <div>
+  <p-table [hidden] #templatesTable ></p-table>
+  <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+  </div>
+
+  <div *ngIf="!pdfUrl" class="row p-2">
       <div class="col">
           <div class="p-4 bg-white shadow-dark rounded-2">
               <p-table #templatesTable  [value]="existingDocDatasource" 
@@ -74,7 +82,7 @@
                 </td>
 
                 <td>
-                  <a href="javascript:void(0);" (click)="previewtemplate(template,existingdoc)">Preview</a>
+                  <a href="javascript:void(0);" (click)="previewtemplate(existingdoc)">Preview</a>
                 </td>
               </tr>
             </ng-template>
@@ -83,53 +91,6 @@
       </div>
   </div>
 </div>
-
-
-<style>
-  /* Styles for .custom-input-group */
-  .custom-input-group {
-      background-color: white;
-      display: flex;
-      align-items: center;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-  }
-  .custom-input-group-text {
-          background: white;
-          border: none;
-          padding: 0;
-          vertical-align: middle;
-      }
-
-      .custom-search-icon {
-          font-size: 14px;
-          margin-right: 5px;
-          margin-left: 9px;
-          color: #555;
-      }
-
-      .custom-input {
-          border: none;
-          padding: 5px;
-          vertical-align: middle;
-          background-color: white;
-          box-shadow: none;
-      }
-  </style>
-<ng-template #template>
-<div class="modal-header">
-  <h4 class="modal-title pull-left">Preview</h4>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
-    <span aria-hidden="true">×</span>
-  </button>
-</div>
-<div class="modal-body">
-  <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
-</div>
-</ng-template>
 
 
 
