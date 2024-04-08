@@ -26,13 +26,14 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TrackSearchComponent } from './common/tracksearch/tracksearch.component';
 import { SearchViewComponent } from './common/searchview/searchview.component';
 import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { DisableRightClickDirective } from './disable-right-click.directive';
 //import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent, TrackSearchComponent, SearchViewComponent],
+  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent, TrackSearchComponent, SearchViewComponent, DisableRightClickDirective],
   imports: [
     BrowserModule,
     FormsModule,
