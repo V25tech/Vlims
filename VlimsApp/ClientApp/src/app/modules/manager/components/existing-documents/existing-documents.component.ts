@@ -30,6 +30,7 @@ export class ExistingDocumentsComponent implements OnInit {
   pdfBytes: Uint8Array | undefined;
   pdfUrl: string | null = null;
   modalRef: BsModalRef | undefined;
+  daterev: string | null | undefined;
 
   constructor(private router: Router, private activate:ActivatedRoute, private spinner: NgxSpinnerService, private commonsvc: CommonService, private existdocService: ExistingDocumentsService
       ,private templatesvc:DocumentTemplateServiceService
@@ -52,7 +53,17 @@ export class ExistingDocumentsComponent implements OnInit {
         if (data != null && data.exisitingDocuments.length > 0 && data != undefined) {
           data.exisitingDocuments.forEach((item: any) => {
             item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
-            item.reviewDateValue = (item.reviewDate != null || item.reviewDate != 'NA') ? this.commonsvc.setDate(item.reviewDate): 'NA';
+            this.daterev=this.commonsvc.setDate(item.reviewDate);
+            debugger;
+            if(this.daterev=='31/12/9999'||this.daterev=='01/01/1900')
+              {
+                item.reviewDateValue = 'NA';
+              }
+              else
+              {
+                item.reviewDateValue = this.commonsvc.setDate(item.reviewDate);
+              }
+            //item.reviewDateValue = (item.reviewDate != null || item.reviewDate != 'NA') ? this.commonsvc.setDate(item.reviewDate): 'NA';
           })
           this.documents = data;
         }       
