@@ -79,7 +79,7 @@ export class ExistingDocumentsComponent implements OnInit {
   //   })
   // }
   previewDocument(template: TemplateRef<any>, docInfo: any) {
-    debugger
+    // debugger
     if (docInfo.entityName.toLowerCase() == 'new document') {
       this.previewRevisionDocument(template, docInfo,true)
     } else {
@@ -88,7 +88,7 @@ export class ExistingDocumentsComponent implements OnInit {
   }
 
   previewtemplate(template: TemplateRef<any>, docInfo: any): void {
-    debugger
+    //debugger
     this.spinner.show();
     docInfo.edrId = docInfo.id;
     this.existdocService.preview(docInfo).subscribe((data: any) => {
