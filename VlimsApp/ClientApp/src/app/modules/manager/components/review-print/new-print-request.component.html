@@ -80,24 +80,12 @@
             <div class="col-sm-10">
               <input type="number" class="form-control" id="noofcopies" name="noofcopies" placeholder=""
                      [(ngModel)]="print.noofcopies" [disabled]="viewMode" #noofcopiesInput="ngModel" required placeholder="Choose No Of Copies" min="1" max="9" />
-              <div *ngIf="noofcopiesInput.invalid && (noofcopiesInput.dirty || noofcopiesInput.touched)" class="text-danger">
+               <div *ngIf="noofcopiesInput.invalid && (noofcopiesInput.dirty || noofcopiesInput.touched)" class="text-danger">
                 No Of Copies is required.
               </div>
             </div>
           </div>
-          <!----Print count-->
-          <div class="form-group row">
-            <label for="noofcopies" class="col-sm-2 col-form-label">
-              Print Count<span style="color: red; font-weight: bolder;">*</span>
-            </label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="printCount" name="printCount" placeholder=""
-                     [(ngModel)]="print.printCount" [disabled]="viewMode" #noofcopiesInput="ngModel" required placeholder="Print Count" min="1" max="9" />
-              <div *ngIf="noofcopiesInput.invalid && (noofcopiesInput.dirty || noofcopiesInput.touched)" class="text-danger">
-                PrintCount is required.
-              </div>
-            </div>
-          </div>
+         
 
 
           <div class="form-group row">
@@ -185,7 +173,7 @@
           <div class="form-group row my-4">
             <div class="col-sm-10 offset-sm-2">
               <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
-              <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid || isButtonDisabled" *ngIf="!viewMode && !editMode">Submit</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid || isButtonDisabled"  *ngIf="!viewMode && !editMode">Submit</button>
               <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid" *ngIf="editMode">Update</button>
               <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
               <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button> -->
