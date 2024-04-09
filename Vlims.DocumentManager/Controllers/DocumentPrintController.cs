@@ -123,6 +123,15 @@ public class DocumentPrintController : ControllerBase
         }
         return BadRequest();
     }
-
+    /// <summary>
+    /// This Method is used to update DocumentEffective
+    /// </summary>
+    /// <param name="documentEffective"></param>
+    [HttpPost("updatedocumentprintcount")]
+    public ActionResult<System.Boolean> UpdateDocumentPrintCount(DocumentPrint documentPrint)
+    {
+        var result = documentPrintService.UpdateDocumentPrintCount(documentPrint);
+        return result;
+    }
 }
 

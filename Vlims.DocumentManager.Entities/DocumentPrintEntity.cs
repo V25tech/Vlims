@@ -19,6 +19,8 @@ public class DocumentPrint
 
     private int noofcopiesField;
 
+    private int printCountField;
+
     private string workflowField;
 
     private string reasonField;
@@ -89,6 +91,18 @@ public class DocumentPrint
         set
         {
             this.noofcopiesField = value;
+        }
+    }
+
+    public int printCount
+    {
+        get
+        {
+            return this.printCountField;
+        }
+        set
+        {
+            this.printCountField = value;
         }
     }
 

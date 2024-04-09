@@ -23,7 +23,6 @@ export class ExistingDocumentRequestService {
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/updatedocumenteffective", this.type);
   }
   geturl() {
-    debugger
     return this.http.getwithheader(`api/existingdocumentreq/getpath`, this.type);
   }
   preview(objrequest: ExistingDocumentRequest) {
