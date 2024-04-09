@@ -81,7 +81,7 @@ DP.CreatedDate_PSY AS PREAPREDDATE,DPP.PrintCopy_PSY,DPP.reason_PSY
 FROM DocumentPreparation_PSY DP 
 LEFT JOIN DocumentEffective_PSY DE ON DE.ReferenceGuid_PSY=DP.GUID_DP
 LEFT JOIN AdditionalTask_PSY AT ON AT.ReferenceGuid_PSY=DE.GUID_DE
-LEFT JOIN DocumentPrint_PSY DPP ON DPP.ReferenceGuid_PSY=DP.GUID_DP
+LEFT JOIN DocumentPrint_PSY DPP ON DPP.ReferenceGuid_PSY=DP.GUID_DP AND DPP.IsActive_PSY=1
 JOIN @PREPAREDBY PR ON PR.TEMPLATE_NAME=DP.template_PSY
 WHERE DP.template_PSY=@TemplateName
 GROUP BY

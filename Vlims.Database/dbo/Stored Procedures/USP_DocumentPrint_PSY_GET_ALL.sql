@@ -18,7 +18,7 @@ DP.CreatedBy_PSY,
 DP.CreatedDate_PSY,  
 DP.ModifiedBy_PSY,  
 DP.ModifiedDate_PSY,  
-DP.Status_PSY,DSP.template_PSY,DP.Refrence_PSY,DP.PrintCopy_PSY,
+DP.Status_PSY,DSP.template_PSY,DP.Refrence_PSY,DP.PrintCopy_PSY,DP.IsActive_PSY,
  count(*) over() as TotalRows   
  FROM [dbo].[DocumentPrint_PSY] DP WITH (NOLOCK)  
  JOIN dbo.DocumentPreparation_PSY DSP ON DSP.GUID_DP=DP.ReferenceGuid_PSY

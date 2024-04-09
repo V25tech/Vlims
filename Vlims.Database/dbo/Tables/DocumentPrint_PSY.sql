@@ -16,6 +16,7 @@
     [ReferenceGuid_PSY] UNIQUEIDENTIFIER NULL,
     [PrintCopy_PSY]     VARCHAR (500)    NULL,
     [printCount_PSY]    NVARCHAR (100)   NULL,
+    [IsActive_PSY] BIT NULL, 
     CONSTRAINT [PK_DocumentPrint_PSY] PRIMARY KEY CLUSTERED ([DRId_PSY] ASC)
 );
 

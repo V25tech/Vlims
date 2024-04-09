@@ -14,9 +14,10 @@
   BEGIN TRY 
   
  DECLARE @ID INT,@REFRENCEID INT,@REFERENCEGUID UNIQUEIDENTIFIER,@GUID_DPP UNIQUEIDENTIFIER
- SET @REFRENCEID=(SELECT TOP(1) Refrence_PSY FROM DocumentPreparation_PSY WHERE @documentno_PSY=@documentno_PSY)
- SET @REFERENCEGUID=(SELECT TOP(1) GUID_DP FROM DocumentPreparation_PSY WHERE @documentno_PSY=@documentno_PSY)
+ SET @REFRENCEID=(SELECT TOP(1) Refrence_PSY FROM DocumentPreparation_PSY WHERE documentno_PSY=@documentno_PSY)
+ SET @REFERENCEGUID=(SELECT TOP(1) GUID_DP FROM DocumentPreparation_PSY WHERE documentno_PSY=@documentno_PSY)
 
+ UPDATE DocumentPrint_PSY SET IsActive_PSY=0 WHERE documentno_PSY=@documentno_PSY --AND Status_PSY='APPROVED' AND printtype_PSY=@PrintCopy_PSY
 
 
  INSERT INTO [dbo].[DocumentPrint_PSY] 
@@ -29,7 +30,7 @@ reason_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PSY,printCount_PSY)
+ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PSY,printCount_PSY,IsActive_PSY)
  VALUES 
 (@documenttitle_PSY,
 @printtype_PSY,
@@ -40,7 +41,7 @@ ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PS
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate(),@REFRENCEID,'In-Progress',NEWID(),@REFERENCEGUID,@PrintCopy_PSY,@printCount_PSY);
+ GetDate(),@REFRENCEID,'In-Progress',NEWID(),@REFERENCEGUID,@PrintCopy_PSY,@printCount_PSY,1);
  SELECT @ID = @@IDENTITY; 
 
   --DECLARE @ISWORKITEMS BIT
