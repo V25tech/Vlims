@@ -14,7 +14,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as Editor from 'ckeditor5-custom-build/build/ckeditor';
 //import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
+import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService, QuickToolbarSettingsModel, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 
@@ -47,7 +47,7 @@ interface BodyDataElement {
   selector: 'app-add-template',
   templateUrl: './add-template.component.html',
   styleUrls: ['./add-template.component.scss'],
-  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService]
+  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService, QuickToolbarService]
 
 })
 export class AddTemplateComponent implements OnInit {
@@ -60,10 +60,26 @@ export class AddTemplateComponent implements OnInit {
       'LowerCase', 'UpperCase', '|',
       'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
       'Indent', 'Outdent', '|',
-      'CreateTable', 'TableRemove', 'TableHeader', 'TableColumns', 'TableRows', 'TableCellHorizontalAlign', 'TableCellVerticalAlign', 'TableEditProperties', '|',
-      'CreateLink', 'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen']
+      'CreateTable','|',
+      'Image', '|', 'FullScreen']
+  };
+  public fontFamily = {
+    default: 'Times New Roman',
+    width: '60px',
   };
 
+  public pasteCleanupSettings: object = {
+    prompt: true,
+    plainText: false,
+    keepFormat: false,
+    deniedTags: ['a'],
+    deniedAttrs: ['class', 'title', 'id'],
+    allowedStyleProps: ['color', 'margin', 'font-size']
+  };
+
+  public quickToolbarSettings: QuickToolbarSettingsModel = {
+    table: ['TableHeader', 'TableRows', 'TableColumns', 'TableCell', '-', 'BackgroundColor', 'TableRemove', 'TableCellVerticalAlign', 'Styles']
+  };
 
   stageSource:stage[] = [
     { label: 'Title', value: 'Title' },
