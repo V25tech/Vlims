@@ -25,12 +25,15 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TrackSearchComponent } from './common/tracksearch/tracksearch.component';
 import { SearchViewComponent } from './common/searchview/searchview.component';
+import { RichTextEditorModule, TableService, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
+import { DisableRightClickDirective } from './disable-right-click.directive';
+//import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent, TrackSearchComponent, SearchViewComponent],
+  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent, TrackSearchComponent, SearchViewComponent, DisableRightClickDirective],
   imports: [
     BrowserModule,
     FormsModule,
@@ -47,11 +50,12 @@ import { SearchViewComponent } from './common/searchview/searchview.component';
     PaginatorModule,
     NgxSummernoteModule,
     ToastrModule.forRoot(),
-    CKEditorModule
+    CKEditorModule, RichTextEditorModule
+
   ],
   exports: [TableModule],
 
-  providers: [BsModalService,AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true },MessageService], 
+  providers: [BsModalService, AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }, MessageService, TableService, QuickToolbarService], 
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -15,7 +15,7 @@
 
       <div  class="row">
 
-        <div class="col" [ngClass]="viewreminderDocs ? 'col-lg-3' : 'col-lg-4'">
+        <div class="col col-lg-4">
           <div class="card" (click)="userRole != 'adminrole' && navigateTo('assigned')">
             <div class="card-header bg-transparent d-flex justify-content-between border-0">
               <span class="ms-auto" style="color: white;"><cite title="Source Title"><small
@@ -41,7 +41,7 @@
           </div>
         </div> -->
 
-        <div class="col" [ngClass]="viewreminderDocs ? 'col-lg-3' : 'col-lg-4'">
+        <div class="col col-lg-4">
           <div class="card" (click)="userRole != 'adminrole' && navigateTo('document-master')">
             <div class="card-body">
               <i class="fa-regular fa-life-ring"></i>
@@ -52,7 +52,7 @@
 
 
 
-        <div class="col" [ngClass]="viewreminderDocs ? 'col-lg-3' : 'col-lg-4'">
+        <div class="col col-lg-4">
           <div class="card" (click)="userRole != 'adminrole' && navigateTo('document-manager')">
             <div class="card-body">
               <i class="fa-solid fa-folder-tree"></i>
@@ -70,7 +70,7 @@
           </div>
         </div> -->
 
-        <div class="col" [ngClass]="viewreminderDocs ? 'col-lg-3' : 'col-lg-4'">
+        <div class="col col-lg-4">
           <div class="card" (click)="navigateTo('admin')">
             <div class="card-body">
               <i class="fa-solid fa-users-gear"></i>
@@ -79,7 +79,7 @@
           </div>
         </div>
 
-        <div class="col" [ngClass]="viewreminderDocs ? 'col-lg-3' : 'col-lg-4'">
+        <div class="col col-lg-4">
           <div class="card" (click)="navigateTo('reports')">
             <div class="card-body">
               <i class="fa-solid fa-users-gear"></i>

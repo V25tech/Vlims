@@ -326,7 +326,9 @@
           <form [formGroup]="form" id="bodyid">
             <!--<div formControlName="html" [ngxSummernote]="config" [(ngModel)]="pages[this.currentPage].text">
   </div>-->
-            <ckeditor formControlName="html" [(ngModel)]="pages[this.currentPage].text" [editor]="Editor" [config]="config"></ckeditor>
+            <!--<ckeditor formControlName="html" [(ngModel)]="pages[this.currentPage].text" [editor]="Editor" [config]="config"></ckeditor>-->
+            <ejs-richtexteditor formControlName="html" [(ngModel)]="pages[this.currentPage].text" id='defaultRTE' [fontFamily]='fontFamily' [toolbarSettings]='tools' [pasteCleanupSettings]="pasteCleanupSettings" [quickToolbarSettings]='quickToolbarSettings'>
+            </ejs-richtexteditor>
           </form>
           <!-- </div> -->
           <div class="form-group row my-4">

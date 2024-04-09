@@ -5,7 +5,8 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { WorkitemsService } from '../../../services/workitems.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ExistingDocumentRequest, RequestContext, RequestContext1, WorkItemsConfiguration } from '../../../../models/model';
-import { ExistingDocumentRequestService } from 'src/app/modules/services/existing-document-request.service';
+import { ExistingDocumentsService } from 'src/app/modules/manager/services/existing-documents.service';
+import { CommonService } from 'src/app/shared/common.service';
 
 @Component({
   selector: 'app-documents-landing',
@@ -23,7 +24,7 @@ export class DocumentsLandingComponent implements OnInit {
   workItemsCount = 0;
   reviewCount = '';
   approveCount = '';  
-  constructor(private router: Router, private loader: NgxSpinnerService, private workitemssvc: WorkitemsService, private existingDocumentRequestService: ExistingDocumentRequestService) {
+  constructor(private router: Router, private loader: NgxSpinnerService, private workitemssvc: WorkitemsService,private commonsvc: CommonService, private existdocService: ExistingDocumentsService) {
     this.userRole = JSON.parse(this.storage['user']).Role.toLowerCase();
     this.userName = this.storage['username'].toLowerCase();
   }
@@ -80,20 +81,22 @@ export class DocumentsLandingComponent implements OnInit {
 
   existingDocumentAll(){
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
-    this.existingDocumentRequestService.GetExistingDocumentAll(objrequest).subscribe((data: any) =>{
+    this.existdocService.getAllDocuments(objrequest).subscribe((data: any) =>{
       //console.log(data?.response); 
-      let filterdbyreviewDate = data?.response.filter((p:any) => p.reviewDate);
-      
+      let filterdbyreviewDate:any[] = [];
+      if (data != null && data.exisitingDocuments.length > 0 && data != undefined) {        
+        filterdbyreviewDate = data?.exisitingDocuments.filter((p:any) => p.reviewDate && p.reviewDate != 'NA');
+      }
       filterdbyreviewDate = filterdbyreviewDate.filter((item:ExistingDocumentRequest) => {
         const currentDate = new Date();
         const reviewDatePlus15Days = new Date();
         reviewDatePlus15Days.setDate(currentDate.getDate() + 15);
   
-        //currentDate.setDate(currentDate.getDate() - 10);
+        currentDate.setDate(currentDate.getDate() - 0);
         // Parse reviewDate string to Date object
         const reviewDate = new Date(item.reviewDate??'');
   
-        return (reviewDate > currentDate && reviewDate < reviewDatePlus15Days);
+        return (reviewDate > currentDate && reviewDate < reviewDatePlus15Days);        
       });
       filterdbyreviewDate.forEach((item: any) => {    
         const reviewDate:Date = new Date(item.reviewDate??'');
@@ -110,7 +113,14 @@ export class DocumentsLandingComponent implements OnInit {
     let currentDate = new Date();
     dateSent = new Date(dateSent);
 
-    return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
- }
+    let Difference_In_Time =
+    dateSent.getTime() - currentDate.getTime();
+ 
+    // Calculating the no. of days between
+    // two dates
+    return Math.round(Difference_In_Time / (1000 * 3600 * 24));
+
+    //return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
+  }
 
 }

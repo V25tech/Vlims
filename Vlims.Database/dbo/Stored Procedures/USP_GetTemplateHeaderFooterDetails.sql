@@ -94,7 +94,7 @@ GROUP BY
     DP.CreatedDate_PSY,
     DP.department_PSY,
     DPP.PrintCopy_PSY,
-    DPP.reason_PSY
+    DPP.reason_PSY,DP.GUID_DP,DE.GUID_DE
 --UNION ALL
 --SELECT TOP(1) AT.Version,(VERSION-1) AS Supersedes FROM AdditionalTask_PSY AT 
 --JOIN DocumentEffective_PSY DE ON DE.GUID_DE=AT.ReferenceGuid_PSY
