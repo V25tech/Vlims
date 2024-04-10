@@ -49,6 +49,7 @@ public static class DocumentPrintConverter
                     documentPrintData.Status = Convert.ToString(row[DocumentPrintConstants.Status.Trim('@')]);
                     documentPrintData.Template = Convert.ToString(row[DocumentPrintConstants.Template.Trim('@')]);
                     documentPrintData.PrintCopy = Convert.ToString(row["PrintCopy_PSY"]);
+                    documentPrintData.IsActive = row["IsActive_PSY"] != DBNull.Value ? Convert.ToBoolean(row["IsActive_PSY"]) : false;
                     if (row["PrintCount_PSY"] != DBNull.Value)
                         documentPrintData.printCount = Convert.ToInt16(row["PrintCount_PSY"]);
                     //documentPrintData. = Convert.ToString(row[DocumentPrintConstants.Template.Trim('@')]);

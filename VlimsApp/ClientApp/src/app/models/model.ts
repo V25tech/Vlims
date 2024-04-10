@@ -374,7 +374,7 @@ export class DocumentPrintConfiguration {
   public template:string='';
   public printCopy='';
   public existingdocumentNumber:string='';
-  
+  public isactive:boolean=false;
 }
 
 export class ExistingDocumentRequest {

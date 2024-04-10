@@ -179,5 +179,6 @@ public class DocumentPrint
     }
     public string Template { get; set; }
     public string PrintCopy { get; set; }
+    public bool IsActive { get; set; }
 }
 
