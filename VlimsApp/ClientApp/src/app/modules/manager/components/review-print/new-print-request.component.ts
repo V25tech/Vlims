@@ -193,8 +193,9 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   addRequest() {
-    this.print.CreatedBy = 'admin';
-    this.print.ModifiedBy = 'admin';
+
+    this.print.CreatedBy =  this.username;
+    this.print.ModifiedBy = this.username;
     this.print.Status = 'In-Progress';
     this.print.CreatedDate = new Date();
     this.print.ModifiedDate = new Date();
