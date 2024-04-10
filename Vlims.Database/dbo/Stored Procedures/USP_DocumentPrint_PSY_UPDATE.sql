@@ -56,10 +56,10 @@ END
 IF(@ISWORKITEMS=1)
 BEGIN
 INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY)
- SELECT @documentno_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@DRId_PSY,WSR.Type,0,@CREATED_BY,@ParentGuid_PSY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Review'
+ SELECT @documentno_PSY,'Print','Pending',NULL,@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',GetDate(),@DRId_PSY,WSR.Type,0,WSR.UserName,@ParentGuid_PSY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Review'
 
  INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY)
- SELECT @documentno_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@DRId_PSY,WSR.Type,0,@CREATED_BY,@ParentGuid_PSY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Approve'
+ SELECT @documentno_PSY,'Print','Pending',NULL,@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',GetDate(),@DRId_PSY,WSR.Type,0,WSR.UserName,@ParentGuid_PSY from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Approve'
 END
 
 IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')

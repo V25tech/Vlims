@@ -52,13 +52,13 @@ ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PS
   SET @GUID_DPP=(SELECT GUID_DPP FROM DocumentPrint_PSY WHERE DRId_PSY=@ID)
 
 
-  INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,RefrenceGuid_PSY)
-SELECT @documentno_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),'In-Progress',GetDate(),@ID,WSR.Type,0,@GUID_DPP from WorkflowUsersMapping WSR 
+  INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,RefrenceGuid_PSY,CreatedBy_PSY,CreatedDate_PSY)
+SELECT @documentno_PSY,'Print','Pending',NULL,@CreatedBy_PSY,GetDate(),'In-Progress',GetDate(),@ID,WSR.Type,0,@GUID_DPP,WSR.UserName,GETDATE() from WorkflowUsersMapping WSR 
  JOIN DocumentPrint_PSY DP ON DP.DRId_PSY=@ID
  WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Review'
 
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,RefrenceGuid_PSY)
- SELECT @documentno_PSY,'Print','Pending',NULL,WSR.UserName,GetDate(),'In-Progress',GetDate(),@ID,WSR.Type,0,@GUID_DPP from WorkflowUsersMapping WSR
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,RefrenceGuid_PSY,CreatedBy_PSY,CreatedDate_PSY)
+ SELECT @documentno_PSY,'Print','Pending',NULL,@CreatedBy_PSY,GetDate(),'In-Progress',GetDate(),@ID,WSR.Type,0,@GUID_DPP,WSR.UserName,GETDATE() from WorkflowUsersMapping WSR
  JOIN DocumentPrint_PSY DP ON DP.DRId_PSY=@ID
  WHERE WSR.WorkFlowName=@workflow_PSY AND WSR.Type='Approve'
   
