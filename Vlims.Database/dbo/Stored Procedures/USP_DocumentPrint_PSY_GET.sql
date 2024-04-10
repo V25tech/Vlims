@@ -12,6 +12,7 @@ reason_PSY,
 DP.CreatedBy_PSY,
 DP.CreatedDate_PSY,
 DP.ModifiedBy_PSY,
+DP.printCount_PSY,
 DP.ModifiedDate_PSY,DP.Status_PSY,DSP.template_PSY,DP.Refrence_PSY,DP.PrintCopy_PSY,DP.IsActive_PSY
   FROM [dbo].[DocumentPrint_PSY] DP WITH (NOLOCK)
   JOIN dbo.DocumentEffective_PSY DE ON DE.Refrence_PSY=DP.Refrence_PSY
