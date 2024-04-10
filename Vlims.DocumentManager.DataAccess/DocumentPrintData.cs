@@ -66,8 +66,8 @@ public static class DocumentPrintData
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.workflow, Value = documentPrint.workflow });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.reason, Value = documentPrint.reason });
 
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchNumber, Value = documentPrint.BatchNumber });
-            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchSize, Value = documentPrint.BatchSize });
+            //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchNumber, Value = documentPrint.BatchNumber });
+            //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchSize, Value = documentPrint.BatchSize });
 
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.CreatedBy, Value = documentPrint.CreatedBy });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.ModifiedBy, Value = documentPrint.ModifiedBy });
