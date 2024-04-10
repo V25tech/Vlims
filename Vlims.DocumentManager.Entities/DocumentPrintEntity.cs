@@ -180,5 +180,7 @@ public class DocumentPrint
     public string Template { get; set; }
     public string PrintCopy { get; set; }
     public bool IsActive { get; set; }
+    public string BatchNumber { get; set; }
+    public string BatchSize { get; set; }
 }
 
