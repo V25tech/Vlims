@@ -1,9 +1,11 @@
-﻿  CREATE PROCEDURE [dbo].[USP_DocumentPreparation_PSY_UPDATE] @DPNID_PSY int, @Documentmanagerid_PSY NVarChar(50),
+﻿
+
+  CREATE PROCEDURE [dbo].[USP_DocumentPreparation_PSY_UPDATE] @DPNID_PSY int, @Documentmanagerid_PSY NVarChar(50),
 @documenttitle_PSY NVarChar(50),
 @documentno_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
 @department_PSY NVarChar(50),
-@document_PSY NVarChar(500),
+@document_PSY XML,
 @template_PSY NVarChar(50),
 @wokflow_PSY NVarChar(50),
 @details_PSY NVarChar(max),
@@ -69,11 +71,11 @@ DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentP
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
 
-UPDATE DocumentPreparation_PSY SET Status_PSY=@Status_PSY WHERE DPNID_PSY=@DPNID_PSY
+UPDATE DocumentPreparation_PSY SET document_PSY=@document_PSY, Status_PSY=@Status_PSY WHERE DPNID_PSY=@DPNID_PSY
 DECLARE @ID INT
 INSERT INTO DocumentEffective_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,EffectiveDate_PSY,Reviewdate_PSY,
 CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY,GUID_DE,ReferenceGuid_PSY)
-VALUES(@DPNID_PSY,@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,@document_PSY,null,null,
+VALUES(@DPNID_PSY,@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,null,null,null,
 @CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId,NEWID(),@ParentGuid)
 SELECT @ID = @@IDENTITY;
 

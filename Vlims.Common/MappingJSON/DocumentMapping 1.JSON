@@ -1,0 +1,39 @@
+{
+  "DocumentMappingJSON": [
+    {
+      "plantCode": "HP",
+      "plantName": "Himachal",
+      "clientInfo": "Accent",
+      "operatingProcedure": "Standard Operating Procedure",
+      "SOP": {
+        "documentTitle": "Product Name",
+        "documentNumber": "BMR No",
+        "revisonNumber": "1234",
+        "supersedesNumber": "TX",
+        "reference": "ABZ333",
+        "sampleQuantity": "5"
+      }
+    },
+    {
+     "plantCode": "MP",
+      "plantName": "Indore",
+      "clientInfo": "Aurabindo",
+      "operatingProcedure": "Standard SystemProcedure",
+      "SOP": {
+        "documentTitle": "49245",
+        "documentNumber": "1111 Industrial Way",
+        "revisonNumber": "Dallas",
+        "supersedesNumber": "TX",
+         "reference" :"ABZ33344",
+         "sampleQuantity":"6"
+      }
+    },
+    {
+      "id": 7115,
+      "name": "Robert Shoemaker",
+      "birthDate": "1968-02-08T00:00:00",
+      "phone": "643-555-1212",
+      "SOP": null
+    }
+  ]
+}

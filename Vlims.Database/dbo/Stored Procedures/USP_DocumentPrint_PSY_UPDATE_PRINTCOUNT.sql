@@ -1,5 +1,7 @@
 ﻿
 
+
+
 --Exec [USP_DocumentPrint_PSY_UPDATE_PRINTCOUNT] 21,'','In-Progress'
 
 CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_UPDATE_PRINTCOUNT] 
@@ -12,7 +14,7 @@ CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_UPDATE_PRINTCOUNT]
  
 DECLARE @PRINTCOUNT int
 DECLARE @PRINTCOUNTUPDATED int
-IF (SELECT COUNT(*) FROM dbo.DocumentPrint_PSY WHERE DRId_PSY = 21) > 0
+IF (SELECT COUNT(*) FROM dbo.DocumentPrint_PSY WHERE DRId_PSY = @DRId_PSY) > 0
   BEGIN
    SELECT @PRINTCOUNT= printCount_PSY FROM dbo.DocumentPrint_PSY WHERE DRId_PSY = @DRId_PSY ;
    
