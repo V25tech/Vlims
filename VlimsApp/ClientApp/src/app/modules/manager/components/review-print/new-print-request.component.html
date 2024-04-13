@@ -144,6 +144,35 @@
             </div>
           </div>
 
+ <!-- Batch Number -->
+
+          <div class="form-group row">
+            <label for="batchNumber" class="col-sm-2 col-form-label">
+              Batch Number<span style="color: red; font-weight: bolder;">*</span>
+            </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="reason" name="BatchNumber" placeholder="Batch Number"
+                     [(ngModel)]="print.BatchNumber" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
+              <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                Batch Number
+              </div>
+            </div>
+          </div>
+
+          <!-- Batch Size -->
+
+          <div class="form-group row">
+            <label for="batchsize" class="col-sm-2 col-form-label">
+              Batch Size<span style="color: red; font-weight: bolder;">*</span>
+            </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="reason" name="BatchSize" placeholder="Batch Size"
+                     [(ngModel)]="print.BatchSize" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
+              <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                Batch Number
+              </div>
+            </div>
+          </div>
 
         </fieldset>
         <!-- Single option controls end here -->
