@@ -1,0 +1,60 @@
+{
+    "document_preparaion_mappings": [
+        {
+            "plantCode": "HP",
+            "plantName": "Himachal",
+            "clientInfo": "Accent",
+            "operatingProcedure": "BATCH PACKING RECORD 08",
+            "lables": {
+                "documentTitle": "Product Name",
+                "documentNumber": "BMR No",
+                "revisionNo": "Revision No.",
+                "supersedes": "BMR Supersedes No."
+            }
+        },
+        {
+            "plantCode": "MP",
+            "plantName": "Indore",
+            "clientInfo": "Aurabindo",
+            "operatingProcedure": "Standard Operating Procedure 011",
+            "lables": {
+                "documentTitle": "Title",
+                "documentNumber": "SOP No.",
+                "revisionNo": "Revision No.",
+                "supersedes": "Supersedes"
+            }
+        },
+        {
+            "plantCode": "MP",
+            "plantName": "Indore",
+            "clientInfo": "Aurabindo",
+            "operatingProcedure": "Validation Protocol",
+            "lables": {
+                "documentTitle": "Generic Name",
+                "documentNumber": "STP No.",
+                "revisionNo": "Revision No.",
+                "supersedes": "Supersedes No.",
+                "reference": "Reference",
+                "sampleQuantity": "Sample Quantity",
+                "packingInformation": "Packing Information",
+                "labelClaim": "Label Claim"
+            }
+        },
+        {
+            "plantCode": "MP",
+            "plantName": "Indore",
+            "clientInfo": "Aurabindo",
+            "operatingProcedure": "STANDARD TESTING SPECIFICATION",
+            "lables": {
+                "documentTitle": "Generic Name",
+                "documentNumber": "STS No.",
+                "revisionNo": "Revision No.",
+                "supersedes": "Supersedes No.",
+                "reference": "Reference",
+                "sampleQuantity": "Sample Quantity",
+                "packingInformation": "Packing Information",
+                "labelClaim": "Label Claim"
+            }
+        }
+    ]
+}

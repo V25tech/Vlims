@@ -76,8 +76,35 @@ export class DocumentPreperationConfiguration {
   document: string = '';
   path: string = '';
   dpnid: string = '';
-  referenceId:number=0;
-  isrevision:boolean=false;
+  referenceId: number = 0;
+  isrevision: boolean = false;
+  prepdocument: Prepdocument = {
+    labelClaim : '',
+    packingInformation : '',
+    revisionNo : '',
+    sampleQuantity : '',
+    supersedes :''
+
+  };
+}
+
+export class Prepdocument {
+  revisionNo: string = '';
+  sampleQuantity: string = '';
+  packingInformation: string = '';
+  labelClaim: string = '';
+  supersedes: string = '';  
+}
+
+export class DocPrep_LableMapping{
+  documentTitle: string = '';
+  documentNumber: string = '';
+  revisionNo: string = '';
+  supersedes: string = '';
+  reference: string = '';
+  sampleQuantity: string = '';
+  packingInformation: string = '';
+  labelClaim: string = '';
 }
 
 export class DocumentEffectiveConfiguration {
