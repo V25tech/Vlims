@@ -371,7 +371,7 @@ export class ReviewPrepationComponent {
         packingInformation : '',
         revisionNo : '',
         sampleQuantity : '',
-        supersedes :''
+        supersedesNo :''
       };
     }
   }

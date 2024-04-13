@@ -83,7 +83,7 @@ export class DocumentPreperationConfiguration {
     packingInformation : '',
     revisionNo : '',
     sampleQuantity : '',
-    supersedes :''
+    supersedesNo :''
 
   };
 }
@@ -93,14 +93,14 @@ export class Prepdocument {
   sampleQuantity: string = '';
   packingInformation: string = '';
   labelClaim: string = '';
-  supersedes: string = '';  
+  supersedesNo: string = '';  
 }
 
 export class DocPrep_LableMapping{
   documentTitle: string = '';
   documentNumber: string = '';
   revisionNo: string = '';
-  supersedes: string = '';
+  supersedesNo: string = '';
   reference: string = '';
   sampleQuantity: string = '';
   packingInformation: string = '';

@@ -9,7 +9,7 @@
                 "documentTitle": "Product Name",
                 "documentNumber": "BMR No",
                 "revisionNo": "Revision No.",
-                "supersedes": "BMR Supersedes No."
+                "supersedesNo": "BMR Supersedes No."
             }
         },
         {
@@ -21,7 +21,7 @@
                 "documentTitle": "Title",
                 "documentNumber": "SOP No.",
                 "revisionNo": "Revision No.",
-                "supersedes": "Supersedes"
+                "supersedesNo": "Supersedes"
             }
         },
         {
@@ -33,7 +33,7 @@
                 "documentTitle": "Generic Name",
                 "documentNumber": "STP No.",
                 "revisionNo": "Revision No.",
-                "supersedes": "Supersedes No.",
+                "supersedesNo": "Supersedes No.",
                 "reference": "Reference",
                 "sampleQuantity": "Sample Quantity",
                 "packingInformation": "Packing Information",
@@ -49,7 +49,7 @@
                 "documentTitle": "Generic Name",
                 "documentNumber": "STS No.",
                 "revisionNo": "Revision No.",
-                "supersedes": "Supersedes No.",
+                "supersedesNo": "Supersedes No.",
                 "reference": "Reference",
                 "sampleQuantity": "Sample Quantity",
                 "packingInformation": "Packing Information",

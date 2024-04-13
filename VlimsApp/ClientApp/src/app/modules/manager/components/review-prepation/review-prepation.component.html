@@ -129,11 +129,11 @@
             </div>
           </div>
 
-          <div *ngIf="lableMappings?.supersedes" class="form-group row">
-            <label for="supersedes" class="col-sm-2 col-form-label">{{lableMappings?.supersedes || 'Supersedes No.'}}</label>
+          <div *ngIf="lableMappings?.supersedesNo" class="form-group row">
+            <label for="supersedes" class="col-sm-2 col-form-label">{{lableMappings?.supersedesNo || 'Supersedes No.'}}</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="supersedes" name="supersedes"
-                [(ngModel)]="preparation.prepdocument.supersedes"/>
+                [(ngModel)]="preparation.prepdocument.supersedesNo"/>
             </div>
           </div>
 
