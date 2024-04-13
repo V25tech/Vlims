@@ -152,7 +152,7 @@
             </label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="reason" name="BatchNumber" placeholder="Batch Number"
-                     [(ngModel)]="print.BatchNumber" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
+                     [(ngModel)]="print.batchNumber" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
               <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
                 Batch Number
               </div>
@@ -167,7 +167,7 @@
             </label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="reason" name="BatchSize" placeholder="Batch Size"
-                     [(ngModel)]="print.BatchSize" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
+                     [(ngModel)]="print.batchSize" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
               <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
                 Batch Number
               </div>

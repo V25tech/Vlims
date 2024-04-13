@@ -48,7 +48,8 @@ public static class DocumentPrintConverter
                     documentPrintData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPrintConstants.ModifiedDate.Trim('@')]);
                     documentPrintData.Status = Convert.ToString(row[DocumentPrintConstants.Status.Trim('@')]);
 
-                    documentPrintData.Status = Convert.ToString(row[DocumentPrintConstants.Status.Trim('@')]);
+                    documentPrintData.BatchNumber = Convert.ToString(row[DocumentPrintConstants.BatchNumber.Trim('@')]);
+                    documentPrintData.BatchSize = Convert.ToString(row[DocumentPrintConstants.BatchSize.Trim('@')]);
 
                     documentPrintData.Template = Convert.ToString(row[DocumentPrintConstants.Template.Trim('@')]);
                     documentPrintData.PrintCopy = Convert.ToString(row["PrintCopy_PSY"]);

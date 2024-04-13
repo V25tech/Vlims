@@ -11,39 +11,39 @@ namespace Vlims.DMS.Entities
 {
     using System;
     using System.Collections.Generic;
-   // using PolicySummary.Common.Entities;
-    
-    
+    // using PolicySummary.Common.Entities;
+
+
     // Comment
     public class DocumentPreparation
     {
-        
+
         private string dpnidField;
-        
+
         private string documentmanageridField;
-        
+
         private string documenttitleField;
-        
+
         private string documentnoField;
-        
+
         private string documenttypeField;
-        
+
         private string departmentField;
-        
+
         private string documentField;
-        
+
         private string templateField;
-        
+
         private string wokflowField;
-        
+
         private string detailsField;
-        
+
         private string createdbyField;
-        
+
         private DateTime? createddateField;
-        
+
         private string modifiedbyField;
-        
+
         private DateTime? modifieddateField;
 
         private string statusField;
@@ -60,7 +60,7 @@ namespace Vlims.DMS.Entities
                 this.dpnidField = value;
             }
         }
-        
+
         public string Documentmanagerid
         {
             get
@@ -72,7 +72,7 @@ namespace Vlims.DMS.Entities
                 this.documentmanageridField = value;
             }
         }
-        
+
         public string documenttitle
         {
             get
@@ -84,7 +84,7 @@ namespace Vlims.DMS.Entities
                 this.documenttitleField = value;
             }
         }
-        
+
         public string documentno
         {
             get
@@ -96,7 +96,7 @@ namespace Vlims.DMS.Entities
                 this.documentnoField = value;
             }
         }
-        
+
         public string documenttype
         {
             get
@@ -108,7 +108,7 @@ namespace Vlims.DMS.Entities
                 this.documenttypeField = value;
             }
         }
-        
+
         public string department
         {
             get
@@ -120,7 +120,7 @@ namespace Vlims.DMS.Entities
                 this.departmentField = value;
             }
         }
-        
+
         public string document
         {
             get
@@ -132,7 +132,7 @@ namespace Vlims.DMS.Entities
                 this.documentField = value;
             }
         }
-        
+
         public string template
         {
             get
@@ -144,7 +144,7 @@ namespace Vlims.DMS.Entities
                 this.templateField = value;
             }
         }
-        
+
         public string wokflow
         {
             get
@@ -156,7 +156,7 @@ namespace Vlims.DMS.Entities
                 this.wokflowField = value;
             }
         }
-        
+
         public string details
         {
             get
@@ -168,7 +168,7 @@ namespace Vlims.DMS.Entities
                 this.detailsField = value;
             }
         }
-        
+
         public string CreatedBy
         {
             get
@@ -180,7 +180,7 @@ namespace Vlims.DMS.Entities
                 this.createdbyField = value;
             }
         }
-        
+
         public DateTime? CreatedDate
         {
             get
@@ -192,7 +192,7 @@ namespace Vlims.DMS.Entities
                 this.createddateField = value;
             }
         }
-        
+
         public string ModifiedBy
         {
             get
@@ -204,7 +204,7 @@ namespace Vlims.DMS.Entities
                 this.modifiedbyField = value;
             }
         }
-        
+
         public DateTime? ModifiedDate
         {
             get
@@ -229,5 +229,15 @@ namespace Vlims.DMS.Entities
         }
         public string path { get; set; }
         public int ReferenceId { get; set; }
+        public PreperationDocument Prepdocument { get; set; }
+    }
+
+    public class PreperationDocument
+    {
+        public string sampleQuantity { get; set; }
+        public string packingInformation { get; set; }
+        public string labelClaim { get; set; }
+        public string supersedesNo { get; set; }
+        public string revisionNo { get; set; }
     }
 }
