@@ -78,6 +78,7 @@ export class DocumentPreperationConfiguration {
   dpnid: string = '';
   referenceId: number = 0;
   isrevision: boolean = false;
+  isEffectiveApproved=false;
   prepdocument: Prepdocument = {
     labelClaim : '',
     packingInformation : '',

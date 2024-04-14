@@ -31,6 +31,12 @@ namespace Vlims.Controllers
     using iTextSharp.text.pdf;
     using Microsoft.SharePoint.Client;
     using System.ComponentModel;
+    using Vlims.DMS.Entities;
+    using Vlims.DocumentManager.DataAccess;
+    using DocumentFormat.OpenXml.Wordprocessing;
+    using Document = Spire.Doc.Document;
+    using PageSize = Spire.Doc.Documents.PageSize;
+    using Paragraph = Spire.Doc.Documents.Paragraph;
 
 
     /// <summary>
@@ -137,7 +143,7 @@ namespace Vlims.Controllers
         [HttpGet("isduplicate")]
         public ActionResult<System.Boolean> IsTemplateDuplicate(string p_template)
         {
-            var result= documentTemplateConfigurationService.IsTemplateDuplicate(p_template);
+            var result = documentTemplateConfigurationService.IsTemplateDuplicate(p_template);
             return result;
         }
 
@@ -182,16 +188,21 @@ namespace Vlims.Controllers
             return Ok(hostAddress);
         }
 
-        
+
 
         [HttpGet("getpdf")]
-        public ActionResult<byte[]> getpdf(string templateinf,string p_user, bool p_isPdf = true)
+        public ActionResult<byte[]> getpdf(string templateinf, string p_user, bool p_isPdf = true)
         {
-            byte[] bytes = null;
+            byte[] bytes = null; DocumentPreparation preparation = new DocumentPreparation();
             DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
             DataSet ds_template = DocumentTemplateConfigurationData.GetTemplateHeaderFooterDetails(templateinf);
             DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
             DocumentTemplateConfiguration template1 = DocumentTemplateConfigurationConverter.SetDocumentTemplateHeaderFooterConfiguration(ds_template);
+            if (template1 != null)
+            {
+                DataSet dp_dataset = DocumentPreparationData.GetDocumentPreparationByDPNID(Convert.ToInt32(template1.DTID));
+                preparation = DocumentPreparationConverter.SetDocumentPreparation(dp_dataset);
+            }
 
             StringBuilder builder = new StringBuilder();
             builder.Append(htmlUpper);
@@ -212,7 +223,7 @@ namespace Vlims.Controllers
             Paragraph footerParagraph = footer.AddParagraph();
             StringBuilder footerbuilder = new StringBuilder();
             footerbuilder.Append(htmlUpper);
-            footerbuilder.Append(TemplatePreparation.PrepareStaticdiv(template, template1,p_user));
+            footerbuilder.Append(TemplatePreparation.PrepareStaticdiv(template, template1, p_user));
             footerbuilder.Append(htmllower);
             footerParagraph.AppendHTML(footerbuilder.ToString());
             footerParagraph.Format.BeforeSpacing = 0;
@@ -227,7 +238,29 @@ namespace Vlims.Controllers
                 Paragraph headerParagraph = header.AddParagraph();
                 StringBuilder headerbuilder = new StringBuilder();
                 headerbuilder.Append(htmlUpper);
-                headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1));
+                if (template.documenttype.Equals("BATCH PACKING RECORD 08", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+                }
+                else if (template.documenttype.Equals("BATCH PACKING RECORD", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+                }
+                else if (template.documenttype.Equals("STANDARD OPERATING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation));
+                }
+                else if (template.documenttype.Equals("STANDARD TESTING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+                }
+                else if (template.documenttype.Equals("STANDARD TESTING SPECIFICATION", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+                }
+                else
+                    headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation));
+
                 //headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template));
                 //headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template));
                 headerbuilder.Append(htmllower);
@@ -255,8 +288,8 @@ namespace Vlims.Controllers
 
 
             Document doc = new Document();
-            
-            
+
+
             doc.LoadFromFile("DocumentWithMargins.docx");
             string pathhh = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithMargins.docx");
             byte[] pdfBytes1 = System.IO.File.ReadAllBytes(pathhh);
@@ -277,11 +310,11 @@ namespace Vlims.Controllers
 
 
 
-        
+
     }
     public class TemplatePreparation
     {
-       public static byte[] ConvertDocxToPdfBytes(Document document)
+        public static byte[] ConvertDocxToPdfBytes(Document document)
 
         {
 
@@ -374,22 +407,10 @@ namespace Vlims.Controllers
 
         }
 
-        public static string PrepareHeaderStaticdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo)
+        public static string PrepareHeaderStaticdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo, DocumentPreparation preparation)
         {
             string table = string.Empty;
             StringBuilder htmlBuilder = new StringBuilder();
-
-            //DocumentPreparationService prepservice = new DocumentPreparationService();
-            //DocumentEffectiveService effectiveService= new DocumentEffectiveService();
-            //AdditionalTaskService taskService = new AdditionalTaskService();
-            //DocumentrequestService documentrequestService = new DocumentrequestService();
-
-            //RequestContext context = new RequestContext();
-            //context.PageNumber = 1; context.PageSize = 1000;
-            //var prep=prepservice.GetAllDocumentPreparation(context).Response.Where(o=>o.template.Equals(template.Templatename,StringComparison.InvariantCultureIgnoreCase));
-            //var reqList = documentrequestService.GetAllDocumentrequest(context).Response.Where(o => o..Equals(template.Templatename, StringComparison.InvariantCultureIgnoreCase)); ;
-            //var effList = effectiveService.GetAllDocumentEffective(context);
-            //var revisionList = taskService.GetAllAdditionalTask(context);
 
             // Read the contents of the SVG file
             string currentDirectory = Directory.GetCurrentDirectory();
@@ -437,9 +458,16 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Revision No.</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.revisionNo))
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
+            else
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
+
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Supersedes</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.supersedesNo))
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument.supersedesNo) ? preparation.Prepdocument.revisionNo : 0) : 0)}</td>");
+            else
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Depaertment</td>");
@@ -459,9 +487,25 @@ namespace Vlims.Controllers
             return table;
 
         }
-        public static string PrepareSTPHeader(DocumentTemplateConfiguration Template)
+        public static string PrepareSTPHeader(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo, DocumentPreparation preparation)
         {
             StringBuilder stringBuilder = new StringBuilder();
+
+            // Read the contents of the SVG file
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path = Path.Combine(currentDirectory, "Logo", template.header);
+            string footerpath = Path.Combine(currentDirectory, "Logo", template.footer);
+            string dataUri = string.Empty; string dataUri1 = string.Empty;
+            if (System.IO.File.Exists(path))
+            {
+                string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
+                dataUri = $"data:image/jpeg;base64,{base64EncodedImage}";
+            }
+            if (System.IO.File.Exists(footerpath))
+            {
+                string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(footerpath));
+                dataUri1 = $"data:image/jpeg;base64,{base64EncodedImage}";
+            }
 
             stringBuilder.AppendLine("<style type=\"text/css\">");
             stringBuilder.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");
@@ -479,46 +523,65 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine(@"<thead>");
             stringBuilder.AppendLine(@"<tr>");
             //stringBuilder.AppendLine(@"<th class=""tg-c3ow""><img src=""data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3e%3cpath fill='%23000000' d='M350.85 129c25.97 4.67 47.27 18.67 63.92 42 14.65 20.67 24.64 46.67 29.96 78 4.67 28.67 4.32 57.33-1 86-7.99 47.33-23.97 87-47.94 119-28.64 38.67-64.59 58-107.87 58-10.66 0-22.3-3.33-34.96-10-8.66-5.33-18.31-8-28.97-8s-20.3 2.67-28.97 8c-12.66 6.67-24.3 10-34.96 10-43.28 0-79.23-19.33-107.87-58-23.97-32-39.95-71.67-47.94-119-5.32-28.67-5.67-57.33-1-86 5.32-31.33 15.31-57.33 29.96-78 16.65-23.33 37.95-37.33 63.92-42 15.98-2.67 37.95-.33 65.92 7 23.97 6.67 44.28 14.67 60.93 24 16.65-9.33 36.96-17.33 60.93-24 27.98-7.33 49.96-9.67 65.94-7zm-54.94-41c-9.32 8.67-21.65 15-36.96 19-10.66 3.33-22.3 5-34.96 5l-14.98-1c-1.33-9.33-1.33-20 0-32 2.67-24 10.32-42.33 22.97-55 9.32-8.67 21.65-15 36.96-19 10.66-3.33 22.3-5 34.96-5l14.98 1 1 15c0 12.67-1.67 24.33-4.99 35-3.99 15.33-10.31 27.67-18.98 37z'/%3e%3c/svg%3e"" width=""80"" height=""80""></th>");
-            stringBuilder.AppendLine(@"<td class=""tg-0pky""><img src=""https://images.app.goo.gl/v534Zi6U8F7y9KxQA"" width=""140"" height=""80""></td>");
-            stringBuilder.AppendLine(@"<th class=""tg-7btt"" colspan=""3"">ACCENT PHARMACEUTICALS &amp; DIAGNOSTICS<br>FOREST ROAD SALON, H.P. (INDIA)<br>QUALITY CONTROL DEPARTMENT<br>STANDARD TESTING PROCEDURE</th>");
+            //stringBuilder.AppendLine(@"<td class=""tg-0pky""><img src=""https://images.app.goo.gl/v534Zi6U8F7y9KxQA"" width=""140"" height=""80""></td>");
+            stringBuilder.AppendLine($@"<th class=""tg-0pky""><img src=""{dataUri}"" width=""140"" height=""80"" /></th>");
+            stringBuilder.AppendLine($"    <th class=\"tg-7btt\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue : "test") : "test")}</th>");
+            stringBuilder.AppendLine($@"<th class=""tg-0pky""><img src=""{dataUri1}"" width=""100"" height=""80"" style=""align:center"" /></th>");
+
+            //stringBuilder.AppendLine(@"<th class=""tg-7btt"" colspan=""3"">ACCENT PHARMACEUTICALS &amp; DIAGNOSTICS<br>FOREST ROAD SALON, H.P. (INDIA)<br>QUALITY CONTROL DEPARTMENT<br>STANDARD TESTING PROCEDURE</th>");
+
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"</thead>");
             stringBuilder.AppendLine(@"<tbody>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">Generic Name</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0pky"" colspan=""3"">DEVELOPERS</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-0pky\" colspan=\"2\"><span style=\"font-weight:bold\"></span> {(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
+            //stringBuilder.AppendLine(@"<td class=""tg-0pky"" colspan=""3"">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : ""test"") : ""test"")}</td>");
             stringBuilder.AppendLine(@"</tr>");
+
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">STP No.</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0pky"">STP NO. 1234</td>");
+            //stringBuilder.AppendLine(@"<td class=""tg-0pky"">STP NO. 1234</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">Revision No.</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0pky"">01</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.revisionNo))
+                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
+            else
+                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
+            //stringBuilder.AppendLine(@"<td class=""tg-0pky"">01</td>");
             stringBuilder.AppendLine(@"</tr>");
+
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">Supersedes No.</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0pky"">00</td>");
+            //stringBuilder.AppendLine(@"<td class=""tg-0pky"">00</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.supersedesNo))
+                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument.supersedesNo) ? preparation.Prepdocument.supersedesNo : 0) : 0)}</td>");
+            else
+                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
+
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">Product/Material Code</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0pky"">001CODEMODE</td>");
+            //stringBuilder.AppendLine(@"<td class=""tg-0pky"">001CODEMODE</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Reference</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0lax"">TESTING REFERENCE</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.ReferenceId.ToString()) ? preparation.ReferenceId.ToString() : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Sample Quality</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0lax"">TESTED BY UMRAZ</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.sampleQuantity) ? preparation.Prepdocument?.sampleQuantity.ToString() : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Effective Date</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0lax"">09-04-2024</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Review Date</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0lax"">10-04-2024</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Packing Information</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0lax"" colspan=""3"">DEVLOPERS PACKED FOR VLIMS PVT LTD</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\" colspan=\"3\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.packingInformation) ? preparation.Prepdocument?.packingInformation.ToString() : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Label Claim</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-0lax"" colspan=""3"">UMRAZ</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\" colspan=\"3\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.labelClaim) ? preparation.Prepdocument?.labelClaim.ToString() : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"</tbody>");
             stringBuilder.AppendLine(@"</table>");
@@ -529,9 +592,25 @@ namespace Vlims.Controllers
 
         }
 
-        public static string PrepareBMRHeader(DocumentTemplateConfiguration Template)
+        public static string PrepareBMRHeader(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo, DocumentPreparation preparation)
         {
             StringBuilder stringBuilder = new StringBuilder();
+
+            // Read the contents of the SVG file
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path = Path.Combine(currentDirectory, "Logo", template.header);
+            string footerpath = Path.Combine(currentDirectory, "Logo", template.footer);
+            string dataUri = string.Empty; string dataUri1 = string.Empty;
+            if (System.IO.File.Exists(path))
+            {
+                string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
+                dataUri = $"data:image/jpeg;base64,{base64EncodedImage}";
+            }
+            if (System.IO.File.Exists(footerpath))
+            {
+                string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(footerpath));
+                dataUri1 = $"data:image/jpeg;base64,{base64EncodedImage}";
+            }
 
             stringBuilder.AppendLine("<style type=\"text/css\">");
             stringBuilder.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");
@@ -546,32 +625,41 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine("<thead>");
             stringBuilder.AppendLine("<tr>");
             //stringBuilder.AppendLine("<th class=\"tg-0lax\"><img src=\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3e%3cpath fill='%23000000' d='M350.85 129c25.97 4.67 47.27 18.67 63.92 42 14.65 20.67 24.64 46.67 29.96 78 4.67 28.67 4.32 57.33-1 86-7.99 47.33-23.97 87-47.94 119-28.64 38.67-64.59 58-107.87 58-10.66 0-22.3-3.33-34.96-10-8.66-5.33-18.31-8-28.97-8s-20.3 2.67-28.97 8c-12.66 6.67-24.3 10-34.96 10-43.28 0-79.23-19.33-107.87-58-23.97-32-39.95-71.67-47.94-119-5.32-28.67-5.67-57.33-1-86 5.32-31.33 15.31-57.33 29.96-78 16.65-23.33 37.95-37.33 63.92-42 15.98-2.67 37.95-.33 65.92 7 23.97 6.67 44.28 14.67 60.93 24 16.65-9.33 36.96-17.33 60.93-24 27.98-7.33 49.96-9.67 65.94-7zm-54.94-41c-9.32 8.67-21.65 15-36.96 19-10.66 3.33-22.3 5-34.96 5l-14.98-1c-1.33-9.33-1.33-20 0-32 2.67-24 10.32-42.33 22.97-55 9.32-8.67 21.65-15 36.96-19 10.66-3.33 22.3-5 34.96-5l14.98 1 1 15c0 12.67-1.67 24.33-4.99 35-3.99 15.33-10.31 27.67-18.98 37z'/%3e%3c/svg%3e\" width=\"80\" height=\"80\"></th>");
-            stringBuilder.AppendLine("<td class=\"tg-0lax\"><img src=\"https://images.app.goo.gl/v534Zi6U8F7y9KxQA\" width=\"140\" height=\"80\"></td>");
-            stringBuilder.AppendLine("<th class=\"tg-amwm\" colspan=\"3\">ACCENT PHARMACEUTICALS &amp; DIAGNOSTICS<br>FOREST ROAD, SOLAN, H.P. (INDIA)<br>BATCH MANUFACTURING RECORD</th>");
+            //stringBuilder.AppendLine("<td class=\"tg-0lax\"><img src=\"https://images.app.goo.gl/v534Zi6U8F7y9KxQA\" width=\"140\" height=\"80\"></td>");
+            //stringBuilder.AppendLine("<th class=\"tg-amwm\" colspan=\"3\">ACCENT PHARMACEUTICALS &amp; DIAGNOSTICS<br>FOREST ROAD, SOLAN, H.P. (INDIA)<br>BATCH MANUFACTURING RECORD</th>");
+            stringBuilder.AppendLine($@"<th class=""tg-0lax""><img src=""{dataUri}"" width=""140"" height=""80"" /></th>");
+            stringBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue : "test") : "test")}</th>");
+            stringBuilder.AppendLine($@"<th class=""tg-0lax""><img src=""{dataUri1}"" width=""100"" height=""80"" style=""align:center"" /></th>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("</thead>");
             stringBuilder.AppendLine("<tbody>");
             stringBuilder.AppendLine("<tr>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">PRODUCT NAME</td>");
-            stringBuilder.AppendLine("<td class=\"tg-0lax\" colspan=\"3\">VLIMS PVT LTD</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\" colspan=\"3\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("<tr>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BMR NO.</td>");
-            stringBuilder.AppendLine("<td class=\"tg-0lax\">BMR/2024/09/04</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "test") : "test")}</td>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">REVISION NO.</td>");
-            stringBuilder.AppendLine("<td class=\"tg-0lax\">01</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.revisionNo))
+                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
+            else
+                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("<tr>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BMR SUPERSEDES NO.</td>");
-            stringBuilder.AppendLine("<td class=\"tg-0lax\">00</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.supersedesNo))
+                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : "test") : "test")}</td>");
+            else
+                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : "test") : "test")}</td>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">EFFECTIVE DATE</td>");
-            stringBuilder.AppendLine("<td class=\"tg-0lax\">09-04-2024 20:38</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("<tr>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BATCH NO.</td>");
-            stringBuilder.AppendLine("<td class=\"tg-0lax\">BT/2024/09/04</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.BatchNumber) ? template1.BatchNumber : "test") : "test")}</td>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BATCH SIZE</td>");
-            stringBuilder.AppendLine("<td class=\"tg-0lax\">120</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.BatchSize) ? template1.BatchSize : "test") : "test")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("</tbody>");
             stringBuilder.AppendLine("</table>");

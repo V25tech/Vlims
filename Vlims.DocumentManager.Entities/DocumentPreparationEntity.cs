@@ -230,6 +230,7 @@ namespace Vlims.DMS.Entities
         public string path { get; set; }
         public int ReferenceId { get; set; }
         public PreperationDocument Prepdocument { get; set; }
+        public bool IsEffectiveApproved { get; set; }
     }
 
     public class PreperationDocument

@@ -63,6 +63,7 @@ namespace Vlims.DocumentManager.DataAccess
                         documentPreparationData.ModifiedBy = Convert.ToString(row[DocumentPreparationConstants.ModifiedBy.Trim('@')]);
                         documentPreparationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPreparationConstants.ModifiedDate.Trim('@')]);
                         documentPreparationData.Status = Convert.ToString(row[DocumentPreparationConstants.Status.Trim('@')]);
+                        documentPreparationData.IsEffectiveApproved = Convert.ToBoolean(row["IsEffApprvd"]);
                         documentPreparationData.path = documentPreparationData.document;
                         object value = row["Refrence_PSY"];
                         if (value != DBNull.Value)

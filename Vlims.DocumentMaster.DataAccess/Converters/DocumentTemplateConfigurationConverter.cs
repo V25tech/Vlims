@@ -97,13 +97,14 @@ namespace Vlims.DocumentMaster.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         documentTemplateConfigurationData = new DocumentTemplateConfiguration();
+                        documentTemplateConfigurationData.DTID = Convert.ToString(row["DPNID_PSY"]);
                         documentTemplateConfigurationData.DocumentTitle = Convert.ToString(row["documenttitle_PSY"]);
                         documentTemplateConfigurationData.DocumentNo = Convert.ToString(row["documentno_PSY"]);
-                        documentTemplateConfigurationData.Version = Convert.ToInt32(row["Version"]);
-                        documentTemplateConfigurationData.Supersedes = Convert.ToInt32(row["Supersedes"]);
-                        documentTemplateConfigurationData.Department = Convert.ToString(row["department_PSY"]);
-                        documentTemplateConfigurationData.EffectiveDate = Convert.ToDateTime(row["EffectiveDate_PSY"]).ToShortDateString();
-                        documentTemplateConfigurationData.ReviewDate = Convert.ToDateTime(row["Reviewdate_PSY"]).ToShortDateString();
+                        documentTemplateConfigurationData.Version = Convert.IsDBNull(row["Version"]) ? 0 : Convert.ToInt32(row["Version"]);
+                        documentTemplateConfigurationData.Supersedes = Convert.IsDBNull(row["Supersedes"]) ? 0 : Convert.ToInt32(row["Supersedes"]);
+                        documentTemplateConfigurationData.Department = row["department_PSY"] == DBNull.Value ? string.Empty : Convert.ToString(row["department_PSY"]);
+                        documentTemplateConfigurationData.EffectiveDate = row["EffectiveDate_PSY"] == DBNull.Value ? string.Empty : Convert.ToDateTime(row["EffectiveDate_PSY"]).ToShortDateString();
+                        documentTemplateConfigurationData.ReviewDate = row["Reviewdate_PSY"] == DBNull.Value ? string.Empty : Convert.ToDateTime(row["Reviewdate_PSY"]).ToShortDateString();
                         documentTemplateConfigurationData.ReviewedBy = Convert.ToString(row["REVIWED_BY"]);
                         documentTemplateConfigurationData.PreparedBy = Convert.ToString(row["PREPARED_BY"]);
                         documentTemplateConfigurationData.ApprovedBy = Convert.ToString(row["APPROVED_BY"]);
@@ -113,6 +114,8 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.ReviewedRole = Convert.ToString(row["REVIWEDROLE"]);
                         documentTemplateConfigurationData.PrintCopy = Convert.ToString(row["PrintCopy_PSY"]);
                         documentTemplateConfigurationData.PrintReason = Convert.ToString(row["reason_PSY"]);
+                        documentTemplateConfigurationData.BatchNumber = Convert.ToString(row["BatchNumber"]);
+                        documentTemplateConfigurationData.BatchSize = Convert.ToString(row["BatchSize"]);
                         string depts = Convert.ToString(row["PREPAREDDEPT"]);
                         if (!string.IsNullOrEmpty(depts))
                         {
