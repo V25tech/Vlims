@@ -26,6 +26,7 @@ export class ReviewPrepationComponent {
   template=new DocumentTemplateConfiguration();
   isButtonDisabled = false;
   preparation: DocumentPreperationConfiguration = new DocumentPreperationConfiguration();
+  lstpreparations:DocumentPreperationConfiguration[]=[];
   selectedFile: any;
   isUploaded: boolean = false;
   departmentsSource = [];
@@ -94,6 +95,14 @@ export class ReviewPrepationComponent {
     }    
     this.getdocttemplate();
     this.getworkflowinfo();
+    this.getpreparations();
+  }
+  getpreparations(){
+    this.spinner.show();
+    this.docPreperationService.getdocumentpreparations(this.commonsvc.req).subscribe((data:any)=>{
+      this.lstpreparations=data.response;
+      this.spinner.hide();
+    });
   }
   getbyId(arg0: number) {
     this.spinner.show();
@@ -146,6 +155,15 @@ export class ReviewPrepationComponent {
       this.preparation.ModifiedBy = this.commonsvc.createdBy;
       this.preparation.status = this.finalStatus;
     }
+    if(this.lstpreparations!=undefined && this.lstpreparations.length>0){
+      const existingPreparation = this.lstpreparations.find(o => o.documentno.toLowerCase() === this.preparation.documentno.toLowerCase());
+      if (existingPreparation) {
+          this.toastr.error("Duplicate Document No.");
+          return;
+      }
+  }
+
+  
     this.toastMsg = this.toastMsg ?? 'Updated';
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
