@@ -76,8 +76,36 @@ export class DocumentPreperationConfiguration {
   document: string = '';
   path: string = '';
   dpnid: string = '';
-  referenceId:number=0;
-  isrevision:boolean=false;
+  referenceId: number = 0;
+  isrevision: boolean = false;
+  isEffectiveApproved=false;
+  prepdocument: Prepdocument = {
+    labelClaim : '',
+    packingInformation : '',
+    revisionNo : '',
+    sampleQuantity : '',
+    supersedesNo :''
+
+  };
+}
+
+export class Prepdocument {
+  revisionNo: string = '';
+  sampleQuantity: string = '';
+  packingInformation: string = '';
+  labelClaim: string = '';
+  supersedesNo: string = '';  
+}
+
+export class DocPrep_LableMapping{
+  documentTitle: string = '';
+  documentNumber: string = '';
+  revisionNo: string = '';
+  supersedesNo: string = '';
+  reference: string = '';
+  sampleQuantity: string = '';
+  packingInformation: string = '';
+  labelClaim: string = '';
 }
 
 export class DocumentEffectiveConfiguration {
@@ -372,8 +400,8 @@ export class DocumentPrintConfiguration {
   public noofcopies: string = '';
   public printCount: string = '';
   public template:string='';
-  // public BatchNumber:string='';
-  // public BatchSize:string='';
+  public batchNumber:string='';
+  public batchSize:string='';
   public printCopy='';
   public existingdocumentNumber:string='';
   public isactive:boolean=false;

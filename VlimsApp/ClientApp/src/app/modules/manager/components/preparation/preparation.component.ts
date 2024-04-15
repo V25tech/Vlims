@@ -44,7 +44,6 @@ export class PreparationComponent {
           ids.push(p.referenceId);
         }
       })
-      console.log(this.preparationsDatasource);
       if(this.preparationsDatasource.length<10)
       {
       this.currentPage=10;
@@ -58,7 +57,7 @@ export class PreparationComponent {
   }
 
   getStatusClass(status: string): string {
-    debugger
+    
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Rejected') {

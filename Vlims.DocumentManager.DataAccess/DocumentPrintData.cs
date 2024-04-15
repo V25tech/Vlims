@@ -65,10 +65,8 @@ public static class DocumentPrintData
             sqlparms.Add(new SqlParameter { DbType = DbType.Int16, ParameterName = DocumentPrintConstants.printCount, Value = documentPrint.printCount });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.workflow, Value = documentPrint.workflow });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.reason, Value = documentPrint.reason });
-
-            //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchNumber, Value = documentPrint.BatchNumber });
-            //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchSize, Value = documentPrint.BatchSize });
-
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchNumber, Value = documentPrint.BatchNumber });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchSize, Value = documentPrint.BatchSize });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.CreatedBy, Value = documentPrint.CreatedBy });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.ModifiedBy, Value = documentPrint.ModifiedBy });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = "@PrintCopy_PSY", Value = documentPrint.PrintCopy });
@@ -94,6 +92,8 @@ public static class DocumentPrintData
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.printCount, Value = documentPrint.printCount });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.workflow, Value = documentPrint.workflow });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.reason, Value = documentPrint.reason });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchNumber, Value = documentPrint.BatchNumber });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchSize, Value = documentPrint.BatchSize });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.ModifiedBy, Value = documentPrint.ModifiedBy });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.Status, Value = documentPrint.Status });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = "@PrintCopy_PSY", Value = documentPrint.PrintCopy });

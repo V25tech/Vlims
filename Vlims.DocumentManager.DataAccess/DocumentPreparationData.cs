@@ -21,6 +21,7 @@ namespace Vlims.DocumentManager.DataAccess
     //using VAMLibrary.Core.Common;
     using Vlims.Common;
     using Vlims.DMS.Entities;
+    using System.Xml.Serialization;
 
 
     // Comment
@@ -62,19 +63,29 @@ namespace Vlims.DocumentManager.DataAccess
         {
             try
             {
+                var serializer = new XmlSerializer(typeof(PreperationDocument));
+                // Create a StringWriter to hold the XML data
+                var writer = new StringWriter();
+                // Serialize the Person object to XML and write it to the StringWriter
+                serializer.Serialize(writer, documentPreparation.Prepdocument);
+                // Get the XML string from the StringWriter
+                string xmlString = writer.ToString();
+
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.Documentmanagerid, Value = documentPreparation.Documentmanagerid });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.documenttitle, Value = documentPreparation.documenttitle });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.documentno, Value = documentPreparation.documentno });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.documenttype, Value = documentPreparation.documenttype });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.department, Value = documentPreparation.department });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.document, Value = documentPreparation.document });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = DocumentPreparationConstants.document, Value = xmlString });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.template, Value = documentPreparation.template });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.wokflow, Value = documentPreparation.wokflow });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.details, Value = documentPreparation.details });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.CreatedBy, Value = documentPreparation.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.ModifiedBy, Value = documentPreparation.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.Status, Value = documentPreparation.Status });
+
+                //sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = DocumentPreparationConstants.Status, Value = documentPreparation.document });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPreparationConstants.USP_DocumentPreparation_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -88,6 +99,13 @@ namespace Vlims.DocumentManager.DataAccess
         {
             try
             {
+                var serializer = new XmlSerializer(typeof(PreperationDocument));
+                // Create a StringWriter to hold the XML data
+                var writer = new StringWriter();
+                // Serialize the Person object to XML and write it to the StringWriter
+                serializer.Serialize(writer, documentPreparation.Prepdocument);
+                // Get the XML string from the StringWriter
+                string xmlString = writer.ToString();
                 List<SqlParameter> sqlparms = new List<SqlParameter>();
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.DPNID, Value = documentPreparation.DPNID });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.Documentmanagerid, Value = documentPreparation.Documentmanagerid });
@@ -95,7 +113,8 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.documentno, Value = documentPreparation.documentno });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.documenttype, Value = documentPreparation.documenttype });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.department, Value = documentPreparation.department });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.document, Value = documentPreparation.document });
+                //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.document, Value = documentPreparation.document });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = DocumentPreparationConstants.document, Value = xmlString });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.template, Value = documentPreparation.template });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.wokflow, Value = documentPreparation.wokflow });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.details, Value = documentPreparation.details });

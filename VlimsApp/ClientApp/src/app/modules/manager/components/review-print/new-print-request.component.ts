@@ -156,10 +156,14 @@ export class NewPrintRequestComponent implements OnInit {
   getdocumentpreparations() {
     //let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.docPreperationService.getdocumentpreparations(this.commonsvc.req).subscribe((data: any) => {
+      console.log(data[0]);
       this.preparations = data.response;
-      this.preparations = this.preparations.filter(p => p.documentno);
+      this.preparations=this.preparations.filter(o=>o.status.toLowerCase() === 'approved' && o.isEffectiveApproved);
+      this.preparations = this.preparations.filter(p => 
+        p.documentno);
     });
   }
+  
 
   documentNumberChange(event: any) {
     debugger
