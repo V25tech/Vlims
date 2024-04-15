@@ -9,11 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/shared/common.service';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 import { ToastrService } from 'ngx-toastr';
-import { faL } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
-import * as Editor from 'ckeditor5-custom-build/build/ckeditor';
-//import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService, QuickToolbarSettingsModel, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
@@ -164,51 +160,7 @@ export class AddTemplateComponent implements OnInit {
   //   status: '',
   // };
 
-  //Ckeditor Configuration
-  public Editor: any = Editor;
-  config = {
-    fontSize: {
-      options: [8,9,10,11,12,13,14,15,16,17,18,19,20],
-    },
-    toolbar: ['undo',
-      'redo',
-      'heading',
-      '|',
-      'bold',
-      'italic',
-      'underline',
-      'fontColor',
-      'fontBackgroundColor',
-      'highlight',
-      'fontFamily',
-      'fontSize',
-      '|',
-      'link',
-      'CKFinder',
-      'imageUpload',
-      'mediaEmbed',
-      '|',
-      'alignment',
-      'bulletedList',
-      'numberedList',
-      '|',
-      'indent',
-      'outdent',
-      '|',
-      'insertTable',
-      'blockQuote',
-      'specialCharacters'],
-    
-    //heading: {
-    //  options: [
-    //    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-    //    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-    //    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-    //  ]
-    //},
-   
-  };
-  
+
 
   constructor(private toastr: ToastrService,
     private location: Location,

@@ -40,7 +40,6 @@ import { ActivateDeactivateuserComponent } from '../authentication/components/Ac
 import { ChangepasswordComponent } from '../authentication/components/changepassword/changepassword.component';
 import { HierarchyComponent } from '../authentication/components/hierarchy/hierarchy.component';
 import { UsermanagementComponent } from '../authentication/components/usermanagement/usermanagement.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AuditdocumenttypesgridpageComponent } from './components/auditdocumenttypesgridpage/auditdocumenttypesgridpage.component';
 import { AudittemplategridpageComponent } from './components/audittemplategridpage/audittemplategridpage.component';
 import { AuditworkflowgridpageComponent } from './components/auditworkflowgridpage/auditworkflowgridpage.component';
@@ -101,7 +100,7 @@ import { QuickToolbarService, RichTextEditorModule, TableService } from '@syncfu
     DropdownModule,
     ToastModule,
     NgxSpinnerModule,
-    CKEditorModule, RichTextEditorModule
+    RichTextEditorModule
   ],
   providers: [TableService, QuickToolbarService] 
 })

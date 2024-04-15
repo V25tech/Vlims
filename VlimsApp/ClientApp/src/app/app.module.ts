@@ -21,8 +21,6 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToastrModule } from 'ngx-toastr';
 import { AuditlogComponentComponent } from './auditlog-component/auditlog-component.component';
-import { NgxSummernoteModule } from 'ngx-summernote';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TrackSearchComponent } from './common/tracksearch/tracksearch.component';
 import { SearchViewComponent } from './common/searchview/searchview.component';
 import { RichTextEditorModule, TableService, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
@@ -48,9 +46,8 @@ import { DisableRightClickDirective } from './disable-right-click.directive';
     NgxSpinnerModule,
     ModalModule,
     PaginatorModule,
-    NgxSummernoteModule,
     ToastrModule.forRoot(),
-    CKEditorModule, RichTextEditorModule
+    RichTextEditorModule
 
   ],
   exports: [TableModule],
