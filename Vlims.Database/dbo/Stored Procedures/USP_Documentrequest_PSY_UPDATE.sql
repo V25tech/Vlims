@@ -1,4 +1,6 @@
-﻿  CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_UPDATE] @DRID_PSY int, @documentmanagerid_PSY NVarChar(50),
+﻿
+
+  CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_UPDATE] @DRID_PSY int, @documentmanagerid_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
 @department_PSY NVarChar(50),
 @Purpose_PSY NVarChar(max),
@@ -6,7 +8,8 @@
 @AssigntoGroup_PSY NVarChar(50),
 @ModifiedBy_PSY NVarChar(100),
 @Workflow_PSY NVarchar(250),
-@Status_PSY Nvarchar(100)
+@Status_PSY Nvarchar(100),
+@Reason_PSY Nvarchar(250)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -27,20 +30,22 @@ department_PSY=@department_PSY,
 Purpose_PSY=@Purpose_PSY,
 ApprovalsCount_PSY=@ApprovalsCount_PSY,
 AssigntoGroup_PSY=@AssigntoGroup_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,Workflow_PSY=@Workflow_PSY WHERE  [DRID_PSY] = @DRID_PSY ;  
+ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,Workflow_PSY=@Workflow_PSY,Reason_PSY=@Reason_PSY WHERE  [DRID_PSY] = @DRID_PSY ;  
 END
 ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
 BEGIN
 --reject functionality is reset values and update status as rejected
 UPDATE [dbo].[Documentrequest_PSY] SET documenttype_PSY=NULL,Workflow_PSY=null,
-AssigntoGroup_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRID_PSY] = @DRID_PSY ;
+AssigntoGroup_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY ,Reason_PSY=@Reason_PSY
+WHERE  [DRID_PSY] = @DRID_PSY ;
 --once rejected delete workitems assigned to users
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid
 END
 ELSE IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
 BEGIN
 --return functionality is just update status as 'return'
-UPDATE [dbo].[Documentrequest_PSY] SET Workflow_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DRID_PSY] = @DRID_PSY ;
+UPDATE [dbo].[Documentrequest_PSY] SET Workflow_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY ,Reason_PSY=@Reason_PSY 
+WHERE  [DRID_PSY] = @DRID_PSY ;
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid;
 END
 

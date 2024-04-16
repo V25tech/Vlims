@@ -1,7 +1,4 @@
 ﻿
-
-
-
 CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_INSERT] @documentmanagerid_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
 @department_PSY NVarChar(50),
@@ -11,7 +8,8 @@ CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_INSERT] @documentmanagerid_PSY N
 @CreatedBy_PSY NVarChar(100),
 @ModifiedBy_PSY NVarChar(100),
 @Status_PSY NVarChar(100),
-@Workflow_PSY NVarChar(100)
+@Workflow_PSY NVarChar(100),
+@Reason_PSY NVarChar(250)
 AS 
  BEGIN 
   BEGIN TRY 
@@ -29,7 +27,7 @@ CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
 Status_PSY,
-Workflow_PSY,GUID_DR)
+Workflow_PSY,GUID_DR,Reason_PSY)
  VALUES 
 (@documentmanagerid_PSY,
 @documenttype_PSY,
@@ -42,7 +40,7 @@ Workflow_PSY,GUID_DR)
 @ModifiedBy_PSY,
  GetDate(),
  @Status_PSY,
- @Workflow_PSY,NEWID());
+ @Workflow_PSY,NEWID(),@Reason_PSY);
  SELECT @ID = @@IDENTITY; 
 
  DECLARE @PARENTGUID_PSY UNIQUEIDENTIFIER

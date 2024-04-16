@@ -3,6 +3,7 @@
 
 
 
+
  CREATE PROCEDURE [dbo].[USP_Documentrequest_PSY_GET_ALL]  @PageSize  INT=50, @PageNumber INT=1  
  AS 
  BEGIN 
@@ -21,7 +22,8 @@ ModifiedDate_PSY,
 Status_PSY,
 ApprovedOn_PSY,
 Approvedby_PSY,
-Workflow_PSY
+Workflow_PSY,
+Reason_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[Documentrequest_PSY] WITH (NOLOCK) 
  Order by CreatedDate_PSY DESC  
