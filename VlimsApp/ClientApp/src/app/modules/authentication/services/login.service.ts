@@ -17,7 +17,7 @@ export class LoginService {
   isvalid=false;
   private loginStatusChanged = new Subject<boolean>();
   loginStatusChanged$ = this.loginStatusChanged.asObservable();
-
+  
   private loggedIn = false;
 
   isLoggedIn(): boolean {  

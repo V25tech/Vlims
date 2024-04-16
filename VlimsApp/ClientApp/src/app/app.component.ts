@@ -28,6 +28,9 @@ export class AppComponent implements OnInit {
     this.loginService.loginStatusChanged$.subscribe((status: boolean) => {
       this.isLoggedIn = status;      
     });
+    this.commonsvc.sidebarchanged$.subscribe((status:boolean)=>{
+      this.isLoggedIn=!status
+    });
     this.checkSessionTimeoutPeriodically();    
   }
 

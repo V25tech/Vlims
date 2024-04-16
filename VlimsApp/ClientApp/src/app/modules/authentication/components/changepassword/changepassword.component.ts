@@ -23,7 +23,7 @@ export class ChangepasswordComponent {
   confirmNewPassword: string = '';
   confirmNewPassword1: string = '';
   isadmin:boolean=false;
-
+  issidebardisabled=false;
   constructor(private location: Location,
     private commomsvc:CommonService,
     private loader:NgxSpinnerService,
@@ -34,6 +34,7 @@ export class ChangepasswordComponent {
    
   ngOnInit(){
     debugger
+    this.issidebardisabled=this.commomsvc.getsidebardisabled();
     this.currentuser=this.commomsvc.getUser() ??  new UserConfiguration();
     if(this.currentuser!=null && this.currentuser!=undefined){
       this.isadmin=this.currentuser.UserID=='Admin';
@@ -67,6 +68,7 @@ export class ChangepasswordComponent {
     this.userssvc.update(this.currentuser).subscribe((data:any)=>{
       this.toaster.success("Password Changed Successfully",'Success');
       this.loginservice.logout();
+      this.commomsvc.setsidebardisabled(false);
     this.router.navigate(['/login']);
     });
   }

@@ -61,7 +61,7 @@ export class LoginComponent {
     this.renderer.selectRootElement(this.usernameInput.nativeElement).focus();
   }
   login() {
-    debugger
+    
     this.loader.show();
     // if(this.user.UserID.toLocaleLowerCase()==='admin')
     // {
@@ -75,12 +75,12 @@ export class LoginComponent {
     //   else{
 
         this.userssvc.login(this.user).subscribe((data:any)=>{
-          debugger
+          
             this.user=data;
             this.commonsvc.setUser(this.user);
             if(this.user.UserID.toLowerCase() === "admin")
             {
-              debugger
+              
               this.loginService.updateuser(this.roles,this.user);
               this.commonsvc.setadminroles();
             }
@@ -96,14 +96,24 @@ export class LoginComponent {
 
   }
   isvaliduser(){
-    debugger
+    
     localStorage.setItem("username", this.user.UserID);
     //this.commonsvc.userEntityPermissions$.next(localStorage.getItem("roles"));
     this.commonsvc.setUsername(this.user.UserID);
     this.commonsvc.createdBy=this.user.UserID;
     this.loader.hide();
     this.loginSuccess.emit();
+    
+    if(this.user.Password==='Passw0rd'){
+      this.commonsvc.setsidebardisabled(true);
+      this.router.navigate(['/admin/change']);
+      //this.commonsvc.issidebardisabled=true;
+    }
+    else{
+      this.commonsvc.setsidebardisabled(false);
+      this.commonsvc.getsidebardisabled();
     this.router.navigate(['/documents']);
+    }
     this.commonsvc.startSessionTimeout(30);
     this.toastr.success('Welcome '+this.user.UserID, 'Login Success', {
       timeOut: 1000, // Set the display time in milliseconds (3 seconds)
