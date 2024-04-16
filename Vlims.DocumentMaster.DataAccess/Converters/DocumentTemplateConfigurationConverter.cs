@@ -97,13 +97,14 @@ namespace Vlims.DocumentMaster.DataAccess
                     {
                         DataRow row = dataset.Tables[0].Rows[i];
                         documentTemplateConfigurationData = new DocumentTemplateConfiguration();
+                        documentTemplateConfigurationData.DTID = Convert.ToString(row["DPNID_PSY"]);
                         documentTemplateConfigurationData.DocumentTitle = Convert.ToString(row["documenttitle_PSY"]);
                         documentTemplateConfigurationData.DocumentNo = Convert.ToString(row["documentno_PSY"]);
-                        documentTemplateConfigurationData.Version = Convert.ToInt32(row["Version"]);
-                        documentTemplateConfigurationData.Supersedes = Convert.ToInt32(row["Supersedes"]);
-                        documentTemplateConfigurationData.Department = Convert.ToString(row["department_PSY"]);
-                        documentTemplateConfigurationData.EffectiveDate = Convert.ToDateTime(row["EffectiveDate_PSY"]).ToShortDateString();
-                        documentTemplateConfigurationData.ReviewDate = Convert.ToDateTime(row["Reviewdate_PSY"]).ToShortDateString();
+                        documentTemplateConfigurationData.Version = Convert.IsDBNull(row["Version"]) ? 0 : Convert.ToInt32(row["Version"]);
+                        documentTemplateConfigurationData.Supersedes = Convert.IsDBNull(row["Supersedes"]) ? 0 : Convert.ToInt32(row["Supersedes"]);
+                        documentTemplateConfigurationData.Department = row["department_PSY"] == DBNull.Value ? string.Empty : Convert.ToString(row["department_PSY"]);
+                        documentTemplateConfigurationData.EffectiveDate = row["EffectiveDate_PSY"] == DBNull.Value ? string.Empty : Convert.ToDateTime(row["EffectiveDate_PSY"]).ToShortDateString();
+                        documentTemplateConfigurationData.ReviewDate = row["Reviewdate_PSY"] == DBNull.Value ? string.Empty : Convert.ToDateTime(row["Reviewdate_PSY"]).ToShortDateString();
                         documentTemplateConfigurationData.ReviewedBy = Convert.ToString(row["REVIWED_BY"]);
                         documentTemplateConfigurationData.PreparedBy = Convert.ToString(row["PREPARED_BY"]);
                         documentTemplateConfigurationData.ApprovedBy = Convert.ToString(row["APPROVED_BY"]);
@@ -111,15 +112,67 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.ApprovedRole = Convert.ToString(row["APPROVEDROLE"]);
                         documentTemplateConfigurationData.ReviewedDept = Convert.ToString(row["REVIWEDDEPT"]);
                         documentTemplateConfigurationData.ReviewedRole = Convert.ToString(row["REVIWEDROLE"]);
+                        documentTemplateConfigurationData.PrintCopy = Convert.ToString(row["PrintCopy_PSY"]);
+                        documentTemplateConfigurationData.PrintReason = Convert.ToString(row["reason_PSY"]);
+                        documentTemplateConfigurationData.BatchNumber = Convert.ToString(row["BatchNumber"]);
+                        documentTemplateConfigurationData.BatchSize = Convert.ToString(row["BatchSize"]);
                         string depts = Convert.ToString(row["PREPAREDDEPT"]);
                         if (!string.IsNullOrEmpty(depts))
                         {
                             string[] values = depts.Split(',');
-                            HashSet<string> uniqueValues = new HashSet<string>(values);
-                            documentTemplateConfigurationData.PrepareDept = string.Join(",", uniqueValues);
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.PrepareDept = string.Join(",", values.Distinct());
+                        }
+                        if(!string.IsNullOrEmpty(documentTemplateConfigurationData.ReviewedBy))
+                        {
+                            string[] values = documentTemplateConfigurationData.ReviewedBy.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ReviewedBy= string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.PreparedBy))
+                        {
+                            string[] values = documentTemplateConfigurationData.PreparedBy.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.PreparedBy = string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ApprovedBy))
+                        {
+                            string[] values = documentTemplateConfigurationData.ApprovedBy.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ApprovedBy = string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ApprovedDept))
+                        {
+                            string[] values = documentTemplateConfigurationData.ApprovedDept.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ApprovedDept = string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ApprovedRole))
+                        {
+                            string[] values = documentTemplateConfigurationData.ApprovedRole.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ApprovedRole = string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ReviewedDept))
+                        {
+                            string[] values = documentTemplateConfigurationData.ReviewedDept.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ReviewedDept = string.Join(",", values.Distinct());
+                        }
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ReviewedRole))
+                        {
+                            string[] values = documentTemplateConfigurationData.ReviewedRole.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ReviewedRole = string.Join(",", values.Distinct());
+                        }
+                        documentTemplateConfigurationData.PreparedRole = Convert.ToString(row["PREPAREDROLE"]);
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.PreparedRole))
+                        {
+                            string[] values = documentTemplateConfigurationData.PreparedRole.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.PreparedRole = string.Join(",", values.Distinct());
                         }
                         //documentTemplateConfigurationData.PrepareDept = Convert.ToString(row["PREPAREDDEPT"]);
-                        documentTemplateConfigurationData.PreparedRole = Convert.ToString(row["PREPAREDROLE"]);
                         result.Add(documentTemplateConfigurationData);
                     }
                 }

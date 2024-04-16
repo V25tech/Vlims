@@ -9,6 +9,8 @@ public class DocumentPrint
 
     private int dridField;
 
+
+
     private string documenttitleField;
 
     private string printtypeField;
@@ -16,6 +18,8 @@ public class DocumentPrint
     private string documentnumberField;
 
     private int noofcopiesField;
+
+    private int printCountField;
 
     private string workflowField;
 
@@ -90,6 +94,18 @@ public class DocumentPrint
         }
     }
 
+    public int printCount
+    {
+        get
+        {
+            return this.printCountField;
+        }
+        set
+        {
+            this.printCountField = value;
+        }
+    }
+
     public string workflow
     {
         get
@@ -161,6 +177,10 @@ public class DocumentPrint
             this.modifieddateField = value;
         }
     }
-    public string Template { get; set; }
+    public string? Template { get; set; }
+    public string? PrintCopy { get; set; }
+    public bool IsActive { get; set; }
+    public string? BatchNumber { get; set; }
+    public string? BatchSize { get; set; }
 }
 

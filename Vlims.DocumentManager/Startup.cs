@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using PolicySummary.DMS.Services;
 using Vlims.DocumentManager.Manager;
@@ -53,6 +54,7 @@ public class Startup
         Services.AddScoped<IDocumentPrintService, DocumentPrintService>();
         Services.AddScoped<IExistingDocumentRequestService, ExistingDocumentRequestService>();
         Services.AddScoped<IAzureBlobService, AzureBlobService>();
+        Services.AddScoped<IExisitingDocumentsService, ExisitingDocumentsService>();
         Services.AddEndpointsApiExplorer();
         Services.AddSwaggerGen();
     }
@@ -73,6 +75,12 @@ public class Startup
         {
             x.AllowAnyOrigin()
             .AllowAnyHeader().AllowAnyMethod();
+        });
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory())),
+            RequestPath = "/pdfs"
         });
         app.UseRouting();
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

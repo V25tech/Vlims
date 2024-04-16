@@ -34,17 +34,17 @@
                  [rowsPerPageOptions]="rowsPerPageOptions" >
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>S.No</th>
-                        <th pSortableColumn="drid" style="width:20%">Request Code<p-sortIcon field="drid"></p-sortIcon></th>
+                        <th style="width:5%">S.No</th>
+                        <th pSortableColumn="drid" style="width:5%">Request Code<p-sortIcon field="drid"></p-sortIcon></th>
                         <th pSortableColumn="documenttype" style="width:10%">Document Type<p-sortIcon field="documenttype"></p-sortIcon></th>
-                        <th pSortableColumn="department" style="width:15%">Department   <p-sortIcon field="department"></p-sortIcon></th>
+                        <th pSortableColumn="department" style="width:10%">Department   <p-sortIcon field="department"></p-sortIcon></th>
                         <!-- <th pSortableColumn="modifiedBy" style="width:20%">Registered by<p-sortIcon field="modifiedBy"></p-sortIcon></th>
                         <th pSortableColumn="modifiedDate" style="width:200px">Registered On <p-sortIcon field="modifiedDate"></p-sortIcon></th> -->
-                        <th pSortableColumn="workflow" style="width:20%">Workflow<p-sortIcon field="workflow"></p-sortIcon></th>
+                        <!-- <th pSortableColumn="workflow" style="width:20%">Workflow<p-sortIcon field="workflow"></p-sortIcon></th> -->
                         <!-- <th pSortableColumn="approvedby" style="width:20%">Approved by<p-sortIcon field="approvedby"></p-sortIcon></th>
                         <th pSortableColumn="approvedOn" style="width:200px">Approved On <p-sortIcon field="approvedOn"></p-sortIcon></th> -->
-                        <th pSortableColumn="status" style="width:200px">Status <p-sortIcon field="status"></p-sortIcon></th>
-                        <th style="width:80px">Modify</th>
+                        <th pSortableColumn="status" style="width:5%">Status <p-sortIcon field="status"></p-sortIcon></th>
+                        <th style="width:5%">Modify</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-docType let-i="rowIndex">
@@ -53,13 +53,13 @@
                         <td>{{docType?.drid}}</td>
                         <td>{{docType?.documenttype}}</td>
                         <td>{{docType?.department}}</td>
-                        <td>{{docType?.workflow}}</td>
+                        <!-- <td>{{docType?.workflow}}</td> -->
                         <!-- <td>{{docType?.modifiedBy}}</td>
                         <td>{{docType?.modifiedDate| date}}</td> -->
                         <!-- <td>{{docType?.approvedby}}</td>
                         <td>{{docType?.approvedOn| date}}</td> -->
                         <td><span class="status" [ngClass]="getStatusClass(docType['status'])">{{docType.status}} </span></td>
-                        <td class="text-center" *ngIf="access && docType?.status=='In-Progress'"><i (click)="editdocreq(docType)" class="bi bi-pencil"></i></td>
+                        <td class="text-center" *ngIf="access && (docType?.status === 'In-Progress' || docType?.status === 'Rejected' || docType?.status === 'Returned')"><i (click)="editdocreq(docType)" class="bi bi-pencil"></i></td>
                         <td class="text-center" *ngIf="!access">
                             <i class="bi bi-lock bi-lg" 
                             [ngClass]="{'text-primary':true}"

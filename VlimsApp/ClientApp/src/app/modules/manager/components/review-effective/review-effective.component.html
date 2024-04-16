@@ -88,7 +88,7 @@
           <div class="form-group row">
             <label for="document" class="col-sm-2 col-form-label">Document</label>
             <div class="col-sm-10">
-              <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
+              <a class="link-opacity-100-hover" (click)="checkduplicatetemplate(template)" href="javascript:void(0)">View Document</a>
             </div>
           </div>
           
@@ -185,7 +185,7 @@
             <button type="submit" class="btn btn-primary" *ngIf="!viewMode" [disabled]="!fm.form.valid || isButtonDisabled">Submit</button>
            
             <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
-          <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button> -->
+          <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="return()">Return</button>
           <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
           
           </div>

@@ -19,6 +19,7 @@ namespace Vlims.DocumentManager.Manager
     using Vlims.DMS.Entities;
     using Vlims.DocumentManager.DataAccess;
     using Vlims.DocumentMaster.Manager;
+    using Vlims.DocumentMaster.Entities;
 
 
     // Comment
@@ -59,6 +60,7 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
+                #region Commented Region
                 //if (documentrequest != null && !string.IsNullOrEmpty(documentrequest.Workflow))
                 //{
                 //    workflowconigurationService workflowsvc = new workflowconigurationService();
@@ -70,13 +72,15 @@ namespace Vlims.DocumentManager.Manager
                 //        documentrequest.Reviwers = mainwork.reviewers.Select(o => string.Join(o.UserID, ",")).ToString();
                 //        documentrequest.Approvals = mainwork.approvals.Select(o => string.Join(o.UserID, ",")).ToString();
                 //    }
-                //}
+                //} 
+                #endregion
                 documentrequest.AssigntoGroup = "A";
                 documentrequest.ApprovalsCount = 9;
                 documentrequest.documentmanagerid = "1";
                 //documentrequest.Status = "In-Progress";
                 var result = DocumentrequestData.SaveDocumentrequest(documentrequest);
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.documentrequest, state = DefinitionStatus.New });
+                
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentrequest.CreatedBy, EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.RequestType, state = DefinitionStatus.New, EntityInfo = documentrequest, Unique = documentrequest.documenttype });
                 return result;
             }
             catch (System.Exception ex)
@@ -84,15 +88,19 @@ namespace Vlims.DocumentManager.Manager
                 throw;
             }
         }
-
         public bool UpdateDocumentrequest(Documentrequest documentrequest)
         {
             try
             {
+
                 String validationMessages = DocumentrequestValidator.IsValidDocumentrequest(documentrequest);
                 if (validationMessages.Length <= 0)
                 {
                     bool result = DocumentrequestData.UpdateDocumentrequest(documentrequest);
+
+                    documentrequest.CreatedDate= DateTime.Now;
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentrequest.CreatedBy, EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.RequestType, state = DefinitionStatus.Modify, EntityInfo = documentrequest, Unique = documentrequest.documenttype });
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);

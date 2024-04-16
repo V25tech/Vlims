@@ -23,6 +23,20 @@ import { ReviewExistingDocumentRequestComponent } from './components/review-exis
 import { DocumentRevisionRequestsComponent } from './components/document-revision/document-revision.component';
 import { NewPrintRequestComponent } from './components/review-print/new-print-request.component';
 import { ReviewRevisionComponent } from './components/review-revision/review-revision.component';
+import { ExistingDocumentsService } from './services/existing-documents.service';
+import { ExistingDocumentsComponent } from './components/existing-documents/existing-documents.component';
+import { AuditmanagerhomepageComponent } from './components/auditmanagerhomepage/auditmanagerhomepage.component';
+import { AuditrequestgridpageComponent } from './components/auditrequestgridpage/auditrequestgridpage.component';
+import { AuditpreparationgridpageComponent } from './components/auditpreparationgridpage/auditpreparationgridpage.component';
+import { AuditeffectivegridpageComponent } from './components/auditeffectivegridpage/auditeffectivegridpage.component';
+import { AuditrevisiongridpageComponent } from './components/auditrevisiongridpage/auditrevisiongridpage.component';
+import { AuditprintgridpageComponent } from './components/auditprintgridpage/auditprintgridpage.component';
+import { AuditexistinggridpageComponent } from './components/auditexistinggridpage/auditexistinggridpage.component';
+import { AuditRequestNewPageComponent } from './components/audit-request-new-page/audit-request-new-page.component';
+import { AuditPreparationNewPageComponent } from './components/audit-preparation-new-page/audit-preparation-new-page.component';
+import { AuditEffectiveNewPageComponent } from './components/audit-effective-new-page/audit-effective-new-page.component';
+import { AuditprintgridpagewComponent } from './components/auditprintgridpagew/auditprintgridpagew.component';
+import { AuditPrintNewPageComponent } from './components/audit-print-new-page/audit-print-new-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +52,20 @@ import { ReviewRevisionComponent } from './components/review-revision/review-rev
     ExistingDocumentRequestComponent,
     ReviewExistingDocumentRequestComponent,
     DocumentRevisionRequestsComponent,
-    ReviewRevisionComponent
+    ReviewRevisionComponent,
+    ExistingDocumentsComponent,
+    AuditmanagerhomepageComponent,
+    AuditrequestgridpageComponent,
+    AuditpreparationgridpageComponent,
+    AuditeffectivegridpageComponent,
+    AuditrevisiongridpageComponent,
+    AuditprintgridpageComponent,
+    AuditexistinggridpageComponent,
+    AuditRequestNewPageComponent,
+    AuditPreparationNewPageComponent,
+    AuditEffectiveNewPageComponent,
+    AuditprintgridpagewComponent,
+    AuditPrintNewPageComponent
   ],
   imports: [
     CommonModule,
@@ -51,5 +78,6 @@ import { ReviewRevisionComponent } from './components/review-revision/review-rev
     DropdownModule,
     ToastModule,
   ],
+  providers: [ExistingDocumentsService]
 })
 export class ManagerModule { }

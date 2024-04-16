@@ -1,0 +1,203 @@
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="page-title"><span class="bold-text"> Document Effective </span><br><span class="bold-text">Audit Trails</span></h4>            <div class="back-icon">
+            <a href="javascript:void(0);" onclick="history.back();">
+              <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <div class="p-4 bg-white shadow-dark rounded-2">
+          <div *ngFor="let auditConfig of types; let i = index">
+            <div class="card mb-3">
+              <div class="card-body">
+                
+                <div class="row">
+                  <div class="col-sm-12 text-center">
+                    <h5 [ngClass]="{'In-Progress': auditConfig.EntityInfo.Status === 'In-Progress','reviewed': auditConfig.EntityInfo.Status === 'Reviewed', 'approved': auditConfig.EntityInfo.Status === 'Approved', 'returned': auditConfig.EntityInfo.Status === 'Returned', 'rejected': auditConfig.EntityInfo.Status === 'Rejected'}">
+                      <ng-container *ngIf="auditConfig.EntityInfo.Status === 'In-Progress'">Activity: Initiation </ng-container>
+                        <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Reviewed'">Activity: Review</ng-container>
+                        <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Approved'">Activity: Approve</ng-container>
+                        <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Returned'">Activity: Return</ng-container>
+                        <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Rejected'">Activity: Reject</ng-container>
+                    </h5>
+                </div>
+                  <div class="col-sm-3">
+                      <strong>Version {{ 0 }}</strong>
+                  </div>
+              </div>
+                
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Document Title:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.documenttitle }}
+                    </div>                 
+                  </div>
+                  
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Document Number:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.documentno }}
+                    </div>                 
+                  </div>
+              
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Document Type:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.documenttype }}
+                    </div>                 
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Department:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.Department }}
+                    </div>                 
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Template:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.template }}
+                    </div>
+                  </div> 
+                  
+                  
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>WorkFlow:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.Workflow }}
+                    </div>
+                  </div>   
+
+
+                  
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Effective Date:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.EffectiveDate | date:'dd/MM/yyyy' }}
+                    </div>
+                  </div>  
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Review Date:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.ReviewDate | date:'dd/MM/yyyy' }}
+                    </div>
+                  </div>  
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Initiated By:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.CreatedBy  }}
+                    </div>
+                  </div> 
+                  
+                  
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Initiated On:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.CreatedDate | date:'dd/MM/yyyy HH:mm' }}
+                    </div>
+                  </div>  
+
+                  <div class="row" *ngIf="auditConfig.EntityInfo.Status === 'Reviewed'">
+                    <div class="col-sm-3">
+                        <strong>Reviewed By:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                        {{ auditConfig.EntityInfo.ModifiedBy }}
+                    </div>
+                </div>
+
+
+                <div class="row" *ngIf="auditConfig.EntityInfo.Status === 'Approved'">
+                  <div class="col-sm-3">
+                      <strong>Approved By:</strong>
+                  </div>
+                  <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.ModifiedBy }}
+                  </div>
+              </div>
+
+
+              <div class="row" *ngIf="auditConfig.EntityInfo.Status === 'Returned'">
+                <div class="col-sm-3">
+                    <strong>Returned By:</strong>
+                </div>
+                <div class="col-sm-9">
+                    {{ auditConfig.EntityInfo.ModifiedBy }}
+                </div>
+            </div>
+
+
+
+            <div class="row" *ngIf="auditConfig.EntityInfo.Status === 'Rejected'">
+              <div class="col-sm-3">
+                  <strong>Rejected By:</strong>
+              </div>
+              <div class="col-sm-9">
+                  {{ auditConfig.EntityInfo.ModifiedBy }}
+              </div>
+          </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Status:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.Status }}
+                    </div>
+                  </div>   
+
+
+                  
+
+                  
+
+                  
+                   
+                <!-- Add more rows for other properties if needed -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,106 +1,126 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col">
-
+     
       <div class="col d-flex justify-content-between align-items-center">
 
         <h4 class="page-title">{{title}}</h4>
         <div class="back-icon" style="margin-right: 10px;">
-
+  
           <a href="javascript:void(0);" onclick="history.back();">
-
+  
             <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
-
+  
           </a>
-
+  
         </div>
-
+  
       </div>
     </div>
   </div>
   <div class="row p-2">
     <div class="col">
       <form (ngSubmit)="addTemplate()" #fm="ngForm">
-        <div class="p-4 bg-white shadow-dark rounded-2">
-          <div class="form-group row">
-            <label for="templateName" class="col-sm-2 col-form-label">Template Name <span style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10">
-              <input type="text"
-                     class="form-control mw-350"
-                     id="Templatename"
-                     name="Templatename"
-                     placeholder="Template Name"
-                     [(ngModel)]="templateForm.Templatename" [disabled]="editMode"
-                     required
-                     #TemplatenameInput="ngModel" />
-              <div *ngIf="TemplatenameInput.invalid && (TemplatenameInput.dirty || TemplatenameInput.touched)" class="text-danger">
-                Enter Template Name
-              </div>
-            </div>
+      <div class="p-4 bg-white shadow-dark rounded-2">
+        <div class="form-group row">
+          <label for="templateName" class="col-sm-2 col-form-label">Template Name <span style="color: red; font-weight: bolder;">*</span></label>
+          <div class="col-sm-10">
+            <input type="text"
+                   class="form-control mw-350"
+                   id="Templatename"
+                   name="Templatename"
+                   placeholder="Template Name"
+                   [(ngModel)]="templateForm.Templatename" 
+                   required
+                     #TemplatenameInput="ngModel"
+                      />
+                      <div *ngIf="TemplatenameInput.invalid && (TemplatenameInput.dirty || TemplatenameInput.touched)" class="text-danger">
+                        Enter Template Name
+                      </div>
           </div>
-          <div class="form-group row">
-            <label for="ucode" class="col-sm-2 col-form-label">Unique Code <span style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10">
-              <input type="text"
-                     class="form-control mw-350"
-                     id="ucode"
-                     name="ucode"
-                     placeholder="Enter Prefix"
-                     [(ngModel)]="templateForm.Uniquecode"
-                     readonly
-                     disabled
-                     required
-                     #ucodeInput="ngModel" />
-
-            </div>
+        </div>
+        <div class="form-group row">
+          <label for="ucode" class="col-sm-2 col-form-label">Unique Code <span style="color: red; font-weight: bolder;">*</span></label>
+          <div class="col-sm-10">
+            <input type="text"
+                   class="form-control mw-350"
+                   id="ucode"
+                   name="ucode"
+                   placeholder="Enter Prefix"
+                   [(ngModel)]="templateForm.Uniquecode"
+                   readonly   
+                   disabled
+                   required
+                   #ucodeInput="ngModel"
+                   />
+                 
           </div>
-          <div class="form-group row">
-            <label for="docType" class="col-sm-2 col-form-label">Document Type <span style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10">
-              <p-dropdown [options]="typesDatasource" [(ngModel)]="selectedtype" placeholder="Select Document Type"
-                          optionLabel="Documenttypename" id="types" name="types" [autoDisplayFirst]="false" [required]="true" #DocumenttypenameInput="ngModel">
-              </p-dropdown>
-              <div *ngIf="DocumenttypenameInput.invalid && (DocumenttypenameInput.dirty || DocumenttypenameInput.touched)" class="text-danger">
-                Document Type is required
-              </div>
-            </div>
-          </div>
-          <!-- <div class="form-group row">
-            <label for="templateName" class="col-sm-2 col-form-label">No. Of Pages <span style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10">
-              <input type="text"
-                     class="form-control mw-350"
-                     id="noofpages"
-                     name="noofpages"
-                     placeholder="No. of Pages"
-                     [(ngModel)]="templateForm.Pages" [disabled]="editMode"   (change)="generatePages()"
-                     required
-                       #noofpagesInput="ngModel"
-                        />
-                        <div *ngIf="noofpagesInput.invalid && (noofpagesInput.dirty || noofpagesInput.touched)" class="text-danger">
-                          Enter No. Of Pages
-                        </div>
-            </div>
-          </div> -->
-          <div class="form-group row">
-            <label for="templateName" class="col-sm-2 col-form-label">Logo <span style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10" *ngIf="templateForm.header==null || templateForm.header==''">
-              <input type="file"
-                     class="form-control mw-350"
-                     id="logoUpload"
-                     (change)="onLogoUpload($event)" accept="image/*"
-                     required />
-            </div>
-            <div *ngIf="templateForm.header" class="col-sm-9">
-              {{templateForm.header}}
-              <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()">Delete</button>
+        </div>
+        <div class="form-group row">
+          <label for="docType" class="col-sm-2 col-form-label">Document Type <span style="color: red; font-weight: bolder;">*</span></label>
+          <div class="col-sm-10">
+            <p-dropdown [options]="typesDatasource" [(ngModel)]="selectedtype" placeholder="Select Document Type"
+                optionLabel="Documenttypename" id="types" name="types" [autoDisplayFirst]="false" [required]="true" #DocumenttypenameInput="ngModel"   >
+             </p-dropdown>
+             <div *ngIf="DocumenttypenameInput.invalid && (DocumenttypenameInput.dirty || DocumenttypenameInput.touched)" class="text-danger">
+              Document Type is required
             </div>
           </div>
         </div>
+        <div class="form-group row">
+          <label for="templateName" class="col-sm-2 col-form-label">No. Of Pages <span style="color: red; font-weight: bolder;">*</span></label>
+          <div class="col-sm-10">
+            <input type="text"
+                   class="form-control mw-350"
+                   id="noofpages"
+                   name="noofpages"
+                   placeholder="No. of Pages"
+                   [(ngModel)]="templateForm.Pages" [disabled]="editMode"   (change)="generatePages()"
+                   required
+                     #noofpagesInput="ngModel"
+                      />
+                      <div *ngIf="noofpagesInput.invalid && (noofpagesInput.dirty || noofpagesInput.touched)" class="text-danger">
+                        Enter No. Of Pages
+                      </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="templateName" class="col-sm-2 col-form-label">Logo</label>
+          <div class="col-sm-10" *ngIf="templateForm.header==null || templateForm.header==''">
+            <input type="file"  
+                   class="form-control mw-350"
+                   id="logoUpload" 
+                  (change)="onLogoUpload($event)" accept="image/*"
+                   z 
+                    
+                      />
+          </div>
+          <div *ngIf="templateForm.header" class="col-sm-9">
+            {{templateForm.header}}
+            <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()">Delete</button>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="templateName" class="col-sm-2 col-form-label">Master Logo</label>
+          <div class="col-sm-10" *ngIf="templateForm.footer==null || templateForm.footer==''">
+            <input type="file"  
+                   class="form-control mw-350"
+                   id="logoUpload" 
+                  (change)="onLogoUpload1($event)" accept="image/*"
+                   z 
+                    
+                      />
+          </div>
+          <div *ngIf="templateForm.footer" class="col-sm-9">
+            {{templateForm.footer}}
+            <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile1()">Delete</button>
+          </div>
+        </div>
+      </div>
       </form>
-
+      
       <div class="p-4 mt-3 bg-white shadow-dark rounded-2">
-        <h5 class="page-card-title">Title</h5>
+        <h5 class="page-card-title">Title</h5> 
         <div class="template-block">
           <div class="template-grid">
             <ng-container *ngIf="showGrid">
@@ -112,7 +132,8 @@
                         <div class="template-cell">
                           <div class="custom-select" style="width: 84px; padding-right: 2px;">
                             <select class="select-dropdown form-select"
-                                    [(ngModel)]="headerData[rowIndex][colIndex].selectedOption">
+                            [(ngModel)]="headerData[rowIndex][colIndex].selectedOption" 
+                            >
                               <option *ngFor="let option of selectOptions"
                                       [value]="option.value">
                                 {{ option.name }}
@@ -124,8 +145,9 @@
                             " [placeholder]="headerData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"
                                  class="form-control"
                                  type="text" /> -->
-                          <textarea class="form-control" style="height: 33px;" [(ngModel)]="headerData[rowIndex][colIndex].inputValue"
-                                    [placeholder]="headerData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"></textarea>
+                                 <textarea class="form-control" style="height: 33px;" [(ngModel)]="headerData[rowIndex][colIndex].inputValue" 
+                                 [placeholder]="headerData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"
+                                 ></textarea>
                         </div>
                       </td>
                     </ng-container>
@@ -137,7 +159,7 @@
         </div>
       </div>
       <!-- <div class="p-4 mt-3 bg-white shadow-dark rounded-2">
-        <h5 class="page-card-title">Header Template-(4 Col max.)</h5>
+        <h5 class="page-card-title">Header Template-(4 Col max.)</h5> 
         <div class="template-block">
           <div class="template-grid">
             <ng-container *ngIf="showGrid">
@@ -156,7 +178,7 @@
                               </option>
                             </select>
                           </div>
-
+                          
                            <p-dropdown
                 name="workflowStage"
                 [options]="stageSource"
@@ -168,10 +190,10 @@
                 placeholder="Select Document Stage"
                 #documentstage="ngModel" width="5em">
               </p-dropdown>
-
-
+           
+                        
                         </div>
-
+                        
                       </td>
                     </ng-container>
                     <td>
@@ -205,6 +227,7 @@
           </div>
         </div>
       </div> -->
+
       <!-- <div class="p-4 mt-3 bg-white shadow-dark rounded-2">
         <h5 class="page-card-title">Footer Template-(4 Col max.)</h5>
         <div class="template-block">
@@ -266,45 +289,47 @@
           </div>
         </div>
       </div> -->
-      <!--
-            <div class="p-4 mt-3 bg-white shadow-dark rounded-2"  *ngIf="!isbody">
-              <h5 class="page-card-title">Header Template</h5>
-              <div class="template-block">
-
-                  <form [formGroup]="form1" id="idh">
-                    <div formControlName="html1" [ngxSummernote]="config" [(ngModel)]="pages[0].header">
-                    </div>
-                  </form>
-
+<!-- 
+      <div class="p-4 mt-3 bg-white shadow-dark rounded-2"  *ngIf="!isbody">
+        <h5 class="page-card-title">Header Template</h5> 
+        <div class="template-block">
+         
+            <form [formGroup]="form1" id="idh">
+              <div formControlName="html1" [ngxSummernote]="config" [(ngModel)]="pages[0].header">
               </div>
-            </div>
+            </form> 
+          
+        </div>
+      </div>
 
-            <div class="p-4 mt-3 bg-white shadow-dark rounded-2" *ngIf="!isbody">
-              <h5 class="page-card-title">Footer Template</h5>
-              <div class="template-block">
-
-                  <form [formGroup]="form2" id="idf">
-                    <div formControlName="html2" [ngxSummernote]="config" [(ngModel)]="pages[0].footer">
-                    </div>
-                  </form>
-
-
-
+      <div class="p-4 mt-3 bg-white shadow-dark rounded-2" *ngIf="!isbody">
+        <h5 class="page-card-title">Footer Template</h5>
+        <div class="template-block">
+         
+            <form [formGroup]="form2" id="idf">
+              <div formControlName="html2" [ngxSummernote]="config" [(ngModel)]="pages[0].footer">
               </div>
-            </div> -->
+            </form> 
+         
+        
+          
+        </div>
+      </div> -->
+      
+     
 
-
-
-      <div *ngIf="isbody" class="p-4 mt-3 bg-white shadow-dark rounded-2">
+      <div class="p-4 mt-3 bg-white shadow-dark rounded-2">
         <h5 class="page-card-title">Body Template</h5>
         <div class="template-block">
           <!-- <div class="template-grid"> -->
 
           <form [formGroup]="form" id="bodyid">
-            <div formControlName="html" [ngxSummernote]="config" [(ngModel)]="pages[this.currentPage].text">
-            </div>
+            <!--<div formControlName="html" [ngxSummernote]="config" [(ngModel)]="pages[this.currentPage].text">
+  </div>-->
+            <!--<ckeditor formControlName="html" [(ngModel)]="pages[this.currentPage].text" [editor]="Editor" [config]="config"></ckeditor>-->
+            <ejs-richtexteditor formControlName="html" [(ngModel)]="pages[this.currentPage].text" id='defaultRTE' [fontFamily]='fontFamily' [toolbarSettings]='tools' [pasteCleanupSettings]="pasteCleanupSettings" [quickToolbarSettings]='quickToolbarSettings' [fontSize]='size' locale = 'en-US'>
+            </ejs-richtexteditor>
           </form>
-
           <!-- </div> -->
           <div class="form-group row my-4">
             <!-- style="margin-left: 29.666667%;" -->
@@ -320,50 +345,52 @@
 
           </div>
         </div>
-      </div>
-
-      <div class="form-group row my-4">
-        <div class="col-sm-10 offset-sm-2">
-          <button type="button"
-                  class="btn btn-outline-secondary mx-2"
-                  (click)="onCancel()">
-            Cancel
-          </button>
-          <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid || isButtonDisabled" (click)="addTemplate()">{{editMode?'Update':'Submit'}} </button>
-          <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="approve()">Approve</button>
-          <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="reinitiative()">Re-Initiative</button>
-          <button type="button" class="col-xs-1 mx-8 offset-sm-1 btn btn-danger" *ngIf="viewMode && templateForm.Status!='Approved'" (click)="reject()">Reject</button>
-        </div>
-      </div>
-      <!-- </form> -->
-
     </div>
+      
+    <div class="form-group row my-4">
+  <div class="col-sm-10 offset-sm-2">
+    <!-- Cancel Button -->
+    <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
+    
+    <!-- Update Button (visible only in editMode) -->
+    <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid || isButtonDisabled" (click)="addTemplate()">Submit</button>
+    <button type="submit" class="btn btn-primary" *ngIf="editMode" (click)="addTemplate()">Update</button>
+    
+    <!-- Individual Buttons for Approval Actions -->
+    <button type="button" class="col-xs-1 mx-2 btn btn-success" *ngIf="viewMode && templateForm.Status !== 'Approved'" (click)="approve()">Approve</button>
+    <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && templateForm.Status !== 'Approved'" (click)="reinitiative()">Re-Initiative</button>
+    <button type="button" class="col-xs-1 mx-8 offset-sm-1 btn btn-danger" *ngIf="viewMode && templateForm.Status !== 'Approved'" (click)="reject()">Reject</button>
   </div>
-  <script>
-    $.summernote.dom.walkPoint = (function (_super) {
-      debugger
-      return function () {
-        debugger
-        var startPoint = arguments[0]
-        var endPoint = arguments[1]
-        var handler = arguments[2]
-        var isSkipInnerOffset = arguments[3]
-        let point = startPoint;
+</div>
 
-        while (point) {
-          handler(point);
+    
+      <!-- </form> -->
+   
+  </div>
+</div>
+<script>
+  $.summernote.dom.walkPoint = (function (_super) {
+        return function () {
+            var startPoint = arguments[0]
+            var endPoint = arguments[1]
+            var handler = arguments[2]
+            var isSkipInnerOffset = arguments[3]
+            let point = startPoint;
 
-          if ($.summernote.dom.isSamePoint(point, endPoint)) {
-            break;
-          }
-          const isSkipOffset = isSkipInnerOffset &&
-            startPoint.node !== point.node &&
-            endPoint.node !== point.node;
-          point = $.summernote.dom.nextPoint(point, isSkipOffset);
-        }
-      };
+            while (point) {
+                handler(point);
+
+                if ($.summernote.dom.isSamePoint(point, endPoint)) {
+                    break;
+                }
+                const isSkipOffset = isSkipInnerOffset &&
+                    startPoint.node !== point.node &&
+                    endPoint.node !== point.node;
+                point = $.summernote.dom.nextPoint(point, isSkipOffset);
+            }
+        };
 
     })($.summernote.dom.walkPoint);
-  </script>
+</script>
 
 

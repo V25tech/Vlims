@@ -59,8 +59,8 @@ namespace PolicySummary.DMS.Services
                 String validationMessages = ExistingDocumentRequestValidator.IsValidExistingDocumentRequest(existingDocumentRequest);
                 if (validationMessages.Length <= 0)
                 {
-                    if (String.IsNullOrEmpty(existingDocumentRequest.reviewDate))
-                        existingDocumentRequest.reviewDate = "NA";
+                    //if (String.IsNullOrEmpty(existingDocumentRequest.reviewDate))
+                    //    existingDocumentRequest.reviewDate = "NA";
                     var result = ExistingDocumentRequestData.SaveExistingDocumentRequest(existingDocumentRequest);
                     return result;
                 }
@@ -137,10 +137,10 @@ namespace PolicySummary.DMS.Services
                         existingDocumentRequest.documenttitle = row["DocumentTitle"]?.ToString().Trim();
                         existingDocumentRequest.documentno = row["DocumentNo"]?.ToString().Trim();
                         existingDocumentRequest.effectiveDate = Convert.ToDateTime(row["EffectiveDate"]?.ToString().Trim());
-                        if (row["ReviewDate"] != null && row["ReviewDate"] != "")
-                            existingDocumentRequest.reviewDate = row["ReviewDate"]?.ToString();
-                        else
-                            existingDocumentRequest.reviewDate = "NA";
+                        //if (row["ReviewDate"] != null && row["ReviewDate"] != "")
+                        //    existingDocumentRequest.reviewDate = row["ReviewDate"]?.ToString();
+                        //else
+                        //    existingDocumentRequest.reviewDate = "NA";
                         existingDocumentRequest.sampletemplate = "Test";
                         existingDocumentRequest.CreatedBy = "ADMIN";
                         existingDocumentRequest.ModifiedBy = "ADMIN";

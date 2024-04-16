@@ -1,7 +1,8 @@
 import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
+import { DocPrep_LableMapping, DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
@@ -21,10 +22,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./review-prepation.component.scss']
 })
 export class ReviewPrepationComponent {
-  
+
   template=new DocumentTemplateConfiguration();
   isButtonDisabled = false;
   preparation: DocumentPreperationConfiguration = new DocumentPreperationConfiguration();
+  lstpreparations:DocumentPreperationConfiguration[]=[];
   selectedFile: any;
   isUploaded: boolean = false;
   departmentsSource = [];
@@ -54,12 +56,14 @@ export class ReviewPrepationComponent {
     { label: 'Stage 2', value: 'option3' },
   ];
 
-  templatesSource:Array<DocumentTemplateConfiguration> = [];
+  templatesSource: Array<DocumentTemplateConfiguration> = [];
+  lableMappings: DocPrep_LableMapping|undefined;
 
   constructor(private location: Location, private router: Router,
     private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
+    private http: HttpClient,
     private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
   ngOnInit() {
@@ -82,17 +86,30 @@ export class ReviewPrepationComponent {
     }
     else if (this.commonsvc.preperation.dpnid) {
       this.preparation = this.commonsvc.preperation;
+      this.preparation.status = 'In-Progress';
+      this.buildPrepdocument();
+      this.getLabelMappings();
     }
     else {
       this.location.back();
-    }
+    }    
     this.getdocttemplate();
     this.getworkflowinfo();
+    this.getpreparations();
+  }
+  getpreparations(){
+    this.spinner.show();
+    this.docPreperationService.getdocumentpreparations(this.commonsvc.req).subscribe((data:any)=>{
+      this.lstpreparations=data.response;
+      this.spinner.hide();
+    });
   }
   getbyId(arg0: number) {
     this.spinner.show();
     return this.docPreperationService.getbyId(arg0).subscribe((data: any) => {
-      this.preparation = data;
+      this.preparation = data;      
+      this.buildPrepdocument();
+      this.getLabelMappings();
       this.spinner.hide();
     });
   }
@@ -115,8 +132,12 @@ export class ReviewPrepationComponent {
       this.savePreparation();
     }
   }
-  reinitiative() {
+  return() {
     this.location.back();
+    this.preparation.ModifiedBy = this.commonsvc.getUsername();
+    this.preparation.status = 'Returned';
+    this.toastMsg = this.preparation.status;
+    this.savePreparation();
   }
   reject() {
     this.preparation.ModifiedBy = this.commonsvc.getUsername();
@@ -127,24 +148,36 @@ export class ReviewPrepationComponent {
   }
   savePreparation() {
     this.spinner.show();
-    if (this.viewMode && this.preparation.status != 'Rejected') {
+    if (this.editMode && (this.preparation.status == 'Rejected' || this.preparation.status == 'Returned')) {
+      this.preparation.status = 'In-Progress';
+    }
+    if (this.viewMode && this.preparation.status != 'Rejected' && this.preparation.status != 'Returned') {
       this.preparation.ModifiedBy = this.commonsvc.createdBy;
       this.preparation.status = this.finalStatus;
     }
+    if(this.lstpreparations!=undefined && this.lstpreparations.length>0){
+      const existingPreparation = this.lstpreparations.find(o => o.documentno.toLowerCase() === this.preparation.documentno.toLowerCase());
+      if (existingPreparation) {
+          this.toastr.error("Duplicate Document No.");
+          return;
+      }
+  }
+
+  
     this.toastMsg = this.toastMsg ?? 'Updated';
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
-    this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
-      this.commonsvc.preperation = new DocumentPreperationConfiguration();
-      this.toastr.success(`Document Preparation ${this.toastMsg}  successfully`);
-      this.spinner.hide();
-      this.location.back();
-      this.isButtonDisabled=false;
-    }, er => {
-      console.log(er);
-      this.spinner.hide();
-    });
-  }
+      this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
+        this.commonsvc.preperation = new DocumentPreperationConfiguration();
+        this.toastr.success(`Document Preparation ${this.toastMsg}  successfully`);
+        this.spinner.hide();
+        this.location.back();
+        this.isButtonDisabled=false;
+      }, er => {
+        console.log(er);
+        this.spinner.hide();
+      });
+    }
   }
 
   onCancel() {
@@ -195,11 +228,21 @@ export class ReviewPrepationComponent {
 
   openViewer(template: TemplateRef<any>): void {
 
-    if (this.pdfBytes) {
-      const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+    // if (this.pdfBytes) {
+    //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
+    //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+    //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    //   debugger
+
+    //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
+    // }
+    this.getUrl(template);
+  }
+  getUrl(template: TemplateRef<any>):void{
+    this.templateService.geturl().subscribe((data:any)=>{
+      this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    }
+    })
   }
 
   // Function to convert base64 to Blob
@@ -217,29 +260,39 @@ export class ReviewPrepationComponent {
     }
     return new Blob(byteArrays, { type: contentType });
   }
-  getTemplate(){
-    let id=0;
-    const obj= this.templatesSource.find(o=>o.Templatename===this.preparation.template);
-    if(obj!=null && obj!=undefined){
-      id=parseInt(obj.DTID);
+  getTemplate() {
+    let id = 0;
+    const obj = this.templatesSource.find(o => o.Templatename === this.preparation.template);
+    if (obj != null && obj != undefined) {
+      id = parseInt(obj.DTID);
     }
     this.templateService.getTemplate(this.preparation.template).subscribe((data: any) => {
-    //this.docPreperationService.getTemplate(this.preparation.template).subscribe((data: any) => {
-      
-      this.template=data;
+      //this.docPreperationService.getTemplate(this.preparation.template).subscribe((data: any) => {
+
+      this.template = data;
       //this.generatePDF(data);
     }, er => {
-      
+
     });
   }
+  checkduplicatetemplate(template: TemplateRef<any>) {
+    this.templateService.isduplicate(this.preparation.template).subscribe((data: any) => {
+      const isduplicate = Boolean(data);
+      if (isduplicate) {
+        this.toastr.error('Template used in multiple preparations unable to view document');
+      } else {
+        this.previewtemplate(template);
+      }
+    })
+  }
   previewtemplate(template: TemplateRef<any>) {
-    this.spinner.show(); let id=0;
-    const obj= this.templatesSource.find(o=>o.Templatename===this.preparation.template);
-    if(obj!=null && obj!=undefined){
-      id=parseInt(obj.DTID);
+    this.spinner.show(); let id = 0;
+    const obj = this.templatesSource.find(o => o.Templatename === this.preparation.template);
+    if (obj != null && obj != undefined) {
+      id = parseInt(obj.DTID);
     }
     this.templateService.getTemplate(this.preparation.template).subscribe((data: any) => {
-    // this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
+      // this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();
@@ -252,8 +305,14 @@ export class ReviewPrepationComponent {
   getdocttemplate() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.templateService.getdocttemplate(objrequest).subscribe((data: any) => {
+
       this.templatesSource = data.Response;
-      this.templatesSource=this.templatesSource.filter(o=>o.documenttype.toLocaleLowerCase()===this.preparation.documenttype.toLocaleLowerCase());
+      this.templatesSource = this.templatesSource.filter(o => o.documenttype.toLowerCase() === this.preparation.documenttype.toLowerCase());
+      if (this.preparation.template == null || this.preparation.template == undefined || this.preparation.template == '') {
+
+        const filter = this.templatesSource.find(o => !o.IsParent);
+        this.templatesSource = filter ? [filter] : [];
+      }
     });
   }
   getworkflowitems() {
@@ -281,7 +340,7 @@ export class ReviewPrepationComponent {
           const approvecountt = totalapprovecount - approvedcount;
           if (this.statuss === 'Review') {
             this.isreview = true;
-            if (countt === 1 || countt==0) {
+            if (countt === 1 || countt == 0) {
               this.finalStatus = 'Reviewed';
             } else if (countt > 1) {
               this.finalStatus = 'Pending Review';
@@ -289,7 +348,7 @@ export class ReviewPrepationComponent {
               this.finalStatus = 'Pending Review';
             }
           } else {
-            if (approvecountt === 1 || approvecountt==0) {
+            if (approvecountt === 1 || approvecountt == 0) {
               this.isapprove = true;
               this.finalStatus = 'Approved';
             } else if (countt > 1) {
@@ -303,10 +362,35 @@ export class ReviewPrepationComponent {
       this.spinner.hide();
     });
   }
-  edittemplate(template:string){
-   const obj= this.templatesSource.find(o=>o.Templatename===template);
-    if(obj!=null && obj!=undefined){
-      this.router.navigate(['/templates/body',obj.DTID]);
+  edittemplate(template: string) {
+    const obj = this.templatesSource.find(o => o.Templatename === template);
+    if (obj != null && obj != undefined) {
+      this.router.navigate(['/templates/body', obj.DTID]);
+    }
+  }
+
+  getLabelMappings() {
+    let mapping_configUrl = 'assets/doc-preparation-mappings.json';
+    console.log(this.preparation.documenttype)
+    return this.http.get(mapping_configUrl).subscribe((data: any) => {      
+      if (data) {
+        let exist= data.document_preparaion_mappings.find((p: any) => p.operatingProcedure.toLowerCase() == this.preparation.documenttype.toLowerCase() );
+        if(exist){
+          this.lableMappings = exist.lables;
+        }
+      }
+    });
+  }
+
+  buildPrepdocument(){
+    if(!this.preparation.prepdocument){        
+        this.preparation.prepdocument = {
+        labelClaim : '',
+        packingInformation : '',
+        revisionNo : '',
+        sampleQuantity : '',
+        supersedesNo :''
+      };
     }
   }
 }

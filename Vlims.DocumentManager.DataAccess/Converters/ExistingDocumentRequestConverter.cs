@@ -38,7 +38,7 @@ public static class ExistingDocumentRequestConverter
                     existingDocumentRequestData.ModifiedBy = Convert.ToString(row[ExistingDocumentRequestConstants.ModifiedBy.Trim('@')]);
                     existingDocumentRequestData.ModifiedDate = DatatypeConverter.SetDateTime(row[ExistingDocumentRequestConstants.ModifiedDate.Trim('@')]);
                     existingDocumentRequestData.effectiveDate = DatatypeConverter.SetDateTime(row[ExistingDocumentRequestConstants.EffectiveDate.Trim('@')]).Value;
-                    existingDocumentRequestData.reviewDate = Convert.ToString(row[ExistingDocumentRequestConstants.ReviewDate.Trim('@')]);
+                    existingDocumentRequestData.reviewDate = DatatypeConverter.SetDateTime(row[ExistingDocumentRequestConstants.ReviewDate.Trim('@')]);
                     result.Add(existingDocumentRequestData);
                 }
             }

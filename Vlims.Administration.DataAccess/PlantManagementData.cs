@@ -67,7 +67,7 @@ namespace PolicySummary.Sheet1.Data
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.CreatedBy, Value = plantManagement.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.ModifiedBy, Value = plantManagement.ModifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(PlantManagementConstants.USP_PlantManagement_PSY_INSERT, sqlparms, ExecutionType.Scalar);
-                return (Convert.ToInt64(result) > 0);
+                return (Convert.ToInt32(result) > 0);
             }
             catch (System.Exception ex)
             {

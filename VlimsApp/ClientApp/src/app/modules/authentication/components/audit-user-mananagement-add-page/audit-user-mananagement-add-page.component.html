@@ -1,0 +1,137 @@
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="page-title"><span class="bold-text">User Configuration</span><br><span class="bold-text">Audit Trails</span></h4>     
+          <div class="back-icon">
+            <a href="javascript:void(0);" onclick="history.back();">
+              <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <div class="p-4 bg-white shadow-dark rounded-2">
+          <div *ngFor="let auditConfig of types; let i = index">
+            <div class="card mb-3">
+              <div class="card-body">
+
+
+                <div class="row">
+                  <div class="col-sm-3">
+                      <strong>Version {{ i + 0 }}</strong>
+                  </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-3">
+                      <strong>FirstName:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.FirstName }}
+                    </div>                 
+                  </div>
+
+
+                <div class="row">
+                    <div class="col-sm-3">
+                      <strong>LastName:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.LastName }}
+                    </div>                 
+                  </div>
+
+                  
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>UserID:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.UserID }}
+                    </div>                 
+                  </div>
+
+                  
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Department:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.Department }}
+                    </div>
+                  </div>    
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Role:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.Role }}
+                    </div>
+                  </div>  
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Doj:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.Doj }}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Empid:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.Empid }}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>EmailId:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.EmailId }}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Initiated By:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.CreatedBy }}
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Initiated On:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.CreatedDate | date:'dd/MM/yyyy HH:mm' }}
+                    </div>
+                  </div>
+
+                  
+
+
+                  
+                   
+                <!-- Add more rows for other properties if needed -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

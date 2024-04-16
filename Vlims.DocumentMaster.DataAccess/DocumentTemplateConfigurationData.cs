@@ -53,6 +53,20 @@ namespace Vlims.DocumentMaster.DataAccess
             }
         }
 
+        public static bool IsTemplateDuplicate(string p_Template)
+        {
+            try
+            {
+                var obj= dataAccessHelper.ExecuteStoredProcedure("dbo.USP_CHECK_DUPLICATE_TEMPLATE", "@TEMPLATE", DbType.String, p_Template, ExecutionType.Scalar);
+                int num= Convert.ToInt32(obj);
+                return num.Equals(0) ? false : true;
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
+
         public static DataSet GetDocumentTemplateConfigurationByTemplate(string templateName) 
         {
             try

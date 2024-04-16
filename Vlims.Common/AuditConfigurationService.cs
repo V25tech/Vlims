@@ -23,6 +23,14 @@ namespace Vlims.Administration.Manager
             return AuditLog.GetAllAuditConfiguration(type);
         }
 
+        List<AuditLogEntity> IAuditConfigurationService.GetAllAuditConfigurationByEntityName(string type)
+        {
+            return AuditLog.GetAllAuditConfigurationByEntityName(type);
+        }
+
+
+       
+
 
         bool IAuditConfigurationService.SaveAuditConfiguration(AuditLogEntity auditLog)
         {

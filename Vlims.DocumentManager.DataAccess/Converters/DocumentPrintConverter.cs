@@ -47,7 +47,15 @@ public static class DocumentPrintConverter
                     documentPrintData.ModifiedBy = Convert.ToString(row[DocumentPrintConstants.ModifiedBy.Trim('@')]);
                     documentPrintData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPrintConstants.ModifiedDate.Trim('@')]);
                     documentPrintData.Status = Convert.ToString(row[DocumentPrintConstants.Status.Trim('@')]);
+
+                    documentPrintData.BatchNumber = Convert.ToString(row[DocumentPrintConstants.BatchNumber.Trim('@')]);
+                    documentPrintData.BatchSize = Convert.ToString(row[DocumentPrintConstants.BatchSize.Trim('@')]);
+
                     documentPrintData.Template = Convert.ToString(row[DocumentPrintConstants.Template.Trim('@')]);
+                    documentPrintData.PrintCopy = Convert.ToString(row["PrintCopy_PSY"]);
+                    documentPrintData.IsActive = row["IsActive_PSY"] != DBNull.Value ? Convert.ToBoolean(row["IsActive_PSY"]) : false;
+                    if (row["PrintCount_PSY"] != DBNull.Value)
+                        documentPrintData.printCount = Convert.ToInt16(row["PrintCount_PSY"]);
                     //documentPrintData. = Convert.ToString(row[DocumentPrintConstants.Template.Trim('@')]);
                     result.Add(documentPrintData);
                 }

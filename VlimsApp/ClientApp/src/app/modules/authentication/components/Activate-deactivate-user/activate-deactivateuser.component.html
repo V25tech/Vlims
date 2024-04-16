@@ -55,7 +55,7 @@
                   <td>{{doc?.UserID}}</td>
                   <td>{{doc?.Role}}</td>
                   <td>{{doc?.Department}}</td>
-                  <td>{{ doc?.Doj | date: 'dd/MM/yyyy' }}</td>
+                  <td>{{ doc?.Doj}}</td>
                   <td><span class="status">{{doc.Status}} </span></td>
                   <td class="text-center" *ngIf="username!=doc?.UserID && access">
                     <!-- <input class="form-check form-switch" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked="doc.Status=='Active'"> -->

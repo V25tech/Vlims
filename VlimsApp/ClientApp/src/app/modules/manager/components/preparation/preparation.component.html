@@ -28,7 +28,7 @@
           <div class="p-4 bg-white shadow-dark rounded-2">
             <p-table #templatesTable
             [value]="preparationsDatasource"
-            [globalFilterFields]="['documentno','documenttitle','documenttype','department','template','status']"
+            [globalFilterFields]="['documentno','documenttitle','documenttype','department','assignedtogroup','status']"
             tableStyleClass="table table-striped" [rows]="itemsPerPage"
               [paginator]="true" [totalRecords]="preparationsDatasource.length"
               [rowsPerPageOptions]="rowsPerPageOptions" 
@@ -46,22 +46,22 @@
                 <th pSortableColumn="documenttitle" style="width: 15%">
                   Document Name<p-sortIcon field="documenttitle"></p-sortIcon>
                 </th>
-                <th pSortableColumn="documentType" style="width: 15%">
-                  Document Type<p-sortIcon field="documentType"></p-sortIcon>
+                <th pSortableColumn="documenttype" style="width: 15%">
+                  Document Type<p-sortIcon field="documenttype"></p-sortIcon>
                 </th>
                 <th pSortableColumn="department" style="width: 15%">
                   Department<p-sortIcon field="department"></p-sortIcon>
                 </th>
   
-                <th pSortableColumn="template" style="width: 100px">
-                  Template<p-sortIcon
-                    field="template"
+                <!-- <th pSortableColumn="assignedToGroup" style="width: 100px">
+                  Assigned to group<p-sortIcon
+                    field="assignedToGroup"
                   ></p-sortIcon>
-                </th>
+                </th> -->
                 <th pSortableColumn="status" style="width: 100px">
                   Status <p-sortIcon field="status"></p-sortIcon>
                 </th>
-                <th class="text-center" style="width: 80px">Modify</th>
+                <th class="text-center" style="width: 80px">Action</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-docPreperation let-i="rowIndex">
@@ -73,7 +73,7 @@
                 <td>{{ docPreperation.documenttitle }}</td>
                 <td>{{ docPreperation.documenttype }}</td>
                 <td>{{ docPreperation.department }}</td>
-                <td>{{ docPreperation.template }}</td>
+                <!-- <td>{{ docPreperation.template }}</td> -->
                 <td>
                   <span
                     class="status"
@@ -81,7 +81,7 @@
                     >{{ docPreperation.status }}
                   </span>
                 </td>
-                <td class="text-center" *ngIf="access && docPreperation?.status=='IN-PROGRESS'"><a (click)="navigateToAddPreparation(docPreperation)"><i  class="bi bi-arrow-right"></i></a></td>
+                <td class="text-center" *ngIf="access && (docPreperation?.status === 'IN-PROGRESS' || docPreperation?.status === 'Rejected' || docPreperation?.status === 'Returned' || docPreperation?.status==='In-Progress')"><a (click)="navigateToAddPreparation(docPreperation)"><i  class="bi bi-arrow-right"></i></a></td>
                 <td class="text-center" *ngIf="!access">
                   <i class="bi bi-lock bi-lg" 
                   [ngClass]="{'text-primary':true}"

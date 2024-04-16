@@ -10,18 +10,15 @@
 namespace Vlims.DocumentManager.DataAccess
 {
     using System;
-    using System.Text;
     using System.IO;
     using System.Linq;
     using System.Data;
     using System.Collections.Generic;
-    using Newtonsoft.Json;
     using Vlims.DMS.Entities;
     using Vlims.Common;
+    using System.Xml.Serialization;
 
-    //using PolicySummary.Sheet1.Entities;
-    //using VAMLIbrary.Core.Extentions;
-    //using PolicySummary.Common.Entities;
+    
 
 
     // Comment
@@ -46,7 +43,18 @@ namespace Vlims.DocumentManager.DataAccess
                         documentPreparationData.documentno = Convert.ToString(row[DocumentPreparationConstants.documentno.Trim('@')]);
                         documentPreparationData.documenttype = Convert.ToString(row[DocumentPreparationConstants.documenttype.Trim('@')]);
                         documentPreparationData.department = Convert.ToString(row[DocumentPreparationConstants.department.Trim('@')]);
-                        documentPreparationData.document = Convert.ToString(row[DocumentPreparationConstants.document.Trim('@')]);
+                        //documentPreparationData.document = Convert.ToString(row[DocumentPreparationConstants.document.Trim('@')]);
+
+                        var docvalue = Convert.ToString(row[DocumentPreparationConstants.document.Trim('@')]);
+                        if (!string.IsNullOrEmpty(docvalue))
+                        {
+                            var serializer1 = new XmlSerializer(typeof(PreperationDocument));
+                            // Create a StringReader to read the XML data
+                            var reader = new StringReader(Convert.ToString(row[DocumentPreparationConstants.document.Trim('@')]));
+                            // Deserialize the XML data back to a Person object
+                            var prepData = (PreperationDocument)serializer1.Deserialize(reader);
+                            documentPreparationData.Prepdocument = prepData;
+                        }
                         documentPreparationData.template = Convert.ToString(row[DocumentPreparationConstants.template.Trim('@')]);
                         documentPreparationData.wokflow = Convert.ToString(row[DocumentPreparationConstants.wokflow.Trim('@')]);
                         documentPreparationData.details = Convert.ToString(row[DocumentPreparationConstants.details.Trim('@')]);
@@ -55,6 +63,7 @@ namespace Vlims.DocumentManager.DataAccess
                         documentPreparationData.ModifiedBy = Convert.ToString(row[DocumentPreparationConstants.ModifiedBy.Trim('@')]);
                         documentPreparationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPreparationConstants.ModifiedDate.Trim('@')]);
                         documentPreparationData.Status = Convert.ToString(row[DocumentPreparationConstants.Status.Trim('@')]);
+                        documentPreparationData.IsEffectiveApproved = Convert.ToBoolean(row["IsEffApprvd"]);
                         documentPreparationData.path = documentPreparationData.document;
                         object value = row["Refrence_PSY"];
                         if (value != DBNull.Value)

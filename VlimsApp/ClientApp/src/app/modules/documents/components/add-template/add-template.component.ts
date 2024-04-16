@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as Editor from 'ckeditor5-custom-build/build/ckeditor';
 //import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService, QuickToolbarSettingsModel, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 
@@ -46,8 +47,53 @@ interface BodyDataElement {
   selector: 'app-add-template',
   templateUrl: './add-template.component.html',
   styleUrls: ['./add-template.component.scss'],
+  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService, QuickToolbarService],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class AddTemplateComponent implements OnInit {
+
+  public tools: object = {
+    items: ['Undo', 'Redo', '|',
+      'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
+      'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
+      'SubScript', 'SuperScript', '|',
+      'LowerCase', 'UpperCase', '|',
+      'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
+      'Indent', 'Outdent', '|',
+      'CreateTable','|',
+      'Image', '|', 'FullScreen']
+  };
+  public fontFamily = {
+    default: 'Times New Roman',
+    width: '60px',
+  };
+
+  public pasteCleanupSettings: object = {
+    prompt: true,
+    plainText: false,
+    keepFormat: false,
+    deniedTags: ['a'],
+    deniedAttrs: ['class', 'title', 'id'],
+    //allowedStyleProps: ['color', 'margin', 'font-size']
+  };
+  public size = {
+    default: '12pt',
+    items: [
+      { text: '10', value: '10pt' },
+      { text: '12', value: '12pt' },
+      { text: '14', value: '14pt' },
+      { text: '16', value: '16pt' },
+      { text: '18', value: '18pt' },
+      { text: '24', value: '24pt' },
+      { text: '36', value: '36pt' },
+      { text: '42', value: '42pt' }]
+  };
+
+  public quickToolbarSettings: QuickToolbarSettingsModel = {
+    table: ['TableHeader', 'TableRows', 'TableColumns', 'TableCell', '-', 'BackgroundColor', 'TableRemove', 'TableCellVerticalAlign', 'Styles']
+  };
+
   stageSource:stage[] = [
     { label: 'Title', value: 'Title' },
     { label: 'SOP No.', value: 'Preparation' },
@@ -122,7 +168,7 @@ export class AddTemplateComponent implements OnInit {
   public Editor: any = Editor;
   config = {
     fontSize: {
-      options: [9, 11, 13, 14, 15, 16, 17, 19, 21],
+      options: [8,9,10,11,12,13,14,15,16,17,18,19,20],
     },
     toolbar: ['undo',
       'redo',
@@ -210,7 +256,6 @@ export class AddTemplateComponent implements OnInit {
     }
     else if(lastSegment=="edit")
     {
-      ;
       this.title='Edit Document Template';
       this.editMode=true;
         let id=parseInt(segments[segments.length-1],10);
@@ -397,7 +442,7 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   addTemplate() {
-    debugger
+    
     this.loader.show();
     console.log(this.headerData);
     // this.templateForm.header=this.html1;
@@ -412,13 +457,15 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
     this.templateForm.Page=this.pages;
     console.log(this.templateForm);
+    
     if(this.editMode)
     {
+      
       this.templateForm.ModifiedBy=this.commonsvc.getUsername();
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
       this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
-        this.toastr.success('Document Template Updated Succesfull!', 'Updated.!');
+        this.toastr.success('Document Template Updated Successfully!', 'Updated.!');
       this.loader.hide();
       this.location.back();
       this.isButtonDisabled = false;
@@ -436,7 +483,7 @@ export class AddTemplateComponent implements OnInit {
         if (!this.isButtonDisabled) {
           this.isButtonDisabled = true;
       this.templatesvc.adddoctemplate(this.templateForm).subscribe((data:any)=>{ 
-        this.toastr.success('Document Template Saved Succesfull!', 'Saved.!');
+        this.toastr.success('Document Template Registered Successfully!', 'Saved.!');
         this.loader.hide();
         this.location.back();
         this.isButtonDisabled = false;
@@ -704,7 +751,6 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     }
   }
   addbodyNewText() {
-    debugger
 
     if (this.pages[this.currentPage].bodyData.length > 0) {
       const lastRow = this.pages[this.currentPage].bodyData[this.pages[this.currentPage].bodyData.length - 1];
@@ -755,13 +801,11 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
   }
   }
   enableheader(){
-    debugger
     this.pages[this.currentPage].isheader = !this.pages[this.currentPage].isheader;
     console.log('header',this.pages[this.currentPage].isheader);
     //this.pages[this.currentPage].isheader=true;
   }
   enablefooter(){
-    debugger
     this.pages[this.currentPage].isfooter = !this.pages[this.currentPage].isfooter;
     console.log('footer',this.pages[this.currentPage].isfooter)
     //this.pages[this.currentPage].isfooter=true;
@@ -788,7 +832,6 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     if (file) {
       this.loader.show();
       this.templatesvc.uploadImage(file).subscribe((data:any)=> {
-          debugger
           console.log('image',data.Message);
           this.templateForm.header=data.Message;
           this.loader.hide();
@@ -803,6 +846,28 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
   onDeleteFile(): void {
    
     this.templateForm.header = '';
+    
+  }
+  onLogoUpload1(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.loader.show();
+      this.templatesvc.uploadImage(file).subscribe((data:any)=> {
+          
+          console.log('image',data.Message);
+          this.templateForm.footer=data.Message;
+          this.loader.hide();
+          //console.log('Image uploaded successfully:', response);
+        },
+        error => {
+          console.error('Error uploading image:', error);
+        }
+      );
+    }
+  }
+  onDeleteFile1(): void {
+   
+    this.templateForm.footer = '';
     
   }
 }

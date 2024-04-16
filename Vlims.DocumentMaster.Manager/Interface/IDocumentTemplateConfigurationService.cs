@@ -30,5 +30,6 @@ namespace Vlims.DocumentMaster.Manager
         bool DeleteDocumentTemplateConfigurationByDTID(int dTID);
         
         bool DeleteAllDocumentTemplateConfiguration(List<int> dTIDs);
+        bool IsTemplateDuplicate(string p_Template);
     }
 }

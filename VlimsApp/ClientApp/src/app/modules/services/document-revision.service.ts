@@ -22,4 +22,7 @@ export class DocumentRevisionService {
   getbyId(id: number) {        
     return this.http.getwithheader("api/additionaltask/getbyId" + "?aTID=" + id, this.type);
   }
+  getTrackSearchInfo(searchTerm: string, userName: string) {
+    return this.http.getJson('api/documents?userName=' + userName + '&searchTerm=' + searchTerm, this.type);
+  }
 }

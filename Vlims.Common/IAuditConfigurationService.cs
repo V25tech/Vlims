@@ -16,8 +16,13 @@ namespace Vlims.Administration.Manager
 
     // Comment
     public interface IAuditConfigurationService
-    {        
-        List<AuditLogEntity> GetAllAuditConfiguration(string type);        
+    {
+        
+        List<AuditLogEntity> GetAllAuditConfiguration(string type);
+        List<AuditLogEntity> GetAllAuditConfigurationByEntityName(string type);
+
+
+        
         bool SaveAuditConfiguration(AuditLogEntity roleConfiguration);
     }
 }
