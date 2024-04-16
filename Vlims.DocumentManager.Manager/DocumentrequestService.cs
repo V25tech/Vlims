@@ -78,6 +78,7 @@ namespace Vlims.DocumentManager.Manager
                 documentrequest.ApprovalsCount = 9;
                 documentrequest.documentmanagerid = "1";
                 //documentrequest.Status = "In-Progress";
+                documentrequest.Reason = string.Empty;
                 var result = DocumentrequestData.SaveDocumentrequest(documentrequest);
                 
                 AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentrequest.CreatedBy, EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.RequestType, state = DefinitionStatus.New, EntityInfo = documentrequest, Unique = documentrequest.documenttype });
@@ -96,6 +97,7 @@ namespace Vlims.DocumentManager.Manager
                 String validationMessages = DocumentrequestValidator.IsValidDocumentrequest(documentrequest);
                 if (validationMessages.Length <= 0)
                 {
+                    documentrequest.Reason = string.Empty;
                     bool result = DocumentrequestData.UpdateDocumentrequest(documentrequest);
 
                     documentrequest.CreatedDate= DateTime.Now;
