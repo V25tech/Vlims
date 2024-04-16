@@ -7,30 +7,30 @@
 
 /* Custom CSS to adjust modal size */
 .custom-modal {
-max-width: 80%; /* Set maximum width of the modal */
-margin: 1.75rem auto; /* Center the modal horizontally */
+  max-width: 80%; /* Set maximum width of the modal */
+  margin: 1.75rem auto; /* Center the modal horizontally */
 }
 
 @media (min-width: 576px) {
-.custom-modal {
-  max-width: 600px; /* Set maximum width of the modal for medium screens */
-}
+  .custom-modal {
+    max-width: 600px; /* Set maximum width of the modal for medium screens */
+  }
 }
 
 @media (min-width: 768px) {
-.custom-modal {
-  max-width: 700px; /* Set maximum width of the modal for large screens */
-}
+  .custom-modal {
+    max-width: 700px; /* Set maximum width of the modal for large screens */
+  }
 }
 
 @media (min-width: 992px) {
-.custom-modal {
-  max-width: 800px; /* Set maximum width of the modal for extra-large screens */
-}
+  .custom-modal {
+    max-width: 800px; /* Set maximum width of the modal for extra-large screens */
+  }
 }
 
 @media (min-width: 1200px) {
-.custom-modal {
-  max-width: 900px; /* Set maximum width of the modal for larger screens */
-}
+  .custom-modal {
+    max-width: 900px; /* Set maximum width of the modal for larger screens */
+  }
 }

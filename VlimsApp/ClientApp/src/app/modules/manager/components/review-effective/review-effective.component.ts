@@ -26,10 +26,10 @@ import { UsersconfigurationService } from 'src/app/modules/services/usersconfigu
 export class ReviewEffectiveComponent {
   isButtonDisabled = false;
   effective = new DocumentEffectiveConfiguration();
-  workflowsourcedata:workflowconiguration[]=[];
+  workflowsourcedata: workflowconiguration[] = [];
   typeSource = [];
   workflowsSource = [];
-  templatesSource:Array<DocumentTemplateConfiguration> = [];
+  templatesSource: Array<DocumentTemplateConfiguration> = [];
   departmentsSource = [];
   fileBytes: Uint8Array = new Uint8Array();
   modalRef: BsModalRef | undefined;
@@ -46,8 +46,8 @@ export class ReviewEffectiveComponent {
   finalStatus: string = ''
   toastMsg: string | null = null;
 
-  lstusers:UserConfiguration[]=[];
-  user:UserConfiguration=new UserConfiguration();
+  lstusers: UserConfiguration[] = [];
+  user: UserConfiguration = new UserConfiguration();
   password: string = '';
   stageSource = [
     { label: 'Select Stage', value: '' },
@@ -61,8 +61,8 @@ export class ReviewEffectiveComponent {
     private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private userssvc:UsersconfigurationService,
-    private templateService:DocumentTemplateServiceService,
+    private userssvc: UsersconfigurationService,
+    private templateService: DocumentTemplateServiceService,
     private modalService: BsModalService, private documentEffectiveService: DocumentEffectiveService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private docPreperationService: DocumentPreperationService,) { }
 
   ngOnInit() {
@@ -105,127 +105,125 @@ export class ReviewEffectiveComponent {
       this.templatesSource = data.Response;
     });
   }
-  
-
- Proceed(template: TemplateRef<any>) {
-  debugger
-// Open the modal
-this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-}
 
 
+  Proceed(template: TemplateRef<any>) {
+    debugger
+    // Open the modal
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+  }
 
 
 
-getusers(){
-  debugger
- 
-  let objrequest=new RequestContext();
-  objrequest.PageNumber=1;objrequest.PageSize=50;
-    return this.userssvc.getusers(objrequest).subscribe((data:any)=>{
-      this.lstusers=data.Response;
+
+
+  getusers() {
+    debugger
+
+    let objrequest = new RequestContext();
+    objrequest.PageNumber = 1; objrequest.PageSize = 50;
+    return this.userssvc.getusers(objrequest).subscribe((data: any) => {
+      this.lstusers = data.Response;
       //localStorage.setItem("lstusers", this.lstusers.);
-     
-      
+
+
     });
-}
-
-
-
-
-
-
-
-
-
-
-
-
-confirmApproval() {
-  debugger
-const username = localStorage.getItem('username') || '';
-const password = (document.getElementById('password') as HTMLInputElement).value;
-const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
-if (userExists) {
-
-  
-  this.effective.ModifiedBy = this.username;
-  this.effective.Status = this.finalStatus;
-  if (this.isapprove && this.reviewpendingcount > 0) {
-    this.toastr.error('Reviews Pending');
   }
-  else {
-    this.toastMsg = this.effective.Status;
-    this.saveEffective();
+
+
+
+
+
+
+
+
+
+
+
+
+  confirmApproval() {
+    debugger
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
+
+
+      this.effective.ModifiedBy = this.username;
+      this.effective.Status = this.finalStatus;
+      if (this.isapprove && this.reviewpendingcount > 0) {
+        this.toastr.error('Reviews Pending');
+      }
+      else {
+        this.toastMsg = this.effective.Status;
+        this.saveEffective();
+      }
+
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
+    }
+
+
+
   }
- 
-} else {// Username or password is invalid, display error message
-  this.toastr.error('Invalid Username or Password');
-}
+
+  confirmReturn() {
 
 
- 
-}
+    debugger
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
 
-confirmReturn() {
-
-
-debugger
-const username = localStorage.getItem('username') || '';
-const password = (document.getElementById('password') as HTMLInputElement).value;
-const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
- if (userExists) {
-
-  debugger
-this.effective.Status = 'Returned'
-  this.toastMsg = this.effective.Status;
-  this.effective.ModifiedBy = this.commonsvc.getUsername();
-  this.saveEffective();
- } else {// Username or password is invalid, display error message
-   this.toastr.error('Invalid Username or Password');
- }
+      debugger
+      this.effective.Status = 'Returned'
+      this.toastMsg = this.effective.Status;
+      this.effective.ModifiedBy = this.commonsvc.getUsername();
+      this.saveEffective();
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
+    }
 
 
 
 
-}
+  }
 
-confirmReject() {
-
-
-
-  debugger
-const username = localStorage.getItem('username') || '';
-const password = (document.getElementById('password') as HTMLInputElement).value;
-const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
-if (userExists) {
-  
-  debugger
-  this.effective.Status = 'Rejected'
-    this.toastMsg = this.effective.Status;
-    this.effective.ModifiedBy = this.commonsvc.getUsername();
-    this.saveEffective();
+  confirmReject() {
 
 
-} else {// Username or password is invalid, display error message
-  this.toastr.error('Invalid Username or Password');
-}
 
-}
+    debugger
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
+
+      debugger
+      this.effective.Status = 'Rejected'
+      this.toastMsg = this.effective.Status;
+      this.effective.ModifiedBy = this.commonsvc.getUsername();
+      this.saveEffective();
+
+
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
+    }
+
+  }
 
   saveEffective() {
-    this.effectivedate= new Date(this.effective.effectiveDate);
+    this.effectivedate = new Date(this.effective.effectiveDate);
     this.reviewdate = new Date(this.effective.reviewDate);
 
-      if (!this.effectivedate || !this.reviewdate) 
-      {
-         null;
-      }
-      if (this.effectivedate >= this.reviewdate)
-       {
-          this.toastr.error('Review Date should be greater than effective Date'); 
-          return;
-       }    
+    if (!this.effectivedate || !this.reviewdate) {
+      null;
+    }
+    if (this.effectivedate >= this.reviewdate) {
+      this.toastr.error('Review Date should be greater than effective Date');
+      return;
+    }
     this.spinner.show();
     if (this.viewMode && this.effective.Status != 'Rejected' && this.effective.Status != 'Returned') {
       this.effective.ModifiedBy = this.commonsvc.createdBy;
@@ -237,16 +235,16 @@ if (userExists) {
     this.toastMsg = this.toastMsg ?? 'Updated'
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
-    this.documentEffectiveService.ManageDocumentEffective(this.effective).subscribe(res => {
-      this.toastr.success(`Document Effective ${this.toastMsg} Successfully!`);
-      this.spinner.hide();
-      this.location.back();
-      this.isButtonDisabled = false;
-    }, er => {
-      console.log(er);
-      this.spinner.hide();
-    });
-  }
+      this.documentEffectiveService.ManageDocumentEffective(this.effective).subscribe(res => {
+        this.toastr.success(`Document Effective ${this.toastMsg} Successfully!`);
+        this.spinner.hide();
+        this.location.back();
+        this.isButtonDisabled = false;
+      }, er => {
+        console.log(er);
+        this.spinner.hide();
+      });
+    }
   }
 
   onCancel() {
@@ -261,21 +259,21 @@ if (userExists) {
   }
 
   openViewer(template: TemplateRef<any>): void {
-    
+
     // if (this.pdfBytes) {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
     //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
     //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     //   debugger
-      
+
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }
     this.getUrl(template);
   }
-  getUrl(template: TemplateRef<any>):void{
-    this.templateService.geturl().subscribe((data:any)=>{
+  getUrl(template: TemplateRef<any>): void {
+    this.templateService.geturl().subscribe((data: any) => {
       debugger
-      this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(data + '#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })
   }
@@ -295,24 +293,24 @@ if (userExists) {
     }
     return new Blob(byteArrays, { type: contentType });
   }
-  checkduplicatetemplate(template: TemplateRef<any>){
-    this.templateService.isduplicate(this.effective.template).subscribe((data:any)=>{
-      const isduplicate=Boolean(data);
-      if(isduplicate){
+  checkduplicatetemplate(template: TemplateRef<any>) {
+    this.templateService.isduplicate(this.effective.template).subscribe((data: any) => {
+      const isduplicate = Boolean(data);
+      if (isduplicate) {
         this.toastr.error('Template used in multiple preparations unable to view document');
-      }else{
+      } else {
         this.previewtemplate(template);
       }
     })
   }
-  previewtemplate(template: TemplateRef<any>) {  
-    let id=0;
-    const obj= this.templatesSource.find(o=>o.Templatename===this.effective.template);
-    if(obj!=null && obj!=undefined){
-      id=parseInt(obj.DTID);
-    }  
+  previewtemplate(template: TemplateRef<any>) {
+    let id = 0;
+    const obj = this.templatesSource.find(o => o.Templatename === this.effective.template);
+    if (obj != null && obj != undefined) {
+      id = parseInt(obj.DTID);
+    }
     this.templateService.getTemplate(this.effective.template).subscribe((data: any) => {
-    //this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
+      //this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();
@@ -325,8 +323,8 @@ if (userExists) {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 100, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsourcedata = data.Response;
-      this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documentstage?.includes("Effective"));
-      this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documenttype?.toLocaleLowerCase()===this.effective.documenttype.toLocaleLowerCase());
+      this.workflowsourcedata = this.workflowsourcedata.filter(o => o.documentstage?.includes("Effective"));
+      this.workflowsourcedata = this.workflowsourcedata.filter(o => o.documenttype?.toLocaleLowerCase() === this.effective.documenttype.toLocaleLowerCase());
       debugger
     });
   }

@@ -24,16 +24,16 @@ import { UsersconfigurationService } from 'src/app/modules/services/usersconfigu
 })
 export class ReviewPrepationComponent {
 
-  template=new DocumentTemplateConfiguration();
+  template = new DocumentTemplateConfiguration();
   isButtonDisabled = false;
   preparation: DocumentPreperationConfiguration = new DocumentPreperationConfiguration();
-  lstpreparations:DocumentPreperationConfiguration[]=[];
+  lstpreparations: DocumentPreperationConfiguration[] = [];
   selectedFile: any;
   isUploaded: boolean = false;
   departmentsSource = [];
   typeSource = [];
   workflowsSource = [];
-  workflowsourcedata:workflowconiguration[]=[];
+  workflowsourcedata: workflowconiguration[] = [];
   docNoType = 'User Defined';
   @ViewChild("fileInput", { static: false })
   InputVar: ElementRef | undefined;
@@ -51,10 +51,10 @@ export class ReviewPrepationComponent {
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus: string = ''
   toastMsg: string | null = null;
-  lstusers:UserConfiguration[]=[];
-  user:UserConfiguration=new UserConfiguration();
+  lstusers: UserConfiguration[] = [];
+  user: UserConfiguration = new UserConfiguration();
   password: string = '';
-  
+
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -62,13 +62,13 @@ export class ReviewPrepationComponent {
   ];
 
   templatesSource: Array<DocumentTemplateConfiguration> = [];
-  lableMappings: DocPrep_LableMapping|undefined;
+  lableMappings: DocPrep_LableMapping | undefined;
 
   constructor(private location: Location, private router: Router,
     private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private userssvc:UsersconfigurationService,
+    private userssvc: UsersconfigurationService,
     private http: HttpClient,
     private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
@@ -100,22 +100,22 @@ export class ReviewPrepationComponent {
     }
     else {
       this.location.back();
-    }    
+    }
     this.getdocttemplate();
     this.getworkflowinfo();
     this.getpreparations();
   }
-  getpreparations(){
+  getpreparations() {
     this.spinner.show();
-    this.docPreperationService.getdocumentpreparations(this.commonsvc.req).subscribe((data:any)=>{
-      this.lstpreparations=data.response;
+    this.docPreperationService.getdocumentpreparations(this.commonsvc.req).subscribe((data: any) => {
+      this.lstpreparations = data.response;
       this.spinner.hide();
     });
   }
   getbyId(arg0: number) {
     this.spinner.show();
     return this.docPreperationService.getbyId(arg0).subscribe((data: any) => {
-      this.preparation = data;      
+      this.preparation = data;
       this.buildPrepdocument();
       this.getLabelMappings();
       this.spinner.hide();
@@ -125,34 +125,34 @@ export class ReviewPrepationComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 100, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsourcedata = data.Response;
-      this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documentstage?.includes("Preparation"));
-      this.workflowsourcedata=this.workflowsourcedata.filter(o=>o.documenttype?.toLocaleLowerCase()===this.preparation.documenttype.toLocaleLowerCase());
+      this.workflowsourcedata = this.workflowsourcedata.filter(o => o.documentstage?.includes("Preparation"));
+      this.workflowsourcedata = this.workflowsourcedata.filter(o => o.documenttype?.toLocaleLowerCase() === this.preparation.documenttype.toLocaleLowerCase());
     });
   }
-  
+
 
 
   proceed(esign: TemplateRef<any>) {
     debugger
-  // Open the modal
-  this.modalRef = this.modalService.show(esign, { class: 'modal-lg' });
+    // Open the modal
+    this.modalRef = this.modalService.show(esign, { class: 'modal-lg' });
   }
 
 
 
 
 
-  getusers(){
+  getusers() {
     debugger
-    
-    let objrequest=new RequestContext();
-    objrequest.PageNumber=1;objrequest.PageSize=50;
-      return this.userssvc.getusers(objrequest).subscribe((data:any)=>{
-        this.lstusers=data.Response;
-        //localStorage.setItem("lstusers", this.lstusers.);
-       
-        
-      });
+
+    let objrequest = new RequestContext();
+    objrequest.PageNumber = 1; objrequest.PageSize = 50;
+    return this.userssvc.getusers(objrequest).subscribe((data: any) => {
+      this.lstusers = data.Response;
+      //localStorage.setItem("lstusers", this.lstusers.);
+
+
+    });
   }
 
 
@@ -168,98 +168,98 @@ export class ReviewPrepationComponent {
 
 
 
-confirmApproval() {
-  debugger
- const username = localStorage.getItem('username') || '';
- const password = (document.getElementById('password') as HTMLInputElement).value;
- const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
-  if (userExists) {
+  confirmApproval() {
+    debugger
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
 
-    this.preparation.ModifiedBy = this.username;
-    this.preparation.status = this.finalStatus;
-    if (this.isapprove && this.reviewpendingcount > 0) {
-      this.toastr.error('Reviews Pending');
+      this.preparation.ModifiedBy = this.username;
+      this.preparation.status = this.finalStatus;
+      if (this.isapprove && this.reviewpendingcount > 0) {
+        this.toastr.error('Reviews Pending');
+      }
+      else {
+        this.toastMsg = this.preparation.status;
+        this.savePreparation();
+      }
+
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
     }
-    else {
+  }
+
+
+
+
+
+  confirmReturn() {
+
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
+
+
+      this.location.back();
+      this.preparation.ModifiedBy = this.commonsvc.getUsername();
+      this.preparation.status = 'Returned';
       this.toastMsg = this.preparation.status;
       this.savePreparation();
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
     }
-  
-  } else {// Username or password is invalid, display error message
-    this.toastr.error('Invalid Username or Password');
   }
-}
 
 
 
 
 
-confirmReturn() {
-  
- const username = localStorage.getItem('username') || '';
- const password = (document.getElementById('password') as HTMLInputElement).value;
- const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
-  if (userExists) {
-
-    
-  this.location.back();
-  this.preparation.ModifiedBy = this.commonsvc.getUsername();
-  this.preparation.status = 'Returned';
-  this.toastMsg = this.preparation.status;
-  this.savePreparation();
-  } else {// Username or password is invalid, display error message
-    this.toastr.error('Invalid Username or Password');
-  }
-}
-
-
-
-
-
-confirmReject() {
-  debugger
- const username = localStorage.getItem('username') || '';
- const password = (document.getElementById('password') as HTMLInputElement).value;
- const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
-  if (userExists) {
-    
+  confirmReject() {
     debugger
-    this.preparation.ModifiedBy = this.commonsvc.getUsername();
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
+
+      debugger
+      this.preparation.ModifiedBy = this.commonsvc.getUsername();
       this.preparation.status = 'Rejected';
       this.toastMsg = this.preparation.status;
       this.savePreparation();
       //this.location.back();
-  
-  } else {// Username or password is invalid, display error message
-    this.toastr.error('Invalid Username or Password');
-  }
-}
 
-savePreparation() {
-  this.spinner.show();
-  if (this.editMode && (this.preparation.status == 'Rejected' || this.preparation.status == 'Returned')) {
-    this.preparation.status = 'In-Progress';
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
+    }
   }
-  if (this.viewMode && this.preparation.status != 'Rejected' && this.preparation.status != 'Returned') {
-    this.preparation.ModifiedBy = this.commonsvc.createdBy;
-    this.preparation.status = this.finalStatus;
+
+  savePreparation() {
+    this.spinner.show();
+    if (this.editMode && (this.preparation.status == 'Rejected' || this.preparation.status == 'Returned')) {
+      this.preparation.status = 'In-Progress';
+    }
+    if (this.viewMode && this.preparation.status != 'Rejected' && this.preparation.status != 'Returned') {
+      this.preparation.ModifiedBy = this.commonsvc.createdBy;
+      this.preparation.status = this.finalStatus;
+    }
+
+    this.toastMsg = this.toastMsg ?? 'Updated';
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
+      this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
+        this.commonsvc.preperation = new DocumentPreperationConfiguration();
+        this.toastr.success(`Document Preparation ${this.toastMsg} successfully`);
+        this.spinner.hide();
+        this.location.back();
+        this.isButtonDisabled = false;
+      }, er => {
+        console.log(er);
+        this.spinner.hide();
+      });
+    }
   }
-  
-  this.toastMsg = this.toastMsg ?? 'Updated';
-  if (!this.isButtonDisabled) {
-    this.isButtonDisabled = true;
-    this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
-      this.commonsvc.preperation = new DocumentPreperationConfiguration();
-      this.toastr.success(`Document Preparation ${this.toastMsg} successfully`);
-      this.spinner.hide();
-      this.location.back();
-      this.isButtonDisabled = false;
-    }, er => {
-      console.log(er);
-      this.spinner.hide();
-    });
-  }
-}
 
 
   onCancel() {
@@ -320,9 +320,9 @@ savePreparation() {
     // }
     this.getUrl(template);
   }
-  getUrl(template: TemplateRef<any>):void{
-    this.templateService.geturl().subscribe((data:any)=>{
-      this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
+  getUrl(template: TemplateRef<any>): void {
+    this.templateService.geturl().subscribe((data: any) => {
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(data + '#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })
   }
@@ -454,24 +454,24 @@ savePreparation() {
   getLabelMappings() {
     let mapping_configUrl = 'assets/doc-preparation-mappings.json';
     console.log(this.preparation.documenttype)
-    return this.http.get(mapping_configUrl).subscribe((data: any) => {      
+    return this.http.get(mapping_configUrl).subscribe((data: any) => {
       if (data) {
-        let exist= data.document_preparaion_mappings.find((p: any) => p.operatingProcedure.toLowerCase() == this.preparation.documenttype.toLowerCase() );
-        if(exist){
+        let exist = data.document_preparaion_mappings.find((p: any) => p.operatingProcedure.toLowerCase() == this.preparation.documenttype.toLowerCase());
+        if (exist) {
           this.lableMappings = exist.lables;
         }
       }
     });
   }
 
-  buildPrepdocument(){
-    if(!this.preparation.prepdocument){        
-        this.preparation.prepdocument = {
-        labelClaim : '',
-        packingInformation : '',
-        revisionNo : '',
-        sampleQuantity : '',
-        supersedesNo :''
+  buildPrepdocument() {
+    if (!this.preparation.prepdocument) {
+      this.preparation.prepdocument = {
+        labelClaim: '',
+        packingInformation: '',
+        revisionNo: '',
+        sampleQuantity: '',
+        supersedesNo: ''
       };
     }
   }

@@ -14,22 +14,22 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-setfunctionalprofile',
   templateUrl: './setfunctionalprofile.component.html'
-  
+
 })
 export class SetfunctionalprofileComponent implements OnInit {
   isButtonDisabled = false;
-  types: functionalprofile[]=[];
+  types: functionalprofile[] = [];
   roleTypes: RoleConfiguration[] = [];
-  selectedRoles=new  RoleConfiguration();
-  profile=new functionalprofile()
-  editMode:boolean=false;
-  viewMode:boolean=false;
-  access:boolean=false;
-  constructor(private commonsvc: CommonService, private doctypeservice: RolesconfigurationService ,
-    private setprofileservice: setfunctionalprofileconfigurationservice  ,
-    private toaster:ToastrService,
+  selectedRoles = new RoleConfiguration();
+  profile = new functionalprofile()
+  editMode: boolean = false;
+  viewMode: boolean = false;
+  access: boolean = false;
+  constructor(private commonsvc: CommonService, private doctypeservice: RolesconfigurationService,
+    private setprofileservice: setfunctionalprofileconfigurationservice,
+    private toaster: ToastrService,
     private location: Location,
-    private loader:NgxSpinnerService,
+    private loader: NgxSpinnerService,
     private router: Router) { }
 
   ngOnInit() {
@@ -39,70 +39,67 @@ export class SetfunctionalprofileComponent implements OnInit {
     this.getsetfunctionalprofile();
     this.getroles();
   }
-getsetfunctionalprofile() {
- this.loader.show();
-      return this.setprofileservice.getsetfunctionalprofileconfiguration(this.commonsvc.req).subscribe((data: any) => {
-        this.types = data.Response;
-        this.loader.hide();
-        console.log(this.types);
-      }, er => {
-     
-      });
+  getsetfunctionalprofile() {
+    this.loader.show();
+    return this.setprofileservice.getsetfunctionalprofileconfiguration(this.commonsvc.req).subscribe((data: any) => {
+      this.types = data.Response;
+      this.loader.hide();
+      console.log(this.types);
+    }, er => {
+
+    });
   }
   getroles() {
     this.loader.show();
-       return this.doctypeservice.getroles(this.commonsvc.req).subscribe((data: any) => {
-         this.roleTypes = data.Response; 
-         this.loader.hide();        
-       });
-   }
-  onSubmit(profileinfo:functionalprofile)
-  {   
+    return this.doctypeservice.getroles(this.commonsvc.req).subscribe((data: any) => {
+      this.roleTypes = data.Response;
+      this.loader.hide();
+    });
+  }
+  onSubmit(profileinfo: functionalprofile) {
     debugger
-    profileinfo.modifiedby=this.commonsvc.getUsername();
+    profileinfo.modifiedby = this.commonsvc.getUsername();
 
     this.loader.show();
-    if(profileinfo.sfpid>0){
+    if (profileinfo.sfpid > 0) {
       // profileinfo.modifiedby=this.commonsvc.getUsername();
-      if(profileinfo.createdby==null || undefined){
-        profileinfo.createdby=this.commonsvc.getUsername();
+      if (profileinfo.createdby == null || undefined) {
+        profileinfo.createdby = this.commonsvc.getUsername();
       }
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
-      this.setprofileservice.update(profileinfo).subscribe((data:any)=>{
-        this.toaster.success('role permissions updated');
-        this.loader.hide();
-        this.isButtonDisabled=false;
-        this.location.back();
-      })
+        this.setprofileservice.update(profileinfo).subscribe((data: any) => {
+          this.toaster.success('role permissions updated');
+          this.loader.hide();
+          this.isButtonDisabled = false;
+          this.location.back();
+        })
+      }
     }
+    else {
+      profileinfo.createdby = this.commonsvc.getUsername();
+      profileinfo.modifiedby = this.commonsvc.getUsername();
+      //profileinfo.role=this.selectedRoles.Role;
+      if (!this.isButtonDisabled) {
+        this.isButtonDisabled = true;
+        this.setprofileservice.addsetfunctionalprofileconfiguration(profileinfo).subscribe((res: any) => {
+          this.toaster.success('role permissions added');
+          this.loader.hide();
+          this.isButtonDisabled = false;
+          this.location.back();
+        });
+      }
     }
-    else{
-    profileinfo.createdby=this.commonsvc.getUsername();
-    profileinfo.modifiedby=this.commonsvc.getUsername();
-    //profileinfo.role=this.selectedRoles.Role;
-    if (!this.isButtonDisabled) {
-      this.isButtonDisabled = true;
-    this.setprofileservice.addsetfunctionalprofileconfiguration(profileinfo).subscribe((res: any) => {
-      this.toaster.success('role permissions added');
-      this.loader.hide();
-      this.isButtonDisabled=false;
-      this.location.back();
-  });
-}
-}
   }
-  binddata(rolename:String){
+  binddata(rolename: String) {
     debugger
-    const role=this.types.find(o=>o.role==rolename);
-    if(role!=null && role!=undefined)
-    {
-      this.profile=role;
+    const role = this.types.find(o => o.role == rolename);
+    if (role != null && role != undefined) {
+      this.profile = role;
       console.log(this.profile);
     }
   }
-  onCancel()
-  {
+  onCancel() {
     this.location.back();
   }
 }

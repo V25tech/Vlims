@@ -8,263 +8,266 @@
         </a>
       </div>
     </div>
-  <div class="row p-2">
-    <div class="col">
-      <form (ngSubmit)="savePreparation()" #fm="ngForm">
-        <div class="p-4 bg-white shadow-dark rounded-2">
-          <!-- <div class="form-group row">
-            <label for="reqCode" class="col-sm-2 col-form-label"
-              >Req Code</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="reqCode"
-                name="reqCode"
-                placeholder="System Generated"
-                [(ngModel)]="preparation.reqCode"
-                readonly
-              />
-            </div>
-          </div> -->
+    <div class="row p-2">
+      <div class="col">
+        <form (ngSubmit)="savePreparation()" #fm="ngForm">
+          <div class="p-4 bg-white shadow-dark rounded-2">
+            <!-- <div class="form-group row">
+              <label for="reqCode" class="col-sm-2 col-form-label"
+                >Req Code</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="reqCode"
+                  name="reqCode"
+                  placeholder="System Generated"
+                  [(ngModel)]="preparation.reqCode"
+                  readonly
+                />
+              </div>
+            </div> -->
 
-          <div class="form-group row">
-            <label for="documentTitle" class="col-sm-2 col-form-label">{{lableMappings?.documentTitle || 'Document Title'}}<span
-              style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="documentTitle" name="documentTitle"
-                placeholder="Enter Document Title" [(ngModel)]="preparation.documenttitle" [disabled]="viewMode" #docTitleInput="ngModel" required/>
+            <div class="form-group row">
+              <label for="documentTitle" class="col-sm-2 col-form-label">
+                {{lableMappings?.documentTitle || 'Document Title'}}<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="documentTitle" name="documentTitle"
+                       placeholder="Enter Document Title" [(ngModel)]="preparation.documenttitle" [disabled]="viewMode" #docTitleInput="ngModel" required />
                 <div *ngIf="docTitleInput.invalid && (docTitleInput.dirty || docTitleInput.touched)" class="text-danger">
                   Document Title is required
                 </div>
-            </div>            
-          </div>
-
-          <!-- <div class="form-group row">
-            <label for="docNoType" class="col-sm-2 col-form-label">Document Number</label>
-            <div class="col-sm-10">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" name="docNoType" type="radio" id="docNoType2" [(ngModel)]="docNoType"
-                  value="System Generated" [disabled]="viewMode" placeholder="Enter Document Number" />
-                <label class="form-check-label" for="docNoType2">System Generated</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" name="docNoType" type="radio" id="docNoType1" [(ngModel)]="docNoType"
-                  value="User Defined" [disabled]="viewMode"/>
-                <label class="form-check-label" for="docNoType1">User Defined</label>
               </div>
             </div>
-          </div> -->
 
-          <div class="form-group row" *ngIf="docNoType === 'User Defined'">
-            <label for="documentNumber" class="col-sm-2 col-form-label">{{lableMappings?.documentNumber || 'Document Number'}}<span
-              style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="documentNumber" name="documentNumber"
-                placeholder=" Enter Document Number" [(ngModel)]="preparation.documentno" [disabled]="viewMode" #documentNumber="ngModel" required/>
+            <div class="form-group row">
+              <label for="docNoType" class="col-sm-2 col-form-label">Document Number</label>
+              <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="docNoType" type="radio" id="docNoType2" [(ngModel)]="docNoType"
+                         value="System Generated" [disabled]="viewMode" placeholder="Enter Document Number" />
+                  <label class="form-check-label" for="docNoType2">System Generated</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="docNoType" type="radio" id="docNoType1" [(ngModel)]="docNoType"
+                         value="User Defined" [disabled]="viewMode" />
+                  <label class="form-check-label" for="docNoType1">User Defined</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row" *ngIf="docNoType === 'User Defined'">
+              <label for="documentNumber" class="col-sm-2 col-form-label">
+                {{lableMappings?.documentNumber || 'Document Number'}}<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="documentNumber" name="documentNumber"
+                       placeholder=" Enter Document Number" [(ngModel)]="preparation.documentno" [disabled]="viewMode" #documentNumber="ngModel" required />
                 <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="text-danger">
                   Document Number is required
                 </div>
+              </div>
             </div>
-          </div>
 
 
 
-          <div class="form-group row">
-            <label for="docType" class="col-sm-2 col-form-label">Document Type</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="documenttype" name="documenttype"
-                [(ngModel)]="preparation.documenttype" readonly [disabled]="viewMode" />
+            <div class="form-group row">
+              <label for="docType" class="col-sm-2 col-form-label">Document Type</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="documenttype" name="documenttype"
+                       [(ngModel)]="preparation.documenttype" readonly [disabled]="viewMode" />
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <label for="department" class="col-sm-2 col-form-label">Department</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="Department" name="Department"
-                [(ngModel)]="preparation.department" readonly [disabled]="viewMode"/>
+            <div class="form-group row">
+              <label for="department" class="col-sm-2 col-form-label">Department</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="Department" name="Department"
+                       [(ngModel)]="preparation.department" readonly [disabled]="viewMode" />
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <label for="workflow" class="col-sm-2 col-form-label">Workflow</label>
-            <!-- <div class="col-sm-10">
-              <input type="text" class="form-control" id="Workflow" name="Workflow" [(ngModel)]="preparation.wokflow"
-                readonly [disabled]="viewMode"/>
-            </div> -->
-            <div class="col-sm-10">
-            <p-dropdown name="workflow" [options]="workflowsourcedata" [(ngModel)]="preparation.wokflow"
-            optionLabel="workflowName" optionValue="workflowName" [disabled]="viewMode || editMode" [required]="true"
-            [autoDisplayFirst]="false" #WorkFlowInput="ngModel" placeholder="Select Workflow">
-          </p-dropdown>
-          <div *ngIf="WorkFlowInput.invalid && (WorkFlowInput.dirty || WorkFlowInput.touched)" class="text-danger">
-            Workflow is required
-          </div>
+            <div class="form-group row">
+              <label for="workflow" class="col-sm-2 col-form-label">Workflow</label>
+              <!-- <div class="col-sm-10">
+                <input type="text" class="form-control" id="Workflow" name="Workflow" [(ngModel)]="preparation.wokflow"
+                  readonly [disabled]="viewMode"/>
+              </div> -->
+              <div class="col-sm-10">
+                <p-dropdown name="workflow" [options]="workflowsourcedata" [(ngModel)]="preparation.wokflow"
+                            optionLabel="workflowName" optionValue="workflowName" [disabled]="viewMode || editMode" [required]="true"
+                            [autoDisplayFirst]="false" #WorkFlowInput="ngModel" placeholder="Select Workflow">
+                </p-dropdown>
+                <div *ngIf="WorkFlowInput.invalid && (WorkFlowInput.dirty || WorkFlowInput.touched)" class="text-danger">
+                  Workflow is required
+                </div>
+              </div>
+
             </div>
-          
-          </div>
 
-          <div class="form-group row">
-            <label for="template" class="col-sm-2 col-form-label">Template<span
-              style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10">
-              <p-dropdown name="template" [options]="templatesSource" [(ngModel)]="preparation.template"
-                          optionLabel="Templatename" optionValue="Templatename" [disabled]="viewMode" [required]="true"
-                          [autoDisplayFirst]="false" #templateInput="ngModel" placeholder="Select Template">
-              </p-dropdown>
-              <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!='' && !viewMode" href="javascript:void(0)" (click)="edittemplate(preparation.template)">Modify</a>
-              <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!='' && viewMode"  href="javascript:void(0)" (click)="checkduplicatetemplate(template)">View Document</a>
-              <div *ngIf="templateInput.invalid && (templateInput.dirty || templateInput.touched)" class="text-danger">
-                Template is required
+            <div class="form-group row">
+              <label for="template" class="col-sm-2 col-form-label">
+                Template<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <p-dropdown name="template" [options]="templatesSource" [(ngModel)]="preparation.template"
+                            optionLabel="Templatename" optionValue="Templatename" [disabled]="viewMode" [required]="true"
+                            [autoDisplayFirst]="false" #templateInput="ngModel" placeholder="Select Template">
+                </p-dropdown>
+                <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!='' && !viewMode" href="javascript:void(0)" (click)="edittemplate(preparation.template)">Modify</a>
+                <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!='' && viewMode" href="javascript:void(0)" (click)="checkduplicatetemplate(template)">View Document</a>
+                <div *ngIf="templateInput.invalid && (templateInput.dirty || templateInput.touched)" class="text-danger">
+                  Template is required
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="lableMappings?.revisionNo" class="form-group row">
+              <label for="revisionNo" class="col-sm-2 col-form-label">{{lableMappings?.revisionNo || 'Revison Number'}}</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="revisionNo" name="revisionNo"
+                       [(ngModel)]="preparation.prepdocument.revisionNo" />
+              </div>
+            </div>
+
+            <div *ngIf="lableMappings?.supersedesNo" class="form-group row">
+              <label for="supersedes" class="col-sm-2 col-form-label">{{lableMappings?.supersedesNo || 'Supersedes No.'}}</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="supersedes" name="supersedes"
+                       [(ngModel)]="preparation.prepdocument.supersedesNo" />
+              </div>
+            </div>
+
+            <div *ngIf="lableMappings?.sampleQuantity" class="form-group row">
+              <label for="sampleQuantity" class="col-sm-2 col-form-label">{{lableMappings?.sampleQuantity || 'Sample Quantity'}}</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="sampleQuantity" name="sampleQuantity"
+                       [(ngModel)]="preparation.prepdocument.sampleQuantity" />
+              </div>
+            </div>
+
+            <div *ngIf="lableMappings?.packingInformation" class="form-group row">
+              <label for="packingInformation" class="col-sm-2 col-form-label">{{lableMappings?.packingInformation || 'Packing Information'}}</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="packingInformation" name="packingInformation"
+                       [(ngModel)]="preparation.prepdocument.packingInformation" />
+              </div>
+            </div>
+
+            <div *ngIf="lableMappings?.labelClaim" class="form-group row">
+              <label for="labelClaim" class="col-sm-2 col-form-label">{{lableMappings?.labelClaim || 'Label Claim'}}</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="labelClaim" name="labelClaim"
+                       [(ngModel)]="preparation.prepdocument.labelClaim" />
+              </div>
+            </div>
+
+            <!-- <div class="form-group row" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!=''">
+              <label for="document" class="col-sm-2 col-form-label">Document<span
+                style="color: red; font-weight: bolder;">*</span></label>
+              <div *ngIf="!preparation.document" class="col-sm-10">
+                <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput [disabled]="isUploaded"
+                  (change)="onFileSelected($event)" [disabled]="viewMode" required>
+              </div>
+
+              <div  class="col-sm-1"  >
+                <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
+
+              </div>
+              <div *ngIf="preparation.document" class="col-sm-9">
+                <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>
+              </div>
+            </div>
+            <div *ngIf="selectedFile && !isUploaded" class="form-group row">
+              <label for="document" class="col-sm-2 col-form-label"></label>
+              <div class="col-sm-10">
+                <button type="button" class="btn btn-outline-secondary mx-2" (click)="onUpload()">Upload</button>
+              </div>
+            </div>          -->
+
+            <div class="form-group row">
+              <label for="Details" class="col-sm-2 col-form-label">Details</label>
+              <div class="col-sm-10">
+                <textarea class="form-control mw-350" id="Details" name="Details" rows="3" placeholder="Details"
+                          [(ngModel)]="preparation.details" [disabled]="viewMode"></textarea>
               </div>
             </div>
           </div>
 
-          <div *ngIf="lableMappings?.revisionNo" class="form-group row">
-            <label for="revisionNo" class="col-sm-2 col-form-label">{{lableMappings?.revisionNo || 'Revison Number'}}</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="revisionNo" name="revisionNo"
-                [(ngModel)]="preparation.prepdocument.revisionNo"/>
+
+          <div class="form-group row my-4">
+            <div class="col-sm-10 offset-sm-2">
+              <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">
+                Cancel
+              </button>
+              <!--[disabled]="!fm.form.valid || !preparation.document"-->
+              <button type="submit" class="btn btn-primary" *ngIf="!viewMode" [disabled]="!fm.form.valid || isButtonDisabled">Submit</button>
+
+              <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="proceed(esign)">Proceed</button>
+              <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="return(esign)">Return</button>
+              <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject(esign)">Reject</button> -->
+
             </div>
           </div>
-
-          <div *ngIf="lableMappings?.supersedesNo" class="form-group row">
-            <label for="supersedes" class="col-sm-2 col-form-label">{{lableMappings?.supersedesNo || 'Supersedes No.'}}</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="supersedes" name="supersedes"
-                [(ngModel)]="preparation.prepdocument.supersedesNo"/>
-            </div>
-          </div>
-
-          <div *ngIf="lableMappings?.sampleQuantity" class="form-group row">
-            <label for="sampleQuantity" class="col-sm-2 col-form-label">{{lableMappings?.sampleQuantity || 'Sample Quantity'}}</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="sampleQuantity" name="sampleQuantity"
-                [(ngModel)]="preparation.prepdocument.sampleQuantity"/>
-            </div>
-          </div>
-
-          <div *ngIf="lableMappings?.packingInformation" class="form-group row">
-            <label for="packingInformation" class="col-sm-2 col-form-label">{{lableMappings?.packingInformation || 'Packing Information'}}</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="packingInformation" name="packingInformation"
-                [(ngModel)]="preparation.prepdocument.packingInformation"/>
-            </div>
-          </div>
-
-          <div *ngIf="lableMappings?.labelClaim" class="form-group row">
-            <label for="labelClaim" class="col-sm-2 col-form-label">{{lableMappings?.labelClaim || 'Label Claim'}}</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="labelClaim" name="labelClaim"
-                [(ngModel)]="preparation.prepdocument.labelClaim" />
-            </div>
-          </div>
-
-          <!-- <div class="form-group row" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!=''">
-            <label for="document" class="col-sm-2 col-form-label">Document<span
-              style="color: red; font-weight: bolder;">*</span></label>
-            <div *ngIf="!preparation.document" class="col-sm-10">
-              <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput [disabled]="isUploaded"
-                (change)="onFileSelected($event)" [disabled]="viewMode" required>
-            </div> 
-            
-            <div  class="col-sm-1"  >
-              <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
-             
-            </div>
-            <div *ngIf="preparation.document" class="col-sm-9">
-              <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>
-            </div>
-          </div>
-          <div *ngIf="selectedFile && !isUploaded" class="form-group row">
-            <label for="document" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-              <button type="button" class="btn btn-outline-secondary mx-2" (click)="onUpload()">Upload</button>
-            </div>
-          </div>          -->
-
-          <div class="form-group row">
-            <label for="Details" class="col-sm-2 col-form-label">Details</label>
-            <div class="col-sm-10"> 
-              <textarea class="form-control mw-350" id="Details" name="Details" rows="3" placeholder="Details"
-                [(ngModel)]="preparation.details" [disabled]="viewMode"></textarea>
-            </div>
-          </div>
-        </div>
-
-       
-        <div class="form-group row my-4">
-          <div class="col-sm-10 offset-sm-2">
-            <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">
-              Cancel
-            </button>
-            <!--[disabled]="!fm.form.valid || !preparation.document"-->
-            <button type="submit" class="btn btn-primary" *ngIf="!viewMode" [disabled]="!fm.form.valid || isButtonDisabled">Update</button>
-
-            <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="proceed(esign)">Proceed</button>
-            <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="return(esign)">Return</button>
-            <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject(esign)">Reject</button> -->
-
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Preview</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
-  </div>
-</ng-template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<ng-template #esign>
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">E-sign Credentials</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modalRef!.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" name="username" value="{{ username }}" readonly>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modalRef!.hide()">Close</button>
-        <button type="button" class="btn btn-success" (click)="confirmApproval()">Approve</button>
-        <button type="button" class="btn btn-primary" (click)="confirmReturn()">Return</button>
-        <button type="button" class="btn btn-danger" (click)="confirmReject()">Reject</button>
+        </form>
       </div>
     </div>
   </div>
-</ng-template>
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Preview</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+    </div>
+  </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <ng-template #esign>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">E-sign Credentials</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modalRef!.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{ username }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modalRef!.hide()">Close</button>
+          <button type="button" class="btn btn-success" (click)="confirmApproval()">Approve</button>
+          <button type="button" class="btn btn-primary" (click)="confirmReturn()">Return</button>
+          <button type="button" class="btn btn-danger" (click)="confirmReject()">Reject</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
