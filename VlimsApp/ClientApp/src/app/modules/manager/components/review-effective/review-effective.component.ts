@@ -2,7 +2,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Effective } from '../../models/effective';
-import { DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
+import { DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, UserConfiguration, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
@@ -15,6 +15,8 @@ import { DocumentEffectiveService } from 'src/app/modules/services/document-effe
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 import { ToastrService } from 'ngx-toastr';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
+import { UsersconfigurationService } from 'src/app/modules/services/usersconfiguration.service';
+
 
 @Component({
   selector: 'app-review-effective',
@@ -43,6 +45,10 @@ export class ReviewEffectiveComponent {
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus: string = ''
   toastMsg: string | null = null;
+
+  lstusers:UserConfiguration[]=[];
+  user:UserConfiguration=new UserConfiguration();
+  password: string = '';
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -55,10 +61,12 @@ export class ReviewEffectiveComponent {
     private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
+    private userssvc:UsersconfigurationService,
     private templateService:DocumentTemplateServiceService,
     private modalService: BsModalService, private documentEffectiveService: DocumentEffectiveService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private docPreperationService: DocumentPreperationService,) { }
 
   ngOnInit() {
+    this.getusers();
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
       this.commonsvc.createdBy = user;
@@ -97,29 +105,113 @@ export class ReviewEffectiveComponent {
       this.templatesSource = data.Response;
     });
   }
-  approve() {
-    this.effective.ModifiedBy = this.username;
-    this.effective.Status = this.finalStatus;
-    if (this.isapprove && this.reviewpendingcount > 0) {
-      this.toastr.error('Reviews Pending');
-    }
-    else {
-      this.toastMsg = this.effective.Status;
-      this.saveEffective();
-    }
+  
+
+ Proceed(template: TemplateRef<any>) {
+  debugger
+// Open the modal
+this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+}
+
+
+
+
+
+getusers(){
+  debugger
+ 
+  let objrequest=new RequestContext();
+  objrequest.PageNumber=1;objrequest.PageSize=50;
+    return this.userssvc.getusers(objrequest).subscribe((data:any)=>{
+      this.lstusers=data.Response;
+      //localStorage.setItem("lstusers", this.lstusers.);
+     
+      
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+confirmApproval() {
+  debugger
+const username = localStorage.getItem('username') || '';
+const password = (document.getElementById('password') as HTMLInputElement).value;
+const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+if (userExists) {
+
+  
+  this.effective.ModifiedBy = this.username;
+  this.effective.Status = this.finalStatus;
+  if (this.isapprove && this.reviewpendingcount > 0) {
+    this.toastr.error('Reviews Pending');
   }
-  return() {
-    this.effective.Status = 'Returned'
+  else {
+    this.toastMsg = this.effective.Status;
+    this.saveEffective();
+  }
+ 
+} else {// Username or password is invalid, display error message
+  this.toastr.error('Invalid Username or Password');
+}
+
+
+ 
+}
+
+confirmReturn() {
+
+
+debugger
+const username = localStorage.getItem('username') || '';
+const password = (document.getElementById('password') as HTMLInputElement).value;
+const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+ if (userExists) {
+
+  debugger
+this.effective.Status = 'Returned'
+  this.toastMsg = this.effective.Status;
+  this.effective.ModifiedBy = this.commonsvc.getUsername();
+  this.saveEffective();
+ } else {// Username or password is invalid, display error message
+   this.toastr.error('Invalid Username or Password');
+ }
+
+
+
+
+}
+
+confirmReject() {
+
+
+
+  debugger
+const username = localStorage.getItem('username') || '';
+const password = (document.getElementById('password') as HTMLInputElement).value;
+const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+if (userExists) {
+  
+  debugger
+  this.effective.Status = 'Rejected'
     this.toastMsg = this.effective.Status;
     this.effective.ModifiedBy = this.commonsvc.getUsername();
     this.saveEffective();
-  }
-  reject() {
-    this.effective.Status = 'Rejected'
-    this.toastMsg = this.effective.Status;
-    this.effective.ModifiedBy = this.commonsvc.getUsername();
-    this.saveEffective();
-  }
+
+
+} else {// Username or password is invalid, display error message
+  this.toastr.error('Invalid Username or Password');
+}
+
+}
 
   saveEffective() {
     this.effectivedate= new Date(this.effective.effectiveDate);

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { Location } from '@angular/common';
-import { DocumentRequestConfiguration, DocumentTypeConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
+import { DocumentRequestConfiguration, DocumentTypeConfiguration, RequestContext, UserConfiguration, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
@@ -10,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/common.service';
 import { ToastrService } from 'ngx-toastr';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { UsersconfigurationService } from 'src/app/modules/services/usersconfiguration.service';
 @Component({
   selector: 'app-add-request',
   templateUrl: './add-request.component.html',
@@ -28,6 +30,10 @@ export class AddRequestComponent {
   editMode: boolean = false;
   viewMode: boolean = false;
   toastMsg: string = '';
+  modalRef: BsModalRef | undefined;
+  lstusers:UserConfiguration[]=[];
+  user:UserConfiguration=new UserConfiguration();
+  password: string = '';
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -37,10 +43,13 @@ export class AddRequestComponent {
 
   constructor(private router: Router, private location: Location, private toastr: ToastrService,
     private workitemssvc: WorkitemsService,
+    private userssvc:UsersconfigurationService,
     private route: ActivatedRoute,
+    private modalService: BsModalService,
     private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private documentRequestService: DocumentRequestService) { }
 
   ngOnInit() {
+    this.getusers();
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
       this.commonsvc.createdBy = user;
@@ -81,32 +90,94 @@ export class AddRequestComponent {
       this.spinner.hide();
     });
   }
-  approve() {
+ 
+
+
+
+  getusers(){
     debugger
-    this.request.modifiedBy = this.username;
-    this.request.status = this.finalStatus;
-    if (this.isapprove && this.reviewpendingcount > 0) {
-      this.toastr.error('Reviews Pending');
-    }
-    else {
-      this.toastMsg = this.finalStatus;
-      this.updateRequest();
-    }
+   
+    let objrequest=new RequestContext();
+    objrequest.PageNumber=1;objrequest.PageSize=50;
+      return this.userssvc.getusers(objrequest).subscribe((data:any)=>{
+        this.lstusers=data.Response;
+        //localStorage.setItem("lstusers", this.lstusers.);
+       
+       
+      });
   }
-  return() {
+
+ 
+  
+  
+  confirmApproval() {
+    debugger
+   const username = localStorage.getItem('username') || '';
+   const password = (document.getElementById('password') as HTMLInputElement).value;
+   const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
+
+      this.request.modifiedBy = username;
+      this.request.status = this.finalStatus;
+      if (this.isapprove && this.reviewpendingcount > 0) {
+        this.toastr.error('Reviews Pending');
+      } else {
+      
+        this.toastMsg = this.finalStatus;
+        this.updateRequest();
+      }
+    
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
+    }
+}
+
+confirmReturn() {
+  debugger
+ const username = localStorage.getItem('username') || '';
+ const password = (document.getElementById('password') as HTMLInputElement).value;
+ const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+  if (userExists) {
+
     this.request.modifiedBy = this.commonsvc.getUsername();
     this.request.status = 'Returned'
     this.toastMsg = this.request.status;
     this.updateRequest();
     this.location.back();
     //this.updateRequest();
+  } else {// Username or password is invalid, display error message
+    this.toastr.error('Invalid Username or Password');
   }
-  reject() {
+}
+
+confirmReject() {
+  debugger
+ const username = localStorage.getItem('username') || '';
+ const password = (document.getElementById('password') as HTMLInputElement).value;
+ const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+  if (userExists) {
+    
     this.request.modifiedBy = this.commonsvc.getUsername();
     this.request.status = 'Rejected'
     this.toastMsg = this.request.status;
     this.updateRequest();
+  
+  } else {// Username or password is invalid, display error message
+    this.toastr.error('Invalid Username or Password');
   }
+}
+
+
+
+approve(template: TemplateRef<any>) {
+  debugger
+  // Open the modal
+  this.modalRef = this.modalService.show(template, { class: 'custom-modal' });
+
+}
+
+
+
 
   saveRequest() {
     debugger

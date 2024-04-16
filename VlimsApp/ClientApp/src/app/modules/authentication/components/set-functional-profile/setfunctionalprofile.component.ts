@@ -73,6 +73,7 @@ getsetfunctionalprofile() {
         this.toaster.success('role permissions updated');
         this.loader.hide();
         this.isButtonDisabled=false;
+        this.location.back();
       })
     }
     }
