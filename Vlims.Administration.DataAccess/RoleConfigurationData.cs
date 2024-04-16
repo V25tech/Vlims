@@ -54,7 +54,7 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         public static bool SaveRoleConfiguration(RoleConfiguration roleConfiguration)
         {
             try
@@ -67,6 +67,7 @@ namespace Vlims.Administration.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = RoleConfigurationConstants.CreatedBy, Value = roleConfiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = RoleConfigurationConstants.ModifiedBy, Value = roleConfiguration.ModifiedBy });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(RoleConfigurationConstants.USP_RoleConfiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
+                roleConfiguration.ROCFId = result.ToString();
                 return (Convert.ToInt32(result) > 0);
             }
             catch (System.Exception ex)
@@ -74,7 +75,7 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
-        
+
         public static bool UpdateRoleConfiguration(RoleConfiguration roleConfiguration)
         {
             try

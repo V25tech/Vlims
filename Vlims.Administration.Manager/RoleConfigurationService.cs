@@ -57,15 +57,19 @@ namespace Vlims.Administration.Manager
             try
             {
                 roleConfiguration.HierarchyManagementId = "1";
-                
+
                 String validationMessages = RoleConfigurationValidator.IsValidRoleConfiguration(roleConfiguration);
                 if (validationMessages.Length <= 0)
                 {
                     var result = RoleConfigurationData.SaveRoleConfiguration(roleConfiguration);
                     roleConfiguration.CreatedDate = DateTime.Now;
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = roleConfiguration.CreatedBy, EntityName = roleConfiguration.Role, Type = RoleConfigurationConstants.RoleType, state = DefinitionStatus.New, EntityInfo = roleConfiguration, Unique = roleConfiguration.Comments });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = roleConfiguration.CreatedBy, EntityName = roleConfiguration.Role, Type = RoleConfigurationConstants.RoleType, state = DefinitionStatus.New, EntityInfo = roleConfiguration, Unique = "Rol" + roleConfiguration.ROCFId });
+                    return result; // Return the result of the save operation
                 }
-                throw new System.Exception(validationMessages);
+                else
+                {
+                    throw new System.Exception(validationMessages);
+                }
             }
             catch (System.Exception ex)
             {
