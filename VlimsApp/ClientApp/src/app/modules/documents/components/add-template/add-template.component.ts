@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { Router } from '@angular/router';
@@ -47,7 +47,8 @@ interface BodyDataElement {
   selector: 'app-add-template',
   templateUrl: './add-template.component.html',
   styleUrls: ['./add-template.component.scss'],
-  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService, QuickToolbarService]
+  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService, QuickToolbarService],
+  encapsulation: ViewEncapsulation.None
 
 })
 export class AddTemplateComponent implements OnInit {
@@ -74,7 +75,19 @@ export class AddTemplateComponent implements OnInit {
     keepFormat: false,
     deniedTags: ['a'],
     deniedAttrs: ['class', 'title', 'id'],
-    allowedStyleProps: ['color', 'margin', 'font-size']
+    //allowedStyleProps: ['color', 'margin', 'font-size']
+  };
+  public size = {
+    default: '12pt',
+    items: [
+      { text: '10', value: '10pt' },
+      { text: '12', value: '12pt' },
+      { text: '14', value: '14pt' },
+      { text: '16', value: '16pt' },
+      { text: '18', value: '18pt' },
+      { text: '24', value: '24pt' },
+      { text: '36', value: '36pt' },
+      { text: '42', value: '42pt' }]
   };
 
   public quickToolbarSettings: QuickToolbarSettingsModel = {

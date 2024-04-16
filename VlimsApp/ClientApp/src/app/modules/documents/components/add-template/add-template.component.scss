@@ -166,11 +166,17 @@
 #alltoolRTEmirror-view {
   padding: 0px;
 }
-.e-richtexteditor .e-rte-content .e-content, .e-richtexteditor .e-source-content .e-content{
-    padding-left : 8rem !important;
-    color: #303030 !important;
+.e-richtexteditor .e-rte-content .e-content *, .e-richtexteditor .e-source-content .e-content *{
+  padding-left: 8rem !important;
+  color: #303030 !important;
+  padding-right: 8rem !important;
 }
 .e-richtexteditor .e-rte-content .e-content p, .e-richtexteditor .e-source-content .e-content p {
   color: #343a40 !important;
 }
 
+.e-richtexteditor .e-rte-content .e-content p, .e-richtexteditor .e-source-content .e-content p {
+  margin: 0 0 10px;
+  margin-bottom: 10px;
+  color: black !important;
+}
