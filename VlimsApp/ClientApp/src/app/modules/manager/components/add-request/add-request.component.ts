@@ -28,6 +28,7 @@ export class AddRequestComponent {
   editMode: boolean = false;
   viewMode: boolean = false;
   toastMsg: string = '';
+  isSubmit = false;
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -82,7 +83,7 @@ export class AddRequestComponent {
     });
   }
   approve() {
-    debugger
+    
     this.request.modifiedBy = this.username;
     this.request.status = this.finalStatus;
     if (this.isapprove && this.reviewpendingcount > 0) {
@@ -93,7 +94,10 @@ export class AddRequestComponent {
       this.updateRequest();
     }
   }
-  return() {
+  return(form: any) {    
+    this.isSubmit = true;
+    if(!form?.valid)
+      return;
     this.request.modifiedBy = this.commonsvc.getUsername();
     this.request.status = 'Returned'
     this.toastMsg = this.request.status;
@@ -101,15 +105,18 @@ export class AddRequestComponent {
     this.location.back();
     //this.updateRequest();
   }
-  reject() {
+  reject(form: any) {
+    this.isSubmit = true;
+    if(!form?.valid)
+      return;
     this.request.modifiedBy = this.commonsvc.getUsername();
     this.request.status = 'Rejected'
     this.toastMsg = this.request.status;
-    this.updateRequest();
+    this.updateRequest();   
   }
 
   saveRequest() {
-    debugger
+    
     if (this.editMode || this.request.status=='Rejected' || this.request.status=='Returned') {
       this.toastMsg = 'Updated';
       this.request.status = 'In-Progress';
@@ -145,7 +152,7 @@ export class AddRequestComponent {
   }
 
   updateRequest() {
-    debugger
+    
     if (this.viewMode && this.request.status != 'Rejected' && this.request.status != 'Returned') {
       this.request.modifiedBy = this.commonsvc.createdBy;
       this.request.status = this.finalStatus;
@@ -190,7 +197,7 @@ export class AddRequestComponent {
     });
   }
   getworkflowitems() {
-    debugger
+    
     this.spinner.show();
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
