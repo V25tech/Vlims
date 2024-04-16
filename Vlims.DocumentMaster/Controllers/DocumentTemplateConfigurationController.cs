@@ -258,6 +258,10 @@ namespace Vlims.Controllers
                 {
                     headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
                 }
+                else if (template.documenttype.Equals("Validation Protocol", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+                }
                 else
                     headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation));
 
