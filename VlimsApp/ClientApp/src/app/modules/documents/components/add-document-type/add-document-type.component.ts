@@ -206,9 +206,8 @@ export class AddDocumentTypeComponent {
     if (!this.isSubmitting) {
       this.isButtonDisabled = true;
       //this.isSubmitting = true;
-  
-   
-  
+    
+      this.documentType.ModifiedDate = new Date().toISOString();
       // If the document type name is unique, proceed with updating
       this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {
         this.commonsvc.documentType = new DocumentTypeConfiguration();

@@ -19,7 +19,7 @@ export class DocumentsLandingComponent implements OnInit {
   public userName: string;
   requestObj = new RequestContext1();
   public workItems : Array<WorkItemsConfiguration> = [];
-  public reminderDocs: ExistingDocumentRequest[] = [];
+  public reminderDocs: any[] = [];
   viewreminderDocs = false;
   workItemsCount = 0;
   reviewCount = '';
@@ -87,7 +87,7 @@ export class DocumentsLandingComponent implements OnInit {
       if (data != null && data.exisitingDocuments.length > 0 && data != undefined) {        
         filterdbyreviewDate = data?.exisitingDocuments.filter((p:any) => p.reviewDate && p.reviewDate != 'NA');
       }
-      filterdbyreviewDate = filterdbyreviewDate.filter((item:ExistingDocumentRequest) => {
+      filterdbyreviewDate = filterdbyreviewDate.filter((item:any) => {
         const currentDate = new Date();
         const reviewDatePlus15Days = new Date();
         reviewDatePlus15Days.setDate(currentDate.getDate() + 15);
