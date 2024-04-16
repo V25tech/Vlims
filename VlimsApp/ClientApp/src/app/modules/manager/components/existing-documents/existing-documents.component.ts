@@ -54,7 +54,7 @@ export class ExistingDocumentsComponent implements OnInit {
           data.exisitingDocuments.forEach((item: any) => {
             item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
             this.daterev=this.commonsvc.setDate(item.reviewDate);
-            debugger;
+            //debugger;
             if(this.daterev=='31/12/9999'||this.daterev=='01/01/1900')
               {
                 item.reviewDateValue = 'NA';
