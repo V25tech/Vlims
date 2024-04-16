@@ -60,6 +60,7 @@ namespace Vlims.DocumentManager.Manager
         {
             try
             {
+                #region Commented Region
                 //if (documentrequest != null && !string.IsNullOrEmpty(documentrequest.Workflow))
                 //{
                 //    workflowconigurationService workflowsvc = new workflowconigurationService();
@@ -71,7 +72,8 @@ namespace Vlims.DocumentManager.Manager
                 //        documentrequest.Reviwers = mainwork.reviewers.Select(o => string.Join(o.UserID, ",")).ToString();
                 //        documentrequest.Approvals = mainwork.approvals.Select(o => string.Join(o.UserID, ",")).ToString();
                 //    }
-                //}
+                //} 
+                #endregion
                 documentrequest.AssigntoGroup = "A";
                 documentrequest.ApprovalsCount = 9;
                 documentrequest.documentmanagerid = "1";
