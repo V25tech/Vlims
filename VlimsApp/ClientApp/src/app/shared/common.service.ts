@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { DocumentTemplateConfiguration } from '../modules/documents/models/DocumentTemplateConfiguration';
 import { DepartmentConfiguration, DocumentAdditionalTasks,DocumentTypeConfiguration, DocumentEffectiveConfiguration, DocumentPreperationConfiguration, DocumentPrintConfiguration, DocumentRequestConfiguration, ExistingDocumentRequest, PlantConfiguration, RequestContext1, RoleConfiguration, UserConfiguration, Usergroupconfiguration, functionalprofile } from '../models/model';
 import { DepartmentComponent } from '../modules/authentication/components/Department/department.component';
@@ -30,7 +30,9 @@ export class CommonService {
   existingDocReq = new ExistingDocumentRequest();
   public userPermissions = new UserPermissions();
   public userEntityPermissions$ = new BehaviorSubject<any>(null);
-  
+  private sidebarStatusChanged = new Subject<boolean>();
+  sidebarchanged$=this.sidebarStatusChanged.asObservable();
+  issidebardisabled=false;
   createdBy = 'admin';
   
   retailerId: number = 0;
@@ -77,6 +79,23 @@ export class CommonService {
   setUser(user:UserConfiguration){
     const userstring = JSON.stringify(user);
     this.storage.setItem('user',userstring);
+  }
+  setsidebardisabled(issidebar:boolean){
+    this.storage.setItem('sidebar',JSON.stringify(issidebar));
+  }
+  getsidebardisabled(){
+    const sidebar=this.storage.getItem('sidebar');
+    if(sidebar==='false')
+      {
+        this.sidebarStatusChanged.next(false);
+        return false;
+      }
+      else
+      {
+        this.sidebarStatusChanged.next(true);
+        return true;
+      }
+   //return Boolean(sidebar);
   }
   setUserRoles(roles:functionalprofile){
     const rolesString = JSON.stringify(roles);

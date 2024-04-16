@@ -71,7 +71,7 @@ export class AddTemplateComponent implements OnInit {
     keepFormat: false,
     deniedTags: ['a'],
     deniedAttrs: ['class', 'title', 'id'],
-    //allowedStyleProps: ['color', 'margin', 'font-size']
+    allowedStyleProps: ['color', 'margin', 'font-size']
   };
   public size = {
     default: '12pt',
