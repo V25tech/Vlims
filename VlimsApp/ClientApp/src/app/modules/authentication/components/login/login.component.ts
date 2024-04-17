@@ -104,16 +104,17 @@ export class LoginComponent {
     this.loader.hide();
     this.loginSuccess.emit();
     
-    if(this.user.Password==='Passw0rd'){
+    if (this.user.Password === 'Passw0rd' && this.user.UserID.toLowerCase() !== 'admin') {
+      // Executes if the password is 'Passw0rd' and the user ID is not 'admin'
       this.commonsvc.setsidebardisabled(true);
       this.router.navigate(['/admin/change']);
-      //this.commonsvc.issidebardisabled=true;
-    }
-    else{
+      // this.commonsvc.issidebardisabled=true;
+  } else {
+      // Executes if the condition above is not met
       this.commonsvc.setsidebardisabled(false);
       this.commonsvc.getsidebardisabled();
-    this.router.navigate(['/documents']);
-    }
+      this.router.navigate(['/documents']);
+  }
     this.commonsvc.startSessionTimeout(30);
     this.toastr.success('Welcome '+this.user.UserID, 'Login Success', {
       timeOut: 1000, // Set the display time in milliseconds (3 seconds)
