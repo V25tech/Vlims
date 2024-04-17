@@ -58,7 +58,8 @@
                         <!-- <td>
                             <a href="javascript:void(0)" (click)="previewtemplate(template1,template)">Preview</a>
                         </td>  -->
-                        <td><span class="status" [ngClass]="{'status-completed':true}">{{template?.Status}} </span>&nbsp;&nbsp;<i class="bi bi-copy" title="Clone" (click)="CopyTemplate(template,template2)"></i></td>
+                        <!-- <td><span class="status" [ngClass]="{'status-completed':true}">{{template?.Status}} </span>&nbsp;&nbsp;<i class="bi bi-copy" title="Clone" (click)="CopyTemplate(template,template2)"></i></td> -->
+                        <td><span class="status" [ngClass]="{'status-completed':true}">{{template?.Status}} </span>&nbsp;&nbsp;<a href="javascript:void(0)" title="Clone" (click)="CopyTemplate(template,template2)">Clone</a></td>
                         <td class="text-center" *ngIf="access && !template?.IsParent"><i (click)="editdoc(template)" class="bi bi-pencil"></i></td>
                         <td class="text-center" *ngIf="!access">
                             <i class="bi bi-lock bi-lg" 
