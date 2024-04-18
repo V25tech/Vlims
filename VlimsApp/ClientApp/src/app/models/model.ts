@@ -53,6 +53,7 @@ export class DocumentRequestConfiguration {
   approvedby: string = '';
   approvedOn?: string;
   UserGroup: string = '';
+  reason: string = '';
 }
 
 export class DocumentPreperationConfiguration {
