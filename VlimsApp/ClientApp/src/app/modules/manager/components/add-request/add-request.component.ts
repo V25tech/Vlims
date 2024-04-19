@@ -166,18 +166,19 @@ export class AddRequestComponent {
     } else {// Username or password is invalid, display error message
       this.toastr.error('Invalid Username or Password');
     }
-  approve() {
-    
-    this.request.modifiedBy = this.username;
-    this.request.status = this.finalStatus;
-    if (this.isapprove && this.reviewpendingcount > 0) {
-      this.toastr.error('Reviews Pending');
-    }
-    else {
-      this.toastMsg = this.finalStatus;
-      this.updateRequest();
-    }
   }
+  // approve() {
+    
+  //   this.request.modifiedBy = this.username;
+  //   this.request.status = this.finalStatus;
+  //   if (this.isapprove && this.reviewpendingcount > 0) {
+  //     this.toastr.error('Reviews Pending');
+  //   }
+  //   else {
+  //     this.toastMsg = this.finalStatus;
+  //     this.updateRequest();
+  //   }
+  // }
   return(form: any) {    
     this.isSubmit = true;
     if(!form?.valid)
@@ -273,12 +274,7 @@ export class AddRequestComponent {
     this.location.back();
   }
 
-  getdepartments() {
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
-    this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-      this.departmentsSource = data.Response;
-    });
-  }
+
   getdocumenttypeconfig() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
@@ -344,4 +340,11 @@ export class AddRequestComponent {
     const filtersource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === this.request.documenttype.toLocaleLowerCase());
     this.workflowsSource = filtersource;
   }
+  getdepartments() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+      this.departmentsSource = data.Response;
+    });
+  }
 }
+

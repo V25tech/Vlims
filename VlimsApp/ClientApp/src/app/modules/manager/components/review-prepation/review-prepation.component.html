@@ -97,7 +97,7 @@
               </div> -->
               <div class="col-sm-10">
                 <p-dropdown name="workflow" [options]="workflowsourcedata" [(ngModel)]="preparation.wokflow"
-                            optionLabel="workflowName" optionValue="workflowName" [disabled]="viewMode || editMode" [required]="true"
+                            optionLabel="workflowName" optionValue="workflowName" [disabled]="isworkflow || viewMode" [required]="true"
                             [autoDisplayFirst]="false" #WorkFlowInput="ngModel" placeholder="Select Workflow">
                 </p-dropdown>
                 <div *ngIf="WorkFlowInput.invalid && (WorkFlowInput.dirty || WorkFlowInput.touched)" class="text-danger">
@@ -113,7 +113,7 @@
               </label>
               <div class="col-sm-10">
                 <p-dropdown name="template" [options]="templatesSource" [(ngModel)]="preparation.template"
-                            optionLabel="Templatename" optionValue="Templatename" [disabled]="viewMode" [required]="true"
+                            optionLabel="Templatename" optionValue="Templatename" [disabled]="istemplate || viewMode" [required]="true"
                             [autoDisplayFirst]="false" #templateInput="ngModel" placeholder="Select Template">
                 </p-dropdown>
                 <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!='' && !viewMode" href="javascript:void(0)" (click)="edittemplate(preparation.template)">Modify</a>
