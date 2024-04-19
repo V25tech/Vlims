@@ -4,7 +4,7 @@
             "plantCode": "HP",
             "plantName": "Himachal",
             "clientInfo": "Accent",
-            "operatingProcedure": "BATCH PACKING RECORD 08",
+            "operatingProcedure": "BATCH PACKING RECORD",
             "lables": {
                 "documentTitle": "Product Name",
                 "documentNumber": "BMR No",
@@ -16,7 +16,7 @@
             "plantCode": "MP",
             "plantName": "Indore",
             "clientInfo": "Aurabindo",
-            "operatingProcedure": "Standard Operating Procedure 011",
+            "operatingProcedure": "STANDARD OPERATING PROCEDURE",
             "lables": {
                 "documentTitle": "Title",
                 "documentNumber": "SOP No.",
@@ -28,7 +28,7 @@
             "plantCode": "MP",
             "plantName": "Indore",
             "clientInfo": "Aurabindo",
-            "operatingProcedure": "Validation Protocol",
+            "operatingProcedure": "STANDARD TESTING PROCEDURE",
             "lables": {
                 "documentTitle": "Generic Name",
                 "documentNumber": "STP No.",
@@ -37,7 +37,8 @@
                 "reference": "Reference",
                 "sampleQuantity": "Sample Quantity",
                 "packingInformation": "Packing Information",
-                "labelClaim": "Label Claim"
+                "labelClaim": "Label Claim",                
+                "productCode": "Product/MaterialCode"
             }
         },
         {
@@ -53,7 +54,8 @@
                 "reference": "Reference",
                 "sampleQuantity": "Sample Quantity",
                 "packingInformation": "Packing Information",
-                "labelClaim": "Label Claim"
+                "labelClaim": "Label Claim",
+                "productCode": "Product/MaterialCode"
             }
         }
     ]

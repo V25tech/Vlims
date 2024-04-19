@@ -85,7 +85,9 @@ export class DocumentPreperationConfiguration {
     packingInformation : '',
     revisionNo : '',
     sampleQuantity : '',
-    supersedesNo :''
+    supersedesNo :'',
+    reference: '',
+    productCode: ''
 
   };
 }
@@ -96,6 +98,8 @@ export class Prepdocument {
   packingInformation: string = '';
   labelClaim: string = '';
   supersedesNo: string = '';  
+  reference: string = '';
+  productCode: string = '';
 }
 
 export class DocPrep_LableMapping{
@@ -107,6 +111,7 @@ export class DocPrep_LableMapping{
   sampleQuantity: string = '';
   packingInformation: string = '';
   labelClaim: string = '';
+  productCode: string = '';
 }
 
 export class DocumentEffectiveConfiguration {
