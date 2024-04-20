@@ -33,8 +33,7 @@ export class AssignedComponent implements OnInit {
     }
   getworkflowitems() {
     this.loader.show();
-    debugger
-    
+        
     const user=localStorage.getItem("username");
     if(user!=null && user!=undefined)
     {
@@ -59,12 +58,12 @@ export class AssignedComponent implements OnInit {
   }
   viewtask(obj:WorkItemsConfiguration)
   {
-    debugger
+    
    const tasktype=obj.TaskType;
    const referId=obj.ReferenceId;
    const total=this.types.filter(o=>o.ReferenceId==obj.ReferenceId && o.ActionType==obj.ActionType);
 
-    debugger
+    
     switch (tasktype) {
       case "Type":
         this.router.navigate(['/document-type/view',referId]);

@@ -34,6 +34,7 @@ export class AddRequestComponent {
   lstusers: UserConfiguration[] = [];
   user: UserConfiguration = new UserConfiguration();
   password: string = '';
+  isSubmit = false;
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -166,6 +167,38 @@ export class AddRequestComponent {
       this.toastr.error('Invalid Username or Password');
     }
   }
+  // approve() {
+    
+  //   this.request.modifiedBy = this.username;
+  //   this.request.status = this.finalStatus;
+  //   if (this.isapprove && this.reviewpendingcount > 0) {
+  //     this.toastr.error('Reviews Pending');
+  //   }
+  //   else {
+  //     this.toastMsg = this.finalStatus;
+  //     this.updateRequest();
+  //   }
+  // }
+  return(form: any) {    
+    this.isSubmit = true;
+    if(!form?.valid)
+      return;
+    this.request.modifiedBy = this.commonsvc.getUsername();
+    this.request.status = 'Returned'
+    this.toastMsg = this.request.status;
+    this.updateRequest();
+    this.location.back();
+    //this.updateRequest();
+  }
+  reject(form: any) {
+    this.isSubmit = true;
+    if(!form?.valid)
+      return;
+    this.request.modifiedBy = this.commonsvc.getUsername();
+    this.request.status = 'Rejected'
+    this.toastMsg = this.request.status;
+    this.updateRequest();   
+  }
 
 
 
@@ -216,7 +249,7 @@ export class AddRequestComponent {
   }
 
   updateRequest() {
-    debugger
+    
     if (this.viewMode && this.request.status != 'Rejected' && this.request.status != 'Returned') {
       this.request.modifiedBy = this.commonsvc.createdBy;
       this.request.status = this.finalStatus;
@@ -241,12 +274,7 @@ export class AddRequestComponent {
     this.location.back();
   }
 
-  getdepartments() {
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
-    this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-      this.departmentsSource = data.Response;
-    });
-  }
+
   getdocumenttypeconfig() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
@@ -261,7 +289,7 @@ export class AddRequestComponent {
     });
   }
   getworkflowitems() {
-    debugger
+    
     this.spinner.show();
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
@@ -312,4 +340,11 @@ export class AddRequestComponent {
     const filtersource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === this.request.documenttype.toLocaleLowerCase());
     this.workflowsSource = filtersource;
   }
+  getdepartments() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
+      this.departmentsSource = data.Response;
+    });
+  }
 }
+
