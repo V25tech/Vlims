@@ -465,14 +465,14 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Revision No.</td>");
-            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.revisionNo))
-                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo))
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
             else
                 htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
 
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Supersedes</td>");
-            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.supersedesNo))
-                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument.supersedesNo) ? preparation.Prepdocument.revisionNo : 0) : 0)}</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.revisionNo : 0) : 0)}</td>");
             else
                 htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
             htmlBuilder.AppendLine("  </tr>");
@@ -551,8 +551,8 @@ namespace Vlims.Controllers
             //stringBuilder.AppendLine(@"<td class=""tg-0pky"">STP NO. 1234</td>");
             stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">Revision No.</td>");
-            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.revisionNo))
-                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo))
+                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
             else
                 stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
             //stringBuilder.AppendLine(@"<td class=""tg-0pky"">01</td>");
@@ -561,18 +561,18 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">Supersedes No.</td>");
             //stringBuilder.AppendLine(@"<td class=""tg-0pky"">00</td>");
-            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.supersedesNo))
-                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument.supersedesNo) ? preparation.Prepdocument.supersedesNo : 0) : 0)}</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
+                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : 0) : 0)}</td>");
             else
                 stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
 
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">Product/Material Code</td>");
             //stringBuilder.AppendLine(@"<td class=""tg-0pky"">001CODEMODE</td>");
-            stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.productCode) ? preparation.Prepdocument.productCode : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Reference</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.ReferenceId.ToString()) ? preparation.ReferenceId.ToString() : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.reference) ? preparation.Prepdocument.reference : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Sample Quality</td>");
             stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.sampleQuantity) ? preparation.Prepdocument?.sampleQuantity.ToString() : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
@@ -648,15 +648,15 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BMR NO.</td>");
             stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "test") : "test")}</td>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">REVISION NO.</td>");
-            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.revisionNo))
-                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo))
+                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
             else
                 stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("<tr>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BMR SUPERSEDES NO.</td>");
-            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument.supersedesNo))
-                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : "test") : "test")}</td>");
+            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument?.supersedesNo))
+                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : "test") : "test")}</td>");
             else
                 stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : "test") : "test")}</td>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">EFFECTIVE DATE</td>");
