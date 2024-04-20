@@ -16,10 +16,29 @@ WHERE DP.DPNID_PSY=@DOCPREPID)
 
 IF(@Status_PSY='REVISION')
 BEGIN
+
+DECLARE @XML XML=''
+SET @XML=(SELECT document_PSY FROM DocumentPreparation_PSY WHERE DPNID_PSY=@DOCPREPID)
+
+IF(@XML IS NOT NULL)
+BEGIN
+-- Update supersedesNo
+SET @XML.modify('
+    replace value of (/PreperationDocument/supersedesNo/text())[1]
+    with xs:int((/PreperationDocument/supersedesNo/text())[1]) + 1
+');
+
+-- Update revisionNo
+SET @XML.modify('
+    replace value of (/PreperationDocument/revisionNo/text())[1]
+    with xs:int((/PreperationDocument/revisionNo/text())[1]) + 1
+');
+END
+
 DECLARE @ID1 INT
 INSERT INTO DocumentPreparation_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,
 department_PSY,document_PSY,template_PSY,wokflow_PSY,details_PSY,CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,DOCStatus_PSY,Refrence_PSY,GUID_DP,ReferenceGuid_PSY)
-SELECT Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,
+SELECT Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,@XML,
 template_PSY,null,details_PSY,CreatedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',DOCStatus_PSY,@referenceId,NEWID(),GUID_DP FROM DocumentPreparation_PSY
 WHERE DPNID_PSY=@DOCPREPID
 SELECT @ID1 = @@IDENTITY;
