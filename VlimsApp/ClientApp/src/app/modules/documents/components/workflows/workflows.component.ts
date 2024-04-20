@@ -43,7 +43,11 @@ export class WorkflowsComponent {
     this.loader.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
       return this.workflowsvc.getworkflow(objrequest).subscribe((data: any) => {
-        
+        if(data!=null&&data.Response!=null&&data.Response.length>0){
+          data.Response.forEach((item:any)=>{
+            item.CreatedDate=this.commonsvc.setDate(item.CreatedDate)
+          })
+         } 
         this.types = data.Response;
         this.commonsvc.templateCount=this.types.length;
         if(this.types.length<10)

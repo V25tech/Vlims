@@ -153,7 +153,14 @@ namespace PolicySummary.Controllers
                 return StatusCode(500, $"An error occurred while uploading the file: {ex.Message}");
             }
         }
-
+        [HttpGet("getpath")]
+        public ActionResult GetPath()
+        {
+            // Get the current request's host address dynamically
+            var hostAddress = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/pdfs/DocumentWithHeaderTable.pdf";
+            string pdfFilePath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithHeaderTable.pdf");
+            return Ok(hostAddress);
+        }
         [HttpPost("preview")]
         public ActionResult PreviewDocumentPreparation(ExistingDocumentRequest existingDocumentRequest)
         {
@@ -164,6 +171,8 @@ namespace PolicySummary.Controllers
 
                 if (res != null && res.Length > 1)
                 {
+                    string fileName = "DocumentWithHeaderTable" + ".pdf";
+                    System.IO.File.WriteAllBytes(fileName, res);
                     return Ok(res);
                 }
             }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonService } from '../../../../shared/common.service';
 
 @Component({
   selector: 'app-document-manager-home',
@@ -7,11 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./document-manager-home.component.scss']
 })
 export class DocumentManagerHomeComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router, public commonSrvc: CommonService) { }
 
   navigateTo(navTo: any) {
     if (navTo === 'requests') {
-      debugger;
       this.router.navigate(['/requests']);
     } else if (navTo === 'preparations') {
       this.router.navigate(['/preparations']);
@@ -31,6 +31,12 @@ export class DocumentManagerHomeComponent {
     }
     else if(navTo === 'document-revision'){    
       this.router.navigate(['/revision']);
+    }
+    else if (navTo === 'existingdocuments') {
+      this.router.navigate(['/' + navTo]);
+    }
+    else if(navTo === 'auditmanager'){    
+      this.router.navigate(['/auditmanager']);
     }
 
   }

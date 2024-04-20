@@ -1,0 +1,46 @@
+﻿
+
+
+
+--Exec [USP_DocumentPrint_PSY_UPDATE_PRINTCOUNT] 21,'','In-Progress'
+
+CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_UPDATE_PRINTCOUNT] 
+@DRId_PSY int, 
+@printCount_PSY nVarchar(100),
+@Status_PSY nvarchar(50)
+ AS 
+ BEGIN 
+  BEGIN TRY 
+ 
+DECLARE @PRINTCOUNT int
+DECLARE @PRINTCOUNTUPDATED int
+IF (SELECT COUNT(*) FROM dbo.DocumentPrint_PSY WHERE DRId_PSY = @DRId_PSY) > 0
+  BEGIN
+   SELECT @PRINTCOUNT= printCount_PSY FROM dbo.DocumentPrint_PSY WHERE DRId_PSY = @DRId_PSY ;
+   
+   if(@PRINTCOUNT IS NULL)
+   BEGIN
+   SET @PRINTCOUNT=0;
+   SET @PRINTCOUNTUPDATED=0+1
+   END
+   ELSE
+   BEGIN
+   
+    SET @PRINTCOUNTUPDATED=@PRINTCOUNT+1
+	
+   END
+  END
+
+-- IF(@Status_PSY='IN-PROGRESS' OR @Status_PSY='IN PROGRESS')
+--BEGIN
+ UPDATE [dbo].[DocumentPrint_PSY] SET printCount_PSY=@PRINTCOUNTUPDATED WHERE  [DRId_PSY] = @DRId_PSY ; 
+ --select @PRINTCOUNTUPDATED
+--END
+
+ 
+  
+  END TRY 
+ BEGIN CATCH 
+ SELECT ERROR_MESSAGE(); 
+ END CATCH 
+ END

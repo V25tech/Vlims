@@ -34,7 +34,7 @@
                 [globalFilterFields]="['workflowName','documentstage', 'documenttype', 'departments','CreatedBy', 'Status','workflowName']"
                  tableStyleClass="table table-striped" [rows]="itemsPerPage"
                 [paginator]="true" [totalRecords]="types.length"
-                [rowsPerPageOptions]="rowsPerPageOptions" >
+                [rowsPerPageOptions]="rowsPerPageOptions" [rowHover]="true">
                     <ng-template pTemplate="header">
                         <tr>
                             <th>S.No</th>
@@ -57,7 +57,7 @@
                             <td class="text-nowrap">{{docItem.documenttype}}</td>
                             <td>{{docItem.departments}}</td>
                             <td>{{docItem.CreatedBy}}</td>
-                            <td>{{docItem.CreatedDate | date:'dd/MM/yyyy'}}</td>
+                            <td>{{docItem.CreatedDate}}</td>
                             <td><span class="status" [ngClass]="{'status-completed':true}">{{docItem?.Status}} </span></td>
                             <td class="text-center"  *ngIf="access && !docItem?.IsParent"><i class="bi bi-pencil" (click)="editdoc(docItem)"></i></td>
                             <td class="text-center" *ngIf="!access">

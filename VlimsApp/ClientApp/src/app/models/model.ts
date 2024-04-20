@@ -8,6 +8,9 @@ export class RequestContext1 {
   public PageSize: number = 0;
   public Id: number = 0;
   public UserName: string | null = null;
+  public type:string | null = null;
+ 
+  
 }
 export class dashboardconfiguration {
   dCId: string = ''
@@ -50,6 +53,7 @@ export class DocumentRequestConfiguration {
   approvedby: string = '';
   approvedOn?: string;
   UserGroup: string = '';
+  reason: string = '';
 }
 
 export class DocumentPreperationConfiguration {
@@ -73,8 +77,41 @@ export class DocumentPreperationConfiguration {
   document: string = '';
   path: string = '';
   dpnid: string = '';
-  referenceId:number=0;
-  isrevision:boolean=false;
+  referenceId: number = 0;
+  isrevision: boolean = false;
+  isEffectiveApproved=false;
+  prepdocument: Prepdocument = {
+    labelClaim : '',
+    packingInformation : '',
+    revisionNo : '',
+    sampleQuantity : '',
+    supersedesNo :'',
+    reference: '',
+    productCode: ''
+
+  };
+}
+
+export class Prepdocument {
+  revisionNo: string = '';
+  sampleQuantity: string = '';
+  packingInformation: string = '';
+  labelClaim: string = '';
+  supersedesNo: string = '';  
+  reference: string = '';
+  productCode: string = '';
+}
+
+export class DocPrep_LableMapping{
+  documentTitle: string = '';
+  documentNumber: string = '';
+  revisionNo: string = '';
+  supersedesNo: string = '';
+  reference: string = '';
+  sampleQuantity: string = '';
+  packingInformation: string = '';
+  labelClaim: string = '';
+  productCode: string = '';
 }
 
 export class DocumentEffectiveConfiguration {
@@ -254,6 +291,8 @@ export class WorkItemsConfiguration {
   ReferenceId: number = 0
   ActionType: string = ''
   IsCompleted: boolean = false
+  CreatedBy: string = ''
+  ModifiedBy: string = ''
 }
 export class PlantConfiguration {
  // DPCFId: string = ''
@@ -268,6 +307,7 @@ export class PlantConfiguration {
   ModifiedDate: Date | undefined;
   Status: string = '';
   PMId: number = 0;
+  
 
 }
 export class SecurityManagement {
@@ -364,7 +404,13 @@ export class DocumentPrintConfiguration {
   public documentNumber: string = '';
   public printtype: string = '';
   public noofcopies: string = '';
+  public printCount: string = '';
   public template:string='';
+  public batchNumber:string='';
+  public batchSize:string='';
+  public printCopy='';
+  public existingdocumentNumber:string='';
+  public isactive:boolean=false;
 }
 
 export class ExistingDocumentRequest {
@@ -379,8 +425,9 @@ export class ExistingDocumentRequest {
   createdDate: Date | undefined;
   modifiedBy: string = '';
   modifiedDate: Date | undefined;
-  effectiveDate: Date | undefined;
-  reviewDate: Date | undefined;
+  effectiveDate?: Date | undefined;
+  reviewDate?: Date | undefined;
+  reviewCountDownValue:  number| undefined;
 }
 
 
@@ -443,5 +490,12 @@ export class AuditConfiguration {
   CreatedDate: Date | undefined;
   ModifiedDate: Date | undefined;
   DepartmentName: any;
+
   id: any;
+  //EntityInfo:string=''
+  EntityInfo: any; // Property for holding a JSON object
+  Unique: any; // Property for holding a JSON object
+  VersionNumber: number | undefined; // Include the VersionNumber property
+  state: number | undefined;
+ 
 }

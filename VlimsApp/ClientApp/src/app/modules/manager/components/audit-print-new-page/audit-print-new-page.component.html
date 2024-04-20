@@ -1,0 +1,151 @@
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="page-title"><span class="bold-text">Docuemnt Print</span><br><span class="bold-text">Audit Trails</span></h4>            <div class="back-icon">
+            <a href="javascript:void(0);" onclick="history.back();">
+              <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <div class="p-4 bg-white shadow-dark rounded-2">
+          <div *ngFor="let auditConfig of types; let i = index">
+            <div class="card mb-3">
+              <div class="card-body">
+                
+                <div class="row">
+                  <div class="col-sm-3">
+                      <strong>Version {{ i + 0 }}</strong>
+                  </div>
+              </div>
+                
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Document Title:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.documenttitle }}
+                    </div>                 
+                  </div>
+                  
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Print Type:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.printtype }}
+                    </div>                 
+                  </div>
+              
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Document Number:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.DocumentNumber }}
+                    </div>                 
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>No Of Copies:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.noofcopies }}
+                    </div>                 
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Workflow:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.workflow }}
+                    </div>                 
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Reasons:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.reason }}
+                    </div>                 
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Template:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.Template }}
+                    </div>                 
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>PrintCopy:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.PrintCopy }}
+                    </div>                 
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Printed By:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.CreatedBy }}
+                    </div>
+                  </div>    
+
+
+                  
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Printed Date:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.CreatedDate | date:'dd/MM/yyyy HH:mm' }}
+                    </div>
+                  </div>  
+
+
+                   <div class="row">
+                    <div class="col-sm-3">
+                      <strong>Status:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.Status }}
+                    </div>
+                  </div>   
+
+
+                  
+
+                  
+                   
+                <!-- Add more rows for other properties if needed -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

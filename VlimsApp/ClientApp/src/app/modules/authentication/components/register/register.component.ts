@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   griddata: UserConfiguration[] = [];
   isactivedirectory: boolean = false;
   isstandarduser: boolean = false;
-  title: string = "New User";
+  title: string = "New User Registration";
   objname: string = '';
   userid: string = '';
   //securityInfo: SecurityManagement[] = [];
@@ -78,31 +78,16 @@ export class RegisterComponent implements OnInit {
 
   submit(adduser: UserConfiguration) {
     debugger;
-  
-    let MinUserId: number = parseInt(this.securityType.MinimumUserIdLength, 10);
-    let MinInvalidAttempt: number = parseInt(this.securityType.InvalidAttempts, 10);
 
-    let MinInvalidAttemplateside: number = parseInt(this.adduser.InvAttempt, 10);
-    
-  
-    
-  
-    if (this.adduser.UserID.length > MinUserId) {
-      this.toastr.error('User ID length must not exceed ' + this.securityType.MinimumUserIdLength + ' characters.');
+    if (this.editMode) {
+        this.update(adduser);
     } else {
-      if (MinInvalidAttemplateside > MinInvalidAttempt) {
-        this.toastr.error('Invalid Attempts on login should not be greater than ' + this.securityType.InvalidAttempts);
-      } else {
-        if (this.editMode) {
-          this.update(adduser);
-        } else {
-          if (!this.isduplicate()) {
+        if (!this.isduplicate()) {
             this.adddoctype(adduser);
-          }
         }
-      }
     }
-  }
+}
+
 
   
   isduplicate() {
@@ -130,7 +115,7 @@ export class RegisterComponent implements OnInit {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
         this.userservice.update(adduser).subscribe((data: any) => {
-          this.toastr.success('updated successfully');
+          this.toastr.success('User updated successfully');
           this.loader.hide();
           this.location.back();
           this.isButtonDisabled = false;
@@ -202,7 +187,8 @@ export class RegisterComponent implements OnInit {
     });
   }
   onCancel() {
-    this.location.back();
+    // Reset the adduser object to clear all fields
+    this.adduser = new UserConfiguration();
   }
   calculateTotalUsers(): void {
     if (this.adduser.FirstName != null || this.adduser.LastName != null) {

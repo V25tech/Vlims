@@ -108,11 +108,11 @@ export class ReviewEffectiveComponent {
       this.saveEffective();
     }
   }
-  reinitiative() {
-    this.effective.Status = 'Re-Initiated'
+  return() {
+    this.effective.Status = 'Returned'
     this.toastMsg = this.effective.Status;
-    //this.saveEffective();
-    this.location.back();
+    this.effective.ModifiedBy = this.commonsvc.getUsername();
+    this.saveEffective();
   }
   reject() {
     this.effective.Status = 'Rejected'
@@ -122,9 +122,9 @@ export class ReviewEffectiveComponent {
   }
 
   saveEffective() {
-    debugger;
     this.effectivedate= new Date(this.effective.effectiveDate);
-    this.reviewdate= new Date (this.effective.reviewDate);
+    this.reviewdate = new Date(this.effective.reviewDate);
+
       if (!this.effectivedate || !this.reviewdate) 
       {
          null;
@@ -135,9 +135,12 @@ export class ReviewEffectiveComponent {
           return;
        }    
     this.spinner.show();
-    if (this.viewMode && this.effective.Status != 'Rejected') {
+    if (this.viewMode && this.effective.Status != 'Rejected' && this.effective.Status != 'Returned') {
       this.effective.ModifiedBy = this.commonsvc.createdBy;
       this.effective.Status = this.finalStatus;
+    } else if ((!this.viewMode || this.editMode) && (this.effective.Status == 'Rejected' || this.effective.Status == "Returned")) {
+      this.effective.ModifiedBy = this.commonsvc.createdBy;
+      this.effective.Status = "InProgress";
     }
     this.toastMsg = this.toastMsg ?? 'Updated'
     if (!this.isButtonDisabled) {
@@ -166,11 +169,23 @@ export class ReviewEffectiveComponent {
   }
 
   openViewer(template: TemplateRef<any>): void {
-    if (this.pdfBytes) {
-      const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+    
+    // if (this.pdfBytes) {
+    //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
+    //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+    //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    //   debugger
+      
+    //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
+    // }
+    this.getUrl(template);
+  }
+  getUrl(template: TemplateRef<any>):void{
+    this.templateService.geturl().subscribe((data:any)=>{
+      debugger
+      this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    }
+    })
   }
 
   // Function to convert base64 to Blob
@@ -187,6 +202,16 @@ export class ReviewEffectiveComponent {
       byteArrays.push(byteArray);
     }
     return new Blob(byteArrays, { type: contentType });
+  }
+  checkduplicatetemplate(template: TemplateRef<any>){
+    this.templateService.isduplicate(this.effective.template).subscribe((data:any)=>{
+      const isduplicate=Boolean(data);
+      if(isduplicate){
+        this.toastr.error('Template used in multiple preparations unable to view document');
+      }else{
+        this.previewtemplate(template);
+      }
+    })
   }
   previewtemplate(template: TemplateRef<any>) {  
     let id=0;

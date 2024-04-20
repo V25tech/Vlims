@@ -51,3 +51,96 @@
 a{
   cursor: pointer;
 }
+
+
+.reminder {
+  background-color: #FEF493;
+  border-radius: 4px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  max-height: 700px;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+}
+
+
+.reminder::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.reminder::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the thumb */
+  border-radius: 5px; /* Roundness of the thumb */
+}
+
+.reminder::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the thumb on hover */
+}
+
+.reminder::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the track */
+}
+
+.reminder::-webkit-scrollbar-track:hover {
+  background-color: #e0e0e0; /* Color of the track on hover */
+}
+
+.reminder ul {
+  margin: 0;
+  padding: 5px 10px;
+
+  li{
+    padding: 10px 0px;
+    border-bottom: 1px solid #e4db86;
+    &:last-child{
+      border-bottom: 0px;
+    }
+  }
+}
+
+.reminder__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.reminder__header-text {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+.reminder__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.reminder__content-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0px;
+}
+
+.reminder__content-due-date {
+  font-size: 12px;
+  // color: #9b7223;
+  color: #333;
+  margin-bottom: 0px;
+}
+
+.reminder__content-title {
+  font-size: 14px;
+  color: #787665;
+  margin-bottom: 0px;
+}
+
+.reminder__content-message {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #666;
+}

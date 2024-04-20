@@ -1,0 +1,133 @@
+<div class="container-fluid">
+  <div class="row p-2">
+    <div class="col">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="page-title flex-grow-1">Documents Repository</h4>
+        <div class="back-icon" style="margin-right: 10px;">
+          <a href="javascript:void(0);" onclick="history.back();">
+            <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+          </a>
+        </div>
+
+        <div class="d-flex page-title-actions">
+          <div class="input-group custom-input-group">
+            <!-- Magnifying glass icon -->
+            <span class="input-group-text custom-input-group-text">
+              <i class="fas fa-search custom-search-icon"></i>
+            </span>
+            <input type="text" class="form-control custom-input" pInputText type="text" (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')"  placeholder="Search" maxlength="249">
+          </div>
+
+          <!--<button class="btn btn-primary mx-2" type="button" *ngIf="access">New</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <div class="p-4 bg-white shadow-dark rounded-2">
+        <p-table #templatesTable [value]="documents?.exisitingDocuments"
+                 [globalFilterFields]="['documentNo', 'documentName','documentType','department','effectiveDateValue','reviewDateValue','entityName']"
+                 tableStyleClass="table table-striped"
+                 [rows]="itemsPerPage"
+                 [paginator]="true"
+                 [totalRecords]="documents?.totalRecords"
+                 [rowsPerPageOptions]="rowsPerPageOptions"
+                 [rowHover]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>S.No</th>
+              <th pSortableColumn="documentNo" style="width:80%">Document No.<p-sortIcon field="documentNo" ></p-sortIcon></th>
+              <!--<th pSortableColumn="documenttypeprefix" style="width:10%">Document No<p-sortIcon field="documentNo"></p-sortIcon></th>-->
+              <th pSortableColumn="documentName" style="width:20%">Document Title<p-sortIcon field="documentName"></p-sortIcon></th>
+              <th pSortableColumn="documentType" style="width:200px">Document Type<p-sortIcon field="documentType"></p-sortIcon></th>
+              <th pSortableColumn="department" style="width:200px">Department<p-sortIcon field="department"></p-sortIcon></th>
+              <th pSortableColumn="effectiveDateValue"style="width:80px">Effective Date<p-sortIcon field="effectiveDateValue"></p-sortIcon></th>
+              <th pSortableColumn="reviewDateValue" style="width:20%">Review Date<p-sortIcon field="reviewDateValue"></p-sortIcon></th>
+              <th pSortableColumn="entityName" style="width:80%">Preparation Type<p-sortIcon field="entityName"></p-sortIcon></th>
+              <th style="width:80%">Actions</th>
+              <th style="width:80%">Preview</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-doc let-i="rowIndex">
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <!--<td>{{doc?.id}}</td>-->
+              <td>{{doc?.documentNo}}</td>
+              <td>{{doc?.documentName}}</td>
+              <td>{{doc?.documentType}}</td>
+              <td>{{doc?.department}}</td>
+              <td>{{doc?.effectiveDateValue}}</td>
+              <td>{{ doc?.reviewDateValue}}</td>
+              <td>{{doc?.entityName}}</td>
+              <td class="text-center" *ngIf="access">
+                <i (click)="editdoc(doc)" class="bi bi-pencil"></i>
+              </td>
+              <td *ngIf="!access">
+                <i class="bi bi-lock bi-lg"
+                   [ngClass]="{'text-primary':true}"
+                   title="No Permissions">
+                </i>
+              </td>
+
+              <td>
+                <a href="javascript:void(0);" (click)="previewDocument(template,doc)">Preview</a>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Preview Document Template-->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Preview</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+  </div>
+</ng-template>
+
+
+
+<style>
+  /* Styles for .custom-input-group */
+  .custom-input-group {
+      background-color: white;
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+  .custom-input-group-text {
+          background: white;
+          border: none;
+          padding: 0;
+          vertical-align: middle;
+      }
+
+      .custom-search-icon {
+          font-size: 14px;
+          margin-right: 5px;
+          margin-left: 9px;
+          color: #555;
+      }
+
+      .custom-input {
+          border: none;
+          padding: 5px;
+          vertical-align: middle;
+          background-color: white;
+          box-shadow: none;
+      }
+  </style>

@@ -28,7 +28,7 @@ public class SetFunctionalProfileController : ControllerBase
     /// </summary>
     /// <param name="requestContext"></param>
     [HttpPost("getallprofileconfig")]
-    public ActionResult GetAllSetFunctionalProfile([FromQuery] RequestContext requestContext)
+    public ActionResult GetAllSetFunctionalProfile(RequestContext requestContext)
     {
         var result = functionalConfigurationService.GetAllSetFunctionalProfile(requestContext);
         return Ok(result);

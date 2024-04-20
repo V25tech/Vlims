@@ -7,7 +7,41 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\common\searchview\searchview.component.ts" />
+    <None Remove="ClientApp\src\app\common\tracksearch.component.ts" />
+    <None Remove="ClientApp\src\app\models\userpermissions.ts" />
+    <None Remove="ClientApp\src\app\modules\manager\components\existing-documents\existing-documents.component.ts" />
+    <None Remove="ClientApp\src\app\modules\manager\services\existing-documents.service.ts" />
+    <None Remove="ClientApp\src\app\modules\reports\documenstindex\documentsindex.component.ts" />
+    <None Remove="ClientApp\src\app\modules\reports\documentprintindex\documentprintindex.component.ts" />
+    <None Remove="ClientApp\src\app\modules\reports\documenttypeindex\documenttypeindex.component.ts" />
+    <None Remove="ClientApp\src\app\modules\reports\reports-routing.module.ts" />
+    <None Remove="ClientApp\src\app\modules\reports\reports.module.ts" />
+    <None Remove="ClientApp\src\app\modules\reports\reportsdashboard\reportsdashboard.component.ts" />
+    <None Remove="ClientApp\src\app\modules\reports\services\documentprintindex.service.ts" />
+    <None Remove="ClientApp\src\app\modules\reports\services\documentsindex.service.ts" />
+    <None Remove="ClientApp\src\app\modules\reports\services\documenttypeindex.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\src\app\model\" />   
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\common\searchview\searchview.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\common\tracksearch\tracksearch.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\userpermissions.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\manager\components\existing-documents\existing-documents.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\manager\services\existing-documents.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\reports\documenstindex\documentsindex.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\reports\documentprintindex\documentprintindex.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\reports\documenttypeindex\documenttypeindex.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\reports\reports-routing.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\reports\reports.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\reports\reportsdashboard\reportsdashboard.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\reports\services\documentprintindex.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\reports\services\documentsindex.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\reports\services\documenttypeindex.service.ts" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,6 @@ export class AdminHomeComponent {
   constructor(private router: Router) {}
 
   navigateTo(navTo: any) {
-    debugger;
     if (navTo === 'security') {
       this.router.navigate(['/admin/security']);
     } else if (navTo === 'hierrachy') {
@@ -31,9 +30,12 @@ export class AdminHomeComponent {
       this.router.navigate(['/admin/departments']);
     } else if (navTo === 'activeuser') {
       this.router.navigate(['/admin/activeuser']);
-    } else if (navTo === 'Audit') {
-      this.router.navigate(['/admin/auditlog']);
+    } else if (navTo === 'auditadmin') {
+      this.router.navigate(['/auditadmin']);
     } else if (navTo === 'home') {
+      this.router.navigate(['/home']);
+    }
+    else if (navTo === 'home') {
       this.router.navigate(['/home']);
     }
   }

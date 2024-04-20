@@ -36,7 +36,7 @@ public class ExistingDocumentRequestConstants
 
     public const string EffectiveDate = "@EffectiveDate_PSY";
 
-    public const string ReviewDate = "@ReviewDate_PSY";
+    public const string ReviewDate = "@reviewdate_PSY";
 
     public const string ModifiedBy = "@ModifiedBy_PSY";
 
@@ -57,5 +57,6 @@ public class ExistingDocumentRequestConstants
     public const string USP_QuickExistingDocumentRequest_INSERT = "dbo.USP_QuickExistingDocumentRequest_INSERT";
 
     public const string USP_QuickExistingDocumentRequest_UPDATE = "dbo.USP_QuickExistingDocumentRequest_UPDATE";
+
 }
 

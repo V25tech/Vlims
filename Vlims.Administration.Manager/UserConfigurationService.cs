@@ -59,6 +59,7 @@ namespace PolicySummary.Sheet1.Services
         {
             try
             {
+                userConfiguration.CreatedDate = DateTime.Now;
                 userConfiguration.UserManagementID = "1";
                 if (userConfiguration.UserID.Equals("Admin", StringComparison.InvariantCultureIgnoreCase))
                     userConfiguration.Status = "Active";
@@ -67,7 +68,8 @@ namespace PolicySummary.Sheet1.Services
                 if (validationMessages.Length <= 0)
                 {
                     var result = UserConfigurationData.SaveUserConfiguration(userConfiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = userConfiguration.UserID, Type = UserConfigurationConstants.userconfiguration1, state = DefinitionStatus.New });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = userConfiguration.CreatedBy, EntityName = userConfiguration.UserID, Type = UserConfigurationConstants.UserType, state = DefinitionStatus.New, EntityInfo = userConfiguration, Unique = userConfiguration.UserID });
+             
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -84,6 +86,7 @@ namespace PolicySummary.Sheet1.Services
             {
                 //ApprovalConfiguration.DocTempNoOfApprovals = "1";
                 var result = UserConfigurationData.SaveApprovalConfiguration(ApprovalConfiguration);
+
                 return result;
 
 
@@ -116,6 +119,9 @@ namespace PolicySummary.Sheet1.Services
             }
         }
 
+
+
+
         public bool UpdateUserConfiguration(UserConfiguration userConfiguration)
         {
             bool result = false;
@@ -125,6 +131,21 @@ namespace PolicySummary.Sheet1.Services
                 if (validationMessages.Length <= 0)
                 {
                     result = UserConfigurationData.UpdateUserConfiguration(userConfiguration);
+
+                    // Check if Password property is equal to "Passw0rd" before executing audit log
+                    if (userConfiguration.Password == "Passw0rd")
+                    {
+                        AuditLog.SaveAuditLog(new AuditLogEntity
+                        {
+                            UserName = userConfiguration.CreatedBy,
+                            EntityName = userConfiguration.UserID,
+                            Type = UserConfigurationConstants.UserType,
+                            state = DefinitionStatus.Modify,
+                            EntityInfo = userConfiguration,
+                            Unique = userConfiguration.UserID
+                        });
+                    }
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -134,6 +155,8 @@ namespace PolicySummary.Sheet1.Services
                 throw;
             }
         }
+
+
         public bool UpdateUserStatusConfiguration(UserConfiguration userConfiguration)
         {
             bool result = false;

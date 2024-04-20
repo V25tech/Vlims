@@ -1,0 +1,62 @@
+{
+    "document_preparaion_mappings": [
+        {
+            "plantCode": "HP",
+            "plantName": "Himachal",
+            "clientInfo": "Accent",
+            "operatingProcedure": "BATCH PACKING RECORD",
+            "lables": {
+                "documentTitle": "Product Name",
+                "documentNumber": "BMR No",
+                "revisionNo": "Revision No.",
+                "supersedesNo": "BMR Supersedes No."
+            }
+        },
+        {
+            "plantCode": "MP",
+            "plantName": "Indore",
+            "clientInfo": "Aurabindo",
+            "operatingProcedure": "STANDARD OPERATING PROCEDURE",
+            "lables": {
+                "documentTitle": "Title",
+                "documentNumber": "SOP No.",
+                "revisionNo": "Revision No.",
+                "supersedesNo": "Supersedes"
+            }
+        },
+        {
+            "plantCode": "MP",
+            "plantName": "Indore",
+            "clientInfo": "Aurabindo",
+            "operatingProcedure": "STANDARD TESTING PROCEDURE",
+            "lables": {
+                "documentTitle": "Generic Name",
+                "documentNumber": "STP No.",
+                "revisionNo": "Revision No.",
+                "supersedesNo": "Supersedes No.",
+                "reference": "Reference",
+                "sampleQuantity": "Sample Quantity",
+                "packingInformation": "Packing Information",
+                "labelClaim": "Label Claim",                
+                "productCode": "Product/MaterialCode"
+            }
+        },
+        {
+            "plantCode": "MP",
+            "plantName": "Indore",
+            "clientInfo": "Aurabindo",
+            "operatingProcedure": "STANDARD TESTING SPECIFICATION",
+            "lables": {
+                "documentTitle": "Generic Name",
+                "documentNumber": "STS No.",
+                "revisionNo": "Revision No.",
+                "supersedesNo": "Supersedes No.",
+                "reference": "Reference",
+                "sampleQuantity": "Sample Quantity",
+                "packingInformation": "Packing Information",
+                "labelClaim": "Label Claim",
+                "productCode": "Product/MaterialCode"
+            }
+        }
+    ]
+}

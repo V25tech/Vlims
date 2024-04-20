@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentAdditionalTasks, DocumentRevisionRequest, DocumentTemplateConfiguration, RequestContext } from 'src/app/models/model';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,6 +7,8 @@ import { Table } from 'primeng/table';
 import { Paginator } from 'primeng/paginator';
 import { DocumentRevisionService } from 'src/app/modules/services/document-revision.service';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'document-revision',
@@ -20,8 +22,13 @@ export class DocumentRevisionRequestsComponent implements OnInit{
   itemsPerPage = 10;
   rowsPerPageOptions = [1,10, 20, 50];
   access:boolean=false;
+  modalRef: BsModalRef | undefined;
+  pdfBytes: Uint8Array | undefined;
+  pdfUrl: string | null = null;
+  fileBytes: Uint8Array = new Uint8Array();
   constructor(private router: Router,private spinner: NgxSpinnerService, private commonsvc: CommonService, 
     private documentRevisionService: DocumentRevisionService,
+    private modalService: BsModalService, private sanitizer: DomSanitizer,
     private templatesvc:DocumentTemplateServiceService
     ) {}
 
@@ -73,41 +80,36 @@ export class DocumentRevisionRequestsComponent implements OnInit{
     this.commonsvc.revision = revision;
     this.router.navigate(['/revision/edit/'+revision.atid]);
   }
-  ExportFiles(
-    fileContent: any,
-    fileType: string,
-    fileName: string,
-    fileExtension?: string
-  ) {
-    let variables = {};
-    //CHECKING FILE CONTENT THERE OR NOT
-    //if (!this.hasValue(fileContent))
-      //SHOWING ERROR MESSAGE
-      //this..Information("Unable to Export File, File Content Not Passed");
-    //CHECKINg FILE NAME THERE OR NOT
-    //if (!this.hasValue(fileName))
-      //SHOWING ERROR MESSAGE
-     // this.us.Information("Unable to Export File, File Name Not Passed");
-    //EVEN WHEN WE PASS BYTE[] as error FROM API..ITS RECEIVING IN UI AS base64 string
-    //FOR THAT CONVERTING THAT TO REQUIRED FORMAT
-    var binary_string = window.atob(fileContent);
-    var len = binary_string.length;
-    var bytes = new Uint8Array(len);
-    for (var i = 0; i < len; i++) {
-      bytes[i] = binary_string.charCodeAt(i);
+  ExportFiles(fileContent: any, fileType: string, fileName: string, fileExtension?: string) {
+    try {
+        // Convert base64 string to binary data
+        const binaryString = atob(fileContent);
+        const length = binaryString.length;
+        const bytes = new Uint8Array(length);
+        for (let i = 0; i < length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
+
+        // Create Blob from binary data
+        const blob = new Blob([bytes], { type: fileType || 'application/octet-stream' });
+
+        // Create download link
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = fileName ? `${fileName}.${fileExtension || 'docx'}` : `${this.GetGUID()}.${fileExtension || 'docx'}`;
+
+        // Trigger download
+        link.click();
+
+        // Clean up
+        window.URL.revokeObjectURL(link.href);
+    } catch (error) {
+        console.error('Error exporting file:', error);
+        // Handle error as needed
     }
-    var link = document.createElement("a");
-    link.href = window.URL.createObjectURL(
-      new Blob([bytes], {
-        type: fileType ? fileType : "application/octet-stream",
-      })
-    );
-    link.download = fileName
-      ? fileName + "." + fileExtension
-      : this.GetGUID() + "." + fileExtension;
-    link.click();
-    window.URL.revokeObjectURL(link.href);
-  }
+}
+
+  
   hasValue(value:any) {
     let variables = {};
     //  if(value===0)
@@ -129,14 +131,71 @@ export class DocumentRevisionRequestsComponent implements OnInit{
     });
     return uuid;
   }
-  previewtemplate(objtemp: DocumentRevisionRequest) {
+  // previewtemplate(objtemp: DocumentRevisionRequest) {
+  //   this.spinner.show();
+  //   this.templatesvc.getTemplate(objtemp.template,false).subscribe((data: any) => {
+  //   this.ExportFiles(data,"docx",objtemp.template,"docx");
+  //   this.spinner.hide();
+  //   }, (error:any) => {
+  //     this.spinner.hide();
+  //   });
+  // }
+  previewtemplate(template: TemplateRef<any>,objtemp: DocumentRevisionRequest) {
     
     this.spinner.show();
-    this.templatesvc.getTemplate(objtemp.template,false).subscribe((data: any) => {
-    this.ExportFiles(data,"docx",objtemp.template,"docx");
-    this.spinner.hide();
+    // this.preparation.template=objtemp.Templatename;
+    // this.preparation.CreatedDate=objtemp.CreatedDate;
+    // this.preparation.ModifiedDate=objtemp.ModifiedDate;
+    // //this.preparation.dpnid = objtemp.
+    this.templatesvc.getTemplate(objtemp.template,true).subscribe((data: any) => {
+    //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
+      this.fileBytes = data;
+      this.pdfBytes = this.fileBytes;
+      this.spinner.hide();
+      this.openViewer(template);
     }, (error:any) => {
       this.spinner.hide();
     });
   }
+  closeModel() {
+    if (this.modalRef)
+      this.modalRef.hide();
+  }
+
+  openViewer(template: TemplateRef<any>): void {
+    
+    // if (this.pdfBytes) {
+    //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
+    //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+    //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    //   debugger
+      
+    //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
+    // }
+    this.getUrl(template);
+  }
+  getUrl(template: TemplateRef<any>):void{
+    this.templatesvc.geturl().subscribe((data:any)=>{
+      debugger
+      this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    })
+  }
+
+  // Function to convert base64 to Blob
+  private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
+
 }
