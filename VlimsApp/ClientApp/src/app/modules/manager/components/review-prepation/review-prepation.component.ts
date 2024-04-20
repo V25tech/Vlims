@@ -2,7 +2,7 @@ import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DocPrep_LableMapping, DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, UserConfiguration, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
+import { DocPrep_LableMapping, DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
@@ -14,7 +14,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 import { ToastrService } from 'ngx-toastr';
-import { UsersconfigurationService } from 'src/app/modules/services/usersconfiguration.service';
 
 
 @Component({
@@ -51,106 +50,23 @@ export class ReviewPrepationComponent {
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus: string = ''
   toastMsg: string | null = null;
-  lstusers: UserConfiguration[] = [];
-  user: UserConfiguration = new UserConfiguration();
-  password: string = '';
-
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
     { label: 'Stage 2', value: 'option3' },
   ];
-  document_preparaion_mappings= [
-    {
-        plantCode: "HP",
-        plantName: "Himachal",
-        clientInfo: "Accent",
-        operatingProcedure: "BATCH PACKING RECORD",
-        lables: {
-            "documentTitle": "Product Name",
-            "documentNumber": "BMR No",
-            "revisionNo": "Revision No.",
-            "supersedesNo": "BMR Supersedes No."
-        }
-    },
-    {
-        plantCode: "MP",
-        plantName: "Indore",
-        clientInfo: "Aurabindo",
-        operatingProcedure: "Standard Operating Procedure",
-        lables: {
-            "documentTitle": "Title",
-            "documentNumber": "SOP No.",
-            "revisionNo": "Revision No.",
-            "supersedesNo": "Supersedes"
-        }
-    },
-    {
-        plantCode: "MP",
-        plantName: "Indore",
-        clientInfo: "Aurabindo",
-        operatingProcedure: "Validation Protocol",
-        lables: {
-            "documentTitle": "Generic Name",
-            "documentNumber": "STP No.",
-            "revisionNo": "Revision No.",
-            "supersedesNo": "Supersedes No.",
-            "reference": "Reference",
-            "sampleQuantity": "Sample Quantity",
-            "packingInformation": "Packing Information",
-            "labelClaim": "Label Claim"
-        }
-    },
-    {
-        plantCode: "MP",
-        plantName: "Indore",
-        clientInfo: "Aurabindo",
-        operatingProcedure: "STANDARD TESTING PROCEDURE",
-        lables: {
-            "documentTitle": "Generic Name",
-            "documentNumber": "STP No.",
-            "revisionNo": "Revision No.",
-            "supersedesNo": "Supersedes No.",
-            "reference": "Reference",
-            "sampleQuantity": "Sample Quantity",
-            "packingInformation": "Packing Information",
-            "labelClaim": "Label Claim"
-        }
-    },
-    {
-        plantCode: "MP",
-        plantName: "Indore",
-        clientInfo: "Aurabindo",
-        operatingProcedure: "STANDARD TESTING SPECIFICATION",
-        lables: {
-            "documentTitle": "Generic Name",
-            "documentNumber": "STS No.",
-            "revisionNo": "Revision No.",
-            "supersedesNo": "Supersedes No.",
-            "reference": "Reference",
-            "sampleQuantity": "Sample Quantity",
-            "packingInformation": "Packing Information",
-            "labelClaim": "Label Claim"
-        }
-    }
-]
 
   templatesSource: Array<DocumentTemplateConfiguration> = [];
   lableMappings: DocPrep_LableMapping | undefined;
-  istemplate:boolean=false;
-  isworkflow:boolean=false;
 
   constructor(private location: Location, private router: Router,
     private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private userssvc: UsersconfigurationService,
     private http: HttpClient,
     private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
   ngOnInit() {
-    this.getusers();
-
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
       this.commonsvc.createdBy = user;
@@ -170,12 +86,6 @@ export class ReviewPrepationComponent {
     }
     else if (this.commonsvc.preperation.dpnid) {
       this.preparation = this.commonsvc.preperation;
-      if(this.preparation.template!='' && this.preparation.template!=undefined){
-        this.istemplate=true;
-      }
-      if(this.preparation.wokflow!='' && this.preparation.wokflow!=undefined){
-        this.isworkflow=true;
-      }
       this.preparation.status = 'In-Progress';
       this.buildPrepdocument();
       this.getLabelMappings();
@@ -205,121 +115,37 @@ export class ReviewPrepationComponent {
   }
   getworkflowinfo() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 100, Id: 0 };
-    this.spinner.show();
-    this.wfservice.getworkflow(this.commonsvc.req).subscribe((data: any) => {
-      
+    this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsourcedata = data.Response;
       this.workflowsourcedata = this.workflowsourcedata.filter(o => o.documentstage?.includes("Preparation"));
       this.workflowsourcedata = this.workflowsourcedata.filter(o => o.documenttype?.toLocaleLowerCase() === this.preparation.documenttype.toLocaleLowerCase());
-      this.spinner.hide();
     });
   }
-
-
-
-  proceed(esign: TemplateRef<any>) {
-    debugger
-    // Open the modal
-    this.modalRef = this.modalService.show(esign, { class: 'modal-lg' });
-  }
-
-
-
-
-
-  getusers() {
-    debugger
-
-    let objrequest = new RequestContext();
-    objrequest.PageNumber = 1; objrequest.PageSize = 50;
-    return this.userssvc.getusers(objrequest).subscribe((data: any) => {
-      this.lstusers = data.Response;
-      //localStorage.setItem("lstusers", this.lstusers.);
-
-
-    });
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  confirmApproval() {
-    debugger
-    const username = localStorage.getItem('username') || '';
-    const password = (document.getElementById('password') as HTMLInputElement).value;
-    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
-    if (userExists) {
-
-      this.preparation.ModifiedBy = this.username;
-      this.preparation.status = this.finalStatus;
-      if (this.isapprove && this.reviewpendingcount > 0) {
-        this.toastr.error('Reviews Pending');
-      }
-      else {
-        this.toastMsg = this.preparation.status;
-        this.savePreparation();
-      }
-
-    } else {// Username or password is invalid, display error message
-      this.toastr.error('Invalid Username or Password');
+  approve() {
+    this.preparation.ModifiedBy = this.username;
+    this.preparation.status = this.finalStatus;
+    if (this.isapprove && this.reviewpendingcount > 0) {
+      this.toastr.error('Reviews Pending');
     }
-  }
-
-
-
-
-
-  confirmReturn() {
-
-    const username = localStorage.getItem('username') || '';
-    const password = (document.getElementById('password') as HTMLInputElement).value;
-    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
-    if (userExists) {
-
-
-      this.location.back();
-      this.preparation.ModifiedBy = this.commonsvc.getUsername();
-      this.preparation.status = 'Returned';
+    else {
       this.toastMsg = this.preparation.status;
       this.savePreparation();
-    } else {// Username or password is invalid, display error message
-      this.toastr.error('Invalid Username or Password');
     }
   }
-
-
-
-
-
-  confirmReject() {
-    debugger
-    const username = localStorage.getItem('username') || '';
-    const password = (document.getElementById('password') as HTMLInputElement).value;
-    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
-    if (userExists) {
-
-      debugger
-      this.preparation.ModifiedBy = this.commonsvc.getUsername();
-      this.preparation.status = 'Rejected';
-      this.toastMsg = this.preparation.status;
-      this.savePreparation();
-      //this.location.back();
-
-    } else {// Username or password is invalid, display error message
-      this.toastr.error('Invalid Username or Password');
-    }
+  return() {
+    this.location.back();
+    this.preparation.ModifiedBy = this.commonsvc.getUsername();
+    this.preparation.status = 'Returned';
+    this.toastMsg = this.preparation.status;
+    this.savePreparation();
   }
-
+  reject() {
+    this.preparation.ModifiedBy = this.commonsvc.getUsername();
+    this.preparation.status = 'Rejected';
+    this.toastMsg = this.preparation.status;
+    this.savePreparation();
+    //this.location.back();
+  }
   savePreparation() {
     this.spinner.show();
     if (this.editMode && (this.preparation.status == 'Rejected' || this.preparation.status == 'Returned')) {
@@ -329,19 +155,21 @@ export class ReviewPrepationComponent {
       this.preparation.ModifiedBy = this.commonsvc.createdBy;
       this.preparation.status = this.finalStatus;
     }
-    if(this.lstpreparations!=undefined && this.lstpreparations.length>0){
+    if (this.lstpreparations != undefined && this.lstpreparations.length > 0) {
       const existingPreparation = this.lstpreparations.find(o => o.documentno.toLowerCase() === this.preparation.documentno.toLowerCase());
       if (existingPreparation) {
-          this.toastr.error("Duplicate Document No.");
-          return;
+        this.toastr.error("Duplicate Document No.");
+        return;
       }
-  }
+    }
+
+
     this.toastMsg = this.toastMsg ?? 'Updated';
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
       this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
         this.commonsvc.preperation = new DocumentPreperationConfiguration();
-        this.toastr.success(`Document Preparation ${this.toastMsg} successfully`);
+        this.toastr.success(`Document Preparation ${this.toastMsg}  successfully`);
         this.spinner.hide();
         this.location.back();
         this.isButtonDisabled = false;
@@ -351,7 +179,6 @@ export class ReviewPrepationComponent {
       });
     }
   }
-
 
   onCancel() {
     this.location.back();
@@ -476,19 +303,16 @@ export class ReviewPrepationComponent {
   }
 
   getdocttemplate() {
-    this.spinner.show();
-    this.templateService.getdocttemplate(this.commonsvc.req).subscribe((data: any) => {
-     
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
+    this.templateService.getdocttemplate(objrequest).subscribe((data: any) => {
+
       this.templatesSource = data.Response;
       this.templatesSource = this.templatesSource.filter(o => o.documenttype.toLowerCase() === this.preparation.documenttype.toLowerCase());
       if (this.preparation.template == null || this.preparation.template == undefined || this.preparation.template == '') {
 
         const filter = this.templatesSource.find(o => !o.IsParent);
         this.templatesSource = filter ? [filter] : [];
-        this.spinner.hide();
       }
-      else
-      { this.spinner.hide();}
     });
   }
   getworkflowitems() {
@@ -545,31 +369,18 @@ export class ReviewPrepationComponent {
     }
   }
 
-  // getLabelMappings() {
-  //   //let mapping_configUrl = '../assets/doc-preparation-mappings.json';
-  //   let mapping_configUrl=this.document_preparaion_mappings;
-  //   console.log(this.preparation.documenttype)
-  //   // return this.http.get(mapping_configUrl).subscribe((data: any) => {
-  //   //   if (data) {
-  //   //     let exist = data.document_preparaion_mappings.find((p: any) => p.operatingProcedure.toLowerCase() == this.preparation.documenttype.toLowerCase());
-  //   //     if (exist) {
-  //   //       this.lableMappings = exist.lables;
-  //   //     }
-  //   //   }
-  //   // });
-  //   let exist = mapping_configUrl.find((p: any) => p.operatingProcedure.toLowerCase() == this.preparation.documenttype.toLowerCase());
-  //       if (exist) {
-  //         this.lableMappings = exist.lables;
-  //       }
-  // }
   getLabelMappings() {
-    debugger
-    let exist = this.document_preparaion_mappings.find((p: any) => p.operatingProcedure.toLowerCase() == this.preparation.documenttype.toLowerCase());
-    if (exist) {
-        this.lableMappings = exist.lables as DocPrep_LableMapping;
-    }
-}
-
+    let mapping_configUrl = 'assets/doc-preparation-mappings.json';
+    console.log(this.preparation.documenttype)
+    return this.http.get(mapping_configUrl).subscribe((data: any) => {
+      if (data) {
+        let exist = data.document_preparaion_mappings.find((p: any) => p.operatingProcedure.toLowerCase() == this.preparation.documenttype.toLowerCase());
+        if (exist) {
+          this.lableMappings = exist.lables;
+        }
+      }
+    });
+  }
 
   buildPrepdocument() {
     if (!this.preparation.prepdocument) {
@@ -578,7 +389,9 @@ export class ReviewPrepationComponent {
         packingInformation: '',
         revisionNo: '',
         sampleQuantity: '',
-        supersedesNo: ''
+        supersedesNo: '',
+        productCode: '',
+        reference: ''
       };
     }
   }

@@ -42,21 +42,21 @@
               </div>
             </div>
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label for="docNoType" class="col-sm-2 col-form-label">Document Number</label>
               <div class="col-sm-10">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" name="docNoType" type="radio" id="docNoType2" [(ngModel)]="docNoType"
-                         value="System Generated" [disabled]="viewMode" placeholder="Enter Document Number" />
+                    value="System Generated" [disabled]="viewMode" placeholder="Enter Document Number" />
                   <label class="form-check-label" for="docNoType2">System Generated</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" name="docNoType" type="radio" id="docNoType1" [(ngModel)]="docNoType"
-                         value="User Defined" [disabled]="viewMode" />
+                    value="User Defined" [disabled]="viewMode"/>
                   <label class="form-check-label" for="docNoType1">User Defined</label>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group row" *ngIf="docNoType === 'User Defined'">
               <label for="documentNumber" class="col-sm-2 col-form-label">
@@ -97,7 +97,7 @@
               </div> -->
               <div class="col-sm-10">
                 <p-dropdown name="workflow" [options]="workflowsourcedata" [(ngModel)]="preparation.wokflow"
-                            optionLabel="workflowName" optionValue="workflowName" [disabled]="isworkflow || viewMode" [required]="true"
+                            optionLabel="workflowName" optionValue="workflowName" [disabled]="viewMode || editMode" [required]="true"
                             [autoDisplayFirst]="false" #WorkFlowInput="ngModel" placeholder="Select Workflow">
                 </p-dropdown>
                 <div *ngIf="WorkFlowInput.invalid && (WorkFlowInput.dirty || WorkFlowInput.touched)" class="text-danger">
@@ -113,7 +113,7 @@
               </label>
               <div class="col-sm-10">
                 <p-dropdown name="template" [options]="templatesSource" [(ngModel)]="preparation.template"
-                            optionLabel="Templatename" optionValue="Templatename" [disabled]="istemplate || viewMode" [required]="true"
+                            optionLabel="Templatename" optionValue="Templatename" [disabled]="viewMode" [required]="true"
                             [autoDisplayFirst]="false" #templateInput="ngModel" placeholder="Select Template">
                 </p-dropdown>
                 <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!='' && !viewMode" href="javascript:void(0)" (click)="edittemplate(preparation.template)">Modify</a>
@@ -164,6 +164,22 @@
               </div>
             </div>
 
+            <div *ngIf="lableMappings?.reference" class="form-group row">
+              <label for="reference" class="col-sm-2 col-form-label">{{lableMappings?.reference || 'Reference'}}</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="reference" name="reference"
+                       [(ngModel)]="preparation.prepdocument.reference" />
+              </div>
+            </div>
+
+            <div *ngIf="lableMappings?.productCode" class="form-group row">
+              <label for="productCode" class="col-sm-2 col-form-label">{{lableMappings?.productCode || 'Product/MaterialCode'}}</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="productCode" name="productCode"
+                       [(ngModel)]="preparation.prepdocument.productCode" />
+              </div>
+            </div>
+
             <!-- <div class="form-group row" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!=''">
               <label for="document" class="col-sm-2 col-form-label">Document<span
                 style="color: red; font-weight: bolder;">*</span></label>
@@ -196,18 +212,17 @@
             </div>
           </div>
 
-
           <div class="form-group row my-4">
             <div class="col-sm-10 offset-sm-2">
               <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">
                 Cancel
               </button>
               <!--[disabled]="!fm.form.valid || !preparation.document"-->
-              <button type="submit" class="btn btn-primary" *ngIf="!viewMode" [disabled]="!fm.form.valid || isButtonDisabled">Submit</button>
+              <button type="submit" class="btn btn-primary" *ngIf="!viewMode" [disabled]="!fm.form.valid || isButtonDisabled">Update</button>
 
-              <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="proceed(esign)">Proceed</button>
-              <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="return(esign)">Return</button>
-              <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject(esign)">Reject</button> -->
+              <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
+              <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="return()">Return</button>
+              <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
 
             </div>
           </div>
@@ -228,46 +243,5 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
-    </div>
-  </ng-template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <ng-template #esign>
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">E-sign Credentials</h4>
-          <button type="button" class="close" aria-label="Close" (click)="modalRef!.hide()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" value="{{ username }}" readonly>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="modalRef!.hide()">Close</button>
-          <button type="button" class="btn btn-success" (click)="confirmApproval()">Approve</button>
-          <button type="button" class="btn btn-primary" (click)="confirmReturn()">Return</button>
-          <button type="button" class="btn btn-danger" (click)="confirmReject()">Reject</button>
-        </div>
-      </div>
     </div>
   </ng-template>
