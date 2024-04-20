@@ -382,14 +382,14 @@ export class ReviewPrepationComponent {
     });
   }
 
-  buildPrepdocument() {
-    if (!this.preparation.prepdocument) {
-      this.preparation.prepdocument = {
-        labelClaim: '',
-        packingInformation: '',
-        revisionNo: '',
-        sampleQuantity: '',
-        supersedesNo: '',
+  buildPrepdocument(){
+    if(!this.preparation.prepdocument){        
+        this.preparation.prepdocument = {
+        labelClaim : '',
+        packingInformation : '',
+        revisionNo : '',
+        sampleQuantity : '',
+        supersedesNo :'',
         productCode: '',
         reference: ''
       };
