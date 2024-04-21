@@ -22,17 +22,39 @@ SET @XML=(SELECT document_PSY FROM DocumentPreparation_PSY WHERE DPNID_PSY=@DOCP
 
 IF(@XML IS NOT NULL)
 BEGIN
--- Update supersedesNo
-SET @XML.modify('
-    replace value of (/PreperationDocument/supersedesNo/text())[1]
-    with xs:int((/PreperationDocument/supersedesNo/text())[1]) + 1
-');
+DECLARE @supersedesNo VARCHAR(10);
+DECLARE @revisionNo VARCHAR(10);
 
--- Update revisionNo
-SET @XML.modify('
-    replace value of (/PreperationDocument/revisionNo/text())[1]
-    with xs:int((/PreperationDocument/revisionNo/text())[1]) + 1
-');
+-- Get supersedesNo value
+SET @supersedesNo = (
+    SELECT TOP 1 T.c.value('.', 'VARCHAR(10)')
+    FROM @XML.nodes('/PreperationDocument/supersedesNo') AS T(c)
+);
+
+-- Check and update supersedesNo
+IF ISNUMERIC(@supersedesNo) = 1
+BEGIN
+    SET @XML.modify('
+        replace value of (/PreperationDocument/supersedesNo/text())[1]
+        with xs:int((/PreperationDocument/supersedesNo/text())[1]) + 1
+    ');
+END
+
+-- Get revisionNo value
+SET @revisionNo = (
+    SELECT TOP 1 T.c.value('.', 'VARCHAR(10)')
+    FROM @XML.nodes('/PreperationDocument/revisionNo') AS T(c)
+);
+
+-- Check and update revisionNo
+IF ISNUMERIC(@revisionNo) = 1
+BEGIN
+    SET @XML.modify('
+        replace value of (/PreperationDocument/revisionNo/text())[1]
+        with xs:int((/PreperationDocument/revisionNo/text())[1]) + 1
+    ');
+END
+
 END
 
 DECLARE @ID1 INT
