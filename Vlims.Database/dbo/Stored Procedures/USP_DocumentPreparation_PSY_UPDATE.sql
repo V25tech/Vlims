@@ -7,7 +7,7 @@
 @department_PSY NVarChar(50),
 @document_PSY XML,
 @template_PSY NVarChar(50),
-@wokflow_PSY NVarChar(50),
+@wokflow_PSY NVarChar(200),
 @details_PSY NVarChar(max),
 @ModifiedBy_PSY NVarChar(100),
 @Status_PSY NVarChar(100)
