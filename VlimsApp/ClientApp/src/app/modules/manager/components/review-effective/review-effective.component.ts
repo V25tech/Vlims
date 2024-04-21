@@ -56,7 +56,7 @@ export class ReviewEffectiveComponent {
   ];
   effectivedate: Date | undefined;
   reviewdate: Date | undefined;
-
+  isworkflow:boolean=false;
   constructor(private location: Location, private router: Router,
     private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
@@ -87,6 +87,9 @@ export class ReviewEffectiveComponent {
     }
     else if (this.commonsvc.efffective.deid) {
       this.effective = this.commonsvc.efffective;
+      if(this.effective.workflow!='' && this.effective.workflow!=undefined){
+        this.isworkflow=true;
+      }
       this.getdocttemplate();
       this.getworkflowinfo();
     }
