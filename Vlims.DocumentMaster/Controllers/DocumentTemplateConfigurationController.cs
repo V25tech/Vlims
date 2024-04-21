@@ -542,7 +542,7 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine(@"<tbody>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">Generic Name</td>");
-            stringBuilder.AppendLine($"    <td class=\"tg-0pky\" colspan=\"2\"><span style=\"font-weight:bold\"></span> {(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-0pky\" colspan=\"3\"><span style=\"font-weight:bold\"></span> {(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
             //stringBuilder.AppendLine(@"<td class=""tg-0pky"" colspan=""3"">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : ""test"") : ""test"")}</td>");
             stringBuilder.AppendLine(@"</tr>");
 
