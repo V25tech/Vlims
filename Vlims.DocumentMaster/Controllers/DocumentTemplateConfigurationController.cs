@@ -359,6 +359,8 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:center;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-weight:bold;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-adin{font-family:\"Times New Roman\", Times, serif !important;font-size:12px;font-weight:bold;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-adin1{font-family:\"Times New Roman\", Times, serif !important;font-size:8px;font-weight:bold;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine(".p {border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine("</style>");
 
@@ -372,35 +374,35 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</thead>");
             htmlBuilder.AppendLine("<tbody>");
-            htmlBuilder.AppendLine("  <tr>");
-            htmlBuilder.AppendLine("    <th class=\"tg-adin\">Signature</th>");
-            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
-            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
-            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
-            htmlBuilder.AppendLine("  </tr>");
+            //htmlBuilder.AppendLine("  <tr>");
+            //htmlBuilder.AppendLine("    <th class=\"tg-adin\">Signature</th>");
+            //htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
+            //htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
+            //htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
+            //htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Date</th>");
-            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
-            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
-            htmlBuilder.AppendLine("    <td class=\"tg-zd42\"></td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-adin\"></td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-adin\"></td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-adin\"></td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Name</th>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PreparedBy) ? template1.PreparedBy : "test") : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewedBy) ? template1.ReviewedBy : "test") : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ApprovedBy) ? template1.ApprovedBy : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PreparedBy) ? template1.PreparedBy : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewedBy) ? template1.ReviewedBy : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ApprovedBy) ? template1.ApprovedBy : "test") : "test")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Designation</th>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PreparedRole) ? template1.PreparedRole : "test") : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewedRole) ? template1.ReviewedRole : "test") : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ApprovedRole) ? template1.ApprovedRole : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PreparedRole) ? template1.PreparedRole : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewedRole) ? template1.ReviewedRole : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ApprovedRole) ? template1.ApprovedRole : "test") : "test")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Department</th>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PrepareDept) ? template1.PrepareDept : "test") : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewedDept) ? template1.ReviewedDept : "test") : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ApprovedDept) ? template1.ApprovedDept : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PrepareDept) ? template1.PrepareDept : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewedDept) ? template1.ReviewedDept : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ApprovedDept) ? template1.ApprovedDept : "test") : "test")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</tbody>");
             htmlBuilder.AppendLine("</table>");
@@ -408,9 +410,9 @@ namespace Vlims.Controllers
             if (!string.IsNullOrEmpty(template1.PrintCopy))
             {
                 htmlBuilder.AppendLine("  <tr>");
-                htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">Print Type: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintCopy) ? template1.PrintCopy : "test") : "test")}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}, </td>");
+                htmlBuilder.AppendLine($"    <td class=\"tg-adin1\"Print Type: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintCopy) ? template1.PrintCopy : "test") : "test")}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}, </td>");
                 htmlBuilder.AppendLine("  </tr>");
-                htmlBuilder.AppendLine($"    <td class=\"tg-zd42\">Print Reason: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintReason) ? template1.PrintReason : "test") : "test")}</td>");
+                htmlBuilder.AppendLine($"    <td class=\"tg-adin1\">Print Reason: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintReason) ? template1.PrintReason : "test") : "test")}</td>");
             }
             //htmlBuilder.AppendLine($"<p>Print Type: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintCopy) ? template1.PrintCopy : "test") : "test")}</p>");
             table = htmlBuilder.ToString();
@@ -443,9 +445,9 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");
             htmlBuilder.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:5px 5px;word-break:normal;}");
             htmlBuilder.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}");
-            htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:center;vertical-align:top}");
-            htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-weight:bold;text-align:left;vertical-align:top}");
-            htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-size:14px;font-weight:bold;text-align:center;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-size:12px;font-weight:bold;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-size:12px;font-weight:bold;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine("</style>");
 
             // Append the table
@@ -522,10 +524,10 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");
             stringBuilder.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:5px 5px;word-break:normal;}");
             stringBuilder.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}");
-            stringBuilder.AppendLine(".tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}");
+            stringBuilder.AppendLine(".tg .tg-1wig{font-family:\"Times New Roman\", Times, serif !important;font-size:12px;font-weight:bold;text-align:left;vertical-align:top}");
             stringBuilder.AppendLine(".tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}");
-            stringBuilder.AppendLine(".tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}");
-            stringBuilder.AppendLine(".tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}");
+            stringBuilder.AppendLine(".tg .tg-7btt{font-family:\"Times New Roman\", Times, serif !important;border-color:inherit;font-size:14px;font-weight:bold;text-align:center;vertical-align:top}");
+            stringBuilder.AppendLine(".tg .tg-fymr{font-family:\"Times New Roman\", Times, serif !important;border-color:inherit;font-size:12px;font-weight:bold;text-align:left;vertical-align:top}");
             stringBuilder.AppendLine(".tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}");
             stringBuilder.AppendLine(".tg .tg-0lax{text-align:left;vertical-align:top}");
             stringBuilder.AppendLine("</style>");
@@ -546,53 +548,53 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine(@"<tbody>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">Generic Name</td>");
-            stringBuilder.AppendLine($"    <td class=\"tg-0pky\" colspan=\"3\"><span style=\"font-weight:bold\"></span> {(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-1wig\" colspan=\"3\"><span style=\"font-weight:bold\"></span> {(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
             //stringBuilder.AppendLine(@"<td class=""tg-0pky"" colspan=""3"">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : ""test"") : ""test"")}</td>");
             stringBuilder.AppendLine(@"</tr>");
 
             stringBuilder.AppendLine(@"<tr>");
-            stringBuilder.AppendLine(@"<td class=""tg-fymr"">STP No.</td>");
+            stringBuilder.AppendLine(@"<td class=""tg-1wig"">STP No.</td>");
             //stringBuilder.AppendLine(@"<td class=""tg-0pky"">STP NO. 1234</td>");
-            stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "test") : "test")}</td>");
-            stringBuilder.AppendLine(@"<td class=""tg-fymr"">Revision No.</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "test") : "test")}</td>");
+            stringBuilder.AppendLine(@"<td class=""tg-1wig"">Revision No.</td>");
             if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo))
-                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
+                stringBuilder.AppendLine($"    <td class=\"tg-1wig\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
             else
-                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
+                stringBuilder.AppendLine($"    <td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
             //stringBuilder.AppendLine(@"<td class=""tg-0pky"">01</td>");
             stringBuilder.AppendLine(@"</tr>");
 
             stringBuilder.AppendLine(@"<tr>");
-            stringBuilder.AppendLine(@"<td class=""tg-fymr"">Supersedes No.</td>");
+            stringBuilder.AppendLine(@"<td class=""tg-1wig"">Supersedes No.</td>");
             //stringBuilder.AppendLine(@"<td class=""tg-0pky"">00</td>");
             if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
-                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : 0) : 0)}</td>");
+                stringBuilder.AppendLine($"    <td class=\"tg-1wig\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : 0) : 0)}</td>");
             else
-                stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
+                stringBuilder.AppendLine($"    <td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
 
             stringBuilder.AppendLine(@"<td class=""tg-fymr"">Product/Material Code</td>");
             //stringBuilder.AppendLine(@"<td class=""tg-0pky"">001CODEMODE</td>");
-            stringBuilder.AppendLine($"    <td class=\"tg-0pky\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.productCode) ? preparation.Prepdocument.productCode : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-fymr\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.productCode) ? preparation.Prepdocument.productCode : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Reference</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.reference) ? preparation.Prepdocument.reference : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.reference) ? preparation.Prepdocument.reference : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Sample Quality</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.sampleQuantity) ? preparation.Prepdocument?.sampleQuantity.ToString() : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.sampleQuantity) ? preparation.Prepdocument?.sampleQuantity.ToString() : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Effective Date</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Review Date</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Packing Information</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\" colspan=\"3\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.packingInformation) ? preparation.Prepdocument?.packingInformation.ToString() : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\" colspan=\"3\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.packingInformation) ? preparation.Prepdocument?.packingInformation.ToString() : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Label Claim</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\" colspan=\"3\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.labelClaim) ? preparation.Prepdocument?.labelClaim.ToString() : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\" colspan=\"3\">{(preparation != null ? (!string.IsNullOrEmpty(preparation.Prepdocument?.labelClaim) ? preparation.Prepdocument?.labelClaim.ToString() : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"</tbody>");
             stringBuilder.AppendLine(@"</table>");
@@ -627,7 +629,8 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");
             stringBuilder.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:5px 5px;word-break:normal;}");
             stringBuilder.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}");
-            stringBuilder.AppendLine(".tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}");
+            stringBuilder.AppendLine(".tg .tg-1wig{font-family:\"Times New Roman\", Times, serif !important;font-size:12px;font-weight:bold;text-align:left;vertical-align:top}");
+            stringBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-size:14px;font-weight:bold;text-align:center;vertical-align:top}");
             stringBuilder.AppendLine(".tg .tg-0lax{text-align:left;vertical-align:top}");
             stringBuilder.AppendLine(".tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}");
             stringBuilder.AppendLine("</style>");
@@ -646,31 +649,31 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine("<tbody>");
             stringBuilder.AppendLine("<tr>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">PRODUCT NAME</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\" colspan=\"3\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\" colspan=\"3\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "test") : "test")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("<tr>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BMR NO.</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "test") : "test")}</td>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">REVISION NO.</td>");
             if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo))
-                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo) ? preparation.Prepdocument.revisionNo : "test") : "test")}</td>");
             else
-                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "test") : "test")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("<tr>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BMR SUPERSEDES NO.</td>");
             if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument?.supersedesNo))
-                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : "test") : "test")}</td>");
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : "test") : "test")}</td>");
             else
-                stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : "test") : "test")}</td>");
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : "test") : "test")}</td>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">EFFECTIVE DATE</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("<tr>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BATCH NO.</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.BatchNumber) ? template1.BatchNumber : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.BatchNumber) ? template1.BatchNumber : "test") : "test")}</td>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BATCH SIZE</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-0lax\">{(template1 != null ? (!string.IsNullOrEmpty(template1.BatchSize) ? template1.BatchSize : "test") : "test")}</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.BatchSize) ? template1.BatchSize : "test") : "test")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("</tbody>");
             stringBuilder.AppendLine("</table>");
