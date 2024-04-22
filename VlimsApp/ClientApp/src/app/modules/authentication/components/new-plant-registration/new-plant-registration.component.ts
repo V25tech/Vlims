@@ -4,20 +4,30 @@ import { PlantConfiguration } from '../../../../models/model';
 import { NewPlantRegistrationConfigurationService } from '../../../services/new-plant-registration-configuration.service';
 import { CommonService } from '../../../../shared/common.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-plant-registration',
   templateUrl: './new-plant-registration.component.html'
 })
 export class NewPlantRegistrationComponent implements OnInit {
-  types: Array<PlantConfiguration> = [];
-  adddoc = new PlantConfiguration();
-  editMode:boolean=false;
+
+
+  isButtonDisabled = false;
+  griddata:PlantConfiguration[]=[];
   viewMode: boolean = false;
+  editMode: boolean = false;
+  newplant = new PlantConfiguration();
   plantid: number = 0;
   title: string = 'New Plant Registration';
 
-  constructor(private commonsvc: CommonService,private toastr: ToastrService, private doctypeservice: NewPlantRegistrationConfigurationService, private router: Router, private cdr: ChangeDetectorRef) { }
+  constructor(private commonsvc: CommonService,
+    private loader:NgxSpinnerService,
+    private location: Location,
+    private toastr: ToastrService,
+     private plantservice: NewPlantRegistrationConfigurationService,
+      private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     const urlPath = this.router.url;
@@ -33,35 +43,88 @@ export class NewPlantRegistrationComponent implements OnInit {
     }
     else if (lastSegment == "view") {
       this.viewMode = true; this.editMode = false;
-      this.adddoc = this.commonsvc.plantConfig;
+      this.newplant = this.commonsvc.plantConfig;
       this.title = "View Plan Configuration";
     }
     //this.get();
     this.cdr.detectChanges();
   }
 
-  submit(adddoc: PlantConfiguration) {
-    debugger;
-    adddoc.Status = 'In Progress';
-    adddoc.CreatedDate = new Date();
-    adddoc.ModifiedDate = new Date();
-    this.doctypeservice.addNewRegistrationconfiguration(adddoc).subscribe((res: any) => {
-      //this.toastr.success('Added');
-      this.toastr.success('New Plant Registered Succesfull!', 'Saved.!');
-      this.router.navigate(['/admin/plant']);
-    });
+
+
+
+
+
+
+
+  submit(newplant: PlantConfiguration) {
+    
+    if(this.editMode)
+    {
+      debugger
+      this.updateplant(newplant);
+    }
+    else{
+      
+      this.addplant(newplant);
+    }
+    
+    //this.location.back();
   }
+  updateplant(newplant: PlantConfiguration) {
+    
+    this.loader.show();
+    newplant.ModifiedBy=this.commonsvc.getUsername();
+    if (!this.isButtonDisabled) {
+      this.isButtonDisabled = true;
+    return this.plantservice.updateNewRegistrationconfiguration(newplant).subscribe((response)=>{
+      this.toastr.success('Plant Updated Successfully','Saved!');
+      this.loader.hide();
+      this.location.back();
+      this.isButtonDisabled=false;
+    })
+  }else{
+    return false;
+  }
+  }
+
+  addplant(newplant: PlantConfiguration) {
+    
+    this.loader.show();
+    newplant.CreatedBy = this.commonsvc.getUsername();
+    newplant.ModifiedBy = this.commonsvc.getUsername();
+    newplant.CreatedDate = new Date();
+    newplant.ModifiedDate = new Date();
+    
+    if (!this.isButtonDisabled) {
+        this.isButtonDisabled = true;
+        this.plantservice.addNewRegistrationconfiguration(newplant).subscribe((res: any) => {
+            this.toastr.success('Plant Registered Successfully!', 'Saved!');
+            this.loader.hide();
+            this.location.back();
+            this.isButtonDisabled = false;
+        });
+    }
+}
+
+
+
+
+
+
+
+  
   closepopup() {
     this.router.navigate(['/admin/plant']);
   }
   onCancel() {
-    this.adddoc = new PlantConfiguration(); // Resetting adddoc to an empty object
+    this.newplant = new PlantConfiguration(); // Resetting adddoc to an empty object
     //this.router.navigate(['/admin/plant']);
   }
   getbyId() {
     debugger
-    this.doctypeservice.getbyId(this.plantid).subscribe((data: any) => {
-      this.adddoc = data;
+    this.plantservice.getbyId(this.plantid).subscribe((data: any) => {
+      this.newplant = data;
     }, ((error: any) => {
 
     }));
