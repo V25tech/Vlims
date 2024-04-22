@@ -232,7 +232,6 @@ namespace Vlims.DMS.Entities
         public PreperationDocument Prepdocument { get; set; }
         public bool IsEffectiveApproved { get; set; }
     }
-
     public class PreperationDocument
     {
         public string sampleQuantity { get; set; }
