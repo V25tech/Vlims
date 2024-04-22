@@ -483,7 +483,7 @@ namespace Vlims.Controllers
                 htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
-            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Depaertment</td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Department</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Department) ? template1.Department : "test") : "test")}</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Page No.</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{p_PageNo} of {template.Pages}</td>");
