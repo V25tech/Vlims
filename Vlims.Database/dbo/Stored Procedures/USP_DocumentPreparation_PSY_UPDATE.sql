@@ -1,13 +1,13 @@
 ﻿
 
   CREATE PROCEDURE [dbo].[USP_DocumentPreparation_PSY_UPDATE] @DPNID_PSY int, @Documentmanagerid_PSY NVarChar(50),
-@documenttitle_PSY NVarChar(50),
-@documentno_PSY NVarChar(50),
-@documenttype_PSY NVarChar(50),
+@documenttitle_PSY NVarChar(500),
+@documentno_PSY NVarChar(100),
+@documenttype_PSY NVarChar(200),
 @department_PSY NVarChar(50),
 @document_PSY XML,
 @template_PSY NVarChar(50),
-@wokflow_PSY NVarChar(50),
+@wokflow_PSY NVarChar(200),
 @details_PSY NVarChar(max),
 @ModifiedBy_PSY NVarChar(100),
 @Status_PSY NVarChar(100)
