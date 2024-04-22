@@ -246,6 +246,10 @@ namespace Vlims.Controllers
                 {
                     headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
                 }
+                else if (template.documenttype.Equals("BATCH MANUFACTURING RECORD", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+                }
                 else if (template.documenttype.Equals("STANDARD OPERATING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
                 {
                     headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation));

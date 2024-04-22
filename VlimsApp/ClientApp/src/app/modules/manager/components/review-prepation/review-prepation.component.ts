@@ -63,11 +63,23 @@ export class ReviewPrepationComponent {
         operatingProcedure: "BATCH PACKING RECORD",
         lables: {
             "documentTitle": "Product Name",
-            "documentNumber": "BMR No",
+            "documentNumber": "BPR No",
             "revisionNo": "Revision No.",
-            "supersedesNo": "BMR Supersedes No."
+            "supersedesNo": "BPR Supersedes No."
         }
     },
+    {
+      plantCode: "HP",
+      plantName: "Himachal",
+      clientInfo: "Accent",
+      operatingProcedure: "BATCH MANUFACTURING RECORD",
+      lables: {
+          "documentTitle": "Product Name",
+          "documentNumber": "BMR No",
+          "revisionNo": "Revision No.",
+          "supersedesNo": "BMR Supersedes No."
+      }
+  },
     {
         plantCode: "MP",
         plantName: "Indore",
