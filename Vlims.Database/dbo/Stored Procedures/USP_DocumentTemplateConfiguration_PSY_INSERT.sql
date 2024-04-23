@@ -14,7 +14,9 @@
 @CreatedBy_PSY NVarChar(100),
 @ModifiedBy_PSY NVarChar(100),
 @Status_PSY NVarChar(100),
-@Pages int
+@Pages int,
+@IsClone bit=0,
+@PreparationId int=0
  AS 
  BEGIN 
   BEGIN TRY 
@@ -37,7 +39,7 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-Status_PSY,Pages)
+Status_PSY,Pages,IsClone,PreparationId)
  VALUES 
 (@DocumentMasterId_PSY,
 @Templatename_PSY,
@@ -55,7 +57,7 @@ Status_PSY,Pages)
  GetDate() ,
 @ModifiedBy_PSY,
  GetDate(),
- @Status_PSY,@Pages);
+ @Status_PSY,@Pages,@IsClone,@PreparationId);
  SELECT @ID = @@IDENTITY; 
 
  --INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)

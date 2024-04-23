@@ -148,7 +148,9 @@ export class ReviewPrepationComponent {
   lableMappings: DocPrep_LableMapping | undefined;
   istemplate:boolean=false;
   isworkflow:boolean=false;
-
+  istemplateused:boolean=false;
+  isrevision:boolean=false;
+  clonetemp:DocumentTemplateConfiguration=new DocumentTemplateConfiguration();
   constructor(private location: Location, private router: Router,
     private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
@@ -175,6 +177,7 @@ export class ReviewPrepationComponent {
       this.getworkflowitems();
     }
     else if (this.commonsvc.preperation.dpnid) {
+      debugger
       this.preparation = this.commonsvc.preperation;
       if(this.preparation.template!='' && this.preparation.template!=undefined){
         this.istemplate=true;
@@ -182,6 +185,14 @@ export class ReviewPrepationComponent {
       if(this.preparation.wokflow!='' && this.preparation.wokflow!=undefined){
         this.isworkflow=true;
       }
+      if(this.preparation.prepdocument!=null && this.preparation.prepdocument!=undefined){
+      if(this.preparation.prepdocument.revisionNo!='' && this.preparation.prepdocument.revisionNo!=undefined){
+        this.isrevision=true;
+      }
+    }
+    else{
+      this.isrevision=false;
+    }
       this.preparation.status = 'In-Progress';
       this.buildPrepdocument();
       this.getLabelMappings();
@@ -260,8 +271,10 @@ export class ReviewPrepationComponent {
         return;
       }
     }
-
-
+    if(this.istemplateused){
+      this.templateService.adddoctemplate(this.clonetemp).subscribe((data:any)=>{
+      });
+    }
     this.toastMsg = this.toastMsg ?? 'Updated';
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
@@ -373,6 +386,46 @@ export class ReviewPrepationComponent {
 
     });
   }
+  istemplatecheck(event: any){
+    debugger
+    this.spinner.show();
+    this.istemplateused=false;
+    this.templateService.isduplicate(this.preparation.template).subscribe((data: any) => {
+      this.istemplateused= Boolean(data);
+      if(this.istemplateused){
+      this.gettemplatebyId();
+    }
+      this.spinner.hide();
+    })
+  }
+  getShortUniqueId(): string {
+    // Generate a timestamp
+    const timestamp = Date.now().toString(36);
+
+    // Generate a random number (4 characters)
+    const randomNumber = Math.random().toString(36).substr(2, 4);
+
+    // Combine timestamp and random number to form the unique identifier
+    const uniqueId = timestamp + randomNumber;
+
+    return uniqueId;
+}
+  gettemplatebyId(){
+    this.spinner.show();
+    let id=this.templatesSource.find(o=>o.Templatename.toLowerCase()===this.preparation.template.toLowerCase())?.DTID;
+    if(id!='' && id!=undefined){
+      this.templateService.getbyId(parseInt(id)).subscribe((data:any)=>{
+        this.clonetemp=data;
+        this.clonetemp.preparationId=parseInt(this.preparation.DTCId);
+        this.clonetemp.isclone=true;
+        this.clonetemp.Templatename+="--"+this.getShortUniqueId();
+        if(!this.isrevision){
+          this.clonetemp.Page=[]
+        }
+        this.spinner.hide();
+      });
+    }
+  }
   checkduplicatetemplate(template: TemplateRef<any>) {
     this.templateService.isduplicate(this.preparation.template).subscribe((data: any) => {
       const isduplicate = Boolean(data);
@@ -406,14 +459,15 @@ export class ReviewPrepationComponent {
      
       this.templatesSource = data.Response;
       this.templatesSource = this.templatesSource.filter(o => o.documenttype.toLowerCase() === this.preparation.documenttype.toLowerCase());
-      if (this.preparation.template == null || this.preparation.template == undefined || this.preparation.template == '') {
+      // if (this.preparation.template == null || this.preparation.template == undefined || this.preparation.template == '') {
   
-        const filter = this.templatesSource.find(o => !o.IsParent);
-        this.templatesSource = filter ? [filter] : [];
-        this.spinner.hide();
-      }
-      else
-      { this.spinner.hide();}
+      //   const filter = this.templatesSource.find(o => !o.IsParent);
+      //   this.templatesSource = filter ? [filter] : [];
+      //   this.spinner.hide();
+      // }
+      // else
+      // { this.spinner.hide();}
+      this.spinner.hide();
     });
   }
   getworkflowitems() {
