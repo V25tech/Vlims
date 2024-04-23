@@ -97,6 +97,9 @@ export class Prepdocument {
   sampleQuantity: string = '';
   packingInformation: string = '';
   labelClaim: string = '';
+  supersedesNo: string = ''; 
+  productCode:string=''; 
+  reference:string='';
   supersedesNo: string = '';
   productCode: string = '';
   reference: string = '';
@@ -111,6 +114,7 @@ export class DocPrep_LableMapping{
   sampleQuantity: string = '';
   packingInformation: string = '';
   labelClaim: string = '';
+  productCode:string=''; 
   productCode: string=''
 
 }

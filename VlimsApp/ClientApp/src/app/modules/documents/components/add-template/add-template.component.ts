@@ -44,7 +44,7 @@ interface BodyDataElement {
   templateUrl: './add-template.component.html',
   styleUrls: ['./add-template.component.scss'],
   providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService, QuickToolbarService],
-  encapsulation: ViewEncapsulation.None
+  //encapsulation: ViewEncapsulation.None
 
 })
 export class AddTemplateComponent implements OnInit {
@@ -52,7 +52,7 @@ export class AddTemplateComponent implements OnInit {
   public tools: object = {
     items: ['Undo', 'Redo', '|',
       'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
-      'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
+      'FontName', 'FontSize', 'FontColor', 'BackgroundColor', 'FormatPainter', '|',
       'SubScript', 'SuperScript', '|',
       'LowerCase', 'UpperCase', '|',
       'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',

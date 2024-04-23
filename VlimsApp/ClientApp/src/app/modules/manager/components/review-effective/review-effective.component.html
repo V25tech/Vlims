@@ -121,7 +121,7 @@
             </div> -->
             <div class="col-sm-10">
               <p-dropdown name="workflow" [options]="workflowsourcedata" [(ngModel)]="effective.workflow"
-                          optionLabel="workflowName" optionValue="workflowName" [disabled]="viewMode || editMode" [required]="true"
+                          optionLabel="workflowName" optionValue="workflowName" [disabled]="isworkflow || viewMode || editMode" [required]="true"
                           [autoDisplayFirst]="false" #WorkFlowInput="ngModel">
               </p-dropdown>
             </div>

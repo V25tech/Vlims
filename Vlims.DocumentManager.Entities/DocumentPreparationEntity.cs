@@ -232,13 +232,14 @@ namespace Vlims.DMS.Entities
         public PreperationDocument Prepdocument { get; set; }
         public bool IsEffectiveApproved { get; set; }
     }
-
     public class PreperationDocument
     {
         public string sampleQuantity { get; set; }
         public string packingInformation { get; set; }
         public string labelClaim { get; set; }
-        public string supersedesNo { get; set; }
+        public string reference { get; set; }
+        public string productCode { get; set; }
         public string revisionNo { get; set; }
+        public string supersedesNo { get; set; }
     }
 }
