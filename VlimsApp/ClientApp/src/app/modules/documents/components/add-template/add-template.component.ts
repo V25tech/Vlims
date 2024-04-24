@@ -185,7 +185,6 @@ export class AddTemplateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
     const urlPath = this.router.url;
     this.segments = urlPath.split('/');
     let lastSegment=''
@@ -359,7 +358,6 @@ export class AddTemplateComponent implements OnInit {
     this.loader.show();
     this.templatesvc.getbyId(cloneid).subscribe((data1:any)=>{
       this.templatecloneForm=data1;
-      debugger
         if(this.templatecloneForm.Page!=null && this.templatecloneForm.Page.length>0){
           //this.templateForm.Page=this.templatecloneForm.Page;
           this.pages=this.templatecloneForm.Page;
@@ -375,7 +373,6 @@ export class AddTemplateComponent implements OnInit {
   }
   getbyId(id:number)
   {
-    debugger
     this.loader.show();
     this.templatesvc.getbyId(id).subscribe((data:any)=>{
       this.templateForm=data;
@@ -443,7 +440,6 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.Page=this.pages;
     if(this.editMode)
     {
-      debugger
       this.templateForm.ModifiedBy=this.commonsvc.getUsername();
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
