@@ -16,7 +16,7 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-Status_PSY,Refrence_PSY,
+Status_PSY,Refrence_PSY,IsRevision,
 ISNULL((SELECT top(1) CASE WHEN Status_PSY = 'Approved' THEN 1 ELSE 0 END
 FROM [dbo].[DocumentEffective_PSY]
 WHERE ReferenceGuid_PSY = GUID_DP), 0) AS IsEffApprvd

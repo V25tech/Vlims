@@ -21,7 +21,7 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY ,
-Status_PSY
+Status_PSY,IsClone,PreparationId
   FROM [dbo].[DocumentTemplateConfiguration_PSY] WITH (NOLOCK) where [DTID_PSY] = @DTID_PSY   
  END TRY 
  BEGIN CATCH 

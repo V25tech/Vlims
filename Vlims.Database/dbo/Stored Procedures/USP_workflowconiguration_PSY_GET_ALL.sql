@@ -16,7 +16,7 @@ CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
 Status_PSY,
-Document_PSY,
+--Document_PSY,
 (SELECT DBO.USP_WORKFLOW_WHERE_USED(workflowName_PSY)) AS IsParent
  ,count(*) over() as TotalRows 
  FROM [dbo].[workflowconiguration_PSY] WITH (NOLOCK) 
