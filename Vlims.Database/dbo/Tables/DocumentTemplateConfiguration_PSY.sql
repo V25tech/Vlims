@@ -21,7 +21,6 @@
     [IsClone] BIT NULL, 
     [PreparationId] INT NULL, 
     [PreparationGuid] UNIQUEIDENTIFIER NULL, 
-    [IsRevision] BIT NULL, 
     CONSTRAINT [PK_DocumentTemplateConfiguration_PSY] PRIMARY KEY CLUSTERED ([DTID_PSY] ASC)
 );
 
