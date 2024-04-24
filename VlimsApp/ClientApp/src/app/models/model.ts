@@ -80,6 +80,7 @@ export class DocumentPreperationConfiguration {
   referenceId: number = 0;
   isrevision: boolean = false;
   isEffectiveApproved=false;
+  isRevision:boolean=false;
   prepdocument: Prepdocument = {
     labelClaim : '',
     packingInformation : '',
@@ -215,8 +216,8 @@ export class DocumentTemplateConfiguration {
   Page:Page[] | null=[];
   Pages:number=0;
   IsParent:boolean=false;
-  isclone:boolean=false;
-  preparationId:number=0;
+  Isclone:boolean=false;
+  PreparationId:number=0;
 }
 interface Page {
   text: string;

@@ -52,7 +52,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         workflowconigurationData.Status = Convert.ToString(row[workflowconigurationConstants.Status.Trim('@')]);
                         if (isgetall)
                             workflowconigurationData.IsParent = Convert.ToBoolean(row[workflowconigurationConstants.IsParent.Trim('@')]);
-                        if (!isgetall)
+                        if (!islist)
                         {
                             string docvalue = Convert.ToString(row["Document_PSY"]);
                             if (!string.IsNullOrEmpty(docvalue))
