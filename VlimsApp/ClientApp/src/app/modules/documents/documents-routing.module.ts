@@ -123,6 +123,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'templates/body/prep/:templateName/:prepid',
+    component: AddTemplateComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'workflow',
     component: WorkflowsComponent,
     canActivate: [AuthGuard],

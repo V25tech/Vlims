@@ -231,6 +231,7 @@ namespace Vlims.DMS.Entities
         public int ReferenceId { get; set; }
         public PreperationDocument Prepdocument { get; set; }
         public bool IsEffectiveApproved { get; set; }
+        public bool IsRevision { get; set; }
     }
     public class PreperationDocument
     {
