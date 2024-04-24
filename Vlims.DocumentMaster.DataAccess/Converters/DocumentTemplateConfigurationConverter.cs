@@ -48,6 +48,8 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.footer = Convert.ToString(row[DocumentTemplateConfigurationConstants.footer.Trim('@')]);
                         documentTemplateConfigurationData.footerrows = Convert.ToString(row[DocumentTemplateConfigurationConstants.footerrows.Trim('@')]);
                         documentTemplateConfigurationData.footercolumns = Convert.ToString(row[DocumentTemplateConfigurationConstants.footercolumns.Trim('@')]);
+                        documentTemplateConfigurationData.IsClone = row["IsClone"]!=DBNull.Value ? Convert.ToBoolean(row["IsClone"]) : false;
+                        documentTemplateConfigurationData.PreparationId = row["PreparationId"] != DBNull.Value ? Convert.ToInt32(row["PreparationId"]) : 0;
                         if (islist)
                             documentTemplateConfigurationData.IsParent = Convert.ToBoolean(row[DocumentTemplateConfigurationConstants.IsParent.Trim('@')]);
                         if (!islist || fromprep)

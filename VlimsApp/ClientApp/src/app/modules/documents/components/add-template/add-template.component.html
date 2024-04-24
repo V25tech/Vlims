@@ -30,7 +30,7 @@
                    id="Templatename"
                    name="Templatename"
                    placeholder="Template Name"
-                   [(ngModel)]="templateForm.Templatename" 
+                   [(ngModel)]="templateForm.Templatename" disabled="editMode || viewBox"
                    required
                      #TemplatenameInput="ngModel"
                       />
@@ -324,7 +324,7 @@
           <!-- <div class="template-grid"> -->
 
           <form [formGroup]="form" id="bodyid">
-            <ejs-richtexteditor formControlName="html" [(ngModel)]="pages[this.currentPage].text" id='defaultRTE' [fontFamily]='fontFamily' [toolbarSettings]='tools' [pasteCleanupSettings]="pasteCleanupSettings" [quickToolbarSettings]='quickToolbarSettings' [fontSize]='size' locale = 'en-US'>
+            <ejs-richtexteditor formControlName="html" [(ngModel)]="pages[this.currentPage].text" id='defaultRTE' [fontFamily]='fontFamily' [toolbarSettings]='tools' [pasteCleanupSettings]="pasteCleanupSettings" [quickToolbarSettings]='quickToolbarSettings' [fontSize]='size'>
             </ejs-richtexteditor>
           </form>
           <!-- </div> -->

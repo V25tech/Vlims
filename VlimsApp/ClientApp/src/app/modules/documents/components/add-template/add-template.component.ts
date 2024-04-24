@@ -123,6 +123,7 @@ export class AddTemplateComponent implements OnInit {
   typesDatasource: DocumentTypeConfiguration[] = [];
   selectedtype=new DocumentTypeConfiguration();
   templateForm=new DocumentTemplateConfiguration();
+  templatecloneForm=new DocumentTemplateConfiguration();
   grid:DocumentTemplateConfiguration[]=[];
   showGrid: boolean = false;
   rows: number = 0;bodyrows:number=1;
@@ -142,7 +143,9 @@ export class AddTemplateComponent implements OnInit {
   colsFooterArray: number[] = [];
   gridFooterData: any = [];
   isSumbited = false;
-
+  isprep=false;
+  segments:string[]=[]
+  preptempid:number=0
   selectOptions: SelectOption[] = [
     { name: 'Label', value: 1 },
      { name: 'Value', value: 2 },
@@ -182,10 +185,18 @@ export class AddTemplateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
     const urlPath = this.router.url;
-    const segments = urlPath.split('/');
-    const lastSegment = segments[segments.length - 2];
+    this.segments = urlPath.split('/');
+    let lastSegment=''
+    const value=this.segments.filter(o=>o==='prep')
+      if(value!=null && value!=undefined){
+        this.isprep=true;
+        lastSegment = this.segments[this.segments.length - 3];
+      }
+      else{
+     lastSegment = this.segments[this.segments.length - 2];
+      }
+      //lastSegment = this.segments[this.segments.length - 2];
     this.rows = 1;
     this.cols = 2;
     this.generateTeplateGrid();
@@ -195,13 +206,12 @@ export class AddTemplateComponent implements OnInit {
     this.headerRow=1;
     this.headerColumn=1;
     this.generateheaderrow();
-    this.getTemplates();
-    this.getdocumenttypeconfig();
+   
     //  this.generateP();
 
     if(lastSegment=="add")
     {
-     let addcount=parseInt(segments[segments.length - 1],10);
+     let addcount=parseInt(this.segments[this.segments.length - 1],10);
      addcount++;
     this.templateForm.Uniquecode="Temp "+addcount;  
     this.templateForm.Pages=1;
@@ -210,7 +220,7 @@ export class AddTemplateComponent implements OnInit {
     {
       this.title='Edit Document Template';
       this.editMode=true;
-        let id=parseInt(segments[segments.length-1],10);
+        let id=parseInt(this.segments[this.segments.length-1],10);
         this.id=id;
         //this.getbyId(id);
     }
@@ -219,20 +229,29 @@ export class AddTemplateComponent implements OnInit {
       ;
       this.title='View Document Template';
       this.viewMode=true;
-        let ide=segments[segments.length-1];
-        this.getbyId(parseInt(segments[segments.length - 1]));
+        let ide=this.segments[this.segments.length-1];
+        this.getbyId(parseInt(this.segments[this.segments.length - 1]));
     }
-    else if(lastSegment=="body")
-    {
-      ;
+    else if(lastSegment=="prep"){
+      
       this.title='Edit Document Template';
       this.editMode=true;
       this.isbody=true;
-        let id=parseInt(segments[segments.length-1],10);
+      this.isprep=true;
+        let id=parseInt(this.segments[this.segments.length-2],10);
+        this.id=id;
+    }
+    else if(lastSegment=="body")
+    {
+      this.title='Edit Document Template';
+      this.editMode=true;
+      this.isbody=true;
+        let id=parseInt(this.segments[this.segments.length-1],10);
         this.id=id;
         //this.getbyId(id);
     }
-    
+    this.getTemplates();
+    this.getdocumenttypeconfig();
   }
   
   //config: any = {
@@ -332,13 +351,30 @@ export class AddTemplateComponent implements OnInit {
     }
   }
 
+  getbyIdClone()
+  {
+    let cloneid=parseInt(this.segments[this.segments.length-1],10)
+        this.preptempid=cloneid;
+    this.loader.show();
+    this.templatesvc.getbyId(cloneid).subscribe((data1:any)=>{
+      this.templatecloneForm=data1;
+        if(this.templatecloneForm.Page!=null && this.templatecloneForm.Page.length>0){
+          //this.templateForm.Page=this.templatecloneForm.Page;
+          this.pages=this.templatecloneForm.Page;
+          }
+          else{
+            this.pages[0].text="";
+          }
+     
+      this.loader.hide();
+    },(error:any)=>{
 
+    });
+  }
   getbyId(id:number)
   {
-    
     this.loader.show();
     this.templatesvc.getbyId(id).subscribe((data:any)=>{
-      
       this.templateForm=data;
       if(this.typesDatasource.length>0)
       {
@@ -352,21 +388,21 @@ export class AddTemplateComponent implements OnInit {
       this.gridData=this.templateForm.headerTable;
       this.gridFooterData=this.templateForm.footerTable;
       this.headerData=this.templateForm.titleTable;
-      if(this.templateForm.Page!=null){
+      if(this.templateForm.Page!=null && this.templateForm.Page.length>0){
       this.pages=this.templateForm.Page;
       }
-      console.log(this.templateForm);
       this.loader.hide();
+      if(this.isprep){
+        this.getbyIdClone();
+      }
     },(error:any)=>{
-
+      this.loader.hide();
     });
   }
   getbyName(name:string)
   {
-    
     this.loader.show();
     this.templatesvc.getdoctemplatebyname(name).subscribe((data:any)=>{
-      
       this.templateForm=data;
       if(this.typesDatasource.length>0)
       {
@@ -379,26 +415,20 @@ export class AddTemplateComponent implements OnInit {
       this.footerCols=parseInt(this.templateForm.footercolumns,10);
       this.gridData=this.templateForm.headerTable;
       this.gridFooterData=this.templateForm.footerTable;
-      console.log(this.templateForm);
       this.loader.hide();
     },(error:any)=>{
-
+      this.loader.hide();
     });
   }
   getTemplates() {
     this.loader.show();
-   //let objrequest: RequestContext={PageNumber:1,PageSize:100,Id:0};
       return this.templatesvc.getdocttemplate(this.commonsvc.req).subscribe((data: any) => {
         this.grid = data.Response;
         this.loader.hide();
       });
   }
   addTemplate() {
-    
     this.loader.show();
-    console.log(this.headerData);
-    // this.templateForm.header=this.html1;
-    // this.templateForm.footer=this.html2;
     this.templateForm.documenttype=this.selectedtype.Documenttypename;
     this.templateForm.titleTable=this.headerData;
     this.templateForm.headerTable=this.gridData;
@@ -408,14 +438,18 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.footerrows=this.rowsFooterArray.length.toString();
     this.templateForm.footercolumns=this.colsFooterArray.length.toString();
     this.templateForm.Page=this.pages;
-    console.log(this.templateForm);
-    
     if(this.editMode)
     {
-      
       this.templateForm.ModifiedBy=this.commonsvc.getUsername();
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
+        if(this.isprep){
+          const formm=this.templateForm;
+          //this.templatecloneForm.Page=this.templateForm.Page;
+          this.templateForm=new DocumentTemplateConfiguration();
+          this.templatecloneForm.Page=this.pages;
+          this.templateForm=this.templatecloneForm
+        }
       this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
         this.toastr.success('Document Template Updated Successfully!', 'Updated.!');
       this.loader.hide();
@@ -445,9 +479,6 @@ export class AddTemplateComponent implements OnInit {
     }
   }
     }
-    // this.templatesvc.adddoctemplate(this.templateForm).subscribe(() => {
-    // this.router.navigate(['/templates']);
-    // });
   }
   isduplicate() {
     if (this.grid != null && this.grid.length > 0) {
@@ -584,15 +615,12 @@ export class AddTemplateComponent implements OnInit {
   }
   getdocumenttypeconfig() {
     this.loader.show();
-   let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
-      return this.doctypeservice.getdoctypeconfig(objrequest).subscribe((data: any) => {
-        
+      return this.doctypeservice.getdoctypeconfig(this.commonsvc.req).subscribe((data: any) => {
         this.typesDatasource = data.Response;
         if(this.editMode){
           this.getbyId(this.id);
         }
         this.loader.hide();
-        console.log(this.typesDatasource);
       }, (error:any) => {
         this.loader.hide();
       });

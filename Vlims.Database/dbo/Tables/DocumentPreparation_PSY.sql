@@ -18,6 +18,7 @@
     [GUID_DP]               UNIQUEIDENTIFIER NULL,
     [ReferenceGuid_PSY]     UNIQUEIDENTIFIER NULL,
     [document_PSY]          XML              NULL,
+    [IsRevision] BIT NULL, 
     CONSTRAINT [PK_DocumentPreparation_PSY] PRIMARY KEY CLUSTERED ([DPNID_PSY] ASC)
 );
 

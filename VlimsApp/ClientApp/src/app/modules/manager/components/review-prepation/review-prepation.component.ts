@@ -145,6 +145,7 @@ export class ReviewPrepationComponent {
     }
 ]
   templatesSource: Array<DocumentTemplateConfiguration> = [];
+  templatesSourceall: Array<DocumentTemplateConfiguration> = [];
   lableMappings: DocPrep_LableMapping | undefined;
   istemplate:boolean=false;
   isworkflow:boolean=false;
@@ -159,6 +160,7 @@ export class ReviewPrepationComponent {
     private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
   ngOnInit() {
+    debugger
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
       this.commonsvc.createdBy = user;
@@ -185,14 +187,7 @@ export class ReviewPrepationComponent {
       if(this.preparation.wokflow!='' && this.preparation.wokflow!=undefined){
         this.isworkflow=true;
       }
-      if(this.preparation.prepdocument!=null && this.preparation.prepdocument!=undefined){
-      if(this.preparation.prepdocument.revisionNo!='' && this.preparation.prepdocument.revisionNo!=undefined){
-        this.isrevision=true;
-      }
-    }
-    else{
-      this.isrevision=false;
-    }
+    if(!this.istemplate && this.isrevision)
       this.preparation.status = 'In-Progress';
       this.buildPrepdocument();
       this.getLabelMappings();
@@ -272,6 +267,7 @@ export class ReviewPrepationComponent {
       }
     }
     if(this.istemplateused){
+      debugger
       this.templateService.adddoctemplate(this.clonetemp).subscribe((data:any)=>{
       });
     }
@@ -378,10 +374,7 @@ export class ReviewPrepationComponent {
       id = parseInt(obj.DTID);
     }
     this.templateService.getTemplate(this.preparation.template).subscribe((data: any) => {
-      //this.docPreperationService.getTemplate(this.preparation.template).subscribe((data: any) => {
-
       this.template = data;
-      //this.generatePDF(data);
     }, er => {
 
     });
@@ -416,10 +409,10 @@ export class ReviewPrepationComponent {
     if(id!='' && id!=undefined){
       this.templateService.getbyId(parseInt(id)).subscribe((data:any)=>{
         this.clonetemp=data;
-        this.clonetemp.preparationId=parseInt(this.preparation.DTCId);
-        this.clonetemp.isclone=true;
+        this.clonetemp.PreparationId=parseInt(this.preparation.dpnid);
+        this.clonetemp.Isclone=true;
         this.clonetemp.Templatename+="--"+this.getShortUniqueId();
-        if(!this.isrevision){
+        if(!this.preparation.isRevision){
           this.clonetemp.Page=[]
         }
         this.spinner.hide();
@@ -458,6 +451,7 @@ export class ReviewPrepationComponent {
     this.templateService.getdocttemplate(this.commonsvc.req).subscribe((data: any) => {
      
       this.templatesSource = data.Response;
+      this.templatesSourceall=data.Response;
       this.templatesSource = this.templatesSource.filter(o => o.documenttype.toLowerCase() === this.preparation.documenttype.toLowerCase());
       // if (this.preparation.template == null || this.preparation.template == undefined || this.preparation.template == '') {
   
@@ -518,10 +512,17 @@ export class ReviewPrepationComponent {
     });
   }
   edittemplate(template: string) {
+    debugger
     const obj = this.templatesSource.find(o => o.Templatename === template);
+    const isclone=this.templatesSourceall.find(o=>o.PreparationId==parseInt(this.preparation.dpnid));
+    if(isclone!=null && isclone!=undefined && obj!=null && obj!=undefined){
+      this.router.navigate(['/templates/body/prep', obj?.DTID,isclone.DTID]);
+    }
+    else{
     if (obj != null && obj != undefined) {
       this.router.navigate(['/templates/body', obj.DTID]);
     }
+  }
   }
 
   getLabelMappings() {

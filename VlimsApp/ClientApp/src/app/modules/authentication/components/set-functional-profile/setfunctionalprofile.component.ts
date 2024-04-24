@@ -33,8 +33,6 @@ export class SetfunctionalprofileComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    debugger
-    console.log(this.commonsvc.getUsername());
     this.access = this.commonsvc.getUsername().toLocaleLowerCase() === 'admin' ? true : false;
     this.getsetfunctionalprofile();
     this.getroles();
@@ -57,7 +55,6 @@ export class SetfunctionalprofileComponent implements OnInit {
     });
   }
   onSubmit(profileinfo: functionalprofile) {
-    debugger
     profileinfo.modifiedby = this.commonsvc.getUsername();
 
     this.loader.show();
@@ -91,12 +88,13 @@ export class SetfunctionalprofileComponent implements OnInit {
       }
     }
   }
-  binddata(rolename: String) {
-    debugger
-    const role = this.types.find(o => o.role == rolename);
-    if (role != null && role != undefined) {
-      this.profile = role;
-      console.log(this.profile);
+  async binddata(rolename: string) {
+    await this.getsetfunctionalprofile();
+    let roleinfo: any;
+    roleinfo = this.types.find(o => o.role == rolename);
+    this.profile = new functionalprofile();
+    if (roleinfo) {
+      this.profile = roleinfo;
     }
   }
   onCancel() {
