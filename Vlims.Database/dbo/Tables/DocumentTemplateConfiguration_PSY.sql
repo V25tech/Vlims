@@ -18,6 +18,9 @@
     [ModifiedDate_PSY]     DATETIME       NULL,
     [Status_PSY]           NVARCHAR (50)  NULL,
     [Pages] INT NULL, 
+    [IsClone] BIT NULL, 
+    [PreparationId] INT NULL, 
+    [PreparationGuid] UNIQUEIDENTIFIER NULL, 
     CONSTRAINT [PK_DocumentTemplateConfiguration_PSY] PRIMARY KEY CLUSTERED ([DTID_PSY] ASC)
 );
 

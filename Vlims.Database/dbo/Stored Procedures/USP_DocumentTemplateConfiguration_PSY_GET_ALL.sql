@@ -18,12 +18,12 @@ rows_PSY,
 footer_rows_PSY,
 footer_columns_PSY,
 columns_PSY,
-document_PSY,
+--document_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-Status_PSY,
+Status_PSY,IsClone,PreparationId,
 (SELECT DBO.USP_DOCUMENT_TEMPLATE_WHEREUSED (Templatename_PSY)) AS IsParent
  ,count(*) over() as TotalRows 
  FROM [dbo].[DocumentTemplateConfiguration_PSY] WITH (NOLOCK) 

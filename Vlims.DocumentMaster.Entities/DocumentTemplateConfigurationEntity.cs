@@ -275,6 +275,8 @@ namespace Vlims.DocumentMaster.Entities
         public string PrintReason { get; set; }
         public string BatchNumber { get; set; }
         public string BatchSize { get; set; }
+        public bool IsClone { get; set; }
+        public int PreparationId { get; set; }
     }
     public class Page
     {

@@ -138,6 +138,7 @@ export class DocumentEffectiveConfiguration {
   template: string = '';
   referenceId:number=0;
   isrevision:boolean=false;
+  documentmanagerid:string='';
 }
 export class DocumentAdditionalTasks {
   documentTitle: string = ''
@@ -219,6 +220,8 @@ export class DocumentTemplateConfiguration {
   Page:Page[] | null=[];
   Pages:number=0;
   IsParent:boolean=false;
+  isclone:boolean=false;
+  preparationId:number=0;
 }
 interface Page {
   text: string;
