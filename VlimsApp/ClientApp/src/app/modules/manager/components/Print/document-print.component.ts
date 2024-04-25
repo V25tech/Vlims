@@ -166,14 +166,14 @@ export class DocumentPrintComponent implements OnInit {
           this.toastr.error('Cannot Print the document as Print Count is more than No of Copies requested');
           return;
         }
-      if(isduplicate){
-        this.toastr.error('Template used in multiple preparations unable to view document');
-      }else{
-        this.UpdatePrintCount(objtemp);
-        this.previewtemplate(template,objtemp);
-
-       
-      }
+      // if(isduplicate){
+      //   this.toastr.error('Template used in multiple preparations unable to view document');
+      // }else{
+      //   this.UpdatePrintCount(objtemp);
+      //   this.previewtemplate(template,objtemp);
+      // }
+      this.UpdatePrintCount(objtemp);
+      this.previewtemplate(template,objtemp);
     })
   }
   previewtemplate(template: TemplateRef<any>,objtemp: DocumentPrintConfiguration) {    

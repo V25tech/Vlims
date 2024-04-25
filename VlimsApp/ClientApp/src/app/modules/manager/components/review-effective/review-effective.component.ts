@@ -298,12 +298,13 @@ export class ReviewEffectiveComponent {
   }
   checkduplicatetemplate(template: TemplateRef<any>) {
     this.templateService.isduplicate(this.effective.template).subscribe((data: any) => {
-      const isduplicate = Boolean(data);
-      if (isduplicate) {
-        this.toastr.error('Template used in multiple preparations unable to view document');
-      } else {
-        this.previewtemplate(template);
-      }
+      // const isduplicate = Boolean(data);
+      // if (isduplicate) {
+      //   this.toastr.error('Template used in multiple preparations unable to view document');
+      // } else {
+      //   this.previewtemplate(template);
+      // }
+      this.previewtemplate(template);
     })
   }
   previewtemplate(template: TemplateRef<any>) {

@@ -172,6 +172,7 @@ export class NewPrintRequestComponent implements OnInit {
       this.print.documenttitle = preps[0].documenttitle;
       this.print.printtype = preps[0].documenttype;
       this.print.template=preps[0].template;
+      this.print.prepId=parseInt(preps[0].dpnid);
       this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Print"));
       this.workflowsSource=this.workflowsSource.filter(o=>o.documenttype?.toLocaleLowerCase()===preps[0].documenttype.toLocaleLowerCase());
     }
@@ -348,13 +349,15 @@ export class NewPrintRequestComponent implements OnInit {
   }
   checkduplicatetemplate(template: TemplateRef<any>){
     this.templatesvc.isduplicate(this.print.template).subscribe((data:any)=>{
-      const isduplicate=Boolean(data);
-      if(isduplicate){
-        this.toastr.error('Template used in multiple preparations unable to view document');
-      }else{
-        this.previewprint(template);
-        this.UpdatePrintCount();
-      }
+      // const isduplicate=Boolean(data);
+      // if(isduplicate){
+      //   this.toastr.error('Template used in multiple preparations unable to view document');
+      // }else{
+      //   this.previewprint(template);
+      //   this.UpdatePrintCount();
+      // }
+      this.previewprint(template);
+      this.UpdatePrintCount();
     })
   }
   previewprint(template: TemplateRef<any>) {    
