@@ -49,7 +49,7 @@ export class ExistingDocumentsComponent implements OnInit {
           type: null
       };
 
-      this.existdocService.getAllDocuments(objrequest).subscribe((data: any) => {
+      this.existdocService.getAllDocuments(this.commonsvc.req).subscribe((data: any) => {
         if (data != null && data.exisitingDocuments.length > 0 && data != undefined) {
           data.exisitingDocuments.forEach((item: any) => {
             item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
@@ -161,7 +161,7 @@ export class ExistingDocumentsComponent implements OnInit {
   }
   previewRevisionDocument(template: TemplateRef<any>, docInfo: any,istempcont:boolean) {
     this.spinner.show();
-    this.existdocService.getTemplate(docInfo.template).subscribe((data: any) => {
+    this.existdocService.getTemplate(docInfo.template,docInfo.prepId).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template,istempcont);

@@ -361,7 +361,7 @@ export class NewPrintRequestComponent implements OnInit {
     debugger
     this.spinner.show();    
     //this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
-      this.templatesvc.getTemplate(this.print.template).subscribe((data: any) => {
+      this.templatesvc.getTemplate(this.print.template,this.print.prepId).subscribe((data: any) => {
         //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
           this.pdfBytes = data;
           //this.pdfBytes = this.fileBytes;

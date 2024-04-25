@@ -277,6 +277,7 @@ namespace Vlims.DocumentMaster.Entities
         public string BatchSize { get; set; }
         public bool IsClone { get; set; }
         public int PreparationId { get; set; }
+        public string CloneTemp { get; set; }
     }
     public class Page
     {

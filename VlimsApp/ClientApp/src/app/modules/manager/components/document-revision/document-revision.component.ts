@@ -147,7 +147,7 @@ export class DocumentRevisionRequestsComponent implements OnInit{
     // this.preparation.CreatedDate=objtemp.CreatedDate;
     // this.preparation.ModifiedDate=objtemp.ModifiedDate;
     // //this.preparation.dpnid = objtemp.
-    this.templatesvc.getTemplate(objtemp.template,true).subscribe((data: any) => {
+    this.templatesvc.getTemplate(objtemp.template,objtemp.prepId,true).subscribe((data: any) => {
     //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;

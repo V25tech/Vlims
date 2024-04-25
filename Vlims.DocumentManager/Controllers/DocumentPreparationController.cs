@@ -110,7 +110,7 @@ namespace PolicySummary.Controllers
             {
                 try
                 {
-                    DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
+                    DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf,0);
                     pdfBytes = DownloadTemplate(dataset);
                 }
                 catch (Exception ex)
@@ -125,7 +125,7 @@ namespace PolicySummary.Controllers
         {
             try
             {
-                DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
+                DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf,0);
                 DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
                 if (template != null)
                 {

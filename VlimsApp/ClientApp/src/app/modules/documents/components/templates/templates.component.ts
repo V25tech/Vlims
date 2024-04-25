@@ -110,7 +110,7 @@ export class TemplatesComponent {
     // this.preparation.CreatedDate=objtemp.CreatedDate;
     // this.preparation.ModifiedDate=objtemp.ModifiedDate;
     // //this.preparation.dpnid = objtemp.
-    this.templatesvc.getTemplate(objtemp.Templatename,true).subscribe((data: any) => {
+    this.templatesvc.getTemplate(objtemp.Templatename,0,true).subscribe((data: any) => {
     //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;

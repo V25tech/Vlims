@@ -155,6 +155,7 @@ export class DocumentAdditionalTasks {
   workflow:string='';
   template:string = '';  
   referenceId:number=0;
+  prepId:number=0;
 }
 
 export class noticationconfiguration {
@@ -415,6 +416,7 @@ export class DocumentPrintConfiguration {
   public printCopy='';
   public existingdocumentNumber:string='';
   public isactive:boolean=false;
+  public prepId:number=0;
 }
 
 export class ExistingDocumentRequest {
@@ -432,6 +434,7 @@ export class ExistingDocumentRequest {
   effectiveDate?: Date | undefined;
   reviewDate?: Date | undefined;
   reviewCountDownValue:  number| undefined;
+  prepId:number=0
 }
 
 
@@ -447,6 +450,7 @@ export class DocumentRevisionRequest {
   reviewDate: Date | undefined;
   modifiedDate: Date | undefined;
   template:string='';
+  prepId:number=0;
 }
 export class functionalprofile {
   sfpid:number=0;

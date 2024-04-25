@@ -182,5 +182,6 @@ public class DocumentPrint
     public bool IsActive { get; set; }
     public string? BatchNumber { get; set; }
     public string? BatchSize { get; set; }
+    public int PrepId { get; set; }
 }
 

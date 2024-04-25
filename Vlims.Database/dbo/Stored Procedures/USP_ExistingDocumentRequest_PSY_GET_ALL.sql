@@ -17,7 +17,7 @@ CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
 effectivedate_PSY,
-reviewdate_PSY 
+reviewdate_PSY,NULL AS DPNID_PSY 
  ,count(*) over() as TotalRows 
  FROM [dbo].[ExistingDocumentRequest_PSY] WITH (NOLOCK) 
  Order by [EDRId_PSY] DESC

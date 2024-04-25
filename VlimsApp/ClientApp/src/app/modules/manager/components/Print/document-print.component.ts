@@ -101,7 +101,7 @@ export class DocumentPrintComponent implements OnInit {
     this.router.navigate(['/print/edit']);
   }
   print(request: DocumentPrintConfiguration){
-    this.templatesvc.getTemplate(request.template,false).subscribe((data:any)=>{
+    this.templatesvc.getTemplate(request.template,request.prepId,false).subscribe((data:any)=>{
       debugger
       this.exportFiles(data,"docx",request.template,"docx");
     });
@@ -182,7 +182,7 @@ export class DocumentPrintComponent implements OnInit {
     // this.preparation.CreatedDate=objtemp.CreatedDate;
     // this.preparation.ModifiedDate=objtemp.ModifiedDate;
     // //this.preparation.dpnid = objtemp.
-    this.templatesvc.getTemplate(objtemp.template,true).subscribe((data: any) => {
+    this.templatesvc.getTemplate(objtemp.template,objtemp.prepId,true).subscribe((data: any) => {
     //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;

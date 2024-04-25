@@ -191,11 +191,11 @@ namespace Vlims.Controllers
 
 
         [HttpGet("getpdf")]
-        public ActionResult<byte[]> getpdf(string templateinf, string p_user, bool p_isPdf = true)
+        public ActionResult<byte[]> getpdf(string templateinf, string p_user,int p_PrepId ,bool p_isPdf = true)
         {
             byte[] bytes = null; DocumentPreparation preparation = new DocumentPreparation();
-            DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf);
-            DataSet ds_template = DocumentTemplateConfigurationData.GetTemplateHeaderFooterDetails(templateinf);
+            DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf,p_PrepId);
+            DataSet ds_template = DocumentTemplateConfigurationData.GetTemplateHeaderFooterDetails(templateinf,p_PrepId);
             DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
             DocumentTemplateConfiguration template1 = DocumentTemplateConfigurationConverter.SetDocumentTemplateHeaderFooterConfiguration(ds_template);
             if (template1 != null)
@@ -203,7 +203,10 @@ namespace Vlims.Controllers
                 DataSet dp_dataset = DocumentPreparationData.GetDocumentPreparationByDPNID(Convert.ToInt32(template1.DTID));
                 preparation = DocumentPreparationConverter.SetDocumentPreparation(dp_dataset);
             }
-
+            if(template!=null && !string.IsNullOrEmpty(template.CloneTemp))
+            {
+                template = DocumentTemplateConfigurationConverter.SetDocumentTemplateCloneConfigurationt(dataset);
+            }
             StringBuilder builder = new StringBuilder();
             builder.Append(htmlUpper);
             string path = Path.Combine(Directory.GetCurrentDirectory(), "license.elic.xml");
