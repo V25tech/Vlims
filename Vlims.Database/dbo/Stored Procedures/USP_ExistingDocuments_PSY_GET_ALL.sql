@@ -37,7 +37,7 @@ Reviewdate_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY,
+ModifiedDate_PSY,null as DPNID_PSY,
 'Existing Document' as TableName_PSY
 
  ,count(*) over() as TotalRows 
