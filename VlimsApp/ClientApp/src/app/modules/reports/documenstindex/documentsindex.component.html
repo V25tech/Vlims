@@ -34,24 +34,31 @@
                  [rowsPerPageOptions]="rowsPerPageOptions">
           <ng-template pTemplate="header">
             <tr>
-
+              <th>S.No</th>
               <ng-container *ngFor="let col of exportColumns">
                 {{col.header}}
-                <th pSortableColumn="col.dataKey" style="width:10%">{{col.title}}<p-sortIcon field="col.dataKey"></p-sortIcon></th>
+                <!--<th pSortableColumn="col.dataKey" style="width:10%">{{col.title}}<p-sortIcon field="col.dataKey"></p-sortIcon></th>-->
+                <th *ngIf="col?.dataKey == 'documentNo'" pSortableColumn="documentNo" style="width:10%">{{col.title}}<p-sortIcon field="documentNo"></p-sortIcon></th>
+                <th *ngIf="col?.dataKey == 'documentName'" pSortableColumn="documentName" style="width:10%">{{col.title}}<p-sortIcon field="documentName"></p-sortIcon></th>
+                <th *ngIf="col?.dataKey == 'documentType'" pSortableColumn="documentType" style="width:10%">{{col.title}}<p-sortIcon field="documentType"></p-sortIcon></th>
+                <th *ngIf="col?.dataKey == 'department'" pSortableColumn="department" style="width: 15%">{{col.title}}<p-sortIcon field="department"></p-sortIcon></th>
+                <th *ngIf="col?.dataKey == 'effectiveDate'" pSortableColumn="effectiveDate" style="width:20%">{{col.title}}<p-sortIcon field="effectiveDate"></p-sortIcon></th>
+                <th *ngIf="col?.dataKey == 'reviewDate'" pSortableColumn="reviewDate" style="width:200px">{{col.title}}<p-sortIcon field="reviewDate"></p-sortIcon></th>
+
               </ng-container>
-              <!--<th>S.No</th>
-              <th pSortableColumn="documentNo" style="width:10%">Document No. <p-sortIcon field="documentNo"></p-sortIcon></th>
+
+              <!--<th pSortableColumn="documentNo" style="width:10%">Document No. <p-sortIcon field="documentNo"></p-sortIcon></th>
               <th pSortableColumn="documentName" style="width:10%">Document Name<p-sortIcon field="documentName"></p-sortIcon></th>
               <th pSortableColumn="documentType" style="width:10%">Document Type<p-sortIcon field="documentType"></p-sortIcon></th>
               <th pSortableColumn="department" style="width:15%">Department<p-sortIcon field="department"></p-sortIcon></th>
               <th pSortableColumn="effectiveDate" style="width:20%">Effective Date<p-sortIcon field="effectiveDate"></p-sortIcon></th>
               <th pSortableColumn="reviewDate" style="width:200px">Review Date<p-sortIcon field="reviewDate"></p-sortIcon></th>-->
-            
+
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-existingdoc let-i="rowIndex">
             <tr>
-              <!--<td>{{ i + 1 }}</td>-->
+              <td>{{ i + 1 }}</td>
               <!-- <td>{{existingdoc?.edrId}}</td> -->
               <td>{{existingdoc?.documentNo}}</td>
               <td>{{existingdoc?.documentName}}</td>
@@ -107,6 +114,18 @@
     vertical-align: middle;
     background-color: white;
     box-shadow: none;
+  }
+  .w-150 {
+    width: 150px;
+  }
+
+  .p-paginator .p-dropdown {
+    height: unset;
+  }
+
+  :host ::ng-deep .p-paginator .p-dropdown {
+    height: unset;
+    min-width: unset;
   }
 </style>
 <!--<ng-template #template>
