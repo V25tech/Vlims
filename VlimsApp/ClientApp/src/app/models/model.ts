@@ -101,9 +101,6 @@ export class Prepdocument {
   supersedesNo: string = ''; 
   productCode:string=''; 
   reference:string='';
-  supersedesNo: string = '';
-  productCode: string = '';
-  reference: string = '';
 }
 
 export class DocPrep_LableMapping{
@@ -116,7 +113,6 @@ export class DocPrep_LableMapping{
   packingInformation: string = '';
   labelClaim: string = '';
   productCode:string=''; 
-  productCode: string=''
 
 }
 
