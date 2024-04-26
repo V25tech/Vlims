@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[USP_GetTemplateHeaderFooterDetails]
-@TemplateName varchar(500)
+@TemplateName varchar(500),@PrepId int=0
 as
 begin
 
@@ -52,18 +52,18 @@ INSERT @PREPAREDBY
 SELECT DP.template_PSY ,DR.CreatedBy_PSY,USR.Department_PSY,USR.Role_PSY FROM Documentrequest_PSY DR
 LEFT JOIN DocumentPreparation_PSY DP ON DP.ReferenceGuid_PSY=DR.GUID_DR
 LEFT JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=DR.CreatedBy_PSY
-WHERE DP.template_PSY=@TemplateName
+WHERE DP.template_PSY=@TemplateName AND DP.DPNID_PSY=@PrepId
 
 INSERT @PREPAREDBY
 SELECT DP.template_PSY ,DP.CreatedBy_PSY,USR.Department_PSY,USR.Role_PSY FROM DocumentPreparation_PSY DP
 LEFT JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=DP.CreatedBy_PSY
-WHERE DP.template_PSY=@TemplateName
+WHERE DP.template_PSY=@TemplateName AND DP.DPNID_PSY=@PrepId
 
 INSERT @PREPAREDBY
 SELECT DP.template_PSY ,DE.CreatedBy_PSY,USR.Department_PSY,USR.Role_PSY FROM DocumentEffective_PSY DE
 LEFT JOIN DocumentPreparation_PSY DP ON DP.GUID_DP=DE.ReferenceGuid_PSY
 LEFT JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=DE.CreatedBy_PSY
-WHERE DP.template_PSY=@TemplateName
+WHERE DP.template_PSY=@TemplateName AND DP.DPNID_PSY=@PrepId
 
 
 SELECT TOP(1) DP.documenttitle_PSY,DP.documentno_PSY,DP.department_PSY,AT.Version,(VERSION-1) AS Supersedes,
@@ -83,7 +83,7 @@ LEFT JOIN DocumentEffective_PSY DE ON DE.ReferenceGuid_PSY=DP.GUID_DP
 LEFT JOIN AdditionalTask_PSY AT ON AT.ReferenceGuid_PSY=DE.GUID_DE
 LEFT JOIN DocumentPrint_PSY DPP ON DPP.ReferenceGuid_PSY=DP.GUID_DP AND DPP.IsActive_PSY=1
 JOIN @PREPAREDBY PR ON PR.TEMPLATE_NAME=DP.template_PSY
-WHERE DP.template_PSY=@TemplateName
+WHERE DP.template_PSY=@TemplateName AND DP.DPNID_PSY=@PrepId
 GROUP BY
     DP.documenttitle_PSY,
     DP.documentno_PSY,

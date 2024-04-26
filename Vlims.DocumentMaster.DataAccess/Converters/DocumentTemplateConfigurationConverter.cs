@@ -17,6 +17,7 @@ namespace Vlims.DocumentMaster.DataAccess
     using Vlims.DocumentMaster.Entities;
     using System.Data.SqlTypes;
     using System.Xml.Serialization;
+    using System.Security.AccessControl;
 
 
     // Comment
@@ -50,6 +51,11 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.footercolumns = Convert.ToString(row[DocumentTemplateConfigurationConstants.footercolumns.Trim('@')]);
                         documentTemplateConfigurationData.IsClone = row["IsClone"]!=DBNull.Value ? Convert.ToBoolean(row["IsClone"]) : false;
                         documentTemplateConfigurationData.PreparationId = row["PreparationId"] != DBNull.Value ? Convert.ToInt32(row["PreparationId"]) : 0;
+                        if (row.Table.Columns.Contains("CloneTemplate"))
+                        {
+                            documentTemplateConfigurationData.CloneTemp = !row.IsNull("CloneTemplate") ? row["CloneTemplate"].ToString() : string.Empty;
+                        }
+
                         if (islist)
                             documentTemplateConfigurationData.IsParent = Convert.ToBoolean(row[DocumentTemplateConfigurationConstants.IsParent.Trim('@')]);
                         if (!islist || fromprep)
@@ -185,7 +191,32 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
-
+        public static DocumentTemplateConfiguration SetDocumentTemplateCloneConfigurationt(DataSet dataset)
+        {
+            DocumentTemplateConfiguration documentTemplateConfigurationData=new DocumentTemplateConfiguration();
+            if (dataset.Tables[0].Rows[0].Table.Columns.Contains("CloneDoc") && dataset.Tables[0].Rows[0]["CloneDoc"]!=DBNull.Value)
+            {
+                DataRow row=dataset.Tables[0].Rows[0];
+                string docvalue = Convert.ToString(row["CloneDoc"]);
+                if (!string.IsNullOrEmpty(docvalue))
+                {
+                    // Create an XmlSerializer for the Person type
+                    var serializer1 = new XmlSerializer(typeof(DocumentTemplateConfiguration));
+                    // Create a StringReader to read the XML data
+                    var reader = new StringReader(Convert.ToString(row["CloneDoc"]));
+                    // Deserialize the XML data back to a Person object
+                    var person = (DocumentTemplateConfiguration)serializer1.Deserialize(reader);
+                    documentTemplateConfigurationData = person;
+                    documentTemplateConfigurationData.headerTable = person.headerTable;
+                    documentTemplateConfigurationData.footerTable = person.footerTable;
+                    documentTemplateConfigurationData.Page = person.Page;
+                    documentTemplateConfigurationData.Pages = person.Pages;
+                    if (person.titleTable != null)
+                        documentTemplateConfigurationData.titleTable = person.titleTable;
+                }
+            }
+            return documentTemplateConfigurationData;
+        }
         public static DocumentTemplateConfiguration SetDocumentTemplateConfiguration(DataSet dataset)
         {
             var result = SetAllDocumentTemplateConfiguration(dataset);

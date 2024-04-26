@@ -101,7 +101,7 @@ export class DocumentPrintComponent implements OnInit {
     this.router.navigate(['/print/edit']);
   }
   print(request: DocumentPrintConfiguration){
-    this.templatesvc.getTemplate(request.template,false).subscribe((data:any)=>{
+    this.templatesvc.getTemplate(request.template,request.prepId,false).subscribe((data:any)=>{
       debugger
       this.exportFiles(data,"docx",request.template,"docx");
     });
@@ -166,14 +166,14 @@ export class DocumentPrintComponent implements OnInit {
           this.toastr.error('Cannot Print the document as Print Count is more than No of Copies requested');
           return;
         }
-      if(isduplicate){
-        this.toastr.error('Template used in multiple preparations unable to view document');
-      }else{
-        this.UpdatePrintCount(objtemp);
-        this.previewtemplate(template,objtemp);
-
-       
-      }
+      // if(isduplicate){
+      //   this.toastr.error('Template used in multiple preparations unable to view document');
+      // }else{
+      //   this.UpdatePrintCount(objtemp);
+      //   this.previewtemplate(template,objtemp);
+      // }
+      this.UpdatePrintCount(objtemp);
+      this.previewtemplate(template,objtemp);
     })
   }
   previewtemplate(template: TemplateRef<any>,objtemp: DocumentPrintConfiguration) {    
@@ -182,7 +182,7 @@ export class DocumentPrintComponent implements OnInit {
     // this.preparation.CreatedDate=objtemp.CreatedDate;
     // this.preparation.ModifiedDate=objtemp.ModifiedDate;
     // //this.preparation.dpnid = objtemp.
-    this.templatesvc.getTemplate(objtemp.template,true).subscribe((data: any) => {
+    this.templatesvc.getTemplate(objtemp.template,objtemp.prepId,true).subscribe((data: any) => {
     //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;

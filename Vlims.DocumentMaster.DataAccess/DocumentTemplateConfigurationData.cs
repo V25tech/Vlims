@@ -67,31 +67,42 @@ namespace Vlims.DocumentMaster.DataAccess
             }
         }
 
-        public static DataSet GetDocumentTemplateConfigurationByTemplate(string templateName) 
+        public static DataSet GetDocumentTemplateConfigurationByTemplate(string templateName, int p_PrepId)
         {
             try
             {
-                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_TEMPLATE, DocumentTemplateConfigurationConstants.Templatename, DbType.String, templateName, ExecutionType.Dataset);
+                List<SqlParameter> sqlparms = new List<SqlParameter>();
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentTemplateConfigurationConstants.Templatename, Value = templateName });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = "@PrepId", Value = p_PrepId });
+                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(
+                    DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_TEMPLATE,
+                    sqlparms,
+                    ExecutionType.Dataset);
                 return dataset;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
         }
 
-        public static DataSet GetTemplateHeaderFooterDetails(string templateName)
+
+        public static DataSet GetTemplateHeaderFooterDetails(string templateName, int p_Prepid)
         {
             try
             {
-                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure("dbo.USP_GetTemplateHeaderFooterDetails", "@TemplateName", DbType.String, templateName, ExecutionType.Dataset);
+                List<SqlParameter> sqlparms = new List<SqlParameter>();
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = "@TemplateName", Value = templateName});
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = "@PrepId", Value = p_Prepid });
+                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure("dbo.USP_GetTemplateHeaderFooterDetails",sqlparms,ExecutionType.Dataset);
                 return dataset;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw;
+                throw; // Re-throwing the exception as is, you might want to handle or log it differently.
             }
         }
+
 
         public static bool SaveDocumentTemplateConfiguration(DocumentTemplateConfiguration documentTemplateConfiguration)
         {

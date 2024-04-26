@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[USP_DocumentTemplateConfiguration_TEMPLATE_GET] @TemplateName_PSY Varchar(200) 
+﻿CREATE PROCEDURE [dbo].[USP_DocumentTemplateConfiguration_TEMPLATE_GET] @TemplateName_PSY Varchar(200),@PrepId int=0 
  AS 
  BEGIN 
  BEGIN TRY 
@@ -21,7 +21,9 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY ,
-Status_PSY
+Status_PSY,IsClone,PreparationId,
+(SELECT Templatename_PSY FROM DocumentTemplateConfiguration_PSY WHERE PreparationId=@PrepId and IsClone=1) as CloneTemplate,
+(SELECT document_PSY FROM DocumentTemplateConfiguration_PSY WHERE PreparationId=@PrepId and IsClone=1) as CloneDoc
   FROM [dbo].[DocumentTemplateConfiguration_PSY] WITH (NOLOCK) where Templatename_PSY = @TemplateName_PSY   
  END TRY 
  BEGIN CATCH 

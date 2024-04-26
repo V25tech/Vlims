@@ -39,6 +39,7 @@ public static class ExistingDocumentRequestConverter
                     existingDocumentRequestData.ModifiedDate = DatatypeConverter.SetDateTime(row[ExistingDocumentRequestConstants.ModifiedDate.Trim('@')]);
                     existingDocumentRequestData.effectiveDate = DatatypeConverter.SetDateTime(row[ExistingDocumentRequestConstants.EffectiveDate.Trim('@')]).Value;
                     existingDocumentRequestData.reviewDate = DatatypeConverter.SetDateTime(row[ExistingDocumentRequestConstants.ReviewDate.Trim('@')]);
+                    existingDocumentRequestData.PrepId = row["DPNID_PSY"] != DBNull.Value ? Convert.ToInt32(row["DPNID_PSY"]) : 0;
                     result.Add(existingDocumentRequestData);
                 }
             }

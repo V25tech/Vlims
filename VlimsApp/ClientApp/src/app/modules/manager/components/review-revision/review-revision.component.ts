@@ -278,7 +278,7 @@ export class ReviewRevisionComponent {
   }
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show();
-    this.templateService.getTemplate(this.revision.template).subscribe((data: any) => {
+    this.templateService.getTemplate(this.revision.template,this.revision.prepId).subscribe((data: any) => {
     //this.docPreperationService.preview(this.revision.template).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;

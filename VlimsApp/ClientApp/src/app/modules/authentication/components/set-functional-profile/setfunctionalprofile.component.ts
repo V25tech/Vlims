@@ -17,6 +17,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 })
 export class SetfunctionalprofileComponent implements OnInit {
+  private storage:any = localStorage;
+
   isButtonDisabled = false;
   types: functionalprofile[] = [];
   roleTypes: RoleConfiguration[] = [];
@@ -67,6 +69,10 @@ export class SetfunctionalprofileComponent implements OnInit {
         this.isButtonDisabled = true;
         this.setprofileservice.update(profileinfo).subscribe((data: any) => {
           this.toaster.success('role permissions updated');
+          if (JSON.parse(this.storage.getItem("roles")).role.toLowerCase() == profileinfo.role.toLowerCase()) {
+            this.commonsvc.userEntityPermissions$.next(profileinfo);
+          }
+          this.commonsvc.userEntityPermissions$.next(profileinfo);
           this.loader.hide();
           this.isButtonDisabled = false;
           this.location.back();

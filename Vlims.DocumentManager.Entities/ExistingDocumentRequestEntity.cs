@@ -184,5 +184,6 @@ public class ExistingDocumentRequest
             this.modifieddateField = value;
         }
     }
+    public int PrepId { get; set; }
 }
 

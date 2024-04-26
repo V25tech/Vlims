@@ -210,6 +210,9 @@ export class ReviewPrepationComponent {
     this.spinner.show();
     return this.docPreperationService.getbyId(arg0).subscribe((data: any) => {
       this.preparation = data;
+      if(this.preparation.template!='' && this.preparation.template!=undefined){
+        this.istemplate=true;
+      }
       this.buildPrepdocument();
       this.getLabelMappings();
       this.spinner.hide();
@@ -373,7 +376,7 @@ export class ReviewPrepationComponent {
     if (obj != null && obj != undefined) {
       id = parseInt(obj.DTID);
     }
-    this.templateService.getTemplate(this.preparation.template).subscribe((data: any) => {
+    this.templateService.getTemplate(this.preparation.template,parseInt(this.preparation.dpnid)).subscribe((data: any) => {
       this.template = data;
     }, er => {
 
@@ -422,11 +425,12 @@ export class ReviewPrepationComponent {
   checkduplicatetemplate(template: TemplateRef<any>) {
     this.templateService.isduplicate(this.preparation.template).subscribe((data: any) => {
       const isduplicate = Boolean(data);
-      if (isduplicate) {
-        this.toastr.error('Template used in multiple preparations unable to view document');
-      } else {
-        this.previewtemplate(template);
-      }
+      // if (isduplicate) {
+      //   this.toastr.error('Template used in multiple preparations unable to view document');
+      // } else {
+      //   this.previewtemplate(template);
+      // }
+      this.previewtemplate(template);
     })
   }
   previewtemplate(template: TemplateRef<any>) {
@@ -435,7 +439,7 @@ export class ReviewPrepationComponent {
     if (obj != null && obj != undefined) {
       id = parseInt(obj.DTID);
     }
-    this.templateService.getTemplate(this.preparation.template).subscribe((data: any) => {
+    this.templateService.getTemplate(this.preparation.template,parseInt(this.preparation.dpnid)).subscribe((data: any) => {
       // this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;

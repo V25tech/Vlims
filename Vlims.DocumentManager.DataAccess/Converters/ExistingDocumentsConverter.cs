@@ -62,7 +62,8 @@ namespace Vlims.DocumentManager.DataAccess.Converters
                         document.ReviewDate = Convert.ToDateTime(DatatypeConverter.SetDateTime(row[DocumentsDatabaseConstants.ReviewDate]));
                         document.EntityName = Convert.ToString(row[DocumentsDatabaseConstants.TableName]);
                         document.Document = Convert.ToString(row[DocumentsDatabaseConstants.Document]);
-                        if (Convert.ToString(row[DocumentsDatabaseConstants.TableName]) == "New Document")
+                        document.PrepId = row["DPNID_PSY"] != DBNull.Value ? Convert.ToInt32(row["DPNID_PSY"]) : 0;
+                    if (Convert.ToString(row[DocumentsDatabaseConstants.TableName]) == "New Document")
                         {
                             document.Template = Convert.ToString(row[DocumentsDatabaseConstants.Template]);
                         }                      

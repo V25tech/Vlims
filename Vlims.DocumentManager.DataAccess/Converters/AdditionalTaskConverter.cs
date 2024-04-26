@@ -58,6 +58,7 @@ namespace Vlims.DocumentManager.DataAccess
                         DateTime? reviwed = DatatypeConverter.SetDateTime(row[DocumentEffectiveConstants.Reviewdate.Trim('@')]);
                         additionalTaskData.EffectiveDate = effective;// GetUIDate(effective);
                         additionalTaskData.ReviewDate = reviwed;// GetUIDate(reviwed);
+                        additionalTaskData.PrepId = row["DPNID_PSY"] != DBNull.Value ? Convert.ToInt32(row["DPNID_PSY"]) : 0;
                         result.Add(additionalTaskData);
                     }
                 }

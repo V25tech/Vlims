@@ -14,7 +14,7 @@ DP.template_PSY,
 AT.GUID_AD AS document_PSY,
 'New Document' as TableName_PSY,
 
-Version,AT.Refrence_PSY,
+Version,AT.Refrence_PSY,DP.DPNID_PSY,
  count(*) over() as TotalRows  ,
  de.document_PSY,de.department_PSY,de.documentno_PSY,de.documenttitle_PSY,de.documenttype_PSY,de.EffectiveDate_PSY,de.Reviewdate_PSY,DP.wokflow_PSY
 
@@ -37,7 +37,7 @@ Reviewdate_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY,
+ModifiedDate_PSY,null as DPNID_PSY,
 'Existing Document' as TableName_PSY
 
  ,count(*) over() as TotalRows 
