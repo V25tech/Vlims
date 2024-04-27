@@ -209,7 +209,7 @@ export class AddTemplateComponent implements OnInit {
    
     //  this.generateP();
 
-    if (urlPath.includes("add"))
+    if(urlPath.includes("add"))
     {
      let addcount=parseInt(this.segments[this.segments.length - 1],10);
      addcount++;

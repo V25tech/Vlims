@@ -29,6 +29,7 @@ export class AddDepartmentComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit() {
+    debugger
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 2];
@@ -65,17 +66,21 @@ export class AddDepartmentComponent implements OnInit {
     //   }
     // }
   submit(newdept: DepartmentConfiguration) {
+    debugger
     if(this.editMode)
     {
+      debugger
       this.update(newdept);
     }
     else{
+      debugger
       this.adddoctype(newdept);
     }
     
     //this.location.back();
   }
   update(newdept: DepartmentConfiguration) {
+    debugger
     this.loader.show();
     newdept.ModifiedBy=this.commonsvc.getUsername();
     if (!this.isButtonDisabled) {
@@ -95,6 +100,7 @@ export class AddDepartmentComponent implements OnInit {
     this.newdept = new DepartmentConfiguration();
   }
   adddoctype(newdept: DepartmentConfiguration) {
+    debugger
     this.loader.show();
     newdept.CreatedBy = this.commonsvc.getUsername();
     newdept.ModifiedBy = this.commonsvc.getUsername();

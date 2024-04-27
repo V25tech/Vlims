@@ -80,7 +80,7 @@ export class AddRoleComponent implements OnInit {
    if (!this.isButtonDisabled) {
     this.isButtonDisabled = true;
     this.rolesservice.Updaterole(addrole).subscribe((res: any) => {
-      this.toastr.success('Roles Updated Succesfull!', 'Updated.!');
+      this.toastr.success('Role Updated Succesfull!', 'Updated.!');
       this.loader.hide();
       this.location.back();
       this.isButtonDisabled=false;

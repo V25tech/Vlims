@@ -24,7 +24,7 @@ export class DocumentsLandingComponent implements OnInit {
   workItemsCount = 0;
   reviewCount = '';
   approveCount = '';  
-  constructor(private router: Router, private loader: NgxSpinnerService, private workitemssvc: WorkitemsService,private commonsvc: CommonService, private existdocService: ExistingDocumentsService) {
+  constructor(private router: Router, private loader: NgxSpinnerService, private workitemssvc: WorkitemsService,public commonsvc: CommonService, private existdocService: ExistingDocumentsService) {
     this.userRole = JSON.parse(this.storage['user']).Role.toLowerCase();
     this.userName = this.storage['username'].toLowerCase();
   }
