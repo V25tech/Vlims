@@ -15,7 +15,7 @@
 
       <div  class="row">
 
-        <div class="col col-lg-4" *ngIf="commonsvc.userPermissions.workItemsassigned">
+        <div class="col col-lg-4" >
           <div class="card" (click)="userRole != 'adminrole' && navigateTo('assigned')">
             <div class="card-header bg-transparent d-flex justify-content-between border-0">
               <span class="ms-auto" style="color: white;"><cite title="Source Title"><small
@@ -41,7 +41,7 @@
           </div>
         </div> -->
 
-        <div class="col col-lg-4" *ngIf="commonsvc.userPermissions.documentMaster">
+        <div class="col col-lg-4" >
           <div class="card" (click)="userRole != 'adminrole' && navigateTo('document-master')">
             <div class="card-body">
               <i class="fa-regular fa-life-ring"></i>
@@ -70,7 +70,7 @@
           </div>
         </div> -->
 
-        <div class="col col-lg-4" *ngIf="commonsvc.userPermissions.adminMgmt">
+        <div class="col col-lg-4" >
           <div class="card" (click)="navigateTo('admin')">
             <div class="card-body">
               <i class="fa-solid fa-users-gear"></i>
