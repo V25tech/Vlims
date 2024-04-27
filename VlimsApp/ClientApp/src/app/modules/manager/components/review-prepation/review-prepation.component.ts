@@ -160,7 +160,7 @@ export class ReviewPrepationComponent {
     private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
   ngOnInit() {
-    debugger
+    
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
       this.commonsvc.createdBy = user;
@@ -176,10 +176,11 @@ export class ReviewPrepationComponent {
     if (this.type == 'view') {
       this.viewMode = true;
       this.getbyId(this.requestId);
+      this.onBodyFileExistsCheck();
       this.getworkflowitems();
     }
     else if (this.commonsvc.preperation.dpnid) {
-      debugger
+      
       this.preparation = this.commonsvc.preperation;
       if(this.preparation.template!='' && this.preparation.template!=undefined){
         this.istemplate=true;
@@ -190,6 +191,7 @@ export class ReviewPrepationComponent {
     if(!this.istemplate && this.isrevision)
       this.preparation.status = 'In-Progress';
       this.buildPrepdocument();
+      this.onBodyFileExistsCheck();
       this.getLabelMappings();
     }
     else {
@@ -270,7 +272,7 @@ export class ReviewPrepationComponent {
       }
     }
     if(this.istemplateused){
-      debugger
+      
       this.templateService.adddoctemplate(this.clonetemp).subscribe((data:any)=>{
       });
     }
@@ -281,6 +283,9 @@ export class ReviewPrepationComponent {
         this.commonsvc.preperation = new DocumentPreperationConfiguration();
         this.toastr.success(`Document Preparation ${this.toastMsg}  successfully`);
         this.spinner.hide();
+        if(this.selectedFile){
+          this.uploadFIle();
+        }
         this.location.back();
         this.isButtonDisabled = false;
       }, er => {
@@ -294,20 +299,29 @@ export class ReviewPrepationComponent {
     this.location.back();
   }
 
+  onBodyFileExistsCheck(){
+    this.templateService.checkFileExist(this.preparation.documentno)
+    .subscribe(
+      (response: any) => { this.isUploaded = response;},
+      (ex) => {
+        console.error('Error uploading file:', ex);
+        this.isUploaded = false;
+      }
+    );
+  }
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
-    this.isUploaded = false; // Reset upload status when a new file is selected
   }
-  onUpload(): void {
+
+  uploadFIle(){
     if (!this.selectedFile) {
       console.error('No file selected.');
       return;
     }
     const formData = new FormData();
     formData.append('file', this.selectedFile);
-    this.spinner.show();
-    this.docPreperationService.upload(formData)
+    this.templateService.upload(formData, this.preparation.documentno)
       .subscribe(
         (response: any) => {
 
@@ -315,20 +329,30 @@ export class ReviewPrepationComponent {
           this.preparation.document = response.filePath;
           this.commonsvc.preperation = this.preparation;
           this.isUploaded = true; // Set upload status to true after successful upload
-          this.spinner.hide();
         },
         (error) => {
           console.error('Error uploading file:', error);
-          this.spinner.hide();
         }
       );
   }
   onDeleteFile(): void {
     this.selectedFile = null;
     this.isUploaded = false;
-    this.preparation.document = '';
-    this.preparation.path = '';
     if (this.InputVar) this.InputVar.nativeElement.value = "";
+    this.spinner.show();
+    this.templateService.deleteFile(this.preparation.documentno)
+    .subscribe(
+      (response: any) => {         
+        this.isUploaded = !response;
+        this.spinner.hide();
+      },
+      (ex) => {
+        console.error('Error uploading file:', ex);
+        this.isUploaded = false;
+        this.spinner.hide();
+
+      }
+    );
   }
 
   closeModel() {
@@ -342,7 +366,7 @@ export class ReviewPrepationComponent {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
     //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
     //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    //   debugger
+    //   
 
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }
@@ -383,7 +407,7 @@ export class ReviewPrepationComponent {
     });
   }
   istemplatecheck(event: any){
-    debugger
+    
     this.spinner.show();
     this.istemplateused=false;
     this.templateService.isduplicate(this.preparation.template).subscribe((data: any) => {
@@ -516,7 +540,7 @@ export class ReviewPrepationComponent {
     });
   }
   edittemplate(template: string) {
-    debugger
+    
     const obj = this.templatesSource.find(o => o.Templatename === template);
     const isclone=this.templatesSourceall.find(o=>o.PreparationId==parseInt(this.preparation.dpnid));
     if(isclone!=null && isclone!=undefined && obj!=null && obj!=undefined){
@@ -530,7 +554,7 @@ export class ReviewPrepationComponent {
   }
 
   getLabelMappings() {
-    debugger
+    
     let exist = this.document_preparaion_mappings.find((p: any) => p.operatingProcedure.toLowerCase() == this.preparation.documenttype.toLowerCase());
     if (exist) {
         this.lableMappings = exist.lables as DocPrep_LableMapping;

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using Vlims.DocumentMaster.Manager.Interface;
 using Vlims.DocumentMaster.Manager;
 
 public class Startup
@@ -60,6 +61,7 @@ public class Startup
             opt.JsonSerializerOptions.PropertyNamingPolicy = null;
         });
         Services.AddScoped<IDocumentTypeConfigurationService, DocumentTypeConfigurationService>();
+        Services.AddScoped<IAzureBlobService, AzureBlobService>();
         Services.AddScoped<IDocumentTemplateConfigurationService, DocumentTemplateConfigurationService>();
         Services.AddScoped<IworkflowconigurationService, workflowconigurationService>();
         Services.AddEndpointsApiExplorer();
