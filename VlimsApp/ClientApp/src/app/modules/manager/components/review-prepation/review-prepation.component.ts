@@ -2,7 +2,7 @@ import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DocPrep_LableMapping, DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
+import { DocPrep_LableMapping, DocumentPreperationConfiguration, DocumentTemplateConfiguration, RequestContext, UserConfiguration, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { DocumentTypeServiceService } from 'src/app/modules/services/document-type-service.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
@@ -14,6 +14,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 import { ToastrService } from 'ngx-toastr';
+import { UsersconfigurationService } from 'src/app/modules/services/usersconfiguration.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./review-prepation.component.scss']
 })
 export class ReviewPrepationComponent {
+
 
   template = new DocumentTemplateConfiguration();
   isButtonDisabled = false;
@@ -50,6 +52,7 @@ export class ReviewPrepationComponent {
   workitems: Array<WorkItemsConfiguration> = [];
   finalStatus: string = ''
   toastMsg: string | null = null;
+  lstusers: UserConfiguration[] = [];
   stageSource = [
     { label: 'Select Stage', value: '' },
     { label: 'Stage 1', value: 'option2' },
@@ -157,10 +160,12 @@ export class ReviewPrepationComponent {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private http: HttpClient,
+    private userssvc: UsersconfigurationService,
     private modalService: BsModalService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private docPreperationService: DocumentPreperationService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private templateService: DocumentTemplateServiceService) { }
 
   ngOnInit() {
-    debugger
+    this.getusers();
+    
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
       this.commonsvc.createdBy = user;
@@ -228,31 +233,109 @@ export class ReviewPrepationComponent {
       this.spinner.hide();
     });
   }
-  approve() {
-    this.preparation.ModifiedBy = this.username;
-    this.preparation.status = this.finalStatus;
-    if (this.isapprove && this.reviewpendingcount > 0) {
-      this.toastr.error('Reviews Pending');
+  proceed(esign: TemplateRef<any>) {
+    debugger
+    // Open the modal
+    this.modalRef = this.modalService.show(esign, { class: 'modal-lg' });
+  }
+  
+  
+  
+  
+  
+  getusers() {
+    debugger
+  
+    let objrequest = new RequestContext();
+    objrequest.PageNumber = 1; objrequest.PageSize = 50;
+    return this.userssvc.getusers(objrequest).subscribe((data: any) => {
+      this.lstusers = data.Response;
+      //localStorage.setItem("lstusers", this.lstusers.);
+  
+  
+    });
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  confirmApproval() {
+    debugger
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
+  
+      this.preparation.ModifiedBy = this.username;
+      this.preparation.status = this.finalStatus;
+      if (this.isapprove && this.reviewpendingcount > 0) {
+        this.toastr.error('Reviews Pending');
+      }
+      else {
+        this.toastMsg = this.preparation.status;
+        this.savePreparation();
+      }
+  
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
     }
-    else {
+  }
+  
+  
+  
+  
+  
+  confirmReturn() {
+  
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
+  
+  
+      this.location.back();
+      this.preparation.ModifiedBy = this.commonsvc.getUsername();
+      this.preparation.status = 'Returned';
       this.toastMsg = this.preparation.status;
       this.savePreparation();
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
     }
   }
-  return() {
-    this.location.back();
-    this.preparation.ModifiedBy = this.commonsvc.getUsername();
-    this.preparation.status = 'Returned';
-    this.toastMsg = this.preparation.status;
-    this.savePreparation();
+  
+  
+  
+  
+  
+  confirmReject() {
+    debugger
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
+  
+      debugger
+      this.preparation.ModifiedBy = this.commonsvc.getUsername();
+      this.preparation.status = 'Rejected';
+      this.toastMsg = this.preparation.status;
+      this.savePreparation();
+      //this.location.back();
+  
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
+    }
   }
-  reject() {
-    this.preparation.ModifiedBy = this.commonsvc.getUsername();
-    this.preparation.status = 'Rejected';
-    this.toastMsg = this.preparation.status;
-    this.savePreparation();
-    //this.location.back();
-  }
+  
   savePreparation() {
     this.spinner.show();
     if (this.editMode && (this.preparation.status == 'Rejected' || this.preparation.status == 'Returned')) {
