@@ -48,6 +48,7 @@ import { AuditRoleAddPageComponent } from '../authentication/components/audit-ro
 import { AuditUserMananagementAddPageComponent } from '../authentication/components/audit-user-mananagement-add-page/audit-user-mananagement-add-page.component';
 import { AuditPlantAddPageComponent } from '../authentication/components/audit-plant-add-page/audit-plant-add-page.component';
 import { AuditTemplateTypeNewPageComponent } from './components/audit-template-type-new-page/audit-template-type-new-page.component';
+import { DocumentsIndexComponent } from '../reports/documenstindex/documentsindex.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -102,6 +103,12 @@ const routes: Routes = [
     component: AuditTemplateTypeNewPageComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'docindex',
+    component: DocumentsIndexComponent,
+    canActivate: [AuthGuard],
+  },
+
   {
     path: 'templates/add/:count',
     component: AddTemplateComponent,

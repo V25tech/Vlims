@@ -290,7 +290,7 @@ export class LeftNavComponent {
         //},
         {
           label: 'Documents Index',
-          path: '/docindex',
+          path: 'docindex',
           isOpen: false,
           children: null,
           isActive: false,

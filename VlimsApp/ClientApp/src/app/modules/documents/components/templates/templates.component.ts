@@ -98,7 +98,6 @@ export class TemplatesComponent {
   }
   getUrl(template: TemplateRef<any>):void{
     this.templatesvc.geturl().subscribe((data:any)=>{
-      debugger
       this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })
@@ -160,14 +159,12 @@ export class TemplatesComponent {
     }
   }
   CopyTemplate(objtemp:DocumentTemplateConfiguration,template2: TemplateRef<any>){
-    debugger
     this.templatesvc.getbyId(parseInt(objtemp.DTID)).subscribe((data:any)=>{
       this.copytemplate=data;
       this.modalRef = this.modalService.show(template2, { class: 'modal-lg' });
     })
   }
   addTemplate(temp:add){
-    debugger
     this.spinner.show();
     if(temp!=null && temp!=undefined){
       const templateExists = this.types.some(o => o.Templatename.toLowerCase() === temp.Templatename.toLowerCase());

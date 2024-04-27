@@ -232,12 +232,12 @@
                 Cancel
               </button>
               <!--[disabled]="!fm.form.valid || !preparation.document"-->
-              <button type="submit" class="btn btn-primary" *ngIf="!viewMode" [disabled]="!fm.form.valid || isButtonDisabled">Update</button>
-
-              <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
-              <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="return()">Return</button>
-              <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
-
+              <button type="submit" class="btn btn-primary" *ngIf="!viewMode" [disabled]="!fm.form.valid || isButtonDisabled">Submit</button>
+        
+              <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="proceed(esign)">Proceed</button>
+              <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="return(esign)">Return</button>
+              <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject(esign)">Reject</button> -->
+        
             </div>
           </div>
         </form>
@@ -257,5 +257,37 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+    </div>
+  </ng-template>
+
+
+
+
+  <ng-template #esign>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">E-sign Credentials</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modalRef!.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{ username }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modalRef!.hide()">Close</button>
+          <button type="button" class="btn btn-success" (click)="confirmApproval()">Approve</button>
+          <button type="button" class="btn btn-primary" (click)="confirmReturn()">Return</button>
+          <button type="button" class="btn btn-danger" (click)="confirmReject()">Reject</button>
+        </div>
+      </div>
     </div>
   </ng-template>
