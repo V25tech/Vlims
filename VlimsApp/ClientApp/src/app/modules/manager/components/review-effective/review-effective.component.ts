@@ -111,7 +111,6 @@ export class ReviewEffectiveComponent {
 
 
   Proceed(template: TemplateRef<any>) {
-    debugger
     // Open the modal
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
@@ -121,8 +120,7 @@ export class ReviewEffectiveComponent {
 
 
   getusers() {
-    debugger
-
+     
     let objrequest = new RequestContext();
     objrequest.PageNumber = 1; objrequest.PageSize = 50;
     return this.userssvc.getusers(objrequest).subscribe((data: any) => {
@@ -145,7 +143,6 @@ export class ReviewEffectiveComponent {
 
 
   confirmApproval() {
-    debugger
     const username = localStorage.getItem('username') || '';
     const password = (document.getElementById('password') as HTMLInputElement).value;
     const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
@@ -173,13 +170,11 @@ export class ReviewEffectiveComponent {
   confirmReturn() {
 
 
-    debugger
     const username = localStorage.getItem('username') || '';
     const password = (document.getElementById('password') as HTMLInputElement).value;
     const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
     if (userExists) {
 
-      debugger
       this.effective.Status = 'Returned'
       this.toastMsg = this.effective.Status;
       this.effective.ModifiedBy = this.commonsvc.getUsername();
@@ -197,13 +192,11 @@ export class ReviewEffectiveComponent {
 
 
 
-    debugger
     const username = localStorage.getItem('username') || '';
     const password = (document.getElementById('password') as HTMLInputElement).value;
     const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
     if (userExists) {
 
-      debugger
       this.effective.Status = 'Rejected'
       this.toastMsg = this.effective.Status;
       this.effective.ModifiedBy = this.commonsvc.getUsername();
@@ -267,7 +260,7 @@ export class ReviewEffectiveComponent {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
     //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
     //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    //   debugger
+    //    
 
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }
@@ -275,7 +268,6 @@ export class ReviewEffectiveComponent {
   }
   getUrl(template: TemplateRef<any>): void {
     this.templateService.geturl().subscribe((data: any) => {
-      debugger
       this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(data + '#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })
@@ -329,7 +321,6 @@ export class ReviewEffectiveComponent {
       this.workflowsourcedata = data.Response;
       this.workflowsourcedata = this.workflowsourcedata.filter(o => o.documentstage?.includes("Effective"));
       this.workflowsourcedata = this.workflowsourcedata.filter(o => o.documenttype?.toLocaleLowerCase() === this.effective.documenttype.toLocaleLowerCase());
-      debugger
     });
   }
   getworkflowitems() {
@@ -339,7 +330,6 @@ export class ReviewEffectiveComponent {
       this.commonsvc.createdBy = user;
     }
     return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
-      debugger
       this.workitems = data.Response;
       if (this.workitems.length > 0) {
         this.workitems = this.workitems.filter(p => p.ReferenceId == this.requestId && p.TaskType == 'Effective');
