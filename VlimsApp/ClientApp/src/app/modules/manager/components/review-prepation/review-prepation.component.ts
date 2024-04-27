@@ -338,6 +338,7 @@ export class ReviewPrepationComponent {
                 this.commonsvc.preperation = new DocumentPreperationConfiguration();
                 this.toastr.success(`Document Preparation ${this.toastMsg}  successfully`);
                 this.spinner.hide();
+                this.uploadFIle();
                 this.location.back();
                 this.isButtonDisabled = false;
             }, er => {
