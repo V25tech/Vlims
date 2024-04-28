@@ -1,6 +1,6 @@
 ﻿
   CREATE PROCEDURE [dbo].[USP_DocumentEffective_PSY_UPDATE] @DEID_PSY int, @Documentmanagerid_PSY NVarChar(50),
-@documenttitle_PSY NVarChar(50),
+@documenttitle_PSY NVarChar(150),
 @documentno_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
 @department_PSY NVarChar(50),
