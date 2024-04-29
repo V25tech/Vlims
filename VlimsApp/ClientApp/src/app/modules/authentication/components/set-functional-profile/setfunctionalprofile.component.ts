@@ -101,6 +101,7 @@ export class SetfunctionalprofileComponent implements OnInit {
     this.profile = new functionalprofile();
     if (roleinfo) {
       this.profile = roleinfo;
+      this.profile.role = rolename;
     }
   }
   onCancel() {
