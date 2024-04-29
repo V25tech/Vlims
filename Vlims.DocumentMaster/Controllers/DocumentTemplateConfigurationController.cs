@@ -23,8 +23,6 @@ namespace Vlims.Controllers
     using Vlims.DocumentMaster.DataAccess;
     using Vlims.DocumentMaster.Entities;
     using Vlims.DocumentMaster.Manager;
-    using Spire.Doc;
-    using Spire.Pdf;
     using FileFormat = Spire.Doc.FileFormat;
     using System.Drawing.Printing;
     using DocumentFormat.OpenXml.Packaging;
@@ -37,6 +35,8 @@ namespace Vlims.Controllers
     using Document = Spire.Doc.Document;
     using PageSize = Spire.Doc.Documents.PageSize;
     using Paragraph = Spire.Doc.Documents.Paragraph;
+    using Vlims.DocumentMaster.Manager.Interface;
+    using iTextSharp.text.pdf.qrcode;
 
 
     /// <summary>
@@ -48,6 +48,7 @@ namespace Vlims.Controllers
     {
 
         private readonly IDocumentTemplateConfigurationService documentTemplateConfigurationService;
+        private readonly IAzureBlobService azureBlobService;
 
         private readonly string htmlUpper = "<html>\r\n<head>\r\n<style type=\"text/css\">\r\n        li, p, table {\r\n            font-family: 'Lucida Sans Unicode', sans-serif;\r\n            font-size: 14pt;\r\n        }\r\n\t\ttable {\r\n            font-family: 'Lucida Sans Unicode', sans-serif;\r\n            font-size: 14pt;\r\n            border: 1px solid black; /* Set border to 1px solid black */\r\n            width: 100%;\r\n        }\r\n</style>\r\n</head>\r\n<body>";
         private readonly string htmllower = "</body>\r\n</html>";
@@ -56,9 +57,10 @@ namespace Vlims.Controllers
         /// 
         /// </summary>
         /// <param name="documentTemplateConfigurationService"></param>
-        public DocumentTemplateConfigurationController(IDocumentTemplateConfigurationService documentTemplateConfigurationService)
+        public DocumentTemplateConfigurationController(IDocumentTemplateConfigurationService documentTemplateConfigurationService, IAzureBlobService _azureBlobService)
         {
             this.documentTemplateConfigurationService = documentTemplateConfigurationService;
+            this.azureBlobService = _azureBlobService;
         }
 
         /// <summary>
@@ -188,10 +190,164 @@ namespace Vlims.Controllers
             return Ok(hostAddress);
         }
 
+        [HttpGet("checkfileexist")]
+        public async Task<IActionResult> CheckFileExist(string filename)
+        {
+            if (string.IsNullOrEmpty(filename))
+                return BadRequest("Please provide filename");
 
+            filename = filename.Replace("/", "_");
+            return Ok(await azureBlobService.CheckFileExist(filename));
+        }
+
+        [HttpGet("deletefile")]
+        public async Task<IActionResult> DeleteFile(string filename)
+        {
+            if (string.IsNullOrEmpty(filename))
+                return BadRequest("Please provide filename");
+
+            filename = filename.Replace("/", "_");
+            return Ok(await azureBlobService.DeleteFile(filename));
+        }
+
+        [HttpPost("upload")]
+        public async Task<IActionResult> UploadFile(IFormFile file, string filename)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(filename))
+                    return BadRequest("Please provide filename");
+
+                filename = filename.Replace("/", "_");
+                string uniqueFileName = filename + Path.GetExtension(file.FileName);
+
+                var resp = await azureBlobService.UploadFiles(file, uniqueFileName).ConfigureAwait(false);
+
+                return Ok(new { message = "File uploaded successfully.", uniqueFileName });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while uploading the file: {ex.Message}");
+            }
+        }
 
         [HttpGet("getpdf")]
-        public ActionResult<byte[]> getpdf(string templateinf, string p_user,int p_PrepId ,bool p_isPdf = true)
+        public ActionResult<byte[]> getpdf(string templateinf, string p_user, int p_PrepId, bool p_isPdf = true)
+        {
+
+            byte[] bytes = null; DocumentPreparation preparation = new DocumentPreparation();
+            DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf, p_PrepId);
+            DataSet ds_template = DocumentTemplateConfigurationData.GetTemplateHeaderFooterDetails(templateinf, p_PrepId);
+            DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
+            DocumentTemplateConfiguration template1 = DocumentTemplateConfigurationConverter.SetDocumentTemplateHeaderFooterConfiguration(ds_template);
+            if (template1 != null)
+            {
+                DataSet dp_dataset = DocumentPreparationData.GetDocumentPreparationByDPNID(Convert.ToInt32(template1.DTID));
+                preparation = DocumentPreparationConverter.SetDocumentPreparation(dp_dataset);
+            }
+            if (template!=null && !string.IsNullOrEmpty(template.CloneTemp))
+            {
+                template = DocumentTemplateConfigurationConverter.SetDocumentTemplateCloneConfigurationt(dataset);
+            }
+
+            StringBuilder builder = new StringBuilder();
+            builder.Append(htmlUpper);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "license.elic.xml");
+            Spire.Doc.License.LicenseProvider.SetLicenseKey("DQEAncpg8UKrpcZ6bd1acDUrk/DzuHpVVqZMUNaup1CKQyMW0ztEG9JSlYIAt/ms0m/szh02VvrZVOWjJ7Kzd4+wgan7Q3mFjE1cVdyrarldLqFv5SNBWtQPTHwyxbyQGweGCKYNGPJzYhM4sutNkPm+T0BpuFGjuYI4XhHjaAx3RzGbRwgzoFr5eVOZXE8z/fugnveQBjN6xxayvrCWvoAzXav0SHLdZSL6TiqpL0nbsEM9IcIxeB2+JRjdBzQ3JenJSuY2FIsrenGNHNQ50ebnoqw8FkYPQbyklyO7j3HtCzpEht1zGUdNEf94YC33hwVdrF9lzmVoSOToP2iOkysIZTRTlKQ5BTjU5qlmrQiki/1gjeU8FiFKB73VDq5kbXiOyY2ZzHutz+CjCqCM1lStKIMC/n4KumDsnoblURz84q2Fks9crbXDZsaEfZ+kMb1WAyIZj5NQ3ECYXzyvQ4l3U1vawJWLMbgifrlmqh1EDGL3XSspO4zVCtTtBrZubr9JLCwUenVDz6JUAU2au9Q8HD/oHOgJbwfoqK4InTvolSaA8elHHpS/vByUCIiBaU4RodGS5Db63ZNv+1r0NiF8ml1Sl91AYYEYuurGIIMO3fZzBdWwQKCLPgM4/L8b88+g/C55UTnBVOOGkd5BM9qx68isemi+9HR3gz8Jawj3ac766QsVVoizDtVrcEDXxCy4zExlplijmwFxcE6eM2nkLTvroL5uFCSA+6c5T4hRvC4cpcI2bUBtR4sDiznRV97Kwy1cPX9yRYupRlxtbdc33k08clY/D3o/VmmosKy0IVocjKTfMgnQxvyRf6v2TZAVCeUvl/bAleUNuJoc6oNbqTCR92i/7Lsq0bfvvq8MsG29KH2jpsTXafhkWSZpb3SLlB658DHloUc9iqRmjQmjSf55jIwUq1itvypXbeU0ytTgteqniZOn+D3W8jeVeKdftey933cTcFlFRF2+I/mGylL+X+ZrNL0aSkRjqXNCJ2B+8085l7W9VFlPfLot7IePqPpMxLju2keXeQAzC7kON/OYbRVJ6Ejr02mQ+1y4JjLq3cUiTfqMMNuYYqG5/aem05aYW6k2tj3HrwCNq23ssaraZYr6yx3UO7cD072H+rNxJjKsVmTvruvgD4dVu1wJUhE/xE8A5YEAMAvLU6aopXw2sdNnFiIYydTPTOFxEtXSdmIsGj0tYm6ccpXnskAVTToqqTsM3G3a5tmLlVCt/9tbgcas9LsFwTvELnV9yh6jP8Nm171VctFUv8GovAzjneetmbJniGEn3wsTnPJVHvE5j8MnM8vVK3ePYpmriWdCY3bWkdiT6VgPr+E51KqRftxBf67lrsYU+MEFit4+UfzAW3YFlbNU2MIA7mtcawNNfcyh5vmGjLPwsIPCqKCpzL5RWAkf1Qt0nMWQye8loyhD/TdHahinJNFHRY9hyqvM6BjxKWebq8/ShGxHtJFzLkP2U9EBLv/eK+mATc0M3pcdWC+sgKA9DHqTV0xm9KVqCCD6e8yvd654CMgnGJy0PFrGuXgBY6vERriKV55aHa64x5xJEd6iyXeU1PI=");
+            Document document = new Spire.Doc.Document();
+            string filename = template1.DocumentNo.Replace("/", "_")+".docx";
+            var byteArray = azureBlobService.GetFileFromAzure(filename);
+
+            Stream stream = new MemoryStream(byteArray);
+            document.LoadFromStream(stream, FileFormat.Docx, XHTMLValidationType.None);
+            Section section = document.Sections[0];
+            section.PageSetup.PageSize = PageSize.A4;
+            section.PageSetup.Margins.All = 72f;
+
+            string ac= document.GetText();
+
+            //section.PageSetup.Margins.Top = 0f;
+            //section.PageSetup.Margins.Bottom = 0f;
+
+            HeaderFooter footer = section.HeadersFooters.Footer;
+            Paragraph footerParagraph = footer.AddParagraph();
+            StringBuilder footerbuilder = new StringBuilder();
+            footerbuilder.Append(htmlUpper);
+            footerbuilder.Append(TemplatePreparation.PrepareStaticdiv(template, template1, p_user));
+            footerbuilder.Append(htmllower);
+            footerParagraph.AppendHTML(footerbuilder.ToString());
+            footerParagraph.Format.BeforeSpacing = 0;
+            footerParagraph.Format.AfterSpacing = 0;
+            footerParagraph.Format.PageBreakBefore = false;
+
+            int i = 0;
+            HeaderFooter header = section.HeadersFooters.Header;
+            Paragraph headerParagraph = header.AddParagraph();
+            StringBuilder headerbuilder = new StringBuilder();
+            headerbuilder.Append(htmlUpper);
+            if (template.documenttype.Equals("BATCH PACKING RECORD 08", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("BATCH PACKING RECORD", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("BATCH MANUFACTURING RECORD", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("STANDARD OPERATING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("STANDARD TESTING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("STANDARD TESTING SPECIFICATION", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("Validation Protocol", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+            }
+            else
+                headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation));
+
+            headerbuilder.Append(htmllower);
+            headerParagraph.AppendHTML(headerbuilder.ToString());
+            headerParagraph.Format.BeforeSpacing = 0;
+            headerParagraph.Format.AfterSpacing = 0;
+            headerParagraph.Format.PageBreakBefore = false;
+
+            document.SaveToFile("DocumentWithMargins.docx", FileFormat.Docx2013);
+            document.Dispose();
+
+
+            Document doc = new Document();
+
+            doc.LoadFromFile("DocumentWithMargins.docx");
+            string pathhh = Path.Combine(Directory.GetCurrentDirectory(), "DocumentWithMargins.docx");
+            byte[] pdfBytes1 = System.IO.File.ReadAllBytes(pathhh);
+            string pdfFilePath = "DocumentWithHeaderTable.pdf";
+            doc.SaveToFile(pdfFilePath, FileFormat.PDF);
+            byte[] pdfBytes = TemplatePreparation.ConvertDocxToPdfBytes(doc);
+            //byte[] pdfBytes = geturl();
+            doc.Dispose();
+            bytes = pdfBytes;
+            //PrintDocument();
+            if (!p_isPdf)
+                return pdfBytes1;
+            else
+                return bytes;
+
+        }
+
+
+        [HttpGet("getpdf2")]
+        public ActionResult<byte[]> getpdf2(string templateinf, string p_user,int p_PrepId ,bool p_isPdf = true)
         {
             byte[] bytes = null; DocumentPreparation preparation = new DocumentPreparation();
             DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf,p_PrepId);

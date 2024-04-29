@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.17.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Vlims.Common\Vlims.Common.csproj" />
     <ProjectReference Include="..\Vlims.DocumentMaster.DataAccess\Vlims.DocumentMaster.DataAccess.csproj" />
     <ProjectReference Include="..\Vlims.DocumentMaster.Entities\Vlims.DocumentMaster.Entities.csproj" />

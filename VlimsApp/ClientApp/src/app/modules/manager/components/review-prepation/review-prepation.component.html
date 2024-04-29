@@ -64,7 +64,7 @@
               </label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="documentNumber" name="documentNumber"
-                       placeholder=" Enter Document Number" [(ngModel)]="preparation.documentno" [disabled]="viewMode" #documentNumber="ngModel" required />
+                       placeholder=" Enter Document Number" [(ngModel)]="preparation.documentno" [disabled]="viewMode || isUploaded" #documentNumber="ngModel" required />
                 <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="text-danger">
                   Document Number is required
                 </div>
@@ -177,6 +177,20 @@
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="productCode" name="productCode"
                        [(ngModel)]="preparation.prepdocument.productCode" [disabled]="viewMode"/>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="documentno" class="col-sm-2 col-form-label">File Body</label>
+              <div class="col-sm-10" *ngIf="!isUploaded">
+                <input type="file"  
+                       class="form-control mw-350"
+                       id="documentno" 
+                      (change)="onFileSelected($event)" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+              </div>
+              <div *ngIf="isUploaded" class="col-sm-9">
+                {{preparation.documentno}}.docx
+                <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()">Delete</button>
               </div>
             </div>
 
