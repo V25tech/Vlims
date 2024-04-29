@@ -14,7 +14,8 @@ CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
 Status_PSY,
-Workflow_PSY
+Workflow_PSY,
+Reason_PSY
   FROM [dbo].[Documentrequest_PSY] WITH (NOLOCK) where [DRID_PSY] = @DRID_PSY   
  END TRY 
  BEGIN CATCH 
