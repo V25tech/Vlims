@@ -184,7 +184,7 @@
               <label for="documentno" class="col-sm-2 col-form-label">File Body</label>
               <div class="col-sm-10" *ngIf="!isUploaded">
                 <input type="file"  
-                       class="form-control mw-350"
+                       class="form-control mw-350" [disabled]="viewMode"
                        id="documentno" 
                       (change)="onFileSelected($event)" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
               </div>

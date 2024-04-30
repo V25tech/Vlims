@@ -57,6 +57,7 @@ export class SetfunctionalprofileComponent implements OnInit {
     });
   }
   onSubmit(profileinfo: functionalprofile) {
+    debugger
     profileinfo.modifiedby = this.commonsvc.getUsername();
 
     this.loader.show();
@@ -95,14 +96,15 @@ export class SetfunctionalprofileComponent implements OnInit {
     }
   }
   async binddata(rolename: string) {
+    debugger
     await this.getsetfunctionalprofile();
     let roleinfo: any;
     roleinfo = this.types.find(o => o.role == rolename);
     this.profile = new functionalprofile();
     if (roleinfo) {
       this.profile = roleinfo;
-      this.profile.role = rolename;
     }
+    this.profile.role = rolename;
   }
   onCancel() {
     this.location.back();

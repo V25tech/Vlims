@@ -64,6 +64,7 @@ export class TemplatesComponent {
       });
   }
   editdoc(editband: DocumentTemplateConfiguration) {
+    debugger
     
     this.commonsvc.template=editband;
     //this.router.navigate(['/templates/view',editband.Templatename]);

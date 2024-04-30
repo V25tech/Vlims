@@ -69,7 +69,7 @@
             <label for="workflow" class="col-sm-2 col-form-label"
               >Document Stage<span style="color: red; font-weight: bolder;">*</span></label
             >
-            <div class="col-sm-10">
+            <div class="col-sm-3">
               <!-- <p-dropdown
                 name="workflowStage"
                 [options]="stageSource"
@@ -89,7 +89,7 @@
                 optionLabel="value"
                 display="chip"
                 [required]="true"
-                #documentstage="ngModel">
+                #documentstage="ngModel" [maxSelectedLabels]="100">
               </p-multiSelect>
               <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
                 Document Stage is required
