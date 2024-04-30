@@ -181,7 +181,7 @@ export class ReviewPrepationComponent {
         if (this.type == 'view') {
             this.viewMode = true;
             this.getbyId(this.requestId);
-            this.onBodyFileExistsCheck();
+            
             this.getworkflowitems();
         }
         else if (this.commonsvc.preperation.dpnid) {
@@ -221,6 +221,7 @@ export class ReviewPrepationComponent {
                 this.istemplate = true;
             }
             this.buildPrepdocument();
+            this.onBodyFileExistsCheck();
             this.getLabelMappings();
             this.spinner.hide();
         });

@@ -188,9 +188,9 @@
                        id="documentno" 
                       (change)="onFileSelected($event)" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
               </div>
-              <div *ngIf="isUploaded" class="col-sm-9">
+              <div *ngIf="isUploaded" class="col-sm-9" >
                 {{preparation.documentno}}.docx
-                <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()">Delete</button>
+                <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>
               </div>
             </div>
 
