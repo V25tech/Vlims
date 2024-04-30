@@ -17,7 +17,8 @@ ELSE IF(@Status_PSY!='REJECT' OR @Status_PSY!='REJECTED')
 BEGIN
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@REFERENCEGUID_PSY
 END
-
+IF(@Status_PSY='REVIEWED' OR @Status_PSY='APPROVED' OR @Status_PSY='REVIEW' OR @Status_PSY='APPROVE')
+BEGIN
 IF(@TYPE='REVIEW' OR @TYPE='REVIEWED')
 BEGIN
 UPDATE workitems_PSY SET Status_PSY='Reviewed', Stage_PSY=@Status_PSY,IsCompleted_PSY=1,ModifiedDate_PSY=GETDATE() WHERE RefrenceGuid_PSY=@REFERENCEGUID_PSY AND CreatedBy_PSY=@UserName
@@ -26,4 +27,5 @@ ELSE IF(@TYPE='APPROVE' OR @TYPE='APPROVED')
 BEGIN
 UPDATE workitems_PSY SET Status_PSY='Approved', Stage_PSY=@Status_PSY,IsCompleted_PSY=1,ModifiedDate_PSY=GETDATE() WHERE RefrenceGuid_PSY=@REFERENCEGUID_PSY AND CreatedBy_PSY=@UserName
 END
-end
+END
+END
