@@ -8,16 +8,11 @@ as
 begin
 
 DECLARE @TYPE NVARCHAR(100); SET @TYPE=(SELECT ActionType_PSY FROM workitems_PSY WHERE CreatedBy_PSY=@UserName AND RefrenceId_PSY=@RefrenceId_PSY AND TaskType_PSY=@TYPEWORK)
-IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
+IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED' OR @Status_PSY='REJECT' OR @Status_PSY='REJECTED')
 BEGIN
---UPDATE workitems_PSY SET Status_PSY='IN-PROGRESS',Stage_PSY=@Status_PSY, ModifiedDate_PSY=GETDATE(),IsCompleted_PSY=0 WHERE RefrenceGuid_PSY=@REFERENCEGUID_PSY --AND InitiatedBy_PSY=@UserName
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@REFERENCEGUID_PSY
 END
 ELSE IF(@Status_PSY!='REJECT' OR @Status_PSY!='REJECTED')
-BEGIN
-DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@REFERENCEGUID_PSY
-END
-IF(@Status_PSY='REVIEWED' OR @Status_PSY='APPROVED' OR @Status_PSY='REVIEW' OR @Status_PSY='APPROVE')
 BEGIN
 IF(@TYPE='REVIEW' OR @TYPE='REVIEWED')
 BEGIN
@@ -28,4 +23,5 @@ BEGIN
 UPDATE workitems_PSY SET Status_PSY='Approved', Stage_PSY=@Status_PSY,IsCompleted_PSY=1,ModifiedDate_PSY=GETDATE() WHERE RefrenceGuid_PSY=@REFERENCEGUID_PSY AND CreatedBy_PSY=@UserName
 END
 END
-END
+
+end
