@@ -51,7 +51,7 @@ export class NewPrintRequestComponent implements OnInit {
   toastMsg: string | null = null;
   printType = 'single';
   preparations1: string[] = []; // Array to hold document numbers
-
+  isworkflow:boolean=false;
 
   stageSource:PrintType[] = [
     { label: 'Master Copy', value: 'Master Copy' },
@@ -101,6 +101,9 @@ export class NewPrintRequestComponent implements OnInit {
       this.print = this.commonsvc.printConfig;
       //this.workflowsSource = [{ workflowName: this.print.workflow }];
       this.preparations = [{ documentno: this.print.documentNumber }];
+      if(this.print.workflow!=null && this.print.workflow!=undefined){
+        this.isworkflow=true;
+      }
     }    
     this.getworkflowinfo();
     this.getdocumentpreparations();
@@ -255,7 +258,8 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/print']);
+this.location.back();
+    //this.router.navigate(['/print']);
   }
   getworkflowitems() {
     debugger
