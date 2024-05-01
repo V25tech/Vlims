@@ -88,9 +88,9 @@ export class EffectivesComponent {
         case 'RETURNED':
         return false;
         case 'Rejected':
-        return false;
+        return true;
         case 'REJECTED':
-        return false;
+        return true;
       default:
         return false;
     }
