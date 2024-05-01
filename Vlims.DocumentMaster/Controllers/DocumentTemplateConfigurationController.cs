@@ -245,7 +245,7 @@ namespace Vlims.Controllers
                 DataSet dp_dataset = DocumentPreparationData.GetDocumentPreparationByDPNID(Convert.ToInt32(template1.DTID));
                 preparation = DocumentPreparationConverter.SetDocumentPreparation(dp_dataset);
             }
-            if (template!=null && !string.IsNullOrEmpty(template.CloneTemp))
+            if (template != null && !string.IsNullOrEmpty(template.CloneTemp))
             {
                 template = DocumentTemplateConfigurationConverter.SetDocumentTemplateCloneConfigurationt(dataset);
             }
@@ -255,7 +255,7 @@ namespace Vlims.Controllers
             string path = Path.Combine(Directory.GetCurrentDirectory(), "license.elic.xml");
             Spire.Doc.License.LicenseProvider.SetLicenseKey("DQEAncpg8UKrpcZ6bd1acDUrk/DzuHpVVqZMUNaup1CKQyMW0ztEG9JSlYIAt/ms0m/szh02VvrZVOWjJ7Kzd4+wgan7Q3mFjE1cVdyrarldLqFv5SNBWtQPTHwyxbyQGweGCKYNGPJzYhM4sutNkPm+T0BpuFGjuYI4XhHjaAx3RzGbRwgzoFr5eVOZXE8z/fugnveQBjN6xxayvrCWvoAzXav0SHLdZSL6TiqpL0nbsEM9IcIxeB2+JRjdBzQ3JenJSuY2FIsrenGNHNQ50ebnoqw8FkYPQbyklyO7j3HtCzpEht1zGUdNEf94YC33hwVdrF9lzmVoSOToP2iOkysIZTRTlKQ5BTjU5qlmrQiki/1gjeU8FiFKB73VDq5kbXiOyY2ZzHutz+CjCqCM1lStKIMC/n4KumDsnoblURz84q2Fks9crbXDZsaEfZ+kMb1WAyIZj5NQ3ECYXzyvQ4l3U1vawJWLMbgifrlmqh1EDGL3XSspO4zVCtTtBrZubr9JLCwUenVDz6JUAU2au9Q8HD/oHOgJbwfoqK4InTvolSaA8elHHpS/vByUCIiBaU4RodGS5Db63ZNv+1r0NiF8ml1Sl91AYYEYuurGIIMO3fZzBdWwQKCLPgM4/L8b88+g/C55UTnBVOOGkd5BM9qx68isemi+9HR3gz8Jawj3ac766QsVVoizDtVrcEDXxCy4zExlplijmwFxcE6eM2nkLTvroL5uFCSA+6c5T4hRvC4cpcI2bUBtR4sDiznRV97Kwy1cPX9yRYupRlxtbdc33k08clY/D3o/VmmosKy0IVocjKTfMgnQxvyRf6v2TZAVCeUvl/bAleUNuJoc6oNbqTCR92i/7Lsq0bfvvq8MsG29KH2jpsTXafhkWSZpb3SLlB658DHloUc9iqRmjQmjSf55jIwUq1itvypXbeU0ytTgteqniZOn+D3W8jeVeKdftey933cTcFlFRF2+I/mGylL+X+ZrNL0aSkRjqXNCJ2B+8085l7W9VFlPfLot7IePqPpMxLju2keXeQAzC7kON/OYbRVJ6Ejr02mQ+1y4JjLq3cUiTfqMMNuYYqG5/aem05aYW6k2tj3HrwCNq23ssaraZYr6yx3UO7cD072H+rNxJjKsVmTvruvgD4dVu1wJUhE/xE8A5YEAMAvLU6aopXw2sdNnFiIYydTPTOFxEtXSdmIsGj0tYm6ccpXnskAVTToqqTsM3G3a5tmLlVCt/9tbgcas9LsFwTvELnV9yh6jP8Nm171VctFUv8GovAzjneetmbJniGEn3wsTnPJVHvE5j8MnM8vVK3ePYpmriWdCY3bWkdiT6VgPr+E51KqRftxBf67lrsYU+MEFit4+UfzAW3YFlbNU2MIA7mtcawNNfcyh5vmGjLPwsIPCqKCpzL5RWAkf1Qt0nMWQye8loyhD/TdHahinJNFHRY9hyqvM6BjxKWebq8/ShGxHtJFzLkP2U9EBLv/eK+mATc0M3pcdWC+sgKA9DHqTV0xm9KVqCCD6e8yvd654CMgnGJy0PFrGuXgBY6vERriKV55aHa64x5xJEd6iyXeU1PI=");
             Document document = new Spire.Doc.Document();
-            string filename = template1.DocumentNo.Replace("/", "_")+".docx";
+            string filename = template1.DocumentNo.Replace("/", "_") + ".docx";
             var byteArray = azureBlobService.GetFileFromAzure(filename);
 
             Stream stream = new MemoryStream(byteArray);
@@ -264,7 +264,7 @@ namespace Vlims.Controllers
             section.PageSetup.PageSize = PageSize.A4;
             section.PageSetup.Margins.All = 72f;
 
-            string ac= document.GetText();
+            string ac = document.GetText();
 
             //section.PageSetup.Margins.Top = 0f;
             //section.PageSetup.Margins.Bottom = 0f;
@@ -347,11 +347,11 @@ namespace Vlims.Controllers
 
 
         [HttpGet("getpdf2")]
-        public ActionResult<byte[]> getpdf2(string templateinf, string p_user,int p_PrepId ,bool p_isPdf = true)
+        public ActionResult<byte[]> getpdf2(string templateinf, string p_user, int p_PrepId, bool p_isPdf = true)
         {
             byte[] bytes = null; DocumentPreparation preparation = new DocumentPreparation();
-            DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf,p_PrepId);
-            DataSet ds_template = DocumentTemplateConfigurationData.GetTemplateHeaderFooterDetails(templateinf,p_PrepId);
+            DataSet dataset = DocumentTemplateConfigurationData.GetDocumentTemplateConfigurationByTemplate(templateinf, p_PrepId);
+            DataSet ds_template = DocumentTemplateConfigurationData.GetTemplateHeaderFooterDetails(templateinf, p_PrepId);
             DocumentTemplateConfiguration template = DocumentTemplateConfigurationConverter.SetDocumentTemplateConfiguration(dataset);
             DocumentTemplateConfiguration template1 = DocumentTemplateConfigurationConverter.SetDocumentTemplateHeaderFooterConfiguration(ds_template);
             if (template1 != null)
@@ -359,7 +359,7 @@ namespace Vlims.Controllers
                 DataSet dp_dataset = DocumentPreparationData.GetDocumentPreparationByDPNID(Convert.ToInt32(template1.DTID));
                 preparation = DocumentPreparationConverter.SetDocumentPreparation(dp_dataset);
             }
-            if(template!=null && !string.IsNullOrEmpty(template.CloneTemp))
+            if (template != null && !string.IsNullOrEmpty(template.CloneTemp))
             {
                 template = DocumentTemplateConfigurationConverter.SetDocumentTemplateCloneConfigurationt(dataset);
             }
@@ -518,8 +518,9 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:center;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-weight:bold;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
-            htmlBuilder.AppendLine(".tg .tg-adin{font-family:\"Times New Roman\", Times, serif !important;font-size:12px;font-weight:bold;text-align:left;vertical-align:top}");
-            htmlBuilder.AppendLine(".tg .tg-adin1{font-family:\"Times New Roman\", Times, serif !important;font-size:8px;font-weight:bold;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-adin{font-family:\"Times New Roman\", Times, serif !important;font-size:9px;font-weight:bold;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-adin1{font-family:\"Times New Roman\", Times, serif !important;font-size:9px;font-weight:bold;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-zv4m{border-color:#ffffff;text-align:left;vertical-align:top;font-family:\"Times New Roman\", Times, serif !important;font-size:9px;}");
             htmlBuilder.AppendLine(".p {border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine("</style>");
 
@@ -541,9 +542,9 @@ namespace Vlims.Controllers
             //htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Date</th>");
-            htmlBuilder.AppendLine("    <td class=\"tg-adin\"></td>");
-            htmlBuilder.AppendLine("    <td class=\"tg-adin\"></td>");
-            htmlBuilder.AppendLine("    <td class=\"tg-adin\"></td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PreparedDate) ? template1.PreparedDate : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Name</th>");
@@ -565,14 +566,26 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</tbody>");
             htmlBuilder.AppendLine("</table>");
-            // Add the label after the table
+
+            htmlBuilder.AppendLine("<table class=\"tg\">");
+            htmlBuilder.AppendLine("<thead>");
+            htmlBuilder.AppendLine("  <tr>");
+            //htmlBuilder.AppendLine($"    <td class=\"tg-zv4m\"><span style=\"font-weight:bold\">Format No : {template.FormatNo}</span><br><span style=\"font-weight:bold\" {!string.IsNullOrEmpty(template1.PrintCopy)}>Print Type: {template1.PrintCopy}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}</span><br><span style=\"font-weight:bold\" {!string.IsNullOrEmpty(template1.PrintCopy)} >Print Reason: {template1.PrintReason}</span></td>");
+            htmlBuilder.AppendLine($"<td class=\"tg-zv4m\"><span style=\"font-weight:bold\">Format No : {(template != null ? template.FormatNo : "")}</span><br>");
             if (!string.IsNullOrEmpty(template1.PrintCopy))
             {
-                htmlBuilder.AppendLine("  <tr>");
-                htmlBuilder.AppendLine($"    <td class=\"tg-adin1\"Print Type: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintCopy) ? template1.PrintCopy : "test") : "test")}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}, </td>");
-                htmlBuilder.AppendLine("  </tr>");
-                htmlBuilder.AppendLine($"    <td class=\"tg-adin1\">Print Reason: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintReason) ? template1.PrintReason : "test") : "test")}</td>");
+                htmlBuilder.AppendLine($"<span style=\"font-weight:bold\">Print Type: {template1.PrintCopy}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}</span><br>");
             }
+            if (!string.IsNullOrEmpty(template1.PrintReason))
+            {
+                htmlBuilder.AppendLine($"<span style=\"font-weight:bold\">Print Reason: {template1.PrintReason}</span>");
+            }
+            htmlBuilder.AppendLine("</td>");
+
+            htmlBuilder.AppendLine("  </tr>");
+            htmlBuilder.AppendLine("</thead>");
+            htmlBuilder.AppendLine("</table>");
+
             //htmlBuilder.AppendLine($"<p>Print Type: {(template1 != null ? (!string.IsNullOrEmpty(template1.PrintCopy) ? template1.PrintCopy : "test") : "test")}</p>");
             table = htmlBuilder.ToString();
             return table;
