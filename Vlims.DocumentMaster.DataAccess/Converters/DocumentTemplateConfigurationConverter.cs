@@ -73,6 +73,7 @@ namespace Vlims.DocumentMaster.DataAccess
                                 documentTemplateConfigurationData.footerTable = person.footerTable;
                                 documentTemplateConfigurationData.Page = person.Page;
                                 documentTemplateConfigurationData.Pages = person.Pages;
+                                documentTemplateConfigurationData.FormatNo = person.FormatNo;
                                 if (person.titleTable != null)
                                     documentTemplateConfigurationData.titleTable = person.titleTable;
                             }

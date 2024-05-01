@@ -30,7 +30,7 @@
                    id="Templatename"
                    name="Templatename"
                    placeholder="Template Name"
-                   [(ngModel)]="templateForm.Templatename"
+                   [(ngModel)]="templateForm.Templatename" [disabled]="editMode"
                    required
                      #TemplatenameInput="ngModel"
                       />
@@ -81,6 +81,23 @@
                       />
                       <div *ngIf="noofpagesInput.invalid && (noofpagesInput.dirty || noofpagesInput.touched)" class="text-danger">
                         Enter No. Of Pages
+                      </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="templateName" class="col-sm-2 col-form-label">Format No.<span style="color: red; font-weight: bolder;">*</span></label>
+          <div class="col-sm-10">
+            <input type="text"
+                   class="form-control mw-350"
+                   id="formatno"
+                   name="formatno"
+                   placeholder="Format No."
+                   [(ngModel)]="templateForm.FormatNo" 
+                   required
+                     #formatnoInput="ngModel"
+                      />
+                      <div *ngIf="formatnoInput.invalid && (formatnoInput.dirty || formatnoInput.touched)" class="text-danger">
+                        Format No.
                       </div>
           </div>
         </div>
