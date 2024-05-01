@@ -278,6 +278,7 @@ namespace Vlims.DocumentMaster.Entities
         public bool IsClone { get; set; }
         public int PreparationId { get; set; }
         public string CloneTemp { get; set; }
+        public string FormatNo { get; set; }    
     }
     public class Page
     {

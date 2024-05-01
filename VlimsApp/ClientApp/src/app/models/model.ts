@@ -220,6 +220,7 @@ export class DocumentTemplateConfiguration {
   IsParent:boolean=false;
   Isclone:boolean=false;
   PreparationId:number=0;
+  FormatNo:string='';
 }
 interface Page {
   text: string;
