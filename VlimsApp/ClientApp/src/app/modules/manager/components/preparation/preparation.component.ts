@@ -91,7 +91,7 @@ export class PreparationComponent {
         case 'Rejected':
         return false;
         case 'Returned':
-        return false;
+        return true;
       default:
         return false;
     }

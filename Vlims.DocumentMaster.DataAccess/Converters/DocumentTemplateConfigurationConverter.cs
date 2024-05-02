@@ -181,6 +181,27 @@ namespace Vlims.DocumentMaster.DataAccess
                             //HashSet<string> uniqueValues = new HashSet<string>(values);
                             documentTemplateConfigurationData.PreparedRole = string.Join(",", values.Distinct());
                         }
+                        documentTemplateConfigurationData.ReviewDates = Convert.ToString(row["REVIEWDATES"]);
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ReviewDates))
+                        {
+                            string[] values = documentTemplateConfigurationData.ReviewDates.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ReviewDates = string.Join(",", values.Distinct());
+                        }
+                        documentTemplateConfigurationData.ApproveDates = Convert.ToString(row["APPROVEDATES"]);
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.ApproveDates))
+                        {
+                            string[] values = documentTemplateConfigurationData.ApproveDates.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.ApproveDates = string.Join(",", values.Distinct());
+                        }
+                        documentTemplateConfigurationData.PreparedDates = Convert.ToString(row["PREPAREDDATES"]);
+                        if (!string.IsNullOrEmpty(documentTemplateConfigurationData.PreparedDates))
+                        {
+                            string[] values = documentTemplateConfigurationData.PreparedDates.Split(',');
+                            //HashSet<string> uniqueValues = new HashSet<string>(values);
+                            documentTemplateConfigurationData.PreparedDates = string.Join(",", values.Distinct());
+                        }
                         //documentTemplateConfigurationData.PrepareDept = Convert.ToString(row["PREPAREDDEPT"]);
                         result.Add(documentTemplateConfigurationData);
                     }

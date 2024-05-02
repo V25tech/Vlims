@@ -542,9 +542,9 @@ namespace Vlims.Controllers
             //htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Date</th>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PreparedDate) ? template1.PreparedDate : "test") : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.PreparedDates) ? template1.PreparedDates : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDates) ? template1.ReviewDates : "test") : "test")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-adin\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ApproveDates) ? template1.ApproveDates : "test") : "test")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <th class=\"tg-adin\">Name</th>");

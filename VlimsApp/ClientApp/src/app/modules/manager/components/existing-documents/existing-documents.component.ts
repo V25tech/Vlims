@@ -90,7 +90,6 @@ export class ExistingDocumentsComponent implements OnInit {
   //   })
   // }
   previewDocument(template: TemplateRef<any>, docInfo: any) {
-    // debugger
     if (docInfo.entityName.toLowerCase() == 'new document') {
       this.previewRevisionDocument(template, docInfo,true)
     } else {
@@ -99,11 +98,9 @@ export class ExistingDocumentsComponent implements OnInit {
   }
 
   previewtemplate(template: TemplateRef<any>, docInfo: any): void {
-    //debugger
     this.spinner.show();
     docInfo.edrId = docInfo.id;
     this.existdocService.preview(docInfo).subscribe((data: any) => {
-    //this.templatesvc.getTemplate(docInfo).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template,false);
@@ -129,14 +126,12 @@ export class ExistingDocumentsComponent implements OnInit {
   }
   getUrl(template: TemplateRef<any>):void{
     this.existdocService.geturl().subscribe((data:any)=>{
-      debugger
       this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })
   }
   getUrl1(template: TemplateRef<any>):void{
     this.templatesvc.geturl().subscribe((data:any)=>{
-      debugger
       this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })

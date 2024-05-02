@@ -160,7 +160,6 @@ export class DocumentPrintComponent implements OnInit {
   checkduplicatetemplate(template: TemplateRef<any>,objtemp: DocumentPrintConfiguration){
     this.templatesvc.isduplicate(objtemp.template).subscribe((data:any)=>{
       const isduplicate=Boolean(data);
-      debugger;
       if(objtemp.printCount>=objtemp.noofcopies)
         {          
           this.toastr.error('Cannot Print the document as Print Count is more than No of Copies requested');
@@ -209,7 +208,6 @@ export class DocumentPrintComponent implements OnInit {
   }
   UpdatePrintCount(objtemp: DocumentPrintConfiguration)
   {
-    debugger;
     let reqObj = JSON.parse(JSON.stringify(objtemp))
     reqObj.modifiedDate = new Date(reqObj.ModifiedDate)
     reqObj.modifiedDate = reqObj.ModifiedDate    

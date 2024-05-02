@@ -15,7 +15,6 @@ export class ExistingDocumentsService {
 
   }
   geturl() {
-    debugger
     return this.http.getwithheader(`api/existingdocumentreq/getpath`, this.type);
   }
   preview(objrequest: ExistingDocumentRequest) {

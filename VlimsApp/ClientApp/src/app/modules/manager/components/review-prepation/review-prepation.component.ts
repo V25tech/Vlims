@@ -457,7 +457,7 @@ export class ReviewPrepationComponent {
     }
     previewtemplate(template: TemplateRef<any>) {
         this.spinner.show(); let id = 0;
-        const obj = this.templatesSource.find(o => o.Templatename === this.preparation.template);
+        let obj = this.templatesSource.find(o => o.Templatename === this.preparation.template);
         if (obj != null && obj != undefined) {
             id = parseInt(obj.DTID);
         }
