@@ -185,7 +185,6 @@ export class ReviewPrepationComponent {
             this.getworkflowitems();
         }
         else if (this.commonsvc.preperation.dpnid) {
-            debugger
             this.preparation = this.commonsvc.preperation;
             if (this.preparation.template != '' && this.preparation.template != undefined) {
                 this.istemplate = true;
@@ -237,13 +236,11 @@ export class ReviewPrepationComponent {
         });
     }
     proceed(esign: TemplateRef<any>) {
-        debugger
         // Open the modal
         this.modalRef = this.modalService.show(esign, { class: 'modal-lg' });
     }
 
     getusers() {
-        debugger
 
         let objrequest = new RequestContext();
         objrequest.PageNumber = 1; objrequest.PageSize = 50;
@@ -256,7 +253,6 @@ export class ReviewPrepationComponent {
     }
 
     confirmApproval() {
-        debugger
         const username = localStorage.getItem('username') || '';
         const password = (document.getElementById('password') as HTMLInputElement).value;
         const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
@@ -293,13 +289,11 @@ export class ReviewPrepationComponent {
     }
 
     confirmReject() {
-        debugger
         const username = localStorage.getItem('username') || '';
         const password = (document.getElementById('password') as HTMLInputElement).value;
         const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
         if (userExists) {
 
-            debugger
             this.preparation.ModifiedBy = this.commonsvc.getUsername();
             this.preparation.status = 'Rejected';
             this.toastMsg = this.preparation.status;
@@ -313,7 +307,7 @@ export class ReviewPrepationComponent {
 
     savePreparation() {
         this.spinner.show();
-        if (this.editMode && (this.preparation.status == 'Rejected' || this.preparation.status == 'Returned')) {
+      if (!this.viewMode && (this.preparation.status == 'Rejected' || this.preparation.status == 'Returned')) {
             this.preparation.status = 'In-Progress';
         }
         if (this.viewMode && this.preparation.status != 'Rejected' && this.preparation.status != 'Returned') {
