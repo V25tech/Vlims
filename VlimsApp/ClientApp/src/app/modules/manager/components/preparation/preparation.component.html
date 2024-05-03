@@ -69,31 +69,41 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ docPreperation.documentno }}</td>
                 <!-- <td *ngIf="!docPreperation.isrevision">{{ docPreperation.referenceId }}</td>
-                <td *ngIf="docPreperation.isrevision">{{ docPreperation.referenceId }}-Revision</td> -->
+  <td *ngIf="docPreperation.isrevision">{{ docPreperation.referenceId }}-Revision</td> -->
                 <td>{{ docPreperation.documenttitle }}</td>
                 <td>{{ docPreperation.documenttype }}</td>
                 <td>{{ docPreperation.department }}</td>
                 <!-- <td>{{ docPreperation.template }}</td> -->
                 <td>
-                  <span
-                    class="status"
-                    [ngClass]="getStatusClass(docPreperation['status'])"
-                    >{{ docPreperation.status }}
+                  <span class="status"
+                        [ngClass]="getStatusClass(docPreperation['status'])">
+                    {{ docPreperation.status }}
                   </span>
                 </td>
-                <td class="text-center" *ngIf="access && (docPreperation?.status === 'IN-PROGRESS' || docPreperation?.status === 'Rejected' || docPreperation?.status === 'Returned' || docPreperation?.status==='In-Progress')"><a (click)="navigateToAddPreparation(docPreperation)"><i  class="bi bi-arrow-right"></i></a></td>
-                <td class="text-center" *ngIf="!access">
-                  <i class="bi bi-lock bi-lg" 
-                  [ngClass]="{'text-primary':true}"
-                  title="No Permissions">
-                  </i>
-                </td>
-                <td class="text-center" *ngIf="access && islocked(docPreperation?.status)">
-                  <i class="bi bi-lock bi-lg" 
-                  [ngClass]="{'text-primary':true}"
-                  title="{{ 'Locked'}}">
-                  </i>
-                </td>
+                <ng-container *ngIf="access && (docPreperation?.status === 'IN-PROGRESS' || docPreperation?.status.toLowerCase() === 'Rejected' || docPreperation?.status === 'Returned' || docPreperation?.status==='In-Progress'); else second">
+                  <td class="text-center"><a (click)="navigateToAddPreparation(docPreperation)"><i class="bi bi-arrow-right"></i></a></td>
+                </ng-container>
+                <ng-template #second>
+                  <ng-container *ngIf="access && islocked(docPreperation?.status); else third">
+                    <td class="text-center">
+                      <i class="bi bi-lock bi-lg"
+                         [ngClass]="{'text-primary':true}"
+                         title="{{ 'Locked'}}">
+                      </i>
+                    </td>
+                  </ng-container>
+                </ng-template>
+                <ng-template #third>
+                  <td class="text-center">
+                    <i class="bi bi-lock bi-lg"
+                       [ngClass]="{'text-primary':true}"
+                       title="No Permissions">
+                    </i>
+                  </td>
+                </ng-template>
+                
+                
+               
                 <!-- <td *ngIf="access && docPreperation?.status=='Approved' || docPreperation?.status=='Reviewed'"><b>Restricted</b></td> -->
               </tr>
             </ng-template>

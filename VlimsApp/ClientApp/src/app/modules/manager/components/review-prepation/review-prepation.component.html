@@ -117,7 +117,7 @@
                             [autoDisplayFirst]="false" #templateInput="ngModel" placeholder="Select Template" (onChange)="istemplatecheck($event);">
                 </p-dropdown>
                 <!--<a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && istemplate && !viewMode" href="javascript:void(0)" (click)="edittemplate(preparation.template)">Modify</a>-->
-                <a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && istemplate && viewMode" href="javascript:void(0)" (click)="checkduplicatetemplate(template)">View Document</a>
+                <!--<a class="col-sm-2 mx-2" *ngIf="preparation.template!=null && istemplate && viewMode" href="javascript:void(0)" (click)="checkduplicatetemplate(template)">View Document</a>-->
                 <div *ngIf="templateInput.invalid && (templateInput.dirty || templateInput.touched)" class="text-danger">
                   Template is required
                 </div>
@@ -181,7 +181,7 @@
             </div>
 
             <div class="form-group row">
-              <label for="documentno" class="col-sm-2 col-form-label">File Body</label>
+              <label for="documentno" class="col-sm-2 col-form-label">Browse Document</label>
               <div class="col-sm-10" *ngIf="!isUploaded">
                 <input type="file"  
                        class="form-control mw-350" [disabled]="viewMode"
@@ -287,7 +287,7 @@
           <button type="button" class="btn btn-secondary" (click)="modalRef!.hide()">Close</button>
           <button type="button" class="btn btn-success" (click)="confirmApproval()">Approve</button>
           <button type="button" class="btn btn-primary" (click)="confirmReturn()">Return</button>
-          <button type="button" class="btn btn-danger" (click)="confirmReject()">Reject</button>
+          <!--<button type="button" class="btn btn-danger" (click)="confirmReject()">Reject</button>-->
         </div>
       </div>
     </div>
