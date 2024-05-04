@@ -35,9 +35,11 @@ END
 ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
 BEGIN
 --reject functionality is reset values and update status as rejected
-UPDATE [dbo].[Documentrequest_PSY] SET documenttype_PSY=NULL,Workflow_PSY=null,
-AssigntoGroup_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY ,Reason_PSY=@Reason_PSY
-WHERE  [DRID_PSY] = @DRID_PSY ;
+--UPDATE [dbo].[Documentrequest_PSY] SET documenttype_PSY=NULL,Workflow_PSY=null,
+--AssigntoGroup_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY ,Reason_PSY=@Reason_PSY
+--WHERE  [DRID_PSY] = @DRID_PSY ;
+
+DELETE FROM [dbo].[Documentrequest_PSY] WHERE [DRID_PSY] = @DRID_PSY ;
 --once rejected delete workitems assigned to users
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid
 END
