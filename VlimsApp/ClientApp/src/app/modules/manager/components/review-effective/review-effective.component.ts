@@ -210,6 +210,7 @@ export class ReviewEffectiveComponent {
   }
 
   saveEffective() {
+    let reqObj: any = {}
     this.effectivedate = new Date(this.effective.effectiveDate);
     this.reviewdate = new Date(this.effective.reviewDate);
 
@@ -221,17 +222,26 @@ export class ReviewEffectiveComponent {
       return;
     }
     this.spinner.show();
-    if (this.viewMode && this.effective.Status != 'Rejected' && this.effective.Status != 'Returned') {
-      this.effective.ModifiedBy = this.commonsvc.createdBy;
-      this.effective.Status = this.finalStatus;
-    } else if ((!this.viewMode || this.editMode) && (this.effective.Status == 'Rejected' || this.effective.Status == "Returned")) {
-      this.effective.ModifiedBy = this.commonsvc.createdBy;
-      this.effective.Status = "InProgress";
+    reqObj = JSON.parse(JSON.stringify(this.effective));
+    debugger
+    //if (this.viewMode && (reqObj.Status == 'Rejected' || reqObj.Status == 'Returned')) {
+    //  reqObj.ModifiedBy = this.commonsvc.createdBy;
+    //  reqObj.Status = "In-Progress";
+    //  reqObj.status = "In-Progress";
+    //}
+    //else
+    //if (this.viewMode && reqObj.status != 'Rejected' && reqObj.status != 'Returned') {
+    if (this.viewMode && reqObj.status == 'Approved' || reqObj.status == 'Reviewed') {
+      reqObj.ModifiedBy = this.commonsvc.createdBy;
+      reqObj.Status = this.finalStatus;
+    } else if ((!this.viewMode || this.editMode) && ((reqObj.status == 'Rejected' || reqObj.status == "Returned"))) {
+      reqObj.ModifiedBy = this.commonsvc.createdBy;
+      reqObj.Status = "In-Progress";
     }
     this.toastMsg = this.toastMsg ?? 'Updated'
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
-      this.documentEffectiveService.ManageDocumentEffective(this.effective).subscribe(res => {
+      this.documentEffectiveService.ManageDocumentEffective(reqObj).subscribe(res => {
         this.toastr.success(`Document Effective ${this.toastMsg} Successfully!`);
         this.spinner.hide();
         this.location.back();
