@@ -63,7 +63,7 @@
               <td class="text-center" *ngIf="access">
                 <i (click)="editdoc(doc)" class="bi bi-pencil"></i>
               </td>
-              <td *ngIf="!access">
+              <td *ngIf="!access && doc?.entityName.toLowerCase=='existing document'">
                 <i class="bi bi-lock bi-lg"
                    [ngClass]="{'text-primary':true}"
                    title="No Permissions">
