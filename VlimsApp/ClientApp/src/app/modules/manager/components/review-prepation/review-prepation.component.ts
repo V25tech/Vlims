@@ -136,7 +136,7 @@ export class ReviewPrepationComponent {
             operatingProcedure: "STANDARD TESTING SPECIFICATION",
             "lables": {
                 "documentTitle": "Generic Name",
-                "documentNumber": "STP No.",
+                "documentNumber": "STS No.",
                 "revisionNo": "Revision No.",
                 "supersedesNo": "Supersedes No.",
                 "reference": "Reference",

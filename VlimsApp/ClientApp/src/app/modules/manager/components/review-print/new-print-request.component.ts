@@ -51,7 +51,8 @@ export class NewPrintRequestComponent implements OnInit {
   toastMsg: string | null = null;
   printType = 'single';
   preparations1: string[] = []; // Array to hold document numbers
-  isworkflow:boolean=false;
+  isworkflow: boolean = false;
+  existingDocumentsList: Array<any> = [];
 
   stageSource:PrintType[] = [
     { label: 'Master Copy', value: 'Master Copy' },
@@ -114,7 +115,10 @@ export class NewPrintRequestComponent implements OnInit {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.existingDocReqservice.GetExistingDocumentAll(objrequest).subscribe((data: any) => {
       // Extracting document numbers from the response data
-      this.preparations1 = data.response.map((doc: any) => doc.documentno);
+      if (data && data.response != null && data.response.length > 0) {
+        this.existingDocumentsList = data;
+        this.preparations1 = data.response.map((doc: any) => doc.documentno);
+      }
     }, er => {
       console.error('An error occurred:', er);
     });
@@ -168,17 +172,31 @@ export class NewPrintRequestComponent implements OnInit {
   }
   
 
-  documentNumberChange(event: any) {
+  documentNumberChange(event: any, printType: string) {
     debugger
-    let preps = this.preparations.filter(p => p.documentno === event.value);
-    if (preps && preps.length > 0) {
-      this.print.documenttitle = preps[0].documenttitle;
-      this.print.printtype = preps[0].documenttype;
-      this.print.template=preps[0].template;
-      this.print.prepId=parseInt(preps[0].dpnid);
-      this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Print"));
-      this.workflowsSource=this.workflowsSource.filter(o=>o.documenttype?.toLocaleLowerCase()===preps[0].documenttype.toLocaleLowerCase());
-    }
+
+    if (printType.toLowerCase() == "bulk") {
+      let preps: any;
+        preps = this.existingDocumentsList.filter(p => p.documentno === event.value);
+      if (preps && preps.length > 0) {
+        this.print.documenttitle = preps[0].documenttitle;
+        this.print.printtype = preps[0].documenttype;
+        this.print.template = preps[0].sampletemplate;
+        this.print.prepId = parseInt(preps[0].edrId);
+        //this.workflowsSource = this.workflowsSource.filter(o => o.documentstage?.includes("Print"));
+        //this.workflowsSource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === preps[0].documenttype.toLocaleLowerCase());
+      }
+    } else {
+      let preps = this.preparations.filter(p => p.documentno === event.value);
+      if (preps && preps.length > 0) {
+        this.print.documenttitle = preps[0].documenttitle;
+        this.print.printtype = preps[0].documenttype;
+        this.print.template = preps[0].template;
+        this.print.prepId = parseInt(preps[0].dpnid);
+        this.workflowsSource = this.workflowsSource.filter(o => o.documentstage?.includes("Print"));
+        this.workflowsSource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === preps[0].documenttype.toLocaleLowerCase());
+      }
+    }    
   }
 
 
