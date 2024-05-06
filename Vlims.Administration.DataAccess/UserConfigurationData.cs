@@ -119,9 +119,17 @@ namespace Vlims.Administration.DataAccess
             }
         }
 
+        public static string UpdatePassword(PasswordChangeConfig passwordChangeConfig)
+        {
+            List<SqlParameter> sqlparms = new List<SqlParameter>();
+            
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.UserID, Value = passwordChangeConfig.UserID });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.Password, Value = passwordChangeConfig.Password });
+            sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.OldPassword, Value = passwordChangeConfig.OldPassword });
+            Object result = dataAccessHelper.ExecuteStoredProcedure(UserConfigurationConstants.USP_UserConfiguration_PSY_UPDATE_PWD, sqlparms, ExecutionType.Scalar);
+            return (result.ToString());
 
-
-
+        }
 
 
 
@@ -153,6 +161,8 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
+
+
         public static bool UpdateUserStatusConfiguration(UserConfiguration userConfiguration)
         {
             try

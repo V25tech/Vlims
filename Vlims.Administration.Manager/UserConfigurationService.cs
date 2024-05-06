@@ -69,7 +69,7 @@ namespace PolicySummary.Sheet1.Services
                 {
                     var result = UserConfigurationData.SaveUserConfiguration(userConfiguration);
                     AuditLog.SaveAuditLog(new AuditLogEntity { UserName = userConfiguration.CreatedBy, EntityName = userConfiguration.UserID, Type = UserConfigurationConstants.UserType, state = DefinitionStatus.New, EntityInfo = userConfiguration, Unique = userConfiguration.UserID });
-             
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -156,6 +156,24 @@ namespace PolicySummary.Sheet1.Services
             }
         }
 
+        public bool UpdatePassword(PasswordChangeConfig passwordChangeConfig)
+        {            
+            try
+            {
+                String validationMessages = UserConfigurationValidator.IsValidPasswordConfiguration(passwordChangeConfig);
+                if (validationMessages.Length <= 0)
+                {
+                    string resultStr = UserConfigurationData.UpdatePassword(passwordChangeConfig);
+                    return (!string.IsNullOrEmpty(resultStr) && resultStr == "Success");
+                        
+                }
+                throw new System.Exception(validationMessages);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
         public bool UpdateUserStatusConfiguration(UserConfiguration userConfiguration)
         {

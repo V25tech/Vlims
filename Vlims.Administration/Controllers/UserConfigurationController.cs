@@ -134,6 +134,13 @@ namespace PolicySummary.Controllers
             return result;
         }
 
+        [HttpPost("updatepassword")]
+        public ActionResult<System.Boolean> updatepassword(PasswordChangeConfig passwordChangeConfig)
+        {
+            var result = userConfigurationService.UpdatePassword(passwordChangeConfig);
+            return result;
+        }
+
         /// <summary>
         /// This Method is used to Delete UserConfiguration By Id uCFId
         /// </summary>

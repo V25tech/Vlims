@@ -288,6 +288,13 @@ export class UserConfiguration {
   //InvAttempt:number=0
   Status : string=''
 }
+
+export class PasswordChangeConfig{
+  UserID: string = '';
+  Password: string = '';
+  OldPassword: string = '';
+}
+
 export class WorkItemsConfiguration {
   WITId: number = 0
   TaskType: string = ''

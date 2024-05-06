@@ -306,5 +306,10 @@ namespace Vlims.Administration.Entities
 
     }
 
-
+    public class PasswordChangeConfig
+    {
+        public string UserID { set; get; }
+        public string Password { set; get; }
+        public string OldPassword { set; get; }
+    }
 }
