@@ -1,4 +1,5 @@
-﻿  CREATE PROCEDURE [dbo].[USP_DocumentEffective_PSY_INSERT] @Documentmanagerid_PSY NVarChar(50),
+﻿
+  CREATE PROCEDURE [dbo].[USP_DocumentEffective_PSY_INSERT] @Documentmanagerid_PSY NVarChar(50),
 @documenttitle_PSY NVarChar(50),
 @documentno_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
@@ -8,7 +9,8 @@
 @Reviewdate_PSY DateTime,
 @CreatedBy_PSY NVarChar(100),
 @ModifiedBy_PSY NVarChar(100),
-@Status_PSY NVarchar(100)
+@Status_PSY NVarchar(100),
+@Reason Nvarchar(500)
 AS 
  BEGIN 
   BEGIN TRY 
@@ -27,7 +29,7 @@ CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
-Status_PSY)
+Status_PSY,Reason)
  VALUES 
 (@Documentmanagerid_PSY,
 @documenttitle_PSY,
@@ -41,7 +43,7 @@ Status_PSY)
  GetDate() ,
 @ModifiedBy_PSY,
  GetDate(),
- @Status_PSY);
+ @Status_PSY,@Reason);
  SELECT @ID = @@IDENTITY; 
  select @ID 
   

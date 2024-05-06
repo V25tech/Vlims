@@ -16,7 +16,7 @@ DP.CreatedDate_PSY,
 DP.ModifiedBy_PSY,
 DP.printCount_PSY,
 DP.ModifiedDate_PSY,DP.Status_PSY,DSP.template_PSY,DP.Refrence_PSY,DP.PrintCopy_PSY,DP.IsActive_PSY,
-Dp.BatchNumber,Dp.BatchSize,DSP.DPNID_PSY
+Dp.BatchNumber,Dp.BatchSize,DSP.DPNID_PSY,DE.Reason
   FROM [dbo].[DocumentPrint_PSY] DP WITH (NOLOCK)
   JOIN dbo.DocumentEffective_PSY DE ON DE.Refrence_PSY=DP.Refrence_PSY
  JOIN dbo.DocumentPreparation_PSY DSP ON DSP.Refrence_PSY=DE.Refrence_PSY

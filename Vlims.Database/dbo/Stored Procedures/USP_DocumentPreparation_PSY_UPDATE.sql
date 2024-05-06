@@ -10,7 +10,8 @@
 @wokflow_PSY NVarChar(200),
 @details_PSY NVarChar(max),
 @ModifiedBy_PSY NVarChar(100),
-@Status_PSY NVarChar(100)
+@Status_PSY NVarChar(100),
+@Reason Nvarchar(500)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -33,7 +34,7 @@ document_PSY=@document_PSY,
 template_PSY=@template_PSY,
 wokflow_PSY=@wokflow_PSY,
 details_PSY=@details_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DPNID_PSY] = @DPNID_PSY ; 
+ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,Reason=@Reason WHERE  [DPNID_PSY] = @DPNID_PSY ; 
 END
 ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
 BEGIN
