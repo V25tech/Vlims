@@ -161,7 +161,7 @@
               </div>
               <div *ngIf="isUploaded" class="col-sm-9">
                 {{preparation.documentno}}.docx
-                <button type="button" class="btn btn-primary mx-2" (click)="previewtemplate(template)" [disabled]="viewMode">View Documnet</button>
+                <button type="button" class="btn btn-primary mx-2" (click)="previewtemplate(template)">View Documnet</button>
                 <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>
               </div>
 

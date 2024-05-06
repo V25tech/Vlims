@@ -50,7 +50,7 @@ namespace Vlims.DMS.Entities
         public const string Status = "@Status_PSY";
         public const string template = "@template_PSY";
         public const string wokrflow = "@wokflow_PSY";
-        public const string reason = "@reason";
+        public const string reason = "@Reason";
         public const string ModifiedDate = "@ModifiedDate_PSY";
 
         public const string USP_DocumentEffective_PSY_GET_ALL = "dbo.USP_DocumentEffective_PSY_GET_ALL";
