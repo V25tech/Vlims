@@ -23,7 +23,7 @@ public class DocumentPrintConstants
 
     public const string workflow = "@workflow_PSY";
 
-    public const string reason = "@Reason";
+    public const string reason = "@reason_PSY";
 
     public const string CreatedBy = "@CreatedBy_PSY";
 
