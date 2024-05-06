@@ -48,7 +48,6 @@ namespace Vlims.DMS.Entities
 
         private string statusField;
 
-
         public string DPNID
         {
             get
@@ -232,6 +231,7 @@ namespace Vlims.DMS.Entities
         public PreperationDocument Prepdocument { get; set; }
         public bool IsEffectiveApproved { get; set; }
         public bool IsRevision { get; set; }
+        public string reason { get; set; }
     }
     public class PreperationDocument
     {

@@ -52,6 +52,8 @@ namespace Vlims.DMS.Entities
 
         public const string ModifiedDate = "@ModifiedDate_PSY";
 
+        public const string Reason = "@Reason";
+
         public const string USP_DocumentPreparation_PSY_GET_ALL = "dbo.USP_DocumentPreparation_PSY_GET_ALL";
 
         public const string USP_DocumentPreparation_PSY_GET = "dbo.USP_DocumentPreparation_PSY_GET";

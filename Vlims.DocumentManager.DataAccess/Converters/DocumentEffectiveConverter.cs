@@ -63,6 +63,7 @@ namespace Vlims.DocumentManager.DataAccess
                         documentEffectiveData.Status = Convert.ToString(row[DocumentEffectiveConstants.Status.Trim('@')]);
                         documentEffectiveData.template = Convert.ToString(row[DocumentEffectiveConstants.template.Trim('@')]);
                         documentEffectiveData.Workflow = Convert.ToString(row[DocumentEffectiveConstants.wokrflow.Trim('@')]);
+                        documentEffectiveData.reason = Convert.ToString(row[DocumentEffectiveConstants.reason.Trim('@')]);
                         documentEffectiveData.ReferenceId= Convert.ToInt32(row[DocumentEffectiveConstants.referenceid.Trim('@')]);
                         result.Add(documentEffectiveData);
                     }

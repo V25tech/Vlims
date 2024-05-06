@@ -12,22 +12,7 @@
       <div class="col">
         <form (ngSubmit)="savePreparation()" #fm="ngForm">
           <div class="p-4 bg-white shadow-dark rounded-2">
-            <!-- <div class="form-group row">
-              <label for="reqCode" class="col-sm-2 col-form-label"
-                >Req Code</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="reqCode"
-                  name="reqCode"
-                  placeholder="System Generated"
-                  [(ngModel)]="preparation.reqCode"
-                  readonly
-                />
-              </div>
-            </div> -->
+        
 
             <div class="form-group row">
               <label for="documentTitle" class="col-sm-2 col-form-label">
@@ -42,21 +27,7 @@
               </div>
             </div>
 
-            <!-- <div class="form-group row">
-              <label for="docNoType" class="col-sm-2 col-form-label">Document Number</label>
-              <div class="col-sm-10">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="docNoType" type="radio" id="docNoType2" [(ngModel)]="docNoType"
-                    value="System Generated" [disabled]="viewMode" placeholder="Enter Document Number" />
-                  <label class="form-check-label" for="docNoType2">System Generated</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="docNoType" type="radio" id="docNoType1" [(ngModel)]="docNoType"
-                    value="User Defined" [disabled]="viewMode"/>
-                  <label class="form-check-label" for="docNoType1">User Defined</label>
-                </div>
-              </div>
-            </div> -->
+         
 
             <div class="form-group row" *ngIf="docNoType === 'User Defined'">
               <label for="documentNumber" class="col-sm-2 col-form-label">
@@ -193,30 +164,18 @@
                 <button type="button" class="btn btn-primary mx-2" (click)="previewtemplate(template)" [disabled]="viewMode">View Documnet</button>
                 <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>
               </div>
+
+
+              
             </div>
 
-            <!-- <div class="form-group row" *ngIf="preparation.template!=null && preparation.template!=undefined && preparation.template!=''">
-              <label for="document" class="col-sm-2 col-form-label">Document<span
-                style="color: red; font-weight: bolder;">*</span></label>
-              <div *ngIf="!preparation.document" class="col-sm-10">
-                <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput [disabled]="isUploaded"
-                  (change)="onFileSelected($event)" [disabled]="viewMode" required>
-              </div>
-
-              <div  class="col-sm-1"  >
-                <a class="link-opacity-100-hover" (click)="previewtemplate(template)">View Document</a>
-
-              </div>
-              <div *ngIf="preparation.document" class="col-sm-9">
-                <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile()" [disabled]="viewMode">Delete</button>
-              </div>
-            </div>
-            <div *ngIf="selectedFile && !isUploaded" class="form-group row">
-              <label for="document" class="col-sm-2 col-form-label"></label>
+            <div class="form-group row">
+              <label for="Reason" class="col-sm-2 col-form-label">Reason</label>
               <div class="col-sm-10">
-                <button type="button" class="btn btn-outline-secondary mx-2" (click)="onUpload()">Upload</button>
-              </div>
-            </div>          -->
+                <input type="text" class="form-control" id="Reason" name="Reason"
+                       [(ngModel)]="preparation.reason"  [disabled]="viewMode" />             
+              </div>        
+          </div>
 
             <div class="form-group row">
               <label for="Details" class="col-sm-2 col-form-label">Details</label>
@@ -226,6 +185,9 @@
               </div>
             </div>
           </div>
+
+
+         
 
           <div class="form-group row my-4">
             <div class="col-sm-10 offset-sm-2">
