@@ -81,6 +81,7 @@ export class DocumentPreperationConfiguration {
   isrevision: boolean = false;
   isEffectiveApproved=false;
   isRevision:boolean=false;
+  reason:string='';
   prepdocument: Prepdocument = {
     labelClaim : '',
     packingInformation : '',
