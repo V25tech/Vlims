@@ -138,6 +138,7 @@ export class DocumentEffectiveConfiguration {
   isrevision:boolean=false;
   documentmanagerid: string = '';
   status: string = '';
+  reason: string = '';
 }
 export class DocumentAdditionalTasks {
   documentTitle: string = ''
