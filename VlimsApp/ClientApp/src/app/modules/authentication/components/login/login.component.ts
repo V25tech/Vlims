@@ -64,18 +64,13 @@ export class LoginComponent {
   login() {
 
     this.loader.show();
-    // if(this.user.UserID.toLocaleLowerCase()==='admin')
-    // {
-    // if(this.loginService.login(this.user.UserID, this.user.Password ?? '',this.lstusers,this.roles)){
-    //   this.isvaliduser();
-    // }
-    // else{
-    //   this.toastr.error('login failed');
-    //     }
-    //   }
-    //   else{
+    this.userssvc.login(this.user).subscribe((data: any) => { 
 
-    this.userssvc.login(this.user).subscribe((data: any) => {
+      this.userssvc.loginForToken({'Username':'rst','Password':'rst'}).subscribe((res: any) =>{
+
+        console.log(res);
+        localStorage.setItem('tokenX',res.Response[0]);
+      })
 
       this.user = data;
       this.commonsvc.setUser(this.user);

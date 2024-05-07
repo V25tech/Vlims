@@ -13,6 +13,9 @@ using Vlims.Administration;
 //using Serilog;
 using Vlims.Administration.Manager;
 using Vlims.Common;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 public class Startup
 {
@@ -38,6 +41,9 @@ public class Startup
                 Description = "API Used to Get or Set Information related to Admin Module In Dlims",
             });
         });
+        //JWT Authentication
+        services.AddJWTAuthentication(Configuration);
+        
         AddAdminDependencies(services);
         //services.AddApplicationInsights(Configuration);
         //services.AddApplicationInsightsTelemetry();
@@ -88,6 +94,8 @@ public class Startup
             .AllowAnyHeader().AllowAnyMethod();
         });
         app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     }

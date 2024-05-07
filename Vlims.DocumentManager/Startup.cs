@@ -1,8 +1,12 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PolicySummary.DMS.Services;
+using System.Text;
 using Vlims.DocumentManager.Manager;
 using Vlims.DocumentManager.Manager.Interface;
+using Vlims.Administration.Manager;
 
 public class Startup
 {
@@ -29,6 +33,10 @@ public class Startup
 
             });
         });
+
+        //JWT Authentication
+        services.AddJWTAuthentication(Configuration);
+
         AddManagerDependencies(services);
         //services.AddApplicationInsights(Configuration);
         //services.AddApplicationInsightsTelemetry();
@@ -83,6 +91,8 @@ public class Startup
             RequestPath = "/pdfs"
         });
         app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     }

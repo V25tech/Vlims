@@ -15,11 +15,13 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.50" />
     <PackageReference Include="HtmlRenderer.PdfSharp.NetStandard2" Version="1.5.1.2" />
     <PackageReference Include="HtmlToOpenXml" Version="1.6.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.29" />
     <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="7.0.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vlims.Administration.Manager\Vlims.Administration.Manager.csproj" />
     <ProjectReference Include="..\Vlims.DocumentManager.Entities\Vlims.DocumentManager.Entities.csproj" />
     <ProjectReference Include="..\Vlims.DocumentManager.Manager\Vlims.DocumentManager.Manager.csproj" />
     <ProjectReference Include="..\Vlims.DocumentMaster.DataAccess\Vlims.DocumentMaster.DataAccess.csproj" />

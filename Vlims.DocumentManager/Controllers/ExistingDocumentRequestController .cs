@@ -18,6 +18,8 @@ namespace PolicySummary.Controllers
     using Vlims.Common;
     using Vlims.DMS.Entities;
     using Vlims.DocumentManager.Manager.Interface;
+    using System.Security.Claims;
+    using Vlims.Administration.Entities;
 
 
 
@@ -41,11 +43,34 @@ namespace PolicySummary.Controllers
             this.azureBlobService = _azureBlobService;
         }
 
+        [HttpGet("admincheck")]
+        [Authorize]
+        public IActionResult AdminEndPoint()
+        {
+            var currentUser = GetCurrentUser();
+            return Ok($"Hi you are an {currentUser.Role}");
+        }
+        private UserModel GetCurrentUser()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                var userClaims = identity.Claims;
+                return new UserModel
+                {
+                    Username = userClaims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value,
+                    Role = userClaims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value
+                };
+            }
+            return null;
+        }
+
         /// <summary>
         /// This method is used to Get List of DocumentEffective
         /// </summary>
         /// <param name="requestContext"></param>
         [HttpPost("GetAllDocEff")]
+        [Authorize]
         public ActionResult GetAllDocumentEffective([FromQuery] RequestContext requestContext)
         {
             var result = existingDocumentRequestService.GetAllExistingDocumentRequest(requestContext);
