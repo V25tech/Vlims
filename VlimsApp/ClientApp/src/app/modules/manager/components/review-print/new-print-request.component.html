@@ -9,7 +9,7 @@
       </div>
     </div>
 
-   
+
   </div>
   <div class="row p-2">
     <div class="col">
@@ -18,317 +18,307 @@
 
 
 
-          <div *ngIf="!editMode"  class="form-group row">
+          <div *ngIf="!editMode" class="form-group row">
             <label for="reviewsType" class="col-sm-2 col-form-label">Print</label>
             <div class="col-sm-10">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" name="reviewsType1" type="radio" id="reviewsType2" value="single"
-                  [(ngModel)]="printType" />
+                       [(ngModel)]="printType" />
                 <label class="form-check-label" for="reviewsType2">New Print</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" name="reviewsType1" type="radio" id="reviewsType1" value="bulk"
-                  [(ngModel)]="printType" />
+                       [(ngModel)]="printType" />
                 <label class="form-check-label" for="reviewsType1">Existing Print</label>
               </div>
             </div>
           </div>
 
 
-           <!-- Single option controls start here -->
-           <fieldset *ngIf="printType != 'bulk'" [disabled]="printType == 'bulk'">
-
-          
-
-          <div class="form-group row">
-            <label for="prefix" class="col-sm-2 col-form-label">
-              Document No<span style="color: red; font-weight: bolder;">*</span>
-            </label>
-            <div class="col-sm-10">
-              <p-dropdown name="docType" [options]="preparations" [(ngModel)]="print.documentNumber"
-                          optionLabel="documentno" optionValue="documentno" (onChange)="documentNumberChange($event,printType)"
-                          [autoDisplayFirst]="false" [required]="true" placeholder="Select Document No"
-                          #documentnoInput="ngModel" [disabled]="viewMode">
-              </p-dropdown>
-              <div *ngIf="documentnoInput.invalid && (documentnoInput.dirty || documentnoInput.touched)" class="text-danger">
-                Document Number is required.
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="documentTitle" name="documentTitle"
-                     placeholder="Document Title" [(ngModel)]="print.documenttitle" [disabled]="'true'" />
-            </div>
-          </div>
+          <!-- Single option controls start here -->
+          <fieldset *ngIf="printType != 'bulk'" [disabled]="printType == 'bulk'">
 
 
-          <div class="form-group row">
-            <label for="prefix" class="col-sm-2 col-form-label">Document Type</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="print" name="printType" placeholder="Document Type"
-                     [(ngModel)]="print.printtype" [disabled]="'true'" />
-            </div>
-          </div>
 
-          <div class="form-group row">
-            <label for="noofcopies" class="col-sm-2 col-form-label">
-              No Of Copies requested<span style="color: red; font-weight: bolder;">*</span>
-            </label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="noofcopies" name="noofcopies" placeholder=""
-                     [(ngModel)]="print.noofcopies" [disabled]="viewMode" #noofcopiesInput="ngModel" required placeholder="Choose No Of Copies" min="1" max="9" />
-               <div *ngIf="noofcopiesInput.invalid && (noofcopiesInput.dirty || noofcopiesInput.touched)" class="text-danger">
-                No Of Copies is required.
-              </div>
-            </div>
-          </div>
-         
-
-
-          <div class="form-group row">
-            <label for="workflow" class="col-sm-2 col-form-label">Print Type<span style="color: red; font-weight: bolder;">*</span></label>
-            <div class="col-sm-10">
-              <!-- <p-multiSelect
-        [options]="stageSource"
-        [(ngModel)]="selectedStage"
-        placeholder="Select Print Type"
-        name="workflowStage"
-        optionLabel="value"
-        display="chip"
-        [required]="true"
-        #documentstage="ngModel">
-      </p-multiSelect>
-      <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
-        Document Stage is required
-      </div> -->
-              <p-dropdown name="PrintType" [options]="stageSource" [(ngModel)]="print.printCopy"
-                          optionLabel="label" optionValue="label" placeholder="Select Print Type" [autoDisplayFirst]="false" [required]="true"
-                          #documentstage="ngModel" [disabled]="viewMode">
-              </p-dropdown>
-              <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
-                Print Type is required.
-              </div>
-            </div>
-          </div>
-          <div class="form-group row" *ngIf="!editMode && !viewMode">
-            <label for="prefix" class="col-sm-2 col-form-label">
-              Workflow<span style="color: red; font-weight: bolder;">*</span>
-            </label>
-            <div class="col-sm-10">
+            <div class="form-group row">
+              <label for="prefix" class="col-sm-2 col-form-label">
+                Document No<span style="color: red; font-weight: bolder;">*</span>
+              </label>
               <div class="col-sm-10">
-                <p-dropdown name="workflow" [options]="workflowsSource" [(ngModel)]="print.workflow"
-                            optionLabel="workflowName" optionValue="workflowName" placeholder="Select Workflow" [autoDisplayFirst]="false" [required]="true"
-                            #WorkflowInput="ngModel" [disabled]="viewMode">
+                <p-dropdown name="docType" [options]="preparations" [(ngModel)]="print.documentNumber"
+                            optionLabel="documentno" optionValue="documentno" (onChange)="documentNumberChange($event,printType)"
+                            [autoDisplayFirst]="false" [required]="true" placeholder="Select Document No"
+                            #documentnoInput="ngModel" [disabled]="viewMode">
                 </p-dropdown>
-                <div *ngIf="WorkflowInput.invalid && (WorkflowInput.dirty || WorkflowInput.touched)" class="text-danger">
-                  Workflow is required.
+                <div *ngIf="documentnoInput.invalid && (documentnoInput.dirty || documentnoInput.touched)" class="text-danger">
+                  Document Number is required.
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <label for="documentType" class="col-sm-2 col-form-label">
-              Reason<span style="color: red; font-weight: bolder;">*</span>
-            </label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="reason" name="Reason" placeholder="Give Reason"
-                     [(ngModel)]="print.reason" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
-              <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
-                Give Print Reason.
-
+            <div class="form-group row">
+              <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="documentTitle" name="documentTitle"
+                       placeholder="Document Title" [(ngModel)]="print.documenttitle" [disabled]="'true'" />
               </div>
             </div>
-          </div>
 
- <!-- Batch Number -->
 
-          <div class="form-group row">
-            <label for="batchNumber" class="col-sm-2 col-form-label">
-              Batch Number<span style="color: red; font-weight: bolder;">*</span>
-            </label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="reason" name="BatchNumber" placeholder="Batch Number"
-                     [(ngModel)]="print.batchNumber" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
-              <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
-                Batch Number
+            <div class="form-group row">
+              <label for="prefix" class="col-sm-2 col-form-label">Document Type</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="print" name="printType" placeholder="Document Type"
+                       [(ngModel)]="print.printtype" [disabled]="'true'" />
               </div>
             </div>
-          </div>
 
-          <!-- Batch Size -->
-
-          <div class="form-group row">
-            <label for="batchsize" class="col-sm-2 col-form-label">
-              Batch Size<span style="color: red; font-weight: bolder;">*</span>
-            </label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="reason" name="BatchSize" placeholder="Batch Size"
-                     [(ngModel)]="print.batchSize" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
-              <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
-                Batch Size
+            <div class="form-group row">
+              <label for="noofcopies" class="col-sm-2 col-form-label">
+                No Of Copies requested<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="noofcopies" name="noofcopies" placeholder=""
+                       [(ngModel)]="print.noofcopies" [disabled]="viewMode" #noofcopiesInput="ngModel" required placeholder="Choose No Of Copies" min="1" max="9" />
+                <div *ngIf="noofcopiesInput.invalid && (noofcopiesInput.dirty || noofcopiesInput.touched)" class="text-danger">
+                  No Of Copies is required.
+                </div>
               </div>
             </div>
-          </div>
-
-        </fieldset>
-        <!-- Single option controls end here -->
 
 
 
+            <div class="form-group row">
+              <label for="workflow" class="col-sm-2 col-form-label">Print Type<span style="color: red; font-weight: bolder;">*</span></label>
+              <div class="col-sm-3">
 
+                <!--<p-dropdown name="PrintType" [options]="stageSource" [(ngModel)]="print.printCopy"
+                            optionLabel="label" optionValue="label" placeholder="Select Print Type" [autoDisplayFirst]="false" [required]="true"
+                            #documentstage="ngModel" [disabled]="viewMode">
+                </p-dropdown>
+                <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
+                  Print Type is required.
+                </div>-->
+
+                <p-multiSelect [options]="stageSource" class="custom-ms" [(ngModel)]="selectedPrintTypes" [filter]="true" defaultLabel="Select Department"
+                               name="department" id="department" display="chip" optionLabel="name" optionValue="code" [resetFilterOnHide]="true"
+                               #printTypeInput="ngModel" [required]="true" [disabled]="viewMode" [maxSelectedLabels]="20">
+                </p-multiSelect>
+                <div *ngIf="printTypeInput.invalid && (printTypeInput.dirty || printTypeInput.touched)" class="text-danger">
+                  Select PrintType.
+                </div>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="!editMode && !viewMode">
+              <label for="prefix" class="col-sm-2 col-form-label">
+                Workflow<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <div class="col-sm-10">
+                  <p-dropdown name="workflow" [options]="workflowsSource" [(ngModel)]="print.workflow"
+                              optionLabel="workflowName" optionValue="workflowName" placeholder="Select Workflow" [autoDisplayFirst]="false" [required]="true"
+                              #WorkflowInput="ngModel" [disabled]="viewMode">
+                  </p-dropdown>
+                  <div *ngIf="WorkflowInput.invalid && (WorkflowInput.dirty || WorkflowInput.touched)" class="text-danger">
+                    Workflow is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="documentType" class="col-sm-2 col-form-label">
+                Reason<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="reason" name="Reason" placeholder="Give Reason"
+                       [(ngModel)]="print.reason" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
+                <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                  Give Print Reason.
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Batch Number -->
+
+            <div class="form-group row">
+              <label for="batchNumber" class="col-sm-2 col-form-label">
+                Batch Number<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="reason" name="BatchNumber" placeholder="Batch Number"
+                       [(ngModel)]="print.batchNumber" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
+                <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                  Batch Number
+                </div>
+              </div>
+            </div>
+
+            <!-- Batch Size -->
+
+            <div class="form-group row">
+              <label for="batchsize" class="col-sm-2 col-form-label">
+                Batch Size<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="reason" name="BatchSize" placeholder="Batch Size"
+                       [(ngModel)]="print.batchSize" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
+                <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                  Batch Size
+                </div>
+              </div>
+            </div>
+
+          </fieldset>
+          <!-- Single option controls end here -->
           <!-- Bulk option controls start here -->
-           <fieldset *ngIf="printType != 'single'" [disabled]="printType == 'single'">
-             <div class="form-group row">
-               <label for="prefix" class="col-sm-2 col-form-label">Existing Document No<span style="color: red; font-weight: bolder;">*</span></label>
-               <div class="col-sm-10">
-                 <p-dropdown name="docType" [options]="preparations1" [(ngModel)]="print.existingdocumentNumber"
-                             (onChange)="documentNumberChange($event,printType)" [autoDisplayFirst]="false" [required]="true"
-                             placeholder="Select Existing Document No" #documentnoInput="ngModel" [disabled]="viewMode">
-                 </p-dropdown>
-                 <div *ngIf="documentnoInput.invalid && (documentnoInput.dirty || documentnoInput.touched)" class="text-danger">
-                   Existing Document Number is required.
-                 </div>
-               </div>
-             </div>
+          <fieldset *ngIf="printType != 'single'" [disabled]="printType == 'single'">
+            <div class="form-group row">
+              <label for="prefix" class="col-sm-2 col-form-label">Existing Document No<span style="color: red; font-weight: bolder;">*</span></label>
+              <div class="col-sm-10">
+                <p-dropdown name="docType" [options]="preparations1" [(ngModel)]="print.existingdocumentNumber"
+                            (onChange)="documentNumberChange($event,printType)" [autoDisplayFirst]="false" [required]="true"
+                            placeholder="Select Existing Document No" #documentnoInput="ngModel" [disabled]="viewMode">
+                </p-dropdown>
+                <div *ngIf="documentnoInput.invalid && (documentnoInput.dirty || documentnoInput.touched)" class="text-danger">
+                  Existing Document Number is required.
+                </div>
+              </div>
+            </div>
 
-             <div class="form-group row">
-               <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
-               <div class="col-sm-10">
-                 <input type="text" class="form-control" id="documentTitle" name="documentTitle"
-                        placeholder="Document Title" [(ngModel)]="print.documenttitle" [disabled]="'true'" />
-               </div>
-             </div>
-
-
-             <div class="form-group row">
-               <label for="prefix" class="col-sm-2 col-form-label">Document Type</label>
-               <div class="col-sm-10">
-                 <input type="text" class="form-control" id="print" name="printType" placeholder="Document Type"
-                        [(ngModel)]="print.printtype" [disabled]="'true'" />
-               </div>
-             </div>
-
-             <div class="form-group row">
-               <label for="noofcopies" class="col-sm-2 col-form-label">
-                 No Of Copies requested<span style="color: red; font-weight: bolder;">*</span>
-               </label>
-               <div class="col-sm-10">
-                 <input type="number" class="form-control" id="noofcopies" name="noofcopies" placeholder=""
-                        [(ngModel)]="print.noofcopies" [disabled]="viewMode" #noofcopiesInput="ngModel" required placeholder="Choose No Of Copies" min="1" max="9" />
-                 <div *ngIf="noofcopiesInput.invalid && (noofcopiesInput.dirty || noofcopiesInput.touched)" class="text-danger">
-                   No Of Copies is required.
-                 </div>
-               </div>
-             </div>
+            <div class="form-group row">
+              <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="documentTitle" name="documentTitle"
+                       placeholder="Document Title" [(ngModel)]="print.documenttitle" [disabled]="'true'" />
+              </div>
+            </div>
 
 
+            <div class="form-group row">
+              <label for="prefix" class="col-sm-2 col-form-label">Document Type</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="print" name="printType" placeholder="Document Type"
+                       [(ngModel)]="print.printtype" [disabled]="'true'" />
+              </div>
+            </div>
 
-             <div class="form-group row">
-               <label for="workflow" class="col-sm-2 col-form-label">Print Type<span style="color: red; font-weight: bolder;">*</span></label>
-               <div class="col-sm-10">
-                 <!-- <p-multiSelect
-        [options]="stageSource"
-        [(ngModel)]="selectedStage"
-        placeholder="Select Print Type"
-        name="workflowStage"
-        optionLabel="value"
-        display="chip"
-        [required]="true"
-        #documentstage="ngModel">
-      </p-multiSelect>
-      <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
-        Document Stage is required
-      </div> -->
-                 <p-dropdown name="PrintType" [options]="stageSource" [(ngModel)]="print.printCopy"
-                             optionLabel="label" optionValue="label" placeholder="Select Print Type" [autoDisplayFirst]="false" [required]="true"
-                             #documentstage="ngModel" [disabled]="viewMode">
-                 </p-dropdown>
-                 <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
-                   Print Type is required.
-                 </div>
-               </div>
-             </div>
-             <div class="form-group row" *ngIf="!editMode && !viewMode">
-               <label for="prefix" class="col-sm-2 col-form-label">
-                 Workflow<span style="color: red; font-weight: bolder;">*</span>
-               </label>
-               <div class="col-sm-10">
-                 <div class="col-sm-10">
-                   <p-dropdown name="workflow" [options]="workflowsSource" [(ngModel)]="print.workflow"
-                               optionLabel="workflowName" optionValue="workflowName" placeholder="Select Workflow" [autoDisplayFirst]="false" [required]="true"
-                               #WorkflowInput="ngModel" [disabled]="viewMode">
-                   </p-dropdown>
-                   <div *ngIf="WorkflowInput.invalid && (WorkflowInput.dirty || WorkflowInput.touched)" class="text-danger">
-                     Workflow is required.
-                   </div>
-                 </div>
-               </div>
-             </div>
+            <div class="form-group row">
+              <label for="noofcopies" class="col-sm-2 col-form-label">
+                No Of Copies requested<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="noofcopies" name="noofcopies" placeholder=""
+                       [(ngModel)]="print.noofcopies" [disabled]="viewMode" #noofcopiesInput="ngModel" required placeholder="Choose No Of Copies" min="1" max="9" />
+                <div *ngIf="noofcopiesInput.invalid && (noofcopiesInput.dirty || noofcopiesInput.touched)" class="text-danger">
+                  No Of Copies is required.
+                </div>
+              </div>
+            </div>
 
-             <!--<div class="form-group row">
-               <label for="documentType" class="col-sm-2 col-form-label">
-                 Reason<span style="color: red; font-weight: bolder;">*</span>
-               </label>
-               <div class="col-sm-10">
-                 <input type="text" class="form-control" id="reason" name="Reason" placeholder="Give Reason"
-                        [(ngModel)]="print.reason" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
-                 <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
-                   Give Print Reason.
 
-                 </div>
-               </div>
-             </div>-->
 
-             <!-- Batch Number -->
+            <div class="form-group row">
+              <label for="workflow" class="col-sm-2 col-form-label">Print Type<span style="color: red; font-weight: bolder;">*</span></label>
+              <div class="col-sm-10">
+                <!-- <p-multiSelect
+                  [options]="stageSource"
+                  [(ngModel)]="selectedStage"
+                  placeholder="Select Print Type"
+                  name="workflowStage"
+                  optionLabel="value"
+                  display="chip"
+                  [required]="true"
+                  #documentstage="ngModel">
+                </p-multiSelect>
+                <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
+                  Document Stage is required
+                </div> -->
+                <p-dropdown name="PrintType" [options]="stageSource" [(ngModel)]="print.printCopy"
+                            optionLabel="label" optionValue="label" placeholder="Select Print Type" [autoDisplayFirst]="false" [required]="true"
+                            #documentstage="ngModel" [disabled]="viewMode">
+                </p-dropdown>
+                <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
+                  Print Type is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="!editMode && !viewMode">
+              <label for="prefix" class="col-sm-2 col-form-label">
+                Workflow<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <div class="col-sm-10">
+                  <p-dropdown name="workflow" [options]="workflowsSource" [(ngModel)]="print.workflow"
+                              optionLabel="workflowName" optionValue="workflowName" placeholder="Select Workflow" [autoDisplayFirst]="false" [required]="true"
+                              #WorkflowInput="ngModel" [disabled]="viewMode">
+                  </p-dropdown>
+                  <div *ngIf="WorkflowInput.invalid && (WorkflowInput.dirty || WorkflowInput.touched)" class="text-danger">
+                    Workflow is required.
+                  </div>
+                </div>
+              </div>
+            </div>
 
-             <div class="form-group row">
-               <label for="batchNumber" class="col-sm-2 col-form-label">
-                 Batch Number<span style="color: red; font-weight: bolder;">*</span>
-               </label>
-               <div class="col-sm-10">
-                 <input type="text" class="form-control" id="reason" name="BatchNumber" placeholder="Batch Number"
-                        [(ngModel)]="print.batchNumber" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
-                 <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
-                   Batch Number
-                 </div>
-               </div>
-             </div>
+            <!--<div class="form-group row">
+              <label for="documentType" class="col-sm-2 col-form-label">
+                Reason<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="reason" name="Reason" placeholder="Give Reason"
+                       [(ngModel)]="print.reason" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
+                <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                  Give Print Reason.
 
-             <!-- Batch Size -->
+                </div>
+              </div>
+            </div>-->
+            <!-- Batch Number -->
 
-             <div class="form-group row">
-               <label for="batchsize" class="col-sm-2 col-form-label">
-                 Batch Size<span style="color: red; font-weight: bolder;">*</span>
-               </label>
-               <div class="col-sm-10">
-                 <input type="text" class="form-control" id="reason" name="BatchSize" placeholder="Batch Size"
-                        [(ngModel)]="print.batchSize" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
-                 <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
-                   Batch Number
-                 </div>
-               </div>
-             </div>
-           </fieldset>
-         
-         <!-- Bulk option controls end here -->
-         
-         <!--<div class="form-group row">
-          <label for="Reason" class="col-sm-2 col-form-label">Reason</label>
-          <div class="col-sm-10">
-            <textarea class="form-control mw-350" id="Reason" name="Reason" rows="3" placeholder="Reason"
-                      [(ngModel)]="print.reason" [disabled]="viewMode"></textarea>
-          </div>        
-      </div>-->
+            <div class="form-group row">
+              <label for="batchNumber" class="col-sm-2 col-form-label">
+                Batch Number<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="reason" name="BatchNumber" placeholder="Batch Number"
+                       [(ngModel)]="print.batchNumber" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
+                <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                  Batch Number
+                </div>
+              </div>
+            </div>
+
+            <!-- Batch Size -->
+
+            <div class="form-group row">
+              <label for="batchsize" class="col-sm-2 col-form-label">
+                Batch Size<span style="color: red; font-weight: bolder;">*</span>
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="reason" name="BatchSize" placeholder="Batch Size"
+                       [(ngModel)]="print.batchSize" [disabled]="viewMode" #reasonInput="ngModel" required maxlength="249" />
+                <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                  Batch Number
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Bulk option controls end here -->
+          <!--<div class="form-group row">
+              <label for="Reason" class="col-sm-2 col-form-label">Reason</label>
+              <div class="col-sm-10">
+                <textarea class="form-control mw-350" id="Reason" name="Reason" rows="3" placeholder="Reason"
+                          [(ngModel)]="print.reason" [disabled]="viewMode"></textarea>
+              </div>
+          </div>-->
 
 
           <div class="form-group row my-4">
             <div class="col-sm-10 offset-sm-2">
               <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
-              <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid || isButtonDisabled"  *ngIf="!viewMode && !editMode">Submit</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid || isButtonDisabled" *ngIf="!viewMode && !editMode">Submit</button>
               <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid" *ngIf="editMode">Update</button>
               <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
               <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button> -->
@@ -357,4 +347,23 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
   </div>
-</ng-template>  
+</ng-template>
+
+<style>
+  /* Styles for .custom-input-group */
+  ::ng-deep .p-multiselect-label-container {
+    overflow: hidden;
+    flex: 1 1 auto;
+    cursor: pointer;
+    min-height: 34px;
+  }
+
+  ::ng-deep p-multiselect .p-multiselect-label {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  ::ng-deep p-multiselect .p-multiselect-token {
+    margin-bottom: .5rem
+  }
+</style>
