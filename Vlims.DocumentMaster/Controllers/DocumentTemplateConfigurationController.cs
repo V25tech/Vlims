@@ -518,9 +518,9 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:center;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-weight:bold;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
-            htmlBuilder.AppendLine(".tg .tg-adin{font-family:\"Times New Roman\", Times, serif !important;font-size:9px;font-weight:bold;text-align:left;vertical-align:top}");
-            htmlBuilder.AppendLine(".tg .tg-adin1{font-family:\"Times New Roman\", Times, serif !important;font-size:9px;font-weight:bold;text-align:left;vertical-align:top}");
-            htmlBuilder.AppendLine(".tg .tg-zv4m{border-color:#ffffff;text-align:left;vertical-align:top;font-family:\"Times New Roman\", Times, serif !important;font-size:9px;}");
+            htmlBuilder.AppendLine(".tg .tg-adin{font-family:\"Times New Roman\", Times, serif !important;font-size:14px;font-weight:bold;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-adin1{font-family:\"Times New Roman\", Times, serif !important;font-size:14px;font-weight:bold;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-zv4m{border-color:#ffffff;text-align:left;vertical-align:top;font-family:\"Times New Roman\", Times, serif !important;font-size:14px;}");
             htmlBuilder.AppendLine(".p {border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine("</style>");
 
@@ -571,14 +571,14 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("<thead>");
             htmlBuilder.AppendLine("  <tr>");
             //htmlBuilder.AppendLine($"    <td class=\"tg-zv4m\"><span style=\"font-weight:bold\">Format No : {template.FormatNo}</span><br><span style=\"font-weight:bold\" {!string.IsNullOrEmpty(template1.PrintCopy)}>Print Type: {template1.PrintCopy}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}</span><br><span style=\"font-weight:bold\" {!string.IsNullOrEmpty(template1.PrintCopy)} >Print Reason: {template1.PrintReason}</span></td>");
-            htmlBuilder.AppendLine($"<td class=\"tg-zv4m\"><span style=\"font-weight:bold\">Format No : {(template != null ? template.FormatNo : "")}</span><br>");
+            htmlBuilder.AppendLine($"<td class=\"tg-zv4m\"><span style=\"font-weight:bold;font-size:9px\">Format No : {(template != null ? template.FormatNo : "")}</span><br>");
             if (!string.IsNullOrEmpty(template1.PrintCopy))
             {
-                htmlBuilder.AppendLine($"<span style=\"font-weight:bold\">Print Type: {template1.PrintCopy}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}</span><br>");
+                htmlBuilder.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">Print Type: {template1.PrintCopy}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}</span><br>");
             }
             if (!string.IsNullOrEmpty(template1.PrintReason))
             {
-                htmlBuilder.AppendLine($"<span style=\"font-weight:bold\">Print Reason: {template1.PrintReason}</span>");
+                htmlBuilder.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">Print Reason: {template1.PrintReason}</span>");
             }
             htmlBuilder.AppendLine("</td>");
 
