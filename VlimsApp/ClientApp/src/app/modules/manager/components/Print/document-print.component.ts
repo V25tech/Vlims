@@ -55,7 +55,7 @@ export class DocumentPrintComponent implements OnInit {
     this.router.navigate(['/print/add']);
   }
   ngOnInit() {
-    this.access = this.commonsvc.getUserRoles()?.documentRevison ?? false;
+    this.access = this.commonsvc.getUserRoles()?.downloadPrint ?? false;
     this.userName = localStorage.getItem("username");
 
     this.GetDocumentPrint();
