@@ -59,5 +59,33 @@ namespace Vlims.Administration.DataAccess
                 throw;
             }
         }
+
+        public static string IsValidPasswordConfiguration(PasswordChangeConfig passwordChangeConfig)
+        {
+            try
+            {
+                StringBuilder validationMessages = new StringBuilder();
+                ValidationHelper validationHelper = new ValidationHelper();
+                validationMessages.Append(validationHelper.NullCheckValidator(passwordChangeConfig.UserID, nameof(passwordChangeConfig.UserID)));
+                validationMessages.Append(validationHelper.LengthCheckValidator(passwordChangeConfig.UserID, 150, nameof(passwordChangeConfig.UserID)));
+                validationMessages.Append(validationHelper.NullCheckValidator(passwordChangeConfig.Password, nameof(passwordChangeConfig.Password)));
+                validationMessages.Append(validationHelper.NullCheckValidator(passwordChangeConfig.OldPassword, nameof(passwordChangeConfig.OldPassword)));
+
+                if (!String.IsNullOrEmpty(validationMessages.ToString()))
+                {
+                    return Convert.ToString(validationMessages.Remove(validationMessages.ToString().LastIndexOf(','), 1));
+                }
+                else
+                {
+                    return Convert.ToString(validationMessages);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

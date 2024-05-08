@@ -229,5 +229,6 @@ namespace Vlims.DMS.Entities
         }
         public string Workflow { get; set; }
         public int ReferenceId { get; set; }
+        public string reason { get; set; }
     }
 }

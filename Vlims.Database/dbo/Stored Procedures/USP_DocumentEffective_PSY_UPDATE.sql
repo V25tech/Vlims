@@ -1,5 +1,4 @@
-﻿
-  CREATE PROCEDURE [dbo].[USP_DocumentEffective_PSY_UPDATE] @DEID_PSY int, @Documentmanagerid_PSY NVarChar(50),
+﻿  CREATE PROCEDURE [dbo].[USP_DocumentEffective_PSY_UPDATE] @DEID_PSY int, @Documentmanagerid_PSY NVarChar(50),
 @documenttitle_PSY NVarChar(150),
 @documentno_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
@@ -9,7 +8,8 @@
 @Reviewdate_PSY DateTime,
 @ModifiedBy_PSY NVarChar(100),
 @Status_PSY NVarChar(50),
-@wokflow_PSY NVarChar(50)
+@wokflow_PSY NVarChar(50),
+@Reason NVarChar(500)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -34,7 +34,8 @@ EffectiveDate_PSY=@EffectiveDate_PSY,
 Reviewdate_PSY=@Reviewdate_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,
 Status_PSY=@Status_PSY,
-Workflow_PSY=@wokflow_PSY
+Workflow_PSY=@wokflow_PSY,
+Reason=@Reason
 WHERE  [DEID_PSY] = @DEID_PSY ;  
 END
 ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
@@ -48,7 +49,7 @@ END
 ELSE IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
 BEGIN
 --return functionality is just update status as 'return'
- UPDATE [dbo].[DocumentEffective_PSY] SET Workflow_PSY=null, ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DEID_PSY] = @DEID_PSY ;
+ UPDATE [dbo].[DocumentEffective_PSY] SET Workflow_PSY=null, ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,Reason=@Reason WHERE  [DEID_PSY] = @DEID_PSY ;
  DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid_PSY;
 END
 

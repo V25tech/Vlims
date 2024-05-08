@@ -10,7 +10,8 @@
 @wokflow_PSY NVarChar(200),
 @details_PSY NVarChar(max),
 @ModifiedBy_PSY NVarChar(100),
-@Status_PSY NVarChar(100)
+@Status_PSY NVarChar(100),
+@Reason Nvarchar(500)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -33,20 +34,27 @@ document_PSY=@document_PSY,
 template_PSY=@template_PSY,
 wokflow_PSY=@wokflow_PSY,
 details_PSY=@details_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DPNID_PSY] = @DPNID_PSY ; 
+ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,Reason=@Reason WHERE  [DPNID_PSY] = @DPNID_PSY ; 
 END
 ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
 BEGIN
 --reject functionality is reset values and update status as rejected
-UPDATE dbo.DocumentPreparation_PSY SET documenttitle_PSY=null,documentno_PSY=null,document_PSY=null,
-template_PSY=null,wokflow_PSY=null,details_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY where DPNID_PSY=@DPNID_PSY
+--UPDATE dbo.DocumentPreparation_PSY SET documenttitle_PSY=null,documentno_PSY=null,document_PSY=null,
+--template_PSY=null,wokflow_PSY=null,details_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY where DPNID_PSY=@DPNID_PSY
+--UPDATE dbo.DocumentPreparation_PSY SET documenttitle_PSY=null,documentno_PSY=null,document_PSY=null,
+--template_PSY=null,details_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY where DPNID_PSY=@DPNID_PSY
+
+DELETE FROM dbo.DocumentPreparation_PSY  WHERE DPNID_PSY=@DPNID_PSY
+
 --once rejected delete workitems assigned to users
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid
 END
 ELSE IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
 BEGIN
 --return functionality is just update status as 'return'
+--UPDATE dbo.DocumentPreparation_PSY SET ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY where DPNID_PSY=@DPNID_PSY
 UPDATE dbo.DocumentPreparation_PSY SET wokflow_PSY=null ,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY where DPNID_PSY=@DPNID_PSY
+
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid
 END
 

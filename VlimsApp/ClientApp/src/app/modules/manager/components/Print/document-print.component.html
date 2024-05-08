@@ -40,7 +40,7 @@
                  <th pSortableColumn="printtype" style="width:20%">Document Type <p-sortIcon field="printtype"></p-sortIcon></th>
                  <th pSortableColumn="documenttitle" style="width:25%">Document Name<p-sortIcon field="documenttitle"></p-sortIcon></th>
                  <th pSortableColumn="documentNumber" style="width:20%">Document Number<p-sortIcon field="documentNumber"></p-sortIcon></th>
-                 <th pSortableColumn="modifiedDate" style="width:100px">Initiated On <p-sortIcon field="modifiedDate"></p-sortIcon></th>
+                 <th pSortableColumn="modifiedDate" style="width:100px">Initiated By <p-sortIcon field="modifiedDate"></p-sortIcon></th>
                  <!-- <th pSortableColumn="workflow" style="width:100px">Initiated by <p-sortIcon field="modifiedby"></p-sortIcon></th> -->
                  <th pSortableColumn="noofcopies" style="width:100px">Requested Copies <p-sortIcon field="noofcopies"></p-sortIcon></th>
                  <th pSortableColumn="printCount" style="width:100px">Print Count <p-sortIcon field="printCount"></p-sortIcon></th>
@@ -67,7 +67,7 @@
                    title="No Permissions">
                    </i>
                  </td>
-                <td class="text-center" *ngIf="doc?.status==='Approved'">
+                <td class="text-center" *ngIf="doc?.status==='Approved' && doc?.createdBy == userName">
                    <i class="bi bi-lock bi-lg" 
                    [ngClass]="{'text-primary':true}"
                    title="Approved">

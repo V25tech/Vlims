@@ -31,7 +31,9 @@ namespace Vlims.Administration.Manager
         bool SaveUserConfiguration(UserConfiguration userConfiguration);
         
         bool UpdateUserConfiguration(UserConfiguration userConfiguration);
-        
+
+        bool UpdatePassword(PasswordChangeConfig passwordChangeConfig);
+
         bool UpdateUserStatusConfiguration(UserConfiguration userConfiguration);
 
         bool DeleteUserConfigurationByUCFId(string uCFId);

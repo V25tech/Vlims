@@ -16,8 +16,8 @@ import { DocumentTemplateServiceService } from 'src/app/modules/services/documen
 import { ExistingDocumentRequestService } from 'src/app/modules/services/existing-document-request.service';
 
 interface PrintType {
-  label:string;
-  value:string;
+  name:string;
+  code:string;
 }
 
 @Component({
@@ -51,22 +51,12 @@ export class NewPrintRequestComponent implements OnInit {
   toastMsg: string | null = null;
   printType = 'single';
   preparations1: string[] = []; // Array to hold document numbers
-  isworkflow:boolean=false;
+  isworkflow: boolean = false;
+  existingDocumentsList: Array<any> = [];
+  selectedPrintTypes: string[] = [];
 
-  stageSource:PrintType[] = [
-    { label: 'Master Copy', value: 'Master Copy' },
-    { label: 'Controlled Copy', value: 'Controlled Copy' },
-    { label: 'Uncontrolled Copy', value: 'Uncontrolled Copy' },
-    { label: 'Reference Copy', value: 'Reference Copy' },
-    { label: 'Display Copy', value: 'Display Copy' },
-    { label: 'Discontinued Copy', value: 'Discontinued Copy' },
-    { label: 'Obsoluted Copy', value: 'Obsoluted Copy' },
-    { label: 'Validation Batch', value: 'Validation Batch' },
-    { label: 'Stability Batch', value: 'Stability Batch' },
-    { label: 'MLT Batch', value: 'MLT Batch' },
-    { label: 'Hold Time study', value: 'Hold Time study' },
-  ];
-  selectedStage:PrintType[]=[];
+  stageSource: any[]=[];
+  //selectedStage:PrintType[]=[];
   constructor(private commonsvc: CommonService, private location: Location,
     private route: ActivatedRoute,
     private workitemssvc: WorkitemsService,
@@ -76,7 +66,19 @@ export class NewPrintRequestComponent implements OnInit {
     private toastr: ToastrService, private spinner: NgxSpinnerService, private docprintservice: NewPrintRequestService, private docPreperationService: DocumentPreperationService, private router: Router, private wfservice: WorkflowServiceService, private docservice: DocumentPreperationService) { }
 
   ngOnInit() {
-
+    this.stageSource = [
+      { name: 'Master Copy', code: 'Master Copy' },
+      { name: 'Controlled Copy', code: 'Controlled Copy' },
+      { name: 'Uncontrolled Copy', code: 'Uncontrolled Copy' },
+      { name: 'Reference Copy', code: 'Reference Copy' },
+      { name: 'Display Copy', code: 'Display Copy' },
+      { name: 'Discontinued Copy', code: 'Discontinued Copy' },
+      { name: 'Obsoluted Copy', code: 'Obsoluted Copy' },
+      { name: 'Validation Batch', code: 'Validation Batch' },
+      { name: 'Stability Batch', code: 'Stability Batch' },
+      { name: 'MLT Batch', code: 'MLT Batch' },
+      { name: 'Hold Time study', code: 'Hold Time study' },
+    ];
     this.getDocumentRequest();
     const user = localStorage.getItem("username");
     
@@ -99,6 +101,7 @@ export class NewPrintRequestComponent implements OnInit {
     else if (segments.slice(-1).toString() == 'edit' && this.commonsvc.printConfig) {
       this.editMode = true;
       this.print = this.commonsvc.printConfig;
+      this.selectedPrintTypes = this.print.printCopy.split(',');
       //this.workflowsSource = [{ workflowName: this.print.workflow }];
       this.preparations = [{ documentno: this.print.documentNumber }];
       if(this.print.workflow!=null && this.print.workflow!=undefined){
@@ -114,7 +117,10 @@ export class NewPrintRequestComponent implements OnInit {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.existingDocReqservice.GetExistingDocumentAll(objrequest).subscribe((data: any) => {
       // Extracting document numbers from the response data
-      this.preparations1 = data.response.map((doc: any) => doc.documentno);
+      if (data && data.response != null && data.response.length > 0) {
+        this.existingDocumentsList = data;
+        this.preparations1 = data.response.map((doc: any) => doc.documentno);
+      }
     }, er => {
       console.error('An error occurred:', er);
     });
@@ -125,6 +131,7 @@ export class NewPrintRequestComponent implements OnInit {
     return this.docprintservice.getbyId(arg0).subscribe((data: any) => {
       console.log(data);
       this.print = data;
+      this.selectedPrintTypes = this.print.printCopy.split(',');
       this.spinner.hide();
     });
 
@@ -132,7 +139,6 @@ export class NewPrintRequestComponent implements OnInit {
     
   }
   approve() {
-    debugger
     this.print.Status = this.finalStatus;
     this.print.ModifiedBy = this.username;
     
@@ -168,17 +174,29 @@ export class NewPrintRequestComponent implements OnInit {
   }
   
 
-  documentNumberChange(event: any) {
-    debugger
-    let preps = this.preparations.filter(p => p.documentno === event.value);
-    if (preps && preps.length > 0) {
-      this.print.documenttitle = preps[0].documenttitle;
-      this.print.printtype = preps[0].documenttype;
-      this.print.template=preps[0].template;
-      this.print.prepId=parseInt(preps[0].dpnid);
-      this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Print"));
-      this.workflowsSource=this.workflowsSource.filter(o=>o.documenttype?.toLocaleLowerCase()===preps[0].documenttype.toLocaleLowerCase());
-    }
+  documentNumberChange(event: any, printType: string) {
+    if (printType.toLowerCase() == "bulk") {
+      let preps: any;
+        preps = this.existingDocumentsList.filter(p => p.documentno === event.value);
+      if (preps && preps.length > 0) {
+        this.print.documenttitle = preps[0].documenttitle;
+        this.print.printtype = preps[0].documenttype;
+        this.print.template = preps[0].sampletemplate;
+        this.print.prepId = parseInt(preps[0].edrId);
+        //this.workflowsSource = this.workflowsSource.filter(o => o.documentstage?.includes("Print"));
+        //this.workflowsSource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === preps[0].documenttype.toLocaleLowerCase());
+      }
+    } else {
+      let preps = this.preparations.filter(p => p.documentno === event.value);
+      if (preps && preps.length > 0) {
+        this.print.documenttitle = preps[0].documenttitle;
+        this.print.printtype = preps[0].documenttype;
+        this.print.template = preps[0].template;
+        this.print.prepId = parseInt(preps[0].dpnid);
+        this.workflowsSource = this.workflowsSource.filter(o => o.documentstage?.includes("Print"));
+        this.workflowsSource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === preps[0].documenttype.toLocaleLowerCase());
+      }
+    }    
   }
 
 
@@ -186,7 +204,6 @@ export class NewPrintRequestComponent implements OnInit {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsSource = data.Response;
-      debugger
       this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Print"));
       this.workflowsSource = this.workflowsSource.filter((p: any) => p.workflowName);
     });
@@ -207,7 +224,8 @@ export class NewPrintRequestComponent implements OnInit {
     this.print.Status = 'In-Progress';
     this.print.CreatedDate = new Date();
     this.print.ModifiedDate = new Date();
-    this.print.printCount='0';
+    this.print.printCount = '0';
+    this.print.printCopy = this.selectedPrintTypes.join(',');
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
       this.spinner.show();
@@ -231,6 +249,7 @@ export class NewPrintRequestComponent implements OnInit {
       let reqObj = JSON.parse(JSON.stringify(this.print))
       reqObj.modifiedDate = new Date(reqObj.modifiedDate)
       reqObj.ModifiedDate = reqObj.modifiedDate
+      reqObj.printCopy = this.selectedPrintTypes.join(',');
 
       this.docprintservice.UpdatePrintRequest(reqObj).subscribe(res => {
       this.commonsvc.printConfig = new DocumentPrintConfiguration();
@@ -246,7 +265,6 @@ export class NewPrintRequestComponent implements OnInit {
   }
   UpdatePrintCount()
   {
-    debugger;
     let reqObj = JSON.parse(JSON.stringify(this.print))
     this.docprintservice.UpdatePrintRequestCount(reqObj).subscribe(res => {
       //this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
@@ -262,14 +280,12 @@ this.location.back();
     //this.router.navigate(['/print']);
   }
   getworkflowitems() {
-    debugger
     this.spinner.show();
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
       this.commonsvc.createdBy = user;
     }
     return this.workitemssvc.getworkitems(this.commonsvc.req).subscribe((data: any) => {
-      debugger
       this.workitems = data.Response;
       if (this.workitems.length > 0) {
         this.workitems = this.workitems.filter(p => p.ReferenceId == this.requestId && p.TaskType == 'Print');
@@ -322,7 +338,6 @@ this.location.back();
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
     //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
     //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    //   debugger
       
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }
@@ -330,7 +345,6 @@ this.location.back();
   }
   getUrl(template: TemplateRef<any>):void{
     this.templatesvc.geturl().subscribe((data:any)=>{
-      debugger
       this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })
@@ -365,7 +379,6 @@ this.location.back();
     })
   }
   previewprint(template: TemplateRef<any>) {    
-    debugger
     this.spinner.show();    
     //this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
       this.templatesvc.getTemplate(this.print.template,this.print.prepId).subscribe((data: any) => {

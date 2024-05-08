@@ -81,6 +81,7 @@ export class DocumentPreperationConfiguration {
   isrevision: boolean = false;
   isEffectiveApproved=false;
   isRevision:boolean=false;
+  reason:string='';
   prepdocument: Prepdocument = {
     labelClaim : '',
     packingInformation : '',
@@ -135,7 +136,9 @@ export class DocumentEffectiveConfiguration {
   template: string = '';
   referenceId:number=0;
   isrevision:boolean=false;
-  documentmanagerid:string='';
+  documentmanagerid: string = '';
+  status: string = '';
+  reason: string = '';
 }
 export class DocumentAdditionalTasks {
   documentTitle: string = ''
@@ -286,6 +289,13 @@ export class UserConfiguration {
   //InvAttempt:number=0
   Status : string=''
 }
+
+export class PasswordChangeConfig{
+  UserID: string = '';
+  Password: string = '';
+  OldPassword: string = '';
+}
+
 export class WorkItemsConfiguration {
   WITId: number = 0
   TaskType: string = ''

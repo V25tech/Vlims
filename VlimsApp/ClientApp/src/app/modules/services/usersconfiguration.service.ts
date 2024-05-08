@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RequestContext, UserConfiguration } from 'src/app/models/model';
+import { PasswordChangeConfig, RequestContext, UserConfiguration } from 'src/app/models/model';
 import { HttpbaseService } from 'src/app/shared/httpbase.service';
 
 
@@ -21,6 +21,9 @@ adduser(objrequest: UserConfiguration) {
 update(objrequest: UserConfiguration) {
   
   return this.http.postJsonLogin(objrequest, "api/userconfiguration/updateuserconfiguration",this.type);
+}
+updatepassword(objrequest: PasswordChangeConfig) {  
+  return this.http.postJsonLogin(objrequest, "api/userconfiguration/updatepassword",this.type);
 }
 getbyId(objrequest: string) {
   

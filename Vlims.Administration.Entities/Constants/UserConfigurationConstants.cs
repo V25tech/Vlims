@@ -52,7 +52,10 @@ namespace Vlims.Administration.Entities
         public const string Status = "@Status_PSY";
 
         public const string ModifiedDate = "@ModifiedDate_PSY";
+        
         public const string Password = "@Password_PSY";
+
+        public const string OldPassword = "@Oldpassword";
 
         public const string USP_UserConfiguration_PSY_GET_ALL = "dbo.USP_UserConfiguration_PSY_GET_ALL";
 
@@ -63,6 +66,8 @@ namespace Vlims.Administration.Entities
         public const string USP_UserConfiguration_PSY_UPDATE = "dbo.USP_UserConfiguration_PSY_UPDATE";
 
         public const string USP_UserConfiguration_PSY_DELETE = "dbo.USP_UserConfiguration_PSY_DELETE";
+
+        public const string USP_UserConfiguration_PSY_UPDATE_PWD = "dbo.USP_UserConfiguration_PSY_UPDATE_PWD";
 
         public const string USP_UserConfiguration_PSY_DELETE_ALL = "dbo.USP_UserConfiguration_PSY_DELETE_ALL";
 
