@@ -75,8 +75,3 @@ SELECT @documentno_PSY,'Print','Pending',NULL,@CreatedBy_PSY,GetDate(),'In-Progr
  SELECT ERROR_MESSAGE(); 
  END CATCH 
  END
-
-
-
- ALTER TABLE DocumentPrint_PSY
-DROP COLUMN Reason;

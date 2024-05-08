@@ -37,6 +37,7 @@ namespace Vlims.Controllers
     using Paragraph = Spire.Doc.Documents.Paragraph;
     using Vlims.DocumentMaster.Manager.Interface;
     using iTextSharp.text.pdf.qrcode;
+    using System.Drawing;
 
 
     /// <summary>
@@ -285,42 +286,56 @@ namespace Vlims.Controllers
             Paragraph headerParagraph = header.AddParagraph();
             StringBuilder headerbuilder = new StringBuilder();
             headerbuilder.Append(htmlUpper);
-            if (template.documenttype.Equals("BATCH PACKING RECORD 08", StringComparison.InvariantCultureIgnoreCase))
-            {
-                headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
-            }
-            else if (template.documenttype.Equals("BATCH PACKING RECORD", StringComparison.InvariantCultureIgnoreCase))
-            {
-                headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
-            }
-            else if (template.documenttype.Equals("BATCH MANUFACTURING RECORD", StringComparison.InvariantCultureIgnoreCase))
-            {
-                headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
-            }
-            else if (template.documenttype.Equals("STANDARD OPERATING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
-            {
-                headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation));
-            }
-            else if (template.documenttype.Equals("STANDARD TESTING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
-            {
-                headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
-            }
-            else if (template.documenttype.Equals("STANDARD TESTING SPECIFICATION", StringComparison.InvariantCultureIgnoreCase))
-            {
-                headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
-            }
-            else if (template.documenttype.Equals("Validation Protocol", StringComparison.InvariantCultureIgnoreCase))
-            {
-                headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
-            }
-            else
-                headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation));
+            var totalPages = document.PageCount-1;
 
-            headerbuilder.Append(htmllower);
-            headerParagraph.AppendHTML(headerbuilder.ToString());
-            headerParagraph.Format.BeforeSpacing = 0;
-            headerParagraph.Format.AfterSpacing = 0;
-            headerParagraph.Format.PageBreakBefore = false;
+                if (template.documenttype.Equals("BATCH PACKING RECORD 08", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+                }
+                else if (template.documenttype.Equals("BATCH PACKING RECORD", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+                }
+                else if (template.documenttype.Equals("BATCH MANUFACTURING RECORD", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+                }
+                else if (template.documenttype.Equals("STANDARD OPERATING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation, totalPages));
+                }
+                else if (template.documenttype.Equals("STANDARD TESTING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+                }
+                else if (template.documenttype.Equals("STANDARD TESTING SPECIFICATION", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+                }
+                else if (template.documenttype.Equals("Validation Protocol", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+                }
+                else
+                    headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation, totalPages));
+
+                headerbuilder.Append(htmllower);
+                headerParagraph.AppendHTML(headerbuilder.ToString());
+                headerParagraph.Format.BeforeSpacing = 0;
+                headerParagraph.Format.AfterSpacing = 0;
+                headerParagraph.Format.PageBreakBefore = false;
+
+                HeaderFooter footer1 = section.HeadersFooters.Footer;
+                // Add "page number / page count" to the footer
+
+                Paragraph footerParagraph1 = footer1.AddParagraph();
+                footerParagraph1.AppendText("Page No - ");
+                footerParagraph1.AppendField("page number", Spire.Doc.FieldType.FieldPage);
+                footerParagraph1.AppendText(" of "+totalPages);
+
+            //footerParagraph.AppendField("page number", FieldType.);
+            //footerParagraph.AppendText(" / ");
+            //footerParagraph.AppendField("page count", FieldType.FieldNumPages);
 
             document.SaveToFile("DocumentWithMargins.docx", FileFormat.Docx2013);
             document.Dispose();
@@ -390,8 +405,9 @@ namespace Vlims.Controllers
             footerParagraph.Format.PageBreakBefore = false;
 
             Paragraph paragraph = section.AddParagraph();
+            var totalPages = document.PageCount-1;
 
-            for (int i = 0; i < template.Pages; i++)
+            for (int i = 0; i < totalPages; i++)
             {
                 HeaderFooter header = section.HeadersFooters.Header;
                 Paragraph headerParagraph = header.AddParagraph();
@@ -411,7 +427,7 @@ namespace Vlims.Controllers
                 }
                 else if (template.documenttype.Equals("STANDARD OPERATING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation));
+                    headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation, totalPages));
                 }
                 else if (template.documenttype.Equals("STANDARD TESTING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -426,7 +442,7 @@ namespace Vlims.Controllers
                     headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
                 }
                 else
-                    headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation));
+                    headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation, totalPages));
 
                 //headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template));
                 //headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template));
@@ -592,7 +608,7 @@ namespace Vlims.Controllers
 
         }
 
-        public static string PrepareHeaderStaticdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo, DocumentPreparation preparation)
+        public static string PrepareHeaderStaticdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo, DocumentPreparation preparation, int totalPages)
         {
             string table = string.Empty;
             StringBuilder htmlBuilder = new StringBuilder();
@@ -658,7 +674,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Department</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Department) ? template1.Department : "test") : "test")}</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Page No.</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{p_PageNo} of {template.Pages}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{p_PageNo} of {totalPages}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Effective Date</td>");
