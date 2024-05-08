@@ -127,14 +127,14 @@ export class LeftNavComponent {
         },
         {
           label: 'Document Repository',
-          path: 'revision',
+          path: 'existingdocuments',
           isOpen: false,
           children: null,
           isActive: false,
           iconClass: '',
         },
         {
-          label: 'Document Print',
+          label: 'Document Print Request',
           path: 'print',
           isOpen: false,
           children: null,
