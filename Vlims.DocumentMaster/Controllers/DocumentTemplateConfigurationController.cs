@@ -683,6 +683,8 @@ namespace Vlims.Controllers
             //htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Review Date</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
+            htmlBuilder.AppendLine("    <td class=\"tg-53v8\"></td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\"></td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</tbody>");
             htmlBuilder.AppendLine("</table>");
