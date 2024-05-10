@@ -160,7 +160,21 @@ export class NewPrintRequestComponent implements OnInit {
     //this.effective.Status='Rejected'
     //this.toastMsg = this.print.Status;
     //this.saveEffective();
-    this.location.back();
+    //this.location.back();
+    //const username = localStorage.getItem('username') || '';
+    //const password = (document.getElementById('password') as HTMLInputElement).value;
+    //const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    //if (userExists) {
+
+      this.print.ModifiedBy = this.commonsvc.getUsername();
+      this.print.Status = 'Rejected';
+      //this.toastMsg = this.preparation.status;
+      this.updateRequest();
+      //this.location.back();
+
+    //} else {// Username or password is invalid, display error message
+    //  this.toastr.error('Invalid Username or Password');
+    //}
   }
   getdocumentpreparations() {
     //let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };

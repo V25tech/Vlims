@@ -231,7 +231,12 @@ export class ReviewEffectiveComponent {
     //}
     //else
     //if (this.viewMode && reqObj.status != 'Rejected' && reqObj.status != 'Returned') {
-    if (this.viewMode && reqObj.status == 'Approved' || reqObj.status == 'Reviewed') {
+    if (this.viewMode && reqObj.status == 'Returned') {
+      reqObj.ModifiedBy = this.commonsvc.createdBy;
+      reqObj.status = this.finalStatus;
+
+    }
+    if (this.viewMode && reqObj.status == 'Approved') {
       reqObj.ModifiedBy = this.commonsvc.createdBy;
       reqObj.Status = this.finalStatus;
     } else if ((!this.viewMode || this.editMode) && ((reqObj.status == 'Rejected' || reqObj.status == "Returned"))) {

@@ -68,6 +68,8 @@ export class EffectivesComponent {
       return 'status-approved';
     } else if (status === 'Pending') {
       return 'status-pending';
+    } else if (status === 'Returned') {
+      return 'status-return';
     } else {
       return '';
     }

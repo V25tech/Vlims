@@ -333,9 +333,6 @@ namespace Vlims.Controllers
                 footerParagraph1.AppendField("page number", Spire.Doc.FieldType.FieldPage);
                 footerParagraph1.AppendText(" of "+totalPages);
 
-            //footerParagraph.AppendField("page number", FieldType.);
-            //footerParagraph.AppendText(" / ");
-            //footerParagraph.AppendField("page count", FieldType.FieldNumPages);
 
             document.SaveToFile("DocumentWithMargins.docx", FileFormat.Docx2013);
             document.Dispose();
