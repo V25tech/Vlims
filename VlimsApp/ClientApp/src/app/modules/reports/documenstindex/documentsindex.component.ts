@@ -115,17 +115,32 @@ export class DocumentsIndexComponent implements OnInit {
   }
 
   exportPdf() {
-
     const doc = new jsPDF('p', 'pt');
-
+    const columnWidths = [100, 150, 100, 100, 100, 100]; // Adjust the width of each column as needed
+  
+    const styles: any = {}; // Define an empty object to hold column styles
+  
+    for (let i = 0; i < columnWidths.length; i++) {
+      styles[i.toString()] = { columnWidth: columnWidths[i] }; // Assign column widths to styles object
+    }
+  
+    // Adjust the width of the date columns
+    styles['1'] = { columnWidth: 95}; // Effective Date
+    styles['2'] = { columnWidth: 95 }; // Effective Date
+    styles['3'] = { columnWidth: 95}; // Effective Date
+    styles['4'] = { columnWidth: 95 }; // Effective Date
+    styles['5'] = { columnWidth: 95 }; // Review Date
+  
     autoTable(doc, {
       columns: this.exportColumns,
       body: this.documents.exisitingDocuments,
       didDrawPage: (dataArg) => {
         doc.text('Documents', dataArg.settings.margin.bottom, 1);
-      }
+      },
+      columnStyles: styles // Assign column styles to columnStyles property
     });
     doc.save('documents.pdf');
   }
+  
 
 }

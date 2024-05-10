@@ -79,6 +79,7 @@ namespace Vlims.DocumentManager.DataAccess
                 //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentrequestConstants.Reviwers, Value = documentrequest.Reviwers });
                 //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentrequestConstants.Approvals, Value = documentrequest.Approvals });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentrequestConstants.USP_Documentrequest_PSY_INSERT, sqlparms, ExecutionType.Scalar);
+                documentrequest.DRID = result.ToString();
                 return (Convert.ToInt32(result) > 0);
             }
             catch (System.Exception ex)
