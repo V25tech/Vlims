@@ -38,16 +38,16 @@ export class AuditplantgridpageComponent {
   getauditmodule() {
     this.loader.show();
     debugger;
-    this.commonsvc.req.type="PlantType"
-       return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
-        
-         
-        this.types = this.removeDuplicates(data, 'Unique'); 
-         this.loader.hide();
-       }, er => {
-         this.loader.hide();
-       });
- }
+    this.commonsvc.req.type = "PlantType";
+    return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
+      this.types = this.removeDuplicates(data, 'Unique');
+      this.types.reverse(); // Reverse the array here
+      this.loader.hide();
+    }, er => {
+      this.loader.hide();
+    });
+  }
+  
 
  removeDuplicates(array: any[], property: string): any[] {
   debugger
