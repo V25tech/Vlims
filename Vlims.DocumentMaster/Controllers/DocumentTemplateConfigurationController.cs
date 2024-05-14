@@ -38,6 +38,7 @@ namespace Vlims.Controllers
     using Vlims.DocumentMaster.Manager.Interface;
     using iTextSharp.text.pdf.qrcode;
     using System.Drawing;
+    using Microsoft.AspNetCore.Http;
 
 
     /// <summary>
@@ -286,52 +287,52 @@ namespace Vlims.Controllers
             Paragraph headerParagraph = header.AddParagraph();
             StringBuilder headerbuilder = new StringBuilder();
             headerbuilder.Append(htmlUpper);
-            var totalPages = document.PageCount-1;
+            var totalPages = document.PageCount - 1;
 
-                if (template.documenttype.Equals("BATCH PACKING RECORD 08", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
-                }
-                else if (template.documenttype.Equals("BATCH PACKING RECORD", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
-                }
-                else if (template.documenttype.Equals("BATCH MANUFACTURING RECORD", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
-                }
-                else if (template.documenttype.Equals("STANDARD OPERATING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation, totalPages));
-                }
-                else if (template.documenttype.Equals("STANDARD TESTING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
-                }
-                else if (template.documenttype.Equals("STANDARD TESTING SPECIFICATION", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
-                }
-                else if (template.documenttype.Equals("Validation Protocol", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
-                }
-                else
-                    headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation, totalPages));
+            if (template.documenttype.Equals("BATCH PACKING RECORD 08", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("BATCH PACKING RECORD", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("BATCH MANUFACTURING RECORD", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("STANDARD OPERATING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation, totalPages));
+            }
+            else if (template.documenttype.Equals("STANDARD TESTING PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("STANDARD TESTING SPECIFICATION", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+            }
+            else if (template.documenttype.Equals("Validation Protocol", StringComparison.InvariantCultureIgnoreCase))
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareSTPHeader(template, template1, i + 1, preparation));
+            }
+            else
+                headerbuilder.Append(TemplatePreparation.PrepareHeaderStaticdiv(template, template1, i + 1, preparation, totalPages));
 
-                headerbuilder.Append(htmllower);
-                headerParagraph.AppendHTML(headerbuilder.ToString());
-                headerParagraph.Format.BeforeSpacing = 0;
-                headerParagraph.Format.AfterSpacing = 0;
-                headerParagraph.Format.PageBreakBefore = false;
+            headerbuilder.Append(htmllower);
+            headerParagraph.AppendHTML(headerbuilder.ToString());
+            headerParagraph.Format.BeforeSpacing = 0;
+            headerParagraph.Format.AfterSpacing = 0;
+            headerParagraph.Format.PageBreakBefore = false;
 
-                HeaderFooter footer1 = section.HeadersFooters.Footer;
-                // Add "page number / page count" to the footer
+            HeaderFooter footer1 = section.HeadersFooters.Footer;
+            // Add "page number / page count" to the footer
 
-                Paragraph footerParagraph1 = footer1.AddParagraph();
-                footerParagraph1.AppendText("Page No - ");
-                footerParagraph1.AppendField("page number", Spire.Doc.FieldType.FieldPage);
-                footerParagraph1.AppendText(" of "+totalPages);
+            Paragraph footerParagraph1 = footer1.AddParagraph();
+            footerParagraph1.AppendText("Page No - ");
+            footerParagraph1.AppendField("page number", Spire.Doc.FieldType.FieldPage);
+            footerParagraph1.AppendText(" of " + totalPages);
 
 
             document.SaveToFile("DocumentWithMargins.docx", FileFormat.Docx2013);
@@ -402,7 +403,7 @@ namespace Vlims.Controllers
             footerParagraph.Format.PageBreakBefore = false;
 
             Paragraph paragraph = section.AddParagraph();
-            var totalPages = document.PageCount-1;
+            var totalPages = document.PageCount - 1;
 
             for (int i = 0; i < totalPages; i++)
             {
@@ -585,9 +586,23 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("  <tr>");
             //htmlBuilder.AppendLine($"    <td class=\"tg-zv4m\"><span style=\"font-weight:bold\">Format No : {template.FormatNo}</span><br><span style=\"font-weight:bold\" {!string.IsNullOrEmpty(template1.PrintCopy)}>Print Type: {template1.PrintCopy}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}</span><br><span style=\"font-weight:bold\" {!string.IsNullOrEmpty(template1.PrintCopy)} >Print Reason: {template1.PrintReason}</span></td>");
             htmlBuilder.AppendLine($"<td class=\"tg-zv4m\"><span style=\"font-weight:bold;font-size:9px\">Format No : {(template != null ? template.FormatNo : "")}</span><br>");
+            #region date
+            // Get the local time zone
+            TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+
+            // Get the time zone by its ID (for example, "Eastern Standard Time")
+            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+
+            // Get the current date and time
+            DateTime currentTime = DateTime.Now;
+
+            // Convert the current time to the target time zone
+            DateTime targetTime = TimeZoneInfo.ConvertTime(currentTime, localTimeZone, targetTimeZone);
+            //Console.WriteLine("Current Time (Target): " + targetTime.ToString("dd-MM-yyyy HH:mm:ss"));
+            #endregion
             if (!string.IsNullOrEmpty(template1.PrintCopy))
             {
-                htmlBuilder.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">Print Type: {template1.PrintCopy}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}</span><br>");
+                htmlBuilder.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">Print Type: {template1.PrintCopy}, Printed By: {p_user}, Printed On: {targetTime.ToString("dd-MM-yyyy HH:mm:ss")}</span><br>");
             }
             if (!string.IsNullOrEmpty(template1.PrintReason))
             {
@@ -669,7 +684,7 @@ namespace Vlims.Controllers
                 supersedesNo = (template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? Convert.ToString(template1.Supersedes) : "0") : "0");
 
             //if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
-                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
             //else
             //    htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
             htmlBuilder.AppendLine("  </tr>");
@@ -677,7 +692,13 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Department</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Department) ? template1.Department : "test") : "test")}</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Effective Date</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
+            if (template1 != null && !string.IsNullOrEmpty(template1.EffectiveDate))
+            {
+                string formatteddate = getformatteddate(template1.EffectiveDate);
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{formatteddate}</td>");
+            }
+            else
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">test</td>");
             //htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Page No.</td>");
             //htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{p_PageNo} of {totalPages}</td>");
             htmlBuilder.AppendLine("  </tr>");
@@ -685,7 +706,13 @@ namespace Vlims.Controllers
             //htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Effective Date</td>");
             //htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Review Date</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
+            if (template1 != null && !string.IsNullOrEmpty(template1.ReviewDate))
+            {
+                string formatteddate = getformatteddate(template1.ReviewDate);
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{formatteddate}</td>");
+            }
+            else
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">test</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\"></td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\"></td>");
             htmlBuilder.AppendLine("  </tr>");
@@ -720,7 +747,7 @@ namespace Vlims.Controllers
                     documentTypeNumber = "STP No.";
                     break;
             }
-                if (System.IO.File.Exists(path))
+            if (System.IO.File.Exists(path))
             {
                 string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
                 dataUri = $"data:image/jpeg;base64,{base64EncodedImage}";
@@ -749,7 +776,7 @@ namespace Vlims.Controllers
             //stringBuilder.AppendLine(@"<th class=""tg-c3ow""><img src=""data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3e%3cpath fill='%23000000' d='M350.85 129c25.97 4.67 47.27 18.67 63.92 42 14.65 20.67 24.64 46.67 29.96 78 4.67 28.67 4.32 57.33-1 86-7.99 47.33-23.97 87-47.94 119-28.64 38.67-64.59 58-107.87 58-10.66 0-22.3-3.33-34.96-10-8.66-5.33-18.31-8-28.97-8s-20.3 2.67-28.97 8c-12.66 6.67-24.3 10-34.96 10-43.28 0-79.23-19.33-107.87-58-23.97-32-39.95-71.67-47.94-119-5.32-28.67-5.67-57.33-1-86 5.32-31.33 15.31-57.33 29.96-78 16.65-23.33 37.95-37.33 63.92-42 15.98-2.67 37.95-.33 65.92 7 23.97 6.67 44.28 14.67 60.93 24 16.65-9.33 36.96-17.33 60.93-24 27.98-7.33 49.96-9.67 65.94-7zm-54.94-41c-9.32 8.67-21.65 15-36.96 19-10.66 3.33-22.3 5-34.96 5l-14.98-1c-1.33-9.33-1.33-20 0-32 2.67-24 10.32-42.33 22.97-55 9.32-8.67 21.65-15 36.96-19 10.66-3.33 22.3-5 34.96-5l14.98 1 1 15c0 12.67-1.67 24.33-4.99 35-3.99 15.33-10.31 27.67-18.98 37z'/%3e%3c/svg%3e"" width=""80"" height=""80""></th>");
             //stringBuilder.AppendLine(@"<td class=""tg-0pky""><img src=""https://images.app.goo.gl/v534Zi6U8F7y9KxQA"" width=""140"" height=""80""></td>");
             stringBuilder.AppendLine($@"<th class=""tg-0pky""><img src=""{dataUri}"" width=""140"" height=""80"" /></th>");
-            stringBuilder.AppendLine($"    <th class=\"tg-7btt\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n","<br>") : "test") : "test")}</th>");
+            stringBuilder.AppendLine($"    <th class=\"tg-7btt\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "test") : "test")}</th>");
             stringBuilder.AppendLine($@"<th class=""tg-0pky""><img src=""{dataUri1}"" width=""100"" height=""80"" style=""align:center"" /></th>");
 
             //stringBuilder.AppendLine(@"<th class=""tg-7btt"" colspan=""3"">ACCENT PHARMACEUTICALS &amp; DIAGNOSTICS<br>FOREST ROAD SALON, H.P. (INDIA)<br>QUALITY CONTROL DEPARTMENT<br>STANDARD TESTING PROCEDURE</th>");
@@ -784,7 +811,7 @@ namespace Vlims.Controllers
             else
                 supersedesNo = (template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? Convert.ToString(template1.Supersedes) : "0") : "0");
 
-                stringBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
 
             //if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
             //    stringBuilder.AppendLine($"    <td class=\"tg-1wig\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : 0) : 0)}</td>");
@@ -803,9 +830,23 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Effective Date</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
+            if (template1 != null && !string.IsNullOrEmpty(template1.EffectiveDate))
+            {
+                string formattedDate = getformatteddate(template1.EffectiveDate);
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{formattedDate}</td>");
+            }
+            else
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">test</td>");
+            //stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Review Date</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
+            if (template1 != null && !string.IsNullOrEmpty(template1.ReviewDate))
+            {
+                string formattedDate = getformatteddate(template1.ReviewDate);
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{formattedDate}</td>");
+            }
+            else
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">test</td>");
+            //stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.ReviewDate) ? template1.ReviewDate : "test") : "test")}</td>");
             stringBuilder.AppendLine(@"</tr>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Packing Information</td>");
@@ -887,13 +928,19 @@ namespace Vlims.Controllers
             else
                 supersedesNo = (template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? Convert.ToString(template1.Supersedes) : "0") : "0");
 
-                stringBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
             //if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument?.supersedesNo))
             //    stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : "test") : "test")}</td>");
             //else
             //    stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : "test") : "test")}</td>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">EFFECTIVE DATE</td>");
-            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
+            if (template1 != null && !string.IsNullOrEmpty(template1.EffectiveDate))
+            {
+                string formattedDate = getformatteddate(template1.EffectiveDate);
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{formattedDate}</td>");
+            }
+            else
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">test</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("<tr>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">BATCH NO.</td>");
@@ -911,7 +958,13 @@ namespace Vlims.Controllers
 
             return result;
         }
-
+        public static string getformatteddate(string p_date)
+        {
+            DateTime date = DateTime.ParseExact(p_date, "M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            // Format the DateTime object to the desired format
+            string formattedDate = date.ToString("MM/dd/yyyy");
+            return formattedDate;
+        }
         public static string PrepareHeaderdiv(DocumentTemplateConfiguration Template)
         {
             string table = string.Empty;
