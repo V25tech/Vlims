@@ -36,13 +36,12 @@ export class AuditdocumenttypesgridpageComponent {
   }
   
   getauditmodule() {
-    debugger
+    
     this.loader.show();
     this.commonsvc.req.type="DocumentType";
     this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
-      debugger
       this.types = this.removeDuplicates(data, 'Unique'); // Filter duplicates based on EntityName
-      debugger
+      this.types.reverse(); // Reverse the array here
       this.loader.hide();
     }, er => {
       this.loader.hide();
@@ -51,7 +50,6 @@ export class AuditdocumenttypesgridpageComponent {
   
   // Function to remove duplicate entries from an array based on a specific property
   removeDuplicates(array: any[], property: string): any[] {
-    debugger
     return array.filter((obj, index, self) =>
       index === self.findIndex((o) => (
         o[property] === obj[property]

@@ -243,7 +243,7 @@ export class ReviewEffectiveComponent {
       reqObj.ModifiedBy = this.commonsvc.createdBy;
       reqObj.Status = "In-Progress";
     }
-    this.toastMsg = this.toastMsg ?? 'Updated'
+    this.toastMsg = this.toastMsg ?? 'Registered'
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
       this.documentEffectiveService.ManageDocumentEffective(reqObj).subscribe(res => {

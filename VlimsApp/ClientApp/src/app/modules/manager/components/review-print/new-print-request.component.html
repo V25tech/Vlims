@@ -100,7 +100,7 @@
                   Print Type is required.
                 </div>-->
 
-                <p-multiSelect [options]="stageSource" class="custom-ms" [(ngModel)]="selectedPrintTypes" [filter]="true" defaultLabel="Select Department"
+                <p-multiSelect [options]="stageSource" class="custom-ms" [(ngModel)]="selectedPrintTypes" [filter]="true" defaultLabel="Select PrintType"
                                name="department" id="department" display="chip" optionLabel="name" optionValue="code" [resetFilterOnHide]="true"
                                #printTypeInput="ngModel" [required]="true" [disabled]="viewMode" [maxSelectedLabels]="20">
                 </p-multiSelect>
