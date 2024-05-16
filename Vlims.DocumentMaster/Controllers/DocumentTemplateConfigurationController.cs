@@ -961,7 +961,7 @@ namespace Vlims.Controllers
         public static string getformatteddate(string p_date)
         {
             DateTime date = DateTime.ParseExact(p_date, "M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            // Format the DateTime object to the desired format
+            // Format the DateTime object to the desired formatt
             string formattedDate = date.ToString("MM/dd/yyyy");
             return formattedDate;
         }
