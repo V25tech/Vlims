@@ -11,8 +11,7 @@
 @PrintCopy_PSY varchar(500),
 @printCount_PSY nVarchar(100),
 @BatchNumber nVarchar(100),
-@BatchSize nVarchar(100),
-@Reason nVarchar(500)
+@BatchSize nVarchar(100)
  AS 
  BEGIN 
   BEGIN TRY 
@@ -34,7 +33,7 @@ reason_PSY,
 CreatedBy_PSY,
 CreatedDate_PSY,
 ModifiedBy_PSY,
-ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PSY,printCount_PSY,IsActive_PSY,BatchNumber,BatchSize,Reason)
+ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PSY,printCount_PSY,IsActive_PSY,BatchNumber,BatchSize)
  VALUES 
 (@documenttitle_PSY,
 @printtype_PSY,
@@ -45,7 +44,7 @@ ModifiedDate_PSY,Refrence_PSY,Status_PSY,GUID_DPP,ReferenceGuid_PSY,PrintCopy_PS
 @CreatedBy_PSY,
  GetDate() ,
 @ModifiedBy_PSY,
- GetDate(),@REFRENCEID,'In-Progress',NEWID(),@REFERENCEGUID,@PrintCopy_PSY,@printCount_PSY,1,@BatchNumber,@BatchSize,@Reason);
+ GetDate(),@REFRENCEID,'In-Progress',NEWID(),@REFERENCEGUID,@PrintCopy_PSY,@printCount_PSY,1,@BatchNumber,@BatchSize);
  SELECT @ID = @@IDENTITY; 
 
   --DECLARE @ISWORKITEMS BIT

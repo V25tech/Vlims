@@ -35,6 +35,7 @@ export class AudittemplategridpageComponent {
     this.commonsvc.req.type="TemplateType"
        return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
         this.types = this.removeDuplicates(data, 'Unique'); 
+        this.types.reverse(); // Reverse the array here
          this.loader.hide();
        }, er => {
          this.loader.hide();

@@ -231,14 +231,19 @@ export class ReviewEffectiveComponent {
     //}
     //else
     //if (this.viewMode && reqObj.status != 'Rejected' && reqObj.status != 'Returned') {
-    if (this.viewMode && reqObj.status == 'Approved' || reqObj.status == 'Reviewed') {
+    if (this.viewMode && reqObj.status == 'Returned') {
+      reqObj.ModifiedBy = this.commonsvc.createdBy;
+      reqObj.status = this.finalStatus;
+
+    }
+    if (this.viewMode && reqObj.status == 'Approved') {
       reqObj.ModifiedBy = this.commonsvc.createdBy;
       reqObj.Status = this.finalStatus;
     } else if ((!this.viewMode || this.editMode) && ((reqObj.status == 'Rejected' || reqObj.status == "Returned"))) {
       reqObj.ModifiedBy = this.commonsvc.createdBy;
       reqObj.Status = "In-Progress";
     }
-    this.toastMsg = this.toastMsg ?? 'Updated'
+    this.toastMsg = this.toastMsg ?? 'Registered'
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
       this.documentEffectiveService.ManageDocumentEffective(reqObj).subscribe(res => {

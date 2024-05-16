@@ -42,18 +42,22 @@ export class DocumentPrintComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
+  userName: string | null = "";
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService, 
     private templatesvc:DocumentTemplateServiceService,
     private modalService: BsModalService, private sanitizer: DomSanitizer,
     private spinner:NgxSpinnerService,
     private toastr: ToastrService,
-    private docservice: DocumentPreperationService, private router: Router) { }
+    private docservice: DocumentPreperationService, private router: Router) {
+  }
 
   navigateToAddPrint(): void {
     this.router.navigate(['/print/add']);
   }
   ngOnInit() {
-    this.access = this.commonsvc.getUserRoles()?.documentRevison ?? false;
+    this.access = this.commonsvc.getUserRoles()?.downloadPrint ?? false;
+    this.userName = localStorage.getItem("username");
+
     this.GetDocumentPrint();
   }
 

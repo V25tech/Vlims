@@ -34,14 +34,14 @@
                  [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
           <ng-template pTemplate="header">
             <tr>
-              <th>S.No</th>
-              <th pSortableColumn="Role" style="width:10%">Role Name <p-sortIcon field="Role"></p-sortIcon></th>
+              <th style="width:100px;">S.No</th>
+              <th pSortableColumn="Role" style="width:30%">Role Name <p-sortIcon field="Role"></p-sortIcon></th>
               <!-- <th pSortableColumn="Department" style="width:15%">Department<p-sortIcon field="Department"></p-sortIcon></th> -->
               <!-- <th pSortableColumn="Comments" style="width:20%">Comments<p-sortIcon field="Comments"></p-sortIcon></th> -->
-              <th pSortableColumn="CreatedBy" style="width:200px">Registered By<p-sortIcon field="CreatedBy"></p-sortIcon></th>
-              <th pSortableColumn="CreatedDate" style="width:200px">Registered On <p-sortIcon field="CreatedDate"></p-sortIcon></th>
+              <th pSortableColumn="CreatedBy" style="width:30%">Registered By<p-sortIcon field="CreatedBy"></p-sortIcon></th>
+              <th pSortableColumn="CreatedDate" style="width:30%">Registered On <p-sortIcon field="CreatedDate"></p-sortIcon></th>
 
-              <th pSortableColumn="Status" style="width:200px">Status<p-sortIcon field="Status"></p-sortIcon></th>
+              <th pSortableColumn="Status" style="width:30%">Status<p-sortIcon field="Status"></p-sortIcon></th>
               <!-- <th style="width:80px">Modify</th> -->
             </tr>
           </ng-template>

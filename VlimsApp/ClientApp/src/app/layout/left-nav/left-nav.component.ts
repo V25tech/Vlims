@@ -92,6 +92,14 @@ export class LeftNavComponent {
         //   isActive: false,
         //   iconClass: '',
         // },
+        {
+          label: 'Audit Trails',
+          path: '/auditdocmaster',
+          isOpen: false,
+          children: null,
+          isActive: false,
+          iconClass: '',
+        },
       ],
     },
     {
@@ -127,14 +135,14 @@ export class LeftNavComponent {
         },
         {
           label: 'Document Repository',
-          path: 'revision',
+          path: 'existingdocuments',
           isOpen: false,
           children: null,
           isActive: false,
           iconClass: '',
         },
         {
-          label: 'Document Print',
+          label: 'Document Print Request',
           path: 'print',
           isOpen: false,
           children: null,
@@ -148,7 +156,15 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: '',
-        }
+        },
+        {
+          label: 'Audit Trails',
+          path: '/auditmanager',
+          isOpen: false,
+          children: null,
+          isActive: false,
+          iconClass: '',
+        },
       ],
     },
     // {
@@ -208,14 +224,14 @@ export class LeftNavComponent {
       iconClass: 'bi bi-gear-wide-connected',
       children: [
        
-        {
-          label: 'Security Management',
-          path: 'securityM',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: ''
-        },
+        //{
+        //  label: 'Security Management',
+        //  path: 'securityM',
+        //  isOpen: false,
+        //  children: null,
+        //  isActive: false,
+        //  iconClass: ''
+        //},
         {
           label: 'Department Configuration',
           path: 'departments',
@@ -268,7 +284,15 @@ export class LeftNavComponent {
           isActive: false,
           iconClass: ''
           
-        }
+        },
+        {
+          label: 'Audit Trails',
+          path: '/auditadmin',
+          isOpen: false,
+          children: null,
+          isActive: false,
+          iconClass: '',
+        },
         // Add more child items as needed
       ]
     },

@@ -19,9 +19,10 @@
     [IsActive_PSY]      BIT              NULL,
     [BatchNumber]       NVARCHAR (100)   NULL,
     [BatchSize]         NVARCHAR (100)   NULL,
-    [Reason]            NVARCHAR (500)   NULL,
     CONSTRAINT [PK_DocumentPrint_PSY] PRIMARY KEY CLUSTERED ([DRId_PSY] ASC)
 );
+
+
 
 
 

@@ -306,6 +306,7 @@ export class ReviewPrepationComponent {
     }
 
     savePreparation() {
+        debugger
         this.spinner.show();
       if (!this.viewMode && (this.preparation.status == 'Rejected' || this.preparation.status == 'Returned')) {
             this.preparation.status = 'In-Progress';
@@ -326,7 +327,7 @@ export class ReviewPrepationComponent {
             this.templateService.adddoctemplate(this.clonetemp).subscribe((data: any) => {
             });
         }
-        this.toastMsg = this.toastMsg ?? 'Updated';
+        this.toastMsg = this.toastMsg ?? 'Registered';
         if (!this.isButtonDisabled) {
             this.isButtonDisabled = true;
             this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {

@@ -31,33 +31,31 @@ public static class DocumentPrintConverter
             DocumentPrint documentPrintData;
             if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
             {
-                for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
+                foreach (DataRow row in dataset.Tables[0].Rows)
                 {
-                    DataRow row = dataset.Tables[0].Rows[i];
                     documentPrintData = new DocumentPrint();
-                    documentPrintData.DRId = Convert.ToInt16(row[DocumentPrintConstants.DRId.Trim('@')]);
-                    documentPrintData.documenttitle = Convert.ToString(row[DocumentPrintConstants.documenttitle.Trim('@')]);
-                    documentPrintData.printtype = Convert.ToString(row[DocumentPrintConstants.printtype.Trim('@')]);
-                    documentPrintData.DocumentNumber = Convert.ToString(row[DocumentPrintConstants.documentno.Trim('@')]);
-                    documentPrintData.noofcopies = Convert.ToInt16(row[DocumentPrintConstants.noofcopies.Trim('@')]);
-                    documentPrintData.workflow = Convert.ToString(row[DocumentPrintConstants.workflow.Trim('@')]);
-                    documentPrintData.reason = Convert.ToString(row[DocumentPrintConstants.reason.Trim('@')]);
-                    documentPrintData.CreatedBy = Convert.ToString(row[DocumentPrintConstants.CreatedBy.Trim('@')]);
-                    documentPrintData.CreatedDate = DatatypeConverter.SetDateTime(row[DocumentPrintConstants.CreatedDate.Trim('@')]);
-                    documentPrintData.ModifiedBy = Convert.ToString(row[DocumentPrintConstants.ModifiedBy.Trim('@')]);
-                    documentPrintData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentPrintConstants.ModifiedDate.Trim('@')]);
-                    documentPrintData.Status = Convert.ToString(row[DocumentPrintConstants.Status.Trim('@')]);
+                    documentPrintData.DRId = row.IsNull(DocumentPrintConstants.DRId.Trim('@')) ? (short)0 : Convert.ToInt16(row[DocumentPrintConstants.DRId.Trim('@')]);
+                    documentPrintData.documenttitle = row.IsNull(DocumentPrintConstants.documenttitle.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.documenttitle.Trim('@')]);
+                    documentPrintData.printtype = row.IsNull(DocumentPrintConstants.printtype.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.printtype.Trim('@')]);
+                    documentPrintData.DocumentNumber = row.IsNull(DocumentPrintConstants.documentno.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.documentno.Trim('@')]);
+                    documentPrintData.noofcopies = row.IsNull(DocumentPrintConstants.noofcopies.Trim('@')) ? (short)0 : Convert.ToInt16(row[DocumentPrintConstants.noofcopies.Trim('@')]);
+                    documentPrintData.workflow = row.IsNull(DocumentPrintConstants.workflow.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.workflow.Trim('@')]);
+                    documentPrintData.reason = row.IsNull(DocumentPrintConstants.reason.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.reason.Trim('@')]);
+                    documentPrintData.CreatedBy = row.IsNull(DocumentPrintConstants.CreatedBy.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.CreatedBy.Trim('@')]);
+                    documentPrintData.CreatedDate = row.IsNull(DocumentPrintConstants.CreatedDate.Trim('@')) ? DateTime.MinValue : DatatypeConverter.SetDateTime(row[DocumentPrintConstants.CreatedDate.Trim('@')]);
+                    documentPrintData.ModifiedBy = row.IsNull(DocumentPrintConstants.ModifiedBy.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.ModifiedBy.Trim('@')]);
+                    documentPrintData.ModifiedDate = row.IsNull(DocumentPrintConstants.ModifiedDate.Trim('@')) ? DateTime.MinValue : DatatypeConverter.SetDateTime(row[DocumentPrintConstants.ModifiedDate.Trim('@')]);
+                    documentPrintData.Status = row.IsNull(DocumentPrintConstants.Status.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.Status.Trim('@')]);
 
-                    documentPrintData.BatchNumber = Convert.ToString(row[DocumentPrintConstants.BatchNumber.Trim('@')]);
-                    documentPrintData.BatchSize = Convert.ToString(row[DocumentPrintConstants.BatchSize.Trim('@')]);
+                    documentPrintData.BatchNumber = row.IsNull(DocumentPrintConstants.BatchNumber.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.BatchNumber.Trim('@')]);
+                    documentPrintData.BatchSize = row.IsNull(DocumentPrintConstants.BatchSize.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.BatchSize.Trim('@')]);
 
-                    documentPrintData.Template = Convert.ToString(row[DocumentPrintConstants.Template.Trim('@')]);
-                    documentPrintData.PrintCopy = Convert.ToString(row["PrintCopy_PSY"]);
-                    documentPrintData.IsActive = row["IsActive_PSY"] != DBNull.Value ? Convert.ToBoolean(row["IsActive_PSY"]) : false;
-                    documentPrintData.PrepId = row["DPNID_PSY"]!=DBNull.Value ? Convert.ToInt32(row["DPNID_PSY"]) : 0;
-                    if (row["PrintCount_PSY"] != DBNull.Value)
-                        documentPrintData.printCount = Convert.ToInt16(row["PrintCount_PSY"]);
-                    //documentPrintData. = Convert.ToString(row[DocumentPrintConstants.Template.Trim('@')]);
+                    documentPrintData.Template = row.IsNull(DocumentPrintConstants.Template.Trim('@')) ? string.Empty : Convert.ToString(row[DocumentPrintConstants.Template.Trim('@')]);
+                    documentPrintData.PrintCopy = row.IsNull("PrintCopy_PSY") ? string.Empty : Convert.ToString(row["PrintCopy_PSY"]);
+                    documentPrintData.IsActive = row.IsNull("IsActive_PSY") ? false : Convert.ToBoolean(row["IsActive_PSY"]);
+                    documentPrintData.PrepId = row.IsNull("DPNID_PSY") ? 0 : Convert.ToInt32(row["DPNID_PSY"]);
+                    documentPrintData.printCount = row.IsNull("PrintCount_PSY") ? (short)0 : Convert.ToInt16(row["PrintCount_PSY"]);
+
                     result.Add(documentPrintData);
                 }
             }
@@ -68,6 +66,7 @@ public static class DocumentPrintConverter
             throw;
         }
     }
+
 
     public static DocumentPrint SetDocumentPrint(DataSet dataset)
     {

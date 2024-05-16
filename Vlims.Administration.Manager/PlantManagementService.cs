@@ -88,6 +88,7 @@ namespace Vlims.Administration.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = PlantManagementData.UpdatePlantManagement(plantManagement);
+                    plantManagement.CreatedDate = DateTime.Now;
                     AuditLog.SaveAuditLog(new AuditLogEntity { UserName = plantManagement.CreatedBy, EntityName = plantManagement.PlantName, Type = PlantManagementConstants.PlantType, state = DefinitionStatus.Modify, EntityInfo = plantManagement, Unique = plantManagement.PlantCode });
 
                     return result;
