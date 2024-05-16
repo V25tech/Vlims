@@ -962,7 +962,7 @@ namespace Vlims.Controllers
         {
             DateTime date = DateTime.ParseExact(p_date, "M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             // Format the DateTime object to the desired format
-            string formattedDate = date.ToString("MM/dd/yyyy");
+            string formattedDate = date.ToString("dd/MM/yyyy");
             return formattedDate;
         }
         public static string PrepareHeaderdiv(DocumentTemplateConfiguration Template)
