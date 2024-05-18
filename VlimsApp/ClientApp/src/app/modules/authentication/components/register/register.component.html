@@ -34,6 +34,7 @@
                        name="firstname"
                        placeholder="Enter First Name"
                        [(ngModel)]="adduser.FirstName"
+                       (ngModelChange)="calculateTotalUsers()" 
                        [disabled]="editMode" 
                        pattern="[A-Za-z ]*"
                        maxlength="24"

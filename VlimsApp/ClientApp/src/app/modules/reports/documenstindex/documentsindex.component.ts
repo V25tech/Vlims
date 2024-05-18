@@ -71,6 +71,7 @@ export class DocumentsIndexComponent implements OnInit {
           delete item.status;
           delete item.template;
           delete item.document;
+          delete item.prepId;
           item.effectiveDate = this.commonsvc.setDate(item.effectiveDate);
           item.reviewDate = (item.reviewDate != null || item.reviewDate != 'NA') ? this.commonsvc.setDate(item.reviewDate) : 'NA';
         })
