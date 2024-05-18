@@ -35,9 +35,9 @@ export class DocumentTemplateServiceService {
 
     return this.http.getwithheader("api/documenttemplateconfiguration/getbyId" + "?dTID=" + id, this.type);
   }
-  getTemplate(templte: string, prepId: number, ispdf: boolean = true) {
+  getTemplate(templte: string, prepId: number, isshort:boolean=false ,ispdf: boolean = true) {
     debugger
-    return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&p_user=${this.commonsvc.getUsername()}&p_PrepId=${prepId}&p_isPdf=${ispdf}`, this.type);
+    return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&p_user=${this.commonsvc.getUsername()}&p_PrepId=${prepId}&p_IsShortHeader=${isshort}&p_isPdf=${ispdf}`, this.type);
   }
   isduplicate(templte: string) {
     debugger

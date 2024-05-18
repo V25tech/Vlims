@@ -123,6 +123,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.ReviewedRole = Convert.ToString(row["REVIWEDROLE"]);
                         documentTemplateConfigurationData.PrintCopy = Convert.ToString(row["PrintCopy_PSY"]);
                         documentTemplateConfigurationData.PrintReason = Convert.ToString(row["reason_PSY"]);
+                        documentTemplateConfigurationData.PrintCount = Convert.ToString(row["printCount_PSY"]);
                         documentTemplateConfigurationData.BatchNumber = Convert.ToString(row["BatchNumber"]);
                         documentTemplateConfigurationData.BatchSize = Convert.ToString(row["BatchSize"]);
                         string depts = Convert.ToString(row["PREPAREDDEPT"]);

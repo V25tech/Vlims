@@ -154,6 +154,7 @@ export class ReviewPrepationComponent {
     isworkflow: boolean = false;
     istemplateused: boolean = false;
     isrevision: boolean = false;
+    iscompleteheader:boolean=true;
     clonetemp: DocumentTemplateConfiguration = new DocumentTemplateConfiguration();
     constructor(private location: Location, private router: Router,
         private workitemssvc: WorkitemsService,
@@ -165,7 +166,7 @@ export class ReviewPrepationComponent {
 
     ngOnInit() {
         this.getusers();
-
+        debugger
         const user = localStorage.getItem("username");
         if (user != null && user != undefined) {
             this.commonsvc.createdBy = user;
@@ -216,6 +217,7 @@ export class ReviewPrepationComponent {
         this.spinner.show();
         return this.docPreperationService.getbyId(arg0).subscribe((data: any) => {
             this.preparation = data;
+            debugger
             if (this.preparation.template != '' && this.preparation.template != undefined) {
                 this.istemplate = true;
             }
@@ -238,6 +240,11 @@ export class ReviewPrepationComponent {
     proceed(esign: TemplateRef<any>) {
         // Open the modal
         this.modalRef = this.modalService.show(esign, { class: 'modal-lg' });
+    }
+    viewprint(esign: TemplateRef<any>,viewdoc:TemplateRef<any>) {
+        debugger
+        // Open the modal
+        this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
     }
 
     getusers() {
@@ -439,7 +446,7 @@ export class ReviewPrepationComponent {
             });
         }
     }
-    checkduplicatetemplate(template: TemplateRef<any>) {
+    checkduplicatetemplate(template: TemplateRef<any>,docview: TemplateRef<any>) {
         this.templateService.isduplicate(this.preparation.template).subscribe((data: any) => {
             const isduplicate = Boolean(data);
             // if (isduplicate) {
@@ -447,17 +454,20 @@ export class ReviewPrepationComponent {
             // } else {
             //   this.previewtemplate(template);
             // }
-            this.previewtemplate(template);
+            this.previewtemplate(template,docview);
         })
     }
-    previewtemplate(template: TemplateRef<any>) {
+    previewtemplate(template: TemplateRef<any>,docview: TemplateRef<any>) {
+        if (this.modalRef)
+            this.modalRef.hide();
         this.spinner.show(); let id = 0;
         let obj = this.templatesSource.find(o => o.Templatename === this.preparation.template);
         if (obj != null && obj != undefined) {
             id = parseInt(obj.DTID);
         }
-        this.templateService.getTemplate(this.preparation.template, parseInt(this.preparation.dpnid)).subscribe((data: any) => {
+        this.templateService.getTemplate(this.preparation.template, parseInt(this.preparation.dpnid),this.iscompleteheader).subscribe((data: any) => {
             // this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
+                this.iscompleteheader=true;
             this.fileBytes = data;
             this.pdfBytes = this.fileBytes;
             this.spinner.hide();

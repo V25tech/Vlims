@@ -234,7 +234,7 @@ namespace Vlims.Controllers
         }
 
         [HttpGet("getpdf")]
-        public ActionResult<byte[]> getpdf(string templateinf, string p_user, int p_PrepId, bool p_isPdf = true)
+        public ActionResult<byte[]> getpdf(string templateinf, string p_user, int p_PrepId, bool p_IsShortHeader=false ,bool p_isPdf = true)
         {
 
             byte[] bytes = null; DocumentPreparation preparation = new DocumentPreparation();
@@ -288,8 +288,11 @@ namespace Vlims.Controllers
             StringBuilder headerbuilder = new StringBuilder();
             headerbuilder.Append(htmlUpper);
             var totalPages = document.PageCount - 1;
-
-            if (template.documenttype.Equals("BATCH PACKING RECORD 08", StringComparison.InvariantCultureIgnoreCase))
+            if (!p_IsShortHeader)
+            {
+                headerbuilder.Append(TemplatePreparation.PrepareShortHeader(template, template1, i + 1, preparation,totalPages));
+            }
+            else if (template.documenttype.Equals("BATCH PACKING RECORD 08", StringComparison.InvariantCultureIgnoreCase))
             {
                 headerbuilder.Append(TemplatePreparation.PrepareBMRHeader(template, template1, i + 1, preparation));
             }
@@ -332,6 +335,7 @@ namespace Vlims.Controllers
             Paragraph footerParagraph1 = footer1.AddParagraph();
             footerParagraph1.AppendText("Page No - ");
             footerParagraph1.AppendField("page number", Spire.Doc.FieldType.FieldPage);
+            totalPages = document.PageCount - 1;
             footerParagraph1.AppendText(" of " + totalPages);
 
 
@@ -608,6 +612,10 @@ namespace Vlims.Controllers
             {
                 htmlBuilder.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">Print Reason: {template1.PrintReason}</span>");
             }
+            if (!string.IsNullOrEmpty(template1.PrintReason))
+            {
+                htmlBuilder.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">, Print Count: {template1.PrintCount}</span>");
+            }
             htmlBuilder.AppendLine("</td>");
 
             htmlBuilder.AppendLine("  </tr>");
@@ -719,6 +727,60 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("</tbody>");
             htmlBuilder.AppendLine("</table>");
             table = htmlBuilder.ToString();
+            return table;
+
+        }
+        public static string PrepareShortHeader(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo, DocumentPreparation preparation, int totalPages)
+        {
+            string table = string.Empty;
+            StringBuilder sb = new StringBuilder();
+
+            // Read the contents of the SVG file
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path = Path.Combine(currentDirectory, "Logo", template.header);
+            string footerpath = Path.Combine(currentDirectory, "Logo", template.footer);
+            string dataUri = string.Empty; string dataUri1 = string.Empty;
+            if (System.IO.File.Exists(path))
+            {
+                string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
+                dataUri = $"data:image/jpeg;base64,{base64EncodedImage}";
+            }
+            if (System.IO.File.Exists(footerpath))
+            {
+                string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(footerpath));
+                dataUri1 = $"data:image/jpeg;base64,{base64EncodedImage}";
+            }
+            // Append the style information
+            sb.AppendLine("<style type=\"text/css\">");
+            sb.AppendLine(".tg  {border:none;border-collapse:collapse;border-spacing:0;}");
+            sb.AppendLine(".tg td{border:none;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;");
+            sb.AppendLine("  padding:10px 5px;word-break:normal;}");
+            sb.AppendLine(".tg th{border:none;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;");
+            sb.AppendLine("  overflow:hidden;padding:10px 5px;word-break:normal;}");
+            sb.AppendLine(".tg .tg-ag9c{border-color:#333333;font-family:\"Times New Roman\", Times, serif !important;font-size:14px;font-weight:bold;");
+            sb.AppendLine("  text-align:center;vertical-align:middle}");
+            sb.AppendLine(".tg .tg-6vv4{border-color:#333333;font-family:\"Times New Roman\", Times, serif !important;font-size:14px;font-weight:bold;");
+            sb.AppendLine("  text-align:center;vertical-align:top}");
+            sb.AppendLine(".tg .tg-ao2g{border-color:#333333;text-align:center;vertical-align:top}");
+            sb.AppendLine(".tg .tg-de2y{border-color:#333333;text-align:left;vertical-align:top}");
+            sb.AppendLine("</style>");
+
+            // Append the table
+            sb.AppendLine("<table class=\"tg\">");
+            sb.AppendLine("<thead>");
+            sb.AppendLine("  <tr>");
+            sb.AppendLine($@"<th class=""tg-ao2g""><img src=""{dataUri}"" width=""100"" height=""80"" /></th>");
+            sb.AppendLine("    <th class=\"tg-6vv4\">Vlims Pvt Ltd.</th>");
+            sb.AppendLine($@"<th class=""tg-de2y""><img src=""{dataUri1}"" width=""100"" height=""80"" style=""align:center"" /></th>");
+            sb.AppendLine("  </tr>");
+            sb.AppendLine("</thead>");
+            sb.AppendLine("<tbody>");
+            sb.AppendLine("  <tr>");
+            sb.AppendLine($"    <td class=\"tg-ag9c\" colspan=\"3\">{template1.DocumentTitle}</td>");
+            sb.AppendLine("  </tr>");
+            sb.AppendLine("</tbody>");
+            sb.AppendLine("</table>");
+            table = sb.ToString();
             return table;
 
         }
@@ -960,9 +1022,9 @@ namespace Vlims.Controllers
         }
         public static string getformatteddate(string p_date)
         {
-            DateTime date = DateTime.ParseExact(p_date, "M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            // Format the DateTime object to the desired format
-            string formattedDate = date.ToString("MM/dd/yyyy");
+            DateTime date = DateTime.ParseExact(p_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            // Format the DateTime object to the desired formatt
+            string formattedDate = date.ToString("dd/MM/yyyy");
             return formattedDate;
         }
         public static string PrepareHeaderdiv(DocumentTemplateConfiguration Template)
