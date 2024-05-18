@@ -276,7 +276,7 @@ export class UserConfiguration {
   Department: string = ''
   Role: string = ''
   Doj: string = ''
-  Empid: number = 0;
+  Empid: any | number;
   EmailId: string = ''
   Activedirectory: string = ''
   Standarduser: string = ''

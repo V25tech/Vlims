@@ -168,7 +168,7 @@ export class NewPrintRequestComponent implements OnInit {
 
       this.print.ModifiedBy = this.commonsvc.getUsername();
       this.print.Status = 'Rejected';
-      //this.toastMsg = this.preparation.status;
+      this.toastMsg = this.print.Status;
       this.updateRequest();
       //this.location.back();
 

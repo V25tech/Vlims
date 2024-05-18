@@ -62,7 +62,7 @@
             <p-dropdown [options]="typesDatasource" [(ngModel)]="selectedtype" placeholder="Select Document Type"
                 optionLabel="Documenttypename" id="types" name="types" [autoDisplayFirst]="false" [required]="true" #DocumenttypenameInput="ngModel"   >
              </p-dropdown>
-             <div *ngIf="DocumenttypenameInput.invalid && (DocumenttypenameInput.dirty || DocumenttypenameInput.touched)" class="text-danger">
+             <div *ngIf="!selectedtype && DocumenttypenameInput.invalid && (DocumenttypenameInput.dirty || DocumenttypenameInput.touched)" class="text-danger">
               Document Type is required
             </div>
           </div>
@@ -367,7 +367,7 @@
     <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
     
     <!-- Update Button (visible only in editMode) -->
-    <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid || isButtonDisabled" (click)="addTemplate()">Submit</button>
+    <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid || isButtonDisabled && selectedtype" (click)="addTemplate()">Submit</button>
     <button type="submit" class="btn btn-primary" *ngIf="editMode" (click)="addTemplate()">Update</button>
     
     <!-- Individual Buttons for Approval Actions -->

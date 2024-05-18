@@ -121,7 +121,7 @@ export class AddTemplateComponent implements OnInit {
   id:number=0;
   title:string='New Document Template';
   typesDatasource: DocumentTypeConfiguration[] = [];
-  selectedtype=new DocumentTypeConfiguration();
+  selectedtype:any=null;
   templateForm=new DocumentTemplateConfiguration();
   templatecloneForm=new DocumentTemplateConfiguration();
   grid:DocumentTemplateConfiguration[]=[];

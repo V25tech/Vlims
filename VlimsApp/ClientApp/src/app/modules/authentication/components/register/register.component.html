@@ -154,18 +154,21 @@
           <div class="form-group row">
             <label for="doj" class="col-sm-2 col-form-label">Date of Joining</label>
             <div class="col-sm-10">
-                <input type="date"
-                       class="form-control"
-                       id="doj"
-                       name="doj"
-                       placeholder="Enter DOJ"
-                       [(ngModel)]="adduser.Doj"
-                       [disabled]="viewMode"
-                       [max]="today"
-                       #dojInput="ngModel" />
-                <div *ngIf="dojInput.invalid && (dojInput.dirty || dojInput.touched)" class="text-danger">
-                    DOJ is required
-                </div>
+              <input type="date"
+                     class="form-control"
+                     id="doj"
+                     name="doj"
+                     placeholder="Enter DOJ"
+                     [(ngModel)]="adduser.Doj"
+                     [disabled]="viewMode"
+                     [max]="today"
+                     #dojInput="ngModel" (change)="validateDate(dojInput)" />
+              <div *ngIf="dojInput.invalid && (dojInput.dirty || dojInput.touched)" class="text-danger">
+                DOJ is required
+              </div>
+              <div *ngIf="futureDateError" class="text-danger">
+                Future dates are not allowed.
+              </div>
             </div>
         </div>
         
@@ -228,7 +231,7 @@
         <div class="form-group row my-4">
           <div class="col-sm-10 offset-sm-2">
             <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
-            <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid || isButtonDisabled">Submit</button>
+            <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid || isButtonDisabled || futureDateError">Submit</button>
             <button type="submit" class="btn btn-primary" *ngIf="editMode">Update</button>
           </div>
         </div>

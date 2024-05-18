@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
   userid: string = '';
   //securityInfo: SecurityManagement[] = [];
   securityType: SecurityManagement = new SecurityManagement;
+  futureDateError = false;
   constructor(private commonsvc: CommonService, private rolesservice: RolesconfigurationService,
     private deptservice: DepartmentconfigurationService,
     private userservice: UsersconfigurationService,
@@ -219,7 +220,16 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-  
+  validateDate(dojInput: any) {
+    const selectedDate = new Date(dojInput.value);
+    if (selectedDate > new Date()) {
+      this.futureDateError = true;
+      dojInput.control.setErrors({ 'futureDate': true });
+    } else {
+      this.futureDateError = false;
+      dojInput.control.setErrors(null);
+    }
+  }
 }
 
 
