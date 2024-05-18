@@ -57,6 +57,7 @@ export class ReviewEffectiveComponent {
   effectivedate: Date | undefined;
   reviewdate: Date | undefined;
   isworkflow:boolean=false;
+  iscompleteheader:boolean=true;
   constructor(private location: Location, private router: Router,
     private workitemssvc: WorkitemsService,
     private route: ActivatedRoute,
@@ -311,17 +312,25 @@ export class ReviewEffectiveComponent {
       // } else {
       //   this.previewtemplate(template);
       // }
-      this.previewtemplate(template);
+      //this.previewtemplate(template);
     })
   }
-  previewtemplate(template: TemplateRef<any>) {
+  viewprint(viewdoc:TemplateRef<any>) {
+    debugger
+    // Open the modal
+    this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
+}
+  previewtemplate(template: TemplateRef<any>,viewdoc: TemplateRef<any>) {
     let id = 0;
+    if (this.modalRef)
+      this.modalRef.hide();
     const obj = this.templatesSource.find(o => o.Templatename === this.effective.template);
     if (obj != null && obj != undefined) {
       id = parseInt(obj.DTID);
     }
-    this.templateService.getTemplate(this.effective.template,parseInt(this.effective.documentmanagerid)).subscribe((data: any) => {
+    this.templateService.getTemplate(this.effective.template,parseInt(this.effective.documentmanagerid),this.iscompleteheader).subscribe((data: any) => {
       //this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
+        this.iscompleteheader=true;
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();

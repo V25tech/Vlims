@@ -54,7 +54,7 @@ export class NewPrintRequestComponent implements OnInit {
   isworkflow: boolean = false;
   existingDocumentsList: Array<any> = [];
   selectedPrintTypes: string[] = [];
-
+  iscompleteheader:boolean=true;
   stageSource: any[]=[];
   //selectedStage:PrintType[]=[];
   constructor(private commonsvc: CommonService, private location: Location,
@@ -388,14 +388,17 @@ this.location.back();
       //   this.previewprint(template);
       //   this.UpdatePrintCount();
       // }
-      this.previewprint(template);
+      //this.previewprint(template);
       this.UpdatePrintCount();
     })
   }
-  previewprint(template: TemplateRef<any>) {    
+  previewprint(template: TemplateRef<any>,viewdoc: TemplateRef<any>) {   
+    if (this.modalRef)
+      this.modalRef.hide(); 
     this.spinner.show();    
     //this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
-      this.templatesvc.getTemplate(this.print.template,this.print.prepId).subscribe((data: any) => {
+      this.templatesvc.getTemplate(this.print.template,this.print.prepId,this.iscompleteheader).subscribe((data: any) => {
+        this.iscompleteheader=true;
         //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
           this.pdfBytes = data;
           //this.pdfBytes = this.fileBytes;
@@ -412,7 +415,11 @@ this.location.back();
     //   this.spinner.hide();
     // });
   }
-
+  viewprint(viewdoc:TemplateRef<any>) {
+    debugger
+    // Open the modal
+    this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
+}
 }
 
 

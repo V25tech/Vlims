@@ -323,7 +323,7 @@
               <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
               <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button> -->
               <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
-              <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-success" (click)="checkduplicatetemplate(template)">Preview</button>
+              <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-success" (click)="viewprint(viewdoc)">Preview</button>
             </div>
           </div>
 
@@ -347,6 +347,32 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
   </div>
+</ng-template>
+
+<ng-template #viewdoc>
+  <!-- <div class="modal-dialog" role="document"> -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">View/Print Document</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+         
+          <input type="radio" class="form-radio-input"  id="fullheader" name="fullheader"  [(ngModel)]="iscompleteheader" [value]="true">
+          <label for="username" class="form-label" style="padding-left: 10px;">Complete Header</label>
+        </div>
+        <div class="form-group">
+         
+          <input type="radio" class="form-radio-input" id="fullheader" name="fullheader"  [(ngModel)]="iscompleteheader" [value]="false">
+          <label for="password" style="padding-left: 10px;">Short Header</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalRef!.hide()">Close</button>
+        <button type="button" class="btn btn-success" (click)="previewprint(template,viewdoc)">Submit</button>
+      </div>
+    </div>
+  <!-- </div> -->
 </ng-template>
 
 <style>

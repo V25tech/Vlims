@@ -273,6 +273,7 @@ namespace Vlims.DocumentMaster.Entities
         public string PreparedDate { get; set; }
         public string PrintCopy { get; set; }
         public string PrintReason { get; set; }
+        public string PrintCount { get; set; }
         public string BatchNumber { get; set; }
         public string BatchSize { get; set; }
         public bool IsClone { get; set; }

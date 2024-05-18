@@ -43,6 +43,7 @@ export class DocumentPrintComponent implements OnInit {
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
   userName: string | null = "";
+  iscompleteheader:boolean=true;
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService, 
     private templatesvc:DocumentTemplateServiceService,
     private modalService: BsModalService, private sanitizer: DomSanitizer,
@@ -176,17 +177,28 @@ export class DocumentPrintComponent implements OnInit {
       //   this.previewtemplate(template,objtemp);
       // }
       this.UpdatePrintCount(objtemp);
-      this.previewtemplate(template,objtemp);
+      //this.previewtemplate(template,objtemp);
     })
   }
-  previewtemplate(template: TemplateRef<any>,objtemp: DocumentPrintConfiguration) {    
+  viewprint(viewdoc:TemplateRef<any>,objdoc:DocumentPrintConfiguration) {
+    debugger
+    this.objProductType=objdoc;
+    // Open the modal
+    this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
+}
+  previewtemplate(template: TemplateRef<any>) {    
+    var objtemp=this.objProductType;
+    if (this.modalRef)
+      this.modalRef.hide(); 
     this.spinner.show();
+    //this.UpdatePrintCount(objtemp);
     // this.preparation.template=objtemp.Templatename;
     // this.preparation.CreatedDate=objtemp.CreatedDate;
     // this.preparation.ModifiedDate=objtemp.ModifiedDate;
     // //this.preparation.dpnid = objtemp.
-    this.templatesvc.getTemplate(objtemp.template,objtemp.prepId,true).subscribe((data: any) => {
+    this.templatesvc.getTemplate(objtemp.template,objtemp.prepId,this.iscompleteheader,true).subscribe((data: any) => {
     //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
+      this.iscompleteheader=true;
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();
