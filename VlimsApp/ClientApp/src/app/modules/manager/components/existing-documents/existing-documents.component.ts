@@ -5,7 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Paginator } from 'primeng/paginator';
-import { RequestContext1 } from '../../../../models/model';
+import { DocumentPrintConfiguration, RequestContext1 } from '../../../../models/model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
@@ -31,7 +31,8 @@ export class ExistingDocumentsComponent implements OnInit {
   pdfUrl: string | null = null;
   modalRef: BsModalRef | undefined;
   daterev: string | null | undefined;
-
+  iscompleteheader:boolean=true;
+  objexisting:any;
   constructor(private router: Router, private activate:ActivatedRoute, private spinner: NgxSpinnerService, private commonsvc: CommonService, private existdocService: ExistingDocumentsService
       ,private templatesvc:DocumentTemplateServiceService
     , private modalService: BsModalService, private sanitizer: DomSanitizer) {
@@ -89,18 +90,27 @@ export class ExistingDocumentsComponent implements OnInit {
   //     }
   //   })
   // }
-  previewDocument(template: TemplateRef<any>, docInfo: any) {
-    if (docInfo.entityName.toLowerCase() == 'new document') {
-      this.previewRevisionDocument(template, docInfo,true)
+  previewDocument(template: TemplateRef<any>) {
+    debugger
+    if (this.modalRef)
+      this.modalRef.hide(); 
+    if (this.objexisting.entityName.toLowerCase() == 'new document') {
+      this.previewRevisionDocument(template, this.objexisting,true)
     } else {
-      this.previewtemplate(template, docInfo);
+      this.previewtemplate(template);
     }
   }
+  viewprint(viewdoc:TemplateRef<any>,objdoc:any) {
+    debugger
+    // Open the modal
+    this.objexisting=objdoc;
+    this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
+}
 
-  previewtemplate(template: TemplateRef<any>, docInfo: any): void {
+  previewtemplate(template: TemplateRef<any>): void {
     this.spinner.show();
-    docInfo.edrId = docInfo.id;
-    this.existdocService.preview(docInfo).subscribe((data: any) => {
+    this.objexisting.edrId = this.objexisting.id;
+    this.existdocService.preview(this.objexisting).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template,false);
@@ -156,7 +166,8 @@ export class ExistingDocumentsComponent implements OnInit {
   }
   previewRevisionDocument(template: TemplateRef<any>, docInfo: any,istempcont:boolean) {
     this.spinner.show();
-    this.existdocService.getTemplate(docInfo.template,docInfo.prepId).subscribe((data: any) => {
+    this.existdocService.getTemplate(docInfo.template,docInfo.prepId,this.iscompleteheader).subscribe((data: any) => {
+      this.iscompleteheader=true;
       this.pdfBytes = data;
       this.spinner.hide();
       this.openViewer(template,istempcont);

@@ -42,6 +42,7 @@ export class ReviewRevisionComponent {
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
   entityName: string|null = null;
+  iscompleteheader:boolean=true;
   constructor(private router: Router, private location: Location, private toastr: ToastrService, private route: ActivatedRoute,
     private spinner: NgxSpinnerService, private commonsvc: CommonService,
     private workitemssvc: WorkitemsService,
@@ -266,20 +267,28 @@ export class ReviewRevisionComponent {
       this.spinner.hide();
     });
   }
+  viewprint(viewdoc:TemplateRef<any>) {
+    debugger
+    // Open the modal
+    this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
+}
   checkduplicatetemplate(template: TemplateRef<any>){
     this.templateService.isduplicate(this.revision.template).subscribe((data:any)=>{
       const isduplicate=Boolean(data);
       if(isduplicate){
         this.toastr.error('Template used in multiple preparations unable to view document');
       }else{
-        this.previewtemplate(template);
+        //this.previewtemplate(template);
       }
     })
   }
   previewtemplate(template: TemplateRef<any>) {
     this.spinner.show();
-    this.templateService.getTemplate(this.revision.template,this.revision.prepId).subscribe((data: any) => {
+    if (this.modalRef)
+      this.modalRef.hide();
+    this.templateService.getTemplate(this.revision.template,this.revision.prepId,this.iscompleteheader).subscribe((data: any) => {
     //this.docPreperationService.preview(this.revision.template).subscribe((data: any) => {
+      this.iscompleteheader=true;
       this.fileBytes = data;
       this.pdfBytes = this.fileBytes;
       this.spinner.hide();

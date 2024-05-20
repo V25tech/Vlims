@@ -20,7 +20,7 @@ export class ExistingDocumentsService {
   preview(objrequest: ExistingDocumentRequest) {
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/preview", this.type);
   }
-  getTemplate(templte: string, p_PrepId:number,ispdf: boolean = true, type = 'master') {
-    return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&p_user=${this.commonsvc.getUsername()}&p_PrepId=${p_PrepId}&p_isPdf=${ispdf}`, type);
+  getTemplate(templte: string, p_PrepId:number,isshort:boolean,ispdf: boolean = true, type = 'master') {
+    return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&p_user=${this.commonsvc.getUsername()}&p_PrepId=${p_PrepId}&p_IsShortHeader=${isshort}&p_isPdf=${ispdf}`, type);
   }
 }
