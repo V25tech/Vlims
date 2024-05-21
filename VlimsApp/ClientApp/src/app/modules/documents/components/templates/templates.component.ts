@@ -175,6 +175,7 @@ export class TemplatesComponent {
         return;
       }
     else{
+      debugger
       let count = this.types.length;
       count++;
       temp.Uniquecode=="Temp "+count;

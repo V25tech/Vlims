@@ -155,14 +155,16 @@ export class CommonService {
     const currentTime = Date.now();
     return currentTime >= sessionTimeout;
   }
-  setDate(date: any) {
-    if (date == undefined || date == null || date == '')
-      return '';
-
-    let dp = new DatePipe(navigator.language);
-    let l_date = dp.transform(date, 'dd/MM/yyyy', navigator.language);
-    return l_date;
+  setDate(date: any): string {
+    if (!date || typeof date !== 'string') {
+      return ''; // Return empty string if date is undefined, null, or not a string
+    }
+  
+    const dp = new DatePipe(navigator.language);
+    const formattedDate = dp.transform(date, 'dd/MM/yyyy', navigator.language);
+    return formattedDate || ''; // Return formatted date or empty string if transformation fails
   }
+  
   setUserPermissions() {
     this.userEntityPermissions$.subscribe(data => {
       if (data != null) {

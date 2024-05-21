@@ -702,7 +702,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Effective Date</td>");
             if (template1 != null && !string.IsNullOrEmpty(template1.EffectiveDate))
             {
-                string formatteddate = getformatteddate(template1.EffectiveDate);
+                string formatteddate = template1.EffectiveDate.Replace('-', '/');//.getformatteddate(template1.EffectiveDate);
                 htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{formatteddate}</td>");
             }
             else
@@ -716,7 +716,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Review Date</td>");
             if (template1 != null && !string.IsNullOrEmpty(template1.ReviewDate))
             {
-                string formatteddate = getformatteddate(template1.ReviewDate);
+                string formatteddate = template1.ReviewDate.Replace('-', '/');//getformatteddate(template1.ReviewDate);
                 htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{formatteddate}</td>");
             }
             else
@@ -1023,7 +1023,7 @@ namespace Vlims.Controllers
         }
         public static string getformatteddate(string p_date)
         {
-            DateTime date = DateTime.ParseExact(p_date, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime date = DateTime.ParseExact(p_date, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             // Format the DateTime object to the desired formatt
             string formattedDate = date.ToString("dd/MM/yyyy");
             return formattedDate;

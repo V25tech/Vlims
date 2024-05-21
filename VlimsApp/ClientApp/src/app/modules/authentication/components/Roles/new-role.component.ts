@@ -142,7 +142,7 @@ console.log('dept',this.types);
   }
   onCancel() {
     // Reset the addrole object to clear all fields
-    this.addrole = new RoleConfiguration();
+    this.location.back();
   }
   getbyId(id:number) {
     

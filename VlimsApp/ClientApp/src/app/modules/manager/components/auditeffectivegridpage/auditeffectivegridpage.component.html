@@ -28,7 +28,7 @@
         <div class="col">
             <div class="p-4 bg-white shadow-dark rounded-2">
                 <p-table #templatesTable [value]="types" 
-                [globalFilterFields]="['Documenttypename', 'documenttypeprefix', 'Description','ModifiedBy','Status']"
+                [globalFilterFields]="['EntityInfo.documentno', 'EntityInfo.documenttitle', 'Description','EntityInfo.CreatedDate','Status']"
                 tableStyleClass="table table-striped"
                 [rows]="itemsPerPage"
                 [paginator]="true" 
@@ -39,14 +39,14 @@
                         <tr>
                             <th>S.No</th>
                             <th pSortableColumn="EntityName" style="width:20%">Effective Date<p-sortIcon field="Entity Name"></p-sortIcon></th>
-                            <th pSortableColumn="EntityName" style="width:20%">Document Number<p-sortIcon field="Entity Name"></p-sortIcon></th>
-                            <th pSortableColumn="EntityName" style="width:20%">Document Title<p-sortIcon field="Entity Name"></p-sortIcon></th>
+                            <th pSortableColumn="EntityInfo.documentno" style="width:20%">Document Number<p-sortIcon field="EntityInfo.documentno"></p-sortIcon></th>
+                            <th pSortableColumn="EntityInfo.documenttitle" style="width:20%">Document Title<p-sortIcon field="EntityInfo.documenttitle"></p-sortIcon></th>
                             
                              <!-- <th pSortableColumn="EntityName" style="width:20%">Review Date<p-sortIcon field="Entity Name"></p-sortIcon></th> -->
                              <!-- <th pSortableColumn="Message" style="width:10%">Message<p-sortIcon field="Message"></p-sortIcon> </th>
                              <th pSortableColumn="Type" style="width:15%">Type<p-sortIcon field="Type"></p-sortIcon></th> -->
-                             <th pSortableColumn="UserName" style="width:20%">Initiated By<p-sortIcon field="User Name"></p-sortIcon></th>
-                              <th pSortableColumn="ModifiedDate" style="width:1n00px">Initiated On<p-sortIcon field="ModifiedDate"></p-sortIcon></th>
+                             <th pSortableColumn="UserName" style="width:20%">Initiated By</th>
+                              <th pSortableColumn="EntityInfo.CreatedDate" style="width:1n00px">Initiated On<p-sortIcon field="EntityInfo.CreatedDate"></p-sortIcon></th>
     
                         </tr>
                     </ng-template>

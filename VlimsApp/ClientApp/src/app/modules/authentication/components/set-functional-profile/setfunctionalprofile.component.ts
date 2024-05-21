@@ -27,6 +27,17 @@ export class SetfunctionalprofileComponent implements OnInit {
   editMode: boolean = false;
   viewMode: boolean = false;
   access: boolean = false;
+  selectAllDocumentMasterChecked: boolean = false; 
+  selectAllDocumentManagerChecked: boolean = false;
+  selectAllWorkAssignedChecked: boolean = false; 
+  selectAllusermanagementchecked: boolean = false; 
+  stateselectAllhierarachychecked: boolean = false; 
+  stateselectAllplantarachychecked: boolean = false; 
+
+
+
+
+
   constructor(private commonsvc: CommonService, private doctypeservice: RolesconfigurationService,
     private setprofileservice: setfunctionalprofileconfigurationservice,
     private toaster: ToastrService,
@@ -109,4 +120,138 @@ export class SetfunctionalprofileComponent implements OnInit {
   onCancel() {
     this.location.back();
   }
+
+  selectAllDocumentMaster(event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.selectAllDocumentMasterChecked = checked;
+    
+    if (checked) {
+     
+       this.profile.documentTypeConfig = true;
+       this.profile.documentTemplateConfig = true;
+       this.profile.workflowConfig = true;
+    } else {
+      
+      this.profile.documentTypeConfig = false;
+       this.profile.documentTemplateConfig = false;
+       this.profile.workflowConfig = false;
+    }
+  }
+
+
+
+  selectAllDocumentManager(event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.selectAllDocumentMasterChecked = checked;
+   
+    if (checked) {
+      
+       this.profile.documentRequest = true;
+       this.profile.documentPreperation = true;
+       this.profile.documentEffective = true;
+       this.profile.additionalTasks = true;
+       this.profile.downloadPrint = true;
+       this.profile.docrepository = true;
+
+    } else {
+     
+      this.profile.documentRequest = false;
+      this.profile.documentPreperation = false;
+      this.profile.documentEffective = false;
+      this.profile.additionalTasks = false;
+      this.profile.downloadPrint = false;
+      this.profile.docrepository = false;
+
+      
+    }
+  }
+
+
+
+  selectAllWorkAssigned(event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.selectAllDocumentMasterChecked = checked;
+    
+    if (checked) {
+       this.profile.documentTypeConfig = true;
+       
+    } else {
+      this.profile.documentTypeConfig = false;
+      
+    }
+  }
+
+
+
+  selectAllusermanagement(event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.selectAllusermanagementchecked = checked;
+   
+    if (checked) {
+       this.profile.userMgmt = true;
+       this.profile.Activatestatus = true;
+       
+    } else {
+      this.profile.userMgmt = false;
+      this.profile.Activatestatus = false;
+      
+    }
+  }
+
+
+
+  selectAllhierarachy(event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.stateselectAllhierarachychecked = checked;
+   
+    if (checked) {
+       this.profile.roleConfig = true;
+       this.profile.deptConfig = true;
+       
+    } else {
+      this.profile.roleConfig = false;
+      this.profile.deptConfig = false;
+      
+    }
+  }
+
+  selectAllplantarachy(event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.stateselectAllplantarachychecked = checked;
+    if (checked) {
+       this.profile.plantMgmt = true;
+    } else {
+      this.profile.plantMgmt = false;
+    }
+  }
+
+
+
+  workassigned(event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.stateselectAllplantarachychecked = checked;
+   
+    if (checked) {
+       this.profile.workItemsassigned = true;
+    } else {
+      this.profile.workItemsassigned = false;
+    }
+  }
+
+
+
+  adminmanagement(event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.stateselectAllplantarachychecked = checked;
+    if (checked) {
+       this.profile.securityMgmt = true;
+    } else {
+      this.profile.securityMgmt = false;
+     
+      
+    }
+  }
+
+
+  
 }

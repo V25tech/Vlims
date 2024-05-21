@@ -120,15 +120,11 @@ export class ReviewEffectiveComponent {
 
 
 
-  getusers() {
-     
+  getusers() { 
     let objrequest = new RequestContext();
     objrequest.PageNumber = 1; objrequest.PageSize = 50;
     return this.userssvc.getusers(objrequest).subscribe((data: any) => {
       this.lstusers = data.Response;
-      //localStorage.setItem("lstusers", this.lstusers.);
-
-
     });
   }
 

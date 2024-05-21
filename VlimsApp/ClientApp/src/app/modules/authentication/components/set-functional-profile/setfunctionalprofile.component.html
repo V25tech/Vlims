@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-qv0Mmr8bb7ZPm/e0Vv0V2JNkz9q8Mtgd3n8iFqykLtpd67zFMzvWq0a30stwGWmV" crossorigin="anonymous"></script>
 <body>
 
   <div class="container-fluid">
@@ -47,112 +48,163 @@
 
 
 
-    <div class="accordion" id="adminAccordion" style="margin-bottom: 20px;">
+    <div class="accordion" id="documentMasterAccordion" style="margin-bottom: 20px;">
       <div class="accordion-item">
-        <h2 class="accordion-header" id="newAccordionHeader">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#newAccordionCollapse" aria-expanded="true" aria-controls="newAccordionCollapse">
-            <span style="font-weight: bold; color: #333;">Work Assigned</span>
+        <h2 class="accordion-header" id="documentMasterHeader">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
+            Work Assigned
           </button>
         </h2>
-        <div id="newAccordionCollapse" class="accordion-collapse collapse show" aria-labelledby="newAccordionHeader" data-bs-parent="#newAccordion">
+        <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
           <div class="accordion-body">
-            <div class="form-group row">
-              <label for="workItemsassigned" class="col-sm-2 col-form-label">Work assigned to Me</label>
-              <div class="col-sm-1">
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="selectAllDocumentMaster" (change)="workassigned($event)">
+                <label class="form-check-label" for="selectAllDocumentMaster">Select All</label>
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="workItemsassigned" name="workItemsassigned" [(ngModel)]="profile.workItemsassigned" [disabled]="viewMode" />
+                <label for="userConfig" class="form-check-label">Work assigned to Me</label>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     
-    
-    <div class="accordion" id="adminAccordion" style="margin-bottom: 20px;">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="adminManagementHeader">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#adminManagementCollapse" aria-expanded="true" aria-controls="adminManagementCollapse">
            
-            <span style="font-weight: bold; color: #333;">Admin Management</span>
-          </button>
-        </h2>
-        <div id="adminManagementCollapse" class="accordion-collapse collapse show" aria-labelledby="adminManagementHeader" data-bs-parent="#adminAccordion">
-          <div class="accordion-body">
-            <div class="form-group row">
-              <label for="securityMgmt" class="col-sm-2 col-form-label">Security Management</label>
-              <div class="col-sm-1">
-                <input type="checkbox" class="form-check-input" id="securityMgmt" name="securityMgmt" [(ngModel)]="profile.securityMgmt" [disabled]="viewMode" />
-              </div>
-              <!-- <label for="securityConfig" class="col-sm-2 col-form-label">Security Configurations</label>
-              <div class="col-sm-1">
-                <input type="checkbox" class="form-check-input" id="securityConfig" name="securityConfig" [(ngModel)]="profile.securityConfig" [disabled]="viewMode" />
-              </div>
-              <label for="approvalConfigs" class="col-sm-2 col-form-label">E sign and Approval Configurations</label>
-              <div class="col-sm-1">
-                <input type="checkbox" class="form-check-input" id="approvalConfigs" name="approvalConfigs" [(ngModel)]="profile.approvalConfigs" [disabled]="viewMode" />
-              </div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     
-
-
-
-
-
-
-
-
-    <div class="accordion" id="adminAccordion" style="margin-bottom: 20px;">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="hierarchyManagementHeader">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#hierarchyManagementCollapse" aria-expanded="true" aria-controls="hierarchyManagementCollapse">         
-            <span style="font-weight: bold; color: #333;">Hirearchy Management</span>
-          </button>
-        </h2>
-        <div id="hierarchyManagementCollapse" class="accordion-collapse collapse show" aria-labelledby="hierarchyManagementHeader" data-bs-parent="#hierarchyAccordion">
-          <div class="accordion-body">
-            <div class="form-group row">
-              <label for="roleConfig" class="col-sm-2 col-form-label">Role Configuration</label>
-              <div class="col-sm-1">
-                <input type="checkbox" class="form-check-input" id="roleConfig" name="roleConfig" [(ngModel)]="profile.roleConfig" [disabled]="viewMode" />
-              </div>
-              <label for="deptConfig" class="col-sm-2 col-form-label">Department Configuration</label>
-              <div class="col-sm-1">
-                <input type="checkbox" class="form-check-input" id="deptConfig" name="deptConfig" [(ngModel)]="profile.deptConfig" [disabled]="viewMode" />
-              </div>
-              <label for="setFunctionalprofile" class="col-sm-2 col-form-label">Set Functional Profile</label>
-              <div class="col-sm-1">
-                <input type="checkbox" class="form-check-input" id="setFunctionalprofile" name="setFunctionalprofile" [disabled]="viewMode" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-
-
-
-
-
-
-    <div class="accordion" id="adminAccordion" style="margin-bottom: 20px;">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="plantConfigurationHeader">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#plantConfigurationCollapse" aria-expanded="true" aria-controls="plantConfigurationCollapse">
             
-            <span style="font-weight: bold; color: #333;">Plant Configuration</span>
+    
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    
+    
+   
+    <div class="accordion" id="documentMasterAccordion" style="margin-bottom: 20px;">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="documentMasterHeader">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
+            Admin Management
           </button>
         </h2>
-        <div id="plantConfigurationCollapse" class="accordion-collapse collapse show" aria-labelledby="plantConfigurationHeader" data-bs-parent="#plantConfigurationAccordion">
+        <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
           <div class="accordion-body">
-            <div class="form-group row">
-              <label for="plantMgmt" class="col-sm-2 col-form-label">Plant Management</label>
-              <div class="col-sm-10">
+            <div class="form-group">
+               <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="selectAllDocumentMaster" (change)="adminmanagement($event)">
+                <label class="form-check-label" for="selectAllDocumentMaster">Select All</label> 
+              </div>
+            </div> 
+    
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="securityMgmt" name="securityMgmt" [(ngModel)]="profile.securityMgmt" [disabled]="viewMode" />
+                <label for="userConfig" class="form-check-label">Security Configurations</label>
+              </div>
+            </div>
+    
+           
+    
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <div class="accordion" id="documentMasterAccordion" style="margin-bottom: 20px;">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="documentMasterHeader">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
+            Hirearchy Management
+          </button>
+        </h2>
+        <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
+          <div class="accordion-body">
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="selectAllDocumentMaster" (change)="selectAllhierarachy($event)">
+                <label class="form-check-label" for="selectAllDocumentMaster">Select All</label>
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="roleConfig" name="roleConfig" [(ngModel)]="profile.roleConfig" [disabled]="viewMode" />
+                <label for="userConfig" class="form-check-label">Role Configuration</label>
+                
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="deptConfig" name="deptConfig" [(ngModel)]="profile.deptConfig" [disabled]="viewMode" />
+                <label for="Activate" class="form-check-label">Department Configuration</label>
+              </div>
+            </div>
+    
+
+             <!-- <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="setFunctionalprofile" [(ngModel)]="profile.adminMgmt"   name="setFunctionalprofile" [disabled]="viewMode" />
+                <label for="Activate" class="form-check-label">Set Functional Profile</label>
+              </div>
+            </div> 
+     -->
+
+            
+    
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    
+
+
+
+
+
+
+    
+    <div class="accordion" id="documentMasterAccordion" style="margin-bottom: 20px;">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="documentMasterHeader">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
+            Plant Configuration
+          </button>
+        </h2>
+        <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
+          <div class="accordion-body">
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="selectAllDocumentMaster" (change)="selectAllplantarachy($event)">
+                <label class="form-check-label" for="selectAllDocumentMaster">Select All</label>
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <div class="form-check">
                 <input
                   type="checkbox"
                   class="form-check-input"
@@ -161,8 +213,10 @@
                   placeholder=""
                   [(ngModel)]="profile.plantMgmt" [disabled]="viewMode"
                 />
+                <label for="userConfig" class="form-check-label">Plant Management</label>
               </div>
             </div>
+    
           </div>
         </div>
       </div>
@@ -172,76 +226,93 @@
 
 
 
-      <div class="accordion" id="adminAccordion" style="margin-bottom: 20px;">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="userManagementHeader">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#userManagementCollapse" aria-expanded="true" aria-controls="userManagementCollapse">
-              
-              <span style="font-weight: bold; color: #333;">User Management</span>
-            </button>
-          </h2>
-          <div id="userManagementCollapse" class="accordion-collapse collapse show" aria-labelledby="userManagementHeader" data-bs-parent="#userManagementAccordion">
-            <div class="accordion-body">
-              <div class="form-group row">
-                <label for="userConfig" class="col-sm-2 col-form-label">User Configuration</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="userConfig" name="userConfig" [(ngModel)]="profile.userMgmt" [disabled]="viewMode" />
-                </div>
-                <label for="Activate" class="col-sm-2 col-form-label">Activate/De-Activate User</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="Activate" name="Activate" [(ngModel)]="profile.Activatestatus" [disabled]="viewMode" />
-                </div>
-                <!-- <label for="userGroupConfig" class="col-sm-2 col-form-label">User Group Configuration</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="userGroupConfig" name="userGroupConfig" [(ngModel)]="profile.userGroupConfig" [disabled]="viewMode" />
-                </div>
-                <label for="Audit" class="col-sm-2 col-form-label">Audit Log</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="Audit" name="Audit" [(ngModel)]="profile.Audit" [disabled]="viewMode" />
-                </div> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       
 
 
 
 
 
-      <div class="accordion" id="adminAccordion" style="margin-bottom: 20px;">
+
+      <div class="accordion" id="documentMasterAccordion" style="margin-bottom: 20px;">
         <div class="accordion-item">
           <h2 class="accordion-header" id="documentMasterHeader">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
-              
-              <span style="font-weight: bold; color: #333;">Document Master</span>
+              User Management
             </button>
           </h2>
           <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
             <div class="accordion-body">
-              <div class="form-group row">
-                <label for="documentTypeConfig" class="col-sm-2 col-form-label">Document Type Configuration</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="documentTypeConfig" name="documentTypeConfig" [(ngModel)]="profile.documentTypeConfig" [disabled]="viewMode" />
+              <div class="form-group">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="selectAllDocumentMaster" (change)="selectAllusermanagement($event)">
+                  <label class="form-check-label" for="selectAllDocumentMaster">Select All</label>
                 </div>
-                <label for="documentTemplateConfig" class="col-sm-2 col-form-label">Document Template Configuration</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="documentTemplateConfig" name="documentTemplateConfig" [(ngModel)]="profile.documentTemplateConfig" [disabled]="viewMode" />
-                </div>
-                <label for="workflowConfig" class="col-sm-2 col-form-label">Workflow Configuration</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="workflowConfig" name="workflowConfig" [(ngModel)]="profile.workflowConfig" [disabled]="viewMode" />
-                </div>
-                <!-- <label for="dashboardConfig" class="col-sm-2 col-form-label">Dashboard Configuration</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="dashboardConfig" name="dashboardConfig" [(ngModel)]="profile.dashboardConfig" [disabled]="viewMode" />
-                </div>
-                <label for="notificationConfig" class="col-sm-2 col-form-label">Notification Configuration</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="notificationConfig" name="notificationConfig" [(ngModel)]="profile.notificationConfig" [disabled]="viewMode" />
-                </div> -->
               </div>
+      
+              <div class="form-group">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="userConfig" name="userConfig" [(ngModel)]="profile.userMgmt" [disabled]="viewMode" />
+                  <label for="userConfig" class="form-check-label">User Configuration</label>
+                </div>
+              </div>
+      
+              <div class="form-group">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="Activate" name="Activate" [(ngModel)]="profile.Activatestatus" [disabled]="viewMode" />
+                  <label for="Activate" class="form-check-label">Activate/De-Activate User</label>
+                </div>
+              </div>
+      
+              
+      
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
+
+
+
+      <div class="accordion" id="documentMasterAccordion" style="margin-bottom: 20px;">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="documentMasterHeader">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
+              Document Master
+            </button>
+          </h2>
+          <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
+            <div class="accordion-body">
+              <div class="form-group">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="selectAllDocumentMaster" (change)="selectAllDocumentMaster($event)">
+                  <label class="form-check-label" for="selectAllDocumentMaster">Select All</label>
+                </div>
+              </div>
+      
+              <div class="form-group">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="documentTypeConfig" name="documentTypeConfig" [(ngModel)]="profile.documentTypeConfig" [disabled]="viewMode" />
+                  <label for="documentTypeConfig" class="form-check-label">Document Type Configuration</label>
+                </div>
+              </div>
+      
+              <div class="form-group">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="documentTemplateConfig" name="documentTemplateConfig" [(ngModel)]="profile.documentTemplateConfig" [disabled]="viewMode" />
+                  <label for="documentTemplateConfig" class="form-check-label">Document Template Configuration</label>
+                </div>
+              </div>
+      
+              <div class="form-group">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="workflowConfig" name="workflowConfig" [(ngModel)]="profile.workflowConfig" [disabled]="viewMode" />
+                  <label for="workflowConfig" class="form-check-label">Workflow Configuration</label>
+                </div>
+              </div>
+      
             </div>
           </div>
         </div>
@@ -254,52 +325,95 @@
 
 
 
+    
 
 
-      <div class="accordion" id="documentManagerAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="documentManagerHeader">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentManagerCollapse" aria-expanded="true" aria-controls="documentManagerCollapse">
-              
-              <span style="font-weight: bold; color: #333;">Document Manager</span>
-            </button>
-          </h2>
-          <div id="documentManagerCollapse" class="accordion-collapse collapse show" aria-labelledby="documentManagerHeader" data-bs-parent="#documentManagerAccordion">
-            <div class="accordion-body">
-              <div class="form-group row">
-                <label for="documentRequest" class="col-sm-2 col-form-label">Document Request</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="documentRequest" name="documentRequest" [(ngModel)]="profile.documentRequest" [disabled]="viewMode" />
-                </div>
-                <label for="documentpreparation" class="col-sm-2 col-form-label">Document Preparation</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="documentpreparation" name="documentpreparation" [(ngModel)]="profile.documentPreperation" [disabled]="viewMode" />
-                </div>
-                <label for="documentEffective" class="col-sm-2 col-form-label">Document Effective</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="documentEffective" name="documentEffective" [(ngModel)]="profile.documentEffective" [disabled]="viewMode" />
-                </div>
-                
-                <label for="documentRevison" class="col-sm-2 col-form-label">Document Revision</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="documentRevison" name="documentRevison" [(ngModel)]="profile.documentRevison" [disabled]="viewMode" />
-                </div>
-                <label for="downloadPrint" class="col-sm-2 col-form-label">Document Print</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="downloadPrint" name="downloadPrint" [(ngModel)]="profile.downloadPrint" [disabled]="viewMode" />
-                </div>
-                <label for="docrepository" class="col-sm-2 col-form-label">Existing Document Request</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-check-input" id="docrepository" name="docrepository" [(ngModel)]="profile.docrepository" [disabled]="viewMode" />
-                </div>
-                
-               
-              </div>
-            </div>
+
+ 
+ 
+  <div class="accordion" id="documentManagerAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="documentManagerHeader">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentManagerCollapse" aria-expanded="true" aria-controls="documentManagerCollapse">
+        <span style="font-weight: bold; color: #333;">Document Manager</span>
+      </button>
+    </h2>
+    <div id="documentManagerCollapse" class="accordion-collapse collapse show" aria-labelledby="documentManagerHeader" data-bs-parent="#documentManagerAccordion">
+      <div class="accordion-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="selectAllDocumentManager" (change)="selectAllDocumentManager($event)">
+            <label class="form-check-label" for="selectAllDocumentManager">Select All</label>
           </div>
         </div>
-      </div>
 
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="documentpreparation" name="documentRequest" [(ngModel)]="profile.documentRequest" [disabled]="viewMode" />
+            <label for="documentRequest" class="form-check-label">Document Request</label>
+          </div>
+        </div>
+
+
+
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="documentpreparation" name="documentpreparation" [(ngModel)]="profile.documentPreperation" [disabled]="viewMode" />            
+            <label for="documentpreparation" class="form-check-label">Document Preparation</label>
+          </div>
+        </div>
+
+     
+
+     
+
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="documentEffective" name="documentEffective" [(ngModel)]="profile.documentEffective" [disabled]="viewMode" />         
+            <label for="documentEffective" class="form-check-label">Document Effective</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-check">
+
+            <input type="checkbox" class="form-check-input" id="documentRevison" name="documentRevison" [(ngModel)]="profile.additionalTasks" [disabled]="viewMode" />            
+            <label for="documentRevison" class="form-check-label">Document Revision</label>
+          </div>
+        </div>
+
+
+     
+
+
+        <div class="form-group">
+          <div class="form-check">
+
+            <input type="checkbox" class="form-check-input" id="downloadPrint" name="downloadPrint" [(ngModel)]="profile.downloadPrint" [disabled]="viewMode" />            
+            <label for="downloadPrint" class="form-check-label">Document Print</label>
+
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="form-check">
+
+            <input type="checkbox" class="form-check-input" id="docrepository" name="docrepository" [(ngModel)]="profile.docrepository" [disabled]="viewMode" /> 
+            <label for="docrepository" class="form-check-label">Existing Document Request</label>
+
+          </div>
+        </div>
+
+
+
+
+        <!-- Add other checkboxes for Document Preparation, Document Effective, etc. following the same pattern -->
+
+      </div>
+    </div>
+  </div>
+</div>
 
       
       

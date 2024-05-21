@@ -39,10 +39,9 @@ export class AuditusermanagementgridpageComponent {
     this.loader.show();
   
     this.commonsvc.req.type="UserType"
-       return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
-     
-         
+       return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {    
         this.types = this.removeDuplicates(data, 'Unique'); 
+        this.types.reverse(); // Reverse the array here
          this.loader.hide();
        }, er => {
          this.loader.hide();

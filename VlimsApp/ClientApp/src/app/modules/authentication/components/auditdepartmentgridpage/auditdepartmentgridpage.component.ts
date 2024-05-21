@@ -43,6 +43,7 @@ export class AuditdepartmentgridpageComponent {
        
          
         this.types = this.removeDuplicates(data, 'Unique'); 
+        this.types.reverse(); // Reverse the array here
          this.loader.hide();
        }, er => {
          this.loader.hide();

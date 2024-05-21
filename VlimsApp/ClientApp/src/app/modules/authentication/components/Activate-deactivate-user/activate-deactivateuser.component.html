@@ -29,7 +29,7 @@
           <div class="p-4 bg-white shadow-dark rounded-2">
             <p-table #templatesTable
              [value]="types" 
-             [globalFilterFields]="['username', 'UserId', 'Role','Department','Status','RegisteredOn']"
+             [globalFilterFields]="['UserID', 'UserID', 'Role','Department','Status','RegisteredOn']"
              tableStyleClass="table table-striped" [rows]="itemsPerPage"
              [paginator]="true" [totalRecords]="types.length"
              [rowsPerPageOptions]="rowsPerPageOptions" [(first)]="currentPage">
@@ -37,8 +37,8 @@
                 <tr>
                   <th>S.No</th>
                   <!-- <th pSortableColumn="S.no" style="width:20%">S No<p-sortIcon field="sno"></p-sortIcon></th> -->
-                  <th pSortableColumn="username" style="width:10%">User Name<p-sortIcon field="username"></p-sortIcon></th>
-                  <th pSortableColumn="UserId" style="width:15%">User ID<p-sortIcon field="UserId"></p-sortIcon></th>
+                  <th pSortableColumn="UserID" style="width:10%">User Name<p-sortIcon field="UserID"></p-sortIcon></th>
+                  <th pSortableColumn="UserId" style="width:15%">User ID</th>
                   <th pSortableColumn="Role" style="width:20%">Role<p-sortIcon field="Role"></p-sortIcon></th>
                   <th pSortableColumn="Department" style="width:200px">Department <p-sortIcon field="Department"></p-sortIcon></th>
                   <th pSortableColumn="RegisteredOn" style="width:200px">Registered On <p-sortIcon field="RegisteredOn"></p-sortIcon></th>

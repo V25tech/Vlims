@@ -39,7 +39,7 @@ export class ExistingDocumentsComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.access = this.commonsvc.getUserRoles()?.docrepository ?? false;
+    this.access = this.commonsvc.getUserRoles()?.additionalTasks ?? false;
     this.getExistingDocuments();
   }
   getExistingDocuments() {

@@ -18,7 +18,7 @@
 
 
           <div *ngIf="!editMode"  class="form-group row">
-            <label for="reviewsType" class="col-sm-2 col-form-label">Print</label>
+            <label for="reviewsType" class="col-sm-2 col-form-label">Existing Document Upload</label>
             <div class="col-sm-10">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" name="reviewsType1" type="radio" id="reviewsType2" value="single"
@@ -113,7 +113,7 @@
             </div>
 
             <div class="form-group row">
-              <label for="document" class="col-sm-2 col-form-label">Browse Document</label>
+              <label for="document" class="col-sm-2 col-form-label">Browse Document (PDF)</label>
               <div *ngIf="!existingDocReq.document" class="col-sm-10">
                 <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput
                 accept=".pdf" [disabled]="isUploaded" (change)="onFileSelected($event)">

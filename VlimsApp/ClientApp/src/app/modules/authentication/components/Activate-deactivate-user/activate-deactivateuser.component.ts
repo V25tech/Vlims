@@ -28,6 +28,7 @@ export class ActivateDeactivateuserComponent implements OnInit {
 
 
   ngOnInit() {
+    debugger
     this.username=this.commonsvc.getUsername();
     this.access = this.commonsvc.getUserRoles()?.Activatestatus ?? false;
     this.get_activate_deactivateuser();
@@ -58,7 +59,7 @@ export class ActivateDeactivateuserComponent implements OnInit {
       return this.userservice.getusers(this.commonsvc.req).subscribe((data: any) => {
         if(data!=null&&data.Response!=null&&data.Response.length>0){
           data.Response.forEach((item:any)=>{
-            item.Doj=this.commonsvc.setDate(item.Doj)
+           
           })
          } 
         this.types = data.Response;

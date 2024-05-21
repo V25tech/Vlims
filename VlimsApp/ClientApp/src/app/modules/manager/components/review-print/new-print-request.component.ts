@@ -2,7 +2,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { DocumentPreperationConfiguration, DocumentPrintConfiguration, RequestContext, WorkItemsConfiguration } from '../../../../models/model';
+import { DocumentPreperationConfiguration, DocumentPrintConfiguration, RequestContext, UserConfiguration, WorkItemsConfiguration } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { NewPrintRequestService } from '../../../services/new-print-request.service';
 import { WorkflowServiceService } from 'src/app/modules/services/workflow-service.service';
@@ -14,10 +14,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
 import { ExistingDocumentRequestService } from 'src/app/modules/services/existing-document-request.service';
+import { UsersconfigurationService } from 'src/app/modules/services/usersconfiguration.service';
 
 interface PrintType {
-  name:string;
-  code:string;
+  name: string;
+  code: string;
 }
 
 @Component({
@@ -54,18 +55,21 @@ export class NewPrintRequestComponent implements OnInit {
   isworkflow: boolean = false;
   existingDocumentsList: Array<any> = [];
   selectedPrintTypes: string[] = [];
-  iscompleteheader:boolean=true;
-  stageSource: any[]=[];
+  iscompleteheader: boolean = true;
+  lstusers: UserConfiguration[] = [];
+  stageSource: any[] = [];
   //selectedStage:PrintType[]=[];
   constructor(private commonsvc: CommonService, private location: Location,
     private route: ActivatedRoute,
     private workitemssvc: WorkitemsService,
     private existingDocReqservice: ExistingDocumentRequestService,
     private modalService: BsModalService, private sanitizer: DomSanitizer,
-    private templatesvc:DocumentTemplateServiceService,
+    private templatesvc: DocumentTemplateServiceService,
+    private userssvc: UsersconfigurationService,
     private toastr: ToastrService, private spinner: NgxSpinnerService, private docprintservice: NewPrintRequestService, private docPreperationService: DocumentPreperationService, private router: Router, private wfservice: WorkflowServiceService, private docservice: DocumentPreperationService) { }
 
   ngOnInit() {
+    this.getusers();
     this.stageSource = [
       { name: 'Master Copy', code: 'Master Copy' },
       { name: 'Controlled Copy', code: 'Controlled Copy' },
@@ -73,15 +77,16 @@ export class NewPrintRequestComponent implements OnInit {
       { name: 'Reference Copy', code: 'Reference Copy' },
       { name: 'Display Copy', code: 'Display Copy' },
       { name: 'Discontinued Copy', code: 'Discontinued Copy' },
-      { name: 'Obsoluted Copy', code: 'Obsoluted Copy' },
+      { name: 'Obsoleted Copy', code: 'Obsoleted Copy' },
       { name: 'Validation Batch', code: 'Validation Batch' },
       { name: 'Stability Batch', code: 'Stability Batch' },
       { name: 'MLT Batch', code: 'MLT Batch' },
       { name: 'Hold Time study', code: 'Hold Time study' },
+      { name: 'Cleaning Validation', code: 'Cleaning Validation' },
     ];
     this.getDocumentRequest();
     const user = localStorage.getItem("username");
-    
+
     if (user != null && user != undefined) {
       this.commonsvc.createdBy = user;
       this.username = user;
@@ -95,8 +100,8 @@ export class NewPrintRequestComponent implements OnInit {
     const segments = urlPath.split('/');
     if (this.type == 'view') {
       this.viewMode = true;
-      this.getbyId(this.requestId); 
-      this.getworkflowitems();     
+      this.getbyId(this.requestId);
+      this.getworkflowitems();
     }
     else if (segments.slice(-1).toString() == 'edit' && this.commonsvc.printConfig) {
       this.editMode = true;
@@ -104,10 +109,10 @@ export class NewPrintRequestComponent implements OnInit {
       this.selectedPrintTypes = this.print.printCopy.split(',');
       //this.workflowsSource = [{ workflowName: this.print.workflow }];
       this.preparations = [{ documentno: this.print.documentNumber }];
-      if(this.print.workflow!=null && this.print.workflow!=undefined){
-        this.isworkflow=true;
+      if (this.print.workflow != null && this.print.workflow != undefined) {
+        this.isworkflow = true;
       }
-    }    
+    }
     this.getworkflowinfo();
     this.getdocumentpreparations();
   }
@@ -134,28 +139,88 @@ export class NewPrintRequestComponent implements OnInit {
       this.selectedPrintTypes = this.print.printCopy.split(',');
       this.spinner.hide();
     });
-
-
-    
   }
-  approve() {
-    this.print.Status = this.finalStatus;
+
+
+  Proceed(template: TemplateRef<any>) {
+    // Open the modal
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+  }
+
+  
+  getusers() { 
+    let objrequest = new RequestContext();
+    objrequest.PageNumber = 1; objrequest.PageSize = 50;
+    return this.userssvc.getusers(objrequest).subscribe((data: any) => {
+      this.lstusers = data.Response;
+    });
+  }
+
+
+
+  confirmApproval() {
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
+
+
+      this.print.Status = this.finalStatus
     this.print.ModifiedBy = this.username;
-    
+
     if (this.isapprove && this.reviewpendingcount > 0) {
       this.toastr.error('Reviews Pending');
     }
-    else{
+    else {
       this.toastMsg = this.print.Status;
-    this.updateRequest();
+      this.updateRequest();
+    }
+
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
     }
   }
-  reinitiative() {
-    //this.effective.Status='Re-Initiated'
-    //this.toastMsg = this.print.Status;
-    //this.updateRequest();
-    this.location.back();
+
+  confirmReject() {
+    
+    const username = localStorage.getItem('username') || '';
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
+    if (userExists) {
+
+      this.print.ModifiedBy = this.commonsvc.getUsername();
+    this.print.Status = 'Rejected';
+    this.toastMsg = this.print.Status;
+    this.updateRequest();
+
+
+    } else {// Username or password is invalid, display error message
+      this.toastr.error('Invalid Username or Password');
+    }
   }
+
+
+
+
+
+  // approve() {
+  //   this.print.Status = this.finalStatus
+  //   this.print.ModifiedBy = this.username;
+
+  //   if (this.isapprove && this.reviewpendingcount > 0) {
+  //     this.toastr.error('Reviews Pending');
+  //   }
+  //   else {
+  //     this.toastMsg = this.print.Status;
+  //     this.updateRequest();
+  //   }
+  // }
+  // reinitiative() {
+  //   //this.effective.Status='Re-Initiated'
+  //   //this.toastMsg = this.print.Status;
+  //   //this.updateRequest();
+  //   this.location.back();
+  // }
   reject() {
     //this.effective.Status='Rejected'
     //this.toastMsg = this.print.Status;
@@ -166,11 +231,11 @@ export class NewPrintRequestComponent implements OnInit {
     //const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
     //if (userExists) {
 
-      this.print.ModifiedBy = this.commonsvc.getUsername();
-      this.print.Status = 'Rejected';
-      this.toastMsg = this.print.Status;
-      this.updateRequest();
-      //this.location.back();
+    this.print.ModifiedBy = this.commonsvc.getUsername();
+    this.print.Status = 'Rejected';
+    this.toastMsg = this.print.Status;
+    this.updateRequest();
+    //this.location.back();
 
     //} else {// Username or password is invalid, display error message
     //  this.toastr.error('Invalid Username or Password');
@@ -181,17 +246,17 @@ export class NewPrintRequestComponent implements OnInit {
     return this.docPreperationService.getdocumentpreparations(this.commonsvc.req).subscribe((data: any) => {
       console.log(data[0]);
       this.preparations = data.response;
-      this.preparations=this.preparations.filter(o=>o.status.toLowerCase() === 'approved' && o.isEffectiveApproved);
-      this.preparations = this.preparations.filter(p => 
+      this.preparations = this.preparations.filter(o => o.status.toLowerCase() === 'approved' && o.isEffectiveApproved);
+      this.preparations = this.preparations.filter(p =>
         p.documentno);
     });
   }
-  
+
 
   documentNumberChange(event: any, printType: string) {
     if (printType.toLowerCase() == "bulk") {
       let preps: any;
-        preps = this.existingDocumentsList.filter(p => p.documentno === event.value);
+      preps = this.existingDocumentsList.filter(p => p.documentno === event.value);
       if (preps && preps.length > 0) {
         this.print.documenttitle = preps[0].documenttitle;
         this.print.printtype = preps[0].documenttype;
@@ -210,7 +275,7 @@ export class NewPrintRequestComponent implements OnInit {
         this.workflowsSource = this.workflowsSource.filter(o => o.documentstage?.includes("Print"));
         this.workflowsSource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === preps[0].documenttype.toLocaleLowerCase());
       }
-    }    
+    }
   }
 
 
@@ -218,7 +283,7 @@ export class NewPrintRequestComponent implements OnInit {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
       this.workflowsSource = data.Response;
-      this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Print"));
+      this.workflowsSource = this.workflowsSource.filter(o => o.documentstage?.includes("Print"));
       this.workflowsSource = this.workflowsSource.filter((p: any) => p.workflowName);
     });
   }
@@ -233,7 +298,7 @@ export class NewPrintRequestComponent implements OnInit {
 
   addRequest() {
 
-    this.print.CreatedBy =  this.username;
+    this.print.CreatedBy = this.username;
     this.print.ModifiedBy = this.username;
     this.print.Status = 'In-Progress';
     this.print.CreatedDate = new Date();
@@ -243,20 +308,20 @@ export class NewPrintRequestComponent implements OnInit {
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
       this.spinner.show();
-    this.docprintservice.AddNewPrintRequest(this.print).subscribe(res => {
-      this.commonsvc.printConfig = new DocumentPrintConfiguration(); this.spinner.hide();
-      this.location.back();
-      this.toastr.success('Document print request saved succesfull!', 'Saved.!');
-      this.isButtonDisabled=false;
-    }, er => {
-      this.spinner.hide();
-      console.log(er);
-    });
-  }
+      this.docprintservice.AddNewPrintRequest(this.print).subscribe(res => {
+        this.commonsvc.printConfig = new DocumentPrintConfiguration(); this.spinner.hide();
+        this.location.back();
+        this.toastr.success('Document print request saved succesfull!', 'Saved.!');
+        this.isButtonDisabled = false;
+      }, er => {
+        this.spinner.hide();
+        console.log(er);
+      });
+    }
   }
 
   updateRequest() {
-    this.spinner.show();    
+    this.spinner.show();
     this.toastMsg = this.toastMsg ?? 'Updated'
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
@@ -266,19 +331,18 @@ export class NewPrintRequestComponent implements OnInit {
       reqObj.printCopy = this.selectedPrintTypes.join(',');
 
       this.docprintservice.UpdatePrintRequest(reqObj).subscribe(res => {
-      this.commonsvc.printConfig = new DocumentPrintConfiguration();
-      this.spinner.hide();
-      this.location.back();
-      this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
-      this.isButtonDisabled=false;
-    }, er => {
-      this.spinner.hide();
-      console.log(er);
-    });
+        this.commonsvc.printConfig = new DocumentPrintConfiguration();
+        this.spinner.hide();
+        this.location.back();
+        this.toastr.success(`Document print request ${this.toastMsg}  succesfully!`);
+        this.isButtonDisabled = false;
+      }, er => {
+        this.spinner.hide();
+        console.log(er);
+      });
+    }
   }
-  }
-  UpdatePrintCount()
-  {
+  UpdatePrintCount() {
     let reqObj = JSON.parse(JSON.stringify(this.print))
     this.docprintservice.UpdatePrintRequestCount(reqObj).subscribe(res => {
       //this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
@@ -286,11 +350,11 @@ export class NewPrintRequestComponent implements OnInit {
       this.spinner.hide();
       console.log(er);
     });
-    
+
   }
 
   onCancel() {
-this.location.back();
+    this.location.back();
     //this.router.navigate(['/print']);
   }
   getworkflowitems() {
@@ -317,7 +381,7 @@ this.location.back();
           const approvecountt = totalapprovecount - approvedcount;
           if (this.statuss === 'Review') {
             //this.isreview = true;
-            if (countt === 1 || countt==0) {
+            if (countt === 1 || countt == 0) {
               this.finalStatus = 'Reviewed';
             } else if (countt > 1) {
               this.finalStatus = 'Pending Review';
@@ -325,7 +389,7 @@ this.location.back();
               this.finalStatus = 'Pending Review';
             }
           } else {
-            if (approvecountt === 1 || approvecountt==0) {
+            if (approvecountt === 1 || approvecountt == 0) {
               this.isapprove = true;
               this.finalStatus = 'Approved';
             } else if (countt > 1) {
@@ -347,19 +411,19 @@ this.location.back();
   }
 
   openViewer(template: TemplateRef<any>): void {
-    
+
     // if (this.pdfBytes) {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
     //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
     //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-      
+
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }
     this.getUrl(template);
   }
-  getUrl(template: TemplateRef<any>):void{
-    this.templatesvc.geturl().subscribe((data:any)=>{
-      this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
+  getUrl(template: TemplateRef<any>): void {
+    this.templatesvc.geturl().subscribe((data: any) => {
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(data + '#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })
   }
@@ -379,8 +443,8 @@ this.location.back();
     }
     return new Blob(byteArrays, { type: contentType });
   }
-  checkduplicatetemplate(template: TemplateRef<any>){
-    this.templatesvc.isduplicate(this.print.template).subscribe((data:any)=>{
+  checkduplicatetemplate(template: TemplateRef<any>) {
+    this.templatesvc.isduplicate(this.print.template).subscribe((data: any) => {
       // const isduplicate=Boolean(data);
       // if(isduplicate){
       //   this.toastr.error('Template used in multiple preparations unable to view document');
@@ -392,21 +456,21 @@ this.location.back();
       this.UpdatePrintCount();
     })
   }
-  previewprint(template: TemplateRef<any>,viewdoc: TemplateRef<any>) {   
+  previewprint(template: TemplateRef<any>, viewdoc: TemplateRef<any>) {
     if (this.modalRef)
-      this.modalRef.hide(); 
-    this.spinner.show();    
+      this.modalRef.hide();
+    this.spinner.show();
     //this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
-      this.templatesvc.getTemplate(this.print.template,this.print.prepId,this.iscompleteheader).subscribe((data: any) => {
-        this.iscompleteheader=true;
-        //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
-          this.pdfBytes = data;
-          //this.pdfBytes = this.fileBytes;
-          this.spinner.hide();
-          this.openViewer(template);
-        }, (error:any) => {
-          this.spinner.hide();
-        });
+    this.templatesvc.getTemplate(this.print.template, this.print.prepId, this.iscompleteheader).subscribe((data: any) => {
+      this.iscompleteheader = true;
+      //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
+      this.pdfBytes = data;
+      //this.pdfBytes = this.fileBytes;
+      this.spinner.hide();
+      this.openViewer(template);
+    }, (error: any) => {
+      this.spinner.hide();
+    });
     //   this.docPreperationService.getTemplate(this.print.template).subscribe((data: any) => {
     //   this.pdfBytes = data;
     //   this.spinner.hide();
@@ -415,11 +479,11 @@ this.location.back();
     //   this.spinner.hide();
     // });
   }
-  viewprint(viewdoc:TemplateRef<any>) {
+  viewprint(viewdoc: TemplateRef<any>) {
     debugger
     // Open the modal
     this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
-}
+  }
 }
 
 

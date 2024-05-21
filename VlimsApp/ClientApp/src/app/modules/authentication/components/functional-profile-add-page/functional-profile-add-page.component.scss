@@ -1,0 +1,25 @@
+/* Add this CSS to your stylesheet or style section */
+
+/* Style for checked checkboxes */
+input[type="checkbox"]:checked {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    appearance: checkbox;
+    border: 2px solid #000; /* Default border color */
+    box-shadow: 0 0 5px 2px #000; /* Highlighted border color */
+  }
+  
+  /* Style for the tick mark inside checked checkboxes */
+  input[type="checkbox"]:checked::before {
+    content: "\2714"; /* Unicode for checkmark */
+    display: inline-block;
+    font-size: 16px; /* Adjust the font size of the checkmark */
+    line-height: 1;
+    width: 20px; /* Adjust the width of the checkbox */
+    height: 20px; /* Adjust the height of the checkbox */
+    text-align: center;
+    color: #000; /* Adjust the color of the checkmark */
+    background-color: #fff; /* Adjust the background color of the checkmark */
+    border-radius: 3px; /* Adjust the border radius of the checkmark */
+  }
+  

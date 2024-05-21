@@ -188,8 +188,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   onCancel() {
-    // Reset the adduser object to clear all fields
-    this.adduser = new UserConfiguration();
+    this.location.back();
   }
   calculateTotalUsers(): void {
     if (this.adduser.FirstName != null || this.adduser.LastName != null) {

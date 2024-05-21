@@ -23,6 +23,23 @@
                       <strong>Version {{ i + 0 }}</strong>
                   </div>
               </div>
+
+
+
+
+              <div class="row" >
+
+                <div class="col-sm-12 text-center">
+                  <h5 [ngClass]="{'In-Progress': auditConfig.EntityInfo.Status === 'In-Progress','reviewed': auditConfig.EntityInfo.Status === 'Reviewed', 'approved': auditConfig.EntityInfo.Status === 'Approved', 'returned': auditConfig.EntityInfo.Status === 'Returned', 'rejected': auditConfig.EntityInfo.Status === 'Rejected','Active': auditConfig.EntityInfo.Status === 'Active'}">
+                    <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Active'">Activity: Initiation </ng-container>
+                      <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Reviewed'">Activity: Review</ng-container>
+                      <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Approved'">Activity: Approve</ng-container>
+                      <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Returned'">Activity: Return</ng-container>
+                      <ng-container *ngIf="auditConfig.EntityInfo.Status === 'Rejected'">Activity: Reject</ng-container>
+                  </h5>
+              </div>
+
+              
                 
 
 
@@ -105,25 +122,7 @@
                   </div>
 
 
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <strong>Printed By:</strong>
-                    </div>
-                    <div class="col-sm-9">
-                      {{ auditConfig.EntityInfo.CreatedBy }}
-                    </div>
-                  </div>    
-
-
-                  
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <strong>Printed Date:</strong>
-                    </div>
-                    <div class="col-sm-9">
-                      {{ auditConfig.EntityInfo.CreatedDate | date:'dd/MM/yyyy HH:mm' }}
-                    </div>
-                  </div>  
+              
 
 
                    <div class="row">
@@ -134,6 +133,36 @@
                       {{ auditConfig.EntityInfo.Status }}
                     </div>
                   </div>   
+
+
+
+
+
+                  
+                  <div class="row" >
+                    <div class="col-sm-3">
+                      <strong>Printed By:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.CreatedBy }}
+                    </div>
+                  </div>    
+
+
+                  
+                  <div class="row" >
+                    <div class="col-sm-3">
+                      <strong>Printed Date:</strong>
+                    </div>
+                    <div class="col-sm-9">
+                      {{ auditConfig.EntityInfo.CreatedDate | date:'dd/MM/yyyy HH:mm' }}
+                    </div>
+                  </div>
+                  
+                  
+                
+
+                  
 
 
                   

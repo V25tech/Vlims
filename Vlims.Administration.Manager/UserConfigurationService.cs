@@ -131,6 +131,7 @@ namespace PolicySummary.Sheet1.Services
                 if (validationMessages.Length <= 0)
                 {
                     result = UserConfigurationData.UpdateUserConfiguration(userConfiguration);
+                    userConfiguration.CreatedDate = DateTime.Now;
 
                     // Check if Password property is equal to "Passw0rd" before executing audit log
                     if (userConfiguration.Password == "Passw0rd")

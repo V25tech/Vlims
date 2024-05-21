@@ -53,7 +53,7 @@ public class DocumentPrintService : IDocumentPrintService
                 // Generate Unique value
                 string uniqueValue = "print" + printCounter++;
 
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = uniqueValue });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = documentPrint.reason });
                 return result;
             }
             throw new System.Exception(validationMessages);
@@ -75,8 +75,8 @@ public class DocumentPrintService : IDocumentPrintService
 
                 // Generate Unique value
                 string uniqueValue = "print" + printCounter++;
-
-                // AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = uniqueValue });
+                documentPrint.CreatedDate = DateTime.Now;
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = documentPrint.reason });
                 return result;
             }
             throw new System.Exception(validationMessages);
@@ -116,6 +116,8 @@ public class DocumentPrintService : IDocumentPrintService
         {
             bool result = DocumentPrintData.UpdatePrintCount(documentPrint);
             //string uniqueValue = "print" + printCounter++;
+            documentPrint.CreatedDate = DateTime.Now;
+           // AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = documentPrint.reason });
             return result;
         }
         catch (System.Exception)

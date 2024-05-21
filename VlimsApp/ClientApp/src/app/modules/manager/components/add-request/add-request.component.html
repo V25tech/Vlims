@@ -88,7 +88,7 @@
             </label>
             <div class="col-sm-10">
               <p-dropdown name="workflow" [options]="workflowsSource" [(ngModel)]="request.workflow"
-                          optionLabel="workflowName" optionValue="workflowName" [disabled]="viewMode || editMode" [required]="true"
+                          optionLabel="workflowName" optionValue="workflowName" [disabled]="viewMode" [required]="true"
                           [autoDisplayFirst]="false" #WorkFlowInput="ngModel" placeholder="Select Workflow">
               </p-dropdown>
               <div *ngIf="WorkFlowInput.invalid && (WorkFlowInput.dirty || WorkFlowInput.touched)" class="text-danger">
@@ -99,12 +99,12 @@
 
          
           <div *ngIf="viewMode" class="form-group row">
-            <label for="reason" class="col-sm-2 col-form-label">Reason(s)/Remark(s)</label>
+            <label for="reason" class="col-sm-2 col-form-label">Reason(s)/Remark(s)<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="reason" name="reason"
                 [(ngModel)]="request.reason" #reasonInput="ngModel" [required]="true"/>
-                <div *ngIf="!fm.form.valid && isSubmit" class="text-danger">
-                  Reason is required on return/reject.
+                <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                  Reason(s)/Remark(s) is Required. 
                 </div>
             </div>
           </div>
@@ -120,7 +120,7 @@
             </button>
             <button type="submit" class="btn btn-primary" *ngIf="!viewMode" [disabled]="!fm.form.valid || isButtonDisabled">Submit</button>
 
-            <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve(template)">Proceed</button>
+            <button type="button" class="col-xs-1 mx-2  btn btn-success" [disabled]="!fm.form.valid || isButtonDisabled" *ngIf="viewMode && !iscompleted" (click)="approve(template)">Proceed</button>
             <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="return(template)">Return</button>
             <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject(template)">Reject</button> -->
 

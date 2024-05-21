@@ -1,7 +1,10 @@
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col d-flex justify-content-between align-items-center">
-      <h4 class="page-title">New Print Request</h4>
+
+      <h4 class="page-title">
+        {{ viewMode ? 'Document Print Approval' : (editMode ? 'Edit Document Print' : 'New Print Request') }}
+      </h4>
       <div class="back-icon" style="margin-right: 10px;">
         <a href="javascript:void(0);" onclick="history.back();">
           <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
@@ -320,9 +323,10 @@
               <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
               <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid || isButtonDisabled" *ngIf="!viewMode && !editMode">Submit</button>
               <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid" *ngIf="editMode">Update</button>
-              <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button>
+              <!-- <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button> -->
+              <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="Proceed(eSignModal)">Proceed</button>
               <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button> -->
-              <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button>
+              <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button> -->
               <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-success" (click)="viewprint(viewdoc)">Preview</button>
             </div>
           </div>
@@ -374,6 +378,39 @@
     </div>
   <!-- </div> -->
 </ng-template>
+
+
+
+
+<ng-template #eSignModal>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">E-sign Credentials</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modalRef!.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" value="{{ username }}" readonly>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalRef!.hide()">Close</button>
+        <button type="button" class="btn btn-success" (click)="confirmApproval()">Approve</button>
+        <!-- \<button type="button" class="btn btn-primary" (click)="confirmReturn()">Return</button> -->
+        <button type="button" class="btn btn-danger" (click)="confirmReject()">Reject</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
 
 <style>
   /* Styles for .custom-input-group */

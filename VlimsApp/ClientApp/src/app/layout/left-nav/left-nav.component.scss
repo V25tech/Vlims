@@ -3,11 +3,11 @@
   top: 55px;
   left: 0;
   width: 230px;
-  height: 100vh;
+  height: calc(100vh - 55px); // Adjust height to fit within the viewport minus the header height
   background-color: #305496;
   transition: transform 0.3s ease;
   z-index: 1;
-  overflow-y: auto; /* Add this line to enable vertical scrollbar */
+  overflow-y: auto; // Ensure the content can scroll vertically
 
   .navbar-nav {
     width: 100%;
@@ -15,6 +15,7 @@
     li {
       &.active {
         background-color: #294a86;
+
         .nav-link {
           &::before {
             content: "";
@@ -69,6 +70,7 @@
           &.active {
             background-color: #223e72;
           }
+
           a {
             padding-left: 40px;
             border: none;
