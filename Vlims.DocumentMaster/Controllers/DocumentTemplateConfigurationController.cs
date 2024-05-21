@@ -770,7 +770,8 @@ namespace Vlims.Controllers
             sb.AppendLine("<thead>");
             sb.AppendLine("  <tr>");
             sb.AppendLine($@"<th class=""tg-ao2g""><img src=""{dataUri}"" width=""100"" height=""80"" /></th>");
-            sb.AppendLine("    <th class=\"tg-6vv4\">Vlims Pvt Ltd.</th>");
+            sb.AppendLine($"    <th class=\"tg-6vv4\" >{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue : "---") : "---")}</th>");
+            //sb.AppendLine("    <th class=\"tg-6vv4\">Vlims Pvt Ltd.</th>");
             sb.AppendLine($@"<th class=""tg-de2y""><img src=""{dataUri1}"" width=""100"" height=""80"" style=""align:center"" /></th>");
             sb.AppendLine("  </tr>");
             sb.AppendLine("</thead>");

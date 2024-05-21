@@ -191,7 +191,7 @@ export class DocumentPrintComponent implements OnInit {
     if (this.modalRef)
       this.modalRef.hide(); 
     this.spinner.show();
-    //this.UpdatePrintCount(objtemp);
+    this.UpdatePrintCount(objtemp);
     // this.preparation.template=objtemp.Templatename;
     // this.preparation.CreatedDate=objtemp.CreatedDate;
     // this.preparation.ModifiedDate=objtemp.ModifiedDate;
