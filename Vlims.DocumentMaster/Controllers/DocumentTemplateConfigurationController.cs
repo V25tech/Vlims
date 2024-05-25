@@ -234,7 +234,7 @@ namespace Vlims.Controllers
         }
 
         [HttpGet("getpdf")]
-        public ActionResult<byte[]> getpdf(string templateinf, string p_user, int p_PrepId, bool p_IsShortHeader=false ,bool p_isPdf = true)
+        public ActionResult<byte[]> getpdf(string templateinf, string p_user, int p_PrepId, bool p_IsShortHeader = false, bool p_isPdf = true)
         {
 
             byte[] bytes = null; DocumentPreparation preparation = new DocumentPreparation();
@@ -275,7 +275,8 @@ namespace Vlims.Controllers
             Paragraph footerParagraph = footer.AddParagraph();
             StringBuilder footerbuilder = new StringBuilder();
             footerbuilder.Append(htmlUpper);
-            footerbuilder.Append(TemplatePreparation.PrepareStaticdiv(template, template1, p_user));
+            if (p_IsShortHeader)
+                footerbuilder.Append(TemplatePreparation.PrepareStaticdiv(template, template1, p_user));
             footerbuilder.Append(htmllower);
             footerParagraph.AppendHTML(footerbuilder.ToString());
             footerParagraph.Format.BeforeSpacing = 0;
@@ -290,7 +291,7 @@ namespace Vlims.Controllers
             var totalPages = document.PageCount - 1;
             if (!p_IsShortHeader)
             {
-                headerbuilder.Append(TemplatePreparation.PrepareShortHeader(template, template1, i + 1, preparation,totalPages));
+                headerbuilder.Append(TemplatePreparation.PrepareShortHeader(template, template1, i + 1, preparation, totalPages));
             }
             else if (template.documenttype.Equals("BATCH PACKING RECORD 08", StringComparison.InvariantCultureIgnoreCase))
             {
