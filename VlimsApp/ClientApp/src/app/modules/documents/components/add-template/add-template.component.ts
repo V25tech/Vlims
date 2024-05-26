@@ -162,7 +162,7 @@ export class AddTemplateComponent implements OnInit {
   //   selectedDepartments: [],
   //   status: '',
   // };
-
+  file: File | null = null;
 
 
   constructor(private toastr: ToastrService,
@@ -485,7 +485,7 @@ export class AddTemplateComponent implements OnInit {
   }
   isduplicate() {
     if (this.grid != null && this.grid.length > 0) {
-      const type = this.grid.find(p => p.Templatename == this.templateForm.Templatename);
+      let type = this.grid.find(p => p.Templatename == this.templateForm.Templatename);
       if (type != null || type != undefined) {
         this.toastr.error('Duplicate Entity');
         this.loader.hide();
@@ -811,10 +811,10 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     this.pages[this.currentPage].bodyData=[];
   }
   onLogoUpload(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
+    this.file = event.target.files[0];
+    if (this.file) {
       this.loader.show();
-      this.templatesvc.uploadImage(file).subscribe((data:any)=> {
+      this.templatesvc.uploadImage(this.file).subscribe((data:any)=> {
           console.log('image',data.Message);
           this.templateForm.header=data.Message;
           this.loader.hide();
@@ -832,10 +832,10 @@ setPageTypeAndBodyData(pageIndex: number, pageType: string) {
     
   }
   onLogoUpload1(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
+    this.file = event.target.files[0];
+    if (this.file) {
       this.loader.show();
-      this.templatesvc.uploadImage(file).subscribe((data:any)=> {
+      this.templatesvc.uploadImage(this.file).subscribe((data:any)=> {
           
           console.log('image',data.Message);
           this.templateForm.footer=data.Message;

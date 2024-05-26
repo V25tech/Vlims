@@ -28,7 +28,7 @@
         <div class="col">
             <div class="p-4 bg-white shadow-dark rounded-2">
                 <p-table #templatesTable [value]="requestsDatasource"
-                 [globalFilterFields]="['drid', 'documenttype', 'department','documenttype','workflow']"
+                 [globalFilterFields]="['drid', 'documenttype', 'department','workflow']"
                  tableStyleClass="table table-striped" [rows]="itemsPerPage"
                  [paginator]="true" [totalRecords]="requestsDatasource.length"
                  [rowsPerPageOptions]="rowsPerPageOptions" >

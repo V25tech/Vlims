@@ -80,9 +80,8 @@ export class AddRequestComponent {
       }
       this.request = this.commonsvc.request;
     }
-    this.getdepartments();
+    
     this.getdocumenttypeconfig();
-    this.getworkflowinfo();
   }
   getbyId(arg0: number) {
     this.spinner.show();
@@ -279,13 +278,21 @@ export class AddRequestComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
       this.typeSource = data.Response;
+      this.getdepartments();
     });
   }
   getworkflowinfo() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
+      let type = this.typeSource.filter(o => o.Documenttypename.toLocaleLowerCase() === this.request.documenttype.toLocaleLowerCase());
+      console.log("abc" + type);
       this.workflowsSource = data.Response;
       this.workflowsSource = this.workflowsSource.filter(o => o.documentstage?.includes("Request"));
+      if (type && type.length>0) {
+        this.request.department = type[0].Assigntodepartment;
+        let filtersource = this.workflowsSource.filter((o:any) => o.documenttype?.toLocaleLowerCase() === this.request.documenttype.toLocaleLowerCase());
+        this.workflowsSource = filtersource;
+      }
     });
   }
   getworkflowitems() {
@@ -344,6 +351,7 @@ export class AddRequestComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
       this.departmentsSource = data.Response;
+      this.getworkflowinfo();
     });
   }
 }

@@ -93,18 +93,18 @@ export class ExistingDocumentRequestComponent implements OnInit {
   }
 
  
-  previewtemplate(docInfo: ExistingDocumentRequest): void {
+  previewtemplate(docInfo: ExistingDocumentRequest, template: TemplateRef<any>): void {
    // debugger
     this.spinner.show();
     this.existingDocReqservice.preview(docInfo).subscribe((data: any) => {
       this.pdfBytes = data;
       this.spinner.hide();
-      this.openViewer();
+      this.openViewer(template);
     }, er => {
       this.spinner.hide();
     });
   }
-  openViewer(): void {
+  openViewer(template: TemplateRef<any>): void {
     
     // if (this.pdfBytes) {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
@@ -114,12 +114,12 @@ export class ExistingDocumentRequestComponent implements OnInit {
       
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }
-    this.getUrl();
+    this.getUrl(template);
   }
-  getUrl():void{
+  getUrl(template: TemplateRef<any>):void{
     this.existingDocReqservice.geturl().subscribe((data:any)=>{
       this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
-      //this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })
   }
   private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
