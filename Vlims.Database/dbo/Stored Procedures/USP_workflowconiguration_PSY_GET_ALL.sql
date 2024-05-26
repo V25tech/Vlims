@@ -20,7 +20,7 @@ Status_PSY,
 (SELECT DBO.USP_WORKFLOW_WHERE_USED(workflowName_PSY)) AS IsParent
  ,count(*) over() as TotalRows 
  FROM [dbo].[workflowconiguration_PSY] WITH (NOLOCK) 
- Order by CreatedDate_PSY DESC 
+ Order by [ModifiedDate_PSY] DESC 
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 

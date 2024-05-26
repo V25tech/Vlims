@@ -1,6 +1,6 @@
 ﻿
 
-  CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_INSERT] @documenttitle_PSY NVarChar(50),
+  CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_INSERT] @documenttitle_PSY NVarChar(150),
 @printtype_PSY NVarChar(50),
 @documentno_PSY NVarChar(50),
 @noofcopies_PSY NVarChar(50),

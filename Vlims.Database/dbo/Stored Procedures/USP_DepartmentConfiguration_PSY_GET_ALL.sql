@@ -15,7 +15,7 @@ ModifiedBy_PSY,
 ModifiedDate_PSY  
  ,count(*) over() as TotalRows 
  FROM [dbo].[DepartmentConfiguration_PSY] WITH (NOLOCK) 
- Order by CreatedDate_PSY desc  
+ Order by ModifiedDate_PSY desc  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 

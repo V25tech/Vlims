@@ -27,7 +27,7 @@ Status_PSY,IsClone,PreparationId,
 (SELECT DBO.USP_DOCUMENT_TEMPLATE_WHEREUSED (Templatename_PSY)) AS IsParent
  ,count(*) over() as TotalRows 
  FROM [dbo].[DocumentTemplateConfiguration_PSY] WITH (NOLOCK) 
- Order by DTID_PSY DESC
+ Order by [ModifiedDate_PSY] DESC, DTID_PSY DESC
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
   END TRY 
