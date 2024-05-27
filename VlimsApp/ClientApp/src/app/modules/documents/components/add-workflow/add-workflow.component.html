@@ -132,7 +132,7 @@
                 optionLabel="DepartmentName"
                 display="chip"
                 [required]="true"
-                #departmentInput="ngModel"  [disabled]="true">
+                #departmentInput="ngModel">
               </p-multiSelect>
               <div *ngIf="departmentInput.invalid && (departmentInput.dirty || departmentInput.touched)" class="text-danger">
                 Department is required

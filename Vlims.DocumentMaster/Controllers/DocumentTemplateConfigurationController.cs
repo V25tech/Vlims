@@ -639,6 +639,31 @@ namespace Vlims.Controllers
             string path = Path.Combine(currentDirectory, "Logo", template.header);
             string footerpath = Path.Combine(currentDirectory, "Logo", template.footer);
             string dataUri = string.Empty; string dataUri1 = string.Empty;
+            string documentTypeNumber = string.Empty;
+            switch (template.documenttype.ToUpper())
+            {
+                case "STANDARD TESTING SPECIFICATION":
+                    documentTypeNumber = "STS No.";
+                    break;
+                case "STANDARD TESTING PROCEDURE":
+                    documentTypeNumber = "STP No.";
+                    break;
+                case "STANDARD OPERATING PROCEDURE":
+                    documentTypeNumber = "SOP No.";
+                    break;
+                case "BATCH PACKING RECORD":
+                    documentTypeNumber = "BPR No.";
+                    break;
+                case "BATCH MANUFACTURING RECORD":
+                    documentTypeNumber = "BMR No";
+                    break;
+                case "Validation Protocol":
+                    documentTypeNumber = "STP No.";
+                    break;
+                default:
+                    documentTypeNumber = "STP No.";
+                    break;
+            }
             if (System.IO.File.Exists(path))
             {
                 string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
@@ -675,7 +700,7 @@ namespace Vlims.Controllers
             //htmlBuilder.AppendLine("    <td class=\"tg-iucd\" colspan=\"2\">Title: Preparation, checking, approval, control, distribution, <br>revision, retrieval &amp; destruction of standard operating procedure</td>");
             //htmlBuilder.AppendLine($"   <td class=\"ttg-iucd\" colspan=\"t2\"t><span style=\"tfont-weight:bold\"t>Title:</span> {template1.DocumentTitle}</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\" colspan=\"2\"><span style=\"font-weight:bold\">Title:</span> {(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "---") : "---")}</td>");
-            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">SOP No.</td>");
+            htmlBuilder.AppendLine($"<td class=\"tg-1wig\">{(documentTypeNumber)}</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "---") : "---")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
@@ -806,6 +831,15 @@ namespace Vlims.Controllers
                     break;
                 case "STANDARD OPERATING PROCEDURE":
                     documentTypeNumber = "SOP No.";
+                    break;
+                case "BATCH PACKING RECORD":
+                    documentTypeNumber = "BPR No.";
+                    break;
+                case "BATCH MANUFACTURING RECORD":
+                    documentTypeNumber = "BMR No";
+                    break;
+                case "Validation Protocol":
+                    documentTypeNumber = "STP No.";
                     break;
                 default:
                     documentTypeNumber = "STP No.";
@@ -938,6 +972,31 @@ namespace Vlims.Controllers
             string path = Path.Combine(currentDirectory, "Logo", template.header);
             string footerpath = Path.Combine(currentDirectory, "Logo", template.footer);
             string dataUri = string.Empty; string dataUri1 = string.Empty;
+            string documentTypeNumber = string.Empty;
+            switch (template.documenttype.ToUpper())
+            {
+                case "STANDARD TESTING SPECIFICATION":
+                    documentTypeNumber = "STS No.";
+                    break;
+                case "STANDARD TESTING PROCEDURE":
+                    documentTypeNumber = "STP No.";
+                    break;
+                case "STANDARD OPERATING PROCEDURE":
+                    documentTypeNumber = "SOP No.";
+                    break;
+                case "BATCH PACKING RECORD":
+                    documentTypeNumber = "BPR No.";
+                    break;
+                case "BATCH MANUFACTURING RECORD":
+                    documentTypeNumber = "BMR No";
+                    break;
+                case "Validation Protocol":
+                    documentTypeNumber = "STP No.";
+                    break;
+                default:
+                    documentTypeNumber = "STP No.";
+                    break;
+            }
             if (System.IO.File.Exists(path))
             {
                 string base64EncodedImage = Convert.ToBase64String(System.IO.File.ReadAllBytes(path));
@@ -976,7 +1035,7 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine($"<td class=\"tg-1wig\" colspan=\"3\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "---") : "---")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("<tr>");
-            stringBuilder.AppendLine("<td class=\"tg-1wig\">BMR NO.</td>");
+            stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(documentTypeNumber)}</td>");
             stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "---") : "---")}</td>");
             stringBuilder.AppendLine("<td class=\"tg-1wig\">REVISION NO.</td>");
             if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo))
