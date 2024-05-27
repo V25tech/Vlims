@@ -11,7 +11,7 @@
 DepartmentName_PSY=@DepartmentName_PSY,
 DepartmentCode_PSY=@DepartmentCode_PSY,
 Comments_PSY=@Comments_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [DPCFId_PSY] = @DPCFId_PSY ;  select @DPCFId_PSY; 
+ModifiedBy_PSY=@ModifiedBy_PSY,ModifiedDate_PSY = GETDATE() WHERE  [DPCFId_PSY] = @DPCFId_PSY ;  select @DPCFId_PSY; 
   
   END TRY 
  BEGIN CATCH 

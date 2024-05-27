@@ -4,7 +4,7 @@
  BEGIN 
   BEGIN TRY 
   
- UPDATE [dbo].[UserConfiguration_PSY] SET Status_PSY=@Status_PSY WHERE  [UCFId_PSY] = @UCFId_PSY ;  select @UCFId_PSY; 
+ UPDATE [dbo].[UserConfiguration_PSY] SET Status_PSY=@Status_PSY, ModifiedDate_PSY = GETDATE() WHERE  [UCFId_PSY] = @UCFId_PSY ;  select @UCFId_PSY; 
   
   END TRY 
  BEGIN CATCH 

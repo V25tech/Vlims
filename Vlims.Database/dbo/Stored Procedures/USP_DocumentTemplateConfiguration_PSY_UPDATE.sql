@@ -30,6 +30,7 @@ footer_rows_PSY=@footer_rows_PSY,
 footer_columns_PSY=@footer_columns_PSY,
 document_PSY=@document_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY, 
+ModifiedDate_PSY = GETDATE(),
 Status_PSY=@Status_PSY,Pages=@Pages WHERE  [DTID_PSY] = @DTID_PSY ;  select @DTID_PSY;
 
 --IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')

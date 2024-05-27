@@ -13,7 +13,7 @@ PlantName_PSY=@PlantName_PSY,
 PlantCode_PSY=@PlantCode_PSY,
 PlantAddress_PSY=@PlantAddress_PSY,
 Comments_PSY=@Comments_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY WHERE  [PMId_PSY] = @PMId_PSY ;  select @PMId_PSY; 
+ModifiedBy_PSY=@ModifiedBy_PSY, ModifiedDate_PSY = GETDATE() WHERE  [PMId_PSY] = @PMId_PSY ;  select @PMId_PSY; 
   
   END TRY 
  BEGIN CATCH 

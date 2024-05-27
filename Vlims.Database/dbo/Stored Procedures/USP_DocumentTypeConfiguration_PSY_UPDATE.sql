@@ -17,6 +17,7 @@ documenttypeprefix_PSY=@documenttypeprefix_PSY,
 Description_PSY=@Description_PSY,
 Assigntodepartment_PSY=@Assigntodepartment_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,
+ModifiedDate_PSY = GETDATE(),
 Status_PSY=@Status_PSY WHERE  [DTCId_PSY] = @DTCId_PSY ;  select @DTCId_PSY; 
 
 --IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')

@@ -37,7 +37,7 @@ documentno_PSY=@documentno_PSY,
 noofcopies_PSY=@noofcopies_PSY,
 workflow_PSY=@workflow_PSY,
 reason_PSY=@reason_PSY,
-ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,PrintCopy_PSY=@PrintCopy_PSY,printCount_PSY=@printCount_PSY, 
+ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,PrintCopy_PSY=@PrintCopy_PSY,printCount_PSY=@printCount_PSY, ModifiedDate_PSY = GETDATE(),
  BatchNumber=@BatchNumber,Batchsize=@BatchSize  WHERE  [DRId_PSY] = @DRId_PSY ; 
 END
 ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')

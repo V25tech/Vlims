@@ -18,6 +18,7 @@ department_PSY=@department_PSY,
 reviewsCount_PSY=@reviewsCount_PSY,
 approvalsCount_PSY=@approvalsCount_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,
+ModifiedDate_PSY = GETDATE(),
 Status_PSY=@Status_PSY,Document_PSY=@document_PSY WHERE  [WFCId_PSY] = @WFCId_PSY ;  select @WFCId_PSY; 
   
   END TRY 
