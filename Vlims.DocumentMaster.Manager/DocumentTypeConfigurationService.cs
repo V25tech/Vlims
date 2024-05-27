@@ -81,6 +81,7 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = DocumentTypeConfigurationData.UpdateDocumentTypeConfiguration(documentTypeConfiguration);
+                    documentTypeConfiguration.CreatedDate = DateTime.Now;
                     AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTypeConfiguration.CreatedBy, EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.Modify, EntityInfo = documentTypeConfiguration, Unique = documentTypeConfiguration.documenttypeprefix });
                     return result;
                 }

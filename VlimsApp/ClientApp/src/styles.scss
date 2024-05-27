@@ -145,9 +145,8 @@ h5.page-card-title{
 }
 
 .status-in-progress {
-  background-color: #cffad1;
-  color: #278225;
-  
+  background-color: #007bff; /* Blue background */
+  color: #ffffff; /* White text */
 }
 
 .status-completed {
@@ -156,8 +155,8 @@ h5.page-card-title{
 }
 
 .status-under-review {
-  background-color: #ffd7c0;
-  color: #bc5b25;
+  background-color: #ffb74d; /* Orange background */
+  color: #ffffff; /* White text */
 }
 
 .status-pending {
@@ -166,22 +165,23 @@ h5.page-card-title{
 }
 
 .status-approved {
-  background-color: #00b0e8;
-  color: #ffffff;
+  background-color: #28a745; /* Green background */
+  color: #ffffff; /* White text */
 }
 
 .status-reject {
-  background-color: #FF0000;
-  color: #ffffff;
-}
-.status-return {
-  background-color: #002aff;
-  color: #ffffff;
+  background-color: #dc3545; /* Red background */
+  color: #ffffff; /* White text */
 }
 
-.status-pending {
-  background-color: #ffd7c0;
-  color: #bc5b25;
+.status-return {
+  background-color: #c92085; /* Teal background */
+  color: #ffffff; /* White text */
+}
+
+.status-reviewed {
+  background-color: #ffe5b4; /* Light orange background */
+  color: #bc5b25; /* Dark orange text */
 }
 
 
@@ -217,4 +217,10 @@ h5.page-card-title{
   .p-datatable-tbody > tr > td{
     white-space: nowrap;
   }
+}
+
+
+.bold-status {
+  font-weight: bold;
+  color: #333; /* Optional: change color to make it stand out more */
 }

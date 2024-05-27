@@ -52,7 +52,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="documentMasterHeader">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
-            Work Assigned
+              <span style="font-weight: bold; color: #333;"> Work Assigned </span>
           </button>
         </h2>
         <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
@@ -83,7 +83,7 @@
 
     
     
-   
+<!--    
     <div class="accordion" id="documentMasterAccordion" style="margin-bottom: 20px;">
       <div class="accordion-item">
         <h2 class="accordion-header" id="documentMasterHeader">
@@ -112,7 +112,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     
     
 
@@ -135,7 +135,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="documentMasterHeader">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
-            Hirearchy Management
+            <span style="font-weight: bold; color: #333;">Hirearchy Management</span>
           </button>
         </h2>
         <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
@@ -191,7 +191,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="documentMasterHeader">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
-            Plant Configuration
+           <span style="font-weight: bold; color: #333;"> Plant Configuration</span>
           </button>
         </h2>
         <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
@@ -237,7 +237,7 @@
         <div class="accordion-item">
           <h2 class="accordion-header" id="documentMasterHeader">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
-              User Management
+              <span style="font-weight: bold; color: #333;">User Management</span>
             </button>
           </h2>
           <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
@@ -280,7 +280,7 @@
         <div class="accordion-item">
           <h2 class="accordion-header" id="documentMasterHeader">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#documentMasterCollapse" aria-expanded="true" aria-controls="documentMasterCollapse">
-              Document Master
+               <span style="font-weight: bold; color: #333;">Document Master</span>
             </button>
           </h2>
           <div id="documentMasterCollapse" class="accordion-collapse collapse show" aria-labelledby="documentMasterHeader" data-bs-parent="#documentMasterAccordion">
@@ -427,7 +427,9 @@
       
       
       
-    
+<div *ngIf="!anyCheckboxSelected() && fm.submitted" class="text-danger">
+  Please select at least one permission.
+</div>
     
     
     
@@ -438,7 +440,9 @@
   <div class="form-group row my-4" *ngIf="access">
     <div class="col-sm-10 offset-sm-2">
       <button type="button" class="btn btn-outline-secondary mx-2" (click)="onCancel()">Cancel</button>
-      <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid || isButtonDisabled">Submit</button>
+      <button type="submit" class="btn btn-primary" *ngIf="!editMode" [disabled]="!fm.form.valid || isButtonDisabled" [disabled]="!anyCheckboxSelected() || isButtonDisabled">Submit</button>
+      
+
       <button type="submit" class="btn btn-primary" *ngIf="editMode" [disabled]="isButtonDisabled">Update</button>
     </div>
   </div>

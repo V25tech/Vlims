@@ -36,12 +36,10 @@ export class AuditworkflowgridpageComponent {
   }
   getauditmodule() {
     this.loader.show();
-    debugger;
     this.commonsvc.req.type="WorkFlowType"
-       return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
-        debugger;
-         
+       return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => { 
         this.types = this.removeDuplicates(data, 'Unique'); 
+        this.types.reverse(); // Reverse the array here
          this.loader.hide();
        }, er => {
          this.loader.hide();
@@ -49,7 +47,7 @@ export class AuditworkflowgridpageComponent {
  }
 
  removeDuplicates(array: any[], property: string): any[] {
-  debugger
+  
   return array.filter((obj, index, self) =>
     index === self.findIndex((o) => (
       o[property] === obj[property]

@@ -119,9 +119,14 @@ export class AssignedComponent implements OnInit {
     else if (status === 'APPROVED') {
       return 'status-approved';
     }
+    
     else if (status === 'Approved') {
       return 'status-approved';
     }
+    else if (status === 'In Progress' || status === 'IN-PROGRESS') {
+      return 'status-in-progress';
+    }
+    
      else {
       return '';
     }
