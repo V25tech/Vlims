@@ -37,25 +37,23 @@ export class RequestsComponent implements OnInit{
   }
 
   getStatusClass(status: string): string {
-    debugger
-    if (status === 'In Progress') {
+    if (status === 'In Progress' || status === 'In-Progress') {
       return 'status-in-progress';
     } else if (status === 'Rejected') {
       return 'status-reject';
-    }else if (status === 'Returned') {
+    } else if (status === 'Returned') {
       return 'status-return';
-    }
-    else if (status === 'In-Progress') {
-      return 'status-in-progress';
     } else if (status === 'Re-Initiated') {
       return 'status-under-review';
-    }else if (status === 'Approved') {
+    } else if (status === 'Approved') {
       return 'status-approved';
+    } else if (status === 'Reviewed') {
+      return 'status-reviewed';
     } else {
       return '';
     }
   }
-
+  
   
   getdocumentrequest() {
     this.spinner.show();

@@ -691,7 +691,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""100"" height=""80"" /></th>");
             //htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""20"" height=""20"" /></th>");
             //htmlBuilder.AppendLine($@"<img src=""{dataUri}"" width=""20"" height=""20"" />");
-            htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue : "---") : "---")}</th>");
+            htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
             htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri1}"" width=""100"" height=""80"" style=""align:center"" /></th>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</thead>");
@@ -796,7 +796,7 @@ namespace Vlims.Controllers
             sb.AppendLine("<thead>");
             sb.AppendLine("  <tr>");
             sb.AppendLine($@"<th class=""tg-ao2g""><img src=""{dataUri}"" width=""100"" height=""80"" /></th>");
-            sb.AppendLine($"    <th class=\"tg-6vv4\" >{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue : "---") : "---")}</th>");
+            sb.AppendLine($"    <th class=\"tg-6vv4\" >{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
             //sb.AppendLine("    <th class=\"tg-6vv4\">Vlims Pvt Ltd.</th>");
             sb.AppendLine($@"<th class=""tg-de2y""><img src=""{dataUri1}"" width=""100"" height=""80"" style=""align:center"" /></th>");
             sb.AppendLine("  </tr>");
@@ -1025,7 +1025,7 @@ namespace Vlims.Controllers
             //stringBuilder.AppendLine("<td class=\"tg-0lax\"><img src=\"https://images.app.goo.gl/v534Zi6U8F7y9KxQA\" width=\"140\" height=\"80\"></td>");
             //stringBuilder.AppendLine("<th class=\"tg-amwm\" colspan=\"3\">ACCENT PHARMACEUTICALS &amp; DIAGNOSTICS<br>FOREST ROAD, SOLAN, H.P. (INDIA)<br>BATCH MANUFACTURING RECORD</th>");
             stringBuilder.AppendLine($@"<th class=""tg-0lax""><img src=""{dataUri}"" width=""140"" height=""80"" /></th>");
-            stringBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue : "---") : "---")}</th>");
+            stringBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
             stringBuilder.AppendLine($@"<th class=""tg-0lax""><img src=""{dataUri1}"" width=""100"" height=""80"" style=""align:center"" /></th>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("</thead>");

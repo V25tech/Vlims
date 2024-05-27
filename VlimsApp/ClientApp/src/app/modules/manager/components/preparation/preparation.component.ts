@@ -56,28 +56,46 @@ export class PreparationComponent {
     });
   }
 
-  getStatusClass(status: string): string {
+  // getStatusClass(status: string): string {
     
-    if (status === 'In Progress') {
+  //   if (status === 'In Progress' || status === 'In-Progress') {
+  //     return 'status-in-progress';
+  //   } else if (status === 'Rejected') {
+  //     return 'status-reject';
+  //   }else if (status === 'Returned') {
+  //     return 'status-return';
+  //   }
+  //   else if (status === 'In-Progress') {
+  //     return 'status-in-progress';
+  //   }else if (status === 'IN-PROGRESS') {
+  //     return 'status-in-progress';
+  //   }
+  //    else if (status === 'Re-Initiated') {
+  //     return 'status-under-review';
+  //   }else if (status === 'Approved') {
+  //     return 'status-approved';
+  //   } else {
+  //     return '';
+  //   }
+  // }
+  getStatusClass(status: string): string {
+    if (status === 'In Progress' || status === 'IN-PROGRESS') {
       return 'status-in-progress';
     } else if (status === 'Rejected') {
       return 'status-reject';
-    }else if (status === 'Returned') {
+    } else if (status === 'Returned') {
       return 'status-return';
-    }
-    else if (status === 'In-Progress') {
-      return 'status-in-progress';
-    }else if (status === 'IN-PROGRESS') {
-      return 'status-in-progress';
-    }
-     else if (status === 'Re-Initiated') {
+    } else if (status === 'Re-Initiated') {
       return 'status-under-review';
-    }else if (status === 'Approved') {
+    } else if (status === 'Approved') {
       return 'status-approved';
+    } else if (status === 'Reviewed') {
+      return 'status-reviewed';
     } else {
       return '';
     }
   }
+
   islocked(status:string): boolean{
     switch (status) {
       case 'Reviewed':

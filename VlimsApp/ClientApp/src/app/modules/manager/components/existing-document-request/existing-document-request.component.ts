@@ -139,6 +139,7 @@ export class ExistingDocumentRequestComponent implements OnInit {
   closeModel() {
     if (this.modalRef)
       this.modalRef.hide();
+      this.pdfUrl=null;
   }
 }
 

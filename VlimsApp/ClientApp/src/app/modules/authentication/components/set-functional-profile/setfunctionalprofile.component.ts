@@ -60,6 +60,8 @@ export class SetfunctionalprofileComponent implements OnInit {
 
     });
   }
+
+  
   getroles() {
     this.loader.show();
     return this.doctypeservice.getroles(this.commonsvc.req).subscribe((data: any) => {
@@ -68,7 +70,11 @@ export class SetfunctionalprofileComponent implements OnInit {
     });
   }
   onSubmit(profileinfo: functionalprofile) {
-    debugger
+    if (!this.anyCheckboxSelected()) {
+      // Show error message indicating that at least one checkbox should be selected
+      this.toaster.error('Please select at least one permission.');
+      return; // Exit the method to prevent further execution
+    }
     profileinfo.modifiedby = this.commonsvc.getUsername();
 
     this.loader.show();
@@ -213,6 +219,28 @@ export class SetfunctionalprofileComponent implements OnInit {
       this.profile.deptConfig = false;
       
     }
+  }
+
+  anyCheckboxSelected(): boolean {
+
+    return this.profile.documentTypeConfig ||
+    this.profile.documentTemplateConfig ||
+    this.profile.workflowConfig ||
+    this.profile.workItemsassigned||
+    this.profile.roleConfig ||
+    this.profile.deptConfig ||
+
+    this.profile.plantMgmt ||
+    this.profile.userMgmt ||
+    this.profile.Activatestatus ||
+
+     this.profile.documentRequest ||
+     this.profile.documentPreperation ||
+     this.profile.documentEffective ||
+     this.profile.additionalTasks ||
+     this.profile.downloadPrint ||
+     this.profile.docrepository;
+
   }
 
   selectAllplantarachy(event: Event) {

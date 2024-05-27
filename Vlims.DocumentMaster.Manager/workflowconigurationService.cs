@@ -87,6 +87,7 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     bool result = workflowconigurationData.Updateworkflowconiguration(workflowconiguration);
+                    workflowconiguration.CreatedDate = DateTime.Now;
                     AuditLog.SaveAuditLog(new AuditLogEntity { UserName = workflowconiguration.CreatedBy, EntityName = workflowconiguration.workflowName, Type = workflowconigurationConstants.WorkflowType, state = DefinitionStatus.Modify, EntityInfo = workflowconiguration, Unique = workflowconiguration.code });
 
                     return result;

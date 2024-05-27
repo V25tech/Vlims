@@ -86,21 +86,23 @@ export class DocumentPrintComponent implements OnInit {
     });
   }
   getStatusClass(status: string): string {
-    if (status === 'In Progress') {
+    if (status === 'In Progress' || status === 'In-Progress') {
       return 'status-in-progress';
-    } else if (status === 'Completed') {
-      return 'status-completed';
-    } else if (status === 'Under Review') {
+    } else if (status === 'Rejected') {
+      return 'status-reject';
+    } else if (status === 'Returned') {
+      return 'status-return';
+    } else if (status === 'Re-Initiated') {
       return 'status-under-review';
     } else if (status === 'Approved') {
       return 'status-approved';
-    } else if (status === 'Active') {
-      return 'status-Active';
-    }
-    else {
+    } else if (status === 'Reviewed') {
+      return 'status-reviewed';
+    } else {
       return '';
     }
   }
+  
   editdoc(request: DocumentPrintConfiguration) {
     this.commonsvc.printConfig = request;
     this.router.navigate(['/print/edit']);
