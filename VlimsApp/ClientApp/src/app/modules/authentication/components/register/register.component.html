@@ -85,7 +85,7 @@
                      id="userid"
                      name="userid"
                      placeholder="Enter User ID"
-                     [(ngModel)]="adduser.UserID" readonly [disabled]="editMode" 
+                     [(ngModel)]="adduser.UserID"  [disabled]="editMode" 
                      required
                      #useridInput="ngModel"/>
                      <div *ngIf="useridInput.invalid && (useridInput.dirty || useridInput.touched)" class="text-danger">

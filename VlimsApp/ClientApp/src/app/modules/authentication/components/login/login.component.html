@@ -15,43 +15,42 @@
       <p class="mb-4">Sign in to your account to continue</p>
 
       <div class="floating-label-group">
-        <input
-        #usernameInput
-          type="text"
-          [(ngModel)]="user.UserID"
-          id="username"
-          name="username"
-          class="form-control"
-          autocomplete="off"         
-          autofocus
-          required
-        />
+        <input #usernameInput
+               type="text"
+               [(ngModel)]="user.UserID"
+               id="username"
+               name="username"
+               class="form-control"
+               autocomplete="off"
+               autofocus
+               required />
         <label class="floating-label">Username</label>
       </div>
 
       <div class="floating-label-group">
-        <input
-          type="password"
-          [(ngModel)]="user.Password"
-          id="password"
-          name="password"
-          class="form-control"
-          autocomplete="off"         
-          required
-        />
-         <label class="floating-label">Password</label> 
+        <input type="password"
+               [(ngModel)]="user.Password"
+               id="password"
+               name="password"
+               class="form-control"
+               autocomplete="off"
+               required />
+        <label class="floating-label">Password</label>
       </div>
 
       <!-- <div class="mb-2 f-pwd">
-        <a class="fs-xs">Forgot password?</a>
-      </div> -->
+    <a class="fs-xs">Forgot password?</a>
+  </div> -->
 
       <div class="text-center mb-3">
         <button class="btn btn-primary w-100">Login</button>
       </div>
+      <div class="text-center mb-3" *ngIf="loginAttemptsCout != 0 && loginAttemptsCout<4">
+        <span>Invalid Password Attempts {{loginAttemptsCout}} of 3</span>
+      </div>
       <!-- <div class="text-center mb-3 pt-4">
-        Don't have an account? <a>Sign up</a>
-      </div> -->
+    Don't have an account? <a>Sign up</a>
+  </div> -->
     </form>
   </div>
 </div>

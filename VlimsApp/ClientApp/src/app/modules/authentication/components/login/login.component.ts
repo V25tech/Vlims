@@ -24,6 +24,7 @@ export class LoginComponent {
   roles: functionalprofile[] = [];
   username: string = '';
   password: string = '';
+  loginAttemptsCout: number = 0;
   constructor(private router: Router, private loginService: LoginService, private userssvc: UsersconfigurationService,
     private toastr: ToastrService,
     private renderer: Renderer2,
@@ -74,24 +75,29 @@ export class LoginComponent {
     //     }
     //   }
     //   else{
+    if (this.loginAttemptsCout < 3) {
+      this.userssvc.login(this.user).subscribe((data: any) => {
 
-    this.userssvc.login(this.user).subscribe((data: any) => {
+        this.user = data;
+        this.commonsvc.setUser(this.user);
+        if (this.user.UserID.toLowerCase() === "admin") {
 
-      this.user = data;
-      this.commonsvc.setUser(this.user);
-      if (this.user.UserID.toLowerCase() === "admin") {
-
-        this.loginService.updateuser(this.roles, this.user);
-        this.commonsvc.setadminroles();
-      }
-      else {
-        this.loginService.updateuser(this.roles, this.user);
-      }
-      this.isvaliduser();
-    }, (error: any) => {
+          this.loginService.updateuser(this.roles, this.user);
+          this.commonsvc.setadminroles();
+        }
+        else {
+          this.loginService.updateuser(this.roles, this.user);
+        }
+        this.isvaliduser();
+      }, (error: any) => {
+        this.loader.hide();
+        this.loginAttemptsCout++;
+        this.toastr.error('login failed');
+      });
+    } else {
+      this.toastr.warning("Please try after sometime");
       this.loader.hide();
-      this.toastr.error('login failed');
-    });
+    }
     //}
 
   }

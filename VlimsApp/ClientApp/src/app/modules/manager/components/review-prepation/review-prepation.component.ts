@@ -313,7 +313,6 @@ export class ReviewPrepationComponent {
     }
 
     savePreparation() {
-        debugger
         this.spinner.show();
       if (!this.viewMode && (this.preparation.status == 'Rejected' || this.preparation.status == 'Returned')) {
             this.preparation.status = 'In-Progress';
@@ -330,7 +329,6 @@ export class ReviewPrepationComponent {
             }
         }
         if (this.istemplateused) {
-            debugger
             this.templateService.adddoctemplate(this.clonetemp).subscribe((data: any) => {
             });
         }

@@ -23,67 +23,70 @@
       <form (ngSubmit)="addTemplate()" #fm="ngForm">
         <div class="p-4 bg-white shadow-dark rounded-2">
           <div class="form-group row">
-            <label for="templateName" class="col-sm-2 col-form-label">Template Name <span
-                style="color: red; font-weight: bolder;">*</span></label>
+            <label for="templateName" class="col-sm-2 col-form-label">
+              Template Name <span style="color: red; font-weight: bolder;">*</span>
+            </label>
             <div class="col-sm-10">
               <input type="text" class="form-control mw-350" id="Templatename" name="Templatename"
-                placeholder="Template Name" [(ngModel)]="templateForm.Templatename" [disabled]="editMode" required
-                #TemplatenameInput="ngModel" />
+                     placeholder="Template Name" [(ngModel)]="templateForm.Templatename" [disabled]="editMode" required
+                     #TemplatenameInput="ngModel" />
               <div *ngIf="TemplatenameInput.invalid && (TemplatenameInput.dirty || TemplatenameInput.touched)"
-                class="text-danger">
+                   class="text-danger">
                 Enter Template Name
               </div>
             </div>
           </div>
           <div class="form-group row">
-            <label for="ucode" class="col-sm-2 col-form-label">Unique Code <span
-                style="color: red; font-weight: bolder;">*</span></label>
+            <label for="ucode" class="col-sm-2 col-form-label">
+              Unique Code <span style="color: red; font-weight: bolder;">*</span>
+            </label>
             <div class="col-sm-10">
               <input type="text" class="form-control mw-350" id="ucode" name="ucode" placeholder="Enter Prefix"
-                [(ngModel)]="templateForm.Uniquecode" readonly disabled required #ucodeInput="ngModel" />
+                     [(ngModel)]="templateForm.Uniquecode" readonly disabled required #ucodeInput="ngModel" />
 
             </div>
           </div>
           <div class="form-group row">
-            <label for="docType" class="col-sm-2 col-form-label">Document Type <span
-                style="color: red; font-weight: bolder;">*</span></label>
+            <label for="docType" class="col-sm-2 col-form-label">
+              Document Type <span style="color: red; font-weight: bolder;">*</span>
+            </label>
             <div class="col-sm-10">
               <p-dropdown [options]="typesDatasource" [(ngModel)]="selectedtype" placeholder="Select Document Type"
-                optionLabel="Documenttypename" id="types" name="types" [autoDisplayFirst]="false" [required]="true"
-                #DocumenttypenameInput="ngModel">
+                          optionLabel="Documenttypename" id="types" name="types" [autoDisplayFirst]="false" [required]="true"
+                          #DocumenttypenameInput="ngModel">
               </p-dropdown>
-              <div
-                *ngIf="!selectedtype && DocumenttypenameInput.invalid && (DocumenttypenameInput.dirty || DocumenttypenameInput.touched)"
-                class="text-danger">
+              <div *ngIf="!selectedtype && DocumenttypenameInput.invalid && (DocumenttypenameInput.dirty || DocumenttypenameInput.touched)"
+                   class="text-danger">
                 Document Type is required
               </div>
             </div>
           </div>
           <!--<div class="form-group row">
-          <label for="templateName" class="col-sm-2 col-form-label">No. Of Pages <span style="color: red; font-weight: bolder;">*</span></label>
-          <div class="col-sm-10">
-            <input type="text"
-                   class="form-control mw-350"
-                   id="noofpages"
-                   name="noofpages"
-                   placeholder="No. of Pages"
-                   [(ngModel)]="templateForm.Pages" [disabled]="editMode"   (change)="generatePages()"
-                   required
-                     #noofpagesInput="ngModel"
-                      />
-                      <div *ngIf="noofpagesInput.invalid && (noofpagesInput.dirty || noofpagesInput.touched)" class="text-danger">
-                        Enter No. Of Pages
-                      </div>
-          </div>
-        </div>-->
+    <label for="templateName" class="col-sm-2 col-form-label">No. Of Pages <span style="color: red; font-weight: bolder;">*</span></label>
+    <div class="col-sm-10">
+      <input type="text"
+             class="form-control mw-350"
+             id="noofpages"
+             name="noofpages"
+             placeholder="No. of Pages"
+             [(ngModel)]="templateForm.Pages" [disabled]="editMode"   (change)="generatePages()"
+             required
+               #noofpagesInput="ngModel"
+                />
+                <div *ngIf="noofpagesInput.invalid && (noofpagesInput.dirty || noofpagesInput.touched)" class="text-danger">
+                  Enter No. Of Pages
+                </div>
+    </div>
+  </div>-->
 
 
           <div class="form-group row">
-            <label for="templateName" class="col-sm-2 col-form-label">Format No.<span
-                style="color: red; font-weight: bolder;">*</span></label>
+            <label for="templateName" class="col-sm-2 col-form-label">
+              Format No.<span style="color: red; font-weight: bolder;">*</span>
+            </label>
             <div class="col-sm-10">
               <input type="text" class="form-control mw-350" id="formatno" name="formatno" placeholder="Format No."
-                [(ngModel)]="templateForm.FormatNo" required #formatnoInput="ngModel" />
+                     [(ngModel)]="templateForm.FormatNo" required #formatnoInput="ngModel" />
               <div *ngIf="formatnoInput.invalid && (formatnoInput.dirty || formatnoInput.touched)" class="text-danger">
                 Format No.
               </div>
@@ -97,7 +100,7 @@
             <label for="templateName" class="col-sm-2 col-form-label">Logo</label>
             <div class="col-sm-10" *ngIf="templateForm.header==null || templateForm.header==''">
               <input type="file" class="form-control mw-350" id="logoUpload" (change)="onLogoUpload($event)"
-                accept="image/*" z />
+                     accept="image/*" z />
             </div>
             <div *ngIf="templateForm.header" class="col-sm-9">
               {{templateForm.header}}
@@ -111,19 +114,35 @@
             <label for="templateName" class="col-sm-2 col-form-label">Master Logo</label>
             <div class="col-sm-10" *ngIf="templateForm.footer==null || templateForm.footer==''">
               <input type="file" class="form-control mw-350" id="logoUpload" (change)="onLogoUpload1($event)"
-                accept="image/*" z />
+                     accept="image/*" z />
             </div>
             <div *ngIf="templateForm.footer" class="col-sm-9">
               {{templateForm.footer}}
               <button type="button" class="btn btn-danger mx-2" (click)="onDeleteFile1()">Delete</button>
             </div>
           </div>
-
-          
+          <div class="form-group row">
+            <label for="title" class="col-sm-2 col-form-label">Title<span style="color: red; font-weight: bolder;">*</span></label>
+            <div class="col-sm-10">
+              <textarea type="a"
+                        class="form-control mw-350"
+                        id="tite"
+                        name="title"
+                        placeholder="Title"
+                        [(ngModel)]="headerData[0][0].inputValue" [disabled]="editMode"
+                        required
+                        #title="ngModel"></textarea>
+              <div *ngIf="title.invalid && (title.dirty || title.touched)" class="text-danger">
+                Enter Title
+              </div>
+            </div>
+          </div>
         </div>
+          
+
       </form>
 
-      <div class="p-4 mt-3 bg-white shadow-dark rounded-2">
+      <!--<div class="p-4 mt-3 bg-white shadow-dark rounded-2">
         <h5 class="page-card-title">Title</h5>
         <div class="template-block">
           <div class="template-grid">
@@ -141,13 +160,13 @@
                                 {{ option.name }}
                               </option>
                             </select>
-                          </div>
+                          </div>-->
                           <!-- <input [(ngModel)]="
                           headerData[rowIndex][colIndex].inputValue
                             " [placeholder]="headerData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"
                                  class="form-control"
                                  type="text" /> -->
-                          <textarea class="form-control" style="height: 33px;"
+                          <!--<textarea class="form-control" style="height: 33px;"
                             [(ngModel)]="headerData[rowIndex][colIndex].inputValue"
                             [placeholder]="headerData[rowIndex][colIndex].selectedOption === 1 ? 'Enter label' : 'Enter Value'"></textarea>
                         </div>
@@ -159,7 +178,7 @@
             </ng-container>
           </div>
         </div>
-      </div>
+      </div>-->
       <!-- <div class="p-4 mt-3 bg-white shadow-dark rounded-2">
     <h5 class="page-card-title">Header Template-(4 Col max.)</h5>
     <div class="template-block">

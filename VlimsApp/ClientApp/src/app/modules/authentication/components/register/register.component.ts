@@ -192,7 +192,7 @@ export class RegisterComponent implements OnInit {
   }
   calculateTotalUsers(): void {
     if (this.adduser.FirstName != null || this.adduser.LastName != null) {
-      this.adduser.UserID = this.adduser.FirstName + this.adduser.LastName;
+      //this.adduser.UserID = this.adduser.FirstName + this.adduser.LastName;
 
     }
   }

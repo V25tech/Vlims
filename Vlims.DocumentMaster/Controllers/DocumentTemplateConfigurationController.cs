@@ -291,7 +291,7 @@ namespace Vlims.Controllers
             var totalPages = document.PageCount - 1;
             if (!p_IsShortHeader)
             {
-                headerbuilder.Append(TemplatePreparation.PrepareShortHeader(template, template1, i + 1, preparation, totalPages));
+                headerbuilder.Append(TemplatePreparation.PrepareShortHeader(template, template1, i + 1, preparation, totalPages, p_user));
             }
             else if (template.documenttype.Equals("BATCH PACKING RECORD 08", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -718,7 +718,7 @@ namespace Vlims.Controllers
                 supersedesNo = (template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? Convert.ToString(template1.Supersedes) : "0") : "0");
 
             //if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-1wig\">{supersedesNo}</td>");
             //else
             //    htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
             htmlBuilder.AppendLine("  </tr>");
@@ -728,7 +728,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Effective Date</td>");
             if (template1 != null && !string.IsNullOrEmpty(template1.EffectiveDate))
             {
-                string formatteddate = template1.EffectiveDate.Replace('-', '/');//.getformatteddate(template1.EffectiveDate);
+                string formatteddate = Convert.ToDateTime(template1.EffectiveDate).ToString("dd-MM-yyyy").Replace('-', '/');
                 htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{formatteddate}</td>");
             }
             else
@@ -742,7 +742,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Review Date</td>");
             if (template1 != null && !string.IsNullOrEmpty(template1.ReviewDate))
             {
-                string formatteddate = template1.ReviewDate.Replace('-', '/');//getformatteddate(template1.ReviewDate);
+                string formatteddate = Convert.ToDateTime(template1.ReviewDate).ToString("dd-MM-yyyy").Replace('-', '/');
                 htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{formatteddate}</td>");
             }
             else
@@ -756,7 +756,7 @@ namespace Vlims.Controllers
             return table;
 
         }
-        public static string PrepareShortHeader(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo, DocumentPreparation preparation, int totalPages)
+        public static string PrepareShortHeader(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo, DocumentPreparation preparation, int totalPages, string p_user)
         {
             string table = string.Empty;
             StringBuilder sb = new StringBuilder();
@@ -807,10 +807,11 @@ namespace Vlims.Controllers
             sb.AppendLine("  </tr>");
             sb.AppendLine("</tbody>");
             sb.AppendLine("</table>");
+
             table = sb.ToString();
             return table;
 
-        }
+        }       
         public static string PrepareSTPHeader(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo, DocumentPreparation preparation)
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -909,7 +910,7 @@ namespace Vlims.Controllers
             else
                 supersedesNo = (template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? Convert.ToString(template1.Supersedes) : "0") : "0");
 
-            stringBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-1wig\">{supersedesNo}</td>");
 
             //if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
             //    stringBuilder.AppendLine($"    <td class=\"tg-1wig\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : 0) : 0)}</td>");
@@ -930,8 +931,8 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Effective Date</td>");
             if (template1 != null && !string.IsNullOrEmpty(template1.EffectiveDate))
             {
-                string formattedDate = getformatteddate(template1.EffectiveDate);
-                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{formattedDate}</td>");
+                string formatteddate = Convert.ToDateTime(template1.EffectiveDate).ToString("dd-MM-yyyy").Replace('-', '/');
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{formatteddate}</td>");
             }
             else
                 stringBuilder.AppendLine($"<td class=\"tg-1wig\">---</td>");
@@ -939,8 +940,8 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine(@"<td class=""tg-1wig"">Review Date</td>");
             if (template1 != null && !string.IsNullOrEmpty(template1.ReviewDate))
             {
-                string formattedDate = getformatteddate(template1.ReviewDate);
-                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{formattedDate}</td>");
+                string formatteddate = Convert.ToDateTime(template1.ReviewDate).ToString("dd-MM-yyyy").Replace('-', '/');
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{formatteddate}</td>");
             }
             else
                 stringBuilder.AppendLine($"<td class=\"tg-1wig\">---</td>");
@@ -1051,7 +1052,7 @@ namespace Vlims.Controllers
             else
                 supersedesNo = (template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? Convert.ToString(template1.Supersedes) : "0") : "0");
 
-            stringBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
+            stringBuilder.AppendLine($"    <td class=\"tg-1wig\">{supersedesNo}</td>");
             //if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation.Prepdocument?.supersedesNo))
             //    stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? preparation.Prepdocument.supersedesNo : "test") : "test")}</td>");
             //else
@@ -1059,8 +1060,8 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine("<td class=\"tg-1wig\">EFFECTIVE DATE</td>");
             if (template1 != null && !string.IsNullOrEmpty(template1.EffectiveDate))
             {
-                string formattedDate = getformatteddate(template1.EffectiveDate);
-                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{formattedDate}</td>");
+                string formatteddate = Convert.ToDateTime(template1.EffectiveDate).ToString("dd-MM-yyyy").Replace('-', '/');
+                stringBuilder.AppendLine($"<td class=\"tg-1wig\">{formatteddate}</td>");
             }
             else
                 stringBuilder.AppendLine($"<td class=\"tg-1wig\">---</td>");

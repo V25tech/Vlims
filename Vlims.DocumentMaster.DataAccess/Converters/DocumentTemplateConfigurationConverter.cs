@@ -75,7 +75,10 @@ namespace Vlims.DocumentMaster.DataAccess
                                 documentTemplateConfigurationData.Pages = person.Pages;
                                 documentTemplateConfigurationData.FormatNo = person.FormatNo;
                                 if (person.titleTable != null)
+                                {
                                     documentTemplateConfigurationData.titleTable = person.titleTable;
+                                }
+                                    
                             }
                         }
                         documentTemplateConfigurationData.CreatedBy = Convert.ToString(row[DocumentTemplateConfigurationConstants.CreatedBy.Trim('@')]);
@@ -85,6 +88,8 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.Status = Convert.ToString(row[DocumentTemplateConfigurationConstants.Status.Trim('@')]);
                         result.Add(documentTemplateConfigurationData);
                     }
+                    result = SetPlantNameandPlantAddressTodocTemplate(result, dataset.Tables[1]);
+
                 }
                 return result;
             }
@@ -93,6 +98,46 @@ namespace Vlims.DocumentMaster.DataAccess
                 throw;
             }
         }
+
+        private static List<DocumentTemplateConfiguration> SetPlantNameandPlantAddressTodocTemplate(List<DocumentTemplateConfiguration> result, DataTable dataTable)
+        {
+            List<DocumentTemplateConfiguration> document = new List<DocumentTemplateConfiguration >();
+            try
+            {
+                if(result != null && result.Count > 0)
+                {
+                    foreach (var item in result)
+                    {
+                        if (item.titleTable != null)
+                        {
+                            if (dataTable != null && dataTable.Rows != null && dataTable.Rows.Count > 0)
+                            {
+                                foreach (DataRow row in dataTable.Rows)
+                                {
+                                    List<string> titleData = new List<string>();
+                                    titleData = item.titleTable[0][0].inputValue.Split("\n").ToList();
+                                    if (titleData != null && titleData.Count > 0)
+                                    {
+                                        titleData[0] = Convert.ToString(row["PlantName_PSY"]);
+                                        if (titleData.Count > 1)
+                                            titleData[1] = Convert.ToString(row["PlantAddress_PSY"]);
+                                        item.titleTable[0][0].inputValue = string.Join("\n", titleData);
+                                    }                                     
+                                }
+                            }
+                        }
+                        document.Add(item);
+                    }
+                }                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return document;
+        }
+
         public static List<DocumentTemplateConfiguration> SetAllDocumentTemplateHeaderFooterConfiguration(DataSet dataset)
         {
             try

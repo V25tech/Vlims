@@ -69,7 +69,6 @@ export class DocumentPrintComponent implements OnInit {
     };
     return this.doctypeservice.GetDocumentPrint(objrequest).subscribe((data: any) => {
       if(data!=null&&data.response!=null&&data.response.length>0){
-        debugger;
         data.response.forEach((item:any)=>{
           item.modifiedDate=this.commonsvc.setDate(item.modifiedDate)
         })
