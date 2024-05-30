@@ -277,6 +277,10 @@ namespace Vlims.Controllers
             footerbuilder.Append(htmlUpper);
             if (p_IsShortHeader)
                 footerbuilder.Append(TemplatePreparation.PrepareStaticdiv(template, template1, p_user));
+            if (!p_IsShortHeader)
+            {
+                footerbuilder.Append(TemplatePreparation.PrepareshortheaderFooterdiv(template, template1, p_user));
+            }
             footerbuilder.Append(htmllower);
             footerParagraph.AppendHTML(footerbuilder.ToString());
             footerParagraph.Format.BeforeSpacing = 0;
@@ -401,6 +405,7 @@ namespace Vlims.Controllers
             StringBuilder footerbuilder = new StringBuilder();
             footerbuilder.Append(htmlUpper);
             footerbuilder.Append(TemplatePreparation.PrepareStaticdiv(template, template1, p_user));
+
             footerbuilder.Append(htmllower);
             footerParagraph.AppendHTML(footerbuilder.ToString());
             footerParagraph.Format.BeforeSpacing = 0;
@@ -1247,5 +1252,56 @@ namespace Vlims.Controllers
             bytes = System.IO.File.ReadAllBytes(path);
             return bytes;
         }
+
+        public static string PrepareshortheaderFooterdiv(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, string p_user)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("<style type=\"text/css\">");
+            sb.AppendLine(".tg  {border-collapse:collapse;border-spacing:0;}");
+            sb.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;");
+            sb.AppendLine("  overflow:hidden;padding:10px 5px;word-break:normal;}");
+            sb.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;");
+            sb.AppendLine("  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}");
+            sb.AppendLine(".tg .tg-hqd7{border-color:#ffffff;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
+            sb.AppendLine("</style>");
+            sb.AppendLine("<table class=\"tg\"><thead>");
+            sb.AppendLine("  <tr>");
+            sb.AppendLine($"<td class=\"tg-hqd7\"><span style=\"font-weight:bold;font-size:9px\">Format No : {(template != null ? template.FormatNo : "")}</span><br>");
+            #region date
+            // Get the local time zone
+            TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+
+            // Get the time zone by its ID (for example, "Eastern Standard Time")
+            TimeZoneInfo targetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+
+            // Get the current date and time
+            DateTime currentTime = DateTime.Now;
+
+            // Convert the current time to the target time zone
+            DateTime targetTime = TimeZoneInfo.ConvertTime(currentTime, localTimeZone, targetTimeZone);
+            //Console.WriteLine("Current Time (Target): " + targetTime.ToString("dd-MM-yyyy HH:mm:ss"));
+            #endregion
+            if (!string.IsNullOrEmpty(template1.PrintCopy))
+            {
+                sb.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">Print Type: {template1.PrintCopy}, Printed By: {p_user}, Printed On: {targetTime.ToString("dd-MM-yyyy HH:mm:ss")}</span><br>");
+            }
+            if (!string.IsNullOrEmpty(template1.PrintReason))
+            {
+                sb.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">Print Reason: {template1.PrintReason}</span>");
+            }
+            if (!string.IsNullOrEmpty(template1.PrintReason))
+            {
+                sb.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">, Print Count: {template1.PrintCount}</span>");
+            }
+            //sb.AppendLine("    <td class=\"tg-hqd7\">Format No : {(template != null ? template.FormatNo : \"\")}<br>Print Type : MAster Copy, Printed By : Admin, Printed On : 2-5-2024<br>Print Reason : Sample, Print Count : 10</td>");
+            sb.AppendLine("  </tr></thead>");
+            sb.AppendLine("</table>");
+
+            string htmlString = sb.ToString();
+            return htmlString;
+
+        }
+
     }
 }

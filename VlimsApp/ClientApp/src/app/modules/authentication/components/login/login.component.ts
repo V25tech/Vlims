@@ -97,6 +97,7 @@ export class LoginComponent {
     } else {
       this.toastr.warning("Please try after sometime");
       this.loader.hide();
+      this.loginAttemptsCout = 0;
     }
     //}
 
