@@ -322,8 +322,7 @@ export class ReviewPrepationComponent {
             this.preparation.status = this.finalStatus;
         }
       if (this.lstpreparations != undefined && this.lstpreparations.length > 0) {
-           debugger
-            let existingPreparation = this.lstpreparations.find(o => o.documentno.toLowerCase() === this.preparation.documentno.toLowerCase() && o.dpnid != this.preparation.dpnid);
+        let existingPreparation = this.lstpreparations.find(o => o.documentno.toLowerCase() === this.preparation.documentno.toLowerCase() && o.dpnid != this.preparation.dpnid && o.status != 'REVISED');
         if (existingPreparation) {
           this.spinner.hide();
               this.toastr.error("Duplicate Document No.");

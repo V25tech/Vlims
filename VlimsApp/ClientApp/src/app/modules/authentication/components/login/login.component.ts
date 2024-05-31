@@ -127,7 +127,7 @@ export class LoginComponent {
 
 
     let coutDownDays = this.compareDateWithToday(this.user.ModifiedDate, 60);
-    if (coutDownDays < 7) {
+    if (coutDownDays < 7 && coutDownDays >= 0) {
       const toastrConfig: Partial<IndividualConfig> = {
         tapToDismiss: false, // Prevent automatic dismissal
         closeButton: true // Optionally, show the close button
