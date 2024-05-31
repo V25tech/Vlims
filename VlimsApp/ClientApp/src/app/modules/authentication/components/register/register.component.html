@@ -80,17 +80,32 @@
           <div class="form-group row">
             <label for="userid" class="col-sm-2 col-form-label">User ID<span style="color: red; font-weight: bolder;">*</span></label>
             <div class="col-sm-10">
+              <!--<input type="text"
+  class="form-control"
+  id="userid"
+  name="userid"
+  placeholder="Enter User ID"
+  [(ngModel)]="adduser.UserID"  [disabled]="editMode"
+  required
+  #useridInput="ngModel"/>-->
+              <!--<div *ngIf="useridInput.invalid && (useridInput.dirty || useridInput.touched)" class="text-danger">
+    User ID is required
+  </div>-->
+
               <input type="text"
                      class="form-control"
                      id="userid"
                      name="userid"
                      placeholder="Enter User ID"
-                     [(ngModel)]="adduser.UserID"  [disabled]="editMode" 
+                     [(ngModel)]="adduser.UserID"
+                     [disabled]="editMode"
+                     pattern="^[a-zA-Z0-9.@_]+$"
                      required
-                     #useridInput="ngModel"/>
-                     <div *ngIf="useridInput.invalid && (useridInput.dirty || useridInput.touched)" class="text-danger">
-                     User ID is required
-                    </div>
+                     #useridInput="ngModel" />
+              <div *ngIf="useridInput.invalid && (useridInput.dirty || useridInput.touched)" class="text-danger">
+                <div *ngIf="useridInput.errors?.['required']">User ID is required.</div>
+                <div *ngIf="useridInput.errors?.['pattern']">User ID can only contain letters, numbers, dots, @, and underscores.</div>
+              </div>
 
             </div>
           </div>

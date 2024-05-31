@@ -166,7 +166,7 @@ export class ReviewPrepationComponent {
 
     ngOnInit() {
         this.getusers();
-        debugger
+         
         const user = localStorage.getItem("username");
         if (user != null && user != undefined) {
             this.commonsvc.createdBy = user;
@@ -217,7 +217,7 @@ export class ReviewPrepationComponent {
         this.spinner.show();
         return this.docPreperationService.getbyId(arg0).subscribe((data: any) => {
             this.preparation = data;
-            debugger
+             
             if (this.preparation.template != '' && this.preparation.template != undefined) {
                 this.istemplate = true;
             }
@@ -242,7 +242,7 @@ export class ReviewPrepationComponent {
         this.modalRef = this.modalService.show(esign, { class: 'modal-lg' });
     }
     viewprint(esign: TemplateRef<any>,viewdoc:TemplateRef<any>) {
-        debugger
+         
         // Open the modal
         this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
     }
@@ -321,10 +321,12 @@ export class ReviewPrepationComponent {
             this.preparation.ModifiedBy = this.commonsvc.createdBy;
             this.preparation.status = this.finalStatus;
         }
-        if (this.lstpreparations != undefined && this.lstpreparations.length > 0) {
-            const existingPreparation = this.lstpreparations.find(o => o.documentno.toLowerCase() === this.preparation.documentno.toLowerCase() && o.dpnid != this.preparation.dpnid);
-            if (existingPreparation) {
-                this.toastr.error("Duplicate Document No.");
+      if (this.lstpreparations != undefined && this.lstpreparations.length > 0) {
+           debugger
+            let existingPreparation = this.lstpreparations.find(o => o.documentno.toLowerCase() === this.preparation.documentno.toLowerCase() && o.dpnid != this.preparation.dpnid);
+        if (existingPreparation) {
+          this.spinner.hide();
+              this.toastr.error("Duplicate Document No.");
                 return;
             }
         }
@@ -364,7 +366,7 @@ export class ReviewPrepationComponent {
         //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
         //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
         //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-        //   debugger
+        //    
 
         //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
         // }
@@ -405,7 +407,7 @@ export class ReviewPrepationComponent {
         });
     }
     istemplatecheck(event: any) {
-        debugger
+         
         this.spinner.show();
         this.istemplateused = false;
         this.templateService.isduplicate(this.preparation.template).subscribe((data: any) => {
@@ -541,7 +543,7 @@ export class ReviewPrepationComponent {
         });
     }
     edittemplate(template: string) {
-        debugger
+         
         const obj = this.templatesSource.find(o => o.Templatename === template);
         const isclone = this.templatesSourceall.find(o => o.PreparationId == parseInt(this.preparation.dpnid));
         if (isclone != null && isclone != undefined && obj != null && obj != undefined) {
@@ -555,7 +557,7 @@ export class ReviewPrepationComponent {
     }
 
     getLabelMappings() {
-        debugger
+         
         let exist = this.document_preparaion_mappings.find((p: any) => p.operatingProcedure.toLowerCase() == this.preparation.documenttype.toLowerCase());
         if (exist) {
             this.lableMappings = exist.lables as DocPrep_LableMapping;

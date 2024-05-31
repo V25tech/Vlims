@@ -705,7 +705,7 @@ namespace Vlims.Controllers
             //htmlBuilder.AppendLine("    <td class=\"tg-iucd\" colspan=\"2\">Title: Preparation, checking, approval, control, distribution, <br>revision, retrieval &amp; destruction of standard operating procedure</td>");
             //htmlBuilder.AppendLine($"   <td class=\"ttg-iucd\" colspan=\"t2\"t><span style=\"tfont-weight:bold\"t>Title:</span> {template1.DocumentTitle}</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\" colspan=\"2\"><span style=\"font-weight:bold\">Title:</span> {(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "---") : "---")}</td>");
-            htmlBuilder.AppendLine($"<td class=\"tg-1wig\">{(documentTypeNumber)}</td>");
+            htmlBuilder.AppendLine($"<td class=\"tg-iucd\">{(documentTypeNumber)}</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "---") : "---")}</td>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("  <tr>");
@@ -723,7 +723,7 @@ namespace Vlims.Controllers
                 supersedesNo = (template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? Convert.ToString(template1.Supersedes) : "0") : "0");
 
             //if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
-            htmlBuilder.AppendLine($"    <td class=\"tg-1wig\">{supersedesNo}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
             //else
             //    htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
             htmlBuilder.AppendLine("  </tr>");
