@@ -5,7 +5,6 @@ import { Table } from 'primeng/table';
 import { DocumentTypeConfiguration, PlantConfiguration, RequestContext } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { PlantmanagementService } from '../../../services/plantmanagement.service';
-import { NewPlantRegistrationComponent } from '../New-plant-registration/new-plant-registration.component';
 
 @Component({
   selector: 'app-plantmanagement',

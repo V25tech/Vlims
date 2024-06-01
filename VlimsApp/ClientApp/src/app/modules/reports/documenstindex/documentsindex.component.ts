@@ -126,9 +126,9 @@ export class DocumentsIndexComponent implements OnInit {
     }
   
     // Adjust the width of the date columns
-    styles['1'] = { columnWidth: 95}; // Effective Date
+    styles['1'] = { columnWidth: 95 }; // Effective Date
     styles['2'] = { columnWidth: 95 }; // Effective Date
-    styles['3'] = { columnWidth: 95}; // Effective Date
+    styles['3'] = { columnWidth: 95 }; // Effective Date
     styles['4'] = { columnWidth: 95 }; // Effective Date
     styles['5'] = { columnWidth: 95 }; // Review Date
   
@@ -136,12 +136,17 @@ export class DocumentsIndexComponent implements OnInit {
       columns: this.exportColumns,
       body: this.documents.exisitingDocuments,
       didDrawPage: (dataArg) => {
-        doc.text('Documents', dataArg.settings.margin.bottom, 1);
+        // Adjusting the title position
+        doc.setFontSize(14); // Set font size for the title
+        doc.text('Documents', dataArg.settings.margin.left, 30); // Title position
       },
+      margin: { top: 50 }, // Adjust top margin to prevent overlapping with title
       columnStyles: styles // Assign column styles to columnStyles property
     });
+  
     doc.save('documents.pdf');
   }
+  
   
 
 }

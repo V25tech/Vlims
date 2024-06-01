@@ -39,6 +39,7 @@ namespace Vlims.Controllers
     using iTextSharp.text.pdf.qrcode;
     using System.Drawing;
     using Microsoft.AspNetCore.Http;
+    using Spire.Doc.Fields;
 
 
     /// <summary>
@@ -337,11 +338,27 @@ namespace Vlims.Controllers
             HeaderFooter footer1 = section.HeadersFooters.Footer;
             // Add "page number / page count" to the footer
 
-            Paragraph footerParagraph1 = footer1.AddParagraph();
-            footerParagraph1.AppendText("Page No - ");
-            footerParagraph1.AppendField("page number", Spire.Doc.FieldType.FieldPage);
+            //Paragraph footerParagraph1 = footer1.AddParagraph();
+            //footerParagraph1.AppendText("Page No - ");
+            //footerParagraph1.AppendField("page number", Spire.Doc.FieldType.FieldPage);
             //totalPages = document.PageCount - 1;
             //footerParagraph1.AppendText(" of " + totalPages);
+
+
+            Paragraph footerParagraph1 = footer1.AddParagraph();
+            footerParagraph1.Format.HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment.Right;
+
+
+            // Append text to the footer paragraph
+            TextRange textRange = footerParagraph1.AppendText("Page No - ");
+            textRange.CharacterFormat.FontName = "Times New Roman"; // Set font style
+            textRange.CharacterFormat.FontSize = 8; // Set font size
+
+            // Append the page number field to the footer paragraph
+            TextRange pageNumber = footerParagraph1.AppendField("page number", Spire.Doc.FieldType.FieldPage) as Spire.Doc.Fields.TextRange;
+            pageNumber.CharacterFormat.FontName = "Times New Roman"; // Set font style
+            pageNumber.CharacterFormat.FontSize = 9; // Set font size
+
 
 
             document.SaveToFile("DocumentWithMargins.docx", FileFormat.Docx2013);
@@ -816,7 +833,7 @@ namespace Vlims.Controllers
             table = sb.ToString();
             return table;
 
-        }       
+        }
         public static string PrepareSTPHeader(DocumentTemplateConfiguration template, DocumentTemplateConfiguration template1, int p_PageNo, DocumentPreparation preparation)
         {
             StringBuilder stringBuilder = new StringBuilder();

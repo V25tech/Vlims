@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@angular/core';
 import { PlantConfiguration, RequestContext } from '../../models/model';
 import { HttpbaseService } from '../../shared/httpbase.service';

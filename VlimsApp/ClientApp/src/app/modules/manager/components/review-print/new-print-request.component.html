@@ -173,6 +173,19 @@
               </div>
             </div>
 
+
+            <div *ngIf="viewMode" class="form-group row">
+              <label for="ReasonOrRemarks" class="col-sm-2 col-form-label">Reason(s)/Remark(s)<span style="color: red; font-weight: bolder;">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="reason" name="ReasonOrRemarks"
+                  [(ngModel)]="print.ReasonOrRemarks" #reasonInput="ngModel" [required]="true"/>
+                  <div *ngIf="reasonInput.invalid && (reasonInput.dirty || reasonInput.touched)" class="text-danger">
+                    Reason(s)/Remark(s) is Required. 
+                  </div>
+              </div>
+            </div>
+
+
           </fieldset>
           <!-- Single option controls end here -->
           <!-- Bulk option controls start here -->
@@ -324,7 +337,8 @@
               <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid || isButtonDisabled" *ngIf="!viewMode && !editMode">Submit</button>
               <button type="submit" class="btn btn-primary" [disabled]="!fm.form.valid" *ngIf="editMode">Update</button>
               <!-- <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="approve()">Approve</button> -->
-              <button type="button" class="col-xs-1 mx-2  btn btn-success" *ngIf="viewMode && !iscompleted" (click)="Proceed(eSignModal)">Proceed</button>
+              <button type="button" class="col-xs-1 mx-2  btn btn-success"  [disabled]="!fm.form.valid || isButtonDisabled" *ngIf="viewMode && !iscompleted" (click)="Proceed(eSignModal)">Proceed</button>
+              
               <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-primary" *ngIf="viewMode && !iscompleted" (click)="reinitiative()">Re-Initiative</button> -->
               <!-- <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-danger" *ngIf="viewMode && !iscompleted" (click)="reject()">Reject</button> -->
               <button type="button" class="col-xs-1 mx-2 offset-sm-1 btn btn-success" (click)="viewprint(viewdoc)">Preview</button>

@@ -37,6 +37,8 @@ public class DocumentPrintConstants
 
     public const string BatchSize = "@BatchSize";
 
+    public const string ReasonOrRemarks = "@ReasonOrRemarks_PSY";
+
     public const string Template = "@template_PSY";
     public const string ModifiedDate = "@ModifiedDate_PSY";
     public const string referenceid = "@Refrence_PSY";

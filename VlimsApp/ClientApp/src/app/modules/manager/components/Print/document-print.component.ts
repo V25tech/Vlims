@@ -225,6 +225,7 @@ export class DocumentPrintComponent implements OnInit {
   }
   UpdatePrintCount(objtemp: DocumentPrintConfiguration)
   {
+    debugger
     let reqObj = JSON.parse(JSON.stringify(objtemp))
     reqObj.modifiedDate = new Date(reqObj.ModifiedDate)
     reqObj.modifiedDate = reqObj.ModifiedDate    

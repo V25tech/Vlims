@@ -15,6 +15,7 @@ export class UsersconfigurationService {
     return this.http.postJsonLogin(objrequest, "api/userconfiguration/getusers",this.type);
 }
 adduser(objrequest: UserConfiguration) {
+  debugger
   
   return this.http.postJsonLogin(objrequest, "api/userconfiguration/saveuserconfiguration",this.type);
 }

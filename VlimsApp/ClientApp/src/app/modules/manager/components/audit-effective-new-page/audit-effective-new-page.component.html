@@ -20,13 +20,13 @@
               <!-- Initiation Section -->
               <div>
                   <h5 class="section-title">Initiation & Modification</h5>
-                  <div class="card-group">
+                  <div class="card-group-scroll">
                       <div class="card mb-3" *ngFor="let auditConfig of types; let i = index" [ngClass]="{'d-none': auditConfig.EntityInfo.Status !== 'IN-PROGRESS'}">
                           <div class="card-body">
-                              <div class="row">
-                                  <div class="col-sm-3"><strong>Version:</strong></div>
-                                  <div class="col-sm-9"><strong>{{ i }}</strong></div>
-                              </div>
+                            <div class="row">
+                                <div class="col-label"><strong>Version:</strong></div>
+                                <div class="col-value"><strong>{{ i | number:'2.0' }}</strong></div>
+                            </div>
                               <div class="row">
                                   <div class="col-sm-3"><strong>Document Title:</strong></div>
                                   <div class="col-sm-9">{{ auditConfig.EntityInfo.documenttitle }}</div>
@@ -79,7 +79,7 @@
               <!-- Review, Approve, Return, Reject Section -->
               <div>
                   <h5 class="section-title">Review/Approve/Return/</h5>
-                  <div class="card-group">
+                  <div class="card-group-scroll">
                       <div class="card mb-3" *ngFor="let auditConfig of types; let i = index" [ngClass]="{'d-none': auditConfig.EntityInfo.Status === 'IN-PROGRESS'}">
                           <div class="card-body">
                               <div class="row">

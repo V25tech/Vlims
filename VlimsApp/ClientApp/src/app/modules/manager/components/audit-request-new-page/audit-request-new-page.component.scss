@@ -11,3 +11,30 @@
 }
 
 
+.card-group-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+
+    .card {
+        flex: 0 0 auto;
+        margin-right: 10px;
+        min-width: 600px; /* Increased min-width for more content space */
+    }
+}
+
+.card-body .row {
+    white-space: nowrap;
+}
+
+.card-body .col-label {
+    flex: 0 0 30%; /* Adjust this value to increase/decrease label column width */
+    max-width: 20%;
+}
+
+.card-body .col-value {
+    flex: 1 0 80%; /* Adjust this value to increase/decrease value column width */
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

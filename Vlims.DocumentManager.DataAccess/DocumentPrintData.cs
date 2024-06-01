@@ -96,7 +96,9 @@ public static class DocumentPrintData
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.BatchSize, Value = documentPrint.BatchSize });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.ModifiedBy, Value = documentPrint.ModifiedBy });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.Status, Value = documentPrint.Status });
+            
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = "@PrintCopy_PSY", Value = documentPrint.PrintCopy });
+
             Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPrintConstants.USP_DocumentPrint_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
             return (Convert.ToInt32(result) > 0);
         }

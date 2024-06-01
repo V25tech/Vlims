@@ -311,12 +311,11 @@ export class ReviewEffectiveComponent {
       //this.previewtemplate(template);
     })
   }
-  viewprint(viewdoc:TemplateRef<any>) {
+  viewprint(template:TemplateRef<any>) {
     debugger
-    // Open the modal
-    this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
+    this.previewtemplate(template);
 }
-  previewtemplate(template: TemplateRef<any>,viewdoc: TemplateRef<any>) {
+  previewtemplate(template: TemplateRef<any>) {
     let id = 0;
     if (this.modalRef)
       this.modalRef.hide();

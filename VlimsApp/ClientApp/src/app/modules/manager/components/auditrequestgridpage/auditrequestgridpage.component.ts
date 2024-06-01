@@ -40,11 +40,8 @@ export class AuditrequestgridpageComponent {
     this.loader.show();
     this.commonsvc.req.type="RequestType";
     this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
-      debugger
       this.types = this.removeDuplicates(data, 'Unique'); // Filter duplicates based on EntityName
-      debugger
-      this.loader.hide();
-    }, er => {
+      this.types.reverse(); // Reverse the array here
       this.loader.hide();
     });
   }

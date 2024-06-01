@@ -32,7 +32,7 @@ export class AuditRequestNewPageComponent {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
       this.types = data;
-      
+  
       this.loader.hide();
     }, error => {
       this.loader.hide();

@@ -429,6 +429,7 @@ export class DocumentPrintConfiguration {
   public existingdocumentNumber:string='';
   public isactive:boolean=false;
   public prepId:number=0;
+  public ReasonOrRemarks: string = '';
 }
 
 export class ExistingDocumentRequest {

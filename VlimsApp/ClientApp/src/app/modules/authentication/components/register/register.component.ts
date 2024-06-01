@@ -140,6 +140,7 @@ export class RegisterComponent implements OnInit {
     else {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
+        debugger
         this.userservice.adduser(adduser).subscribe((res: any) => {
           this.loader.hide();
           this.toastr.success('user added successfully');
