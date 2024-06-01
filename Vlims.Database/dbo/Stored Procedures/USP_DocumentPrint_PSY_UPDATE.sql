@@ -1,8 +1,4 @@
-﻿
-
-
-
-  CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_UPDATE] @DRId_PSY int, @documenttitle_PSY NVarChar(150),
+﻿CREATE PROCEDURE [dbo].[USP_DocumentPrint_PSY_UPDATE] @DRId_PSY int, @documenttitle_PSY NVarChar(150),
 @printtype_PSY NVarChar(50),
 @documentno_PSY NVarChar(50),
 @noofcopies_PSY NVarChar(50),
@@ -46,6 +42,9 @@ UPDATE DocumentPrint_PSY SET documenttitle_PSY=NULL,documentno_PSY=NULL,printtyp
 reason_PSY=NULL,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY,@PrintCopy_PSY=null WHERE DRId_PSY=@DRId_PSY
 --UPDATE workitems_PSY SET Stage_PSY='Pending',Status_PSY='IN-PROGRESS',IsCompleted_PSY=0 WHERE RefrenceId_PSY=@DRId_PSY
 DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid_PSY
+--DELETING THE REJECTED DOCUMENT IN PRINT GRID PAGE
+DELETE FROM DocumentPrint_PSY WHERE DRId_PSY=@DRId_PSY 
+
 END
 ELSE IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
 BEGIN
@@ -69,6 +68,7 @@ END
 
 IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
+UPDATE  DocumentPrint_PSY SET Status_PSY=@Status_PSY WHERE DRId_PSY=@DRId_PSY
 EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DRId_PSY,@ModifiedBy_PSY,'PRINT',@ParentGuid_PSY
 END
 

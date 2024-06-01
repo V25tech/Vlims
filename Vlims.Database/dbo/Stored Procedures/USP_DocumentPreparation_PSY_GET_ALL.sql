@@ -26,6 +26,7 @@ WHERE ReferenceGuid_PSY = DE.GUID_DP), 0) AS IsEffApprvd,
 Refrence_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[DocumentPreparation_PSY] DE WITH (NOLOCK) 
+ WHERE Status_PSY != 'REVISED'
  Order by CreatedDate_PSY DESC  
  OFFSET @PageSize * (@PageNumber - 1) ROWS 
   FETCH NEXT @PageSize ROWS ONLY; 
