@@ -618,7 +618,7 @@ namespace Vlims.Controllers
             {
                 htmlBuilder.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">Print Reason: {template1.PrintReason}</span>");
             }
-            if (!string.IsNullOrEmpty(template1.PrintReason))
+            if (!string.IsNullOrEmpty(template1.PrintCount))
             {
                 htmlBuilder.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">, Print Count: {template1.PrintCount}</span>");
             }
@@ -1290,7 +1290,7 @@ namespace Vlims.Controllers
             {
                 sb.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">Print Reason: {template1.PrintReason}</span>");
             }
-            if (!string.IsNullOrEmpty(template1.PrintReason))
+            if (!string.IsNullOrEmpty(template1.PrintCount))
             {
                 sb.AppendLine($"<span style=\"font-weight:bold;font-size:9px\">, Print Count: {template1.PrintCount}</span>");
             }
