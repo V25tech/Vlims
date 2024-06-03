@@ -88,13 +88,13 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.Status = Convert.ToString(row[DocumentTemplateConfigurationConstants.Status.Trim('@')]);
                         result.Add(documentTemplateConfigurationData);
                     }
-                    if (dataset.Tables.Count >= 2)
-                    {
-                        if (dataset.Tables[1] != null & dataset.Tables[1].Rows != null && dataset.Tables[1].Rows.Count > 0)
-                        {
-                            result = SetPlantNameandPlantAddressTodocTemplate(result, dataset.Tables[1]);
-                        }
-                    }
+                    //if (dataset.Tables.Count >= 2)
+                    //{
+                    //    if (dataset.Tables[1] != null & dataset.Tables[1].Rows != null && dataset.Tables[1].Rows.Count > 0)
+                    //    {
+                    //        result = SetPlantNameandPlantAddressTodocTemplate(result, dataset.Tables[1]);
+                    //    }
+                    //}
                 }
                 return result;
             }
