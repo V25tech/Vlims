@@ -57,7 +57,7 @@ export class EffectivesComponent {
   }
 
   getStatusClass(status: string): string {
-    if (status === 'In Progress' || status === 'IN-PROGRESS') {
+    if (status === 'In-Progress' || status === 'IN-PROGRESS') {
       return 'status-in-progress';
     } else if (status === 'Rejected') {
       return 'status-reject';

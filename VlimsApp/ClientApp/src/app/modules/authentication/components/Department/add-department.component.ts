@@ -20,6 +20,7 @@ export class AddDepartmentComponent implements OnInit {
   departId: number = 0;
   editMode: boolean = false;
   title: string = 'Add Department Configuration';
+  isDuplicateDeptName: boolean = false; // Flag to track duplicate department name
 
   constructor(
     private commonsvc: CommonService,
@@ -77,6 +78,10 @@ export class AddDepartmentComponent implements OnInit {
     return this.griddata.some(dept => dept.DepartmentCode.toLowerCase() === departmentCode.toLowerCase());
   }
 
+  isDuplicateDepartmentName(departmentName: string): boolean {
+    return this.griddata.some(dept => dept.DepartmentName.toLowerCase() === departmentName.toLowerCase());
+  }
+
   update(newdept: DepartmentConfiguration) {
     this.loader.show();
     newdept.ModifiedBy = this.commonsvc.getUsername();
@@ -106,6 +111,14 @@ export class AddDepartmentComponent implements OnInit {
     
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
+
+      if (this.isDuplicateDepartmentName(newdept.DepartmentName)) {
+        this.toastr.error('Department Name already exists. Please choose a different name.');
+        this.loader.hide();
+        this.isButtonDisabled = false;
+        return;
+      }
+
       this.doctypeservice.adddepartment(newdept).subscribe((res: any) => {
         this.toastr.success('Department added successfully!', 'Saved.');
         this.loader.hide();
