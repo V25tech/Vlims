@@ -170,22 +170,23 @@ export class DocumentPrintComponent implements OnInit {
         {          
           this.toastr.error('Cannot Print the document as Print Count is more than No of Copies requested');
           return;
-        }
+      }
+      this.objProductType = objtemp;
+      // Open the modal
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
       // if(isduplicate){
       //   this.toastr.error('Template used in multiple preparations unable to view document');
       // }else{
       //   this.UpdatePrintCount(objtemp);
       //   this.previewtemplate(template,objtemp);
       // }
-      this.UpdatePrintCount(objtemp);
+      //this.UpdatePrintCount(objtemp);
       //this.previewtemplate(template,objtemp);
     })
   }
-  viewprint(viewdoc:TemplateRef<any>,objdoc:DocumentPrintConfiguration) {
-    debugger
-    this.objProductType=objdoc;
-    // Open the modal
-    this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
+  viewprint(viewdoc: TemplateRef<any>, objdoc: DocumentPrintConfiguration) {
+    this.checkduplicatetemplate(viewdoc, objdoc);
+    
 }
   previewtemplate(template: TemplateRef<any>) {    
     var objtemp=this.objProductType;
