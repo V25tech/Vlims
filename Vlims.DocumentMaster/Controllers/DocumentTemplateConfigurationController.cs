@@ -996,28 +996,37 @@ namespace Vlims.Controllers
             string footerpath = Path.Combine(currentDirectory, "Logo", template.footer);
             string dataUri = string.Empty; string dataUri1 = string.Empty;
             string documentTypeNumber = string.Empty;
+            string documentTypesupersedesNo = string.Empty;
             switch (template.documenttype.ToUpper())
             {
                 case "STANDARD TESTING SPECIFICATION":
                     documentTypeNumber = "STS No.";
+                    documentTypesupersedesNo = "STS";
                     break;
                 case "STANDARD TESTING PROCEDURE":
                     documentTypeNumber = "STP No.";
+                    documentTypesupersedesNo = "STP";
                     break;
                 case "STANDARD OPERATING PROCEDURE":
                     documentTypeNumber = "SOP No.";
+                    documentTypesupersedesNo = "SOP";
                     break;
                 case "BATCH PACKING RECORD":
                     documentTypeNumber = "BPR No.";
+                    documentTypesupersedesNo = "BPR";
                     break;
                 case "BATCH MANUFACTURING RECORD":
                     documentTypeNumber = "BMR No";
+                    documentTypesupersedesNo = "BMR";
                     break;
                 case "Validation Protocol":
                     documentTypeNumber = "STP No.";
+                    documentTypesupersedesNo = "STP";
                     break;
                 default:
                     documentTypeNumber = "STP No.";
+                    documentTypesupersedesNo = "STP";
+
                     break;
             }
             if (System.IO.File.Exists(path))
@@ -1067,7 +1076,9 @@ namespace Vlims.Controllers
                 stringBuilder.AppendLine($"<td class=\"tg-1wig\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "---") : "---")}</td>");
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("<tr>");
-            stringBuilder.AppendLine("<td class=\"tg-1wig\">BMR SUPERSEDES NO.</td>");
+            //stringBuilder.AppendLine("<td class=\"tg-1wig\">BMR SUPERSEDES NO.</td>");
+            stringBuilder.AppendLine("<td class=\"tg-1wig\">" + documentTypesupersedesNo + " SUPERSEDES NO.</td>");
+
             var supersedesNo = string.Empty;
             if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
                 supersedesNo = !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? Convert.ToString(preparation?.Prepdocument?.supersedesNo) : "0";

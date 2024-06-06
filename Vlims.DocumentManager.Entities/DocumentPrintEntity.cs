@@ -180,17 +180,7 @@ public class DocumentPrint
         }
     }
 
-    public string ReasonOrRemarks
-    {
-        get
-        {
-            return this.ReasonOrRemarksField;
-        }
-        set
-        {
-            this.ReasonOrRemarksField = value;
-        }
-    }
+    public string? ReasonOrRemarks { get; set; }  
 
     public string? Template { get; set; }
     public string? PrintCopy { get; set; }

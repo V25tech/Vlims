@@ -421,7 +421,7 @@ export class DocumentPrintConfiguration {
   public documentNumber: string = '';
   public printtype: string = '';
   public noofcopies: string = '';
-  public printCount: string = '';
+  public printCount: number = 0;
   public template:string='';
   public batchNumber:string='';
   public batchSize:string='';

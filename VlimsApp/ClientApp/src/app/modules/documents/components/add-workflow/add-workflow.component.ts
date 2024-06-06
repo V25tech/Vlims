@@ -104,7 +104,6 @@ export class AddWorkflowComponent {
       this.workflow.approvalsCount = 0;
     }
     else if (lastSegment == "edit") {
-      debugger
       this.title = 'Modify Workflow Configuration';
       this.editMode = true;
       this.id = parseInt(segments[segments.length - 1], 10);

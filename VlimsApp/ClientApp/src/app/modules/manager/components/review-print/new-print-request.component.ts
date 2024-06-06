@@ -303,7 +303,7 @@ export class NewPrintRequestComponent implements OnInit {
     this.print.Status = 'In-Progress';
     this.print.CreatedDate = new Date();
     this.print.ModifiedDate = new Date();
-    this.print.printCount = '0';
+    this.print.printCount = 0;
     this.print.printCopy = this.selectedPrintTypes.join(',');
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;

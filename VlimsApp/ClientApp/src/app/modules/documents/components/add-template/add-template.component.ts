@@ -118,8 +118,8 @@ export class AddTemplateComponent implements OnInit {
   numOfPages: number = 1;
   pages: Page[] = [{ text: '', pagenumber: 1, pagetype: 'text', bodyData: [],istext:false,isgrid:false,istextposition:false,isheader:true,isfooter:true,header:'',footer:'' }];
   currentPage: number = 0;
-  id:number=0;
-  title:string='New Document Template';
+  id: number = 0;
+  public title12: string = '';
   typesDatasource: DocumentTypeConfiguration[] = [];
   selectedtype:any=null;
   templateForm=new DocumentTemplateConfiguration();
@@ -173,6 +173,7 @@ export class AddTemplateComponent implements OnInit {
     private templatesvc:DocumentTemplateServiceService,
     private router: Router,private fb: FormBuilder
   ) {
+    this.title12 = "New Document Template";
     this.form = this.fb.group({
       html: new FormControl('', Validators.required)
     });
@@ -219,7 +220,7 @@ export class AddTemplateComponent implements OnInit {
     }
     else if(lastSegment=="edit")
     {
-      this.title='Edit Document Template';
+      this.title12='Edit Document Template';
       this.editMode=true;
         let id=parseInt(this.segments[this.segments.length-1],10);
         this.id=id;
@@ -227,15 +228,14 @@ export class AddTemplateComponent implements OnInit {
     }
     else if(lastSegment=="view")
     {
-      ;
-      this.title='View Document Template';
+      this.title12='View Document Template';
       this.viewMode=true;
         let ide=this.segments[this.segments.length-1];
         this.getbyId(parseInt(this.segments[this.segments.length - 1]));
     }
     else if(lastSegment=="prep"){
       
-      this.title='Edit Document Template';
+      this.title12='Edit Document Template';
       this.editMode=true;
       this.isbody=true;
       this.isprep=true;
@@ -244,7 +244,7 @@ export class AddTemplateComponent implements OnInit {
     }
     else if(lastSegment=="body")
     {
-      this.title='Edit Document Template';
+      this.title12='Edit Document Template';
       this.editMode=true;
       this.isbody=true;
         let id=parseInt(this.segments[this.segments.length-1],10);
