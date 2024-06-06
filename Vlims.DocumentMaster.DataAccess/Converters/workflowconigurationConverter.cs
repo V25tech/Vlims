@@ -22,19 +22,18 @@ namespace Vlims.DocumentMaster.DataAccess
     public static class workflowconigurationConverter
     {
 
-        public static List<workflowconiguration> SetAllworkflowconiguration(DataSet dataset, bool isgetall= true)
+        public static List<workflowconiguration> SetAllworkflowconiguration(DataSet dataset, bool isgetall = true)
         {
             try
             {
                 List<workflowconiguration> result = new List<workflowconiguration>();
-                workflowconiguration workflowconigurationData; bool islist;
                 if (dataset != null && dataset.Tables.Count > 0 && dataset.Tables[0].Rows.Count > 0)
                 {
-                    islist = dataset.Tables[0].Rows.Count > 1;
-                    for (int i = 0; (i < dataset.Tables[0].Rows.Count); i = (i + 1))
+                    bool isList = dataset.Tables[0].Rows.Count > 1;
+
+                    foreach (DataRow row in dataset.Tables[0].Rows)
                     {
-                        DataRow row = dataset.Tables[0].Rows[i];
-                        workflowconigurationData = new workflowconiguration();
+                        workflowconiguration workflowconigurationData = new workflowconiguration();
                         workflowconigurationData.WFCId = Convert.ToString(row[workflowconigurationConstants.WFCId.Trim('@')]);
                         workflowconigurationData.DocumentMasterId = Convert.ToString(row[workflowconigurationConstants.DocumentMasterId.Trim('@')]);
                         workflowconigurationData.workflowName = Convert.ToString(row[workflowconigurationConstants.workflowName_PSY.Trim('@')]);
@@ -52,36 +51,39 @@ namespace Vlims.DocumentMaster.DataAccess
                         workflowconigurationData.Status = Convert.ToString(row[workflowconigurationConstants.Status.Trim('@')]);
                         if (isgetall)
                             workflowconigurationData.IsParent = Convert.ToBoolean(row[workflowconigurationConstants.IsParent.Trim('@')]);
-                        if (!islist)
+
+                        if (dataset.Tables[0].Columns.Contains("Document_PSY"))
                         {
-                            string docvalue = Convert.ToString(row["Document_PSY"]);
-                            if (!string.IsNullOrEmpty(docvalue))
+                            string docValue = Convert.ToString(row["Document_PSY"]);
+                            if (!string.IsNullOrEmpty(docValue))
                             {
-                                // Create an XmlSerializer for the Person type
-                                var serializer1 = new XmlSerializer(typeof(workflowconiguration));
-                                // Create a StringReader to read the XML data
-                                var reader = new StringReader(Convert.ToString(row["Document_PSY"]));
-                                // Deserialize the XML data back to a Person object
-                                var person = (workflowconiguration)serializer1.Deserialize(reader);
-                                workflowconigurationData.reviewsType = person.reviewsType;
-                                workflowconigurationData.approvalsType = person.approvalsType;
-                                workflowconigurationData.reviewers = person.reviewers;
-                                workflowconigurationData.approvals = person.approvals;
-                                workflowconigurationData.reviewersGroup = person.reviewersGroup;
-                                workflowconigurationData.approvalsGroup = person.approvalsGroup;
-                                workflowconigurationData.department=person.department;
+                                // Deserialize the XML data back to a workflowconiguration object
+                                var serializer = new XmlSerializer(typeof(workflowconiguration));
+                                using (var reader = new StringReader(docValue))
+                                {
+                                    var documentConfiguration = (workflowconiguration)serializer.Deserialize(reader);
+                                    workflowconigurationData.reviewsType = documentConfiguration.reviewsType;
+                                    workflowconigurationData.approvalsType = documentConfiguration.approvalsType;
+                                    workflowconigurationData.reviewers = documentConfiguration.reviewers;
+                                    workflowconigurationData.approvals = documentConfiguration.approvals;
+                                    workflowconigurationData.reviewersGroup = documentConfiguration.reviewersGroup;
+                                    workflowconigurationData.approvalsGroup = documentConfiguration.approvalsGroup;
+                                    workflowconigurationData.department = documentConfiguration.department;
+                                }
                             }
                         }
+
                         result.Add(workflowconigurationData);
                     }
                 }
                 return result;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
         }
+
 
         public static workflowconiguration Setworkflowconiguration(DataSet dataset)
         {

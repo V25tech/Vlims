@@ -34,7 +34,7 @@ public class DocumentPrint
     private DateTime? modifieddateField;
     public string Status { get; set; }
 
-    private string ReasonOrRemarksField { get; set; }
+    private string? ReasonOrRemarksField { get; set; } 
 
     public int DRId
     {
@@ -177,6 +177,18 @@ public class DocumentPrint
         set
         {
             this.modifieddateField = value;
+        }
+    }
+
+    public string ReasonOrRemarks
+    {
+        get
+        {
+            return this.ReasonOrRemarksField;
+        }
+        set
+        {
+            this.ReasonOrRemarksField = value;
         }
     }
 

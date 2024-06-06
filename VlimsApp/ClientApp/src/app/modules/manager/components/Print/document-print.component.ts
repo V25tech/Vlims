@@ -231,7 +231,9 @@ export class DocumentPrintComponent implements OnInit {
     reqObj.modifiedDate = new Date(reqObj.ModifiedDate)
     reqObj.modifiedDate = reqObj.ModifiedDate    
     this.doctypeservice.UpdatePrintRequestCount(reqObj).subscribe(res => {
+      
     this.GetDocumentPrint();
+    debugger
       //this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
     }, er => {
       this.spinner.hide();
