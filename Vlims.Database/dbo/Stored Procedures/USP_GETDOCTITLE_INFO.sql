@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE USP_GETDOCTITLE_INFO 
+﻿CREATE PROCEDURE [dbo].[USP_GETDOCTITLE_INFO] 
     @documenttype_PSY NVARCHAR(150),
     @Templatename_PSY NVARCHAR(150),
     @CombinedInfo NVARCHAR(MAX) OUTPUT -- Add an output parameter
@@ -21,7 +21,7 @@ BEGIN
 
         -- Combine the values into a single string
         --SET @CombinedInfo =  @PlantName + '\n' + @PlantAddress +'\n'+ @DEPARTMENT + '\n' + @Templatename_PSY;
-		  SET @CombinedInfo =  @PlantName + CHAR(13) + CHAR(10) + @PlantAddress + CHAR(13) + CHAR(10) + @DEPARTMENT + CHAR(13) + CHAR(10) + @Templatename_PSY;
+		  SET @CombinedInfo =  @PlantName + CHAR(13) + CHAR(10) + @PlantAddress + CHAR(13) + CHAR(10) + @DEPARTMENT + CHAR(13) + CHAR(10) + @documenttype_PSY;
 
 
         -- No need to return the value; it's set through the output parameter

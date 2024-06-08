@@ -78,13 +78,40 @@ PRINT @CombinedString
         SELECT @ID = @@IDENTITY; 
 
         -- Update the XML content
-		UPDATE [dbo].[DocumentTemplateConfiguration_PSY]
-        SET document_PSY.modify('
-            replace value of (/DocumentTemplateConfiguration/titleTable/ArrayOfHeaderTable/HeaderTable/inputValue/text())[1]
-            with sql:variable("@CombinedString")
-        ')
-        WHERE DTID_PSY = @ID;
-	SELECT @ID;
+		--UPDATE [dbo].[DocumentTemplateConfiguration_PSY]
+  --      SET document_PSY.modify('
+  --          replace value of (/DocumentTemplateConfiguration/titleTable/ArrayOfHeaderTable/HeaderTable/inputValue/text())[1]
+  --          with sql:variable("@CombinedString")
+  --      ')
+  --      WHERE DTID_PSY = @ID;
+  DECLARE @ExistingValue NVARCHAR(MAX);
+
+-- Get the existing value of inputValue
+SELECT @ExistingValue = document_PSY.value('(/DocumentTemplateConfiguration/titleTable/ArrayOfHeaderTable/HeaderTable/inputValue)[1]', 'NVARCHAR(MAX)')
+FROM [dbo].[DocumentTemplateConfiguration_PSY]
+WHERE DTID_PSY = @ID;
+
+-- Check if the existing value is null or empty
+IF @ExistingValue IS NULL OR @ExistingValue = ''
+BEGIN
+    -- Insert the inputValue node with the CombinedString value
+    UPDATE [dbo].[DocumentTemplateConfiguration_PSY]
+    SET document_PSY.modify('
+        insert <inputValue>{sql:variable("@CombinedString")}</inputValue> as first into (/DocumentTemplateConfiguration/titleTable/ArrayOfHeaderTable/HeaderTable)[1]
+    ')
+    WHERE DTID_PSY = @ID;
+END
+ELSE
+BEGIN
+    -- Replace the existing value with CombinedString value
+    UPDATE [dbo].[DocumentTemplateConfiguration_PSY]
+    SET document_PSY.modify('
+        replace value of (/DocumentTemplateConfiguration/titleTable/ArrayOfHeaderTable/HeaderTable/inputValue/text())[1]
+        with sql:variable("@CombinedString")
+    ')
+    WHERE DTID_PSY = @ID;
+END;
+
 
         --INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
         --SELECT @Templatename_PSY,'Template',@Status_PSY,null,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate(),@ID
