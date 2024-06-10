@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
-
 import { Router } from '@angular/router';
 import { TemplateForm } from '../../models/templates';
 import { DocumentTemplateConfiguration, DocumentTypeConfiguration, RequestContext } from 'src/app/models/model';
@@ -48,6 +47,7 @@ interface BodyDataElement {
 
 })
 export class AddTemplateComponent implements OnInit {
+  
 
   public tools: object = {
     items: ['Undo', 'Redo', '|',
