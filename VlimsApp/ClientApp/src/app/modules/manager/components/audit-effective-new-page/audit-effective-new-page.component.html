@@ -82,6 +82,10 @@
                   <div class="card-group-scroll">
                       <div class="card mb-3" *ngFor="let auditConfig of types; let i = index" [ngClass]="{'d-none': auditConfig.EntityInfo.Status === 'IN-PROGRESS'}">
                           <div class="card-body">
+                            <div class="row">
+                                <div class="col-label"><strong>Version:</strong></div>
+                                <div class="col-value"><strong>{{ i | number:'2.0' }}</strong></div>
+                            </div>
                               <div class="row">
                                   <div class="col-sm-3"><strong>Document Title:</strong></div>
                                   <div class="col-sm-9">{{ auditConfig.EntityInfo.documenttitle }}</div>
@@ -138,6 +142,11 @@
                                   <div class="col-sm-3"><strong>Rejected By:</strong></div>
                                   <div class="col-sm-9">{{ auditConfig.EntityInfo.ModifiedBy }}</div>
                               </div>
+                              
+                              <div class="row">
+                                <div class="col-sm-3"><strong>Reason(s):</strong></div>
+                                <div class="col-sm-9 ">{{ auditConfig.EntityInfo.reason }}</div>
+                            </div>
                               <div class="row">
                                   <div class="col-sm-3"><strong>Status:</strong></div>
                                   <div class="col-sm-9 bold-status">{{ auditConfig.EntityInfo.Status }}</div>

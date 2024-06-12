@@ -98,7 +98,7 @@ namespace Vlims.DocumentManager.Manager
                 String validationMessages = DocumentrequestValidator.IsValidDocumentrequest(documentrequest);
                 if (validationMessages.Length <= 0)
                 {
-                    documentrequest.Reason = string.Empty;
+                    
                     bool result = DocumentrequestData.UpdateDocumentrequest(documentrequest);
 
                     documentrequest.CreatedDate= DateTime.Now;

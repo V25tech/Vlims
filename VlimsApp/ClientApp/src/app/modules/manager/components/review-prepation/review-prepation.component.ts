@@ -194,7 +194,7 @@ export class ReviewPrepationComponent {
                 this.isworkflow = true;
             }
             if (!this.istemplate && this.isrevision)
-                this.preparation.status = 'In-Progress';
+                this.preparation.status = 'IN-PROGRESS';
             this.buildPrepdocument();
             this.onBodyFileExistsCheck();
             this.getLabelMappings();
@@ -315,7 +315,7 @@ export class ReviewPrepationComponent {
     savePreparation() {
         this.spinner.show();
       if (!this.viewMode && (this.preparation.status == 'Rejected' || this.preparation.status == 'Returned')) {
-            this.preparation.status = 'In-Progress';
+            this.preparation.status = 'IN-PROGRESS';
         }
         if (this.viewMode && this.preparation.status != 'Rejected' && this.preparation.status != 'Returned') {
             this.preparation.ModifiedBy = this.commonsvc.createdBy;

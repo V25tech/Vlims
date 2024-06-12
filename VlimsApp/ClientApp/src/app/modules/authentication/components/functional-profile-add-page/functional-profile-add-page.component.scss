@@ -22,4 +22,43 @@ input[type="checkbox"]:checked {
     background-color: #fff; /* Adjust the background color of the checkmark */
     border-radius: 3px; /* Adjust the border radius of the checkmark */
   }
-  
+  .card-body {
+    padding: 10px;
+}
+.row {
+    margin-bottom: 5px;
+}
+.section-title {
+    margin-top: 20px;
+    font-weight: 500;
+    text-align: center; // Center align the text
+}
+
+
+.card-group-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+
+    .card {
+        flex: 0 0 auto;
+        margin-right: 10px;
+        min-width: 600px; /* Increased min-width for more content space */
+    }
+}
+
+.card-body .row {
+    white-space: nowrap;
+}
+
+.card-body .col-label {
+    flex: 0 0 30%; /* Adjust this value to increase/decrease label column width */
+    max-width: 20%;
+}
+
+.card-body .col-value {
+    flex: 1 0 80%; /* Adjust this value to increase/decrease value column width */
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
