@@ -238,7 +238,7 @@ export class ReviewEffectiveComponent {
       reqObj.Status = this.finalStatus;
     } else if ((!this.viewMode || this.editMode) && ((reqObj.status == 'Rejected' || reqObj.status == "Returned"))) {
       reqObj.ModifiedBy = this.commonsvc.createdBy;
-      reqObj.Status = "In-Progress";
+      reqObj.Status = "IN-PROGRESS";
     }
     this.toastMsg = this.toastMsg ?? 'Registered'
     if (!this.isButtonDisabled) {

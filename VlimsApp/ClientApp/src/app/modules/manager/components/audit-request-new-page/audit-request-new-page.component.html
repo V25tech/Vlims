@@ -36,7 +36,7 @@
                                     <div class="col-value">{{ auditConfig.EntityInfo.department }}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-label"><strong>Comments:</strong></div>
+                                    <div class="col-label"><strong>Purpose:</strong></div>
                                     <div class="col-value">{{ auditConfig.EntityInfo.Purpose }}</div>
                                 </div>
                                 <div class="row">
@@ -66,6 +66,10 @@
                     <div class="card-group-scroll">
                         <div class="card mb-3" *ngFor="let auditConfig of types; let i = index" [ngClass]="{'d-none': auditConfig.EntityInfo.Status === 'In-Progress'}">
                             <div class="card-body">
+                                  <div class="row">
+                                    <div class="col-label"><strong>Version:</strong></div>
+                                    <div class="col-value"><strong>{{ i | number:'2.0' }}</strong></div>
+                                </div>
                                 <div class="row">
                                     <div class="col-label"><strong>Document Name:</strong></div>
                                     <div class="col-value">{{ auditConfig.EntityInfo.documenttype }}</div>
@@ -105,6 +109,10 @@
                                 <div class="row" *ngIf="auditConfig.EntityInfo.Status === 'Rejected'">
                                     <div class="col-label"><strong>Rejected By:</strong></div>
                                     <div class="col-value">{{ auditConfig.EntityInfo.ModifiedBy }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-label"><strong>Reason(s):</strong></div>
+                                    <div class="col-value">{{ auditConfig.EntityInfo.Reason }}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-label"><strong>Status:</strong></div>
