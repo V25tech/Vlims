@@ -14,6 +14,12 @@ export class ExistingDocumentsService {
     return this.http.postJsonLogin(objrequest, "api/documents", this.type);
 
   }
+
+  getAllDocumentsobsolete(objrequest: RequestContext) {
+    return this.http.postJsonLogin(objrequest, "api/documents/reviseddocuments", this.type);
+
+  }
+
   geturl() {
     return this.http.getwithheader(`api/existingdocumentreq/getpath`, this.type);
   }

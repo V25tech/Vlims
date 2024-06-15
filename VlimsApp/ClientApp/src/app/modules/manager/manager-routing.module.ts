@@ -29,6 +29,7 @@ import { AuditPreparationNewPageComponent } from './components/audit-preparation
 import { AuditEffectiveNewPageComponent } from './components/audit-effective-new-page/audit-effective-new-page.component';
 import { AuditprintgridpagewComponent } from './components/auditprintgridpagew/auditprintgridpagew.component';
 import { AuditPrintNewPageComponent } from './components/audit-print-new-page/audit-print-new-page.component';
+import { ObsoluteGridComponent } from './components/obsolute-grid/obsolute-grid.component';
 
 const routes: Routes = [
   { path: 'manager', redirectTo: 'document-manager', pathMatch: 'full' },
@@ -75,6 +76,12 @@ const routes: Routes = [
   {
     path: 'auditeffectiveaddpage',
     component: AuditEffectiveNewPageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'obsoletegrid',
+    component: ObsoluteGridComponent,
     canActivate: [AuthGuard],
   },
 

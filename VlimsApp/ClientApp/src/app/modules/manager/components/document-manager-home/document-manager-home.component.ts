@@ -39,5 +39,9 @@ export class DocumentManagerHomeComponent {
       this.router.navigate(['/auditmanager']);
     }
 
+    else if(navTo === 'obsoletegrid'){    
+      this.router.navigate(['/obsoletegrid']);
+    }
+
   }
 }

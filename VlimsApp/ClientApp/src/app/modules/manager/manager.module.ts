@@ -37,6 +37,7 @@ import { AuditPreparationNewPageComponent } from './components/audit-preparation
 import { AuditEffectiveNewPageComponent } from './components/audit-effective-new-page/audit-effective-new-page.component';
 import { AuditprintgridpagewComponent } from './components/auditprintgridpagew/auditprintgridpagew.component';
 import { AuditPrintNewPageComponent } from './components/audit-print-new-page/audit-print-new-page.component';
+import { ObsoluteGridComponent } from './components/obsolute-grid/obsolute-grid.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { AuditPrintNewPageComponent } from './components/audit-print-new-page/au
     AuditPreparationNewPageComponent,
     AuditEffectiveNewPageComponent,
     AuditprintgridpagewComponent,
-    AuditPrintNewPageComponent
+    AuditPrintNewPageComponent,
+    ObsoluteGridComponent
   ],
   imports: [
     CommonModule,
