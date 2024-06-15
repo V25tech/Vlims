@@ -29,6 +29,8 @@ namespace Vlims.DocumentManager.Entities
         public string? Document { get; set; }
         public string? Template { get; set; }
         public int PrepId { get; set; }
+        public int RevisionNumber { get; set; }
+
 
 
     }

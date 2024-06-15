@@ -31,6 +31,7 @@ namespace Vlims.DocumentManager.Entities.Constants
         public static string EffectiveDate = "effectivedate_PSY";
         public static string ReviewDate = "reviewdate_PSY";
         public static string TableName = "TableName_PSY";
+        public static string RevisionNumber = "RevisionNumber_PSY";
         #endregion
 
         #region TrackSearch

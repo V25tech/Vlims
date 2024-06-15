@@ -66,7 +66,11 @@ namespace Vlims.DocumentManager.DataAccess.Converters
                     if (Convert.ToString(row[DocumentsDatabaseConstants.TableName]) == "New Document")
                         {
                             document.Template = Convert.ToString(row[DocumentsDatabaseConstants.Template]);
-                        }                      
+                        }
+                    if (row.Table.Columns.Contains(DocumentsDatabaseConstants.RevisionNumber))
+                    {
+                        document.RevisionNumber = row[DocumentsDatabaseConstants.RevisionNumber] != DBNull.Value ? Convert.ToInt32(row[DocumentsDatabaseConstants.RevisionNumber]) : 0;
+                    }
                 }
                 return document;
             }
