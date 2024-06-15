@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { DocumentRequestConfiguration, DocumentTypeConfiguration, RequestContext, UserConfiguration, WorkItemsConfiguration, workflowconiguration } from 'src/app/models/model';
 import { DepartmentconfigurationService } from 'src/app/modules/services/departmentconfiguration.service';
@@ -40,17 +40,21 @@ export class AddRequestComponent {
     { label: 'Stage 1', value: 'option2' },
     { label: 'Stage 2', value: 'option3' },
   ];
+  departmentInfo: any[] = [];
+  selectedDepartments: any[] = [];
 
 
   constructor(private router: Router, private location: Location, private toastr: ToastrService,
     private workitemssvc: WorkitemsService,
     private userssvc: UsersconfigurationService,
     private route: ActivatedRoute,
-    private modalService: BsModalService,
+    private modalService: BsModalService, private cdr: ChangeDetectorRef,
     private spinner: NgxSpinnerService, private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private wfservice: WorkflowServiceService, private doctypeserv: DocumentTypeServiceService, private documentRequestService: DocumentRequestService) { }
 
   ngOnInit() {
     this.getusers();
+    //this.getdepartments();
+
     const user = localStorage.getItem("username");
     if (user != null && user != undefined) {
       this.commonsvc.createdBy = user;
@@ -80,8 +84,8 @@ export class AddRequestComponent {
       }
       this.request = this.commonsvc.request;
     }
-    
     this.getdocumenttypeconfig();
+    this.getworkflowinfo();
   }
   getbyId(arg0: number) {
     this.spinner.show();
@@ -89,6 +93,7 @@ export class AddRequestComponent {
       this.request = data;
       this.spinner.hide();
     });
+    this.cdr.detectChanges();
   }
 
 
@@ -224,6 +229,7 @@ export class AddRequestComponent {
   }
 
   addRequest() {
+    debugger
     if (!this.viewMode) {
       this.request.createdBy = this.commonsvc.getUsername();
       this.request.modifiedBy = this.commonsvc.getUsername();
@@ -233,6 +239,7 @@ export class AddRequestComponent {
       this.spinner.show();
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
+        this.request.department = this.selectedDepartments.map(dept => dept.value).join(',');
         this.documentRequestService.adddocreqconfig(this.request).subscribe(res => {
           this.commonsvc.request = new DocumentRequestConfiguration();
           this.location.back();
@@ -256,6 +263,7 @@ export class AddRequestComponent {
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
       this.spinner.show();
+      this.request.department = this.selectedDepartments.map(dept => dept.value).join(',');
       this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
         this.commonsvc.request = new DocumentRequestConfiguration();
         this.toastr.success(`Document Request ${this.toastMsg} Succesfull!`, 'Saved.!');
@@ -278,7 +286,28 @@ export class AddRequestComponent {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
       this.typeSource = data.Response;
-      this.getdepartments();
+      //  this.getdepartments();
+      let deptSocureInfo = [];
+      debugger
+      let type = this.typeSource.filter(o => o.Documenttypename.toLocaleLowerCase() === this.request.documenttype.toLocaleLowerCase());
+      //deptSocureInfo = type[0].Assigntodepartment;
+      if (type[0].Assigntodepartment) {
+        deptSocureInfo = type[0].Assigntodepartment.split(',');
+        this.departmentInfo = deptSocureInfo.map(department => ({
+          label: department.trim(),
+          value: department.trim()
+        }));
+
+        // Check each department against the selected ones
+        let info: string[] = [];
+        info = this.departmentInfo
+          .filter(dept => this.request.department.split(',').includes(dept.value))
+          .map(dept => dept.value); // Only push the values of selected departments
+        if (info && info.length > 0) {
+          this.selectedDepartments = this.departmentInfo.filter(item => info.includes(item.value));
+        }
+      }
+      
     });
   }
   getworkflowinfo() {
@@ -342,17 +371,20 @@ export class AddRequestComponent {
     });
   }
   onChange() {
-    const type = this.typeSource.filter(o => o.Documenttypename.toLocaleLowerCase() === this.request.documenttype.toLocaleLowerCase());
-    this.request.department = type[0].Assigntodepartment;
-    const filtersource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === this.request.documenttype.toLocaleLowerCase());
+    let deptSocureInfo = [];
+    this.selectedDepartments = [];
+    let type = this.typeSource.filter(o => o.Documenttypename.toLocaleLowerCase() === this.request.documenttype.toLocaleLowerCase());
+    //deptSocureInfo = type[0].Assigntodepartment;
+    if (type[0].Assigntodepartment) {
+      deptSocureInfo = type[0].Assigntodepartment.split(',');
+      this.departmentInfo = deptSocureInfo.map(department => ({
+        label: department.trim(),
+        value: department.trim()
+      }));
+    }
+    let filtersource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === this.request.documenttype.toLocaleLowerCase());
     this.workflowsSource = filtersource;
-  }
-  getdepartments() {
-    let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
-    this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-      this.departmentsSource = data.Response;
-      this.getworkflowinfo();
-    });
-  }
+
+  } 
 }
 
