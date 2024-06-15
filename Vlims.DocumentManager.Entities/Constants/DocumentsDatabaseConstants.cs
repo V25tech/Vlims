@@ -40,7 +40,11 @@ namespace Vlims.DocumentManager.Entities.Constants
         public static string DocumentNumber = "DocumentNo_PSY";
         public static string DocumentTitle = "DocumentName_PSY";
         public static string Stage = "Stage";
-        
+
+        #endregion
+
+        #region
+        public const string USP_RevisedDocuments_PSY_GET_ALL = "dbo.USP_RevisedDocuments_PSY_GET_ALL";
         #endregion
     }
 }

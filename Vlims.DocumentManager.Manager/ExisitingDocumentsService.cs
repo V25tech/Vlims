@@ -28,5 +28,11 @@ namespace Vlims.DocumentManager.Manager
             List<TrackSearchInfo> documents = ExistingDocumentsConverter.SetAllTrackedDocuments(dataset);
             return Task.FromResult(documents);
         }
+        public Task<DocumentsEntity> GetRevisedDocuments(Common.RequestContext requestContext)
+        {
+            DataSet dataset = ExisitingDocumentsData.GetRevisedDocuments(requestContext);
+            DocumentsEntity documents = ExistingDocumentsConverter.SetAllExistingDocuments(dataset);
+            return Task.FromResult(documents);
+        }
     }
 }

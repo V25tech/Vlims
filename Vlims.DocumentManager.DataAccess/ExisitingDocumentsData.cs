@@ -47,5 +47,23 @@ namespace Vlims.DocumentManager.DataAccess
                 throw;
             }
         }
+        public static DataSet GetRevisedDocuments(RequestContext requestContext)
+        {
+            try
+            {
+                DataSet dataSet = new DataSet();
+                List<SqlParameter> sqlparms = new List<SqlParameter>();
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = RequestContextConstants.PageNumber, Value = requestContext.PageNumber });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = RequestContextConstants.PageSize, Value = requestContext.PageSize });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = RequestContextConstants.UserName, Value = requestContext.userName });
+                DataSet dataset = (DataSet)dataAccessHelper.ExecuteStoredProcedure(DocumentsDatabaseConstants.USP_RevisedDocuments_PSY_GET_ALL, sqlparms, ExecutionType.Dataset);
+                return dataset;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

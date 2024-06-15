@@ -12,5 +12,7 @@ namespace Vlims.DocumentManager.Manager.Interface
     {
         Task<DocumentsEntity> GetAllExistingDocuments(RequestContext requestContext);
         Task<List<TrackSearchInfo>> GetAllTrackedDocuments(string userName,string searchTerm);
+        Task<DocumentsEntity> GetRevisedDocuments(RequestContext requestContext);
+
     }
 }

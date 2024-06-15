@@ -33,5 +33,11 @@ namespace Vlims.DocumentManager.Controllers
             var result = await exisitingDocumentsService.GetAllTrackedDocuments(userName,searchTerm);
             return Ok(result);
         }
+        [HttpPost("reviseddocuments")]
+        public async Task<ActionResult> GetRevisedDocuments(RequestContext requestContext)
+        {
+            var result = await exisitingDocumentsService.GetRevisedDocuments(requestContext);
+            return Ok(result);
+        }
     }
 }
