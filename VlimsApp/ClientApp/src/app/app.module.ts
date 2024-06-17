@@ -25,13 +25,14 @@ import { TrackSearchComponent } from './common/tracksearch/tracksearch.component
 import { SearchViewComponent } from './common/searchview/searchview.component';
 import { RichTextEditorModule, TableService, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 import { DisableRightClickDirective } from './disable-right-click.directive';
+import { AuditCommonGridComponent } from './common/audit-common-grid/audit-common-grid.component';
 //import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent, TrackSearchComponent, SearchViewComponent, DisableRightClickDirective],
+  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent, TrackSearchComponent, SearchViewComponent, DisableRightClickDirective, AuditCommonGridComponent],
   imports: [
     BrowserModule,
     FormsModule,

@@ -48,6 +48,9 @@ export class DocumentsLandingComponent implements OnInit {
     } else if (navTo === 'reports') {
       this.router.navigate(['/reports']);
     }
+    else if (navTo === 'commonaudit') {
+      this.router.navigate(['/repocommonauditrts']);
+    }
 
   }
 
