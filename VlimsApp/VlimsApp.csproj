@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\common\auditgrid.ts" />
     <None Remove="ClientApp\src\app\common\searchview\searchview.component.ts" />
     <None Remove="ClientApp\src\app\common\tracksearch.component.ts" />
     <None Remove="ClientApp\src\app\models\userpermissions.ts" />
@@ -28,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\common\auditgrid.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\common\searchview\searchview.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\common\tracksearch\tracksearch.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\userpermissions.ts" />
