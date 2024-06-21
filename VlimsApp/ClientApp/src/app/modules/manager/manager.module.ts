@@ -38,48 +38,50 @@ import { AuditEffectiveNewPageComponent } from './components/audit-effective-new
 import { AuditprintgridpagewComponent } from './components/auditprintgridpagew/auditprintgridpagew.component';
 import { AuditPrintNewPageComponent } from './components/audit-print-new-page/audit-print-new-page.component';
 import { ObsoluteGridComponent } from './components/obsolute-grid/obsolute-grid.component';
+import { DocumentsModule } from "../documents/documents.module";
 
 @NgModule({
-  declarations: [
-    RequestsComponent,
-    AddRequestComponent,
-    PreparationComponent,
-    ReviewPrepationComponent,
-    EffectivesComponent,
-    ReviewEffectiveComponent,
-    DocumentManagerHomeComponent,
-    DocumentPrintComponent,
-    NewPrintRequestComponent,
-    ExistingDocumentRequestComponent,
-    ReviewExistingDocumentRequestComponent,
-    DocumentRevisionRequestsComponent,
-    ReviewRevisionComponent,
-    ExistingDocumentsComponent,
-    AuditmanagerhomepageComponent,
-    AuditrequestgridpageComponent,
-    AuditpreparationgridpageComponent,
-    AuditeffectivegridpageComponent,
-    AuditrevisiongridpageComponent,
-    AuditprintgridpageComponent,
-    AuditexistinggridpageComponent,
-    AuditRequestNewPageComponent,
-    AuditPreparationNewPageComponent,
-    AuditEffectiveNewPageComponent,
-    AuditprintgridpagewComponent,
-    AuditPrintNewPageComponent,
-    ObsoluteGridComponent
-  ],
-  imports: [
-    CommonModule,
-    ManagerRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    FontAwesomeModule,
-    TableModule,
-    MultiSelectModule,
-    DropdownModule,
-    ToastModule,
-  ],
-  providers: [ExistingDocumentsService]
+    declarations: [
+        RequestsComponent,
+        AddRequestComponent,
+        PreparationComponent,
+        ReviewPrepationComponent,
+        EffectivesComponent,
+        ReviewEffectiveComponent,
+        DocumentManagerHomeComponent,
+        DocumentPrintComponent,
+        NewPrintRequestComponent,
+        ExistingDocumentRequestComponent,
+        ReviewExistingDocumentRequestComponent,
+        DocumentRevisionRequestsComponent,
+        ReviewRevisionComponent,
+        ExistingDocumentsComponent,
+        AuditmanagerhomepageComponent,
+        AuditrequestgridpageComponent,
+        AuditpreparationgridpageComponent,
+        AuditeffectivegridpageComponent,
+        AuditrevisiongridpageComponent,
+        AuditprintgridpageComponent,
+        AuditexistinggridpageComponent,
+        AuditRequestNewPageComponent,
+        AuditPreparationNewPageComponent,
+        AuditEffectiveNewPageComponent,
+        AuditprintgridpagewComponent,
+        AuditPrintNewPageComponent,
+        ObsoluteGridComponent
+    ],
+    providers: [ExistingDocumentsService],
+    imports: [
+        CommonModule,
+        ManagerRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        FontAwesomeModule,
+        TableModule,
+        MultiSelectModule,
+        DropdownModule,
+        ToastModule,
+        DocumentsModule
+    ]
 })
 export class ManagerModule { }

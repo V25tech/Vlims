@@ -1,4 +1,3 @@
-
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,6 +6,10 @@ import { Table } from 'primeng/table';
 import { AuditConfiguration } from 'src/app/models/model';
 import { AuditConfiurationService } from 'src/app/modules/services/audit-module-service.service';
 import { CommonService } from 'src/app/shared/common.service';
+
+import { DataGrid } from '../../../../common/auditgrid';
+
+
 
 @Component({
   selector: 'app-auditusermanagementgridpage',
@@ -17,6 +20,7 @@ export class AuditusermanagementgridpageComponent {
   @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
   @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
   // Pagination properties
+  
   currentPage = 10;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
@@ -26,14 +30,46 @@ export class AuditusermanagementgridpageComponent {
   access:boolean=false;
   EntityName: any;
   prefix: any;
+
+  
+
+  globalFilterFields: string[] = [
+    'printtype',
+    'documenttitle',
+    'documentNumber',
+    'noofcopies',
+    'createdBy',
+    'printCount',
+    'status'
+  ];
+  public gridConfig = new DataGrid();
   constructor(private commonsvc: CommonService, private auditservice: AuditConfiurationService,private loader: NgxSpinnerService, private router: Router,private route: ActivatedRoute) { }
   ngOnInit() {
     this.access = this.commonsvc.getUserRoles()?.deptConfig ?? false;
+
+    this.setHeaders();
+this.setConfig();
     this.getauditmodule();
     this.route.queryParams.subscribe(params => {
       this.prefix = params['prefix'];
       // Now you have the prefix value here, you can use it as needed
   });
+  }
+
+  setHeaders() {
+    this.gridConfig.Headers = [
+      { Name: 'UserID', DisplayName: 'UserId', width: 20, sort: false, isNavigation: true },
+      { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
+      { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
+      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
+    ]
+  }
+  setConfig() {
+    this.gridConfig.Config = {
+      itemsPerPage : 10,
+      currentPage: 1,
+      rowsPerPageOptions: [10, 20, 50]
+    }
   }
   getauditmodule() {
     this.loader.show();
@@ -42,6 +78,12 @@ export class AuditusermanagementgridpageComponent {
        return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {    
         this.types = this.removeDuplicates(data, 'Unique'); 
         this.types.reverse(); // Reverse the array here
+
+        this.gridConfig.gridData = this.types;
+if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;
+
+        this.gridConfig.gridData = this.types;
+if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;
          this.loader.hide();
        }, er => {
          this.loader.hide();
@@ -56,4 +98,10 @@ export class AuditusermanagementgridpageComponent {
     ))
   );
 }
+
+handleAction(event: any) {
+  console.log(event);
+  this.router.navigate(["./../"]);
+}
+
 }

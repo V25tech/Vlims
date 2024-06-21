@@ -9,60 +9,13 @@
                         <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
                     </a>
                 </div>
-                
-                <div class="d-flex page-title-actions">
-                    <div class="input-group custom-input-group">
-                        <!-- Magnifying glass icon -->
-                        <span class="input-group-text custom-input-group-text">
-                            <i class="fas fa-search custom-search-icon"></i>
-                        </span>
-                        <input type="text" class="form-control custom-input" pInputText (input)="templatesTable.filterGlobal($any($event.target)?.value, 'contains')" placeholder="Search" maxlength="250">
-                    </div>
-                </div>
+               
             </div>
         </div>
     </div>
-    <div class="row p-2">
-        <div class="col">
-            <div class="p-4 bg-white shadow-dark rounded-2">
-                <p-table #templatesTable [value]="types" 
-                [globalFilterFields]="['Unique', 'EntityInfo.DocumentNumber', 'EntityInfo.documenttitle', 'EntityInfo.printtype', 'EntityInfo.noofcopies', 'UserName', 'EntityInfo.CreatedDate']"
-                tableStyleClass="table table-striped"
-                [rows]="itemsPerPage"
-                [paginator]="true" 
-                [totalRecords]="types.length"
-                [rowsPerPageOptions]="rowsPerPageOptions"  
-                [rowHover]="true">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>S.No</th>
-                            <th pSortableColumn="Unique" style="width:20%"> Print Comments <p-sortIcon field="Unique"></p-sortIcon></th>
-                            <th pSortableColumn="EntityInfo.DocumentNumber" style="width:20%"> Document Number <p-sortIcon field="EntityInfo.DocumentNumber"></p-sortIcon></th>
-                            <th pSortableColumn="EntityInfo.documenttitle" style="width:20%"> Document Title <p-sortIcon field="EntityInfo.documenttitle"></p-sortIcon></th>
-                            <th pSortableColumn="EntityInfo.printtype" style="width:20%"> Document Type <p-sortIcon field="EntityInfo.printtype"></p-sortIcon></th>
-                            <th pSortableColumn="EntityInfo.noofcopies" style="width:20%"> No Of Copies <p-sortIcon field="EntityInfo.noofcopies"></p-sortIcon></th>
-                            <th pSortableColumn="UserName" style="width:20%"> Printed By <p-sortIcon field="UserName"></p-sortIcon></th>
-                            <th pSortableColumn="EntityInfo.CreatedDate" style="width:100px"> Printed On <p-sortIcon field="EntityInfo.CreatedDate"></p-sortIcon></th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-doc let-i="rowIndex">
-                        <tr>  
-                            <td>{{ i + 1 }}</td> 
-                            <td>
-                                <a [routerLink]="['/auditprinttaddpage']" [queryParams]="{ DocumentName: doc?.Unique }">{{doc?.Unique}}</a>
-                            </td>
-                            <td>{{doc?.EntityInfo?.DocumentNumber}}</td>
-                            <td>{{doc?.EntityInfo?.documenttitle}}</td>
-                            <td>{{doc?.EntityInfo?.printtype}}</td>
-                            <td>{{doc?.EntityInfo?.noofcopies}}</td>
-                            <td>{{doc?.UserName}}</td>
-                            <td>{{doc?.EntityInfo?.CreatedDate | date:'dd/MM/yyyy HH:mm' }}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
-    </div>
+    <ng-container *ngIf="gridConfig?.gridData?.length>0">
+        <app-audit-common-grid [gridConfig]="gridConfig" [filterAttributes]="globalFilterFields" (action)="handleAction($event)"></app-audit-common-grid>
+      </ng-container>
 </div>
 
 <style>

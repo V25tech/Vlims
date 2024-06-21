@@ -38,6 +38,7 @@ export class AuditdocumenttypesgridpageComponent {
   constructor(private commonsvc: CommonService, private auditservice: AuditConfiurationService, private loader: NgxSpinnerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    debugger
     this.access = this.commonsvc.getUserRoles()?.deptConfig ?? false;
     this.setHeaders();
     this.setConfig();
@@ -48,6 +49,7 @@ export class AuditdocumenttypesgridpageComponent {
     });
   }
   setHeaders() {
+    debugger
     this.gridConfig.Headers = [
       { Name: 'documenttypeprefix', DisplayName: 'Prefix', width: 20, sort: false, isNavigation: true },
       { Name: 'Documenttypename', DisplayName: 'Document Type Name', width: 25, sort: false, isNavigation: false },
@@ -57,6 +59,7 @@ export class AuditdocumenttypesgridpageComponent {
     ]
   }
   setConfig() {
+    debugger
     this.gridConfig.Config = {
       itemsPerPage : 10,
       currentPage: 1,
@@ -65,7 +68,7 @@ export class AuditdocumenttypesgridpageComponent {
   }
   
   getauditmodule() {
-    
+    debugger
     this.loader.show();
     this.commonsvc.req.type="DocumentType";
     this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
@@ -81,6 +84,7 @@ export class AuditdocumenttypesgridpageComponent {
   
   // Function to remove duplicate entries from an array based on a specific property
   removeDuplicates(array: any[], property: string): any[] {
+    debugger
     return array.filter((obj, index, self) =>
       index === self.findIndex((o) => (
         o[property] === obj[property]
@@ -88,6 +92,7 @@ export class AuditdocumenttypesgridpageComponent {
     );
   }
   handleAction(event: any) {
+    debugger
     console.log(event);
     this.router.navigate(["./../"]);
   }

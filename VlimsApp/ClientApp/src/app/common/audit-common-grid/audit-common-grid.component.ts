@@ -13,9 +13,7 @@ export class AuditCommonGridComponent {
   @Input() filterAttributes: string[] = [];  // Ensure this is declared as an input
   /*rowsPerPageOptions = [10, 20, 50];*/
   public route: any = {};
-  
   constructor(public router: Router, public activate: ActivatedRoute) {
-
   }
   ngOnInit() {
    

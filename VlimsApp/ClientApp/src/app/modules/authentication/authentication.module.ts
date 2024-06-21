@@ -27,50 +27,49 @@ import { AuditRoleAddPageComponent } from './components/audit-role-add-page/audi
 import { AuditUserMananagementAddPageComponent } from './components/audit-user-mananagement-add-page/audit-user-mananagement-add-page.component';
 import { AuditPlantAddPageComponent } from './components/audit-plant-add-page/audit-plant-add-page.component';
 import { FunctionalProfileAddPageComponent } from './components/functional-profile-add-page/functional-profile-add-page.component';
+import { DocumentsModule } from "../documents/documents.module";
 
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    AuditadminhomeComponent,
-    AuditplantgridpageComponent,
-    AuditusermanagementgridpageComponent,
-    AudithierarchyhomepageComponent,
-    AuditdepartmentgridpageComponent,
-    AuditrolegridpageComponent,
-    AuditsetfuncprofilegridpageComponent,
-    AuditDepAddComponent,
-    AuditRoleAddPageComponent,
-    AuditUserMananagementAddPageComponent,
-    AuditPlantAddPageComponent,
-    FunctionalProfileAddPageComponent,
-    //AdminHomeComponent,
-    //AddDepartmentComponent,
-    //ApprovalConfigurationsComponent,
-    // AddRolesComponent,
-    // NewPlantRegistrationComponent,
-    //PlantComponent,
-   // RolesComponent
-
-
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    AuthenticationRoutingModule,
-    CommonModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    FontAwesomeModule,
-    TableModule,
-    MultiSelectModule,
-    DropdownModule,
-    ToastModule,
-    NgxSpinnerModule
-
-  ],
-  providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true },MessageService]
+    declarations: [
+        LoginComponent,
+        RegisterComponent,
+        AuditadminhomeComponent,
+        AuditplantgridpageComponent,
+        AuditusermanagementgridpageComponent,
+        AudithierarchyhomepageComponent,
+        AuditdepartmentgridpageComponent,
+        AuditrolegridpageComponent,
+        AuditsetfuncprofilegridpageComponent,
+        AuditDepAddComponent,
+        AuditRoleAddPageComponent,
+        AuditUserMananagementAddPageComponent,
+        AuditPlantAddPageComponent,
+        FunctionalProfileAddPageComponent,
+        //AdminHomeComponent,
+        //AddDepartmentComponent,
+        //ApprovalConfigurationsComponent,
+        // AddRolesComponent,
+        // NewPlantRegistrationComponent,
+        //PlantComponent,
+        // RolesComponent
+    ],
+    providers: [AppintializorService, { provide: APP_INITIALIZER, useFactory: serverConfigInitializerFactory, deps: [AppintializorService], multi: true }, MessageService],
+    imports: [
+        CommonModule,
+        FormsModule,
+        AuthenticationRoutingModule,
+        CommonModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        FontAwesomeModule,
+        TableModule,
+        MultiSelectModule,
+        DropdownModule,
+        ToastModule,
+        NgxSpinnerModule,
+        DocumentsModule
+    ]
 })
 export class AuthenticationModule { 
  
