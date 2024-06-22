@@ -48,8 +48,9 @@ import { AuditWorkflowTypeNewPageComponent } from './components/audit-workflow-t
 import { AuditTemplateTypeNewPageComponent } from './components/audit-template-type-new-page/audit-template-type-new-page.component';
 import { QuickToolbarService, RichTextEditorModule, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 import { AuditCommonGridComponent } from '../../common/audit-common-grid/audit-common-grid.component';
-
-
+import { SummaryComponent } from '../../common/summary/summary.component';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { AuditCommonGridComponent } from '../../common/audit-common-grid/audit-c
    AuditDocumetTypeNewPageComponent,
    AuditWorkflowTypeNewPageComponent,
    AuditTemplateTypeNewPageComponent,
-    AuditCommonGridComponent
+    AuditCommonGridComponent,
+    SummaryComponent
 
   ],
   imports: [
@@ -101,11 +103,13 @@ import { AuditCommonGridComponent } from '../../common/audit-common-grid/audit-c
     DropdownModule,
     ToastModule,
     NgxSpinnerModule,
-    RichTextEditorModule
+    RichTextEditorModule,
+    PanelModule,
+    DialogModule
   ],
   providers: [TableService, QuickToolbarService],
   exports: [
-    AuditCommonGridComponent,
+    AuditCommonGridComponent, SummaryComponent
     // other components to be exported
   ]
 })

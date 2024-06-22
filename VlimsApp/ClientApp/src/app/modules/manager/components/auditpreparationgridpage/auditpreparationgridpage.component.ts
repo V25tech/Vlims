@@ -23,9 +23,9 @@ export class AuditpreparationgridpageComponent {
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
   types: AuditConfiguration[] = [];
-  
-  viewMode:boolean=false;
-  access:boolean=false;
+
+  viewMode: boolean = false;
+  access: boolean = false;
   prefix: any;
   globalFilterFields: string[] = [
     'printtype',
@@ -37,7 +37,7 @@ export class AuditpreparationgridpageComponent {
     'status'
   ];
   public gridConfig = new DataGrid();
-  constructor(private commonsvc: CommonService, private auditservice: AuditConfiurationService,private loader: NgxSpinnerService, private router: Router,private route: ActivatedRoute) { }
+  constructor(private commonsvc: CommonService, private auditservice: AuditConfiurationService, private loader: NgxSpinnerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.access = this.commonsvc.getUserRoles()?.deptConfig ?? false;
@@ -59,32 +59,32 @@ export class AuditpreparationgridpageComponent {
       { Name: 'CreatedBy', DisplayName: 'Prepared By', width: 10, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Prepared On', width: 10, sort: false, isNavigation: false },
 
-      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
+      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation: false }
     ]
   }
   setConfig() {
     this.gridConfig.Config = {
-      itemsPerPage : 10,
+      itemsPerPage: 10,
       currentPage: 1,
       rowsPerPageOptions: [10, 20, 50]
     }
   }
-  
+
   getauditmodule() {
     debugger
     this.loader.show();
-    this.commonsvc.req.type="PreparationType";
+    this.commonsvc.req.type = "PreparationType";
     this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
       this.types = this.removeDuplicates(data, 'Unique'); // Filter duplicates based on EntityName
       this.types.reverse(); // Reverse the array here
       this.gridConfig.gridData = this.types;
-      if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;
+      if (this.gridConfig.Config != undefined) this.gridConfig.Config.itemsPerPage = this.types.length;
       this.loader.hide();
     }, er => {
       this.loader.hide();
     });
   }
-  
+
   // Function to remove duplicate entries from an array based on a specific property
   removeDuplicates(array: any[], property: string): any[] {
     debugger
@@ -94,8 +94,10 @@ export class AuditpreparationgridpageComponent {
       ))
     );
   }
+
   handleAction(event: any) {
+    debugger
     console.log(event);
-    this.router.navigate(["./../"]);
+    this.router.navigate(["../auditpreparationaddpage"], { queryParams: { DocumentName: event.route.entityObj.documentno } });
   }
 }

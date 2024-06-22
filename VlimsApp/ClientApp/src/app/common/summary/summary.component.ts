@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-summary',
@@ -7,7 +7,28 @@ import { Component } from '@angular/core';
 })
 export class SummaryComponent {
   visible: boolean = false;
-  showDialog(){
-    this.visible =true;
-    }
+  @Input() gridConfig: any = {};
+  @Input() module: any = '';
+  @Input() entityName: any = '';
+  @Input() fieldsToShow: any = [];
+  @Input() filedsofActivity: any = [];  
+  constructor() {
+
+  }
+ 
+
+  ngOnInit() {
+
+  }
+  ngOnChanges() {
+    console.log(this.gridConfig)
+    console.log(this.module)
+    console.log(this.entityName)
+  }
+  showDialog() {
+    this.visible = true;
+  }
+  //getObjectKeys(obj: any): string[] {
+  //  return obj ? Object.keys(obj) : [];
+  //}
 }

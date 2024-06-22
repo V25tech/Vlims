@@ -25,7 +25,7 @@ import { TrackSearchComponent } from './common/tracksearch/tracksearch.component
 import { SearchViewComponent } from './common/searchview/searchview.component';
 import { RichTextEditorModule, TableService, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 import { DisableRightClickDirective } from './disable-right-click.directive';
-import { SummaryComponent } from './common/summary/summary.component';
+//import { SummaryComponent } from './common/summary/summary.component';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 //import { AuditCommonGridComponent } from './common/audit-common-grid/audit-common-grid.component';
@@ -34,7 +34,7 @@ import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent, TrackSearchComponent, SearchViewComponent, DisableRightClickDirective, SummaryComponent],
+  declarations: [AppComponent, HeaderComponent, LeftNavComponent, AuditlogComponentComponent, TrackSearchComponent, SearchViewComponent, DisableRightClickDirective],
   imports: [
     BrowserModule,
     FormsModule,

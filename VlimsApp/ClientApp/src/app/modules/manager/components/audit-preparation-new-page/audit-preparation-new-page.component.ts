@@ -11,6 +11,27 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./audit-preparation-new-page.component.scss']
 })
 export class AuditPreparationNewPageComponent {
+
+  fieldsToShow = [
+    { key: 'documenttitle', label: 'Title' },
+    { key: 'documentno', label: 'SOP No.' },
+    { key: 'documenttype', label: 'Document Type' },
+    { key: 'department', label: 'Department' },
+    { key: 'wokflow', label: 'Workflow' },
+    { key: 'template', label: 'Template' },
+    { key: 'RevisionNo', label: 'Revision No.' },
+    { key: 'supersedesNo', label: 'Supersedes' },
+    { key: 'template', label: 'View Document' },
+    { key: 'details', label: 'Document Details' }
+  ];
+
+  filedsofActivity = [
+    { key: 'ModifiedDate', label: 'Initiated Date & Time' },
+    //{ key: 'documenttitle', label: 'Activity' },
+    { key: 'ModifiedBy', label: 'Activity By' },
+    { key: 'Status', label: 'Activity' },
+  //  { key: 'reason', label: 'Remarks' }
+  ]
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,

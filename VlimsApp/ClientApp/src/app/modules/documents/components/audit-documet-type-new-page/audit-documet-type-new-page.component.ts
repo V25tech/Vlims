@@ -11,6 +11,18 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./audit-documet-type-new-page.component.scss']
 })
 export class AuditDocumetTypeNewPageComponent implements OnInit {
+
+  fieldsToShow = [
+    { key: 'Documenttypename', label: 'Document Type Name' },
+    { key: 'documenttypeprefix', label: 'Document Type Prefix' },
+    { key: 'Assigntodepartment', label: 'Assign To Department' },
+    { key: 'Description', label: 'Comments' }
+  ];
+
+  filedsofActivity = [
+
+  ]
+
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,
@@ -22,7 +34,6 @@ export class AuditDocumetTypeNewPageComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      debugger
       const documentName = this.route.snapshot.queryParams['DocumentName'];
       this.commonsvc.req.type = documentName;
       this.getAuditModuleByName();
@@ -33,7 +44,6 @@ export class AuditDocumetTypeNewPageComponent implements OnInit {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
       this.types = data;
-      debugger
       this.loader.hide();
     }, error => {
       this.loader.hide();

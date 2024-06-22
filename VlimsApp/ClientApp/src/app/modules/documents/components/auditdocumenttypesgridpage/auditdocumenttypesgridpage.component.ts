@@ -26,13 +26,8 @@ export class AuditdocumenttypesgridpageComponent {
   access:boolean=false;
   prefix: any;
   globalFilterFields: string[] = [
-    'printtype',
-    'documenttitle',
-    'documentNumber',
-    'noofcopies',
-    'createdBy',
-    'printCount',
-    'status'
+    'documenttypeprefix',
+    'Documenttypename'
   ];
   public gridConfig = new DataGrid();
   constructor(private commonsvc: CommonService, private auditservice: AuditConfiurationService, private loader: NgxSpinnerService, private router: Router, private route: ActivatedRoute) { }
@@ -94,6 +89,6 @@ export class AuditdocumenttypesgridpageComponent {
   handleAction(event: any) {
     debugger
     console.log(event);
-    this.router.navigate(["./../"]);
+    this.router.navigate(["./../auditgridadd"], { queryParams: { DocumentName: event.route.entityObj.documenttypeprefix } });
   }
 }

@@ -1,130 +1,80 @@
 <div class="container-fluid">
-    <div class="row p-2 ">
-        <div class="col">
-          <h4 class="page-title">Document Type Audit Trails</h4>
-        </div>
-      </div>
-<div class="col-lg-12">
-   <div class="m-3">
-    <p-panel class=" col-lg-5" header="Revision 4" [toggleable]="true">
-        <div class="d-flex flex-column py-3 px-4">
-            <div class="form-group row ">
-                <label for="title" class="col-md-5">Title</label>
-                    <div class="col-lg-7">
-                        <span>Procedure For Change Controls</span>
-                    </div>
+  <div class="row p-2 ">
+    <div class="col">
+      <h4 class="page-title">Document Type Audit Trails</h4>
+    </div>
+  </div>
+  <div class="col-lg-12" *ngIf="module == 'master'">
+
+    <ng-container *ngFor="let item of gridConfig">
+      <div class="m-3">
+        <p-panel class=" col-lg-5" header="Revision 4" [toggleable]="true">
+          <div class="d-flex flex-column py-3 px-4">
+            <ng-container *ngFor="let field of fieldsToShow">
+              <div class="form-group row">
+                <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
+                <div class="col-lg-7">
+                  <span>{{ item.EntityInfo[field.key] }}</span>
                 </div>
-            
-            <div class="form-group row ">
-                <label for="sopNo" class="col-md-5">SOP No.</label>
-                <div  class="col-lg-7">
-                   <span>APD/QAD/002</span>
-                </div>
-            </div>
-            <div class="form-group row ">
-                <label for="documentType" class="col-md-5">Document Type</label>
-                    <div class="col-lg-7">
-                        <span>Standard Operating Procedure</span>
-                    </div>
-                </div>
-                <div class="form-group row ">
-                    <label for="department" class="col-md-5">Department</label>
-                        <div class="col-lg-7">
-                            <span>Quality Control</span>
-                        </div>
-                    </div>
-                    <div class="form-group row ">
-                        <label for="workFlow" class="col-md-5">Work Flow</label>
-                            <div class="col-lg-7">
-                                <span>SOP Workflow</span>
-                            </div>
-                        </div>
-                        <div class="form-group row ">
-                            <label for="template" class="col-md-5">Template</label>
-                                <div class="col-lg-7">
-                                    <span>SOP Template</span>
-                                </div>
-                            </div>
-        
-                            <div class="form-group row ">
-                                <label for="revisionNo" class="col-md-5">Revision No.</label>
-                                    <div class="col-lg-7">
-                                        <span>NA</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row ">
-                                    <label for="supersedes" class="col-md-5">Supersedes</label>
-                                        <div class="col-lg-7">
-                                            <span>NIL</span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row ">
-                                        <label for="document" class="col-md-5">Document</label>
-                                        
-                                            <div class="col-lg-7">
-                                                <span  class="viewDocument"(click)="showDialog()">View Document</span>
-                                            </div>
-                                    
-                                        </div>
-               
-                        <div class="form-group row ">
-                            <label for="remarks" class="col-md-5">Remark(s)/Reason</label>
-                                <div class="col-lg-7">
-                                    <span>Remarks/Reason</span>
-                                </div>
-                            </div>
-        
-        </div>
-        <div class="page-card-title border-bottom p-2">
+              </div>
+            </ng-container>
+          </div>
+
+
+
+
+          <div class="page-card-title border-bottom p-2">
             Activity
-             
-           </div>
-           <div class="m-3">
+
+          </div>
+          <div class="m-3">
             <div class="d-flex">
-             <div class="activity-time col-lg-3 ">
-               <p>16-10-2023</p>
-             </div>
-             <div class="activity-items col-lg-9">
-               <ul>
-                 <li class="d-flex">
-                   <div class="activity-icon">
-                     <i class="fa-solid fa-pencil"></i>
-                   </div>
-                   <div class="activity-info ms-2">
-                     <p class="mb-0 p-date-styles"> <span class="name-styles">John Doe</span> Modified <span
-                         class="p-date-styles"></span></p>
-                     <span class="activity-date">04:05am IST</span>
-                   </div>
-       
-                 </li>
-               
-               </ul>
-             </div>
-           </div>
-             <div class="d-flex">
-                
-             <div class="activity-time col-lg-3">
+              <div class="activity-time col-lg-3 ">
+                <p>16-10-2023</p>
+              </div>
+              <div class="activity-items col-lg-9">
+                <ul>
+                  <li class="d-flex">
+                    <div class="activity-icon">
+                      <i class="fa-solid fa-pencil"></i>
+                    </div>
+                    <div class="activity-info ms-2">
+                      <p class="mb-0 p-date-styles">
+                        <span class="name-styles">John Doe</span> Modified <span class="p-date-styles"></span>
+                      </p>
+                      <span class="activity-date">04:05am IST</span>
+                    </div>
+
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+            <div class="d-flex">
+
+              <div class="activity-time col-lg-3">
                 <p>16-10-2023</p>
               </div>
               <div class="activity-items col-lg-9 ">
                 <ul>
                   <li class="d-flex">
                     <div class="activity-icon">
-                     <i class="fa-regular fa-eye"></i>
+                      <i class="fa-regular fa-eye"></i>
                     </div>
                     <div class="activity-info ms-2">
-                      <p class="mb-0 p-date-styles"> <span class="name-styles">Stef Bogaerts</span> Reviewed<span
-                          class="p-date-styles"></span></p>
+                      <p class="mb-0 p-date-styles">
+                        <span class="name-styles">Stef Bogaerts</span> Reviewed<span class="p-date-styles"></span>
+                      </p>
                       <span class="activity-date">04:05am IST</span>
                     </div>
-        
+
                   </li>
-                
+
                 </ul>
               </div>
-             </div>
-             
-             <div class="d-flex">
+            </div>
+
+            <div class="d-flex">
               <div class="activity-time col-lg-3">
                 <p>16-10-2023</p>
               </div>
@@ -132,467 +82,140 @@
                 <ul>
                   <li class="d-flex">
                     <div class="activity-icon">
-                     <i class="fa-regular fa-circle-check"></i>
+                      <i class="fa-regular fa-circle-check"></i>
                     </div>
                     <div class="activity-info ms-2">
-                      <p class="mb-0 p-date-styles"> <span class="name-styles">Alice Johnson</span> Approved <span
-                          class="p-date-styles"></span></p>
+                      <p class="mb-0 p-date-styles">
+                        <span class="name-styles">Alice Johnson</span> Approved <span class="p-date-styles"></span>
+                      </p>
                       <span class="activity-date">04:05am IST</span>
                     </div>
-        
+
                   </li>
-                
+
                 </ul>
               </div>
-             </div>
-            </div> 
-           
-    </p-panel>
-   </div>
+            </div>
+          </div>
 
-  
-    
-    <div class="m-3">
-            <p-panel class="mt-3 col-lg-5" header="Revision 3" [toggleable]="true">
-                <div class="d-flex flex-column py-3 px-4">
-                    <div class="form-group row ">
-                        <label for="title" class="col-md-5">Title</label>
-                            <div class="col-lg-7">
-                                <span>Procedure For Change Controls</span>
-                            </div>
-                        </div>
-                    
-                    <div class="form-group row ">
-                        <label for="sopNo" class="col-md-5">SOP No.</label>
-                        <div  class="col-lg-7">
-                           <span>APD/QAD/002</span>
-                        </div>
-                    </div>
-                    <div class="form-group row ">
-                        <label for="documentType" class="col-md-5">Document Type</label>
-                            <div class="col-lg-7">
-                                <span>Standard Operating Procedure</span>
-                            </div>
-                        </div>
-                        <div class="form-group row ">
-                            <label for="department" class="col-md-5">Department</label>
-                                <div class="col-lg-7">
-                                    <span>Quality Control</span>
-                                </div>
-                            </div>
-                            <div class="form-group row ">
-                                <label for="workFlow" class="col-md-5">Work Flow</label>
-                                    <div class="col-lg-7">
-                                        <span>SOP Workflow</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row ">
-                                    <label for="template" class="col-md-5">Template</label>
-                                        <div class="col-lg-7">
-                                            <span>SOP Template</span>
-                                        </div>
-                                    </div>
-                
-                                    <div class="form-group row ">
-                                        <label for="revisionNo" class="col-md-5">Revision No.</label>
-                                            <div class="col-lg-7">
-                                                <span>NA</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row ">
-                                            <label for="supersedes" class="col-md-5">Supersedes</label>
-                                                <div class="col-lg-7">
-                                                    <span>NIL</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row ">
-                                                <label for="document" class="col-md-5">Document</label>
-                                                
-                                                    <div class="col-lg-7">
-                                                        <span  class="viewDocument"(click)="showDialog()">View Document</span>
-                                                    </div>
-                                            
-                                                </div>
-                       
-                                <div class="form-group row ">
-                                    <label for="remarks" class="col-md-5">Remark(s)/Reason</label>
-                                        <div class="col-lg-7">
-                                            <span>Remarks/Reason</span>
-                                        </div>
-                                    </div>
-                
+        </p-panel>
+      </div>
+    </ng-container>
+
+
+
+
+  </div>
+  <div class="col-lg-12"  *ngIf="module == 'manager'">
+
+
+    <ng-container *ngFor="let item of gridConfig">
+      <div class="m-3">
+        <p-panel class=" col-lg-5" header="Revision 4" [toggleable]="true">
+          <div class="d-flex flex-column py-3 px-4">
+            <ng-container *ngFor="let field of fieldsToShow">
+              <div class="form-group row">
+                <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
+                <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && 'template'">
+                  <span>{{ item.EntityInfo[field.key] }}</span>
                 </div>
-                <div class="page-card-title border-bottom p-2">
-                    Activity
-                     
-                   </div>
-                   <div class="m-3">
-                    <div class="d-flex">
-                     <div class="activity-time col-lg-3 ">
-                       <p>16-10-2023</p>
-                     </div>
-                     <div class="activity-items col-lg-9">
-                       <ul>
-                         <li class="d-flex">
-                           <div class="activity-icon">
-                             <i class="fa-solid fa-pencil"></i>
-                           </div>
-                           <div class="activity-info ms-2">
-                             <p class="mb-0 p-date-styles"> <span class="name-styles">John Doe</span> Modified <span
-                                 class="p-date-styles"></span></p>
-                             <span class="activity-date">04:05am IST</span>
-                           </div>
-               
-                         </li>
-                       
-                       </ul>
-                     </div>
-                   </div>
-                     <div class="d-flex">
-                        
-                     <div class="activity-time col-lg-3">
-                        <p>16-10-2023</p>
-                      </div>
-                      <div class="activity-items col-lg-9 ">
-                        <ul>
-                          <li class="d-flex">
-                            <div class="activity-icon">
-                             <i class="fa-regular fa-eye"></i>
-                            </div>
-                            <div class="activity-info ms-2">
-                              <p class="mb-0 p-date-styles"> <span class="name-styles">Stef Bogaerts</span> Reviewed<span
-                                  class="p-date-styles"></span></p>
-                              <span class="activity-date">04:05am IST</span>
-                            </div>
-                
-                          </li>
-                        
-                        </ul>
-                      </div>
-                     </div>
-                     
-                     <div class="d-flex">
-                      <div class="activity-time col-lg-3">
-                        <p>16-10-2023</p>
-                      </div>
-                      <div class="activity-items col-lg-9">
-                        <ul>
-                          <li class="d-flex">
-                            <div class="activity-icon">
-                             <i class="fa-regular fa-circle-check"></i>
-                            </div>
-                            <div class="activity-info ms-2">
-                              <p class="mb-0 p-date-styles"> <span class="name-styles">Alice Johnson</span> Approved <span
-                                  class="p-date-styles"></span></p>
-                              <span class="activity-date">04:05am IST</span>
-                            </div>
-                
-                          </li>
-                        
-                        </ul>
-                      </div>
-                     </div>
-                    </div> 
-            </p-panel>
-    </div>
-        
-        
-        
-           
-        
-      
-       <div class="m-3">
-            <p-panel  class="mt-3 col-lg-5" header="Revision 2" [toggleable]="true">
-                <div class="d-flex flex-column py-3 px-4">
-                    <div class="form-group row ">
-                        <label for="title" class="col-md-5">Title</label>
-                            <div class="col-lg-7">
-                                <span>Procedure For Change Controls</span>
-                            </div>
-                        </div>
-                    
-                    <div class="form-group row ">
-                        <label for="sopNo" class="col-md-5">SOP No.</label>
-                        <div  class="col-lg-7">
-                           <span>APD/QAD/002</span>
-                        </div>
-                    </div>
-                    <div class="form-group row ">
-                        <label for="documentType" class="col-md-5">Document Type</label>
-                            <div class="col-lg-7">
-                                <span>Standard Operating Procedure</span>
-                            </div>
-                        </div>
-                        <div class="form-group row ">
-                            <label for="department" class="col-md-5">Department</label>
-                                <div class="col-lg-7">
-                                    <span>Quality Control</span>
-                                </div>
-                            </div>
-                            <div class="form-group row ">
-                                <label for="workFlow" class="col-md-5">Work Flow</label>
-                                    <div class="col-lg-7">
-                                        <span>SOP Workflow</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row ">
-                                    <label for="template" class="col-md-5">Template</label>
-                                        <div class="col-lg-7">
-                                            <span>SOP Template</span>
-                                        </div>
-                                    </div>
-                
-                                    <div class="form-group row ">
-                                        <label for="revisionNo" class="col-md-5">Revision No.</label>
-                                            <div class="col-lg-7">
-                                                <span>NA</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row ">
-                                            <label for="supersedes" class="col-md-5">Supersedes</label>
-                                                <div class="col-lg-7">
-                                                    <span>NIL</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row ">
-                                                <label for="document" class="col-md-5">Document</label>
-                                                
-                                                    <div class="col-lg-7">
-                                                        <span  class="viewDocument"(click)="showDialog()">View Document</span>
-                                                    </div>
-                                            
-                                                </div>
-                       
-                                <div class="form-group row ">
-                                    <label for="remarks" class="col-md-5">Remark(s)/Reason</label>
-                                        <div class="col-lg-7">
-                                            <span>Remarks/Reason</span>
-                                        </div>
-                                    </div>
-                
+                <div class="col-lg-7" *ngIf="field.key == 'supersedesNo'">
+                  <span>{{ item.EntityInfo.Prepdocument[field.key] }}</span>
                 </div>
-                <div class="page-card-title border-bottom p-2">
-                    Activity
-                     
-                   </div>
-                   <div class="m-3">
-                    <div class="d-flex">
-                     <div class="activity-time col-lg-3 ">
-                       <p>16-10-2023</p>
-                     </div>
-                     <div class="activity-items col-lg-9">
-                       <ul>
-                         <li class="d-flex">
-                           <div class="activity-icon">
-                             <i class="fa-solid fa-pencil"></i>
-                           </div>
-                           <div class="activity-info ms-2">
-                             <p class="mb-0 p-date-styles"> <span class="name-styles">John Doe</span> Modified <span
-                                 class="p-date-styles"></span></p>
-                             <span class="activity-date">04:05am IST</span>
-                           </div>
-               
-                         </li>
-                       
-                       </ul>
-                     </div>
-                   </div>
-                     <div class="d-flex">
-                        
-                     <div class="activity-time col-lg-3">
-                        <p>16-10-2023</p>
-                      </div>
-                      <div class="activity-items col-lg-9 ">
-                        <ul>
-                          <li class="d-flex">
-                            <div class="activity-icon">
-                             <i class="fa-regular fa-eye"></i>
-                            </div>
-                            <div class="activity-info ms-2">
-                              <p class="mb-0 p-date-styles"> <span class="name-styles">Stef Bogaerts</span> Reviewed<span
-                                  class="p-date-styles"></span></p>
-                              <span class="activity-date">04:05am IST</span>
-                            </div>
-                
-                          </li>
-                        
-                        </ul>
-                      </div>
-                     </div>
-                     
-                     <div class="d-flex">
-                      <div class="activity-time col-lg-3">
-                        <p>16-10-2023</p>
-                      </div>
-                      <div class="activity-items col-lg-9">
-                        <ul>
-                          <li class="d-flex">
-                            <div class="activity-icon">
-                             <i class="fa-regular fa-circle-check"></i>
-                            </div>
-                            <div class="activity-info ms-2">
-                              <p class="mb-0 p-date-styles"> <span class="name-styles">Alice Johnson</span> Approved <span
-                                  class="p-date-styles"></span></p>
-                              <span class="activity-date">04:05am IST</span>
-                            </div>
-                
-                          </li>
-                        
-                        </ul>
-                      </div>
-                     </div>
-                    </div> 
-            </p-panel>
-        
-       </div>
-        
-       <div class="m-3">
-            <p-panel  class="mt-3 col-lg-5" header="Revision 1" [toggleable]="true">
-                <div class="d-flex flex-column py-3 px-4">
-                    <div class="form-group row ">
-                        <label for="title" class="col-md-5">Title</label>
-                            <div class="col-lg-7">
-                                <span>Procedure For Change Controls</span>
-                            </div>
-                        </div>
-                    
-                    <div class="form-group row ">
-                        <label for="sopNo" class="col-md-5">SOP No.</label>
-                        <div  class="col-lg-7">
-                           <span>APD/QAD/002</span>
-                        </div>
+              </div>
+            </ng-container>
+          </div>
+
+
+
+
+          <div class="page-card-title border-bottom p-2">
+            Activity
+
+          </div>
+          <div class="m-3">
+            <div class="d-flex">
+              <div class="activity-time col-lg-3 ">
+                <p>{{ item.EntityInfo['ModifiedDate'] }}</p>
+              </div>
+              <div class="activity-items col-lg-9">
+                <ul>
+                  <li class="d-flex">
+                    <div class="activity-icon">
+                      <i class="fa-solid fa-pencil"></i>
                     </div>
-                    <div class="form-group row ">
-                        <label for="documentType" class="col-md-5">Document Type</label>
-                            <div class="col-lg-7">
-                                <span>Standard Operating Procedure</span>
-                            </div>
-                        </div>
-                        <div class="form-group row ">
-                            <label for="department" class="col-md-5">Department</label>
-                                <div class="col-lg-7">
-                                    <span>Quality Control</span>
-                                </div>
-                            </div>
-                            <div class="form-group row ">
-                                <label for="workFlow" class="col-md-5">Work Flow</label>
-                                    <div class="col-lg-7">
-                                        <span>SOP Workflow</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row ">
-                                    <label for="template" class="col-md-5">Template</label>
-                                        <div class="col-lg-7">
-                                            <span>SOP Template</span>
-                                        </div>
-                                    </div>
-                
-                                    <div class="form-group row ">
-                                        <label for="revisionNo" class="col-md-5">Revision No.</label>
-                                            <div class="col-lg-7">
-                                                <span>NA</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row ">
-                                            <label for="supersedes" class="col-md-5">Supersedes</label>
-                                                <div class="col-lg-7">
-                                                    <span>NIL</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row ">
-                                                <label for="document" class="col-md-5">Document</label>
-                                                
-                                                    <div class="col-lg-7">
-                                                        <span  class="viewDocument"(click)="showDialog()">View Document</span>
-                                                    </div>
-                                            
-                                                </div>
-                                <div class="form-group row ">
-                                    <label for="remarks" class="col-md-5">Remark(s)/Reason</label>
-                                        <div class="col-lg-7">
-                                            <span>Remarks/Reason</span>
-                                        </div>
-                                    </div>
-                
-                </div>
-                <div class="page-card-title border-bottom p-2">
-                    Activity
-                     
-                   </div>
-                   <div class="m-3">
-                   <div class="d-flex">
-                    <div class="activity-time col-lg-3 ">
-                      <p>16-10-2023</p>
+                    <div class="activity-info ms-2">
+                      <p class="mb-0 p-date-styles">
+                        <span class="name-styles">{{ item['UserName'] }}</span> {{ item.EntityInfo['Status'] == 'IN-PROGRESS' ? 'Modified' : item.EntityInfo['Status'] == 'Reviewed'? 'Reviewed' : 'Approved'  }} <span class="p-date-styles"></span>
+                      </p>
+                      <span class="activity-date">{{ item.EntityInfo['ModifiedDate'] }}</span>
                     </div>
-                    <div class="activity-items col-lg-9">
-                      <ul>
-                        <li class="d-flex">
-                          <div class="activity-icon">
-                            <i class="fa-solid fa-pencil"></i>
-                          </div>
-                          <div class="activity-info ms-2">
-                            <p class="mb-0 p-date-styles"> <span class="name-styles">John Doe</span> Modified <span
-                                class="p-date-styles"></span></p>
-                            <span class="activity-date">04:05am IST</span>
-                          </div>
-              
-                        </li>
-                      
-                      </ul>
+
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+            <div class="d-flex">
+
+              <div class="activity-time col-lg-3">
+                <p>16-10-2023</p>
+              </div>
+              <div class="activity-items col-lg-9 ">
+                <ul>
+                  <li class="d-flex">
+                    <div class="activity-icon">
+                      <i class="fa-regular fa-eye"></i>
                     </div>
-                  </div>
-                    <div class="d-flex">
-                       
-                    <div class="activity-time col-lg-3">
-                       <p>16-10-2023</p>
-                     </div>
-                     <div class="activity-items col-lg-9 ">
-                       <ul>
-                         <li class="d-flex">
-                           <div class="activity-icon">
-                            <i class="fa-regular fa-eye"></i>
-                           </div>
-                           <div class="activity-info ms-2">
-                             <p class="mb-0 p-date-styles"> <span class="name-styles">Stef Bogaerts</span> Reviewed<span
-                                 class="p-date-styles"></span></p>
-                             <span class="activity-date">04:05am IST</span>
-                           </div>
-               
-                         </li>
-                       
-                       </ul>
-                     </div>
+                    <div class="activity-info ms-2">
+                      <p class="mb-0 p-date-styles">
+                        <span class="name-styles">Stef Bogaerts</span> Reviewed<span class="p-date-styles"></span>
+                      </p>
+                      <span class="activity-date">04:05am IST</span>
                     </div>
-                    
-                    <div class="d-flex">
-                     <div class="activity-time col-lg-3">
-                       <p>16-10-2023</p>
-                     </div>
-                     <div class="activity-items col-lg-9">
-                       <ul>
-                         <li class="d-flex">
-                           <div class="activity-icon">
-                            <i class="fa-regular fa-circle-check"></i>
-                           </div>
-                           <div class="activity-info ms-2">
-                             <p class="mb-0 p-date-styles"> <span class="name-styles">Alice Johnson</span> Approved <span
-                                 class="p-date-styles"></span></p>
-                             <span class="activity-date">04:05am IST</span>
-                           </div>
-               
-                         </li>
-                       
-                       </ul>
-                     </div>
+
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="d-flex">
+              <div class="activity-time col-lg-3">
+                <p>16-10-2023</p>
+              </div>
+              <div class="activity-items col-lg-9">
+                <ul>
+                  <li class="d-flex">
+                    <div class="activity-icon">
+                      <i class="fa-regular fa-circle-check"></i>
                     </div>
-                   </div> 
-            </p-panel>
-       </div>
-        
-</div>  <p-dialog header="Document" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+                    <div class="activity-info ms-2">
+                      <p class="mb-0 p-date-styles">
+                        <span class="name-styles">Alice Johnson</span> Approved <span class="p-date-styles"></span>
+                      </p>
+                      <span class="activity-date">04:05am IST</span>
+                    </div>
+
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </p-panel>
+      </div>
+    </ng-container>
+
+
+
+
+  </div>
+  <p-dialog header="Document" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
     <p class="m-0">
-        <img src="assets/images/document pdf.png">
+      <img src="assets/images/document pdf.png">
     </p>
-</p-dialog>
-               
+  </p-dialog>
+
 </div>
