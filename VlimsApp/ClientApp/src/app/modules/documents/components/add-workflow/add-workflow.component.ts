@@ -177,6 +177,7 @@ export class AddWorkflowComponent {
     }
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
+      workflow.RevisionNumber = workflow.RevisionNumber++;
     return this.workflowsvc.update(workflow).subscribe((data: any) => {
       this.toastr.success('workflow Updated Succesfully!', 'Updated.!');
       this.location.back();

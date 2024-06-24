@@ -453,6 +453,7 @@ export class AddTemplateComponent implements OnInit {
           this.templateForm=this.templatecloneForm
         }
         debugger
+        this.templateForm.RevisionNumber = this.templateForm.RevisionNumber++;
       this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
         this.toastr.success('Document Template Updated Successfully!', 'Updated.!');
       this.loader.hide();

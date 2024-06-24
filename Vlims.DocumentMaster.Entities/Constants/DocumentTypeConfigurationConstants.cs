@@ -56,5 +56,7 @@ namespace Vlims.DocumentMaster.Entities
         public const string USP_QuickDocumentTypeConfiguration_INSERT = "dbo.USP_QuickDocumentTypeConfiguration_INSERT";
 
         public const string USP_QuickDocumentTypeConfiguration_UPDATE = "dbo.USP_QuickDocumentTypeConfiguration_UPDATE";
+        public const string RevisionNumber = "REVISION_NUMBER_PSY";
+
     }
 }

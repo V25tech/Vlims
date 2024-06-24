@@ -34,7 +34,8 @@ export class DocumentTypeConfiguration {
   ModifiedBy: string = ''
   ModifiedDate: string | null = null;
   Status: string | null = null;
-  IsParent:boolean=false;
+  IsParent: boolean = false;
+  RevisionNumber: number = 0;
 }
 export class DocumentRequestConfiguration {
   drid: string = '';
@@ -159,7 +160,8 @@ export class DocumentAdditionalTasks {
   workflow:string='';
   template:string = '';  
   referenceId:number=0;
-  prepId:number=0;
+  prepId: number = 0;
+  revisionNumber: number = 0;
 }
 
 export class noticationconfiguration {
@@ -195,7 +197,8 @@ export class workflowconiguration {
   ModifiedBy: string = '';
   ModifiedDate: string | null = null;
   Status: string | null = '';
-  IsParent:boolean=false;
+  IsParent: boolean = false;
+  RevisionNumber: number = 0;
 }
 export class DocumentTemplateConfiguration {
   DTID: string = ''
@@ -223,7 +226,8 @@ export class DocumentTemplateConfiguration {
   IsParent:boolean=false;
   Isclone:boolean=false;
   PreparationId:number=0;
-  FormatNo:string='';
+  FormatNo: string = '';
+  RevisionNumber: number = 0;
 }
 interface Page {
   text: string;

@@ -283,6 +283,8 @@ namespace Vlims.DocumentMaster.Entities
         public string ReviewDates { get; set; }
         public string ApproveDates { get; set; }
         public string PreparedDates { get; set; }
+        public int RevisionNumber { get; set; }
+
     }
     public class Page
     {

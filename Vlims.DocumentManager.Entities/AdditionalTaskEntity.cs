@@ -155,5 +155,7 @@ namespace Vlims.DMS.Entities
         public string Template { get; set; }
         public int ReferenceId { get; set; }
         public int PrepId { get; set; }
+        public int RevisionNumber { get; set; }
+
     }
 }

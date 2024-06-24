@@ -198,6 +198,7 @@ export class ReviewRevisionComponent {
     this.spinner.show();
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
+      this.revision.revisionNumber = this.revision.revisionNumber++;
       if (this.entityName?.toLowerCase() == 'new document') {
         this.documentRevisionService.updatedocrevconfig(this.revision).subscribe(res => {
           this.commonsvc.revision = new DocumentAdditionalTasks();

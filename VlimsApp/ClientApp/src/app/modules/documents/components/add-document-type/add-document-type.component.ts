@@ -82,6 +82,7 @@ export class AddDocumentTypeComponent {
     this.doctypeservice.getbyId(id).subscribe((data: any) => {
       this.selectedDepartments = data?.Assigntodepartment?.split(',');
       this.documentType = data;
+      this.documentType.RevisionNumber = data.RevisionNumber;
       this.getdepartments();
     }, ((error: any) => {
       console.log(error);
@@ -208,7 +209,9 @@ export class AddDocumentTypeComponent {
       //this.isSubmitting = true;
     
       this.documentType.ModifiedDate = new Date().toISOString();
+      this.documentType.RevisionNumber = this.documentType.RevisionNumber++;
       // If the document type name is unique, proceed with updating
+      debugger
       this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {
         this.commonsvc.documentType = new DocumentTypeConfiguration();
         this.toastr.success('Document Type Updated Successfully!', 'Updated.');

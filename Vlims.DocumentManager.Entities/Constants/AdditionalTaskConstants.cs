@@ -70,5 +70,7 @@ namespace Vlims.DMS.Entities
         public const string USP_QuickAdditionalTask_INSERT = "dbo.USP_QuickAdditionalTask_INSERT";
         
         public const string USP_QuickAdditionalTask_UPDATE = "dbo.USP_QuickAdditionalTask_UPDATE";
+        public const string RevisionNumber = "REVISION_NUMBER_PSY";
+
     }
 }

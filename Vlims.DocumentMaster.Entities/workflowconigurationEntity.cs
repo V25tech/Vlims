@@ -183,6 +183,8 @@ namespace Vlims.DocumentMaster.Entities
             }
         }
         public bool IsParent { get; set; }
+        public int RevisionNumber { get; set; }
+
     }
     public class WorkFlowMapping
     {

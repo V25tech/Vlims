@@ -63,5 +63,7 @@ namespace Vlims.DocumentMaster.Entities
         public const string USP_Quickworkflowconiguration_INSERT = "dbo.USP_Quickworkflowconiguration_INSERT";
 
         public const string USP_Quickworkflowconiguration_UPDATE = "dbo.USP_Quickworkflowconiguration_UPDATE";
+        public const string RevisionNumber = "REVISION_NUMBER_PSY";
+
     }
 }

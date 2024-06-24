@@ -66,6 +66,7 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.EffectiveDate, Value = additionalTask.EffectiveDate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.reviewDate, Value = additionalTask.ReviewDate });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.Workflow, Value = additionalTask.Workflow });
+                //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.RevisionNumber, Value = additionalTask.Workflow });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(AdditionalTaskConstants.USP_AdditionalTask_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -89,6 +90,7 @@ namespace Vlims.DocumentManager.DataAccess
                 //sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.ModifiedDate, Value = additionalTask.ModifiedDate });
                 //sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.EffectiveDate, Value = additionalTask.EffectiveDate });
                 //sqlparms.Add(new SqlParameter { DbType = DbType.DateTime, ParameterName = AdditionalTaskConstants.reviewDate, Value = additionalTask.ReviewDate });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = AdditionalTaskConstants.RevisionNumber, Value = additionalTask.RevisionNumber });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(AdditionalTaskConstants.USP_AdditionalTask_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
