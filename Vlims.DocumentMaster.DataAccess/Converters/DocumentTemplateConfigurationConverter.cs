@@ -88,13 +88,13 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.Status = Convert.ToString(row[DocumentTemplateConfigurationConstants.Status.Trim('@')]);
                         result.Add(documentTemplateConfigurationData);
                     }
-                    //if (dataset.Tables.Count >= 2)
-                    //{
-                    //    if (dataset.Tables[1] != null & dataset.Tables[1].Rows != null && dataset.Tables[1].Rows.Count > 0)
-                    //    {
-                    //        result = SetPlantNameandPlantAddressTodocTemplate(result, dataset.Tables[1]);
-                    //    }
-                    //}
+                    if (dataset.Tables.Count >= 2)
+                    {
+                        if (dataset.Tables[1] != null & dataset.Tables[1].Rows != null && dataset.Tables[1].Rows.Count > 0)
+                        {
+                            result = SetPlantNameandPlantAddressTodocTemplate(result, dataset.Tables[1]);
+                        }
+                    }
                 }
                 return result;
             }
@@ -106,39 +106,47 @@ namespace Vlims.DocumentMaster.DataAccess
 
         private static List<DocumentTemplateConfiguration> SetPlantNameandPlantAddressTodocTemplate(List<DocumentTemplateConfiguration> result, DataTable dataTable)
         {
-            List<DocumentTemplateConfiguration> document = new List<DocumentTemplateConfiguration >();
+            List<DocumentTemplateConfiguration> document = new List<DocumentTemplateConfiguration>();
             try
             {
-                if(result != null && result.Count > 0)
+                if (result != null && result.Count > 0)
                 {
                     foreach (var item in result)
                     {
-                        if (item.titleTable != null)
+                        if (item.titleTable != null && item.titleTable.Count > 0
+                            && item.titleTable[0].Count > 0 && item.titleTable[0][0] != null)
                         {
+                            // Assuming item.titleTable[0][0].inputValue is a string
+                            string inputValue = item.titleTable[0][0].inputValue;
+
                             if (dataTable != null && dataTable.Rows != null && dataTable.Rows.Count > 0)
                             {
                                 foreach (DataRow row in dataTable.Rows)
                                 {
                                     List<string> titleData = new List<string>();
-                                    titleData = item.titleTable[0][0].inputValue.Split("\n").ToList();
-                                    if (titleData != null && titleData.Count > 0)
+                                    titleData = inputValue.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.None).ToList();
+
+                                    // Ensure titleData has at least 3 lines before updating the third line
+                                    if (titleData.Count > 2)
                                     {
-                                        titleData[0] = Convert.ToString(row["PlantName_PSY"]);
-                                        if (titleData.Count > 1)
-                                            titleData[1] = Convert.ToString(row["PlantAddress_PSY"]);
-                                        item.titleTable[0][0].inputValue = string.Join("\n", titleData);
-                                    }                                     
+                                        titleData[2] = Convert.ToString(row["department_PSY"]);
+                                        inputValue = string.Join("\n", titleData);
+                                    }
                                 }
                             }
+
+                            // Update item.titleTable[0][0].inputValue with modified inputValue
+                            item.titleTable[0][0].inputValue = inputValue;
                         }
+
                         document.Add(item);
                     }
-                }                
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                // Handle exceptions as per your application's error handling strategy
+                throw new Exception("Error in SetPlantNameandPlantAddressTodocTemplate method.", ex);
             }
             return document;
         }

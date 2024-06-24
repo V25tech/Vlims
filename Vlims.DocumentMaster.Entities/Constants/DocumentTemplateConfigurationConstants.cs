@@ -57,7 +57,7 @@ namespace Vlims.DocumentMaster.Entities
 
         public const string USP_DocumentTemplateConfiguration_PSY_GET = "dbo.USP_DocumentTemplateConfiguration_PSY_GET";
 
-        public const string USP_DocumentTemplateConfiguration_TEMPLATE="dbo.USP_DocumentTemplateConfiguration_TEMPLATE_GET";
+        public const string USP_DocumentTemplateConfiguration_TEMPLATE="dbo.USP_DocumentTemplateConfiguration_TEMPLATE_GET_1";
 
         public const string USP_DocumentTemplateConfiguration_PSY_INSERT = "dbo.USP_DocumentTemplateConfiguration_PSY_INSERT_1";
 

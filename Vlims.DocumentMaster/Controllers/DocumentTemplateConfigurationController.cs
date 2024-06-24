@@ -248,10 +248,10 @@ namespace Vlims.Controllers
                 DataSet dp_dataset = DocumentPreparationData.GetDocumentPreparationByDPNID(Convert.ToInt32(template1.DTID));
                 preparation = DocumentPreparationConverter.SetDocumentPreparation(dp_dataset);
             }
-            if (template != null && !string.IsNullOrEmpty(template.CloneTemp))
-            {
-                template = DocumentTemplateConfigurationConverter.SetDocumentTemplateCloneConfigurationt(dataset);
-            }
+            //if (template != null && !string.IsNullOrEmpty(template.CloneTemp))
+            //{
+            //    template = DocumentTemplateConfigurationConverter.SetDocumentTemplateCloneConfigurationt(dataset);
+            //}
 
             StringBuilder builder = new StringBuilder();
             builder.Append(htmlUpper);
