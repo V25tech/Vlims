@@ -94,6 +94,7 @@ this.setConfig();
 }
 handleAction(event: any) {
   console.log(event);
-  this.router.navigate(["./../"]);
+  this.router.navigate(["./../auditroleaddpage"], { queryParams: { DocumentName: event.route.entityObj.Role } });
+
 }
 }

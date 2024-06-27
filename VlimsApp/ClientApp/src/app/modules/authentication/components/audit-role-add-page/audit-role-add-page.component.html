@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="container-fluid">
     <div class="row">
       <div class="col">
@@ -69,19 +69,10 @@
                   </div>  
 
 
-                  <!-- <div class="row">
-                    <div class="col-sm-3">
-                      <strong>Revision Number:</strong>
-                    </div>
-                    <div class="col-sm-9">
-                      {{ auditConfig.RevisionNumber }}
-                    </div>
-                  </div> -->
-
+                
 
                   
                    
-                <!-- Add more rows for other properties if needed -->
               </div>
             </div>
           </div>
@@ -90,4 +81,6 @@
       </div>
     </div>
   </div>
-  
+   -->
+
+   <app-summary [gridConfig]="types" [module]="'master'" [entityName] ="'documentType'" [fieldsToShow] ="fieldsToShow" [filedsofActivity] ="filedsofActivity"></app-summary>

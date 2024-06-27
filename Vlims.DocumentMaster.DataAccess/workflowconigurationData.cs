@@ -137,8 +137,10 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32,  ParameterName  = workflowconigurationConstants.approvalsCount,  Value = workflowconiguration.approvalsCount });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.CreatedBy,        Value = workflowconiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.ModifiedBy,       Value = workflowconiguration.ModifiedBy });
-                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.Status,           Value = workflowconiguration.Status });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.Status,           Value = workflowconiguration.Status });          
                 sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName    = workflowconigurationConstants.document,         Value = xmlString });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workflowconigurationConstants.RevisionNumber, Value = workflowconiguration.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(workflowconigurationConstants.USP_workflowconiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 if (Convert.ToInt32(result) > 0)
                     workflowconiguration.WFCId = result.ToString();
@@ -176,7 +178,7 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.ModifiedBy, Value = workflowconiguration.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = workflowconigurationConstants.Status, Value = workflowconiguration.Status });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = workflowconigurationConstants.document, Value = xmlString });
-                sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = workflowconigurationConstants.RevisionNumber, Value = workflowconiguration.RevisionNumber });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = workflowconigurationConstants.RevisionNumber, Value = workflowconiguration.RevisionNumber });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(workflowconigurationConstants.USP_workflowconiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

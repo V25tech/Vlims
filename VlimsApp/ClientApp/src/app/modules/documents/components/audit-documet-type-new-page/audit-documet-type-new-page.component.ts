@@ -21,6 +21,7 @@ export class AuditDocumetTypeNewPageComponent implements OnInit {
 
   filedsofActivity = [
 
+    
   ]
 
   constructor(

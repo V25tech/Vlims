@@ -12,6 +12,18 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./audit-template-type-new-page.component.scss']
 })
 export class AuditTemplateTypeNewPageComponent {
+  fieldsToShow = [
+    { key: 'Templatename', label: 'Template Name' },
+    { key: 'Uniquecode', label: 'Template Code' },
+    { key: 'documenttype', label: 'Document Type' },
+    { key: 'CreatedBy', label: 'Initiated By' },
+    { key: 'CreatedDate', label: 'Initiated On' }
+  ];
+
+  filedsofActivity = [
+
+    
+  ]
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,

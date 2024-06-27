@@ -16,6 +16,7 @@ namespace Vlims.DocumentMaster.DataAccess
     using Vlims.DocumentMaster.Entities;
     using Vlims.Common;
     using System.Collections;
+    using Vlims.Administration.Entities;
 
     // Comment
     public static class DocumentTypeConfigurationConverter
@@ -45,6 +46,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTypeConfigurationData.ModifiedBy = Convert.ToString(row[DocumentTypeConfigurationConstants.ModifiedBy.Trim('@')]);
                         documentTypeConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DocumentTypeConfigurationConstants.ModifiedDate.Trim('@')]);
                         documentTypeConfigurationData.Status = Convert.ToString(row[DocumentTypeConfigurationConstants.Status_PSY.Trim('@')]);
+                        documentTypeConfigurationData.RevisionNumber = Convert.ToInt32(row[DocumentTypeConfigurationConstants.RevisionNumber.Trim('@')]);
                         if (islist)
                             documentTypeConfigurationData.IsParent = Convert.ToBoolean(row[DocumentTypeConfigurationConstants.IsParent.Trim('@')]);
                         result.Add(documentTypeConfigurationData);

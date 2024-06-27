@@ -80,6 +80,8 @@ namespace Vlims.Administration.Entities
         public const string USP_UserConfiguration_PSY_By_UMId_GET = "dbo.USP_UserConfiguration_PSY_By_UMId_GET";
 
         public const string USP_UserConfiguration_PSY_By_UMId_DELETE = "dbo.USP_UserConfiguration_PSY_By_UMId_DELETE";
+
+        public const string RevisionNumber = "REVISION_NUMBER_PSY";
     }
 
     public class ApprovalkConfigurationConstants

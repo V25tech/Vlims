@@ -76,7 +76,7 @@ export class AuditdepartmentgridpageComponent {
         this.types = this.removeDuplicates(data, 'Unique'); 
         this.types.reverse(); // Reverse the array here
         this.gridConfig.gridData = this.types;
-if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;
+        if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;
          this.loader.hide();
        }, er => {
          this.loader.hide();
@@ -94,7 +94,7 @@ if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = 
 
 handleAction(event: any) {
   console.log(event);
-  this.router.navigate(["./../"]);
+  this.router.navigate(["./../auditadddepartment"], { queryParams: { DocumentName: event.route.entityObj.DepartmentCode } });
 }
 
 }

@@ -101,6 +101,6 @@ this.setConfig();
 
 handleAction(event: any) {
   console.log(event);
-  this.router.navigate(["./../"]);
+  this.router.navigate(["./../auditadddfunctionalprofile"], { queryParams: { DocumentName: event.route.entityObj.role } });
 }
 }

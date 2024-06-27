@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Vlims.Common;
 using Vlims.Administration.Entities;
 using System.Xml.Serialization;
+using Vlims.Data;
 
 
 
@@ -31,6 +32,8 @@ public static class SetFunctionalProfileConverter
                     setFunctionalProfileData.sfpid = Convert.ToInt16(row[SetFunctionalProfileConstants.SFPID.Trim('@')]);
                     int id = setFunctionalProfileData.sfpid;
                     setFunctionalProfileData.role = row[SetFunctionalProfileConstants.Role.Trim('@')].ToString();
+                    setFunctionalProfileData.RevisionNumber = Convert.ToInt32(row[SetFunctionalProfileConstants.RevisionNumber.Trim('@')]);
+
                     string docvalue = Convert.ToString(row[SetFunctionalProfileConstants.Document.Trim('@')]);
                     if (!string.IsNullOrEmpty(docvalue))
                     {

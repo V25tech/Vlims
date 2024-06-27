@@ -101,7 +101,7 @@ if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = 
 
 handleAction(event: any) {
   console.log(event);
-  this.router.navigate(["./../"]);
+  this.router.navigate(["./../auditadduserconfiguration"], { queryParams: { DocumentName: event.route.entityObj.UserID } });
 }
 
 }

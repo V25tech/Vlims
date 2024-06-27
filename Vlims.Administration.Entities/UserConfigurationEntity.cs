@@ -255,6 +255,7 @@ namespace Vlims.Administration.Entities
                 this.modifieddateField = value;
             }
         }
+        public int RevisionNumber { get; set; }
 
         public string Password { get; set; }
     }

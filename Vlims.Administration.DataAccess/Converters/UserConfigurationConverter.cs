@@ -18,6 +18,7 @@ namespace Vlims.Administration.DataAccess
     using Newtonsoft.Json;
     using Vlims.Administration.Entities;
     using Vlims.Common;
+    using PolicySummary.Sheet1.Data;
 
 
 
@@ -63,6 +64,8 @@ namespace Vlims.Administration.DataAccess
                         userConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[UserConfigurationConstants.ModifiedDate.Trim('@')]);
                         userConfigurationData.Password = Convert.ToString(row[UserConfigurationConstants.Password.Trim('@')]);
                         userConfigurationData.Status = Convert.ToString(row[UserConfigurationConstants.Status.Trim('@')]);
+                        userConfigurationData.RevisionNumber = Convert.ToInt32(row[UserConfigurationConstants.RevisionNumber.Trim('@')]);
+
                         result.Add(userConfigurationData);
                     }
                 }

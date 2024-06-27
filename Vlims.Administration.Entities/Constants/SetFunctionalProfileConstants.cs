@@ -86,5 +86,6 @@ public class SetFunctionalProfileConstants
     public const string USP_QuickSetFunctionalProfile_INSERT = "dbo.USP_QuickSetFunctionalProfile_INSERT";
 
     public const string USP_QuickSetFunctionalProfile_UPDATE = "dbo.USP_QuickSetFunctionalProfile_UPDATE";
+    public const string RevisionNumber = "REVISION_NUMBER_PSY";
 }
 

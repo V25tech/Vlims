@@ -60,6 +60,7 @@ namespace Vlims.Data
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DepartmentConfigurationConstants.Comments, Value = departmentConfiguration.Comments });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DepartmentConfigurationConstants.CreatedBy, Value = departmentConfiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DepartmentConfigurationConstants.ModifiedBy, Value = departmentConfiguration.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DepartmentConfigurationConstants.RevisionNumber, Value = departmentConfiguration.RevisionNumber });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DepartmentConfigurationConstants.USP_DepartmentConfiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -80,6 +81,8 @@ namespace Vlims.Data
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DepartmentConfigurationConstants.DepartmentCode, Value = departmentConfiguration.DepartmentCode });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DepartmentConfigurationConstants.Comments, Value = departmentConfiguration.Comments });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DepartmentConfigurationConstants.ModifiedBy, Value = departmentConfiguration.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DepartmentConfigurationConstants.RevisionNumber, Value = departmentConfiguration.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DepartmentConfigurationConstants.USP_DepartmentConfiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

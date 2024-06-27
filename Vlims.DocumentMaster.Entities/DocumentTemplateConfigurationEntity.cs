@@ -158,8 +158,11 @@ namespace Vlims.DocumentMaster.Entities
                 this.footerField = value;
             }
         }
+
         public string footerrows { get; set; }
         public string footercolumns { get; set; }
+
+        public int RevisionNumber { get; set; }
         //public string rows
         //{
         //    get
@@ -242,6 +245,7 @@ namespace Vlims.DocumentMaster.Entities
                 this.statusField = value;
             }
         }
+
         public int Pages { get; set; }
 
         public List<Page> Page { get; set; }
@@ -283,7 +287,7 @@ namespace Vlims.DocumentMaster.Entities
         public string ReviewDates { get; set; }
         public string ApproveDates { get; set; }
         public string PreparedDates { get; set; }
-        public int RevisionNumber { get; set; }
+        
 
     }
     public class Page

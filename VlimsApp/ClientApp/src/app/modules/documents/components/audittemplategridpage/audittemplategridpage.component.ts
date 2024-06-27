@@ -88,7 +88,7 @@ export class AudittemplategridpageComponent {
 
 handleAction(event: any) {
   console.log(event);
-  this.router.navigate(["./../"]);
+  this.router.navigate(["../auditgridaddpagetemplate"], { queryParams: { DocumentName: event.route.entityObj.Uniquecode } });
 }
 
 }

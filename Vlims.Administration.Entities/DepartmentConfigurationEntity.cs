@@ -141,5 +141,6 @@ namespace Vlims.Administration.Entities
                 this.modifieddateField = value;
             }
         }
+        public int RevisionNumber { get; set; }
     }
 }

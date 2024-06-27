@@ -11,6 +11,26 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./audit-request-new-page.component.scss']
 })
 export class AuditRequestNewPageComponent {
+  fieldsToShow = [
+    { key: 'documenttitle', label: 'Document Name' },
+    { key: 'documentno', label: 'Department' },
+    { key: 'documenttype', label: 'Comments' },
+    { key: 'department', label: 'WorkFlow' },
+    { key: 'wokflow', label: 'Requested By' },
+    { key: 'template', label: 'Template' },
+    { key: 'RevisionNo', label: 'Requested On' },
+    { key: 'supersedesNo', label: 'Status' },
+
+  ];
+
+  filedsofActivity = [
+    { key: 'ModifiedDate', label: 'Initiated Date & Time' },
+    //{ key: 'documenttitle', label: 'Activity' },
+    { key: 'ModifiedBy', label: 'Activity By' },
+    { key: 'Status', label: 'Activity' },
+  //  { key: 'reason', label: 'Remarks' }
+  ]
+ 
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div class="row">
       <div class="col">
           <div class="d-flex justify-content-between align-items-center">
@@ -17,7 +17,6 @@
   <div class="row mt-3">
       <div class="col">
           <div class="p-4 bg-white shadow-dark rounded-2">
-              <!-- Initiation Section -->
               <div>
                   <h5 class="section-title">Initiation & Modification</h5>
                   <div class="card-group-scroll">
@@ -76,7 +75,6 @@
                   </div>
               </div>
 
-              <!-- Review, Approve, Return, Reject Section -->
               <div>
                   <h5 class="section-title">Review/Approve/Return/</h5>
                   <div class="card-group-scroll">
@@ -156,8 +154,11 @@
                   </div>
               </div>
 
-              <!-- Add more sections or rows for other properties if needed -->
           </div>
       </div>
   </div>
-</div>
+</div> -->
+
+
+<app-summary [gridConfig]="types" [module]="'manager'" [entityName]="'preparaation'" [fieldsToShow]="fieldsToShow" [filedsofActivity]="filedsofActivity"></app-summary>
+

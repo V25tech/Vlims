@@ -11,6 +11,24 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./audit-workflow-type-new-page.component.scss']
 })
 export class AuditWorkflowTypeNewPageComponent {
+  fieldsToShow = [
+    { key: 'workflowName', label: 'Workflow Name:' },
+    { key: 'code', label: 'Workflow Code' },
+    { key: 'documentstage', label: 'Document Stage' },
+    { key: 'documenttype', label: 'Document Type' },
+    { key: 'departments', label: 'Department' },
+    { key: 'UserID', label: 'Reviewer Name' },
+    { key: 'Description', label: 'No.of Reviews' },
+    { key: 'Description', label: 'Approver Name' },
+    { key: 'Description', label: 'No.of Approvals' },
+    { key: 'CreatedBy', label: 'Initiated By' },
+    { key: 'CreatedDate', label: 'Initiated On' }
+  ];
+
+  filedsofActivity = [
+
+    
+  ]
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,
@@ -41,3 +59,14 @@ export class AuditWorkflowTypeNewPageComponent {
     });
   }
 }
+
+
+
+
+
+
+
+
+
+
+

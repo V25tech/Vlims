@@ -56,5 +56,7 @@ namespace Vlims.Administration.Entities
         public const string USP_QuickPlantManagement_INSERT = "dbo.USP_QuickPlantManagement_INSERT";
 
         public const string USP_QuickPlantManagement_UPDATE = "dbo.USP_QuickPlantManagement_UPDATE";
+
+        public const string RevisionNumber = "REVISION_NUMBER_PSY";
     }
 }

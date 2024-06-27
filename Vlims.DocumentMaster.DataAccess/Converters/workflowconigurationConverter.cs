@@ -16,6 +16,7 @@ namespace Vlims.DocumentMaster.DataAccess
     using Vlims.Common;
     using Vlims.DocumentMaster.Entities;
     using System.Xml.Serialization;
+    using Vlims.Administration.Entities;
 
 
     // Comment
@@ -49,6 +50,7 @@ namespace Vlims.DocumentMaster.DataAccess
                         workflowconigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[workflowconigurationConstants.ModifiedDate.Trim('@')]);
                         workflowconigurationData.ModifiedBy = Convert.ToString(row[workflowconigurationConstants.ModifiedBy.Trim('@')]);
                         workflowconigurationData.Status = Convert.ToString(row[workflowconigurationConstants.Status.Trim('@')]);
+                        workflowconigurationData.RevisionNumber = Convert.ToInt32(row[workflowconigurationConstants.RevisionNumber.Trim('@')]);
                         if (isgetall)
                             workflowconigurationData.IsParent = Convert.ToBoolean(row[workflowconigurationConstants.IsParent.Trim('@')]);
 

@@ -13,6 +13,18 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./audit-dep-add.component.scss']
 })
 export class AuditDepAddComponent {
+  fieldsToShow = [
+    { key: 'DepartmentName', label: 'Department Name:' },
+    { key: 'DepartmentCode', label: 'Department Code:' },
+    { key: 'Comments', label: 'Comments:' },
+    { key: 'CreatedBy', label: 'Initiated By:' },
+    { key: 'CreatedDate', label: 'Initiated Oy:' }
+  ];
+
+  filedsofActivity = [
+
+    
+  ]
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,

@@ -72,6 +72,8 @@ namespace Vlims.Data
                 sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = SetFunctionalProfileConstants.Document, Value = xmlString });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.CreatedBy, Value = setFunctionalProfile.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.ModifiedBy, Value = setFunctionalProfile.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.RevisionNumber, Value = setFunctionalProfile.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(SetFunctionalProfileConstants.USP_SetFunctionalProfile_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -98,6 +100,8 @@ namespace Vlims.Data
                 sqlparms.Add(new SqlParameter { DbType = DbType.Xml, ParameterName = SetFunctionalProfileConstants.Document, Value = xmlString });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.ModifiedBy, Value = setFunctionalProfile.ModifiedBy });
                 //sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.ModifiedBy, Value = setFunctionalProfile.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = SetFunctionalProfileConstants.RevisionNumber, Value = setFunctionalProfile.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(SetFunctionalProfileConstants.USP_SetFunctionalProfile_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

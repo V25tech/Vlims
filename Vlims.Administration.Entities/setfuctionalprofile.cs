@@ -84,6 +84,8 @@ namespace Vlims.Administration.Entities
 
         public DateTime? createddate { get; set; }
 
+        public int RevisionNumber { get; set; }
+
 
 
 

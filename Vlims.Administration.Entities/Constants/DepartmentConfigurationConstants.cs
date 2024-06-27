@@ -59,5 +59,7 @@ namespace Vlims.Administration.Entities
 
         public const string USP_DepartmentConfiguration_PSY_By_HMId_DELETE = "dbo.USP_DepartmentConfiguration_PSY_By_HMId_DELETE";
 
+        public const string RevisionNumber = "REVISION_NUMBER_PSY";
+
     }
 }

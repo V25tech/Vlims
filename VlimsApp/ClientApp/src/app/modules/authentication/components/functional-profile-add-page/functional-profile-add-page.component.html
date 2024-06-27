@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
         <div class="col">
             <div class="d-flex justify-content-between align-items-center">
@@ -34,14 +34,7 @@
                             </div>
   
                             
-                            <!-- <div class="row">
-                                <div class="col-sm-3">
-                                  <strong>Security Management:</strong>
-                                </div>
-                                <div class="col-sm-9">
-                                  <input type="checkbox" [checked]="auditConfig.EntityInfo.securityConfig" disabled>
-                                </div>
-                              </div> -->
+                           
   
   
                         
@@ -210,4 +203,6 @@
         </div>
     </div>
   </div>
-  
+   -->
+
+   <app-summary [gridConfig]="types" [module]="'master'" [entityName] ="'documentType'" [fieldsToShow] ="fieldsToShow" [filedsofActivity] ="filedsofActivity"></app-summary>

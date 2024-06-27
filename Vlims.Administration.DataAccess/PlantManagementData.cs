@@ -66,6 +66,8 @@ namespace PolicySummary.Sheet1.Data
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.Comments, Value = plantManagement.Comments });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.CreatedBy, Value = plantManagement.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.ModifiedBy, Value = plantManagement.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.RevisionNumber, Value = plantManagement.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(PlantManagementConstants.USP_PlantManagement_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -87,6 +89,8 @@ namespace PolicySummary.Sheet1.Data
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.PlantAddress, Value = plantManagement.PlantAddress });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.Comments, Value = plantManagement.Comments });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.ModifiedBy, Value = plantManagement.ModifiedBy });
+                sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = PlantManagementConstants.RevisionNumber, Value = plantManagement.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(PlantManagementConstants.USP_PlantManagement_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

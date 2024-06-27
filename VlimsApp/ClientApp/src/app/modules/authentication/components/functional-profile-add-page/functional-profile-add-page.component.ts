@@ -12,6 +12,33 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./functional-profile-add-page.component.scss']
 })
 export class FunctionalProfileAddPageComponent {
+   fieldsToShow = [
+    { key: 'role', label: 'Role Name:' },
+    { key: 'roleConfig', label: 'Role Configuration:' },
+    { key: 'deptConfig', label: 'Department Configuration:' },
+    { key: 'plantMgmt', label: 'Plant Configurationt:' },
+    { key: 'userMgmt', label: 'User Configuration:' },
+    { key: 'Activatestatus', label: 'Activate/De-Activate:' },
+    { key: 'documentTypeConfig', label: 'Document Type Configuration:' },
+    { key: 'documentTemplateConfig', label: 'Document Template Configuration:' },
+    { key: 'workflowConfig', label: 'Workflow Configuration:' },
+    { key: 'documentRequest', label: 'Document Request Configuration:' },
+    { key: 'documentPreperation', label: 'Document Preparation Configuration:' },
+    { key: 'documentEffective', label: 'Document Effective Configuration:' },
+    { key: 'additionalTasks', label: 'Document Repository:' },
+    { key: 'workItemsassigned', label: 'Work Assigned To Me:' },
+    { key: 'downloadPrint', label: 'Document Print Configuration:' },
+    { key: 'docrepository', label: 'Existing Document Request:' },
+    { key: 'CreatedBy', label: 'Initiated By:' },
+    { key: 'createddate', label: 'Initiated On:' },
+
+  ];
+  
+
+  filedsofActivity = [
+
+    
+  ]
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,

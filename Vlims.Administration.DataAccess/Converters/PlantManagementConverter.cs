@@ -18,6 +18,7 @@ namespace Vlims.Administration.DataAccess
     using Newtonsoft.Json;
     using Vlims.Administration.Entities;
     using Vlims.Common;
+    using Vlims.Data;
 
 
 
@@ -47,6 +48,8 @@ namespace Vlims.Administration.DataAccess
                         plantManagementData.CreatedDate = DatatypeConverter.SetDateTime(row[PlantManagementConstants.CreatedDate.Trim('@')]);
                         plantManagementData.ModifiedBy = Convert.ToString(row[PlantManagementConstants.ModifiedBy.Trim('@')]);
                         plantManagementData.ModifiedDate = DatatypeConverter.SetDateTime(row[PlantManagementConstants.ModifiedDate.Trim('@')]);
+                        plantManagementData.RevisionNumber = Convert.ToInt32(row[PlantManagementConstants.RevisionNumber.Trim('@')]);
+
                         //plantManagementData.Status = Convert.ToString(row[PlantManagementConstants.Status.Trim('@')]);
                         result.Add(plantManagementData);
                     }

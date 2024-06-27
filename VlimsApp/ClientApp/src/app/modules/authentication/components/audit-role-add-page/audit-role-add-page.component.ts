@@ -11,6 +11,17 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./audit-role-add-page.component.scss']
 })
 export class AuditRoleAddPageComponent {
+  fieldsToShow = [
+    { key: 'Role', label: 'Role:' },
+    { key: 'Comments', label: 'Comments:' },
+    { key: 'CreatedBy', label: 'Initiated By:' },
+    { key: 'CreatedDate', label: 'Initiated Oy:' }
+  ];
+
+  filedsofActivity = [
+
+    
+  ]
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,

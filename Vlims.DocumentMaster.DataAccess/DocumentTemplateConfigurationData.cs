@@ -137,6 +137,8 @@ namespace Vlims.DocumentMaster.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.Boolean, ParameterName = "@IsClone", Value = documentTemplateConfiguration.IsClone });
                 sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = "@PreparationId", Value = documentTemplateConfiguration.PreparationId });
                 //sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentTemplateConfigurationConstants.RevisionNumber, Value = documentTemplateConfiguration.RevisionNumber });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentTemplateConfigurationConstants.RevisionNumber, Value = documentTemplateConfiguration.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentTemplateConfigurationConstants.USP_DocumentTemplateConfiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

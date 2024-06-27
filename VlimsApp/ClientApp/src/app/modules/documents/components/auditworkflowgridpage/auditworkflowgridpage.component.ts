@@ -89,6 +89,6 @@ export class AuditworkflowgridpageComponent {
 }
 handleAction(event: any) {
   console.log(event);
-  this.router.navigate(["./../"]);
+  this.router.navigate(["../auditgridaddworkflow"], { queryParams: { DocumentName: event.route.entityObj.code } });
 }
 }

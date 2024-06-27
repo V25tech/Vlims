@@ -43,6 +43,9 @@ namespace Vlims.Administration.DataAccess
                         departmentConfigurationData.CreatedDate = DatatypeConverter.SetDateTime(row[DepartmentConfigurationConstants.CreatedDate.Trim('@'  )]);
                         departmentConfigurationData.ModifiedBy = Convert.ToString(row[DepartmentConfigurationConstants.ModifiedBy.Trim('@' )]);
                         departmentConfigurationData.ModifiedDate = DatatypeConverter.SetDateTime(row[DepartmentConfigurationConstants.ModifiedDate.Trim('@')]);
+                        departmentConfigurationData.DPCFId = Convert.ToString(row[DepartmentConfigurationConstants.DPCFId.Trim('@')]);
+                        departmentConfigurationData.RevisionNumber = Convert.ToInt32(row[DepartmentConfigurationConstants.RevisionNumber.Trim('@')]);
+
                         result.Add(departmentConfigurationData);
                     }
                 }

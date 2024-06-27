@@ -12,6 +12,25 @@ import { CommonService } from 'src/app/shared/common.service';
   styleUrls: ['./audit-effective-new-page.component.scss']
 })
 export class AuditEffectiveNewPageComponent {
+  fieldsToShow = [
+    { key: 'documenttitle', label: 'Document Title' },
+    { key: 'documentno', label: 'Document Numbe' },
+    { key: 'documenttype', label: 'Document Type' },
+    { key: 'department', label: 'Department' },
+    { key: 'wokflow', label: 'Workflow' },
+    { key: 'template', label: 'Template' },
+    { key: 'RevisionNo', label: 'Effective Date:' },
+    { key: 'supersedesNo', label: 'Effective Date:' },
+
+  ];
+
+  filedsofActivity = [
+    { key: 'ModifiedDate', label: 'Initiated Date & Time' },
+    //{ key: 'documenttitle', label: 'Activity' },
+    { key: 'ModifiedBy', label: 'Activity By' },
+    { key: 'Status', label: 'Activity' },
+  //  { key: 'reason', label: 'Remarks' }
+  ]
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,
