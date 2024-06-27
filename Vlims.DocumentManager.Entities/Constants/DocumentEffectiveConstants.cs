@@ -72,5 +72,6 @@ namespace Vlims.DMS.Entities
         public const string USP_QuickDocumentEffective_INSERT = "dbo.USP_QuickDocumentEffective_INSERT";
 
         public const string USP_QuickDocumentEffective_UPDATE = "dbo.USP_QuickDocumentEffective_UPDATE";
+        public const string RevisionNumber = "REVISION_NUMBER_PSY";
     }
 }

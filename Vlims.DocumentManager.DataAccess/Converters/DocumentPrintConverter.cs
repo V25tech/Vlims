@@ -55,6 +55,7 @@ public static class DocumentPrintConverter
                     documentPrintData.IsActive = row.IsNull("IsActive_PSY") ? false : Convert.ToBoolean(row["IsActive_PSY"]);
                     documentPrintData.PrepId = row.IsNull("DPNID_PSY") ? 0 : Convert.ToInt32(row["DPNID_PSY"]);
                     documentPrintData.printCount = row.IsNull("PrintCount_PSY") ? (short)0 : Convert.ToInt16(row["PrintCount_PSY"]);
+                    //documentPrintData.RevisionNumber = Convert.ToInt32(row[DocumentPrintConstants.RevisionNumber.Trim('@')]);
 
                     result.Add(documentPrintData);
                 }

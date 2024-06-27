@@ -188,5 +188,7 @@ public class DocumentPrint
     public string? BatchNumber { get; set; }
     public string? BatchSize { get; set; }
     public int PrepId { get; set; }
+
+    public int RevisionNumber { get; set; }
 }
 

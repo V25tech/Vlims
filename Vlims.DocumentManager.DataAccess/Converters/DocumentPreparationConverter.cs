@@ -67,6 +67,7 @@ namespace Vlims.DocumentManager.DataAccess
                         documentPreparationData.path = documentPreparationData.document;
                         documentPreparationData.reason = Convert.ToString(row[DocumentPreparationConstants.Reason.Trim('@')]);
                         documentPreparationData.IsRevision = row["IsRevision"] != DBNull.Value ? Convert.ToBoolean(row["IsRevision"]) : false;
+                        documentPreparationData.RevisionNumber = Convert.ToInt32(row[DocumentPreparationConstants.RevisionNumber.Trim('@')]);
                         object value = row["Refrence_PSY"];
                         if (value != DBNull.Value)
                             documentPreparationData.ReferenceId = Convert.ToInt32(row[DocumentPreparationConstants.referenceid.Trim('@')]);

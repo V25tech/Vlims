@@ -237,5 +237,7 @@ namespace Vlims.DMS.Entities
         }
         public string Reviwers { get; set; }
         public string Approvals { get; set; }
+
+        public int RevisionNumber { get; set; }
     }
 }

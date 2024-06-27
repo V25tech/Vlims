@@ -226,6 +226,7 @@ namespace Vlims.DMS.Entities
                 this.statusField = value;
             }
         }
+        public int RevisionNumber { get; set; }
         public string path { get; set; }
         public int ReferenceId { get; set; }
         public PreperationDocument Prepdocument { get; set; }

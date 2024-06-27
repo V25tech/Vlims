@@ -59,5 +59,7 @@ public class DocumentPrintConstants
     public const string USP_QuickDocumentPrint_INSERT = "dbo.USP_QuickDocumentPrint_INSERT";
 
     public const string USP_QuickDocumentPrint_UPDATE = "dbo.USP_QuickDocumentPrint_UPDATE";
+    public const string RevisionNumber = "REVISION_NUMBER_PSY";
+
 }
 

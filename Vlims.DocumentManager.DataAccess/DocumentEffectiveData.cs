@@ -78,6 +78,8 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.ModifiedBy, Value = documentEffective.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.Status, Value = documentEffective.Status });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.reason, Value = documentEffective.reason });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentEffectiveConstants.RevisionNumber, Value = documentEffective.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentEffectiveConstants.USP_DocumentEffective_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -110,6 +112,7 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.Status, Value = documentEffective.Status });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.wokrflow, Value = documentEffective.Workflow });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentEffectiveConstants.reason, Value = documentEffective.reason });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentEffectiveConstants.RevisionNumber, Value = documentEffective.RevisionNumber });
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentEffectiveConstants.USP_DocumentEffective_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

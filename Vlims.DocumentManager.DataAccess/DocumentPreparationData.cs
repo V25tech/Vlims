@@ -86,6 +86,8 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.Status, Value = documentPreparation.Status });
 
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.Reason, Value = documentPreparation.reason });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentPreparationConstants.RevisionNumber, Value = documentPreparation.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPreparationConstants.USP_DocumentPreparation_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -121,6 +123,8 @@ namespace Vlims.DocumentManager.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.ModifiedBy, Value = documentPreparation.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.Status, Value = documentPreparation.Status });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPreparationConstants.Reason, Value = documentPreparation.reason });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentPreparationConstants.RevisionNumber, Value = documentPreparation.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPreparationConstants.USP_DocumentPreparation_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

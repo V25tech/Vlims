@@ -52,6 +52,7 @@ namespace Vlims.DocumentManager.DataAccess
                         documentrequestData.Status = Convert.ToString(row[DocumentrequestConstants.Status.Trim('@')]);
                         documentrequestData.Reason = Convert.ToString(row[DocumentrequestConstants.Reason.Trim('@')]);
                         documentrequestData.Workflow = Convert.ToString(row[DocumentrequestConstants.Workflow.Trim('@')]);
+                        documentrequestData.RevisionNumber = Convert.ToInt32(row[DocumentrequestConstants.RevisionNumber.Trim('@')]);
                         //documentrequestData.Approvedby = Convert.ToString(row[DocumentrequestConstants.Approvedby.Trim('@')]);
                         //documentrequestData.ApprovedOn= DatatypeConverter.SetDateTime(row[DocumentrequestConstants.ApprovedOn.Trim('@')]);
                         //end

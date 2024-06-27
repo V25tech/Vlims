@@ -69,5 +69,6 @@ namespace Vlims.DMS.Entities
         public const string USP_QuickDocumentPreparation_INSERT = "dbo.USP_QuickDocumentPreparation_INSERT";
 
         public const string USP_QuickDocumentPreparation_UPDATE = "dbo.USP_QuickDocumentPreparation_UPDATE";
+        public const string RevisionNumber = "REVISION_NUMBER_PSY";
     }
 }

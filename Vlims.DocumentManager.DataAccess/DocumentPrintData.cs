@@ -70,6 +70,8 @@ public static class DocumentPrintData
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.CreatedBy, Value = documentPrint.CreatedBy });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.ModifiedBy, Value = documentPrint.ModifiedBy });
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = "@PrintCopy_PSY", Value = documentPrint.PrintCopy });
+            sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentPrintConstants.RevisionNumber, Value = documentPrint.RevisionNumber });
+
             Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPrintConstants.USP_DocumentPrint_PSY_INSERT, sqlparms, ExecutionType.Scalar);
             return (Convert.ToInt32(result) > 0);
         }
@@ -98,6 +100,8 @@ public static class DocumentPrintData
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = DocumentPrintConstants.Status, Value = documentPrint.Status });
             
             sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = "@PrintCopy_PSY", Value = documentPrint.PrintCopy });
+            sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = DocumentPrintConstants.RevisionNumber, Value = documentPrint.RevisionNumber });
+
 
             Object result = dataAccessHelper.ExecuteStoredProcedure(DocumentPrintConstants.USP_DocumentPrint_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
             return (Convert.ToInt32(result) > 0);
