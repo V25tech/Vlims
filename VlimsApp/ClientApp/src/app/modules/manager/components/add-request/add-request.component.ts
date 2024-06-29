@@ -100,8 +100,6 @@ export class AddRequestComponent {
 
 
   getusers() {
-    debugger
-
     let objrequest = new RequestContext();
     objrequest.PageNumber = 1; objrequest.PageSize = 50;
     return this.userssvc.getusers(objrequest).subscribe((data: any) => {
@@ -116,7 +114,6 @@ export class AddRequestComponent {
 
 
   confirmApproval() {
-    debugger
     const username = localStorage.getItem('username') || '';
     const password = (document.getElementById('password') as HTMLInputElement).value;
     const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
@@ -138,7 +135,6 @@ export class AddRequestComponent {
   }
 
   confirmReturn() {
-    debugger
     const username = localStorage.getItem('username') || '';
     const password = (document.getElementById('password') as HTMLInputElement).value;
     const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
@@ -156,7 +152,6 @@ export class AddRequestComponent {
   }
 
   confirmReject() {
-    debugger
     const username = localStorage.getItem('username') || '';
     const password = (document.getElementById('password') as HTMLInputElement).value;
     const userExists = this.lstusers.find(user => user.UserID === username && user.Password === password);
@@ -207,7 +202,6 @@ export class AddRequestComponent {
 
 
   approve(template: TemplateRef<any>) {
-    debugger
     // Open the modal
     this.modalRef = this.modalService.show(template, { class: 'custom-modal' });
 
@@ -217,7 +211,6 @@ export class AddRequestComponent {
 
 
   saveRequest() {
-    debugger
     if (this.editMode || this.request.status == 'Rejected' || this.request.status == 'Returned') {
       this.toastMsg = 'Updated';
       this.request.status = 'In-Progress';
@@ -229,7 +222,6 @@ export class AddRequestComponent {
   }
 
   addRequest() {
-    debugger
     if (!this.viewMode) {
       this.request.createdBy = this.commonsvc.getUsername();
       this.request.modifiedBy = this.commonsvc.getUsername();
@@ -240,6 +232,7 @@ export class AddRequestComponent {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
         this.request.department = this.selectedDepartments.map(dept => dept.value).join(',');
+        this.request.RevisionNumber = 0;
         this.documentRequestService.adddocreqconfig(this.request).subscribe(res => {
           this.commonsvc.request = new DocumentRequestConfiguration();
           this.location.back();
@@ -264,6 +257,7 @@ export class AddRequestComponent {
       this.isButtonDisabled = true;
       this.spinner.show();
       this.request.department = this.selectedDepartments.map(dept => dept.value).join(',');
+      this.request.RevisionNumber++;
       this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
         this.commonsvc.request = new DocumentRequestConfiguration();
         this.toastr.success(`Document Request ${this.toastMsg} Succesfull!`, 'Saved.!');

@@ -89,6 +89,6 @@ if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = 
   }
   handleAction(event: any) {
     console.log(event);
-    this.router.navigate(["../auditrequestaddpage"], { queryParams: { DocumentName: event.route.entityObj.Unique } });
+    this.router.navigate(["./../auditrequestaddpage"], { queryParams: { DocumentName: "REQ ID " + event.route.entityObj.DRID } });
   }
 }
