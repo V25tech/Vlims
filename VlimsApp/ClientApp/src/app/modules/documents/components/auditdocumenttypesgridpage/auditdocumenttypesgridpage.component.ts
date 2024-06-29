@@ -50,7 +50,7 @@ export class AuditdocumenttypesgridpageComponent {
       { Name: 'Documenttypename', DisplayName: 'Document Type Name', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
-      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
+      { Name: 'RevisionNumber', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
     ]
   }
   setConfig() {
@@ -63,12 +63,11 @@ export class AuditdocumenttypesgridpageComponent {
   }
   
   getauditmodule() {
-    debugger
     this.loader.show();
     this.commonsvc.req.type="DocumentType";
     this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
       this.types = this.removeDuplicates(data, 'Unique'); // Filter duplicates based on EntityName
-      this.types.reverse(); // Reverse the array here
+      //this.types.reverse(); // Reverse the array here
       this.gridConfig.gridData = this.types;
       if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;
       this.loader.hide();
@@ -79,7 +78,6 @@ export class AuditdocumenttypesgridpageComponent {
   
   // Function to remove duplicate entries from an array based on a specific property
   removeDuplicates(array: any[], property: string): any[] {
-    debugger
     return array.filter((obj, index, self) =>
       index === self.findIndex((o) => (
         o[property] === obj[property]

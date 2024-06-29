@@ -107,7 +107,8 @@ namespace Vlims.Common
                         state = (DefinitionStatus)Enum.Parse(typeof(DefinitionStatus), Convert.ToString(item["state"])),
                         CreatedDate = Convert.ToDateTime(item["CreatedDate_PSY"]),
                         EntityInfo = JsonSerializer.Deserialize<dynamic>(Convert.ToString(item["JsonData"])),
-                        Unique = Convert.ToString(item["Unique"].ToString())
+                        Unique = Convert.ToString(item["Unique"].ToString()),
+                        RevisionNumber = Convert.ToInt32(item["REVISION_NUMBER_PSY"])
 
 
                     };
@@ -153,6 +154,7 @@ namespace Vlims.Common
                         state = (DefinitionStatus)Enum.Parse(typeof(DefinitionStatus), Convert.ToString(item["state"])),                 
                         CreatedDate = Convert.ToDateTime(item["CreatedDate_PSY"]),                    
                         EntityInfo = JsonSerializer.Deserialize<dynamic>(Convert.ToString(item["JsonData"])),
+                        RevisionNumber = Convert.ToInt32(item["REVISION_NUMBER_PSY"])
 
                     };
                     result.Add(entity);
