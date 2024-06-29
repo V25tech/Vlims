@@ -57,13 +57,8 @@ namespace Vlims.Common
                 new SqlParameter{SqlDbType=SqlDbType.VarChar,ParameterName="@EntityName",Value=auditLog.EntityName},         
                 new SqlParameter{SqlDbType=SqlDbType.VarChar,ParameterName="@state",Value=auditLog.state},
                 new SqlParameter{SqlDbType=SqlDbType.VarChar,ParameterName="@Unique",Value=auditLog.Unique},
-                new SqlParameter{SqlDbType=SqlDbType.VarChar,ParameterName="@JsonData",Value=JsonSerializer.Serialize(auditLog.EntityInfo),
-
-
-                 
-
-
-
+                new SqlParameter{SqlDbType=SqlDbType.VarChar,ParameterName="@JsonData",Value=JsonSerializer.Serialize(auditLog.EntityInfo) },
+                new SqlParameter{SqlDbType=SqlDbType.VarChar,ParameterName="@REVISION_NUMBER_PSY",Value=JsonSerializer.Serialize(auditLog.RevisionNumber),
 
             },
                 };

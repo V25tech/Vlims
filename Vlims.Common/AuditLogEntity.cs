@@ -20,6 +20,8 @@ namespace Vlims.Common
         public string printauditid { get; set; } // Add VersionNumber property
                                                // public string JsonData { get; set; } // Add JsonData property
         public dynamic EntityInfo { get; set; } // Add JsonData property
+        public int RevisionNumber { get; set; } // Add JsonData property
+
 
         //public DocumentTypeConfiguration DocumentTypeConfiguration { get; set; } //
     }

@@ -52,6 +52,8 @@ export class AddDocumentTypeComponent {
       if (this.commonsvc.documentType.DTCId) {
         this.selectedDepartments = this.commonsvc.documentType?.Assigntodepartment?.split(',');
         this.documentType = this.commonsvc.documentType;
+        this.documentType.RevisionNumber = this.commonsvc.documentType.RevisionNumber;
+
       }
       else
         this.getbyId(id);
@@ -184,6 +186,7 @@ export class AddDocumentTypeComponent {
     documentType.CreatedBy = this.commonsvc.getUsername();
     documentType.ModifiedBy = this.commonsvc.getUsername();
     documentType.DTCId = "1";
+    documentType.RevisionNumber = 0;
     if (!this.isSubmitting) {
       this.isButtonDisabled = true;
       this.isSubmitting = true;
