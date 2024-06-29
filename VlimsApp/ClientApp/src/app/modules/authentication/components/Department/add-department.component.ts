@@ -85,6 +85,7 @@ export class AddDepartmentComponent implements OnInit {
   update(newdept: DepartmentConfiguration) {
     this.loader.show();
     newdept.ModifiedBy = this.commonsvc.getUsername();
+    this.newdept.RevisionNumber++;
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
       return this.doctypeservice.update(newdept).subscribe((response) => {
@@ -108,6 +109,7 @@ export class AddDepartmentComponent implements OnInit {
     newdept.ModifiedBy = this.commonsvc.getUsername();
     newdept.CreatedDate = new Date();
     newdept.ModifiedDate = new Date();
+    newdept.RevisionNumber = 0;
     
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;

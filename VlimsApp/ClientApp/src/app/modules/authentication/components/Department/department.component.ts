@@ -73,6 +73,7 @@ getdepartments() {
     
     newdept.CreatedBy = this.commonsvc.getUsername(); this.navigateToAddDepartment
     newdept.ModifiedBy = this.commonsvc.getUsername();
+    
     //this.router.navigate(['/products']);
     this.doctypeservice.adddepartment(newdept).subscribe((res: any) => {
       //this.toastr.success('Added');

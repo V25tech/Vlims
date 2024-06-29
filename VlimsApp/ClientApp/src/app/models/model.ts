@@ -260,6 +260,7 @@ export class DepartmentConfiguration {
   CreatedDate: Date | undefined;
   ModifiedBy: string = ''
   ModifiedDate: Date | undefined;
+  RevisionNumber: number = 0;
 }
 export class RoleConfiguration {
   ROCFId: string = ''
@@ -294,6 +295,7 @@ export class UserConfiguration {
   Password: string | null = ''
   //InvAttempt:number=0
   Status : string=''
+  RevisionNumber: number = 0;
 }
 
 export class PasswordChangeConfig{
@@ -330,6 +332,7 @@ export class PlantConfiguration {
   ModifiedDate: Date | undefined;
   Status: string = '';
   PMId: number = 0;
+  RevisionNumber: number = 0;
   
 
 }
@@ -507,6 +510,7 @@ export class functionalprofile {
   modifiedDate: Date | undefined;
   modifiedby: string ='';
   createdby: string ='';
+  RevisionNumber: number = 0;
 }
 export class AuditConfiguration {
   DocumentType: string = ''

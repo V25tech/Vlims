@@ -85,6 +85,7 @@ export class SetfunctionalprofileComponent implements OnInit {
       }
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
+        profileinfo.RevisionNumber++;  // Correctly increment the RevisionNumber
         this.setprofileservice.update(profileinfo).subscribe((data: any) => {
           this.toaster.success('role permissions updated');
           if (JSON.parse(this.storage.getItem("roles")).role.toLowerCase() == profileinfo.role.toLowerCase()) {
@@ -100,6 +101,7 @@ export class SetfunctionalprofileComponent implements OnInit {
     else {
       profileinfo.createdby = this.commonsvc.getUsername();
       profileinfo.modifiedby = this.commonsvc.getUsername();
+      profileinfo.RevisionNumber = 0;
       //profileinfo.role=this.selectedRoles.Role;
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;

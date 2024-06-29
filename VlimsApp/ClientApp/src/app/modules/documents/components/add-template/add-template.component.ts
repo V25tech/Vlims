@@ -431,59 +431,64 @@ export class AddTemplateComponent implements OnInit {
   }
   addTemplate() {
     this.loader.show();
-    this.templateForm.documenttype=this.selectedtype.Documenttypename;
-    this.templateForm.titleTable=this.headerData;
-    this.templateForm.headerTable=this.gridData;
-    this.templateForm.footerTable=this.gridFooterData;
-    this.templateForm.rows=this.rowsArray.length.toString();
-    this.templateForm.columns=this.colsArray.length.toString();
-    this.templateForm.footerrows=this.rowsFooterArray.length.toString();
-    this.templateForm.footercolumns=this.colsFooterArray.length.toString();
-    this.templateForm.Page=this.pages;
-    if(this.editMode)
-    {
-      this.templateForm.ModifiedBy=this.commonsvc.getUsername();
-      if (!this.isButtonDisabled) {
-        this.isButtonDisabled = true;
-        if(this.isprep){
-          const formm=this.templateForm;
-          //this.templatecloneForm.Page=this.templateForm.Page;
-          this.templateForm=new DocumentTemplateConfiguration();
-          this.templatecloneForm.Page=this.pages;
-          this.templateForm=this.templatecloneForm
-        }
-        debugger
-        this.templateForm.RevisionNumber = this.templateForm.RevisionNumber++;
-      this.templatesvc.updatedoctemplate(this.templateForm).subscribe((data:any)=>{
-        this.toastr.success('Document Template Updated Successfully!', 'Updated.!');
-      this.loader.hide();
-      this.location.back();
-      this.isButtonDisabled = false;
-    }, (error:any) => {
-      this.loader.hide();
-    });
-  }
-    }
-    else
-    { 
-      if(!this.isduplicate())
-      {
-        this.templateForm.CreatedBy=this.commonsvc.getUsername();
-        this.templateForm.ModifiedBy=this.commonsvc.getUsername();
+    
+    // Set template form properties
+    this.templateForm.documenttype = this.selectedtype.Documenttypename;
+    this.templateForm.titleTable = this.headerData;
+    this.templateForm.headerTable = this.gridData;
+    this.templateForm.footerTable = this.gridFooterData;
+    this.templateForm.rows = this.rowsArray.length.toString();
+    this.templateForm.columns = this.colsArray.length.toString();
+    this.templateForm.footerrows = this.rowsFooterArray.length.toString();
+    this.templateForm.footercolumns = this.colsFooterArray.length.toString();
+    this.templateForm.Page = this.pages;
+    this.templateForm.RevisionNumber = 0;
+
+    if (this.editMode) {
+        this.templateForm.ModifiedBy = this.commonsvc.getUsername();
         if (!this.isButtonDisabled) {
-          this.isButtonDisabled = true;
-      this.templatesvc.adddoctemplate(this.templateForm).subscribe((data:any)=>{ 
-        this.toastr.success('Document Template Registered Successfully!', 'Saved.!');
-        this.loader.hide();
-        this.location.back();
-        this.isButtonDisabled = false;
-      }, (error:any) => {
-        this.loader.hide();
-      });
+            this.isButtonDisabled = true;
+            if (this.isprep) {
+                const formm = this.templateForm;
+                this.templateForm = new DocumentTemplateConfiguration();
+                this.templateForm = { ...formm, Page: this.pages };
+            }
+            debugger;
+            this.templateForm.RevisionNumber++;
+            this.templatesvc.updatedoctemplate(this.templateForm).subscribe(
+                (data: any) => {
+                    this.toastr.success('Document Template Updated Successfully!', 'Updated.!');
+                    this.loader.hide();
+                    this.location.back();
+                    this.isButtonDisabled = false;
+                },
+                (error: any) => {
+                    this.loader.hide();
+                }
+            );
+        }
+    } else {
+        if (!this.isduplicate()) {
+            this.templateForm.CreatedBy = this.commonsvc.getUsername();
+            this.templateForm.ModifiedBy = this.commonsvc.getUsername();
+            if (!this.isButtonDisabled) {
+                this.isButtonDisabled = true;
+                this.templatesvc.adddoctemplate(this.templateForm).subscribe(
+                    (data: any) => {
+                        this.toastr.success('Document Template Registered Successfully!', 'Saved.!');
+                        this.loader.hide();
+                        this.location.back();
+                        this.isButtonDisabled = false;
+                    },
+                    (error: any) => {
+                        this.loader.hide();
+                    }
+                );
+            }
+        }
     }
-  }
-    }
-  }
+}
+
   isduplicate() {
     if (this.grid != null && this.grid.length > 0) {
       let type = this.grid.find(p => p.Templatename == this.templateForm.Templatename);

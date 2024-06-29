@@ -18,6 +18,7 @@ namespace Vlims.DocumentManager.Manager
     using Vlims.Common;
     using Vlims.DMS.Entities;
     using Vlims.DocumentManager.DataAccess;
+    using Vlims.DocumentMaster.Entities;
 
 
     // Comment
@@ -77,7 +78,7 @@ namespace Vlims.DocumentManager.Manager
                 //if (validationMessages.Length <= 0)
                 //{
                 var result = DocumentEffectiveData.SaveDocumentEffective(documentEffective);
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentEffective.CreatedBy, EntityName = documentEffective.documenttype, Type = DocumentEffectiveConstants.EffectiveType, state = DefinitionStatus.New, EntityInfo = documentEffective, Unique = documentEffective.EffectiveDate });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentEffective.CreatedBy, EntityName = documentEffective.documenttype, Type = DocumentEffectiveConstants.EffectiveType, state = DefinitionStatus.New, EntityInfo = documentEffective, Unique = documentEffective.EffectiveDate, RevisionNumber = documentEffective.RevisionNumber });
                 return result;
                 //}
                 //throw new System.Exception(validationMessages);
@@ -97,7 +98,7 @@ namespace Vlims.DocumentManager.Manager
                 //{
                 bool result = DocumentEffectiveData.UpdateDocumentEffective(documentEffective);
                 documentEffective.CreatedDate = DateTime.Now;
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentEffective.CreatedBy, EntityName = documentEffective.documenttype, Type = DocumentEffectiveConstants.EffectiveType, state = DefinitionStatus.Modify, EntityInfo = documentEffective, Unique = documentEffective.EffectiveDate });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentEffective.CreatedBy, EntityName = documentEffective.documenttype, Type = DocumentEffectiveConstants.EffectiveType, state = DefinitionStatus.Modify, EntityInfo = documentEffective, Unique = documentEffective.EffectiveDate, RevisionNumber = documentEffective.RevisionNumber });
 
                 return result;
                 //}

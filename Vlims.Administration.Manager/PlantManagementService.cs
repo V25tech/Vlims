@@ -68,7 +68,7 @@ namespace Vlims.Administration.Manager
                 plantManagement.CreatedBy = "admin";
                 plantManagement.ModifiedBy = "admin";
                 var result = PlantManagementData.SavePlantManagement(plantManagement);
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = plantManagement.CreatedBy, EntityName = plantManagement.PlantName, Type = PlantManagementConstants.PlantType, state = DefinitionStatus.Modify, EntityInfo = plantManagement, Unique = plantManagement.PlantCode });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = plantManagement.CreatedBy, EntityName = plantManagement.PlantName, Type = PlantManagementConstants.PlantType, state = DefinitionStatus.Modify, EntityInfo = plantManagement, Unique = plantManagement.PlantCode, RevisionNumber = plantManagement.RevisionNumber });
 
                 return result;
                 //}
@@ -89,7 +89,7 @@ namespace Vlims.Administration.Manager
                 {
                     bool result = PlantManagementData.UpdatePlantManagement(plantManagement);
                     plantManagement.CreatedDate = DateTime.Now;
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = plantManagement.CreatedBy, EntityName = plantManagement.PlantName, Type = PlantManagementConstants.PlantType, state = DefinitionStatus.Modify, EntityInfo = plantManagement, Unique = plantManagement.PlantCode });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = plantManagement.CreatedBy, EntityName = plantManagement.PlantName, Type = PlantManagementConstants.PlantType, state = DefinitionStatus.Modify, EntityInfo = plantManagement, Unique = plantManagement.PlantCode , RevisionNumber = plantManagement.RevisionNumber });
 
                     return result;
                 }

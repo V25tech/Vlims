@@ -65,7 +65,7 @@ namespace Vlims.DocumentMaster.Manager
                 {
                     workflowconiguration.Status = "Active";
                     var result = workflowconigurationData.Saveworkflowconiguration(workflowconiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = workflowconiguration.CreatedBy, EntityName = workflowconiguration.workflowName, Type = workflowconigurationConstants.WorkflowType, state = DefinitionStatus.New,  EntityInfo = workflowconiguration, Unique = workflowconiguration.code });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = workflowconiguration.CreatedBy, EntityName = workflowconiguration.workflowName, Type = workflowconigurationConstants.WorkflowType, state = DefinitionStatus.New,  EntityInfo = workflowconiguration, Unique = workflowconiguration.code, RevisionNumber = workflowconiguration.RevisionNumber });
 
                     if (result)
                         workflowconigurationData.WorkspaceUserMapping(workflowconiguration);
@@ -88,8 +88,7 @@ namespace Vlims.DocumentMaster.Manager
                 {
                     bool result = workflowconigurationData.Updateworkflowconiguration(workflowconiguration);
                     workflowconiguration.CreatedDate = DateTime.Now;
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = workflowconiguration.CreatedBy, EntityName = workflowconiguration.workflowName, Type = workflowconigurationConstants.WorkflowType, state = DefinitionStatus.Modify, EntityInfo = workflowconiguration, Unique = workflowconiguration.code });
-
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = workflowconiguration.CreatedBy, EntityName = workflowconiguration.workflowName, Type = workflowconigurationConstants.WorkflowType, state = DefinitionStatus.Modify, EntityInfo = workflowconiguration, Unique = workflowconiguration.code, RevisionNumber = workflowconiguration.RevisionNumber });
                     return result;
                 }
                 throw new System.Exception(validationMessages);

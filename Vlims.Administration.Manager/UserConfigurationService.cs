@@ -68,8 +68,7 @@ namespace PolicySummary.Sheet1.Services
                 if (validationMessages.Length <= 0)
                 {
                     var result = UserConfigurationData.SaveUserConfiguration(userConfiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = userConfiguration.CreatedBy, EntityName = userConfiguration.UserID, Type = UserConfigurationConstants.UserType, state = DefinitionStatus.New, EntityInfo = userConfiguration, Unique = userConfiguration.UserID });
-
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = userConfiguration.CreatedBy, EntityName = userConfiguration.UserID, Type = UserConfigurationConstants.UserType, state = DefinitionStatus.New, EntityInfo = userConfiguration, Unique = userConfiguration.UserID, RevisionNumber = userConfiguration.RevisionNumber });
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -143,7 +142,8 @@ namespace PolicySummary.Sheet1.Services
                             Type = UserConfigurationConstants.UserType,
                             state = DefinitionStatus.Modify,
                             EntityInfo = userConfiguration,
-                            Unique = userConfiguration.UserID
+                            Unique = userConfiguration.UserID,
+                            RevisionNumber = userConfiguration.RevisionNumber
                         });
                     }
 

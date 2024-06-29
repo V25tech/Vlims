@@ -61,8 +61,7 @@ this.setConfig();
       { Name: 'UserID', DisplayName: 'UserId', width: 20, sort: false, isNavigation: true },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
-      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
-    ]
+      { Name: 'RevisionNumber', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }    ]
   }
   setConfig() {
     this.gridConfig.Config = {
@@ -77,7 +76,7 @@ this.setConfig();
     this.commonsvc.req.type="UserType"
        return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {    
         this.types = this.removeDuplicates(data, 'Unique'); 
-        this.types.reverse(); // Reverse the array here
+       // this.types.reverse(); // Reverse the array here
 
         this.gridConfig.gridData = this.types;
 if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;

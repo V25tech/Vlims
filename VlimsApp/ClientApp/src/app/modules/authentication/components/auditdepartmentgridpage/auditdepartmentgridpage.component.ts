@@ -56,7 +56,7 @@ export class AuditdepartmentgridpageComponent {
       { Name: 'DepartmentName', DisplayName: 'Department Name',  sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Initiated on', sort: false, isNavigation: false },
-      { Name: 'DTCId', DisplayName: 'Revision No.', sort: false, isNavigation:false }
+      { Name: 'RevisionNumber', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
     ]
   }
   setConfig() {
@@ -74,7 +74,7 @@ export class AuditdepartmentgridpageComponent {
        
          
         this.types = this.removeDuplicates(data, 'Unique'); 
-        this.types.reverse(); // Reverse the array here
+        //this.types.reverse(); // Reverse the array here
         this.gridConfig.gridData = this.types;
         if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;
          this.loader.hide();

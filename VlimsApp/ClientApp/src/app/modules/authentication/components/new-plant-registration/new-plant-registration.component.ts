@@ -88,6 +88,7 @@ export class NewPlantRegistrationComponent implements OnInit {
     
     this.loader.show();
     newplant.ModifiedBy=this.commonsvc.getUsername();
+    this.newplant.RevisionNumber++;
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
     return this.plantservice.updateNewRegistrationconfiguration(newplant).subscribe((response)=>{
@@ -108,6 +109,7 @@ export class NewPlantRegistrationComponent implements OnInit {
     newplant.ModifiedBy = this.commonsvc.getUsername();
     newplant.CreatedDate = new Date();
     newplant.ModifiedDate = new Date();
+    newplant.RevisionNumber = 0;
     
     if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;

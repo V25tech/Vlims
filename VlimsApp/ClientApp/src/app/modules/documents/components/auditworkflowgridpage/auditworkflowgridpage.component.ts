@@ -54,7 +54,8 @@ export class AuditworkflowgridpageComponent {
       { Name: 'workflowName', DisplayName: 'Workflow Name', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
-      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
+      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false },
+      { Name: 'RevisionNumber', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
     ]
   }
   setConfig() {
@@ -70,7 +71,7 @@ export class AuditworkflowgridpageComponent {
     this.commonsvc.req.type="WorkFlowType"
        return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => { 
         this.types = this.removeDuplicates(data, 'Unique'); 
-        this.types.reverse(); // Reverse the array here
+        //this.types.reverse(); // Reverse the array here
         this.gridConfig.gridData = this.types;
         if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;
          this.loader.hide();

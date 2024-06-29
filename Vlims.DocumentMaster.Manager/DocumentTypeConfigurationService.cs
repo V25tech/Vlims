@@ -60,7 +60,7 @@ namespace Vlims.DocumentMaster.Manager
                 if (validationMessages.Length <= 0)
                 {
                     var result = DocumentTypeConfigurationData.SaveDocumentTypeConfiguration(documentTypeConfiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTypeConfiguration.CreatedBy, EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.New, EntityInfo = documentTypeConfiguration, Unique = documentTypeConfiguration.documenttypeprefix });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTypeConfiguration.CreatedBy, EntityName = documentTypeConfiguration.Documenttypename, Type = DocumentTypeConfigurationConstants.DocumentType, state = DefinitionStatus.New, EntityInfo = documentTypeConfiguration, Unique = documentTypeConfiguration.documenttypeprefix, RevisionNumber = documentTypeConfiguration.RevisionNumber });
 
                     return result;
                 }

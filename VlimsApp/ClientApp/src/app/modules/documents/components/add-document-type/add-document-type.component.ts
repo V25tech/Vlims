@@ -205,33 +205,38 @@ export class AddDocumentTypeComponent {
   }
   }
   updatetype() {
-    debugger
+    debugger;
     this.documentType.ModifiedBy = this.commonsvc.getUsername();
+
     if (!this.isSubmitting) {
-      this.isButtonDisabled = true;
-      //this.isSubmitting = true;
-    
-      this.documentType.ModifiedDate = new Date().toISOString();
-      this.documentType.RevisionNumber = this.documentType.RevisionNumber++;
-      // If the document type name is unique, proceed with updating
-      debugger
-      this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(res => {
-        this.commonsvc.documentType = new DocumentTypeConfiguration();
-        this.toastr.success('Document Type Updated Successfully!', 'Updated.');
-        this.spinner.hide();
-        this.location.back();
-      }, er => {
-        console.log(er);
-        this.isSubmiting = false;
-        this.isButtonDisabled = false;
-        this.spinner.hide();
-        this.toastr.error('Document type update failed', 'Internal server error', {
-          timeOut: 3000,
-        });
-      });
+        this.isButtonDisabled = true;
+        //this.isSubmitting = true;
+
+        this.documentType.ModifiedDate = new Date().toISOString();
+        this.documentType.RevisionNumber++;  // Correctly increment the RevisionNumber
+
+        // If the document type name is unique, proceed with updating
+        debugger;
+        this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(
+            (res) => {
+                this.commonsvc.documentType = new DocumentTypeConfiguration();
+                this.toastr.success('Document Type Updated Successfully!', 'Updated.');
+                this.spinner.hide();
+                this.location.back();
+            },
+            (er) => {
+                console.log(er);
+                this.isSubmitting = false;
+                this.isButtonDisabled = false;
+                this.spinner.hide();
+                this.toastr.error('Document type update failed', 'Internal server error', {
+                    timeOut: 3000,
+                });
+            }
+        );
     }
-  }
-  
+}
+
 
 
   approve() {

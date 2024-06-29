@@ -113,6 +113,7 @@ export class RegisterComponent implements OnInit {
     }
     else {
       adduser.ModifiedBy = this.commonsvc.getUsername();
+      this.adduser.RevisionNumber++;
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
         this.userservice.update(adduser).subscribe((data: any) => {
@@ -133,6 +134,7 @@ export class RegisterComponent implements OnInit {
     adduser.CreatedDate = new Date();
     adduser.ModifiedDate = new Date();
     adduser.Status = "Active";
+    adduser.RevisionNumber = 0;
     if (adduser.UserID.toLocaleLowerCase() === 'admin') {
       this.toastr.error('admin user Already Exists')
       this.loader.show();

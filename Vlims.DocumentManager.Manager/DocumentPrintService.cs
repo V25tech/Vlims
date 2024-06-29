@@ -53,7 +53,7 @@ public class DocumentPrintService : IDocumentPrintService
                 // Generate Unique value
                 string uniqueValue = "print" + printCounter++;
 
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = documentPrint.reason });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = documentPrint.reason , RevisionNumber = documentPrint.RevisionNumber });
                 return result;
             }
             throw new System.Exception(validationMessages);
@@ -76,7 +76,7 @@ public class DocumentPrintService : IDocumentPrintService
                 // Generate Unique value
                 string uniqueValue = "print" + printCounter++;
                 documentPrint.CreatedDate = DateTime.Now;
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = documentPrint.reason });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPrint.CreatedBy, EntityName = documentPrint.DocumentNumber, Type = DocumentPrintConstants.PrintType, state = DefinitionStatus.New, EntityInfo = documentPrint, Unique = documentPrint.reason , RevisionNumber = documentPrint.RevisionNumber });
                 return result;
             }
             throw new System.Exception(validationMessages);

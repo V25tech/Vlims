@@ -73,6 +73,8 @@ namespace Vlims.Administration.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.CreatedBy, Value = userConfiguration.CreatedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.ModifiedBy, Value = userConfiguration.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.Status, Value = userConfiguration.Status });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = UserConfigurationConstants.RevisionNumber, Value = userConfiguration.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(UserConfigurationConstants.USP_UserConfiguration_PSY_INSERT, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }
@@ -153,6 +155,8 @@ namespace Vlims.Administration.DataAccess
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.ModifiedBy, Value = userConfiguration.ModifiedBy });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.Status, Value = userConfiguration.Status });
                 sqlparms.Add(new SqlParameter { DbType = DbType.String, ParameterName = UserConfigurationConstants.Password, Value = userConfiguration.Password });
+                sqlparms.Add(new SqlParameter { DbType = DbType.Int32, ParameterName = UserConfigurationConstants.RevisionNumber, Value = userConfiguration.RevisionNumber });
+
                 Object result = dataAccessHelper.ExecuteStoredProcedure(UserConfigurationConstants.USP_UserConfiguration_PSY_UPDATE, sqlparms, ExecutionType.Scalar);
                 return (Convert.ToInt32(result) > 0);
             }

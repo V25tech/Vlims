@@ -172,6 +172,8 @@ export class AddWorkflowComponent {
   }
   update(workflow: workflowconiguration) {
     workflow.ModifiedBy = this.commonsvc.getUsername();
+    this.workflow.RevisionNumber = this.workflow.RevisionNumber++;
+    workflow
     if (workflow.department != null) {
       workflow.departments = workflow.department.map(o => o.DepartmentName).join(",");
     }
@@ -235,6 +237,7 @@ export class AddWorkflowComponent {
   add(workflow: workflowconiguration) {
     workflow.CreatedBy = this.commonsvc.getUsername();
     workflow.ModifiedBy = this.commonsvc.getUsername();
+    workflow.RevisionNumber = 0;
     if (workflow.department != null) {
       workflow.departments = workflow.department.map(o => o.DepartmentName).join(",");
     }

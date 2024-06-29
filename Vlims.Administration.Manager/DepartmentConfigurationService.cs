@@ -64,7 +64,7 @@ namespace Vlims.Administration.Manager
                 if (validationMessages.Length <= 0)
                 {
                     var result = DepartmentConfigurationData.SaveDepartmentConfiguration(departmentConfiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = departmentConfiguration.CreatedBy, EntityName = departmentConfiguration.DepartmentName, Type = DepartmentConfigurationConstants.DepartmentType, state = DefinitionStatus.New, CreatedDate = (DateTime)departmentConfiguration.CreatedDate, EntityInfo = departmentConfiguration,Unique= departmentConfiguration.DepartmentCode});
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = departmentConfiguration.CreatedBy, EntityName = departmentConfiguration.DepartmentName, Type = DepartmentConfigurationConstants.DepartmentType, state = DefinitionStatus.New, CreatedDate = (DateTime)departmentConfiguration.CreatedDate, EntityInfo = departmentConfiguration,Unique= departmentConfiguration.DepartmentCode, RevisionNumber = departmentConfiguration.RevisionNumber });
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -84,7 +84,7 @@ namespace Vlims.Administration.Manager
                 {
                     bool result = DepartmentConfigurationData.UpdateDepartmentConfiguration(departmentConfiguration);
                     departmentConfiguration.CreatedDate = DateTime.Now;  
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = departmentConfiguration.CreatedBy, EntityName = departmentConfiguration.DepartmentName, Type = DepartmentConfigurationConstants.DepartmentType, state = DefinitionStatus.Modify, CreatedDate = (DateTime)departmentConfiguration.CreatedDate, EntityInfo = departmentConfiguration,Unique= departmentConfiguration.DepartmentCode});
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = departmentConfiguration.CreatedBy, EntityName = departmentConfiguration.DepartmentName, Type = DepartmentConfigurationConstants.DepartmentType, state = DefinitionStatus.Modify, CreatedDate = (DateTime)departmentConfiguration.CreatedDate, EntityInfo = departmentConfiguration,Unique= departmentConfiguration.DepartmentCode, RevisionNumber = departmentConfiguration.RevisionNumber });
 
                     return result;
                 }

@@ -82,7 +82,7 @@ namespace Vlims.DocumentManager.Manager
                 documentrequest.Reason = string.Empty;
                 var result = DocumentrequestData.SaveDocumentrequest(documentrequest);
                 
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentrequest.CreatedBy, EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.RequestType, state = DefinitionStatus.New, EntityInfo = documentrequest, Unique = "REQ ID " + documentrequest.DRID });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentrequest.CreatedBy, EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.RequestType, state = DefinitionStatus.New, EntityInfo = documentrequest, Unique = "REQ ID " + documentrequest.DRID, RevisionNumber = documentrequest.RevisionNumber });
                 return result;
             }
             catch (System.Exception ex)
@@ -102,7 +102,7 @@ namespace Vlims.DocumentManager.Manager
                     bool result = DocumentrequestData.UpdateDocumentrequest(documentrequest);
 
                     documentrequest.CreatedDate= DateTime.Now;
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentrequest.CreatedBy, EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.RequestType, state = DefinitionStatus.Modify, EntityInfo = documentrequest, Unique = "REQ ID " + documentrequest.DRID });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentrequest.CreatedBy, EntityName = documentrequest.documenttype, Type = DocumentrequestConstants.RequestType, state = DefinitionStatus.Modify, EntityInfo = documentrequest, Unique = "REQ ID " + documentrequest.DRID, RevisionNumber = documentrequest.RevisionNumber });
 
                     return result;
                 }

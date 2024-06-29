@@ -87,7 +87,7 @@ namespace Vlims.DocumentManager.Manager
                 //documentPreparation.template = "";
                 var result = DocumentPreparationData.SaveDocumentPreparation(documentPreparation);
                 documentPreparation.CreatedDate = DateTime.Now; 
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPreparation.CreatedBy, EntityName = documentPreparation.documenttitle, Type = DocumentPreparationConstants.PreparationType, state = DefinitionStatus.New, EntityInfo = documentPreparation, Unique = documentPreparation.documentno });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPreparation.CreatedBy, EntityName = documentPreparation.documenttitle, Type = DocumentPreparationConstants.PreparationType, state = DefinitionStatus.New, EntityInfo = documentPreparation, Unique = documentPreparation.documentno, RevisionNumber = documentPreparation.RevisionNumber });
                 return result;
                 //}
                 throw new System.Exception(validationMessages);
@@ -107,7 +107,7 @@ namespace Vlims.DocumentManager.Manager
                 //{
                 bool result = DocumentPreparationData.UpdateDocumentPreparation(documentPreparation);
                 documentPreparation.CreatedDate = DateTime.Now;
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPreparation.CreatedBy, EntityName = documentPreparation.documenttitle, Type = DocumentPreparationConstants.PreparationType, state = DefinitionStatus.Modify, EntityInfo = documentPreparation, Unique = documentPreparation.documentno});
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPreparation.CreatedBy, EntityName = documentPreparation.documenttitle, Type = DocumentPreparationConstants.PreparationType, state = DefinitionStatus.Modify, EntityInfo = documentPreparation, Unique = documentPreparation.documentno, RevisionNumber = documentPreparation.RevisionNumber });
 
                 return result;
                 //}

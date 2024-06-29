@@ -62,7 +62,7 @@ namespace Vlims.Administration.Manager
                     setFunctionalProfile.createddate= DateTime.Now;
 
 
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = setFunctionalProfile.CreatedBy, EntityName = setFunctionalProfile.role, Type = SetFunctionalProfileConstants.ProfileType, state = DefinitionStatus.New,  EntityInfo = setFunctionalProfile, Unique = setFunctionalProfile.role });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = setFunctionalProfile.CreatedBy, EntityName = setFunctionalProfile.role, Type = SetFunctionalProfileConstants.ProfileType, state = DefinitionStatus.New,  EntityInfo = setFunctionalProfile, Unique = setFunctionalProfile.role , RevisionNumber = setFunctionalProfile.RevisionNumber });
                     setFunctionalProfile.createddate = DateTime.Now;  
                     return result;
                 }
@@ -83,7 +83,7 @@ namespace Vlims.Administration.Manager
                 {
                     bool result = SetFunctionalProfileData.UpdateSetFunctionalProfile(setFunctionalProfile);
                     setFunctionalProfile.createddate= DateTime.Now; 
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = setFunctionalProfile.CreatedBy, EntityName = setFunctionalProfile.role, Type = SetFunctionalProfileConstants.ProfileType, state = DefinitionStatus.Modify, EntityInfo = setFunctionalProfile, Unique = setFunctionalProfile.role });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = setFunctionalProfile.CreatedBy, EntityName = setFunctionalProfile.role, Type = SetFunctionalProfileConstants.ProfileType, state = DefinitionStatus.Modify, EntityInfo = setFunctionalProfile, Unique = setFunctionalProfile.role, RevisionNumber = setFunctionalProfile.RevisionNumber });
 
                     return result;
                 }

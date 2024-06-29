@@ -73,7 +73,7 @@ if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = 
       { Name: 'PlantName', DisplayName: 'Plant Name', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
-      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
+      { Name: 'RevisionNumber', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
     ]
   }
   setConfig() {

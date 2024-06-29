@@ -77,7 +77,7 @@ namespace Vlims.DocumentMaster.Manager
                 {
                     var result = DocumentTemplateConfigurationData.SaveDocumentTemplateConfiguration(documentTemplateConfiguration);
                     documentTemplateConfiguration.CreatedDate = DateTime.Now;
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTemplateConfiguration.CreatedBy, EntityName = documentTemplateConfiguration.Templatename, Type = DocumentTemplateConfigurationConstants.TemplateType, state = DefinitionStatus.New, EntityInfo = documentTemplateConfiguration, Unique = documentTemplateConfiguration.Uniquecode });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTemplateConfiguration.CreatedBy, EntityName = documentTemplateConfiguration.Templatename, Type = DocumentTemplateConfigurationConstants.TemplateType, state = DefinitionStatus.New, EntityInfo = documentTemplateConfiguration, Unique = documentTemplateConfiguration.Uniquecode, RevisionNumber = documentTemplateConfiguration.RevisionNumber });
 
                     return result;
                 }
@@ -98,7 +98,7 @@ namespace Vlims.DocumentMaster.Manager
                 {
                     bool result = DocumentTemplateConfigurationData.UpdateDocumentTemplateConfiguration(documentTemplateConfiguration);
                     documentTemplateConfiguration.CreatedDate = DateTime.Now;
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTemplateConfiguration.CreatedBy, EntityName = documentTemplateConfiguration.Templatename, Type = DocumentTemplateConfigurationConstants.TemplateType, state = DefinitionStatus.Modify, EntityInfo = documentTemplateConfiguration, Unique = documentTemplateConfiguration.Uniquecode });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentTemplateConfiguration.CreatedBy, EntityName = documentTemplateConfiguration.Templatename, Type = DocumentTemplateConfigurationConstants.TemplateType, state = DefinitionStatus.Modify, EntityInfo = documentTemplateConfiguration, Unique = documentTemplateConfiguration.Uniquecode, RevisionNumber = documentTemplateConfiguration.RevisionNumber });
 
                     return result;
                 }
