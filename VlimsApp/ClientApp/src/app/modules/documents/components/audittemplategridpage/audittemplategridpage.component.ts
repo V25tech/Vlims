@@ -50,7 +50,7 @@ export class AudittemplategridpageComponent {
       { Name: 'Templatename', DisplayName: 'Template Name', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
-      { Name: 'RevisionNumber', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
+      { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
       
     ]
   }
@@ -58,7 +58,8 @@ export class AudittemplategridpageComponent {
     this.gridConfig.Config = {
       itemsPerPage : 10,
       currentPage: 1,
-      rowsPerPageOptions: [10, 20, 50]
+      rowsPerPageOptions: [10, 20, 50],
+      gridDisplayName: "Document Template List Audit Trails"
     }
   }
   

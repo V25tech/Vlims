@@ -73,14 +73,16 @@ if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = 
       { Name: 'PlantName', DisplayName: 'Plant Name', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
-      { Name: 'RevisionNumber', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
+      { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
     ]
   }
   setConfig() {
     this.gridConfig.Config = {
       itemsPerPage : 10,
       currentPage: 1,
-      rowsPerPageOptions: [10, 20, 50]
+      rowsPerPageOptions: [10, 20, 50],
+      gridDisplayName: "Document Effective List Audit Trails"
+
     }
   }
   

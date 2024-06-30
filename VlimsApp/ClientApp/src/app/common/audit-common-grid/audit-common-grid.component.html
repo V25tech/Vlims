@@ -1,8 +1,8 @@
-<div class="container-fluid" >
+<div class="container-fluid" *ngIf="gridConfig">
   <div class="row p-2">
       <div class="col">
           <div class="d-flex justify-content-between align-items-center">
-              <h4 class="page-title flex-grow-1">Document Type Configuration</h4>
+            <h4 class="page-title flex-grow-1">{{gridConfig?.Config?.gridDisplayName}}</h4>
 
               <div class="back-icon" style="margin-right: 10px;">
                   <a href="javascript:void(0);" onclick="history.back();">
@@ -23,17 +23,17 @@
           </div>
       </div>
   </div>
-  <div class="row p-2">
+  <div class="row p-2" *ngIf="gridConfig?.gridData && gridConfig?.Config && gridConfig?.Config?.itemsPerPage ">
     <div class="col">
       <div class="p-4 bg-white shadow-dark rounded-2">
         <p-table #templatesTable
                  [value]="gridConfig?.gridData"
                  [globalFilterFields]="filterAttributes"
                  tableStyleClass="table table-striped"
-                 [rows]="gridConfig?.Config?.itemsPerPage"
+                 [rows]="10"
                  [paginator]="true"
-                 [totalRecords]="100"
-                 [rowsPerPageOptions]="gridConfig?.Config?.rowsPerPageOptions">
+                 [totalRecords]="gridConfig?.gridData?.length"
+                 [rowsPerPageOptions]="[10, 20, 50]">
   
           <ng-template pTemplate="header">
             <tr>

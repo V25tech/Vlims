@@ -17,7 +17,7 @@ export class AuditrequestgridpageComponent {
   @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
   @ViewChild('paginator') dataPaginator!: Paginator; // ViewChild to get reference to the p-paginator component
   // Pagination properties
-  currentPage = 10;
+  currentPage = 1;
   itemsPerPage = 10;
   rowsPerPageOptions = [10, 20, 50];
   types: AuditConfiguration[] = [];
@@ -54,14 +54,16 @@ export class AuditrequestgridpageComponent {
       { Name: 'department', DisplayName: 'Department', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Requested By', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'equested On', width: 10, sort: false, isNavigation: false },
-      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
+      { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
     ]
   }
   setConfig() {
     this.gridConfig.Config = {
       itemsPerPage : 10,
       currentPage: 1,
-      rowsPerPageOptions: [10, 20, 50]
+      rowsPerPageOptions: [10, 20, 50],
+      gridDisplayName: "Document Request List Audit Trails"
+
     }
   }
   

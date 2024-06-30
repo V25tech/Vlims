@@ -56,14 +56,16 @@ export class AuditeffectivegridpageComponent {
       { Name: 'documenttitle', DisplayName: 'Document Title', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
-      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
+      { Name: 'DTCId', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
     ]
   }
   setConfig() {
     this.gridConfig.Config = {
       itemsPerPage : 10,
       currentPage: 1,
-      rowsPerPageOptions: [10, 20, 50]
+      rowsPerPageOptions: [10, 20, 50],
+      gridDisplayName: "Document Effective List Audit Trails"
+
     }
   }
   
@@ -85,7 +87,6 @@ export class AuditeffectivegridpageComponent {
   
   // Function to remove duplicate entries from an array based on a specific property
   removeDuplicates(array: any[], property: string): any[] {
-    debugger
     return array.filter((obj, index, self) =>
       index === self.findIndex((o) => (
         o[property] === obj[property]
@@ -94,6 +95,6 @@ export class AuditeffectivegridpageComponent {
   }
   handleAction(event: any) {
     console.log(event);
-    this.router.navigate(["../auditeffectiveaddpage"], { queryParams: { DocumentName: event.route.entityObj.Unique } });
+    this.router.navigate(["./../auditeffectiveaddpage"], { queryParams: { DocumentName: event.route.entityObj.EffectiveDate } });
    }
 }

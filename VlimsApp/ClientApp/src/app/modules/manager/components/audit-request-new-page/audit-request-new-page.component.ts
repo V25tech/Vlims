@@ -12,15 +12,13 @@ import { CommonService } from 'src/app/shared/common.service';
 })
 export class AuditRequestNewPageComponent {
   fieldsToShow = [
-    { key: 'documenttitle', label: 'Document Name' },
-    { key: 'documentno', label: 'Department' },
-    { key: 'documenttype', label: 'Comments' },
-    { key: 'department', label: 'WorkFlow' },
-    { key: 'wokflow', label: 'Requested By' },
-    { key: 'template', label: 'Template' },
-    { key: 'RevisionNo', label: 'Requested On' },
-    { key: 'supersedesNo', label: 'Status' },
-
+    { key: 'documenttype', label: 'Document Name' },
+    { key: 'department', label: 'Department' },
+    { key: 'Purpose', label: 'Comments' },
+    { key: 'Workflow', label: 'WorkFlow' },
+    { key: 'CreatedBy', label: 'Requested By' },
+    { key: 'CreatedDate', label: 'Requested On' },
+    { key: 'Status', label: 'Status' },
   ];
 
   filedsofActivity = [

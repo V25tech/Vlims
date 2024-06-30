@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AuditConfiguration } from 'src/app/models/model';
+import { AuditConfiguration, DocumentPreperationConfiguration } from 'src/app/models/model';
 import { AuditConfiurationService } from 'src/app/modules/services/audit-module-service.service';
 import { CommonService } from 'src/app/shared/common.service';
 @Component({
@@ -32,6 +32,7 @@ export class AuditPreparationNewPageComponent {
     { key: 'Status', label: 'Activity' },
   //  { key: 'reason', label: 'Remarks' }
   ]
+  groupedRecords: { [key: number]: any[] } = {};
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,
@@ -53,11 +54,20 @@ export class AuditPreparationNewPageComponent {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
       this.types = data;
-      
+      this.groupRecordsByRevisionNumber();
       this.loader.hide();
     }, error => {
       this.loader.hide();
       console.error('Error fetching audit module:', error);
+    });
+  }
+  groupRecordsByRevisionNumber() {
+    this.types.forEach((record: any) => {
+      let revisionNumber = record.RevisionNumber;
+      if (!this.groupedRecords[revisionNumber]) {
+        this.groupedRecords[revisionNumber] = [];
+      }
+      this.groupedRecords[revisionNumber].push(record);
     });
   }
 }

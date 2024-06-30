@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-summary',
@@ -15,19 +15,22 @@ export class SummaryComponent {
   constructor() {
 
   }
- 
-
   ngOnInit() {
-
+   
   }
+
   ngOnChanges() {
-    console.log(this.gridConfig)
     console.log(this.module)
     console.log(this.entityName)
+    console.log(this.gridConfig)
   }
   showDialog() {
     this.visible = true;
   }
+  groupedRecordsKeys(): number[] {
+    return Object.keys(this.gridConfig).map(Number);
+  }
+
   //getObjectKeys(obj: any): string[] {
   //  return obj ? Object.keys(obj) : [];
   //}

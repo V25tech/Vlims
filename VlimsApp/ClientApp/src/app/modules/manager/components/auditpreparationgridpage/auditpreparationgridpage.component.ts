@@ -58,15 +58,15 @@ export class AuditpreparationgridpageComponent {
       { Name: 'department', DisplayName: 'Department', width: 10, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Prepared By', width: 10, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Prepared On', width: 10, sort: false, isNavigation: false },
-
-      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation: false }
+      { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation: false }
     ]
   }
   setConfig() {
     this.gridConfig.Config = {
       itemsPerPage: 10,
       currentPage: 1,
-      rowsPerPageOptions: [10, 20, 50]
+      rowsPerPageOptions: [10, 20, 50],
+      gridDisplayName:"Document Preparation List Audit Trails"
     }
   }
 

@@ -16,12 +16,11 @@ export class AuditEffectiveNewPageComponent {
     { key: 'documenttitle', label: 'Document Title' },
     { key: 'documentno', label: 'Document Numbe' },
     { key: 'documenttype', label: 'Document Type' },
-    { key: 'department', label: 'Department' },
-    { key: 'wokflow', label: 'Workflow' },
+    { key: 'Department', label: 'Department' },
+    { key: 'Workflow', label: 'Workflow' },
     { key: 'template', label: 'Template' },
-    { key: 'RevisionNo', label: 'Effective Date:' },
-    { key: 'supersedesNo', label: 'Effective Date:' },
-
+    { key: 'EffectiveDate', label: 'Effective Date:' },
+    { key: 'ReviewDate', label: 'Review Date:' },
   ];
 
   filedsofActivity = [
@@ -31,6 +30,8 @@ export class AuditEffectiveNewPageComponent {
     { key: 'Status', label: 'Activity' },
   //  { key: 'reason', label: 'Remarks' }
   ]
+  groupedRecords: { [key: number]: any[] } = {};
+
   constructor(
     private route: ActivatedRoute,
     private commonsvc: CommonService,
@@ -52,11 +53,21 @@ export class AuditEffectiveNewPageComponent {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
       this.types = data;
-      
+      this.groupRecordsByRevisionNumber();
       this.loader.hide();
     }, error => {
       this.loader.hide();
       console.error('Error fetching audit module:', error);
     });
+  }
+  groupRecordsByRevisionNumber() {
+    this.types.forEach((record: any) => {
+      let revisionNumber = record.RevisionNumber;
+      if (!this.groupedRecords[revisionNumber]) {
+        this.groupedRecords[revisionNumber] = [];
+      }
+      this.groupedRecords[revisionNumber].push(record);
+    });
+    console.log(this.groupedRecords)
   }
 }

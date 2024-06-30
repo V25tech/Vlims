@@ -26,7 +26,8 @@ export class Config {
   totalItems?: number = 100;
   isCheckBoxRequired?: boolean = false;
   isPolicy?: boolean = false;
-  rowsPerPageOptions?: any[]=[];
+  rowsPerPageOptions?: any[] = [];
+  gridDisplayName: string ='';
 }
 export class Actions {
   editAction: boolean | undefined;

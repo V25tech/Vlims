@@ -13,13 +13,11 @@ export class AuditConfiurationService {
   constructor(private http: HttpbaseService) { }
 
   getAuditModule(objrequest: RequestContext1) {
-    debugger  
     const type = objrequest.type; // Assuming 'type' is a property in objrequest
     return this.http.postJsonLogin(objrequest, `api/auditconfiguration/getaudit?type=${type}`,this.type);
 }
 
 getAuditModuleByEntityName(objrequest: RequestContext1) {
-  debugger;
   const type = objrequest.type; // Assuming 'type' is a property in objrequest
   return this.http.postJsonLogin(objrequest, `api/auditconfiguration/getauditByEntityInfo?type=${type}`, this.type);
 }

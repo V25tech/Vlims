@@ -159,6 +159,6 @@
   </div>
 </div> -->
 
-
-<app-summary [gridConfig]="types" [module]="'manager'" [entityName]="'preparaation'" [fieldsToShow]="fieldsToShow" [filedsofActivity]="filedsofActivity"></app-summary>
-
+<ng-container *ngIf="groupedRecords">
+  <app-summary [gridConfig]="groupedRecords" [module]="'manager'" [entityName]="'effective'" [fieldsToShow]="fieldsToShow" [filedsofActivity]="filedsofActivity"></app-summary>
+</ng-container>

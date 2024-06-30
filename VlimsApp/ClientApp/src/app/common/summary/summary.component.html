@@ -1,9 +1,17 @@
 <div class="container-fluid">
   <div class="row p-2 ">
     <div class="col">
-      <h4 class="page-title">Document Type Audit Trails</h4>
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="page-title">Document Type Audit Trails</h4>
+        <div class="back-icon">
+          <a href="javascript:void(0);" onclick="history.back();">
+            <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+          </a>
+        </div>
+        </div>
+      </div>
+
     </div>
-  </div>
   <div class="col-lg-12" *ngIf="module == 'master' || module == '' ">
 
     <ng-container *ngFor="let item of gridConfig">
@@ -60,12 +68,135 @@
 
 
   </div>
-  <div class="col-lg-12"  *ngIf="module == 'manager'">
+  <div class="col-lg-12" *ngIf="module == 'manager' && gridConfig &&  entityName">
 
 
-    <ng-container *ngFor="let item of gridConfig">
+    <ng-container *ngIf="entityName.toLowerCase() == 'request'">
       <div class="m-3">
-        <p-panel class=" col-lg-5" header="Revision 4" [toggleable]="true">
+        <p-panel class=" col-lg-5" header="Revision {{gridConfig[0].RevisionNumber}}" [toggleable]="true">
+          <div class="d-flex flex-column py-3 px-4">
+            <ng-container *ngFor="let field of fieldsToShow">
+              <div class="form-group row">
+                <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
+                <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && 'template'">
+                  <span>{{ gridConfig[0].EntityInfo[field.key] }}</span>
+                </div>
+                <div class="col-lg-7" *ngIf="field.key == 'supersedesNo'">
+                  <span>{{ gridConfig[0].EntityInfo.Prepdocument[field.key] }}</span>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="page-card-title border-bottom p-2">
+            Activity
+
+          </div>
+          <div class="m-3">
+            <div class="d-flex" *ngFor="let item of gridConfig.reverse()">
+              <div class="activity-time col-lg-3 ">
+                <p>{{ item.EntityInfo['ModifiedDate'] }}</p>
+              </div>
+              <div class="activity-items col-lg-9">
+                <ul>
+                  <li class="d-flex">
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'in-progress' || item.EntityInfo['Status'].toLowerCase() == 'inprogress'">
+                      <i class="fa-solid fa-pencil"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'approved'">
+                      <i class="fa-regular fa-eye"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'reviewed'">
+                      <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'returned'">
+                      <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'rejected'">
+                      <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <div class="activity-info ms-2">
+                      <p class="mb-0 p-date-styles">
+                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
+                      </p>
+                      <span class="activity-date">{{ item.EntityInfo['ModifiedDate'] }}</span>
+                    </div>
+
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+        </p-panel>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective'">
+      <div class="m-3" *ngFor="let key of groupedRecordsKeys().reverse()">
+        <p-panel class=" col-lg-5" header="Revision {{key}}" [toggleable]="true">
+          <div class="d-flex flex-column py-3 px-4">
+            <ng-container *ngFor="let field of fieldsToShow">
+              <div class="form-group row">
+                <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
+                <div class="col-lg-7" *ngIf="field.key != 'supersedesNo'">
+                  <span>{{ gridConfig[key][0].EntityInfo[field.key] }}</span>
+                </div>
+                <!--<div class="col-lg-7" *ngIf="field.key == 'supersedesNo' && entityName.toLowerCase() != 'effective'">
+                <span>{{ gridConfig[key][0].EntityInfo.Prepdocument[field.key] }}</span>
+              </div>-->
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="page-card-title border-bottom p-2">
+            Activity
+
+          </div>
+          <div class="m-3">
+            <div class="d-flex" *ngFor="let item of gridConfig[key]">
+              <div class="activity-time col-lg-3 ">
+                <p>{{ item.EntityInfo['ModifiedDate'] }}</p>
+              </div>
+              <div class="activity-items col-lg-9">
+                <ul>
+                  <li class="d-flex">
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'in-progress' || item.EntityInfo['Status'].toLowerCase() == 'inprogress'">
+                      <i class="fa-solid fa-pencil"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'approved'">
+                      <i class="fa-regular fa-eye"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'reviewed'">
+                      <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'returned'">
+                      <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'rejected'">
+                      <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <div class="activity-info ms-2">
+                      <p class="mb-0 p-date-styles">
+                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
+                      </p>
+                      <span class="activity-date">{{ item.EntityInfo['ModifiedDate'] }}</span>
+                    </div>
+
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </p-panel>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="entityName == 'print'">
+      <div class="m-3" *ngFor="let item of gridConfig.reverse()">
+        <p-panel class=" col-lg-5" header="Revision {{item.RevisionNumber}}" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
             <ng-container *ngFor="let field of fieldsToShow">
               <div class="form-group row">
@@ -73,15 +204,12 @@
                 <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && 'template'">
                   <span>{{ item.EntityInfo[field.key] }}</span>
                 </div>
-                <div class="col-lg-7" *ngIf="field.key == 'supersedesNo'">
+                <!--<div class="col-lg-7" *ngIf="field.key == 'supersedesNo'">
                   <span>{{ item.EntityInfo.Prepdocument[field.key] }}</span>
-                </div>
+                </div>-->
               </div>
             </ng-container>
           </div>
-
-
-
 
           <div class="page-card-title border-bottom p-2">
             Activity
@@ -95,12 +223,24 @@
               <div class="activity-items col-lg-9">
                 <ul>
                   <li class="d-flex">
-                    <div class="activity-icon">
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'in-progress' || item.EntityInfo['Status'].toLowerCase() == 'inprogress'">
                       <i class="fa-solid fa-pencil"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'approved'">
+                      <i class="fa-regular fa-eye"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'reviewed'">
+                      <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'returned'">
+                      <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'rejected'">
+                      <i class="fa-regular fa-circle-check"></i>
                     </div>
                     <div class="activity-info ms-2">
                       <p class="mb-0 p-date-styles">
-                        <span class="name-styles">{{ item['UserName'] }}</span> {{ item.EntityInfo['Status'] == 'IN-PROGRESS' ? 'Modified' : item.EntityInfo['Status'] == 'Reviewed'? 'Reviewed' : 'Approved'  }} <span class="p-date-styles"></span>
+                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
                       </p>
                       <span class="activity-date">{{ item.EntityInfo['ModifiedDate'] }}</span>
                     </div>
@@ -110,59 +250,12 @@
                 </ul>
               </div>
             </div>
-            <div class="d-flex">
 
-              <div class="activity-time col-lg-3">
-                <p>16-10-2023</p>
-              </div>
-              <div class="activity-items col-lg-9 ">
-                <ul>
-                  <li class="d-flex">
-                    <div class="activity-icon">
-                      <i class="fa-regular fa-eye"></i>
-                    </div>
-                    <div class="activity-info ms-2">
-                      <p class="mb-0 p-date-styles">
-                        <span class="name-styles">Stef Bogaerts</span> Reviewed<span class="p-date-styles"></span>
-                      </p>
-                      <span class="activity-date">04:05am IST</span>
-                    </div>
-
-                  </li>
-
-                </ul>
-              </div>
-            </div>
-
-            <div class="d-flex">
-              <div class="activity-time col-lg-3">
-                <p>16-10-2023</p>
-              </div>
-              <div class="activity-items col-lg-9">
-                <ul>
-                  <li class="d-flex">
-                    <div class="activity-icon">
-                      <i class="fa-regular fa-circle-check"></i>
-                    </div>
-                    <div class="activity-info ms-2">
-                      <p class="mb-0 p-date-styles">
-                        <span class="name-styles">Alice Johnson</span> Approved <span class="p-date-styles"></span>
-                      </p>
-                      <span class="activity-date">04:05am IST</span>
-                    </div>
-
-                  </li>
-
-                </ul>
-              </div>
-            </div>
           </div>
 
         </p-panel>
       </div>
     </ng-container>
-
-
 
 
   </div>

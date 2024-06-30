@@ -55,14 +55,15 @@ export class AuditprintgridpagewComponent {
       { Name: 'workflow', DisplayName: 'Workflow Name', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Printed by', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Printed on', width: 10, sort: false, isNavigation: false },
-      { Name: 'DTCId', DisplayName: 'Revision No.', width: 10, sort: false, isNavigation:false }
+      { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
     ]
   }
   setConfig() {
     this.gridConfig.Config = {
       itemsPerPage : 10,
       currentPage: 1,
-      rowsPerPageOptions: [10, 20, 50]
+      rowsPerPageOptions: [10, 20, 50],
+      gridDisplayName: "Document Print List Audit Trails"
     }
   }
   
@@ -91,6 +92,6 @@ export class AuditprintgridpagewComponent {
   }
   handleAction(event: any) {
     console.log(event);
-    this.router.navigate(["./../"]);
+    this.router.navigate(["./../auditprinttaddpage"], { queryParams: { DocumentName: event.route.entityObj.reason } });
   }
 }
