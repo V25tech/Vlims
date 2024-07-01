@@ -55,7 +55,7 @@ export class DocumentRequestConfiguration {
   approvedOn?: string;
   UserGroup: string = '';
   reason: string = '';
-  RevisionNumber: number = 0;
+  revisionNumber = 0;
   
 }
 

@@ -83,6 +83,7 @@ export class AddRequestComponent {
         this.location.back();
       }
       this.request = this.commonsvc.request;
+      this.request.revisionNumber = this.commonsvc.request.revisionNumber;
     }
     this.getdocumenttypeconfig();
     this.getworkflowinfo();
@@ -91,6 +92,7 @@ export class AddRequestComponent {
     this.spinner.show();
     return this.documentRequestService.getbyId(arg0).subscribe((data: any) => {
       this.request = data;
+      this.request.revisionNumber = data.revisionNumber;
       this.spinner.hide();
     });
     this.cdr.detectChanges();
@@ -232,7 +234,7 @@ export class AddRequestComponent {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
         this.request.department = this.selectedDepartments.map(dept => dept.value).join(',');
-        this.request.RevisionNumber = 0;
+        this.request.revisionNumber = 0;
         this.documentRequestService.adddocreqconfig(this.request).subscribe(res => {
           this.commonsvc.request = new DocumentRequestConfiguration();
           this.location.back();
@@ -257,7 +259,7 @@ export class AddRequestComponent {
       this.isButtonDisabled = true;
       this.spinner.show();
       this.request.department = this.selectedDepartments.map(dept => dept.value).join(',');
-      this.request.RevisionNumber++;
+      this.request.revisionNumber++;
       this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
         this.commonsvc.request = new DocumentRequestConfiguration();
         this.toastr.success(`Document Request ${this.toastMsg} Succesfull!`, 'Saved.!');
