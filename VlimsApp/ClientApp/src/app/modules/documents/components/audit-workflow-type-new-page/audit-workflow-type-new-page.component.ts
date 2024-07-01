@@ -17,9 +17,9 @@ export class AuditWorkflowTypeNewPageComponent {
     { key: 'documentstage', label: 'Document Stage' },
     { key: 'documenttype', label: 'Document Type' },
     { key: 'departments', label: 'Department' },
-    { key: 'UserID', label: 'Reviewer Name' },
+    { key: 'approvals', label: 'Reviewer Name' },
     { key: 'Description', label: 'No.of Reviews' },
-    { key: 'Description', label: 'Approver Name' },
+    { key: 'reviewers', label: 'Approver Name' },
     { key: 'Description', label: 'No.of Approvals' },
     { key: 'CreatedBy', label: 'Initiated By' },
     { key: 'CreatedDate', label: 'Initiated On' }
