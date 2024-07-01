@@ -272,6 +272,7 @@ export class RoleConfiguration {
   CreatedDate: Date | undefined;
   ModifiedBy: string = ''
   ModifiedDate: Date | undefined;
+  RevisionNumber: number = 0;
 }
 export class UserConfiguration {
   

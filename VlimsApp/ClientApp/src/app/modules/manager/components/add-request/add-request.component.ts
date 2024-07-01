@@ -257,7 +257,6 @@ export class AddRequestComponent {
       this.isButtonDisabled = true;
       this.spinner.show();
       this.request.department = this.selectedDepartments.map(dept => dept.value).join(',');
-      this.request.RevisionNumber++;
       this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
         this.commonsvc.request = new DocumentRequestConfiguration();
         this.toastr.success(`Document Request ${this.toastMsg} Succesfull!`, 'Saved.!');

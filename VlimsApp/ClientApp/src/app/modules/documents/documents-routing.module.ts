@@ -223,7 +223,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'auditgridadd',
+    path: 'auditdoctypenew',
     component: AuditDocumetTypeNewPageComponent,
     canActivate: [AuthGuard],
   },
