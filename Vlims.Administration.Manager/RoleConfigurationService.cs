@@ -63,7 +63,7 @@ namespace Vlims.Administration.Manager
                 {
                     var result = RoleConfigurationData.SaveRoleConfiguration(roleConfiguration);
                     roleConfiguration.CreatedDate = DateTime.Now;
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = roleConfiguration.CreatedBy, EntityName = roleConfiguration.Role, Type = RoleConfigurationConstants.RoleType, state = DefinitionStatus.New, EntityInfo = roleConfiguration, Unique = "Rol" + roleConfiguration.ROCFId });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = roleConfiguration.CreatedBy, EntityName = roleConfiguration.Role, Type = RoleConfigurationConstants.RoleType, state = DefinitionStatus.New, EntityInfo = roleConfiguration, Unique = roleConfiguration.ROCFId });
                     return result; // Return the result of the save operation
                 }
                 else
@@ -86,7 +86,7 @@ namespace Vlims.Administration.Manager
                 {
                     bool result = RoleConfigurationData.UpdateRoleConfiguration(roleConfiguration);
                     roleConfiguration.CreatedDate = DateTime.Now;
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = roleConfiguration.CreatedBy, EntityName = roleConfiguration.Role, Type = RoleConfigurationConstants.RoleType, state = DefinitionStatus.Modify, EntityInfo = roleConfiguration, Unique = roleConfiguration.Comments });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = roleConfiguration.CreatedBy, EntityName = roleConfiguration.Role, Type = RoleConfigurationConstants.RoleType, state = DefinitionStatus.Modify, EntityInfo = roleConfiguration, Unique = roleConfiguration.ROCFId });
                     return result;
                 }
                 throw new System.Exception(validationMessages);

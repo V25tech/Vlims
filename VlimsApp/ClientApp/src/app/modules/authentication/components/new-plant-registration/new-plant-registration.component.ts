@@ -85,7 +85,6 @@ export class NewPlantRegistrationComponent implements OnInit {
 
   
   updateplant(newplant: PlantConfiguration) {
-    
     this.loader.show();
     newplant.ModifiedBy=this.commonsvc.getUsername();
     this.newplant.RevisionNumber++;

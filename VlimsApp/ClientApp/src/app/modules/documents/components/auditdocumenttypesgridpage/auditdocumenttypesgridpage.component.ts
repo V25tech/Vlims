@@ -86,8 +86,8 @@ export class AuditdocumenttypesgridpageComponent {
     );
   }
   handleAction(event: any) {
-    debugger
     console.log(event);
-    this.router.navigate(["./../auditgridadd"], { queryParams: { DocumentName: event.route.entityObj.documenttypeprefix } });
+    this.router.navigate(["../auditdoctypenew"], { queryParams: { DocumentName: event.route.entityObj.documenttypeprefix } });
+
   }
 }

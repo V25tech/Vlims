@@ -76,6 +76,7 @@ export class AddRoleComponent implements OnInit {
   }
   update(addrole: RoleConfiguration) {
     addrole.ModifiedBy=this.commonsvc.getUsername();
+    this.addrole.RevisionNumber++;
    this.loader.show();
    if (!this.isButtonDisabled) {
     this.isButtonDisabled = true;
@@ -93,6 +94,7 @@ export class AddRoleComponent implements OnInit {
     adaddrole.ModifiedBy = this.commonsvc.getUsername();
     adaddrole.CreatedDate = new Date();
     adaddrole.ModifiedDate = new Date();
+    adaddrole.RevisionNumber = 0;
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
     this.rolesservice.addrole(adaddrole).subscribe((data:any)=>{

@@ -95,7 +95,8 @@ this.setConfig();
 }
 handleAction(event: any) {
   console.log(event);
-  this.router.navigate(["./../auditroleaddpage"], { queryParams: { DocumentName: event.route.entityObj.Role } });
+  this.router.navigate(["../auditroleaddpage"], { queryParams: { DocumentName: event.route.entityObj.ROCFId } });
+  
 
 }
 }
