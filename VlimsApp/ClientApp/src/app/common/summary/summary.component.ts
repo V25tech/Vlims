@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CommonService } from '../../shared/common.service';
 
 @Component({
   selector: 'app-summary',
@@ -11,8 +12,8 @@ export class SummaryComponent {
   @Input() module: any = '';
   @Input() entityName: any = '';
   @Input() fieldsToShow: any = [];
-  @Input() filedsofActivity: any = [];  
-  constructor() {
+  @Input() filedsofActivity: any = [];
+  constructor(public commonsrvc: CommonService) {
 
   }
   ngOnInit() {
