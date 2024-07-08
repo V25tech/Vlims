@@ -194,7 +194,8 @@ export class ReviewPrepationComponent {
                 this.isworkflow = true;
             }
             if (!this.istemplate && this.isrevision)
-                this.preparation.status = 'IN-PROGRESS';
+            this.preparation.status = 'IN-PROGRESS';
+          this.preparation.RevisionNumber = this.commonsvc.preperation.RevisionNumber;
             this.buildPrepdocument();
             this.onBodyFileExistsCheck();
             this.getLabelMappings();
@@ -216,7 +217,8 @@ export class ReviewPrepationComponent {
     getbyId(arg0: number) {
         this.spinner.show();
         return this.docPreperationService.getbyId(arg0).subscribe((data: any) => {
-            this.preparation = data;
+          this.preparation = data;
+          this.preparation.RevisionNumber = data.RevisionNumber;
              
             if (this.preparation.template != '' && this.preparation.template != undefined) {
                 this.istemplate = true;
@@ -335,7 +337,7 @@ export class ReviewPrepationComponent {
         }
         this.toastMsg = this.toastMsg ?? 'Registered';
         if (!this.isButtonDisabled) {
-            this.isButtonDisabled = true;
+          this.isButtonDisabled = true;
             this.docPreperationService.ManageDocument(this.preparation).subscribe(res => {
                 this.commonsvc.preperation = new DocumentPreperationConfiguration();
                 this.toastr.success(`Document Preparation ${this.toastMsg}  successfully`);

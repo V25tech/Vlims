@@ -88,6 +88,7 @@ export class ReviewEffectiveComponent {
     }
     else if (this.commonsvc.efffective.deid) {
       this.effective = this.commonsvc.efffective;
+      this.effective.RevisionNumber = this.commonsvc.efffective.RevisionNumber;
       if(this.effective.workflow!='' && this.effective.workflow!=undefined){
         this.isworkflow=true;
       }
@@ -100,6 +101,7 @@ export class ReviewEffectiveComponent {
     this.spinner.show();
     return this.documentEffectiveService.getbyId(arg0).subscribe((data: any) => {
       this.effective = data;
+      this.effective.RevisionNumber = data.RevisionNumber
       this.spinner.hide();
     });
   }
