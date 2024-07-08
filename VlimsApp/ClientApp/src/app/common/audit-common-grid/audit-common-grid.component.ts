@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataGrid } from '../auditgrid';
 import { Table } from 'primeng/table';
 import { Paginator } from 'primeng/paginator';
+import { CommonService } from '../../shared/common.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class AuditCommonGridComponent {
   @ViewChild('templatesTable') templatesTable!: Table; // ViewChild to get reference to the p-table component
 
   // Pagination properties
-  constructor(public router: Router, public activate: ActivatedRoute) {
+  constructor(public router: Router, public activate: ActivatedRoute, public commonsrvc: CommonService) {
   }
   ngOnInit() {
    

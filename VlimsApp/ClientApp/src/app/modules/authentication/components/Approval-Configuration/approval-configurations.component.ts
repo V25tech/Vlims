@@ -23,13 +23,13 @@ export class ApprovalConfigurationsComponent implements OnInit {
     private appconfigserv: ApprovalConfigurationService) { }
 
   ngOnInit() {
-    debugger
+    
     this.access = this.commonsvc.getUserRoles()?.approvalConfigs ?? false;
     this.getApproval();
    // this.tabselect = this.router.url.split('/').pop(); 
   }
   addApproval(newApproval: ApprovalManagament) {
-    debugger
+    
     //newdept.CreatedBy = "admin";
     //newdept.ModifiedBy = "admin";
     //this.router.navigate(['/products']);   
@@ -44,7 +44,7 @@ export class ApprovalConfigurationsComponent implements OnInit {
     //this.loader.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.appconfigserv.getapprovalconfiguration(objrequest).subscribe((data: any) => {
-        debugger
+        
         this.types = data;
         this.approvalconfig=data;
         //this.loader.hide();
@@ -56,7 +56,7 @@ export class ApprovalConfigurationsComponent implements OnInit {
 }
  
   submit(newApproval: ApprovalManagament) {
-    debugger
+    
     this.appconfigserv.addapprovalconfiguration(newApproval);
   }
  

@@ -11,11 +11,11 @@ export class usergroupconfigurationService {
   constructor(private http: HttpbaseService) { }
 
   getusergroupconfiguration(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/usergroupconfiguration/getusergroupconfiguration",this.type);
 }
 addusergroupconfiguration(objrequest: Usergroupconfiguration) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/usergroupconfiguration/saveusergroupconfiguration",this.type);
 }
 }

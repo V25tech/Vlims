@@ -39,7 +39,7 @@ export class UsergroupconfigurationComponent implements OnInit {
   getusergroupInfo() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.doctypeservice.getusergroupconfiguration(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.types = data.Response;
       console.log(this.types);
     }, er => {
@@ -47,16 +47,16 @@ export class UsergroupconfigurationComponent implements OnInit {
     });
   }
   editdoc(doc: Usergroupconfiguration) {
-    debugger
+    
     this.commonsvc.userGroupConfig = doc;
     this.router.navigate(['/admin/usermanagement/groups/edit', doc.Ugcid]);
   }
   addusergroup(): void {
-    debugger
+    
     this.router.navigate(['admin/usermanagement/groups/add',this.types.length]);
   }
   getStatusClass(status: string): string {
-    debugger
+    
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Completed') {

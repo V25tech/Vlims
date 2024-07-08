@@ -26,7 +26,7 @@ export class NewPrintRequestComponent implements OnInit {
      Id: 0
    };
       return this.doctypeservice.GetNewPrintRequest(objrequest).subscribe((data: any) => {
-        debugger
+        
         this.types = data.Response;
         this.loader.hide();
         console.log(this.types);

@@ -31,7 +31,7 @@ export class SecurityManagementComponent implements OnInit {
       Id: 0
     };
     return this.doctypeservice.getsecuritymanagement(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.types = data.Response;
       this.securityType = data.Response[0];
       this.loader.hide();
@@ -42,7 +42,7 @@ export class SecurityManagementComponent implements OnInit {
     });
   }
   submit(securityType: SecurityManagement) {
-    debugger
+    
     /*if (this.editMode) {*/
     this.doctypeservice.addsecurityconfiguration(securityType).subscribe((res: any) => {
         this.toastr.success('Updated');

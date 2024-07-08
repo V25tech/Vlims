@@ -10,11 +10,11 @@ export class RolesconfigurationService {
   constructor(private http: HttpbaseService) { }
 
   getroles(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/roleconfiguration/getroles",this.type);
 }
 addrole(objrequest: RoleConfiguration) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/roleconfiguration/saveroleconfiguration",this.type);
 }
 }

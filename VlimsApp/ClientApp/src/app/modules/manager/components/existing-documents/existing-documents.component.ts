@@ -55,7 +55,7 @@ export class ExistingDocumentsComponent implements OnInit {
           data.exisitingDocuments.forEach((item: any) => {
             item.effectiveDateValue = this.commonsvc.setDate(item.effectiveDate);
             this.daterev=this.commonsvc.setDate(item.reviewDate);
-            //debugger;
+            //;
             if(this.daterev=='31/12/9999'||this.daterev=='01/01/1900')
               {
                 item.reviewDateValue = 'NA';
@@ -91,7 +91,7 @@ export class ExistingDocumentsComponent implements OnInit {
   //   })
   // }
   previewDocument(template: TemplateRef<any>) {
-    debugger
+    
     if (this.modalRef)
       this.modalRef.hide(); 
     if (this.objexisting.entityName.toLowerCase() == 'new document') {
@@ -101,7 +101,7 @@ export class ExistingDocumentsComponent implements OnInit {
     }
   }
   viewprint(viewdoc:TemplateRef<any>,objdoc:any) {
-    debugger
+    
     // Open the modal
     this.objexisting=objdoc;
     this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
@@ -124,7 +124,7 @@ export class ExistingDocumentsComponent implements OnInit {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
     //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
     //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    //   debugger
+    //   
       
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }

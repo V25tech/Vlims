@@ -34,7 +34,7 @@ export class UserConfigurationComponent implements OnInit {
     this.loader.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.doctypeservice.getusers(objrequest).subscribe((data: any) => {
-        debugger
+        
         this.types = data.Response;
         this.loader.hide();
         console.log(this.types);
@@ -44,7 +44,7 @@ export class UserConfigurationComponent implements OnInit {
       });
   }
   editdoc(doc: UserConfiguration) {
-    debugger
+    
     this.commonsvc.userConfig = doc;
     this.router.navigate(['/mainpage/users/adduser']);
   }

@@ -38,19 +38,19 @@ export class SecuritymgmtComponent {
 
  
   getsecuritymanagement() {
-    debugger;
+    ;
     let objrequest: RequestContext = {
       PageNumber: 1, PageSize: 1,
       Id: 0
     };
     return this.Secuypeservice.getsecuritymanagement(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.types = data.Response;
       this.securityType = data.Response[0];
     });
   }
   submit(securityType: SecurityManagement) {
-    debugger
+    
     /*if (this.editMode) {*/
     
     this.Secuypeservice.updatesecurityconfiguration(securityType).subscribe((res: any) => {

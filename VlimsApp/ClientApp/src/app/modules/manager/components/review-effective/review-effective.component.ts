@@ -220,7 +220,7 @@ export class ReviewEffectiveComponent {
     }
     this.spinner.show();
     reqObj = JSON.parse(JSON.stringify(this.effective));
-    debugger
+    
     //if (this.viewMode && (reqObj.Status == 'Rejected' || reqObj.Status == 'Returned')) {
     //  reqObj.ModifiedBy = this.commonsvc.createdBy;
     //  reqObj.Status = "In-Progress";
@@ -312,7 +312,7 @@ export class ReviewEffectiveComponent {
     })
   }
   viewprint(template:TemplateRef<any>) {
-    debugger
+    
     this.previewtemplate(template);
 }
   previewtemplate(template: TemplateRef<any>) {

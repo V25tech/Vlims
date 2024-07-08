@@ -32,7 +32,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
   doctypes: Array<DocumentTypeConfiguration> = [];;
   constructor(private commonsvc: CommonService, private docReqServ: DocumentPreperationService, private doctypeserv: DocumentTypeServiceService, private deptservice: DepartmentconfigurationService, private docEffServ: DocumentEffectiveService, private workflowserv: WorkflowServiceService, private doctypeservice: DocumentTemplateServiceService, private toastr: ToastrService, private cdr: ChangeDetectorRef, private loader: SpinnerService, private router: Router,) { }
   ngOnInit() {
-    debugger;
+    ;
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 1];
@@ -54,7 +54,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
       this.cdr.detectChanges();
     }
     if (lastSegment == "documeffectedit") {
-      debugger;
+      ;
       this.editMode = this.commonsvc.docEffecConfig != null ? true : false;
       if (this.editMode) {
         this.adddocreq = this.commonsvc.docEffecConfig;
@@ -86,19 +86,19 @@ export class DocumentEffectiveEditComponent implements OnInit {
   getdocumenttemplateconfig() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.doctypeservice.getdocttemplate(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.templates = data.Response;
     });
   }
   getworkflowtypeconfig() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.workflowserv.getworkflow(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.workflowTypes = data.Response;
     });
   }
   submit(adddocreq: DocumentEffectiveConfiguration) {
-    debugger
+    
     //this.addDocumentEffective(adddocreq);
     this.UpdateDocumentEffective(adddocreq);
   }
@@ -116,7 +116,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
   getdepartments() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.departs = data.Response;
 
     });
@@ -124,7 +124,7 @@ export class DocumentEffectiveEditComponent implements OnInit {
   getdocumenttypeconfig() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.doctypes = data.Response;
     });
   }
@@ -146,9 +146,9 @@ export class DocumentEffectiveEditComponent implements OnInit {
   }
   getByName(objname: string) {
     this.loader.show();
-    debugger
+    
     return this.docEffServ.getdocrequestbyname(objname).subscribe((data: any) => {
-      debugger
+      
       this.commonsvc.docPreperation = data;
       this.adddocreq = data;
       this.loader.hide();

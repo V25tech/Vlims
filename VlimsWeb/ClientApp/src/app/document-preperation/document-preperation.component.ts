@@ -29,7 +29,7 @@ export class DocumentPreperationComponent implements OnInit {
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentPreperationService, private toastr: ToastrService, private loader: SpinnerService, private router: Router) { }
 
   ngOnInit() {
-    debugger;
+    ;
     //this.tabselect = this.router.url.split('/').pop();
     this.getdocumentrequest();
 
@@ -39,7 +39,7 @@ export class DocumentPreperationComponent implements OnInit {
     this.loader.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.doctypeservice.getdocumentrequest(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.requests = data.response;
       this.loader.hide();
       console.log(this.requests);
@@ -50,7 +50,7 @@ export class DocumentPreperationComponent implements OnInit {
   }
   editBrand(editband: DocumentPreperationConfiguration) {
     this.commonsvc.docPreperation = editband;
-    debugger;
+    ;
     this.loader.show();
     this.router.navigate(['/mainpage/documentmanager/editdocprep']);
   }

@@ -36,7 +36,7 @@ export class AuditDepAddComponent {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      debugger
+      
       const documentName = this.route.snapshot.queryParams['DocumentName'];
       this.commonsvc.req.type = documentName;
       this.getAuditModuleByName();
@@ -47,7 +47,7 @@ export class AuditDepAddComponent {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
       this.types = data;
-      debugger
+      
       this.loader.hide();
     }, error => {
       this.loader.hide();

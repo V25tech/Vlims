@@ -18,11 +18,11 @@ export class AddDepartmentComponent implements OnInit {
   ngOnInit() {
   }
   submit(newdept: DepartmentConfiguration) {
-    debugger
+    
         this.adddoctype(newdept);
     }
     adddoctype(newdept: DepartmentConfiguration) {
-      debugger
+      
       newdept.CreatedBy="admin";
       newdept.ModifiedBy="admin";
       //this.router.navigate(['/products']);

@@ -30,7 +30,7 @@ export class DocumentRevisonComponent implements OnInit {
     this.loader.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.docrevservice.getdocumentrevison(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.requests = data.response;
       this.loader.hide();
       console.log(this.requests);
@@ -43,7 +43,7 @@ export class DocumentRevisonComponent implements OnInit {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     //objrequest.Id = editband.DTCId;
     //this.doctypeservice.getdocumentrequestbyId(objrequest).subscribe((data: any) => {
-    //  debugger
+    //  
     //  this.objProductType = data.response;
     this.commonsvc.docEffecConfig = editband;
     this.router.navigate(['/mainpage/documentmanager/documeffectedit']);

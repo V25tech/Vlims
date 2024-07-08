@@ -10,7 +10,7 @@ export class DocumentRevisonService {
 
   constructor(private http: HttpbaseService) { }
   getdocumentrevison(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentrequest/GetAllDocreq", this.type);
   }
 }

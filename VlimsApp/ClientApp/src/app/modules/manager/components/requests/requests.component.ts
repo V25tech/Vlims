@@ -29,7 +29,7 @@ export class RequestsComponent implements OnInit{
   requestsDatasource = [];
 
   ngOnInit() {   
-    debugger
+    
     //this.dataPaginator.rows = 10;
     this.access = this.commonsvc.getUserRoles()?.documentRequest ?? false;
     this.getdocumentrequest();
@@ -72,7 +72,7 @@ export class RequestsComponent implements OnInit{
   }
 
   editdocreq(request: DocumentRequestConfiguration) {
-    debugger
+    
     this.commonsvc.request = request;
     this.router.navigate(['/requests/edit']);
   }
@@ -80,7 +80,7 @@ export class RequestsComponent implements OnInit{
 
   //   let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
   //   this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-  //     debugger
+  //     
   //     this.departs = data.Response;
 
   //   });
@@ -88,7 +88,7 @@ export class RequestsComponent implements OnInit{
   // getdocumenttypeconfig() {
   //   let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
   //   this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
-  //     debugger
+  //     
   //     this.doctypes = data.Response;
   //   });
   // }

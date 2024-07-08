@@ -27,7 +27,7 @@ export class AddWorkflowConfigComponent implements OnInit {
     private router: Router,private toastr: ToastrService) { }
 
     ngOnInit() {
-      debugger
+      
       const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 1];
@@ -58,9 +58,9 @@ export class AddWorkflowConfigComponent implements OnInit {
     getByName(objname:string)
   {
     this.loader.show();
-    debugger
+    
       return this.workflowservice.getworkflowbyname(objname).subscribe((data:any)=>{
-        debugger
+        
         this.addworkflow=data;
         this.loader.hide();
         console.log(this.addworkflow);
@@ -73,7 +73,7 @@ export class AddWorkflowConfigComponent implements OnInit {
       this.loader.show();
      let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
         return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-          debugger
+          
           this.departs = data.Response;
           this.loader.hide();
           console.log(this.departs);
@@ -86,9 +86,9 @@ export class AddWorkflowConfigComponent implements OnInit {
       this.loader.show();
      let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
         return this.doctypeservice.getdoctypeconfig(objrequest).subscribe((data: any) => {
-          debugger
+          
           this.types = data.Response;
-          debugger
+          
           this.loader.hide();
           console.log(this.types);
         }, er => {
@@ -97,13 +97,13 @@ export class AddWorkflowConfigComponent implements OnInit {
         });
     }
   submit(addworkflow: workflowconiguration) {
-    debugger
+    
       
         this.adddoctype(addworkflow);
       
     }
     adddoctype(addworkflow: workflowconiguration) {
-      debugger
+      
       addworkflow.CreatedBy="admin";
       addworkflow.ModifiedBy="admin";
       //this.router.navigate(['/products']);

@@ -13,11 +13,11 @@ export class ApprovalConfigurationsComponent implements OnInit {
   constructor(private router: Router, private appconfigserv: ApprovalConfigurationService) { }
 
   ngOnInit() {
-    debugger
+    
     this.tabselect = this.router.url.split('/').pop(); 
   }
   addapprovalconfig(newdept: ApprovalManagament) {
-    debugger
+    
     //newdept.CreatedBy = "admin";
     //newdept.ModifiedBy = "admin";
     //this.router.navigate(['/products']);

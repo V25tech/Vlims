@@ -28,7 +28,7 @@ export class LoginComponent {
   }
 
   validate(user: Users) {
-    debugger
+    
     // this.loader.show();
     // this.loginsvc.login(user.UserName, user.Password).subscribe((data: any) => {
     //   if (data != null || undefined) {

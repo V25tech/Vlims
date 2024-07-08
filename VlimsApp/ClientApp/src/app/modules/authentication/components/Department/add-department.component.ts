@@ -61,7 +61,7 @@ export class AddDepartmentComponent implements OnInit {
   }
 
   submit(newdept: DepartmentConfiguration) {
-    debugger
+    
     if (this.editMode) {
       this.update(newdept);
     } else {
@@ -74,7 +74,7 @@ export class AddDepartmentComponent implements OnInit {
   }
 
   isDuplicateDepartmentCode(departmentCode: string): boolean {
-    debugger
+    
     return this.griddata.some(dept => dept.DepartmentCode.toLowerCase() === departmentCode.toLowerCase());
   }
 

@@ -116,7 +116,7 @@ export class ProductsView {
   }
 
   edit(objnew: Products) {
-    debugger
+    
     this.header = "Update Product";
     this.newobj = new Products();
 
@@ -170,7 +170,7 @@ export class ProductsView {
     });
   }
   selecttype(filterVal: any) {
-    debugger
+    
     if (filterVal == "0") {
 
     }
@@ -182,7 +182,7 @@ export class ProductsView {
     }
   }
   selectbrand(filterVal: any) {
-    debugger
+    
     if (filterVal == "0") {
 
     }

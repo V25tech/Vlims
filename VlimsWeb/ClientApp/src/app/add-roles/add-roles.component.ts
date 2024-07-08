@@ -26,7 +26,7 @@ export class AddRolesComponent implements OnInit {
       this.loader.show();
      let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
         return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-          debugger
+          
           this.types = data.Response;
           this.loader.hide();
           console.log(this.types);
@@ -36,11 +36,11 @@ export class AddRolesComponent implements OnInit {
         });
     }
   submit(addrole: RoleConfiguration) {
-    debugger
+    
         this.adddoctype(addrole);
     }
     adddoctype(addrole: RoleConfiguration) {
-      debugger
+      
       addrole.CreatedBy="admin";
       addrole.ModifiedBy="admin";
       //this.router.navigate(['/products']);

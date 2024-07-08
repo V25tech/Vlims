@@ -71,7 +71,7 @@ export class AuditpreparationgridpageComponent {
   }
 
   getauditmodule() {
-    debugger
+    
     this.loader.show();
     this.commonsvc.req.type = "PreparationType";
     this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
@@ -87,7 +87,7 @@ export class AuditpreparationgridpageComponent {
 
   // Function to remove duplicate entries from an array based on a specific property
   removeDuplicates(array: any[], property: string): any[] {
-    debugger
+    
     return array.filter((obj, index, self) =>
       index === self.findIndex((o) => (
         o[property] === obj[property]
@@ -96,7 +96,7 @@ export class AuditpreparationgridpageComponent {
   }
 
   handleAction(event: any) {
-    debugger
+    
     console.log(event);
     this.router.navigate(["../auditpreparationaddpage"], { queryParams: { DocumentName: event.route.entityObj.documentno } });
   }

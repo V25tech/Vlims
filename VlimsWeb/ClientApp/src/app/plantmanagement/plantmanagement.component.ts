@@ -25,7 +25,7 @@ export class PlantComponent implements OnInit {
       Id: 0
     };
     return this.doctypeservice.getplantconfiguration(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.types = data.Response;
       this.loader.hide();
       console.log(this.types);

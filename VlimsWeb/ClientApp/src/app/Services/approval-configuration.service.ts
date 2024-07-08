@@ -12,11 +12,11 @@ export class ApprovalConfigurationService {
   constructor(private http: HttpbaseService) { }
 
   getapprovalconfiguration(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/approvalconfiguration/ApprovalConfiguration",this.type);
 }
 addapprovalconfiguration(objrequest: ApprovalManagament) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/approvalconfiguration/saveApprovalConfiguration",this.type);
 }
 }

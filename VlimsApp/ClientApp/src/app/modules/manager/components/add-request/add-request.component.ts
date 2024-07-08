@@ -284,7 +284,7 @@ export class AddRequestComponent {
       this.typeSource = data.Response;
       //  this.getdepartments();
       let deptSocureInfo = [];
-      debugger
+      
       let type = this.typeSource.filter(o => o.Documenttypename.toLocaleLowerCase() === this.request.documenttype.toLocaleLowerCase());
       //deptSocureInfo = type[0].Assigntodepartment;
       if (type[0].Assigntodepartment) {

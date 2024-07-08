@@ -32,7 +32,7 @@ export class DocumentTemplateConfigComponent implements OnInit {
     this.loader.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.doctypeservice.getdocttemplate(objrequest).subscribe((data: any) => {
-        debugger
+        
         this.types = data.Response;
         this.loader.hide();
         console.log(this.types);
@@ -42,7 +42,7 @@ export class DocumentTemplateConfigComponent implements OnInit {
       });
   }
   editdoc(editband: DocumentTemplateConfiguration) {
-    debugger
+    
     this.commonsvc.objdoctemplate=editband;
     this.router.navigate(['/mainpage/documentmaster/editdoctemplate']);
   }

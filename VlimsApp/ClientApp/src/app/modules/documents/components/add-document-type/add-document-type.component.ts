@@ -205,7 +205,7 @@ export class AddDocumentTypeComponent {
   }
   }
   updatetype() {
-    debugger;
+    ;
     this.documentType.ModifiedBy = this.commonsvc.getUsername();
 
     if (!this.isSubmitting) {
@@ -217,6 +217,7 @@ export class AddDocumentTypeComponent {
 
         // If the document type name is unique, proceed with updating
        
+        ;
         this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(
             (res) => {
                 this.commonsvc.documentType = new DocumentTypeConfiguration();

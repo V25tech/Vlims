@@ -25,7 +25,7 @@ export class DocumentAdditionaltasksComponent implements OnInit {
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentAdditionalTasksService, private toastr: ToastrService, private loader: SpinnerService, private router: Router) { }
 
   ngOnInit() {
-    debugger;
+    ;
     //this.tabselect = this.router.url.split('/').pop();
     this.getdocumentrequest();
   }
@@ -35,7 +35,7 @@ export class DocumentAdditionaltasksComponent implements OnInit {
     this.loader.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50,Id:0 };
     return this.doctypeservice.getdocumentrequest(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.requests = data.response;
       this.loader.hide();
       console.log(this.requests);

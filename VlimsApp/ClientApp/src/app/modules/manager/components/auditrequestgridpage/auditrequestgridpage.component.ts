@@ -67,7 +67,7 @@ export class AuditrequestgridpageComponent {
   }
   
   getauditmodule() {
-    debugger
+    
     this.loader.show();
     this.commonsvc.req.type="RequestType";
     this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
@@ -81,7 +81,7 @@ if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = 
   
   // Function to remove duplicate entries from an array based on a specific property
   removeDuplicates(array: any[], property: string): any[] {
-    debugger
+    
     return array.filter((obj, index, self) =>
       index === self.findIndex((o) => (
         o[property] === obj[property]

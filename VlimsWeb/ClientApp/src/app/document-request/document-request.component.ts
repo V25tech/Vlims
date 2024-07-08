@@ -30,7 +30,7 @@ export class DocumentRequestComponent implements OnInit {
   constructor(private commonsvc: CommonService, private deptservice: DepartmentconfigurationService, private doctypeservice: DocumentRequestService, private doctypeserv: DocumentTypeServiceService, private toastr: ToastrService, private loader: SpinnerService, private router: Router) { }
 
   ngOnInit() {
-    debugger;
+    ;
     this.getdocumentrequest();
     this.getdepartments();
     this.getdocumenttypeconfig();
@@ -41,7 +41,7 @@ export class DocumentRequestComponent implements OnInit {
     this.loader.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.doctypeservice.getdocumentrequest(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.requests = data.response;
       this.loader.hide();
       console.log(this.requests);
@@ -51,7 +51,7 @@ export class DocumentRequestComponent implements OnInit {
     });
   }
   editdocreq(editband: DocumentRequestConfiguration) {
-    debugger
+    
     this.commonsvc.docrequest = editband;
     this.router.navigate(['/mainpage/documentmanager/editdocreq']);
   }
@@ -59,7 +59,7 @@ export class DocumentRequestComponent implements OnInit {
 
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.departs = data.Response;
 
     });
@@ -67,7 +67,7 @@ export class DocumentRequestComponent implements OnInit {
   getdocumenttypeconfig() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.doctypes = data.Response;
     });
   }

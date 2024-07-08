@@ -9,7 +9,7 @@ export class DocumentAdditionalTasksService {
 
   constructor(private http: HttpbaseService) { }
   getdocumentrequest(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/additionaltask/GetAddtask");
   }
 }

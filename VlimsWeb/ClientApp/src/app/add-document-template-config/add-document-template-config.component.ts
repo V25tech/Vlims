@@ -28,7 +28,7 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
       
      }
   ngOnInit() {
-    debugger
+    
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 1];
@@ -58,9 +58,9 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
   getByName(objname:string)
   {
     this.loader.show();
-    debugger
+    
       return this.doctemplateservice.getdoctemplatebyname(objname).subscribe((data:any)=>{
-        debugger
+        
         this.newdoctemplate=data;
         this.loader.hide();
         console.log(this.newdoctemplate);
@@ -73,9 +73,9 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
     this.loader.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.doctypeservice.getdoctypeconfig(objrequest).subscribe((data: any) => {
-        debugger
+        
         this.doctypes = data.Response;
-        debugger
+        
         this.loader.hide();
         console.log(this.doctypes);
       }, er => {
@@ -84,13 +84,13 @@ export class AddDocumentTemplateConfigComponent implements OnInit {
       });
   }
   submit(doctype: DocumentTemplateConfiguration) {
-    debugger
+    
       
         this.adddoctype(doctype);
       
     }
     adddoctype(doctype: DocumentTemplateConfiguration) {
-      debugger
+      
       doctype.CreatedBy="admin";
       doctype.ModifiedBy = "admin";
       doctype.Status = "Pending";

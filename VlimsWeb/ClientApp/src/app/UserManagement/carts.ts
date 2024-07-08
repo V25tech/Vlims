@@ -155,7 +155,7 @@ export class CartsComponent {
   }
 
   addbilling(objbill: Bill) {
-    debugger
+    
     this.loader.show();
     this.billsvc.addBilling(objbill).subscribe((data: any) => {
       if (data > 0) {

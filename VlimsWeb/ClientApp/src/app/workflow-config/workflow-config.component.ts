@@ -22,7 +22,7 @@ export class WorkflowConfigComponent implements OnInit {
     this.loader.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.doctypeservice.getworkflow(objrequest).subscribe((data: any) => {
-        debugger
+        
         this.types = data.Response;
         this.loader.hide();
         console.log(this.types);
@@ -32,7 +32,7 @@ export class WorkflowConfigComponent implements OnInit {
       });
   }
   editdoc(editband: workflowconiguration) {
-    debugger
+    
     this.commonsvc.objworkflow=editband;
     this.router.navigate(['/mainpage/documentmaster/editworkflow']);
   }

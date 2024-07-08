@@ -50,14 +50,24 @@
               <ng-container *ngFor="let header of gridConfig?.Headers">
                 <td *ngIf="header?.Name" class="text-center">
                   <ng-container *ngIf="header.isNavigation; else nonNavigation">
-                    <a href="javascript:void(0);" (click)="navigate(doc?.EntityInfo,doc?.Type)">
+                    <!-- If header.isNavigation is true, render this link -->
+                    <a href="javascript:void(0);" (click)="navigate(doc?.EntityInfo, doc?.Type)">
                       {{ doc?.EntityInfo[header.Name] }}
                     </a>
                   </ng-container>
                   <ng-template #nonNavigation>
-                    {{ doc?.EntityInfo[header.Name] }}
+                    <!-- If header.isNavigation is false, render this content -->
+                    <ng-container *ngIf="header.Name == 'CreatedDate'">
+                      <!-- If header.DisplayName is 'Initiated on', use commonsrvc.setDate -->
+                      {{ commonsrvc.setDate(doc?.EntityInfo[header.Name]) }}
+                    </ng-container>
+                    <ng-container *ngIf="header.Name != 'CreatedDate'">
+                      <!-- If header.DisplayName is not 'Initiated on', simply display the value -->
+                      {{ doc?.EntityInfo[header.Name] }}
+                    </ng-container>
                   </ng-template>
                 </td>
+
               </ng-container>
             </tr>
           </ng-template>

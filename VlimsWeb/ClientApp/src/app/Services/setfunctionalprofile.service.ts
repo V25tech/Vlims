@@ -11,11 +11,11 @@ export class setfunctionalprofileconfigurationservice {
   constructor(private http: HttpbaseService) { }
 
   getsetfunctionalprofileconfiguration(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/setfunctionalprofileconfiguration/getsetfunctionalprofileconfiguration", this.type);
   }
   addsetfunctionalprofileconfiguration(objrequest: setfunctionalprofileconfigurationservice) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/setfunctionalprofileconfiguration/addsetfunctionalprofileconfiguration", this.type);
   }
 }

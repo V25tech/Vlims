@@ -269,7 +269,7 @@ export class ReviewRevisionComponent {
     });
   }
   viewprint(viewdoc:TemplateRef<any>) {
-    debugger
+    
     // Open the modal
     this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
 }
@@ -304,7 +304,7 @@ export class ReviewRevisionComponent {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
     //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
     //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    //   debugger
+    //   
       
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }
@@ -312,7 +312,7 @@ export class ReviewRevisionComponent {
   }
   getUrl(template: TemplateRef<any>):void{
     this.templateService.geturl().subscribe((data:any)=>{
-      debugger
+      
       this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })

@@ -51,7 +51,7 @@ export class AuditPrintNewPageComponent {
   getAuditModuleByName() {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
-      debugger
+      
       this.types = data;
       
       this.loader.hide();

@@ -64,7 +64,7 @@ export class ObsoluteGridComponent {
             }
             //item.reviewDateValue = (item.reviewDate != null || item.reviewDate != 'NA') ? this.commonsvc.setDate(item.reviewDate): 'NA';
           })
-          debugger
+          
           this.documents = data;
         }
         this.spinner.hide();
@@ -80,7 +80,7 @@ export class ObsoluteGridComponent {
     this.router.navigate(["revision/edit/" + doc.id], { queryParams: { entityName: doc.entityName } });
   }
   previewDocument(template: TemplateRef<any>) {
-    debugger
+    
     if (this.modalRef)
       this.modalRef.hide();
     if (this.objexisting.entityName.toLowerCase() == 'new document') {
@@ -90,7 +90,7 @@ export class ObsoluteGridComponent {
     }
   }
   viewprint(viewdoc: TemplateRef<any>, objdoc: any) {
-    debugger
+    
     // Open the modal
     this.objexisting = objdoc;
     this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });

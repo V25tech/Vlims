@@ -12,11 +12,11 @@ export class ActivateDeactivateService {
   constructor(private http: HttpbaseService) { }
 
   get_activate_deactivateuser(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/userconfiguration/getusers", this.type);
   }
   add_activate_deactivate(objrequest: activateDeactivateuser) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/userconfiguration/updateusermanagement", this.type);
 }
 }

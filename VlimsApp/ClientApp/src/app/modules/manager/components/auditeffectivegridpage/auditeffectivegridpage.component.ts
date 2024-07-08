@@ -70,7 +70,7 @@ export class AuditeffectivegridpageComponent {
   }
   
   getauditmodule() {
-    debugger
+    
     this.loader.show();
     this.commonsvc.req.type="EffectiveType";
     this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {

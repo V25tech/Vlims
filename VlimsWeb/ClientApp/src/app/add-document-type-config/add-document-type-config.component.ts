@@ -29,7 +29,7 @@ export class AddDocumentTypeConfigComponent implements OnInit {
     private router: Router,private toastr: ToastrService) { }
 
   ngOnInit() {
-    debugger
+    
     const urlPath = this.router.url;
     const segments = urlPath.split('/');
     const lastSegment = segments[segments.length - 1];
@@ -40,7 +40,7 @@ export class AddDocumentTypeConfigComponent implements OnInit {
    this.viewMode= true;
    if(this.viewMode)
    {
-    debugger
+    
     this.objname=this.commonsvc.objname;
     this.getdocTypeByName(this.objname);
   //  this.adddoc=this.commonsvc.docobject;
@@ -62,9 +62,9 @@ export class AddDocumentTypeConfigComponent implements OnInit {
   getdocTypeByName(objname:string)
   {
     this.loader.show();
-    debugger
+    
       return this.doctypeservice.getdoctypeconfigbyname(objname).subscribe((data:any)=>{
-        debugger
+        
         this.adddoc=data;
         this.loader.hide();
         console.log(this.adddoc);
@@ -77,7 +77,7 @@ export class AddDocumentTypeConfigComponent implements OnInit {
     this.loader.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
       return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-        debugger
+        
         this.types = data.Response;
         this.loader.hide();
         console.log(this.types);
@@ -87,7 +87,7 @@ export class AddDocumentTypeConfigComponent implements OnInit {
       });
   }
   submit(doctype: DocumentTypeConfiguration) {
-  debugger
+  
     if(this.editMode)
     {
       doctype.Status="Pending";
@@ -102,7 +102,7 @@ export class AddDocumentTypeConfigComponent implements OnInit {
     
   }
   adddoctype(doctype: DocumentTypeConfiguration) {
-    debugger
+    
     doctype.CreatedBy="admin";
     doctype.ModifiedBy = "admin";
     // const format = 'dd/MM/yyyy';

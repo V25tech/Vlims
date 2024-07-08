@@ -50,7 +50,7 @@
           <div class="m-3">
             <div class="d-flex">
               <div class="activity-time col-lg-3 ">
-                <p>{{item.CreatedDate}}</p>
+                <p>{{commonsrvc.setDate(item.CreatedDate)}}</p>
               </div>
               <div class="activity-items col-lg-9">
                 <ul>
@@ -107,7 +107,7 @@
           <div class="m-3">
             <div class="d-flex" *ngFor="let item of gridConfig.reverse()">
               <div class="activity-time col-lg-3 ">
-                <p>{{ item.EntityInfo['ModifiedDate'] }}</p>
+                <p>{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</p>
               </div>
               <div class="activity-items col-lg-9">
                 <ul>
@@ -131,7 +131,7 @@
                       <p class="mb-0 p-date-styles">
                         <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
                       </p>
-                      <span class="activity-date">{{ item.EntityInfo['ModifiedDate'] }}</span>
+                      <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
                     </div>
 
                   </li>
@@ -145,7 +145,7 @@
         </p-panel>
       </div>
     </ng-container>
-    <ng-container *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective'">
+    <ng-container *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective' && entityName.toLowerCase() != 'request'">
       <div class="m-3" *ngFor="let key of groupedRecordsKeys().reverse()">
         <p-panel class=" col-lg-5" header="Revision {{key}}" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
@@ -193,7 +193,7 @@
                       <p class="mb-0 p-date-styles">
                         <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
                       </p>
-                      <span class="activity-date">{{ item.EntityInfo['ModifiedDate'] }}</span>
+                      <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
                     </div>
 
                   </li>
@@ -230,7 +230,7 @@
           <div class="m-3">
             <div class="d-flex">
               <div class="activity-time col-lg-3 ">
-                <p>{{ item.EntityInfo['ModifiedDate'] }}</p>
+                <p>{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</p>
               </div>
               <div class="activity-items col-lg-9">
                 <ul>
@@ -254,7 +254,7 @@
                       <p class="mb-0 p-date-styles">
                         <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
                       </p>
-                      <span class="activity-date">{{ item.EntityInfo['ModifiedDate'] }}</span>
+                      <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
                     </div>
 
                   </li>

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class AudithierarchyhomepageComponent {
   constructor(private router: Router) {}
   navigateTo(navTo: any) {
-    debugger;
+    ;
     if (navTo === 'auditdepartments') {
       this.router.navigate(['/auditdepartments']);
     } else if (navTo === 'auditRoles') {

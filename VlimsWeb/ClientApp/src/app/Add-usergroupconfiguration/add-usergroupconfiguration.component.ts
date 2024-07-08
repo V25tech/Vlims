@@ -28,11 +28,11 @@ export class AddusergroupconfigurationComponent implements OnInit {
     const lastSegment = segments[segments.length - 1];
     //this.getdepartments();
     //this.getroles();
-    debugger
+    
     if (lastSegment == "viewdoctype") {
       this.viewMode = true;
       if (this.viewMode) {
-        debugger
+        
         this.objname = this.commonsvc.objname;
         //this.getdocTypeByName(this.objname);
         this.adduser = this.commonsvc.userGroupConfig;
@@ -51,11 +51,11 @@ export class AddusergroupconfigurationComponent implements OnInit {
     }
   }
   submit(newdept: Usergroupconfiguration) {
-    debugger
+    
         this.adddoctype(newdept);
     }
     adddoctype(newdept: Usergroupconfiguration) {
-      debugger
+      
       newdept.Registeredby="admin";
       newdept.Modify="admin";
       this.ugService.addusergroupconfiguration(newdept).subscribe((res:any)=>{
@@ -68,7 +68,7 @@ export class AddusergroupconfigurationComponent implements OnInit {
   getusers() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.userService.getusers(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.types = data.Response;      
     });
   }

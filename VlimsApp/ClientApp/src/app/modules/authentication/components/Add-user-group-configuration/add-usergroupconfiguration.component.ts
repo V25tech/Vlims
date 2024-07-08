@@ -41,7 +41,7 @@ export class AddusergroupconfigurationComponent implements OnInit {
    else if (lastSegment == "view") {
       this.viewMode = true;
       if (this.viewMode) {
-        debugger
+        
         this.objname = this.commonsvc.objname;
         //this.getdocTypeByName(this.objname);
         this.newdept = this.commonsvc.userGroupConfig;
@@ -60,11 +60,11 @@ export class AddusergroupconfigurationComponent implements OnInit {
     this.location.back();
   }
   submit(newdept: Usergroupconfiguration) {
-    debugger
+    
         this.adddoctype(newdept);
     }
     adddoctype(newdept: Usergroupconfiguration) {
-      debugger
+      
       newdept.Registeredby="admin";
       newdept.Modify = "admin";
       if(newdept.totalusers=="0"){
@@ -101,12 +101,12 @@ export class AddusergroupconfigurationComponent implements OnInit {
   getusers() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.userService.getusers(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.types = data.Response;      
     });
   }
   getbyId(id:number) {
-    debugger
+    
     this.ugService.getbyId(id).subscribe((data: any) => {
       this.newdept = data;
     }, ((error: any) => {
