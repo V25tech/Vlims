@@ -13,20 +13,20 @@ export class NewPrintRequestService {
   constructor(private http: HttpbaseService) { }
 
   GetNewPrintRequest(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentprint/GetAllDocPrint", this.type);
   }
   AddNewPrintRequest(objrequest: DocumentPrintConfiguration) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentprint/savedocumentprint", this.type);
   }
   UpdatePrintRequest(objrequest: DocumentPrintConfiguration) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentprint/updatedocumentprint", this.type);
   }
 
   UpdatePrintRequestCount(objrequest: DocumentPrintConfiguration) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentprint/updatedocumentprintcount", this.type);
   }
   getbyId(docreq: number) {

@@ -30,7 +30,7 @@ export class DocumentPrintComponent implements OnInit {
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentPrintService, private docservice: DocumentPreperationService, private toastr: ToastrService, private loader: SpinnerService, private router: Router) { }
 
   ngOnInit() {
-    debugger;
+    ;
     //this.tabselect = this.router.url.split('/').pop();
     this.GetDocumentPrint();
     this.getdocumentrequest();
@@ -40,7 +40,7 @@ export class DocumentPrintComponent implements OnInit {
     this.loader.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.docservice.getdocumentrequest(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.requestsInfo = data.response;
       this.loader.hide();
       console.log(this.requests);
@@ -57,7 +57,7 @@ export class DocumentPrintComponent implements OnInit {
         Id: 0
     };
     return this.doctypeservice.GetDocumentPrint(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.requests = data.response;
       this.loader.hide();
       console.log(this.requests);

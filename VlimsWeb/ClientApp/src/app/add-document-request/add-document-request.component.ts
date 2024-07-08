@@ -38,7 +38,7 @@ export class AddDocumentRequestComponent implements OnInit {
     this.getdocumenttypeconfig();
     this.getusergroupInfo();
     this.getworkflowinfo()
-    debugger;
+    ;
     if (lastSegment == "viewdocreq") {
       this.viewMode = this.commonsvc.docrequest != null ? true : false;
       this.viewMode = true;
@@ -46,7 +46,7 @@ export class AddDocumentRequestComponent implements OnInit {
         this.adddocreq = this.commonsvc.docrequest;
       }
       if (this.viewMode) {
-        debugger
+        
         this.objname = this.commonsvc.objname;
         this.getByName(this.objname);
         this.title = "View Document Type Configuration"
@@ -69,24 +69,24 @@ export class AddDocumentRequestComponent implements OnInit {
   getdocumentrequest() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     this.docReqServ.getdocumentrequest(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.requests = data.response;
     });
   }
   getusergroupInfo() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     return this.doctypeservice.getusergroupconfiguration(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.usergroups = data.Response;
     });
   }
   submit(adddocreq: DocumentRequestConfiguration) {
-    debugger
+    
     this.adddocrequest(adddocreq);
 
   }
   adddocrequest(adddocreq: DocumentRequestConfiguration) {
-    debugger
+    
     adddocreq.CreatedBy = "admin";
     adddocreq.ModifiedBy = "admin";
     adddocreq.Status = "In-Progress";
@@ -102,7 +102,7 @@ export class AddDocumentRequestComponent implements OnInit {
   getdepartments() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.departs = data.Response;
 
     });
@@ -110,22 +110,22 @@ export class AddDocumentRequestComponent implements OnInit {
   getdocumenttypeconfig() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.doctypes = data.Response;
     });
   }
   getworkflowinfo() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.wfservice.getworkflow(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.wflows = data.Response;
     });
   }
   getByName(objname: string) {
     this.loader.show();
-    debugger
+    
     return this.docReqServ.getdocrequestbyname(objname).subscribe((data: any) => {
-      debugger
+      
       this.commonsvc.docrequest = data;
       this.adddocreq = data;
       this.loader.hide();

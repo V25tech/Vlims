@@ -64,7 +64,7 @@ export class TemplatesComponent {
       });
   }
   editdoc(editband: DocumentTemplateConfiguration) {
-    debugger
+    
     
     this.commonsvc.template=editband;
     //this.router.navigate(['/templates/view',editband.Templatename]);
@@ -91,7 +91,7 @@ export class TemplatesComponent {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
     //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
     //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    //   debugger
+    //   
       
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }
@@ -175,7 +175,7 @@ export class TemplatesComponent {
         return;
       }
     else{
-      debugger
+      
       let count = this.types.length;
       count++;
       temp.Uniquecode=="Temp "+count;

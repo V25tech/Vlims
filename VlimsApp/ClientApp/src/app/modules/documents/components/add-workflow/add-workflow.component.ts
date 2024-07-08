@@ -158,7 +158,7 @@ export class AddWorkflowComponent {
   }
  
   addWorkflow(workflow: workflowconiguration) {
-    debugger
+    
     workflow.documentstage=this.selectedStage.map(o=>o.label).join(",")
     if (this.editMode) {
       if (!this.isApprovalsNdReviewerSame())
@@ -221,7 +221,7 @@ export class AddWorkflowComponent {
     return false;
   }
   typeChange(){
-    debugger;
+    ;
     if(this.workflow.documenttype!=null && this.workflow.documenttype!=undefined){
     const selectedtype=this.types.filter(o=>o.Documenttypename.toLocaleLowerCase()===this.workflow.documenttype?.toLocaleLowerCase());
     if(selectedtype!=null && selectedtype!=undefined)

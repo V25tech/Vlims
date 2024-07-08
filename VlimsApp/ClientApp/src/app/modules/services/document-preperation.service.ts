@@ -17,11 +17,11 @@ export class DocumentPreperationService {
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/GetAllDocPrep", this.type);
   }
   getdocumentrequestbyId(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/getdocId");
   }
   ManageDocument(objrequest: DocumentPreperationConfiguration) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/updatedocumentpreparation", this.type);
   }
   preview(templte: string) {
@@ -32,11 +32,11 @@ export class DocumentPreperationService {
   }
 
   previewtemplate(dtid: number) {
-    debugger
+    
     return this.http.getwithheader("api/documentpreparation/templatepreview" + "?dtid=" + dtid, this.type);
   }
   upload(objrequest: FormData) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/upload", this.type);
   }
   getbyId(id: number) {

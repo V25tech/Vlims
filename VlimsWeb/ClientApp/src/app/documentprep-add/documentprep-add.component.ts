@@ -44,7 +44,7 @@ export class DocumentprepAddComponent implements OnInit {
     this.getworkflowtypeconfig();
     this.getdepartments();
     this.getdocumenttypeconfig();
-    debugger;
+    ;
     if (lastSegment == "viewdocprep") {
       this.viewMode = this.commonsvc.docPreperation != null ? true : false;
       this.viewMode = true;
@@ -57,7 +57,7 @@ export class DocumentprepAddComponent implements OnInit {
       this.cdr.detectChanges();
     }
     if (lastSegment == "editdocprep") {
-      debugger;
+      ;
       this.editMode = this.commonsvc.docPreperation != null ? true : false;
       if (this.editMode) {
         this.adddocreq = this.commonsvc.docPreperation;
@@ -83,7 +83,7 @@ export class DocumentprepAddComponent implements OnInit {
     });
   }
   submit(adddocreq: DocumentPreperationConfiguration) {
-    debugger
+    
     this.addpreprequest(adddocreq);
   }
   addpreprequest(adddocreq: DocumentPreperationConfiguration) {
@@ -102,14 +102,14 @@ export class DocumentprepAddComponent implements OnInit {
   getdocumenttemplateconfig() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeservice.getdocttemplate(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.templates = data.Response;
     });
   }
   getworkflowtypeconfig() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.workflowserv.getworkflow(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.workflowTypes = data.Response;
     });
   }
@@ -117,7 +117,7 @@ export class DocumentprepAddComponent implements OnInit {
 
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.departs = data.Response;
 
     });
@@ -125,17 +125,17 @@ export class DocumentprepAddComponent implements OnInit {
   getdocumenttypeconfig() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.doctypeserv.getdoctypeconfig(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.doctypes = data.Response;
     });
   }
   onFileSelected(event: any): void {
-    debugger
+    
     this.selectedFile = event.target.files[0];
     this.isUploaded = false; // Reset upload status when a new file is selected
   }
   onUpload(): void {
-    debugger
+    
     if (!this.selectedFile) {
       console.error('No file selected.');
       return;
@@ -157,7 +157,7 @@ export class DocumentprepAddComponent implements OnInit {
       );
   }
   onDeleteFile(): void {
-    debugger
+    
     this.selectedFile = null;
     this.isUploaded = false;
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
@@ -167,9 +167,9 @@ export class DocumentprepAddComponent implements OnInit {
     }
   }
   previewtemplate(adddocreq: DocumentPreperationConfiguration) {
-    debugger
+    
     this.docprepServ.preview(adddocreq).subscribe((data: any) => {
-      debugger
+      
       this.fileBytes = data;
       this.commonsvc.pdfBytes = this.fileBytes;
       this.router.navigate(['/mainpage/documentmanager/preview']);
@@ -178,9 +178,9 @@ export class DocumentprepAddComponent implements OnInit {
   }
   getByName(objname: string) {
     this.loader.show();
-    debugger
+    
     return this.docprepServ.getdocrequestbyname(objname).subscribe((data: any) => {
-      debugger
+      
       this.commonsvc.docPreperation = data;
       this.adddocreq = data;
       this.loader.hide();

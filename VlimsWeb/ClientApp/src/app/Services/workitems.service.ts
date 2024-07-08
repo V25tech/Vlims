@@ -10,7 +10,7 @@ export class WorkitemsService {
 
   constructor(private http: HttpbaseService) { }
   getworkitems(objrequest: RequestContext) {
-    debugger
+    
     //change this method
     return this.http.postJsonLogin(objrequest, "api/workitems/GetAllworkitems", this.type);
   }

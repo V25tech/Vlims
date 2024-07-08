@@ -33,7 +33,7 @@ export class AuditdocumenttypesgridpageComponent {
   constructor(private commonsvc: CommonService, private auditservice: AuditConfiurationService, private loader: NgxSpinnerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    debugger
+    
     this.access = this.commonsvc.getUserRoles()?.deptConfig ?? false;
     this.setHeaders();
     this.setConfig();
@@ -44,7 +44,7 @@ export class AuditdocumenttypesgridpageComponent {
     });
   }
   setHeaders() {
-    debugger
+    
     this.gridConfig.Headers = [
       { Name: 'documenttypeprefix', DisplayName: 'Prefix', width: 20, sort: false, isNavigation: true },
       { Name: 'Documenttypename', DisplayName: 'Document Type Name', width: 25, sort: false, isNavigation: false },
@@ -54,7 +54,7 @@ export class AuditdocumenttypesgridpageComponent {
     ]
   }
   setConfig() {
-    debugger
+    
     this.gridConfig.Config = {
       itemsPerPage : 10,
       currentPage: 1,

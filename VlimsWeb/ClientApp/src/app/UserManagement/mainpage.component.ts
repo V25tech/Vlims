@@ -19,14 +19,14 @@ export class MainPageComponent {
     public cdate = new Date();
 
     constructor(private router: Router, public commonsvc: CommonService, private castssvc: CartsService) {
-        debugger
+        
         router.events.subscribe(val => {
             this.serachStr = '';
         });
     }
 
     ngOnInit() {
-        debugger
+        
         if (window.innerWidth > 400) {
             //desktop screen code
             this.commonsvc.sliderOpen();

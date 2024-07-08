@@ -12,11 +12,11 @@ export class NewPrintRequestService {
   constructor(private http: HttpbaseService) { }
 
   GetNewPrintRequest(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/NewPrint/GetNewPrintRequest",this.type);
 }
 AddNewPrintRequest(objrequest: PrintRequest) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/NewPrint/AddNewPrintRequest",this.type);
 }
 }

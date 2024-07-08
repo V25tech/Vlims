@@ -59,7 +59,7 @@ export class ProductTypeComponent {
   }
 
   edittype(newobject: ProductType) {
-    debugger
+    
     this.header = "Update Product Type";
     this.newtype = new ProductType();
     this.newtype.Name = newobject.Name;

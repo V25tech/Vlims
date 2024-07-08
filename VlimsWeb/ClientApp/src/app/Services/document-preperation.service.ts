@@ -13,35 +13,35 @@ export class DocumentPreperationService {
   constructor(private http: HttpbaseService) {
   }
   getdocumentrequest(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/GetAllDocPrep",this.type);
   }
   getdocumentrequestbyId(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/getdocId");
   }
   ManageDocument(objrequest: DocumentPreperationConfiguration) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/savedocumentpreparation",this.type);
   }
   UpdateDocument(objrequest: DocumentPreperationConfiguration) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/updatedocumentpreparation", this.type);
   }
   preview(objrequest: DocumentPreperationConfiguration) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/preview",this.type);
   }
   upload(objrequest: FormData){
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/upload",this.type);
   }
   getdocrequestbyname(docreq: string) {
-    debugger
+    
     return this.http.getwithheader("api/documentpreparation/GetDocumentRequestbyName" + "?name=" + docreq, this.type);
   }
   ManageApprovalFlow(objprep: DocumentPreperationConfiguration) {
-    debugger
+    
     var docEff = new DocumentEffectiveConfiguration();
     docEff.documenttype = objprep.documenttype;
     docEff.Department = objprep.Department;

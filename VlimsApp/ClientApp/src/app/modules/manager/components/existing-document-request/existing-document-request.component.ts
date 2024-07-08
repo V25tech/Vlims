@@ -94,7 +94,7 @@ export class ExistingDocumentRequestComponent implements OnInit {
 
  
   previewtemplate(docInfo: ExistingDocumentRequest, template: TemplateRef<any>): void {
-   // debugger
+   // 
     this.spinner.show();
     this.existingDocReqservice.preview(docInfo).subscribe((data: any) => {
       this.pdfBytes = data;
@@ -110,7 +110,7 @@ export class ExistingDocumentRequestComponent implements OnInit {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
     //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
     //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    //   debugger
+    //   
       
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }

@@ -10,7 +10,7 @@ export class AuditadminhomeComponent {
   constructor(private router: Router) {}
 
   navigateTo(navTo: any) {
-    debugger;
+    ;
     if (navTo === 'security') {
       this.router.navigate(['/admin/security']);
     } else if (navTo === 'hierrachy') {

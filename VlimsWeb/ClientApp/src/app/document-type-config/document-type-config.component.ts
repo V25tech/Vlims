@@ -33,7 +33,7 @@ getdocumenttypeconfig() {
   this.loader.show();
  let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
     return this.doctypeservice.getdoctypeconfig(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.types = data.Response;
       this.loader.hide();
       console.log(this.types);
@@ -43,7 +43,7 @@ getdocumenttypeconfig() {
     });
 }
 editdoc(editband: DocumentTypeConfiguration) {
-  debugger
+  
   this.commonsvc.docobject=editband;
   this.router.navigate(['/mainpage/documentmaster/editdoctype']);
 }

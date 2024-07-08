@@ -13,11 +13,11 @@ export class NewPlantRegistrationConfigurationService {
   constructor(private http: HttpbaseService) { }
 
   GetPlantRegistrationconfiguration(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/plantmanagement/GetAllPlantManagement",this.type);
   }
   addNewRegistrationconfiguration(objrequest: PlantConfiguration) {
-  debugger
+  
     return this.http.postJsonLogin(objrequest, "api/plantmanagement/saveplantmanagement",this.type);
 }
 }

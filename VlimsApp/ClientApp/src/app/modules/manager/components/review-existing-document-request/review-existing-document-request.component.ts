@@ -272,7 +272,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
           this.location.back();
         },
         (error: any) => {
-          debugger;
+          ;
           console.log('Error uploading file:', error);
           this.toastr.error(error.error);          
           this.spinner.hide();

@@ -10,11 +10,11 @@ export class UsersconfigurationService {
   constructor(private http: HttpbaseService) { }
 
   getusers(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/userconfiguration/getusers",this.type);
 }
 adduser(objrequest: UserConfiguration) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/userconfiguration/saveuserconfiguration",this.type);
 }
 }

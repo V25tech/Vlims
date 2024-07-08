@@ -26,7 +26,7 @@ export class ActivateDeactivateuserComponent implements OnInit {
       Id: 0
     };
     return this.Userservice.getusers(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.types = data.Response;
       this.loader.hide();
       console.log(this.types);

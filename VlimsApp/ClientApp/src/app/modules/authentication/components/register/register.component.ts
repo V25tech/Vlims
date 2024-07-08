@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
 
 
   submit(adduser: UserConfiguration) {
-    debugger;
+    ;
 
     if (this.editMode) {
         this.update(adduser);
@@ -142,7 +142,7 @@ export class RegisterComponent implements OnInit {
     else {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
-        debugger
+        
         this.userservice.adduser(adduser).subscribe((res: any) => {
           this.loader.hide();
           this.toastr.success('user added successfully');
@@ -204,7 +204,7 @@ export class RegisterComponent implements OnInit {
       
   //     this.types = data.Response;
   //     this.securityType = data.Response[0];
-  //     debugger
+  //     
   //     console.log(data.Response[0])
   //   });
   // }
@@ -212,7 +212,7 @@ export class RegisterComponent implements OnInit {
 
 
   getSecurityInfo() {
-    debugger
+    
     return this.securityService.getsecuritymanagement(this.commonsvc.req).subscribe((data: any) => {
       if (data.Response && data.Response.length > 0) {
         this.securityType = data.Response[0];

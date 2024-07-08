@@ -11,7 +11,7 @@ export class AuditmanagerhomepageComponent {
 
   navigateTo(navTo: any) {
     if (navTo === 'auditrequests') {
-      debugger;
+      ;
       this.router.navigate(['/auditrequests']);
     } else if (navTo === 'auditpreparations') {
       this.router.navigate(['/auditpreparations']);

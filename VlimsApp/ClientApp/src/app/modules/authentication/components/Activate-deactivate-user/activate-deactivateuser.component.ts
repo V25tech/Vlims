@@ -28,7 +28,7 @@ export class ActivateDeactivateuserComponent implements OnInit {
 
 
   ngOnInit() {
-    debugger
+    
     this.username=this.commonsvc.getUsername();
     this.access = this.commonsvc.getUserRoles()?.Activatestatus ?? false;
     this.get_activate_deactivateuser();
@@ -39,7 +39,7 @@ export class ActivateDeactivateuserComponent implements OnInit {
   // get_activate_deactivateuser() {
   //   this.loader.show();
   //   return this.userservice.getusers(this.commonsvc.req).subscribe((data: any) => {
-  //     debugger
+  //     
   //     this.types = data.Response;
   //     this.loader.hide();
   //   }, er => {
@@ -82,7 +82,7 @@ export class ActivateDeactivateuserComponent implements OnInit {
 
 
   /*update(user:UserConfiguration,event: Event){
-    debugger
+    
     this.loader.show();
     const checkbox = event.target as HTMLInputElement;
     if(user.UserID!=this.commonsvc.getUsername()){
@@ -105,7 +105,7 @@ export class ActivateDeactivateuserComponent implements OnInit {
 
 
   update(user: UserConfiguration, event: Event) {
-    debugger;
+    ;
     this.loader.show();
     const checkbox = event ? event.target as HTMLInputElement : null;
     
@@ -143,7 +143,7 @@ export class ActivateDeactivateuserComponent implements OnInit {
   editdoc(doc: activateDeactivateuser) {
     this.adduser.UCFId = doc.UCFId;
     this.adduser.UserManagementID = "1";
-    debugger;
+    ;
     if (doc.Status == 'Active') {
       this.adduser.Status = 'InActive';     
       this.userservice.update(this.adduser).subscribe((data: any) => {
@@ -160,7 +160,7 @@ export class ActivateDeactivateuserComponent implements OnInit {
 
   }
   getStatusClass(status: string): string {
-    debugger
+    
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Completed') {

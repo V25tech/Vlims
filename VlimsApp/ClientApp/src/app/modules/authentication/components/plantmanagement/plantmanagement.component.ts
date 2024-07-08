@@ -36,7 +36,7 @@ export class PlantComponent implements OnInit {
           item.ModifiedDate=this.commonsvc.setDate(item.ModifiedDate)
         })
        } 
-      debugger
+      
       this.types = data.Response;
       console.log(this.types);
     }, er => {
@@ -67,7 +67,7 @@ navigateToAddPlant() {
 }
 
   editdoc(editband: PlantConfiguration) {
-    debugger
+    
     this.commonsvc.plantConfig = editband;
     this.router.navigate(['/admin/plant/edit', editband.PMId]);
   }

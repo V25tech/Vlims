@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class UsermanagementComponent {
   constructor(private router: Router) {}
   navigateTo(navTo: any) {
-    debugger;
+    ;
     if (navTo === 'security') {
       this.router.navigate(['/admin/security']);
     } else if (navTo === 'hierrachy') {

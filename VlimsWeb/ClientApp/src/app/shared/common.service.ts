@@ -117,7 +117,7 @@ export class CommonService {
   }
 
   setCurrentPage(cpageConfig: PageConfig, deletedItemIndex: number, totalItems: number) {
-    debugger
+    
     deletedItemIndex += 1;
     let reminder = deletedItemIndex % cpageConfig.itemsPerPage;
     if (cpageConfig.currentPage > 1 &&

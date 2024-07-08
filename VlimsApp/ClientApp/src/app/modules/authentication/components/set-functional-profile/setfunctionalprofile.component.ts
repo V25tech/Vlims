@@ -115,7 +115,7 @@ export class SetfunctionalprofileComponent implements OnInit {
     }
   }
   async binddata(rolename: string) {
-    debugger
+    
     await this.getsetfunctionalprofile();
     let roleinfo: any;
     roleinfo = this.types.find(o => o.role == rolename);

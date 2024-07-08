@@ -139,7 +139,7 @@
         </p-panel>
       </div>
     </ng-container>
-    <ng-container *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective'">
+    <ng-container *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective' && entityName.toLowerCase() != 'request'">
       <div class="m-3" *ngFor="let key of groupedRecordsKeys().reverse()">
         <p-panel class=" col-lg-5" header="Revision {{key}}" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">

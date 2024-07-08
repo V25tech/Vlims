@@ -36,15 +36,15 @@ export class DocumentTemplateServiceService {
     return this.http.getwithheader("api/documenttemplateconfiguration/getbyId" + "?dTID=" + id, this.type);
   }
   getTemplate(templte: string, prepId: number, isshort:boolean=false ,ispdf: boolean = true) {
-    debugger
+    
     return this.http.getwithheader(`api/documenttemplateconfiguration/getpdf?templateinf=${templte}&p_user=${this.commonsvc.getUsername()}&p_PrepId=${prepId}&p_IsShortHeader=${isshort}&p_isPdf=${ispdf}`, this.type);
   }
   isduplicate(templte: string) {
-    debugger
+    
     return this.http.getwithheader(`api/documenttemplateconfiguration/isduplicate?p_template=${templte}`, this.type);
   }
   geturl() {
-    debugger
+    
     return this.http.getwithheader(`api/documenttemplateconfiguration/getpath`, this.type);
   }
   uploadImage(file: File): Observable<any> {

@@ -14,11 +14,11 @@ export class DocumentPrintService {
   constructor(private http: HttpbaseService) { }
 
   GetDocumentPrint(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentprint/GetDocumentPrint",this.type);
 }
 adddDocumentPrint(objrequest: DepartmentConfiguration) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/documentprint/adddDocumentPrint",this.type);
 }
 }

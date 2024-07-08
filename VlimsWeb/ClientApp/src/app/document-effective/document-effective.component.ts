@@ -26,7 +26,7 @@ export class DocumentEffectiveComponent implements OnInit {
   constructor(private commonsvc: CommonService, private doctypeservice: DocumentEffectiveService, private toastr: ToastrService, private loader: SpinnerService, private router: Router) { }
 
   ngOnInit() {
-    debugger;
+    ;
     //this.tabselect = this.router.url.split('/').pop();
     this.getdocumentrequest();
   }
@@ -34,7 +34,7 @@ export class DocumentEffectiveComponent implements OnInit {
     this.loader.show();
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.doctypeservice.getdocumentrequest(objrequest).subscribe((data: any) => {
-      debugger
+      
       this.requests = data.response;
       this.loader.hide();
       console.log(this.requests);
@@ -47,7 +47,7 @@ export class DocumentEffectiveComponent implements OnInit {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     //objrequest.Id = editband.DTCId;
     //this.doctypeservice.getdocumentrequestbyId(objrequest).subscribe((data: any) => {
-    //  debugger
+    //  
     //  this.objProductType = data.response;
     this.commonsvc.docEffecConfig = editband;
     this.router.navigate(['/mainpage/documentmanager/documeffectedit']);

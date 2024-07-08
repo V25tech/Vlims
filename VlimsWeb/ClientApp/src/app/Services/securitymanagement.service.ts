@@ -11,11 +11,11 @@ export class SecuritymanagementService {
   constructor(private http: HttpbaseService) { }
 
   getsecuritymanagement(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/securitymanagement/GetAllSecurityManagement",this.type);
 }
 addsecurityconfiguration(objrequest:SecurityManagement ) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/securitymanagement/savesecuritymanagement",this.type);
 }
 }

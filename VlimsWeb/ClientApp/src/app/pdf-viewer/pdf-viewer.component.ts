@@ -16,7 +16,7 @@ export class PdfViewerComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer,private commonsvc: CommonService) {}
 
   ngOnInit(): void {
-    debugger
+    
     this.pdfBytes=this.commonsvc.pdfBytes;
     if (this.pdfBytes) {
       console.log("safePdfDataUrl"+"-"+this.pdfBytes);

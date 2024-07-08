@@ -480,7 +480,7 @@ export class NewPrintRequestComponent implements OnInit {
     // });
   }
   viewprint(viewdoc: TemplateRef<any>) {
-    debugger
+    
     // Open the modal
     this.modalRef = this.modalService.show(viewdoc, { class: 'modal-lg' });
   }

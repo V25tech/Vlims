@@ -10,20 +10,20 @@ export class DocumentRequestService {
   type: string = "manager";
   constructor(private http: HttpbaseService) { }
   getdocumentrequest(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentrequest/GetAllDocreq", this.type);
   }
   adddocreqconfig(objrequest: DocumentRequestConfiguration) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentrequest/SaveDocumentrequest", this.type);
   }
   getdocrequestbyname(docreq: string) {
-    debugger
-    debugger
+    
+    
     return this.http.getwithheader("api/documentrequest/GetDocumentRequestbyName" + "?name=" + docreq, this.type);
   }
   ManageApprovalFlow(objrequest: DocumentRequestConfiguration) {
-    debugger
+    
     var docPrep = new DocumentPreperationConfiguration();
     docPrep.documenttype = objrequest.documenttype;
     docPrep.Department = objrequest.department;

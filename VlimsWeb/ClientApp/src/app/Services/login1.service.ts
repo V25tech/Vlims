@@ -12,11 +12,11 @@ export class LoginServicepage {
   constructor(private http: HttpbaseService) { }
 
   getlogindetails(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/usermanagement/GetAllUserManagement",this.type);
   }
   savelogindetails(objrequest: LoginServicepage) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/usermanagement/SaveUserManagement",this.type);
 }
 }

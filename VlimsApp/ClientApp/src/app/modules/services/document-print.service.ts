@@ -15,18 +15,18 @@ export class DocumentPrintService {
   constructor(private http: HttpbaseService) { }
 
   GetDocumentPrint(objrequest: RequestContext) {
-    debugger
+    
     return this.http.postJsonLogin(objrequest, "api/documentprint/GetAllDocPrint",this.type);
 }
 adddDocumentPrint(objrequest: DepartmentConfiguration) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/documentprint/adddDocumentPrint",this.type);
 }
 getbyId(docreq: number) {        
   return this.http.getwithheader("api/documentprint/getbyId" + "?dEID=" + docreq, this.type);
 }
 UpdatePrintRequestCount(objrequest: DocumentPrintConfiguration) {
-  debugger
+  
   return this.http.postJsonLogin(objrequest, "api/documentprint/updatedocumentprintcount", this.type);
 }
 }

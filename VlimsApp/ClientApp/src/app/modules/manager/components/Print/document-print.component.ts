@@ -108,7 +108,7 @@ export class DocumentPrintComponent implements OnInit {
   }
   print(request: DocumentPrintConfiguration){
     this.templatesvc.getTemplate(request.template,request.prepId,false).subscribe((data:any)=>{
-      debugger
+      
       this.exportFiles(data,"docx",request.template,"docx");
     });
   }
@@ -150,7 +150,7 @@ export class DocumentPrintComponent implements OnInit {
     //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
     //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
     //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    //   debugger
+    //   
       
     //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
     // }
@@ -158,7 +158,7 @@ export class DocumentPrintComponent implements OnInit {
   }
   getUrl(template: TemplateRef<any>):void{
     this.templatesvc.geturl().subscribe((data:any)=>{
-      debugger
+      
       this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data) as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     })
@@ -226,7 +226,7 @@ export class DocumentPrintComponent implements OnInit {
   }
   UpdatePrintCount(objtemp: DocumentPrintConfiguration)
   {
-    debugger
+    
     let reqObj = JSON.parse(JSON.stringify(objtemp))
     reqObj.modifiedDate = new Date(reqObj.ModifiedDate)
     reqObj.modifiedDate = reqObj.ModifiedDate;
@@ -234,7 +234,7 @@ export class DocumentPrintComponent implements OnInit {
     this.doctypeservice.UpdatePrintRequestCount(reqObj).subscribe(res => {
       
     this.GetDocumentPrint();
-    debugger
+    
       //this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
     }, er => {
       this.spinner.hide();

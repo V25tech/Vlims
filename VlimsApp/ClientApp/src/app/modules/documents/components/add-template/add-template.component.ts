@@ -186,7 +186,7 @@ export class AddTemplateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
+    
     const urlPath = this.router.url;
     this.segments = urlPath.split('/');
     let lastSegment=''
@@ -376,7 +376,7 @@ export class AddTemplateComponent implements OnInit {
   {
     this.loader.show();
     this.templatesvc.getbyId(id).subscribe((data:any)=>{
-      debugger
+      
       this.templateForm=data;
       if(this.typesDatasource.length>0)
       {
@@ -453,7 +453,7 @@ export class AddTemplateComponent implements OnInit {
                 this.templateForm = new DocumentTemplateConfiguration();
                 this.templateForm = { ...formm, Page: this.pages };
             }
-            debugger;
+            ;
             this.templateForm.RevisionNumber++;
             this.templatesvc.updatedoctemplate(this.templateForm).subscribe(
                 (data: any) => {

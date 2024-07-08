@@ -162,7 +162,7 @@ export class BrandComponent {
 
   export() {
     this.loader.show();
-    debugger
+    
     this.brandsvc.exportBrands(this.retailId).subscribe((data: any) => {
       this.commonsvc.downloadAsExcel(data, 'Brands', this.loader, this.toastr);
     }, (err: any) => {

@@ -53,7 +53,7 @@ export class AuditplantgridpageComponent {
   
   getauditmodule() {
     this.loader.show();
-    debugger;
+    ;
     this.commonsvc.req.type = "PlantType";
     return this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
       this.types = this.removeDuplicates(data, 'Unique');
@@ -88,7 +88,7 @@ if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = 
   
 
  removeDuplicates(array: any[], property: string): any[] {
-  debugger
+  
   return array.filter((obj, index, self) =>
     index === self.findIndex((o) => (
       o[property] === obj[property]

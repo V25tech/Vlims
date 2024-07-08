@@ -61,11 +61,11 @@ export class NewPlantRegistrationComponent implements OnInit {
 
 
   submit(newplant: PlantConfiguration) {
-    debugger
+    
     
     if(this.editMode)
     {
-      debugger
+      
       this.updateplant(newplant);
     }
     else{
@@ -135,7 +135,7 @@ export class NewPlantRegistrationComponent implements OnInit {
    this.location.back();
   }
   getbyId() {
-    debugger
+    
     this.plantservice.getbyId(this.plantid).subscribe((data: any) => {
       this.newplant = data;
     }, ((error: any) => {

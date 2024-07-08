@@ -11,7 +11,7 @@ export class HierarchymanagementComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    debugger
+    
     this.tabselect = this.router.url.split('/').pop(); 
   }
 

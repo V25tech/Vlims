@@ -34,11 +34,11 @@ export class AddUserComponent implements OnInit {
     const lastSegment = segments[segments.length - 1];
       this.getdepartments();
     this.getroles();
-    debugger
+    
       if (lastSegment == "viewdoctype") {
         this.viewMode = true;
         if (this.viewMode) {
-          debugger
+          
           this.objname = this.commonsvc.objname;
           //this.getdocTypeByName(this.objname);
           this.adduser = this.commonsvc.userConfig;
@@ -57,11 +57,11 @@ export class AddUserComponent implements OnInit {
 
     }
     submit(adduser: UserConfiguration) {
-      debugger
+      
           this.adddoctype(adduser);
       }
       adddoctype(adduser: UserConfiguration) {
-        debugger
+        
         adduser.Activedirectory=this.isactivedirectory ? "true" : "false" ;
         adduser.Standarduser=this.isstandarduser ? "true" : "false" ;
         adduser.CreatedBy="admin";
@@ -81,7 +81,7 @@ export class AddUserComponent implements OnInit {
       this.loader.show();
      let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
         return this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
-          debugger
+          
           this.types = data.Response;
           this.loader.hide();
           console.log(this.types);
@@ -94,7 +94,7 @@ export class AddUserComponent implements OnInit {
       this.loader.show();
      let objrequest: RequestContext={PageNumber:1,PageSize:1,Id:0};
         return this.rolesservice.getroles(objrequest).subscribe((data: any) => {
-          debugger
+          
           this.roles = data.Response;
           this.loader.hide();
           console.log(this.roles);
