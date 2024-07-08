@@ -16,7 +16,7 @@ export class FunctionalProfileAddPageComponent {
     { key: 'role', label: 'Role Name:' },
     { key: 'roleConfig', label: 'Role Configuration:' },
     { key: 'deptConfig', label: 'Department Configuration:' },
-    { key: 'plantMgmt', label: 'Plant Configurationt:' },
+    { key: 'plantMgmt', label: 'Plant Configuration:' },
     { key: 'userMgmt', label: 'User Configuration:' },
     { key: 'Activatestatus', label: 'Activate/De-Activate:' },
     { key: 'documentTypeConfig', label: 'Document Type Configuration:' },
@@ -29,8 +29,7 @@ export class FunctionalProfileAddPageComponent {
     { key: 'workItemsassigned', label: 'Work Assigned To Me:' },
     { key: 'downloadPrint', label: 'Document Print Configuration:' },
     { key: 'docrepository', label: 'Existing Document Request:' },
-    { key: 'CreatedBy', label: 'Initiated By:' },
-    { key: 'createddate', label: 'Initiated On:' },
+
 
   ];
   

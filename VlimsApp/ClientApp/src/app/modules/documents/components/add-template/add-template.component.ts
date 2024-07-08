@@ -186,7 +186,7 @@ export class AddTemplateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
+    
     const urlPath = this.router.url;
     this.segments = urlPath.split('/');
     let lastSegment=''
@@ -430,6 +430,7 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   addTemplate() {
+    debugger
     this.loader.show();
     
     // Set template form properties
@@ -442,9 +443,10 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm.footerrows = this.rowsFooterArray.length.toString();
     this.templateForm.footercolumns = this.colsFooterArray.length.toString();
     this.templateForm.Page = this.pages;
-    this.templateForm.RevisionNumber = 0;
+   
 
     if (this.editMode) {
+      debugger
         this.templateForm.ModifiedBy = this.commonsvc.getUsername();
         if (!this.isButtonDisabled) {
             this.isButtonDisabled = true;
@@ -473,6 +475,7 @@ export class AddTemplateComponent implements OnInit {
             this.templateForm.ModifiedBy = this.commonsvc.getUsername();
             if (!this.isButtonDisabled) {
                 this.isButtonDisabled = true;
+                this.templateForm.RevisionNumber = 0;
                 this.templatesvc.adddoctemplate(this.templateForm).subscribe(
                     (data: any) => {
                         this.toastr.success('Document Template Registered Successfully!', 'Saved.!');
@@ -503,6 +506,9 @@ export class AddTemplateComponent implements OnInit {
       return false;
     }
   }
+
+
+
   onCancel() {
     this.location.back();
   }

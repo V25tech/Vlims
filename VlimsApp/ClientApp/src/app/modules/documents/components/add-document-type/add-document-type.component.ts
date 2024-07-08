@@ -216,7 +216,7 @@ export class AddDocumentTypeComponent {
         this.documentType.RevisionNumber++;  // Correctly increment the RevisionNumber
 
         // If the document type name is unique, proceed with updating
-        debugger;
+       
         this.doctypeservice.updatedoctypeconfig(this.documentType).subscribe(
             (res) => {
                 this.commonsvc.documentType = new DocumentTypeConfiguration();

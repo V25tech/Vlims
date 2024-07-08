@@ -18,11 +18,9 @@ export class AuditWorkflowTypeNewPageComponent {
     { key: 'documenttype', label: 'Document Type' },
     { key: 'departments', label: 'Department' },
     { key: 'approvals', label: 'Reviewer Name' },
-    { key: 'Description', label: 'No.of Reviews' },
+    { key: 'reviewsCount', label: 'No.of Reviews' },
     { key: 'reviewers', label: 'Approver Name' },
-    { key: 'Description', label: 'No.of Approvals' },
-    { key: 'CreatedBy', label: 'Initiated By' },
-    { key: 'CreatedDate', label: 'Initiated On' }
+    { key: 'approvalsCount', label: 'No.of Approvals' },
   ];
 
   filedsofActivity = [

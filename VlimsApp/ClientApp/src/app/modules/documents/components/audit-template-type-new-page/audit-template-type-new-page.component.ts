@@ -16,8 +16,8 @@ export class AuditTemplateTypeNewPageComponent {
     { key: 'Templatename', label: 'Template Name' },
     { key: 'Uniquecode', label: 'Template Code' },
     { key: 'documenttype', label: 'Document Type' },
-    { key: 'CreatedBy', label: 'Initiated By' },
-    { key: 'CreatedDate', label: 'Initiated On' }
+    { key: 'Format No.', label: 'FormatNo' },
+    
   ];
 
   filedsofActivity = [
