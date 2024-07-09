@@ -95,6 +95,7 @@ export class DocumentPreperationConfiguration {
     productCode:''
 
   };
+  RevisionNumber: number = 0;
 }
 
 export class Prepdocument {
@@ -142,6 +143,7 @@ export class DocumentEffectiveConfiguration {
   documentmanagerid: string = '';
   status: string = '';
   reason: string = '';
+  RevisionNumber: number = 0;
 }
 export class DocumentAdditionalTasks {
   documentTitle: string = ''
