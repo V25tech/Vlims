@@ -17,6 +17,7 @@ export class SummaryComponent {
   @Input() gridConfig: any = {};
   @Input() module: any = '';
   @Input() entityName: any = '';
+  @Input() title: any = '';
   @Input() fieldsToShow: any = [];
   @Input() filedsofActivity: any = [];
   data: string = '<base64-encoded-data>';
@@ -34,15 +35,21 @@ export class SummaryComponent {
    
   }
 
+  isBoolean(value: any): boolean {
+    return typeof value === 'boolean';
+  }
+
   ngOnChanges() {
     console.log(this.module)
     console.log(this.entityName)
+    debugger
     console.log(this.gridConfig)
   }
   showDialog() {
     this.visible = true;
   }
   groupedRecordsKeys(): number[] {
+    debugger
     return Object.keys(this.gridConfig).map(Number);
   }
 

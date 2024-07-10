@@ -81,7 +81,7 @@ if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = 
       itemsPerPage : 10,
       currentPage: 1,
       rowsPerPageOptions: [10, 20, 50],
-      gridDisplayName: "Document Effective List Audit Trails"
+      gridDisplayName: "Plant List Audit Trails"
 
     }
   }

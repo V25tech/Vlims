@@ -28,7 +28,7 @@ export class AuditPreparationNewPageComponent {
   filedsofActivity = [
     { key: 'ModifiedDate', label: 'Initiated Date & Time' },
     //{ key: 'documenttitle', label: 'Activity' },
-    { key: 'ModifiedBy', label: 'Activity By' },
+    { key: 'CreatedBy', label: 'Activity By' },
     { key: 'Status', label: 'Activity' },
   //  { key: 'reason', label: 'Remarks' }
   ]

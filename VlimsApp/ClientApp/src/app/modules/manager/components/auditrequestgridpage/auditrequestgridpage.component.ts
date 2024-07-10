@@ -53,8 +53,7 @@ export class AuditrequestgridpageComponent {
       { Name: 'DRID', DisplayName: 'Request ID', width: 20, sort: false, isNavigation: true },
       { Name: 'department', DisplayName: 'Department', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Requested By', width: 20, sort: false, isNavigation: false },
-      { Name: 'CreatedDate', DisplayName: 'equested On', width: 10, sort: false, isNavigation: false },
-      { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
+      { Name: 'CreatedDate', DisplayName: 'Requested On', width: 10, sort: false, isNavigation: false },
     ]
   }
   setConfig() {

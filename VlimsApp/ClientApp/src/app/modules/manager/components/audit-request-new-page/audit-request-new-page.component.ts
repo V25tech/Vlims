@@ -14,11 +14,8 @@ export class AuditRequestNewPageComponent {
   fieldsToShow = [
     { key: 'documenttype', label: 'Document Name' },
     { key: 'department', label: 'Department' },
-    { key: 'Purpose', label: 'Comments' },
+    { key: 'Purpose', label: 'Purpose' },
     { key: 'Workflow', label: 'WorkFlow' },
-    { key: 'CreatedBy', label: 'Requested By' },
-    { key: 'CreatedDate', label: 'Requested On' },
-    { key: 'Status', label: 'Status' },
   ];
 
   filedsofActivity = [

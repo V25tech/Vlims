@@ -14,8 +14,6 @@ export class AuditRoleAddPageComponent {
   fieldsToShow = [
     { key: 'Role', label: 'Role:' },
     { key: 'Comments', label: 'Comments:' },
-    { key: 'CreatedBy', label: 'Initiated By:' },
-    { key: 'CreatedDate', label: 'Initiated Oy:' }
   ];
 
   filedsofActivity = [

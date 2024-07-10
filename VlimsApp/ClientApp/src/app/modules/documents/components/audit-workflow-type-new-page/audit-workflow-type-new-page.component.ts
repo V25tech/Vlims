@@ -12,17 +12,14 @@ import { CommonService } from 'src/app/shared/common.service';
 })
 export class AuditWorkflowTypeNewPageComponent {
   fieldsToShow = [
-    { key: 'workflowName', label: 'Workflow Name:' },
+    { key: 'workflowName', label: 'Workflow Name' },
     { key: 'code', label: 'Workflow Code' },
     { key: 'documentstage', label: 'Document Stage' },
     { key: 'documenttype', label: 'Document Type' },
-    { key: 'departments', label: 'Department' },
-    { key: 'approvals', label: 'Reviewer Name' },
-    { key: 'Description', label: 'No.of Reviews' },
-    { key: 'reviewers', label: 'Approver Name' },
-    { key: 'Description', label: 'No.of Approvals' },
-    { key: 'CreatedBy', label: 'Initiated By' },
-    { key: 'CreatedDate', label: 'Initiated On' }
+    { key: 'reviewers', label: 'Reviewers Name' },
+    { key: 'reviewsCount', label: 'No.of Reviews' },
+    { key: 'approvals', label: 'Approvers Name' },
+    { key: 'approvalsCount', label: 'No.of Approvals' },
   ];
 
   filedsofActivity = [

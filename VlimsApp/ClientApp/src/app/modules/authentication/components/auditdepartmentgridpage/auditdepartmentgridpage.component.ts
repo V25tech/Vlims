@@ -64,7 +64,7 @@ export class AuditdepartmentgridpageComponent {
       itemsPerPage : 10,
       currentPage: 1,
       rowsPerPageOptions: [10, 20, 50],
-      gridDisplayName: "Document Effective List Audit Trails"
+      gridDisplayName: "Department List Audit Trails"
     }
   }
   getauditmodule() {

@@ -59,8 +59,8 @@ this.setConfig();
     this.gridConfig.Headers = [
       { Name: 'role', DisplayName: 'Role Name', width: 20, sort: false, isNavigation: true },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
-      { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
-      { Name: 'DTCId', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
+      { Name: 'createddate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
+      { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
     ]
   }
   setConfig() {
@@ -68,7 +68,7 @@ this.setConfig();
       itemsPerPage : 10,
       currentPage: 1,
       rowsPerPageOptions: [10, 20, 50],
-      gridDisplayName: "Document Effective List Audit Trails"
+      gridDisplayName: "Funtional Profile List Audit Trails"
 
     }
   }

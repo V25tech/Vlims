@@ -14,10 +14,10 @@ import { CommonService } from 'src/app/shared/common.service';
 export class AuditTemplateTypeNewPageComponent {
   fieldsToShow = [
     { key: 'Templatename', label: 'Template Name' },
-    { key: 'Uniquecode', label: 'Template Code' },
+    { key: 'Uniquecode', label: 'Unique Code' },
     { key: 'documenttype', label: 'Document Type' },
-    { key: 'CreatedBy', label: 'Initiated By' },
-    { key: 'CreatedDate', label: 'Initiated On' }
+    { key: 'FormatNo', label: 'FormatNo' },
+    
   ];
 
   filedsofActivity = [
