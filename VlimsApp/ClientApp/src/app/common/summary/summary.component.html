@@ -8,10 +8,10 @@
             <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
           </a>
         </div>
-        </div>
       </div>
-
     </div>
+
+  </div>
   <div class="col-lg-12" *ngIf="module == 'master' || module == '' ">
 
     <ng-container *ngFor="let item of gridConfig">
@@ -146,14 +146,19 @@
             <ng-container *ngFor="let field of fieldsToShow">
               <div class="form-group row">
                 <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
-                <div class="col-lg-7" *ngIf="field.key != 'supersedesNo'">
+                <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && field.label != 'View Document'">
                   <span>{{ gridConfig[key][0].EntityInfo[field.key] }}</span>
                 </div>
-                <!--<div class="col-lg-7" *ngIf="field.key == 'supersedesNo' && entityName.toLowerCase() != 'effective'">
-                <span>{{ gridConfig[key][0].EntityInfo.Prepdocument[field.key] }}</span>
-              </div>-->
+                <div class="col-lg-7" *ngIf="field.label == 'View Document'">
+                  <span>
+                    <a (click)="viewprint(template, gridConfig[key][0].EntityInfo)" href="javascript:void(0)">
+                      {{ gridConfig[key][0].EntityInfo[field.key] }}
+                    </a>
+                  </span>
+                </div>
               </div>
             </ng-container>
+
           </div>
 
           <div class="page-card-title border-bottom p-2">
@@ -207,12 +212,12 @@
             <ng-container *ngFor="let field of fieldsToShow">
               <div class="form-group row">
                 <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
-                <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && 'template'">
+                <!--<div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && field.label.toLowercase() != 'view document' ">
                   <span>{{ item.EntityInfo[field.key] }}</span>
-                </div>
-                <!--<div class="col-lg-7" *ngIf="field.key == 'supersedesNo'">
-                  <span>{{ item.EntityInfo.Prepdocument[field.key] }}</span>
                 </div>-->
+                <div class="col-lg-7" *ngIf="field.label.toLowercase() == 'view document'">
+                  <a class="link-opacity-100-hover" (click)="viewprint(template,item.EntityInfo )" href="javascript:void(0)">{{ item.EntityInfo.Prepdocument[field.key] }}</a>
+                </div>
               </div>
             </ng-container>
           </div>
@@ -272,3 +277,44 @@
   </p-dialog>
 
 </div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Preview</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+  </div>
+</ng-template>
+
+
+<ng-template #viewdoc>
+  <!-- <div class="modal-dialog" role="document"> -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">View/Print Document</h4>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+
+        <input type="radio" class="form-radio-input" id="fullheader" name="fullheader" [(ngModel)]="iscompleteheader" [value]="true">
+        <label for="username" class="form-label" style="padding-left: 10px;">Complete Header</label>
+      </div>
+      <div class="form-group">
+
+        <input type="radio" class="form-radio-input" id="fullheader" name="fullheader" [(ngModel)]="iscompleteheader" [value]="false">
+        <label for="password" style="padding-left: 10px;">Short Header</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <!--<button type="button" class="btn btn-secondary" (click)="modalRef!.hide()">Close</button>
+      <button type="button" class="btn btn-success" (click)="previewtemplate(template)">Submit</button>-->
+    </div>
+  </div>
+  <!-- </div> -->
+</ng-template>

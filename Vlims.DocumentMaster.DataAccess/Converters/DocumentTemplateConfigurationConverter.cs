@@ -52,8 +52,10 @@ namespace Vlims.DocumentMaster.DataAccess
                         documentTemplateConfigurationData.footercolumns = Convert.ToString(row[DocumentTemplateConfigurationConstants.footercolumns.Trim('@')]);
                         documentTemplateConfigurationData.IsClone = row["IsClone"]!=DBNull.Value ? Convert.ToBoolean(row["IsClone"]) : false;
                         documentTemplateConfigurationData.PreparationId = row["PreparationId"] != DBNull.Value ? Convert.ToInt32(row["PreparationId"]) : 0;
-                        documentTemplateConfigurationData.RevisionNumber = Convert.ToInt32(row[DocumentTemplateConfigurationConstants.RevisionNumber.Trim('@')]);
-
+                        if (row.Table.Columns.Contains("REVISION_NUMBER_PSY"))
+                        {
+                            documentTemplateConfigurationData.RevisionNumber = Convert.ToInt32(row[DocumentTemplateConfigurationConstants.RevisionNumber.Trim('@')]);
+                        }
                         if (row.Table.Columns.Contains("CloneTemplate"))
                         {
                             documentTemplateConfigurationData.CloneTemp = !row.IsNull("CloneTemplate") ? row["CloneTemplate"].ToString() : string.Empty;

@@ -1,5 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { CommonService } from '../../shared/common.service';
+import { DocumentTemplateServiceService } from '../../modules/services/document-template-service.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+
 
 @Component({
   selector: 'app-summary',
@@ -13,7 +19,15 @@ export class SummaryComponent {
   @Input() entityName: any = '';
   @Input() fieldsToShow: any = [];
   @Input() filedsofActivity: any = [];
-  constructor(public commonsrvc: CommonService) {
+  data: string = '<base64-encoded-data>';
+  pdfUrl: string | null = null;
+  modalRef: BsModalRef | undefined;
+  pdfBytes: Uint8Array | undefined;
+  fileBytes: Uint8Array = new Uint8Array();
+  iscompleteheader: boolean = true;
+  
+  constructor(public commonsrvc: CommonService, private templateService: DocumentTemplateServiceService, private sanitizer: DomSanitizer, private modalService: BsModalService,
+ private spinner: NgxSpinnerService) {
 
   }
   ngOnInit() {
@@ -32,7 +46,37 @@ export class SummaryComponent {
     return Object.keys(this.gridConfig).map(Number);
   }
 
-  //getObjectKeys(obj: any): string[] {
-  //  return obj ? Object.keys(obj) : [];
-  //}
+  getUrl(template: TemplateRef<any>): void {
+    this.templateService.geturl().subscribe((data: any) => {
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(data + '#toolbar=0') as string;
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    })
+  }
+  closeModel() {
+    if (this.modalRef)
+      this.modalRef.hide();
+  }
+  viewprint(template: TemplateRef<any>, data: any) {
+    console.log(data);
+    this.spinner.hide();
+    this.previewtemplate(template, data);
+  }
+  previewtemplate(template: TemplateRef<any>, data:any) {
+
+
+    this.templateService.getTemplate(data.template, parseInt(data.DPNID), true).subscribe((data: any) => {
+      //this.docPreperationService.previewtemplate(id).subscribe((data: any) => {
+      this.iscompleteheader = true;
+      this.fileBytes = data;
+      this.pdfBytes = this.fileBytes;
+      this.spinner.hide();
+      this.openViewer(template);
+    }, er => {
+      this.spinner.hide();
+    });
+  }
+  openViewer(template: TemplateRef<any>): void {
+
+    this.getUrl(template);
+  }
 }
