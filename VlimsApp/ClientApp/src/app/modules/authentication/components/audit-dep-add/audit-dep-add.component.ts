@@ -14,11 +14,9 @@ import { CommonService } from 'src/app/shared/common.service';
 })
 export class AuditDepAddComponent {
   fieldsToShow = [
-    { key: 'DepartmentName', label: 'Department Name:' },
-    { key: 'DepartmentCode', label: 'Department Code:' },
-    { key: 'Comments', label: 'Comments:' },
-    { key: 'CreatedBy', label: 'Initiated By:' },
-    { key: 'CreatedDate', label: 'Initiated Oy:' }
+    { key: 'DepartmentName', label: 'Department Name' },
+    { key: 'DepartmentCode', label: 'Department Code' },
+    { key: 'Comments', label: 'Comments' },
   ];
 
   filedsofActivity = [

@@ -21,15 +21,21 @@ export class SummaryComponent {
    
   }
 
+  isBoolean(value: any): boolean {
+    return typeof value === 'boolean';
+  }
+
   ngOnChanges() {
     console.log(this.module)
     console.log(this.entityName)
+    debugger
     console.log(this.gridConfig)
   }
   showDialog() {
     this.visible = true;
   }
   groupedRecordsKeys(): number[] {
+    debugger
     return Object.keys(this.gridConfig).map(Number);
   }
 

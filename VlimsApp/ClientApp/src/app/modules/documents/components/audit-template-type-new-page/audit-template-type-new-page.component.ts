@@ -14,9 +14,9 @@ import { CommonService } from 'src/app/shared/common.service';
 export class AuditTemplateTypeNewPageComponent {
   fieldsToShow = [
     { key: 'Templatename', label: 'Template Name' },
-    { key: 'Uniquecode', label: 'Template Code' },
+    { key: 'Uniquecode', label: 'Unique Code' },
     { key: 'documenttype', label: 'Document Type' },
-    { key: 'Format No.', label: 'FormatNo' },
+    { key: 'FormatNo', label: 'FormatNo' },
     
   ];
 
