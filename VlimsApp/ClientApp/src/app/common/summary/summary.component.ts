@@ -11,6 +11,7 @@ export class SummaryComponent {
   @Input() gridConfig: any = {};
   @Input() module: any = '';
   @Input() entityName: any = '';
+  @Input() title: any = '';
   @Input() fieldsToShow: any = [];
   @Input() filedsofActivity: any = [];
   constructor(public commonsrvc: CommonService) {

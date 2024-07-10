@@ -59,8 +59,8 @@ this.setConfig();
     this.gridConfig.Headers = [
       { Name: 'role', DisplayName: 'Role Name', width: 20, sort: false, isNavigation: true },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
-      { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
-      { Name: 'DTCId', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
+      { Name: 'createddate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
+      { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
     ]
   }
   setConfig() {

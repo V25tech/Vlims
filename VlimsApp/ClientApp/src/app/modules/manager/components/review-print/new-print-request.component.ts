@@ -297,7 +297,7 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   addRequest() {
-
+    debugger
     this.print.CreatedBy = this.username;
     this.print.ModifiedBy = this.username;
     this.print.Status = 'In-Progress';
@@ -305,6 +305,7 @@ export class NewPrintRequestComponent implements OnInit {
     this.print.ModifiedDate = new Date();
     this.print.printCount = 0;
     this.print.printCopy = this.selectedPrintTypes.join(',');
+    this.print.RevisionNumber = 0;
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
       this.spinner.show();
@@ -321,14 +322,19 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   updateRequest() {
+    debugger
     this.spinner.show();
     this.toastMsg = this.toastMsg ?? 'Updated'
+  
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
+      if(this.print.RevisionNumber)
+        this.print.RevisionNumber++;
       let reqObj = JSON.parse(JSON.stringify(this.print))
       reqObj.modifiedDate = new Date(reqObj.modifiedDate)
       reqObj.ModifiedDate = reqObj.modifiedDate
       reqObj.printCopy = this.selectedPrintTypes.join(',');
+      
 
       this.docprintservice.UpdatePrintRequest(reqObj).subscribe(res => {
         this.commonsvc.printConfig = new DocumentPrintConfiguration();
