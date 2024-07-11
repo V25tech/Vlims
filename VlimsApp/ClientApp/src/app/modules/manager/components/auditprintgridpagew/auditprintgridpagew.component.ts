@@ -50,7 +50,7 @@ export class AuditprintgridpagewComponent {
   }
   setHeaders() {
     this.gridConfig.Headers = [
-      { Name: 'PrepId', DisplayName: 'Print Id', width: 20, sort: false, isNavigation: true },
+      { Name: 'reason', DisplayName: 'Reason', width: 20, sort: false, isNavigation: true },
       { Name: 'DocumentNumber', DisplayName: 'Document Number', width: 25, sort: false, isNavigation: false },
       { Name: 'workflow', DisplayName: 'Workflow Name', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Printed by', width: 20, sort: false, isNavigation: false },

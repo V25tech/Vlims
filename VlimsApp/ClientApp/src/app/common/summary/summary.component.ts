@@ -32,7 +32,7 @@ export class SummaryComponent {
 
   }
   ngOnInit() {
-   
+    console.log('fieldsToShow:', this.fieldsToShow); // Log the initial value of fieldsToShow
   }
 
   isBoolean(value: any): boolean {
@@ -40,16 +40,15 @@ export class SummaryComponent {
   }
 
   ngOnChanges() {
-    console.log(this.module)
-    console.log(this.entityName)
-    debugger
-    console.log(this.gridConfig)
+    console.log(this.module);
+    console.log(this.entityName); 
+    console.log(this.gridConfig);
   }
   showDialog() {
     this.visible = true;
   }
   groupedRecordsKeys(): number[] {
-    debugger
+    
     return Object.keys(this.gridConfig).map(Number);
   }
 

@@ -20,7 +20,7 @@ export class AuditPrintNewPageComponent {
   ) { }
   fieldsToShow = [
     { key: 'documenttitle', label: 'Document Title' },
-    { key: 'DocumentNumber', label: 'Document Numbe' },
+    { key: 'DocumentNumber', label: 'Document Number' },
     { key: 'printtype', label: 'Print Type' },
     { key: 'noofcopies', label: 'No Of Copies' },
     { key: 'workflow', label: 'Workflow' },
