@@ -30,12 +30,19 @@
               </div>
 
 
-              <div class="form-group row" *ngIf="field.key.toLowerCase() == 'reviewers' || field.key.toLowerCase() == 'approvals' ">
-                <label for="{{ field.key[0].UserID }}" class="col-md-5">{{ field.label }}</label>
+              <div class="form-group row" *ngIf="field.key.toLowerCase() == 'reviewers' || field.key.toLowerCase() == 'approvals'">
+                <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
                 <div class="col-lg-7">
-                  <span>{{ item.EntityInfo[field.key][0].UserID }}</span>
+                  <ng-container *ngIf="item.EntityInfo[field.key] && item.EntityInfo[field.key].length > 0">
+                    <span *ngFor="let reviewer of item.EntityInfo[field.key]; let last = last">
+                      {{ reviewer.UserID }}
+                      <ng-container *ngIf="!last">,</ng-container>
+                    </span>
+                  </ng-container>
                 </div>
               </div>
+              
+              
 
 
 
@@ -87,7 +94,7 @@
               <!-- Activity On Column -->
               <div class="col-lg-6">
                 <p><strong>Activity On:</strong></p>
-                <p>{{ commonsrvc.setDate(item.CreatedDate) }}</p>
+                <p>{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
               </div>
             </div>
           </div>
@@ -169,6 +176,9 @@
         </p-panel>
       </div>
     </ng-container>
+
+
+    
     <ng-container *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective' && entityName.toLowerCase() != 'request'">
       <div class="m-3" *ngFor="let key of groupedRecordsKeys().reverse()">
         <p-panel class=" col-lg-5" header="Revision {{key}}" [toggleable]="true">

@@ -16,7 +16,7 @@ export class AuditTemplateTypeNewPageComponent {
     { key: 'Templatename', label: 'Template Name' },
     { key: 'Uniquecode', label: 'Unique Code' },
     { key: 'documenttype', label: 'Document Type' },
-    { key: 'FormatNo', label: 'FormatNo' },
+    { key: 'FormatNo', label: 'Format No' },
     
   ];
 

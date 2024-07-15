@@ -13,17 +13,15 @@ import { CommonService } from 'src/app/shared/common.service';
 })
 export class AuditUserMananagementAddPageComponent {
   fieldsToShow = [
-    { key: 'FirstName', label: 'FirstName:' },
-    { key: 'LastName', label: 'LastName:' },
-    { key: 'UserID', label: 'UserID:' },
+    { key: 'FirstName', label: 'FirstName' },
+    { key: 'LastName', label: 'LastName' },
+    { key: 'Department', label: 'Department' },
+    { key: 'UserID', label: 'UserID' },
+    { key: 'Role', label: 'Role' },
+    { key: 'Doj', label: 'Doj' },
+    { key: 'Empid', label: 'Empid' },
+    { key: 'EmailId', label: 'EmailId' },
 
-    { key: 'Role', label: 'Role:' },
-    { key: 'Doj', label: 'Doj:' },
-    { key: 'Empid', label: 'Empid:' },
-    { key: 'EmailId', label: 'EmailId:' },
-
-    { key: 'CreatedBy', label: 'Initiated By:' },
-    { key: 'CreatedDate', label: 'Initiated Oy:' }
   ];
 
   filedsofActivity = [
