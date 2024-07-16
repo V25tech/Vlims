@@ -15,7 +15,7 @@
 
 
 
-  <div class="col-lg-12" *ngIf="module == 'master' || module == '' ">
+  <div class="col-lg-12" *ngIf="module == 'master' || module == 'admin' ">
     <ng-container *ngFor="let item of gridConfig">
       <div class="m-3">
         <p-panel class=" col-lg-5" header="Revision {{item.RevisionNumber}}" [toggleable]="true">
@@ -132,7 +132,7 @@
 
           </div>
           <div class="m-3">
-            <div class="d-flex" *ngFor="let item of gridConfig.reverse()">
+            <div class="d-flex" *ngFor="let item of gridConfig">
               <div class="activity-time col-lg-3">
                 <p>{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</p>
               </div>
@@ -256,16 +256,21 @@
 
 
     <ng-container *ngIf="entityName === 'print'">
-      <div class="m-3" *ngFor="let item of gridConfig.reverse()">
+      <div class="m-3" *ngFor="let item of gridConfig">
         <p-panel class="col-lg-5" header="Revision {{item.RevisionNumber}}" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
             <ng-container *ngFor="let field of fieldsToShow">
               <div class="form-group row">
                 <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
-              
-                <div class="col-lg-7" *ngIf="field.label.toLowerCase() === 'view document'">
+
+                <div class="col-lg-7" *ngIf="field.label.toLowerCase() != 'view document'">
+                  <span>
+                    {{ item.EntityInfo[field.key] }}
+                  </span>
+                </div>
+                <div class="col-lg-7" *ngIf="field.label.toLowerCase() == 'view document'">
                   <a class="link-opacity-100-hover" (click)="viewprint(template, item.EntityInfo)" href="javascript:void(0)">
-                    {{ item.EntityInfo.Prepdocument[field.key] }}
+                    {{ item.EntityInfo[field.key] }}
                   </a>
                 </div>
               </div>

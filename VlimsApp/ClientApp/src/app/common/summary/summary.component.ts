@@ -40,6 +40,8 @@ export class SummaryComponent {
   }
 
   ngOnChanges() {
+    if (this.entityName.toLowerCase() != 'preparation' && this.entityName.toLowerCase() != 'effective' )
+    this.gridConfig = this.gridConfig.reverse();
     console.log(this.module);
     console.log(this.entityName); 
     console.log(this.gridConfig);
@@ -85,4 +87,8 @@ export class SummaryComponent {
 
     this.getUrl(template);
   }
+  //trackByFn(index: number, item: any): number {
+  //  return item.id; // or item.RevisionNumber if id is not available
+  //}
+
 }
