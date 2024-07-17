@@ -97,9 +97,6 @@
                 <p *ngIf="entityName.toLowerCase() != 'fprofile'">{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
                 <p *ngIf="entityName.toLowerCase() == 'fprofile'">{{ item.EntityInfo.createddate  | date:'dd/MM/yyyy HH:mm' }}</p>
               </div>
-
-
-
             </div>
           </div>
           
@@ -169,12 +166,7 @@
                         <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span> &nbsp;&nbsp;{{ item.EntityInfo['Reason'] }}
                       </p>
                       <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
-
                     </div>
-
-
-                  
-
                   </li>
                 </ul>
               </div>
@@ -185,9 +177,6 @@
         </p-panel>
       </div>
     </ng-container>
-
-
-    
     <ng-container *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective' && entityName.toLowerCase() != 'request'">
       <div class="m-3" *ngFor="let key of groupedRecordsKeys().reverse()">
         <p-panel class=" col-lg-5" header="Revision {{key}}" [toggleable]="true">
@@ -251,16 +240,10 @@
                       <p class="mb-0 p-date-styles">
                         <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span> &nbsp;&nbsp;{{ item.EntityInfo['Reason'] }}
                       </p>
-                      
                     </div>
                   </li>
                 </ul>
               </div>
-
-
-        
-
-
             </div>
 
           </div>
