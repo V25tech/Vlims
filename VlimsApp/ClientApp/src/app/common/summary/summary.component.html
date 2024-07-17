@@ -24,8 +24,11 @@
 
               <div class="form-group row" *ngIf="field.key != 'reviewers' && field.key != 'approvals' ">
                 <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
-                <div class="col-lg-7">
+                <div class="col-lg-7" *ngIf="field.key.toLowerCase() != 'createddate'">
                   <span>{{ item.EntityInfo[field.key] }}</span>
+                </div>
+                <div class="col-lg-7" *ngIf="field.key.toLowerCase() == 'createddate'">
+                  <span>{{  commonsrvc.setDate(item.EntityInfo[field.key]) }}</span>
                 </div>
               </div>
 
@@ -105,16 +108,16 @@
 
     <ng-container *ngIf="entityName.toLowerCase() == 'request'">
       <div class="m-3">
-        <p-panel class=" col-lg-5" header="Revision {{gridConfig[0].RevisionNumber}}" [toggleable]="true">
+        <p-panel class=" col-lg-5" header="Revision {{gridConfig[gridConfig.length-1].RevisionNumber}}" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
             <ng-container *ngFor="let field of fieldsToShow">
               <div class="form-group row">
                 <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
                 <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && 'template'">
-                  <span>{{ gridConfig[0].EntityInfo[field.key] }}</span>
+                  <span>{{ gridConfig[gridConfig.length-1].EntityInfo[field.key] }}</span>
                 </div>
                 <div class="col-lg-7" *ngIf="field.key == 'supersedesNo'">
-                  <span>{{ gridConfig[0].EntityInfo.Prepdocument[field.key] }}</span>
+                  <span>{{ gridConfig[gridConfig.length-1].EntityInfo.Prepdocument[field.key] }}</span>
                 </div>
               </div>
             </ng-container>
@@ -155,7 +158,7 @@
                     </div>
                     <div class="activity-info ms-2">
                       <p class="mb-0 p-date-styles">
-                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
+                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span> &nbsp;&nbsp;{{ item.EntityInfo['Reason'] }}
                       </p>
                       <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
                     </div>
@@ -175,14 +178,18 @@
           <div class="d-flex flex-column py-3 px-4">
             <ng-container *ngFor="let field of fieldsToShow">
               <div class="form-group row">
-                <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
+
+
+                <label *ngIf="entityName.toLowerCase() == 'preparation' && field.key =='documentno'" for="{{ setLabelName(gridConfig[key][gridConfig[key].length-1].EntityInfo['documenttype']) }}" class="col-md-5">{{ setLabelName(gridConfig[key][0].EntityInfo['documenttype']) }}</label>
+                <label *ngIf="entityName.toLowerCase() == 'preparation' && field.key !='documentno' || entityName.toLowerCase() != 'preparation'" for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
                 <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && field.label != 'View Document'">
-                  <span>{{ gridConfig[key][0].EntityInfo[field.key] }}</span>
+                  <span>{{ gridConfig[key][gridConfig[key].length-1].EntityInfo[field.key] }}</span>
+                  <!--<span *ngIf="field.key.toLowerCase() =='effectivedate' || field.key.toLowerCase() =='reviewdate' || field.key.toLowerCase() =='createddate'">{{ commonsrvc.setDate(gridConfig[key][gridConfig[key].length-1].EntityInfo[field.key])}}</span>-->
                 </div>
                 <div class="col-lg-7" *ngIf="field.label == 'View Document'">
                   <span>
                     <a (click)="viewprint(template, gridConfig[key][0].EntityInfo)" href="javascript:void(0)">
-                      {{ gridConfig[key][0].EntityInfo[field.key] }}
+                      {{ gridConfig[key][gridConfig[key].length-1].EntityInfo[field.key] }}
                     </a>
                   </span>
                 </div>
@@ -226,7 +233,7 @@
                     </div>
                     <div class="activity-info ms-2">
                       <p class="mb-0 p-date-styles">
-                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
+                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span> &nbsp;&nbsp;{{ item.EntityInfo['Reason'] }}
                       </p>
                       <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
                     </div>
@@ -296,7 +303,7 @@
                     </div>
                     <div class="activity-info ms-2">
                       <p class="mb-0 p-date-styles">
-                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
+                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span> &nbsp;&nbsp;{{ item.EntityInfo['Reason'] }}
                       </p>
                       <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
                     </div>

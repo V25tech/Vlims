@@ -87,6 +87,31 @@ export class SummaryComponent {
 
     this.getUrl(template);
   }
+  setLabelName(docType: string): string {
+    switch (docType.toUpperCase()) {
+      case "STANDARD TESTING SPECIFICATION":
+        return "STS No.";
+        break;
+      case "STANDARD TESTING PROCEDURE":
+        return "STP No.";
+        break;
+      case "STANDARD OPERATING PROCEDURE":
+        return "SOP No.";
+        break;
+      case "BATCH PACKING RECORD":
+        return "BPR No.";
+        break;
+      case "BATCH MANUFACTURING RECORD":
+        return "BMR No.";
+        break;
+      case "Validation Protocol":
+        return "STP No.";
+        break;
+      default:
+        return "STP No.";
+        break;
+    }
+  }
   //trackByFn(index: number, item: any): number {
   //  return item.id; // or item.RevisionNumber if id is not available
   //}

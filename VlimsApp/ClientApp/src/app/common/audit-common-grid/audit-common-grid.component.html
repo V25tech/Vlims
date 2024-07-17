@@ -57,11 +57,11 @@
                   </ng-container>
                   <ng-template #nonNavigation>
                     <!-- If header.isNavigation is false, render this content -->
-                    <ng-container *ngIf="header.Name == 'CreatedDate'">
+                    <ng-container *ngIf="header.Name.toLowerCase() == 'createddate'">
                       <!-- If header.DisplayName is 'Initiated on', use commonsrvc.setDate -->
                       {{ commonsrvc.setDate(doc?.EntityInfo[header.Name]) }}
                     </ng-container>
-                    <ng-container *ngIf="header.Name != 'CreatedDate'">
+                    <ng-container *ngIf="header.Name.toLowerCase() != 'createddate'">
                       <!-- If header.DisplayName is not 'Initiated on', simply display the value -->
                       {{ doc?.EntityInfo[header.Name] }}
                     </ng-container>

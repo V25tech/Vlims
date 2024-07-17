@@ -430,7 +430,6 @@ export class AddTemplateComponent implements OnInit {
       });
   }
   addTemplate() {
-    debugger
     this.loader.show();
     
     // Set template form properties
@@ -446,7 +445,6 @@ export class AddTemplateComponent implements OnInit {
    
 
     if (this.editMode) {
-      debugger
         this.templateForm.ModifiedBy = this.commonsvc.getUsername();
         if (!this.isButtonDisabled) {
             this.isButtonDisabled = true;

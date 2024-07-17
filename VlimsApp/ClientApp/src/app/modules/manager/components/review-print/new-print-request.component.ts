@@ -297,7 +297,6 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   addRequest() {
-    debugger
     this.print.CreatedBy = this.username;
     this.print.ModifiedBy = this.username;
     this.print.Status = 'In-Progress';
@@ -322,7 +321,6 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   updateRequest() {
-    debugger
     this.spinner.show();
     this.toastMsg = this.toastMsg ?? 'Updated'
   

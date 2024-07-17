@@ -5,11 +5,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuditConfiguration } from 'src/app/models/model';
 import { AuditConfiurationService } from 'src/app/modules/services/audit-module-service.service';
 import { CommonService } from 'src/app/shared/common.service';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-audit-effective-new-page',
   templateUrl: './audit-effective-new-page.component.html',
-  styleUrls: ['./audit-effective-new-page.component.scss']
+  styleUrls: ['./audit-effective-new-page.component.scss'],
+  providers: [DatePipe]
 })
 export class AuditEffectiveNewPageComponent {
   fieldsToShow = [
@@ -21,6 +24,7 @@ export class AuditEffectiveNewPageComponent {
     { key: 'template', label: 'Template' },
     { key: 'EffectiveDate', label: 'Effective Date:' },
     { key: 'ReviewDate', label: 'Review Date:' },
+    { key: 'template', label: 'View Document' }
   ];
 
   filedsofActivity = [
@@ -36,7 +40,8 @@ export class AuditEffectiveNewPageComponent {
     private route: ActivatedRoute,
     private commonsvc: CommonService,
     private auditservice: AuditConfiurationService,
-    private loader: NgxSpinnerService
+    private loader: NgxSpinnerService,
+    private datePipe: DatePipe
   ) { }
 
   types: AuditConfiguration[] = [];
@@ -52,6 +57,10 @@ export class AuditEffectiveNewPageComponent {
   getAuditModuleByName() {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
+      data.forEach((item:any) => {
+        item.EntityInfo.EffectiveDate = this.datePipe.transform(new Date(item.EntityInfo.EffectiveDate), 'MM/dd/yyyy')!;
+        item.EntityInfo.ReviewDate = this.datePipe.transform(new Date(item.EntityInfo.ReviewDate), 'MM/dd/yyyy')!;
+      })
       this.types = data;
       this.groupRecordsByRevisionNumber();
       this.loader.hide();

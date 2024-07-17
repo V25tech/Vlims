@@ -5,11 +5,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuditConfiguration } from 'src/app/models/model';
 import { AuditConfiurationService } from 'src/app/modules/services/audit-module-service.service';
 import { CommonService } from 'src/app/shared/common.service';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-audit-user-mananagement-add-page',
   templateUrl: './audit-user-mananagement-add-page.component.html',
-  styleUrls: ['./audit-user-mananagement-add-page.component.scss']
+  styleUrls: ['./audit-user-mananagement-add-page.component.scss'],
+  providers: [DatePipe]
 })
 export class AuditUserMananagementAddPageComponent {
   fieldsToShow = [
@@ -34,7 +37,9 @@ export class AuditUserMananagementAddPageComponent {
     private route: ActivatedRoute,
     private commonsvc: CommonService,
     private auditservice: AuditConfiurationService,
-    private loader: NgxSpinnerService
+    private loader: NgxSpinnerService,
+    private datePipe: DatePipe
+
   ) { }
 
   types: AuditConfiguration[] = [];
@@ -51,6 +56,9 @@ export class AuditUserMananagementAddPageComponent {
   getAuditModuleByName() {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
+      data.forEach((item: any) => {
+        item.EntityInfo.Doj = this.datePipe.transform(new Date(item.EntityInfo.Doj), 'MM/dd/yyyy')!;
+      })
       this.types = data;
       
       this.loader.hide();

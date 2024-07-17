@@ -260,6 +260,8 @@ export class AddRequestComponent {
       this.spinner.show();
       this.request.department = this.selectedDepartments.map(dept => dept.value).join(',');
       this.request.revisionNumber++;
+      if (this.request.status.toLowerCase() == 'in-progress' || this.request.status.toLowerCase() == 'inprogress')
+          this.request.modifiedBy = this.commonsvc.createdBy;
       this.documentRequestService.updatedocreqconfig(this.request).subscribe(res => {
         this.commonsvc.request = new DocumentRequestConfiguration();
         this.toastr.success(`Document Request ${this.toastMsg} Succesfull!`, 'Saved.!');

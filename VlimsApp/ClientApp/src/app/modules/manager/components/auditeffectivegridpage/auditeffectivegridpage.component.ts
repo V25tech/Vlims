@@ -70,13 +70,11 @@ export class AuditeffectivegridpageComponent {
   }
   
   getauditmodule() {
-    debugger
     this.loader.show();
     this.commonsvc.req.type="EffectiveType";
     this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
       
       this.types = this.removeDuplicates(data, 'Unique'); // Filter duplicates based on EntityName
-      debugger
       this.gridConfig.gridData = this.types;
       if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;
       
