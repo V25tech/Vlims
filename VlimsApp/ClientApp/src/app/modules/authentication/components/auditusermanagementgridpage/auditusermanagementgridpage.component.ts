@@ -58,7 +58,9 @@ this.setConfig();
 
   setHeaders() {
     this.gridConfig.Headers = [
-      { Name: 'UserID', DisplayName: 'UserId', width: 20, sort: false, isNavigation: true },
+      { Name: 'UserID', DisplayName: 'User ID', width: 20, sort: false, isNavigation: true },
+      { Name: 'Role', DisplayName: 'Role', width: 20, sort: false, isNavigation: false },
+      { Name: 'Department', DisplayName: 'Department', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
       { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }    ]

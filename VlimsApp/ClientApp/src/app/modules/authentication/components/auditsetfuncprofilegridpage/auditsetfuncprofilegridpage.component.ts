@@ -80,7 +80,7 @@ this.setConfig();
        
          
         this.types = this.removeDuplicates(data, 'Unique'); 
-        this.types.reverse(); // Reverse the array here
+       // this.types.reverse(); // Reverse the array here
 
         this.gridConfig.gridData = this.types;
         if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;

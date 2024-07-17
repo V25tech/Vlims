@@ -16,9 +16,9 @@ export class AuditWorkflowTypeNewPageComponent {
     { key: 'code', label: 'Workflow Code' },
     { key: 'documentstage', label: 'Document Stage' },
     { key: 'documenttype', label: 'Document Type' },
-    { key: 'reviewers', label: 'Reviewers Name' },
+    { key: 'reviewers', label: 'Reviewer(s)' },
     { key: 'reviewsCount', label: 'No.of Reviews' },
-    { key: 'approvals', label: 'Approvers Name' },
+    { key: 'approvals', label: 'Approver(s)' },
     { key: 'approvalsCount', label: 'No.of Approvals' },
   ];
 
