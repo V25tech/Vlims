@@ -12,8 +12,8 @@ import { CommonService } from 'src/app/shared/common.service';
 })
 export class AuditRoleAddPageComponent {
   fieldsToShow = [
-    { key: 'Role', label: 'Role:' },
-    { key: 'Comments', label: 'Comments:' },
+    { key: 'Role', label: 'Role' },
+    { key: 'Comments', label: 'Comments' },
   ];
 
   filedsofActivity = [

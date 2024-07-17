@@ -72,7 +72,7 @@ export class AuditrequestgridpageComponent {
     this.commonsvc.req.type="RequestType";
     this.auditservice.getAuditModule(this.commonsvc.req).subscribe((data: any) => {
       this.types = this.removeDuplicates(data, 'Unique'); // Filter duplicates based on EntityName
-      this.types.reverse(); // Reverse the array here
+     // this.types.reverse(); // Reverse the array here
       this.gridConfig.gridData = this.types;
 if (this.gridConfig.Config != undefined)  this.gridConfig.Config.itemsPerPage = this.types.length;
       this.loader.hide();

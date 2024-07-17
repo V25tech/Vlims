@@ -42,8 +42,6 @@
                 </div>
               </div>
               
-              
-
 
 
               <div class="form-group row" *ngIf="item.Type === 'ProfileType'">
@@ -54,11 +52,10 @@
                   </span>
                 </div>
               </div>
-              
+
 
               
-
-              
+               
               
             </ng-container>
           </div>
@@ -94,8 +91,12 @@
               <!-- Activity On Column -->
               <div class="col-lg-6">
                 <p><strong>Activity On:</strong></p>
-                <p>{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
+                <p *ngIf="entityName.toLowerCase() != 'fprofile'">{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
+                <p *ngIf="entityName.toLowerCase() == 'fprofile'">{{ item.EntityInfo.createddate  | date:'dd/MM/yyyy HH:mm' }}</p>
               </div>
+
+
+
             </div>
           </div>
           
@@ -134,7 +135,7 @@
           <div class="m-3">
             <div class="d-flex" *ngFor="let item of gridConfig">
               <div class="activity-time col-lg-3">
-                <p>{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</p>
+                <p>{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
               </div>
               <div class="activity-items col-lg-9">
                 <ul>
@@ -154,7 +155,7 @@
                     </div>
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'returned'">
                       <i class="fa-regular fa-circle-check"></i>
-                      <span class="ms-2 badge" style="background-color: #c92085; color:white;">Reviewed</span>
+                      <span class="ms-2 badge" style="background-color: #c92085; color:white;">Returned</span>
                     </div>
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'rejected'">
                       <i class="fa-regular fa-circle-check"></i>
@@ -162,10 +163,14 @@
                     </div>
                     <div class="activity-info ms-2">
                       <p class="mb-0 p-date-styles">
-                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
+                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span>
                       </p>
-                      <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
+                      
                     </div>
+
+
+                  
+
                   </li>
                 </ul>
               </div>
@@ -208,9 +213,9 @@
           <div class="m-3">
             <div class="d-flex" *ngFor="let item of gridConfig[key]">
               <div class="activity-time col-lg-3 ">
-                <p>{{ item.EntityInfo['ModifiedDate'] }}</p>
+                <p>{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
               </div>
-              <div class="activity-items col-lg-9">
+              <div class="activity-items col-lg-3">
                 <ul>
                   <li class="d-flex">
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'in-progress'">
@@ -228,7 +233,7 @@
                     </div>
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'returned'">
                       <i class="fa-regular fa-circle-check"></i>
-                      <span class="ms-2 badge" style="background-color: #c92085; color:white;">Reviewed</span>
+                      <span class="ms-2 badge" style="background-color: #c92085; color:white;">Returned</span>
                     </div>
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'rejected'">
                       <i class="fa-regular fa-circle-check"></i>
@@ -236,13 +241,18 @@
                     </div>
                     <div class="activity-info ms-2">
                       <p class="mb-0 p-date-styles">
-                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> {{ item.EntityInfo['Status'] }} <span class="p-date-styles"></span>
+                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span> <span class="p-date-styles"></span>
                       </p>
-                      <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
+                      
                     </div>
                   </li>
                 </ul>
               </div>
+
+
+        
+
+
             </div>
 
           </div>

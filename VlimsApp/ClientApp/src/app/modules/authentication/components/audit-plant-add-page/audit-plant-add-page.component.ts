@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -13,18 +12,14 @@ import { CommonService } from 'src/app/shared/common.service';
 })
 export class AuditPlantAddPageComponent {
   fieldsToShow = [
-    { key: 'PlantName', label: 'Plant Name:' },
-    { key: 'PlantCode', label: 'Plant Code:' },
-    { key: 'PlantAddress', label: 'PlantAddress:' },
-
+    { key: 'PlantName', label: 'Plant Name' },
+    { key: 'PlantCode', label: 'Plant Code' },
+    { key: 'Plant Address', label: 'PlantAddress' },
     { key: 'Comments', label: 'Comments:' },
-    { key: 'CreatedBy', label: 'Initiated By:' },
-    { key: 'CreatedDate', label: 'Initiated Oy:' }
+
   ];
 
   filedsofActivity = [
-
-    
   ]
   constructor(
     private route: ActivatedRoute,
