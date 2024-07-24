@@ -86,6 +86,8 @@ namespace Vlims.Administration.Entities
 
         public int RevisionNumber { get; set; }
 
+        public bool? obsolete { get; set; }
+
 
 
 

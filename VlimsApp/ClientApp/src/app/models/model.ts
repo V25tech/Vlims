@@ -515,6 +515,8 @@ export class functionalprofile {
   modifiedby: string ='';
   createdby: string ='';
   RevisionNumber: number = 0;
+  obsolete: boolean = false;
+
 }
 export class AuditConfiguration {
   DocumentType: string = ''

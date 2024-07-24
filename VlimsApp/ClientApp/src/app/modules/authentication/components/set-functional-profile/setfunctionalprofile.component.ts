@@ -86,6 +86,7 @@ export class SetfunctionalprofileComponent implements OnInit {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true;
         profileinfo.RevisionNumber++;  // Correctly increment the RevisionNumber
+        debugger
         this.setprofileservice.update(profileinfo).subscribe((data: any) => {
           this.toaster.success('role permissions updated');
           if (JSON.parse(this.storage.getItem("roles")).role.toLowerCase() == profileinfo.role.toLowerCase()) {
@@ -160,6 +161,7 @@ export class SetfunctionalprofileComponent implements OnInit {
        this.profile.additionalTasks = true;
        this.profile.downloadPrint = true;
        this.profile.docrepository = true;
+       this.profile.obsolete = true;
 
     } else {
      
@@ -169,6 +171,7 @@ export class SetfunctionalprofileComponent implements OnInit {
       this.profile.additionalTasks = false;
       this.profile.downloadPrint = false;
       this.profile.docrepository = false;
+      this.profile.obsolete = false;
 
       
     }

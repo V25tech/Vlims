@@ -29,8 +29,7 @@ export class FunctionalProfileAddPageComponent {
     { key: 'workItemsassigned', label: 'Work Assigned To Me' },
     { key: 'downloadPrint', label: 'Document Print Configuration' },
     { key: 'docrepository', label: 'Existing Document Request' },
-
-
+    { key: 'obsolete', label: 'Obsolete Documents' },
   ];
   
 
