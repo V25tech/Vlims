@@ -14,7 +14,7 @@ export class AuditPlantAddPageComponent {
   fieldsToShow = [
     { key: 'PlantName', label: 'Plant Name' },
     { key: 'PlantCode', label: 'Plant Code' },
-    { key: 'Plant Address', label: 'PlantAddress' },
+    { key: 'PlantAddress', label: 'Plant Address' },
     { key: 'Comments', label: 'Comments:' },
 
   ];
