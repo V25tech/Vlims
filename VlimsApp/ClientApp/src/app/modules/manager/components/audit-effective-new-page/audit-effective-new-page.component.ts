@@ -58,8 +58,8 @@ export class AuditEffectiveNewPageComponent {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
       data.forEach((item:any) => {
-        item.EntityInfo.EffectiveDate = this.datePipe.transform(new Date(item.EntityInfo.EffectiveDate), 'MM/dd/yyyy')!;
-        item.EntityInfo.ReviewDate = this.datePipe.transform(new Date(item.EntityInfo.ReviewDate), 'MM/dd/yyyy')!;
+        item.EntityInfo.EffectiveDate = this.datePipe.transform(new Date(item.EntityInfo.EffectiveDate), 'dd/MM/yyyy')!;
+        item.EntityInfo.ReviewDate = this.datePipe.transform(new Date(item.EntityInfo.ReviewDate), 'dd/MM/yyyy')!;
       })
       this.types = data;
       this.groupRecordsByRevisionNumber();

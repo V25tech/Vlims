@@ -55,7 +55,7 @@ export class AuditUserMananagementAddPageComponent {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
       data.forEach((item: any) => {
-        item.EntityInfo.Doj = this.datePipe.transform(new Date(item.EntityInfo.Doj), 'MM/dd/yyyy')!;
+        item.EntityInfo.Doj = this.datePipe.transform(new Date(item.EntityInfo.Doj), 'dd/MM/yyyy')!;
       })
       this.types = data;
       
