@@ -72,9 +72,17 @@
           
           <div class="m-3">
             <div class="d-flex">
+
+
+              <div class="col-lg-4">
+                
+                <p *ngIf="entityName.toLowerCase() != 'fprofile'">{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
+                <p *ngIf="entityName.toLowerCase() == 'fprofile'">{{ item.EntityInfo.createddate  | date:'dd/MM/yyyy HH:mm' }}</p>
+              </div>
+
               <!-- Activity Column -->
-              <div class="col-lg-3">
-                <p><strong>Activity</strong></p>
+              <div class="col-lg-4">
+                
                 <div class="activity-icon">
                   <i class="fa-solid fa-pencil"></i>
                   <span *ngIf="item.EntityInfo.RevisionNumber === 0" class="ms-2 badge bg-primary">Initiated</span>
@@ -84,18 +92,14 @@
               </div>
           
               <!-- Activity By Column -->
-              <div class="col-lg-3">
-                <p><strong>Activity By</strong></p>
+              <div class="col-lg-4">
+                
                     <span class="name-styles">{{ item.UserName }}</span>
 
               </div>
           
               <!-- Activity On Column -->
-              <div class="col-lg-6">
-                <p><strong>Activity On</strong></p>
-                <p *ngIf="entityName.toLowerCase() != 'fprofile'">{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
-                <p *ngIf="entityName.toLowerCase() == 'fprofile'">{{ item.EntityInfo.createddate  | date:'dd/MM/yyyy HH:mm' }}</p>
-              </div>
+            
             </div>
           </div>
           
@@ -283,16 +287,27 @@
                       <i class="fa-regular fa-circle-check"></i>
                       <span class="ms-2 badge bg-danger">Rejected</span>
                     </div>
+
+
+
                     <div class="activity-info ms-2">
                       <p class="mb-0 p-date-styles">
                         <span class="name-styles">
                           {{ item.EntityInfo['Status'].toLowerCase() === 'in-progress' ? item.EntityInfo['CreatedBy'] : item.EntityInfo['ModifiedBy'] }}
                         </span>
-                         {{ item.EntityInfo['Status'] }}
+                         
                           <span class="p-date-styles"></span>
-                         &nbsp;&nbsp;{{ item.EntityInfo['Reason'] }}
+
+                          <span *ngIf="['returned', 'rejected', 'reviewed', 'approved'].includes(item.EntityInfo['Status'].toLowerCase())">
+                            &nbsp;&nbsp;{{ item.EntityInfo['reason'] }}
+                          </span> 
                       </p>
                     </div>
+
+
+                
+
+
                   </li>
                 </ul>
               </div>
