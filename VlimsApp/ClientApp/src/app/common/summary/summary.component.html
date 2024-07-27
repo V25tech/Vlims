@@ -75,20 +75,19 @@
               <!-- Activity Column -->
               <div class="col-lg-3">
                 <p><strong>Activity</strong></p>
-                <p>
-                  <ng-container *ngIf="item.RevisionNumber === 0">
-                    Initiated
-                  </ng-container>
-                  <ng-container *ngIf="item.RevisionNumber > 0">
-                    Modified
-                  </ng-container>
-                </p>
+                <div class="activity-icon">
+                  <i class="fa-solid fa-pencil"></i>
+                  <span *ngIf="item.EntityInfo.RevisionNumber === 0" class="ms-2 badge bg-primary">Initiated</span>
+                  <span *ngIf="item.EntityInfo.RevisionNumber > 0" class="ms-2 badge bg-success">Modified</span>
+                
+                </div>
               </div>
           
               <!-- Activity By Column -->
               <div class="col-lg-3">
                 <p><strong>Activity By</strong></p>
-                <p><span class="name-styles">{{ item.UserName }}</span></p>
+                    <span class="name-styles">{{ item.UserName }}</span>
+
               </div>
           
               <!-- Activity On Column -->
@@ -124,6 +123,8 @@
                 <div class="col-lg-7" *ngIf="field.key == 'supersedesNo'">
                   <span>{{ gridConfig[gridConfig.length-1].EntityInfo.Prepdocument[field.key] }}</span>
                 </div>
+
+                
               </div>
             </ng-container>
           </div>
@@ -137,47 +138,77 @@
               <div class="activity-time col-lg-3">
                 <p>{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
               </div>
+
+              <div class="page-card-title border-bottom p-2">
+                Activity
+              </div>
+              
+
               <div class="activity-items col-lg-9">
                 <ul>
                   <li class="d-flex">
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'in-progress'">
+                    <div class="col-lg-3" class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'in-progress'">
                       <i class="fa-solid fa-pencil"></i>
                       <span *ngIf="item.EntityInfo.RevisionNumber === 0" class="ms-2 badge bg-primary">Initiated</span>
                       <span *ngIf="item.EntityInfo.RevisionNumber === 1" class="ms-2 badge bg-success">Modified</span>
-                      <span *ngIf="item.EntityInfo.RevisionNumber > 1" class="ms-2 badge bg-success">Re-Initiated</span>
+                    
                     </div>
+
+                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'active'">
+                      <i class="fa-regular fa-eye"></i>
+                      <span class="ms-2 badge" style="background-color: #28a745; color: white;">Initiated</span>
+                    </div>
+
+                    
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'approved'">
                       <i class="fa-regular fa-eye"></i>
                       <span class="ms-2 badge" style="background-color: #28a745; color: white;">Approved</span>
                     </div>
+
+
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'reviewed'">
                       <i class="fa-regular fa-circle-check"></i>
                       <span class="ms-2 badge" style="background-color: #f6aa1e; color: WHITE;">Reviewed</span>
                     </div>
+
+
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'returned'">
                       <i class="fa-regular fa-circle-check"></i>
                       <span class="ms-2 badge" style="background-color: #c92085; color:white;">Returned</span>
                     </div>
+
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'rejected'">
                       <i class="fa-regular fa-circle-check"></i>
                       <span class="ms-2 badge bg-danger">Rejected</span>
                     </div>
+
+
                     <div class="activity-info ms-2">
                       <p class="mb-0 p-date-styles">
                         <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span>
                          <span class="p-date-styles"></span>
-                        <span *ngIf="item.EntityInfo['Status'].toLowerCase() === 'returned' || item.EntityInfo['Status'].toLowerCase() === 'rejected'">&nbsp;&nbsp;{{ item.EntityInfo['Reason'] }}</span>
+                         <span *ngIf="['returned', 'rejected', 'reviewed', 'approved'].includes(item.EntityInfo['Status'].toLowerCase())">
+                          &nbsp;&nbsp;{{ item.EntityInfo['Reason'] }}
+                        </span> 
+                        <span *ngIf="item.EntityInfo['ReasonOrRemarks']">
+                          &nbsp;&nbsp;{{ item.EntityInfo['ReasonOrRemarks'] }}
+                        </span>                    
                       </p>
                       <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
                     </div>
+
+
                     
                   </li>
                 </ul>
               </div>
+
+
+
+
+
             </div>
           </div>
-          
-
         </p-panel>
       </div>
     </ng-container>
