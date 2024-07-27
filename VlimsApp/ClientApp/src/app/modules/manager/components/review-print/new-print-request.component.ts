@@ -326,8 +326,11 @@ export class NewPrintRequestComponent implements OnInit {
   
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
-      if(this.print.RevisionNumber)
+      if (this.print && this.print.RevisionNumber != null && this.print.RevisionNumber>0) {
         this.print.RevisionNumber++;
+    }else{
+      this.print.RevisionNumber= 1
+    }
       let reqObj = JSON.parse(JSON.stringify(this.print))
       reqObj.modifiedDate = new Date(reqObj.modifiedDate)
       reqObj.ModifiedDate = reqObj.modifiedDate

@@ -19,7 +19,7 @@ export class AuditPreparationNewPageComponent {
     { key: 'department', label: 'Department' },
     { key: 'wokflow', label: 'Workflow' },
     { key: 'template', label: 'Template' },
-    { key: 'RevisionNo', label: 'Revision No.' },
+    // { key: 'RevisionNo', label: 'Revision No.' },
     { key: 'supersedesNo', label: 'Supersedes' },
     { key: 'template', label: 'View Document' },
     { key: 'details', label: 'Document Details' }

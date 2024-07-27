@@ -52,7 +52,7 @@ export class AuditPrintNewPageComponent {
     this.loader.show();
     this.auditservice.getAuditModuleByEntityName(this.commonsvc.req).subscribe((data: any) => {
       
-      this.types = data;
+      this.types = data.reverse();
       
       this.loader.hide();
     }, error => {

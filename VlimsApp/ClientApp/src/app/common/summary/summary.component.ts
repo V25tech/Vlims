@@ -40,7 +40,7 @@ export class SummaryComponent {
   }
 
   ngOnChanges() {
-    if (this.entityName.toLowerCase() != 'preparation' && this.entityName.toLowerCase() != 'effective' )
+    if (this.entityName.toLowerCase() != 'preparation' && this.entityName.toLowerCase() != 'effective'  && this.entityName.toLowerCase() != 'print' )
     this.gridConfig = this.gridConfig.reverse();
     console.log(this.module);
     console.log(this.entityName); 

@@ -442,7 +442,7 @@ export class DocumentPrintConfiguration {
   public isactive:boolean=false;
   public prepId:number=0;
   public ReasonOrRemarks: string = '';
-  RevisionNumber: number | undefined;
+  RevisionNumber: number = 0;
 }
 
 export class ExistingDocumentRequest {

@@ -18,7 +18,7 @@
   <div class="col-lg-12" *ngIf="module == 'master' || module == 'admin' ">
     <ng-container *ngFor="let item of gridConfig">
       <div class="m-3">
-        <p-panel class=" col-lg-5" header="Revision {{item.RevisionNumber}}" [toggleable]="true">
+        <p-panel class=" col-lg-5" header="Revision {{item.RevisionNumber.toString().padStart(2, '0')}}" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
             <ng-container *ngFor="let field of fieldsToShow">
 
@@ -111,9 +111,9 @@
   <div class="col-lg-12" *ngIf="module == 'manager' && gridConfig &&  entityName">
 
 
-    <ng-container *ngIf="entityName.toLowerCase() == 'request'">
+    <ng-container *ngIf="entityName.toLowerCase() == 'request' || entityName.toLowerCase() == 'print'">
       <div class="m-3">
-        <p-panel class=" col-lg-5"  header="Revision 0" [toggleable]="true">
+        <p-panel class=" col-lg-5"  header="Revision 00" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
             <ng-container *ngFor="let field of fieldsToShow">
               <div class="form-group row">
@@ -184,17 +184,22 @@
 
 
 
-    <ng-container *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective' && entityName.toLowerCase() != 'request'">
+    <ng-container *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective' && entityName.toLowerCase() != 'request' && entityName.toLowerCase() != 'print'">
       <div class="m-3" *ngFor="let key of groupedRecordsKeys().reverse()">
-        <p-panel class=" col-lg-5" header="Revision {{key}}" [toggleable]="true">
+        <p-panel class=" col-lg-5" header="Revision {{key.toString().padStart(2, '0')}}" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
             <ng-container *ngFor="let field of fieldsToShow">
               <div class="form-group row">
 
 
-                <label *ngIf="entityName.toLowerCase() == 'preparation' && field.key =='documentno'" for="{{ setLabelName(gridConfig[key][gridConfig[key].length-1].EntityInfo['documenttype']) }}" class="col-md-5">{{ setLabelName(gridConfig[key][0].EntityInfo['documenttype']) }}</label>
+                <label *ngIf="entityName.toLowerCase() == 'preparation' &&  field.key =='documentno'    " for="{{ setLabelName(gridConfig[key][gridConfig[key].length-1].EntityInfo['documenttype']) }}" class="col-md-5">{{ setLabelName(gridConfig[key][0].EntityInfo['documenttype']) }}</label>
                 <label *ngIf="entityName.toLowerCase() == 'preparation' && field.key !='documentno' || entityName.toLowerCase() != 'preparation'" for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
-                <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && field.label != 'View Document'">
+                <div class="col-lg-7" *ngIf="entityName.toLowerCase() == 'preparation' && field.key == 'supersedesNo'">
+                  <span>
+                    <span>{{ gridConfig[key][gridConfig[key].length-1].EntityInfo.Prepdocument[field.key]}}</span>
+                  </span>
+                </div>
+                <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && field.label != 'View Document' ">
                   <span>{{ gridConfig[key][gridConfig[key].length-1].EntityInfo[field.key] }}</span>
                   <!--<span *ngIf="field.key.toLowerCase() =='effectivedate' || field.key.toLowerCase() =='reviewdate' || field.key.toLowerCase() =='createddate'">{{ commonsrvc.setDate(gridConfig[key][gridConfig[key].length-1].EntityInfo[field.key])}}</span>-->
                 </div>
@@ -205,6 +210,13 @@
                     </a>
                   </span>
                 </div>
+
+                <div class="col-lg-7" *ngIf="field.key == 'supersedesNo'">
+                  <span>
+                    <span>{{ gridConfig[key][gridConfig[key].length-1].EntityInfo[field.key] }}</span>
+                  </span>
+                </div>
+
               </div>
             </ng-container>
 
@@ -224,8 +236,8 @@
                   <li class="d-flex">
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'in-progress'">
                       <i class="fa-solid fa-pencil"></i>
-                      <span *ngIf="item.EntityInfo.RevisionNumber === 0" class="ms-2 badge bg-primary">Initiated</span>
-                      <span *ngIf="item.EntityInfo.RevisionNumber > 0" class="ms-2 badge bg-success">Modified</span>
+                      <span *ngIf="item.EntityInfo.RevisionNumber === 0  ||  item.EntityInfo.RevisionNumber === 1" class="ms-2 badge bg-primary">Initiated</span>
+                      <span *ngIf="item.EntityInfo.RevisionNumber > 1" class="ms-2 badge bg-success">Modified</span>
                     </div>
                     <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'approved'">
                       <i class="fa-regular fa-eye"></i>
@@ -268,7 +280,7 @@
 
 
 
-    <ng-container *ngIf="entityName === 'print'">
+    <!-- <ng-container *ngIf="entityName === 'print'">
       <div class="m-3" *ngFor="let item of gridConfig">
         <p-panel class="col-lg-5" header="Revision {{item.RevisionNumber}}" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
@@ -331,7 +343,7 @@
     
         </p-panel>
       </div>
-    </ng-container>
+    </ng-container> -->
     
 
 

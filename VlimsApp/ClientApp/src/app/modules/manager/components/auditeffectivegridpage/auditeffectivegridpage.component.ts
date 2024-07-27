@@ -94,6 +94,6 @@ export class AuditeffectivegridpageComponent {
   }
   handleAction(event: any) {
     console.log(event);
-    this.router.navigate(["./../auditeffectiveaddpage"], { queryParams: { DocumentName: event.route.entityObj.DEID } });
+    this.router.navigate(["./../auditeffectiveaddpage"], { queryParams: { DocumentName: event.route.entityObj.ReferenceId } });
    }
 }
