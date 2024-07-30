@@ -49,13 +49,11 @@ export class AuditprintgridpagewComponent {
     });
   }
   setHeaders() {
-    this.gridConfig.Headers = [
-      { Name: 'reason', DisplayName: 'Reason', width: 20, sort: false, isNavigation: true },
-      { Name: 'DocumentNumber', DisplayName: 'Document Number', width: 25, sort: false, isNavigation: false },
+    this.gridConfig.Headers = [ 
+      { Name: 'DocumentNumber', DisplayName: 'Document Number', width: 25, sort: false, isNavigation: true },
       { Name: 'workflow', DisplayName: 'Workflow Name', width: 25, sort: false, isNavigation: false },
-      { Name: 'CreatedBy', DisplayName: 'Printed by', width: 20, sort: false, isNavigation: false },
-      { Name: 'CreatedDate', DisplayName: 'Printed on', width: 10, sort: false, isNavigation: false },
-      { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
+      { Name: 'CreatedBy', DisplayName: 'Requested By', width: 20, sort: false, isNavigation: false },
+      { Name: 'CreatedDate', DisplayName: 'Requested On', width: 10, sort: false, isNavigation: false },
     ]
   }
   setConfig() {
@@ -92,6 +90,6 @@ export class AuditprintgridpagewComponent {
   }
   handleAction(event: any) {
     console.log(event);
-    this.router.navigate(["./../auditprinttaddpage"], { queryParams: { DocumentName: event.route.entityObj.reason } });
+    this.router.navigate(["./../auditprinttaddpage"], { queryParams: { DocumentName: event.route.entityObj.PrepId } });
   }
 }

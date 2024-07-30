@@ -19,16 +19,20 @@ export class AuditPrintNewPageComponent {
     private loader: NgxSpinnerService
   ) { }
   fieldsToShow = [
+    { key: 'DocumentNumber', label: 'Document No.' },
     { key: 'documenttitle', label: 'Document Title' },
-    { key: 'DocumentNumber', label: 'Document Number' },
-    { key: 'printtype', label: 'Print Type' },
-    { key: 'noofcopies', label: 'No Of Copies' },
+
+    { key: 'printtype', label: 'Document Type' },
+    { key: 'noofcopies', label: 'No Of Copies requested' },
+    { key: 'PrintCopy', label: 'Print Type' },
     { key: 'workflow', label: 'Workflow' },
-    { key: 'Template', label: 'Template' },
-    { key: 'reason', label: 'Reasons' },
-    { key: 'PrintCopy', label: 'PrintCopy' },
-    { key: 'CreatedBy', label: 'Printed By' },
-    { key: 'ModifiedDate', label: 'Printed Date' },
+    { key: 'reason', label: 'Reason' },
+    { key: 'BatchNumber', label: 'Batch Number' },
+    { key: 'BatchSize', label: 'Batch Size' },
+   
+   
+    // { key: 'CreatedBy', label: 'Printed By' },
+    // { key: 'ModifiedDate', label: 'Printed Date' },
   ];
 
   filedsofActivity = [

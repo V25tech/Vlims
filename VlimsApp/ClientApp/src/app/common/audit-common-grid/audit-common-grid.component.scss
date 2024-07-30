@@ -6,3 +6,49 @@
     height: unset;
     min-width: unset;
   }
+
+
+
+  /* Alignment Utility Classes */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Consistent Table Styling */
+.table th, .table td {
+  padding: 0.75rem; /* Adjust padding as needed */
+  vertical-align: middle; /* Ensures vertical alignment */
+}
+
+.table th {
+  background-color: #f8f9fa; /* Light gray background for headers */
+  border-bottom: 2px solid #dee2e6; /* Border for header row */
+}
+
+.table td {
+  border-bottom: 1px solid #dee2e6; /* Border for data rows */
+}
+
+/* Responsive Table */
+.table-responsive {
+  overflow-x: auto; /* Allows horizontal scroll on small screens */
+}
+
+@media (max-width: 768px) {
+  .table {
+    font-size: 0.875rem; /* Adjust font size for small screens */
+  }
+}
+
+
+.serial-number {
+  text-align: center; /* Center-aligns the serial number column */
+}

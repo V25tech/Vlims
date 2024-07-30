@@ -46,10 +46,10 @@ export class AudittemplategridpageComponent {
 
   setHeaders() {
     this.gridConfig.Headers = [
-      { Name: 'Uniquecode', DisplayName: 'Template Code', width: 20, sort: false, isNavigation: true },
+      { Name: 'Uniquecode', DisplayName: 'Unique Code', width: 20, sort: false, isNavigation: true },
       { Name: 'Templatename', DisplayName: 'Template Name', width: 25, sort: false, isNavigation: false },
-      { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
-      { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
+      { Name: 'CreatedBy', DisplayName: 'Initiated By', width: 20, sort: false, isNavigation: false },
+      { Name: 'CreatedDate', DisplayName: 'Initiated On', width: 10, sort: false, isNavigation: false },
       { Name: 'RevisionNumber', DisplayName: 'Revision', width: 10, sort: false, isNavigation:false }
       
     ]

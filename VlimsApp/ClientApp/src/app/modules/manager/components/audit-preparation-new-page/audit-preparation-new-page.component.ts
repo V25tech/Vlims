@@ -22,7 +22,7 @@ export class AuditPreparationNewPageComponent {
     // { key: 'RevisionNo', label: 'Revision No.' },
     { key: 'supersedesNo', label: 'Supersedes' },
     { key: 'template', label: 'View Document' },
-    { key: 'details', label: 'Document Details' }
+    { key: 'details', label: 'Details' }
   ];
 
   filedsofActivity = [

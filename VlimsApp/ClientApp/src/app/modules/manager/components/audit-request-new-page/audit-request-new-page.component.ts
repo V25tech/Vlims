@@ -12,10 +12,10 @@ import { CommonService } from 'src/app/shared/common.service';
 })
 export class AuditRequestNewPageComponent {
   fieldsToShow = [
-    { key: 'documenttype', label: 'Document Name' },
+    { key: 'documenttype', label: 'Document Type' },
     { key: 'department', label: 'Department' },
     { key: 'Purpose', label: 'Purpose' },
-    { key: 'Workflow', label: 'WorkFlow' },
+    { key: 'Workflow', label: 'Workflow' },
   ];
 
   filedsofActivity = [

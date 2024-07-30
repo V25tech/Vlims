@@ -27,7 +27,15 @@ export class AuditCommonGridComponent {
   ngOnInit() {
    
   }
-
+  // Method to get the alignment class based on the column name
+  getAlignmentClass(columnName: string): string {
+    // Example of numeric columns that should be right-aligned
+    const numericColumns = ['amount', 'price', 'quantity']; // Define your numeric columns here
+    if (numericColumns.includes(columnName.toLowerCase())) {
+      return 'text-right';
+    }
+    return 'text-left'; // Default alignment
+  }
   ngOnChanges() {
     console.log(this.gridConfig);
   }

@@ -15,7 +15,7 @@ export class AuditPlantAddPageComponent {
     { key: 'PlantName', label: 'Plant Name' },
     { key: 'PlantCode', label: 'Plant Code' },
     { key: 'PlantAddress', label: 'Plant Address' },
-    { key: 'Comments', label: 'Comments:' },
+    { key: 'Comments', label: 'Comments' },
 
   ];
 

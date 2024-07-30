@@ -17,7 +17,7 @@ import { DatePipe } from '@angular/common';
 export class AuditEffectiveNewPageComponent {
   fieldsToShow = [
     { key: 'documenttitle', label: 'Document Title' },
-    { key: 'documentno', label: 'Document Number' },
+    { key: 'documentno', label: 'Document' },
     { key: 'documenttype', label: 'Document Type' },
     { key: 'Department', label: 'Department' },
     { key: 'Workflow', label: 'Workflow' },

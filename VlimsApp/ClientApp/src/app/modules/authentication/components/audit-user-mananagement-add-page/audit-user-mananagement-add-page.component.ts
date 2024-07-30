@@ -16,14 +16,15 @@ import { DatePipe } from '@angular/common';
 })
 export class AuditUserMananagementAddPageComponent {
   fieldsToShow = [
-    { key: 'FirstName', label: 'FirstName' },
-    { key: 'LastName', label: 'LastName' },
+    { key: 'FirstName', label: 'First Name' },
+    { key: 'LastName', label: 'Last Name' },
+    { key: 'UserID', label: 'User ID' },
     { key: 'Department', label: 'Department' },
-    { key: 'UserID', label: 'UserID' },
+   
     { key: 'Role', label: 'Role' },
-    { key: 'Doj', label: 'Doj' },
-    { key: 'Empid', label: 'Empid' },
-    { key: 'EmailId', label: 'EmailId' },
+    { key: 'Doj', label: 'Date of Joining' },
+    { key: 'Empid', label: 'Employee ID' },
+    { key: 'EmailId', label: 'E-Mail ID' },
 
   ];
 
