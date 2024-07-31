@@ -51,7 +51,6 @@ export class AuditeffectivegridpageComponent {
 
   setHeaders() {
     this.gridConfig.Headers = [
-      { Name: 'DEID', DisplayName: 'Effective Id', width: 20, sort: false, isNavigation: false },
       { Name: 'documentno', DisplayName: 'Document Number', width: 25, sort: false, isNavigation: true },
       { Name: 'documenttitle', DisplayName: 'Document Title', width: 25, sort: false, isNavigation: false },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },

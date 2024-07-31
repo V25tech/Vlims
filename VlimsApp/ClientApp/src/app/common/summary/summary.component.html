@@ -10,30 +10,29 @@
         </div>
       </div>
     </div>
-
-    </div>
+  </div>
 
 
 
   <div class="col-lg-12" *ngIf="module == 'master' || module == 'admin' ">
     <ng-container *ngFor="let item of gridConfig">
       <div class="m-3">
-        <p-panel class=" col-lg-5" header="Revision {{item.RevisionNumber.toString().padStart(2, '0')}}" [toggleable]="true">
+        <p-panel class=" col-lg-5" header="Revision {{item.RevisionNumber.toString().padStart(2, '0')}}"
+          [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
             <ng-container *ngFor="let field of fieldsToShow">
-
               <div class="form-group row" *ngIf="field.key != 'reviewers' && field.key != 'approvals' ">
                 <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
                 <div class="col-lg-7" *ngIf="field.key.toLowerCase() != 'createddate'">
                   <span>{{ item.EntityInfo[field.key] }}</span>
                 </div>
                 <div class="col-lg-7" *ngIf="field.key.toLowerCase() == 'createddate'">
-                  <span>{{  commonsrvc.setDate(item.EntityInfo[field.key]) }}</span>
+                  <span>{{ commonsrvc.setDate(item.EntityInfo[field.key]) }}</span>
                 </div>
               </div>
 
-
-              <div class="form-group row" *ngIf="field.key.toLowerCase() == 'reviewers' || field.key.toLowerCase() == 'approvals'">
+              <div class="form-group row"
+                *ngIf="field.key.toLowerCase() == 'reviewers' || field.key.toLowerCase() == 'approvals'">
                 <label for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
                 <div class="col-lg-7">
                   <ng-container *ngIf="item.EntityInfo[field.key] && item.EntityInfo[field.key].length > 0">
@@ -44,65 +43,57 @@
                   </ng-container>
                 </div>
               </div>
-              
-
 
               <div class="form-group row" *ngIf="item.Type === 'ProfileType'">
                 <label for="{{ field.key }}" class="col-md-5"></label>
-                <div class="col-lg-7">               
+                <div class="col-lg-7">
                   <span *ngIf="isBoolean(item.EntityInfo[field.key])">
                     <input type="checkbox" [checked]="item.EntityInfo[field.key]" disabled>
                   </span>
                 </div>
               </div>
-
-
-              
-               
-              
             </ng-container>
           </div>
 
-
-
-
-          <div class="page-card-title border-bottom p-2">
-            Activity
-          </div>
+          <div class="activity-section">
+            <div class="activity-header">
+              <h3 class="activity-title">Activity</h3>
+            </div>
           
-          <div class="m-3">
-            <div class="d-flex">
-
-
-              <div class="col-lg-4">
-                
-                <p *ngIf="entityName.toLowerCase() != 'fprofile'">{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
-                <p *ngIf="entityName.toLowerCase() == 'fprofile'">{{ item.EntityInfo.createddate  | date:'dd/MM/yyyy HH:mm' }}</p>
+            <div class="activity-content">
+              <!-- Column Headers -->
+              <div class="row mb-2 activity-header-row">
+                <div class="col-lg-4"><strong>ACTIVITY</strong></div>
+                <div class="col-lg-4"><strong>ACTIVITY BY</strong></div>
+                <div class="col-lg-4"><strong>ACTIVITY ON</strong></div>
               </div>
-
-              <!-- Activity Column -->
-              <div class="col-lg-4">
-                
-                <div class="activity-icon">
-                  <i class="fa-solid fa-pencil"></i>
-                  <span *ngIf="item.EntityInfo.RevisionNumber === 0" class="ms-2 badge bg-primary">Initiated</span>
-                  <span *ngIf="item.EntityInfo.RevisionNumber > 0" class="ms-2 badge bg-success">Modified</span>
-                
+          
+              <div class="row mb-3 activity-entry">
+                <!-- Status Column -->
+                <div class="col-lg-4">
+                  <div class="activity-icon">
+                    <i class="fa-solid fa-pencil"></i>
+                    <span *ngIf="item.EntityInfo.RevisionNumber === 0" class="ms-2 badge bg-primary">Initiated</span>
+                    <span *ngIf="item.EntityInfo.RevisionNumber > 0" class="ms-2 badge bg-success">Modified</span>
+                  </div>
+                </div>
+          
+                <!-- Activity By Column -->
+                <div class="col-lg-4">
+                  <span class="name-styles">{{ item.UserName }}</span>
+                </div>
+          
+                <!-- Date Column -->
+                <div class="col-lg-4">
+                  <p *ngIf="entityName.toLowerCase() != 'fprofile'">{{ item.EntityInfo.CreatedDate | date:'dd/MM/yyyy HH:mm' }}</p>
+                  <p *ngIf="entityName.toLowerCase() == 'fprofile'">{{ item.EntityInfo.createddate | date:'dd/MM/yyyy HH:mm' }}</p>
                 </div>
               </div>
-          
-              <!-- Activity By Column -->
-              <div class="col-lg-4">
-                
-                    <span class="name-styles">{{ item.UserName }}</span>
-
-              </div>
-          
-              <!-- Activity On Column -->
-            
             </div>
           </div>
           
+
+
         </p-panel>
       </div>
     </ng-container>
@@ -116,7 +107,7 @@
 
     <ng-container *ngIf="entityName.toLowerCase() == 'request' || entityName.toLowerCase() == 'print'">
       <div class="m-3">
-        <p-panel class=" col-lg-5"  header="Revision 00" [toggleable]="true">
+        <p-panel class="col-lg-5" header="Revision 00" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
             <ng-container *ngFor="let field of fieldsToShow">
               <div class="form-group row">
@@ -127,114 +118,134 @@
                 <div class="col-lg-7" *ngIf="field.key == 'supersedesNo'">
                   <span>{{ gridConfig[gridConfig.length-1].EntityInfo.Prepdocument[field.key] }}</span>
                 </div>
-
-                
               </div>
             </ng-container>
           </div>
 
-          <div class="page-card-title border-bottom p-2">
-            Activity
-
-          </div>
-          <div class="m-3">
-            <div class="d-flex" *ngFor="let item of gridConfig">
-              <div class="activity-time col-lg-3">
-                <p>{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
+          <div class="activity-section">
+            <div class="activity-header">
+              <h3 class="activity-title">Activity</h3>
+            </div>
+          
+            <div class="activity-content">
+              <!-- Column Headers -->
+              <div class="row mb-2 activity-header-row">
+                <div class="col-lg-3"><strong>ACTIVITY</strong></div>
+                <div class="col-lg-3"><strong>ACTIVITY BY</strong></div>
+                <div class="col-lg-3"><strong>ACTIVITY ON</strong></div>
+                <div class="col-lg-3"><strong>REASON(S)</strong></div>
               </div>
-
-              
-
-              <div class="activity-items col-lg-9">
-                <ul>
-                  <li class="d-flex">
-                    <div class="col-lg-3" class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'in-progress'">
-                      <i class="fa-solid fa-pencil"></i>
-                      <span *ngIf="item.EntityInfo.RevisionNumber === 0" class="ms-2 badge bg-primary">Initiated</span>
-                      <span *ngIf="item.EntityInfo.RevisionNumber === 1" class="ms-2 badge bg-success">Modified</span>
-                    
-                    </div>
-
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'active'">
-                      <i class="fa-regular fa-eye"></i>
-                      <span class="ms-2 badge" style="background-color: #28a745; color: white;">Initiated</span>
-                    </div>
-
-                    
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'approved'">
-                      <i class="fa-regular fa-eye"></i>
-                      <span class="ms-2 badge" style="background-color: #28a745; color: white;">Approved</span>
-                    </div>
-
-
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'reviewed'">
-                      <i class="fa-regular fa-circle-check"></i>
-                      <span class="ms-2 badge" style="background-color: #f6aa1e; color: WHITE;">Reviewed</span>
-                    </div>
-
-
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'returned'">
-                      <i class="fa-regular fa-circle-check"></i>
-                      <span class="ms-2 badge" style="background-color: #c92085; color:white;">Returned</span>
-                    </div>
-
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'rejected'">
-                      <i class="fa-regular fa-circle-check"></i>
-                      <span class="ms-2 badge bg-danger">Rejected</span>
-                    </div>
-
-
-                    <div class="activity-info ms-2">
-                      <p class="mb-0 p-date-styles">
-                        <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span>
-                         <span class="p-date-styles"></span>
-                         <span *ngIf="['returned', 'rejected', 'reviewed', 'approved'].includes(item.EntityInfo['Status'].toLowerCase())">
-                          &nbsp;&nbsp;{{ item.EntityInfo['Reason'] }}
-                        </span> 
-                        <span *ngIf="item.EntityInfo['ReasonOrRemarks']">
-                          &nbsp;&nbsp;{{ item.EntityInfo['ReasonOrRemarks'] }}
-                        </span>                    
-                      </p>
-                      <span class="activity-date">{{ commonsrvc.setDate(item.EntityInfo['ModifiedDate']) }}</span>
-                    </div>
-
-
-                    
-                  </li>
-                </ul>
+          
+              <div *ngFor="let item of gridConfig" class="row mb-3 activity-entry">
+                <!-- Activity Column -->
+                <div class="col-lg-3">
+                  <div class="activity-icon">
+                    <ng-container [ngSwitch]="item.EntityInfo['Status'].toLowerCase()">
+                      <!-- 'in-progress' and 'active' case with Revision Number check -->
+                      <ng-container *ngSwitchCase="'in-progress'">
+                        <i class="fa-solid fa-pencil"></i>
+                        <span *ngIf="item.EntityInfo.RevisionNumber === 0" class="ms-2 badge bg-primary">Initiated</span>
+                        <span *ngIf="item.EntityInfo.RevisionNumber > 0" class="ms-2 badge bg-success">Modified</span>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'active'">
+                        <i class="fa-solid fa-pencil"></i>
+                        <span class="ms-2 badge bg-primary">Initiated</span>
+                      </ng-container>
+          
+                      <!-- 'approved' case -->
+                      <ng-container *ngSwitchCase="'approved'">
+                        <i class="fa-regular fa-circle-check"></i>
+                        <span class="ms-2 badge" style="background-color: #28a745; color: white;">Approved</span>
+                      </ng-container>
+          
+                      <!-- 'reviewed' case -->
+                      <ng-container *ngSwitchCase="'reviewed'">
+                        <i class="fa-regular fa-circle-check"></i>
+                        <span class="ms-2 badge" style="background-color: #f6aa1e; color: white;">Reviewed</span>
+                      </ng-container>
+          
+                      <!-- 'returned' case -->
+                      <ng-container *ngSwitchCase="'returned'">
+                        <i class="fa-solid fa-undo"></i>
+                        <span class="ms-2 badge" style="background-color: #c92085; color: white;">Returned</span>
+                      </ng-container>
+          
+                      <!-- 'rejected' case -->
+                      <ng-container *ngSwitchCase="'rejected'">
+                        <i class="fa-solid fa-times-circle"></i>
+                        <span class="ms-2 badge bg-danger">Rejected</span>
+                      </ng-container>
+          
+                      <!-- Default case -->
+                      <ng-container *ngSwitchDefault>
+                        <span class="ms-2 badge bg-secondary">Unknown Status</span>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </div>
+          
+                <!-- Activity By Column -->
+                <div class="col-lg-3">
+                  <span class="name-styles">{{ item.EntityInfo['ModifiedBy'] }}</span>
+                </div>
+          
+                <!-- Date Column -->
+                <div class="col-lg-3">
+                  <p>{{ item.EntityInfo.CreatedDate | date:'dd/MM/yyyy HH:mm' }}</p>
+                </div>
+          
+                <!-- Reason/Remarks Column -->
+                <div class="col-lg-3">
+                  <p class="mb-0 p-date-styles">
+                    <span *ngIf="item.EntityInfo['ReasonOrRemarks'] && item.EntityInfo['ReasonOrRemarks'].trim() !== ''">
+                      &nbsp;&nbsp;{{ item.EntityInfo['ReasonOrRemarks'] }}
+                    </span>
+                    <span
+                      *ngIf="!item.EntityInfo['ReasonOrRemarks'] && item.EntityInfo['Reason'] && 
+                             ['returned', 'rejected', 'reviewed', 'approved'].includes(item.EntityInfo['Status'].toLowerCase())">
+                      &nbsp;&nbsp;{{ item.EntityInfo['Reason'] }}
+                    </span>
+                    <span
+                      *ngIf="(!item.EntityInfo['ReasonOrRemarks'] || item.EntityInfo['ReasonOrRemarks'].trim() === '') && 
+                             (!item.EntityInfo['Reason'] || !['returned', 'rejected', 'reviewed', 'approved'].includes(item.EntityInfo['Status'].toLowerCase()))">
+                      &nbsp;&nbsp;NA
+                    </span>
+                  </p>
+                </div>
               </div>
-
-
-
-
-
             </div>
           </div>
+          
+
+
         </p-panel>
       </div>
     </ng-container>
 
 
 
-    <ng-container *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective' && entityName.toLowerCase() != 'request' && entityName.toLowerCase() != 'print'">
+    <ng-container
+      *ngIf="entityName.toLowerCase() == 'preparation' || entityName.toLowerCase() == 'effective' && entityName.toLowerCase() != 'request' && entityName.toLowerCase() != 'print'">
       <div class="m-3" *ngFor="let key of groupedRecordsKeys().reverse()">
-        <p-panel class=" col-lg-5" header="Revision {{key.toString().padStart(2, '0')}}" [toggleable]="true">
+        <p-panel class="col-lg-5" header="Revision {{key.toString().padStart(2, '0')}}" [toggleable]="true">
           <div class="d-flex flex-column py-3 px-4">
             <ng-container *ngFor="let field of fieldsToShow">
               <div class="form-group row">
+                <label *ngIf="entityName.toLowerCase() == 'preparation' &&  field.key =='documentno'"
+                  for="{{ setLabelName(gridConfig[key][gridConfig[key].length-1].EntityInfo['documenttype']) }}"
+                  class="col-md-5">{{ setLabelName(gridConfig[key][0].EntityInfo['documenttype']) }}</label>
+                <label
+                  *ngIf="entityName.toLowerCase() == 'preparation' && field.key !='documentno' || entityName.toLowerCase() != 'preparation'"
+                  for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
 
-
-                <label *ngIf="entityName.toLowerCase() == 'preparation' &&  field.key =='documentno'    " for="{{ setLabelName(gridConfig[key][gridConfig[key].length-1].EntityInfo['documenttype']) }}" class="col-md-5">{{ setLabelName(gridConfig[key][0].EntityInfo['documenttype']) }}</label>
-                <label *ngIf="entityName.toLowerCase() == 'preparation' && field.key !='documentno' || entityName.toLowerCase() != 'preparation'" for="{{ field.key }}" class="col-md-5">{{ field.label }}</label>
                 <div class="col-lg-7" *ngIf="entityName.toLowerCase() == 'preparation' && field.key == 'supersedesNo'">
-                  <span>
-                    <span>{{ gridConfig[key][gridConfig[key].length-1].EntityInfo.Prepdocument[field.key]}}</span>
-                  </span>
+                  <span>{{ gridConfig[key][gridConfig[key].length-1].EntityInfo.Prepdocument[field.key] }}</span>
                 </div>
-                <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && field.label != 'View Document' ">
+
+                <div class="col-lg-7" *ngIf="field.key != 'supersedesNo' && field.label != 'View Document'">
                   <span>{{ gridConfig[key][gridConfig[key].length-1].EntityInfo[field.key] }}</span>
-                  <!--<span *ngIf="field.key.toLowerCase() =='effectivedate' || field.key.toLowerCase() =='reviewdate' || field.key.toLowerCase() =='createddate'">{{ commonsrvc.setDate(gridConfig[key][gridConfig[key].length-1].EntityInfo[field.key])}}</span>-->
                 </div>
+
                 <div class="col-lg-7" *ngIf="field.label == 'View Document'">
                   <span>
                     <a (click)="viewprint(template, gridConfig[key][0].EntityInfo)" href="javascript:void(0)">
@@ -244,79 +255,86 @@
                 </div>
 
                 <div class="col-lg-7" *ngIf="field.key == 'supersedesNo'">
-                  <span>
-                    <span>{{ gridConfig[key][gridConfig[key].length-1].EntityInfo[field.key] }}</span>
-                  </span>
+                  <span>{{ gridConfig[key][gridConfig[key].length-1].EntityInfo[field.key] }}</span>
                 </div>
-
               </div>
             </ng-container>
-
           </div>
 
-          <div class="page-card-title border-bottom p-2">
-            Activity
-
-          </div>
-          <div class="m-3">
-            <div class="d-flex" *ngFor="let item of gridConfig[key]">
-              <div class="activity-time col-lg-3 ">
-                <p>{{ item.EntityInfo.CreatedDate  | date:'dd/MM/yyyy HH:mm' }}</p>
+          <div class="activity-section">
+            <div class="activity-header">
+              <h3 class="activity-title">Activity Log</h3>
+            </div>
+          
+            <div class="activity-content">
+              <!-- Column Headers -->
+              <div class="row mb-2 activity-header-row">
+                <div class="col-lg-3"><strong>ACTIVITY</strong></div>
+                <div class="col-lg-3"><strong>ACTIVITY BY</strong></div>
+                <div class="col-lg-3"><strong>ACTIVITY ON</strong></div>
+                <div class="col-lg-3"><strong>REASON(S)</strong></div>
               </div>
-              <div class="activity-items col-lg-3">
-                <ul>
-                  <li class="d-flex">
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'in-progress'">
-                      <i class="fa-solid fa-pencil"></i>
-                      <span *ngIf="item.EntityInfo.RevisionNumber === 0  ||  item.EntityInfo.RevisionNumber === 1" class="ms-2 badge bg-primary">Initiated</span>
-                      <span *ngIf="item.EntityInfo.RevisionNumber > 1" class="ms-2 badge bg-success">Modified</span>
-                    </div>
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'approved'">
-                      <i class="fa-regular fa-eye"></i>
-                      <span class="ms-2 badge" style="background-color: #28a745; color: white;">Approved</span>
-                    </div>
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'reviewed'">
-                      <i class="fa-regular fa-circle-check"></i>
-                      <span class="ms-2 badge" style="background-color: #f6aa1e; color: WHITE;">Reviewed</span>
-                    </div>
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'returned'">
-                      <i class="fa-regular fa-circle-check"></i>
-                      <span class="ms-2 badge" style="background-color: #c92085; color:white;">Returned</span>
-                    </div>
-                    <div class="activity-icon" *ngIf="item.EntityInfo['Status'].toLowerCase() == 'rejected'">
-                      <i class="fa-regular fa-circle-check"></i>
-                      <span class="ms-2 badge bg-danger">Rejected</span>
-                    </div>
-
-
-
-                    <div class="activity-info ms-2">
-                      <p class="mb-0 p-date-styles">
-                        <span class="name-styles">
-                          {{ item.EntityInfo['Status'].toLowerCase() === 'in-progress' ? item.EntityInfo['CreatedBy'] : item.EntityInfo['ModifiedBy'] }}
-                        </span>
-                         
-                          <span class="p-date-styles"></span>
-
-                          <span *ngIf="['returned', 'rejected', 'reviewed', 'approved'].includes(item.EntityInfo['Status'].toLowerCase())">
-                            &nbsp;&nbsp;{{ item.EntityInfo['reason'] }}
-                          </span> 
-                      </p>
-                    </div>
-
-
-                
-
-
-                  </li>
-                </ul>
+          
+              <div *ngFor="let item of gridConfig[key]" class="row mb-3 activity-entry">
+                <!-- Status Column -->
+                <div class="activity-items col-lg-3">
+                  <div *ngIf="item.EntityInfo['Status']" class="activity-icon">
+                    <ng-container [ngSwitch]="item.EntityInfo['Status'].toLowerCase()">
+                      <ng-container *ngSwitchCase="'in-progress'">
+                        <i class="fa-solid fa-pencil"></i>
+                        <span *ngIf="item.EntityInfo.RevisionNumber === 0" class="ms-2 badge bg-primary">Initiated</span>
+                        <span *ngIf="item.EntityInfo.RevisionNumber > 0" class="ms-2 badge bg-success">Modified</span>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'approved'">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span class="ms-2 badge bg-success">Approved</span>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'reviewed'">
+                        <i class="fa-solid fa-eye"></i>
+                        <span class="ms-2 badge" style="background-color: #f6aa1e; color: white;">Reviewed</span>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'returned'">
+                        <i class="fa-solid fa-undo"></i>
+                        <span class="ms-2 badge" style="background-color: #c92085; color: white;">Returned</span>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'rejected'">
+                        <i class="fa-solid fa-times-circle"></i>
+                        <span class="ms-2 badge bg-danger">Rejected</span>
+                      </ng-container>
+                      <ng-container *ngSwitchDefault>
+                        <span class="ms-2 badge bg-secondary">Unknown Status</span>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </div>
+          
+                <!-- Name Column -->
+                <div class="activity-name col-lg-3">
+                  <span>{{ item.EntityInfo['Status'].toLowerCase() === 'in-progress' ? item.EntityInfo['CreatedBy'] : item.EntityInfo['ModifiedBy'] }}</span>
+                </div>
+          
+                <!-- Date Column -->
+                <div class="activity-time col-lg-3">
+                  <span>{{ item.EntityInfo.CreatedDate | date:'dd/MM/yyyy HH:mm' }}</span>
+                </div>
+          
+                <!-- Reason Column -->
+                <div class="activity-reason col-lg-3">
+                  <span *ngIf="item.EntityInfo['reason']; else noReason">{{ item.EntityInfo['reason'] }}</span>
+                  <ng-template #noReason>NA</ng-template>
+                </div>
               </div>
             </div>
-
           </div>
+          
+
+
+
         </p-panel>
       </div>
     </ng-container>
+
+
 
 
 
@@ -387,14 +405,15 @@
         </p-panel>
       </div>
     </ng-container> -->
-    
+
 
 
 
 
 
   </div>
-  <p-dialog header="Document" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <p-dialog header="Document" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false"
+    [resizable]="false">
     <p class="m-0">
       <img src="assets/images/document pdf.png">
     </p>
@@ -426,12 +445,14 @@
     <div class="modal-body">
       <div class="form-group">
 
-        <input type="radio" class="form-radio-input" id="fullheader" name="fullheader" [(ngModel)]="iscompleteheader" [value]="true">
+        <input type="radio" class="form-radio-input" id="fullheader" name="fullheader" [(ngModel)]="iscompleteheader"
+          [value]="true">
         <label for="username" class="form-label" style="padding-left: 10px;">Complete Header</label>
       </div>
       <div class="form-group">
 
-        <input type="radio" class="form-radio-input" id="fullheader" name="fullheader" [(ngModel)]="iscompleteheader" [value]="false">
+        <input type="radio" class="form-radio-input" id="fullheader" name="fullheader" [(ngModel)]="iscompleteheader"
+          [value]="false">
         <label for="password" style="padding-left: 10px;">Short Header</label>
       </div>
     </div>
