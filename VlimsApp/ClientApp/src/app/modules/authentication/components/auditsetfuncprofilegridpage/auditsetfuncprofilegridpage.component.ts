@@ -68,7 +68,7 @@ this.setConfig();
       itemsPerPage : 10,
       currentPage: 1,
       rowsPerPageOptions: [10, 20, 50],
-      gridDisplayName: "Funtional Profile List Audit Trails"
+      gridDisplayName: "Functional Profile List Audit Trails"
 
     }
   }

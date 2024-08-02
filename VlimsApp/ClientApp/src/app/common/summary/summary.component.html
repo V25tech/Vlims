@@ -75,6 +75,7 @@
                     <i class="fa-solid fa-pencil"></i>
                     <span *ngIf="item.EntityInfo.RevisionNumber === 0" class="ms-2 badge bg-primary">Initiated</span>
                     <span *ngIf="item.EntityInfo.RevisionNumber > 0" class="ms-2 badge bg-success">Modified</span>
+                    <span *ngIf="item.RevisionNumber === 0 && item.Type === 'RoleType'" class="ms-2 badge bg-success">Initiated</span>
                   </div>
                 </div>
           

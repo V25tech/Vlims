@@ -22,8 +22,8 @@ export class AuditEffectiveNewPageComponent {
     { key: 'Department', label: 'Department' },
     { key: 'Workflow', label: 'Workflow' },
     { key: 'template', label: 'Template' },
-    { key: 'EffectiveDate', label: 'Effective Date:' },
-    { key: 'ReviewDate', label: 'Review Date:' },
+    { key: 'EffectiveDate', label: 'Effective Date' },
+    { key: 'ReviewDate', label: 'Review Date' },
     { key: 'template', label: 'View Document' }
   ];
 

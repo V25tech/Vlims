@@ -52,8 +52,8 @@ this.setConfig();
 
   setHeaders() {
     this.gridConfig.Headers = [
-      { Name: 'ROCFId', DisplayName: 'Role Id', width: 20, sort: false, isNavigation: true },
-      { Name: 'Role', DisplayName: 'Role Name', width: 25, sort: false, isNavigation: false },
+     
+      { Name: 'Role', DisplayName: 'Role Name', width: 25, sort: false, isNavigation: true },
       { Name: 'CreatedBy', DisplayName: 'Initiated by', width: 20, sort: false, isNavigation: false },
       { Name: 'CreatedDate', DisplayName: 'Initiated on', width: 10, sort: false, isNavigation: false },
     ]
