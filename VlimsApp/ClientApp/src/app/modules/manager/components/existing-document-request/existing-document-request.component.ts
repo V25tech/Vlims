@@ -1,5 +1,4 @@
-
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, SecurityContext, TemplateRef, ViewChild } from '@angular/core';
 import { ExistingDocumentRequest, RequestContext } from '../../../../models/model';
 import { CommonService } from '../../../../shared/common.service';
 import { ExistingDocumentRequestService } from '../../../services/existing-document-request.service';
@@ -9,6 +8,7 @@ import { Table } from 'primeng/table';
 import { Paginator } from 'primeng/paginator';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DomSanitizer } from '@angular/platform-browser';
+import { saveAs } from 'file-saver'; // Add this import for file-saver
 
 @Component({
   selector: 'app-document-request',
@@ -92,9 +92,7 @@ export class ExistingDocumentRequestComponent implements OnInit {
     return [estdoc];
   }
 
- 
   previewtemplate(docInfo: ExistingDocumentRequest, template: TemplateRef<any>): void {
-   // 
     this.spinner.show();
     this.existingDocReqservice.preview(docInfo).subscribe((data: any) => {
       this.pdfBytes = data;
@@ -104,24 +102,18 @@ export class ExistingDocumentRequestComponent implements OnInit {
       this.spinner.hide();
     });
   }
+
   openViewer(template: TemplateRef<any>): void {
-    
-    // if (this.pdfBytes) {
-    //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
-    //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
-    //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    //   
-      
-    //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
-    // }
     this.getUrl(template);
   }
-  getUrl(template: TemplateRef<any>):void{
-    this.existingDocReqservice.geturl().subscribe((data:any)=>{
-      this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
+
+  getUrl(template: TemplateRef<any>): void {
+    this.existingDocReqservice.geturl().subscribe((data: any) => {
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(data + '#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    })
+    });
   }
+
   private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
@@ -136,11 +128,19 @@ export class ExistingDocumentRequestComponent implements OnInit {
     }
     return new Blob(byteArrays, { type: contentType });
   }
+
   closeModel() {
     if (this.modalRef)
       this.modalRef.hide();
-      this.pdfUrl=null;
+    this.pdfUrl = null;
+  }
+
+  downloadPdf() {
+    if (this.pdfUrl) {
+      const url = this.sanitizer.sanitize(SecurityContext.URL, this.pdfUrl);
+      if (url) {
+        saveAs(url, 'document.pdf');
+      }
+    }
   }
 }
-
-
