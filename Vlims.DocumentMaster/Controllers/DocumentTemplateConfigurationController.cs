@@ -714,7 +714,7 @@ namespace Vlims.Controllers
             //htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""20"" height=""20"" /></th>");
             //htmlBuilder.AppendLine($@"<img src=""{dataUri}"" width=""20"" height=""20"" />");
             htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
-            htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri1}"" width=""100"" height=""80"" style=""align:center"" /></th>");
+            htmlBuilder.AppendLine($@"<th class=""tg-iucd""></th>");
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</thead>");
             htmlBuilder.AppendLine("<tbody>");

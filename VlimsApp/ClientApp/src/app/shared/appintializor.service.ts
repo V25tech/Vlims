@@ -13,9 +13,9 @@ export class AppintializorService {
   //  adminUrl: string = "https://dmsadminv2.azurewebsites.net/";
 
 
-  documentmasterUrl: string = "https://dmsmaster.azurewebsites.net/";
-  documentmanagerUrl: string = "https://dmsmanager.azurewebsites.net/";
-  adminUrl: string = "https://dmsadmin.azurewebsites.net/";
+  documentmasterUrl: string = "https://dmsmasterprod.azurewebsites.net/";
+  documentmanagerUrl: string = "https://dmsdocmanagerprod.azurewebsites.net/";
+  adminUrl: string = "https://dmsadminprod.azurewebsites.net/";
 
     configUrl = 'assets/serverconfig.json'
     constructor(private http: HttpClient) {
