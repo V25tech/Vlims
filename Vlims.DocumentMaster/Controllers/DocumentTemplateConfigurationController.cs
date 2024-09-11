@@ -336,29 +336,31 @@ namespace Vlims.Controllers
             headerParagraph.Format.PageBreakBefore = false;
 
             HeaderFooter footer1 = section.HeadersFooters.Footer;
-            // Add "page number / page count" to the footer
 
-            //Paragraph footerParagraph1 = footer1.AddParagraph();
-            //footerParagraph1.AppendText("Page No - ");
-            //footerParagraph1.AppendField("page number", Spire.Doc.FieldType.FieldPage);
-            //totalPages = document.PageCount - 1;
-            //footerParagraph1.AppendText(" of " + totalPages);
-
-
+            // Add "Page No: X of Y" to the footer
             Paragraph footerParagraph1 = footer1.AddParagraph();
             footerParagraph1.Format.HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment.Right;
 
-
-            // Append text to the footer paragraph
-            TextRange textRange = footerParagraph1.AppendText("Page No - ");
+            // Append "Page No: " text
+            TextRange textRange = footerParagraph1.AppendText("Page No: ");
             textRange.CharacterFormat.FontName = "Times New Roman"; // Set font style
-            textRange.CharacterFormat.FontSize = 8; // Set font size
+            textRange.CharacterFormat.FontSize = 9; // Set font size
 
-            // Append the page number field to the footer paragraph
-            TextRange pageNumber = footerParagraph1.AppendField("page number", Spire.Doc.FieldType.FieldPage) as Spire.Doc.Fields.TextRange;
+            // Append the page number field (X)
+            TextRange pageNumber = footerParagraph1.AppendField("Page", Spire.Doc.FieldType.FieldPage) as Spire.Doc.Fields.TextRange;
             pageNumber.CharacterFormat.FontName = "Times New Roman"; // Set font style
             pageNumber.CharacterFormat.FontSize = 9; // Set font size
 
+            // Append " of " text
+            TextRange ofText = footerParagraph1.AppendText(" of ");
+            ofText.CharacterFormat.FontName = "Times New Roman";
+            ofText.CharacterFormat.FontSize = 9;
+
+            // Append the total page number field (Y)
+            TextRange totalPageCount = footerParagraph1.AppendField("NumPages", Spire.Doc.FieldType.FieldNumPages) as Spire.Doc.Fields.TextRange;
+            totalPageCount.CharacterFormat.FontName = "Times New Roman";
+            totalPageCount.CharacterFormat.FontSize = 9;
+   
 
 
             document.SaveToFile("DocumentWithMargins.docx", FileFormat.Docx2013);
@@ -559,7 +561,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:center;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
-            htmlBuilder.AppendLine(".tg .tg-adin{font-family:\"Times New Roman\", Times, serif !important;font-size:14px;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-adin{font-family:\"Times New Roman\", Times, serif !important;font-size:14px;text-align:left;font-weight:bold;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-adin1{font-family:\"Times New Roman\", Times, serif !important;font-size:14px;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-zv4m{border-color:#ffffff;text-align:left;vertical-align:top;font-family:\"Times New Roman\", Times, serif !important;font-size:14px;}");
             htmlBuilder.AppendLine(".p {border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;text-align:left;vertical-align:top}");
@@ -702,7 +704,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine(".tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:5px 5px;word-break:normal;}");
             htmlBuilder.AppendLine(".tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:5px 5px;word-break:normal;}");
             htmlBuilder.AppendLine(".tg .tg-0p91{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-size:14px;font-weight:bold;text-align:center;vertical-align:top}");
-            htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-size:12px;font-weight:bold;text-align:left;vertical-align:top}");
+            htmlBuilder.AppendLine(".tg .tg-53v8{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-size:14px;font-weight:bold;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine(".tg .tg-iucd{border-color:inherit;font-family:\"Times New Roman\", Times, serif !important;font-size:12px;font-weight:bold;text-align:left;vertical-align:top}");
             htmlBuilder.AppendLine("</style>");
 
@@ -710,13 +712,17 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("<table class=\"tg\">");
             htmlBuilder.AppendLine("<thead>");
             htmlBuilder.AppendLine("  <tr>");
+
+            // First cell with the image
             htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""100"" height=""80"" /></th>");
-            //htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""20"" height=""20"" /></th>");
-            //htmlBuilder.AppendLine($@"<img src=""{dataUri}"" width=""20"" height=""20"" />");
-            htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"2\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
-            htmlBuilder.AppendLine($@"<th class=""tg-iucd""></th>");
+
+            // Merge the 2nd and 3rd cells
+            htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"3\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
+
+            // Close the row and header
             htmlBuilder.AppendLine("  </tr>");
             htmlBuilder.AppendLine("</thead>");
+
             htmlBuilder.AppendLine("<tbody>");
             htmlBuilder.AppendLine("  <tr>");
             //htmlBuilder.AppendLine("    <td class=\"tg-iucd\" colspan=\"2\">Title: Preparation, checking, approval, control, distribution, <br>revision, retrieval &amp; destruction of standard operating procedure</td>");
