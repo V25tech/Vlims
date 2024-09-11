@@ -264,8 +264,19 @@ namespace Vlims.Controllers
             Stream stream = new MemoryStream(byteArray);
             document.LoadFromStream(stream, FileFormat.Docx, XHTMLValidationType.None);
             Section section = document.Sections[0];
+            // Adjust the page setup (margins and header/footer distance)
             section.PageSetup.PageSize = PageSize.A4;
-            section.PageSetup.Margins.All = 72f;
+
+            // Set page margins to 0.5 inch (36 points = 0.5 inch)
+            section.PageSetup.Margins.Top = 36f;       // 0.5 inch top margin
+            section.PageSetup.Margins.Bottom = 36f;    // 0.5 inch bottom margin
+            section.PageSetup.Margins.Left = 36f;      // 0.5 inch left margin
+            section.PageSetup.Margins.Right = 36f;     // 0.5 inch right margin
+
+            // Adjust header and footer distance from the page edges (in points)
+            section.PageSetup.HeaderDistance = 18f;    // Header distance 0.25 inch from top
+            section.PageSetup.FooterDistance = 18f;    // Footer distance 0.25 inch from bottom
+
 
             string ac = document.GetText();
 
@@ -290,6 +301,23 @@ namespace Vlims.Controllers
 
             int i = 0;
             HeaderFooter header = section.HeadersFooters.Header;
+
+            // Add "For Restricted Use Only" before the header, aligned to the left
+            Paragraph restrictedTextParagraph = header.AddParagraph();
+            restrictedTextParagraph.Format.HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment.Left; // Align to the left
+
+            // Append the "For Restricted Use Only" text
+            TextRange restrictedText = restrictedTextParagraph.AppendText("For Restricted Circulation Only");
+            restrictedText.CharacterFormat.FontName = "Times New Roman";  // Set font style
+            restrictedText.CharacterFormat.FontSize = 9;                   // Set font size
+            restrictedText.CharacterFormat.Bold = true;                    // Make it bold if necessary
+            restrictedText.CharacterFormat.Italic = true;                  // Make it italic if required
+
+            // Remove any spacing before or after the text to ensure it's closely attached to the header
+            restrictedTextParagraph.Format.BeforeSpacing = 0f;    // No space before the paragraph
+            restrictedTextParagraph.Format.AfterSpacing = 0f;     // No space after the paragraph
+            restrictedTextParagraph.Format.LineSpacing = 9f;      // Match line spacing to the font size
+            restrictedTextParagraph.Format.LineSpacingRule = LineSpacingRule.AtLeast; // Ensure tight spacing
             Paragraph headerParagraph = header.AddParagraph();
             StringBuilder headerbuilder = new StringBuilder();
             headerbuilder.Append(htmlUpper);
@@ -724,61 +752,60 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("</thead>");
 
             htmlBuilder.AppendLine("<tbody>");
+
+            // 1st Row: Title
             htmlBuilder.AppendLine("  <tr>");
-            //htmlBuilder.AppendLine("    <td class=\"tg-iucd\" colspan=\"2\">Title: Preparation, checking, approval, control, distribution, <br>revision, retrieval &amp; destruction of standard operating procedure</td>");
-            //htmlBuilder.AppendLine($"   <td class=\"ttg-iucd\" colspan=\"t2\"t><span style=\"tfont-weight:bold\"t>Title:</span> {template1.DocumentTitle}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\" colspan=\"2\"><span style=\"font-weight:bold\">Title:</span> {(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "---") : "---")}</td>");
-            htmlBuilder.AppendLine($"<td class=\"tg-iucd\">{(documentTypeNumber)}</td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "---") : "---")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\" colspan=\"4\"><span style=\"font-weight:bold\">Title:</span> {(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentTitle) ? template1.DocumentTitle : "---") : "---")}</td>");
             htmlBuilder.AppendLine("  </tr>");
+
+            // 2nd Row: SOP No. and Revision No.
             htmlBuilder.AppendLine("  <tr>");
-            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Revision No.</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-53v8\">{documentTypeNumber}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.DocumentNo) ? template1.DocumentNo : "---") : "---")}</td>");
+            htmlBuilder.AppendLine($"    <td class=\"tg-53v8\">Revision No.</td>");
             if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo))
-                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(preparation != null ? (!string.IsNullOrEmpty(preparation?.Prepdocument?.revisionNo) ? preparation.Prepdocument.revisionNo : "---") : "---")}</td>");
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{preparation.Prepdocument.revisionNo}</td>");
             else
                 htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Version.ToString()) ? template1.Version : "---") : "---")}</td>");
-
-            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Supersedes</td>");
-            var supersedesNo = string.Empty;
-            if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
-                supersedesNo = !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo) ? Convert.ToString(preparation?.Prepdocument?.supersedesNo) : "0";
-            else
-                supersedesNo = (template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? Convert.ToString(template1.Supersedes) : "0") : "0");
-
-            //if (preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo))
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
-            //else
-            //    htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes : 0) : 0)}</td>");
             htmlBuilder.AppendLine("  </tr>");
+
+            // 3rd Row: Supersedes and Department
             htmlBuilder.AppendLine("  <tr>");
+            htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Supersedes</td>");
+            var supersedesNo = preparation?.Prepdocument != null && !string.IsNullOrEmpty(preparation?.Prepdocument?.supersedesNo)
+                                ? preparation.Prepdocument.supersedesNo
+                                : (template1 != null && !string.IsNullOrEmpty(template1.Supersedes.ToString()) ? template1.Supersedes.ToString() : "0");
+            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{supersedesNo}</td>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Department</td>");
             htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.Department) ? template1.Department : "---") : "---")}</td>");
+            htmlBuilder.AppendLine("  </tr>");
+
+            // 4th Row: Effective Date and Review Date
+            htmlBuilder.AppendLine("  <tr>");
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Effective Date</td>");
             if (template1 != null && !string.IsNullOrEmpty(template1.EffectiveDate))
             {
-                string formatteddate = Convert.ToDateTime(template1.EffectiveDate).ToString("dd-MM-yyyy").Replace('-', '/');
-                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{formatteddate}</td>");
+                string formattedDate = Convert.ToDateTime(template1.EffectiveDate).ToString("dd-MM-yyyy").Replace('-', '/');
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{formattedDate}</td>");
             }
             else
+            {
                 htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">---</td>");
-            //htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Page No.</td>");
-            //htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{p_PageNo} of {totalPages}</td>");
-            htmlBuilder.AppendLine("  </tr>");
-            htmlBuilder.AppendLine("  <tr>");
-            //htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Effective Date</td>");
-            //htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{(template1 != null ? (!string.IsNullOrEmpty(template1.EffectiveDate) ? template1.EffectiveDate : "test") : "test")}</td>");
+            }
             htmlBuilder.AppendLine("    <td class=\"tg-53v8\">Review Date</td>");
             if (template1 != null && !string.IsNullOrEmpty(template1.ReviewDate))
             {
-                string formatteddate = Convert.ToDateTime(template1.ReviewDate).ToString("dd-MM-yyyy").Replace('-', '/');
-                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{formatteddate}</td>");
+                string formattedDate = Convert.ToDateTime(template1.ReviewDate).ToString("dd-MM-yyyy").Replace('-', '/');
+                htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">{formattedDate}</td>");
             }
             else
+            {
                 htmlBuilder.AppendLine($"    <td class=\"tg-iucd\">---</td>");
-            htmlBuilder.AppendLine("    <td class=\"tg-53v8\"></td>");
-            htmlBuilder.AppendLine($"    <td class=\"tg-iucd\"></td>");
+            }
             htmlBuilder.AppendLine("  </tr>");
+
             htmlBuilder.AppendLine("</tbody>");
+
             htmlBuilder.AppendLine("</table>");
             table = htmlBuilder.ToString();
             return table;
