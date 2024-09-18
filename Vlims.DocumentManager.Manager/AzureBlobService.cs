@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Azure.Storage.Blobs;
+﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using Vlims.DocumentManager.Manager.Interface;
 using Azure;
 using Microsoft.Extensions.Configuration;
@@ -14,14 +12,15 @@ namespace Vlims.DocumentManager.Manager
 {
     public class AzureBlobService : IAzureBlobService
     {
-        BlobServiceClient _blobClient;
-        BlobContainerClient _containerClient;
+        private readonly BlobServiceClient _blobClient;
+        private readonly BlobContainerClient _containerClient;
         private readonly IConfiguration _configuration;
+
         public AzureBlobService(IConfiguration configuration)
         {
             _configuration = configuration;
-           string azureConnectionString = _configuration.GetSection("StorageConnectionString").Value;
-           string containerName = _configuration.GetSection("ContainerName").Value;
+            string azureConnectionString = _configuration.GetSection("StorageConnectionString").Value;
+            string containerName = _configuration.GetSection("ContainerName").Value;
 
             _blobClient = new BlobServiceClient(azureConnectionString);
             _containerClient = _blobClient.GetBlobContainerClient(containerName);
@@ -32,7 +31,7 @@ namespace Vlims.DocumentManager.Manager
             Response<BlobContentInfo> azureResponse;
             using (var memoryStream = new MemoryStream())
             {
-                file.CopyTo(memoryStream);
+                await file.CopyToAsync(memoryStream);
                 memoryStream.Position = 0;
                 azureResponse = await _containerClient.UploadBlobAsync(fileName, memoryStream, default);
             }
@@ -47,13 +46,11 @@ namespace Vlims.DocumentManager.Manager
             {
                 items.Add(file);
             }
-
             return items;
         }
 
         public byte[] GetFileFromAzure(string fileName)
         {
-
             BlobClient blobClient = _containerClient.GetBlobClient(fileName);
 
             if (blobClient.ExistsAsync().Result)

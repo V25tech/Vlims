@@ -113,12 +113,12 @@
             </div>
 
             <div class="form-group row">
-              <label for="document" class="col-sm-2 col-form-label">Browse Document (PDF)</label>
+              <label for="document" class="col-sm-2 col-form-label">Browse Document (Word)</label>
               <div *ngIf="!existingDocReq.document" class="col-sm-10">
                 <input class="form-control" type="file" id="fileInput" name="fileInput" #fileInput
-                accept=".pdf" [disabled]="isUploaded" (change)="onFileSelected($event)">
-                  <div *ngIf="isFileUploadError && printType == 'single'"
-                  class="text-danger">
+                  accept=".doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  [disabled]="isUploaded" (change)="onFileSelected($event)">
+                <div *ngIf="isFileUploadError && printType == 'single'" class="text-danger">
                   Document file upload is required.
                 </div>
               </div>
@@ -129,6 +129,7 @@
                 <a class="link-opacity-100-hover" style="color: red;" (click)="onDeleteFile()">Delete</a>
               </div>
             </div>
+            
             <div *ngIf="selectedFile && !isUploaded" class="form-group row">
               <label for="document" class="col-sm-2 col-form-label"></label>
               <div class="col-sm-10">

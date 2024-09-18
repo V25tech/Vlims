@@ -136,15 +136,32 @@ namespace PolicySummary.Controllers
             return Ok(responseContext);
         }
 
-
         [HttpPost("upload")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
             try
             {
-                string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                if (file == null || file.Length == 0)
+                {
+                    return BadRequest("No file uploaded.");
+                }
 
-                var resp = await azureBlobService.UploadFiles(file, uniqueFileName).ConfigureAwait(false);
+            
+
+                // Convert Word document to PDF
+                byte[] pdfBytes;
+                using (var fileStream = file.OpenReadStream())
+                {
+                    pdfBytes = ConvertWordToPdf(fileStream);
+                }
+
+                // Upload PDF to Azure Blob Storage
+                string uniqueFileName = Guid.NewGuid().ToString() + ".pdf";
+                using (var pdfStream = new MemoryStream(pdfBytes))
+                {
+                    var formFile = new FormFile(pdfStream, 0, pdfStream.Length, "pdfFile", uniqueFileName);
+                    var resp = await azureBlobService.UploadFiles(formFile, uniqueFileName).ConfigureAwait(false);
+                }
 
                 return Ok(new { message = "File uploaded successfully.", uniqueFileName });
             }
@@ -153,6 +170,19 @@ namespace PolicySummary.Controllers
                 return StatusCode(500, $"An error occurred while uploading the file: {ex.Message}");
             }
         }
+
+
+        private byte[] ConvertWordToPdf(Stream wordStream)
+        {
+            using (var pdfStream = new MemoryStream())
+            {
+                var document = new Aspose.Words.Document(wordStream);
+                document.Save(pdfStream, Aspose.Words.SaveFormat.Pdf);
+                return pdfStream.ToArray();
+            }
+        }
+
+
         [HttpGet("getpath")]
         public ActionResult GetPath()
         {
