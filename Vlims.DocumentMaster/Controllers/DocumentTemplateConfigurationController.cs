@@ -753,7 +753,24 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine($@"<th class=""tg-iucd""><img src=""{dataUri}"" width=""100"" height=""80"" /></th>");
 
             // Merge the 2nd and 3rd cells
-            htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"3\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
+            // htmlBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"3\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
+
+
+            // Split the title based on newlines
+            var titleLines = template1 != null ? template.titleTable[0][0].inputValue.Split('\n') : new string[] { "---" };
+
+            // Build the content within the same cell using <span> for different styles
+            htmlBuilder.AppendLine("<th class=\"tg-0p91\" colspan=\"3\">");
+
+            // First line with class tg-0p91
+            htmlBuilder.AppendLine($"<span class=\"tg-0p91\">{titleLines[0]}</span><br>");
+
+            // Append remaining lines with the class tg-iucd, all in the same cell
+            for (int i = 1; i < titleLines.Length; i++)
+            {
+                htmlBuilder.AppendLine($"<span class=\"tg-iucd\">{titleLines[i]}</span><br>");
+            }
+
 
             // Close the row and header
             htmlBuilder.AppendLine("  </tr>");
@@ -939,7 +956,22 @@ namespace Vlims.Controllers
             stringBuilder.AppendLine(@"<thead>");
             stringBuilder.AppendLine(@"<tr>");
             stringBuilder.AppendLine($@"<th class=""tg-0pky""><img src=""{dataUri}"" width=""140"" height=""80"" /></th>");
-            stringBuilder.AppendLine($@"<th class=""tg-0p91"" colspan=""3"">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
+            //stringBuilder.AppendLine($@"<th class=""tg-0p91"" colspan=""3"">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
+            // Split the title based on newlines
+            var titleLines = template1 != null ? template.titleTable[0][0].inputValue.Split('\n') : new string[] { "---" };
+
+            // Build the content within the same cell using <span> for different styles
+            stringBuilder.AppendLine("<th class=\"tg-0p91\" colspan=\"3\">");
+
+            // First line with class tg-0p91
+            stringBuilder.AppendLine($"<span class=\"tg-0p91\">{titleLines[0]}</span><br>");
+
+            // Append remaining lines with the class tg-iucd, all in the same cell
+            for (int i = 1; i < titleLines.Length; i++)
+            {
+                stringBuilder.AppendLine($"<span class=\"tg-iucd\">{titleLines[i]}</span><br>");
+            }
+
             stringBuilder.AppendLine(@"</tr>");
 
 
@@ -1088,7 +1120,26 @@ namespace Vlims.Controllers
             // First cell for the image
             stringBuilder.AppendLine($@"<th class=""tg-0lax""><img src=""{dataUri}"" width=""140"" height=""80"" /></th>");
             // Merged second and third cells (set colspan to 3 to span both)
-            stringBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"3\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
+           // stringBuilder.AppendLine($"    <th class=\"tg-0p91\" colspan=\"3\">{(template1 != null ? (!string.IsNullOrEmpty(template.titleTable[0][0].inputValue) ? template.titleTable[0][0].inputValue.Replace("\n", "<br>") : "---") : "---")}</th>");
+            // Split the title based on newlines
+            var titleLines = template1 != null ? template.titleTable[0][0].inputValue.Split('\n') : new string[] { "---" };
+
+            // Build the content within the same cell using <span> for different styles
+            stringBuilder.AppendLine("<th class=\"tg-0p91\" colspan=\"3\">");
+
+            // First line with class tg-0p91
+            stringBuilder.AppendLine($"<span class=\"tg-0p91\">{titleLines[0]}</span><br>");
+
+            // Append remaining lines with the class tg-iucd, all in the same cell
+            for (int i = 1; i < titleLines.Length; i++)
+            {
+                stringBuilder.AppendLine($"<span class=\"tg-iucd\">{titleLines[i]}</span><br>");
+            }
+
+
+
+
+
             stringBuilder.AppendLine("</tr>");
             stringBuilder.AppendLine("</thead>");
 
