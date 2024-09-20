@@ -647,7 +647,7 @@ namespace Vlims.Controllers
             htmlBuilder.AppendLine("<thead>");
             htmlBuilder.AppendLine("  <tr>");
             //htmlBuilder.AppendLine($"    <td class=\"tg-zv4m\"><span style=\"font-weight:bold\">Format No : {template.FormatNo}</span><br><span style=\"font-weight:bold\" {!string.IsNullOrEmpty(template1.PrintCopy)}>Print Type: {template1.PrintCopy}, Printed By: {p_user}, Printed On: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}</span><br><span style=\"font-weight:bold\" {!string.IsNullOrEmpty(template1.PrintCopy)} >Print Reason: {template1.PrintReason}</span></td>");
-            htmlBuilder.AppendLine($"<td class=\"tg-zv4m\"><span style=\"font-weight:bold;font-size:9px\">Format No : {(template != null ? template.FormatNo : "")}</span><br>");
+            htmlBuilder.AppendLine($"<td class=\"tg-zv4m\"><span style=\"font-weight:bold;font-size:9pt\">Format No : {(template != null ? template.FormatNo : "")}</span><br>");
             #region date
             // Get the local time zone
             TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
