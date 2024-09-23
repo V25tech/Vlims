@@ -90,6 +90,6 @@ export class AuditprintgridpagewComponent {
   }
   handleAction(event: any) {
     console.log(event);
-    this.router.navigate(["./../auditprinttaddpage"], { queryParams: { DocumentName: event.route.entityObj.PrepId } });
+    this.router.navigate(["./../auditprinttaddpage"], { queryParams: { DocumentName: event.route.entityObj.documenttitle } });
   }
 }
