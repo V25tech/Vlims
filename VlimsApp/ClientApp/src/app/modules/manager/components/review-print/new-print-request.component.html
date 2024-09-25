@@ -23,18 +23,18 @@
 
           <div *ngIf="!editMode" class="form-group row">
             <!-- <label for="reviewsType" class="col-sm-2 col-form-label">Print</label> -->
-            <div class="col-sm-10">
-              <!-- <div class="form-check form-check-inline">
+            <!-- <div class="col-sm-10">
+              <div class="form-check form-check-inline">
                 <input class="form-check-input" name="reviewsType1" type="radio" id="reviewsType2" value="single"
                        [(ngModel)]="printType" />
                 <label class="form-check-label" for="reviewsType2">New Print</label>
-              </div> -->
-              <!-- <div class="form-check form-check-inline">
+              </div> 
+               <div class="form-check form-check-inline">
                 <input class="form-check-input" name="reviewsType1" type="radio" id="reviewsType1" value="bulk"
                        [(ngModel)]="printType" />
                 <label class="form-check-label" for="reviewsType1">Existing Print</label>
-              </div> -->
-            </div>
+              </div> 
+            </div> -->
           </div>
 
 
@@ -112,6 +112,7 @@
                 </div>
               </div>
             </div>
+
             <div class="form-group row" *ngIf="!editMode && !viewMode">
               <label for="prefix" class="col-sm-2 col-form-label">
                 Workflow<span style="color: red; font-weight: bolder;">*</span>
@@ -192,17 +193,29 @@
           <!-- Bulk option controls start here -->
           <fieldset *ngIf="printType != 'single'" [disabled]="printType == 'single'">
             <div class="form-group row">
-              <label for="prefix" class="col-sm-2 col-form-label">Existing Document No<span style="color: red; font-weight: bolder;">*</span></label>
+              <label for="prefix" class="col-sm-2 col-form-label">
+                Document No<span style="color: red; font-weight: bolder;">*</span>
+              </label>
               <div class="col-sm-10">
-                <p-dropdown name="docType" [options]="preparations1" [(ngModel)]="print.existingdocumentNumber"
-                            (onChange)="documentNumberChange($event,printType)" [autoDisplayFirst]="false" [required]="true"
-                            placeholder="Select Existing Document No" #documentnoInput="ngModel" [disabled]="viewMode">
+                <p-dropdown 
+                  name="docType" 
+                  [options]="preparations1" 
+                  [(ngModel)]="print.documentNumber"
+                  optionLabel="label" 
+                  optionValue="value" 
+                  (onChange)="documentNumberChange($event, printType)"
+                  [autoDisplayFirst]="false" 
+                  [required]="true" 
+                  placeholder="Select Document No"
+                  #documentnoInput="ngModel" 
+                  [disabled]="viewMode">
                 </p-dropdown>
                 <div *ngIf="documentnoInput.invalid && (documentnoInput.dirty || documentnoInput.touched)" class="text-danger">
-                  Existing Document Number is required.
+                  Document Number is required.
                 </div>
               </div>
             </div>
+            
 
             <div class="form-group row">
               <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
@@ -238,30 +251,28 @@
 
             <div class="form-group row">
               <label for="workflow" class="col-sm-2 col-form-label">Print Type<span style="color: red; font-weight: bolder;">*</span></label>
-              <div class="col-sm-10">
-                <!-- <p-multiSelect
-                  [options]="stageSource"
-                  [(ngModel)]="selectedStage"
-                  placeholder="Select Print Type"
-                  name="workflowStage"
-                  optionLabel="value"
-                  display="chip"
-                  [required]="true"
-                  #documentstage="ngModel">
-                </p-multiSelect>
-                <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
-                  Document Stage is required
-                </div> -->
-                <p-dropdown name="PrintType" [options]="stageSource" [(ngModel)]="print.printCopy"
+              <div class="col-sm-3">
+
+                <!--<p-dropdown name="PrintType" [options]="stageSource" [(ngModel)]="print.printCopy"
                             optionLabel="label" optionValue="label" placeholder="Select Print Type" [autoDisplayFirst]="false" [required]="true"
                             #documentstage="ngModel" [disabled]="viewMode">
                 </p-dropdown>
                 <div *ngIf="documentstage.invalid && (documentstage.dirty || documentstage.touched)" class="text-danger">
                   Print Type is required.
+                </div>-->
+
+                <p-multiSelect [options]="stageSource" class="custom-ms" [(ngModel)]="selectedPrintTypes" [filter]="true" defaultLabel="Select PrintType"
+                               name="department" id="department" display="chip" optionLabel="name" optionValue="code" [resetFilterOnHide]="true"
+                               #printTypeInput="ngModel" [required]="true" [disabled]="viewMode" [maxSelectedLabels]="20">
+                </p-multiSelect>
+                <div *ngIf="printTypeInput.invalid && (printTypeInput.dirty || printTypeInput.touched)" class="text-danger">
+                  Select PrintType.
                 </div>
               </div>
             </div>
-            <div class="form-group row" *ngIf="!editMode && !viewMode">
+
+
+            <!-- <div class="form-group row" *ngIf="!editMode && !viewMode">
               <label for="prefix" class="col-sm-2 col-form-label">
                 Workflow<span style="color: red; font-weight: bolder;">*</span>
               </label>
@@ -276,7 +287,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!--<div class="form-group row">
               <label for="documentType" class="col-sm-2 col-form-label">
@@ -293,7 +304,7 @@
             </div>-->
             <!-- Batch Number -->
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label for="batchNumber" class="col-sm-2 col-form-label">
                 Batch Number<span style="color: red; font-weight: bolder;">*</span>
               </label>
@@ -304,10 +315,10 @@
                   Batch Number
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Batch Size -->
-
+<!-- 
             <div class="form-group row">
               <label for="batchsize" class="col-sm-2 col-form-label">
                 Batch Size<span style="color: red; font-weight: bolder;">*</span>
@@ -319,7 +330,7 @@
                   Batch Number
                 </div>
               </div>
-            </div>
+            </div> -->
           </fieldset>
 
           <!-- Bulk option controls end here -->

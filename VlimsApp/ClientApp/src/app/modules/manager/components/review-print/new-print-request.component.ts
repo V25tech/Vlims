@@ -1,5 +1,5 @@
 
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { DocumentPreperationConfiguration, DocumentPrintConfiguration, RequestContext, UserConfiguration, WorkItemsConfiguration } from '../../../../models/model';
@@ -51,7 +51,7 @@ export class NewPrintRequestComponent implements OnInit {
   pdfUrl: string | null = null;
   toastMsg: string | null = null;
   printType = 'single';
-  preparations1: string[] = []; // Array to hold document numbers
+  preparations1: { label: string, value: string }[] = [];
   isworkflow: boolean = false;
   existingDocumentsList: Array<any> = [];
   selectedPrintTypes: string[] = [];
@@ -60,6 +60,7 @@ export class NewPrintRequestComponent implements OnInit {
   stageSource: any[] = [];
   //selectedStage:PrintType[]=[];
   constructor(private commonsvc: CommonService, private location: Location,
+    private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
     private workitemssvc: WorkitemsService,
     private existingDocReqservice: ExistingDocumentRequestService,
@@ -120,16 +121,26 @@ export class NewPrintRequestComponent implements OnInit {
 
   getDocumentRequest() {
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
-    this.existingDocReqservice.GetExistingDocumentAll(objrequest).subscribe((data: any) => {
-      // Extracting document numbers from the response data
-      if (data && data.response != null && data.response.length > 0) {
-        this.existingDocumentsList = data;
-        this.preparations1 = data.response.map((doc: any) => doc.documentno);
+    this.existingDocReqservice.GetExistingDocumentAll(objrequest).subscribe(
+      (data: any) => {
+        // Check if data and its response property exist and contain valid data
+        if (data && data.response && data.response.length > 0) {
+          // Store the entire response for other potential uses
+          this.existingDocumentsList = data.response;
+          // Extract only the document numbers and store them in the 'preparations1' array
+          this.preparations1 = data.response.map((doc: any) => {
+            return { label: doc.documentno, value: doc.documentno }; // For PrimeNG dropdown format
+          });
+        } else {
+          console.error('No data found or response is empty.');
+        }
+      },
+      (er) => {
+        console.error('An error occurred:', er);
       }
-    }, er => {
-      console.error('An error occurred:', er);
-    });
+    );
   }
+  
 
   getbyId(arg0: number) {
     this.spinner.show();
@@ -252,7 +263,6 @@ export class NewPrintRequestComponent implements OnInit {
     });
   }
 
-
   documentNumberChange(event: any, printType: string) {
     if (printType.toLowerCase() == "bulk") {
       let preps: any;
@@ -262,8 +272,8 @@ export class NewPrintRequestComponent implements OnInit {
         this.print.printtype = preps[0].documenttype;
         this.print.template = preps[0].sampletemplate;
         this.print.prepId = parseInt(preps[0].edrId);
-        //this.workflowsSource = this.workflowsSource.filter(o => o.documentstage?.includes("Print"));
-        //this.workflowsSource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === preps[0].documenttype.toLocaleLowerCase());
+       // this.workflowsSource = [...this.workflowsSource.filter(o => o.documentstage?.includes("Print"))];
+        //this.workflowsSource = [...this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === preps[0].documenttype.toLocaleLowerCase())];
       }
     } else {
       let preps = this.preparations.filter(p => p.documentno === event.value);
@@ -272,11 +282,17 @@ export class NewPrintRequestComponent implements OnInit {
         this.print.printtype = preps[0].documenttype;
         this.print.template = preps[0].template;
         this.print.prepId = parseInt(preps[0].dpnid);
-        this.workflowsSource = this.workflowsSource.filter(o => o.documentstage?.includes("Print"));
-        this.workflowsSource = this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === preps[0].documenttype.toLocaleLowerCase());
+  
+        // Additional step: manually trigger change detection to update the UI
+        this.workflowsSource = [...this.workflowsSource.filter(o => o.documentstage?.includes("Print"))];
+        this.workflowsSource = [...this.workflowsSource.filter(o => o.documenttype?.toLocaleLowerCase() === preps[0].documenttype.toLocaleLowerCase())];
       }
     }
+  
+    // Trigger change detection manually to ensure UI reflects the changes
+    this.cd.detectChanges();  // Make sure ChangeDetectorRef is injected in the constructor
   }
+  
 
 
   getworkflowinfo() {
