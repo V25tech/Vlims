@@ -1,0 +1,206 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="page-title"><span class="bold-text">Functional Profile</span><br><span class="bold-text">Audit Trails</span></h4>
+                <div class="back-icon">
+                    <a href="javascript:void(0);" onclick="history.back();">
+                        <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <div class="p-4 bg-white shadow-dark rounded-2">
+                <div *ngFor="let auditConfig of types; let i = index">
+                    <div class="card mb-3">
+                        <div class="card-body">
+  
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Version {{ i + 0 }}</strong>
+                                </div>
+                            </div>
+  
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Role Name:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.role }}
+                                </div>
+                            </div>
+  
+                            
+  
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Security Management:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.securityConfig }}
+                                </div>
+                            </div>
+  
+                        
+  
+                        
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Role Configuration:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.roleConfig }}
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Department Configuration:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.deptConfig }}
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Plant Configuration:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.plantMgmt }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>User Configuration :</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.userMgmt }}
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Activate/De-Activate:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.Activatestatus }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Document Type Configuration:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.documentTypeConfig }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Document Template Configuration:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.documentTemplateConfig }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Workflow Configuration:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.workflowConfig }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Document Request Configuration:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.documentRequest }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Document Preparation Configuration:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.documentPreperation }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Document Effective Configuration:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.documentEffective }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Document Repository:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.additionalTasks }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Work Assignes To Me:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.workItemsassigned }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Document Print Comfiguration:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.downloadPrint }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Initiated By:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.CreatedBy }}
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong>Initiated On:</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ auditConfig.EntityInfo.createddate | date:'dd/MM/yyyy HH:mm' }}
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

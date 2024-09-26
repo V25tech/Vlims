@@ -15,6 +15,8 @@
     [Status_PSY]            NVARCHAR (50)  NULL,
     [Refrence_PSY]          INT            NULL,
     [Workflow_PSY] NVARCHAR(200) NULL, 
+    [GUID_DE] UNIQUEIDENTIFIER NULL, 
+    [ReferenceGuid_PSY] UNIQUEIDENTIFIER NULL, 
     CONSTRAINT [PK_DocumentEffective_PSY] PRIMARY KEY CLUSTERED ([DEID_PSY] ASC)
 );
 

@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col">
+          <div class="d-flex justify-content-between align-items-center">
+              <h4 class="page-title"><span class="bold-text">Department</span><br><span class="bold-text">Audit Trails</span></h4>
+              <div class="back-icon">
+                  <a href="javascript:void(0);" onclick="history.back();">
+                      <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row mt-3">
+      <div class="col">
+          <div class="p-4 bg-white shadow-dark rounded-2">
+              <div *ngFor="let auditConfig of types; let i = index">
+                  <div class="card mb-3">
+                      <div class="card-body">
+
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <strong>Version {{ i + 0 }}</strong>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <strong>Department Name:</strong>
+                              </div>
+                              <div class="col-sm-9">
+                                  {{ auditConfig.EntityInfo.DepartmentName }}
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <strong>Department Code:</strong>
+                              </div>
+                              <div class="col-sm-9">
+                                  {{ auditConfig.EntityInfo.DepartmentCode }}
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <strong>Comments:</strong>
+                              </div>
+                              <div class="col-sm-9">
+                                  {{ auditConfig.EntityInfo.Comments }}
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <strong>Initiated By:</strong>
+                              </div>
+                              <div class="col-sm-9">
+                                  {{ auditConfig.EntityInfo.CreatedBy }}
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <strong>Initiated On:</strong>
+                              </div>
+                              <div class="col-sm-9">
+                                  {{ auditConfig.EntityInfo.CreatedDate | date:'dd/MM/yyyy HH:mm'  }}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

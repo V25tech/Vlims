@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
@@ -84,8 +85,41 @@ public class Startup
             x.AllowAnyOrigin()
             .AllowAnyHeader().AllowAnyMethod();
         });
+        // Serve static files from the specified directory
+        string pathhh = Path.Combine(Directory.GetCurrentDirectory(), @"C:\Users\Sheikh\source\repos\Vlims\Vlims.DocumentMaster");
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory())),
+            RequestPath = "/pdfs"
+        });
         app.UseRouting();
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        //app.UseEndpoints(endpoints =>
+        //{
+        //    endpoints.MapControllers();
+
+        //    endpoints.MapGet("/pdfurl", async context =>
+        //    {
+        //        var scheme = context.Request.Scheme;
+        //        var host = context.Request.Host;
+
+        //        // Construct the directory path dynamically
+        //        var directoryPath = Path.Combine(Directory.GetCurrentDirectory());
+
+        //        // Serve static files from the specified directory
+        //        app.UseStaticFiles(new StaticFileOptions
+        //        {
+        //            FileProvider = new PhysicalFileProvider(directoryPath),
+        //            RequestPath = "/pdfs"
+        //        });
+
+        //        // Construct the URL for the PDF file
+        //        var pdfUrl = $"{scheme}://{host}/pdfs/DocumentWithHeaderTable.pdf";
+
+        //        await context.Response.WriteAsync(pdfUrl);
+        //    });
+        //});
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     }
 }

@@ -1,0 +1,75 @@
+<div class="container-fluid mb-5">
+  <!--<div class="row p-2">
+    <div class="col">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="page-title flex-grow-1">Search Results</h4>
+      </div>
+
+      <div class="d-flex page-title-actions">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Search (Document Numbers)">
+          <button type="button" class="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>-->
+  <div class="row">
+    <div class="col">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="page-title">Track Search Documents<span class="bold-text"></span><br><span class="bold-text"></span></h4>
+        <div class="back-icon">
+          <a href="javascript:void(0);" onclick="history.back();">
+            <i class="bi bi-arrow-left-circle-fill" style="font-size: 30px;"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <div class="p-4 bg-white shadow-dark rounded-2">
+        <!--<h6 class="my-3">Track Search Documents</h6>-->
+
+        <p-table [value]="searchResults" tableStyleClass="table table-striped" [rows]="itemsPerPage" [paginator]="true"
+                 [totalRecords]="searchResults.length" [rowsPerPageOptions]="rowsPerPageOptions">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name" style="width:20%">
+                Document No.<p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th>Name</th>
+              <th pSortableColumn="docPrefix" style="width:200px">
+                Stage <p-sortIcon field="docPrefix"></p-sortIcon>
+              </th>
+
+              <th pSortableColumn="status" style="width:200px">
+                Status <p-sortIcon field="status"></p-sortIcon>
+              </th>
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-docType let-i="rowIndex">
+            <tr>
+              <td><a (click)="viewDetails(docType)">{{docType.documentNo}}</a></td>
+              <td>{{docType.documentName}}</td>
+              <td>
+                <span class="stage"
+                      [ngClass]="getStageClass(docType['stage'])"></span>{{docType.stage}}
+              </td>
+              <td>
+                <span class="status" [ngClass]="getStatusClass(docType['status'])">
+                  {{docType.status}}
+                </span>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+
+</div>

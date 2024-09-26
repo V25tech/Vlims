@@ -82,6 +82,8 @@ namespace Vlims.Administration.Entities
 
         public string ModifiedBy { get; set;}
 
+        public DateTime? createddate { get; set; }
+
 
 
 

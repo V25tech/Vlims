@@ -47,6 +47,8 @@ namespace Vlims.DMS.Entities
         private DateTime? approvedOnField;
 
         private string workflowField;
+
+        private string reasonField;
         public string DRID
         {
             get
@@ -220,6 +222,17 @@ namespace Vlims.DMS.Entities
             set
             {
                 this.approvedOnField = value;
+            }
+        }
+        public string Reason
+        {
+            get
+            {
+                return this.reasonField;
+            }
+            set
+            {
+                this.reasonField = value;
             }
         }
         public string Reviwers { get; set; }

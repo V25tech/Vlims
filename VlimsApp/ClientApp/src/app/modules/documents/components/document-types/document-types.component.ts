@@ -38,7 +38,11 @@ export class DocumentTypesComponent {
     this.spinner.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:50,Id:0};
       return this.documenttypeService.getdoctypeconfig(objrequest).subscribe((data: any) => {
-        
+        if(data!=null&&data.Response!=null&&data.Response.length>0){
+          data.Response.forEach((item:any)=>{
+            item.ModifiedDate=this.commonsvc.setDate(item.ModifiedDate)
+          })
+         } 
         this.types = data.Response;
         this.spinner.hide();
       },

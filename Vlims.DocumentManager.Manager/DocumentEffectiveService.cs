@@ -77,7 +77,7 @@ namespace Vlims.DocumentManager.Manager
                 //if (validationMessages.Length <= 0)
                 //{
                 var result = DocumentEffectiveData.SaveDocumentEffective(documentEffective);
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentEffective.documenttitle, Type = DocumentEffectiveConstants.documenteffective, state = DefinitionStatus.New });
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentEffective.CreatedBy, EntityName = documentEffective.documenttype, Type = DocumentEffectiveConstants.EffectiveType, state = DefinitionStatus.New, EntityInfo = documentEffective, Unique = documentEffective.EffectiveDate });
                 return result;
                 //}
                 //throw new System.Exception(validationMessages);
@@ -96,6 +96,9 @@ namespace Vlims.DocumentManager.Manager
                 //if (validationMessages.Length <= 0)
                 //{
                 bool result = DocumentEffectiveData.UpdateDocumentEffective(documentEffective);
+                documentEffective.CreatedDate = DateTime.Now;
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentEffective.CreatedBy, EntityName = documentEffective.documenttype, Type = DocumentEffectiveConstants.EffectiveType, state = DefinitionStatus.Modify, EntityInfo = documentEffective, Unique = documentEffective.EffectiveDate });
+
                 return result;
                 //}
                 //throw new System.Exception(validationMessages);

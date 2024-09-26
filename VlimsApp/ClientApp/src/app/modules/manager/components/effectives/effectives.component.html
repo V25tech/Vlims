@@ -74,7 +74,7 @@
                     >{{ effective.status }}
                   </span>
                 </td>
-                <td class="text-center" *ngIf="access && effective?.status=='IN-PROGRESS'">
+                <td class="text-center" *ngIf="access && effective?.status!=='Approved' && effective?.status !== 'Reviewed'">
                   <a (click)="navigateToReviewEffective(effective)"
                     ><i class="bi bi-arrow-right"></i
                   ></a>

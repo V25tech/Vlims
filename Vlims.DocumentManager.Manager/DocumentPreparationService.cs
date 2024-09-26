@@ -19,6 +19,7 @@ namespace Vlims.DocumentManager.Manager
     using Vlims.Common;
     using Vlims.DocumentManager.DataAccess;
     using static System.Net.Mime.MediaTypeNames;
+    using Vlims.DocumentMaster.Entities;
 
 
     // Comment
@@ -85,7 +86,8 @@ namespace Vlims.DocumentManager.Manager
                 //documentPreparation.Documentmanagerid = "1";
                 //documentPreparation.template = "";
                 var result = DocumentPreparationData.SaveDocumentPreparation(documentPreparation);
-                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = documentPreparation.documenttitle, Type = DocumentPreparationConstants.documentpreparation, state = DefinitionStatus.New });
+                documentPreparation.CreatedDate = DateTime.Now; 
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPreparation.CreatedBy, EntityName = documentPreparation.documenttitle, Type = DocumentPreparationConstants.PreparationType, state = DefinitionStatus.New, EntityInfo = documentPreparation, Unique = documentPreparation.documentno });
                 return result;
                 //}
                 throw new System.Exception(validationMessages);
@@ -104,6 +106,9 @@ namespace Vlims.DocumentManager.Manager
                 //if (validationMessages.Length <= 0)
                 //{
                 bool result = DocumentPreparationData.UpdateDocumentPreparation(documentPreparation);
+                documentPreparation.CreatedDate = DateTime.Now;
+                AuditLog.SaveAuditLog(new AuditLogEntity { UserName = documentPreparation.CreatedBy, EntityName = documentPreparation.documenttitle, Type = DocumentPreparationConstants.PreparationType, state = DefinitionStatus.Modify, EntityInfo = documentPreparation, Unique = documentPreparation.documentno});
+
                 return result;
                 //}
                 //throw new System.Exception(validationMessages);

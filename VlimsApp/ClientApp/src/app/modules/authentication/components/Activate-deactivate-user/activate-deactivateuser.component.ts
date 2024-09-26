@@ -47,9 +47,20 @@ export class ActivateDeactivateuserComponent implements OnInit {
   // }
 
 
+
+
+
+  
+
+
     get_activate_deactivateuser() {
       this.loader.show();
       return this.userservice.getusers(this.commonsvc.req).subscribe((data: any) => {
+        if(data!=null&&data.Response!=null&&data.Response.length>0){
+          data.Response.forEach((item:any)=>{
+            item.Doj=this.commonsvc.setDate(item.Doj)
+          })
+         } 
         this.types = data.Response;
         // Sort the users based on status (Active users first)
         this.types.sort((a, b) => {
@@ -66,7 +77,6 @@ export class ActivateDeactivateuserComponent implements OnInit {
   
       });
     }
-  
 
 
   /*update(user:UserConfiguration,event: Event){

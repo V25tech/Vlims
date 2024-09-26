@@ -78,8 +78,9 @@ export class LoginComponent {
           debugger
             this.user=data;
             this.commonsvc.setUser(this.user);
-            if(this.user.UserID==="Admin")
+            if(this.user.UserID.toLowerCase() === "admin")
             {
+              debugger
               this.loginService.updateuser(this.roles,this.user);
               this.commonsvc.setadminroles();
             }
@@ -97,6 +98,7 @@ export class LoginComponent {
   isvaliduser(){
     debugger
     localStorage.setItem("username", this.user.UserID);
+    //this.commonsvc.userEntityPermissions$.next(localStorage.getItem("roles"));
     this.commonsvc.setUsername(this.user.UserID);
     this.commonsvc.createdBy=this.user.UserID;
     this.loader.hide();

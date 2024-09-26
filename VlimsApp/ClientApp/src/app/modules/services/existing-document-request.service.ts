@@ -19,10 +19,12 @@ export class ExistingDocumentRequestService {
   adddExistingDocument(objrequest: ExistingDocumentRequest) {
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/savedocumenteffective", this.type);
   }
-  UpdateExistingDocument(objrequest: ExistingDocumentRequest) {   
+  UpdateExistingDocument(objrequest: any) {   
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/updatedocumenteffective", this.type);
   }
-  
+  geturl() {
+    return this.http.getwithheader(`api/existingdocumentreq/getpath`, this.type);
+  }
   preview(objrequest: ExistingDocumentRequest) {
     return this.http.postJsonLogin(objrequest, "api/existingdocumentreq/preview",this.type);
   }

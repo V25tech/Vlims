@@ -40,11 +40,12 @@
                  <th pSortableColumn="printtype" style="width:20%">Document Type <p-sortIcon field="printtype"></p-sortIcon></th>
                  <th pSortableColumn="documenttitle" style="width:25%">Document Name<p-sortIcon field="documenttitle"></p-sortIcon></th>
                  <th pSortableColumn="documentNumber" style="width:20%">Document Number<p-sortIcon field="documentNumber"></p-sortIcon></th>
-                 <th pSortableColumn="modifiedDate" style="width:100px">Printed On <p-sortIcon field="modifiedDate"></p-sortIcon></th>
-                 <th pSortableColumn="workflow" style="width:100px">Printed by <p-sortIcon field="modifiedby"></p-sortIcon></th>
-                 <th pSortableColumn="noofcopies" style="width:100px">Print Count <p-sortIcon field="noofcopies"></p-sortIcon></th>
-                 <!-- <th pSortableColumn="Status" style="width:100px">Status <p-sortIcon field="Status"></p-sortIcon></th> -->
-                 <!-- <th style="width:80px">Modify</th> -->
+                 <th pSortableColumn="modifiedDate" style="width:100px">Initiated On <p-sortIcon field="modifiedDate"></p-sortIcon></th>
+                 <!-- <th pSortableColumn="workflow" style="width:100px">Initiated by <p-sortIcon field="modifiedby"></p-sortIcon></th> -->
+                 <th pSortableColumn="noofcopies" style="width:100px">Requested Copies <p-sortIcon field="noofcopies"></p-sortIcon></th>
+                 <th pSortableColumn="printCount" style="width:100px">Print Count <p-sortIcon field="printCount"></p-sortIcon></th>
+                 <th pSortableColumn="Status" style="width:100px">Status <p-sortIcon field="Status"></p-sortIcon></th>
+                 <th style="width:80px">Modify</th>
    
                </tr>
              </ng-template>
@@ -54,24 +55,26 @@
                  <td>{{doc?.printtype}}</td>
                  <td>{{doc?.documenttitle}}</td>
                  <td>{{doc?.documentNumber}}</td>
-                 <td>{{doc?.modifiedDate | date:'dd/MM/yyy'}}</td>
+                 <!-- <td>{{doc?.modifiedDate}}</td> -->
                  <td>{{doc?.modifiedBy}}</td>
                  <td>{{doc?.noofcopies}}</td>
-   
-                 <!-- <td><span class="status" [ngClass]="getStatusClass(doc['status'])">{{doc.status}} </span></td> -->
-                 <!-- <td class="text-center" (click)="editdoc(doc)" *ngIf="access && doc?.status==='In-Progress'"><i class="bi bi-pencil"></i></td> -->
-                 <!-- <td class="text-center" *ngIf="!access">
+                 <td>{{doc?.printCount}}</td>
+                 <td><span class="status" [ngClass]="getStatusClass(doc['status'])">{{doc.status}} </span></td>
+                 <td class="text-center" (click)="editdoc(doc)" *ngIf="access && doc?.status==='In-Progress'"><i class="bi bi-pencil"></i></td>
+                  <td class="text-center" *ngIf="!access">
                    <i class="bi bi-lock bi-lg" 
-                   [ngClass]="{'text-primary':true}"
+                   [ngClass]="{'text-primary':true}"  
                    title="No Permissions">
                    </i>
                  </td>
-                 <td class="text-center" *ngIf="doc?.status==='Approved'">
+                <td class="text-center" *ngIf="doc?.status==='Approved'">
                    <i class="bi bi-lock bi-lg" 
                    [ngClass]="{'text-primary':true}"
                    title="Approved">
                    </i>
-                 </td> -->
+                   <span class="mx-2"></span> 
+                   <i class="bi bi-printer-fill" title="Print" (click)="checkduplicatetemplate(template1,doc)"></i>
+                 </td>
                </tr>
              </ng-template>
            </p-table>
@@ -83,7 +86,20 @@
 
 
 
-
+<ng-template #template1>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Preview</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModel()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <iframe *ngIf="pdfUrl" [src]="pdfUrl" type="application/pdf" width="100%" height="500px"></iframe>
+    </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="closeModel()">Close</button>
+  </div>
+</ng-template>
 
 
 

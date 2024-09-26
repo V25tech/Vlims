@@ -1,9 +1,11 @@
-﻿  CREATE PROCEDURE [dbo].[USP_DocumentPreparation_PSY_UPDATE] @DPNID_PSY int, @Documentmanagerid_PSY NVarChar(50),
+﻿
+
+  CREATE PROCEDURE [dbo].[USP_DocumentPreparation_PSY_UPDATE] @DPNID_PSY int, @Documentmanagerid_PSY NVarChar(50),
 @documenttitle_PSY NVarChar(50),
 @documentno_PSY NVarChar(50),
 @documenttype_PSY NVarChar(50),
 @department_PSY NVarChar(50),
-@document_PSY NVarChar(500),
+@document_PSY XML,
 @template_PSY NVarChar(50),
 @wokflow_PSY NVarChar(50),
 @details_PSY NVarChar(max),
@@ -12,13 +14,17 @@
  AS 
  BEGIN 
   BEGIN TRY 
-  DECLARE @ISWORKITEMS BIT
+  DECLARE @ISWORKITEMS BIT,@CREATED_BY VARCHAR(500),@ParentGuid uniqueidentifier
+  SET @CREATED_BY=(SELECT CreatedBy_PSY FROM dbo.DocumentPreparation_PSY WHERE DPNID_PSY = @DPNID_PSY)
+  SET @ParentGuid=(SELECT GUID_DP FROM DocumentPreparation_PSY WHERE DPNID_PSY=@DPNID_PSY)
   IF (SELECT COUNT(*) FROM dbo.DocumentPreparation_PSY WHERE DPNID_PSY = @DPNID_PSY AND wokflow_PSY IS NULL) > 0
   BEGIN
   SET @ISWORKITEMS=1;
   END
-  
- UPDATE [dbo].[DocumentPreparation_PSY] SET 
+ 
+IF(@Status_PSY='IN-PROGRESS' OR @Status_PSY='IN PROGRESS')
+BEGIN
+UPDATE [dbo].[DocumentPreparation_PSY] SET 
 documenttitle_PSY=@documenttitle_PSY,
 documentno_PSY=@documentno_PSY,
 documenttype_PSY=@documenttype_PSY,
@@ -28,56 +34,52 @@ template_PSY=@template_PSY,
 wokflow_PSY=@wokflow_PSY,
 details_PSY=@details_PSY,
 ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY WHERE  [DPNID_PSY] = @DPNID_PSY ; 
+END
+ELSE IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
+BEGIN
+--reject functionality is reset values and update status as rejected
+UPDATE dbo.DocumentPreparation_PSY SET documenttitle_PSY=null,documentno_PSY=null,document_PSY=null,
+template_PSY=null,wokflow_PSY=null,details_PSY=null,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY where DPNID_PSY=@DPNID_PSY
+--once rejected delete workitems assigned to users
+DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid
+END
+ELSE IF(@Status_PSY='RETURN' OR @Status_PSY='RETURNED')
+BEGIN
+--return functionality is just update status as 'return'
+UPDATE dbo.DocumentPreparation_PSY SET wokflow_PSY=null ,ModifiedBy_PSY=@ModifiedBy_PSY,Status_PSY=@Status_PSY where DPNID_PSY=@DPNID_PSY
+DELETE FROM workitems_PSY WHERE RefrenceGuid_PSY=@ParentGuid
+END
+
 
 IF(@ISWORKITEMS=1)
 BEGIN
-INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT @documenttype_PSY,'Preparation','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@DPNID_PSY,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
+INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY)
+ SELECT @documenttype_PSY,'Preparation','Pending',NULL,@CREATED_BY,GetDate(),'IN-PROGRESS',GetDate(),@DPNID_PSY,WSR.Type,0,WSR.UserName,@ParentGuid,GETDATE(),WSR.UserName,GETDATE() from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
 
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
- SELECT @documenttype_PSY,'Preparation','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@DPNID_PSY,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY,CreatedBy_PSY,RefrenceGuid_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY)
+ SELECT @documenttype_PSY,'Preparation','Pending',NULL,@CREATED_BY,GetDate(),'IN-PROGRESS',GetDate(),@DPNID_PSY,WSR.Type,0,WSR.UserName,@ParentGuid,GETDATE(),WSR.UserName,GETDATE() from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
 END
 
 IF(@Status_PSY!='IN-PROGRESS' AND @Status_PSY!='IN PROGRESS')
 BEGIN
-EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DPNID_PSY,@ModifiedBy_PSY,'PREPARATION'
+UPDATE DocumentPreparation_PSY SET Status_PSY=@Status_PSY WHERE DPNID_PSY=@DPNID_PSY
+EXEC [dbo].[USP_UpdateWorkItemsByReferenceId_PSY] @Status_PSY, @DPNID_PSY,@ModifiedBy_PSY,'PREPARATION',@ParentGuid
 END
 
 
 DECLARE @referenceId int=0; set @referenceId=(select Refrence_PSY from DocumentPreparation_PSY where DPNID_PSY=@DPNID_PSY)
 IF(@Status_PSY='APPROVED' OR @Status_PSY='APPROVE')
 BEGIN
-DECLARE @ID INT
 
+UPDATE DocumentPreparation_PSY SET document_PSY=@document_PSY, Status_PSY=@Status_PSY WHERE DPNID_PSY=@DPNID_PSY
+DECLARE @ID INT
 INSERT INTO DocumentEffective_PSY(Documentmanagerid_PSY,documenttitle_PSY,documentno_PSY,documenttype_PSY,department_PSY,document_PSY,EffectiveDate_PSY,Reviewdate_PSY,
-CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY)
-VALUES(@DPNID_PSY,@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,@document_PSY,null,null,
-@ModifiedBy_PSY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId)
+CreatedBy_PSY,CreatedDate_PSY,ModifiedBy_PSY,ModifiedDate_PSY,Status_PSY,Refrence_PSY,GUID_DE,ReferenceGuid_PSY)
+VALUES(@DPNID_PSY,@documenttitle_PSY,@documentno_PSY,@documenttype_PSY,@department_PSY,null,null,null,
+@CREATED_BY,GetDate(),@ModifiedBy_PSY,GetDate(),'IN-PROGRESS',@referenceId,NEWID(),@ParentGuid)
 SELECT @ID = @@IDENTITY;
 
---INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
--- SELECT @documenttype_PSY,'Effective','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Review'
-
--- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,ActionType_PSY,IsCompleted_PSY)
--- SELECT @documenttype_PSY,'Effective','Pending',NULL,WSR.UserName,GetDate(),'IN-PROGRESS',GetDate(),@ID,WSR.Type,0 from WorkflowUsersMapping WSR WHERE WSR.WorkFlowName=@wokflow_PSY AND WSR.Type='Approve'
-
 END
-
-IF(@Status_PSY='REJECT' OR @Status_PSY='REJECTED')
-BEGIN
-DECLARE @COUNT INT=0,@REF INT=0
-SET @REF=(SELECT Refrence_PSY FROM DocumentPreparation_PSY WHERE DPNID_PSY=@DPNID_PSY)
-SET @COUNT=(SELECT COUNT(*) FROM DocumentPreparation_PSY WHERE Refrence_PSY=@REF)
-DELETE FROM workitems_PSY WHERE RefrenceId_PSY=@DPNID_PSY
-DELETE FROM DocumentPreparation_PSY WHERE DPNID_PSY=@DPNID_PSY
-IF(@COUNT=1)
-BEGIN
-UPDATE Documentrequest_PSY SET Status_PSY='IN-PROGRESS' WHERE DRID_PSY=@REF
-UPDATE workitems_PSY SET Stage_PSY='Pending',Status_PSY='IN-PROGRESS',IsCompleted_PSY=0 WHERE RefrenceId_PSY=@REF
-END
-
-END
-
 
 select @DPNID_PSY; 
 

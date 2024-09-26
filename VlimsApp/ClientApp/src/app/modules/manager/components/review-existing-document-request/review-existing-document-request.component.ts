@@ -1,4 +1,4 @@
-
+  
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ExistingDocumentRequest, RequestContext } from '../../../../models/model';
@@ -51,9 +51,12 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
     if (this.id) { //edit mode
       this.editMode = true;
       if (this.commonsvc.existingDocReq.edrId > 0) {
-        this.existingDocReq = this.commonsvc.existingDocReq;
-        this.effectiveDate = this.toDate(this.existingDocReq.effectiveDate);
-        this.reviewDate = this.toDate(this.existingDocReq.reviewDate);
+        let data:any = this.commonsvc.existingDocReq;
+        data.effectiveDate = this.toDate(data.effectiveDate);
+        data.reviewDate = this.toDate(data.reviewDate);
+        this.existingDocReq = data;
+        //this.effectiveDate = this.toDate(this.existingDocReq.effectiveDate);
+        //this.reviewDate = this.toDate(this.existingDocReq.reviewDate);
       }
       else
         this.getExistingDocument(this.id);
@@ -74,9 +77,11 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   getExistingDocument(id: string) {
     this.spinner.show();
     this.existingDocReqservice.GetExistingDocumentById(id).subscribe((res: any) => {
-      this.existingDocReq = res;
-      this.effectiveDate = this.toDate(this.existingDocReq.effectiveDate);
-      this.reviewDate = this.toDate(this.existingDocReq.reviewDate);
+      if (res) {
+        res.effectiveDate = this.toDate(res.effectiveDate);
+        res.reviewDate = this.toDate(res.reviewDate);
+        this.existingDocReq = res;
+      }      
       this.spinner.hide();
     }, er => {
       this.spinner.hide();
@@ -85,6 +90,7 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   }
 
   getdepartments() {
+    
     let objrequest: RequestContext = { PageNumber: 1, PageSize: 1, Id: 0 };
     this.deptservice.getdepartments(objrequest).subscribe((data: any) => {
       this.departmentsSource = data.Response;
@@ -113,17 +119,20 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
   Add() {
 
     if (!this.viewMode) {
-      this.existingDocReq.createdBy = 'admin';
-      this.existingDocReq.modifiedBy = 'admin';
-      this.existingDocReq.createdDate = new Date();
-      this.existingDocReq.modifiedDate = new Date();
+      let reqObj = JSON.parse(JSON.stringify(this.existingDocReq));
+      reqObj.createdBy = 'admin';
+      reqObj.modifiedBy = 'admin';
+      reqObj.createdDate = new Date();
+      reqObj.modifiedDate = new Date();
+      reqObj.effectiveDate = new Date(reqObj.effectiveDate);
+      reqObj.reviewDate = new Date(reqObj.reviewDate);
       if (!this.selectedFile || !this.existingDocReq.document) {
         console.error('No file selected.');
         this.isFileUploadError = true;
         return;
       }
       this.spinner.show();
-      this.existingDocReqservice.adddExistingDocument(this.existingDocReq).subscribe(res => {
+      this.existingDocReqservice.adddExistingDocument(reqObj).subscribe(res => {
         this.location.back();
         this.spinner.hide();
         this.toastr.success('Document details saved suscessfully','Saved.!');
@@ -140,7 +149,10 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
       this.isFileUploadError = true;
       return;
     }
-    this.existingDocReqservice.UpdateExistingDocument(this.existingDocReq).subscribe(res => {
+    let reqObj = JSON.parse(JSON.stringify(this.existingDocReq))
+    reqObj.effectiveDate = (reqObj.effectiveDate)
+    reqObj.reviewDate = new Date(reqObj.reviewDate)
+    this.existingDocReqservice.UpdateExistingDocument(reqObj).subscribe(res => {
       this.commonsvc.existingDocReq = new ExistingDocumentRequest();
       this.location.back();
       this.spinner.hide();
@@ -159,9 +171,9 @@ export class ReviewExistingDocumentRequestComponent implements OnInit {
     let dd = pdate.getDate();
     return yyyy + '-' + (mm < 10 ? '0' : '') + mm + '-' + (dd < 10 ? '0' : '') + dd;
   }
-  getAsDate(event: any) {
-    return event.target.valueAsDate;
-  }
+  //getAsDate(event: any) {
+  //  return event.target.value;
+  //}
 
   onCancel() {
     this.location.back();

@@ -12,7 +12,13 @@ import { ToastrService } from 'ngx-toastr';
 import { WorkitemsService } from 'src/app/modules/services/workitems.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { DocumentTemplateServiceService } from 'src/app/modules/services/document-template-service.service';
+import { ExistingDocumentRequestService } from 'src/app/modules/services/existing-document-request.service';
 
+interface PrintType {
+  label:string;
+  value:string;
+}
 
 @Component({
   selector: 'app-new-print-request.component',
@@ -43,14 +49,35 @@ export class NewPrintRequestComponent implements OnInit {
   data: string = '<base64-encoded-data>';
   pdfUrl: string | null = null;
   toastMsg: string | null = null;
+  printType = 'single';
+  preparations1: string[] = []; // Array to hold document numbers
 
+
+  stageSource:PrintType[] = [
+    { label: 'Master Copy', value: 'Master Copy' },
+    { label: 'Controlled Copy', value: 'Controlled Copy' },
+    { label: 'Uncontrolled Copy', value: 'Uncontrolled Copy' },
+    { label: 'Reference Copy', value: 'Reference Copy' },
+    { label: 'Display Copy', value: 'Display Copy' },
+    { label: 'Discontinued Copy', value: 'Discontinued Copy' },
+    { label: 'Obsoluted Copy', value: 'Obsoluted Copy' },
+    { label: 'Validation Batch', value: 'Validation Batch' },
+    { label: 'Stability Batch', value: 'Stability Batch' },
+    { label: 'MLT Batch', value: 'MLT Batch' },
+    { label: 'Hold Time study', value: 'Hold Time study' },
+  ];
+  selectedStage:PrintType[]=[];
   constructor(private commonsvc: CommonService, private location: Location,
     private route: ActivatedRoute,
     private workitemssvc: WorkitemsService,
+    private existingDocReqservice: ExistingDocumentRequestService,
     private modalService: BsModalService, private sanitizer: DomSanitizer,
+    private templatesvc:DocumentTemplateServiceService,
     private toastr: ToastrService, private spinner: NgxSpinnerService, private docprintservice: NewPrintRequestService, private docPreperationService: DocumentPreperationService, private router: Router, private wfservice: WorkflowServiceService, private docservice: DocumentPreperationService) { }
 
   ngOnInit() {
+
+    this.getDocumentRequest();
     const user = localStorage.getItem("username");
     
     if (user != null && user != undefined) {
@@ -78,6 +105,18 @@ export class NewPrintRequestComponent implements OnInit {
     this.getworkflowinfo();
     this.getdocumentpreparations();
   }
+
+
+  getDocumentRequest() {
+    let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
+    this.existingDocReqservice.GetExistingDocumentAll(objrequest).subscribe((data: any) => {
+      // Extracting document numbers from the response data
+      this.preparations1 = data.response.map((doc: any) => doc.documentno);
+    }, er => {
+      console.error('An error occurred:', er);
+    });
+  }
+
   getbyId(arg0: number) {
     this.spinner.show();
     return this.docprintservice.getbyId(arg0).subscribe((data: any) => {
@@ -85,6 +124,9 @@ export class NewPrintRequestComponent implements OnInit {
       this.print = data;
       this.spinner.hide();
     });
+
+
+    
   }
   approve() {
     debugger
@@ -114,16 +156,22 @@ export class NewPrintRequestComponent implements OnInit {
   getdocumentpreparations() {
     //let objrequest: RequestContext = { PageNumber: 1, PageSize: 50, Id: 0 };
     return this.docPreperationService.getdocumentpreparations(this.commonsvc.req).subscribe((data: any) => {
+      console.log(data[0]);
       this.preparations = data.response;
-      this.preparations = this.preparations.filter(p => p.documentno);
+      this.preparations=this.preparations.filter(o=>o.status.toLowerCase() === 'approved' && o.isEffectiveApproved);
+      this.preparations = this.preparations.filter(p => 
+        p.documentno);
     });
   }
+  
 
   documentNumberChange(event: any) {
+    debugger
     let preps = this.preparations.filter(p => p.documentno === event.value);
     if (preps && preps.length > 0) {
       this.print.documenttitle = preps[0].documenttitle;
       this.print.printtype = preps[0].documenttype;
+      this.print.template=preps[0].template;
       this.workflowsSource=this.workflowsSource.filter(o=>o.documentstage?.includes("Print"));
       this.workflowsSource=this.workflowsSource.filter(o=>o.documenttype?.toLocaleLowerCase()===preps[0].documenttype.toLocaleLowerCase());
     }
@@ -149,11 +197,13 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   addRequest() {
-    this.print.CreatedBy = 'admin';
-    this.print.ModifiedBy = 'admin';
+
+    this.print.CreatedBy =  this.username;
+    this.print.ModifiedBy = this.username;
     this.print.Status = 'In-Progress';
     this.print.CreatedDate = new Date();
     this.print.ModifiedDate = new Date();
+    this.print.printCount='0';
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
       this.spinner.show();
@@ -174,7 +224,11 @@ export class NewPrintRequestComponent implements OnInit {
     this.toastMsg = this.toastMsg ?? 'Updated'
     if (!this.isButtonDisabled) {
       this.isButtonDisabled = true;
-    this.docprintservice.UpdatePrintRequest(this.print).subscribe(res => {
+      let reqObj = JSON.parse(JSON.stringify(this.print))
+      reqObj.modifiedDate = new Date(reqObj.modifiedDate)
+      reqObj.ModifiedDate = reqObj.modifiedDate
+
+      this.docprintservice.UpdatePrintRequest(reqObj).subscribe(res => {
       this.commonsvc.printConfig = new DocumentPrintConfiguration();
       this.spinner.hide();
       this.location.back();
@@ -185,6 +239,18 @@ export class NewPrintRequestComponent implements OnInit {
       console.log(er);
     });
   }
+  }
+  UpdatePrintCount()
+  {
+    debugger;
+    let reqObj = JSON.parse(JSON.stringify(this.print))
+    this.docprintservice.UpdatePrintRequestCount(reqObj).subscribe(res => {
+      //this.toastr.success(`Document print request ${this.toastMsg}  succesfull!`, 'Updated.!');
+    }, er => {
+      this.spinner.hide();
+      console.log(er);
+    });
+    
   }
 
   onCancel() {
@@ -246,11 +312,23 @@ export class NewPrintRequestComponent implements OnInit {
   }
 
   openViewer(template: TemplateRef<any>): void {
-    if (this.pdfBytes) {
-      const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+    
+    // if (this.pdfBytes) {
+    //   const pdfBlob = this.b64toBlob(this.pdfBytes.toString(), 'application/pdf');
+    //   this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdfBlob)) as string;
+    //   this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    //   debugger
+      
+    //   this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl("https://localhost:7157/pdfs/DocumentWithHeaderTable.pdf"+'#toolbar=0') as string;
+    // }
+    this.getUrl(template);
+  }
+  getUrl(template: TemplateRef<any>):void{
+    this.templatesvc.geturl().subscribe((data:any)=>{
+      debugger
+      this.pdfUrl=this.sanitizer.bypassSecurityTrustResourceUrl(data+'#toolbar=0') as string;
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-    }
+    })
   }
 
   // Function to convert base64 to Blob
@@ -268,16 +346,37 @@ export class NewPrintRequestComponent implements OnInit {
     }
     return new Blob(byteArrays, { type: contentType });
   }
+  checkduplicatetemplate(template: TemplateRef<any>){
+    this.templatesvc.isduplicate(this.print.template).subscribe((data:any)=>{
+      const isduplicate=Boolean(data);
+      if(isduplicate){
+        this.toastr.error('Template used in multiple preparations unable to view document');
+      }else{
+        this.previewprint(template);
+        this.UpdatePrintCount();
+      }
+    })
+  }
   previewprint(template: TemplateRef<any>) {    
+    debugger
     this.spinner.show();    
     //this.docPreperationService.preview(this.print.template).subscribe((data: any) => {
-      this.docPreperationService.getTemplate(this.print.template).subscribe((data: any) => {
-      this.pdfBytes = data;
-      this.spinner.hide();
-      this.openViewer(template);
-    }, er => {
-      this.spinner.hide();
-    });
+      this.templatesvc.getTemplate(this.print.template).subscribe((data: any) => {
+        //this.preparationsvc.previewtemplate(Number.parseInt(objtemp.DTID)).subscribe((data: any) => {
+          this.pdfBytes = data;
+          //this.pdfBytes = this.fileBytes;
+          this.spinner.hide();
+          this.openViewer(template);
+        }, (error:any) => {
+          this.spinner.hide();
+        });
+    //   this.docPreperationService.getTemplate(this.print.template).subscribe((data: any) => {
+    //   this.pdfBytes = data;
+    //   this.spinner.hide();
+    //   this.openViewer(template);
+    // }, er => {
+    //   this.spinner.hide();
+    // });
   }
 
 }

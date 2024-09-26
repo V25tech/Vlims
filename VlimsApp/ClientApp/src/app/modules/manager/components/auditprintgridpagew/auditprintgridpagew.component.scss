@@ -1,0 +1,17 @@
+.p-paginator .p-dropdown {    
+    height: unset;
+  }
+
+  :host ::ng-deep .p-paginator .p-dropdown {    
+    height: unset;
+    min-width: unset;
+  }
+
+  .custom-back-icon a {
+    background: linear-gradient(90deg, rgb(11, 8, 8), rgb(59, 155, 245)); /* Set linear gradient background from purple to blue */
+  -webkit-background-clip: text; /* Clip text to the background shape */
+  background-clip: text; /* Clip text to the background shape */
+  color: transparent; /* Make the text transparent */
+  display: inline-block; /* Ensure proper rendering */
+  }
+  

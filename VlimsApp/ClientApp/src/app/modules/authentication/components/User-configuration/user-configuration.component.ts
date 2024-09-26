@@ -13,7 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-user-configuration',
   templateUrl: './user-configuration.component.html'
-
+  
 })
 export class UserConfigurationComponent implements OnInit {
   @ViewChild('dt') dataTable!: Table; // ViewChild to get reference to the p-table component
@@ -26,14 +26,14 @@ export class UserConfigurationComponent implements OnInit {
   name: string = 'Product Type';
   newtype: UserConfiguration | undefined;
   objProductType: UserConfiguration | undefined;
-  retailId: number = 0;
-  header: string = '';
-  actiontype: number = 0;
+  retailId: number=0;
+  header: string='';
+  actiontype: number=0;
   pageConfig: any;
-  searchstr: string = '';
-  access: boolean = false;
+  searchstr: string='';
+  access:boolean=false;
   constructor(private commonsvc: CommonService, private doctypeservice: UsersconfigurationService,
-    private loader: NgxSpinnerService,
+    private loader:NgxSpinnerService,
     private router: Router) { }
 
   ngOnInit() {
@@ -42,17 +42,17 @@ export class UserConfigurationComponent implements OnInit {
   }
   getusers() {
     this.loader.show();
-    return this.doctypeservice.getusers(this.commonsvc.req).subscribe((data: any) => {
-      this.types = data.Response;
-
-      console.log('users', this.types);
-      this.loader.hide();
-    }, er => {
-
-    });
+      return this.doctypeservice.getusers(this.commonsvc.req).subscribe((data: any) => {
+        this.types = data.Response;
+        
+        console.log('users',this.types);
+        this.loader.hide();
+      }, er => {
+       
+      });
   }
   editdoc(doc: UserConfiguration) {
-
+    
     this.commonsvc.userConfig = doc;
     this.router.navigate(['/admin/usermanagement/users/edit', doc.UCFId]);
   }
@@ -60,14 +60,14 @@ export class UserConfigurationComponent implements OnInit {
   navigateToAddUser(): void {
     this.router.navigate(['/admin/usermanagement/users/add']);
   }
-
+  
   getStatusClass(status: string): string {
-
+    
     if (status === 'In Progress') {
       return 'status-in-progress';
     } else if (status === 'Completed') {
       return 'status-completed';
-    } else if (status === 'Active') {
+    }else if (status === 'Active') {
       return 'status-completed';
     } else if (status === 'Active') {
       return 'status-completed';
@@ -79,8 +79,9 @@ export class UserConfigurationComponent implements OnInit {
       return '';
     }
   }
-  addusergroup() {
-
+  addusergroup()
+  {
+    
   }
 
 }

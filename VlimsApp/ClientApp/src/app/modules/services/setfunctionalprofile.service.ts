@@ -12,7 +12,6 @@ export class setfunctionalprofileconfigurationservice {
   constructor(private http: HttpbaseService) { }
 
   getsetfunctionalprofileconfiguration(objrequest: RequestContext) {
-    debugger
     return this.http.postJsonLogin(objrequest, "api/SetFunctionalProfile/getallprofileconfig", this.type);
   }
   addsetfunctionalprofileconfiguration(objrequest: functionalprofile) {

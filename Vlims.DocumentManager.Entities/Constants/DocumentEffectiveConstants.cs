@@ -12,9 +12,10 @@ namespace Vlims.DMS.Entities
     using System;
     using System.Collections.Generic;
 
-
     public class DocumentEffectiveConstants
     {
+        public const string EffectiveType = "EffectiveType";
+
         public const string documenteffective = "documenteffective";
 
         public const string DEID = "@DEID_PSY";

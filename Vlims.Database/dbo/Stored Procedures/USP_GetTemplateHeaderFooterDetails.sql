@@ -19,13 +19,13 @@ JOIN DocumentPreparation_PSY DP ON DP.Documentmanagerid_PSY=DP.DPNID_PSY WHERE D
 
 
 INSERT @REVIEWERS
-SELECT @TEMPLATENAME,USR.Department_PSY,USR.Role_PSY FROM WorkflowUsersMapping WUM
+SELECT DISTINCT @TEMPLATENAME,USR.UserID_PSY,USR.Department_PSY,USR.Role_PSY FROM WorkflowUsersMapping WUM
 JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=WUM.USERNAME
 JOIN @WORKFLOWS WF ON WF.WORKFLOWNAME=WUM.WorkFlowName
 WHERE  WUM.Type='REVIEW'
 
 INSERT @APPROVERS
-SELECT @TEMPLATENAME,USR.Department_PSY,USR.Role_PSY FROM WorkflowUsersMapping WUM
+SELECT DISTINCT @TEMPLATENAME,USR.UserID_PSY,USR.Department_PSY,USR.Role_PSY FROM WorkflowUsersMapping WUM
 JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=WUM.USERNAME
 JOIN @WORKFLOWS WF ON WF.WORKFLOWNAME=WUM.WorkFlowName
 WHERE  WUM.Type='APPROVE'
@@ -49,38 +49,25 @@ WHERE  WUM.Type='APPROVE'
 --WHERE DP.template_PSY=@TemplateName AND WFM.Type='Approve'
 
 INSERT @PREPAREDBY
-SELECT DISTINCT DP.template_PSY ,DRT.CreatedBy_PSY,USR.Department_PSY,USR.Role_PSY
-FROM AdditionalTask_PSY AT
-JOIN DocumentEffective_PSY DE ON DE.DEID_PSY=AT.DocumentEffective_ID
-JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY
-JOIN Documentrequest_PSY DRT ON DRT.DRID_PSY=DP.Refrence_PSY
-JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
-JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=DRT.CreatedBy_PSY
-WHERE DT.Templatename_PSY=@TemplateName AND DRT.CreatedBy_PSY NOT IN (SELECT USERNAME FROM @PREPAREDBY)
+SELECT DP.template_PSY ,DR.CreatedBy_PSY,USR.Department_PSY,USR.Role_PSY FROM Documentrequest_PSY DR
+LEFT JOIN DocumentPreparation_PSY DP ON DP.ReferenceGuid_PSY=DR.GUID_DR
+LEFT JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=DR.CreatedBy_PSY
+WHERE DP.template_PSY=@TemplateName
 
 INSERT @PREPAREDBY
-SELECT DISTINCT DP.template_PSY ,DP.CreatedBy_PSY,USR.Department_PSY,USR.Role_PSY
-FROM AdditionalTask_PSY AT
-JOIN DocumentEffective_PSY DE ON DE.DEID_PSY=AT.DocumentEffective_ID
-JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY
-JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
-JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=DP.CreatedBy_PSY
-JOIN Documentrequest_PSY DRT ON DRT.DRID_PSY=DP.Refrence_PSY
-WHERE DT.Templatename_PSY=@TemplateName AND DP.CreatedBy_PSY NOT IN (SELECT USERNAME FROM @PREPAREDBY)
+SELECT DP.template_PSY ,DP.CreatedBy_PSY,USR.Department_PSY,USR.Role_PSY FROM DocumentPreparation_PSY DP
+LEFT JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=DP.CreatedBy_PSY
+WHERE DP.template_PSY=@TemplateName
 
 INSERT @PREPAREDBY
-SELECT DISTINCT DP.template_PSY ,DE.CreatedBy_PSY,USR.Department_PSY,USR.Role_PSY
-FROM AdditionalTask_PSY AT
-JOIN DocumentEffective_PSY DE ON DE.DEID_PSY=AT.DocumentEffective_ID
-JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY
-JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
-JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=DE.CreatedBy_PSY
-JOIN Documentrequest_PSY DRT ON DRT.DRID_PSY=DP.Refrence_PSY
-WHERE DT.Templatename_PSY=@TemplateName AND DE.CreatedBy_PSY NOT IN (SELECT USERNAME FROM @PREPAREDBY)
+SELECT DP.template_PSY ,DE.CreatedBy_PSY,USR.Department_PSY,USR.Role_PSY FROM DocumentEffective_PSY DE
+LEFT JOIN DocumentPreparation_PSY DP ON DP.GUID_DP=DE.ReferenceGuid_PSY
+LEFT JOIN UserConfiguration_PSY USR ON USR.UserID_PSY=DE.CreatedBy_PSY
+WHERE DP.template_PSY=@TemplateName
 
 
-SELECT TOP(1) DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,(VERSION-1) AS Supersedes,DP.department_PSY,
-DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DRT.department_PSY,
+SELECT TOP(1) DP.documenttitle_PSY,DP.documentno_PSY,DP.department_PSY,AT.Version,(VERSION-1) AS Supersedes,
+DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DP.department_PSY,DP.GUID_DP,DE.GUID_DE,
 (SELECT STRING_AGG(USERNAME,',') FROM @REVIEWERS) AS REVIWED_BY,
 (SELECT STRING_AGG(USERNAME,',') FROM @APPROVERS) AS APPROVED_BY,
 STRING_AGG(PR.UserName, ',') AS PREPARED_BY,
@@ -90,14 +77,13 @@ STRING_AGG(PR.DEPTNAME, ',') AS PREPAREDDEPT,
 (SELECT STRING_AGG(ROLENAME,',') FROM @APPROVERS) AS APPROVEDROLE,
 (SELECT STRING_AGG(ROLENAME,',') FROM @REVIEWERS) AS REVIWEDROLE,
 STRING_AGG(PR.ROLENAME, ',') AS PREPAREDROLE,
-DP.CreatedDate_PSY AS PREAPREDDATE
-FROM AdditionalTask_PSY AT
-JOIN DocumentEffective_PSY DE ON DE.DEID_PSY=AT.DocumentEffective_ID
-JOIN DocumentPreparation_PSY DP ON DP.DPNID_PSY=DE.Documentmanagerid_PSY
-JOIN DocumentTemplateConfiguration_PSY DT ON DT.Templatename_PSY=DP.template_PSY
-JOIN Documentrequest_PSY DRT ON DRT.DRID_PSY=DP.Refrence_PSY
+DP.CreatedDate_PSY AS PREAPREDDATE,DPP.PrintCopy_PSY,DPP.reason_PSY,DP.DPNID_PSY,DPP.BatchNumber,DPP.BatchSize
+FROM DocumentPreparation_PSY DP 
+LEFT JOIN DocumentEffective_PSY DE ON DE.ReferenceGuid_PSY=DP.GUID_DP
+LEFT JOIN AdditionalTask_PSY AT ON AT.ReferenceGuid_PSY=DE.GUID_DE
+LEFT JOIN DocumentPrint_PSY DPP ON DPP.ReferenceGuid_PSY=DP.GUID_DP AND DPP.IsActive_PSY=1
 JOIN @PREPAREDBY PR ON PR.TEMPLATE_NAME=DP.template_PSY
-WHERE DT.Templatename_PSY=@TemplateName
+WHERE DP.template_PSY=@TemplateName
 GROUP BY
     DP.documenttitle_PSY,
     DP.documentno_PSY,
@@ -106,6 +92,20 @@ GROUP BY
     DE.EffectiveDate_PSY,
     DE.Reviewdate_PSY,
     DP.CreatedDate_PSY,
-    DRT.department_PSY;
+    DP.department_PSY,
+    DPP.PrintCopy_PSY,
+    DPP.reason_PSY,DP.GUID_DP,DE.GUID_DE,DP.DPNID_PSY,DPP.BatchNumber,DPP.BatchSize
+--UNION ALL
+--SELECT TOP(1) AT.Version,(VERSION-1) AS Supersedes FROM AdditionalTask_PSY AT 
+--JOIN DocumentEffective_PSY DE ON DE.GUID_DE=AT.ReferenceGuid_PSY
+--JOIN DocumentPreparation_PSY DP ON DP.GUID_DP=DE.ReferenceGuid_PSY WHERE DP.template_PSY=@TemplateName
+--SELECT TOP(1) DP.documenttitle_PSY,DP.documentno_PSY,AT.Version,(VERSION-1) AS Supersedes,DP.department_PSY,
+--DE.EffectiveDate_PSY,DE.Reviewdate_PSY,DP.department_PSY, 
+--DP.CreatedDate_PSY AS PREAPREDDATE,DPP.PrintCopy_PSY,DPP.reason_PSY
+--FROM DocumentPreparation_PSY DP 
+--RIGHT JOIN DocumentEffective_PSY DE ON DE.ReferenceGuid_PSY=DP.GUID_DP
+--RIGHT JOIN AdditionalTask_PSY AT ON AT.ReferenceGuid_PSY=DE.GUID_DE
+--RIGHT JOIN DocumentPrint_PSY DPP ON DPP.ReferenceGuid_PSY=DP.GUID_DP
+--WHERE DP.template_PSY=''
 
 end

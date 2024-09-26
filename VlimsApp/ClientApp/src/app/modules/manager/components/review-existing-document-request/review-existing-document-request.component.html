@@ -70,7 +70,7 @@
               <label for="documentTitle" class="col-sm-2 col-form-label">Document Title</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="documentTitle" name="documentTitle"
-                  placeholder="Document Title" [(ngModel)]="existingDocReq.documenttitle" #documenttitleInput="ngModel"
+                  placeholder="Document Title" [(ngModel)]="existingDocReq.documenttitle" #documenttitleInput="ngModel" maxlength="99"
                   required />
                 <div *ngIf="documenttitleInput.invalid && (documenttitleInput.dirty || documenttitleInput.touched)"
                   class="text-danger">
@@ -83,7 +83,7 @@
               <label for="documentType" class="col-sm-2 col-form-label">Document Number</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="dnumber" name="Dnumber" placeholder="Document Number"
-                  [(ngModel)]="existingDocReq.documentno" #documentno="ngModel" required />
+                  [(ngModel)]="existingDocReq.documentno" #documentno="ngModel" maxlength="99" required />
                 <div *ngIf="documentno.invalid && (documentno.dirty || documentno.touched)" class="text-danger">
                   Document Number is required.
                 </div>
@@ -94,7 +94,7 @@
               <label for="documentType" class="col-sm-2 col-form-label">Effective Date</label>
               <div class="col-sm-10">
                 <input type="date" class="form-control" id="edate" name="Edate"  placeholder="Effective Date"
-                  [(ngModel)]="effectiveDate" (change)="existingDocReq.effectiveDate = getAsDate($event)"
+                  [(ngModel)]="existingDocReq.effectiveDate"
                   #effectiveDateInput="ngModel" required />
                 <div *ngIf="effectiveDateInput.invalid && (effectiveDateInput.dirty || effectiveDateInput.touched)"
                   class="text-danger">
@@ -107,7 +107,7 @@
               <label for="documentType" class="col-sm-2 col-form-label">Review Date</label>
               <div class="col-sm-10">
                 <input type="date" class="form-control" id="rdate" name="Rdate" placeholder="Review Date"
-                  [(ngModel)]="reviewDate" (change)="existingDocReq.reviewDate = getAsDate($event)"
+                  [(ngModel)]="existingDocReq.reviewDate"
                   #reviewDateInput="ngModel"  />
               </div>
             </div>
@@ -159,6 +159,7 @@
                 </div>
               </div>              
             </div>
+            
           </fieldset>
           <!-- Bulk option controls end here -->
 

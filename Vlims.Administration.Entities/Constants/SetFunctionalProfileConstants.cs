@@ -5,10 +5,12 @@ using System.Collections.Generic;
 
 public class SetFunctionalProfileConstants
 {
+    public const string ProfileType = "ProfileType";
 
     public const string SFPID = "@SFPID_PSY";
 
     public const string Role = "@Role_PSY";
+
     public const string Document = "@Document_PSY";
 
     public const string AdminManagement = "@AdminManagement_PSY";

@@ -16,6 +16,7 @@ namespace Vlims.DMS.Entities
     public class DocumentPreparationConstants
     {
 
+        public const string PreparationType = "PreparationType";
 
         public const string documentpreparation = "documentpreparation";
 

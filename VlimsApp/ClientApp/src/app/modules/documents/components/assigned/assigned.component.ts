@@ -33,8 +33,7 @@ export class AssignedComponent implements OnInit {
     }
   getworkflowitems() {
     this.loader.show();
-    debugger
-    
+        
     const user=localStorage.getItem("username");
     if(user!=null && user!=undefined)
     {
@@ -42,11 +41,11 @@ export class AssignedComponent implements OnInit {
     }
     return this.workitemssvc.getworkitems(this.commonsvc.req,user).subscribe((data: any) => {
       this.types = data.Response;
-      if(this.types.length>0)
-      {
-        debugger
-        this.types=this.types.filter(p=>p.InitiatedBy==user).sort((a, b) => b.WITId - a.WITId);
-      }
+      //if(this.types.length>0)
+      //{
+      //   this.types=this.types.filter(p=>p.InitiatedBy==user).sort((a, b) => b.WITId - a.WITId);
+      //  //this.types = this.types.filter(p => p.CreatedBy ==user).sort((a, b) => b.WITId - a.WITId);
+      //}
         if(this.types.length<10)
         this.currentPage=10;
       this.loader.hide();
@@ -59,12 +58,12 @@ export class AssignedComponent implements OnInit {
   }
   viewtask(obj:WorkItemsConfiguration)
   {
-    debugger
+    
    const tasktype=obj.TaskType;
    const referId=obj.ReferenceId;
    const total=this.types.filter(o=>o.ReferenceId==obj.ReferenceId && o.ActionType==obj.ActionType);
 
-    debugger
+    
     switch (tasktype) {
       case "Type":
         this.router.navigate(['/document-type/view',referId]);

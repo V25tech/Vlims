@@ -20,6 +20,9 @@ CreatedDate_PSY,
 ModifiedBy_PSY,
 ModifiedDate_PSY,
 Status_PSY,
+ISNULL((SELECT top(1) CASE WHEN Status_PSY = 'Approved' THEN 1 ELSE 0 END
+FROM [dbo].[DocumentEffective_PSY]
+WHERE ReferenceGuid_PSY = DE.GUID_DP), 0) AS IsEffApprvd,
 Refrence_PSY
  ,count(*) over() as TotalRows 
  FROM [dbo].[DocumentPreparation_PSY] DE WITH (NOLOCK) 

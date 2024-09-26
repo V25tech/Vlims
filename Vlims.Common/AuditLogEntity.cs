@@ -15,6 +15,13 @@ namespace Vlims.Common
         public Actions Action { get; set; }
         public DateTime CreatedDate { get; set; }
         public DefinitionStatus state { get; set; }
+        public string Unique { get; set; }
+
+        public string printauditid { get; set; } // Add VersionNumber property
+                                               // public string JsonData { get; set; } // Add JsonData property
+        public dynamic EntityInfo { get; set; } // Add JsonData property
+
+        //public DocumentTypeConfiguration DocumentTypeConfiguration { get; set; } //
     }
 
     public enum Actions

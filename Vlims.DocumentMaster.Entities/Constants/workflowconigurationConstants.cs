@@ -15,6 +15,7 @@ namespace Vlims.DocumentMaster.Entities
 
     public class workflowconigurationConstants
     {
+        public const string WorkflowType = "WorkflowType";
 
         public const string workflowName1 = "workflowName1";
 

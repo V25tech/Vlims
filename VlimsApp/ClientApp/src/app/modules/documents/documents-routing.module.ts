@@ -30,6 +30,24 @@ import { ChangepasswordComponent } from '../authentication/components/changepass
 import { HierarchyComponent } from '../authentication/components/hierarchy/hierarchy.component';
 import { UsermanagementComponent } from '../authentication/components/usermanagement/usermanagement.component';
 import { AuditlogComponentComponent } from 'src/app/auditlog-component/auditlog-component.component';
+import { AuditdocumentmasterhomeComponent } from './components/auditdocumentmasterhome/auditdocumentmasterhome.component';
+import { AuditdocumenttypesgridpageComponent } from './components/auditdocumenttypesgridpage/auditdocumenttypesgridpage.component';
+import { AudittemplategridpageComponent } from './components/audittemplategridpage/audittemplategridpage.component';
+import { AuditworkflowgridpageComponent } from './components/auditworkflowgridpage/auditworkflowgridpage.component';
+import { AuditadminhomeComponent } from '../authentication/components/auditadminhome/auditadminhome.component';
+import { AuditplantgridpageComponent } from '../authentication/components/auditplantgridpage/auditplantgridpage.component';
+import { AuditusermanagementgridpageComponent } from '../authentication/components/auditusermanagementgridpage/auditusermanagementgridpage.component';
+import { AudithierarchyhomepageComponent } from '../authentication/components/audithierarchyhomepage/audithierarchyhomepage.component';
+import { AuditdepartmentgridpageComponent } from '../authentication/components/auditdepartmentgridpage/auditdepartmentgridpage.component';
+import { AuditrolegridpageComponent } from '../authentication/components/auditrolegridpage/auditrolegridpage.component';
+import { AuditsetfuncprofilegridpageComponent } from '../authentication/components/auditsetfuncprofilegridpage/auditsetfuncprofilegridpage.component';
+import { AuditDocumetTypeNewPageComponent } from './components/audit-documet-type-new-page/audit-documet-type-new-page.component';
+import { AuditWorkflowTypeNewPageComponent } from './components/audit-workflow-type-new-page/audit-workflow-type-new-page.component';
+import { AuditDepAddComponent } from '../authentication/components/audit-dep-add/audit-dep-add.component';
+import { AuditRoleAddPageComponent } from '../authentication/components/audit-role-add-page/audit-role-add-page.component';
+import { AuditUserMananagementAddPageComponent } from '../authentication/components/audit-user-mananagement-add-page/audit-user-mananagement-add-page.component';
+import { AuditPlantAddPageComponent } from '../authentication/components/audit-plant-add-page/audit-plant-add-page.component';
+import { AuditTemplateTypeNewPageComponent } from './components/audit-template-type-new-page/audit-template-type-new-page.component';
 
 const routes: Routes = [
   { path: 'documents', redirectTo: 'home', pathMatch: 'full' },
@@ -41,8 +59,14 @@ const routes: Routes = [
   },
   { path: 'assigned', component: AssignedComponent, canActivate: [AuthGuard] },
   { path: 'document-master', component: DocumentMasterHomeComponent, canActivate: [AuthGuard] },
+  { path: 'auditdocmaster', component: AuditdocumentmasterhomeComponent, canActivate: [AuthGuard] },
   {
     path: 'document-types', component: DocumentTypesComponent,
+
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auditdocumettypes', component: AuditdocumenttypesgridpageComponent,
 
     canActivate: [AuthGuard],
   },
@@ -65,6 +89,17 @@ const routes: Routes = [
   {
     path: 'templates',
     component: TemplatesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'audittemplatesgrid',
+    component: AudittemplategridpageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditgridaddpagetemplate',
+    component: AuditTemplateTypeNewPageComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -93,6 +128,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'auditworkflowgrid',
+    component: AuditworkflowgridpageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'workflows/add/:count',
     component: AddWorkflowComponent,
     canActivate: [AuthGuard],
@@ -105,6 +145,11 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminHomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auditadmin',
+    component: AuditadminhomeComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -130,6 +175,55 @@ const routes: Routes = [
   {
     path: 'departments',
     component: DepartmentComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auditadddepartment',
+    component: AuditDepAddComponent,
+    canActivate: [AuthGuard],
+  },
+  
+  {
+    path: 'auditplantadd',
+    component: AuditPlantAddPageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditaddrole',
+    component: AuditRoleAddPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auditadduserconfiguration',
+    component: AuditUserMananagementAddPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auditdepartments',
+    component: AuditdepartmentgridpageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auditRoles',
+    component: AuditrolegridpageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditgridadd',
+    component: AuditDocumetTypeNewPageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'auditgridaddworkflow',
+    component: AuditWorkflowTypeNewPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auditprofile',
+    component: AuditsetfuncprofilegridpageComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -199,6 +293,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'auditplant',
+    component: AuditplantgridpageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
     path: 'plant',
     component: PlantComponent,
     canActivate: [AuthGuard],
@@ -240,15 +340,41 @@ const routes: Routes = [
     component: ActivateDeactivateuserComponent,
     canActivate: [AuthGuard],
   },
+
+  
+  {
+    path: 'audithierrachy',
+    component: AudithierarchyhomepageComponent,
+    canActivate: [AuthGuard],
+  },
+
   {
     path: 'admin/change',
     component: ChangepasswordComponent,
     canActivate: [AuthGuard],
   },
-
+  
   {
     path: 'admin/hierarchy',
     component: HierarchyComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'audithierrachy',
+    component: AudithierarchyhomepageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'audithierrachy',
+    component: AudithierarchyhomepageComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'audithierrachy',
+    component: AudithierarchyhomepageComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -257,6 +383,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
 
+  {
+    path: 'auditUser',
+    component: AuditusermanagementgridpageComponent,
+    canActivate: [AuthGuard],
+  },
+  
   {
     path: 'home/hierarchy',
     component: AdminHomeComponent,
@@ -272,6 +404,8 @@ const routes: Routes = [
     component: AdminHomeComponent,
     canActivate: [AuthGuard],
   }
+
+  
 ];
 
 @NgModule({
