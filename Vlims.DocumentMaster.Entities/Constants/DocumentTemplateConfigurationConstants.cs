@@ -15,6 +15,7 @@ namespace Vlims.DocumentMaster.Entities
 
     public class DocumentTemplateConfigurationConstants
     {
+        public const string TemplateType = "TemplateType";
 
         public const string Templatename1 = "Templatename1";
 

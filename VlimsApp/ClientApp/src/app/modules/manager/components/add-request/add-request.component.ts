@@ -59,7 +59,12 @@ export class AddRequestComponent {
       this.getworkflowitems();
     }
     else if (segments.slice(-1).toString() == 'edit') {
+      if(this.commonsvc.request.status=='Rejected' || this.commonsvc.request.status=='Returned'){
+          this.editMode=false;
+      }
+      else{
       this.editMode = true;
+      }
       if (this.commonsvc.request == null) {
         this.location.back();
       }
@@ -88,8 +93,11 @@ export class AddRequestComponent {
       this.updateRequest();
     }
   }
-  reinitiative() {
-    this.request.status = 'Re-Initiated'
+  return() {
+    this.request.modifiedBy = this.commonsvc.getUsername();
+    this.request.status = 'Returned'
+    this.toastMsg = this.request.status;
+    this.updateRequest();
     this.location.back();
     //this.updateRequest();
   }
@@ -102,8 +110,9 @@ export class AddRequestComponent {
 
   saveRequest() {
     debugger
-    if (this.editMode) {
+    if (this.editMode || this.request.status=='Rejected' || this.request.status=='Returned') {
       this.toastMsg = 'Updated';
+      this.request.status = 'In-Progress';
       this.updateRequest();
     }
     else {
@@ -136,7 +145,8 @@ export class AddRequestComponent {
   }
 
   updateRequest() {
-    if (this.viewMode && this.request.status != 'Rejected') {
+    debugger
+    if (this.viewMode && this.request.status != 'Rejected' && this.request.status != 'Returned') {
       this.request.modifiedBy = this.commonsvc.createdBy;
       this.request.status = this.finalStatus;
     }
@@ -226,7 +236,6 @@ export class AddRequestComponent {
     });
   }
   onChange(){
-    debugger
     const type=this.typeSource.filter(o=>o.Documenttypename.toLocaleLowerCase()===this.request.documenttype.toLocaleLowerCase());
     this.request.department=type[0].Assigntodepartment;
     const filtersource=this.workflowsSource.filter(o=>o.documenttype?.toLocaleLowerCase()===this.request.documenttype.toLocaleLowerCase());

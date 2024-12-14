@@ -41,6 +41,13 @@ import { ChangepasswordComponent } from '../authentication/components/changepass
 import { HierarchyComponent } from '../authentication/components/hierarchy/hierarchy.component';
 import { UsermanagementComponent } from '../authentication/components/usermanagement/usermanagement.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AuditdocumenttypesgridpageComponent } from './components/auditdocumenttypesgridpage/auditdocumenttypesgridpage.component';
+import { AudittemplategridpageComponent } from './components/audittemplategridpage/audittemplategridpage.component';
+import { AuditworkflowgridpageComponent } from './components/auditworkflowgridpage/auditworkflowgridpage.component';
+import { AuditDocumetTypeNewPageComponent } from './components/audit-documet-type-new-page/audit-documet-type-new-page.component';
+import { AuditWorkflowTypeNewPageComponent } from './components/audit-workflow-type-new-page/audit-workflow-type-new-page.component';
+import { AuditTemplateTypeNewPageComponent } from './components/audit-template-type-new-page/audit-template-type-new-page.component';
+
 
 
 
@@ -71,7 +78,14 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ActivateDeactivateuserComponent,
     ChangepasswordComponent,
     HierarchyComponent,
-   UsermanagementComponent
+   UsermanagementComponent,
+   AuditdocumenttypesgridpageComponent,
+   AudittemplategridpageComponent,
+   AuditworkflowgridpageComponent,
+   AuditDocumetTypeNewPageComponent,
+   AuditWorkflowTypeNewPageComponent,
+   AuditTemplateTypeNewPageComponent,
+
 
   ],
   imports: [

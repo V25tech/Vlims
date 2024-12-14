@@ -266,7 +266,7 @@ namespace Vlims.Controllers
             //htmlBuilder.Append(".label-cell { text-align: left; font-weight: bold; width: 50px; }");
             //htmlBuilder.Append(".value-cell { text-align: center; width: 50px; }");
             //htmlBuilder.Append("</style>");
-            //htmlBuilder.Append("<div class=\"table-container\">");
+            //htmlBuilder.Append("<div class=\"table-container\">");kkkkkkkkkk
 
             // Append the style information
             htmlBuilder.AppendLine("<style type=\"text/css\">");

@@ -15,6 +15,8 @@ namespace Vlims.Administration.Entities
 
     public class UserConfigurationConstants
     {
+        public const string UserType = "UserType";
+
         public const string userconfiguration1 = "userconfiguration1";
 
         public const string UCFId = "@UCFId_PSY";

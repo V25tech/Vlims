@@ -9,7 +9,7 @@
 @CreatedBy_PSY NVarChar(100),
 @ModifiedBy_PSY NVarChar(100),
 @Status_PSY NVarchar(100)
- AS 
+AS 
  BEGIN 
   BEGIN TRY 
   
@@ -47,8 +47,8 @@ Status_PSY)
   
  UPDATE DocumentPreparation_PSY SET Status_PSY='Approved',ModifiedDate_PSY=GETDATE() where DPNID_PSY=@Documentmanagerid_PSY
 
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
- SELECT @documenttitle_PSY,'Effective',@Status_PSY,null,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate(),@ID
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY, CreatedBy_PSY, CreatedDate_PSY,ModifiedBy_PSY, ModifiedDate_PSY)
+ SELECT @documenttitle_PSY,'Effective',@Status_PSY,null,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate(),@ID, @CreatedBy_PSY, GETDATE(), @ModifiedBy_PSY, GETDATE()
 
   END TRY 
  BEGIN CATCH 

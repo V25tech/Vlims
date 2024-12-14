@@ -10,7 +10,7 @@
 @EffectiveDate_PSY datetime,
 @reviewDate_PSY datetime,
 @workflow_PSY Nvarchar(100)
- AS 
+  AS 
  BEGIN 
   BEGIN TRY 
   
@@ -32,8 +32,8 @@ ModifiedDate_PSY,Status_PSY,Version,EffectiveDate_PSY,ReviewDate_PSY,workflow_PS
  DECLARE @documenttitle_PSY NVarchar(500)
  SET @documenttitle_PSY=(SELECT top 1 (documenttitle_PSY) FROM DocumentPreparation_PSY WHERE Documentmanagerid_PSY=1)
 
- INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY)
- SELECT @documenttitle_PSY,'Additional',@Status_PSY,null,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate(),@ID
+ INSERT into workitems_PSY(TaskName_PSY,TaskType_PSY,Stage_PSY,AssignedToGroup_PSY,InitiatedBy_PSY,InitiatedOn_PSY,Status_PSY,DueDate_PSY,RefrenceId_PSY,CreatedBy_PSY, CreatedDate_PSY, ModifiedBy_PSY, ModifiedDate_PSY)
+ SELECT @documenttitle_PSY,'Additional',@Status_PSY,null,@CreatedBy_PSY,GetDate(),@Status_PSY,GetDate(),@ID, @CreatedBy_PSY, GETDATE(), @ModifiedBy_PSY, GETDATE()
 
  select @ID 
   

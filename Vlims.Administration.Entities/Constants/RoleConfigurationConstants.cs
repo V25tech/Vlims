@@ -15,6 +15,8 @@ namespace Vlims.Administration.Entities
 
     public class RoleConfigurationConstants
     {
+        public const string RoleType = "RoleType";
+
         public const string RoleNew = "RoleNew";
 
         public const string ROCFId = "@ROCFId_PSY";

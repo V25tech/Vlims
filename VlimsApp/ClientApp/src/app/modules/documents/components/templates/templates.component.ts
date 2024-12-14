@@ -48,7 +48,11 @@ export class TemplatesComponent {
     this.spinner.show();
    let objrequest: RequestContext={PageNumber:1,PageSize:100,Id:0};
       return this.templatesvc.getdocttemplate(this.commonsvc.req).subscribe((data: any) => {
-        
+        if(data!=null&&data.Response!=null&&data.Response.length>0){
+          data.Response.forEach((item:any)=>{
+            item.CreatedDate=this.commonsvc.setDate(item.CreatedDate)
+          })
+         } 
         this.types = data.Response;
         this.commonsvc.templateCount=this.types.length;
         this.spinner.hide();

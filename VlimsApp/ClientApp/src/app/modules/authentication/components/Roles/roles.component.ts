@@ -34,6 +34,11 @@ export class RolesComponent implements OnInit {
   getroles() {
     this.loader.show();
       return this.doctypeservice.getroles(this.commonsvc.req).subscribe((data: any) => {
+        if(data!=null&&data.Response!=null&&data.Response.length>0){
+          data.Response.forEach((item:any)=>{
+            item.CreatedDate=this.commonsvc.setDate(item.CreatedDate)
+          })
+         } 
         this.types = data.Response;
         this.loader.hide();
         if(this.types!=null && this.types.length<10)

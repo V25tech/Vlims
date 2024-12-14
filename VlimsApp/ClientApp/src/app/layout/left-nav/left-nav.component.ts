@@ -230,7 +230,7 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: ''
-
+         
         },
         {
           label: 'Set Functional Profile',
@@ -239,7 +239,7 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: ''
-
+          
         },
         {
           label: 'Plant Management',
@@ -248,9 +248,8 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: ''
-
+          
         },
-
         {
           label: 'User Configuration',
           path: 'userconfig',
@@ -258,7 +257,7 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: ''
-
+          
         },
         {
           label: 'Active or Deactivate Users',
@@ -267,63 +266,12 @@ export class LeftNavComponent {
           children: null,
           isActive: false,
           iconClass: ''
-
+          
         }
         // Add more child items as needed
       ]
     }
-
-      ],
-    },
-    {
-      label: 'Switch to Admin',
-      path: '',
-      isOpen: false,
-      isActive: false,
-      iconClass: 'bi bi-ui-checks-grid',
-      children: [
-        {
-          label: 'Security Management',
-          path: '/admin/security',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: '',
-        },
-        {
-          label: 'Hierarchy Management',
-          path: '/admin/hierarchy',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: '',
-        },
-        {
-          label: 'Plant Management',
-          path: '/admin/plant',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: '',
-        },
-        {
-          label: 'User Management',
-          path: '/admin/usermanagement',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: '',
-        },
-        {
-          label: 'Audit Management',
-          path: '/admin/auditlog',
-          isOpen: false,
-          children: null,
-          isActive: false,
-          iconClass: '',
-        }
-      ],
-    },
+    
   ];
 
   toggleLeftNav() {
@@ -340,7 +288,6 @@ export class LeftNavComponent {
   }
 
   toggleNavItem(item: any): void {
-    debugger
     if (item.path) this.router.navigate([item.path]);
     else if (!item.path && item.children) {
       item.isOpen = !item.isOpen; // Toggle the open state of the item

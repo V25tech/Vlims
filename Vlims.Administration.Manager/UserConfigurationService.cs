@@ -67,7 +67,8 @@ namespace PolicySummary.Sheet1.Services
                 if (validationMessages.Length <= 0)
                 {
                     var result = UserConfigurationData.SaveUserConfiguration(userConfiguration);
-                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = "test", EntityName = userConfiguration.UserID, Type = UserConfigurationConstants.userconfiguration1, state = DefinitionStatus.New });
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = userConfiguration.CreatedBy, EntityName = userConfiguration.UserID, Type = UserConfigurationConstants.UserType, state = DefinitionStatus.New, EntityInfo = userConfiguration, Unique = userConfiguration.UserID });
+             
                     return result;
                 }
                 throw new System.Exception(validationMessages);
@@ -84,6 +85,7 @@ namespace PolicySummary.Sheet1.Services
             {
                 //ApprovalConfiguration.DocTempNoOfApprovals = "1";
                 var result = UserConfigurationData.SaveApprovalConfiguration(ApprovalConfiguration);
+
                 return result;
 
 
@@ -125,6 +127,8 @@ namespace PolicySummary.Sheet1.Services
                 if (validationMessages.Length <= 0)
                 {
                     result = UserConfigurationData.UpdateUserConfiguration(userConfiguration);
+                    AuditLog.SaveAuditLog(new AuditLogEntity { UserName = userConfiguration.CreatedBy, EntityName = userConfiguration.UserID, Type = UserConfigurationConstants.UserType, state = DefinitionStatus.Modify, EntityInfo = userConfiguration, Unique = userConfiguration.UserID });
+
                     return result;
                 }
                 throw new System.Exception(validationMessages);

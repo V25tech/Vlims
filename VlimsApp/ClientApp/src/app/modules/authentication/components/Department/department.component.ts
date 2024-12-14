@@ -31,7 +31,13 @@ export class DepartmentComponent implements OnInit {
 getdepartments() {
     this.loader.show();
       return this.doctypeservice.getdepartments(this.commonsvc.req).subscribe((data: any) => {
-        this.types = data.Response;
+        if(data!=null&&data.Response!=null&&data.Response.length>0){
+          data.Response.forEach((item:any)=>{
+            item.ModifiedDate=this.commonsvc.setDate(item.ModifiedDate)
+          })
+          this.types = data.Response;
+         } 
+        // this.types = data.Response;
         this.loader.hide();
       });
 }

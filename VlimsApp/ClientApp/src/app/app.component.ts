@@ -26,9 +26,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.loginService.loginStatusChanged$.subscribe((status: boolean) => {
-      this.isLoggedIn = status;
-
-      
+      this.isLoggedIn = status;      
     });
     this.checkSessionTimeoutPeriodically();
   }

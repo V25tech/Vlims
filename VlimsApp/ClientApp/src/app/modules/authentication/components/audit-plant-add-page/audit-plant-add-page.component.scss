@@ -1,0 +1,13 @@
+
+  
+  .custom-back-icon a {
+    background: linear-gradient(90deg, purple, blue); /* Set linear gradient background from purple to blue */
+    -webkit-background-clip: text; /* Clip text to the background shape */
+    background-clip: text; /* Clip text to the background shape */
+    color: transparent; /* Make the text transparent */
+    display: inline-block; /* Ensure proper rendering */
+  }
+  
+  
+  
+  

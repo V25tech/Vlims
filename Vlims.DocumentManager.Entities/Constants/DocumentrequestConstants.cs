@@ -15,6 +15,7 @@ namespace Vlims.DMS.Entities
 
     public class DocumentrequestConstants
     {
+        public const string RequestType = "RequestType";
 
         public const string documentrequest = "documentrequest";
 

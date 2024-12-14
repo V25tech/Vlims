@@ -15,6 +15,7 @@ namespace Vlims.Administration.Entities
 
     public class DepartmentConfigurationConstants
     {
+        public const string DepartmentType = "DepartmentType";
 
         public static string DepartmentName1 = "DepartmentName1";
 

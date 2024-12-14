@@ -16,11 +16,9 @@ export class DocumentEffectiveService {
   }
 
   getdocumentrequestbyId(objrequest: RequestContext) {
-    debugger
     return this.http.postJsonLogin(objrequest, "api/documentpreparation/getdocId");
   }
   ManageDocumentEffective(adddocreq: DocumentEffectiveConfiguration) {
-    debugger
     return this.http.postJsonLogin(adddocreq, "api/documenteffective/updatedocumenteffective", this.type);
   }
   getbyId(docreq: number) {        

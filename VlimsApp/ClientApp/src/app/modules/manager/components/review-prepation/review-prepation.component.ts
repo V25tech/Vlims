@@ -82,6 +82,7 @@ export class ReviewPrepationComponent {
     }
     else if (this.commonsvc.preperation.dpnid) {
       this.preparation = this.commonsvc.preperation;
+      this.preparation.status='In-Progress';
     }
     else {
       this.location.back();
@@ -115,8 +116,12 @@ export class ReviewPrepationComponent {
       this.savePreparation();
     }
   }
-  reinitiative() {
+  return() {
     this.location.back();
+    this.preparation.ModifiedBy = this.commonsvc.getUsername();
+    this.preparation.status = 'Returned';
+    this.toastMsg = this.preparation.status;
+    this.savePreparation();
   }
   reject() {
     this.preparation.ModifiedBy = this.commonsvc.getUsername();
@@ -126,8 +131,12 @@ export class ReviewPrepationComponent {
     //this.location.back();
   }
   savePreparation() {
+    debugger
     this.spinner.show();
-    if (this.viewMode && this.preparation.status != 'Rejected') {
+    if(this.editMode && (this.preparation.status== 'Rejected' || this.preparation.status == 'Returned')){
+      this.preparation.status='In-Progress';
+    }
+    if (this.viewMode && this.preparation.status != 'Rejected' && this.preparation.status != 'Returned') {
       this.preparation.ModifiedBy = this.commonsvc.createdBy;
       this.preparation.status = this.finalStatus;
     }

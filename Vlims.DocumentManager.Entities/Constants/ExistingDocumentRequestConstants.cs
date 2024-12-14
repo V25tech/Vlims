@@ -57,5 +57,6 @@ public class ExistingDocumentRequestConstants
     public const string USP_QuickExistingDocumentRequest_INSERT = "dbo.USP_QuickExistingDocumentRequest_INSERT";
 
     public const string USP_QuickExistingDocumentRequest_UPDATE = "dbo.USP_QuickExistingDocumentRequest_UPDATE";
+
 }
 
